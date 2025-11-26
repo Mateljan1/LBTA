@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Mail, Phone } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
@@ -225,14 +226,12 @@ export default function AndrewMateljanPage() {
                 <span>(949) 241-0847</span>
               </a>
             </div>
-            <a
-              href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=andrew_page&utm_campaign=nextjs"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book"
               className="btn-primary"
             >
               SCHEDULE SESSION
-            </a>
+            </Link>
           </AnimatedSection>
         </div>
       </section>

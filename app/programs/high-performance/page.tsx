@@ -1,3 +1,8 @@
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const programs = [
@@ -35,6 +40,8 @@ const components = [
 ]
 
 export default function HighPerformancePage() {
+  const [activeSeason, setActiveSeason] = useState<'fall' | 'winter'>('fall')
+
   return (
     <>
       {/* Hero */}
@@ -52,6 +59,58 @@ export default function HighPerformancePage() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Season Toggle */}
+      <section className="bg-lbta-cream border-b border-gray-200 sticky top-24 z-40 py-6">
+        <div className="container-lbta">
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => setActiveSeason('fall')}
+              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
+                activeSeason === 'fall'
+                  ? 'bg-lbta-charcoal text-white'
+                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
+              }`}
+            >
+              FALL 2025 (JOIN NOW)
+            </button>
+            <button
+              onClick={() => setActiveSeason('winter')}
+              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
+                activeSeason === 'winter'
+                  ? 'bg-lbta-charcoal text-white'
+                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
+              }`}
+            >
+              WINTER 2026
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Season Info Banner */}
+      <AnimatePresence mode="wait">
+        <motion.section
+          key={activeSeason}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.3 }}
+          className={`py-6 ${activeSeason === 'fall' ? 'bg-lbta-tan' : 'bg-blue-50'} border-b border-gray-200`}
+        >
+          <div className="container-lbta text-center">
+            {activeSeason === 'fall' ? (
+              <p className="text-sm text-gray-600 font-sans">
+                <strong>Fall 2025:</strong> Join anytime through December • Rolling admissions
+              </p>
+            ) : (
+              <p className="text-sm text-gray-600 font-sans">
+                <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
+              </p>
+            )}
+          </div>
+        </motion.section>
+      </AnimatePresence>
 
       {/* Programs */}
       <section className="section-spacing bg-lbta-cream">
@@ -107,16 +166,26 @@ export default function HighPerformancePage() {
                       </div>
                     </div>
 
-                    <a
-                      href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=hp_programs&utm_campaign=nextjs"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary w-full mt-8 justify-center"
-                    >
-                      APPLY NOW
-                    </a>
+                        <Link
+                          href="/book"
+                          className="btn-primary w-full mt-8 justify-center"
+                        >
+                          {activeSeason === 'fall' ? 'APPLY NOW' : 'GET NOTIFIED'}
+                        </Link>
+                        
+                        {activeSeason === 'fall' && (
+                          <p className="text-xs text-center text-gray-500 mt-3">
+                            Rolling admissions • Join anytime
+                          </p>
+                        )}
+                        {activeSeason === 'winter' && (
+                          <p className="text-xs text-center text-gray-500 mt-3">
+                            Registration opens December 1, 2025
+                          </p>
+                        )}
+                      </motion.div>
+                    </AnimatePresence>
                   </div>
-                </div>
               </div>
             </AnimatedSection>
           ))}
@@ -179,15 +248,13 @@ export default function HighPerformancePage() {
             <p className="text-sm text-white/60 mb-8">
               Approval required. We'll contact you within 24 hours.
             </p>
-            <a
-              href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=hp_cta&utm_campaign=nextjs"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-lbta-charcoal font-sans text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-500"
               style={{ minHeight: '48px', letterSpacing: '1.5px' }}
             >
               APPLY FOR HIGH PERFORMANCE
-            </a>
+            </Link>
           </AnimatedSection>
         </div>
       </section>

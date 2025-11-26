@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const navigation = [
   { name: 'Programs', href: '/programs' },
+  { name: 'Schedules', href: '/schedules' },
+  { name: 'Pricing', href: '/pricing' },
   { name: 'Coaches', href: '/coaches' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
@@ -52,14 +54,12 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <a 
-              href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=nav&utm_campaign=nextjs"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book"
               className="btn-primary text-xs py-3 px-6"
             >
               BOOK TRIAL
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -98,15 +98,13 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
-              <a
-                href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=mobile_nav&utm_campaign=nextjs"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/book"
                 className="btn-primary w-full mt-4 text-center text-xs"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 BOOK TRIAL
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

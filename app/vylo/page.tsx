@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const admissionSteps = [
@@ -62,12 +63,13 @@ export default function VYLOPage() {
         <div className="relative z-10 container-narrow text-center px-6 py-40">
           <AnimatedSection>
             <img 
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/1daf9879b_VYLO_logo_grayscale_version.png"
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/1daf9879b_VYLO_logo_grayscale_version.png?quality=95"
               alt="VYLO Performance Institute"
               className="mx-auto mb-16"
               style={{ 
                 width: '110px',
-                filter: 'brightness(0) invert(1)'
+                filter: 'brightness(0) invert(1)',
+                imageRendering: '-webkit-optimize-contrast'
               }}
             />
 
@@ -89,15 +91,13 @@ export default function VYLOPage() {
               20 Division I placements  |  3 ATP/WTA professionals  |  Laguna Beach, California
             </p>
 
-            <a
-              href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=vylo&utm_campaign=consultation"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book"
               className="inline-flex items-center justify-center px-12 py-4 border border-white/50 text-white font-sans text-sm font-medium tracking-ultra-wide hover:bg-white/10 hover:border-white transition-all duration-500"
               style={{ minHeight: '48px', letterSpacing: '2px' }}
             >
               REQUEST CONSULTATION
-            </a>
+            </Link>
 
             <p className="text-xs text-white/65 mt-6 font-sans">
               Ten athletes. Two coaches. Zero compromises.
@@ -209,15 +209,13 @@ export default function VYLOPage() {
               </p>
             </div>
             
-            <a
-              href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=vylo_cta&utm_campaign=consultation"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book"
               className="inline-flex items-center justify-center px-12 py-4 bg-white text-lbta-charcoal font-sans text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-500"
               style={{ minHeight: '48px', letterSpacing: '1.5px' }}
             >
               REQUEST PRIVATE CONSULTATION
-            </a>
+            </Link>
 
             <p className="text-sm text-white/60 mt-8">
               Most consultations happen within 5-7 days of request.

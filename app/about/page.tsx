@@ -1,123 +1,104 @@
-import { Award, BookOpen, Heart, Trophy } from 'lucide-react'
+import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-
-const coaches = [
-  {
-    name: 'Michael Chen',
-    title: 'Head Coach & Director',
-    credentials: 'USPTA Elite Professional, Former ATP Player',
-    bio: 'With 20 years of coaching experience and a career-high ATP ranking of 312, Michael brings both playing and teaching expertise. He has developed numerous junior champions and college scholarship recipients.',
-    specialties: ['Advanced technique', 'Tournament preparation', 'Mental game coaching'],
-  },
-  {
-    name: 'Sarah Martinez',
-    title: 'Junior Program Director',
-    credentials: 'PTR Master Professional, NCAA Division I Coach',
-    bio: 'Sarah spent 10 years as assistant coach at USC before joining LBTA. Her player-centered approach emphasizes skill development alongside character building and academic balance.',
-    specialties: ['Junior development', 'College recruitment', 'Group instruction'],
-  },
-  {
-    name: 'David Thompson',
-    title: 'Adult Programs Coordinator',
-    credentials: 'USPTA Professional, Biomechanics Specialist',
-    bio: 'David combines technical expertise with an understanding of adult learning styles. His background in biomechanics helps students optimize movement patterns and prevent injury.',
-    specialties: ['Adult beginners', 'Injury prevention', 'Technical refinement'],
-  },
-]
 
 const milestones = [
   {
-    year: '2010',
-    title: 'Academy Founded',
-    description: 'Established with a vision to bring world-class tennis instruction to Laguna Beach.',
+    year: "2020",
+    title: "LBTA Founded",
+    description: "Andrew Mateljan establishes Laguna Beach Tennis Academy, bringing ATP/WTA-level coaching to the community. City of Laguna Beach partnership begins."
   },
   {
-    year: '2014',
-    title: 'Facility Expansion',
-    description: 'Added three premier courts and dedicated training areas to serve growing membership.',
+    year: "2021",
+    title: "First D1 Placements",
+    description: "Three academy students earn Division I college scholarships, establishing LBTA's reputation for elite player development."
   },
   {
-    year: '2018',
-    title: 'Junior Champions',
-    description: 'Five academy students earned Division I college scholarships, establishing our reputation.',
+    year: "2022",
+    title: "Program Expansion",
+    description: "Added High Performance track and expanded to three city facilities. Enrollment reaches 100+ active students."
   },
   {
-    year: '2023',
-    title: 'Community Impact',
-    description: 'Launched scholarship program providing free instruction to 20 local youth annually.',
+    year: "2023",
+    title: "ATP Success",
+    description: "Karue Sell improves 600 ATP ranking spots while training with Andrew. Fit4Tennis reaches 100K+ followers globally."
   },
+  {
+    year: "2024",
+    title: "20+ D1 Placements",
+    description: "Milestone achievement: Over 20 Division I college scholarships awarded to LBTA-trained athletes. VYLO Performance Institute announced."
+  },
+  {
+    year: "2025",
+    title: "Continued Excellence",
+    description: "200+ active members. Three ATP-ranked players currently training. Scholarship program expands to $25K+ annually."
+  }
+]
+
+const values = [
+  {
+    title: "Excellence",
+    description: "We pursue mastery in technique, tactics, and mental performance. Championship-level standards applied at every level."
+  },
+  {
+    title: "Individual Development",
+    description: "Every student receives personalized attention. We group by skill level, not just age. Custom training plans for each athlete."
+  },
+  {
+    title: "Honest Communication",
+    description: "We tell you the truth about your level, timeline, and realistic goals. No false promises. Just professional guidance."
+  },
+  {
+    title: "Community",
+    description: "200+ families training together. From ages 3 to ATP professionals. Everyone values discipline, progress, and belonging."
+  }
 ]
 
 export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-gradient-to-b from-sand-50 to-white pt-40 pb-20">
+      <section className="relative bg-white pt-40 pb-20">
         <div className="container-narrow text-center">
           <AnimatedSection>
+            <p className="text-overline mb-6">About LBTA</p>
             <h1 className="text-display-lg heading-display mb-6">
-              About the Academy
+              Excellence Built Here
             </h1>
-            <p className="text-xl md:text-2xl font-light text-clay-600 max-w-2xl mx-auto leading-relaxed">
-              Where passion for tennis meets commitment to excellence. 
-              Our story is written by every student who walks onto our courts.
+            <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Championship-level tennis training in Laguna Beach since 2020.  
+              Official City Partner.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Story */}
-      <section className="section-spacing bg-white">
-        <div className="container-luxury">
+      {/* Our Story */}
+      <section className="section-spacing bg-lbta-cream">
+        <div className="container-lbta">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
-              <h2 className="text-display-sm heading-display mb-8">
-                Our Story
-              </h2>
-              <div className="space-y-6 body-text">
-                <p>
-                  Laguna Beach Tennis Academy was born from a simple belief: that tennis, taught 
-                  with patience and precision, can transform lives. Founded in 2010 by former 
-                  professional players who wanted to share their love of the game, we've grown 
-                  into Southern California's premier destination for tennis instruction.
-                </p>
-                <p>
-                  What sets us apart isn't just our technical expertise—it's our commitment to 
-                  understanding each student as an individual. We recognize that everyone arrives 
-                  with unique goals, whether that's winning championships, staying active, or 
-                  simply enjoying time on the court.
-                </p>
-                <p>
-                  Over the years, we've had the privilege of coaching players from complete 
-                  beginners to college-bound athletes. Our proudest moments aren't just the 
-                  trophies won, but the confidence gained, friendships formed, and lifelong 
-                  passion for tennis we help ignite.
-                </p>
-              </div>
+              <img 
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png?quality=95"
+                alt="Laguna Beach Tennis Academy facilities"
+                className="w-full h-auto rounded-sm"
+                style={{ imageRendering: '-webkit-optimize-contrast' }}
+              />
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="card-luxury p-6 text-center">
-                  <Trophy className="h-8 w-8 text-sage-600 mx-auto mb-4" />
-                  <div className="text-3xl font-display font-light text-clay-900 mb-2">15+</div>
-                  <div className="text-sm text-clay-600">Years of Excellence</div>
-                </div>
-                <div className="card-luxury p-6 text-center">
-                  <Award className="h-8 w-8 text-sage-600 mx-auto mb-4" />
-                  <div className="text-3xl font-display font-light text-clay-900 mb-2">500+</div>
-                  <div className="text-sm text-clay-600">Students Coached</div>
-                </div>
-                <div className="card-luxury p-6 text-center">
-                  <BookOpen className="h-8 w-8 text-sage-600 mx-auto mb-4" />
-                  <div className="text-3xl font-display font-light text-clay-900 mb-2">25+</div>
-                  <div className="text-sm text-clay-600">College Scholarships</div>
-                </div>
-                <div className="card-luxury p-6 text-center">
-                  <Heart className="h-8 w-8 text-sage-600 mx-auto mb-4" />
-                  <div className="text-3xl font-display font-light text-clay-900 mb-2">98%</div>
-                  <div className="text-sm text-clay-600">Satisfaction Rate</div>
-                </div>
+              <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
+                Our Story
+              </h2>
+              <div className="space-y-6 text-gray-600 leading-relaxed">
+                <p>
+                  Laguna Beach Tennis Academy was founded in 2020 by Andrew Mateljan—a former top-ranked national junior and professional coach with international experience across Spain, Croatia, and Norway.
+                </p>
+                <p>
+                  After years coaching on the ATP/WTA tours, Andrew returned to Laguna Beach with a mission: create a training environment where technical precision meets authentic mentorship. Where players of every level—from 3-year-olds discovering tennis to professionals competing on tour—receive the same systematic approach to development.
+                </p>
+                <p>
+                  Today, LBTA serves 200+ families across three premier city facilities, maintains the official City of Laguna Beach tennis partnership, and has helped 20+ athletes earn Division I college scholarships while currently coaching multiple ATP-ranked professionals.
+                </p>
               </div>
             </AnimatedSection>
           </div>
@@ -125,32 +106,29 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="section-spacing bg-sand-50">
-        <div className="container-luxury">
-          <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-display-sm heading-display mb-6">
-              Our Journey
+      <section className="section-spacing bg-white">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-16">
+            <p className="text-overline mb-6">Our Journey</p>
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
+              Five Years of Growth
             </h2>
-            <p className="body-text text-clay-600">
-              From humble beginnings to a thriving tennis community, 
-              each milestone represents our commitment to growth.
-            </p>
           </AnimatedSection>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto space-y-12">
             {milestones.map((milestone, index) => (
               <AnimatedSection key={milestone.year} delay={index * 0.1}>
-                <div className="flex items-start space-x-6 md:space-x-8 mb-12 last:mb-0">
-                  <div className="flex-shrink-0 w-20 md:w-24">
-                    <div className="text-2xl md:text-3xl font-display font-light text-sage-700">
+                <div className="flex gap-8">
+                  <div className="flex-shrink-0 w-24 text-right">
+                    <div className="text-3xl font-serif font-light text-lbta-burnt">
                       {milestone.year}
                     </div>
                   </div>
-                  <div className="flex-grow border-l-2 border-sage-300 pl-6 md:pl-8 pb-8">
-                    <h3 className="text-xl md:text-2xl font-sans font-medium text-clay-900 mb-3">
+                  <div className="flex-1 border-l-2 border-gray-200 pl-8 pb-8">
+                    <h3 className="text-xl font-sans font-medium text-lbta-charcoal mb-3">
                       {milestone.title}
                     </h3>
-                    <p className="text-clay-600 leading-relaxed">
+                    <p className="text-gray-600 leading-relaxed">
                       {milestone.description}
                     </p>
                   </div>
@@ -161,48 +139,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Coaches */}
-      <section id="coaches" className="section-spacing bg-white">
-        <div className="container-luxury">
-          <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-display-sm heading-display mb-6">
-              Meet Your Coaches
+      {/* Values */}
+      <section className="section-spacing bg-lbta-cream">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-16">
+            <p className="text-overline mb-6">Our Values</p>
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
+              What We Stand For
             </h2>
-            <p className="body-text text-clay-600">
-              Our team brings decades of combined experience, professional playing backgrounds, 
-              and most importantly, genuine passion for developing players.
-            </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
-            {coaches.map((coach, index) => (
-              <AnimatedSection key={coach.name} delay={index * 0.1}>
-                <div className="card-luxury p-8">
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-display font-light text-clay-900 mb-2">
-                      {coach.name}
-                    </h3>
-                    <p className="text-sage-700 font-medium mb-1">{coach.title}</p>
-                    <p className="text-sm text-clay-600">{coach.credentials}</p>
-                  </div>
-                  
-                  <p className="text-clay-700 leading-relaxed mb-6">
-                    {coach.bio}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {values.map((value, index) => (
+              <AnimatedSection key={value.title} delay={index * 0.1}>
+                <div className="text-center">
+                  <h3 className="text-xl font-sans font-medium text-lbta-charcoal mb-4">
+                    {value.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {value.description}
                   </p>
-
-                  <div>
-                    <h4 className="text-sm uppercase tracking-wider text-clay-900 mb-3">
-                      Specialties
-                    </h4>
-                    <ul className="space-y-2">
-                      {coach.specialties.map((specialty) => (
-                        <li key={specialty} className="flex items-start space-x-2 text-sm text-clay-600">
-                          <span className="text-sage-600 mt-0.5">•</span>
-                          <span>{specialty}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                 </div>
               </AnimatedSection>
             ))}
@@ -211,23 +167,21 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-spacing bg-clay-900 text-sand-100">
+      <section className="section-spacing bg-white border-t border-gray-200">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <h2 className="text-display-sm font-display font-light tracking-tight mb-6">
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
               Join Our Tennis Community
             </h2>
-            <p className="text-lg md:text-xl font-light text-sand-300 mb-10 leading-relaxed">
-              Experience the difference that dedicated coaching and a supportive 
-              environment can make in your tennis journey.
+            <p className="text-lg text-gray-600 mb-10">
+              Experience the difference that dedicated coaching and a supportive environment can make
             </p>
-            <a href="/contact" className="btn-primary">
-              Get Started Today
-            </a>
+            <Link href="/book" className="btn-primary">
+              SCHEDULE TRIAL
+            </Link>
           </AnimatedSection>
         </div>
       </section>
     </>
   )
 }
-

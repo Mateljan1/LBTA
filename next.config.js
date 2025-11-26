@@ -3,9 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
-  },
-  experimental: {
-    optimizeCss: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'qtrypzzcjebvfcihiynt.supabase.co',
+      },
+    ],
   },
 }
 

@@ -1,3 +1,8 @@
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const programs = [
@@ -73,6 +78,8 @@ const programs = [
 ]
 
 export default function AdultProgramsPage() {
+  const [activeSeason, setActiveSeason] = useState<'fall' | 'winter'>('fall')
+
   return (
     <>
       {/* Hero */}
@@ -90,6 +97,58 @@ export default function AdultProgramsPage() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Season Toggle */}
+      <section className="bg-lbta-cream border-b border-gray-200 sticky top-24 z-40 py-6">
+        <div className="container-lbta">
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => setActiveSeason('fall')}
+              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
+                activeSeason === 'fall'
+                  ? 'bg-lbta-charcoal text-white'
+                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
+              }`}
+            >
+              FALL 2025 (JOIN NOW)
+            </button>
+            <button
+              onClick={() => setActiveSeason('winter')}
+              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
+                activeSeason === 'winter'
+                  ? 'bg-lbta-charcoal text-white'
+                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
+              }`}
+            >
+              WINTER 2026
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Season Info Banner */}
+      <AnimatePresence mode="wait">
+        <motion.section
+          key={activeSeason}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.3 }}
+          className={`py-6 ${activeSeason === 'fall' ? 'bg-lbta-tan' : 'bg-blue-50'} border-b border-gray-200`}
+        >
+          <div className="container-lbta text-center">
+            {activeSeason === 'fall' ? (
+              <p className="text-sm text-gray-600 font-sans">
+                <strong>Fall 2025:</strong> Join anytime through December • Prorated pricing based on remaining weeks
+              </p>
+            ) : (
+              <p className="text-sm text-gray-600 font-sans">
+                <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
+              </p>
+            )}
+          </div>
+        </motion.section>
+      </AnimatePresence>
 
       {/* NTRP Guide */}
       <section className="bg-lbta-tan py-12 border-b border-gray-200">
@@ -168,10 +227,18 @@ export default function AdultProgramsPage() {
 
                   {/* Right: Pricing */}
                   <div>
-                    <div className="card-lbta p-8">
-                      <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-6">
-                        Winter 2026 Pricing
-                      </h3>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeSeason}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                        className="card-lbta p-8"
+                      >
+                        <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-6">
+                          {activeSeason === 'fall' ? 'Fall 2025 Pricing' : 'Winter 2026 Pricing'}
+                        </h3>
                       <div className="space-y-4">
                         {program.monthly_1x && (
                           <div className="flex justify-between items-center pb-3 border-b border-gray-200">
@@ -211,15 +278,25 @@ export default function AdultProgramsPage() {
                         </div>
                       </div>
 
-                      <a
-                        href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=adult_programs&utm_campaign=nextjs"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary w-full mt-8 justify-center"
-                      >
-                        START TRIAL
-                      </a>
-                    </div>
+                        <Link
+                          href="/book"
+                          className="btn-primary w-full mt-8 justify-center"
+                        >
+                          {activeSeason === 'fall' ? 'JOIN NOW' : 'GET NOTIFIED'}
+                        </Link>
+                        
+                        {activeSeason === 'fall' && (
+                          <p className="text-xs text-center text-gray-500 mt-3">
+                            Prorated pricing available • Join anytime
+                          </p>
+                        )}
+                        {activeSeason === 'winter' && (
+                          <p className="text-xs text-center text-gray-500 mt-3">
+                            Registration opens December 1, 2025
+                          </p>
+                        )}
+                      </motion.div>
+                    </AnimatePresence>
 
                     <p className="text-sm text-gray-500 mt-4 text-center">
                       Not sure of your level? We'll assess during your first session.
@@ -258,14 +335,12 @@ export default function AdultProgramsPage() {
             <p className="text-lg text-gray-600 mb-10 leading-relaxed">
               Professional instruction. Zero commitment required.
             </p>
-            <a
-              href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=adult_cta&utm_campaign=nextjs"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book"
               className="btn-primary"
             >
               START TRIAL
-            </a>
+            </Link>
           </AnimatedSection>
         </div>
       </section>

@@ -1,9 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import type { Metadata } from 'next'
+import Link from 'next/link'
 import { ChevronDown, TrendingUp, DollarSign, Award, Users, Shield, AlertCircle, HelpCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+
+export const metadata: Metadata = {
+  title: 'FAQ - Honest Answers About Tennis Training | LBTA',
+  description: 'Straight answers about costs ($150K-300K for 10-year pathway), college success rates (60% for committed players), and what makes LBTA different. No sugar-coating.',
+  keywords: 'tennis training cost, D1 tennis scholarship, tennis academy FAQ, college tennis recruitment, ATP tennis coaching',
+}
 
 const faqs = [
   {
@@ -66,6 +74,35 @@ const categories = [...new Set(faqs.map(faq => faq.category))]
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  // Add FAQ Schema for rich snippets
+  useEffect(() => {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    }
+
+    const script = document.createElement('script')
+    script.type = 'application/ld+json'
+    script.text = JSON.stringify(faqSchema)
+    script.id = 'faq-schema'
+    document.head.appendChild(script)
+
+    return () => {
+      const existingScript = document.getElementById('faq-schema')
+      if (existingScript) {
+        existingScript.remove()
+      }
+    }
+  }, [])
 
   return (
     <>
@@ -150,31 +187,21 @@ export default function FAQPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-spacing bg-lbta-burnt text-white">
+      <section className="section-spacing bg-white border-t border-gray-200">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <h2 className="text-4xl font-serif font-light mb-6">
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
               Still Have Questions?
             </h2>
-            <p className="text-lg font-sans font-light text-white/90 mb-10 leading-relaxed">
-              Book a free trial and experience LBTA firsthand. Talk to our coaches, see our facilities, understand our philosophy.
+            <p className="text-lg text-gray-600 mb-10 font-sans leading-relaxed">
+              Schedule a complimentary trial. Experience our approach firsthand.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=faq&utm_campaign=nextjs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-lbta-charcoal font-sans text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-500"
-                style={{ minHeight: '48px', letterSpacing: '1.5px' }}
-              >
-                BOOK FREE TRIAL
-              </a>
-              <a
-                href="tel:9494646645"
-                className="inline-flex items-center justify-center px-8 py-3.5 border border-white text-white font-sans text-sm font-medium tracking-wide hover:bg-white/10 transition-all duration-500"
-                style={{ minHeight: '48px', letterSpacing: '1.5px' }}
-              >
-                CALL (949) 464-6645
+              <Link href="/book" className="btn-primary">
+                SCHEDULE TRIAL
+              </Link>
+              <a href="tel:9494646645" className="btn-secondary">
+                (949) 464-6645
               </a>
             </div>
           </AnimatedSection>

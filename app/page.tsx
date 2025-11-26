@@ -1,7 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const stats = [
@@ -38,7 +41,27 @@ const coaches = [
   },
 ]
 
+const testimonialVideos = [
+  { id: "1134930901", title: "Parent Testimonial" },
+  { id: "1134930934", title: "Junior Player Success" },
+  { id: "1134931000", title: "Adult Member Story" },
+  { id: "1134930887", title: "Competitive Player" },
+  { id: "533673494", title: "Family Experience" },
+  { id: "1134930870", title: "Tournament Success" },
+  { id: "533673103", title: "Adult Transformation" }
+]
+
 export default function Home() {
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+
+  const nextVideo = () => {
+    setCurrentVideoIndex((prev) => (prev + 1) % testimonialVideos.length)
+  }
+
+  const prevVideo = () => {
+    setCurrentVideoIndex((prev) => (prev - 1 + testimonialVideos.length) % testimonialVideos.length)
+  }
+
   return (
     <>
       {/* Hero - Refined & Elegant */}
@@ -46,9 +69,10 @@ export default function Home() {
         <div 
           className="absolute inset-0"
           style={{ 
-            backgroundImage: 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png)',
+            backgroundImage: 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png?quality=95)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            imageRendering: '-webkit-optimize-contrast',
           }}
         >
           <div className="absolute inset-0 bg-black/40" />
@@ -72,14 +96,12 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-              <a
-                href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=hero&utm_campaign=nextjs"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/book"
                 className="btn-primary"
               >
                 BEGIN YOUR JOURNEY
-              </a>
+              </Link>
 
               <Link href="/programs" className="btn-secondary bg-white/10 border-white text-white hover:bg-white hover:text-lbta-charcoal">
                 EXPLORE PROGRAMS
@@ -172,10 +194,13 @@ export default function Home() {
             {/* Left: Image */}
             <AnimatedSection>
               <div className="relative">
-                <img 
+                <Image 
                   src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/8b7ec1948_ATPTRANSFORMATIONSECTION-KarueAndrewinbackground.png"
                   alt="Andrew Mateljan coaching ATP professional Karue Sell"
+                  width={1200}
+                  height={800}
                   className="w-full h-auto rounded-sm"
+                  priority
                 />
                 <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-4 rounded-sm">
                   <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">
@@ -223,11 +248,17 @@ export default function Home() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.2} className="flex justify-center mb-20">
-            <img 
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/e9aabb5b1_CityofLBLogo.png"
-              alt="City of Laguna Beach"
-              className="h-64 md:h-80 w-auto opacity-90"
-            />
+            <div className="relative h-64 md:h-80 w-auto">
+              <Image 
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/e9aabb5b1_CityofLBLogo.png"
+                alt="City of Laguna Beach"
+                width={400}
+                height={320}
+                className="h-full w-auto opacity-90 mix-blend-multiply"
+                style={{ backgroundColor: 'transparent', objectFit: 'contain' }}
+                priority
+              />
+            </div>
           </AnimatedSection>
 
           <AnimatedSection delay={0.4}>
@@ -240,9 +271,10 @@ export default function Home() {
                 <div key={facility.name} className="group">
                   <div className="aspect-[4/3] overflow-hidden rounded-sm mb-4">
                     <img 
-                      src={`https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/${facility.img}`}
+                      src={`https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/${facility.img}?quality=95`}
                       alt={facility.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      style={{ imageRendering: '-webkit-optimize-contrast' }}
                     />
                   </div>
                   <p className="text-sm text-center text-gray-500 font-sans tracking-wide">
@@ -324,11 +356,13 @@ export default function Home() {
             {coaches.map((coach, index) => (
               <AnimatedSection key={coach.name} delay={index * 0.1}>
                 <Link href="/coaches" className="group">
-                  <div className="aspect-square overflow-hidden rounded-sm mb-4">
-                    <img 
+                  <div className="aspect-square overflow-hidden rounded-sm mb-4 relative">
+                    <Image 
                       src={coach.image}
                       alt={coach.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      width={300}
+                      height={300}
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                   <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-1 group-hover:text-lbta-burnt transition-colors">
@@ -353,17 +387,73 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonial - Single Quote */}
+      {/* Video Testimonials - Elegant Carousel */}
       <section className="section-spacing bg-white">
-        <div className="container-narrow">
-          <AnimatedSection>
-            <blockquote className="text-2xl md:text-3xl font-serif font-light text-lbta-charcoal leading-relaxed text-center mb-8">
-              "The coaches at LBTA don't just teach tennis—they build character. My daughter learned discipline and resilience here."
-            </blockquote>
-            <p className="text-center text-sm text-gray-500 tracking-wide font-sans">
-              Sarah M., Parent
-            </p>
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-16">
+            <p className="text-overline mb-6">Testimonials</p>
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
+              What Families Are Saying
+            </h2>
           </AnimatedSection>
+
+          <div className="relative max-w-5xl mx-auto">
+            <motion.div
+              key={currentVideoIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div 
+                className="rounded-sm overflow-hidden"
+                style={{ 
+                  padding: '56.25% 0 0 0', 
+                  position: 'relative',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
+                }}
+              >
+                <iframe 
+                  src={`https://player.vimeo.com/video/${testimonialVideos[currentVideoIndex].id}?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0`}
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                  allowFullScreen
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                  title={testimonialVideos[currentVideoIndex].title}
+                />
+              </div>
+            </motion.div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevVideo}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg z-20"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-6 h-6 text-lbta-charcoal" />
+            </button>
+
+            <button
+              onClick={nextVideo}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg z-20"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-6 h-6 text-lbta-charcoal" />
+            </button>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-8">
+              {testimonialVideos.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentVideoIndex(index)}
+                  className={`h-2 rounded-full transition-all ${
+                    index === currentVideoIndex ? 'bg-lbta-burnt w-10' : 'bg-gray-300 w-2 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -378,15 +468,13 @@ export default function Home() {
               Experience our approach firsthand. Complimentary trial. No pressure.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=cta&utm_campaign=nextjs"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/book"
                 className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-lbta-charcoal font-sans text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-500"
                 style={{ minHeight: '48px', letterSpacing: '1.5px' }}
               >
                 SCHEDULE TRIAL
-              </a>
+              </Link>
               <a
                 href="tel:9494646645"
                 className="inline-flex items-center justify-center px-8 py-3.5 border border-white/30 text-white font-sans text-sm font-medium tracking-wide hover:border-white hover:bg-white/10 transition-all duration-500"

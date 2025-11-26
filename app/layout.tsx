@@ -3,6 +3,7 @@ import { Inter, Montserrat, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import WinterCountdown from '@/components/ui/WinterCountdown'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -43,7 +44,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable} ${cormorant.variable}`}>
+      <head>
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX');
+            `,
+          }}
+        />
+      </head>
       <body className="flex flex-col min-h-screen">
+        <WinterCountdown />
         <Header />
         <main className="flex-grow">
           {children}

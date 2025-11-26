@@ -1,8 +1,16 @@
-'use client'
-
-import { Mail, Phone, Trophy } from 'lucide-react'
-import { motion } from 'framer-motion'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import Image from 'next/image'
+import { Mail, Phone } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+
+export const metadata: Metadata = {
+  title: 'Expert Tennis Coaches | ATP/WTA Coaching | LBTA',
+  description: 'Meet our championship coaching staff. Andrew Mateljan (ATP/WTA Coach), Kevin Jackson (20+ D1 placements), and expert team. Schedule your trial today.',
+  keywords: 'tennis coaches Laguna Beach, ATP coach, WTA coach, D1 college tennis, private tennis lessons, Kevin Jackson, Andrew Mateljan',
+}
+
+const coaches = [
 
 const coaches = [
   {
@@ -132,28 +140,24 @@ const coaches = [
 
 const pathways = [
   {
-    icon: "🎾",
     title: "Junior Development (Ages 3-12)",
     coach: "Michelle Bevins - Youth Director",
     description: "Specializes in foundational technique and love of the game for young players",
     scrollTo: "michelle-bevins"
   },
   {
-    icon: "🏆",
     title: "Competitive Juniors (Ages 13-18)",
     coach: "Kevin Jackson - Head Coach",
     description: "20+ D1 college placements, tournament preparation specialist",
     scrollTo: "kevin-jackson"
   },
   {
-    icon: "⚡",
     title: "High Performance / College Prep",
     coach: "Andrew Mateljan - Founder & ATP/WTA Coach",
     description: "Tour-level training for serious competitors and college-bound athletes",
     scrollTo: "andrew-mateljan"
   },
   {
-    icon: "👔",
     title: "Adult Players (All Levels)",
     coach: "Savriyan Danilov & Andy Wu",
     description: "Professional insights and structured approach for adult game development",
@@ -169,26 +173,17 @@ export default function CoachesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-black text-white overflow-hidden flex items-center min-h-[400px]">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-lbta-charcoal to-black opacity-90" />
-        
-        <div className="relative z-10 container-lbta text-center py-24 md:py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black uppercase mb-4 tracking-widest"
-                style={{ textShadow: '2px 4px 8px rgba(0,0,0,0.7)' }}>
-              Meet Your Championship Coaches
+      <section className="relative bg-white pt-40 pb-20">
+        <div className="container-narrow text-center">
+          <AnimatedSection>
+            <p className="text-overline mb-6">Our Coaches</p>
+            <h1 className="text-display-lg heading-display mb-6">
+              Meet Your Coaches
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-4 font-sans">
-              ATP/WTA Tour Experience • NCAA Recruitment Experts • Professional Training
+            <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              ATP/WTA tour experience. NCAA recruitment expertise. Genuine care for each athlete's journey.
             </p>
-            <p className="text-lg text-lbta-gold font-sans max-w-3xl mx-auto">
-              Our coaching staff combines professional tour experience with genuine care for each athlete's journey.
-            </p>
-          </motion.div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -211,8 +206,8 @@ export default function CoachesPage() {
                   onClick={() => scrollToCoach(pathway.scrollTo)}
                   className="bg-lbta-cream border border-gray-300 rounded-lg p-6 text-left hover:shadow-lg transition-all duration-300 cursor-pointer group w-full"
                 >
-                  <h3 className="text-lg font-display font-bold text-lbta-charcoal mb-2">
-                    {pathway.icon} {pathway.title}
+                  <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-2">
+                    {pathway.title}
                   </h3>
                   <div className="w-8 h-0.5 bg-lbta-burnt mb-3" />
                   <p className="text-base text-lbta-intense font-sans font-medium mb-2">
@@ -261,9 +256,10 @@ export default function CoachesPage() {
                   <div className="flex-shrink-0 mx-auto lg:mx-0">
                     <div className="w-64 h-64 rounded-lg overflow-hidden shadow-lg">
                       <img 
-                        src={coach.image}
+                        src={`${coach.image}?quality=95`}
                         alt={`${coach.name}, ${coach.title}`}
                         className="w-full h-full object-cover object-top"
+                        style={{ imageRendering: '-webkit-optimize-contrast' }}
                       />
                     </div>
                   </div>
@@ -385,14 +381,12 @@ export default function CoachesPage() {
                         </a>
                       )}
 
-                      <a
-                        href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=coaches&utm_campaign=nextjs"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href="/book"
                         className="btn-primary mt-2"
                       >
                         Book with {coach.name.split(' ')[0]}
-                      </a>
+                      </Link>
                     </div>
 
                     {/* Signature */}
@@ -422,9 +416,10 @@ export default function CoachesPage() {
             <AnimatedSection>
               <div className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
                 <img 
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/3f8b8b984_Coachmichelle.png"
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/3f8b8b984_Coachmichelle.png?quality=95"
                   alt="Coach Michelle Bevins teaching young tennis players"
                   className="w-full h-80 object-cover hover:scale-105 transition-transform duration-300"
+                  style={{ imageRendering: '-webkit-optimize-contrast' }}
                 />
               </div>
             </AnimatedSection>
@@ -432,9 +427,10 @@ export default function CoachesPage() {
             <AnimatedSection delay={0.1}>
               <div className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
                 <img 
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/c2d8f3254_Groupphoto.png"
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/c2d8f3254_Groupphoto.png?quality=95"
                   alt="LBTA coaches with junior tennis team"
                   className="w-full h-80 object-cover hover:scale-105 transition-transform duration-300"
+                  style={{ imageRendering: '-webkit-optimize-contrast' }}
                 />
               </div>
             </AnimatedSection>
@@ -442,9 +438,10 @@ export default function CoachesPage() {
             <AnimatedSection delay={0.2}>
               <div className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
                 <img 
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/40c1cfa5f_GroupAdult.png"
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/40c1cfa5f_GroupAdult.png?quality=95"
                   alt="LBTA coach leading adult tennis clinic"
                   className="w-full h-80 object-cover hover:scale-105 transition-transform duration-300"
+                  style={{ imageRendering: '-webkit-optimize-contrast' }}
                 />
               </div>
             </AnimatedSection>
@@ -505,32 +502,21 @@ export default function CoachesPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-lbta-burnt section-spacing">
+      <section className="bg-white section-spacing border-t border-gray-200">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6 uppercase">
-              Ready to Work with Our Coaches?
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
+              Work with Our Coaches
             </h2>
-            <p className="text-xl text-white/90 mb-8 font-sans">
-              Book your free trial lesson and experience LBTA coaching excellence
+            <p className="text-lg text-gray-600 mb-10 font-sans leading-relaxed">
+              Experience championship-level coaching. Schedule your complimentary trial.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=coaches_cta&utm_campaign=nextjs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-10 py-5 bg-black text-white font-display text-lg font-bold uppercase rounded-lg hover:scale-105 transition-all duration-300 shadow-2xl"
-                style={{ minHeight: '56px', letterSpacing: '0.5px' }}
-              >
-                Book Free Trial
-              </a>
-              <a 
-                href="mailto:support@lagunabeachtennisacademy.com"
-                className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-white text-lbta-burnt font-display text-lg font-bold uppercase rounded-lg hover:bg-gray-100 transition-all duration-300"
-                style={{ minHeight: '56px', letterSpacing: '0.5px' }}
-              >
-                <Mail className="w-5 h-5" />
-                Contact Us
+              <Link href="/book" className="btn-primary">
+                SCHEDULE TRIAL
+              </Link>
+              <a href="mailto:support@lagunabeachtennisacademy.com" className="btn-secondary">
+                CONTACT US
               </a>
             </div>
           </AnimatedSection>

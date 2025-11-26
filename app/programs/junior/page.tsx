@@ -1,3 +1,8 @@
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const programs = [
@@ -94,6 +99,8 @@ const programs = [
 ]
 
 export default function JuniorProgramsPage() {
+  const [activeSeason, setActiveSeason] = useState<'fall' | 'winter'>('fall')
+
   return (
     <>
       {/* Hero */}
@@ -112,14 +119,57 @@ export default function JuniorProgramsPage() {
         </div>
       </section>
 
-      {/* Winter 2026 Notice */}
-      <section className="bg-lbta-cream py-6 border-b border-gray-200">
+      {/* Season Toggle */}
+      <section className="bg-lbta-cream border-b border-gray-200 sticky top-24 z-40 py-6">
         <div className="container-lbta">
-          <p className="text-center text-sm text-gray-600 font-sans">
-            Winter 2026: January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
-          </p>
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => setActiveSeason('fall')}
+              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
+                activeSeason === 'fall'
+                  ? 'bg-lbta-charcoal text-white'
+                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
+              }`}
+            >
+              FALL 2025 (JOIN NOW)
+            </button>
+            <button
+              onClick={() => setActiveSeason('winter')}
+              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
+                activeSeason === 'winter'
+                  ? 'bg-lbta-charcoal text-white'
+                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
+              }`}
+            >
+              WINTER 2026
+            </button>
+          </div>
         </div>
       </section>
+
+      {/* Season Info Banner */}
+      <AnimatePresence mode="wait">
+        <motion.section
+          key={activeSeason}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.3 }}
+          className={`py-6 ${activeSeason === 'fall' ? 'bg-lbta-tan' : 'bg-blue-50'} border-b border-gray-200`}
+        >
+          <div className="container-lbta text-center">
+            {activeSeason === 'fall' ? (
+              <p className="text-sm text-gray-600 font-sans">
+                <strong>Fall 2025:</strong> Join anytime through December • Prorated pricing based on remaining weeks
+              </p>
+            ) : (
+              <p className="text-sm text-gray-600 font-sans">
+                <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
+              </p>
+            )}
+          </div>
+        </motion.section>
+      </AnimatePresence>
 
       {/* Programs */}
       <section className="section-spacing bg-white">
@@ -158,46 +208,74 @@ export default function JuniorProgramsPage() {
 
                   {/* Right: Pricing */}
                   <div>
-                    <div className="card-lbta p-8">
-                      <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-6">
-                        Winter 2026 Pricing
-                      </h3>
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                          <span className="text-gray-600">Monthly (1x/week)</span>
-                          <span className="text-xl font-serif font-light text-lbta-charcoal">
-                            ${program.monthly_1x}
-                          </span>
-                        </div>
-                        <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                          <span className="text-gray-600">Monthly (2x/week)</span>
-                          <span className="text-xl font-serif font-light text-lbta-charcoal">
-                            ${program.monthly_2x}
-                          </span>
-                        </div>
-                        <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                          <span className="text-gray-600">Quarterly (prepay)</span>
-                          <span className="text-xl font-serif font-light text-lbta-charcoal">
-                            ${program.quarterly_prepay}
-                          </span>
-                        </div>
-                        <div className="flex justify-between items-center pt-2">
-                          <span className="text-gray-600">Drop-in Rate</span>
-                          <span className="text-xl font-serif font-light text-lbta-charcoal">
-                            ${program.drop_in}
-                          </span>
-                        </div>
-                      </div>
-
-                      <a
-                        href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=junior_programs&utm_campaign=nextjs"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary w-full mt-8 justify-center"
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeSeason}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                        className="card-lbta p-8"
                       >
-                        START TRIAL
-                      </a>
-                    </div>
+                        <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-6">
+                          {activeSeason === 'fall' ? 'Fall 2025 Pricing' : 'Winter 2026 Pricing'}
+                        </h3>
+                        <div className="space-y-4">
+                          <div className="flex justify-between items-center pb-3 border-b border-gray-200">
+                            <span className="text-gray-600">Monthly (1x/week)</span>
+                            <span className="text-xl font-serif font-light text-lbta-charcoal">
+                              ${program.monthly_1x}
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center pb-3 border-b border-gray-200">
+                            <span className="text-gray-600">Monthly (2x/week)</span>
+                            <span className="text-xl font-serif font-light text-lbta-charcoal">
+                              ${program.monthly_2x}
+                            </span>
+                          </div>
+                          {activeSeason === 'fall' && (
+                            <div className="flex justify-between items-center pb-3 border-b border-gray-200">
+                              <span className="text-gray-600">Remaining weeks</span>
+                              <span className="text-lg font-serif font-light text-lbta-charcoal">
+                                Prorated
+                              </span>
+                            </div>
+                          )}
+                          {activeSeason === 'winter' && (
+                            <div className="flex justify-between items-center pb-3 border-b border-gray-200">
+                              <span className="text-gray-600">Quarterly (prepay)</span>
+                              <span className="text-xl font-serif font-light text-lbta-charcoal">
+                                ${program.quarterly_prepay}
+                              </span>
+                            </div>
+                          )}
+                          <div className="flex justify-between items-center pt-2">
+                            <span className="text-gray-600">Drop-in Rate</span>
+                            <span className="text-xl font-serif font-light text-lbta-charcoal">
+                              ${program.drop_in}
+                            </span>
+                          </div>
+                        </div>
+
+                        <Link
+                          href="/book"
+                          className="btn-primary w-full mt-8 justify-center"
+                        >
+                          {activeSeason === 'fall' ? 'JOIN NOW' : 'GET NOTIFIED'}
+                        </Link>
+                        
+                        {activeSeason === 'fall' && (
+                          <p className="text-xs text-center text-gray-500 mt-3">
+                            Prorated pricing available • Join anytime
+                          </p>
+                        )}
+                        {activeSeason === 'winter' && (
+                          <p className="text-xs text-center text-gray-500 mt-3">
+                            Registration opens December 1, 2025
+                          </p>
+                        )}
+                      </motion.div>
+                    </AnimatePresence>
                   </div>
                 </div>
               </div>
@@ -216,14 +294,12 @@ export default function JuniorProgramsPage() {
             <p className="text-lg text-gray-600 mb-10 leading-relaxed">
               Experience professional coaching. Zero commitment required.
             </p>
-            <a
-              href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=junior_cta&utm_campaign=nextjs"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book"
               className="btn-primary"
             >
               START FREE TRIAL
-            </a>
+            </Link>
           </AnimatedSection>
         </div>
       </section>

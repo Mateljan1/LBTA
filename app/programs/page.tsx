@@ -166,15 +166,13 @@ export default function ProgramsPage() {
             <p className="text-lg font-sans font-light text-white/80 mb-10 leading-relaxed">
               Schedule a complimentary consultation. We'll assess your level and recommend the ideal path.
             </p>
-            <a
-              href="https://book.lagunabeachtennisacademy.com?utm_source=website&utm_medium=programs&utm_campaign=nextjs"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/book"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-lbta-charcoal font-sans text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-500"
               style={{ minHeight: '48px', letterSpacing: '1.5px' }}
             >
               SCHEDULE CONSULTATION
-            </a>
+            </Link>
           </AnimatedSection>
         </div>
       </section>
