@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-montserrat: 'Montserrat', system-ui, sans-serif;
+    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  * {
+    @apply border-lbta-sand;
+  }
+
+  body {
+    @apply bg-lbta-cream text-lbta-charcoal antialiased;
+  }
+
+  html {
+    @apply scroll-smooth;
+    scroll-padding-top: 160px;
+  }
+}
+
+@layer components {
+  .container-lbta {
+    @apply mx-auto max-w-7xl px-6 md:px-8 lg:px-12;
+  }
+
+  .container-narrow {
+    @apply mx-auto max-w-4xl px-6 md:px-8;
+  }
+
+  .section-spacing {
+    @apply py-20 md:py-32 lg:py-40;
+  }
+
+  .heading-display {
+    @apply font-serif font-light tracking-tight text-lbta-charcoal;
+  }
+
+  .heading-sans {
+    @apply font-display font-medium tracking-normal text-lbta-charcoal;
+  }
+
+  .body-text {
+    @apply font-sans text-base md:text-lg leading-relaxed text-gray-600;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-lbta-charcoal text-white
+           font-sans text-sm font-medium tracking-wide transition-all duration-500
+           hover:bg-lbta-burnt focus:outline-none focus:ring-2 focus:ring-lbta-charcoal focus:ring-offset-2;
+    min-height: 48px;
+    letter-spacing: 1.5px;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 border border-lbta-charcoal/30 text-lbta-charcoal
+           font-sans text-sm font-medium tracking-wide transition-all duration-500
+           hover:border-lbta-charcoal hover:bg-lbta-charcoal hover:text-white
+           focus:outline-none focus:ring-2 focus:ring-lbta-charcoal focus:ring-offset-2;
+    min-height: 48px;
+    letter-spacing: 1.5px;
+  }
+
+  .card-lbta {
+    @apply bg-white border border-gray-200 transition-all duration-500
+           hover:shadow-sm hover:border-gray-300;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .text-overline {
+    @apply font-sans text-xs tracking-[3px] uppercase text-gray-500 font-medium;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
