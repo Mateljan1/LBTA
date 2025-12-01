@@ -7,12 +7,12 @@ import { motion, AnimatePresence, useMotionValue, useTransform, useSpring, useIn
 import { useEffect, useState, useRef } from 'react'
 import { useVYLOAnimations } from './useVYLOAnimations'
 
-// Add font - Manrope for elegant mono-family design
+// Add font - Neue Haas Grotesk from Adobe Fonts
 if (typeof document !== 'undefined') {
-  const manropeLink = document.createElement('link')
-  manropeLink.href = 'https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap'
-  manropeLink.rel = 'stylesheet'
-  document.head.appendChild(manropeLink)
+  const neueHaasLink = document.createElement('link')
+  neueHaasLink.href = 'https://use.typekit.net/ayc1ohg.css'
+  neueHaasLink.rel = 'stylesheet'
+  document.head.appendChild(neueHaasLink)
 }
 
 // Animated Counter Component
@@ -327,9 +327,9 @@ function LabCard({ lab, index }: LabCardProps) {
         <h4
           className="uppercase mb-4"
           style={{
-            fontFamily: "'Manrope', sans-serif",
+            fontFamily: '"neue-haas-grotesk-text", sans-serif',
             fontSize: '13px',
-            fontWeight: 600,
+            fontWeight: 500,
             letterSpacing: '0.1em',
             color: '#111111',
             transform: 'translateZ(20px)',
@@ -354,9 +354,9 @@ function LabCard({ lab, index }: LabCardProps) {
         <div className="pt-7 border-t border-black/6" style={{ transform: 'translateZ(15px)' }}>
           <div
             style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-display", sans-serif',
               fontSize: '44px',
-              fontWeight: 600,
+              fontWeight: 500,
               color: '#111111',
               letterSpacing: '-0.02em',
               marginBottom: '8px',
@@ -532,9 +532,9 @@ function RhythmCard({ block, index }: RhythmCardProps) {
         <h4
           className="text-center uppercase mb-6"
           style={{
-            fontFamily: "'Manrope', sans-serif",
+            fontFamily: '"neue-haas-grotesk-text", sans-serif',
             fontSize: '12px',
-            fontWeight: 600,
+            fontWeight: 500,
             letterSpacing: '0.12em',
             color: block.color,
           }}
@@ -628,9 +628,9 @@ function MilestoneCard({ milestone, index }: MilestoneCardProps) {
       >
         <motion.div
           style={{
-            fontFamily: "'Manrope', sans-serif",
+            fontFamily: '"neue-haas-grotesk-display", sans-serif',
             fontSize: '36px',
-            fontWeight: 600,
+            fontWeight: 500,
             color: '#111111',
             letterSpacing: '-0.02em',
             marginBottom: '4px',
@@ -641,7 +641,7 @@ function MilestoneCard({ milestone, index }: MilestoneCardProps) {
 
         <h3
           style={{
-            fontFamily: "'Manrope', sans-serif",
+            fontFamily: '"neue-haas-grotesk-display", sans-serif',
             fontSize: '18px',
             fontWeight: 500,
             color: '#111111',
@@ -794,9 +794,9 @@ export default function VYLOPage() {
               transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
             >
               <div style={{
-                fontFamily: "'Manrope', sans-serif",
+                fontFamily: '"neue-haas-grotesk-text", sans-serif',
                 fontSize: '11px',
-                fontWeight: 400,
+                fontWeight: 500,
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
                 color: '#888888',
@@ -807,9 +807,9 @@ export default function VYLOPage() {
 
               <h1
                 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-display", sans-serif',
                   fontSize: 'clamp(42px, 5vw, 72px)',
-                  fontWeight: 600,
+                  fontWeight: 500,
                   lineHeight: 1.1,
                   color: '#FFFFFF',
                   marginBottom: '40px',
@@ -824,7 +824,7 @@ export default function VYLOPage() {
 
               <p
                 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-text", sans-serif',
                   fontSize: 'clamp(15px, 1.6vw, 17px)',
                   fontWeight: 400,
                   color: 'rgba(255, 255, 255, 0.75)',
@@ -846,7 +846,7 @@ export default function VYLOPage() {
                   href="/book"
                   className="group inline-flex items-center gap-3 px-12 py-5 bg-[#1A1A1A] hover:bg-[#0A0A0A] transition-all duration-500"
                   style={{
-                    fontFamily: "'Manrope', sans-serif",
+                    fontFamily: '"neue-haas-grotesk-text", sans-serif',
                     fontSize: '11px',
                     fontWeight: 500,
                     letterSpacing: '0.15em',
@@ -867,7 +867,7 @@ export default function VYLOPage() {
                   </motion.span>
                 </Link>
                 <p style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-text", sans-serif',
                   fontSize: '12px',
                   color: 'rgba(255, 255, 255, 0.4)',
                   marginTop: '16px',
@@ -932,9 +932,9 @@ export default function VYLOPage() {
             style={{ maxWidth: '800px', margin: '0 auto' }}
           >
             <p style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-display", sans-serif',
               fontSize: 'clamp(36px, 4vw, 40px)',
-              fontWeight: 400,
+              fontWeight: 500,
               lineHeight: 1.4,
               color: '#111111',
               textAlign: 'center',
@@ -958,9 +958,9 @@ export default function VYLOPage() {
             style={{ marginBottom: '80px' }}
           >
             <div style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '12px',
-              fontWeight: 400,
+              fontWeight: 500,
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
               color: '#888888',
@@ -969,7 +969,7 @@ export default function VYLOPage() {
               Philosophy
             </div>
             <p style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '22px',
               lineHeight: 1.4,
               color: '#FFFFFF',
@@ -1013,9 +1013,9 @@ export default function VYLOPage() {
                 }}
               >
                 <h3 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-display", sans-serif',
                   fontSize: '20px',
-                  fontWeight: 600,
+                  fontWeight: 500,
                   color: '#FFFFFF',
                   marginBottom: '16px',
                   letterSpacing: '-0.01em',
@@ -1023,7 +1023,7 @@ export default function VYLOPage() {
                   {pillar.title}
                 </h3>
                 <p style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-text", sans-serif',
                   fontSize: '16px',
                   lineHeight: 1.5,
                   color: '#999999',
@@ -1048,9 +1048,9 @@ export default function VYLOPage() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <div style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '12px',
-              fontWeight: 400,
+              fontWeight: 500,
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
               color: '#888888',
@@ -1059,9 +1059,9 @@ export default function VYLOPage() {
               The System
             </div>
             <h2 style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-display", sans-serif',
               fontSize: '48px',
-              fontWeight: 600,
+              fontWeight: 500,
               color: '#111111',
               marginBottom: '24px',
               letterSpacing: '-0.02em',
@@ -1070,7 +1070,7 @@ export default function VYLOPage() {
               Four Labs. One Trajectory.
             </h2>
             <p style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '18px',
               lineHeight: 1.5,
               color: '#666666',
@@ -1115,9 +1115,9 @@ export default function VYLOPage() {
                 }}
               >
                 <h3 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-display", sans-serif',
                   fontSize: '20px',
-                  fontWeight: 600,
+                  fontWeight: 500,
                   color: '#111111',
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
@@ -1125,7 +1125,7 @@ export default function VYLOPage() {
                   {area.title}
                 </h3>
                 <p style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-text", sans-serif',
                   fontSize: '15px',
                   lineHeight: 1.6,
                   color: '#555555',
@@ -1149,9 +1149,9 @@ export default function VYLOPage() {
             transition={{ duration: 0.8 }}
           >
             <div style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '12px',
-              fontWeight: 400,
+              fontWeight: 500,
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
               color: '#888888',
@@ -1161,7 +1161,7 @@ export default function VYLOPage() {
             </div>
 
             <p style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '28px',
               fontWeight: 400,
               lineHeight: 1.6,
@@ -1173,7 +1173,7 @@ export default function VYLOPage() {
             </p>
 
             <p style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '16px',
               fontWeight: 400,
               color: '#888888',
@@ -1186,9 +1186,9 @@ export default function VYLOPage() {
               href="/book"
               className="group inline-flex items-center gap-3 px-12 py-4 transition-all duration-500"
               style={{
-                fontFamily: "'Manrope', sans-serif",
+                fontFamily: '"neue-haas-grotesk-text", sans-serif',
                 fontSize: '14px',
-                fontWeight: 400,
+                fontWeight: 500,
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
                 color: '#FFFFFF',
@@ -1220,9 +1220,9 @@ export default function VYLOPage() {
             transition={{ duration: 0.8 }}
           >
             <div style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '12px',
-              fontWeight: 400,
+              fontWeight: 500,
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
               color: '#888888',
@@ -1232,9 +1232,9 @@ export default function VYLOPage() {
             </div>
 
             <h2 style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-display", sans-serif',
               fontSize: '40px',
-              fontWeight: 600,
+              fontWeight: 500,
               color: '#111111',
               marginBottom: '16px',
               letterSpacing: '-0.02em',
@@ -1243,7 +1243,7 @@ export default function VYLOPage() {
             </h2>
 
             <p style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '18px',
               lineHeight: 1.6,
               color: '#666666',
@@ -1285,9 +1285,9 @@ export default function VYLOPage() {
             style={{ marginBottom: '80px' }}
           >
             <div style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
               fontSize: '12px',
-              fontWeight: 400,
+              fontWeight: 500,
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
               color: '#888888',
@@ -1296,9 +1296,9 @@ export default function VYLOPage() {
               Leadership
             </div>
             <h2 style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-display", sans-serif',
               fontSize: '48px',
-              fontWeight: 600,
+              fontWeight: 500,
               color: '#111111',
               letterSpacing: '-0.02em',
             }}>
@@ -1327,9 +1327,9 @@ export default function VYLOPage() {
                 </div>
 
                 <h3 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-display", sans-serif',
                   fontSize: '28px',
-                  fontWeight: 600,
+                  fontWeight: 500,
                   color: '#111111',
                   marginBottom: '8px',
                   letterSpacing: '-0.01em',
@@ -1338,11 +1338,11 @@ export default function VYLOPage() {
                 </h3>
 
                 <div style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-text", sans-serif',
                   fontSize: '14px',
                   color: '#888888',
                   marginBottom: '24px',
-                  fontWeight: 400,
+                  fontWeight: 500,
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em',
                 }}>
@@ -1350,7 +1350,7 @@ export default function VYLOPage() {
                 </div>
 
                 <p style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-text", sans-serif',
                   fontSize: '15px',
                   lineHeight: 1.7,
                   color: '#555555',
@@ -1381,9 +1381,9 @@ export default function VYLOPage() {
                 </div>
 
                 <h3 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-display", sans-serif',
                   fontSize: '28px',
-                  fontWeight: 600,
+                  fontWeight: 500,
                   color: '#111111',
                   marginBottom: '8px',
                   letterSpacing: '-0.01em',
@@ -1392,11 +1392,11 @@ export default function VYLOPage() {
                 </h3>
 
                 <div style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-text", sans-serif',
                   fontSize: '14px',
                   color: '#888888',
                   marginBottom: '24px',
-                  fontWeight: 400,
+                  fontWeight: 500,
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em',
                 }}>
@@ -1404,7 +1404,7 @@ export default function VYLOPage() {
                 </div>
 
                 <p style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: '"neue-haas-grotesk-text", sans-serif',
                   fontSize: '15px',
                   lineHeight: 1.7,
                   color: '#555555',
@@ -1427,9 +1427,9 @@ export default function VYLOPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: '"neue-haas-grotesk-display", sans-serif',
               fontSize: 'clamp(28px, 3.5vw, 40px)',
-              fontWeight: 600,
+              fontWeight: 500,
               color: '#FFFFFF',
               textAlign: 'center',
               letterSpacing: '-0.01em',
@@ -1459,7 +1459,7 @@ export default function VYLOPage() {
             {/* Center - Contact */}
             <div>
               <div style={{
-                fontFamily: "'Manrope', sans-serif",
+                fontFamily: '"neue-haas-grotesk-text", sans-serif',
                 fontSize: '15px',
                 lineHeight: 1.8,
                 color: '#FFFFFF',

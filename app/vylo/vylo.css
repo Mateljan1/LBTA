@@ -1,9 +1,7 @@
 /* ================================
    VYLO PAGE — SCOPED STYLES
-   Logo-matched typography system
+   Neue Haas Grotesk typography system
    ================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* ================================
    CSS VARIABLES
@@ -11,13 +9,12 @@
 
 .vylo-page {
   /* Typography */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'neue-haas-grotesk-display', sans-serif;
+  --font-text: 'neue-haas-grotesk-text', sans-serif;
 
   /* Font Weights */
   --font-weight-regular: 400;
   --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
 
   /* Colors - Warm Palette */
   --color-black: #0D0D0D;
@@ -49,7 +46,7 @@
    ================================ */
 
 .vylo-page {
-  font-family: var(--font-primary);
+  font-family: var(--font-text);
   font-weight: var(--font-weight-regular);
   font-size: 16px;
   line-height: 1.6;
@@ -80,30 +77,34 @@
    TYPOGRAPHY
    ================================ */
 
-/* Headlines - Bold, tight tracking (matches logo) */
+/* Headlines - Display font, medium weight */
 .vylo-page h1,
 .vylo-page .vylo-headline-xl {
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .vylo-page h2,
 .vylo-page .vylo-headline-lg {
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
 .vylo-page h3,
 .vylo-page .vylo-headline-md {
-  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-medium);
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 /* Labels - Tracked out, uppercase */
 .vylo-page .vylo-label {
+  font-family: var(--font-text);
   font-size: 11px;
   font-weight: var(--font-weight-medium);
   letter-spacing: 0.15em;
@@ -113,20 +114,25 @@
 
 /* Body Text */
 .vylo-page .vylo-body {
+  font-family: var(--font-text);
   font-size: 16px;
   font-weight: var(--font-weight-regular);
   line-height: 1.7;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   color: var(--color-gray-600);
 }
 
 .vylo-page .vylo-body-lg {
+  font-family: var(--font-text);
   font-size: 18px;
-  line-height: 1.7;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
 }
 
 .vylo-page .vylo-body-sm {
+  font-family: var(--font-text);
   font-size: 14px;
+  font-weight: var(--font-weight-regular);
   line-height: 1.6;
 }
 
@@ -136,10 +142,10 @@
 
 .vylo-page .vylo-button {
   display: inline-block;
-  font-family: var(--font-primary);
+  font-family: var(--font-text);
   font-size: 12px;
   font-weight: var(--font-weight-medium);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   padding: 18px 48px;

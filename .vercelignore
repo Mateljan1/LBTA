@@ -1,0 +1,24 @@
+# Large video files - upload to CDN separately
+public/videos/vylo-hero.mp4
+public/vylo-hero.MP4
+
+# Large unoptimized images - need compression
+public/photos/LBCOURTSETTING.jpg
+public/photos/GymSetting.png
+public/photos/VideoAnalysisRoom.png
+public/photos/playerhousing.png
+public/photos/Closeupcourt.png
+public/photos/Court setting.png
+public/photos/MaxResting.jpg
+
+# Build artifacts
+.next/
+node_modules/
+.git/
+
+# Development files
+*.swp
+*.backup
+*.working
+*.txt
+*.md
