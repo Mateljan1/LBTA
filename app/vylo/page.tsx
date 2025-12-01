@@ -802,7 +802,7 @@ export default function VYLOPage() {
                 color: '#888888',
                 marginBottom: '24px',
               }}>
-                Laguna Beach, CA
+                LAGUNA BEACH, CA
               </div>
 
               <h1
@@ -817,9 +817,9 @@ export default function VYLOPage() {
                   textTransform: 'uppercase',
                 }}
               >
-                Ten athletes.
+                TEN ATHLETES.
                 <br />
-                One standard.
+                DOCUMENTED PROGRESSION.
               </h1>
 
               <p
@@ -834,7 +834,7 @@ export default function VYLOPage() {
                   marginBottom: '56px',
                 }}
               >
-                An active ATP coach. Ten junior athletes. Every session on record.
+                30+ Division I placements. ATP/WTA coaching experience. A full-time system for ten athletes.
               </p>
 
               <motion.div
@@ -856,7 +856,7 @@ export default function VYLOPage() {
                     boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
                   }}
                 >
-                  LEARN MORE
+                  APPLY NOW
                   <motion.span
                     className="text-white/40 group-hover:text-white/80"
                     initial={{ x: 0 }}
@@ -873,7 +873,7 @@ export default function VYLOPage() {
                   marginTop: '16px',
                   fontWeight: 400,
                 }}>
-                  Applications now open — Founding Cohort January 2026
+                  Applications open — Founding Cohort January 2026
                 </p>
               </motion.div>
             </motion.div>
