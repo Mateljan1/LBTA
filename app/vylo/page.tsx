@@ -280,8 +280,8 @@ function LabCard({ lab, index }: LabCardProps) {
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ delay: index * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       style={{
@@ -434,8 +434,8 @@ function RhythmCard({ block, index }: RhythmCardProps) {
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
       className="group relative"
@@ -606,8 +606,8 @@ function MilestoneCard({ milestone, index }: MilestoneCardProps) {
         left: milestone.position.left,
         top: milestone.position.top,
       }}
-      initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: 0.6 + index * 0.2, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={() => setIsHovered(true)}
@@ -748,6 +748,8 @@ export default function VYLOPage() {
   const [heroTextVisible, setHeroTextVisible] = useState(false)
   const [carouselIndex, setCarouselIndex] = useState(0)
   const [activeTimeline, setActiveTimeline] = useState<number | null>(null)
+  const [navbarVisible, setNavbarVisible] = useState(true)
+  const [navbarScrolled, setNavbarScrolled] = useState(false)
 
   const { scrollY } = useScroll()
   const heroScale = useTransform(scrollY, [0, 1000], [1, 1.15])
@@ -756,10 +758,30 @@ export default function VYLOPage() {
     const scrollTimer = setTimeout(() => setScrollHintVisible(false), 8000)
     const heroTimer = setTimeout(() => setHeroTextVisible(true), 4000)
 
+    let lastScrollY = window.scrollY
+
     const handleScroll = () => {
-      if (window.scrollY > 100) setScrollHintVisible(false)
+      const currentScrollY = window.scrollY
+
+      // Hide scroll hint
+      if (currentScrollY > 100) setScrollHintVisible(false)
+
+      // Track if scrolled past hero (for backdrop blur)
+      setNavbarScrolled(currentScrollY > 50)
+
+      // Smart navbar: hide on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down
+        setNavbarVisible(false)
+      } else {
+        // Scrolling up
+        setNavbarVisible(true)
+      }
+
+      lastScrollY = currentScrollY
     }
-    window.addEventListener('scroll', handleScroll)
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
       clearTimeout(scrollTimer)
@@ -775,8 +797,16 @@ export default function VYLOPage() {
 
   return (
     <div className="vylo-page">
-      {/* HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50">
+      {/* HEADER - Smart Navbar */}
+      <header
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out"
+        style={{
+          transform: navbarVisible ? 'translateY(0)' : 'translateY(-100%)',
+          backgroundColor: navbarScrolled ? 'rgba(10, 10, 10, 0.8)' : 'transparent',
+          backdropFilter: navbarScrolled ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: navbarScrolled ? 'blur(12px)' : 'none',
+        }}
+      >
         <div className="max-w-[1440px] mx-auto px-8 md:px-12 py-8 flex items-center justify-between">
           <Link href="/vylo" className="hover:opacity-80 transition-opacity">
             <Image src="/logos/VYLO Icon_Word_Logo_Classic_Org_Wht.png" alt="VYLO" width={180} height={60} className="w-auto h-auto" priority />
@@ -789,8 +819,8 @@ export default function VYLOPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 min-h-screen">
           <div className="lg:col-span-5 flex flex-col justify-center px-8 md:px-16 lg:px-20 py-32 lg:py-20">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
             >
               <div style={{
@@ -1037,50 +1067,53 @@ export default function VYLOPage() {
         </div>
       </section>
 
-      {/* THE SYSTEM */}
+      {/* THE SYSTEM - Enhanced with Sticky Layout */}
       <section style={{ padding: '120px 0', background: '#FFFFFF' }}>
         <div className="max-w-[1440px] mx-auto px-8 md:px-12">
-          <motion.div
-            className="mb-20 max-w-[700px]"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div style={{
-              fontFamily: '"neue-haas-grotesk-text", sans-serif',
-              fontSize: '12px',
-              fontWeight: 500,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: '#888888',
-              marginBottom: '24px',
-            }}>
-              The System
-            </div>
-            <h2 style={{
-              fontFamily: '"neue-haas-grotesk-display", sans-serif',
-              fontSize: '48px',
-              fontWeight: 500,
-              color: '#111111',
-              marginBottom: '24px',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.1,
-            }}>
-              Four Labs. One Trajectory.
-            </h2>
-            <p style={{
-              fontFamily: '"neue-haas-grotesk-text", sans-serif',
-              fontSize: '18px',
-              lineHeight: 1.5,
-              color: '#666666',
-              fontWeight: 400,
-            }}>
-              Each athlete is developed across four integrated domains. Quarterly assessments. Documented progression.
-            </p>
-          </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+            {/* Sticky Header - Left Column */}
+            <motion.div
+              className="lg:sticky lg:top-32 lg:self-start max-w-[500px]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div style={{
+                fontFamily: '"neue-haas-grotesk-text", sans-serif',
+                fontSize: '12px',
+                fontWeight: 500,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: '#888888',
+                marginBottom: '24px',
+              }}>
+                The System
+              </div>
+              <h2 style={{
+                fontFamily: '"neue-haas-grotesk-display", sans-serif',
+                fontSize: '48px',
+                fontWeight: 500,
+                color: '#111111',
+                marginBottom: '24px',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.1,
+              }}>
+                Four Labs. One Trajectory.
+              </h2>
+              <p style={{
+                fontFamily: '"neue-haas-grotesk-text", sans-serif',
+                fontSize: '18px',
+                lineHeight: 1.5,
+                color: '#666666',
+                fontWeight: 400,
+              }}>
+                Each athlete is developed across four integrated domains. Quarterly assessments. Documented progression.
+              </p>
+            </motion.div>
 
-          <div className="max-w-[1000px]">
+            {/* Scrolling Content - Right Column */}
+            <div>
             {[
               {
                 title: 'Technical',
@@ -1135,6 +1168,7 @@ export default function VYLOPage() {
                 </p>
               </motion.div>
             ))}
+            </div>
           </div>
         </div>
       </section>
