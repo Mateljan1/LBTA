@@ -53,7 +53,7 @@
            font-sans text-sm font-medium tracking-wide transition-all duration-500
            hover:bg-lbta-burnt focus:outline-none focus:ring-2 focus:ring-lbta-charcoal focus:ring-offset-2;
     min-height: 48px;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
   }
 
   .btn-secondary {
@@ -62,17 +62,64 @@
            hover:border-lbta-charcoal hover:bg-lbta-charcoal hover:text-white
            focus:outline-none focus:ring-2 focus:ring-lbta-charcoal focus:ring-offset-2;
     min-height: 48px;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
   }
 
   .card-lbta {
     @apply bg-white border border-gray-200 transition-all duration-500
-           hover:shadow-sm hover:border-gray-300;
+           hover:border-gray-300;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .card-lbta:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
   }
 
   .text-overline {
     @apply font-sans text-xs tracking-[3px] uppercase text-gray-500 font-medium;
+  }
+
+  .text-h4 {
+    @apply font-serif text-xl font-light text-lbta-charcoal;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  /* Advanced Micro-Interactions - Aman Standard */
+  a:not(.btn-primary):not(.btn-secondary):not(.card-lbta) {
+    position: relative;
+  }
+
+  a:not(.btn-primary):not(.btn-secondary):not(.card-lbta)::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s ease-out;
+  }
+
+  a:not(.btn-primary):not(.btn-secondary):not(.card-lbta):hover::after {
+    width: 100%;
+  }
+
+  /* Button press states */
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Image zoom on hover */
+  .image-zoom {
+    transition: transform 0.7s ease-out;
+  }
+
+  .image-zoom:hover {
+    transform: scale(1.05);
   }
 }
 
@@ -123,6 +170,282 @@
     textarea {
       min-height: 48px;
     }
+  }
+
+  /* Ultra-luxury animations */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-200%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(200%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(197, 165, 114, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(197, 165, 114, 0.6);
+    }
+  }
+
+  @keyframes luxury-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  .animate-luxury-fade-in {
+    animation: luxury-fade-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* Performance optimizations */
+  .transform-gpu {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  /* Luxury hover effects */
+  .luxury-hover {
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .luxury-hover:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.15));
+  }
+
+  /* Premium button animations */
+  .btn-luxury {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+  }
+
+  .btn-luxury::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.7s;
+  }
+
+  .btn-luxury:hover::before {
+    left: 100%;
+  }
+
+  /* Advanced Performance Optimizations */
+  
+  /* GPU-accelerated transforms */
+  .gpu-accelerate {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Smooth scroll with hardware acceleration */
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Optimize font rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Optimized clip-path animations (better than border-radius) */
+  .luxury-clip-animate {
+    transition: clip-path 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .luxury-clip-animate:hover {
+    clip-path: inset(0 round 8px);
+  }
+
+  /* Hardware-accelerated filters */
+  .luxury-filter {
+    filter: brightness(1) contrast(1) saturate(1);
+    transition: filter 0.5s ease-out;
+  }
+
+  .luxury-filter:hover {
+    filter: brightness(1.05) contrast(1.1) saturate(1.1);
+  }
+
+  /* Contain layout for better performance */
+  .contain-layout {
+    contain: layout style paint;
+  }
+
+  /* Critical resource hints */
+  .preload-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Image loading optimization */
+  .logo-container {
+    position: relative;
+    background-color: var(--logo-bg, #F5F2EF);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .logo-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--logo-bg, #F5F2EF);
+    z-index: 1;
+  }
+
+  .logo-container img {
+    position: relative;
+    z-index: 2;
+    mix-blend-mode: multiply;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .logo-container img[data-loaded="false"] {
+    opacity: 0;
+  }
+
+  .logo-container img[data-loaded="true"] {
+    opacity: 0.9;
+  }
+
+  /* Seamless logo integration */
+  .city-logo-blend {
+    background: linear-gradient(135deg, 
+      #F5F2EF 0%, 
+      #F3F0ED 50%, 
+      #F5F2EF 100%);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Specific blending for City of Laguna Beach logo on tan background */
+  .city-logo-tan-blend {
+    filter: 
+      contrast(1.15) 
+      brightness(0.90) 
+      saturate(1.1);
+    mix-blend-mode: darken;
+  }
+
+  /* Remove white background from logos on tan sections */
+  .bg-lbta-tan .city-logo-tan-blend {
+    background: transparent !important;
+    mix-blend-mode: darken;
+  }
+  
+  /* Additional white background removal for City logo */
+  img[src*="CityofLBLogo"] {
+    mix-blend-mode: darken;
+  }
+
+  /* Advanced logo blending for seamless integration */
+  .bg-lbta-tan .logo-container.city-logo-blend {
+    background: linear-gradient(135deg, 
+      #f8e6bb 0%, 
+      #f6e3b5 50%, 
+      #f8e6bb 100%);
+    box-shadow: none;
+  }
+
+  .bg-lbta-tan .logo-container.city-logo-blend::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(ellipse at center, transparent 30%, rgba(248, 230, 187, 0.1) 70%);
+    mix-blend-mode: overlay;
+    z-index: 15;
+    pointer-events: none;
+  }
+}
+
+/* VYLO Apply Button - Premium Border Draw Animation */
+@keyframes drawBorder {
+  0% {
+    stroke-dashoffset: 500;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Magnetic button hover effect */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
   }
 }
 

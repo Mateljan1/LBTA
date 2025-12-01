@@ -48,16 +48,15 @@ export default function WinterCountdown() {
   if (isDismissed || timeLeft.days < 0) return null
 
   return (
-    <div className="relative bg-gradient-to-r from-blue-50 to-blue-100 border-b border-blue-200 py-3">
+    <div className="relative bg-lbta-cream border-b border-gray-200 py-2">
       <div className="container-lbta">
         <div className="flex items-center justify-between">
           <div className="flex-1 text-center">
-            <p className="text-sm font-sans text-gray-700">
-              <span className="font-medium">Winter 2026 Registration Opens:</span>{' '}
-              <span className="font-serif font-light text-lg text-lbta-charcoal">
-                {timeLeft.days} days {timeLeft.hours}h {timeLeft.minutes}m
+            <p className="text-sm font-sans text-gray-600">
+              <span className="font-serif font-light">Winter 2026</span> registration opens December 1 
+              <span className="ml-2 text-xs text-gray-400">
+                ({timeLeft.days}d {timeLeft.hours}h remaining)
               </span>
-              {' '}• December 1, 2025
             </p>
           </div>
           <button
@@ -65,7 +64,7 @@ export default function WinterCountdown() {
             className="flex-shrink-0 p-1 hover:bg-black/5 rounded-full transition-colors"
             aria-label="Dismiss"
           >
-            <X className="w-4 h-4 text-gray-500" />
+            <X className="w-3 h-3 text-gray-400" />
           </button>
         </div>
       </div>

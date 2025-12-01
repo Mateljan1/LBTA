@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Mail, Phone } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
 const philosophy = [
   {
@@ -40,8 +41,13 @@ const atpPlayers = [
 export default function AndrewMateljanPage() {
   return (
     <>
+      <Breadcrumbs items={[
+        { label: 'Coaches', href: '/coaches' },
+        { label: 'Andrew Mateljan' }
+      ]} />
+      
       {/* Hero */}
-      <section className="relative bg-white pt-40 pb-20">
+      <section className="relative bg-white pt-32 pb-20">
         <div className="container-narrow text-center">
           <AnimatedSection>
             <h1 className="text-display-lg heading-display mb-6">
@@ -198,7 +204,7 @@ export default function AndrewMateljanPage() {
                 <ul className="space-y-2 text-sm text-white/80 mb-6">
                   <li>• 10 athletes maximum—personalized attention</li>
                   <li>• Professional-grade training systems</li>
-                  <li>• Precision, alignment, measurable progress</li>
+                  <li>• Excellence, alignment, measurable progress</li>
                 </ul>
                 <a href="/vylo" className="text-sm font-sans text-white tracking-wide hover:text-vylo-orange transition-colors border-b border-white/30 hover:border-vylo-orange pb-1 inline-block">
                   Learn About VYLO →

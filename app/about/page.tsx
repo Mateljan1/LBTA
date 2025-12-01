@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const milestones = [
@@ -36,20 +37,20 @@ const milestones = [
 
 const values = [
   {
-    title: "Excellence",
-    description: "We pursue mastery in technique, tactics, and mental performance. Championship-level standards applied at every level."
+    title: "The Work",
+    description: "Perfect technique takes time. What happens faster: mental clarity, physical discipline, the confidence that comes from doing hard things well."
   },
   {
-    title: "Individual Development",
-    description: "Every student receives personalized attention. We group by skill level, not just age. Custom training plans for each athlete."
+    title: "Your Path",
+    description: "No two athletes develop the same way. We honor your unique strengths, address your specific challenges, design around your goals."
   },
   {
-    title: "Honest Communication",
-    description: "We tell you the truth about your level, timeline, and realistic goals. No false promises. Just professional guidance."
+    title: "Honest Feedback",
+    description: "Real progress requires truth. You'll always know where you stand, what's working, and what needs work. No sugar-coating, no false praise."
   },
   {
-    title: "Community",
-    description: "200+ families training together. From ages 3 to ATP professionals. Everyone values discipline, progress, and belonging."
+    title: "The Community",
+    description: "From 3-year-olds learning focus to ATP professionals refining strategy. Everyone here is serious about getting better."
   }
 ]
 
@@ -60,14 +61,14 @@ export default function AboutPage() {
       <section className="relative bg-white pt-40 pb-20">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <p className="text-overline mb-6">About LBTA</p>
+            <p className="text-overline mb-6">Our Story</p>
             <h1 className="text-display-lg heading-display mb-6">
-              Excellence Built Here
+              Where Character Meets  
+              Championship
             </h1>
-            <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Championship-level tennis training in Laguna Beach since 2020.  
-              Official City Partner.
-            </p>
+              <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                For five years, students have learned that good tennis teaches more than strokes. It builds focus, resilience, and the quiet confidence that comes from doing hard work well.
+              </p>
           </AnimatedSection>
         </div>
       </section>
@@ -77,9 +78,11 @@ export default function AboutPage() {
         <div className="container-lbta">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
-              <img 
+              <Image 
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png?quality=95"
                 alt="Laguna Beach Tennis Academy facilities"
+                width={1200}
+                height={800}
                 className="w-full h-auto rounded-sm"
                 style={{ imageRendering: '-webkit-optimize-contrast' }}
               />
@@ -87,17 +90,20 @@ export default function AboutPage() {
 
             <AnimatedSection delay={0.2}>
               <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
-                Our Story
+                Why We Started
               </h2>
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p>
-                  Laguna Beach Tennis Academy was founded in 2020 by Andrew Mateljan—a former top-ranked national junior and professional coach with international experience across Spain, Croatia, and Norway.
+                  In 2020, Andrew Mateljan came back to Laguna Beach after coaching ATP/WTA players across Europe. The goal was simple: bring professional-level training to anyone serious about getting better.
                 </p>
                 <p>
-                  After years coaching on the ATP/WTA tours, Andrew returned to Laguna Beach with a mission: create a training environment where technical precision meets authentic mentorship. Where players of every level—from 3-year-olds discovering tennis to professionals competing on tour—receive the same systematic approach to development.
+                  What if tennis became the foundation for unshakeable confidence? What if the clarity required for perfect form translated into clarity in every life decision? What if the mental toughness needed to compete at the highest level built leaders who could excel anywhere?
                 </p>
                 <p>
-                  Today, LBTA serves 200+ families across three premier city facilities, maintains the official City of Laguna Beach tennis partnership, and has helped 20+ athletes earn Division I college scholarships while currently coaching multiple ATP-ranked professionals.
+                  Today, LBTA is living proof of this vision. Our athletes don't just win matches—they earn full scholarships to Stanford, develop the work ethic that transforms careers, and carry themselves with the quiet confidence that comes from true mastery.
+                </p>
+                <p>
+                  This is tennis as character development. This is sport as life preparation. This is LBTA.
                 </p>
               </div>
             </AnimatedSection>
@@ -143,10 +149,14 @@ export default function AboutPage() {
       <section className="section-spacing bg-lbta-cream">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
-            <p className="text-overline mb-6">Our Values</p>
+            <p className="text-overline mb-6">Our Foundation</p>
             <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
-              What We Stand For
+              The Principles That  
+              Shape Champions
             </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
+              These aren't just tennis values—they're life principles that our athletes carry far beyond the court.
+            </p>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -171,13 +181,13 @@ export default function AboutPage() {
         <div className="container-narrow text-center">
           <AnimatedSection>
             <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
-              Join Our Tennis Community
+              Begin Your Excellence Journey
             </h2>
-            <p className="text-lg text-gray-600 mb-10">
-              Experience the difference that dedicated coaching and a supportive environment can make
+            <p className="text-lg text-gray-600 mb-10 leading-relaxed">
+              Discover how tennis excellence becomes the foundation for confidence, character, and success in every area of life. Your transformation awaits.
             </p>
             <Link href="/book" className="btn-primary">
-              SCHEDULE TRIAL
+              REQUEST CONSULTATION
             </Link>
           </AnimatedSection>
         </div>

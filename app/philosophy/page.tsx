@@ -4,13 +4,13 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 const principles = [
   {
     icon: Target,
-    title: 'Mastery Through Precision',
+    title: 'Excellence Through Clarity',
     description: 'Excellence isn\'t accidental. Every stroke, every movement, every tactical decision receives focused attention. We believe in deliberate practice—breaking complex skills into manageable elements, refining each component, and integrating them into fluid performance.',
   },
   {
     icon: Brain,
     title: 'Mind and Body as One',
-    description: 'Tennis is as much mental as physical. We develop mental resilience alongside technical skill, teaching players to manage pressure, maintain focus, and learn from both victories and defeats. The strongest players master their inner game.',
+    description: 'Tennis is as much mental as physical. We develop mental resilience alongside technical skill, teaching players to manage pressure, maintain focus, and learn from both victories and defeats. The strongest players command their inner game.',
   },
   {
     icon: Compass,

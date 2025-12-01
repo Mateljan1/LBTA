@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 import { Inter, Montserrat, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import WinterCountdown from '@/components/ui/WinterCountdown'
+import ConditionalLayout from '@/components/layout/ConditionalLayout'
 
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 const montserrat = Montserrat({
@@ -17,13 +17,17 @@ const montserrat = Montserrat({
   weight: ['500', '600', '700', '800'],
   variable: '--font-montserrat',
   display: 'swap',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-cormorant',
-  display: 'swap',
+  display: 'optional',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 export const metadata: Metadata = {
@@ -59,14 +63,10 @@ export default function RootLayout({
         />
       </head>
       <body className="flex flex-col min-h-screen">
-        <WinterCountdown />
-        <Header />
-        <main className="flex-grow">
+        <ConditionalLayout>
           {children}
-        </main>
-        <Footer />
+        </ConditionalLayout>
       </body>
     </html>
   )
 }
-

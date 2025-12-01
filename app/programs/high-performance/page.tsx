@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
 const programs = [
   {
@@ -44,8 +44,13 @@ export default function HighPerformancePage() {
 
   return (
     <>
+      <Breadcrumbs items={[
+        { label: 'Programs', href: '/programs' },
+        { label: 'High Performance' }
+      ]} />
+      
       {/* Hero */}
-      <section className="relative bg-white pt-40 pb-20">
+      <section className="relative bg-white pt-32 pb-20">
         <div className="container-narrow text-center">
           <AnimatedSection>
             <p className="text-overline mb-6">High Performance</p>
@@ -89,28 +94,22 @@ export default function HighPerformancePage() {
       </section>
 
       {/* Season Info Banner */}
-      <AnimatePresence mode="wait">
-        <motion.section
-          key={activeSeason}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.3 }}
-          className={`py-6 ${activeSeason === 'fall' ? 'bg-lbta-tan' : 'bg-blue-50'} border-b border-gray-200`}
-        >
-          <div className="container-lbta text-center">
-            {activeSeason === 'fall' ? (
-              <p className="text-sm text-gray-600 font-sans">
-                <strong>Fall 2025:</strong> Join anytime through December • Rolling admissions
-              </p>
-            ) : (
-              <p className="text-sm text-gray-600 font-sans">
-                <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
-              </p>
-            )}
-          </div>
-        </motion.section>
-      </AnimatePresence>
+      <section
+        key={activeSeason}
+        className={`py-6 ${activeSeason === 'fall' ? 'bg-lbta-tan' : 'bg-blue-50'} border-b border-gray-200 transition-all duration-300`}
+      >
+        <div className="container-lbta text-center">
+          {activeSeason === 'fall' ? (
+            <p className="text-sm text-gray-600 font-sans">
+              <strong>Fall 2025:</strong> Join anytime through December • Rolling admissions
+            </p>
+          ) : (
+            <p className="text-sm text-gray-600 font-sans">
+              <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
+            </p>
+          )}
+        </div>
+      </section>
 
       {/* Programs */}
       <section className="section-spacing bg-lbta-cream">
@@ -183,8 +182,7 @@ export default function HighPerformancePage() {
                             Registration opens December 1, 2025
                           </p>
                         )}
-                      </motion.div>
-                    </AnimatePresence>
+                    </div>
                   </div>
               </div>
             </AnimatedSection>

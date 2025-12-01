@@ -1,12 +1,9 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-
-export const metadata: Metadata = {
-  title: 'Tennis Lesson Pricing - Transparent Rates | LBTA',
-  description: 'Complete pricing: Junior $140-$260/mo, Adult $180-$300/mo, Private $100-$250/hr, VYLO $2,200-3,500/mo. Prepay discounts & $25K+ scholarships available.',
-  keywords: 'tennis lesson prices Laguna Beach, tennis academy cost, private tennis lessons cost, tennis scholarship, tennis training investment',
-}
+import TestimonialQuote from '@/components/ui/TestimonialQuote'
 
 const programs = [
   { name: "Little Tennis Stars", ages: "3-4", monthly_1x: 140, monthly_2x: 260, category: "Junior" },
@@ -29,6 +26,8 @@ const privateRates = [
 ]
 
 export default function PricingPage() {
+  const [activeSeason, setActiveSeason] = useState<'fall' | 'winter'>('fall')
+
   return (
     <>
       {/* Hero */}
@@ -37,12 +36,84 @@ export default function PricingPage() {
           <AnimatedSection>
             <p className="text-overline mb-6">Pricing</p>
             <h1 className="text-display-lg heading-display mb-6">
-              Transparent Investment
+              What It Costs
             </h1>
             <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Clear pricing. No hidden fees. Prepay discounts available.
+              Tennis teaches more than technique. It builds character, discipline, and confidence that last a lifetime.
             </p>
           </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Value Proposition */}
+      <section className="section-spacing bg-white border-t border-gray-200">
+        <div className="container-narrow text-center">
+          <AnimatedSection>
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
+              What Your Investment Includes
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+              <div>
+                <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-3">
+                  ATP/WTA Expertise
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Training methods proven at the highest levels of professional tennis, adapted to your development stage.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-3">
+                  Individual Attention
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Small group sizes ensure personalized feedback. Your unique path honored and accelerated.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-3">
+                  Complete Development
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Technical skill, mental toughness, physical conditioning, and life character—integrated approach.
+                </p>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Season Selection */}
+      <section className="bg-lbta-cream border-y border-gray-200 py-8">
+        <div className="container-narrow">
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => setActiveSeason('fall')}
+              className={`px-10 py-4 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-500 ${
+                activeSeason === 'fall'
+                  ? 'bg-lbta-charcoal text-white'
+                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
+              }`}
+              style={{ letterSpacing: '2px' }}
+            >
+              FALL 2025
+            </button>
+            <button
+              onClick={() => setActiveSeason('winter')}
+              className={`px-10 py-4 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-500 ${
+                activeSeason === 'winter'
+                  ? 'bg-lbta-charcoal text-white'
+                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
+              }`}
+              style={{ letterSpacing: '2px' }}
+            >
+              WINTER 2026
+            </button>
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-4 font-sans">
+            {activeSeason === 'fall' 
+              ? 'Current session in progress — Join us anytime' 
+              : 'Registration opens December 1, 2025'}
+          </p>
         </div>
       </section>
 
@@ -51,8 +122,11 @@ export default function PricingPage() {
         <div className="container-lbta">
           <AnimatedSection className="mb-12">
             <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-6 text-center">
-              Group Programs
+              {activeSeason === 'fall' ? 'Fall 2025' : 'Winter 2026'} Pricing
             </h2>
+            <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
+              Monthly rates. All programs include facility access, progress tracking, and quarterly assessments.
+            </p>
           </AnimatedSection>
 
           <div className="overflow-x-auto">
@@ -173,14 +247,22 @@ export default function PricingPage() {
                 Scholarships cover 25-50% of program tuition for qualified families.
               </p>
               <p className="text-sm text-gray-500">
-                Requirements: Household income &lt; $75K, 2+ sessions/week commitment, 2.5+ GPA
+                Requirements: Household income &lt; $75K, 2+ sessions/week commitment, 3.5+ GPA
               </p>
-              <p className="text-sm text-gray-500 mt-4">
-                Email applications to{' '}
-                <a href="mailto:scholarships@lagunabeachtennisacademy.com" className="text-lbta-burnt hover:text-lbta-orange">
-                  scholarships@lagunabeachtennisacademy.com
+              <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  href="/apply-scholarship"
+                  className="btn-primary"
+                >
+                  APPLY NOW
+                </Link>
+                <a 
+                  href="mailto:scholarships@lagunabeachtennisacademy.com" 
+                  className="btn-secondary"
+                >
+                  EMAIL QUESTIONS
                 </a>
-              </p>
+              </div>
             </div>
           </AnimatedSection>
         </div>

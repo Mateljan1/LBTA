@@ -1,11 +1,9 @@
-'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import SeamlessLogo from '@/components/ui/SeamlessLogo'
+import PhotoVideoGallery from '@/components/ui/PhotoVideoGallery'
+import PartnershipSection from '@/components/ui/PartnershipSection'
 
 const stats = [
   { value: "200+", label: "Active Members" },
@@ -41,26 +39,7 @@ const coaches = [
   },
 ]
 
-const testimonialVideos = [
-  { id: "1134930901", title: "Parent Testimonial" },
-  { id: "1134930934", title: "Junior Player Success" },
-  { id: "1134931000", title: "Adult Member Story" },
-  { id: "1134930887", title: "Competitive Player" },
-  { id: "533673494", title: "Family Experience" },
-  { id: "1134930870", title: "Tournament Success" },
-  { id: "533673103", title: "Adult Transformation" }
-]
-
 export default function Home() {
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
-
-  const nextVideo = () => {
-    setCurrentVideoIndex((prev) => (prev + 1) % testimonialVideos.length)
-  }
-
-  const prevVideo = () => {
-    setCurrentVideoIndex((prev) => (prev - 1 + testimonialVideos.length) % testimonialVideos.length)
-  }
 
   return (
     <>
@@ -79,20 +58,17 @@ export default function Home() {
         </div>
         
         <div className="relative z-10 container-narrow text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-          >
+          <div>
             <h1 className="text-5xl md:text-7xl font-serif font-light text-white mb-8 tracking-tight" 
                 style={{ lineHeight: 1.1, textShadow: '0 2px 12px rgba(0,0,0,0.3)' }}>
-              Excellence Built Here
+              Your Championship Journey
+              <br />
+              Starts in Laguna Beach.
             </h1>
             
             <p className="text-lg md:text-xl font-sans font-light text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed"
                style={{ textShadow: '0 1px 6px rgba(0,0,0,0.3)' }}>
-              ATP/WTA coaching for ages 3 to professional.  
-              Small by design.
+              Championship-level coaching. Individual attention. Proven results.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
@@ -115,9 +91,10 @@ export default function Home() {
               <span className="hidden sm:inline">•</span>
               <span>City Partner Since 2020</span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
+
 
       {/* Principles - Quiet Confidence */}
       <section className="section-spacing bg-white">
@@ -125,7 +102,7 @@ export default function Home() {
           <AnimatedSection className="text-center mb-20">
             <p className="text-overline mb-6">Our Approach</p>
             <h2 className="text-4xl md:text-5xl font-serif font-light text-lbta-charcoal mb-6 tracking-tight">
-              What Sets Us Apart
+              How We Work
             </h2>
           </AnimatedSection>
 
@@ -134,10 +111,10 @@ export default function Home() {
               <div className="text-center">
                 <div className="text-6xl font-serif font-light text-lbta-burnt/30 mb-6">01</div>
                 <h3 className="text-xl font-sans font-medium text-lbta-charcoal mb-4">
-                  Professional Expertise
+                  Real Experience
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  ATP/WTA tour experience informs every lesson. From beginners to professionals, we apply proven systems.
+                  ATP/WTA tour coaches. Twenty years refining what works. We teach the way professionals train—adapted to where you are now.
                 </p>
               </div>
             </AnimatedSection>
@@ -146,10 +123,10 @@ export default function Home() {
               <div className="text-center">
                 <div className="text-6xl font-serif font-light text-lbta-burnt/30 mb-6">02</div>
                 <h3 className="text-xl font-sans font-medium text-lbta-charcoal mb-4">
-                  Individual Attention
+                  Small Groups
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Small group sizes ensure personalized feedback. Eight specialized coaches, each committed to your progress.
+                  Six students maximum. Your coach knows your name, your game, your goals. Every session is personal.
                 </p>
               </div>
             </AnimatedSection>
@@ -158,10 +135,10 @@ export default function Home() {
               <div className="text-center">
                 <div className="text-6xl font-serif font-light text-lbta-burnt/30 mb-6">03</div>
                 <h3 className="text-xl font-sans font-medium text-lbta-charcoal mb-4">
-                  Proven Results
+                  It Works
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Twenty D1 placements. ATP player development. From weekend players to tour professionals.
+                  Twenty students earned D1 scholarships. Three train on the ATP tour. But most come for something simpler: to play better tennis and enjoy it more.
                 </p>
               </div>
             </AnimatedSection>
@@ -169,17 +146,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats - Minimal */}
+      {/* Stats - Premium */}
       <section className="section-spacing bg-lbta-cream">
         <div className="container-lbta">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+          <AnimatedSection className="text-center mb-16">
+            <p className="text-overline mb-6">By the Numbers</p>
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
+              Results Measured
+            </h2>
+          </AnimatedSection>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
             {stats.map((stat, index) => (
               <AnimatedSection key={stat.label} delay={index * 0.1}>
-                <div className="text-5xl md:text-6xl font-serif font-light text-lbta-charcoal mb-3">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-gray-500 font-sans tracking-wide">
-                  {stat.label}
+                <div className="group cursor-default">
+                  <div className="text-5xl md:text-6xl font-serif font-light text-lbta-charcoal mb-3 group-hover:text-lbta-burnt transition-colors duration-500">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-gray-500 font-sans tracking-wide group-hover:text-gray-700 transition-colors duration-500">
+                    {stat.label}
+                  </div>
+                  <div className="w-8 h-0.5 bg-gray-300 mx-auto mt-4 group-hover:bg-lbta-burnt transition-colors duration-500" />
                 </div>
               </AnimatedSection>
             ))}
@@ -187,7 +174,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ATP Excellence - Refined */}
+      {/* Professional Development - Refined */}
       <section className="section-spacing bg-white">
         <div className="container-lbta">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -200,7 +187,7 @@ export default function Home() {
                   width={1200}
                   height={800}
                   className="w-full h-auto rounded-sm"
-                  priority
+                  loading="lazy"
                 />
                 <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-4 rounded-sm">
                   <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">
@@ -215,16 +202,16 @@ export default function Home() {
 
             {/* Right: Content */}
             <AnimatedSection delay={0.2}>
-              <p className="text-overline mb-6">Professional Development</p>
+              <p className="text-overline mb-6">Real Results</p>
               <h2 className="text-4xl md:text-5xl font-serif font-light text-lbta-charcoal mb-8 tracking-tight leading-tight">
-                Real Players.  
-                Real Results.
+                #858 to #258  
+                in Twelve Months
               </h2>
               <p className="body-text mb-6">
-                Karue Sell improved his ATP ranking by 600 positions in one year through structured training focused on movement efficiency and match conditioning.
+                Karue Sell was talented but inconsistent. We worked on movement efficiency and match mindset. Twelve months later, he'd climbed 600 ATP ranking spots.
               </p>
               <p className="body-text mb-8">
-                The same principles that develop ATP professionals apply to every level—from weekend players to competitive juniors.
+                The breakthrough wasn't technical. It was mental. The same approach works whether you're eight years old or on tour.
               </p>
               <Link href="/coaches/andrew-mateljan" className="btn-secondary">
                 MEET ANDREW
@@ -238,27 +225,33 @@ export default function Home() {
       <section className="section-spacing bg-lbta-tan">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-20">
-            <p className="text-overline mb-6">Official Partner</p>
-            <h2 className="text-5xl md:text-7xl font-serif font-light text-lbta-charcoal mb-4 tracking-tight">
+            <p className="text-overline mb-6">Official Partnership</p>
+            <h2 className="text-5xl md:text-7xl font-serif font-light text-lbta-charcoal mb-6 tracking-tight">
               City of Laguna Beach
             </h2>
-            <p className="text-sm text-gray-500 font-sans tracking-wide">
-              Since 2020
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <div className="w-12 h-0.5 bg-lbta-burnt" />
+              <p className="text-sm text-gray-500 font-sans tracking-wide">
+                Since 2020
+              </p>
+              <div className="w-12 h-0.5 bg-lbta-burnt" />
+            </div>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Entrusted with developing tennis training across three premier city facilities. 
+              A partnership built on proven results and community impact.
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={0.2} className="flex justify-center mb-20">
-            <div className="relative h-64 md:h-80 w-auto">
-              <Image 
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/e9aabb5b1_CityofLBLogo.png"
-                alt="City of Laguna Beach"
-                width={400}
-                height={320}
-                className="h-full w-auto opacity-90 mix-blend-multiply"
-                style={{ backgroundColor: 'transparent', objectFit: 'contain' }}
-                priority
-              />
-            </div>
+            <img 
+              src="/logos/city-laguna-beach.png"
+              alt="City of Laguna Beach - Official Partner"
+              className="h-64 md:h-80 w-auto opacity-90"
+              style={{ 
+                objectFit: 'contain',
+                mixBlendMode: 'darken'
+              }}
+            />
           </AnimatedSection>
 
           <AnimatedSection delay={0.4}>
@@ -268,18 +261,22 @@ export default function Home() {
                 { name: "Moulton Meadows Park", img: "d1706d2b0_2.png" },
                 { name: "Alta Laguna Park", img: "0f3eda457_1.png" }
               ].map((facility) => (
-                <div key={facility.name} className="group">
-                  <div className="aspect-[4/3] overflow-hidden rounded-sm mb-4">
+                <div key={facility.name} className="group cursor-default">
+                  <div className="aspect-[4/3] overflow-hidden rounded-sm mb-6 relative bg-gray-100">
                     <img 
                       src={`https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/${facility.img}?quality=95`}
                       alt={facility.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       style={{ imageRendering: '-webkit-optimize-contrast' }}
                     />
+                    <div className="absolute inset-0 bg-lbta-charcoal/0 group-hover:bg-lbta-charcoal/10 transition-all duration-500" />
                   </div>
-                  <p className="text-sm text-center text-gray-500 font-sans tracking-wide">
-                    {facility.name}
-                  </p>
+                  <div className="text-center">
+                    <p className="text-sm text-gray-500 font-sans tracking-wide group-hover:text-gray-700 transition-colors duration-500">
+                      {facility.name}
+                    </p>
+                    <div className="w-6 h-0.5 bg-gray-300 mx-auto mt-3 group-hover:bg-lbta-burnt group-hover:w-10 transition-all duration-500" />
+                  </div>
                 </div>
               ))}
             </div>
@@ -293,10 +290,10 @@ export default function Home() {
           <AnimatedSection className="text-center mb-20">
             <p className="text-overline mb-6">Programs</p>
             <h2 className="text-4xl md:text-5xl font-serif font-light text-lbta-charcoal mb-6 tracking-tight">
-              Junior & Adult Development
+              Programs
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto font-sans">
-              Structured pathways for every age and skill level
+              Junior and adult. Beginner to advanced. Group and private.
             </p>
           </AnimatedSection>
 
@@ -346,10 +343,13 @@ export default function Home() {
       <section className="section-spacing bg-lbta-cream">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-20">
-            <p className="text-overline mb-6">Coaches</p>
+            <p className="text-overline mb-6">Your Development Team</p>
             <h2 className="text-4xl md:text-5xl font-serif font-light text-lbta-charcoal tracking-tight">
               Our Team
             </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
+              Each coach brings unique expertise from professional tours to collegiate success. Your development is guided by proven experience.
+            </p>
           </AnimatedSection>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
@@ -371,7 +371,7 @@ export default function Home() {
                   <p className="text-sm text-gray-500 mb-1">
                     {coach.title}
                   </p>
-                  <p className="text-xs text-lbta-burnt tracking-wide">
+                  <p className="text-xs text-lbta-burnt font-sans tracking-wide">
                     {coach.specialty}
                   </p>
                 </Link>
@@ -387,75 +387,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Video Testimonials - Elegant Carousel */}
+      {/* Video Testimonials - Single Featured */}
       <section className="section-spacing bg-white">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
-            <p className="text-overline mb-6">Testimonials</p>
+            <p className="text-overline mb-6">In Their Words</p>
             <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
-              What Families Are Saying
+              Member Stories
             </h2>
           </AnimatedSection>
 
-          <div className="relative max-w-5xl mx-auto">
-            <motion.div
-              key={currentVideoIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div 
-                className="rounded-sm overflow-hidden"
-                style={{ 
-                  padding: '56.25% 0 0 0', 
-                  position: 'relative',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
-                }}
-              >
-                <iframe 
-                  src={`https://player.vimeo.com/video/${testimonialVideos[currentVideoIndex].id}?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0`}
+          <AnimatedSection delay={0.1}>
+            <div className="max-w-4xl mx-auto">
+              <div className="aspect-video rounded-sm overflow-hidden" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+                <iframe
+                  src="https://player.vimeo.com/video/1134930901?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0"
+                  className="w-full h-full"
                   frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                  allowFullScreen
-                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                  title={testimonialVideos[currentVideoIndex].title}
-                />
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  title="Parent testimonial"
+                ></iframe>
               </div>
-            </motion.div>
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={prevVideo}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg z-20"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="w-6 h-6 text-lbta-charcoal" />
-            </button>
-
-            <button
-              onClick={nextVideo}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg z-20"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="w-6 h-6 text-lbta-charcoal" />
-            </button>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-8">
-              {testimonialVideos.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentVideoIndex(index)}
-                  className={`h-2 rounded-full transition-all ${
-                    index === currentVideoIndex ? 'bg-lbta-burnt w-10' : 'bg-gray-300 w-2 hover:bg-gray-400'
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
+              <div className="text-center mt-6">
+                <Link href="/success-stories" className="text-sm font-sans text-gray-500 hover:text-lbta-charcoal transition-colors">
+                  View more stories →
+                </Link>
+              </div>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
+
+      {/* Photo & Program Video Gallery */}
+      <section className="section-spacing bg-lbta-cream">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-16">
+            <p className="text-overline mb-6">Our Community in Action</p>
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
+              Behind the Scenes
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
+              Experience the energy and dedication that defines every day at LBTA. 
+              From championship facilities to daily training sessions.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.2}>
+            <PhotoVideoGallery className="max-w-5xl mx-auto" />
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Partnership Section */}
+      <PartnershipSection />
 
       {/* CTA - Minimal */}
       <section className="section-spacing bg-lbta-charcoal text-white">
@@ -484,6 +468,83 @@ export default function Home() {
               </a>
             </div>
           </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Our Network - Moved to End */}
+      <section className="section-spacing bg-white border-t border-gray-200">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-16">
+            <p className="text-overline mb-6">The Complete Experience</p>
+            <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
+              Beyond the Court
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
+              The full tennis experience: training on court, conditioning off court, equipment when you need it.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Fit4Tennis */}
+            <AnimatedSection delay={0.1}>
+              <div className="card-lbta p-10 text-center h-full flex flex-col">
+                <div className="h-20 mb-6 flex items-center justify-center bg-gray-50 rounded-sm -mx-10 -mt-10 mb-8 p-6">
+                  <img
+                    src="/logos/fit4tennis.png"
+                    alt="Fit4Tennis"
+                    className="h-16 w-auto opacity-90"
+                  />
+                </div>
+                <h3 className="text-2xl font-sans font-medium text-lbta-charcoal mb-4">
+                  Fit4Tennis
+                </h3>
+                <p className="text-gray-600 mb-6 leading-relaxed flex-grow">
+                  Andrew's global fitness platform. Workout programs, movement training, and conditioning protocols used by ATP/WTA players.
+                </p>
+                <p className="text-sm text-gray-500 mb-6">
+                  100K+ followers worldwide
+                </p>
+                <a
+                  href="https://fit4tennis.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-sans text-lbta-charcoal tracking-wide hover:text-lbta-burnt transition-colors border-b border-gray-300 hover:border-lbta-burnt pb-1 inline-block"
+                >
+                  Visit Fit4Tennis →
+                </a>
+              </div>
+            </AnimatedSection>
+
+            {/* Racket Rescue */}
+            <AnimatedSection delay={0.2}>
+              <div className="card-lbta p-10 text-center h-full flex flex-col">
+                <div className="h-20 mb-6 flex items-center justify-center bg-gray-50 rounded-sm -mx-10 -mt-10 mb-8 p-6">
+                  <img
+                    src="/logos/racketrescue.png"
+                    alt="Racket Rescue"
+                    className="h-16 w-auto opacity-90"
+                  />
+                </div>
+                <h3 className="text-2xl font-sans font-medium text-lbta-charcoal mb-4">
+                  Racket Rescue
+                </h3>
+                <p className="text-gray-600 mb-6 leading-relaxed flex-grow">
+                  Professional racket restringing and equipment services. Mobile pickup and delivery throughout Laguna Beach.
+                </p>
+                <p className="text-sm text-gray-500 mb-6">
+                  (949) 534-0457
+                </p>
+                <a
+                  href="https://racketrescue.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-sans text-lbta-charcoal tracking-wide hover:text-lbta-burnt transition-colors border-b border-gray-300 hover:border-lbta-burnt pb-1 inline-block"
+                >
+                  Visit Racket Rescue →
+                </a>
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
     </>

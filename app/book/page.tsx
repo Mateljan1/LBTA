@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { CheckCircle, Send, Loader2 } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
@@ -46,6 +47,7 @@ export default function BookPage() {
     email: '',
     phone: '',
     program: '',
+    preferredCoach: '',
     preferredTime: '',
     experience: '',
     goals: '',
@@ -85,12 +87,12 @@ export default function BookPage() {
       <section className="relative bg-white pt-40 pb-20">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <p className="text-overline mb-6">Book Your Trial</p>
+            <p className="text-overline mb-6">Private Consultation Request</p>
             <h1 className="text-display-lg heading-display mb-6">
-              Start Your Journey
+              Book a Trial
             </h1>
             <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Complete the form below. We'll contact you within 24 hours to schedule your complimentary trial class.
+              Not everyone is ready for what we offer. Let's discover together if LBTA is the right environment for your tennis excellence journey.
             </p>
           </AnimatedSection>
         </div>
@@ -102,19 +104,19 @@ export default function BookPage() {
           <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-lbta-burnt" />
-              <span>100% Free Trial</span>
+              <span>Complimentary Assessment</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-lbta-burnt" />
-              <span>No Credit Card Required</span>
+              <span>Private Consultation</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-lbta-burnt" />
-              <span>Zero Commitment</span>
+              <span>Honest Guidance</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-lbta-burnt" />
-              <span>24-Hour Response</span>
+              <span>Same-Day Response</span>
             </div>
           </div>
         </div>
@@ -128,7 +130,7 @@ export default function BookPage() {
               {/* Personal Information */}
               <div>
                 <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
-                  Your Information
+                  Contact Details
                 </h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -231,6 +233,32 @@ export default function BookPage() {
                     </p>
                   </div>
 
+                  {/* Coach Selection - Shows for Private Lessons */}
+                  {formData.program === 'private-lessons' && (
+                    <div>
+                      <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                        Preferred Coach *
+                      </label>
+                      <select
+                        required
+                        value={formData.preferredCoach}
+                        onChange={(e) => handleChange('preferredCoach', e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-lbta-burnt transition-all"
+                      >
+                        <option value="">Select your coach</option>
+                        <option value="andrew-mateljan">Andrew Mateljan - ATP/WTA Tour Coach ($250/hr)</option>
+                        <option value="kevin-jackson">Kevin Jackson - College Recruitment ($150/hr)</option>
+                        <option value="savriyan-danilov">Savriyan Danilov - ATP Pro #556 ($120/hr)</option>
+                        <option value="andy-wu">Andy Wu - USPTA Certified ($100/hr)</option>
+                        <option value="michelle-bevins">Michelle Bevins - Youth Director ($120/hr)</option>
+                        <option value="no-preference">No Preference</option>
+                      </select>
+                      <p className="text-xs text-gray-500 mt-2">
+                        View full coach profiles on our <Link href="/coaches" className="text-lbta-burnt hover:underline">coaches page</Link>
+                      </p>
+                    </div>
+                  )}
+
                   <div>
                     <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
                       Preferred time for trial class *
@@ -271,22 +299,22 @@ export default function BookPage() {
               {/* Goals */}
               <div className="pt-8 border-t border-gray-200">
                 <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
-                  Your Goals (Optional)
+                  Your Aspirations
                 </h2>
 
                 <div>
                   <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
-                    What would you like to achieve through tennis?
+                    What draws you to tennis excellence? What transformation do you seek?
                   </label>
                   <textarea
                     value={formData.goals}
                     onChange={(e) => handleChange('goals', e.target.value)}
                     rows={4}
                     className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-lbta-burnt transition-all resize-none"
-                    placeholder="e.g., improve fitness, compete in USTA leagues, earn college scholarship, have fun with friends..."
+                    placeholder="e.g., develop unshakeable mental toughness, earn a college scholarship, achieve the excellence of professional technique, discover the confidence that comes from true skill..."
                   />
                   <p className="text-xs text-gray-500 mt-2">
-                    This helps us match you with the right coach and program
+                    This helps us determine if our approach aligns with your vision
                   </p>
                 </div>
               </div>
@@ -301,19 +329,19 @@ export default function BookPage() {
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      SUBMITTING...
+                      SUBMITTING REQUEST...
                     </>
                   ) : (
                     <>
                       <Send className="w-4 h-4 mr-2" />
-                      REQUEST FREE TRIAL
+                      REQUEST CONSULTATION
                     </>
                   )}
                 </button>
 
                 <p className="text-xs text-center text-gray-500 mt-4 leading-relaxed">
-                  By submitting this form, you agree to receive communication from LBTA about your trial class.  
-                  We'll contact you within 24 hours to schedule your session.
+                  By submitting this request, you agree to receive personalized communication from LBTA about your consultation.  
+                  We'll reach out within 24 hours to arrange your private assessment.
                 </p>
               </div>
             </form>
@@ -326,8 +354,11 @@ export default function BookPage() {
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-12">
             <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-6">
-              What Happens Next
+              Your Journey to Excellence
             </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              From initial conversation to transformation—here's how we guide you through the LBTA experience.
+            </p>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
@@ -337,10 +368,10 @@ export default function BookPage() {
                   1
                 </div>
                 <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-2">
-                  We Review
+                  We Assess
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Your request goes directly to our coaching team
+                  Our coaching team reviews your aspirations and current level
                 </p>
               </div>
             </AnimatedSection>
@@ -351,10 +382,10 @@ export default function BookPage() {
                   2
                 </div>
                 <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-2">
-                  We Call You
+                  We Connect
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Within 24 hours to schedule your trial
+                  Personal conversation about your goals and our approach
                 </p>
               </div>
             </AnimatedSection>
@@ -365,10 +396,10 @@ export default function BookPage() {
                   3
                 </div>
                 <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-2">
-                  You Attend
+                  You Experience
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Experience LBTA coaching firsthand
+                  Private session to feel our coaching approach and philosophy
                 </p>
               </div>
             </AnimatedSection>
@@ -379,10 +410,10 @@ export default function BookPage() {
                   4
                 </div>
                 <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-2">
-                  You Decide
+                  We Align
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  No pressure. Just honest guidance.
+                  Together we determine if LBTA is your path to excellence
                 </p>
               </div>
             </AnimatedSection>
@@ -395,10 +426,10 @@ export default function BookPage() {
         <div className="container-narrow text-center">
           <AnimatedSection>
             <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-6">
-              Prefer to Call?
+              Prefer Direct Contact?
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Our team is here to help answer questions and get you scheduled
+              Speak directly with our team about your tennis aspirations and our approach to excellence
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -411,7 +442,7 @@ export default function BookPage() {
                 href="mailto:support@lagunabeachtennisacademy.com"
                 className="btn-secondary"
               >
-                EMAIL US
+                EMAIL US DIRECTLY
               </a>
             </div>
           </AnimatedSection>

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import TestimonialQuote from '@/components/ui/TestimonialQuote'
 
 const programs = [
   {
@@ -49,15 +50,16 @@ export default function ProgramsPage() {
           <AnimatedSection>
             <p className="text-overline mb-6">Programs</p>
             <h1 className="text-display-lg heading-display mb-6">
-              Find Your Path
+              Our Programs
             </h1>
             <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Structured development for every age and skill level.  
-              From first lesson to professional tour.
+              Ages 3 to professional. Beginners to tour players.  
+              Find what fits.
             </p>
           </AnimatedSection>
         </div>
       </section>
+
 
       {/* Programs Overview */}
       <section className="section-spacing bg-lbta-cream">
@@ -81,7 +83,7 @@ export default function ProgramsPage() {
                             {offering.name}
                           </div>
                           <div className="text-xs text-gray-500">
-                            {offering.ages || offering.level || offering.specialty}
+                            {'ages' in offering ? offering.ages : 'level' in offering ? offering.level : offering.specialty}
                           </div>
                         </div>
                         <div className="text-sm font-sans text-gray-500 tracking-wide">
@@ -104,8 +106,19 @@ export default function ProgramsPage() {
         </div>
       </section>
 
+      {/* Testimonial */}
+      <section className="section-spacing bg-white border-t border-gray-200">
+        <div className="container-narrow">
+          <TestimonialQuote 
+            quote="Andrew transformed my son's tennis game and his confidence. The D1 scholarship offer was the result we hoped for—the life skills he gained were the bonus we didn't expect."
+            author="Sarah M."
+            role="Parent of D1 Player"
+          />
+        </div>
+      </section>
+
       {/* Scholarship Information */}
-      <section className="section-spacing bg-white">
+      <section className="section-spacing bg-lbta-cream">
         <div className="container-narrow">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-6">

@@ -334,6 +334,44 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Additional Services */}
+      <section className="section-spacing bg-lbta-cream border-t border-gray-200">
+        <div className="container-narrow text-center">
+          <AnimatedSection>
+            <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-6">
+              Equipment Services
+            </h2>
+            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              Need your racket restrung or new equipment? Visit our sister service.
+            </p>
+            <div className="card-lbta p-8 max-w-2xl mx-auto">
+              <h3 className="text-xl font-sans font-medium text-lbta-charcoal mb-4">
+                Racket Rescue
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Mobile racket restringing and equipment sales. Professional service with pickup and delivery throughout Laguna Beach.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="https://racketrescue.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                >
+                  VISIT RACKET RESCUE
+                </a>
+                <a
+                  href="tel:9495340457"
+                  className="btn-secondary"
+                >
+                  (949) 534-0457
+                </a>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Map */}
       <section className="bg-gray-200">
         <div className="h-96">

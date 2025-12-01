@@ -1,15 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-
-export const metadata: Metadata = {
-  title: 'Tennis Pathway Planner - Find Your Development Plan | LBTA',
-  description: 'Interactive tool to plan your tennis journey. Get personalized program recommendations, timeline estimates, and investment breakdown based on age, level, and goals.',
-  keywords: 'tennis development pathway, tennis training plan, college tennis recruitment, junior tennis programs, tennis investment calculator',
-}
 
 type PathwayResult = {
   program: string
@@ -21,7 +14,7 @@ type PathwayResult = {
   coach: string
 }
 
-export default function PathwayPlannerPage() {
+function PathwayPlannerInteractive() {
   const [formData, setFormData] = useState({
     age: '',
     experience: '',
@@ -315,4 +308,8 @@ export default function PathwayPlannerPage() {
       )}
     </>
   )
+}
+
+export default function PathwayPlannerPage() {
+  return <PathwayPlannerInteractive />
 }

@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+// Removed framer-motion to avoid conflicts
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
 const programs = [
   {
@@ -103,8 +104,13 @@ export default function JuniorProgramsPage() {
 
   return (
     <>
+      <Breadcrumbs items={[
+        { label: 'Programs', href: '/programs' },
+        { label: 'Junior Programs' }
+      ]} />
+      
       {/* Hero */}
-      <section className="relative bg-white pt-40 pb-20">
+      <section className="relative bg-white pt-32 pb-20">
         <div className="container-narrow text-center">
           <AnimatedSection>
             <p className="text-overline mb-6">Junior Development</p>
@@ -148,28 +154,22 @@ export default function JuniorProgramsPage() {
       </section>
 
       {/* Season Info Banner */}
-      <AnimatePresence mode="wait">
-        <motion.section
-          key={activeSeason}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.3 }}
-          className={`py-6 ${activeSeason === 'fall' ? 'bg-lbta-tan' : 'bg-blue-50'} border-b border-gray-200`}
-        >
-          <div className="container-lbta text-center">
-            {activeSeason === 'fall' ? (
-              <p className="text-sm text-gray-600 font-sans">
-                <strong>Fall 2025:</strong> Join anytime through December • Prorated pricing based on remaining weeks
-              </p>
-            ) : (
-              <p className="text-sm text-gray-600 font-sans">
-                <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
-              </p>
-            )}
-          </div>
-        </motion.section>
-      </AnimatePresence>
+      <section
+        key={activeSeason}
+        className={`py-6 ${activeSeason === 'fall' ? 'bg-lbta-tan' : 'bg-blue-50'} border-b border-gray-200 transition-all duration-300`}
+      >
+        <div className="container-lbta text-center">
+          {activeSeason === 'fall' ? (
+            <p className="text-sm text-gray-600 font-sans">
+              <strong>Fall 2025:</strong> Join anytime through December • Prorated pricing based on remaining weeks
+            </p>
+          ) : (
+            <p className="text-sm text-gray-600 font-sans">
+              <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
+            </p>
+          )}
+        </div>
+      </section>
 
       {/* Programs */}
       <section className="section-spacing bg-white">
@@ -208,15 +208,10 @@ export default function JuniorProgramsPage() {
 
                   {/* Right: Pricing */}
                   <div>
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={activeSeason}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3 }}
-                        className="card-lbta p-8"
-                      >
+                    <div
+                      key={activeSeason}
+                      className="card-lbta p-8 transition-all duration-300"
+                    >
                         <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-6">
                           {activeSeason === 'fall' ? 'Fall 2025 Pricing' : 'Winter 2026 Pricing'}
                         </h3>
@@ -274,8 +269,7 @@ export default function JuniorProgramsPage() {
                             Registration opens December 1, 2025
                           </p>
                         )}
-                      </motion.div>
-                    </AnimatePresence>
+                    </div>
                   </div>
                 </div>
               </div>

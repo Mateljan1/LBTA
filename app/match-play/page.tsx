@@ -27,10 +27,10 @@ export default function MatchPlayPage() {
           <AnimatedSection>
             <p className="text-overline mb-6">Match Play</p>
             <h1 className="text-display-lg heading-display mb-6">
-              Friday Night Tennis
+              Test Your Game
             </h1>
             <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Live competitive play every Friday. Round robin doubles for all levels.
+              Every Friday evening, you'll experience real match pressure in a supportive environment. Round robin doubles. All skill levels welcome. Your competitive confidence grows here.
             </p>
           </AnimatedSection>
         </div>

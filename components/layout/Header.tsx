@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -28,18 +29,23 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-white/80 backdrop-blur-sm'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
+        scrolled 
+          ? 'bg-white/98 backdrop-blur-xl shadow-lg shadow-black/5 py-4 md:py-5' 
+          : 'bg-white/90 backdrop-blur-md py-6 md:py-8'
       }`}
     >
-      <nav className="container-lbta py-6 md:py-8">
+      <nav className="container-lbta">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="group">
-            <img 
+            <Image 
               src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png"
               alt="Laguna Beach Tennis Academy"
+              width={120}
+              height={56}
               className="h-12 md:h-14 w-auto group-hover:opacity-80 transition-opacity duration-300"
+              priority
             />
           </Link>
 
@@ -78,35 +84,56 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Luxury Animation */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-200"
-          >
-            <div className="container-lbta py-6 space-y-4">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block text-sm font-sans text-lbta-charcoal hover:text-lbta-burnt transition-colors tracking-wide"
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed right-0 top-0 bottom-0 w-80 bg-white shadow-2xl z-50 md:hidden overflow-y-auto"
+            >
+              <div className="p-8">
+                <button
                   onClick={() => setMobileMenuOpen(false)}
+                  className="absolute top-6 right-6 p-2 text-lbta-charcoal hover:text-lbta-burnt transition-colors"
+                  aria-label="Close menu"
                 >
-                  {item.name}
-                </Link>
-              ))}
-              <Link
-                href="/book"
-                className="btn-primary w-full mt-4 text-center text-xs"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                BOOK TRIAL
-              </Link>
-            </div>
-          </motion.div>
+                  <X className="h-6 w-6" />
+                </button>
+
+                <div className="mt-16 space-y-6">
+                  {navigation.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="block text-lg font-sans text-lbta-charcoal hover:text-lbta-burnt transition-colors tracking-wide"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/book"
+                    className="btn-primary w-full mt-8 text-center"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    BOOK TRIAL
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
