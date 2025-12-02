@@ -149,10 +149,15 @@
   text-transform: uppercase;
   text-decoration: none;
   padding: 18px 48px;
+  min-height: 44px;
+  min-width: 44px;
   border: 1px solid;
   background: transparent;
   cursor: pointer;
   transition: all var(--transition-fast);
+  /* Enhanced touch targets for mobile */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .vylo-page .vylo-button-light {
@@ -236,5 +241,35 @@
   .vylo-page .vylo-button {
     width: 100%;
     text-align: center;
+    /* Enhanced mobile touch targets */
+    padding: 20px 48px;
+    min-height: 56px;
+  }
+
+  /* Mobile typography optimizations */
+  .vylo-page h1,
+  .vylo-page .vylo-headline-xl {
+    font-size: clamp(32px, 8vw, 56px);
+  }
+
+  .vylo-page h2,
+  .vylo-page .vylo-headline-lg {
+    font-size: clamp(24px, 6vw, 40px);
+  }
+
+  .vylo-page h3,
+  .vylo-page .vylo-headline-md {
+    font-size: clamp(20px, 5vw, 32px);
+  }
+
+  /* Improved mobile scrolling */
+  .vylo-page {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  .vylo-page * {
+    max-width: 100%;
   }
 }

@@ -762,16 +762,17 @@ export default function VYLOPage() {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY
+      const heroHeight = window.innerHeight // Hero is 100vh
 
       // Hide scroll hint
       if (currentScrollY > 100) setScrollHintVisible(false)
 
-      // Track if scrolled past hero (for backdrop blur)
-      setNavbarScrolled(currentScrollY > 50)
+      // Only show navbar when scrolled past hero (section 2)
+      setNavbarScrolled(currentScrollY > heroHeight - 100)
 
       // Smart navbar: hide on scroll down, show on scroll up
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down
+      if (currentScrollY > lastScrollY && currentScrollY > heroHeight) {
+        // Scrolling down in section 2+
         setNavbarVisible(false)
       } else {
         // Scrolling up
@@ -797,22 +798,7 @@ export default function VYLOPage() {
 
   return (
     <div className="vylo-page">
-      {/* HEADER - Smart Navbar */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out"
-        style={{
-          transform: navbarVisible ? 'translateY(0)' : 'translateY(-100%)',
-          backgroundColor: navbarScrolled ? 'rgba(10, 10, 10, 0.8)' : 'transparent',
-          backdropFilter: navbarScrolled ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: navbarScrolled ? 'blur(12px)' : 'none',
-        }}
-      >
-        <div className="max-w-[1440px] mx-auto px-8 md:px-12 py-8 flex items-center justify-between">
-          <Link href="/vylo" className="hover:opacity-80 transition-opacity">
-            <Image src="/logos/VYLO Icon_Word_Logo_Classic_Org_Wht.png" alt="VYLO" width={180} height={60} className="w-auto h-auto" priority />
-          </Link>
-        </div>
-      </header>
+      {/* NO HEADER - Pure Aman aesthetic: complete immersion */}
 
       {/* HERO SECTION */}
       <section className="relative w-full min-h-screen bg-[#0A0A0A]">
@@ -823,14 +809,26 @@ export default function VYLOPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
             >
+              {/* Logo - Aman-refined: understated */}
+              <div style={{ marginBottom: '56px' }}>
+                <Image
+                  src="/logos/VYLO Icon_Word_Logo_Classic_Org_Wht.png"
+                  alt="VYLO Performance Institute"
+                  width={160}
+                  height={53}
+                  style={{ width: 'auto', height: 'auto', maxHeight: '40px' }}
+                  priority
+                />
+              </div>
+
               <div style={{
                 fontFamily: '"neue-haas-grotesk-text", sans-serif',
-                fontSize: '11px',
+                fontSize: '10px',
                 fontWeight: 500,
-                letterSpacing: '0.15em',
+                letterSpacing: '0.2em',
                 textTransform: 'uppercase',
-                color: '#888888',
-                marginBottom: '24px',
+                color: '#666666',
+                marginBottom: '32px',
               }}>
                 LAGUNA BEACH, CA
               </div>
@@ -838,12 +836,12 @@ export default function VYLOPage() {
               <h1
                 style={{
                   fontFamily: '"neue-haas-grotesk-display", sans-serif',
-                  fontSize: 'clamp(42px, 5vw, 72px)',
+                  fontSize: 'clamp(36px, 4.5vw, 58px)',
                   fontWeight: 500,
-                  lineHeight: 1.1,
+                  lineHeight: 1.15,
                   color: '#FFFFFF',
-                  marginBottom: '40px',
-                  letterSpacing: '-0.02em',
+                  marginBottom: '32px',
+                  letterSpacing: '-0.015em',
                   textTransform: 'uppercase',
                 }}
               >
@@ -855,13 +853,13 @@ export default function VYLOPage() {
               <p
                 style={{
                   fontFamily: '"neue-haas-grotesk-text", sans-serif',
-                  fontSize: 'clamp(15px, 1.6vw, 17px)',
+                  fontSize: 'clamp(14px, 1.4vw, 15px)',
                   fontWeight: 400,
-                  color: 'rgba(255, 255, 255, 0.75)',
-                  maxWidth: '480px',
-                  lineHeight: 1.7,
-                  letterSpacing: '0.01em',
-                  marginBottom: '56px',
+                  color: 'rgba(255, 255, 255, 0.6)',
+                  maxWidth: '420px',
+                  lineHeight: 1.8,
+                  letterSpacing: '0.005em',
+                  marginBottom: '48px',
                 }}
               >
                 30+ Division I placements. ATP/WTA coaching experience. A full-time system for ten athletes.
@@ -874,21 +872,20 @@ export default function VYLOPage() {
               >
                 <Link
                   href="/book"
-                  className="group inline-flex items-center gap-3 px-12 py-5 bg-[#1A1A1A] hover:bg-[#0A0A0A] transition-all duration-500"
+                  className="group inline-flex items-center gap-3 px-10 py-4 hover:bg-white/5 transition-all duration-700"
                   style={{
                     fontFamily: '"neue-haas-grotesk-text", sans-serif',
-                    fontSize: '11px',
+                    fontSize: '10px',
                     fontWeight: 500,
-                    letterSpacing: '0.15em',
+                    letterSpacing: '0.2em',
                     textTransform: 'uppercase',
                     color: '#FFFFFF',
-                    border: '1px solid rgba(255,255,255,0.12)',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
+                    border: '1px solid rgba(255,255,255,0.2)',
                   }}
                 >
                   APPLY NOW
                   <motion.span
-                    className="text-white/40 group-hover:text-white/80"
+                    className="text-white/50 group-hover:text-white/90"
                     initial={{ x: 0 }}
                     whileHover={{ x: 4 }}
                     transition={{ duration: 0.3 }}
@@ -898,10 +895,11 @@ export default function VYLOPage() {
                 </Link>
                 <p style={{
                   fontFamily: '"neue-haas-grotesk-text", sans-serif',
-                  fontSize: '12px',
-                  color: 'rgba(255, 255, 255, 0.4)',
-                  marginTop: '16px',
+                  fontSize: '11px',
+                  color: 'rgba(255, 255, 255, 0.35)',
+                  marginTop: '20px',
                   fontWeight: 400,
+                  letterSpacing: '0.01em',
                 }}>
                   Applications open — Founding Cohort January 2026
                 </p>
@@ -1453,8 +1451,8 @@ export default function VYLOPage() {
       </section>
 
       {/* CLOSING STATEMENT */}
-      <section style={{ padding: '140px 0', background: '#111111' }}>
-        <div className="max-w-[1200px] mx-auto px-8 md:px-12">
+      <section style={{ padding: '160px 0', background: '#0A0A0A' }}>
+        <div className="max-w-[900px] mx-auto px-8 md:px-12">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1462,12 +1460,12 @@ export default function VYLOPage() {
             transition={{ duration: 0.8 }}
             style={{
               fontFamily: '"neue-haas-grotesk-display", sans-serif',
-              fontSize: 'clamp(28px, 3.5vw, 40px)',
+              fontSize: 'clamp(24px, 3vw, 34px)',
               fontWeight: 500,
-              color: '#FFFFFF',
+              color: 'rgba(255, 255, 255, 0.9)',
               textAlign: 'center',
-              letterSpacing: '-0.01em',
-              lineHeight: 1.3,
+              letterSpacing: '-0.005em',
+              lineHeight: 1.4,
             }}
           >
             Ten athletes. One trajectory. January 2026.
@@ -1475,38 +1473,34 @@ export default function VYLOPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer style={{ padding: '80px 0', background: '#111111' }}>
-        <div className="max-w-[1200px] mx-auto px-8 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* Left - Logo */}
-            <div>
-              <Image
-                src="/logos/VYLO Icon_Word_Logo_Classic_Org_Wht.png"
-                alt="VYLO"
-                width={140}
-                height={46}
-                className="w-auto h-auto"
-              />
-            </div>
+      {/* FOOTER - Aman-refined */}
+      <footer style={{ padding: '100px 0 60px', background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="max-w-[800px] mx-auto px-8 md:px-12 text-center">
+          {/* Logo */}
+          <div style={{ marginBottom: '48px' }}>
+            <Image
+              src="/logos/VYLO Icon_Word_Logo_Classic_Org_Wht.png"
+              alt="VYLO Performance Institute"
+              width={140}
+              height={47}
+              style={{ width: 'auto', height: 'auto', maxHeight: '32px', margin: '0 auto' }}
+            />
+          </div>
 
-            {/* Center - Contact */}
-            <div>
-              <div style={{
-                fontFamily: '"neue-haas-grotesk-text", sans-serif',
-                fontSize: '15px',
-                lineHeight: 1.8,
-                color: '#FFFFFF',
-                fontWeight: 400,
-              }}>
-                <div>admissions@vylo.tennis</div>
-                <div>(949) 464-6645</div>
-                <div>Laguna Beach, CA 92651</div>
-              </div>
+          {/* Contact */}
+          <div style={{
+            fontFamily: '"neue-haas-grotesk-text", sans-serif',
+            fontSize: '13px',
+            lineHeight: 2.2,
+            color: 'rgba(255, 255, 255, 0.5)',
+            fontWeight: 400,
+            letterSpacing: '0.02em',
+          }}>
+            <div>admissions@vylo.tennis</div>
+            <div>(949) 464-6645</div>
+            <div style={{ marginTop: '20px', color: 'rgba(255, 255, 255, 0.35)', fontSize: '12px' }}>
+              Laguna Beach, California
             </div>
-
-            {/* Right - Empty */}
-            <div></div>
           </div>
         </div>
       </footer>

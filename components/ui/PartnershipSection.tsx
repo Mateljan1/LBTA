@@ -82,11 +82,11 @@ export default function PartnershipSection({ className = '' }: PartnershipSectio
                   className="group block text-center"
                   title={`${partner.name} - ${partner.description}`}
                 >
-                  <div className="relative h-24 w-full flex items-center justify-center transition-all duration-500 bg-white rounded-sm p-4 border border-gray-200 group-hover:border-gray-300 group-hover:shadow-md">
+                  <div className="relative h-24 w-full flex items-center justify-center transition-all duration-500">
                     <img
                       src={partner.logo}
                       alt={`${partner.name} - ${partner.description}`}
-                      className="max-h-16 max-w-full w-auto object-contain opacity-70 group-hover:opacity-100 transition-all duration-500"
+                      className="max-h-16 max-w-full w-auto object-contain opacity-60 group-hover:opacity-90 transition-all duration-500"
                     />
                   </div>
                   <p className="text-xs text-gray-500 mt-4 font-sans text-center">

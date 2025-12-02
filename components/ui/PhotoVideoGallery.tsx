@@ -6,28 +6,28 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 // Gallery items - Premium facility photos
 const galleryItems = [
   {
-    src: '/photos/facility-sunset.jpg',
-    alt: 'Championship tennis courts overlooking the Pacific at sunset',
-    caption: '7:32 AM — SOUTH COURT 1',
+    src: '/photos/LBCOURTSETTING.jpg',
+    alt: 'Championship tennis courts in Laguna Beach',
+    caption: 'Championship Courts',
   },
   {
-    src: '/photos/study-ocean.jpg',
-    alt: 'Private study room with ocean views for video analysis',
-    caption: 'Player Study Suite',
-  },
-  {
-    src: '/photos/gym-ocean.jpg',
-    alt: 'State-of-the-art training facility with panoramic ocean views',
-    caption: 'Performance Center',
-  },
-  {
-    src: '/photos/analytics-room.jpg',
-    alt: 'Advanced analytics and video review room',
+    src: '/photos/VideoAnalysisRoom.png',
+    alt: 'Video analysis room for player development',
     caption: 'Analytics Lab',
   },
   {
-    src: '/photos/court-net.jpg',
-    alt: 'Artistic view of championship court with afternoon shadows',
+    src: '/photos/GymSetting.png',
+    alt: 'State-of-the-art training facility',
+    caption: 'Performance Center',
+  },
+  {
+    src: '/photos/OncourtTraining.jpg',
+    alt: 'On-court training session',
+    caption: 'Training in Action',
+  },
+  {
+    src: '/photos/Court setting.png',
+    alt: 'Laguna Beach tennis facility with ocean views',
     caption: 'The Courts',
   }
 ]
