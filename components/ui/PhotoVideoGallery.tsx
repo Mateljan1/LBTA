@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 // Gallery items - Premium facility photos
@@ -78,10 +79,16 @@ export default function PhotoVideoGallery({ className = '' }: PhotoVideoGalleryP
       {/* Main Gallery Display */}
       <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-black">
         {/* Image */}
-        <img
+        <Image
           src={currentItem.src}
           alt={currentItem.alt}
-          className="w-full h-full object-cover transition-all duration-1000 ease-out"
+          fill
+          quality={90}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+          className="object-cover transition-all duration-1000 ease-out"
+          priority={currentIndex === 0}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8ZAAAAAAAAA//Z"
         />
 
         {/* Navigation Controls - Always visible */}
