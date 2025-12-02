@@ -1,33 +1,40 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+
+// Static imports for build-time optimization (images are 13-27MB each)
+import courtSetting from '@/public/photos/LBCOURTSETTING.jpg'
+import videoRoom from '@/public/photos/VideoAnalysisRoom.png'
+import gymSetting from '@/public/photos/GymSetting.png'
+import oncourtTraining from '@/public/photos/OncourtTraining.jpg'
+import courtSettingWide from '@/public/photos/Court setting.png'
 
 // Gallery items - Premium facility photos
 const galleryItems = [
   {
-    src: '/photos/LBCOURTSETTING.jpg',
+    src: courtSetting,
     alt: 'Championship tennis courts in Laguna Beach',
     caption: 'Championship Courts',
   },
   {
-    src: '/photos/VideoAnalysisRoom.png',
+    src: videoRoom,
     alt: 'Video analysis room for player development',
     caption: 'Analytics Lab',
   },
   {
-    src: '/photos/GymSetting.png',
+    src: gymSetting,
     alt: 'State-of-the-art training facility',
     caption: 'Performance Center',
   },
   {
-    src: '/photos/OncourtTraining.jpg',
+    src: oncourtTraining,
     alt: 'On-court training session',
     caption: 'Training in Action',
   },
   {
-    src: '/photos/Court setting.png',
+    src: courtSettingWide,
     alt: 'Laguna Beach tennis facility with ocean views',
     caption: 'The Courts',
   }
@@ -83,12 +90,11 @@ export default function PhotoVideoGallery({ className = '' }: PhotoVideoGalleryP
           src={currentItem.src}
           alt={currentItem.alt}
           fill
-          quality={90}
+          quality={85}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           className="object-cover transition-all duration-1000 ease-out"
           priority={currentIndex === 0}
           placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8ZAAAAAAAAA//Z"
         />
 
         {/* Navigation Controls - Always visible */}
