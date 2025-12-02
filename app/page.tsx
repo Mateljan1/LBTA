@@ -43,40 +43,45 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero - Refined & Elegant */}
+      {/* Hero - Museum-Quality Elegance */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0"
-          style={{ 
-            backgroundImage: 'url(https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png?quality=95)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            imageRendering: '-webkit-optimize-contrast',
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40" />
+        {/* Optimized Background Image */}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png"
+            alt="Laguna Beach Tennis Academy courts at sunset with palm trees"
+            fill
+            priority
+            quality={95}
+            sizes="100vw"
+            className="object-cover"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8ZAAAAAAAAA//Z"
+          />
+          {/* Refined gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/65" />
         </div>
-        
-        <div className="relative z-10 container-narrow text-center">
+
+        <div className="relative z-10 container-narrow text-center px-6">
           <div>
-            <h1 className="text-5xl md:text-7xl font-serif font-light text-white mb-8 tracking-tight" 
+            <h1 className="text-5xl md:text-7xl font-serif font-light text-white mb-8 tracking-tight"
                 style={{ lineHeight: 1.1, textShadow: '0 2px 12px rgba(0,0,0,0.3)' }}>
-              Your Championship Journey
+              Your Tennis Journey
               <br />
               Starts in Laguna Beach.
             </h1>
-            
+
             <p className="text-lg md:text-xl font-sans font-light text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed"
                style={{ textShadow: '0 1px 6px rgba(0,0,0,0.3)' }}>
-              Championship-level coaching. Individual attention. Proven results.
+              Professional coaching. Individual attention. Proven development.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
               <Link
                 href="/book"
                 className="btn-primary"
               >
-                BEGIN YOUR JOURNEY
+                BEGIN
               </Link>
 
               <Link href="/programs" className="btn-secondary bg-white/10 border-white text-white hover:bg-white hover:text-lbta-charcoal">
@@ -96,7 +101,7 @@ export default function Home() {
       </section>
 
 
-      {/* Principles - Quiet Confidence */}
+      {/* Principles - Refined Minimalism */}
       <section className="section-spacing bg-white">
         <div className="container-narrow">
           <AnimatedSection className="text-center mb-20">
@@ -146,7 +151,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats - Premium */}
+      {/* Stats - Understated Elegance */}
       <section className="section-spacing bg-lbta-cream">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
@@ -155,7 +160,7 @@ export default function Home() {
               Results Measured
             </h2>
           </AnimatedSection>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
             {stats.map((stat, index) => (
               <AnimatedSection key={stat.label} delay={index * 0.1}>
@@ -174,22 +179,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Professional Development - Refined */}
+      {/* Professional Development - Image Optimized */}
       <section className="section-spacing bg-white">
         <div className="container-lbta">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Image */}
+            {/* Left: Optimized Image */}
             <AnimatedSection>
-              <div className="relative">
-                <Image 
+              <div className="relative aspect-[3/2]">
+                <Image
                   src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/8b7ec1948_ATPTRANSFORMATIONSECTION-KarueAndrewinbackground.png"
                   alt="Andrew Mateljan coaching ATP professional Karue Sell"
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto rounded-sm"
-                  loading="lazy"
+                  fill
+                  quality={90}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover rounded-sm"
                 />
-                <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-4 rounded-sm">
+                <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-4 rounded-sm shadow-lg">
                   <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">
                     ATP Ranking
                   </p>
@@ -204,7 +209,7 @@ export default function Home() {
             <AnimatedSection delay={0.2}>
               <p className="text-overline mb-6">Real Results</p>
               <h2 className="text-4xl md:text-5xl font-serif font-light text-lbta-charcoal mb-8 tracking-tight leading-tight">
-                #858 to #258  
+                #858 to #258
                 in Twelve Months
               </h2>
               <p className="body-text mb-6">
@@ -221,7 +226,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* City Partnership - Museum Quality */}
+      {/* City Partnership - Premium Quality */}
       <section className="section-spacing bg-lbta-tan">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-20">
@@ -237,21 +242,23 @@ export default function Home() {
               <div className="w-12 h-0.5 bg-lbta-burnt" />
             </div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Entrusted with developing tennis training across three premier city facilities. 
+              Entrusted with developing tennis training across three premier city facilities.
               A partnership built on proven results and community impact.
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={0.2} className="flex justify-center mb-20">
-            <img 
-              src="/logos/city-laguna-beach.png"
-              alt="City of Laguna Beach - Official Partner"
-              className="h-64 md:h-80 w-auto opacity-90"
-              style={{ 
-                objectFit: 'contain',
-                mixBlendMode: 'darken'
-              }}
-            />
+            <div className="relative w-full max-w-md h-64 md:h-80">
+              <Image
+                src="/logos/city-laguna-beach.png"
+                alt="City of Laguna Beach - Official Partner"
+                fill
+                quality={100}
+                sizes="(max-width: 768px) 80vw, 448px"
+                className="object-contain opacity-90"
+                style={{ mixBlendMode: 'darken' }}
+              />
+            </div>
           </AnimatedSection>
 
           <AnimatedSection delay={0.4}>
@@ -263,11 +270,13 @@ export default function Home() {
               ].map((facility) => (
                 <div key={facility.name} className="group cursor-default">
                   <div className="aspect-[4/3] overflow-hidden rounded-sm mb-6 relative bg-gray-100">
-                    <img 
-                      src={`https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/${facility.img}?quality=95`}
+                    <Image
+                      src={`https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/${facility.img}`}
                       alt={facility.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      style={{ imageRendering: '-webkit-optimize-contrast' }}
+                      fill
+                      quality={90}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-lbta-charcoal/0 group-hover:bg-lbta-charcoal/10 transition-all duration-500" />
                   </div>
@@ -284,7 +293,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Programs - Minimal Grid */}
+      {/* Programs - Clean Hierarchy */}
       <section className="section-spacing bg-white">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-20">
@@ -339,7 +348,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Coaching Team - Refined Grid */}
+      {/* Coaching Team - Optimized Images */}
       <section className="section-spacing bg-lbta-cream">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-20">
@@ -355,14 +364,15 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {coaches.map((coach, index) => (
               <AnimatedSection key={coach.name} delay={index * 0.1}>
-                <Link href="/coaches" className="group">
-                  <div className="aspect-square overflow-hidden rounded-sm mb-4 relative">
-                    <Image 
+                <Link href="/coaches" className="group block">
+                  <div className="aspect-square overflow-hidden rounded-sm mb-4 relative bg-gray-100">
+                    <Image
                       src={coach.image}
-                      alt={coach.name}
-                      width={300}
-                      height={300}
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      alt={`${coach.name} - ${coach.title} at Laguna Beach Tennis Academy`}
+                      fill
+                      quality={90}
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                   <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-1 group-hover:text-lbta-burnt transition-colors">
@@ -387,7 +397,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Video Testimonials - Single Featured */}
+      {/* Video Testimonials */}
       <section className="section-spacing bg-white">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
@@ -427,7 +437,7 @@ export default function Home() {
               Behind the Scenes
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
-              Experience the energy and dedication that defines every day at LBTA. 
+              Experience the energy and dedication that defines every day at LBTA.
               From championship facilities to daily training sessions.
             </p>
           </AnimatedSection>
@@ -441,7 +451,7 @@ export default function Home() {
       {/* Partnership Section */}
       <PartnershipSection />
 
-      {/* CTA - Minimal */}
+      {/* CTA - Refined */}
       <section className="section-spacing bg-lbta-charcoal text-white">
         <div className="container-narrow text-center">
           <AnimatedSection>
@@ -471,7 +481,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Our Network - Moved to End */}
+      {/* Our Network - Optimized Logos */}
       <section className="section-spacing bg-white border-t border-gray-200">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
@@ -488,11 +498,14 @@ export default function Home() {
             {/* Fit4Tennis */}
             <AnimatedSection delay={0.1}>
               <div className="card-lbta p-10 text-center h-full flex flex-col">
-                <div className="h-20 mb-6 flex items-center justify-center bg-gray-50 rounded-sm -mx-10 -mt-10 mb-8 p-6">
-                  <img
+                <div className="h-20 mb-6 flex items-center justify-center bg-gray-50 rounded-sm -mx-10 -mt-10 mb-8 p-6 relative">
+                  <Image
                     src="/logos/fit4tennis.png"
-                    alt="Fit4Tennis"
-                    className="h-16 w-auto opacity-90"
+                    alt="Fit4Tennis Performance Training"
+                    fill
+                    quality={100}
+                    sizes="300px"
+                    className="object-contain opacity-90"
                   />
                 </div>
                 <h3 className="text-2xl font-sans font-medium text-lbta-charcoal mb-4">
@@ -518,11 +531,14 @@ export default function Home() {
             {/* Racket Rescue */}
             <AnimatedSection delay={0.2}>
               <div className="card-lbta p-10 text-center h-full flex flex-col">
-                <div className="h-20 mb-6 flex items-center justify-center bg-gray-50 rounded-sm -mx-10 -mt-10 mb-8 p-6">
-                  <img
+                <div className="h-20 mb-6 flex items-center justify-center bg-gray-50 rounded-sm -mx-10 -mt-10 mb-8 p-6 relative">
+                  <Image
                     src="/logos/racketrescue.png"
-                    alt="Racket Rescue"
-                    className="h-16 w-auto opacity-90"
+                    alt="Racket Rescue Equipment Services"
+                    fill
+                    quality={100}
+                    sizes="300px"
+                    className="object-contain opacity-90"
                   />
                 </div>
                 <h3 className="text-2xl font-sans font-medium text-lbta-charcoal mb-4">

@@ -84,10 +84,13 @@ export default function CoachesPage() {
                     <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-gray-100">
                       <Image
                         src={coach.image}
-                        alt={coach.name}
-                        width={600}
-                        height={800}
-                        className="w-full h-full object-cover object-top"
+                        alt={`${coach.name} - ${coach.title} at Laguna Beach Tennis Academy`}
+                        fill
+                        quality={90}
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover object-top"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8ZAAAAAAAAA//Z"
                       />
                     </div>
                   </div>

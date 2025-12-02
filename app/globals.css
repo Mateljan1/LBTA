@@ -15,6 +15,25 @@
 
   body {
     @apply bg-lbta-cream text-lbta-charcoal antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  /* Subtle texture overlay for depth */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(197, 165, 114, 0.01) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(26, 26, 26, 0.01) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   html {
@@ -50,29 +69,57 @@
 
   .btn-primary {
     @apply inline-flex items-center justify-center px-8 py-3.5 bg-lbta-charcoal text-white
-           font-sans text-sm font-medium tracking-wide transition-all duration-500
+           font-sans text-sm font-medium tracking-wide transition-all
            hover:bg-lbta-burnt focus:outline-none focus:ring-2 focus:ring-lbta-charcoal focus:ring-offset-2;
     min-height: 48px;
     letter-spacing: 2px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.05),
+      0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 8px 16px rgba(0, 0, 0, 0.08);
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center px-8 py-3.5 border border-lbta-charcoal/30 text-lbta-charcoal
-           font-sans text-sm font-medium tracking-wide transition-all duration-500
+           font-sans text-sm font-medium tracking-wide transition-all
            hover:border-lbta-charcoal hover:bg-lbta-charcoal hover:text-white
            focus:outline-none focus:ring-2 focus:ring-lbta-charcoal focus:ring-offset-2;
     min-height: 48px;
     letter-spacing: 2px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.06),
+      0 4px 8px rgba(0, 0, 0, 0.06);
   }
 
   .card-lbta {
     @apply bg-white border border-gray-200 transition-all duration-500
            hover:border-gray-300;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.02),
+      0 2px 4px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.02);
   }
 
   .card-lbta:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.03),
+      0 4px 8px rgba(0, 0, 0, 0.03),
+      0 8px 16px rgba(0, 0, 0, 0.04),
+      0 16px 32px rgba(0, 0, 0, 0.04);
     transform: translateY(-2px);
   }
 
@@ -89,6 +136,7 @@
   /* Advanced Micro-Interactions - Aman Standard */
   a:not(.btn-primary):not(.btn-secondary):not(.card-lbta) {
     position: relative;
+    transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   a:not(.btn-primary):not(.btn-secondary):not(.card-lbta)::after {
@@ -99,7 +147,8 @@
     width: 0;
     height: 1px;
     background: currentColor;
-    transition: width 0.3s ease-out;
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: left;
   }
 
   a:not(.btn-primary):not(.btn-secondary):not(.card-lbta):hover::after {
@@ -113,13 +162,20 @@
     transition: transform 0.1s ease-out;
   }
 
-  /* Image zoom on hover */
+  /* Image zoom on hover - Refined */
   .image-zoom {
-    transition: transform 0.7s ease-out;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
   }
 
   .image-zoom:hover {
     transform: scale(1.05);
+  }
+
+  /* Refined image loading states */
+  img, [data-nextimg] {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 }
 
@@ -137,11 +193,12 @@
     scrollbar-width: none;
   }
 
-  /* Custom Focus States - Accessibility */
+  /* Custom Focus States - Accessibility & Elegance */
   *:focus-visible {
     outline: 2px solid theme('colors.lbta.burnt');
-    outline-offset: 2px;
-    border-radius: 2px;
+    outline-offset: 3px;
+    border-radius: 3px;
+    transition: outline-offset 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   button:focus-visible,
@@ -150,7 +207,11 @@
   select:focus-visible,
   textarea:focus-visible {
     outline: 2px solid theme('colors.lbta.burnt');
-    outline-offset: 2px;
+    outline-offset: 3px;
+    box-shadow:
+      0 0 0 4px rgba(197, 165, 114, 0.1),
+      0 0 0 8px rgba(197, 165, 114, 0.05);
+    transition: box-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Mobile Touch Targets - Minimum 48px */

@@ -78,14 +78,18 @@ export default function AboutPage() {
         <div className="container-lbta">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
-              <Image 
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png?quality=95"
-                alt="Laguna Beach Tennis Academy facilities"
-                width={1200}
-                height={800}
-                className="w-full h-auto rounded-sm"
-                style={{ imageRendering: '-webkit-optimize-contrast' }}
-              />
+              <div className="relative aspect-[3/2] overflow-hidden rounded-sm bg-gray-100">
+                <Image
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png"
+                  alt="Laguna Beach Tennis Academy facilities with palm trees and tennis courts"
+                  fill
+                  quality={90}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8ZAAAAAAAAA//Z"
+                />
+              </div>
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>

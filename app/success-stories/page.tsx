@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export const metadata: Metadata = {
@@ -100,12 +101,18 @@ export default function SuccessStoriesPage() {
               <AnimatedSection key={player.name} delay={index * 0.1}>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                   <div className={index % 2 === 0 ? 'order-1' : 'order-2'}>
-                    <img 
-                      src={`${player.image}?quality=95`}
-                      alt={player.name}
-                      className="w-full h-auto rounded-sm"
-                      style={{ imageRendering: '-webkit-optimize-contrast' }}
-                    />
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-gray-100">
+                      <Image
+                        src={player.image}
+                        alt={`${player.name} - ${player.rank} ATP Professional`}
+                        fill
+                        quality={90}
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8ZAAAAAAAAA//Z"
+                      />
+                    </div>
                   </div>
                   <div className={index % 2 === 0 ? 'order-2' : 'order-1'}>
                     <p className="text-lbta-burnt text-sm font-sans tracking-wide mb-4">
