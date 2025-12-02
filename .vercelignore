@@ -2,13 +2,11 @@
 public/videos/vylo-hero.mp4
 public/vylo-hero.MP4
 
-# Large unoptimized images - need compression
-public/photos/LBCOURTSETTING.jpg
-public/photos/GymSetting.png
-public/photos/VideoAnalysisRoom.png
+# NOTE: Gallery photos are now imported statically for build-time optimization
+# They must be included in the build, not ignored
+# Large unoptimized images - uploading to Vercel for Next.js optimization
 public/photos/playerhousing.png
 public/photos/Closeupcourt.png
-public/photos/Court setting.png
 public/photos/MaxResting.jpg
 
 # Build artifacts
