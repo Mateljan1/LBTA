@@ -133,6 +133,41 @@
     letter-spacing: -0.01em;
   }
 
+  /* Blueprint Typography System */
+  .display {
+    @apply font-serif text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1];
+    letter-spacing: -0.02em;
+  }
+
+  .body-lg {
+    @apply font-sans text-lg md:text-xl leading-relaxed;
+  }
+
+  .body-sm {
+    @apply font-sans text-sm md:text-base leading-relaxed;
+  }
+
+  /* Blueprint Buttons */
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-lbta-burnt text-white
+           font-sans text-sm font-medium tracking-wide transition-all
+           hover:bg-lbta-charcoal focus:outline-none focus:ring-2 focus:ring-lbta-burnt focus:ring-offset-2;
+    min-height: 48px;
+    letter-spacing: 2px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.05),
+      0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-accent:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+
   /* Advanced Micro-Interactions - Aman Standard */
   a:not(.btn-primary):not(.btn-secondary):not(.card-lbta) {
     position: relative;
