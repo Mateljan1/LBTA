@@ -33,3 +33,7 @@ yarn-error.log*
 next-env.d.ts
 
 public/videos/vylo-hero.mp4
+
+public/vylo-hero.MP4
+public/**/*.mp4
+public/**/*.MP4
