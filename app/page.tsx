@@ -11,11 +11,11 @@ export default function Home() {
       <section className="relative h-screen flex items-center">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png"
+            src="/photos/hero-main.jpg"
             alt="Laguna Beach Tennis Academy courts at golden hour"
             fill
             priority
-            quality={90}
+            quality={95}
             sizes="100vw"
             className="object-cover object-center"
           />
@@ -73,10 +73,10 @@ export default function Home() {
               <AnimatedSection>
                 <div className="relative aspect-[4/3] lg:aspect-[3/4]">
                   <Image
-                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/8b7ec1948_ATPTRANSFORMATIONSECTION-KarueAndrewinbackground.png"
+                    src="/photos/atp-story-karue.jpg"
                     alt="Karue Sell - ATP #258 training at LBTA"
                     fill
-                    quality={90}
+                    quality={95}
                     sizes="(max-width: 1024px) 100vw, 60vw"
                     className="object-cover object-center"
                     priority
@@ -213,10 +213,10 @@ export default function Home() {
             <Link href="/programs/junior" className="group block relative overflow-hidden">
               <div className="relative h-[70vh] md:h-[80vh]">
                 <Image
-                  src="/photos/OncourtTraining.jpg"
+                  src="/photos/junior-program-hero.jpg"
                   alt="Junior development on-court training at LBTA"
                   fill
-                  quality={85}
+                  quality={95}
                   sizes="100vw"
                   className="object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105"
                 />
@@ -256,10 +256,10 @@ export default function Home() {
               <Link href="/programs/adult" className="group block relative overflow-hidden">
                 <div className="relative h-[60vh]">
                   <Image
-                    src="/photos/LBCOURTSETTING.jpg"
+                    src="/photos/adult-program.jpg"
                     alt="Adult programs - Professional training environment"
                     fill
-                    quality={85}
+                    quality={95}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105"
                   />
@@ -288,10 +288,10 @@ export default function Home() {
               <Link href="/programs/high-performance" className="group block relative overflow-hidden">
                 <div className="relative h-[60vh]">
                   <Image
-                    src="/photos/KarueFH2.jpg"
+                    src="/photos/high-performance.jpg"
                     alt="High Performance - ATP/WTA tour preparation"
                     fill
-                    quality={85}
+                    quality={95}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105"
                   />
@@ -332,10 +332,10 @@ export default function Home() {
               <AnimatedSection>
                 <div className="relative aspect-[3/4] max-w-xs mx-auto lg:mx-0">
                   <Image
-                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/b542dd0d0_AndrewMateljanPic.png"
+                    src="/photos/andrew-portrait.jpg"
                     alt="Andrew Mateljan - Founder"
                     fill
-                    quality={90}
+                    quality={95}
                     sizes="(max-width: 1024px) 60vw, 25vw"
                     className="object-cover object-center"
                   />
@@ -577,10 +577,10 @@ export default function Home() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/photos/CQ8A0537.jpg"
+            src="/photos/final-cta.jpg"
             alt="Championship courts at Laguna Beach Tennis Academy"
             fill
-            quality={85}
+            quality={95}
             sizes="100vw"
             className="object-cover object-center"
           />

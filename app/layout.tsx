@@ -3,6 +3,7 @@ import { Inter, Montserrat, Cormorant_Garamond } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
+import Chatbot from '@/components/ui/Chatbot'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -97,6 +98,7 @@ export default function RootLayout({
         <ConditionalLayout>
           {children}
         </ConditionalLayout>
+        <Chatbot />
       </body>
     </html>
   )
