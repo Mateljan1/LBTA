@@ -11,7 +11,7 @@ export default function Home() {
       <section className="relative h-screen flex items-center">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/photos/hero-main.jpg"
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png"
             alt="Laguna Beach Tennis Academy courts at golden hour"
             fill
             priority
@@ -73,7 +73,7 @@ export default function Home() {
               <AnimatedSection>
                 <div className="relative aspect-[4/3] lg:aspect-[3/4]">
                   <Image
-                    src="/photos/atp-story-karue.jpg"
+                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/8b7ec1948_ATPTRANSFORMATIONSECTION-KarueAndrewinbackground.png"
                     alt="Karue Sell - ATP #258 training at LBTA"
                     fill
                     quality={90}
@@ -213,7 +213,7 @@ export default function Home() {
             <Link href="/programs/junior" className="group block relative overflow-hidden">
               <div className="relative h-[70vh] md:h-[80vh]">
                 <Image
-                  src="/photos/junior-program-hero.jpg"
+                  src="/photos/OncourtTraining.jpg"
                   alt="Junior development on-court training at LBTA"
                   fill
                   quality={85}
@@ -256,7 +256,7 @@ export default function Home() {
               <Link href="/programs/adult" className="group block relative overflow-hidden">
                 <div className="relative h-[60vh]">
                   <Image
-                    src="/photos/adult-program.jpg"
+                    src="/photos/LBCOURTSETTING.jpg"
                     alt="Adult programs - Professional training environment"
                     fill
                     quality={85}
@@ -288,7 +288,7 @@ export default function Home() {
               <Link href="/programs/high-performance" className="group block relative overflow-hidden">
                 <div className="relative h-[60vh]">
                   <Image
-                    src="/photos/high-performance.jpg"
+                    src="/photos/KarueFH2.jpg"
                     alt="High Performance - ATP/WTA tour preparation"
                     fill
                     quality={85}
@@ -332,7 +332,7 @@ export default function Home() {
               <AnimatedSection>
                 <div className="relative aspect-[3/4] max-w-xs mx-auto lg:mx-0">
                   <Image
-                    src="/photos/andrew-portrait.jpg"
+                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/b542dd0d0_AndrewMateljanPic.png"
                     alt="Andrew Mateljan - Founder"
                     fill
                     quality={90}
@@ -577,7 +577,7 @@ export default function Home() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/photos/final-cta.jpg"
+            src="/photos/CQ8A0537.jpg"
             alt="Championship courts at Laguna Beach Tennis Academy"
             fill
             quality={85}
