@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const navigation = [
   { name: 'Programs', href: '/programs' },
+  { name: 'Camps', href: '/camps' },
+  { name: 'Fitness', href: '/fitness' },
   { name: 'Schedules', href: '/schedules' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Coaches', href: '/coaches' },
