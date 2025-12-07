@@ -482,14 +482,14 @@ export default function Home() {
 
 
       {/* ============================================
-          PARTNERSHIP — Minimal, cohesive, refined
+          PARTNERSHIP — Enhanced, prominent, professional
           ============================================ */}
-      <section className="py-32 bg-lbta-bone border-y border-lbta-primary/6">
+      <section className="py-40 bg-lbta-bone border-y border-lbta-primary/6">
         <div className="container-lbta px-6 md:px-30">
-          <div className="max-w-5xl mx-auto">
-            {/* City Partnership - Compact */}
-            <AnimatedSection className="text-center mb-16">
-              <div className="relative w-16 h-16 mx-auto mb-6 opacity-30">
+          <div className="max-w-6xl mx-auto">
+            {/* City Partnership - Prominent */}
+            <AnimatedSection className="text-center mb-20">
+              <div className="relative w-28 h-28 mx-auto mb-8 opacity-40">
                 <Image
                   src="/logos/city-laguna-beach.png"
                   alt="City of Laguna Beach"
@@ -499,68 +499,68 @@ export default function Home() {
                 />
               </div>
 
-              <h3 className="subhead text-lbta-primary mb-4">
+              <h3 className="headline-sm text-lbta-primary mb-6">
                 Official City Partner
               </h3>
 
-              <p className="body-sm text-lbta-secondary mb-8">
+              <p className="body text-lbta-secondary">
                 Laguna Beach High School • Alta Laguna Park • Moulton Meadows Park
               </p>
             </AnimatedSection>
 
-            {/* Partner Logos - Single compact section */}
+            {/* Partner Logos - Single row, larger */}
             <AnimatedSection delay={0.2}>
-              <div className="flex flex-wrap items-center justify-center gap-12 md:gap-16 max-w-4xl mx-auto">
-                <div className="relative h-12 w-28 opacity-50 hover:opacity-100 transition-opacity duration-500">
-                  <Image 
-                    src="/logos/fit4tennis.png" 
-                    alt="Fit4Tennis" 
-                    fill 
+              <div className="flex items-center justify-center gap-8 md:gap-12 overflow-x-auto pb-4 scrollbar-hide">
+                <div className="relative h-16 w-36 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                  <Image
+                    src="/logos/fit4tennis.png"
+                    alt="Fit4Tennis"
+                    fill
                     className="object-contain"
                   />
                 </div>
-                
-                <div className="relative h-12 w-28 opacity-50 hover:opacity-100 transition-opacity duration-500">
-                  <Image 
-                    src="/logos/racketrescue.png" 
-                    alt="Racket Rescue" 
-                    fill 
+
+                <div className="relative h-16 w-36 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                  <Image
+                    src="/logos/racketrescue.png"
+                    alt="Racket Rescue"
+                    fill
                     className="object-contain"
                   />
                 </div>
-                
-                <div className="relative h-12 w-28 opacity-50 hover:opacity-100 transition-opacity duration-500">
-                  <Image 
-                    src="/logos/vylo.png" 
-                    alt="VYLO" 
-                    fill 
+
+                <div className="relative h-16 w-36 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                  <Image
+                    src="/logos/vylo.png"
+                    alt="VYLO"
+                    fill
                     className="object-contain"
                   />
                 </div>
-                
-                <div className="relative h-10 w-24 opacity-50 hover:opacity-100 transition-opacity duration-500">
-                  <Image 
-                    src="/logos/racquetiq.png" 
-                    alt="RacquetIQ" 
-                    fill 
+
+                <div className="relative h-16 w-32 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                  <Image
+                    src="/logos/racquetiq.png"
+                    alt="RacquetIQ"
+                    fill
                     className="object-contain"
                   />
                 </div>
-                
-                <div className="relative h-10 w-24 opacity-50 hover:opacity-100 transition-opacity duration-500">
-                  <Image 
-                    src="/logos/tennisbeast.png" 
-                    alt="Tennis Beast" 
-                    fill 
+
+                <div className="relative h-16 w-32 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                  <Image
+                    src="/logos/tennisbeast.png"
+                    alt="Tennis Beast"
+                    fill
                     className="object-contain"
                   />
                 </div>
-                
-                <div className="relative h-10 w-24 opacity-50 hover:opacity-100 transition-opacity duration-500">
-                  <Image 
-                    src="/logos/lbhs.png" 
-                    alt="Laguna Beach HS" 
-                    fill 
+
+                <div className="relative h-16 w-32 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                  <Image
+                    src="/logos/lbhs.png"
+                    alt="Laguna Beach HS"
+                    fill
                     className="object-contain"
                   />
                 </div>
