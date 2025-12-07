@@ -597,7 +597,7 @@ export default function Home() {
               </h2>
 
               <p className="body text-white/80 mb-12 max-w-md mx-auto">
-                Free trial session. No commitment.
+                Experience championship-level training. Your first session is complimentary.
               </p>
 
               <Link
