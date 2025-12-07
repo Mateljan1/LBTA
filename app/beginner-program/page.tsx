@@ -8,6 +8,7 @@ export default function BeginnerProgramLanding() {
     name: '',
     email: '',
     phone: '',
+    schedule: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -91,6 +92,36 @@ export default function BeginnerProgramLanding() {
             <p className="text-xl text-lbta-secondary mb-8 leading-relaxed">
               Transform from complete beginner to confident player in just 12 weeks with ATP/WTA-level coaching at Laguna Beach Tennis Academy.
             </p>
+
+            {/* Pricing Options */}
+            <div className="bg-white/50 backdrop-blur-sm border border-lbta-coral/20 rounded-xl p-6 mb-8">
+              <h3 className="text-sm font-semibold text-lbta-coral uppercase tracking-wide mb-4">
+                12-Week Program Options
+              </h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-medium text-lbta-primary">Saturday 9:00am</p>
+                    <p className="text-sm text-lbta-secondary">12 sessions • 1x per week</p>
+                  </div>
+                  <p className="text-xl font-serif text-lbta-coral">$497</p>
+                </div>
+                <div className="border-t border-gray-200 pt-3 flex justify-between items-center">
+                  <div>
+                    <p className="font-medium text-lbta-primary">Tue/Thu 10:00am</p>
+                    <p className="text-sm text-lbta-secondary">24 sessions • 2x per week</p>
+                  </div>
+                  <p className="text-xl font-serif text-lbta-coral">$797</p>
+                </div>
+                <div className="border-t border-gray-200 pt-3 flex justify-between items-center">
+                  <div>
+                    <p className="font-medium text-lbta-primary">Mon/Wed 6:00pm</p>
+                    <p className="text-sm text-lbta-secondary">24 sessions • 2x per week</p>
+                  </div>
+                  <p className="text-xl font-serif text-lbta-coral">$797</p>
+                </div>
+              </div>
+            </div>
 
             {/* Benefits */}
             <div className="space-y-4 mb-8">
@@ -195,6 +226,24 @@ export default function BeginnerProgramLanding() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lbta-coral focus:border-transparent outline-none transition"
                       placeholder="(949) 123-4567"
                     />
+                  </div>
+
+                  <div>
+                    <label htmlFor="schedule" className="block text-sm font-medium text-lbta-primary mb-2">
+                      Preferred Schedule *
+                    </label>
+                    <select
+                      id="schedule"
+                      required
+                      value={formData.schedule}
+                      onChange={(e) => setFormData({...formData, schedule: e.target.value})}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lbta-coral focus:border-transparent outline-none transition bg-white"
+                    >
+                      <option value="">Select a schedule...</option>
+                      <option value="saturday">Saturday 9:00am ($497)</option>
+                      <option value="weekday-morning">Tue/Thu 10:00am ($797)</option>
+                      <option value="weekday-evening">Mon/Wed 6:00pm ($797)</option>
+                    </select>
                   </div>
 
                   <button
