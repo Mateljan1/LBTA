@@ -460,6 +460,102 @@ export default function Home() {
 
 
       {/* ============================================
+          TRAINING METHODOLOGY — Three-column refined
+          ============================================ */}
+      <section className="py-48 bg-lbta-bone">
+        <div className="container-lbta px-6 md:px-30">
+          <div className="max-w-6xl mx-auto">
+            <AnimatedSection className="text-center mb-20">
+              <p className="eyebrow mb-6 text-lbta-secondary">
+                THE METHOD
+              </p>
+              <h2 className="headline-md text-lbta-primary mb-6">
+                How Training Works
+              </h2>
+              <p className="body text-lbta-secondary max-w-2xl mx-auto">
+                A structured approach built on three integrated components. Each element reinforces the others, creating complete player development.
+              </p>
+            </AnimatedSection>
+
+            <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
+              <AnimatedSection delay={0.1}>
+                <div className="border-t-2 border-lbta-coral pt-6">
+                  <p className="eyebrow text-lbta-coral mb-4">
+                    TECHNICAL & TACTICAL
+                  </p>
+                  <h3 className="subhead text-lbta-primary mb-4">
+                    On-Court Training
+                  </h3>
+                  <p className="body-sm text-lbta-secondary mb-6">
+                    Stroke mechanics, movement patterns, and tactical understanding developed through progressive skill work. Every session builds from fundamentals to match-realistic scenarios.
+                  </p>
+                  <div className="space-y-2">
+                    <p className="caption text-lbta-primary font-medium mb-2">Session Structure:</p>
+                    <ul className="space-y-1.5 body-sm text-lbta-secondary">
+                      <li>• Warm-up and movement prep</li>
+                      <li>• Technical focus work</li>
+                      <li>• Pattern-based drills</li>
+                      <li>• Live point play</li>
+                      <li>• Cool-down and review</li>
+                    </ul>
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.2}>
+                <div className="border-t-2 border-lbta-coral pt-6">
+                  <p className="eyebrow text-lbta-coral mb-4">
+                    FIT4TENNIS INTEGRATION
+                  </p>
+                  <h3 className="subhead text-lbta-primary mb-4">
+                    Athletic Development
+                  </h3>
+                  <p className="body-sm text-lbta-secondary mb-6">
+                    Speed, agility, strength, and conditioning work designed specifically for tennis demands. Programs scale from youth fundamentals to high-performance requirements.
+                  </p>
+                  <div className="space-y-2">
+                    <p className="caption text-lbta-primary font-medium mb-2">Key Components:</p>
+                    <ul className="space-y-1.5 body-sm text-lbta-secondary">
+                      <li>• Court-specific footwork patterns</li>
+                      <li>• Rotational power development</li>
+                      <li>• Mobility and flexibility work</li>
+                      <li>• Tennis-specific conditioning</li>
+                      <li>• Recovery protocols</li>
+                    </ul>
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.3}>
+                <div className="border-t-2 border-lbta-coral pt-6">
+                  <p className="eyebrow text-lbta-coral mb-4">
+                    MATCH READINESS
+                  </p>
+                  <h3 className="subhead text-lbta-primary mb-4">
+                    Competitive Preparation
+                  </h3>
+                  <p className="body-sm text-lbta-secondary mb-6">
+                    Tactical decision-making, emotional regulation, and competitive routines. Match play is integrated into training, not treated as separate from skill development.
+                  </p>
+                  <div className="space-y-2">
+                    <p className="caption text-lbta-primary font-medium mb-2">Development Areas:</p>
+                    <ul className="space-y-1.5 body-sm text-lbta-secondary">
+                      <li>• Shot selection under pressure</li>
+                      <li>• Emotional regulation during competition</li>
+                      <li>• Match strategy and adaptation</li>
+                      <li>• Pre-match and between-point routines</li>
+                      <li>• Tournament preparation</li>
+                    </ul>
+                  </div>
+                </div>
+              </AnimatedSection>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ============================================
           VIDEO TESTIMONIAL — Blueprint typography
           ============================================ */}
       <section className="py-60 bg-lbta-sand border-y border-lbta-primary/6">
