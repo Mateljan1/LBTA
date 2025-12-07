@@ -281,7 +281,7 @@ export default function BeginnerProgramLanding() {
               <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
                 <div>
                   <h4 className="font-medium text-lbta-primary mb-1">12-24 Group Sessions</h4>
-                  <p className="text-sm text-lbta-secondary">ATP/WTA coaching, max 4:1 ratio</p>
+                  <p className="text-sm text-lbta-secondary">ATP/WTA coaching, max 6:1 ratio</p>
                 </div>
                 <p className="text-xl font-serif text-lbta-secondary">$1,800</p>
               </div>
@@ -302,19 +302,11 @@ export default function BeginnerProgramLanding() {
                 <p className="text-xl font-serif text-lbta-secondary">$400</p>
               </div>
 
-              <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
-                <div>
-                  <h4 className="font-medium text-lbta-primary mb-1">Court Access</h4>
-                  <p className="text-sm text-lbta-secondary">Alta Laguna Park premium courts</p>
-                </div>
-                <p className="text-xl font-serif text-lbta-secondary">$300</p>
-              </div>
-
               <div className="flex justify-between items-center pt-6">
                 <div>
                   <h4 className="font-medium text-lbta-primary text-lg">Total Value</h4>
                 </div>
-                <p className="text-3xl font-serif text-lbta-primary line-through opacity-50">$3,100</p>
+                <p className="text-3xl font-serif text-lbta-primary line-through opacity-50">$2,800</p>
               </div>
 
               <div className="bg-white p-6 -mx-6 -mb-6">
