@@ -487,15 +487,17 @@ export default function Home() {
       <section className="py-32 bg-lbta-bone border-y border-lbta-primary/6">
         <div className="container-lbta px-6 md:px-30">
           <div className="max-w-5xl mx-auto">
-            {/* City Partnership - Compact */}
+            {/* City Partnership - Prominent */}
             <AnimatedSection className="text-center mb-16">
-              <div className="relative w-16 h-16 mx-auto mb-6 opacity-30">
+              <div className="relative w-full max-w-lg h-72 mx-auto mb-6">
                 <Image
                   src="/logos/city-laguna-beach.png"
-                  alt="City of Laguna Beach"
+                  alt="City of Laguna Beach - Official Partner"
                   fill
+                  quality={100}
+                  sizes="(max-width: 768px) 90vw, 512px"
                   className="object-contain"
-                  style={{ mixBlendMode: 'darken' }}
+                  style={{ mixBlendMode: 'darken', opacity: 0.65 }}
                 />
               </div>
 

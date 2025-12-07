@@ -73,23 +73,24 @@ export default function PartnershipSection({ className = '' }: PartnershipSectio
           </p>
         </AnimatedSection>
 
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-16 items-center justify-items-center">
+        <div className="max-w-6xl mx-auto">
+          {/* Single row of logos - horizontally scrollable on mobile */}
+          <div className="flex items-center justify-center gap-10 md:gap-14 overflow-x-auto no-scrollbar pb-4">
             {partners.map((partner, index) => (
               <AnimatedSection key={partner.name} delay={index * 0.1}>
                 <a
                   href={partner.url}
-                  className="group block text-center"
+                  className="group block text-center flex-shrink-0"
                   title={`${partner.name} - ${partner.description}`}
                 >
-                  <div className="relative h-24 w-full flex items-center justify-center transition-all duration-500">
+                  <div className="relative h-28 w-36 flex items-center justify-center transition-all duration-300">
                     <img
                       src={partner.logo}
                       alt={`${partner.name} - ${partner.description}`}
-                      className="max-h-16 max-w-full w-auto object-contain opacity-60 group-hover:opacity-90 transition-all duration-500"
+                      className="max-h-20 max-w-full w-auto object-contain opacity-70 group-hover:opacity-100 transition-all duration-300"
                     />
                   </div>
-                  <p className="text-xs text-gray-500 mt-4 font-sans text-center">
+                  <p className="text-xs text-gray-500 mt-3 font-sans text-center group-hover:text-gray-700 transition-colors">
                     {partner.description}
                   </p>
                 </a>
