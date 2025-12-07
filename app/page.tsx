@@ -1,4 +1,3 @@
-// LBTA Homepage - Force rebuild to clear cache
 import Link from 'next/link'
 import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
@@ -459,17 +458,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TEST SECTION - Verify rendering at this position */}
-      <section className="py-24 bg-red-500">
-        <div className="container-lbta text-center">
-          <h2 className="text-6xl font-bold text-white">
-            🔴 TEST SECTION - If you see this, content renders here
-          </h2>
-          <p className="text-2xl text-white mt-4">
-            This is positioned between Team and Training Methodology sections
-          </p>
-        </div>
-      </section>
 
       {/* ============================================
           TRAINING METHODOLOGY — Three-column refined
