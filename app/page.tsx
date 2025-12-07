@@ -366,7 +366,7 @@ export default function Home() {
                   </p>
                   
                   <p>
-                    Training history: Max McKennon, Ryan Seggerman, Colton Smith. ATP Masters 1000 experience. Founder, Fit4Tennis (100K+).
+                    Training history: Max McKennon (ATP #458), Ryan Seggerman (ATP #63 Doubles, #348 Singles), Colton Smith (ATP #133). Masters 1000 experience at Indian Wells. Founder, Fit4Tennis (100K+).
                   </p>
                 </div>
               </AnimatedSection>
