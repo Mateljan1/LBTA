@@ -15,7 +15,7 @@ export default function Home() {
             alt="Laguna Beach Tennis Academy courts at golden hour"
             fill
             priority
-            quality={95}
+            quality={90}
             sizes="100vw"
             className="object-cover object-center"
           />
@@ -38,14 +38,14 @@ export default function Home() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-6 items-start mb-12">
-                  <Link
-                    href="/book"
+                  <Link 
+                    href="/book" 
                     className="btn-accent"
                   >
                     Book Trial
                   </Link>
                 </div>
-
+                
                 {/* Blueprint Subtext */}
                 <p className="body-sm text-white/60" style={{ fontWeight: 300 }}>
                   ATP/WTA-backed training. Laguna Beach, California.
@@ -76,7 +76,7 @@ export default function Home() {
                     src="/photos/atp-story-karue.jpg"
                     alt="Karue Sell - ATP #258 training at LBTA"
                     fill
-                    quality={95}
+                    quality={90}
                     sizes="(max-width: 1024px) 100vw, 60vw"
                     className="object-cover object-center"
                     priority
@@ -101,7 +101,7 @@ export default function Home() {
                 <div className="max-w-md">
                   {/* Blueprint Eyebrow */}
                   <p className="eyebrow mb-6">REAL RESULTS</p>
-
+                  
                   {/* Blueprint Headline */}
                   <h2 className="headline mb-10">
                     #858 to #258.<br />
@@ -114,12 +114,12 @@ export default function Home() {
                       Karue Sell. ATP #258.<br />
                       Max McKennon. ATP #458.
                     </p>
-
+                    
                     <p className="body text-lbta-secondary">
                       Twenty D1 scholarships.<br />
                       Hundreds of adults who stopped blaming their racket.
                     </p>
-
+                    
                     <p className="body text-lbta-secondary">
                       One system. Every level.
                     </p>
@@ -152,7 +152,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-16 md:gap-20 max-w-6xl mx-auto">
             <AnimatedSection delay={0.1}>
               <div className="text-center md:text-left">
-                <div className="text-8xl font-display font-light text-lbta-coral/20 mb-6" style={{ lineHeight: 0.9 }}>
+                <div className="text-8xl font-display font-light text-lbta-coral mb-6" style={{ lineHeight: 0.9 }}>
                   01
                 </div>
                 <h3 className="subhead text-lbta-primary mb-4">
@@ -166,7 +166,7 @@ export default function Home() {
 
             <AnimatedSection delay={0.2}>
               <div className="text-center md:text-left">
-                <div className="text-8xl font-display font-light text-lbta-coral/20 mb-6" style={{ lineHeight: 0.9 }}>
+                <div className="text-8xl font-display font-light text-lbta-coral mb-6" style={{ lineHeight: 0.9 }}>
                   02
                 </div>
                 <h3 className="subhead text-lbta-primary mb-4">
@@ -180,7 +180,7 @@ export default function Home() {
 
             <AnimatedSection delay={0.3}>
               <div className="text-center md:text-left">
-                <div className="text-8xl font-display font-light text-lbta-coral/20 mb-6" style={{ lineHeight: 0.9 }}>
+                <div className="text-8xl font-display font-light text-lbta-coral mb-6" style={{ lineHeight: 0.9 }}>
                   03
                 </div>
                 <h3 className="subhead text-lbta-primary mb-4">
@@ -216,33 +216,33 @@ export default function Home() {
                   src="/photos/junior-program-hero.jpg"
                   alt="Junior development on-court training at LBTA"
                   fill
-                  quality={95}
+                  quality={85}
                   sizes="100vw"
                   className="object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
+                
                 <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 pb-12 md:pb-16">
                   <div className="max-w-xl">
                     {/* Blueprint Eyebrow */}
                     <p className="eyebrow text-white mb-4">
                       AGES 3–18
                     </p>
-
+                    
                     {/* Blueprint Subhead */}
                     <h3 className="subhead-sm text-white mb-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
                       Junior<br />
                       Development
                     </h3>
-
+                    
                     {/* Blueprint Body */}
                     <p className="body-sm text-white mb-6 max-w-sm">
                       From first lesson to D1 scholarship. Little Stars (ages 3-4) through High Performance training.
                     </p>
-
+                    
                     {/* Blueprint Link */}
                     <div className="inline-flex items-center gap-2 body-sm text-white pb-1 border-b border-white/60 group-hover:border-white transition-colors">
-                      Explore →
+                      Explore → 
                     </div>
                   </div>
                 </div>
@@ -259,12 +259,12 @@ export default function Home() {
                     src="/photos/adult-program.jpg"
                     alt="Adult programs - Professional training environment"
                     fill
-                    quality={95}
+                    quality={85}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
+                  
                   <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 pb-12 md:pb-16">
                     <p className="eyebrow text-white mb-4">
                       ALL LEVELS
@@ -291,12 +291,12 @@ export default function Home() {
                     src="/photos/high-performance.jpg"
                     alt="High Performance - ATP/WTA tour preparation"
                     fill
-                    quality={95}
+                    quality={85}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
+                  
                   <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 pb-12 md:pb-16">
                     <p className="eyebrow text-white mb-4">
                       COMPETITIVE
@@ -335,7 +335,7 @@ export default function Home() {
                     src="/photos/andrew-portrait.jpg"
                     alt="Andrew Mateljan - Founder"
                     fill
-                    quality={95}
+                    quality={90}
                     sizes="(max-width: 1024px) 60vw, 25vw"
                     className="object-cover object-center"
                   />
@@ -349,7 +349,7 @@ export default function Home() {
                 <p className="eyebrow mb-4 text-lbta-coral">
                   FOUNDER & DIRECTOR
                 </p>
-
+                
                 <h2 className="headline-sm text-lbta-bone mb-6">
                   Andrew Mateljan
                 </h2>
@@ -360,11 +360,11 @@ export default function Home() {
                   <p>
                     20 years developing competitive players. Former #3 SoCal, #12 nationally ranked junior.
                   </p>
-
+                  
                   <p>
                     Seven years coaching internationally across Spain, Croatia, Norway. Currently coaches ATP #262 Karue Sell.
                   </p>
-
+                  
                   <p>
                     Training history: Max McKennon, Ryan Seggerman, Colton Smith. ATP Masters 1000 experience. Founder, Fit4Tennis (100K+).
                   </p>
@@ -375,17 +375,9 @@ export default function Home() {
 
           {/* Development Team */}
           <div className="border-t border-lbta-bone/10 pt-16">
-            <AnimatedSection delay={0.3} className="text-center mb-16">
-              <p className="eyebrow text-lbta-coral mb-6">
+            <AnimatedSection delay={0.3} className="text-center mb-12">
+              <p className="eyebrow text-lbta-coral mb-2">
                 DEVELOPMENT TEAM
-              </p>
-
-              <h3 className="headline-sm text-lbta-bone mb-6">
-                Proven Expertise
-              </h3>
-
-              <p className="body text-lbta-bone/70 max-w-2xl mx-auto">
-                From professional tours to collegiate success, each coach brings specialized experience to your development journey.
               </p>
             </AnimatedSection>
 
@@ -444,112 +436,6 @@ export default function Home() {
                 </Link>
               </AnimatedSection>
             </div>
-
-            {/* CTA */}
-            <AnimatedSection delay={0.7} className="text-center mt-16">
-              <Link
-                href="/coaches"
-                className="inline-flex items-center gap-2 body text-lbta-bone/80 pb-1 border-b border-lbta-bone/40 hover:text-lbta-bone hover:border-lbta-bone transition-all duration-300"
-              >
-                Meet the Full Team →
-              </Link>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ============================================
-          TRAINING METHODOLOGY — Three-column refined
-          ============================================ */}
-      <section className="py-48 bg-lbta-bone">
-        <div className="container-lbta px-6 md:px-30">
-          <div className="max-w-6xl mx-auto">
-            <AnimatedSection className="text-center mb-20">
-              <p className="eyebrow mb-6 text-lbta-secondary">
-                THE METHOD
-              </p>
-              <h2 className="headline-md text-lbta-primary mb-6">
-                How Training Works
-              </h2>
-              <p className="body text-lbta-secondary max-w-2xl mx-auto">
-                A structured approach built on three integrated components. Each element reinforces the others, creating complete player development.
-              </p>
-            </AnimatedSection>
-
-            <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
-              <AnimatedSection delay={0.1}>
-                <div className="border-t-2 border-lbta-coral pt-6">
-                  <p className="eyebrow text-lbta-coral mb-4">
-                    TECHNICAL & TACTICAL
-                  </p>
-                  <h3 className="subhead text-lbta-primary mb-4">
-                    On-Court Training
-                  </h3>
-                  <p className="body-sm text-lbta-secondary mb-6">
-                    Stroke mechanics, movement patterns, and tactical understanding developed through progressive skill work. Every session builds from fundamentals to match-realistic scenarios.
-                  </p>
-                  <div className="space-y-2">
-                    <p className="caption text-lbta-primary font-medium mb-2">Session Structure:</p>
-                    <ul className="space-y-1.5 body-sm text-lbta-secondary">
-                      <li>• Warm-up and movement prep</li>
-                      <li>• Technical focus work</li>
-                      <li>• Pattern-based drills</li>
-                      <li>• Live point play</li>
-                      <li>• Cool-down and review</li>
-                    </ul>
-                  </div>
-                </div>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.2}>
-                <div className="border-t-2 border-lbta-coral pt-6">
-                  <p className="eyebrow text-lbta-coral mb-4">
-                    FIT4TENNIS INTEGRATION
-                  </p>
-                  <h3 className="subhead text-lbta-primary mb-4">
-                    Athletic Development
-                  </h3>
-                  <p className="body-sm text-lbta-secondary mb-6">
-                    Speed, agility, strength, and conditioning work designed specifically for tennis demands. Programs scale from youth fundamentals to high-performance requirements.
-                  </p>
-                  <div className="space-y-2">
-                    <p className="caption text-lbta-primary font-medium mb-2">Key Components:</p>
-                    <ul className="space-y-1.5 body-sm text-lbta-secondary">
-                      <li>• Court-specific footwork patterns</li>
-                      <li>• Rotational power development</li>
-                      <li>• Mobility and flexibility work</li>
-                      <li>• Tennis-specific conditioning</li>
-                      <li>• Recovery protocols</li>
-                    </ul>
-                  </div>
-                </div>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.3}>
-                <div className="border-t-2 border-lbta-coral pt-6">
-                  <p className="eyebrow text-lbta-coral mb-4">
-                    MATCH READINESS
-                  </p>
-                  <h3 className="subhead text-lbta-primary mb-4">
-                    Competitive Preparation
-                  </h3>
-                  <p className="body-sm text-lbta-secondary mb-6">
-                    Tactical decision-making, emotional regulation, and competitive routines. Match play is integrated into training, not treated as separate from skill development.
-                  </p>
-                  <div className="space-y-2">
-                    <p className="caption text-lbta-primary font-medium mb-2">Development Areas:</p>
-                    <ul className="space-y-1.5 body-sm text-lbta-secondary">
-                      <li>• Shot selection under pressure</li>
-                      <li>• Emotional regulation during competition</li>
-                      <li>• Match strategy and adaptation</li>
-                      <li>• Pre-match and between-point routines</li>
-                      <li>• Tournament preparation</li>
-                    </ul>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
           </div>
         </div>
       </section>
@@ -566,7 +452,7 @@ export default function Home() {
               <p className="eyebrow mb-6 text-lbta-secondary">
                 IN THEIR WORDS
               </p>
-
+              
               {/* Blueprint Headline */}
               <h2 className="headline-md text-lbta-primary">
                 Member stories.
@@ -601,17 +487,15 @@ export default function Home() {
       <section className="py-32 bg-lbta-bone border-y border-lbta-primary/6">
         <div className="container-lbta px-6 md:px-30">
           <div className="max-w-5xl mx-auto">
-            {/* City Partnership - Prominent */}
+            {/* City Partnership - Compact */}
             <AnimatedSection className="text-center mb-16">
-              <div className="relative w-full max-w-lg h-72 mx-auto mb-6">
+              <div className="relative w-16 h-16 mx-auto mb-6 opacity-30">
                 <Image
                   src="/logos/city-laguna-beach.png"
-                  alt="City of Laguna Beach - Official Partner"
+                  alt="City of Laguna Beach"
                   fill
-                  quality={100}
-                  sizes="(max-width: 768px) 90vw, 512px"
                   className="object-contain"
-                  style={{ mixBlendMode: 'darken', opacity: 0.65 }}
+                  style={{ mixBlendMode: 'darken' }}
                 />
               </div>
 
@@ -624,59 +508,59 @@ export default function Home() {
               </p>
             </AnimatedSection>
 
-            {/* Partner Logos - ONE single row, MORE visible */}
+            {/* Partner Logos - Single compact section */}
             <AnimatedSection delay={0.2}>
-              <div className="flex items-center justify-center gap-10 md:gap-14 overflow-x-auto no-scrollbar">
-                <div className="relative h-14 w-32 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                  <Image
-                    src="/logos/fit4tennis.png"
-                    alt="Fit4Tennis"
-                    fill
+              <div className="flex flex-wrap items-center justify-center gap-12 md:gap-16 max-w-4xl mx-auto">
+                <div className="relative h-12 w-28 opacity-50 hover:opacity-100 transition-opacity duration-500">
+                  <Image 
+                    src="/logos/fit4tennis.png" 
+                    alt="Fit4Tennis" 
+                    fill 
                     className="object-contain"
                   />
                 </div>
-
-                <div className="relative h-14 w-32 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                  <Image
-                    src="/logos/racketrescue.png"
-                    alt="Racket Rescue"
-                    fill
+                
+                <div className="relative h-12 w-28 opacity-50 hover:opacity-100 transition-opacity duration-500">
+                  <Image 
+                    src="/logos/racketrescue.png" 
+                    alt="Racket Rescue" 
+                    fill 
                     className="object-contain"
                   />
                 </div>
-
-                <div className="relative h-14 w-32 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                  <Image
-                    src="/logos/vylo.png"
-                    alt="VYLO"
-                    fill
+                
+                <div className="relative h-12 w-28 opacity-50 hover:opacity-100 transition-opacity duration-500">
+                  <Image 
+                    src="/logos/vylo.png" 
+                    alt="VYLO" 
+                    fill 
                     className="object-contain"
                   />
                 </div>
-
-                <div className="relative h-12 w-28 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                  <Image
-                    src="/logos/racquetiq.png"
-                    alt="RacquetIQ"
-                    fill
+                
+                <div className="relative h-10 w-24 opacity-50 hover:opacity-100 transition-opacity duration-500">
+                  <Image 
+                    src="/logos/racquetiq.png" 
+                    alt="RacquetIQ" 
+                    fill 
                     className="object-contain"
                   />
                 </div>
-
-                <div className="relative h-12 w-28 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                  <Image
-                    src="/logos/tennisbeast.png"
-                    alt="Tennis Beast"
-                    fill
+                
+                <div className="relative h-10 w-24 opacity-50 hover:opacity-100 transition-opacity duration-500">
+                  <Image 
+                    src="/logos/tennisbeast.png" 
+                    alt="Tennis Beast" 
+                    fill 
                     className="object-contain"
                   />
                 </div>
-
-                <div className="relative h-12 w-28 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                  <Image
-                    src="/logos/lbhs.png"
-                    alt="Laguna Beach HS"
-                    fill
+                
+                <div className="relative h-10 w-24 opacity-50 hover:opacity-100 transition-opacity duration-500">
+                  <Image 
+                    src="/logos/lbhs.png" 
+                    alt="Laguna Beach HS" 
+                    fill 
                     className="object-contain"
                   />
                 </div>
@@ -688,37 +572,42 @@ export default function Home() {
 
 
       {/* ============================================
-          FINAL CTA — Aspirational, not transactional
+          FINAL CTA — Blueprint specs + Drama
           ============================================ */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center">
+      <section className="relative h-[65vh] min-h-[600px] flex items-center justify-center">
         <div className="absolute inset-0 -z-10">
           <Image
             src="/photos/final-cta.jpg"
             alt="Championship courts at Laguna Beach Tennis Academy"
             fill
-            quality={95}
+            quality={85}
             sizes="100vw"
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+          {/* Blueprint gradient: transparent to charcoal at 70% */}
+          <div className="absolute inset-0 bg-gradient-to-t from-lbta-charcoal/70 via-lbta-charcoal/30 to-transparent" />
         </div>
 
         <div className="relative z-10 container-lbta px-6 md:px-30">
           <div className="max-w-3xl mx-auto text-center">
             <AnimatedSection>
-              <h2 className="headline text-white mb-10">
-                Begin your<br />development.
+              {/* Blueprint Headline */}
+              <h2 className="headline text-lbta-bone mb-12">
+                One free trial.
               </h2>
-
-              <p className="body text-white/80 mb-12 max-w-md mx-auto">
-                Experience championship-level training. Your first session is complimentary.
-              </p>
-
-              <Link
-                href="/book"
-                className="btn-accent px-14 py-5"
+              
+              {/* Blueprint Button - White on dark */}
+              <Link 
+                href="/book" 
+                className="inline-flex items-center justify-center bg-white text-lbta-primary px-12 py-5 text-base font-medium tracking-[0.2px] transition-all duration-300 hover:bg-lbta-sand hover:-translate-y-0.5"
+                style={{ 
+                  fontFamily: 'var(--font-inter)', 
+                  fontWeight: 500,
+                  borderRadius: '2px',
+                  boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)'
+                }}
               >
-                Book Trial
+                Book Now
               </Link>
             </AnimatedSection>
           </div>

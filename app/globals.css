@@ -2,11 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Blueprint Typography System - FREE Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500&display=swap');
+
 @layer base {
   :root {
+    /* Blueprint Font Stack */
+    --font-cormorant: 'Cormorant', Georgia, serif;
     --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-montserrat: 'Montserrat', system-ui, sans-serif;
-    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+    --font-space-grotesk: 'Space Grotesk', 'Courier New', monospace;
+    
+    /* Blueprint Color System */
+    --color-primary: #1A1A1A;
+    --color-secondary: #6B6B6B;
+    --color-coral: #E8956F;
+    --color-coral-dark: #D67D5A;
+    --color-bone: #FDFCFA;
+    --color-sand: #F4EDE4;
+    --color-charcoal: #2B2B2B;
   }
 
   * {
@@ -14,14 +27,85 @@
   }
 
   body {
-    @apply bg-lbta-cream text-lbta-charcoal antialiased;
+    @apply bg-lbta-bone text-lbta-primary antialiased;
+    font-family: var(--font-inter);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   }
+  
+  /* Blueprint Typography Classes */
+  .display {
+    font-family: var(--font-cormorant);
+    font-weight: 300;
+    font-size: clamp(48px, 9vw, 84px);
+    line-height: 0.95;
+    letter-spacing: -0.5px;
+    color: var(--color-primary);
+  }
+  
+  .headline {
+    font-family: var(--font-cormorant);
+    font-weight: 400;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+    color: var(--color-primary);
+  }
+  
+  .headline-md {
+    font-size: clamp(36px, 5vw, 56px);
+  }
+  
+  .headline-sm {
+    font-size: clamp(32px, 4vw, 48px);
+  }
+  
+  .subhead {
+    font-family: var(--font-cormorant);
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.2px;
+    color: var(--color-primary);
+  }
 
-  /* Subtle texture overlay for depth */
+  .subhead-sm {
+    font-family: var(--font-cormorant);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 28px);
+    line-height: 1.2;
+    letter-spacing: -0.2px;
+    color: var(--color-primary);
+  }
+
+  .eyebrow {
+    font-family: var(--font-space-grotesk);
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-coral);
+  }
+  
+  .body {
+    font-family: var(--font-inter);
+    font-size: 18px;
+    line-height: 1.8;
+    letter-spacing: 0.1px;
+    color: var(--color-secondary);
+  }
+  
+  .body-sm {
+    font-size: 16px;
+  }
+  
+  .body-lg {
+    font-size: 20px;
+  }
+
+  /* Beach-inspired texture overlay - very subtle */
   body::before {
     content: '';
     position: fixed;
@@ -30,8 +114,8 @@
     width: 100%;
     height: 100%;
     background-image:
-      radial-gradient(circle at 20% 50%, rgba(197, 165, 114, 0.01) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(26, 26, 26, 0.01) 0%, transparent 50%);
+      radial-gradient(circle at 30% 40%, rgba(248, 230, 187, 0.015) 0%, transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.008) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -52,62 +136,148 @@
   }
 
   .section-spacing {
-    @apply py-20 md:py-32 lg:py-40;
+    @apply py-32 md:py-48 lg:py-64;
+  }
+
+  .section-spacing-xl {
+    @apply py-40 md:py-60 lg:py-80;
+  }
+
+  .section-spacing-hero {
+    @apply py-48 md:py-72 lg:py-96;
   }
 
   .heading-display {
-    @apply font-serif font-light tracking-tight text-lbta-charcoal;
+    @apply font-serif font-light text-lbta-black;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
 
   .heading-sans {
-    @apply font-display font-medium tracking-normal text-lbta-charcoal;
+    @apply font-display font-medium text-lbta-black;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
   }
 
   .body-text {
-    @apply font-sans text-base md:text-lg leading-relaxed text-gray-600;
+    @apply font-sans text-base md:text-lg text-gray-700;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+
+  .body-text-large {
+    @apply font-sans text-lg md:text-xl text-gray-600;
+    line-height: 1.85;
+    letter-spacing: 0.01em;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-3.5 bg-lbta-charcoal text-white
+    @apply inline-flex items-center justify-center text-white
            font-sans text-sm font-medium tracking-wide transition-all
-           hover:bg-lbta-burnt focus:outline-none focus:ring-2 focus:ring-lbta-charcoal focus:ring-offset-2;
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: #000000;  /* Pure black */
     min-height: 48px;
-    letter-spacing: 2px;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 14px 40px;
+    letter-spacing: 2.5px;
+    border-radius: 2px;  /* Nearly square - Aman style */
+    transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
     box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.05),
-      0 2px 4px rgba(0, 0, 0, 0.05);
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 2px 4px rgba(0, 0, 0, 0.04);
   }
 
   .btn-primary:hover {
-    transform: translateY(-1px);
+    background-color: #f8a121;  /* Orange on hover */
+    transform: translateY(-2px);
     box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.08),
-      0 4px 8px rgba(0, 0, 0, 0.08),
-      0 8px 16px rgba(0, 0, 0, 0.08);
+      0 2px 4px rgba(248, 161, 33, 0.15),
+      0 4px 8px rgba(248, 161, 33, 0.12),
+      0 8px 16px rgba(248, 161, 33, 0.08);
+  }
+
+  .btn-primary:focus {
+    ring-color: #f8a121;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-8 py-3.5 border border-lbta-charcoal/30 text-lbta-charcoal
+    @apply inline-flex items-center justify-center text-lbta-black
            font-sans text-sm font-medium tracking-wide transition-all
-           hover:border-lbta-charcoal hover:bg-lbta-charcoal hover:text-white
-           focus:outline-none focus:ring-2 focus:ring-lbta-charcoal focus:ring-offset-2;
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: transparent;
     min-height: 48px;
-    letter-spacing: 2px;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 14px 40px;
+    letter-spacing: 2.5px;
+    border-radius: 2px;
+    border: 1.5px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
     backdrop-filter: blur(8px);
   }
 
   .btn-secondary:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    border-color: #000000;
+    background-color: rgba(0, 0, 0, 0.02);
     box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.06),
-      0 4px 8px rgba(0, 0, 0, 0.06);
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      0 4px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  /* Accent CTA Button - CORAL (Blueprint Standard) */
+  .btn-accent {
+    @apply inline-flex items-center justify-center text-white
+           font-sans text-sm font-medium tracking-wide transition-all
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: #E8956F;  /* Coral accent (Blueprint) */
+    min-height: 48px;
+    padding: 16px 40px;
+    letter-spacing: 0.2px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(232, 149, 111, 0.2);
+  }
+
+  .btn-accent:hover {
+    background-color: #D67D5A;  /* Darker coral */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(232, 149, 111, 0.3);
+  }
+
+  .btn-accent:focus {
+    ring-color: #E8956F;
+  }
+  
+  /* Blueprint Link Animation */
+  .link-animated {
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    color: var(--color-coral);
+    font-family: var(--font-inter);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    transition: color 0.3s ease;
+  }
+  
+  .link-animated::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-coral);
+    transition: width 0.3s ease;
+  }
+  
+  .link-animated:hover::after {
+    width: 100%;
   }
 
   .card-lbta {
-    @apply bg-white border border-gray-200 transition-all duration-500
-           hover:border-gray-300;
+    @apply bg-white transition-all;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: all 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.02),
       0 2px 4px rgba(0, 0, 0, 0.02),
@@ -115,12 +285,12 @@
   }
 
   .card-lbta:hover {
+    border-color: rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
     box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.03),
       0 4px 8px rgba(0, 0, 0, 0.03),
-      0 8px 16px rgba(0, 0, 0, 0.04),
-      0 16px 32px rgba(0, 0, 0, 0.04);
-    transform: translateY(-2px);
+      0 8px 16px rgba(0, 0, 0, 0.03),
+      0 16px 32px rgba(0, 0, 0, 0.03);
   }
 
   .text-overline {
@@ -131,41 +301,6 @@
     @apply font-serif text-xl font-light text-lbta-charcoal;
     line-height: 1.6;
     letter-spacing: -0.01em;
-  }
-
-  /* Blueprint Typography System */
-  .display {
-    @apply font-serif text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1];
-    letter-spacing: -0.02em;
-  }
-
-  .body-lg {
-    @apply font-sans text-lg md:text-xl leading-relaxed;
-  }
-
-  .body-sm {
-    @apply font-sans text-sm md:text-base leading-relaxed;
-  }
-
-  /* Blueprint Buttons */
-  .btn-accent {
-    @apply inline-flex items-center justify-center px-8 py-3.5 bg-lbta-burnt text-white
-           font-sans text-sm font-medium tracking-wide transition-all
-           hover:bg-lbta-charcoal focus:outline-none focus:ring-2 focus:ring-lbta-burnt focus:ring-offset-2;
-    min-height: 48px;
-    letter-spacing: 2px;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.05),
-      0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-
-  .btn-accent:hover {
-    transform: translateY(-1px);
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.08),
-      0 4px 8px rgba(0, 0, 0, 0.08),
-      0 8px 16px rgba(0, 0, 0, 0.08);
   }
 
   /* Advanced Micro-Interactions - Aman Standard */
@@ -520,6 +655,103 @@
     mix-blend-mode: overlay;
     z-index: 15;
     pointer-events: none;
+  }
+
+  /* ========== LUXURY BEACH-INSPIRED UTILITIES ========== */
+  
+  /* Beach-inspired section separators */
+  .section-divider {
+    position: relative;
+  }
+
+  .section-divider::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+  }
+
+  /* Luxury image containers with white borders */
+  .image-container-luxury {
+    position: relative;
+    overflow: hidden;
+    background: white;
+    padding: 12px;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.02),
+      0 8px 16px rgba(0, 0, 0, 0.02);
+  }
+
+  .image-container-luxury::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Refined image zoom - slower and subtle */
+  .image-zoom-luxury {
+    transition: transform 2s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform;
+  }
+
+  .image-zoom-luxury:hover {
+    transform: scale(1.03);
+  }
+
+  /* Asymmetric content layouts */
+  .content-offset-left {
+    @apply ml-0 mr-auto max-w-4xl;
+  }
+
+  .content-offset-right {
+    @apply ml-auto mr-0 max-w-4xl;
+  }
+
+  /* Beach texture overlay for sand sections */
+  .bg-lbta-sand {
+    position: relative;
+  }
+
+  .bg-lbta-sand::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-lbta-sand > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Refined focus states with orange accent */
+  *:focus-visible {
+    outline: 2px solid #f8a121;  /* Orange */
+    outline-offset: 3px;
+    border-radius: 2px;
+    transition: outline-offset 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible {
+    outline: 2px solid #f8a121;
+    outline-offset: 3px;
+    box-shadow:
+      0 0 0 4px rgba(248, 161, 33, 0.1),
+      0 0 0 8px rgba(248, 161, 33, 0.05);
   }
 }
 
