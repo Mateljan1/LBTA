@@ -375,9 +375,17 @@ export default function Home() {
 
           {/* Development Team */}
           <div className="border-t border-lbta-bone/10 pt-16">
-            <AnimatedSection delay={0.3} className="text-center mb-12">
-              <p className="eyebrow text-lbta-coral mb-2">
+            <AnimatedSection delay={0.3} className="text-center mb-16">
+              <p className="eyebrow text-lbta-coral mb-6">
                 DEVELOPMENT TEAM
+              </p>
+
+              <h3 className="headline-sm text-lbta-bone mb-6">
+                Proven Expertise
+              </h3>
+
+              <p className="body text-lbta-bone/70 max-w-2xl mx-auto">
+                From professional tours to collegiate success, each coach brings specialized experience to your development journey.
               </p>
             </AnimatedSection>
 
@@ -436,6 +444,16 @@ export default function Home() {
                 </Link>
               </AnimatedSection>
             </div>
+
+            {/* CTA */}
+            <AnimatedSection delay={0.7} className="text-center mt-16">
+              <Link
+                href="/coaches"
+                className="inline-flex items-center gap-2 body text-lbta-bone/80 pb-1 border-b border-lbta-bone/40 hover:text-lbta-bone hover:border-lbta-bone transition-all duration-300"
+              >
+                Meet the Full Team →
+              </Link>
+            </AnimatedSection>
           </div>
         </div>
       </section>
