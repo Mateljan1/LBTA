@@ -9,43 +9,65 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // LBTA Brand Colors - Bold & Performance-Driven
+        // LBTA Aman-Level Luxury Palette - Blueprint Standard
         lbta: {
-          orange: '#f8a121',      // Primary CTA
-          burnt: '#e67e30',       // Accents
-          intense: '#E65100',     // Urgent CTAs
-          cream: '#f5f1e8',       // Main background
-          tan: '#f8e6bb',         // Section backgrounds
-          charcoal: '#1a1a1a',    // Primary text
-          slate: '#2d2d2d',       // Secondary backgrounds
-          gold: '#c9a961',        // Premium accents
-          sand: '#e8dcc4',        // Soft backgrounds
+          // BLUEPRINT PRIMARY COLORS
+          primary: '#1A1A1A',     // Primary text
+          secondary: '#6B6B6B',   // Secondary text
+          coral: '#E8956F',       // Sophisticated accent (Blueprint)
+          'coral-dark': '#D67D5A', // Coral hover state
+          
+          // BLUEPRINT BACKGROUNDS
+          bone: '#FDFCFA',        // Background 1 (bone white)
+          sand: '#F4EDE4',        // Background 2 (warm sand)
+          charcoal: '#2B2B2B',    // Background 3 (dark sections)
+          
+          // LEGACY ALIASES (backwards compatibility)
+          white: '#FDFCFA',
+          black: '#1A1A1A',
+          orange: '#E8956F',      // Now points to coral
+          burnt: '#D67D5A',       // Now points to coral-dark
+          cream: '#F4EDE4',
         },
         vylo: {
           orange: '#F26522',      // VYLO brand distinct color
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
-        serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
+        // Blueprint Font System (FREE)
+        display: ['var(--font-cormorant)', 'Georgia', 'serif'],     // Cormorant for display
+        serif: ['var(--font-cormorant)', 'Georgia', 'serif'],       // Cormorant for headlines
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],     // Inter for body
+        accent: ['var(--font-space-grotesk)', 'monospace', 'sans-serif'], // Space Grotesk for eyebrows
       },
       fontSize: {
-        'display-xl': ['clamp(3.5rem, 7vw, 6rem)', { lineHeight: '1.05', letterSpacing: '-0.01em', fontWeight: '300' }],
-        'display-lg': ['clamp(2.5rem, 5vw, 4.5rem)', { lineHeight: '1.1', letterSpacing: '-0.01em', fontWeight: '300' }],
-        'display-md': ['clamp(2rem, 4vw, 3rem)', { lineHeight: '1.15', letterSpacing: '0em', fontWeight: '300' }],
-        'display-sm': ['clamp(1.5rem, 3vw, 2rem)', { lineHeight: '1.2', letterSpacing: '0em', fontWeight: '400' }],
+        // Blueprint Typography System (Exact Scales)
+        'display': ['clamp(48px, 9vw, 84px)', { lineHeight: '0.95', letterSpacing: '-0.5px', fontWeight: '300' }],
+        'headline': ['clamp(40px, 6vw, 64px)', { lineHeight: '1.1', letterSpacing: '-0.3px', fontWeight: '400' }],
+        'headline-md': ['clamp(36px, 5vw, 56px)', { lineHeight: '1.1', letterSpacing: '-0.3px', fontWeight: '400' }],
+        'headline-sm': ['clamp(32px, 4vw, 48px)', { lineHeight: '1.1', letterSpacing: '-0.3px', fontWeight: '400' }],
+        'subhead': ['clamp(28px, 3.5vw, 32px)', { lineHeight: '1.2', letterSpacing: '-0.2px', fontWeight: '400' }],
+        'subhead-sm': ['clamp(24px, 3vw, 28px)', { lineHeight: '1.2', letterSpacing: '-0.2px', fontWeight: '400' }],
+        'body-lg': ['20px', { lineHeight: '1.8', letterSpacing: '0.1px', fontWeight: '400' }],
+        'body': ['18px', { lineHeight: '1.8', letterSpacing: '0.1px', fontWeight: '400' }],
+        'body-sm': ['16px', { lineHeight: '1.8', letterSpacing: '0.1px', fontWeight: '400' }],
+        'eyebrow': ['11px', { lineHeight: '1.4', letterSpacing: '2px', fontWeight: '400' }],
       },
       spacing: {
-        '18': '4.5rem',
-        '22': '5.5rem',
-        '26': '6.5rem',
-        '30': '7.5rem',
-        '34': '8.5rem',
-        '36': '9rem',
-        '40': '10rem',
-        '44': '11rem',
-        '48': '12rem',
+        // Blueprint Spacing System (12px base unit)
+        '15': '60px',    // 12 × 5
+        '18': '72px',    // 12 × 6
+        '20': '80px',    // 12 × 6.67
+        '22': '88px',    // Custom
+        '24': '96px',    // 12 × 8
+        '26': '104px',   // Custom
+        '28': '112px',   // Custom
+        '30': '120px',   // 12 × 10 (Blueprint outer margins)
+        '36': '144px',   // 12 × 12
+        '40': '160px',   // 12 × 13.33 (Blueprint section spacing medium)
+        '48': '192px',   // 12 × 16
+        '60': '240px',   // 12 × 20 (Blueprint section padding desktop)
+        '72': '288px',   // 12 × 24
       },
       maxWidth: {
         'prose': '65ch',

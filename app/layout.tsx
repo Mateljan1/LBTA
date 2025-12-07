@@ -1,33 +1,32 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Montserrat, Cormorant_Garamond } from 'next/font/google'
-import Script from 'next/script'
+import { Inter, Cormorant, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
-import Chatbot from '@/components/ui/Chatbot'
 
+// Blueprint Typography System - FREE Fonts
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600'],
   variable: '--font-inter',
   display: 'swap',
   preload: true,
   adjustFontFallback: true,
 })
 
-const montserrat = Montserrat({
+const cormorant = Cormorant({
   subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
-  variable: '--font-montserrat',
+  weight: ['300', '400', '500'],
+  variable: '--font-cormorant',
   display: 'swap',
   preload: true,
   adjustFontFallback: true,
 })
 
-const cormorant = Cormorant_Garamond({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-cormorant',
-  display: 'optional',
+  weight: ['400', '500'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
   preload: true,
   adjustFontFallback: true,
 })
@@ -65,7 +64,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${inter.variable} ${cormorant.variable} ${spaceGrotesk.variable}`}>
       <head>
         {/* PWA & Mobile Optimization */}
         <link rel="manifest" href="/manifest.json" />
@@ -77,28 +76,25 @@ export default function RootLayout({
         {/* Performance Optimizations */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://use.typekit.net" />
-        <link rel="preconnect" href="https://qtrypzzcjebvfcihiynt.supabase.co" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX');
+            `,
+          }}
+        />
       </head>
       <body className="flex flex-col min-h-screen">
-        {/* Google Analytics - Optimized with Next.js Script */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
-          `}
-        </Script>
-
         <ConditionalLayout>
           {children}
         </ConditionalLayout>
-        <Chatbot />
       </body>
     </html>
   )
