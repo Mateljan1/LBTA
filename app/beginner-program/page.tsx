@@ -53,8 +53,13 @@ export default function BeginnerProgramLanding() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Urgency Banner */}
+      <div className="bg-lbta-coral text-white py-3 text-center text-sm font-medium tracking-wide">
+        <span className="font-bold">$50 OFF</span> January enrollment — Sign up by December 15th • Only 4 spots remaining
+      </div>
+
       {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/40 to-transparent">
+      <header className="absolute top-12 left-0 right-0 z-50 bg-gradient-to-b from-black/40 to-transparent">
         <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
           <Image
             src="/logos/lbta-logo.svg"
@@ -141,25 +146,34 @@ export default function BeginnerProgramLanding() {
           <div className="grid md:grid-cols-3 gap-12">
             <div>
               <div className="text-7xl font-serif font-light text-lbta-coral mb-6">01</div>
-              <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 1-4</h3>
-              <p className="text-lbta-secondary leading-relaxed">
-                Fundamentals. Movement patterns, grip, contact point. The building blocks that prevent bad habits from forming.
+              <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 1-4: Foundation</h3>
+              <p className="text-lbta-secondary leading-relaxed mb-4">
+                Master the fundamentals that prevent bad habits. By week 4, you'll have proper grip, balanced stance, and clean contact point on both groundstrokes.
+              </p>
+              <p className="text-sm font-medium text-lbta-coral">
+                Outcome: Hit 15+ consistent forehands and backhands in a row
               </p>
             </div>
 
             <div>
               <div className="text-7xl font-serif font-light text-lbta-coral mb-6">02</div>
-              <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 5-8</h3>
-              <p className="text-lbta-secondary leading-relaxed">
-                Rally development. Consistency over power. Learning to sustain points and recognize patterns in play.
+              <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 5-8: Rally Development</h3>
+              <p className="text-lbta-secondary leading-relaxed mb-4">
+                Consistency over power. Learning to sustain cross-court and down-the-line rallies. Pattern recognition and court positioning.
+              </p>
+              <p className="text-sm font-medium text-lbta-coral">
+                Outcome: Rally for 20+ shots with another player
               </p>
             </div>
 
             <div>
               <div className="text-7xl font-serif font-light text-lbta-coral mb-6">03</div>
-              <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 9-12</h3>
-              <p className="text-lbta-secondary leading-relaxed">
-                Match preparation. Scoring, strategy, singles and doubles play. You're ready to compete.
+              <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 9-12: Match Ready</h3>
+              <p className="text-lbta-secondary leading-relaxed mb-4">
+                Scoring, serve mechanics, return positioning, singles and doubles strategy. You'll play your first competitive match.
+              </p>
+              <p className="text-sm font-medium text-lbta-coral">
+                Outcome: Play a full match with proper scoring and strategy
               </p>
             </div>
           </div>
@@ -223,6 +237,115 @@ export default function BeginnerProgramLanding() {
         </div>
       </section>
 
+      {/* Testimonials Video */}
+      <section className="py-32 bg-lbta-bone">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
+              Real Results
+            </p>
+            <h2 className="font-serif text-4xl lg:text-5xl text-lbta-primary mb-6">
+              Hear From Our Members
+            </h2>
+            <p className="text-lg text-lbta-secondary max-w-2xl mx-auto font-light">
+              Adults who started as complete beginners and now play confidently every week.
+            </p>
+          </div>
+
+          <div className="aspect-video overflow-hidden bg-lbta-charcoal shadow-2xl">
+            <iframe
+              src="https://player.vimeo.com/video/1134930901?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              title="Member testimonials"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Value Stack */}
+      <section className="py-32 bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
+              Complete Package
+            </p>
+            <h2 className="font-serif text-4xl lg:text-5xl text-lbta-primary mb-6">
+              Everything Included
+            </h2>
+          </div>
+
+          <div className="bg-lbta-bone p-12 border-l-4 border-lbta-coral">
+            <div className="space-y-6">
+              <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
+                <div>
+                  <h4 className="font-medium text-lbta-primary mb-1">12-24 Group Sessions</h4>
+                  <p className="text-sm text-lbta-secondary">ATP/WTA coaching, max 4:1 ratio</p>
+                </div>
+                <p className="text-xl font-serif text-lbta-secondary">$1,800</p>
+              </div>
+
+              <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
+                <div>
+                  <h4 className="font-medium text-lbta-primary mb-1">Video Analysis Package</h4>
+                  <p className="text-sm text-lbta-secondary">Session recordings + technique breakdown</p>
+                </div>
+                <p className="text-xl font-serif text-lbta-secondary">$600</p>
+              </div>
+
+              <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
+                <div>
+                  <h4 className="font-medium text-lbta-primary mb-1">Personalized Training Plan</h4>
+                  <p className="text-sm text-lbta-secondary">Custom progression roadmap + drills</p>
+                </div>
+                <p className="text-xl font-serif text-lbta-secondary">$400</p>
+              </div>
+
+              <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
+                <div>
+                  <h4 className="font-medium text-lbta-primary mb-1">Court Access</h4>
+                  <p className="text-sm text-lbta-secondary">Alta Laguna Park premium courts</p>
+                </div>
+                <p className="text-xl font-serif text-lbta-secondary">$300</p>
+              </div>
+
+              <div className="flex justify-between items-center pt-6">
+                <div>
+                  <h4 className="font-medium text-lbta-primary text-lg">Total Value</h4>
+                </div>
+                <p className="text-3xl font-serif text-lbta-primary line-through opacity-50">$3,100</p>
+              </div>
+
+              <div className="bg-white p-6 -mx-6 -mb-6">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h4 className="font-medium text-lbta-coral text-2xl mb-1">Your Investment</h4>
+                    <p className="text-sm text-lbta-secondary">Plus $50 off with December 15th enrollment</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-4xl font-serif text-lbta-coral">$447-$747</p>
+                    <p className="text-sm text-lbta-secondary">Normally $497-$797</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-3 bg-lbta-coral/10 px-6 py-4 rounded-lg">
+              <svg className="w-6 h-6 text-lbta-coral flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <div className="text-left">
+                <p className="font-medium text-lbta-primary">30-Day Satisfaction Guarantee</p>
+                <p className="text-sm text-lbta-secondary">Not progressing as expected? Full refund within first 30 days.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Program Options & Booking Section */}
       <section id="program" className="py-32 bg-lbta-sand">
         <div className="max-w-4xl mx-auto px-6">
@@ -230,31 +353,53 @@ export default function BeginnerProgramLanding() {
             <div className="grid lg:grid-cols-5">
               {/* Left: Program Options */}
               <div className="lg:col-span-2 bg-lbta-charcoal p-12 flex flex-col justify-center">
+                <div className="bg-lbta-coral text-white px-4 py-2 text-xs font-bold tracking-wider uppercase text-center mb-6 -mx-12 -mt-12">
+                  $50 OFF • Enroll by Dec 15th • 4 Spots Left
+                </div>
+
                 <h3 className="font-serif text-3xl text-lbta-bone mb-6">
-                  Program Options
+                  January Cohort
                 </h3>
                 <div className="space-y-6 text-lbta-bone/80 text-sm leading-relaxed">
                   <div className="border-b border-lbta-bone/20 pb-6">
                     <p className="text-lbta-coral font-medium mb-2">Saturday 9:00am</p>
-                    <p className="mb-1">12 sessions • 1x per week</p>
-                    <p className="text-2xl font-serif text-lbta-bone">$497</p>
+                    <p className="mb-3">12 sessions • 1x per week</p>
+                    <div className="flex items-baseline gap-3">
+                      <p className="text-2xl font-serif text-lbta-bone">$447</p>
+                      <p className="text-lg text-lbta-bone/40 line-through">$497</p>
+                    </div>
+                    <p className="text-xs text-lbta-coral mt-2">Save $50 • Ends Dec 15th</p>
                   </div>
 
                   <div className="border-b border-lbta-bone/20 pb-6">
                     <p className="text-lbta-coral font-medium mb-2">Tue/Thu 10:00am</p>
-                    <p className="mb-1">24 sessions • 2x per week</p>
-                    <p className="text-2xl font-serif text-lbta-bone">$797</p>
+                    <p className="mb-3">24 sessions • 2x per week</p>
+                    <div className="flex items-baseline gap-3">
+                      <p className="text-2xl font-serif text-lbta-bone">$747</p>
+                      <p className="text-lg text-lbta-bone/40 line-through">$797</p>
+                    </div>
+                    <p className="text-xs text-lbta-coral mt-2">Save $50 • Ends Dec 15th</p>
                   </div>
 
                   <div className="pb-6">
                     <p className="text-lbta-coral font-medium mb-2">Mon/Wed 6:00pm</p>
-                    <p className="mb-1">24 sessions • 2x per week</p>
-                    <p className="text-2xl font-serif text-lbta-bone">$797</p>
+                    <p className="mb-3">24 sessions • 2x per week</p>
+                    <div className="flex items-baseline gap-3">
+                      <p className="text-2xl font-serif text-lbta-bone">$747</p>
+                      <p className="text-lg text-lbta-bone/40 line-through">$797</p>
+                    </div>
+                    <p className="text-xs text-lbta-coral mt-2">Save $50 • Ends Dec 15th</p>
                   </div>
 
-                  <p className="text-lbta-coral font-medium pt-4">
-                    All programs include free trial lesson at Alta Laguna Park.
-                  </p>
+                  <div className="bg-lbta-bone/10 -mx-6 px-6 py-4 mt-6">
+                    <p className="text-lbta-bone font-medium mb-2">What's Included:</p>
+                    <ul className="space-y-1 text-xs text-lbta-bone/70">
+                      <li>✓ Video analysis package ($600 value)</li>
+                      <li>✓ Personalized training plan</li>
+                      <li>✓ 30-day satisfaction guarantee</li>
+                      <li>✓ Alta Laguna Park courts</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
@@ -272,9 +417,14 @@ export default function BeginnerProgramLanding() {
                   </div>
                 ) : (
                   <>
-                    <h4 className="text-2xl font-serif text-lbta-primary mb-8">
-                      Start Your Journey
-                    </h4>
+                    <div className="mb-8">
+                      <h4 className="text-2xl font-serif text-lbta-primary mb-2">
+                        Secure Your Spot
+                      </h4>
+                      <p className="text-sm text-lbta-coral font-medium">
+                        $50 discount ends December 15th • Only 4 spots remaining
+                      </p>
+                    </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div>
@@ -345,7 +495,7 @@ export default function BeginnerProgramLanding() {
                         disabled={isSubmitting}
                         className="w-full bg-lbta-coral text-white font-medium py-4 px-6 tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {isSubmitting ? 'Submitting...' : 'Request Program Information'}
+                        {isSubmitting ? 'Submitting...' : 'Claim My $50 Discount →'}
                       </button>
 
                       <p className="text-xs text-center text-gray-500">
