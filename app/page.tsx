@@ -592,22 +592,27 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center">
             <AnimatedSection>
               {/* Blueprint Headline */}
-              <h2 className="headline text-lbta-bone mb-12">
-                One free trial.
+              <h2 className="headline text-lbta-bone mb-6">
+                Begin your development.
               </h2>
-              
+
+              {/* Blueprint Body - Subheadline */}
+              <p className="body-lg text-lbta-bone/80 mb-12" style={{ fontWeight: 300 }}>
+                Free trial session. No commitment.
+              </p>
+
               {/* Blueprint Button - White on dark */}
-              <Link 
-                href="/book" 
+              <Link
+                href="/book"
                 className="inline-flex items-center justify-center bg-white text-lbta-primary px-12 py-5 text-base font-medium tracking-[0.2px] transition-all duration-300 hover:bg-lbta-sand hover:-translate-y-0.5"
-                style={{ 
-                  fontFamily: 'var(--font-inter)', 
+                style={{
+                  fontFamily: 'var(--font-inter)',
                   fontWeight: 500,
                   borderRadius: '2px',
                   boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)'
                 }}
               >
-                Book Now
+                Book Trial
               </Link>
             </AnimatedSection>
           </div>
