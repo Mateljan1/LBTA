@@ -143,7 +143,7 @@ export default function Home() {
       <section className="py-48 bg-lbta-sand">
         <div className="container-lbta px-6 md:px-30">
           <AnimatedSection className="text-center mb-20">
-            <p className="eyebrow mb-6 text-lbta-secondary">
+            <p className="eyebrow mb-6">
               THE APPROACH
             </p>
           </AnimatedSection>
@@ -449,10 +449,10 @@ export default function Home() {
           <div className="max-w-5xl mx-auto">
             <AnimatedSection className="text-center mb-20">
               {/* Blueprint Eyebrow */}
-              <p className="eyebrow mb-6 text-lbta-secondary">
+              <p className="eyebrow mb-6">
                 IN THEIR WORDS
               </p>
-              
+
               {/* Blueprint Headline */}
               <h2 className="headline-md text-lbta-primary">
                 Member stories.
