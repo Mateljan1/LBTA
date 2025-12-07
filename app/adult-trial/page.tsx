@@ -237,12 +237,17 @@ export default function AdultTrialLanding() {
           <p className="text-sm text-lbta-secondary mb-2">
             Laguna Beach Tennis Academy • Official City of Laguna Beach Tennis Partner Since 2020
           </p>
-          <p className="text-sm text-lbta-secondary">
+          <p className="text-sm text-lbta-secondary mb-2">
             <a href="tel:9494646645" className="text-lbta-coral hover:underline">(949) 464-6645</a>
             {' • '}
             <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral hover:underline">
               info@lagunabeachtennisacademy.com
             </a>
+          </p>
+          <p className="text-xs text-gray-500">
+            <a href="/privacy" className="hover:text-lbta-coral transition">Privacy Policy</a>
+            {' • '}
+            <a href="/terms" className="hover:text-lbta-coral transition">Terms of Service</a>
           </p>
         </div>
       </footer>
