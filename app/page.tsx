@@ -1,3 +1,4 @@
+// LBTA Homepage - Force rebuild to clear cache
 import Link from 'next/link'
 import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
