@@ -10,7 +10,6 @@ const navigation = [
   { name: 'High Performance', href: '/programs/high-performance' },
   { name: 'Our Coaches', href: '/coaches' },
   { name: 'Schedules', href: '/schedules' },
-  { name: 'Pricing', href: '/pricing' },
 ]
 
 const connect = [

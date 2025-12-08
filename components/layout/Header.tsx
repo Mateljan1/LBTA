@@ -11,7 +11,6 @@ const navigation = [
   { name: 'Camps', href: '/camps' },
   { name: 'Fitness', href: '/fitness' },
   { name: 'Schedules', href: '/schedules' },
-  { name: 'Pricing', href: '/pricing' },
   { name: 'Coaches', href: '/coaches' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
