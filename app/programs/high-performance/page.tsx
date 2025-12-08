@@ -1,47 +1,36 @@
-'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { Trophy, Clock, Target, Users, TrendingUp, Award } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
-const programs = [
-  {
-    id: "hp-training",
-    name: "HP Training",
-    age_level: "Ages 12-17 / UTR 5.0-8.0",
-    duration: "90 minutes",
-    monthly_1x: 260,
-    monthly_2x: 490,
-    quarterly_prepay: 795,
-    drop_in: 75,
-    description: "Intensive training for tournament players. Technical refinement, tactical mastery, fitness integration, and mental performance coaching."
-  },
-  {
-    id: "college-bound",
-    name: "College Bound",
-    age_level: "Ages 14-18 / UTR 8.0+",
-    duration: "120 minutes",
-    monthly_1x: 260,
-    monthly_2x: 520,
-    quarterly_prepay: 795,
-    drop_in: 85,
-    description: "Elite training for college-bound athletes. Includes NCAA recruitment guidance, college prep strategies, and advanced performance training."
-  }
+const placements = [
+  "Stanford University",
+  "UCLA",
+  "USC",
+  "UC Berkeley",
+  "Pepperdine",
+  "And 15+ more D1 programs"
 ]
 
-const components = [
-  "Technical Training",
-  "Video Analysis",
-  "Fitness & Movement",
-  "Mental Performance",
-  "Tournament Strategy",
-  "College Recruitment"
+const whatYouGet = [
+  { icon: Clock, title: "15-20 Hours Weekly", desc: "On-court training, match play, fitness, video analysis" },
+  { icon: Users, title: "Small Group Focus", desc: "4-6 players maximum. Personal attention from ATP/WTA coaches" },
+  { icon: Trophy, title: "Tournament Support", desc: "Coach-accompanied events, strategy sessions, UTR tracking" },
+  { icon: Target, title: "College Placement", desc: "NCAA recruitment guidance, showcase event prep, scholarship strategy" },
+  { icon: TrendingUp, title: "Performance Analytics", desc: "Video analysis, progress tracking, personalized development plans" },
+  { icon: Award, title: "Mental Coaching", desc: "Sports psychology, pressure management, competitive mindset" },
+]
+
+const requirements = [
+  "Ages 12-18",
+  "Tournament experience required",
+  "UTR 5.0+ (or evaluation by Andrew)",
+  "Full commitment to training schedule",
+  "Family support and alignment",
 ]
 
 export default function HighPerformancePage() {
-  const [activeSeason, setActiveSeason] = useState<'fall' | 'winter'>('fall')
-
   return (
     <>
       <Breadcrumbs items={[
@@ -50,183 +39,164 @@ export default function HighPerformancePage() {
       ]} />
       
       {/* Hero */}
-      <section className="relative bg-white pt-32 pb-20">
+      <section className="relative bg-white pt-32 pb-16">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <p className="text-overline mb-6">High Performance</p>
-            <h1 className="text-display-lg heading-display mb-6">
+            <p className="eyebrow mb-6" style={{ color: '#E8956F' }}>HIGH PERFORMANCE</p>
+            <h1 className="display mb-6">
               Championship Training
             </h1>
-            <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Elite development for competitive juniors and college-bound athletes.  
-              Ages 10-18.
+            <p className="body-lg max-w-2xl mx-auto text-gray-600">
+              Full-time development for competitive juniors seeking D1 college placement or ATP/WTA tour preparation.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Season Toggle */}
-      <section className="bg-lbta-cream border-b border-gray-200 sticky top-24 z-40 py-6">
+      {/* Track Record */}
+      <section className="bg-lbta-bone border-y border-gray-200 py-12">
         <div className="container-lbta">
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={() => setActiveSeason('fall')}
-              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
-                activeSeason === 'fall'
-                  ? 'bg-lbta-charcoal text-white'
-                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
-              }`}
-            >
-              FALL 2025 (JOIN NOW)
-            </button>
-            <button
-              onClick={() => setActiveSeason('winter')}
-              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
-                activeSeason === 'winter'
-                  ? 'bg-lbta-charcoal text-white'
-                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
-              }`}
-            >
-              WINTER 2026
-            </button>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <AnimatedSection>
+              <div className="headline-sm text-lbta-charcoal">20+</div>
+              <div className="body-sm text-gray-600">D1 Placements</div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.1}>
+              <div className="headline-sm text-lbta-charcoal">#258</div>
+              <div className="body-sm text-gray-600">ATP Coached</div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="headline-sm text-lbta-charcoal">15-20</div>
+              <div className="body-sm text-gray-600">Hours/Week</div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.3}>
+              <div className="headline-sm text-lbta-charcoal">3</div>
+              <div className="body-sm text-gray-600">ATP/WTA Coaches</div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Season Info Banner */}
-      <section
-        key={activeSeason}
-        className={`py-6 ${activeSeason === 'fall' ? 'bg-lbta-tan' : 'bg-blue-50'} border-b border-gray-200 transition-all duration-300`}
-      >
-        <div className="container-lbta text-center">
-          {activeSeason === 'fall' ? (
-            <p className="text-sm text-gray-600 font-sans">
-              <strong>Fall 2025:</strong> Join anytime through December • Rolling admissions
+      {/* What You Get */}
+      <section className="section-spacing bg-white">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="headline mb-4">Complete Development</h2>
+            <p className="body-sm text-gray-600 max-w-2xl mx-auto">
+              Everything needed to compete at the highest levels and earn college scholarships.
             </p>
-          ) : (
-            <p className="text-sm text-gray-600 font-sans">
-              <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
-            </p>
-          )}
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whatYouGet.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <AnimatedSection key={item.title} delay={index * 0.05}>
+                  <div className="bg-white border border-gray-200 p-6 hover:border-lbta-charcoal/40 transition-all duration-300">
+                    <Icon className="w-5 h-5 mb-4" style={{ color: '#E8956F' }} />
+                    <h3 className="subhead-sm mb-2">{item.title}</h3>
+                    <p className="body-sm text-gray-600">{item.desc}</p>
+                  </div>
+                </AnimatedSection>
+              )
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Programs */}
-      <section className="section-spacing bg-lbta-cream">
-        <div className="container-lbta space-y-16">
-          {programs.map((program, index) => (
-            <AnimatedSection key={program.id} delay={index * 0.1}>
-              <div id={program.id} className="card-lbta p-10">
-                <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-4">
-                  {program.name}
-                </h2>
-                <p className="text-lg text-lbta-burnt font-sans mb-6">
-                  {program.age_level}
-                </p>
-                <p className="text-gray-600 leading-relaxed mb-8">
-                  {program.description}
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-4">
-                      Training Components
-                    </h3>
-                    <ul className="space-y-2">
-                      {components.map((component) => (
-                        <li key={component} className="flex items-start gap-3 text-gray-600">
-                          <span className="text-lbta-burnt mt-1">•</span>
-                          <span>{component}</span>
-                        </li>
-                      ))}
-                    </ul>
+      {/* College Placements */}
+      <section className="section-spacing bg-lbta-bone border-y border-gray-200">
+        <div className="container-narrow text-center">
+          <AnimatedSection>
+            <h2 className="headline mb-6">College Placements</h2>
+            <p className="body-lg mb-8 text-gray-600">
+              LBTA athletes have earned Division I scholarships at:
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+              {placements.map((school, index) => (
+                <AnimatedSection key={school} delay={index * 0.05}>
+                  <div className="body-sm text-lbta-charcoal">
+                    {school}
                   </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
 
-                  <div>
-                    <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-6">
-                      Winter 2026 Pricing
-                    </h3>
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                        <span className="text-gray-600">Monthly (1x/week)</span>
-                        <span className="text-xl font-serif font-light">${program.monthly_1x}</span>
-                      </div>
-                      <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                        <span className="text-gray-600">Monthly (2x/week)</span>
-                        <span className="text-xl font-serif font-light">${program.monthly_2x}</span>
-                      </div>
-                      <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                        <span className="text-gray-600">Quarterly (prepay)</span>
-                        <span className="text-xl font-serif font-light">${program.quarterly_prepay}</span>
-                      </div>
-                      <div className="flex justify-between items-center pt-2">
-                        <span className="text-gray-600">Drop-in</span>
-                        <span className="text-xl font-serif font-light">${program.drop_in}</span>
-                      </div>
-                    </div>
+      {/* Requirements */}
+      <section className="section-spacing bg-white">
+        <div className="container-narrow">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="headline mb-4">Who This Is For</h2>
+            <p className="body-sm text-gray-600 max-w-2xl mx-auto">
+              High Performance training is selective. Athletes must demonstrate commitment and competitive readiness.
+            </p>
+          </AnimatedSection>
 
-                        <Link
-                          href="/book"
-                          className="btn-primary w-full mt-8 justify-center"
-                        >
-                          {activeSeason === 'fall' ? 'APPLY NOW' : 'GET NOTIFIED'}
-                        </Link>
-                        
-                        {activeSeason === 'fall' && (
-                          <p className="text-xs text-center text-gray-500 mt-3">
-                            Rolling admissions • Join anytime
-                          </p>
-                        )}
-                        {activeSeason === 'winter' && (
-                          <p className="text-xs text-center text-gray-500 mt-3">
-                            Registration opens December 1, 2025
-                          </p>
-                        )}
-                    </div>
-                  </div>
+          <AnimatedSection delay={0.2}>
+            <div className="bg-lbta-bone border border-gray-200 p-8 max-w-2xl mx-auto">
+              <h3 className="subhead mb-6">Requirements</h3>
+              <ul className="space-y-3 mb-8">
+                {requirements.map((req) => (
+                  <li key={req} className="flex items-start gap-3 body-sm text-gray-600">
+                    <span className="text-lbta-coral mt-1">•</span>
+                    <span>{req}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex gap-4">
+                <Link
+                  href="/schedules"
+                  className="flex-1 eyebrow bg-lbta-coral text-white px-8 py-4 text-center transition hover:bg-lbta-coral-dark"
+                >
+                  SEE SCHEDULE & PRICING
+                </Link>
+                <Link
+                  href="/book"
+                  className="flex-1 eyebrow border border-lbta-charcoal text-lbta-charcoal px-8 py-4 text-center transition hover:bg-lbta-charcoal hover:text-white"
+                >
+                  APPLY NOW
+                </Link>
               </div>
-            </AnimatedSection>
-          ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Coaches */}
-      <section className="section-spacing bg-white">
+      <section className="section-spacing bg-lbta-bone border-t border-gray-200">
         <div className="container-narrow">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-6">
-              Your High Performance Coaches
-            </h2>
+            <h2 className="headline mb-4">Your Coaches</h2>
+            <p className="body-sm text-gray-600">
+              Train with coaches who've competed and coached at the highest levels.
+            </p>
           </AnimatedSection>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <AnimatedSection>
+              <div className="bg-white border border-gray-200 p-6 text-center">
+                <p className="subhead-sm mb-1">Andrew Mateljan</p>
+                <p className="body-sm text-gray-600 mb-2">ATP/WTA Tour Coach</p>
+                <p className="body-sm text-lbta-coral">Currently coaches ATP #258</p>
+              </div>
+            </AnimatedSection>
+
             <AnimatedSection delay={0.1}>
-              <div className="card-lbta p-6">
-                <h3 className="text-xl font-sans font-medium mb-2">Andrew Mateljan</h3>
-                <p className="text-lbta-burnt font-sans font-medium mb-2">Director • ATP/WTA Tour Coach</p>
-                <p className="text-gray-600">
-                  Elite-level coaching with extensive experience on the ATP/WTA tours.
-                </p>
+              <div className="bg-white border border-gray-200 p-6 text-center">
+                <p className="subhead-sm mb-1">Kevin Jackson</p>
+                <p className="body-sm text-gray-600 mb-2">College Prep Expert</p>
+                <p className="body-sm text-lbta-coral">20+ D1 placements</p>
               </div>
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <div className="card-lbta p-6">
-                <h3 className="text-xl font-sans font-medium mb-2">Kevin Jackson</h3>
-                <p className="text-lbta-burnt font-sans font-medium mb-2">Head Coach • College Prep Specialist</p>
-                <p className="text-gray-600">
-                  20+ D1 college placements. Expert in NCAA recruitment process.
-                </p>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.3}>
-              <div className="card-lbta p-6">
-                <h3 className="text-xl font-sans font-medium mb-2">Savriyan Danilov</h3>
-                <p className="text-lbta-burnt font-sans font-medium mb-2">ATP Professional • Career High #556</p>
-                <p className="text-gray-600">
-                  Professional tour experience brings real-world competitive insights.
-                </p>
+              <div className="bg-white border border-gray-200 p-6 text-center">
+                <p className="subhead-sm mb-1">Savriyan Danilov</p>
+                <p className="body-sm text-gray-600 mb-2">ATP Professional</p>
+                <p className="body-sm text-lbta-coral">Career high ATP #556</p>
               </div>
             </AnimatedSection>
           </div>
@@ -237,20 +207,13 @@ export default function HighPerformancePage() {
       <section className="section-spacing bg-lbta-charcoal text-white">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <h2 className="text-4xl font-serif font-light mb-8">
-              Ready to Train at the Highest Level?
+            <h2 className="headline mb-6 text-white">
+              Ready to Compete?
             </h2>
-            <p className="text-lg font-sans font-light text-white/80 mb-4 leading-relaxed">
-              Join our elite training program today
+            <p className="body-lg mb-10 max-w-2xl mx-auto text-white/80">
+              Application required. We'll evaluate your readiness and contact you within 24 hours.
             </p>
-            <p className="text-sm text-white/60 mb-8">
-              Approval required. We'll contact you within 24 hours.
-            </p>
-            <Link
-              href="/book"
-              className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-lbta-charcoal font-sans text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-500"
-              style={{ minHeight: '48px', letterSpacing: '1.5px' }}
-            >
+            <Link href="/book" className="eyebrow inline-flex items-center justify-center bg-white text-lbta-charcoal px-10 py-4 transition-all duration-300 hover:bg-lbta-bone">
               APPLY FOR HIGH PERFORMANCE
             </Link>
           </AnimatedSection>
@@ -259,4 +222,3 @@ export default function HighPerformancePage() {
     </>
   )
 }
-
