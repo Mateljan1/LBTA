@@ -6,7 +6,57 @@ import { MapPin, Clock, User, DollarSign } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import RegistrationModal from '@/components/ui/RegistrationModal'
 
-// Unified program data with schedule + pricing
+// Fall 2025 - 18 Week Session (Aug - Dec)
+const fall2025Programs = [
+  // Junior Programs - Alta Laguna
+  { name: "JTT Practice - 10U Orange Ball", day: "Monday", time: "3:30-5:00 PM", ages: "Team", duration: "90 min", price: "$795/18wk", location: "Alta Laguna", coach: "Staff", category: "junior" },
+  { name: "JTT Practice - 10U Orange Ball", day: "Wednesday", time: "3:30-5:00 PM", ages: "Team", duration: "90 min", price: "$795/18wk", location: "Alta Laguna", coach: "Staff", category: "junior" },
+  { name: "JTT Practice - 10U Orange Ball", day: "Friday", time: "3:30-5:00 PM", ages: "Team", duration: "90 min", price: "$795/18wk", location: "Alta Laguna", coach: "Staff", category: "junior" },
+  { name: "JTT Match - 10U Orange Ball", day: "Saturday", time: "2:00-4:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "Alta Laguna", coach: "Staff", category: "junior" },
+  { name: "14U Team Practice", day: "Tuesday", time: "5:00-7:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "Alta Laguna", coach: "Staff", category: "youth" },
+  { name: "14U Team Practice", day: "Thursday", time: "5:00-7:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "Alta Laguna", coach: "Staff", category: "youth" },
+  { name: "12U Bronze Team", day: "Monday", time: "5:00-7:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "Alta Laguna", coach: "Staff", category: "junior" },
+  { name: "12U Bronze Team", day: "Wednesday", time: "5:00-7:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "Alta Laguna", coach: "Staff", category: "junior" },
+  { name: "12U Bronze Team", day: "Friday", time: "5:00-7:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "Alta Laguna", coach: "Staff", category: "junior" },
+  
+  // Junior Programs - Moulton
+  { name: "Little Tennis Stars", day: "Tuesday", time: "3:30-4:15 PM", ages: "3-4", duration: "45 min", price: "$260/18wk", location: "Moulton", coach: "Staff", category: "junior" },
+  { name: "Little Tennis Stars", day: "Thursday", time: "2:45-3:30 PM", ages: "3-4", duration: "45 min", price: "$260/18wk", location: "Moulton", coach: "Staff", category: "junior" },
+  { name: "Red Ball - Advanced", day: "Monday", time: "3:30-4:30 PM", ages: "5-7", duration: "1 hr", price: "$420/18wk", location: "Moulton", coach: "Staff", category: "junior" },
+  { name: "Red Ball - Beginner", day: "Wednesday", time: "3:30-4:30 PM", ages: "5-7", duration: "1 hr", price: "$420/18wk", location: "Moulton", coach: "Staff", category: "junior" },
+  { name: "Orange Ball - Beginner", day: "Tuesday", time: "4:30-5:30 PM", ages: "7-9", duration: "1 hr", price: "$420/18wk", location: "Moulton", coach: "Staff", category: "junior" },
+  { name: "Orange Ball - Advanced", day: "Thursday", time: "3:30-4:30 PM", ages: "7-9", duration: "1 hr", price: "$420/18wk", location: "Moulton", coach: "Staff", category: "junior" },
+  { name: "Green Dot - Advanced", day: "Monday", time: "4:30-5:30 PM", ages: "9-11", duration: "1 hr", price: "$420/18wk", location: "Moulton", coach: "Staff", category: "junior" },
+  { name: "Green Dot - Beginner", day: "Wednesday", time: "4:30-5:30 PM", ages: "9-11", duration: "1 hr", price: "$420/18wk", location: "Moulton", coach: "Staff", category: "junior" },
+  { name: "Fun Friday Games", day: "Friday", time: "3:30-4:30 PM", ages: "5-10", duration: "1 hr", price: "$420/18wk", location: "Moulton", coach: "Staff", category: "junior" },
+  { name: "Youth Development", day: "Monday", time: "5:30-7:00 PM", ages: "11-13", duration: "1.5 hr", price: "$610/18wk", location: "Moulton", coach: "Staff", category: "youth" },
+  { name: "Youth Development", day: "Tuesday", time: "5:30-7:00 PM", ages: "13-18", duration: "1.5 hr", price: "$610/18wk", location: "Moulton", coach: "Staff", category: "youth" },
+  { name: "Youth Development", day: "Thursday", time: "4:30-6:00 PM", ages: "13-18", duration: "1.5 hr", price: "$610/18wk", location: "Moulton", coach: "Staff", category: "youth" },
+  
+  // Adult Programs - Moulton
+  { name: "Adult Beginner", day: "Monday", time: "7:00-8:00 PM", ages: "NTRP 1.0-2.5", duration: "1 hr", price: "$550/18wk", location: "Moulton", coach: "Staff", category: "adult" },
+  { name: "Cardio Tennis", day: "Wednesday", time: "6:00-7:30 PM", ages: "All Levels", duration: "1.5 hr", price: "$610/18wk", location: "Moulton", coach: "Staff", category: "adult" },
+  { name: "LiveBall - Intermediate", day: "Thursday", time: "6:00-7:30 PM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$610/18wk", location: "Moulton", coach: "Staff", category: "adult" },
+  
+  // LBHS Programs
+  { name: "LiveBall - Intermediate/Advanced", day: "Monday", time: "7:00-9:30 AM", ages: "NTRP 3.0-4.5", duration: "2.5 hr", price: "$610/18wk", location: "LBHS", coach: "Kevin", category: "adult" },
+  { name: "Adult Advanced", day: "Monday", time: "12:00-2:00 PM", ages: "NTRP 4.0+", duration: "2 hr", price: "$920/18wk", location: "LBHS", coach: "Kevin", category: "adult" },
+  { name: "12U Gold Team Practice", day: "Monday", time: "5:00-7:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "LBHS", coach: "Kevin", category: "youth" },
+  { name: "Adult Intermediate", day: "Tuesday", time: "10:30 AM-12:00 PM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$735/18wk", location: "LBHS", coach: "Kevin", category: "adult" },
+  { name: "Ladies 3.5 Practice", day: "Tuesday", time: "5:00-7:00 PM", ages: "Team", duration: "2 hr", price: "$610/18wk", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "12U Gold Team Practice", day: "Wednesday", time: "5:00-7:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "LBHS", coach: "Kevin", category: "youth" },
+  { name: "Adult Intermediate", day: "Thursday", time: "10:30 AM-12:00 PM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$735/18wk", location: "LBHS", coach: "Kevin", category: "adult" },
+  { name: "Practice Match - 12U Gold", day: "Friday", time: "4:00-6:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "LBHS", coach: "Kevin", category: "youth" },
+  { name: "Adult Intermediate", day: "Saturday", time: "9:00-10:30 AM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$735/18wk", location: "LBHS", coach: "Kevin", category: "adult" },
+  { name: "LiveBall - Beginner", day: "Saturday", time: "9:00-10:30 AM", ages: "Adult", duration: "1.5 hr", price: "$610/18wk", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "LiveBall - Int/Adv", day: "Saturday", time: "10:30 AM-12:00 PM", ages: "Adult", duration: "1.5 hr", price: "$610/18wk", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "Adult Beginner", day: "Saturday", time: "10:30-11:30 AM", ages: "NTRP 1.0-2.5", duration: "1 hr", price: "$550/18wk", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "Ladies 3.5 Matches", day: "Saturday", time: "12:00-3:00 PM", ages: "Team", duration: "3 hr", price: "$610/18wk", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "12U Bronze Matches", day: "Saturday", time: "2:00-4:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "LBHS", coach: "Staff", category: "youth" },
+  { name: "12U Gold Matches", day: "Saturday", time: "4:00-6:00 PM", ages: "Team", duration: "2 hr", price: "$795/18wk", location: "LBHS", coach: "Kevin", category: "youth" },
+]
+
+// Winter 2026 - 13 Week Session (Jan 6 - Apr 5)
 const winter2026Programs = [
   // Junior Programs - Ages 3-11
   { name: "Little Tennis Stars", day: "Monday", time: "3:30-4:15 PM", ages: "3-4", duration: "45 min", price: "$120/mo", location: "Moulton", coach: "Michelle", category: "junior" },
@@ -101,8 +151,11 @@ export default function SchedulesPage() {
 
   const isEarlyBird = season === 'winter' && new Date() < new Date('2025-12-15')
 
+  // Select programs based on season
+  const currentPrograms = season === 'fall' ? fall2025Programs : winter2026Programs
+
   // Filter programs
-  const filteredPrograms = winter2026Programs.filter(program => {
+  const filteredPrograms = currentPrograms.filter(program => {
     if (filters.programType !== 'all' && program.category !== filters.programType) return false
     if (filters.location !== 'all' && program.location !== filters.location) return false
     if (filters.day !== 'all' && program.day !== filters.day) return false
@@ -175,7 +228,7 @@ export default function SchedulesPage() {
           <div className="text-center">
             <p className="body-sm" style={{ color: '#6B6B6B' }}>
               {season === 'fall'
-                ? 'Current session in progress — Join anytime'
+                ? '18-week session: August 26 – December 20, 2025'
                 : '13-week session: January 6 – April 5, 2026'}
             </p>
           </div>
@@ -314,8 +367,7 @@ export default function SchedulesPage() {
       {/* Schedule List by Day */}
       <section className="section-spacing bg-lbta-bone">
         <div className="container-lbta">
-          {season === 'winter' ? (
-            <div className="space-y-16">
+          <div className="space-y-16">
               {days.map((day, dayIndex) => {
                 const dayPrograms = programsByDay[day]
                 if (!dayPrograms || dayPrograms.length === 0) return null
@@ -410,13 +462,6 @@ export default function SchedulesPage() {
                 )
               })}
             </div>
-          ) : (
-            <div className="text-center py-16">
-              <p className="body-lg" style={{ color: '#6B6B6B' }}>
-                Fall 2025 schedule and pricing available upon request. Contact us at (949) 464-6645.
-              </p>
-            </div>
-          )}
         </div>
       </section>
 
@@ -520,7 +565,7 @@ export default function SchedulesPage() {
         onClose={() => setRegistrationModal({ isOpen: false, program: null })}
         program={registrationModal.program}
         season={season}
-        allPrograms={winter2026Programs.map(p => ({
+        allPrograms={currentPrograms.map(p => ({
           name: p.name,
           price: p.price,
           location: p.location
