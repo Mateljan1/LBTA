@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Cormorant, Space_Grotesk } from 'next/font/google'
+import { Inter, Cormorant, DM_Sans } from 'next/font/google'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 
@@ -22,14 +22,13 @@ const cormorant = Cormorant({
   adjustFontFallback: true,
 })
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500'],
-  variable: '--font-space-grotesk',
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-dm-sans',
   display: 'swap',
   fallback: ['Inter', 'system-ui', 'sans-serif'],
   preload: true,
-  adjustFontFallback: true,
 })
 
 export const metadata: Metadata = {
@@ -65,7 +64,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${inter.variable} ${cormorant.variable} ${dmSans.variable}`}>
       <head>
         {/* PWA & Mobile Optimization */}
         <link rel="manifest" href="/manifest.json" />
