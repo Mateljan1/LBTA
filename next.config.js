@@ -127,6 +127,17 @@ const nextConfig = {
         destination: '/coaches',
         permanent: true,
       },
+      // Pricing page now unified with schedules
+      {
+        source: '/pricing',
+        destination: '/schedules',
+        permanent: true,
+      },
+      {
+        source: '/pricing/',
+        destination: '/schedules',
+        permanent: true,
+      },
     ]
   },
 }
