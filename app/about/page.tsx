@@ -67,7 +67,7 @@ export default function AboutPage() {
               Championship
             </h1>
               <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                For five years, students have learned that good tennis teaches more than strokes. It builds focus, resilience, and the quiet confidence that comes from doing hard work well.
+                Since 2020, students have learned that good tennis teaches more than strokes. It builds focus, resilience, and the quiet confidence that comes from doing hard work well.
               </p>
           </AnimatedSection>
         </div>
@@ -121,7 +121,7 @@ export default function AboutPage() {
           <AnimatedSection className="text-center mb-16">
             <p className="text-overline mb-6">Our Journey</p>
             <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
-              Five Years of Growth
+              Built on Results
             </h2>
           </AnimatedSection>
 
@@ -185,13 +185,13 @@ export default function AboutPage() {
         <div className="container-narrow text-center">
           <AnimatedSection>
             <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
-              Begin Your Excellence Journey
+              Start Your Development
             </h2>
             <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-              Discover how tennis excellence becomes the foundation for confidence, character, and success in every area of life. Your transformation awaits.
+              Professional coaching for all ages and levels. Book your complimentary trial session.
             </p>
             <Link href="/book" className="btn-primary">
-              REQUEST CONSULTATION
+              BOOK TRIAL
             </Link>
           </AnimatedSection>
         </div>

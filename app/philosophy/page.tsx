@@ -169,14 +169,13 @@ export default function PhilosophyPage() {
         <div className="container-narrow text-center">
           <AnimatedSection>
             <h2 className="text-display-sm heading-display mb-6">
-              Experience Our Approach
+              See It in Action
             </h2>
             <p className="body-text text-clay-600 mb-10 max-w-2xl mx-auto">
-              See firsthand how our philosophy translates into results. 
-              Schedule a complimentary consultation to begin your journey.
+              Book your complimentary trial session and experience our approach firsthand.
             </p>
-            <a href="/contact" className="btn-primary">
-              Get Started
+            <a href="/book" className="btn-primary">
+              BOOK TRIAL
             </a>
           </AnimatedSection>
         </div>

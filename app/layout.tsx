@@ -23,10 +23,11 @@ const cormorant = Cormorant({
 })
 
 const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   weight: ['400', '500'],
   variable: '--font-space-grotesk',
   display: 'swap',
+  fallback: ['Inter', 'system-ui', 'sans-serif'],
   preload: true,
   adjustFontFallback: true,
 })

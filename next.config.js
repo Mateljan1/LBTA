@@ -138,6 +138,17 @@ const nextConfig = {
         destination: '/schedules',
         permanent: true,
       },
+      // Hide VYLO page temporarily
+      {
+        source: '/vylo',
+        destination: '/programs/high-performance',
+        permanent: false,
+      },
+      {
+        source: '/vylo/',
+        destination: '/programs/high-performance',
+        permanent: false,
+      },
     ]
   },
 }
