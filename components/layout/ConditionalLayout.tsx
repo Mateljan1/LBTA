@@ -15,9 +15,10 @@ export default function ConditionalLayout({
   const pathname = usePathname()
   const isVYLO = pathname?.startsWith('/vylo')
   const isBeginnerLanding = pathname?.startsWith('/beginner-program')
+  const isJuniorLanding = pathname?.startsWith('/junior-trial')
 
   // Standalone landing pages render without LBTA header/footer
-  if (isVYLO || isBeginnerLanding) {
+  if (isVYLO || isBeginnerLanding || isJuniorLanding) {
     return <>{children}</>
   }
 
