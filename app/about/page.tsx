@@ -66,7 +66,7 @@ export default function AboutPage() {
               Where Character Meets  
               Championship
             </h1>
-              <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              <p className="body-lg text-gray-600 max-w-2xl mx-auto">
                 Since 2020, students have learned that good tennis teaches more than strokes. It builds focus, resilience, and the quiet confidence that comes from doing hard work well.
               </p>
           </AnimatedSection>
@@ -93,7 +93,7 @@ export default function AboutPage() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
+              <h2 className="headline-sm text-lbta-charcoal mb-8">
                 Why We Started
               </h2>
               <div className="space-y-6 text-gray-600 leading-relaxed">
@@ -119,8 +119,8 @@ export default function AboutPage() {
       <section className="section-spacing bg-white">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
-            <p className="text-overline mb-6">Our Journey</p>
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
+            <p className="eyebrow mb-6" style={{ color: '#E8956F' }}>OUR JOURNEY</p>
+            <h2 className="headline text-lbta-charcoal">
               Built on Results
             </h2>
           </AnimatedSection>
@@ -130,14 +130,14 @@ export default function AboutPage() {
               <AnimatedSection key={milestone.year} delay={index * 0.1}>
                 <div className="flex gap-8">
                   <div className="flex-shrink-0 w-24 text-right">
-                    <div className="text-3xl font-serif font-light text-lbta-burnt">
-                      {milestone.year}
-                    </div>
+                  <div className="subhead text-lbta-coral">
+                    {milestone.year}
+                  </div>
                   </div>
                   <div className="flex-1 border-l-2 border-gray-200 pl-8 pb-8">
-                    <h3 className="text-xl font-sans font-medium text-lbta-charcoal mb-3">
-                      {milestone.title}
-                    </h3>
+            <h3 className="subhead-sm text-lbta-charcoal mb-3">
+                {milestone.title}
+              </h3>
                     <p className="text-gray-600 leading-relaxed">
                       {milestone.description}
                     </p>
@@ -153,8 +153,8 @@ export default function AboutPage() {
       <section className="section-spacing bg-lbta-cream">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
-            <p className="text-overline mb-6">Our Foundation</p>
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
+            <p className="eyebrow mb-6" style={{ color: '#E8956F' }}>OUR FOUNDATION</p>
+            <h2 className="headline text-lbta-charcoal">
               The Principles That  
               Shape Champions
             </h2>
@@ -167,7 +167,7 @@ export default function AboutPage() {
             {values.map((value, index) => (
               <AnimatedSection key={value.title} delay={index * 0.1}>
                 <div className="text-center">
-                  <h3 className="text-xl font-sans font-medium text-lbta-charcoal mb-4">
+                  <h3 className="subhead-sm text-lbta-charcoal mb-4">
                     {value.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -184,10 +184,10 @@ export default function AboutPage() {
       <section className="section-spacing bg-white border-t border-gray-200">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
+            <h2 className="headline-sm text-lbta-charcoal mb-8">
               Start Your Development
             </h2>
-            <p className="text-lg text-gray-600 mb-10 leading-relaxed">
+            <p className="body-lg text-gray-600 mb-10">
               Professional coaching for all ages and levels. Book your complimentary trial session.
             </p>
             <Link href="/book" className="btn-primary">
