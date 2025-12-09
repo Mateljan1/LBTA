@@ -1,18 +1,163 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
+// Winter 2026 Program Data Structure
+const programData = {
+  '3-4': {
+    programs: {
+      'Little Tennis Stars': {
+        schedules: [
+          { day: 'Monday 3:30pm', location: 'Moulton', time: 'Mon 3:30-4:15 PM' },
+          { day: 'Tuesday 3:30pm', location: 'Moulton', time: 'Tue 3:30-4:15 PM' },
+          { day: 'Wednesday 3:30pm', location: 'Moulton', time: 'Wed 3:30-4:15 PM' },
+          { day: 'Thursday 2:45pm', location: 'Moulton', time: 'Thu 2:45-3:30 PM' },
+        ],
+        pricing: { '1x': 120, billing: 'per month' }
+      }
+    }
+  },
+  '5-7': {
+    programs: {
+      'Red Ball Beginner': {
+        schedules: [
+          { day: 'Monday 3:30pm', location: 'Alta Laguna', time: 'Mon 3:30-4:30 PM' },
+          { day: 'Monday 4:30pm', location: 'Moulton', time: 'Mon 4:30-5:30 PM' },
+          { day: 'Wednesday 3:30pm', location: 'Alta Laguna', time: 'Wed 3:30-4:30 PM' },
+          { day: 'Wednesday 4:30pm', location: 'Moulton', time: 'Wed 4:30-5:30 PM' },
+        ],
+        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
+      },
+      'Red Ball Advanced': {
+        schedules: [
+          { day: 'Monday 3:30pm', location: 'Alta Laguna', time: 'Mon 3:30-4:30 PM' },
+          { day: 'Wednesday 3:30pm', location: 'Alta Laguna', time: 'Wed 3:30-4:30 PM' },
+          { day: 'Saturday 9:00am', location: 'Alta Laguna', time: 'Sat 9:00-10:00 AM' },
+        ],
+        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
+      }
+    }
+  },
+  '7-9': {
+    programs: {
+      'Orange Ball Beginner': {
+        schedules: [
+          { day: 'Tuesday 4:30pm', location: 'Moulton', time: 'Tue 4:30-5:30 PM' },
+          { day: 'Wednesday 4:30pm', location: 'Alta Laguna', time: 'Wed 4:30-5:30 PM' },
+        ],
+        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
+      },
+      'Orange Ball Advanced': {
+        schedules: [
+          { day: 'Monday 4:30pm', location: 'Alta Laguna', time: 'Mon 4:30-5:30 PM' },
+          { day: 'Monday 5:30pm', location: 'Moulton', time: 'Mon 5:30-6:30 PM' },
+          { day: 'Thursday 3:30pm', location: 'Moulton', time: 'Thu 3:30-4:30 PM' },
+        ],
+        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
+      }
+    }
+  },
+  '9-11': {
+    programs: {
+      'Green Dot Beginner': {
+        schedules: [
+          { day: 'Wednesday 5:30pm', location: 'Moulton', time: 'Wed 5:30-6:30 PM' },
+        ],
+        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
+      },
+      'Green Dot Advanced': {
+        schedules: [
+          { day: 'Tuesday 3:30pm', location: 'Alta Laguna', time: 'Tue 3:30-4:30 PM' },
+          { day: 'Thursday 3:30pm', location: 'Alta Laguna', time: 'Thu 3:30-4:30 PM' },
+        ],
+        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
+      }
+    }
+  },
+  '11-15': {
+    programs: {
+      'Youth Development (11-15)': {
+        schedules: [
+          { day: 'Monday 5:30pm', location: 'Alta Laguna', time: 'Mon 5:30-6:30 PM' },
+          { day: 'Tuesday 3:30pm', location: 'LBHS', time: 'Tue 3:30-5:00 PM' },
+          { day: 'Tuesday 4:30pm', location: 'Alta Laguna', time: 'Tue 4:30-6:00 PM' },
+          { day: 'Wednesday 5:30pm', location: 'Alta Laguna', time: 'Wed 5:30-6:30 PM' },
+          { day: 'Thursday 3:30pm', location: 'LBHS', time: 'Thu 3:30-5:00 PM' },
+          { day: 'Thursday 4:30pm', location: 'Alta Laguna', time: 'Thu 4:30-6:00 PM' },
+        ],
+        pricing: { '1x': 706, '2x': 1387, billing: 'per quarter' }
+      }
+    }
+  },
+  '13-18': {
+    programs: {
+      'Youth Development (13-18)': {
+        schedules: [
+          { day: 'Tuesday 3:30pm', location: 'LBHS', time: 'Tue 3:30-5:00 PM' },
+          { day: 'Thursday 3:30pm', location: 'LBHS', time: 'Thu 3:30-5:00 PM' },
+        ],
+        pricing: { '1x': 706, '2x': 1387, billing: 'per quarter' }
+      },
+      'High Performance Training': {
+        schedules: [
+          { day: 'Monday 3:30pm', location: 'LBHS', time: 'Mon 3:30-5:30 PM' },
+          { day: 'Tuesday 5:00pm', location: 'LBHS', time: 'Tue 5:00-7:00 PM' },
+          { day: 'Wednesday 3:30pm', location: 'LBHS', time: 'Wed 3:30-5:30 PM' },
+          { day: 'Thursday 5:00pm', location: 'LBHS', time: 'Thu 5:00-7:00 PM' },
+        ],
+        pricing: { '1x': 1387, '2x': 2637, billing: 'per quarter' }
+      }
+    }
+  }
+}
+
 export default function JuniorWinter2026Landing() {
+  const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     parentName: '',
     email: '',
     phone: '',
     childAge: '',
     program: '',
+    schedule: '',
+    frequency: '1x',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+
+  // Get available programs based on age
+  const availablePrograms = formData.childAge && programData[formData.childAge as keyof typeof programData]
+    ? Object.keys(programData[formData.childAge as keyof typeof programData].programs)
+    : []
+
+  // Get available schedules based on program
+  const availableSchedules = formData.childAge && formData.program
+    ? (programData[formData.childAge as keyof typeof programData]?.programs as any)?.[formData.program]?.schedules || []
+    : []
+
+  // Get pricing based on selections
+  const selectedProgramData = formData.childAge && formData.program
+    ? (programData[formData.childAge as keyof typeof programData]?.programs as any)?.[formData.program]
+    : null
+
+  const price = selectedProgramData?.pricing?.[formData.frequency as '1x' | '2x'] as number || 0
+  const isEarlyBird = new Date() < new Date('2025-12-15')
+  const discount = isEarlyBird && price > 120 ? 50 : 0
+  const finalPrice = price - discount
+
+  // Reset dependent fields when parent field changes
+  useEffect(() => {
+    if (formData.childAge) {
+      setFormData(prev => ({ ...prev, program: '', schedule: '', frequency: '1x' }))
+    }
+  }, [formData.childAge])
+
+  useEffect(() => {
+    if (formData.program) {
+      setFormData(prev => ({ ...prev, schedule: '' }))
+    }
+  }, [formData.program])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -21,8 +166,8 @@ export default function JuniorWinter2026Landing() {
     // Fire Meta Pixel Lead event
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'Lead', {
-        content_name: 'Junior Winter 2026 Registration',
-        value: formData.program.includes('Youth') ? 756.17 : 546.00,
+        content_name: `Junior Winter 2026: ${formData.program}`,
+        value: finalPrice,
         currency: 'USD',
       })
     }
@@ -33,6 +178,8 @@ export default function JuniorWinter2026Landing() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
+          finalPrice,
+          discount,
           program: `Junior Winter 2026: ${formData.program}`,
           source: 'junior-winter-2026-landing',
         }),
@@ -78,17 +225,17 @@ export default function JuniorWinter2026Landing() {
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative h-[85vh] min-h-[700px] flex items-center">
         <div className="absolute inset-0">
           <Image
             src="/UPDATED LBTA PICS/junior-program-hero.jpg"
-            alt="Junior tennis development at LBTA"
+            alt="Junior tennis at LBTA"
             fill
             priority
             quality={95}
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
         </div>
@@ -106,311 +253,257 @@ export default function JuniorWinter2026Landing() {
 
             <div className="w-20 h-px bg-white/40 mb-8" />
 
-            <p className="text-xl text-white/90 mb-10 leading-relaxed font-light max-w-lg">
-              From Little Stars (ages 3-4) to High Performance training. ATP/WTA coaching, small groups, proven results.
+            <p className="text-xl text-white/90 mb-6 leading-relaxed font-light">
+              From Little Stars (ages 3-4) to High Performance training. 
             </p>
-
             <p className="text-lg text-white/80 mb-10">
               13-week session: January 6 – April 5, 2026
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="#register"
-                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-lbta-sand"
-              >
-                View Programs & Register
-              </a>
-              <a
-                href="tel:9494646645"
-                className="inline-flex items-center justify-center border border-white text-white px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-white/10"
-              >
-                Call to Discuss
-              </a>
-            </div>
+            <a
+              href="#register"
+              className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-lbta-sand"
+            >
+              Register Now & Save $50
+            </a>
           </div>
         </div>
       </section>
 
-      {/* What's Included */}
-      <section className="py-20 bg-lbta-bone">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl lg:text-5xl text-lbta-primary mb-6">
-              Small Groups, Big Results
-            </h2>
-            <p className="text-lg text-lbta-secondary max-w-2xl mx-auto font-light">
-              ATP/WTA coaching methodology adapted for ages 3-18. The same system behind 20+ D1 college placements.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 border border-gray-200">
-              <h3 className="font-medium text-lbta-primary mb-3">Small Group Sizes</h3>
-              <p className="text-lbta-secondary">
-                Maximum 4-6 students per group. Personal attention at every session.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 border border-gray-200">
-              <h3 className="font-medium text-lbta-primary mb-3">Age-Appropriate Development</h3>
-              <p className="text-lbta-secondary">
-                From Little Stars (ages 3-4) through Youth Development and High Performance.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 border border-gray-200">
-              <h3 className="font-medium text-lbta-primary mb-3">Professional Coaching</h3>
-              <p className="text-lbta-secondary">
-                ATP/WTA tour experience. Certified youth development specialists.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 border border-gray-200">
-              <h3 className="font-medium text-lbta-primary mb-3">Three Premium Locations</h3>
-              <p className="text-lbta-secondary">
-                LBHS, Moulton Meadows, Alta Laguna Park. Choose what works for you.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Registration Section */}
+      {/* Smart Registration Form */}
       <section id="register" className="py-32 bg-lbta-sand">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-white shadow-xl">
-            <div className="grid lg:grid-cols-5">
-              {/* Left: Program Options */}
-              <div className="lg:col-span-2 bg-lbta-charcoal p-12">
-                <div className="bg-lbta-coral text-white px-4 py-2 text-xs font-bold tracking-wider uppercase text-center mb-6 -mx-12 -mt-12">
-                  $50 OFF • Register by Dec 15th
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="bg-white shadow-2xl">
+            {submitted ? (
+              <div className="p-16 text-center">
+                <div className="w-16 h-16 bg-lbta-coral/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-8 h-8 text-lbta-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
                 </div>
-
-                <h3 className="font-serif text-3xl text-lbta-bone mb-6">
-                  Winter 2026 Programs
-                </h3>
-
-                <p className="text-lbta-bone/80 text-sm mb-8">
-                  13-week session: January 6 – April 5, 2026
+                <h4 className="text-3xl font-serif text-lbta-primary mb-4">Registration Received</h4>
+                <p className="text-lbta-secondary text-lg">
+                  We'll contact you within 24 hours to confirm your spot and finalize details.
                 </p>
-
-                <div className="space-y-6 text-lbta-bone/80 text-sm">
-                  <div className="border-b border-lbta-bone/20 pb-4">
-                    <p className="text-lbta-coral font-medium mb-2">Little Tennis Stars (Ages 3-4)</p>
-                    <p className="mb-2">45 minutes • Moulton Meadows</p>
-                    <p className="text-xl font-serif text-lbta-bone">$120/month</p>
-                  </div>
-
-                  <div className="border-b border-lbta-bone/20 pb-4">
-                    <p className="text-lbta-coral font-medium mb-2">Red/Orange/Green Ball (Ages 5-11)</p>
-                    <p className="mb-2">1 hour • Multiple locations & times</p>
-                    <div className="flex items-baseline gap-3">
-                      <p className="text-xl font-serif text-lbta-bone">$496</p>
-                      <p className="text-sm text-lbta-bone/40 line-through">$546</p>
-                    </div>
-                    <p className="text-xs text-lbta-coral mt-1">Save $50 • 13-week session</p>
-                  </div>
-
-                  <div className="pb-4">
-                    <p className="text-lbta-coral font-medium mb-2">Youth Development (Ages 11-18)</p>
-                    <p className="mb-2">1.5 hours • Advanced training</p>
-                    <div className="flex items-baseline gap-3">
-                      <p className="text-xl font-serif text-lbta-bone">$706-$1,387</p>
-                      <p className="text-sm text-lbta-bone/40 line-through">$756-$1,437</p>
-                    </div>
-                    <p className="text-xs text-lbta-coral mt-1">Save $50 • 1x or 2x per week</p>
-                  </div>
-                </div>
               </div>
+            ) : (
+              <div className="p-12">
+                <div className="mb-10">
+                  <h2 className="text-4xl font-serif text-lbta-primary mb-3">
+                    Register for Winter 2026
+                  </h2>
+                  <p className="text-lbta-coral font-medium">
+                    $50 discount ends December 15th • 13-week session
+                  </p>
+                </div>
 
-              {/* Right: Form */}
-              <div className="lg:col-span-3 p-12">
-                {submitted ? (
-                  <div className="text-center py-12">
-                    <div className="w-16 h-16 bg-lbta-coral/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <svg className="w-8 h-8 text-lbta-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <h4 className="text-2xl font-serif text-lbta-primary mb-3">Registration Received</h4>
-                    <p className="text-lbta-secondary">We'll contact you within 24 hours to confirm your spot and schedule.</p>
-                  </div>
-                ) : (
-                  <>
-                    <div className="mb-8">
-                      <h4 className="text-2xl font-serif text-lbta-primary mb-2">
-                        Register for Winter 2026
-                      </h4>
-                      <p className="text-sm text-lbta-coral font-medium">
-                        $50 discount ends December 15th
-                      </p>
-                    </div>
-
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  
+                  {/* Step 1: Parent Info */}
+                  <div className="pb-8 border-b border-gray-200">
+                    <h3 className="text-xl font-medium text-lbta-primary mb-6">Tell Us About Your Player</h3>
+                    
+                    <div className="space-y-6">
                       <div>
-                        <label htmlFor="parentName" className="block text-sm font-medium text-lbta-primary mb-2">
+                        <label className="block text-sm font-medium text-lbta-primary mb-2">
                           Parent/Guardian Name *
                         </label>
                         <input
                           type="text"
-                          id="parentName"
                           required
                           value={formData.parentName}
                           onChange={(e) => setFormData({...formData, parentName: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
+                          className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
                           placeholder="Jane Smith"
                         />
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label htmlFor="email" className="block text-sm font-medium text-lbta-primary mb-2">
+                          <label className="block text-sm font-medium text-lbta-primary mb-2">
                             Email *
                           </label>
                           <input
                             type="email"
-                            id="email"
                             required
                             value={formData.email}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
-                            className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
+                            className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
                             placeholder="jane@example.com"
                           />
                         </div>
 
                         <div>
-                          <label htmlFor="phone" className="block text-sm font-medium text-lbta-primary mb-2">
+                          <label className="block text-sm font-medium text-lbta-primary mb-2">
                             Phone *
                           </label>
                           <input
                             type="tel"
-                            id="phone"
                             required
                             value={formData.phone}
                             onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                            className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
+                            className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
                             placeholder="(949) 123-4567"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label htmlFor="childAge" className="block text-sm font-medium text-lbta-primary mb-2">
+                        <label className="block text-sm font-medium text-lbta-primary mb-2">
                           Child's Age *
                         </label>
-                        <input
-                          type="number"
-                          id="childAge"
+                        <select
                           required
                           value={formData.childAge}
                           onChange={(e) => setFormData({...formData, childAge: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
-                          placeholder="7"
-                          min="3"
-                          max="18"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="program" className="block text-sm font-medium text-lbta-primary mb-2">
-                          Select Program & Schedule *
-                        </label>
-                        <select
-                          id="program"
-                          required
-                          value={formData.program}
-                          onChange={(e) => setFormData({...formData, program: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition bg-white"
+                          className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition bg-white"
                         >
-                          <option value="">Select age group and schedule...</option>
-                          
-                          <optgroup label="Ages 3-4 - Little Tennis Stars ($120/month)">
-                            <option value="Little Stars - Mon 3:30pm Moulton">Monday 3:30pm - Moulton</option>
-                            <option value="Little Stars - Tue 3:30pm Moulton">Tuesday 3:30pm - Moulton</option>
-                            <option value="Little Stars - Wed 3:30pm Moulton">Wednesday 3:30pm - Moulton</option>
-                            <option value="Little Stars - Thu 2:45pm Moulton">Thursday 2:45pm - Moulton</option>
-                          </optgroup>
-
-                          <optgroup label="Ages 5-7 - Red Ball ($496/quarter - Save $50)">
-                            <option value="Red Ball - Mon 3:30pm Alta Laguna">Monday 3:30pm - Alta Laguna</option>
-                            <option value="Red Ball - Mon 4:30pm Moulton">Monday 4:30pm - Moulton</option>
-                            <option value="Red Ball - Wed 3:30pm Alta Laguna">Wednesday 3:30pm - Alta Laguna</option>
-                            <option value="Red Ball - Wed 4:30pm Moulton">Wednesday 4:30pm - Moulton</option>
-                            <option value="Red Ball - Sat 9:00am Alta Laguna">Saturday 9:00am - Alta Laguna</option>
-                          </optgroup>
-
-                          <optgroup label="Ages 7-9 - Orange Ball ($496/quarter - Save $50)">
-                            <option value="Orange Ball - Mon 4:30pm Alta Laguna">Monday 4:30pm - Alta Laguna</option>
-                            <option value="Orange Ball - Mon 5:30pm Moulton">Monday 5:30pm - Moulton</option>
-                            <option value="Orange Ball - Tue 4:30pm Moulton">Tuesday 4:30pm - Moulton</option>
-                            <option value="Orange Ball - Wed 4:30pm Alta Laguna">Wednesday 4:30pm - Alta Laguna</option>
-                            <option value="Orange Ball - Thu 3:30pm Moulton">Thursday 3:30pm - Moulton</option>
-                          </optgroup>
-
-                          <optgroup label="Ages 9-11 - Green Dot ($496/quarter - Save $50)">
-                            <option value="Green Dot - Tue 3:30pm Alta Laguna">Tuesday 3:30pm - Alta Laguna</option>
-                            <option value="Green Dot - Wed 5:30pm Moulton">Wednesday 5:30pm - Moulton</option>
-                            <option value="Green Dot - Thu 3:30pm Alta Laguna">Thursday 3:30pm - Alta Laguna</option>
-                          </optgroup>
-
-                          <optgroup label="Ages 11-15 - Youth Development ($706/quarter - Save $50)">
-                            <option value="Youth Dev 11-15 - Mon 5:30pm Alta Laguna">Monday 5:30pm - Alta Laguna</option>
-                            <option value="Youth Dev 11-15 - Tue 3:30pm LBHS">Tuesday 3:30pm - LBHS</option>
-                            <option value="Youth Dev 11-15 - Tue 4:30pm Alta Laguna">Tuesday 4:30pm - Alta Laguna</option>
-                            <option value="Youth Dev 11-15 - Wed 5:30pm Alta Laguna">Wednesday 5:30pm - Alta Laguna</option>
-                            <option value="Youth Dev 11-15 - Thu 3:30pm LBHS">Thursday 3:30pm - LBHS</option>
-                            <option value="Youth Dev 11-15 - Thu 4:30pm Alta Laguna">Thursday 4:30pm - Alta Laguna</option>
-                          </optgroup>
-
-                          <optgroup label="Ages 11+ - Fun Friday ($496/quarter - Save $50)">
-                            <option value="Fun Friday - Fri 3:30pm Moulton">Friday 3:30pm - Moulton</option>
-                            <option value="MatchPlay Friday - Fri 3:30pm Alta Laguna">MatchPlay Friday 3:30pm - Alta Laguna</option>
-                          </optgroup>
+                          <option value="">Select age group...</option>
+                          <option value="3-4">Ages 3-4 (Little Tennis Stars)</option>
+                          <option value="5-7">Ages 5-7 (Red Ball)</option>
+                          <option value="7-9">Ages 7-9 (Orange Ball)</option>
+                          <option value="9-11">Ages 9-11 (Green Dot)</option>
+                          <option value="11-15">Ages 11-15 (Youth Development)</option>
+                          <option value="13-18">Ages 13-18 (Youth Dev / High Performance)</option>
                         </select>
                       </div>
+                    </div>
+                  </div>
 
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full bg-lbta-coral text-white font-medium py-4 px-6 tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
+                  {/* Step 2: Program Selection (appears when age selected) */}
+                  {formData.childAge && (
+                    <div className="pb-8 border-b border-gray-200">
+                      <h3 className="text-xl font-medium text-lbta-primary mb-6">Choose Program</h3>
+                      <select
+                        required
+                        value={formData.program}
+                        onChange={(e) => setFormData({...formData, program: e.target.value})}
+                        className="w-full px-4 py-3 border-2 border-lbta-coral/30 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition bg-white"
                       >
-                        {isSubmitting ? 'Submitting...' : 'Claim My $50 Discount →'}
-                      </button>
+                        <option value="">Select program...</option>
+                        {availablePrograms.map(prog => (
+                          <option key={prog} value={prog}>{prog}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
 
-                      <p className="text-xs text-center text-gray-500">
-                        By submitting, you agree to receive communications from LBTA. No spam, unsubscribe anytime.
-                      </p>
-                    </form>
-                  </>
-                )}
+                  {/* Step 3: Schedule Selection (appears when program selected) */}
+                  {formData.program && (
+                    <div className="pb-8 border-b border-gray-200">
+                      <h3 className="text-xl font-medium text-lbta-primary mb-6">Select Schedule</h3>
+                      <select
+                        required
+                        value={formData.schedule}
+                        onChange={(e) => setFormData({...formData, schedule: e.target.value})}
+                        className="w-full px-4 py-3 border-2 border-lbta-coral/30 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition bg-white"
+                      >
+                        <option value="">Select day & time...</option>
+                        {availableSchedules.map((sched: any) => (
+                          <option key={sched.day} value={`${sched.time} - ${sched.location}`}>
+                            {sched.time} — {sched.location}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+
+                  {/* Step 4: Frequency Selection (appears when schedule selected) */}
+                  {formData.schedule && selectedProgramData && (
+                    <div className="pb-8 border-b border-gray-200">
+                      <h3 className="text-xl font-medium text-lbta-primary mb-6">Select Training Frequency</h3>
+                      <div className="space-y-3">
+                        {Object.entries(selectedProgramData.pricing)
+                          .filter(([key]) => key !== 'billing')
+                          .map(([freq, amount]: [string, any]) => {
+                            const freqDiscount = isEarlyBird && amount > 120 ? 50 : 0
+                            const freqPrice = amount - freqDiscount
+                            return (
+                              <label
+                                key={freq}
+                                className={`block p-4 border-2 cursor-pointer transition ${
+                                  formData.frequency === freq
+                                    ? 'border-lbta-coral bg-lbta-coral/5'
+                                    : 'border-gray-200 hover:border-gray-300'
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="frequency"
+                                  value={freq}
+                                  checked={formData.frequency === freq}
+                                  onChange={(e) => setFormData({...formData, frequency: e.target.value})}
+                                  className="mr-3"
+                                />
+                                <span className="font-medium text-lbta-primary">
+                                  {freq === '1x' ? '1x per week' : '2x per week'}
+                                </span>
+                                <span className="float-right">
+                                  <span className="text-2xl font-serif text-lbta-charcoal">${freqPrice}</span>
+                                  {freqDiscount > 0 && (
+                                    <span className="text-sm text-gray-400 line-through ml-2">${amount}</span>
+                                  )}
+                                  <span className="text-sm text-gray-500 ml-2">{selectedProgramData?.pricing?.billing}</span>
+                                </span>
+                              </label>
+                            )
+                          })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Summary Box (appears when all selections made) */}
+                  {formData.schedule && (
+                    <div className="bg-lbta-bone p-6 border-l-4 border-lbta-coral">
+                      <h4 className="font-medium text-lbta-primary mb-4">Your Selection:</h4>
+                      <div className="space-y-2 text-sm text-gray-700">
+                        <p><span className="font-medium">Program:</span> {formData.program}</p>
+                        <p><span className="font-medium">Schedule:</span> {formData.schedule}</p>
+                        <p><span className="font-medium">Frequency:</span> {formData.frequency === '1x' ? '1x per week' : '2x per week'}</p>
+                        <p className="text-lg font-medium text-lbta-coral pt-2">
+                          Price: ${finalPrice} {selectedProgramData?.pricing.billing}
+                          {discount > 0 && <span className="text-sm"> (Save $50)</span>}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !formData.schedule}
+                    className="w-full bg-lbta-coral text-white font-bold py-5 px-6 text-lg tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? 'Processing...' : 'Claim My $50 Discount →'}
+                  </button>
+
+                  <p className="text-xs text-center text-gray-500">
+                    By submitting, you agree to receive communications from LBTA. No spam, unsubscribe anytime.
+                  </p>
+                </form>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* Social Proof */}
-      <section className="py-20 bg-white border-t border-gray-100">
+      <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center">
             <div>
-              <div className="text-3xl font-serif text-lbta-primary mb-1">20+</div>
-              <p className="text-sm text-lbta-secondary">D1 College Placements</p>
+              <div className="text-4xl font-serif text-lbta-primary mb-1">20+</div>
+              <p className="text-sm text-lbta-secondary">D1 Placements</p>
             </div>
-
             <div className="hidden md:block w-px h-12 bg-gray-200" />
-
             <div>
-              <div className="text-3xl font-serif text-lbta-primary mb-1">200+</div>
-              <p className="text-sm text-lbta-secondary">Active Junior Members</p>
+              <div className="text-4xl font-serif text-lbta-primary mb-1">200+</div>
+              <p className="text-sm text-lbta-secondary">Active Juniors</p>
             </div>
-
             <div className="hidden md:block w-px h-12 bg-gray-200" />
-
             <div>
-              <div className="text-3xl font-serif text-lbta-primary mb-1">Since 2020</div>
-              <p className="text-sm text-lbta-secondary">Official City Partner</p>
+              <div className="text-4xl font-serif text-lbta-primary mb-1">Since 2020</div>
+              <p className="text-sm text-lbta-secondary">City Partner</p>
             </div>
           </div>
         </div>
@@ -420,19 +513,14 @@ export default function JuniorWinter2026Landing() {
       <footer className="bg-lbta-charcoal py-12">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <p className="text-sm text-lbta-bone/60 mb-3">
-            Laguna Beach Tennis Academy • Official City of Laguna Beach Tennis Partner Since 2020
+            Laguna Beach Tennis Academy • Official City Partner Since 2020
           </p>
-          <p className="text-sm text-lbta-bone/60 mb-3">
-            <a href="tel:9494646645" className="text-lbta-coral hover:text-lbta-coral-dark transition">(949) 464-6645</a>
+          <p className="text-sm text-lbta-bone/60">
+            <a href="tel:9494646645" className="text-lbta-coral">(949) 464-6645</a>
             <span className="mx-3">•</span>
-            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral hover:text-lbta-coral-dark transition">
+            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral">
               info@lagunabeachtennisacademy.com
             </a>
-          </p>
-          <p className="text-xs text-lbta-bone/40">
-            <a href="/privacy" className="hover:text-lbta-coral transition">Privacy Policy</a>
-            <span className="mx-2">•</span>
-            <a href="/terms" className="hover:text-lbta-coral transition">Terms of Service</a>
           </p>
         </div>
       </footer>
