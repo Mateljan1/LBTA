@@ -59,14 +59,14 @@ export default function BeginnerProgramLanding() {
       </div>
 
       {/* Header */}
-      <header className="absolute top-12 left-0 right-0 z-50 bg-gradient-to-b from-black/40 to-transparent">
+      <header className="absolute top-12 left-0 right-0 z-50 bg-gradient-to-b from-black/60 to-transparent">
         <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
           <Image
-            src="/logos/lbta-logo.svg"
-            alt="LBTA"
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png"
+            alt="Laguna Beach Tennis Academy"
             width={140}
-            height={48}
-            className="h-12 w-auto brightness-0 invert"
+            height={56}
+            className="h-14 w-auto brightness-0 invert"
           />
           <a
             href="tel:9494646645"
