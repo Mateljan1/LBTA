@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Cormorant, DM_Sans } from 'next/font/google'
+import { Inter, Cormorant } from 'next/font/google'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 
@@ -20,15 +20,6 @@ const cormorant = Cormorant({
   display: 'swap',
   preload: true,
   adjustFontFallback: true,
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-dm-sans',
-  display: 'swap',
-  fallback: ['Inter', 'system-ui', 'sans-serif'],
-  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -64,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <head>
         {/* PWA & Mobile Optimization */}
         <link rel="manifest" href="/manifest.json" />

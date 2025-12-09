@@ -38,7 +38,7 @@ const config: Config = {
         display: ['var(--font-cormorant)', 'Georgia', 'serif'],     // Cormorant for display
         serif: ['var(--font-cormorant)', 'Georgia', 'serif'],       // Cormorant for headlines
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],     // Inter for body
-        accent: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'], // DM Sans for eyebrows (replaces Space Grotesk for accessibility)
+        accent: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'], // Space Grotesk for eyebrows (loaded via CSS @import)
       },
       fontSize: {
         // Blueprint Typography System (Exact Scales)
