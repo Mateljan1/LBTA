@@ -113,7 +113,7 @@ export default function Home() {
               sizes="50vw"
               priority
             />
-            <div className="absolute inset-0 bg-white/80"></div>
+            <div className="absolute inset-0 bg-white/40"></div>
           </div>
 
           <div className="font-body text-[#134252] text-lg md:text-xl space-y-2 relative p-8 md:p-12">
