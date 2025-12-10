@@ -203,73 +203,80 @@ export default function Home() {
       {/* Programs Overview */}
       <section className="bg-[#FCFCF9] py-24 px-6 md:px-20">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="space-y-8">
             
-            {/* Junior Development */}
-            <Link href="/programs/junior" className="group relative overflow-hidden h-[500px] block">
+            {/* Junior Development - Full Width Hero */}
+            <Link href="/programs/junior" className="group relative overflow-hidden h-[600px] block">
               <Image
                 src="/photos/junior-program-hero.jpg"
                 alt="Junior Development"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="100vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-              <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
-                <p className="text-xs uppercase tracking-wider mb-3 opacity-90">AGES 3–18</p>
-                <h3 className="font-headline text-4xl md:text-5xl font-semibold mb-4">Junior</h3>
-                <p className="font-body text-base mb-6 leading-relaxed opacity-90">
-                  Ages 3-18. From first lesson to D1 scholarship.
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+              <div className="absolute left-0 top-0 bottom-0 w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center text-white">
+                <p className="text-xs uppercase tracking-wider mb-4 opacity-90">AGES 3–18</p>
+                <h3 className="font-headline text-5xl md:text-6xl font-semibold mb-6">
+                  Junior<br />Development
+                </h3>
+                <p className="font-body text-lg mb-8 leading-relaxed opacity-90 max-w-lg">
+                  From first lesson to D1 scholarship. Little Stars (ages 3-4) through High Performance training.
                 </p>
-                <span className="text-[#E76F51] font-semibold hover:text-white transition-colors inline-flex items-center">
+                <span className="text-[#E76F51] font-semibold hover:text-white transition-colors inline-flex items-center text-base">
                   Explore →
                 </span>
               </div>
             </Link>
 
-            {/* Adult Programs */}
-            <Link href="/programs/adult" className="group relative overflow-hidden h-[500px] block">
-              <Image
-                src="/photos/adult-program.jpg"
-                alt="Adult Programs"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-              <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
-                <p className="text-xs uppercase tracking-wider mb-3 opacity-90">ALL LEVELS</p>
-                <h3 className="font-headline text-4xl md:text-5xl font-semibold mb-4">Adult Programs</h3>
-                <p className="font-body text-base mb-6 leading-relaxed opacity-90">
-                  All levels. Fitness, social, competitive.
-                </p>
-                <span className="text-[#E76F51] font-semibold hover:text-white transition-colors inline-flex items-center">
-                  Explore →
-                </span>
-              </div>
-            </Link>
+            {/* Adult Programs + High Performance - Side by Side */}
+            <div className="grid md:grid-cols-2 gap-8">
+              
+              {/* Adult Programs */}
+              <Link href="/programs/adult" className="group relative overflow-hidden h-[500px] block">
+                <Image
+                  src="/photos/adult-program.jpg"
+                  alt="Adult Programs"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+                <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                  <p className="text-xs uppercase tracking-wider mb-3 opacity-90">ALL LEVELS</p>
+                  <h3 className="font-headline text-4xl md:text-5xl font-semibold mb-4">Adult Programs</h3>
+                  <p className="font-body text-base mb-6 leading-relaxed opacity-90">
+                    Beginner through USTA 4.0+. Same ATP/WTA coaching systems.
+                  </p>
+                  <span className="text-[#E76F51] font-semibold hover:text-white transition-colors inline-flex items-center">
+                    View details →
+                  </span>
+                </div>
+              </Link>
 
-            {/* High Performance */}
-            <Link href="/programs/high-performance" className="group relative overflow-hidden h-[500px] block">
-              <Image
-                src="/photos/high-performance.jpg"
-                alt="High Performance"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-              <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
-                <p className="text-xs uppercase tracking-wider mb-3 opacity-90">COMPETITIVE</p>
-                <h3 className="font-headline text-4xl md:text-5xl font-semibold mb-4">High Performance</h3>
-                <p className="font-body text-base mb-6 leading-relaxed opacity-90">
-                  College recruitment. Tour preparation.
-                </p>
-                <span className="text-[#E76F51] font-semibold hover:text-white transition-colors inline-flex items-center">
-                  Explore →
-                </span>
-              </div>
-            </Link>
+              {/* High Performance */}
+              <Link href="/programs/high-performance" className="group relative overflow-hidden h-[500px] block">
+                <Image
+                  src="/photos/high-performance.jpg"
+                  alt="High Performance"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+                <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                  <p className="text-xs uppercase tracking-wider mb-3 opacity-90">COMPETITIVE</p>
+                  <h3 className="font-headline text-4xl md:text-5xl font-semibold mb-4">High Performance</h3>
+                  <p className="font-body text-base mb-6 leading-relaxed opacity-90">
+                    College recruitment and ATP/WTA tour preparation.
+                  </p>
+                  <span className="text-[#E76F51] font-semibold hover:text-white transition-colors inline-flex items-center">
+                    Apply →
+                  </span>
+                </div>
+              </Link>
+
+            </div>
 
           </div>
 
