@@ -202,12 +202,12 @@ export default function Home() {
 
       {/* Programs Overview */}
       <section className="bg-[#FCFCF9] py-24 px-6 md:px-20">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             
             {/* Junior Development */}
-            <div className="bg-white overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-              <div className="relative h-64">
+            <div className="bg-white overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="relative h-96">
                 <Image
                   src="/photos/junior-program-hero.jpg"
                   alt="Junior Development"
@@ -216,20 +216,20 @@ export default function Home() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
-              <div className="p-8">
-                <h3 className="font-headline text-3xl font-semibold text-[#134252] mb-3">Junior</h3>
-                <p className="font-body text-[#A7A9A9] mb-6">
+              <div className="p-8 bg-white">
+                <h3 className="font-headline text-4xl font-semibold text-[#134252] mb-4">Junior</h3>
+                <p className="font-body text-base text-[#A7A9A9] mb-6 leading-relaxed">
                   Ages 3-18. From first lesson to D1 scholarship.
                 </p>
-                <Link href="/programs/junior" className="text-[#E76F51] font-semibold hover:text-[#d86247]">
+                <Link href="/programs/junior" className="text-[#E76F51] font-semibold hover:text-[#d86247] inline-flex items-center">
                   Explore →
                 </Link>
               </div>
             </div>
 
             {/* Adult Programs */}
-            <div className="bg-white overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-              <div className="relative h-64">
+            <div className="bg-white overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="relative h-96">
                 <Image
                   src="/photos/adult-program.jpg"
                   alt="Adult Programs"
@@ -238,20 +238,20 @@ export default function Home() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
-              <div className="p-8">
-                <h3 className="font-headline text-3xl font-semibold text-[#134252] mb-3">Adult</h3>
-                <p className="font-body text-[#A7A9A9] mb-6">
+              <div className="p-8 bg-white">
+                <h3 className="font-headline text-4xl font-semibold text-[#134252] mb-4">Adult</h3>
+                <p className="font-body text-base text-[#A7A9A9] mb-6 leading-relaxed">
                   All levels. Fitness, social, competitive.
                 </p>
-                <Link href="/programs/adult" className="text-[#E76F51] font-semibold hover:text-[#d86247]">
+                <Link href="/programs/adult" className="text-[#E76F51] font-semibold hover:text-[#d86247] inline-flex items-center">
                   Explore →
                 </Link>
               </div>
             </div>
 
             {/* High Performance */}
-            <div className="bg-white overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-              <div className="relative h-64">
+            <div className="bg-white overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="relative h-96">
                 <Image
                   src="/photos/high-performance.jpg"
                   alt="High Performance"
@@ -260,12 +260,12 @@ export default function Home() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
-              <div className="p-8">
-                <h3 className="font-headline text-3xl font-semibold text-[#134252] mb-3">High Performance</h3>
-                <p className="font-body text-[#A7A9A9] mb-6">
+              <div className="p-8 bg-white">
+                <h3 className="font-headline text-4xl font-semibold text-[#134252] mb-4">High Performance</h3>
+                <p className="font-body text-base text-[#A7A9A9] mb-6 leading-relaxed">
                   College recruitment. Tour preparation.
                 </p>
-                <Link href="/programs/high-performance" className="text-[#E76F51] font-semibold hover:text-[#d86247]">
+                <Link href="/programs/high-performance" className="text-[#E76F51] font-semibold hover:text-[#d86247] inline-flex items-center">
                   Explore →
                 </Link>
               </div>
@@ -320,7 +320,7 @@ export default function Home() {
               alt="Andrew Mateljan, Director & ATP/WTA Coach"
               fill
               quality={90}
-              className="object-cover object-center rounded-sm"
+              className="object-cover object-top rounded-sm"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
