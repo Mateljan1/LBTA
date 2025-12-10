@@ -54,6 +54,7 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover brightness-95"
           aria-label="Laguna Beach Tennis Academy training video"
         >
+          <source src="/videos/LBTA HOME PAGE VIDEO 2.webm" type="video/webm" />
           <source src="/videos/vylo-hero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/35" aria-hidden="true"></div>
@@ -93,18 +94,32 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Right - Stats Grid */}
-        <div className="font-body text-[#134252] text-lg md:text-xl space-y-2">
-          <p>20 Division I Scholarships</p>
-          <p>A player who climbed <strong>600 ATP ranking spots in one year</strong></p>
-          <p>100K+ players trained through Fit4Tennis</p>
-          <p>Hundreds of adults rediscovering their game</p>
-          <Link
-            href="/success-stories"
-            className="inline-block mt-6 text-[#E76F51] font-semibold hover:text-[#d86247] transition-colors"
-          >
-            See Their Stories →
-          </Link>
+        {/* Right - Stats Grid with Karue Background */}
+        <div className="relative">
+          {/* Karue Background Image (Desktop Only) */}
+          <div className="hidden md:block absolute inset-0 -z-10">
+            <Image
+              src="/photos/atp-story-karue.jpg"
+              alt="Karue Sell improved ATP ranking by 600 positions in one year"
+              fill
+              className="object-cover brightness-95 rounded-sm"
+              sizes="50vw"
+            />
+            <div className="absolute inset-0 bg-white/80"></div>
+          </div>
+
+          <div className="font-body text-[#134252] text-lg md:text-xl space-y-2 relative p-8 md:p-12">
+            <p>20 Division I Scholarships</p>
+            <p>A player who climbed <strong>600 ATP ranking spots in one year</strong></p>
+            <p>100K+ players trained through Fit4Tennis</p>
+            <p>Hundreds of adults rediscovering their game</p>
+            <Link
+              href="/success-stories"
+              className="inline-block mt-6 text-[#E76F51] font-semibold hover:text-[#d86247] transition-colors"
+            >
+              See Their Stories →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -281,28 +296,61 @@ export default function Home() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 text-center shadow-md hover:shadow-xl transition-shadow">
-              <h3 className="font-headline text-2xl font-semibold text-[#134252] mb-2">Kevin Jackson</h3>
-              <p className="font-body text-sm text-[#E76F51] mb-3 uppercase tracking-wide">College Recruitment Director</p>
-              <p className="font-body text-[#A7A9A9] text-sm">
-                100% placement rate. 20+ D1 athletes.
-              </p>
+            <div className="bg-white overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+              <div className="relative h-80">
+                <Image
+                  src="/photos/CQ8A0199.jpg"
+                  alt="Kevin Jackson, Head Coach"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              <div className="p-8 text-center">
+                <h3 className="font-headline text-2xl font-semibold text-[#134252] mb-2">Kevin Jackson</h3>
+                <p className="font-body text-sm text-[#E76F51] mb-3 uppercase tracking-wide">College Recruitment Director</p>
+                <p className="font-body text-[#A7A9A9] text-sm">
+                  100% placement rate. 20+ D1 athletes.
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white p-8 text-center shadow-md hover:shadow-xl transition-shadow">
-              <h3 className="font-headline text-2xl font-semibold text-[#134252] mb-2">Michelle Bevins</h3>
-              <p className="font-body text-sm text-[#E76F51] mb-3 uppercase tracking-wide">Youth Development</p>
-              <p className="font-body text-[#A7A9A9] text-sm">
-                USTA Certified. Ages 3-12 specialist.
-              </p>
+            <div className="bg-white overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+              <div className="relative h-80">
+                <Image
+                  src="/photos/CQ8A0490.jpg"
+                  alt="Michelle Bevins, Youth Director"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              <div className="p-8 text-center">
+                <h3 className="font-headline text-2xl font-semibold text-[#134252] mb-2">Michelle Bevins</h3>
+                <p className="font-body text-sm text-[#E76F51] mb-3 uppercase tracking-wide">Youth Development</p>
+                <p className="font-body text-[#A7A9A9] text-sm">
+                  USTA Certified. Ages 3-12 specialist.
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white p-8 text-center shadow-md hover:shadow-xl transition-shadow">
-              <h3 className="font-headline text-2xl font-semibold text-[#134252] mb-2">Savriyan Danilov</h3>
-              <p className="font-body text-sm text-[#E76F51] mb-3 uppercase tracking-wide">ATP #556</p>
-              <p className="font-body text-[#A7A9A9] text-sm">
-                Mental conditioning. High performance.
-              </p>
+            <div className="bg-white overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+              <div className="relative h-80">
+                <Image
+                  src="/photos/CQ8A0537.jpg"
+                  alt="Savriyan Danilov, ATP Pro"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              <div className="p-8 text-center">
+                <h3 className="font-headline text-2xl font-semibold text-[#134252] mb-2">Savriyan Danilov</h3>
+                <p className="font-body text-sm text-[#E76F51] mb-3 uppercase tracking-wide">ATP #556</p>
+                <p className="font-body text-[#A7A9A9] text-sm">
+                  Mental conditioning. High performance.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -314,19 +362,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonial Video */}
+      <section className="bg-white py-24 px-6 md:px-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="font-body text-sm text-[#E76F51] uppercase tracking-wide mb-4">Real Results</p>
+            <h2 className="font-headline text-4xl md:text-5xl font-semibold text-[#134252] mb-4">
+              Hear From Our Members
+            </h2>
+            <p className="font-body text-lg text-[#A7A9A9]">
+              Adults who started as complete beginners and now play confidently every week.
+            </p>
+          </div>
+
+          <div className="aspect-video overflow-hidden bg-[#134252] shadow-2xl rounded-sm">
+            <iframe
+              src="https://player.vimeo.com/video/1134930901?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0"
+              className="w-full h-full"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              title="Member testimonials"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Partners Grid */}
-      <section className="bg-white py-16 px-6 md:px-20 border-t border-gray-200">
+      <section className="bg-[#FCFCF9] py-16 px-6 md:px-20 border-y border-gray-200">
         <div className="max-w-6xl mx-auto text-center">
           <p className="font-body text-sm text-[#A7A9A9] mb-8">
             Trusted by pros, schools, and the City of Laguna Beach.
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 opacity-60">
-            <div className="text-sm font-semibold text-[#134252]">City of Laguna Beach</div>
-            <div className="text-sm font-semibold text-[#134252]">Fit4Tennis</div>
-            <div className="text-sm font-semibold text-[#134252]">Racket Rescue</div>
-            <div className="text-sm font-semibold text-[#134252]">RacquetIQ</div>
-            <div className="text-sm font-semibold text-[#134252]">Tennis Beast</div>
-            <div className="text-sm font-semibold text-[#134252]">Laguna Beach HS</div>
+          <div className="flex flex-wrap justify-center items-center gap-12 grayscale opacity-60 hover:opacity-80 transition">
+            <Image src="/logos/city-laguna-beach.png" alt="City of Laguna Beach" width={120} height={60} className="h-12 w-auto object-contain" />
+            <Image src="/logos/fit4tennis.png" alt="Fit4Tennis" width={120} height={60} className="h-12 w-auto object-contain" />
+            <Image src="/logos/racketrescue.png" alt="Racket Rescue" width={120} height={60} className="h-12 w-auto object-contain" />
+            <Image src="/logos/racquetiq.png" alt="RacquetIQ" width={120} height={60} className="h-12 w-auto object-contain" />
+            <Image src="/logos/tennisbeast.png" alt="Tennis Beast" width={120} height={60} className="h-12 w-auto object-contain" />
+            <Image src="/logos/lbhs.png" alt="Laguna Beach High School" width={120} height={60} className="h-12 w-auto object-contain" />
           </div>
           <p className="font-body text-xs text-[#A7A9A9] mt-8 italic">
             Official Partner since 2020
