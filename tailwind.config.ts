@@ -34,10 +34,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        // Homepage Rebuild Font System
-        headline: ['Playfair Display', 'Georgia', 'serif'],      // Playfair for headlines
-        body: ['Work Sans', 'system-ui', 'sans-serif'],          // Work Sans for everything else
-        // Legacy aliases (for pages not yet updated)
+        // LBTA Final Font Stack (Playfair Display + Work Sans)
+        // NO Space Grotesk - causes accessibility bugs
+        headline: ['Playfair Display', 'Georgia', 'serif'],
+        body: ['Work Sans', 'system-ui', 'sans-serif'],
         display: ['Playfair Display', 'Georgia', 'serif'],
         serif: ['Playfair Display', 'Georgia', 'serif'],
         sans: ['Work Sans', 'system-ui', 'sans-serif'],
