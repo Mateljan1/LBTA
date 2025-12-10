@@ -86,65 +86,65 @@ export default function Home() {
       </section>
 
       {/* Real Results Section */}
-      <section className="relative bg-[#FCFCF9] py-24 px-6 md:px-20 overflow-hidden">
-        <div className="grid md:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
-          {/* Left - Narrative */}
+      <section className="relative bg-[#FCFCF9] py-20 md:py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
+        <div className="grid md:grid-cols-[1fr_2fr] gap-8 md:gap-12 items-center max-w-7xl mx-auto">
+          {/* Left - Minimal Narrative */}
           <div className="relative z-10">
-            <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-semibold text-[#134252] mb-6 leading-tight">
+            <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-semibold text-[#134252] mb-4 leading-tight">
               Results that speak for themselves.
             </h2>
-            <p className="font-body text-xl md:text-2xl text-[#134252] leading-relaxed mb-4 font-medium">
+            <p className="font-body text-lg md:text-xl text-[#134252] leading-relaxed mb-3 font-medium">
               Division I commits. National champions. ATP Tour players.
             </p>
-            <p className="font-body text-lg md:text-xl text-[#134252]/80 leading-relaxed">
+            <p className="font-body text-base md:text-lg text-[#134252]/70 leading-relaxed">
               Our training produces measurable, career-changing results.
             </p>
           </div>
 
-          {/* Right - Stats Grid with Karue Background */}
-          <div className="relative rounded-lg overflow-hidden shadow-2xl min-h-[500px]">
+          {/* Right - Large Photo with Stats Overlay */}
+          <div className="relative rounded-lg overflow-hidden shadow-2xl min-h-[500px] md:min-h-[600px]">
             {/* Karue Background Image (Desktop Only) */}
             <div className="hidden md:block absolute inset-0">
               <Image
                 src="/photos/atp-story-karue.jpg"
                 alt="Karue Sell improved ATP ranking from #862 to #262 in one year"
                 fill
-                quality={90}
+                quality={95}
                 className="object-cover"
-                sizes="50vw"
+                sizes="66vw"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-[#134252]/80 via-[#134252]/70 to-[#134252]/60"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#134252]/45 via-[#134252]/35 to-[#134252]/25"></div>
             </div>
             {/* Mobile fallback background */}
             <div className="md:hidden absolute inset-0 bg-gradient-to-br from-[#134252] to-[#2a5f73]"></div>
 
-            <div className="relative p-10 md:p-12 lg:p-14 flex flex-col justify-center min-h-[500px]">
-              <div className="space-y-8">
-                <div className="flex items-center gap-4">
-                  <div className="w-1 h-8 bg-[#E76F51] rounded-full flex-shrink-0"></div>
-                  <p className="font-body text-white text-lg md:text-xl leading-tight">
+            <div className="relative p-8 md:p-10 lg:p-12 flex flex-col justify-center min-h-[500px] md:min-h-[600px]">
+              <div className="space-y-6 md:space-y-7">
+                <div className="flex items-center gap-3">
+                  <div className="w-1 h-7 bg-[#E76F51] rounded-full flex-shrink-0"></div>
+                  <p className="font-body text-white text-base md:text-lg leading-tight">
                     <span className="font-semibold">20 Division I Scholarships</span>
                   </p>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-1 h-12 bg-[#E76F51] rounded-full flex-shrink-0"></div>
-                  <p className="font-body text-white text-lg md:text-xl leading-tight">
-                    Went from <span className="font-bold text-2xl md:text-3xl text-[#E76F51]">#862 → #262</span> in the ATP rankings
+                <div className="flex items-center gap-3">
+                  <div className="w-1 h-10 bg-[#E76F51] rounded-full flex-shrink-0"></div>
+                  <p className="font-body text-white text-base md:text-lg leading-tight">
+                    Went from <span className="font-bold text-xl md:text-2xl text-[#E76F51]">#862 → #262</span> in the ATP rankings
                   </p>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-1 h-12 bg-[#E76F51] rounded-full flex-shrink-0"></div>
-                  <p className="font-body text-white text-lg md:text-xl leading-tight">
+                <div className="flex items-center gap-3">
+                  <div className="w-1 h-10 bg-[#E76F51] rounded-full flex-shrink-0"></div>
+                  <p className="font-body text-white text-base md:text-lg leading-tight">
                     <span className="font-semibold">Multiple national champions</span> at junior and collegiate levels
                   </p>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-1 h-10 bg-[#E76F51] rounded-full flex-shrink-0"></div>
-                  <p className="font-body text-white text-lg md:text-xl leading-tight">
+                <div className="flex items-center gap-3">
+                  <div className="w-1 h-8 bg-[#E76F51] rounded-full flex-shrink-0"></div>
+                  <p className="font-body text-white text-base md:text-lg leading-tight">
                     <span className="font-semibold">Hundreds of adults</span> rediscovering competitive tennis
                   </p>
                 </div>
@@ -152,7 +152,7 @@ export default function Home() {
 
               <Link
                 href="/success-stories"
-                className="inline-flex items-center gap-2 text-white bg-[#E76F51] px-6 py-3 rounded-sm font-semibold hover:bg-[#d86247] transition-colors mt-12"
+                className="inline-flex items-center gap-2 text-white bg-[#E76F51] px-5 py-2.5 rounded-sm text-sm font-semibold hover:bg-[#d86247] transition-colors mt-10 md:mt-12"
               >
                 See Their Stories →
               </Link>
