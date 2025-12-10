@@ -206,12 +206,12 @@ export default function Home() {
           <div>
             
             {/* Junior Development - Full Width Hero */}
-            <Link href="/programs/junior" className="group relative overflow-hidden h-[600px] block">
+            <Link href="/programs/junior" className="group relative overflow-hidden aspect-[21/9] md:aspect-[21/9] block">
               <Image
                 src="/photos/junior-program-hero.jpg"
                 alt="Junior Development"
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 sizes="100vw"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70"></div>
@@ -233,12 +233,12 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-0">
               
               {/* Adult Programs */}
-              <Link href="/programs/adult" className="group relative overflow-hidden h-[500px] block">
+              <Link href="/programs/adult" className="group relative overflow-hidden aspect-[4/3] md:aspect-[4/3] block">
                 <Image
                   src="/photos/adult-program.jpg"
                   alt="Adult Programs"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70"></div>
@@ -257,12 +257,12 @@ export default function Home() {
               </Link>
 
               {/* High Performance */}
-              <Link href="/programs/high-performance" className="group relative overflow-hidden h-[500px] block">
+              <Link href="/programs/high-performance" className="group relative overflow-hidden aspect-[4/3] md:aspect-[4/3] block">
                 <Image
                   src="/photos/high-performance.jpg"
                   alt="High Performance"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70"></div>
