@@ -108,8 +108,10 @@ export default function Home() {
               src="/photos/atp-story-karue.jpg"
               alt="Karue Sell improved ATP ranking by 600 positions in one year"
               fill
+              quality={90}
               className="object-cover brightness-95 rounded-sm"
               sizes="50vw"
+              priority
             />
             <div className="absolute inset-0 bg-white/80"></div>
           </div>
@@ -284,9 +286,10 @@ export default function Home() {
 
           <div className="relative h-96 md:h-[500px]">
             <Image
-              src="/photos/KarueFH2.jpg"
+              src="/photos/andrew-portrait.jpg"
               alt="Andrew Mateljan, Director & ATP/WTA Coach"
               fill
+              quality={90}
               className="object-cover object-center rounded-sm"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
