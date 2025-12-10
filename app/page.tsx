@@ -91,13 +91,13 @@ export default function Home() {
           {/* Left - Narrative */}
           <div className="relative z-10">
             <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-semibold text-[#134252] mb-6 leading-tight">
-              From recreational to remarkable — in twelve months.
+              Results that speak for themselves.
             </h2>
             <p className="font-body text-xl md:text-2xl text-[#134252] leading-relaxed mb-4 font-medium">
-              Real athletes. Real results.
+              Division I commits. National champions. ATP Tour players.
             </p>
             <p className="font-body text-lg md:text-xl text-[#134252]/80 leading-relaxed">
-              College scholarships, national titles, and pros who started here.
+              Our training produces measurable, career-changing results.
             </p>
           </div>
 
@@ -107,7 +107,7 @@ export default function Home() {
             <div className="hidden md:block absolute inset-0">
               <Image
                 src="/photos/atp-story-karue.jpg"
-                alt="Karue Sell improved ATP ranking by 600 positions in one year"
+                alt="Karue Sell improved ATP ranking from #862 to #262 in one year"
                 fill
                 quality={90}
                 className="object-cover"
@@ -122,37 +122,37 @@ export default function Home() {
             <div className="relative p-10 md:p-12 lg:p-14 space-y-6">
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-1.5 h-16 bg-[#F2622E] rounded-full flex-shrink-0 mt-1"></div>
+                  <div className="w-1.5 h-16 bg-[#E76F51] rounded-full flex-shrink-0 mt-1"></div>
                   <p className="font-body text-white text-lg md:text-xl leading-relaxed">
                     <span className="font-semibold">20 Division I Scholarships</span>
                   </p>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-1.5 h-20 bg-[#F2622E] rounded-full flex-shrink-0 mt-1"></div>
+                  <div className="w-1.5 h-24 bg-[#E76F51] rounded-full flex-shrink-0 mt-1"></div>
                   <p className="font-body text-white text-lg md:text-xl leading-relaxed">
-                    A player who climbed <span className="font-bold text-2xl md:text-3xl text-[#F2622E]">600 ATP ranking spots</span> in one year
+                    Went from <span className="font-bold text-2xl md:text-3xl text-[#E76F51]">#862 → #262</span> in the ATP rankings
                   </p>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-1.5 h-16 bg-[#F2622E] rounded-full flex-shrink-0 mt-1"></div>
+                  <div className="w-1.5 h-16 bg-[#E76F51] rounded-full flex-shrink-0 mt-1"></div>
                   <p className="font-body text-white text-lg md:text-xl leading-relaxed">
-                    <span className="font-semibold">100K+ players</span> trained through Fit4Tennis
+                    <span className="font-semibold">Multiple national champions</span> at junior and collegiate levels
                   </p>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-1.5 h-16 bg-[#F2622E] rounded-full flex-shrink-0 mt-1"></div>
+                  <div className="w-1.5 h-16 bg-[#E76F51] rounded-full flex-shrink-0 mt-1"></div>
                   <p className="font-body text-white text-lg md:text-xl leading-relaxed">
-                    <span className="font-semibold">Hundreds of adults</span> rediscovering their game
+                    <span className="font-semibold">Hundreds of adults</span> rediscovering competitive tennis
                   </p>
                 </div>
               </div>
 
               <Link
                 href="/success-stories"
-                className="inline-flex items-center gap-2 text-white bg-[#F2622E] px-6 py-3 rounded-sm font-semibold hover:bg-[#d94f1e] transition-colors mt-6"
+                className="inline-flex items-center gap-2 text-white bg-[#E76F51] px-6 py-3 rounded-sm font-semibold hover:bg-[#d86247] transition-colors mt-6"
               >
                 See Their Stories →
               </Link>
