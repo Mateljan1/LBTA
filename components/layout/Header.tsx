@@ -106,24 +106,17 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile Menu - Pure CSS (No Framer Motion) */}
-      {/* Backdrop */}
-      <div
-        className={`fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${
-          mobileMenuOpen 
-            ? 'opacity-100 pointer-events-auto' 
-            : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setMobileMenuOpen(false)}
-        aria-hidden="true"
-      />
+      {/* Mobile Menu - Pure CSS */}
+      {mobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/40 z-40"
+            onClick={() => setMobileMenuOpen(false)}
+          />
 
-      {/* Slide Menu */}
-      <div
-        className={`fixed right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-white shadow-2xl z-50 md:hidden overflow-y-auto transition-transform duration-300 ease-out ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
+          {/* Slide Menu */}
+          <div className="fixed right-0 top-0 bottom-0 w-80 bg-white shadow-2xl z-50 overflow-y-auto">
         <div className="p-8">
           <button
             onClick={() => setMobileMenuOpen(false)}
@@ -154,6 +147,8 @@ export default function Header() {
           </div>
         </div>
       </div>
+        </>
+      )}
     </header>
   )
 }
