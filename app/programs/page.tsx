@@ -27,7 +27,7 @@ export default function ProgramsPage() {
             
             {/* Junior Development */}
             <AnimatedSection>
-              <Link href="/schedules?filter=junior" className="block group">
+              <Link href="/schedules" className="block group">
                 <div className="bg-white border border-gray-200 overflow-hidden hover:border-lbta-charcoal/40 transition-all duration-300 hover:shadow-xl h-full">
                   <div className="relative h-80 overflow-hidden bg-gray-100">
                     <Image
@@ -56,7 +56,7 @@ export default function ProgramsPage() {
 
             {/* Adult Programs */}
             <AnimatedSection delay={0.1}>
-              <Link href="/schedules?filter=adult" className="block group">
+              <Link href="/schedules" className="block group">
                 <div className="bg-white border border-gray-200 overflow-hidden hover:border-lbta-charcoal/40 transition-all duration-300 hover:shadow-xl h-full">
                   <div className="relative h-80 overflow-hidden bg-gray-100">
                     <Image
@@ -85,7 +85,7 @@ export default function ProgramsPage() {
 
             {/* High Performance */}
             <AnimatedSection delay={0.2}>
-              <Link href="/programs/high-performance" className="block group">
+              <Link href="/schedules" className="block group">
                 <div className="bg-white border border-gray-200 overflow-hidden hover:border-lbta-charcoal/40 transition-all duration-300 hover:shadow-xl h-full">
                   <div className="relative h-80 overflow-hidden bg-gray-100">
                     <Image
