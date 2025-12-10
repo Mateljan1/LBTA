@@ -302,7 +302,7 @@ export default function Home() {
                   src="/photos/CQ8A0199.jpg"
                   alt="Kevin Jackson, Head Coach"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
@@ -321,7 +321,7 @@ export default function Home() {
                   src="/photos/CQ8A0490.jpg"
                   alt="Michelle Bevins, Youth Director"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
@@ -340,7 +340,7 @@ export default function Home() {
                   src="/photos/CQ8A0537.jpg"
                   alt="Savriyan Danilov, ATP Pro"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
@@ -393,13 +393,13 @@ export default function Home() {
           <p className="font-body text-sm text-[#A7A9A9] mb-8">
             Trusted by pros, schools, and the City of Laguna Beach.
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 grayscale opacity-60 hover:opacity-80 transition">
-            <Image src="/logos/city-laguna-beach.png" alt="City of Laguna Beach" width={120} height={60} className="h-12 w-auto object-contain" />
-            <Image src="/logos/fit4tennis.png" alt="Fit4Tennis" width={120} height={60} className="h-12 w-auto object-contain" />
-            <Image src="/logos/racketrescue.png" alt="Racket Rescue" width={120} height={60} className="h-12 w-auto object-contain" />
-            <Image src="/logos/racquetiq.png" alt="RacquetIQ" width={120} height={60} className="h-12 w-auto object-contain" />
-            <Image src="/logos/tennisbeast.png" alt="Tennis Beast" width={120} height={60} className="h-12 w-auto object-contain" />
-            <Image src="/logos/lbhs.png" alt="Laguna Beach High School" width={120} height={60} className="h-12 w-auto object-contain" />
+          <div className="flex flex-wrap justify-center items-center gap-16 grayscale opacity-70 hover:opacity-90 transition">
+            <Image src="/logos/city-laguna-beach.png" alt="City of Laguna Beach" width={160} height={80} className="h-16 w-auto object-contain" />
+            <Image src="/logos/fit4tennis.png" alt="Fit4Tennis" width={160} height={80} className="h-16 w-auto object-contain" />
+            <Image src="/logos/racketrescue.png" alt="Racket Rescue" width={160} height={80} className="h-16 w-auto object-contain" />
+            <Image src="/logos/racquetiq.png" alt="RacquetIQ" width={160} height={80} className="h-16 w-auto object-contain" />
+            <Image src="/logos/tennisbeast.png" alt="Tennis Beast" width={160} height={80} className="h-16 w-auto object-contain" />
+            <Image src="/logos/lbhs.png" alt="Laguna Beach High School" width={160} height={80} className="h-16 w-auto object-contain" />
           </div>
           <p className="font-body text-xs text-[#A7A9A9] mt-8 italic">
             Official Partner since 2020

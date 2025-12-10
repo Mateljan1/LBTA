@@ -56,7 +56,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm font-sans text-lbta-charcoal hover:text-lbta-burnt transition-colors duration-300 tracking-wide"
+                className="text-sm font-body text-lbta-charcoal hover:text-lbta-burnt transition-colors duration-300 tracking-wide"
               >
                 {item.name}
               </Link>
@@ -118,7 +118,7 @@ export default function Header() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="block text-lg font-sans text-lbta-charcoal hover:text-lbta-burnt transition-colors tracking-wide"
+                      className="block text-lg font-body text-lbta-charcoal hover:text-lbta-burnt transition-colors tracking-wide"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
