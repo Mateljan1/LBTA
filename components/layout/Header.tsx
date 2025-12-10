@@ -56,14 +56,14 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm font-body text-lbta-charcoal hover:text-lbta-burnt transition-colors duration-300 tracking-wide"
+                className="text-sm font-body text-[#134252] hover:text-[#E76F51] transition-colors duration-300 tracking-wide"
               >
                 {item.name}
               </Link>
             ))}
             <Link
               href="/book"
-              className="btn-primary text-xs py-3 px-6"
+              className="bg-[#E76F51] text-white px-6 py-3 rounded-full text-xs font-semibold hover:bg-[#d86247] transition-all uppercase tracking-wide"
             >
               BOOK TRIAL
             </Link>
@@ -72,8 +72,11 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden p-2 text-lbta-charcoal"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-[#134252]"
+            onClick={() => {
+              console.log('Hamburger clicked, current state:', mobileMenuOpen)
+              setMobileMenuOpen(!mobileMenuOpen)
+            }}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
@@ -107,7 +110,7 @@ export default function Header() {
               <div className="p-8">
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="absolute top-6 right-6 p-2 text-lbta-charcoal hover:text-lbta-burnt transition-colors"
+                  className="absolute top-6 right-6 p-2 text-[#134252] hover:text-[#E76F51] transition-colors"
                   aria-label="Close menu"
                 >
                   <X className="h-6 w-6" />
@@ -118,7 +121,7 @@ export default function Header() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="block text-lg font-body text-lbta-charcoal hover:text-lbta-burnt transition-colors tracking-wide"
+                      className="block text-lg font-body text-[#134252] hover:text-[#E76F51] transition-colors tracking-wide"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
@@ -126,7 +129,7 @@ export default function Header() {
                   ))}
                   <Link
                     href="/book"
-                    className="btn-primary w-full mt-8 text-center"
+                    className="block w-full mt-8 text-center bg-[#E76F51] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#d86247] transition-all"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     BOOK TRIAL
