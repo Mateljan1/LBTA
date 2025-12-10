@@ -86,9 +86,9 @@ export default function Home() {
       </section>
 
       {/* Real Results Section */}
-      <section className="grid md:grid-cols-2 gap-12 items-center bg-[#FCFCF9] py-24 px-6 md:px-20">
+      <section className="grid md:grid-cols-2 gap-12 items-center py-24 px-6 md:px-20">
         {/* Left - Narrative */}
-        <div className="max-w-xl">
+        <div className="max-w-xl bg-[#FCFCF9] p-8 rounded-sm">
           <h2 className="font-headline text-4xl md:text-5xl font-semibold text-[#134252] mb-4">
             From recreational to remarkable — in twelve months.
           </h2>
@@ -101,9 +101,9 @@ export default function Home() {
         </div>
 
         {/* Right - Stats Grid with Karue Background */}
-        <div className="relative">
+        <div className="relative rounded-sm overflow-hidden min-h-[400px]">
           {/* Karue Background Image (Desktop Only) */}
-          <div className="hidden md:block absolute inset-0 -z-10">
+          <div className="hidden md:block absolute inset-0">
             <Image
               src="/photos/atp-story-karue.jpg"
               alt="Karue Sell improved ATP ranking by 600 positions in one year"
@@ -115,6 +115,8 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-white/40"></div>
           </div>
+          {/* Mobile fallback background */}
+          <div className="md:hidden absolute inset-0 bg-[#FCFCF9]"></div>
 
           <div className="font-body text-[#134252] text-lg md:text-xl space-y-2 relative p-8 md:p-12">
             <p>20 Division I Scholarships</p>
