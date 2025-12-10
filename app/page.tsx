@@ -86,49 +86,77 @@ export default function Home() {
       </section>
 
       {/* Real Results Section */}
-      <section className="grid md:grid-cols-2 gap-12 items-center py-24 px-6 md:px-20">
-        {/* Left - Narrative */}
-        <div className="max-w-xl bg-[#FCFCF9] p-8 rounded-sm">
-          <h2 className="font-headline text-4xl md:text-5xl font-semibold text-[#134252] mb-4">
-            From recreational to remarkable — in twelve months.
-          </h2>
-          <p className="font-body text-lg md:text-xl text-[#134252] leading-relaxed mb-3">
-            Real athletes. Real results.
-          </p>
-          <p className="font-body text-base md:text-lg text-[#134252] opacity-90">
-            College scholarships, national titles, and pros who started here.
-          </p>
-        </div>
-
-        {/* Right - Stats Grid with Karue Background */}
-        <div className="relative rounded-sm overflow-hidden min-h-[400px]">
-          {/* Karue Background Image (Desktop Only) */}
-          <div className="hidden md:block absolute inset-0">
-            <Image
-              src="/photos/atp-story-karue.jpg"
-              alt="Karue Sell improved ATP ranking by 600 positions in one year"
-              fill
-              quality={90}
-              className="object-cover brightness-95 rounded-sm"
-              sizes="50vw"
-              priority
-            />
-            <div className="absolute inset-0 bg-white/40"></div>
+      <section className="relative bg-[#FCFCF9] py-24 px-6 md:px-20 overflow-hidden">
+        <div className="grid md:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+          {/* Left - Narrative */}
+          <div className="relative z-10">
+            <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-semibold text-[#134252] mb-6 leading-tight">
+              From recreational to remarkable — in twelve months.
+            </h2>
+            <p className="font-body text-xl md:text-2xl text-[#134252] leading-relaxed mb-4 font-medium">
+              Real athletes. Real results.
+            </p>
+            <p className="font-body text-lg md:text-xl text-[#134252]/80 leading-relaxed">
+              College scholarships, national titles, and pros who started here.
+            </p>
           </div>
-          {/* Mobile fallback background */}
-          <div className="md:hidden absolute inset-0 bg-[#FCFCF9]"></div>
 
-          <div className="font-body text-[#134252] text-lg md:text-xl space-y-2 relative p-8 md:p-12">
-            <p>20 Division I Scholarships</p>
-            <p>A player who climbed <strong>600 ATP ranking spots in one year</strong></p>
-            <p>100K+ players trained through Fit4Tennis</p>
-            <p>Hundreds of adults rediscovering their game</p>
-            <Link
-              href="/success-stories"
-              className="inline-block mt-6 text-[#E76F51] font-semibold hover:text-[#d86247] transition-colors"
-            >
-              See Their Stories →
-            </Link>
+          {/* Right - Stats Grid with Karue Background */}
+          <div className="relative rounded-lg overflow-hidden shadow-2xl min-h-[500px]">
+            {/* Karue Background Image (Desktop Only) */}
+            <div className="hidden md:block absolute inset-0">
+              <Image
+                src="/photos/atp-story-karue.jpg"
+                alt="Karue Sell improved ATP ranking by 600 positions in one year"
+                fill
+                quality={90}
+                className="object-cover"
+                sizes="50vw"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#134252]/80 via-[#134252]/70 to-[#134252]/60"></div>
+            </div>
+            {/* Mobile fallback background */}
+            <div className="md:hidden absolute inset-0 bg-gradient-to-br from-[#134252] to-[#2a5f73]"></div>
+
+            <div className="relative p-10 md:p-12 lg:p-14 space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-1.5 h-16 bg-[#F2622E] rounded-full flex-shrink-0 mt-1"></div>
+                  <p className="font-body text-white text-lg md:text-xl leading-relaxed">
+                    <span className="font-semibold">20 Division I Scholarships</span>
+                  </p>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-1.5 h-20 bg-[#F2622E] rounded-full flex-shrink-0 mt-1"></div>
+                  <p className="font-body text-white text-lg md:text-xl leading-relaxed">
+                    A player who climbed <span className="font-bold text-2xl md:text-3xl text-[#F2622E]">600 ATP ranking spots</span> in one year
+                  </p>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-1.5 h-16 bg-[#F2622E] rounded-full flex-shrink-0 mt-1"></div>
+                  <p className="font-body text-white text-lg md:text-xl leading-relaxed">
+                    <span className="font-semibold">100K+ players</span> trained through Fit4Tennis
+                  </p>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-1.5 h-16 bg-[#F2622E] rounded-full flex-shrink-0 mt-1"></div>
+                  <p className="font-body text-white text-lg md:text-xl leading-relaxed">
+                    <span className="font-semibold">Hundreds of adults</span> rediscovering their game
+                  </p>
+                </div>
+              </div>
+
+              <Link
+                href="/success-stories"
+                className="inline-flex items-center gap-2 text-white bg-[#F2622E] px-6 py-3 rounded-sm font-semibold hover:bg-[#d94f1e] transition-colors mt-6"
+              >
+                See Their Stories →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
