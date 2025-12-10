@@ -45,7 +45,7 @@ export default function Home() {
       </div>
 
       {/* Hero Video Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-[#FCFCF9]">
+      <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#FCFCF9]">
         <video 
           autoPlay 
           loop 
@@ -59,23 +59,23 @@ export default function Home() {
         </video>
         <div className="absolute inset-0 bg-black/35" aria-hidden="true"></div>
         
-        <div className="relative z-10 text-center text-[#FCFCF9] px-6 md:px-12 max-w-3xl">
-          <h1 className="font-headline text-5xl md:text-6xl font-semibold mb-4 leading-tight">
+        <div className="relative z-10 text-center text-[#FCFCF9] px-6 md:px-12 max-w-3xl mx-auto">
+          <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 md:mb-4 leading-tight">
             Tennis as it should be taught.
           </h1>
-          <p className="font-body text-xl md:text-2xl mb-2">
+          <p className="font-body text-lg md:text-xl lg:text-2xl mb-4 md:mb-2">
             Movement. Discipline. Belonging.
           </p>
-          <p className="font-body text-base md:text-lg mb-6 text-white/90">
+          <p className="font-body text-sm md:text-base lg:text-lg mb-8 md:mb-6 text-white/90">
             Train with the system trusted by pros and built for everyone.
           </p>
           <a 
             href="#trial" 
-            className="inline-block bg-[#E76F51] px-8 py-3 rounded-full text-sm uppercase tracking-wide font-semibold hover:bg-[#d86247] transition-all"
+            className="inline-block bg-[#E76F51] px-8 py-4 md:py-3 rounded-full text-sm uppercase tracking-wide font-semibold hover:bg-[#d86247] transition-all"
           >
             Claim Your Free Trial →
           </a>
-          <p className="mt-3 text-sm opacity-80">No commitment. Starts this week.</p>
+          <p className="mt-4 md:mt-3 text-sm opacity-80">No commitment. Starts this week.</p>
         </div>
       </section>
 

@@ -117,19 +117,19 @@ export default function Header() {
                 </button>
 
                 <div className="mt-16 space-y-6">
-                  {navigation.map((item) => (
+                  {navigation.length > 0 ? navigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="block text-lg font-body text-[#134252] hover:text-[#E76F51] transition-colors tracking-wide"
+                      className="block text-xl font-body text-[#134252] hover:text-[#E76F51] transition-colors py-2"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
                     </Link>
-                  ))}
+                  )) : <p className="text-red-500">No navigation items</p>}
                   <Link
                     href="/book"
-                    className="block w-full mt-8 text-center bg-[#E76F51] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#d86247] transition-all"
+                    className="block w-full mt-8 text-center bg-[#E76F51] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#d86247] transition-all uppercase tracking-wide text-sm"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     BOOK TRIAL
