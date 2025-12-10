@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 const navigation = [
   { name: 'Programs', href: '/programs' },
@@ -26,6 +25,27 @@ export default function Header() {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Body scroll lock when menu open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [mobileMenuOpen])
+
+  // Escape key handler
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false)
+    }
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
   }, [])
 
   return (
@@ -72,74 +92,68 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden p-2 text-[#134252]"
-            onClick={() => {
-              console.log('Hamburger clicked, current state:', mobileMenuOpen)
-              setMobileMenuOpen(!mobileMenuOpen)
-            }}
+            className="md:hidden p-2 text-[#134252] z-[60] relative"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-7 w-7" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-7 w-7" />
             )}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu - Luxury Animation */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed right-0 top-0 bottom-0 w-80 bg-white shadow-2xl z-50 md:hidden overflow-y-auto"
-            >
-              <div className="p-8">
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="absolute top-6 right-6 p-2 text-[#134252] hover:text-[#E76F51] transition-colors"
-                  aria-label="Close menu"
-                >
-                  <X className="h-6 w-6" />
-                </button>
+      {/* Mobile Menu - Pure CSS (No Framer Motion) */}
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${
+          mobileMenuOpen 
+            ? 'opacity-100 pointer-events-auto' 
+            : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setMobileMenuOpen(false)}
+        aria-hidden="true"
+      />
 
-                <div className="mt-16 space-y-6">
-                  {navigation.length > 0 ? navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="block text-xl font-body text-[#134252] hover:text-[#E76F51] transition-colors py-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  )) : <p className="text-red-500">No navigation items</p>}
-                  <Link
-                    href="/book"
-                    className="block w-full mt-8 text-center bg-[#E76F51] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#d86247] transition-all uppercase tracking-wide text-sm"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    BOOK TRIAL
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      {/* Slide Menu */}
+      <div
+        className={`fixed right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-white shadow-2xl z-50 md:hidden overflow-y-auto transition-transform duration-300 ease-out ${
+          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="p-8">
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="absolute top-6 right-6 p-2 text-[#134252] hover:text-[#E76F51] transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="h-7 w-7" />
+          </button>
+
+          <div className="mt-16 space-y-1">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="block text-xl font-body text-[#134252] hover:text-[#E76F51] transition-colors py-3 border-b border-gray-100"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <Link
+              href="/book"
+              className="block w-full mt-8 text-center bg-[#E76F51] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#d86247] transition-all uppercase tracking-wide text-sm"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              BOOK TRIAL
+            </Link>
+          </div>
+        </div>
+      </div>
     </header>
   )
 }
