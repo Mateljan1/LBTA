@@ -206,70 +206,70 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             
             {/* Junior Development */}
-            <div className="bg-white overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="relative h-96">
-                <Image
-                  src="/photos/junior-program-hero.jpg"
-                  alt="Junior Development"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-              <div className="p-8 bg-white">
-                <h3 className="font-headline text-4xl font-semibold text-[#134252] mb-4">Junior</h3>
-                <p className="font-body text-base text-[#A7A9A9] mb-6 leading-relaxed">
+            <Link href="/programs/junior" className="group relative overflow-hidden h-[500px] block">
+              <Image
+                src="/photos/junior-program-hero.jpg"
+                alt="Junior Development"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+              <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                <p className="text-xs uppercase tracking-wider mb-3 opacity-90">AGES 3–18</p>
+                <h3 className="font-headline text-4xl md:text-5xl font-semibold mb-4">Junior</h3>
+                <p className="font-body text-base mb-6 leading-relaxed opacity-90">
                   Ages 3-18. From first lesson to D1 scholarship.
                 </p>
-                <Link href="/programs/junior" className="text-[#E76F51] font-semibold hover:text-[#d86247] inline-flex items-center">
+                <span className="text-[#E76F51] font-semibold hover:text-white transition-colors inline-flex items-center">
                   Explore →
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
 
             {/* Adult Programs */}
-            <div className="bg-white overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="relative h-96">
-                <Image
-                  src="/photos/adult-program.jpg"
-                  alt="Adult Programs"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-              <div className="p-8 bg-white">
-                <h3 className="font-headline text-4xl font-semibold text-[#134252] mb-4">Adult</h3>
-                <p className="font-body text-base text-[#A7A9A9] mb-6 leading-relaxed">
+            <Link href="/programs/adult" className="group relative overflow-hidden h-[500px] block">
+              <Image
+                src="/photos/adult-program.jpg"
+                alt="Adult Programs"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+              <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                <p className="text-xs uppercase tracking-wider mb-3 opacity-90">ALL LEVELS</p>
+                <h3 className="font-headline text-4xl md:text-5xl font-semibold mb-4">Adult Programs</h3>
+                <p className="font-body text-base mb-6 leading-relaxed opacity-90">
                   All levels. Fitness, social, competitive.
                 </p>
-                <Link href="/programs/adult" className="text-[#E76F51] font-semibold hover:text-[#d86247] inline-flex items-center">
+                <span className="text-[#E76F51] font-semibold hover:text-white transition-colors inline-flex items-center">
                   Explore →
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
 
             {/* High Performance */}
-            <div className="bg-white overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="relative h-96">
-                <Image
-                  src="/photos/high-performance.jpg"
-                  alt="High Performance"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-              <div className="p-8 bg-white">
-                <h3 className="font-headline text-4xl font-semibold text-[#134252] mb-4">High Performance</h3>
-                <p className="font-body text-base text-[#A7A9A9] mb-6 leading-relaxed">
+            <Link href="/programs/high-performance" className="group relative overflow-hidden h-[500px] block">
+              <Image
+                src="/photos/high-performance.jpg"
+                alt="High Performance"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+              <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                <p className="text-xs uppercase tracking-wider mb-3 opacity-90">COMPETITIVE</p>
+                <h3 className="font-headline text-4xl md:text-5xl font-semibold mb-4">High Performance</h3>
+                <p className="font-body text-base mb-6 leading-relaxed opacity-90">
                   College recruitment. Tour preparation.
                 </p>
-                <Link href="/programs/high-performance" className="text-[#E76F51] font-semibold hover:text-[#d86247] inline-flex items-center">
+                <span className="text-[#E76F51] font-semibold hover:text-white transition-colors inline-flex items-center">
                   Explore →
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
 
           </div>
 
