@@ -305,10 +305,11 @@ export default function Home() {
             <div className="bg-white overflow-hidden shadow-md hover:shadow-xl transition-shadow">
               <div className="relative h-80">
                 <Image
-                  src="/photos/CQ8A0023.jpg"
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/0505f2a39_kevinJacksonPic.png"
                   alt="Kevin Jackson, Head Coach"
                   fill
-                  className="object-cover object-[50%_20%]"
+                  quality={90}
+                  className="object-cover object-top"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
@@ -324,10 +325,11 @@ export default function Home() {
             <div className="bg-white overflow-hidden shadow-md hover:shadow-xl transition-shadow">
               <div className="relative h-80">
                 <Image
-                  src="/photos/CQ8A0103.jpg"
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/97b8fa461_MichelleBevinsPic.png"
                   alt="Michelle Bevins, Youth Director"
                   fill
-                  className="object-cover object-[50%_30%]"
+                  quality={90}
+                  className="object-cover object-top"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
@@ -343,10 +345,11 @@ export default function Home() {
             <div className="bg-white overflow-hidden shadow-md hover:shadow-xl transition-shadow">
               <div className="relative h-80">
                 <Image
-                  src="/photos/CQ8A0046_1.jpg"
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/57a63569f_Savriyan.png"
                   alt="Savriyan Danilov, ATP Pro"
                   fill
-                  className="object-cover object-[50%_20%]"
+                  quality={90}
+                  className="object-cover object-top"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
