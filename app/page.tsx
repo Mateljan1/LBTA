@@ -40,8 +40,14 @@ export default function Home() {
   return (
     <>
       {/* Announcement Banner */}
-      <div className="bg-[#E76F51] text-white py-3 text-center text-sm font-medium" role="banner" aria-label="Announcement">
-        <span className="font-semibold">Winter 2026 Enrollment Opens Dec 1</span> · 24 Spots Only · <Link href="/schedules" className="underline hover:no-underline">Join Waitlist →</Link>
+      <div className="bg-[#E76F51] text-white py-3 text-center text-xs md:text-sm font-medium px-4" role="banner" aria-label="Announcement">
+        <span className="font-semibold">Winter 2026 Enrollment</span>
+        <span className="hidden sm:inline"> Opens Dec 1</span> 
+        <span className="hidden md:inline"> · 24 Spots Only</span> · 
+        <Link href="/schedules" className="underline hover:no-underline ml-1">
+          <span className="sm:hidden">Register</span>
+          <span className="hidden sm:inline">Join Waitlist</span> →
+        </Link>
       </div>
 
       {/* Hero Video Section */}
