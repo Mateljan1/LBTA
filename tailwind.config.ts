@@ -34,11 +34,14 @@ const config: Config = {
         },
       },
       fontFamily: {
-        // Blueprint Font System (FREE)
-        display: ['var(--font-cormorant)', 'Georgia', 'serif'],     // Cormorant for display
-        serif: ['var(--font-cormorant)', 'Georgia', 'serif'],       // Cormorant for headlines
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],     // Inter for body
-        accent: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'], // Space Grotesk for eyebrows (loaded via CSS @import)
+        // Homepage Rebuild Font System
+        headline: ['Playfair Display', 'Georgia', 'serif'],      // Playfair for headlines
+        body: ['Work Sans', 'system-ui', 'sans-serif'],          // Work Sans for everything else
+        // Legacy aliases (for pages not yet updated)
+        display: ['Playfair Display', 'Georgia', 'serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['Work Sans', 'system-ui', 'sans-serif'],
+        accent: ['Work Sans', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         // Blueprint Typography System (Exact Scales)

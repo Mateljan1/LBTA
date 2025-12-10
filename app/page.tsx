@@ -1,621 +1,446 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    level: '',
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          program: 'Free Trial - Homepage',
+          source: 'homepage-final-cta',
+        }),
+      })
+
+      if (response.ok) {
+        window.location.href = '/thank-you'
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <>
-      {/* ============================================
-          HERO — Real LBTA photography, optimized
-          ============================================ */}
-      <section className="relative h-screen flex items-center">
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src="/photos/hero-main.jpg"
-            alt="Laguna Beach Tennis Academy courts at golden hour"
-            fill
-            priority
-            quality={90}
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" />
-        </div>
+      {/* Announcement Banner */}
+      <div className="bg-[#E76F51] text-white py-3 text-center text-sm font-medium" role="banner" aria-label="Announcement">
+        <span className="font-semibold">Winter 2026 Enrollment Opens Dec 1</span> · 24 Spots Only · <Link href="/schedules" className="underline hover:no-underline">Join Waitlist →</Link>
+      </div>
 
-        <div className="relative z-10 w-full">
-          <div className="container-lbta px-6 md:px-30">
-            <div className="max-w-3xl">
-              <AnimatedSection>
-                {/* Blueprint Display Typography */}
-                <h1 className="display text-white mb-8">
-                  Tennis as it<br />
-                  should be taught.
-                </h1>
-
-                {/* Blueprint Subhead */}
-                <p className="body-lg text-white/90 mb-12" style={{ fontWeight: 400 }}>
-                  Movement. Discipline. Belonging.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-6 items-start mb-12">
-                  <Link 
-                    href="/book" 
-                    className="btn-accent"
-                  >
-                    Book Trial
-                  </Link>
-                </div>
-                
-                {/* Blueprint Subtext */}
-                <p className="body-sm text-white/60" style={{ fontWeight: 300 }}>
-                  ATP/WTA-backed training. Laguna Beach, California.
-                </p>
-              </AnimatedSection>
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <p className="eyebrow text-white/40">Scroll</p>
+      {/* Hero Video Section */}
+      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-[#FCFCF9]">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover brightness-95"
+          aria-label="Laguna Beach Tennis Academy training video"
+        >
+          <source src="/videos/vylo-hero.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/35" aria-hidden="true"></div>
+        
+        <div className="relative z-10 text-center text-[#FCFCF9] px-6 md:px-12 max-w-3xl">
+          <h1 className="font-headline text-5xl md:text-6xl font-semibold mb-4 leading-tight">
+            Tennis as it should be taught.
+          </h1>
+          <p className="font-body text-xl md:text-2xl mb-2">
+            Movement. Discipline. Belonging.
+          </p>
+          <p className="font-body text-base md:text-lg mb-6 text-white/90">
+            Train with the system trusted by pros and built for everyone.
+          </p>
+          <a 
+            href="#trial" 
+            className="inline-block bg-[#E76F51] px-8 py-3 rounded-full text-sm uppercase tracking-wide font-semibold hover:bg-[#d86247] transition-all"
+          >
+            Claim Your Free Trial →
+          </a>
+          <p className="mt-3 text-sm opacity-80">No commitment. Starts this week.</p>
         </div>
       </section>
 
+      {/* Real Results Section */}
+      <section className="grid md:grid-cols-2 gap-12 items-center bg-[#FCFCF9] py-24 px-6 md:px-20">
+        {/* Left - Narrative */}
+        <div className="max-w-xl">
+          <h2 className="font-headline text-4xl md:text-5xl font-semibold text-[#134252] mb-4">
+            From recreational to remarkable — in twelve months.
+          </h2>
+          <p className="font-body text-lg md:text-xl text-[#134252] leading-relaxed mb-3">
+            Real athletes. Real results.
+          </p>
+          <p className="font-body text-base md:text-lg text-[#134252] opacity-90">
+            College scholarships, national titles, and pros who started here.
+          </p>
+        </div>
 
-      {/* ============================================
-          ATP STORY — Editorial 7+5 + Blueprint typography
-          ============================================ */}
-      <section className="relative min-h-screen flex items-center bg-lbta-bone py-60">
-        <div className="container-lbta">
-          <div className="grid lg:grid-cols-12 gap-0 items-center">
-            {/* Left: Image takes 7 columns - Real Karue photo */}
-            <div className="lg:col-span-7 -mx-6 md:-mx-30 lg:mx-0">
-              <AnimatedSection>
-                <div className="relative aspect-[4/3] lg:aspect-[3/4]">
-                  <Image
-                    src="/photos/atp-story-karue.jpg"
-                    alt="Karue Sell - ATP #258 training at LBTA"
-                    fill
-                    quality={90}
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="object-cover object-center"
-                    priority
-                  />
-                  {/* Blueprint-style badge overlay */}
-                  <div className="absolute bottom-8 right-8 bg-lbta-sand/95 backdrop-blur-sm px-8 py-6 border border-lbta-primary/8">
-                    <p className="eyebrow mb-2">ATP/WTA COACHING</p>
-                    <p className="text-5xl font-display font-normal text-lbta-primary" style={{ lineHeight: 1 }}>
-                      #258
-                    </p>
-                    <p className="body-sm text-lbta-secondary mt-2" style={{ fontWeight: 400, opacity: 0.7 }}>
-                      Karue Sell, 2024
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
-
-            {/* Right: Content - 5 columns */}
-            <div className="lg:col-span-5 px-6 md:px-16 lg:px-20 py-20 lg:py-0">
-              <AnimatedSection delay={0.2}>
-                <div className="max-w-md">
-                  {/* Blueprint Eyebrow */}
-                  <p className="eyebrow mb-6">REAL RESULTS</p>
-                  
-                  {/* Blueprint Headline */}
-                  <h2 className="headline mb-10">
-                    #858 to #258.<br />
-                    Twelve months.
-                  </h2>
-
-                  {/* Blueprint Body */}
-                  <div className="space-y-6 mb-10">
-                    <p className="body text-lbta-secondary">
-                      Karue Sell. ATP #258.<br />
-                      Max McKennon. ATP #458.
-                    </p>
-                    
-                    <p className="body text-lbta-secondary">
-                      Twenty D1 scholarships.<br />
-                      Hundreds of adults who stopped blaming their racket.
-                    </p>
-                    
-                    <p className="body text-lbta-secondary">
-                      One system. Every level.
-                    </p>
-                  </div>
-
-                  {/* Blueprint Link */}
-                  <a href="/success-stories" className="link-animated">
-                    See results →
-                  </a>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
+        {/* Right - Stats Grid */}
+        <div className="font-body text-[#134252] text-lg md:text-xl space-y-2">
+          <p>20 Division I Scholarships</p>
+          <p>A player who climbed <strong>600 ATP ranking spots in one year</strong></p>
+          <p>100K+ players trained through Fit4Tennis</p>
+          <p>Hundreds of adults rediscovering their game</p>
+          <Link
+            href="/success-stories"
+            className="inline-block mt-6 text-[#E76F51] font-semibold hover:text-[#d86247] transition-colors"
+          >
+            See Their Stories →
+          </Link>
         </div>
       </section>
 
+      {/* The Approach */}
+      <section className="bg-white py-24 px-6 md:px-20 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-headline text-4xl md:text-5xl font-semibold text-[#134252] mb-4">
+            Small groups. Proven systems. Real accountability.
+          </h2>
+          <p className="font-body text-lg md:text-xl text-[#A7A9A9] mb-12">
+            Our 4-Pillar Method → Technique · Conditioning · Strategy · Mindset
+          </p>
 
-      {/* ============================================
-          PHILOSOPHY — Refined minimal grid
-          ============================================ */}
-      <section className="py-48 bg-lbta-sand">
-        <div className="container-lbta px-6 md:px-30">
-          <AnimatedSection className="text-center mb-20">
-            <p className="eyebrow mb-6">
-              THE APPROACH
-            </p>
-          </AnimatedSection>
-
-          {/* Minimal three-column grid with large numbers */}
-          <div className="grid md:grid-cols-3 gap-16 md:gap-20 max-w-6xl mx-auto">
-            <AnimatedSection delay={0.1}>
-              <div className="text-center md:text-left">
-                <div className="text-8xl font-display font-light text-lbta-coral mb-6" style={{ lineHeight: 0.9 }}>
-                  01
-                </div>
-                <h3 className="subhead text-lbta-primary mb-4">
-                  Small groups.
-                </h3>
-                <p className="body-sm text-lbta-secondary">
-                  Four to eight students. Personal attention. Real coaching.
-                </p>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <div className="text-center md:text-left">
-                <div className="text-8xl font-display font-light text-lbta-coral mb-6" style={{ lineHeight: 0.9 }}>
-                  02
-                </div>
-                <h3 className="subhead text-lbta-primary mb-4">
-                  ATP/WTA systems.
-                </h3>
-                <p className="body-sm text-lbta-secondary">
-                  Twenty years on tour. Same patterns. Your level.
-                </p>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.3}>
-              <div className="text-center md:text-left">
-                <div className="text-8xl font-display font-light text-lbta-coral mb-6" style={{ lineHeight: 0.9 }}>
-                  03
-                </div>
-                <h3 className="subhead text-lbta-primary mb-4">
-                  It works.
-                </h3>
-                <p className="body-sm text-lbta-secondary">
-                  Three tour players. Twenty D1 scholarships. Proven results.
-                </p>
-              </div>
-            </AnimatedSection>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            <div>
+              <div className="text-5xl md:text-6xl font-headline text-[#E76F51] mb-3">01</div>
+              <h3 className="font-body font-semibold text-[#134252] mb-2">Technique</h3>
+              <p className="font-body text-sm text-[#A7A9A9]">ATP/WTA fundamentals</p>
+            </div>
+            <div>
+              <div className="text-5xl md:text-6xl font-headline text-[#E76F51] mb-3">02</div>
+              <h3 className="font-body font-semibold text-[#134252] mb-2">Conditioning</h3>
+              <p className="font-body text-sm text-[#A7A9A9]">Tennis-specific fitness</p>
+            </div>
+            <div>
+              <div className="text-5xl md:text-6xl font-headline text-[#E76F51] mb-3">03</div>
+              <h3 className="font-body font-semibold text-[#134252] mb-2">Strategy</h3>
+              <p className="font-body text-sm text-[#A7A9A9]">Match intelligence</p>
+            </div>
+            <div>
+              <div className="text-5xl md:text-6xl font-headline text-[#E76F51] mb-3">04</div>
+              <h3 className="font-body font-semibold text-[#134252] mb-2">Mindset</h3>
+              <p className="font-body text-sm text-[#A7A9A9]">Mental performance</p>
+            </div>
           </div>
 
-          {/* Minimal CTA */}
-          <AnimatedSection delay={0.4} className="text-center mt-20">
-            <a href="/philosophy" className="link-animated">
-              Our philosophy →
-            </a>
-          </AnimatedSection>
+          <Link href="/philosophy" className="text-[#E76F51] font-semibold hover:text-[#d86247]">
+            See how it works →
+          </Link>
         </div>
       </section>
 
-
-      {/* ============================================
-          PROGRAMS — Magazine full-bleed + Blueprint typography
-          ============================================ */}
-      <section className="bg-lbta-sand">
-        <div className="container-lbta px-0">
-          {/* Junior Program - Real on-court training photo */}
-          <AnimatedSection>
-            <Link href="/programs/junior" className="group block relative overflow-hidden">
-              <div className="relative h-[70vh] md:h-[80vh]">
+      {/* Programs Overview */}
+      <section className="bg-[#FCFCF9] py-24 px-6 md:px-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
+            
+            {/* Junior Development */}
+            <div className="bg-white overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <div className="relative h-64">
                 <Image
                   src="/photos/junior-program-hero.jpg"
-                  alt="Junior development on-court training at LBTA"
+                  alt="Junior Development"
                   fill
-                  quality={85}
-                  sizes="100vw"
-                  className="object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                
-                <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 pb-12 md:pb-16">
-                  <div className="max-w-xl">
-                    {/* Blueprint Eyebrow */}
-                    <p className="eyebrow text-white mb-4">
-                      AGES 3–18
-                    </p>
-                    
-                    {/* Blueprint Subhead */}
-                    <h3 className="subhead-sm text-white mb-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
-                      Junior<br />
-                      Development
-                    </h3>
-                    
-                    {/* Blueprint Body */}
-                    <p className="body-sm text-white mb-6 max-w-sm">
-                      From first lesson to D1 scholarship. Little Stars (ages 3-4) through High Performance training.
-                    </p>
-                    
-                    {/* Blueprint Link */}
-                    <div className="inline-flex items-center gap-2 body-sm text-white pb-1 border-b border-white/60 group-hover:border-white transition-colors">
-                      Explore → 
-                    </div>
-                  </div>
-                </div>
               </div>
-            </Link>
-          </AnimatedSection>
-
-          {/* Adult & High Performance - Side by Side */}
-          <div className="grid md:grid-cols-2">
-            <AnimatedSection delay={0.1}>
-              <Link href="/programs/adult" className="group block relative overflow-hidden">
-                <div className="relative h-[60vh]">
-                  <Image
-                    src="/photos/adult-program.jpg"
-                    alt="Adult programs - Professional training environment"
-                    fill
-                    quality={85}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  
-                  <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 pb-12 md:pb-16">
-                    <p className="eyebrow text-white mb-4">
-                      ALL LEVELS
-                    </p>
-                    <h3 className="subhead-sm text-white mb-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
-                      Adult<br />
-                      Programs
-                    </h3>
-                    <p className="body-sm text-white mb-6 max-w-sm">
-                      Beginner through USTA 4.0+. Same ATP/WTA coaching systems.
-                    </p>
-                    <div className="inline-flex items-center gap-2 body-sm text-white pb-1 border-b border-white/60 group-hover:border-white transition-colors">
-                      View details →
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <Link href="/programs/high-performance" className="group block relative overflow-hidden">
-                <div className="relative h-[60vh]">
-                  <Image
-                    src="/photos/high-performance.jpg"
-                    alt="High Performance - ATP/WTA tour preparation"
-                    fill
-                    quality={85}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover object-center transition-transform duration-[1500ms] group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  
-                  <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 pb-12 md:pb-16">
-                    <p className="eyebrow text-white mb-4">
-                      COMPETITIVE
-                    </p>
-                    <h3 className="subhead-sm text-white mb-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
-                      High<br />
-                      Performance
-                    </h3>
-                    <p className="body-sm text-white mb-6 max-w-sm">
-                      College recruitment and ATP/WTA tour preparation.
-                    </p>
-                    <div className="inline-flex items-center gap-2 body-sm text-white pb-1 border-b border-white/60 group-hover:border-white transition-colors">
-                      Apply →
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ============================================
-          COACHING — Andrew + Team unified section
-          ============================================ */}
-      <section className="bg-lbta-charcoal py-48">
-        <div className="container-lbta px-6 md:px-30">
-          {/* Andrew - Refined */}
-          <div className="grid lg:grid-cols-5 gap-12 items-start mb-20">
-            {/* Image: 2 columns, smaller */}
-            <div className="lg:col-span-2">
-              <AnimatedSection>
-                <div className="relative aspect-[3/4] max-w-xs mx-auto lg:mx-0">
-                  <Image
-                    src="/photos/andrew-portrait.jpg"
-                    alt="Andrew Mateljan - Founder"
-                    fill
-                    quality={90}
-                    sizes="(max-width: 1024px) 60vw, 25vw"
-                    className="object-cover object-center"
-                  />
-                </div>
-              </AnimatedSection>
-            </div>
-
-            {/* Content: 3 columns */}
-            <div className="lg:col-span-3">
-              <AnimatedSection delay={0.2}>
-                <p className="eyebrow mb-4 text-lbta-coral">
-                  FOUNDER & DIRECTOR
+              <div className="p-8">
+                <h3 className="font-headline text-3xl font-semibold text-[#134252] mb-3">Junior</h3>
+                <p className="font-body text-[#A7A9A9] mb-6">
+                  Ages 3-18. From first lesson to D1 scholarship.
                 </p>
-                
-                <h2 className="headline-sm text-lbta-bone mb-6">
-                  Andrew Mateljan
-                </h2>
-
-                <div className="w-12 h-px bg-lbta-bone/20 mb-6" />
-
-                <div className="body-sm text-lbta-bone/80 space-y-3 max-w-lg">
-                  <p>
-                    20 years developing competitive players. Former #3 SoCal, #12 nationally ranked junior.
-                  </p>
-                  
-                  <p>
-                    Seven years coaching internationally across Spain, Croatia, Norway. Currently coaches ATP #262 Karue Sell.
-                  </p>
-                  
-                  <p>
-                    Training history: Max McKennon (ATP #458), Ryan Seggerman (ATP #63 Doubles, #348 Singles), Colton Smith (ATP #133). Masters 1000 experience at Indian Wells. Founder, Fit4Tennis (100K+).
-                  </p>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-
-          {/* Development Team */}
-          <div className="border-t border-lbta-bone/10 pt-16">
-            <AnimatedSection delay={0.3} className="text-center mb-12">
-              <p className="eyebrow text-lbta-coral mb-2">
-                DEVELOPMENT TEAM
-              </p>
-            </AnimatedSection>
-
-            <div className="grid md:grid-cols-3 gap-10 max-w-4xl mx-auto">
-              <AnimatedSection delay={0.4}>
-                <Link href="/coaches" className="group block">
-                  <div className="relative aspect-[3/4] mb-4 overflow-hidden">
-                    <Image
-                      src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/0505f2a39_kevinJacksonPic.png"
-                      alt="Kevin Jackson"
-                      fill
-                      quality={85}
-                      sizes="(max-width: 768px) 100vw, 30vw"
-                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <h4 className="subhead-sm text-lbta-bone mb-1">Kevin Jackson</h4>
-                  <p className="body-sm text-lbta-bone/60 mb-2">Head Coach</p>
-                  <p className="eyebrow text-lbta-coral">COLLEGE RECRUITMENT</p>
+                <Link href="/programs/junior" className="text-[#E76F51] font-semibold hover:text-[#d86247]">
+                  Explore →
                 </Link>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.5}>
-                <Link href="/coaches" className="group block">
-                  <div className="relative aspect-[3/4] mb-4 overflow-hidden">
-                    <Image
-                      src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/97b8fa461_MichelleBevinsPic.png"
-                      alt="Michelle Bevins"
-                      fill
-                      quality={85}
-                      sizes="(max-width: 768px) 100vw, 30vw"
-                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <h4 className="subhead-sm text-lbta-bone mb-1">Michelle Bevins</h4>
-                  <p className="body-sm text-lbta-bone/60 mb-2">Youth Director</p>
-                  <p className="eyebrow text-lbta-coral">AGES 3-12</p>
-                </Link>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.6}>
-                <Link href="/coaches" className="group block">
-                  <div className="relative aspect-[3/4] mb-4 overflow-hidden">
-                    <Image
-                      src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/57a63569f_Savriyan.png"
-                      alt="Savriyan Danilov"
-                      fill
-                      quality={85}
-                      sizes="(max-width: 768px) 100vw, 30vw"
-                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <h4 className="subhead-sm text-lbta-bone mb-1">Savriyan Danilov</h4>
-                  <p className="body-sm text-lbta-bone/60 mb-2">High Performance</p>
-                  <p className="eyebrow text-lbta-coral">ATP PRO #556</p>
-                </Link>
-              </AnimatedSection>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ============================================
-          VIDEO TESTIMONIAL — Blueprint typography
-          ============================================ */}
-      <section className="py-60 bg-lbta-sand border-y border-lbta-primary/6">
-        <div className="container-lbta px-6 md:px-30">
-          <div className="max-w-5xl mx-auto">
-            <AnimatedSection className="text-center mb-20">
-              {/* Blueprint Eyebrow */}
-              <p className="eyebrow mb-6">
-                IN THEIR WORDS
-              </p>
-
-              {/* Blueprint Headline */}
-              <h2 className="headline-md text-lbta-primary">
-                Member stories.
-              </h2>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <div className="aspect-video overflow-hidden bg-lbta-charcoal">
-                <iframe
-                  src="https://player.vimeo.com/video/1134930901?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0"
-                  className="w-full h-full"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  title="Member testimonials"
-                />
               </div>
-            </AnimatedSection>
+            </div>
 
-            <AnimatedSection delay={0.3} className="text-center mt-12">
-              <a href="/success-stories" className="link-animated">
-                More stories →
-              </a>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ============================================
-          PARTNERSHIP — Enhanced, prominent, professional
-          ============================================ */}
-      <section className="py-40 bg-lbta-bone border-y border-lbta-primary/6">
-        <div className="container-lbta px-6 md:px-30">
-          <div className="max-w-6xl mx-auto">
-            {/* City Partnership - Prominent */}
-            <AnimatedSection className="text-center mb-20">
-              <div className="relative w-28 h-28 mx-auto mb-8 opacity-40">
+            {/* Adult Programs */}
+            <div className="bg-white overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <div className="relative h-64">
                 <Image
-                  src="/logos/city-laguna-beach.png"
-                  alt="City of Laguna Beach"
+                  src="/photos/adult-program.jpg"
+                  alt="Adult Programs"
                   fill
-                  className="object-contain"
-                  style={{ mixBlendMode: 'darken' }}
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
-
-              <h3 className="headline-sm text-lbta-primary mb-6">
-                Official City Partner
-              </h3>
-
-              <p className="body text-lbta-secondary">
-                Laguna Beach High School • Alta Laguna Park • Moulton Meadows Park
-              </p>
-            </AnimatedSection>
-
-            {/* Partner Logos - Single row, larger */}
-            <AnimatedSection delay={0.2}>
-              <div className="flex items-center justify-center gap-8 md:gap-12 overflow-x-auto pb-4 scrollbar-hide">
-                <div className="relative h-16 w-36 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
-                  <Image
-                    src="/logos/fit4tennis.png"
-                    alt="Fit4Tennis"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-
-                <div className="relative h-16 w-36 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
-                  <Image
-                    src="/logos/racketrescue.png"
-                    alt="Racket Rescue"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-
-                <div className="relative h-16 w-36 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
-                  <Image
-                    src="/logos/vylo.png"
-                    alt="VYLO"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-
-                <div className="relative h-16 w-32 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
-                  <Image
-                    src="/logos/racquetiq.png"
-                    alt="RacquetIQ"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-
-                <div className="relative h-16 w-32 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
-                  <Image
-                    src="/logos/tennisbeast.png"
-                    alt="Tennis Beast"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-
-                <div className="relative h-16 w-32 flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
-                  <Image
-                    src="/logos/lbhs.png"
-                    alt="Laguna Beach HS"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+              <div className="p-8">
+                <h3 className="font-headline text-3xl font-semibold text-[#134252] mb-3">Adult</h3>
+                <p className="font-body text-[#A7A9A9] mb-6">
+                  All levels. Fitness, social, competitive.
+                </p>
+                <Link href="/programs/adult" className="text-[#E76F51] font-semibold hover:text-[#d86247]">
+                  Explore →
+                </Link>
               </div>
-            </AnimatedSection>
+            </div>
+
+            {/* High Performance */}
+            <div className="bg-white overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <div className="relative h-64">
+                <Image
+                  src="/photos/high-performance.jpg"
+                  alt="High Performance"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="font-headline text-3xl font-semibold text-[#134252] mb-3">High Performance</h3>
+                <p className="font-body text-[#A7A9A9] mb-6">
+                  College recruitment. Tour preparation.
+                </p>
+                <Link href="/programs/high-performance" className="text-[#E76F51] font-semibold hover:text-[#d86247]">
+                  Explore →
+                </Link>
+              </div>
+            </div>
+
+          </div>
+
+          <p className="text-center mt-12 font-body text-[#A7A9A9]">
+            Winter 2026 enrollment open. Limited spots per tier.
+          </p>
+        </div>
+      </section>
+
+      {/* Founder Section */}
+      <section className="bg-white py-24 px-6 md:px-20">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+          <div>
+            <p className="text-sm font-semibold text-[#E76F51] uppercase tracking-wide mb-4">
+              Meet the Director
+            </p>
+            <h2 className="font-headline text-4xl md:text-5xl font-semibold text-[#134252] mb-6">
+              Andrew Mateljan
+            </h2>
+            <div className="font-body text-base md:text-lg text-[#134252] space-y-4 leading-relaxed">
+              <p>
+                20 years developing competitive players—junior, collegiate, and professional.
+              </p>
+              <p>
+                Former #3 SoCal · #12 US junior · Seven years in Spain, Croatia, Norway.
+              </p>
+              <p>
+                Guided players to Division I and professional tour success, including ATP athletes Karue Sell, Max McKennon, Ryan Seggerman, Colton Smith, and numerous WTA/ITF players.
+              </p>
+              <p>
+                Experience at Masters 1000 Indian Wells. Founder of Fit4Tennis (100K users).
+              </p>
+              <p className="italic text-[#A7A9A9] border-l-4 border-[#E76F51] pl-4">
+                "Great tennis isn't taught — it's developed, one disciplined day at a time."
+              </p>
+            </div>
+            <Link 
+              href="/book" 
+              className="inline-block mt-8 bg-[#E76F51] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#d86247] transition"
+            >
+              Book a Trial with Andrew's Team →
+            </Link>
+          </div>
+
+          <div className="relative h-96 md:h-[500px]">
+            <Image
+              src="/photos/andrew-portrait.jpg"
+              alt="Andrew Mateljan, Director & ATP/WTA Coach"
+              fill
+              className="object-cover rounded-sm"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         </div>
       </section>
 
+      {/* Coaching Team */}
+      <section className="bg-[#FCFCF9] py-24 px-6 md:px-20">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-headline text-4xl md:text-5xl font-semibold text-[#134252] mb-12 text-center">
+            Your Development Team
+          </h2>
 
-      {/* ============================================
-          FINAL CTA — Blueprint specs + Drama
-          ============================================ */}
-      <section className="relative h-[65vh] min-h-[600px] flex items-center justify-center">
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src="/photos/final-cta.jpg"
-            alt="Championship courts at Laguna Beach Tennis Academy"
-            fill
-            quality={85}
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          {/* Blueprint gradient: transparent to charcoal at 70% */}
-          <div className="absolute inset-0 bg-gradient-to-t from-lbta-charcoal/70 via-lbta-charcoal/30 to-transparent" />
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 text-center shadow-md hover:shadow-xl transition-shadow">
+              <h3 className="font-headline text-2xl font-semibold text-[#134252] mb-2">Kevin Jackson</h3>
+              <p className="font-body text-sm text-[#E76F51] mb-3 uppercase tracking-wide">College Recruitment Director</p>
+              <p className="font-body text-[#A7A9A9] text-sm">
+                100% placement rate. 20+ D1 athletes.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 text-center shadow-md hover:shadow-xl transition-shadow">
+              <h3 className="font-headline text-2xl font-semibold text-[#134252] mb-2">Michelle Bevins</h3>
+              <p className="font-body text-sm text-[#E76F51] mb-3 uppercase tracking-wide">Youth Development</p>
+              <p className="font-body text-[#A7A9A9] text-sm">
+                USTA Certified. Ages 3-12 specialist.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 text-center shadow-md hover:shadow-xl transition-shadow">
+              <h3 className="font-headline text-2xl font-semibold text-[#134252] mb-2">Savriyan Danilov</h3>
+              <p className="font-body text-sm text-[#E76F51] mb-3 uppercase tracking-wide">ATP #556</p>
+              <p className="font-body text-[#A7A9A9] text-sm">
+                Mental conditioning. High performance.
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link href="/coaches" className="text-[#E76F51] font-semibold hover:text-[#d86247]">
+              Meet the Team →
+            </Link>
+          </div>
         </div>
+      </section>
 
-        <div className="relative z-10 container-lbta px-6 md:px-30">
-          <div className="max-w-3xl mx-auto text-center">
-            <AnimatedSection>
-              {/* Blueprint Headline */}
-              <h2 className="headline text-lbta-bone mb-6">
+      {/* Partners Grid */}
+      <section className="bg-white py-16 px-6 md:px-20 border-t border-gray-200">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="font-body text-sm text-[#A7A9A9] mb-8">
+            Trusted by pros, schools, and the City of Laguna Beach.
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-12 opacity-60">
+            <div className="text-sm font-semibold text-[#134252]">City of Laguna Beach</div>
+            <div className="text-sm font-semibold text-[#134252]">Fit4Tennis</div>
+            <div className="text-sm font-semibold text-[#134252]">Racket Rescue</div>
+            <div className="text-sm font-semibold text-[#134252]">RacquetIQ</div>
+            <div className="text-sm font-semibold text-[#134252]">Tennis Beast</div>
+            <div className="text-sm font-semibold text-[#134252]">Laguna Beach HS</div>
+          </div>
+          <p className="font-body text-xs text-[#A7A9A9] mt-8 italic">
+            Official Partner since 2020
+          </p>
+        </div>
+      </section>
+
+      {/* Final CTA / Form */}
+      <section id="trial" className="bg-[#FCFCF9] py-24 px-6 md:px-20">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="font-headline text-4xl md:text-5xl font-semibold text-[#134252] mb-4">
                 Begin your development.
               </h2>
-
-              {/* Blueprint Body - Subheadline */}
-              <p className="body-lg text-lbta-bone/80 mb-12" style={{ fontWeight: 300 }}>
-                Free trial session. No commitment.
+              <p className="font-body text-lg text-[#134252] mb-4">
+                Free trial session. No commitment. Start this week.
               </p>
+              <p className="font-body text-sm text-[#E76F51] font-semibold">
+                Only 24 Winter spots remaining.
+              </p>
+            </div>
 
-              {/* Blueprint Button - White on dark */}
-              <Link
-                href="/book"
-                className="inline-flex items-center justify-center bg-white text-lbta-primary px-12 py-5 text-base font-medium tracking-[0.2px] transition-all duration-300 hover:bg-lbta-sand hover:-translate-y-0.5"
-                style={{
-                  fontFamily: 'var(--font-inter)',
-                  fontWeight: 500,
-                  borderRadius: '2px',
-                  boxShadow: '0 4px 12px rgba(255, 255, 255, 0.2)'
-                }}
-              >
-                Book Trial
-              </Link>
-            </AnimatedSection>
+            <div className="bg-white p-8 shadow-lg">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block font-body text-sm font-medium text-[#134252] mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-[#E76F51] focus:border-[#E76F51] outline-none transition font-body"
+                    placeholder="Your name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block font-body text-sm font-medium text-[#134252] mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-[#E76F51] focus:border-[#E76F51] outline-none transition font-body"
+                    placeholder="your@email.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="level" className="block font-body text-sm font-medium text-[#134252] mb-2">
+                    Level
+                  </label>
+                  <select
+                    id="level"
+                    required
+                    value={formData.level}
+                    onChange={(e) => setFormData({...formData, level: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-[#E76F51] focus:border-[#E76F51] outline-none transition font-body bg-white"
+                  >
+                    <option value="">Select your level...</option>
+                    <option value="beginner">Beginner - Never played</option>
+                    <option value="intermediate">Intermediate - Can rally</option>
+                    <option value="advanced">Advanced - Competitive player</option>
+                    <option value="junior">Junior (ages 3-18)</option>
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#E76F51] text-white font-semibold py-4 rounded-full hover:bg-[#d86247] transition disabled:opacity-50 uppercase tracking-wide text-sm"
+                >
+                  {isSubmitting ? 'Sending...' : 'Claim My Free Trial →'}
+                </button>
+
+                <p className="text-xs text-center text-[#A7A9A9]">
+                  Only 24 Winter spots remaining.
+                </p>
+              </form>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Subscribe Block */}
+      <section className="bg-[#134252] text-white py-16 px-6 md:px-20">
+        <div className="max-w-3xl mx-auto text-center">
+          <h3 className="font-headline text-3xl font-semibold mb-4">
+            Stay Ahead of the Game
+          </h3>
+          <p className="font-body text-white/80 mb-8">
+            Join 2,400+ players receiving weekly tips and early access to camps.
+          </p>
+          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-white/50 outline-none font-body"
+              required
+            />
+            <button
+              type="submit"
+              className="bg-[#E76F51] px-8 py-3 font-semibold hover:bg-[#d86247] transition uppercase tracking-wide text-sm"
+            >
+              Subscribe →
+            </button>
+          </form>
         </div>
       </section>
     </>
