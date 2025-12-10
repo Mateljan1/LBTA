@@ -119,32 +119,32 @@ export default function Home() {
             {/* Mobile fallback background */}
             <div className="md:hidden absolute inset-0 bg-gradient-to-br from-[#134252] to-[#2a5f73]"></div>
 
-            <div className="relative p-10 md:p-12 lg:p-14 space-y-6">
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-1.5 h-16 bg-[#E76F51] rounded-full flex-shrink-0 mt-1"></div>
-                  <p className="font-body text-white text-lg md:text-xl leading-relaxed">
+            <div className="relative p-10 md:p-12 lg:p-14 flex flex-col justify-center min-h-[500px]">
+              <div className="space-y-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-1 h-8 bg-[#E76F51] rounded-full flex-shrink-0"></div>
+                  <p className="font-body text-white text-lg md:text-xl leading-tight">
                     <span className="font-semibold">20 Division I Scholarships</span>
                   </p>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-1.5 h-24 bg-[#E76F51] rounded-full flex-shrink-0 mt-1"></div>
-                  <p className="font-body text-white text-lg md:text-xl leading-relaxed">
+                <div className="flex items-center gap-4">
+                  <div className="w-1 h-12 bg-[#E76F51] rounded-full flex-shrink-0"></div>
+                  <p className="font-body text-white text-lg md:text-xl leading-tight">
                     Went from <span className="font-bold text-2xl md:text-3xl text-[#E76F51]">#862 → #262</span> in the ATP rankings
                   </p>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-1.5 h-16 bg-[#E76F51] rounded-full flex-shrink-0 mt-1"></div>
-                  <p className="font-body text-white text-lg md:text-xl leading-relaxed">
+                <div className="flex items-center gap-4">
+                  <div className="w-1 h-12 bg-[#E76F51] rounded-full flex-shrink-0"></div>
+                  <p className="font-body text-white text-lg md:text-xl leading-tight">
                     <span className="font-semibold">Multiple national champions</span> at junior and collegiate levels
                   </p>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-1.5 h-16 bg-[#E76F51] rounded-full flex-shrink-0 mt-1"></div>
-                  <p className="font-body text-white text-lg md:text-xl leading-relaxed">
+                <div className="flex items-center gap-4">
+                  <div className="w-1 h-10 bg-[#E76F51] rounded-full flex-shrink-0"></div>
+                  <p className="font-body text-white text-lg md:text-xl leading-tight">
                     <span className="font-semibold">Hundreds of adults</span> rediscovering competitive tennis
                   </p>
                 </div>
@@ -152,7 +152,7 @@ export default function Home() {
 
               <Link
                 href="/success-stories"
-                className="inline-flex items-center gap-2 text-white bg-[#E76F51] px-6 py-3 rounded-sm font-semibold hover:bg-[#d86247] transition-colors mt-6"
+                className="inline-flex items-center gap-2 text-white bg-[#E76F51] px-6 py-3 rounded-sm font-semibold hover:bg-[#d86247] transition-colors mt-12"
               >
                 See Their Stories →
               </Link>
