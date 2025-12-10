@@ -278,10 +278,10 @@ export default function Home() {
 
           <div className="relative h-96 md:h-[500px]">
             <Image
-              src="/photos/andrew-portrait.jpg"
+              src="/photos/KarueFH2.jpg"
               alt="Andrew Mateljan, Director & ATP/WTA Coach"
               fill
-              className="object-cover rounded-sm"
+              className="object-cover object-center rounded-sm"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
@@ -299,10 +299,10 @@ export default function Home() {
             <div className="bg-white overflow-hidden shadow-md hover:shadow-xl transition-shadow">
               <div className="relative h-80">
                 <Image
-                  src="/photos/CQ8A0199.jpg"
+                  src="/photos/CQ8A0023.jpg"
                   alt="Kevin Jackson, Head Coach"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-[50%_20%]"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
@@ -318,10 +318,10 @@ export default function Home() {
             <div className="bg-white overflow-hidden shadow-md hover:shadow-xl transition-shadow">
               <div className="relative h-80">
                 <Image
-                  src="/photos/CQ8A0490.jpg"
+                  src="/photos/CQ8A0103.jpg"
                   alt="Michelle Bevins, Youth Director"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-[50%_30%]"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
@@ -337,10 +337,10 @@ export default function Home() {
             <div className="bg-white overflow-hidden shadow-md hover:shadow-xl transition-shadow">
               <div className="relative h-80">
                 <Image
-                  src="/photos/CQ8A0537.jpg"
+                  src="/photos/CQ8A0046_1.jpg"
                   alt="Savriyan Danilov, ATP Pro"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-[50%_20%]"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
