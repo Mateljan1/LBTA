@@ -1,199 +1,181 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import AnimatedSection from '@/components/ui/AnimatedSection'
 
 const milestones = [
-  {
-    year: "2020",
-    title: "LBTA Founded",
-    description: "Andrew Mateljan establishes Laguna Beach Tennis Academy, bringing ATP/WTA-level coaching to the community. City of Laguna Beach partnership begins."
-  },
-  {
-    year: "2021",
-    title: "First D1 Placements",
-    description: "Three academy students earn Division I college scholarships, establishing LBTA's reputation for elite player development."
-  },
-  {
-    year: "2022",
-    title: "Program Expansion",
-    description: "Added High Performance track and expanded to three city facilities. Enrollment reaches 100+ active students."
-  },
-  {
-    year: "2023",
-    title: "ATP Success",
-    description: "Karue Sell improves 600 ATP ranking spots while training with Andrew. Fit4Tennis reaches 100K+ followers globally."
-  },
-  {
-    year: "2024",
-    title: "20+ D1 Placements",
-    description: "Milestone achievement: Over 20 Division I college scholarships awarded to LBTA-trained athletes. VYLO Performance Institute announced."
-  },
-  {
-    year: "2025",
-    title: "Continued Excellence",
-    description: "200+ active members. Three ATP-ranked players currently training. Scholarship program expands to $25K+ annually."
-  }
+  { year: '2020', title: 'LBTA Founded', description: 'Andrew returns to Laguna, begins ATP/WTA-level coaching locally.' },
+  { year: '2021', title: 'First D1 Placements', description: 'Three students earn Division I scholarships.' },
+  { year: '2022', title: 'Program Expansion', description: 'High Performance track introduced.' },
+  { year: '2023', title: 'ATP Success', description: 'Karue Sell rises 600 spots on ATP Tour.' },
+  { year: '2024', title: '20+ D1 Scholarships', description: 'Over 20 placements achieved.' },
+  { year: '2025', title: 'Continued Excellence', description: '200+ members, $25K+ annual scholarship fund.' },
 ]
 
-const values = [
-  {
-    title: "The Work",
-    description: "Perfect technique takes time. What happens faster: mental clarity, physical discipline, the confidence that comes from doing hard things well."
-  },
-  {
-    title: "Your Path",
-    description: "No two athletes develop the same way. We honor your unique strengths, address your specific challenges, design around your goals."
-  },
-  {
-    title: "Honest Feedback",
-    description: "Real progress requires truth. You'll always know where you stand, what's working, and what needs work. No sugar-coating, no false praise."
-  },
-  {
-    title: "The Community",
-    description: "From 3-year-olds learning focus to ATP professionals refining strategy. Everyone here is serious about getting better."
-  }
+const principles = [
+  { title: 'The Work', description: 'Technique takes time. Mental clarity and discipline come first.' },
+  { title: 'Your Path', description: 'Every athlete develops uniquely. Training is personalized.' },
+  { title: 'Honest Feedback', description: 'Real progress requires truth — no sugar-coating.' },
+  { title: 'The Community', description: 'From 3-year-olds to ATP players — one shared pursuit of excellence.' },
 ]
 
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-white pt-40 pb-20">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <p className="text-overline mb-6">Our Story</p>
-            <h1 className="text-display-lg heading-display mb-6">
-              Where Character Meets  
-              Championship
-            </h1>
-              <p className="body-lg text-gray-600 max-w-2xl mx-auto">
-                Since 2020, students have learned that good tennis teaches more than strokes. It builds focus, resilience, and the quiet confidence that comes from doing hard work well.
-              </p>
-          </AnimatedSection>
+      {/* HERO SECTION */}
+      <section className="relative min-h-[65vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero/laguna-horizon.webp"
+            alt="Laguna Beach tennis courts with ocean horizon"
+            fill
+            className="object-cover"
+            style={{ objectPosition: '50% 60%' }}
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/15 to-transparent" />
+        </div>
+        
+        <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
+          <h1 className="font-serif text-[36px] md:text-[64px] font-bold leading-[1.05] mb-6 text-shadow">
+            Where Character Meets Championship.
+          </h1>
+          <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-10 max-w-[85%] mx-auto">
+            Tennis as craft. Coaching as mentorship. Development as life preparation.
+          </p>
+          <Link 
+            href="/programs"
+            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+          >
+            Explore Programs →
+          </Link>
         </div>
       </section>
 
-      {/* Our Story */}
-      <section className="section-spacing bg-lbta-cream">
-        <div className="container-lbta">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <AnimatedSection>
-              <div className="relative aspect-[3/2] overflow-hidden rounded-sm bg-gray-100">
-                <Image
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/35885076d_HEROIMAGE-2.png"
-                  alt="Laguna Beach Tennis Academy facilities with palm trees and tennis courts"
-                  fill
-                  quality={90}
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8ZAAAAAAAAA//Z"
-                />
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <h2 className="headline-sm text-lbta-charcoal mb-8">
-                Why We Started
+      {/* OUR STORY */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-12">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div className="relative aspect-[3/2] overflow-hidden rounded">
+              <Image
+                src="/images/programs/private-specialty.webp"
+                alt="LBTA tennis coaching session"
+                fill
+                className="object-cover"
+                style={{ objectPosition: '50% 55%' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 overlay-light" />
+            </div>
+            
+            <div className="space-y-6">
+              <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black leading-tight">
+                Our Story
               </h2>
-              <div className="space-y-6 text-gray-600 leading-relaxed">
-                <p>
-                  In 2020, Andrew Mateljan came back to Laguna Beach after coaching ATP/WTA players across Europe. The goal was simple: bring professional-level training to anyone serious about getting better.
-                </p>
-                <p>
-                  What if tennis became the foundation for unshakeable confidence? What if the clarity required for perfect form translated into clarity in every life decision? What if the mental toughness needed to compete at the highest level built leaders who could excel anywhere?
-                </p>
-                <p>
-                  Today, LBTA is living proof of this vision. Our athletes don't just win matches—they earn full scholarships to Stanford, develop the work ethic that transforms careers, and carry themselves with the quiet confidence that comes from true mastery.
-                </p>
-                <p>
-                  This is tennis as character development. This is sport as life preparation. This is LBTA.
-                </p>
-              </div>
-            </AnimatedSection>
+              <p className="font-sans text-[16px] md:text-[17px] leading-relaxed text-black/85">
+                Since 2020, students have learned that good tennis teaches more than strokes. 
+                It builds focus, resilience, and quiet confidence through disciplined effort.
+              </p>
+              <p className="font-sans text-[16px] md:text-[17px] leading-relaxed text-black/85">
+                Founded by Andrew Mateljan, LBTA brings ATP/WTA-level coaching to every player — 
+                from first rally to professional tour.
+              </p>
+              <p className="font-sans text-[16px] md:text-[17px] leading-relaxed text-black/85">
+                Today, our players compete globally, earn college scholarships, and carry themselves 
+                with the composure of true mastery.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="section-spacing bg-white">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center mb-16">
-            <p className="eyebrow mb-6" style={{ color: '#E8956F' }}>OUR JOURNEY</p>
-            <h2 className="headline text-lbta-charcoal">
-              Built on Results
-            </h2>
-          </AnimatedSection>
-
-          <div className="max-w-4xl mx-auto space-y-12">
-            {milestones.map((milestone, index) => (
-              <AnimatedSection key={milestone.year} delay={index * 0.1}>
-                <div className="flex gap-8">
-                  <div className="flex-shrink-0 w-24 text-right">
-                  <div className="subhead text-lbta-coral">
+      {/* OUR JOURNEY - Timeline */}
+      <section className="bg-[#FAF8F3] py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+          <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-12 text-center">
+            Our Journey
+          </h2>
+          
+          <div className="relative">
+            {/* Timeline connector - desktop */}
+            <div className="hidden md:block absolute left-0 right-0 top-[60px] h-[2px] bg-lbta-orange/30" />
+            
+            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-6">
+              {milestones.map((milestone, index) => (
+                <div 
+                  key={milestone.year}
+                  className="relative bg-white rounded-xl p-6 shadow-soft hover:shadow-hover transition-all duration-300 text-center"
+                >
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-lbta-orange hidden md:block" />
+                  <div className="text-[24px] md:text-[28px] font-serif font-bold text-lbta-orange mb-2">
                     {milestone.year}
                   </div>
-                  </div>
-                  <div className="flex-1 border-l-2 border-gray-200 pl-8 pb-8">
-            <h3 className="subhead-sm text-lbta-charcoal mb-3">
-                {milestone.title}
-              </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {milestone.description}
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="section-spacing bg-lbta-cream">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center mb-16">
-            <p className="eyebrow mb-6" style={{ color: '#E8956F' }}>OUR FOUNDATION</p>
-            <h2 className="headline text-lbta-charcoal">
-              The Principles That  
-              Shape Champions
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
-              These aren't just tennis values—they're life principles that our athletes carry far beyond the court.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {values.map((value, index) => (
-              <AnimatedSection key={value.title} delay={index * 0.1}>
-                <div className="text-center">
-                  <h3 className="subhead-sm text-lbta-charcoal mb-4">
-                    {value.title}
+                  <h3 className="font-serif text-[16px] md:text-[18px] font-semibold text-black mb-2 leading-tight">
+                    {milestone.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {value.description}
+                  <p className="font-sans text-[13px] md:text-[14px] text-black/70 leading-relaxed">
+                    {milestone.description}
                   </p>
                 </div>
-              </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR FOUNDATION - Principles */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+          <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-12 text-center">
+            Our Foundation
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {principles.map((principle, index) => (
+              <div 
+                key={principle.title}
+                className="bg-[#FAF8F3] rounded-2xl p-8 md:p-10 shadow-soft hover:shadow-hover transition-all duration-300"
+              >
+                <div className="text-[36px] md:text-[42px] text-lbta-orange font-serif font-bold mb-4">
+                  {index + 1}
+                </div>
+                <h3 className="font-serif text-[22px] md:text-[26px] font-semibold text-black mb-4">
+                  {principle.title}
+                </h3>
+                <p className="font-sans text-[15px] md:text-[16px] text-black/80 leading-relaxed">
+                  {principle.description}
+                </p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-spacing bg-white border-t border-gray-200">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h2 className="headline-sm text-lbta-charcoal mb-8">
-              Start Your Development
-            </h2>
-            <p className="body-lg text-gray-600 mb-10">
-              Professional coaching for all ages and levels. Book your complimentary trial session.
-            </p>
-            <Link href="/book" className="btn-primary">
-              BOOK TRIAL
-            </Link>
-          </AnimatedSection>
+      {/* CTA SECTION */}
+      <section className="relative min-h-[500px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero/laguna-horizon.webp"
+            alt="Laguna Beach sunset"
+            fill
+            className="object-cover cta-img"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 overlay-strong" />
+        </div>
+        
+        <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto py-20">
+          <h2 className="font-serif text-[36px] md:text-[52px] font-semibold mb-8 leading-[1.15] text-shadow">
+            Start Your Development
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/95 mb-10">
+            Professional coaching for all ages and levels.
+          </p>
+          <Link 
+            href="/book"
+            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+          >
+            Book Trial →
+          </Link>
         </div>
       </section>
     </>
