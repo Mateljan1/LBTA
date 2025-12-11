@@ -14,14 +14,14 @@ export default function Programs() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0">
           <Image
-            src="/images/cta/cta-background.webp"
-            alt="Laguna Beach tennis courts at sunset"
+            src="/images/programs/private-lessons-hero.webp"
+            alt="LBTA professional tennis coaching"
             fill
             className="object-cover"
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-black/35" />
+          <div className="absolute inset-0 bg-black/15" />
         </div>
         
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
@@ -57,6 +57,7 @@ export default function Programs() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
+              <div className="absolute inset-0 bg-black/10" />
             </div>
             
             {/* Text Right */}
@@ -137,12 +138,13 @@ export default function Programs() {
             {/* Image Right */}
             <div className="relative aspect-[3/2] overflow-hidden md:order-2">
               <Image
-                src="/images/programs/juniors.webp"
+                src="/images/results/karue-training.webp"
                 alt="Youth tennis development for ages 11-18"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
+              <div className="absolute inset-0 bg-black/10" />
             </div>
           </div>
         </div>
@@ -152,13 +154,13 @@ export default function Programs() {
       <section className="relative py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/results/karue-training.webp"
+            src="/images/programs/private-lessons-hp.webp"
             alt="High performance tennis training"
             fill
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/15" />
         </div>
         
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40 text-white">
@@ -243,6 +245,7 @@ export default function Programs() {
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
+                  <div className="absolute inset-0 bg-black/10" />
                 </div>
                 <h3 className="font-serif text-[24px] font-semibold text-black mb-2">
                   {program.title}
@@ -283,12 +286,13 @@ export default function Programs() {
             {/* Image Left */}
             <div className="relative aspect-[3/2] overflow-hidden">
               <Image
-                src="/images/philosophy/belonging.webp"
+                src="/images/community/community-3.webp"
                 alt="Fitness and community tennis programs"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
+              <div className="absolute inset-0 bg-black/10" />
             </div>
             
             {/* Text Right */}
@@ -381,6 +385,7 @@ export default function Programs() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
+              <div className="absolute inset-0 bg-black/25" />
             </div>
           </div>
         </div>
@@ -390,7 +395,7 @@ export default function Programs() {
       <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/cta/cta-background.webp"
+            src="/images/hero/laguna-horizon.webp"
             alt="Laguna Beach tennis courts at sunset"
             fill
             className="object-cover"
@@ -414,11 +419,11 @@ export default function Programs() {
               View Schedules →
             </Link>
             <a 
-              href="/pdfs/LBTA_Winter2026_Optimized.pdf"
+              href="/LBTA_Winter2026_Optimized.pdf"
               download
               className="inline-block border-2 border-white hover:bg-white hover:text-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200 w-full sm:w-auto"
             >
-              Download Winter 2026 PDF
+              Download Winter 2026 Schedule
             </a>
           </div>
         </div>
