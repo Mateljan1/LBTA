@@ -141,6 +141,7 @@ export default function Home() {
             alt="Karue Sell ATP training session"
             fill
             className="object-cover"
+            style={{ objectPosition: '50% 35%' }}
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-black/50" />
