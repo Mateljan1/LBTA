@@ -55,17 +55,18 @@ export default function Home() {
         >
           <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
         </video>
+        <div className="absolute inset-0 bg-black/15" aria-hidden="true"></div>
         
         <div className="relative z-10 text-center text-white px-6 max-w-5xl mx-auto">
           <h1 
             className="font-serif text-[42px] md:text-[72px] font-bold leading-[1.1] tracking-[-0.5px] mb-4 md:mb-6"
-            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.35)' }}
+            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.45)' }}
           >
             Tennis, as it should be taught.
           </h1>
           <p 
             className="font-serif text-[24px] md:text-[32px] leading-[1.2] mb-12"
-            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.35)' }}
+            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.45)' }}
           >
             Movement. Discipline. Belonging.
           </p>
@@ -101,10 +102,10 @@ export default function Home() {
               <h2 className="font-serif text-[40px] md:text-[48px] leading-[1.1] font-semibold text-black">
                 Founded in Laguna Beach by Andrew Mateljan
               </h2>
-              <p className="font-sans text-[18px] leading-[1.8] text-black/90">
+              <p className="font-sans text-[18px] leading-[1.8] text-black/85">
                 A lifetime in the game — from international courts to California's coast.
               </p>
-              <p className="font-sans text-[18px] leading-[1.8] text-black/90">
+              <p className="font-sans text-[18px] leading-[1.8] text-black/85">
                 25 years in tennis as a top-ranked junior and international coach. 
                 Years spent coaching in Spain and Croatia shaped a movement-first approach 
                 grounded in clarity and accountability. Now guiding players of every level 
@@ -140,7 +141,7 @@ export default function Home() {
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-black/50" />
         </div>
         
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40 w-full">
@@ -217,7 +218,7 @@ export default function Home() {
       {/* SCENE 5: PROGRAMS - "Pathways for Every Player" */}
       <section 
         id="programs" 
-        className="bg-white py-24 md:py-32"
+        className="bg-[#FAF8F3] py-24 md:py-32"
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-20">
           <h2 className="font-serif text-[40px] md:text-[48px] font-semibold text-black mb-12 text-center">
@@ -294,7 +295,7 @@ export default function Home() {
             sizes="100vw"
             priority={false}
           />
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/45" />
         </div>
         
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
@@ -310,13 +311,13 @@ export default function Home() {
       {/* SCENE 7: COMMUNITY - "Players Who Train Our Way" */}
       <section 
         id="community" 
-        className="bg-white py-24 md:py-32"
+        className="bg-[#F8E6BB]/20 py-24 md:py-32"
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-20">
           <h2 className="font-serif text-[40px] font-semibold text-black mb-4 text-center">
             Players who train our way.
           </h2>
-          <p className="font-sans text-[18px] text-black/80 mb-12 text-center max-w-3xl mx-auto">
+          <p className="font-sans text-[18px] text-black/85 mb-12 text-center max-w-3xl mx-auto">
             From junior pathways to ATP courts, each player shares the same standard.
           </p>
           
@@ -352,7 +353,7 @@ export default function Home() {
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30" />
         </div>
         
         <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto py-20">
@@ -367,7 +368,7 @@ export default function Home() {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               required
-              className="w-full px-6 py-4 bg-white/95 text-black rounded-lg font-sans text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
+              className="w-full px-6 py-4 bg-[#F8F8F5] text-black rounded-lg font-sans text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
             />
             <input
               type="email"
@@ -375,7 +376,7 @@ export default function Home() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
-              className="w-full px-6 py-4 bg-white/95 text-black rounded-lg font-sans text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
+              className="w-full px-6 py-4 bg-[#F8F8F5] text-black rounded-lg font-sans text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
             />
             <input
               type="tel"
@@ -383,7 +384,7 @@ export default function Home() {
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               required
-              className="w-full px-6 py-4 bg-white/95 text-black rounded-lg font-sans text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
+              className="w-full px-6 py-4 bg-[#F8F8F5] text-black rounded-lg font-sans text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
             />
             <button
               type="submit"
