@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
+import { CourseSchema } from '../schema'
 
 export const metadata: Metadata = {
   title: 'Programs | Laguna Beach Tennis Academy',
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function Programs() {
   return (
     <>
+      <CourseSchema />
       {/* SECTION 1: HERO */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0">

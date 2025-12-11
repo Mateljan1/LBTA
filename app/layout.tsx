@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Work_Sans } from 'next/font/google'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
+import { OrganizationSchema } from './schema'
 
 // LBTA Typography System - Playfair Display + Work Sans
 const playfair = Playfair_Display({
@@ -99,6 +100,9 @@ export default function RootLayout({
 
         {/* Google Analytics - Add your GA4 measurement ID when ready */}
         {/* Placeholder removed - configure with real GA4 ID in production */}
+        
+        {/* Schema Markup */}
+        <OrganizationSchema />
       </head>
       <body className={`${workSans.className} flex flex-col min-h-screen`}>
         <ConditionalLayout>

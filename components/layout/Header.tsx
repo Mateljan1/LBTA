@@ -90,12 +90,12 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Mobile Menu - Simplified */}
+      {/* Mobile Menu - Enhanced */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-[90] md:hidden">
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
           
