@@ -9,6 +9,31 @@
   }
 }
 
+/* React Big Calendar Custom Styles */
+.lbta-calendar .rbc-header {
+  @apply font-sans text-[14px] font-semibold text-black/80 py-3 border-b border-gray-200;
+}
+
+.lbta-calendar .rbc-time-slot {
+  @apply border-gray-100;
+}
+
+.lbta-calendar .rbc-time-content {
+  @apply border-t border-gray-200;
+}
+
+.lbta-calendar .rbc-current-time-indicator {
+  @apply bg-lbta-red;
+}
+
+.lbta-calendar .rbc-event {
+  @apply font-sans;
+}
+
+.lbta-calendar .rbc-event:hover {
+  @apply opacity-100 scale-[1.02] transition-transform;
+}
+
 @layer base {
   :root {
     /* LBTA Font Stack */
