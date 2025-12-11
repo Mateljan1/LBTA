@@ -250,7 +250,7 @@ export default function Home() {
                 href={program.link}
                 className="group block"
               >
-                <div className="relative aspect-[4/5] overflow-hidden mb-4 bg-gray-100">
+                <div className="relative aspect-[3/2] overflow-hidden mb-4 bg-gray-100">
                   <Image
                     src={program.image}
                     alt={program.title}
@@ -320,11 +320,11 @@ export default function Home() {
             From junior pathways to ATP courts, each player shares the same standard.
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {[1, 2, 3, 4, 5, 6, 7].map((num) => (
               <div 
                 key={num}
-                className="relative aspect-[3/4] overflow-hidden bg-gray-100"
+                className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded"
               >
                 <Image
                   src={`/images/community/community-${num}.webp`}
@@ -399,35 +399,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="bg-[#F8E6BB] py-20">
-        <div className="max-w-[1440px] mx-auto px-6 text-center">
-          <div className="mb-8">
-            <Image
-              src="/logos/LBTAblktext.png"
-              alt="Laguna Beach Tennis Academy"
-              width={200}
-              height={60}
-              className="mx-auto"
-            />
-          </div>
-          
-          <nav className="mb-8">
-            <ul className="flex flex-wrap justify-center gap-6 md:gap-8 font-sans text-[14px] uppercase tracking-wide text-black/80">
-              <li><Link href="/" className="hover:text-lbta-orange transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-lbta-orange transition-colors">Philosophy</Link></li>
-              <li><Link href="/programs" className="hover:text-lbta-orange transition-colors">Programs</Link></li>
-              <li><Link href="/coaches" className="hover:text-lbta-orange transition-colors">Coaches</Link></li>
-              <li><Link href="/contact" className="hover:text-lbta-orange transition-colors">Contact</Link></li>
-            </ul>
-          </nav>
-          
-          <div className="font-sans text-[12px] text-black/60">
-            <p>© {new Date().getFullYear()} Laguna Beach Tennis Academy. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </>
   )
 }
