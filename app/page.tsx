@@ -324,7 +324,7 @@ export default function Home() {
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            {[1, 2, 3, 4, 5, 6, 7].map((num) => (
+            {[1, 2, 3, 4, 5, 6].map((num) => (
               <div 
                 key={num}
                 className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded"
@@ -334,6 +334,7 @@ export default function Home() {
                   alt={`LBTA community member ${num}`}
                   fill
                   className="object-cover"
+                  style={{ objectPosition: '50% 20%' }}
                   sizes="(max-width: 768px) 50vw, 33vw"
                 />
               </div>
