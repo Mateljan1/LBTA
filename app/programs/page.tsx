@@ -1,153 +1,426 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import AnimatedSection from '@/components/ui/AnimatedSection'
+import type { Metadata } from 'next'
 
-export default function ProgramsPage() {
+export const metadata: Metadata = {
+  title: 'Programs | Laguna Beach Tennis Academy',
+  description: 'Explore tennis programs for every age and level — from junior development to college-bound athletes and adult training — all built around movement, discipline and belonging.',
+}
+
+export default function Programs() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-white pt-40 pb-20">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <p className="eyebrow mb-6" style={{ color: '#E8956F' }}>Programs</p>
-            <h1 className="display mb-6">
-              Find Your Path
-            </h1>
-            <p className="body-lg max-w-2xl mx-auto text-gray-600">
-              Three paths. One standard. ATP/WTA coaching for all ages and levels.
-            </p>
-          </AnimatedSection>
+      {/* SECTION 1: HERO */}
+      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-black">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/cta/cta-background.webp"
+            alt="Laguna Beach tennis courts at sunset"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/35" />
+        </div>
+        
+        <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
+          <h1 className="font-serif text-[48px] md:text-[64px] font-bold leading-[1.1] tracking-[-0.5px] mb-6">
+            Programs for Every Player.
+          </h1>
+          <p className="font-sans text-[18px] md:text-[20px] leading-[1.6] text-white/90 mb-8 max-w-3xl mx-auto">
+            From your child's first rally to college recruitment and lifelong play — 
+            every program follows the same philosophy:
+          </p>
+          <p className="font-serif text-[24px] md:text-[28px] leading-[1.3] mb-10 text-white">
+            Movement. Discipline. Belonging.
+          </p>
+          <Link 
+            href="/schedules"
+            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
+          >
+            View Schedules →
+          </Link>
         </div>
       </section>
 
-      {/* Three Program Pathways */}
-      <section className="section-spacing bg-lbta-bone">
-        <div className="container-lbta">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* SECTION 2: JUNIOR DEVELOPMENT (Ages 3-11) */}
+      <section className="bg-[#FAF8F3] py-24 md:py-32">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            {/* Image Left */}
+            <div className="relative aspect-[3/2] overflow-hidden">
+              <Image
+                src="/images/programs/juniors.webp"
+                alt="Junior tennis development for ages 3-11"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
             
-            {/* Junior Development */}
-            <AnimatedSection>
-              <Link href="/schedules" className="block group">
-                <div className="bg-white border border-gray-200 overflow-hidden hover:border-lbta-charcoal/40 transition-all duration-300 hover:shadow-xl h-full">
-                  <div className="relative h-80 overflow-hidden bg-gray-100">
-                    <Image
-                      src="/photos/junior-program-hero.webp"
-                      alt="Junior tennis development"
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                    />
-                  </div>
-                  <div className="p-8">
-                    <p className="eyebrow mb-3" style={{ color: '#E8956F' }}>AGES 3–18</p>
-                    <h2 className="headline-sm mb-4 group-hover:text-lbta-coral transition-colors">
-                      Junior Development
-                    </h2>
-                    <p className="body-sm text-gray-600 mb-6">
-                      From first lesson to D1 scholarship. Little Stars (ages 3-4) through High Performance training.
-                    </p>
-                    <div className="eyebrow text-lbta-charcoal group-hover:text-lbta-coral transition-colors inline-flex items-center">
-                      SEE SCHEDULE & PRICING →
-                    </div>
-                  </div>
-                </div>
+            {/* Text Right */}
+            <div className="space-y-6">
+              <h2 className="font-serif text-[40px] md:text-[48px] leading-[1.1] font-semibold text-black">
+                Junior Development
+                <span className="block text-[24px] font-sans font-normal text-black/70 mt-2">
+                  Ages 3–11
+                </span>
+              </h2>
+              <h3 className="font-serif text-[24px] text-lbta-orange italic">
+                Where it begins.
+              </h3>
+              <p className="font-sans text-[18px] leading-[1.8] text-black/85">
+                Our youngest players build coordination, rhythm, and love for the game.
+              </p>
+              <p className="font-sans text-[18px] leading-[1.8] text-black/85">
+                Programs progress from Little Stars to Green Dot, blending fundamentals 
+                with movement and fun discipline.
+              </p>
+              <div className="pt-4">
+                <p className="font-sans text-[16px] text-black/70 mb-2">
+                  <strong>Format:</strong> 45–60 min · Small groups · Quarterly billing
+                </p>
+                <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+                  "Confidence before competition."
+                </blockquote>
+              </div>
+              <Link 
+                href="/schedules#junior"
+                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
+              >
+                View Junior Schedule →
               </Link>
-            </AnimatedSection>
-
-            {/* Adult Programs */}
-            <AnimatedSection delay={0.1}>
-              <Link href="/schedules" className="block group">
-                <div className="bg-white border border-gray-200 overflow-hidden hover:border-lbta-charcoal/40 transition-all duration-300 hover:shadow-xl h-full">
-                  <div className="relative h-80 overflow-hidden bg-gray-100">
-                    <Image
-                      src="/photos/adult-program.webp"
-                      alt="Adult tennis programs"
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                    />
-                  </div>
-                  <div className="p-8">
-                    <p className="eyebrow mb-3" style={{ color: '#E8956F' }}>ALL LEVELS</p>
-                    <h2 className="headline-sm mb-4 group-hover:text-lbta-coral transition-colors">
-                      Adult Programs
-                    </h2>
-                    <p className="body-sm text-gray-600 mb-6">
-                      Beginner through USTA 4.0+. Fitness, social connection, and competitive play.
-                    </p>
-                    <div className="eyebrow text-lbta-charcoal group-hover:text-lbta-coral transition-colors inline-flex items-center">
-                      SEE SCHEDULE & PRICING →
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </AnimatedSection>
-
-            {/* High Performance */}
-            <AnimatedSection delay={0.2}>
-              <Link href="/schedules" className="block group">
-                <div className="bg-white border border-gray-200 overflow-hidden hover:border-lbta-charcoal/40 transition-all duration-300 hover:shadow-xl h-full">
-                  <div className="relative h-80 overflow-hidden bg-gray-100">
-                    <Image
-                      src="/photos/high-performance.webp"
-                      alt="High performance tennis training"
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                    />
-                  </div>
-                  <div className="p-8">
-                    <p className="eyebrow mb-3" style={{ color: '#E8956F' }}>COMPETITIVE</p>
-                    <h2 className="headline-sm mb-4 group-hover:text-lbta-coral transition-colors">
-                      High Performance
-                    </h2>
-                    <p className="body-sm text-gray-600 mb-6">
-                      College recruitment and ATP/WTA tour preparation. Application only.
-                    </p>
-                    <div className="eyebrow text-lbta-charcoal group-hover:text-lbta-coral transition-colors inline-flex items-center">
-                      VIEW PROGRAM DETAILS →
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </AnimatedSection>
-
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Private Coaching Brief Mention */}
-      <section className="section-spacing bg-white border-t border-gray-200">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h2 className="headline mb-4">Private Coaching</h2>
-            <p className="body-lg text-gray-600 mb-8">
-              One-on-one sessions with ATP/WTA tour coaches. $100-$250 per hour.
-            </p>
-            <Link
-              href="/coaches"
-              className="eyebrow inline-flex items-center justify-center border border-lbta-charcoal text-lbta-charcoal px-10 py-4 transition hover:bg-lbta-charcoal hover:text-white"
-            >
-              VIEW COACHES & RATES
-            </Link>
-          </AnimatedSection>
+      {/* SECTION 3: YOUTH DEVELOPMENT (Ages 11-18) */}
+      <section className="bg-white py-24 md:py-32">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            {/* Text Left */}
+            <div className="space-y-6 md:order-1">
+              <h2 className="font-serif text-[40px] md:text-[48px] leading-[1.1] font-semibold text-black">
+                Youth Development
+                <span className="block text-[24px] font-sans font-normal text-black/70 mt-2">
+                  Ages 11–18
+                </span>
+              </h2>
+              <h3 className="font-serif text-[24px] text-lbta-orange italic">
+                For players growing into competitors.
+              </h3>
+              <p className="font-sans text-[18px] leading-[1.8] text-black/85">
+                Full-court training focused on technical precision, tactical awareness, 
+                and structured match play.
+              </p>
+              <p className="font-sans text-[18px] leading-[1.8] text-black/85">
+                Led by Andrew Mateljan and LBTA staff using tour-tested methodology.
+              </p>
+              <div className="pt-4">
+                <p className="font-sans text-[16px] text-black/70 mb-2">
+                  <strong>Format:</strong> 90 min · Max 6 per court · Moulton / LBHS
+                </p>
+                <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+                  "Discipline creates confidence."
+                </blockquote>
+              </div>
+              <Link 
+                href="/schedules#youth"
+                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
+              >
+                View Youth Schedule →
+              </Link>
+            </div>
+            
+            {/* Image Right */}
+            <div className="relative aspect-[3/2] overflow-hidden md:order-2">
+              <Image
+                src="/images/programs/juniors.webp"
+                alt="Youth tennis development for ages 11-18"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-spacing bg-lbta-charcoal text-white">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h2 className="headline mb-6 text-white">
-              Ready to Start?
+      {/* SECTION 4: HIGH PERFORMANCE PATHWAY */}
+      <section className="relative py-32 md:py-40 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/results/karue-training.webp"
+            alt="High performance tennis training"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+        
+        <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40 text-white">
+          <div className="max-w-3xl">
+            <h2 className="font-serif text-[48px] md:text-[56px] leading-[1.1] font-bold mb-4">
+              High Performance Pathway
             </h2>
-            <p className="body-lg mb-10 max-w-2xl mx-auto text-white/80">
-              Book your complimentary trial session.
+            <p className="font-sans text-[20px] text-white/90 mb-6">
+              UTR 5–8 & College Bound UTR 8+
             </p>
-            <Link href="/book" className="eyebrow inline-flex items-center justify-center bg-white text-lbta-charcoal px-10 py-4 transition-all duration-300 hover:bg-lbta-bone">
-              BOOK FREE TRIAL
+            <h3 className="font-serif text-[24px] text-lbta-orange italic mb-6">
+              Where ambition meets structure.
+            </h3>
+            <p className="font-sans text-[18px] leading-[1.8] text-white/90 mb-4">
+              Invitation-only training for advanced juniors preparing for tournaments 
+              and collegiate play.
+            </p>
+            <p className="font-sans text-[18px] leading-[1.8] text-white/90 mb-6">
+              Sessions combine tactical match-play, conditioning, and mindset development.
+            </p>
+            <div className="pt-4 mb-8">
+              <p className="font-sans text-[16px] text-white/80">
+                <strong>Format:</strong> 2 hrs · LBHS facility · Application required
+              </p>
+              <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+                "We don't chase points — we build players who can win anywhere."
+              </blockquote>
+            </div>
+            <Link 
+              href="/apply-scholarship"
+              className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
+            >
+              Apply for High Performance →
             </Link>
-          </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: ADULT PROGRAMS */}
+      <section className="bg-white py-24 md:py-32">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20">
+          <div className="text-center mb-16">
+            <h2 className="font-serif text-[40px] md:text-[48px] leading-[1.1] font-semibold text-black mb-4">
+              Adult Programs
+              <span className="block text-[24px] font-sans font-normal text-black/70 mt-2">
+                Beginner – Advanced
+              </span>
+            </h2>
+            <h3 className="font-serif text-[24px] text-lbta-orange italic">
+              Progression with purpose.
+            </h3>
+            <p className="font-sans text-[18px] leading-[1.8] text-black/85 mt-6 max-w-3xl mx-auto">
+              From fundamentals to competitive match-play, each program builds clarity, 
+              skill, and confidence.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-12">
+            {[
+              {
+                title: 'Beginner',
+                level: '1.0 – 2.5',
+                description: 'Learn the essentials.',
+              },
+              {
+                title: 'Intermediate',
+                level: '3.0 – 3.5',
+                description: 'Refine technique & tactics.',
+              },
+              {
+                title: 'Advanced',
+                level: '4.0+',
+                description: 'Compete & strategize.',
+              },
+            ].map((program) => (
+              <div key={program.title} className="text-center">
+                <div className="relative aspect-[3/2] overflow-hidden mb-6 bg-gray-100">
+                  <Image
+                    src="/images/programs/adults.webp"
+                    alt={`Adult ${program.title} tennis program`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
+                <h3 className="font-serif text-[24px] font-semibold text-black mb-2">
+                  {program.title}
+                </h3>
+                <p className="font-sans text-[16px] text-black/70 mb-2">
+                  {program.level}
+                </p>
+                <p className="font-sans text-[16px] text-black/85">
+                  {program.description}
+                </p>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center space-y-4">
+            <p className="font-sans text-[16px] text-black/70">
+              <strong>Format:</strong> 60–120 min · LBHS / Moulton · 13-week season
+            </p>
+            <blockquote className="font-serif italic text-[20px] text-lbta-orange max-w-2xl mx-auto">
+              "Serious training, relaxed atmosphere."
+            </blockquote>
+            <div className="pt-4">
+              <Link 
+                href="/adult-trial"
+                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
+              >
+                Book Adult Trial →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6: FITNESS & COMMUNITY */}
+      <section className="bg-[#FAF8F3] py-24 md:py-32">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            {/* Image Left */}
+            <div className="relative aspect-[3/2] overflow-hidden">
+              <Image
+                src="/images/philosophy/belonging.webp"
+                alt="Fitness and community tennis programs"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+            
+            {/* Text Right */}
+            <div className="space-y-6">
+              <h2 className="font-serif text-[40px] md:text-[48px] leading-[1.1] font-semibold text-black">
+                Fitness & Community
+                <span className="block text-[24px] font-sans font-normal text-black/70 mt-2">
+                  Cardio / LiveBall
+                </span>
+              </h2>
+              <h3 className="font-serif text-[24px] text-lbta-orange italic">
+                Play harder. Move smarter.
+              </h3>
+              <p className="font-sans text-[18px] leading-[1.8] text-black/85">
+                High-energy sessions combining fitness, competition, and fun.
+              </p>
+              <div className="space-y-3">
+                <p className="font-sans text-[16px] text-black/85">
+                  <strong>Cardio Tennis:</strong> music-driven drills for conditioning.
+                </p>
+                <p className="font-sans text-[16px] text-black/85">
+                  <strong>LiveBall:</strong> continuous doubles competition by level.
+                </p>
+              </div>
+              <div className="pt-4">
+                <p className="font-sans text-[16px] text-black/70 mb-2">
+                  <strong>Format:</strong> 90 min · Monthly · All levels welcome
+                </p>
+                <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+                  "Community built through play."
+                </blockquote>
+              </div>
+              <Link 
+                href="/schedules#fitness"
+                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
+              >
+                Join a Session →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 7: PRIVATE & SPECIALTY TRAINING */}
+      <section className="bg-white py-24 md:py-32">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            {/* Text Left */}
+            <div className="space-y-6 md:order-1">
+              <h2 className="font-serif text-[40px] md:text-[48px] leading-[1.1] font-semibold text-black">
+                Private & Specialty Training
+              </h2>
+              <h3 className="font-serif text-[24px] text-lbta-orange italic">
+                Precision in every detail.
+              </h3>
+              <p className="font-sans text-[18px] leading-[1.8] text-black/85">
+                One-on-one instruction and specialty programs including Serve Development 
+                and Fitness Training.
+              </p>
+              <p className="font-sans text-[18px] leading-[1.8] text-black/85">
+                Personalized movement analysis and match strategy from LBTA's professional staff.
+              </p>
+              <div className="pt-4">
+                <p className="font-sans text-[16px] text-black/70 mb-4">
+                  <strong>Rates:</strong>
+                </p>
+                <ul className="font-sans text-[16px] text-black/85 space-y-2">
+                  <li>Andrew Mateljan: $250/hr</li>
+                  <li>Head Coach: $150/hr</li>
+                  <li>Staff Coach: $120/hr</li>
+                </ul>
+                <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+                  "Every player deserves precision."
+                </blockquote>
+              </div>
+              <Link 
+                href="/book"
+                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
+              >
+                Request Private →
+              </Link>
+            </div>
+            
+            {/* Image Right */}
+            <div className="relative aspect-[3/2] overflow-hidden md:order-2">
+              <Image
+                src="/images/founder/andrew-portrait.webp"
+                alt="Private tennis coaching with Andrew Mateljan"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 8: CTA - "Start Training with Purpose" */}
+      <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/cta/cta-background.webp"
+            alt="Laguna Beach tennis courts at sunset"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25" />
+        </div>
+        
+        <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto py-20">
+          <h2 className="font-serif text-[40px] md:text-[56px] font-semibold mb-6 leading-[1.2]">
+            Start training with purpose.
+          </h2>
+          <p className="font-sans text-[18px] leading-[1.6] text-white/90 mb-10">
+            View schedules, pricing, and book your first session.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link 
+              href="/schedules"
+              className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200 w-full sm:w-auto"
+            >
+              View Schedules →
+            </Link>
+            <a 
+              href="/pdfs/LBTA_Winter2026_Optimized.pdf"
+              download
+              className="inline-block border-2 border-white hover:bg-white hover:text-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200 w-full sm:w-auto"
+            >
+              Download Winter 2026 PDF
+            </a>
+          </div>
         </div>
       </section>
     </>
