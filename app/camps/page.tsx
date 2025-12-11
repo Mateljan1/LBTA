@@ -1,332 +1,154 @@
-'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
-import AnimatedSection from '@/components/ui/AnimatedSection'
-import Breadcrumbs from '@/components/ui/Breadcrumbs'
-
-const camps = [
-  {
-    id: "summer-intensive",
-    name: "College & Pro Pathway Summer Camp",
-    dates: "June - August 2026",
-    ages: "Ages 12-18",
-    duration: "Full Day (9am-4pm)",
-    level: "Intermediate to Advanced",
-    weekly: 750,
-    description: "Elite intensive summer program offering professional-level tennis training, daily competitive play, mental conditioning, and pro-player mentorship in a high-performance setting.",
-    badge: "Elite Training",
-    features: [
-      "Daily match play & tournament preparation",
-      "Video analysis with ATP-level coaches",
-      "Mental performance training",
-      "Strength & conditioning sessions",
-      "College recruitment guidance",
-      "Pro player guest appearances"
-    ]
-  },
-  {
-    id: "winter-break",
-    name: "Winter Break Camp",
-    dates: "December 2025 & January 2026",
-    ages: "Ages 5-16",
-    duration: "Half Day (9am-12pm)",
-    level: "All Skill Levels",
-    weekly: 425,
-    description: "Stay sharp during school breaks. Maintain tournament form and technical progress through structured training and match play.",
-    badge: "Seasonal Program",
-    features: [
-      "Stroke technique refinement",
-      "Match play experience",
-      "Age-appropriate coaching",
-      "Indoor/outdoor flexibility",
-      "Small group instruction",
-      "Skills competitions & prizes"
-    ]
-  },
-  {
-    id: "spring-break",
-    name: "Spring Break Camp",
-    dates: "March - April 2026",
-    ages: "Ages 5-16",
-    duration: "Half Day (9am-12pm)",
-    level: "Beginner to Advanced",
-    weekly: 425,
-    description: "Perfect introduction to competitive tennis or skill advancement during spring break. Build confidence through structured play and professional instruction.",
-    badge: "Spring Development",
-    features: [
-      "Progressive skill development",
-      "Tournament preparation for spring season",
-      "Tactical training & point construction",
-      "Physical conditioning drills",
-      "Singles & doubles strategy",
-      "End-of-week showcase tournament"
-    ]
-  },
-  {
-    id: "summer-champion",
-    name: "Junior Champions Summer Camp",
-    dates: "June - August 2026",
-    ages: "Ages 4-13",
-    duration: "Half Day (9am-1pm)",
-    level: "Beginner to Intermediate",
-    weekly: 550,
-    description: "Where summer fun meets serious skill development. Perfect for juniors new to tennis or ready to take their game to the next level. From first strokes to competitive readiness.",
-    badge: "Most Popular",
-    features: [
-      "Age-appropriate tennis instruction",
-      "Court movement & footwork training",
-      "Rally development & consistency",
-      "Introduction to match play",
-      "Character building through sport",
-      "End-of-week awards ceremony"
-    ]
-  }
-]
+import Image from 'next/image'
 
 export default function CampsPage() {
-  const [activeSeason, setActiveSeason] = useState<'summer' | 'break'>('summer')
-
   return (
     <>
-      <Breadcrumbs items={[
-        { label: 'Programs', href: '/programs' },
-        { label: 'Tennis Camps' }
-      ]} />
-
-      {/* Hero */}
-      <section className="relative bg-white pt-32 pb-20">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <p className="text-overline mb-6">Year-Round Excellence</p>
-            <h1 className="text-display-lg heading-display mb-6">
-              Tennis Camps That
-              Transform
-            </h1>
-            <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              From beginner-friendly summer programs to elite college pathway training. Professional coaching at every level, all year long.
-            </p>
-          </AnimatedSection>
+      {/* HERO */}
+      <section className="relative min-h-[65vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/community/community-5.webp"
+            alt="Junior tennis campers at Laguna Beach celebrating on courts at sunset"
+            fill
+            className="object-cover"
+            style={{ objectPosition: '50% 50%' }}
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/15 to-transparent" />
+        </div>
+        
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-24">
+          <h1 className="font-serif text-[36px] md:text-[60px] font-bold leading-[1.05] mb-6 text-shadow">
+            Summer Tennis Camps 2026
+          </h1>
+          <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-10 max-w-[85%] mx-auto">
+            High-energy development for ages 6–16. Learn, compete, and belong in Laguna Beach.
+          </p>
+          <Link 
+            href="/book"
+            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+          >
+            Reserve Your Spot →
+          </Link>
         </div>
       </section>
 
-      {/* Season Toggle */}
-      <section className="bg-lbta-cream border-b border-gray-200 sticky top-24 z-40 py-6">
-        <div className="container-lbta">
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={() => setActiveSeason('summer')}
-              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
-                activeSeason === 'summer'
-                  ? 'bg-lbta-charcoal text-white'
-                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
-              }`}
-            >
-              SUMMER CAMPS
-            </button>
-            <button
-              onClick={() => setActiveSeason('break')}
-              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
-                activeSeason === 'break'
-                  ? 'bg-lbta-charcoal text-white'
-                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
-              }`}
-            >
-              WINTER & SPRING CAMPS
-            </button>
+      {/* CAMP OVERVIEW */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-12">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div className="space-y-6">
+              <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black">
+                Camp Details
+              </h2>
+              <div className="space-y-4 font-sans text-[15px] md:text-[16px] text-black/85 leading-relaxed">
+                <p><strong>Location:</strong> Moulton Courts · Alta Laguna Park</p>
+                <p><strong>Dates:</strong> June 10 – August 2, 2026</p>
+                <p><strong>Time:</strong> 9:00 AM – 12:00 PM (Half-Day) · 9:00 AM – 3:00 PM (Full-Day)</p>
+                <p><strong>Levels:</strong> Beginner – Advanced (Ages 6-16)</p>
+                <p><strong>Tuition:</strong> $495/week (Half-Day) · $695/week (Full-Day)</p>
+              </div>
+              <Link 
+                href="/schedules"
+                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-full transition-all duration-200 min-h-[44px]"
+              >
+                View Schedule →
+              </Link>
+            </div>
+            
+            <div className="relative aspect-[3/2] overflow-hidden rounded">
+              <Image
+                src="/images/community/community-4.webp"
+                alt="Junior tennis campers at Moulton Courts practicing forehands during summer camp"
+                fill
+                className="object-cover"
+                style={{ objectPosition: '50% 50%' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 overlay-light" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Season Info Banner */}
-      <section
-        key={activeSeason}
-        className={`py-6 ${activeSeason === 'summer' ? 'bg-amber-50' : 'bg-blue-50'} border-b border-gray-200 transition-all duration-300`}
-      >
-        <div className="container-lbta text-center">
-          {activeSeason === 'summer' ? (
-            <p className="text-sm text-gray-600 font-sans">
-              <strong>Summer 2026:</strong> Registration opens March 1st • Early bird discounts for multi-week enrollment
-            </p>
-          ) : (
-            <p className="text-sm text-gray-600 font-sans">
-              <strong>Break Camps:</strong> Winter Dec/Jan • Spring March/April • Registration opens 6 weeks prior
-            </p>
-          )}
-        </div>
-      </section>
-
-      {/* Camps */}
-      <section className="section-spacing bg-white">
-        <div className="container-lbta space-y-16">
-          {camps
-            .filter(camp =>
-              activeSeason === 'summer'
-                ? camp.id.includes('summer')
-                : camp.id.includes('winter') || camp.id.includes('spring')
-            )
-            .map((camp, index) => (
-            <AnimatedSection key={camp.id} delay={index * 0.1}>
-              <div id={camp.id} className="scroll-mt-32">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                  {/* Left: Info */}
-                  <div>
-                    <span className="inline-block px-3 py-1 bg-lbta-charcoal text-white text-xs font-sans tracking-wider mb-4">
-                      {camp.badge}
-                    </span>
-                    <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-4">
-                      {camp.name}
-                    </h2>
-                    <div className="space-y-2 mb-6">
-                      <p className="text-lg text-lbta-burnt font-sans font-medium">
-                        {camp.ages} • {camp.level}
-                      </p>
-                      <p className="text-base text-gray-600 font-sans">
-                        {camp.dates}
-                      </p>
-                      <p className="text-base text-gray-600 font-sans">
-                        {camp.duration}
-                      </p>
-                    </div>
-                    <p className="text-gray-600 leading-relaxed mb-8">
-                      {camp.description}
-                    </p>
-
-                    <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-4">
-                      What's Included
-                    </h3>
-                    <ul className="space-y-2">
-                      {camp.features.map((feature) => (
-                        <li key={feature} className="flex items-start gap-3 text-gray-600">
-                          <span className="text-lbta-burnt mt-1">•</span>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Right: Pricing */}
-                  <div>
-                    <div className="card-lbta p-8 transition-all duration-300">
-                        <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-6">
-                          Camp Investment
-                        </h3>
-                        <div className="space-y-4">
-                          <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                            <span className="text-gray-600">Per Week</span>
-                            <span className="text-3xl font-serif font-light text-lbta-charcoal">
-                              ${camp.weekly}
-                            </span>
-                          </div>
-                          {camp.id === 'summer-intensive' && (
-                            <>
-                              <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                                <span className="text-gray-600">4-Week Package</span>
-                                <span className="text-xl font-serif font-light text-lbta-charcoal">
-                                  $2,850
-                                </span>
-                              </div>
-                              <div className="flex justify-between items-center pt-2">
-                                <span className="text-gray-600">8-Week Package</span>
-                                <span className="text-xl font-serif font-light text-lbta-charcoal">
-                                  $5,400
-                                </span>
-                              </div>
-                            </>
-                          )}
-                          {camp.id === 'summer-champion' && (
-                            <div className="flex justify-between items-center pt-2">
-                              <span className="text-gray-600">Multi-Week Discount</span>
-                              <span className="text-lg font-serif font-light text-lbta-burnt">
-                                10% off 3+ weeks
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        <Link
-                          href="/book"
-                          className="btn-primary w-full mt-8 justify-center"
-                        >
-                          {activeSeason === 'summer' ? 'PRE-REGISTER NOW' : 'GET NOTIFIED'}
-                        </Link>
-
-                        <p className="text-xs text-center text-gray-500 mt-3">
-                          {activeSeason === 'summer'
-                            ? 'Early bird pricing • Limited spots available'
-                            : 'Registration opens 6 weeks before camp start'
-                          }
-                        </p>
-                    </div>
-                  </div>
+      {/* CAMP HIGHLIGHTS */}
+      <section className="bg-[#FAF8F3] py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+          <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-12 text-center">
+            What Makes LBTA Camps Different
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+            {[
+              {
+                image: '/images/programs/fitness.webp',
+                title: 'Movement',
+                description: 'Drills, agility, and dynamic learning.',
+              },
+              {
+                image: '/images/programs/juniors.webp',
+                title: 'Discipline',
+                description: 'Consistency and feedback — improvement through structure.',
+              },
+              {
+                image: '/images/hero/laguna-horizon.webp',
+                title: 'Belonging',
+                description: 'Team play, community, and confidence.',
+              },
+            ].map((pillar) => (
+              <div key={pillar.title} className="bg-white rounded-xl shadow-soft overflow-hidden">
+                <div className="relative aspect-[3/2]">
+                  <Image
+                    src={pillar.image}
+                    alt={`${pillar.title} - ${pillar.description}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 overlay-light" />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-serif text-[22px] md:text-[24px] font-semibold text-black mb-3">
+                    {pillar.title}
+                  </h3>
+                  <p className="font-sans text-[14px] md:text-[15px] text-black/80 leading-relaxed">
+                    {pillar.description}
+                  </p>
                 </div>
               </div>
-            </AnimatedSection>
-          ))}
-        </div>
-      </section>
-
-      {/* Why Our Camps */}
-      <section className="section-spacing bg-lbta-cream">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center mb-16">
-            <p className="text-overline mb-6">The LBTA Difference</p>
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
-              Where Champions Train in Summer
-            </h2>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <AnimatedSection delay={0.1}>
-              <div className="text-center">
-                <h3 className="text-2xl font-serif font-light text-lbta-charcoal mb-4">
-                  ATP-Level Coaching
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Learn from coaches actively training ATP professionals. Andrew Mateljan currently coaches ATP #262 Karue Sell alongside directing all camp programs.
-                </p>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <div className="text-center">
-                <h3 className="text-2xl font-serif font-light text-lbta-charcoal mb-4">
-                  Small Group Ratios
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Maximum 6:1 player-to-coach ratio ensures personalized attention, immediate feedback, and accelerated skill development. No player gets lost in the crowd.
-                </p>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.3}>
-              <div className="text-center">
-                <h3 className="text-2xl font-serif font-light text-lbta-charcoal mb-4">
-                  Proven Track Record
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  20+ Division I college scholarships since 2020. Multiple ATP-ranked players trained here. Your development is backed by measurable results.
-                </p>
-              </div>
-            </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="section-spacing bg-white border-t border-gray-200">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
-              Secure Your Spot
-            </h2>
-            <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-              Limited enrollment ensures quality coaching. Summer camps fill quickly—early registration recommended.
-            </p>
-            <Link href="/book" className="btn-primary">
-              REGISTER FOR CAMP
-            </Link>
-          </AnimatedSection>
+      <section className="relative min-h-[500px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero/laguna-horizon.webp"
+            alt="Laguna Beach sunset over tennis courts"
+            fill
+            className="object-cover cta-img"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 overlay-strong" />
+        </div>
+        
+        <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto py-20">
+          <h2 className="font-serif text-[36px] md:text-[52px] font-semibold mb-8 leading-[1.15] text-shadow">
+            Reserve Your Spot
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/95 mb-10">
+            Camp spaces fill quickly — secure your week today.
+          </p>
+          <Link 
+            href="/book"
+            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+          >
+            Book Camp Consultation →
+          </Link>
         </div>
       </section>
     </>
