@@ -1,19 +1,12 @@
-/* LBTA Final Font Stack - Playfair Display + Work Sans (NO Space Grotesk) */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Work+Sans:wght@400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Blueprint Typography System - FREE Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500&display=swap');
-
 @layer base {
   :root {
-    /* Blueprint Font Stack */
-    --font-cormorant: 'Cormorant', Georgia, serif;
-    --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-space-grotesk: 'Space Grotesk', 'Courier New', monospace;
+    /* LBTA Font Stack */
+    --font-playfair: 'Playfair Display', Georgia, serif;
+    --font-work-sans: 'Work Sans', system-ui, -apple-system, sans-serif;
     
     /* Blueprint Color System */
     --color-primary: #1A1A1A;
@@ -31,16 +24,16 @@
 
   body {
     @apply bg-lbta-bone text-lbta-primary antialiased;
-    font-family: var(--font-inter);
+    font-family: var(--font-work-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   }
   
-  /* Blueprint Typography Classes */
+  /* LBTA Typography Classes */
   .display {
-    font-family: var(--font-cormorant);
+    font-family: var(--font-playfair);
     font-weight: 300;
     font-size: clamp(48px, 9vw, 84px);
     line-height: 0.95;

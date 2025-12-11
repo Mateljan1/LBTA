@@ -1,22 +1,22 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Cormorant } from 'next/font/google'
+import { Playfair_Display, Work_Sans } from 'next/font/google'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 
-// Blueprint Typography System - FREE Fonts
-const inter = Inter({
+// LBTA Typography System - Playfair Display + Work Sans
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-inter',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-playfair',
   display: 'swap',
   preload: true,
   adjustFontFallback: true,
 })
 
-const cormorant = Cormorant({
+const workSans = Work_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-cormorant',
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-work-sans',
   display: 'swap',
   preload: true,
   adjustFontFallback: true,
@@ -55,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="font-body">
+    <html lang="en" className={`${workSans.variable} ${playfair.variable}`}>
       <head>
         {/* PWA & Mobile Optimization */}
         <link rel="manifest" href="/manifest.json" />
@@ -100,7 +100,7 @@ export default function RootLayout({
         {/* Google Analytics - Add your GA4 measurement ID when ready */}
         {/* Placeholder removed - configure with real GA4 ID in production */}
       </head>
-      <body className="flex flex-col min-h-screen">
+      <body className={`${workSans.className} flex flex-col min-h-screen`}>
         <ConditionalLayout>
           {children}
         </ConditionalLayout>
