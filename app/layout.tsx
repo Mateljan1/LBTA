@@ -97,18 +97,8 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XXXXXXXXXX');
-            `,
-          }}
-        />
+        {/* Google Analytics - Add your GA4 measurement ID when ready */}
+        {/* Placeholder removed - configure with real GA4 ID in production */}
       </head>
       <body className="flex flex-col min-h-screen">
         <ConditionalLayout>

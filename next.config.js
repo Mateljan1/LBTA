@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   eslint: {
-    ignoreDuringBuilds: true,
+    // Only lint specific directories to avoid noise
+    dirs: ['app', 'components', 'lib'],
   },
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -17,6 +18,9 @@ const nextConfig = {
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+  },
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   poweredByHeader: false,
   async redirects() {

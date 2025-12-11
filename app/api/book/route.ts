@@ -1,6 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { rateLimit } from '@/lib/rate-limit'
 
 export async function POST(request: NextRequest) {
+  // Rate limiting: 5 requests per minute per IP
+  const ip = request.ip || request.headers.get('x-forwarded-for') || 'anonymous'
+  const rateLimitResult = rateLimit(`book:${ip}`, { interval: 60000, maxRequests: 5 })
+
+  if (!rateLimitResult.allowed) {
+    return NextResponse.json(
+      { success: false, message: 'Too many requests. Please try again later.' },
+      { 
+        status: 429,
+        headers: {
+          'X-RateLimit-Remaining': '0',
+          'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
+        }
+      }
+    )
+  }
+
   try {
     const body = await request.json()
     
