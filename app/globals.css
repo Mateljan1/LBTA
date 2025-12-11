@@ -9,6 +9,129 @@
   }
 }
 
+/* =====================
+   LBTA VISUAL UTILITY KIT
+   Image Aspect Ratios & Positioning
+===================== */
+
+/* Hero / CTA / High Performance */
+.aspect-hero {
+  aspect-ratio: 21 / 9;
+}
+
+/* Standard Program Sections */
+.aspect-section {
+  aspect-ratio: 3 / 2;
+}
+
+/* Mobile override for lighter loads */
+@media (max-width: 768px) {
+  .aspect-section,
+  .aspect-hero {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Section image base */
+.section-img {
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .section-img {
+    min-height: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-img {
+    min-height: 420px;
+  }
+}
+
+/* =====================
+   OBJECT POSITIONING
+===================== */
+
+.hero-img { object-position: 50% 70%; }
+.juniors-img { object-position: 50% 60%; }
+.youth-img { object-position: 50% 45%; }
+.hp-img { object-position: 50% 50%; }
+.adults-img { object-position: 50% 30%; }
+.fitness-img { object-position: 50% 55%; }
+.private-img { object-position: 50% 75%; }
+.cta-img { object-position: 50% 50%; }
+
+/* =====================
+   OVERLAYS & GRADIENTS
+===================== */
+
+/* Strong overlay for hero, HP, CTA */
+.overlay-strong {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.1) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Light overlay for standard sections */
+.overlay-light {
+  background: rgba(0, 0, 0, 0.10);
+}
+
+/* Section transition fade */
+.section-fade {
+  height: 100px;
+  background: linear-gradient(to bottom, #FAF8F3, #FFFFFF);
+}
+
+/* =====================
+   TEXT CLARITY
+===================== */
+
+.text-shadow {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.text-overlay {
+  backdrop-filter: blur(1px);
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .text-overlay {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* =====================
+   ANIMATION
+===================== */
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Prevent GPU blur on scroll */
+.no-blur-scroll {
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
 /* React Big Calendar Custom Styles */
 .lbta-calendar .rbc-header {
   @apply font-sans text-[14px] font-semibold text-black/80 py-3 border-b border-gray-200;

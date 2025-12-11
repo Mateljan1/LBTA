@@ -98,6 +98,18 @@ const config: Config = {
         'ultra-wide': '0.2em',
         'mega-wide': '0.25em',
       },
+      boxShadow: {
+        soft: '0 2px 12px rgba(0,0,0,0.08)',
+        hover: '0 4px 16px rgba(0,0,0,0.12)',
+      },
+      transitionTimingFunction: {
+        cinematic: 'cubic-bezier(0.22, 0.61, 0.36, 1)',
+      },
+      aspectRatio: {
+        hero: '21 / 9',
+        section: '3 / 2',
+        mobile: '4 / 3',
+      },
     },
   },
   plugins: [],
