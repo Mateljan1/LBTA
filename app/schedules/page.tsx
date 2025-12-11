@@ -86,9 +86,22 @@ const fall2025Programs = [
 
 export default function SchedulesPage() {
   const [selectedSeason, setSelectedSeason] = useState<'winter' | 'fall'>('winter')
+  const [selectedLocation, setSelectedLocation] = useState<string>('all')
+  const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list')
   
-  const currentPrograms = selectedSeason === 'winter' ? winter2026Programs : fall2025Programs
+  const allPrograms = selectedSeason === 'winter' ? winter2026Programs : fall2025Programs
+  const currentPrograms = selectedLocation === 'all' 
+    ? allPrograms 
+    : allPrograms.filter(p => p.location.toLowerCase().includes(selectedLocation))
   const seasonLabel = selectedSeason === 'winter' ? 'Winter 2026' : 'Fall 2025'
+  
+  // Group by category
+  const groupedPrograms = {
+    junior: currentPrograms.filter(p => p.category === 'junior'),
+    youth: currentPrograms.filter(p => p.category === 'youth'),
+    hp: currentPrograms.filter(p => p.category === 'high-performance'),
+    adult: currentPrograms.filter(p => p.category === 'adult'),
+  }
 
   return (
     <>
@@ -150,6 +163,44 @@ export default function SchedulesPage() {
           <p className="text-center text-[15px] mt-4 text-black/60 italic font-sans">
             Select your season to view the current schedule.
           </p>
+          
+          {/* Location Filter */}
+          <div className="flex justify-center mt-6">
+            <select 
+              value={selectedLocation}
+              onChange={(e) => setSelectedLocation(e.target.value)}
+              className="border border-gray-300 rounded-full px-6 py-3 bg-white text-[15px] text-black/80 focus:border-lbta-red focus:outline-none focus:ring-2 focus:ring-lbta-red/20 font-sans cursor-pointer"
+            >
+              <option value="all">All Locations</option>
+              <option value="moulton">Moulton Courts</option>
+              <option value="alta">Alta Laguna Park</option>
+              <option value="lbhs">Laguna Beach High School</option>
+            </select>
+          </div>
+          
+          {/* View Toggle */}
+          <div className="flex items-center justify-center gap-3 mt-8">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`px-6 py-2 rounded-full font-sans font-semibold text-[14px] transition-all duration-200 ${
+                viewMode === 'list'
+                  ? 'bg-lbta-red text-white'
+                  : 'border-2 border-lbta-red text-lbta-red hover:bg-lbta-orange/10'
+              }`}
+            >
+              List View
+            </button>
+            <button
+              onClick={() => setViewMode('calendar')}
+              className={`hidden lg:inline-block px-6 py-2 rounded-full font-sans font-semibold text-[14px] transition-all duration-200 ${
+                viewMode === 'calendar'
+                  ? 'bg-lbta-red text-white'
+                  : 'border-2 border-lbta-red text-lbta-red hover:bg-lbta-orange/10'
+              }`}
+            >
+              Calendar View
+            </button>
+          </div>
         </div>
       </div>
 
@@ -163,37 +214,69 @@ export default function SchedulesPage() {
             {currentPrograms.length} programs available
           </p>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {currentPrograms.map((program, index) => (
-              <div 
-                key={`${program.name}-${program.day}-${program.time}-${index}`}
-                className="bg-white rounded-2xl shadow-sm p-6 hover:shadow-lg transition-all duration-300 border border-gray-100"
-              >
-                <h3 className="font-serif text-[22px] font-semibold text-black/90 mb-2 leading-tight">
-                  {program.name}
-                </h3>
-                <div className="space-y-1 mb-4">
-                  <p className="font-sans text-[16px] text-black/80">
-                    📍 {program.location} · 🕒 {program.time}
-                  </p>
-                  <p className="font-sans text-[14px] text-black/60 italic">
-                    {program.day} · Ages {program.ages} · {program.duration} · Coach {program.coach}
-                  </p>
-                </div>
-                <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                  <span className="font-sans font-semibold text-lbta-orange text-[17px]">
-                    {program.price}
-                  </span>
-                  <Link
-                    href="/book"
-                    className="bg-lbta-red hover:bg-lbta-orange text-white px-5 py-2 rounded-full font-sans font-semibold text-[14px] transition-all duration-200 shadow-sm"
-                  >
-                    Book or Try →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+          {viewMode === 'list' ? (
+            /* LIST VIEW WITH ACCORDION */
+            <div className="space-y-12">
+              {[
+                { key: 'junior', label: 'Junior Programs (Ages 3-11)', programs: groupedPrograms.junior },
+                { key: 'youth', label: 'Youth Development (Ages 11-18)', programs: groupedPrograms.youth },
+                { key: 'hp', label: 'High Performance', programs: groupedPrograms.hp },
+                { key: 'adult', label: 'Adult Programs', programs: groupedPrograms.adult },
+              ].map(({ key, label, programs }) => (
+                programs.length > 0 && (
+                  <div key={key} className="border-b border-gray-200 pb-8">
+                    <h3 className="font-serif text-[28px] font-semibold text-black mb-6">
+                      {label}
+                      <span className="ml-3 text-[18px] font-sans font-normal text-lbta-orange">
+                        ({programs.length})
+                      </span>
+                    </h3>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                      {programs.map((program, index) => (
+                        <div 
+                          key={`${program.name}-${program.day}-${program.time}-${index}`}
+                          className="bg-white rounded-2xl shadow-sm p-6 hover:shadow-lg transition-all duration-300 border border-gray-100"
+                        >
+                          <h4 className="font-serif text-[22px] font-semibold text-black/90 mb-2 leading-tight">
+                            {program.name}
+                          </h4>
+                          <div className="space-y-1 mb-4">
+                            <p className="font-sans text-[16px] text-black/80">
+                              {program.location} · {program.time}
+                            </p>
+                            <p className="font-sans text-[14px] text-black/60 italic">
+                              {program.day} · Ages {program.ages} · {program.duration} · Coach {program.coach}
+                            </p>
+                          </div>
+                          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+                            <span className="font-sans font-semibold text-lbta-orange text-[17px]">
+                              {program.price}
+                            </span>
+                            <Link
+                              href="/book"
+                              className="bg-lbta-red hover:bg-lbta-orange text-white px-5 py-2 rounded-full font-sans font-semibold text-[14px] transition-all duration-200 shadow-sm"
+                            >
+                              Book or Try →
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
+              ))}
+            </div>
+          ) : (
+            /* CALENDAR VIEW (Desktop Only) */
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <p className="text-center font-sans text-[16px] text-black/70">
+                Calendar View - Coming Soon
+              </p>
+              <p className="text-center font-sans text-[14px] text-black/50 mt-2">
+                For now, please use List View to browse all programs.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 

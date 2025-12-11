@@ -11,14 +11,14 @@ export default function Programs() {
   return (
     <>
       {/* SECTION 1: HERO */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0">
           <Image
             src="/images/programs/hero.webp"
             alt="Laguna Beach Tennis Academy players training at sunset on coastal courts"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 75%' }}
+            style={{ objectPosition: '50% 70%' }}
             sizes="100vw"
             priority
           />
@@ -46,7 +46,7 @@ export default function Programs() {
       </section>
 
       {/* SECTION 2: JUNIOR DEVELOPMENT (Ages 3-11) */}
-      <section className="bg-[#FAF8F3] py-24 md:py-32">
+      <section className="bg-[#FAF8F3] py-20 md:py-20">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Image Left */}
@@ -99,7 +99,7 @@ export default function Programs() {
       </section>
 
       {/* SECTION 3: YOUTH DEVELOPMENT (Ages 11-18) */}
-      <section className="bg-white py-24 md:py-32">
+      <section className="bg-white py-20 md:py-20">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Text Left */}
@@ -152,7 +152,7 @@ export default function Programs() {
       </section>
 
       {/* SECTION 4: HIGH PERFORMANCE PATHWAY */}
-      <section className="relative py-32 md:py-40 overflow-hidden">
+      <section className="relative py-20 md:py-20 overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/programs/high-performance.webp"
@@ -201,7 +201,7 @@ export default function Programs() {
       </section>
 
       {/* SECTION 5: ADULT PROGRAMS */}
-      <section className="bg-white py-24 md:py-32">
+      <section className="bg-white py-20 md:py-20">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20">
           <div className="text-center mb-16">
             <h2 className="font-serif text-[40px] md:text-[48px] leading-[1.1] font-semibold text-black mb-4">
@@ -250,6 +250,7 @@ export default function Programs() {
                     alt={program.alt}
                     fill
                     className="object-cover"
+                    style={{ objectPosition: '50% 30%' }}
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-black/10" />
@@ -287,7 +288,7 @@ export default function Programs() {
       </section>
 
       {/* SECTION 6: FITNESS & COMMUNITY */}
-      <section className="bg-[#FAF8F3] py-24 md:py-32">
+      <section className="bg-[#FAF8F3] py-20 md:py-20">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Image Left */}
@@ -344,7 +345,7 @@ export default function Programs() {
       </section>
 
       {/* SECTION 7: PRIVATE & SPECIALTY TRAINING */}
-      <section className="bg-white py-24 md:py-32">
+      <section className="bg-white py-20 md:py-20">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Text Left */}
