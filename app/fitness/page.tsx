@@ -39,7 +39,7 @@ export default function FitnessPage() {
             <AnimatedSection delay={0.2}>
               <div className="relative h-96 lg:h-[500px] overflow-hidden bg-gray-100">
                 <Image
-                  src="/photos/GymSetting.png"
+                  src="/photos/GymSetting.webp"
                   alt="Fitness training at LBTA"
                   fill
                   className="object-cover"
@@ -317,7 +317,7 @@ export default function FitnessPage() {
             <AnimatedSection delay={0.2}>
               <div className="relative h-96 overflow-hidden bg-gray-100">
                 <Image
-                  src="/photos/OncourtTraining.jpg"
+                  src="/photos/OncourtTraining.webp"
                   alt="Training session at LBTA"
                   fill
                   className="object-cover"

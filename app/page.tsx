@@ -106,7 +106,7 @@ export default function Home() {
             {/* Karue Background Image (Desktop Only) */}
             <div className="hidden md:block absolute inset-0">
               <Image
-                src="/photos/atp-story-karue.jpg"
+                src="/photos/atp-story-karue.webp"
                 alt="Karue Sell improved ATP ranking from #862 to #262 in one year"
                 fill
                 quality={95}
@@ -208,7 +208,7 @@ export default function Home() {
             {/* Junior Development - Full Width Hero */}
             <Link href="/programs/junior" className="group relative overflow-hidden aspect-[21/9] md:aspect-[21/9] block">
               <Image
-                src="/photos/junior-program-hero.jpg"
+                src="/photos/junior-program-hero.webp"
                 alt="Junior Development"
                 fill
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
@@ -235,7 +235,7 @@ export default function Home() {
               {/* Adult Programs */}
               <Link href="/programs/adult" className="group relative overflow-hidden aspect-[4/3] md:aspect-[4/3] block">
                 <Image
-                  src="/photos/adult-program.jpg"
+                  src="/photos/adult-program.webp"
                   alt="Adult Programs"
                   fill
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
@@ -259,7 +259,7 @@ export default function Home() {
               {/* High Performance */}
               <Link href="/programs/high-performance" className="group relative overflow-hidden aspect-[4/3] md:aspect-[4/3] block">
                 <Image
-                  src="/photos/high-performance.jpg"
+                  src="/photos/high-performance.webp"
                   alt="High Performance"
                   fill
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
@@ -327,7 +327,7 @@ export default function Home() {
 
           <div className="relative h-96 md:h-[500px]">
             <Image
-              src="/photos/andrew-portrait.jpg"
+              src="/photos/andrew-portrait.webp"
               alt="Andrew Mateljan, Director & ATP/WTA Coach"
               fill
               quality={90}

@@ -736,11 +736,11 @@ function AnimatedCounterSimple({ target, duration = 2, delay = 0 }: { target: nu
 }
 
 const facilityImages = [
-  { src: '/photos/LBCOURTSETTING.jpg', caption: 'The Environment — Laguna Beach', alt: 'Court setting and environment' },
-  { src: '/photos/VideoAnalysisRoom.png', caption: 'Video Analysis Room — Tactical Review', alt: 'Video analysis and tactical review room' },
+  { src: '/photos/LBCOURTSETTING.webp', caption: 'The Environment — Laguna Beach', alt: 'Court setting and environment' },
+  { src: '/photos/VideoAnalysisRoom.webp', caption: 'Video Analysis Room — Tactical Review', alt: 'Video analysis and tactical review room' },
   { src: '/photos/IMG_3777 (1).JPG', caption: '7:32 AM — South Court 1', alt: 'Tennis court close-up training session' },
-  { src: '/photos/GymSetting.png', caption: 'Strength Lab — Performance Training', alt: 'Gym and fitness facility' },
-  { src: '/photos/playerhousing.png', caption: 'Athlete Housing — Ocean View Study', alt: 'Player housing with ocean view study area' },
+  { src: '/photos/GymSetting.webp', caption: 'Strength Lab — Performance Training', alt: 'Gym and fitness facility' },
+  { src: '/photos/playerhousing.webp', caption: 'Athlete Housing — Ocean View Study', alt: 'Player housing with ocean view study area' },
 ]
 
 export default function VYLOPage() {
@@ -915,7 +915,7 @@ export default function VYLOPage() {
               transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <img
-                src="/photos/KarueFH2.jpg"
+                src="/photos/KarueFH2.webp"
                 alt="Elite tennis training at VYLO Laguna Beach"
                 className="w-full h-full object-cover"
                 style={{

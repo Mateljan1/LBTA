@@ -5,10 +5,10 @@ import Image, { StaticImageData } from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 // Static imports for build-time optimization (images are 13-27MB each)
-import courtSetting from '../../public/photos/LBCOURTSETTING.jpg'
-import videoRoom from '../../public/photos/VideoAnalysisRoom.png'
-import gymSetting from '../../public/photos/GymSetting.png'
-import oncourtTraining from '../../public/photos/OncourtTraining.jpg'
+import courtSetting from '../../public/photos/LBCOURTSETTING.webp'
+import videoRoom from '../../public/photos/VideoAnalysisRoom.webp'
+import gymSetting from '../../public/photos/GymSetting.webp'
+import oncourtTraining from '../../public/photos/OncourtTraining.webp'
 import courtSettingWide from '../../public/photos/Court setting.png'
 
 // Gallery items - Premium facility photos

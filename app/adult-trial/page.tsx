@@ -75,7 +75,7 @@ export default function AdultTrialLanding() {
       <section className="relative h-[85vh] min-h-[700px] flex items-center">
         <div className="absolute inset-0">
           <Image
-            src="/photos/adult-trial-hero.jpg"
+            src="/photos/adult-trial-hero.webp"
             alt="Adult tennis development at LBTA"
             fill
             priority

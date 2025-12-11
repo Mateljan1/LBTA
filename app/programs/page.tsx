@@ -31,7 +31,7 @@ export default function ProgramsPage() {
                 <div className="bg-white border border-gray-200 overflow-hidden hover:border-lbta-charcoal/40 transition-all duration-300 hover:shadow-xl h-full">
                   <div className="relative h-80 overflow-hidden bg-gray-100">
                     <Image
-                      src="/photos/junior-program-hero.jpg"
+                      src="/photos/junior-program-hero.webp"
                       alt="Junior tennis development"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -60,7 +60,7 @@ export default function ProgramsPage() {
                 <div className="bg-white border border-gray-200 overflow-hidden hover:border-lbta-charcoal/40 transition-all duration-300 hover:shadow-xl h-full">
                   <div className="relative h-80 overflow-hidden bg-gray-100">
                     <Image
-                      src="/photos/adult-program.jpg"
+                      src="/photos/adult-program.webp"
                       alt="Adult tennis programs"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -89,7 +89,7 @@ export default function ProgramsPage() {
                 <div className="bg-white border border-gray-200 overflow-hidden hover:border-lbta-charcoal/40 transition-all duration-300 hover:shadow-xl h-full">
                   <div className="relative h-80 overflow-hidden bg-gray-100">
                     <Image
-                      src="/photos/high-performance.jpg"
+                      src="/photos/high-performance.webp"
                       alt="High performance tennis training"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
