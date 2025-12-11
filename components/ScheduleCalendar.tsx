@@ -31,32 +31,34 @@ interface ScheduleCalendarProps {
 }
 
 // Convert "Monday 3:30-4:30 PM" format to Date objects
-function programToEvent(program: Program, baseDate: Date): CalendarEvent {
+function programToEvent(program: Program, baseDate: Date): CalendarEvent | null {
   const dayMap: { [key: string]: number } = {
     'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 
     'Thursday': 4, 'Friday': 5, 'Saturday': 6, 'Sunday': 0
   }
   
   const dayOfWeek = dayMap[program.day]
-  const [startTime, endTime] = program.time.split(/\s*[–-]\s*/)
+  if (dayOfWeek === undefined) return null
   
-  // Parse start time
-  const startMatch = startTime.match(/(\d+):(\d+)\s*(AM|PM)/i)
-  if (!startMatch) return null as any
+  // Split time range (handle both – and - dashes)
+  const timeMatch = program.time.match(/(\d+):(\d+)\s*(AM|PM)\s*[-–]\s*(\d+):(\d+)\s*(AM|PM)/i)
+  if (!timeMatch) {
+    console.warn(`Could not parse time: ${program.time}`)
+    return null
+  }
   
-  let startHour = parseInt(startMatch[1])
-  const startMin = parseInt(startMatch[2])
-  if (startMatch[3].toUpperCase() === 'PM' && startHour !== 12) startHour += 12
-  if (startMatch[3].toUpperCase() === 'AM' && startHour === 12) startHour = 0
+  let startHour = parseInt(timeMatch[1])
+  const startMin = parseInt(timeMatch[2])
+  const startPeriod = timeMatch[3].toUpperCase()
+  let endHour = parseInt(timeMatch[4])
+  const endMin = parseInt(timeMatch[5])
+  const endPeriod = timeMatch[6].toUpperCase()
   
-  // Parse end time
-  const endMatch = endTime.match(/(\d+):(\d+)\s*(AM|PM)/i)
-  if (!endMatch) return null as any
-  
-  let endHour = parseInt(endMatch[1])
-  const endMin = parseInt(endMatch[2])
-  if (endMatch[3].toUpperCase() === 'PM' && endHour !== 12) endHour += 12
-  if (endMatch[3].toUpperCase() === 'AM' && endHour === 12) endHour = 0
+  // Convert to 24-hour format
+  if (startPeriod === 'PM' && startHour !== 12) startHour += 12
+  if (startPeriod === 'AM' && startHour === 12) startHour = 0
+  if (endPeriod === 'PM' && endHour !== 12) endHour += 12
+  if (endPeriod === 'AM' && endHour === 12) endHour = 0
   
   // Create dates for this week
   const start = new Date(baseDate)
@@ -67,7 +69,7 @@ function programToEvent(program: Program, baseDate: Date): CalendarEvent {
   end.setHours(endHour, endMin, 0, 0)
   
   return {
-    title: program.name,
+    title: `${program.name} - ${program.coach}`,
     start,
     end,
     resource: program

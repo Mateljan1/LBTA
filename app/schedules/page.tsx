@@ -137,29 +137,30 @@ export default function SchedulesPage() {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[65vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/programs/schedules-hero.webp"
-            alt="LBTA tennis training programs"
+            alt="Laguna Beach Tennis Academy training at sunset"
             fill
             className="object-cover"
+            style={{ objectPosition: '50% 70%' }}
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-black/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
         </div>
         
-        <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
-          <h1 className="font-serif text-[40px] md:text-[56px] font-bold leading-[1.1] tracking-[-0.5px] mb-6">
+        <div className="relative z-10 text-center text-white px-4 md:px-6 max-w-4xl mx-auto py-24">
+          <h1 className="font-serif text-[36px] md:text-[60px] font-bold leading-[1.1] tracking-[-0.5px] mb-6 text-shadow">
             Every Day, a Place to Belong.
           </h1>
-          <p className="font-sans text-[18px] md:text-[20px] leading-[1.6] text-white/90 mb-8">
+          <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-8 md:mb-10 max-w-[90%] mx-auto">
             Explore class times and programs built around movement, discipline, and belonging.
           </p>
           <Link 
             href="/programs"
-            className="inline-block border-2 border-white hover:bg-white hover:text-black text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200"
+            className="inline-block border-2 border-white hover:bg-lbta-red hover:border-lbta-red text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
           >
             View Programs →
           </Link>
