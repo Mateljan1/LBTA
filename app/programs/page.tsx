@@ -14,14 +14,15 @@ export default function Programs() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0">
           <Image
-            src="/images/programs/private-lessons-hero.webp"
-            alt="LBTA professional tennis coaching"
+            src="/images/programs/hero.webp"
+            alt="Laguna Beach Tennis Academy players training at sunset on coastal courts"
             fill
             className="object-cover"
+            style={{ objectPosition: '50% 75%' }}
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-black/15" />
+          <div className="absolute inset-0 bg-black/25" />
         </div>
         
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
@@ -51,8 +52,8 @@ export default function Programs() {
             {/* Image Left */}
             <div className="relative aspect-[3/2] overflow-hidden">
               <Image
-                src="/images/programs/juniors.webp"
-                alt="Junior tennis development for ages 3-11"
+                src="/images/programs/youth-dev-1.webp"
+                alt="Young tennis players learning forehand technique during junior development class"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -138,8 +139,8 @@ export default function Programs() {
             {/* Image Right */}
             <div className="relative aspect-[3/2] overflow-hidden md:order-2">
               <Image
-                src="/images/results/karue-training.webp"
-                alt="Youth tennis development for ages 11-18"
+                src="/images/programs/youth-dev-2.webp"
+                alt="Intermediate youth players in match play session at LBTA"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -154,13 +155,13 @@ export default function Programs() {
       <section className="relative py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/programs/private-lessons-hp.webp"
-            alt="High performance tennis training"
+            src="/images/programs/high-performance.webp"
+            alt="High performance athletes training under pro supervision at Laguna Beach Tennis Academy"
             fill
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/15" />
+          <div className="absolute inset-0 bg-black/25" />
         </div>
         
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40 text-white">
@@ -224,23 +225,29 @@ export default function Programs() {
                 title: 'Beginner',
                 level: '1.0 – 2.5',
                 description: 'Learn the essentials.',
+                image: '/images/programs/adult-beginner.webp',
+                alt: 'Adult beginner group practicing rally drills on Laguna courts',
               },
               {
                 title: 'Intermediate',
                 level: '3.0 – 3.5',
                 description: 'Refine technique & tactics.',
+                image: '/images/programs/adult-intermediate.webp',
+                alt: 'Adult intermediate tennis players in mid-court training session',
               },
               {
                 title: 'Advanced',
                 level: '4.0+',
                 description: 'Compete & strategize.',
+                image: '/images/programs/adult-advanced.webp',
+                alt: 'Advanced adult players practicing doubles strategy under late-day sunlight',
               },
             ].map((program) => (
               <div key={program.title} className="text-center">
                 <div className="relative aspect-[3/2] overflow-hidden mb-6 bg-gray-100">
                   <Image
-                    src="/images/programs/adults.webp"
-                    alt={`Adult ${program.title} tennis program`}
+                    src={program.image}
+                    alt={program.alt}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -286,8 +293,8 @@ export default function Programs() {
             {/* Image Left */}
             <div className="relative aspect-[3/2] overflow-hidden">
               <Image
-                src="/images/community/community-3.webp"
-                alt="Fitness and community tennis programs"
+                src="/images/programs/fitness.webp"
+                alt="LBTA community group in cardio tennis session under golden-hour lighting"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -379,8 +386,8 @@ export default function Programs() {
             {/* Image Right */}
             <div className="relative aspect-[3/2] overflow-hidden md:order-2">
               <Image
-                src="/images/founder/andrew-portrait.webp"
-                alt="Private tennis coaching with Andrew Mateljan"
+                src="/images/programs/private-specialty.webp"
+                alt="Private coaching session with LBTA coach providing one-on-one instruction"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -396,7 +403,7 @@ export default function Programs() {
         <div className="absolute inset-0">
           <Image
             src="/images/hero/laguna-horizon.webp"
-            alt="Laguna Beach tennis courts at sunset"
+            alt="View of Laguna Beach tennis courts overlooking ocean horizon at sunset"
             fill
             className="object-cover"
             sizes="100vw"
