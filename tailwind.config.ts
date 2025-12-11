@@ -9,25 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // LBTA Aman-Level Luxury Palette - Blueprint Standard
+        // LBTA Production Spec Colors - Cinematic Homepage
         lbta: {
-          // BLUEPRINT PRIMARY COLORS
-          primary: '#1A1A1A',     // Primary text
-          secondary: '#6B6B6B',   // Secondary text
-          coral: '#E8956F',       // Sophisticated accent (Blueprint)
-          'coral-dark': '#D67D5A', // Coral hover state
+          // PRIMARY COLORS (Production Spec)
+          orange: '#F8A121',      // Primary accent - Production spec
+          red: '#F04E23',         // Accent CTA - Production spec
+          beige: '#F8E6BB',       // Soft beige background - Production spec
+          black: '#000000',       // Text primary
+          white: '#FFFFFF',       // Pure white
           
-          // BLUEPRINT BACKGROUNDS
-          bone: '#FDFCFA',        // Background 1 (bone white)
-          sand: '#F4EDE4',        // Background 2 (warm sand)
-          charcoal: '#2B2B2B',    // Background 3 (dark sections)
-          
-          // LEGACY ALIASES (backwards compatibility)
-          white: '#FDFCFA',
-          black: '#1A1A1A',
-          orange: '#E8956F',      // Now points to coral
-          burnt: '#D67D5A',       // Now points to coral-dark
-          cream: '#F4EDE4',
+          // LEGACY COLORS (backwards compatibility for other pages)
+          primary: '#1A1A1A',     
+          secondary: '#6B6B6B',   
+          coral: '#E8956F',       
+          'coral-dark': '#D67D5A',
+          bone: '#FDFCFA',        
+          sand: '#F4EDE4',        
+          charcoal: '#2B2B2B',    
         },
         vylo: {
           orange: '#F26522',      // VYLO brand distinct color
