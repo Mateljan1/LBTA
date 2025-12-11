@@ -132,6 +132,80 @@
   perspective: 1000px;
 }
 
+/* =====================
+   MICRO-INTERACTIONS
+===================== */
+
+/* CTA Pulse - Gentle attention every 8s */
+@keyframes lbtaPulse {
+  0%   { transform: scale(1);   box-shadow: 0 2px 12px rgba(0,0,0,0.10); }
+  50%  { transform: scale(1.08); box-shadow: 0 4px 18px rgba(240,78,35,0.25); }
+  100% { transform: scale(1);   box-shadow: 0 2px 12px rgba(0,0,0,0.10); }
+}
+
+.lbta-cta-pulse {
+  animation: lbtaPulse 1s cubic-bezier(0.22, 0.61, 0.36, 1) 8s infinite;
+}
+
+/* Chat Wave - Friendly greeting (3 times) */
+@keyframes lbtaWave {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-10deg); }
+  50%  { transform: rotate(10deg); }
+  75%  { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.lbta-chat-wave {
+  animation: lbtaWave 1.4s ease-in-out 12s 3;
+  transform-origin: center;
+}
+
+/* Chat Idle Pulse - Subtle reminder every 60s */
+@keyframes lbtaChatIdle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.lbta-chat-idle {
+  animation: lbtaChatIdle 3s ease-in-out 60s infinite;
+}
+
+/* Chat Widget Positioning */
+.lbta-chat {
+  position: fixed;
+  bottom: 6rem;
+  right: 1.25rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  background-color: #F04E23;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 2px solid #FFFFFF;
+  transition: all 0.2s ease-out;
+  z-index: 40;
+}
+
+.lbta-chat:hover {
+  background-color: #F8A121;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .lbta-chat {
+    bottom: 5rem;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .lbta-cta-pulse,
+  .lbta-chat-wave,
+  .lbta-chat-idle {
+    animation: none !important;
+  }
+}
+
 /* React Big Calendar Custom Styles */
 .lbta-calendar .rbc-header {
   @apply font-sans text-[14px] font-semibold text-black/80 py-3 border-b border-gray-200;
