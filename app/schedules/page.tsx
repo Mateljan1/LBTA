@@ -364,36 +364,6 @@ export default function SchedulesPage() {
         </div>
       </section>
       
-      {/* FINAL CTA SECTION */}
-      <section className="relative min-h-[450px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero/laguna-horizon.webp"
-            alt="Laguna Beach sunset"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25" />
-        </div>
-        
-        <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto py-20">
-          <h2 className="font-serif text-[40px] md:text-[48px] font-semibold mb-6 leading-[1.2] text-shadow">
-            Start Training with Purpose.
-          </h2>
-          <p className="font-sans text-[18px] leading-[1.6] text-white/90 mb-10">
-            The structure that builds confidence. The community that lasts.
-          </p>
-          <Link 
-            href="/book"
-            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px]"
-          >
-            Get Started →
-          </Link>
-        </div>
-      </section>
-      
       {/* Registration Modal */}
       <RegistrationModal 
         program={selectedProgram} 
