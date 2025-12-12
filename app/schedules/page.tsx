@@ -53,13 +53,22 @@ export default function SchedulesPage() {
     return groups
   }, [filteredPrograms])
   
-  // Handle accordion toggle
+  // Handle accordion toggle with auto-collapse and smooth scroll
   const toggleAccordion = (category: string) => {
+    const willExpand = !expandedAccordions.includes(category)
+    
+    // Auto-collapse others, open only this one (or close if already open)
     setExpandedAccordions(prev =>
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
+      prev.includes(category) ? [] : [category]
     )
+    
+    // Smooth scroll to accordion header when expanding
+    if (willExpand) {
+      setTimeout(() => {
+        const element = document.getElementById(`accordion-header-${category}`)
+        element?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+      }, 250)
+    }
   }
   
   // Handle registration
@@ -248,16 +257,27 @@ export default function SchedulesPage() {
             </div>
           ) : (
             /* ACCORDION GROUPS BY CATEGORY */
-            <div className="space-y-6 md:space-y-8">
-              {Object.entries(groupedPrograms).map(([category, programs]) => {
+            <div className="space-y-6 md:space-y-10">
+              {Object.entries(groupedPrograms).map(([category, programs], index) => {
                 const isExpanded = expandedAccordions.includes(category)
                 
                 return (
-                  <div key={category} className="bg-white rounded-2xl shadow-soft overflow-hidden">
+                  <div 
+                    key={category} 
+                    id={`accordion-header-${category}`}
+                    style={{ animationDelay: `${index * 100}ms` }}
+                    className="bg-white rounded-3xl shadow-soft overflow-hidden animate-fade-in-up"
+                  >
                     {/* Accordion Header */}
                     <button
                       onClick={() => toggleAccordion(category)}
-                      className="accordion-header w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between bg-[#FAF8F3] hover:bg-lbta-orange/10 focus:outline-none focus:ring-2 focus:ring-lbta-orange"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          toggleAccordion(category)
+                        }
+                      }}
+                      className="accordion-header w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between bg-[#FAF8F3] hover:bg-lbta-orange/10 focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all duration-200"
                       aria-expanded={isExpanded}
                       aria-controls={`accordion-${category}`}
                       aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${category} Programs section`}
@@ -283,7 +303,9 @@ export default function SchedulesPage() {
                     {isExpanded && (
                       <div 
                         id={`accordion-${category}`}
-                        className="accordion-content px-4 md:px-6 py-6 md:py-8 bg-white"
+                        className="accordion-content px-4 md:px-6 py-6 md:py-8 bg-white min-h-[200px]"
+                        role="region"
+                        aria-labelledby={`accordion-header-${category}`}
                       >
                         <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                           {programs.map((program) => (

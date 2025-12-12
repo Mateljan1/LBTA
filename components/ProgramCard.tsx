@@ -79,14 +79,15 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
   return (
     <div 
       ref={cardRef}
-      className={`bg-white rounded-3xl shadow-soft hover:shadow-hover transition-all duration-200 overflow-hidden border-2 ${
-        isExpanded ? 'border-lbta-orange/40' : 'border-transparent'
+      className={`bg-white rounded-[24px] shadow-soft hover:shadow-hover hover:-translate-y-1 transition-all duration-180 overflow-hidden border-2 ${
+        isExpanded ? 'border-lbta-orange/40 shadow-lg' : 'border-transparent'
       }`}
     >
       {/* COLLAPSED VIEW - Always Visible */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full p-4 md:p-6 text-left focus:outline-none focus:ring-2 focus:ring-lbta-orange rounded-3xl transition-all"
+        onTouchStart={() => {}}
+        className="w-full p-5 md:p-6 text-left focus:outline-none focus:ring-2 focus:ring-lbta-orange rounded-[24px] transition-all active:scale-[0.98]"
         aria-expanded={isExpanded}
         aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${program.program} details`}
       >
@@ -101,7 +102,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             </p>
             
             {/* Quick Info */}
-            <div className="flex flex-wrap gap-3 mb-3">
+            <div className="flex flex-wrap gap-2 md:gap-3 mb-3 items-center">
               <div className="flex items-center gap-1.5 text-[13px] md:text-[14px] text-black/70">
                 <MapPin className="w-3.5 h-3.5 text-lbta-orange flex-shrink-0" />
                 <span className="font-sans">{program.location}</span>
@@ -110,12 +111,23 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
                 <Clock className="w-3.5 h-3.5 text-lbta-orange flex-shrink-0" />
                 <span className="font-sans">{getSessionInfo()}</span>
               </div>
+              
+              {/* Billing Badge */}
+              {program.pricing.monthly ? (
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#F8E6BB] text-[#A3501B] text-[11px] md:text-[12px] font-sans font-semibold">
+                  Monthly Plan
+                </span>
+              ) : (
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-lbta-orange/10 text-lbta-orange text-[11px] md:text-[12px] font-sans font-semibold">
+                  Quarterly Plan
+                </span>
+              )}
             </div>
             
             {/* Base Price */}
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-baseline gap-2 flex-wrap">
               <span className="font-sans text-[13px] text-black/60">Starting at</span>
-              <span className="font-serif text-[22px] md:text-[24px] font-bold text-lbta-orange">
+              <span className="font-serif text-[24px] md:text-[26px] font-bold text-lbta-orange leading-[1.3]">
                 {getBasePrice()}
               </span>
               <span className="font-sans text-[13px] text-black/60">
@@ -137,7 +149,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
       
       {/* EXPANDED VIEW - Schedule + Pricing + Register */}
       {isExpanded && (
-        <div className="px-4 md:px-6 pb-4 md:pb-6 animate-fade-in-up">
+        <div className="px-5 md:px-6 pb-5 md:pb-6 animate-fade-in-up">
           {/* Description */}
           <p className="font-sans text-[14px] md:text-[15px] text-black/70 leading-relaxed mb-6 italic">
             {program.description}
@@ -193,7 +205,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
                 {program.pricing['1x'] && (
                   <div className="text-center p-3 bg-white rounded-lg">
                     <p className="font-sans text-[12px] md:text-[13px] text-black/60 mb-1">1× per week</p>
-                    <p className="font-serif text-[18px] md:text-[20px] font-bold text-lbta-orange">
+                    <p className="font-serif text-[20px] md:text-[22px] font-bold text-lbta-orange leading-[1.3]">
                       ${program.pricing['1x']}
                     </p>
                   </div>
@@ -296,20 +308,36 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             </div>
             
             {/* Billing Note */}
-            <p className="font-sans text-[12px] md:text-[13px] text-black/50 italic mt-2">
+            <p className="font-sans text-[13px] text-black/70 font-medium mt-3">
               {program.pricing['1x'] 
-                ? 'Prices are per 13-week quarter' 
+                ? 'Quarterly billing (13 weeks)' 
                 : 'Monthly billing'}
             </p>
           </div>
           
-          {/* Register Button */}
+          {/* Register Button - Desktop */}
           <button
             onClick={(e) => {
               e.stopPropagation()
               onRegister(program)
             }}
-            className="w-full bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] focus:outline-none focus:ring-2 focus:ring-lbta-red focus:ring-offset-2"
+            className="hidden md:block w-full bg-lbta-red hover:bg-lbta-orange hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] focus:outline-none focus:ring-2 focus:ring-lbta-red focus:ring-offset-2"
+          >
+            Register for {program.program} →
+          </button>
+        </div>
+      )}
+      
+      {/* Mobile Sticky Register Button (only when expanded) */}
+      {isExpanded && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 px-4 py-3 shadow-lg">
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onRegister(program)
+            }}
+            className="w-full bg-lbta-red hover:bg-lbta-orange active:scale-[0.98] text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md min-h-[48px]"
+            onTouchStart={() => {}}
           >
             Register for {program.program} →
           </button>
