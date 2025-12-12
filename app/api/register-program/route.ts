@@ -4,47 +4,125 @@ import axios from 'axios'
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 
+// Helper function to determine program category
+function determineCategory(programName: string): string {
+  const program = programName.toLowerCase()
+  
+  // Junior Programs
+  if (program.includes('little stars') || 
+      program.includes('red ball') || 
+      program.includes('orange ball') || 
+      program.includes('green dot')) {
+    return 'Junior'
+  }
+  
+  // Youth Programs
+  if (program.includes('youth development') || 
+      program.includes('high performance')) {
+    return 'Youth'
+  }
+  
+  // Fitness Programs
+  if (program.includes('cardio') || 
+      program.includes('liveball') || 
+      program.includes('family tennis') || 
+      program.includes('match play')) {
+    return 'Fitness'
+  }
+  
+  // Adult Programs (default)
+  return 'Adult'
+}
+
+// Helper function to check if Early Bird discount applies
+function isEarlyBird(): boolean {
+  const now = new Date()
+  const earlyBirdDeadline = new Date('2025-12-20T23:59:59')
+  return now < earlyBirdDeadline
+}
+
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json()
     
-    // 1. Save to Notion
+    // Determine category from program name
+    const category = determineCategory(data.program)
+    
+    // Calculate frequency from selected days
+    const frequency = (data.preferredDays || []).length
+    
+    // 1. Save to Notion (aligned with your database structure)
     try {
       await notion.pages.create({
         parent: { database_id: process.env.NOTION_DATABASE_ID! },
         properties: {
-          'Name': {
+          // Parent Name (Title field)
+          'Parent Name': {
             title: [{ text: { content: `${data.firstName} ${data.lastName}` } }]
           },
-          'Email': {
-            email: data.email
+          // Player Name (student's name)
+          'Player Name': {
+            rich_text: [{ text: { content: data.studentName || `${data.firstName} ${data.lastName}` } }]
           },
-          'Phone': {
-            phone_number: data.phone
-          },
+          // Program
           'Program': {
             rich_text: [{ text: { content: data.program } }]
           },
-          'Student Name': {
-            rich_text: [{ text: { content: data.studentName || '' } }]
+          // Category (auto-determined)
+          'Category': {
+            select: { name: category }
           },
-          'Student Age': {
-            number: parseInt(data.studentAge) || null
-          },
-          'Experience': {
-            select: { name: data.experience || 'Not specified' }
-          },
-          'Preferred Days': {
-            multi_select: (data.preferredDays || []).map((day: string) => ({ name: day }))
-          },
+          // Location
           'Location': {
             select: { name: data.location || 'Not specified' }
           },
-          'Total Price': {
+          // Days Selected (multi-select)
+          'Days Selected': {
+            multi_select: (data.preferredDays || []).map((day: string) => ({ name: day }))
+          },
+          // Time Slot (can be added later manually, or derived from schedule)
+          'Time Slot': {
+            rich_text: [{ text: { content: data.timeSlot || '' } }]
+          },
+          // Frequency (days/week)
+          'Frequency (days/week)': {
+            number: frequency
+          },
+          // Tuition
+          'Tuition': {
             number: parseInt(data.totalPrice) || 0
           },
+          // Age (for juniors/youth)
+          'Age': {
+            number: parseInt(data.studentAge) || null
+          },
+          // Parent Email
+          'Parent Email': {
+            email: data.email
+          },
+          // Parent Phone
+          'Parent Phone': {
+            phone_number: data.phone
+          },
+          // Experience Level
+          'Experience Level': {
+            select: { name: data.experience || 'Not specified' }
+          },
+          // Status (set to "New" as per your workflow)
           'Status': {
-            select: { name: 'Pending' }
+            select: { name: 'New' }
+          },
+          // Timestamp (current date/time)
+          'Timestamp': {
+            date: { start: new Date().toISOString() }
+          },
+          // Early Bird Applied (checkbox)
+          'Early Bird Applied': {
+            checkbox: isEarlyBird()
+          },
+          // Notes (optional field from form)
+          'Notes': {
+            rich_text: [{ text: { content: data.notes || '' } }]
           }
         }
       })
