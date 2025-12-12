@@ -7,73 +7,68 @@ import ScheduleCalendar from '@/components/ScheduleCalendar'
 import ProgramModal from '@/components/ProgramModal'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 
-// Winter 2026 - 13 Week Session (Jan 6 - Apr 5)
+// Winter 2026 - 13 Week Session (Jan 6 - Apr 5, 2026) - OFFICIAL FINAL
 const winter2026Programs = [
-  // Junior Programs - Ages 3-11
-  { name: "Little Tennis Stars", day: "Monday", time: "3:30-4:15 PM", ages: "3-4", duration: "45 min", price: "$120/mo", location: "Moulton", coach: "Michelle", category: "junior" },
-  { name: "Little Tennis Stars", day: "Tuesday", time: "3:30-4:15 PM", ages: "3-4", duration: "45 min", price: "$120/mo", location: "Moulton", coach: "Andy", category: "junior" },
-  { name: "Little Tennis Stars", day: "Wednesday", time: "3:30-4:15 PM", ages: "3-4", duration: "45 min", price: "$120/mo", location: "Moulton", coach: "Michelle", category: "junior" },
-  { name: "Little Tennis Stars", day: "Thursday", time: "2:45-3:30 PM", ages: "3-4", duration: "45 min", price: "$120/mo", location: "Moulton", coach: "Andy", category: "junior" },
+  // MOULTON MEADOWS - Junior Foundations
+  { name: "Little Tennis Stars", day: "Monday", time: "3:30-4:15 PM", ages: "3-4", duration: "45 min", price: "$260/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
+  { name: "Little Tennis Stars", day: "Wednesday", time: "3:30-4:15 PM", ages: "3-4", duration: "45 min", price: "$260/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
   
-  { name: "Red Ball Tennis", day: "Monday", time: "3:30-4:30 PM", ages: "5-7", duration: "1 hr", price: "$546/qtr", location: "Alta Laguna", coach: "Michelle", category: "junior" },
-  { name: "Red Ball Tennis", day: "Monday", time: "4:30-5:30 PM", ages: "5-7", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
-  { name: "Red Ball Tennis", day: "Wednesday", time: "3:30-4:30 PM", ages: "5-7", duration: "1 hr", price: "$546/qtr", location: "Alta Laguna", coach: "Michelle", category: "junior" },
-  { name: "Red Ball Tennis", day: "Wednesday", time: "4:30-5:30 PM", ages: "5-7", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
-  { name: "Red/Orange Ball Group", day: "Saturday", time: "9:00-10:00 AM", ages: "5-9", duration: "1 hr", price: "$546/qtr", location: "Alta Laguna", coach: "Andy", category: "junior" },
+  { name: "Red Ball Tennis", day: "Monday", time: "4:15-5:15 PM", ages: "5-6", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
+  { name: "Red Ball Tennis", day: "Wednesday", time: "4:15-5:15 PM", ages: "5-6", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
   
-  { name: "Orange Ball Tennis", day: "Monday", time: "4:30-5:30 PM", ages: "7-9", duration: "1 hr", price: "$546/qtr", location: "Alta Laguna", coach: "Michelle", category: "junior" },
-  { name: "Orange Ball Tennis", day: "Monday", time: "5:30-6:30 PM", ages: "7-9", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
-  { name: "Orange Ball Tennis", day: "Tuesday", time: "4:30-5:30 PM", ages: "7-9", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Andy", category: "junior" },
-  { name: "Orange Ball Tennis", day: "Wednesday", time: "4:30-5:30 PM", ages: "7-9", duration: "1 hr", price: "$546/qtr", location: "Alta Laguna", coach: "Michelle", category: "junior" },
-  { name: "Orange Ball Tennis", day: "Thursday", time: "3:30-4:30 PM", ages: "7-9", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Andy", category: "junior" },
+  { name: "Orange Ball Tennis", day: "Monday", time: "5:15-6:15 PM", ages: "7-8", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
+  { name: "Orange Ball Tennis", day: "Tuesday", time: "3:30-4:30 PM", ages: "7-8", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Andy", category: "junior" },
+  { name: "Orange Ball Tennis", day: "Wednesday", time: "5:15-6:15 PM", ages: "7-8", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
+  { name: "Orange Ball Tennis", day: "Thursday", time: "3:30-4:30 PM", ages: "7-8", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Andy", category: "junior" },
+  { name: "Orange Ball Match Play", day: "Friday", time: "3:30-4:30 PM", ages: "7-8", duration: "1 hr", price: "$85/mo", location: "Moulton", coach: "Michelle", category: "junior" },
   
-  { name: "Green Dot Tennis", day: "Tuesday", time: "3:30-4:30 PM", ages: "9-11", duration: "1 hr", price: "$546/qtr", location: "Alta Laguna", coach: "Andy", category: "junior" },
-  { name: "Green Dot Tennis", day: "Wednesday", time: "5:30-6:30 PM", ages: "9-11", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
-  { name: "Green Dot Tennis", day: "Thursday", time: "3:30-4:30 PM", ages: "9-11", duration: "1 hr", price: "$546/qtr", location: "Alta Laguna", coach: "Andy", category: "junior" },
+  { name: "Green Dot Tennis", day: "Tuesday", time: "4:30-5:30 PM", ages: "9-11", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Andy", category: "junior" },
+  { name: "Green Dot Tennis", day: "Thursday", time: "4:30-5:30 PM", ages: "9-11", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Andy", category: "junior" },
+  { name: "Green Dot Match Play", day: "Friday", time: "4:30-5:30 PM", ages: "9-11", duration: "1 hr", price: "$85/mo", location: "Moulton", coach: "Michelle", category: "junior" },
   
-  { name: "Fun Friday", day: "Friday", time: "3:30-4:30 PM", ages: "5-10", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
-  { name: "MatchPlay Friday", day: "Friday", time: "3:30-5:30 PM", ages: "All Ages", duration: "2 hr", price: "$546/qtr", location: "Alta Laguna", coach: "Andy", category: "junior" },
+  // MOULTON - Adult Programs
+  { name: "Adult Beginner 2 (Bridge)", day: "Monday", time: "6:30-7:30 PM", ages: "NTRP 2.0-2.5", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "adult" },
+  { name: "Adult Beginner 2 (Bridge)", day: "Wednesday", time: "6:30-7:30 PM", ages: "NTRP 2.0-2.5", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "adult" },
+  { name: "LiveBall Intermediate", day: "Thursday", time: "6:00-7:30 PM", ages: "NTRP 2.0-3.5", duration: "1.5 hr", price: "$150/mo", location: "Moulton", coach: "Michelle", category: "adult" },
   
-  // Youth Development - Ages 11-18
-  { name: "Youth Development", day: "Monday", time: "5:30-7:00 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Michelle", category: "youth" },
-  { name: "Youth Development", day: "Tuesday", time: "3:30-5:00 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Savriyan", category: "youth" },
-  { name: "Youth Development", day: "Tuesday", time: "4:30-6:00 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Andy", category: "youth" },
-  { name: "Youth Development", day: "Wednesday", time: "5:30-7:00 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Michelle", category: "youth" },
-  { name: "Youth Development", day: "Thursday", time: "3:30-5:00 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Savriyan", category: "youth" },
-  { name: "Youth Development", day: "Thursday", time: "4:30-6:00 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Andy", category: "youth" },
+  // ALTA LAGUNA PARK - Youth Development
+  { name: "Youth Development", day: "Monday", time: "4:00-5:30 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Michelle", category: "youth" },
+  { name: "Youth Development", day: "Tuesday", time: "4:00-5:30 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Andy", category: "youth" },
+  { name: "Youth Development", day: "Wednesday", time: "4:00-5:30 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Michelle", category: "youth" },
+  { name: "Youth Development", day: "Thursday", time: "4:00-5:30 PM", ages: "11-15", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Andy", category: "youth" },
+  { name: "Youth Development Match Play", day: "Friday", time: "3:00-4:00 PM", ages: "11-15", duration: "1 hr", price: "Included", location: "Alta Laguna", coach: "Staff", category: "youth" },
   
-  // High Performance
-  { name: "High Performance Training", day: "Monday", time: "3:30-5:30 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "$1,437/qtr", location: "LBHS", coach: "Kevin", category: "high-performance" },
-  { name: "High Performance Training", day: "Tuesday", time: "5:00-7:00 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "$1,437/qtr", location: "LBHS", coach: "Savriyan", category: "high-performance" },
-  { name: "High Performance Training", day: "Wednesday", time: "3:30-5:30 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "$1,437/qtr", location: "LBHS", coach: "Kevin", category: "high-performance" },
-  { name: "High Performance Training", day: "Thursday", time: "5:00-7:00 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "$1,437/qtr", location: "LBHS", coach: "Savriyan", category: "high-performance" },
+  // LBHS - High Performance
+  { name: "High Performance Training", day: "Monday", time: "6:00-8:00 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "$810/qtr", location: "LBHS", coach: "Kevin", category: "high-performance" },
+  { name: "High Performance Training", day: "Tuesday", time: "6:00-8:00 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "$810/qtr", location: "LBHS", coach: "Savriyan", category: "high-performance" },
+  { name: "High Performance Training", day: "Wednesday", time: "6:00-8:00 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "$810/qtr", location: "LBHS", coach: "Kevin", category: "high-performance" },
+  { name: "High Performance Training", day: "Thursday", time: "6:00-8:00 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "$810/qtr", location: "LBHS", coach: "Savriyan", category: "high-performance" },
+  { name: "HP Match Play", day: "Friday", time: "5:30-7:30 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "Included", location: "LBHS", coach: "Kevin", category: "high-performance" },
+  { name: "HP Match Play (Optional)", day: "Saturday", time: "2:00-4:00 PM", ages: "12-17 (UTR 5-8)", duration: "2 hr", price: "Included", location: "LBHS", coach: "Kevin", category: "high-performance" },
   
-  { name: "College Bound Intensive", day: "Monday", time: "5:30-7:30 PM", ages: "14-18 (UTR 8.0+)", duration: "2 hr", price: "$1,437/qtr", location: "LBHS", coach: "Kevin", category: "high-performance" },
-  { name: "College Bound Intensive", day: "Wednesday", time: "5:30-7:30 PM", ages: "14-18 (UTR 8.0+)", duration: "2 hr", price: "$1,437/qtr", location: "LBHS", coach: "Kevin", category: "high-performance" },
+  // LBHS - Adult Programs
+  { name: "Adult Beginner 1", day: "Monday", time: "6:00-7:00 PM", ages: "NTRP 1.0-2.0", duration: "1 hr", price: "$546/qtr", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "Adult Beginner 1", day: "Tuesday", time: "10:00-11:00 AM", ages: "NTRP 1.0-2.0", duration: "1 hr", price: "$546/qtr", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "Adult Beginner 1", day: "Wednesday", time: "6:00-7:00 PM", ages: "NTRP 1.0-2.0", duration: "1 hr", price: "$546/qtr", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "Adult Beginner 1", day: "Thursday", time: "10:00-11:00 AM", ages: "NTRP 1.0-2.0", duration: "1 hr", price: "$546/qtr", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "Adult Beginner 1", day: "Saturday", time: "9:00-10:00 AM", ages: "NTRP 1.0-2.0", duration: "1 hr", price: "$546/qtr", location: "LBHS", coach: "Staff", category: "adult" },
   
-  // Adult Programs
-  { name: "Adult Beginner", day: "Monday", time: "7:00-8:00 PM", ages: "NTRP 1.0-2.5", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "adult" },
-  { name: "Adult Beginner", day: "Saturday", time: "10:30-11:30 AM", ages: "NTRP 1.0-2.5", duration: "1 hr", price: "$546/qtr", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "Adult Intermediate", day: "Tuesday", time: "11:00 AM-12:30 PM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
+  { name: "Adult Intermediate", day: "Thursday", time: "11:00 AM-12:30 PM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
+  { name: "Adult Intermediate", day: "Saturday", time: "10:00-11:30 AM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
   
-  { name: "Adult Intermediate", day: "Monday", time: "7:00-8:30 PM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Michelle", category: "adult" },
-  { name: "Adult Intermediate", day: "Tuesday", time: "10:30 AM-12:00 PM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
-  { name: "Adult Intermediate", day: "Wednesday", time: "7:00-8:30 PM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$756/qtr", location: "Alta Laguna", coach: "Michelle", category: "adult" },
-  { name: "Adult Intermediate", day: "Thursday", time: "10:30 AM-12:00 PM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
-  { name: "Adult Intermediate", day: "Saturday", time: "9:00-10:30 AM", ages: "NTRP 3.0-3.5", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
+  { name: "Adult Advanced", day: "Monday", time: "12:00-2:00 PM", ages: "NTRP 4.0+", duration: "2 hr", price: "$810/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
+  { name: "Adult Advanced", day: "Wednesday", time: "12:00-2:00 PM", ages: "NTRP 4.0+", duration: "2 hr", price: "$810/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
   
-  { name: "Adult Advanced", day: "Monday", time: "12:00-2:00 PM", ages: "NTRP 4.0+", duration: "2 hr", price: "$1,121/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
+  // LBHS - Fitness & Community (Monthly)
+  { name: "Cardio Tennis", day: "Friday", time: "9:00-10:30 AM", ages: "All Levels", duration: "1.5 hr", price: "$150/mo", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "LiveBall Intermediate", day: "Sunday", time: "9:00-10:00 AM", ages: "All Levels", duration: "1 hr", price: "$150/mo", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "LiveBall Advanced", day: "Sunday", time: "10:30 AM-12:00 PM", ages: "NTRP 3.0+", duration: "1.5 hr", price: "$150/mo", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "LiveBall Advanced", day: "Saturday", time: "11:30 AM-1:00 PM", ages: "NTRP 3.0+", duration: "1.5 hr", price: "$150/mo", location: "LBHS", coach: "Staff", category: "adult" },
+  { name: "Family Tennis", day: "Sunday", time: "11:00 AM-12:00 PM", ages: "All Ages", duration: "1 hr", price: "$150/mo", location: "LBHS", coach: "Staff", category: "adult" },
   
-  { name: "LiveBall - Intermediate", day: "Monday", time: "7:00-9:30 AM", ages: "NTRP 3.0-4.5", duration: "2.5 hr", price: "$756/qtr", location: "LBHS", coach: "Kevin", category: "adult" },
-  { name: "LiveBall - Beginner", day: "Thursday", time: "6:00-7:30 PM", ages: "NTRP 2.0-3.5", duration: "1.5 hr", price: "$756/qtr", location: "Moulton", coach: "Michelle", category: "adult" },
-  { name: "LiveBall - Beginner", day: "Saturday", time: "9:00-10:30 AM", ages: "All Levels", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Staff", category: "adult" },
-  { name: "LiveBall - Int/Adv", day: "Saturday", time: "10:30 AM-12:00 PM", ages: "NTRP 3.0+", duration: "1.5 hr", price: "$756/qtr", location: "LBHS", coach: "Staff", category: "adult" },
-  
-  { name: "Cardio Tennis", day: "Tuesday", time: "6:00-7:00 PM", ages: "All Levels", duration: "1 hr", price: "$546/qtr", location: "Moulton", coach: "Michelle", category: "adult" },
-  { name: "Cardio Tennis", day: "Wednesday", time: "6:00-7:30 PM", ages: "All Levels", duration: "1.5 hr", price: "$756/qtr", location: "Moulton", coach: "Michelle", category: "adult" },
-  
-  // Ladies Programs
-  { name: "Ladies 3.5 Practice", day: "Tuesday", time: "5:00-7:00 PM", ages: "Team", duration: "2 hr", price: "$756/qtr", location: "LBHS", coach: "Staff", category: "adult" },
-  { name: "Ladies 3.5 Matches", day: "Saturday", time: "12:00-3:00 PM", ages: "Team", duration: "3 hr", price: "$756/qtr", location: "LBHS", coach: "Staff", category: "adult" },
+  // Match Play
+  { name: "Adult Match Play", day: "Friday", time: "6:00-8:00 PM", ages: "Adults", duration: "2 hr", price: "$120/mo", location: "LBHS", coach: "Staff", category: "adult" },
 ]
 
 const fall2025Programs = [
