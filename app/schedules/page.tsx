@@ -1,10 +1,13 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { ChevronDown, ChevronUp, SlidersHorizontal } from 'lucide-react'
 import ProgramCard, { Program } from '@/components/ProgramCard'
 import RegistrationModal from '@/components/RegistrationModal'
+import MobileFilterOverlay from '@/components/MobileFilterOverlay'
+import BackToTopButton from '@/components/BackToTopButton'
 
 // Import data
 import winter2026Data from '@/data/winter2026.json'
@@ -14,16 +17,18 @@ export default function SchedulesPage() {
   const [selectedSeason, setSelectedSeason] = useState<'winter' | 'fall'>('winter')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedLocation, setSelectedLocation] = useState<string>('all')
+  const [selectedDays, setSelectedDays] = useState<string[]>([])
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null)
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false)
+  const [expandedAccordions, setExpandedAccordions] = useState<string[]>(['Junior'])
+  const [heroParallax, setHeroParallax] = useState(0)
   
   // Get current season data
   const seasonData = selectedSeason === 'winter' ? winter2026Data : fall2025Data
   const allPrograms = seasonData.programs as Program[]
   
-  // Get unique categories for filter
+  // Get unique categories and locations
   const categories = ['all', ...Array.from(new Set(allPrograms.map(p => p.category)))]
-  
-  // Get unique locations for filter
   const locations = ['all', ...Array.from(new Set(allPrograms.map(p => p.location)))]
   
   // Filter programs
@@ -31,11 +36,12 @@ export default function SchedulesPage() {
     return allPrograms.filter(p => {
       const categoryMatch = selectedCategory === 'all' || p.category === selectedCategory
       const locationMatch = selectedLocation === 'all' || p.location.toLowerCase().includes(selectedLocation)
-      return categoryMatch && locationMatch
+      const dayMatch = selectedDays.length === 0 || p.schedule.some(s => selectedDays.includes(s.day))
+      return categoryMatch && locationMatch && dayMatch
     })
-  }, [allPrograms, selectedCategory, selectedLocation])
+  }, [allPrograms, selectedCategory, selectedLocation, selectedDays])
   
-  // Group by category for display
+  // Group by category for accordion display
   const groupedPrograms = useMemo(() => {
     const groups: { [key: string]: Program[] } = {}
     filteredPrograms.forEach(program => {
@@ -47,9 +53,54 @@ export default function SchedulesPage() {
     return groups
   }, [filteredPrograms])
   
+  // Handle accordion toggle
+  const toggleAccordion = (category: string) => {
+    setExpandedAccordions(prev =>
+      prev.includes(category)
+        ? prev.filter(c => c !== category)
+        : [...prev, category]
+    )
+  }
+  
+  // Handle registration
   const handleRegister = (program: Program) => {
     setSelectedProgram(program)
   }
+  
+  // Parallax effect on hero
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      setHeroParallax(scrollY * 0.3)
+    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+  
+  // Restore filter state from localStorage
+  useEffect(() => {
+    const savedFilters = localStorage.getItem('lbta-schedule-filters')
+    if (savedFilters) {
+      try {
+        const filters = JSON.parse(savedFilters)
+        setSelectedCategory(filters.category || 'all')
+        setSelectedLocation(filters.location || 'all')
+        setSelectedDays(filters.days || [])
+      } catch (e) {
+        // Ignore parse errors
+      }
+    }
+  }, [])
+  
+  // Save filter state to localStorage
+  useEffect(() => {
+    localStorage.setItem('lbta-schedule-filters', JSON.stringify({
+      category: selectedCategory,
+      location: selectedLocation,
+      days: selectedDays
+    }))
+  }, [selectedCategory, selectedLocation, selectedDays])
   
   const seasonLabel = selectedSeason === 'winter' ? 'Winter 2026' : 'Fall 2025'
   const seasonDates = selectedSeason === 'winter' 
@@ -58,7 +109,7 @@ export default function SchedulesPage() {
 
   return (
     <>
-      {/* HERO SECTION */}
+      {/* HERO SECTION - Enhanced with Gradient Overlay */}
       <section className="relative min-h-[65vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -66,19 +117,25 @@ export default function SchedulesPage() {
             alt="Laguna Beach Tennis Academy training at sunset"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 70%' }}
+            style={{ 
+              objectPosition: '50% 70%',
+              transform: `translateY(${heroParallax}px)`
+            }}
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-lbta-orange/20 to-lbta-beige/40" />
         </div>
         
         <div className="relative z-10 text-center text-white px-4 md:px-6 max-w-4xl mx-auto py-24">
           <h1 className="font-serif text-[36px] md:text-[60px] font-bold leading-[1.1] tracking-[-0.5px] mb-6 text-shadow">
-            Every Day, a Place to Belong.
+            Winter 2026 Schedule & Pricing
           </h1>
-          <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-8 md:mb-10 max-w-[90%] mx-auto">
-            Explore class times and programs built around movement, discipline, and belonging.
+          <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-4 max-w-[90%] mx-auto">
+            {seasonDates}
+          </p>
+          <p className="font-sans text-[15px] md:text-[18px] text-white/90 mb-8 md:mb-10">
+            Early Bird Special: Save $50 on full-quarter enrollment through December 20
           </p>
           <Link 
             href="/programs"
@@ -89,16 +146,16 @@ export default function SchedulesPage() {
         </div>
       </section>
 
-      {/* SEASON TOGGLE & FILTERS */}
-      <div className="bg-[#FAF8F3] py-12">
-        <div className="max-w-[1440px] mx-auto px-6">
+      {/* STICKY FILTER BAR - Glass Morphism */}
+      <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 py-4 md:py-6 shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-6">
           {/* Season Toggle */}
-          <div className="flex items-center justify-center gap-3 bg-white p-2 rounded-full shadow-sm w-fit mx-auto mb-6">
+          <div className="flex items-center justify-center gap-3 bg-white p-2 rounded-full shadow-sm w-fit mx-auto mb-4">
             <button
               onClick={() => setSelectedSeason('winter')}
-              className={`px-8 py-3 rounded-full font-sans font-semibold text-[16px] transition-all duration-300 ${
+              className={`px-6 md:px-8 py-2.5 md:py-3 rounded-full font-sans font-semibold text-[14px] md:text-[16px] transition-all duration-200 ${
                 selectedSeason === 'winter'
-                  ? 'bg-lbta-red text-white'
+                  ? 'bg-lbta-red text-white shadow-sm'
                   : 'text-lbta-red hover:bg-lbta-orange/10'
               }`}
             >
@@ -106,9 +163,9 @@ export default function SchedulesPage() {
             </button>
             <button
               onClick={() => setSelectedSeason('fall')}
-              className={`px-8 py-3 rounded-full font-sans font-semibold text-[16px] transition-all duration-300 ${
+              className={`px-6 md:px-8 py-2.5 md:py-3 rounded-full font-sans font-semibold text-[14px] md:text-[16px] transition-all duration-200 ${
                 selectedSeason === 'fall'
-                  ? 'bg-lbta-red text-white'
+                  ? 'bg-lbta-red text-white shadow-sm'
                   : 'text-lbta-red hover:bg-lbta-orange/10'
               }`}
             >
@@ -116,38 +173,27 @@ export default function SchedulesPage() {
             </button>
           </div>
           
-          <p className="text-center text-[15px] mb-6 text-black/60 italic font-sans">
-            {seasonDates}
-          </p>
-          
-          {/* Early Bird Banner (Winter Only) */}
-          {selectedSeason === 'winter' && (
-            <div className="bg-lbta-orange text-white text-center py-3 px-6 rounded-full max-w-2xl mx-auto mb-6 shadow-sm">
-              <p className="font-sans text-[15px] font-semibold">
-                🎾 Early Bird Special: Save $50 on full-quarter enrollment through December 20!
-              </p>
-            </div>
-          )}
-          
-          {/* Filters Row */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-8">
-            {/* Program Type Filter */}
+          {/* Desktop Filters Row */}
+          <div className="hidden md:flex items-center justify-center gap-4">
+            {/* Program Type */}
             <select 
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="border border-gray-300 rounded-full px-6 py-3 bg-white text-[15px] text-black/80 focus:border-lbta-red focus:outline-none focus:ring-2 focus:ring-lbta-red/20 font-sans cursor-pointer min-w-[200px]"
+              className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 font-sans cursor-pointer min-w-[160px] transition-all"
+              aria-label="Filter by program type"
             >
               <option value="all">All Programs</option>
               {categories.slice(1).map(cat => (
-                <option key={cat} value={cat}>{cat} Programs</option>
+                <option key={cat} value={cat}>{cat}</option>
               ))}
             </select>
             
-            {/* Location Filter */}
+            {/* Location */}
             <select 
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
-              className="border border-gray-300 rounded-full px-6 py-3 bg-white text-[15px] text-black/80 focus:border-lbta-red focus:outline-none focus:ring-2 focus:ring-lbta-red/20 font-sans cursor-pointer min-w-[200px]"
+              className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 font-sans cursor-pointer min-w-[160px] transition-all"
+              aria-label="Filter by location"
             >
               <option value="all">All Locations</option>
               <option value="moulton">Moulton Meadows</option>
@@ -155,60 +201,111 @@ export default function SchedulesPage() {
               <option value="lbhs">Laguna Beach High School</option>
             </select>
           </div>
+          
+          {/* Billing Info Legend */}
+          <p className="hidden md:block text-center text-[13px] text-black/60 font-sans mt-4 italic">
+            All Junior, Youth, and Adult programs billed quarterly (13 weeks). Fitness programs billed monthly.
+          </p>
         </div>
       </div>
+      
+      {/* Mobile Filter Button */}
+      <button
+        onClick={() => setMobileFilterOpen(true)}
+        className="md:hidden fixed bottom-6 right-6 z-30 bg-lbta-red hover:bg-lbta-orange text-white px-5 py-3.5 rounded-full shadow-lg font-sans font-semibold text-[14px] flex items-center gap-2 min-h-[48px] transition-all duration-200"
+        aria-label="Open filters"
+      >
+        <SlidersHorizontal className="w-4 h-4" />
+        Filters
+      </button>
 
-      {/* PROGRAM CARDS SECTION */}
-      <section className="bg-white py-16 md:py-24">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-          <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-black mb-3 text-center">
-            {seasonLabel} Schedule
+      {/* PROGRAM ACCORDION SECTIONS */}
+      <section className="bg-[#FAF8F3] py-12 md:py-20">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-6">
+          <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-black mb-2 text-center">
+            {seasonLabel} Programs
           </h2>
-          <p className="font-sans text-[15px] md:text-[16px] text-black/70 mb-12 text-center">
+          <p className="font-sans text-[14px] md:text-[16px] text-black/60 mb-10 md:mb-16 text-center">
             {filteredPrograms.length} program{filteredPrograms.length !== 1 ? 's' : ''} available
           </p>
           
           {/* Check if we have programs */}
           {filteredPrograms.length === 0 ? (
-            <div className="text-center py-12">
+            <div className="text-center py-16 bg-white rounded-2xl">
               <p className="font-sans text-[16px] text-black/60">
                 No programs match your filters. Try adjusting your selection.
               </p>
+              <button
+                onClick={() => {
+                  setSelectedCategory('all')
+                  setSelectedLocation('all')
+                  setSelectedDays([])
+                }}
+                className="mt-4 text-lbta-orange hover:underline font-sans font-semibold text-[15px]"
+              >
+                Clear all filters
+              </button>
             </div>
           ) : (
-            /* Display programs grouped by category */
-            <div className="space-y-16">
-              {Object.entries(groupedPrograms).map(([category, programs]) => (
-                <div key={category}>
-                  {/* Category Header */}
-                  <div className="mb-8">
-                    <h3 className="font-serif text-[32px] font-semibold text-black inline-block border-b-4 border-lbta-orange pb-2">
-                      {category} Programs
-                    </h3>
-                    <span className="ml-4 font-sans text-[18px] text-black/60">
-                      ({programs.length})
-                    </span>
+            /* ACCORDION GROUPS BY CATEGORY */
+            <div className="space-y-6 md:space-y-8">
+              {Object.entries(groupedPrograms).map(([category, programs]) => {
+                const isExpanded = expandedAccordions.includes(category)
+                
+                return (
+                  <div key={category} className="bg-white rounded-2xl shadow-soft overflow-hidden">
+                    {/* Accordion Header */}
+                    <button
+                      onClick={() => toggleAccordion(category)}
+                      className="accordion-header w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between bg-[#FAF8F3] hover:bg-lbta-orange/10 focus:outline-none focus:ring-2 focus:ring-lbta-orange"
+                      aria-expanded={isExpanded}
+                      aria-controls={`accordion-${category}`}
+                      aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${category} Programs section`}
+                    >
+                      <div className="flex items-center gap-3 md:gap-4">
+                        <h3 className="font-serif text-[24px] md:text-[32px] font-bold text-black">
+                          {category} Programs
+                        </h3>
+                        <span className="font-sans text-[16px] md:text-[18px] text-lbta-orange font-semibold bg-lbta-orange/10 px-3 py-1 rounded-full">
+                          {programs.length}
+                        </span>
+                      </div>
+                      <div className="flex-shrink-0">
+                        {isExpanded ? (
+                          <ChevronUp className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
+                        ) : (
+                          <ChevronDown className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
+                        )}
+                      </div>
+                    </button>
+                    
+                    {/* Accordion Content */}
+                    {isExpanded && (
+                      <div 
+                        id={`accordion-${category}`}
+                        className="accordion-content px-4 md:px-6 py-6 md:py-8 bg-white"
+                      >
+                        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+                          {programs.map((program) => (
+                            <ProgramCard
+                              key={program.id}
+                              program={program}
+                              onRegister={handleRegister}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  
-                  {/* Program Cards Grid */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
-                    {programs.map((program) => (
-                      <ProgramCard
-                        key={program.id}
-                        program={program}
-                        onRegister={handleRegister}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )}
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="relative min-h-[500px] flex items-center justify-center overflow-hidden">
+      {/* NEW PRE-FOOTER CTA SECTION */}
+      <section className="relative min-h-[400px] md:min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/hero/laguna-horizon.webp"
@@ -216,22 +313,61 @@ export default function SchedulesPage() {
             fill
             className="object-cover"
             sizes="100vw"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-black/25" />
+        </div>
+        
+        <div className="relative z-10 text-center text-white px-6 py-20 animate-fade-in-up">
+          <h2 className="font-serif text-[36px] md:text-[48px] font-semibold mb-4 leading-[1.2] text-shadow">
+            Ready to Train This Winter?
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/90 mb-8">
+            Secure your spot today — spaces are limited.
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <Link
+              href="/book"
+              className="bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] inline-block"
+            >
+              Book Trial
+            </Link>
+            <button
+              onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
+              className="border-2 border-white text-white hover:bg-white/10 font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            >
+              Browse Programs
+            </button>
+          </div>
+        </div>
+      </section>
+      
+      {/* FINAL CTA SECTION */}
+      <section className="relative min-h-[450px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero/laguna-horizon.webp"
+            alt="Laguna Beach sunset"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25" />
         </div>
         
         <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto py-20">
-          <h2 className="font-serif text-[40px] md:text-[48px] font-semibold mb-6 leading-[1.2]">
+          <h2 className="font-serif text-[40px] md:text-[48px] font-semibold mb-6 leading-[1.2] text-shadow">
             Start Training with Purpose.
           </h2>
           <p className="font-sans text-[18px] leading-[1.6] text-white/90 mb-10">
-            Book your spot in our {seasonLabel} sessions today and experience the structure that builds confidence.
+            The structure that builds confidence. The community that lasts.
           </p>
           <Link 
-            href="/programs"
-            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
+            href="/book"
+            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px]"
           >
-            View All Programs →
+            Get Started →
           </Link>
         </div>
       </section>
@@ -241,6 +377,23 @@ export default function SchedulesPage() {
         program={selectedProgram} 
         onClose={() => setSelectedProgram(null)} 
       />
+      
+      {/* Mobile Filter Overlay */}
+      <MobileFilterOverlay
+        isOpen={mobileFilterOpen}
+        onClose={() => setMobileFilterOpen(false)}
+        selectedCategory={selectedCategory}
+        selectedLocation={selectedLocation}
+        selectedDays={selectedDays}
+        onCategoryChange={setSelectedCategory}
+        onLocationChange={setSelectedLocation}
+        onDaysChange={setSelectedDays}
+        categories={categories}
+        locations={locations}
+      />
+      
+      {/* Back to Top Button */}
+      <BackToTopButton />
     </>
   )
 }

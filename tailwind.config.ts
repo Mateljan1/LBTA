@@ -77,7 +77,8 @@ const config: Config = {
       },
       animation: {
         'fade-in': 'fadeIn 1s ease-out',
-        'slide-up': 'slideUp 1.2s ease-out',
+        'slide-up': 'slideUp 300ms ease-out',
+        'fade-in-up': 'fadeInUp 400ms ease-out',
         'scale-in': 'scaleIn 0.8s ease-out',
       },
       keyframes: {
@@ -86,13 +87,20 @@ const config: Config = {
           '100%': { opacity: '1' },
         },
         slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '0%': { opacity: '0', transform: 'translateY(100%)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         scaleIn: {
           '0%': { opacity: '0', transform: 'scale(0.98)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
+      },
+      backdropBlur: {
+        xs: '2px',
       },
       letterSpacing: {
         'ultra-wide': '0.2em',
