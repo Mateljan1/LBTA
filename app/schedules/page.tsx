@@ -7,7 +7,7 @@ import ScheduleCalendar from '@/components/ScheduleCalendar'
 import ProgramModal from '@/components/ProgramModal'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 
-// Winter 2026 - 13 Week Session (Jan 6 - Apr 5, 2026) - OFFICIAL FINAL
+// Winter 2026 - 13 Week Session (Jan 5 - Apr 5, 2026) - OFFICIAL FINAL
 const winter2026Programs = [
   // MOULTON MEADOWS - Junior Foundations
   { name: "Little Tennis Stars", day: "Monday", time: "3:30-4:15 PM", ages: "3-4", duration: "45 min", price: "$260/qtr", location: "Moulton", coach: "Michelle", category: "junior" },
