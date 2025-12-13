@@ -131,9 +131,10 @@ export async function POST(request: NextRequest) {
       // Continue even if Notion fails
     }
 
-    // 2. Add to ActiveCampaign
+    // 2. Add to ActiveCampaign with automatic tagging
     try {
-      await axios.post(
+      // Create/update contact
+      const contactResponse = await axios.post(
         `${process.env.ACTIVECAMPAIGN_URL}/api/3/contacts`,
         {
           contact: {
@@ -143,7 +144,7 @@ export async function POST(request: NextRequest) {
             phone: data.phone,
             fieldValues: [
               {
-                field: '1', // Program field ID (update as needed)
+                field: '1',
                 value: data.program
               }
             ]
@@ -157,8 +158,46 @@ export async function POST(request: NextRequest) {
         }
       )
 
-      // Trigger automation (tag for Winter 2026 registration)
-      // This would require the automation ID from ActiveCampaign
+      // Add tags to trigger automation
+      if (contactResponse.data?.contact?.id) {
+        const contactId = contactResponse.data.contact.id
+        
+        // Add Winter 2026 tag (ID: 34)
+        await axios.post(
+          `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
+          {
+            contactTag: {
+              contact: contactId,
+              tag: 34  // Winter 2026 tag
+            }
+          },
+          {
+            headers: {
+              'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        
+        // Add Website Registration tag (ID: 36)
+        await axios.post(
+          `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
+          {
+            contactTag: {
+              contact: contactId,
+              tag: 36  // Website Registration tag
+            }
+          },
+          {
+            headers: {
+              'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        
+        console.log(`✅ ActiveCampaign contact synced with tags: ${data.email}`)
+      }
     } catch (acError) {
       console.error('ActiveCampaign error:', acError)
       // Continue even if AC fails
