@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import StickyCTA from '@/components/StickyCTA'
 
 export default function CampsPage() {
   return (
@@ -151,6 +152,9 @@ export default function CampsPage() {
           </Link>
         </div>
       </section>
+      
+      {/* Sticky Mobile CTA */}
+      <StickyCTA text="Reserve Your Spot" href="/book" showAfterScroll={600} />
     </>
   )
 }

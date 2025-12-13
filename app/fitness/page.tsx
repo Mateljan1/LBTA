@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import StickyCTA from '@/components/StickyCTA'
 
 const fitnessClasses = [
   { name: "Cardio Tennis", day: "Tuesday", time: "6:00-7:00 PM", location: "Moulton", price: "$546/qtr" },
@@ -194,6 +195,9 @@ export default function FitnessPage() {
           </Link>
         </div>
       </section>
+      
+      {/* Sticky Mobile CTA */}
+      <StickyCTA text="Join a Session" href="/book" showAfterScroll={600} />
     </>
   )
 }
