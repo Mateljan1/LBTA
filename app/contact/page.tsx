@@ -1,392 +1,391 @@
 'use client'
 
 import { useState } from 'react'
-import { MapPin, Phone, Mail, Clock, Send, Calendar, Users, CheckCircle } from 'lucide-react'
-import AnimatedSection from '@/components/ui/AnimatedSection'
-
-const steps = [
-  {
-    number: "1",
-    icon: Phone,
-    title: "We Respond Within 24 Hours",
-    description: "You'll hear from our team the same or next business day. We'll answer your questions and help you find the right program."
-  },
-  {
-    number: "2",
-    icon: Calendar,
-    title: "Schedule Your Free Trial",
-    description: "Choose a convenient time for your complimentary trial session. No commitment, no pressure—just come experience LBTA firsthand."
-  },
-  {
-    number: "3",
-    icon: Users,
-    title: "Meet Your Coach",
-    description: "Your assigned coach will assess your level, understand your goals, and create a personalized development plan."
-  },
-  {
-    number: "4",
-    icon: CheckCircle,
-    title: "Start Your Tennis Journey",
-    description: "If it's the right fit, we'll get you registered and into your program within days. If not, no worries—we'll point you in the right direction."
-  }
-]
+import Link from 'next/link'
+import Image from 'next/image'
+import { MapPin, Phone, Mail, CheckCircle, Loader2 } from 'lucide-react'
+import StickyCTA from '@/components/StickyCTA'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     phone: '',
-    program: '',
+    interestedIn: '',
     message: ''
   })
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle')
+  const [errors, setErrors] = useState<{[key: string]: string}>({})
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  const validatePhone = (phone: string) => /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phone)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setErrors({})
+    
+    // Validation
+    const newErrors: {[key: string]: string} = {}
+    if (!formData.name) newErrors.name = 'Name is required'
+    if (!formData.email) newErrors.email = 'Email is required'
+    else if (!validateEmail(formData.email)) newErrors.email = 'Please enter a valid email'
+    if (!formData.phone) newErrors.phone = 'Phone is required'
+    else if (!validatePhone(formData.phone)) newErrors.phone = 'Please enter a valid phone number'
+    
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
+    
     setStatus('sending')
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
-    setStatus('success')
-    setTimeout(() => {
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        program: '',
-        message: ''
+    try {
+      const response = await fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          firstName: formData.name.split(' ')[0],
+          lastName: formData.name.split(' ').slice(1).join(' ') || formData.name,
+          program: formData.interestedIn || 'General Inquiry',
+          source: 'contact-page',
+        }),
       })
-      setStatus('idle')
-    }, 3000)
+      
+      if (response.ok) {
+        setStatus('success')
+        setTimeout(() => {
+          setFormData({ name: '', email: '', phone: '', interestedIn: '', message: '' })
+          setStatus('idle')
+        }, 5000)
+      } else {
+        setStatus('error')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      setStatus('error')
+    }
   }
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-white pt-40 pb-20">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <p className="text-overline mb-6">Contact</p>
-            <h1 className="text-display-lg heading-display mb-6">
-              Get in Touch
-            </h1>
-            <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              We respond within 24 hours. Let's find the right program for you.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Contact Information */}
-      <section className="section-spacing bg-lbta-cream">
-        <div className="container-lbta">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-            <AnimatedSection>
-              <div className="flex items-start gap-4">
-                <Phone className="w-6 h-6 text-lbta-burnt flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-sans font-medium mb-2">Phone</h3>
-                  <a 
-                    href="tel:9494646645"
-                    className="text-2xl font-serif font-light text-lbta-charcoal hover:text-lbta-burnt transition-colors"
-                  >
-                    (949) 464-6645
-                  </a>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.1}>
-              <div className="flex items-start gap-4">
-                <Mail className="w-6 h-6 text-lbta-burnt flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-sans font-medium mb-2">Email</h3>
-                  <a 
-                    href="mailto:support@lagunabeachtennisacademy.com"
-                    className="text-lg text-lbta-charcoal hover:text-lbta-burnt transition-colors break-all"
-                  >
-                    support@lagunabeachtennisacademy.com
-                  </a>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <div className="flex items-start gap-4">
-                <MapPin className="w-6 h-6 text-lbta-burnt flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-sans font-medium mb-2">Address</h3>
-                  <p className="text-gray-600 mb-2">
-                    1098 Balboa Ave<br />
-                    Laguna Beach, CA 92651
-                  </p>
-                  <a 
-                    href="https://www.google.com/maps/search/?api=1&query=1098+Balboa+Ave+Laguna+Beach+CA+92651"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-lbta-burnt hover:text-lbta-orange transition-colors"
-                  >
-                    Get Directions →
-                  </a>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.3}>
-              <div className="flex items-start gap-4">
-                <Clock className="w-6 h-6 text-lbta-burnt flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-sans font-medium mb-2">Hours</h3>
-                  <p className="text-gray-600">
-                    Monday-Friday: 6:00 AM – 9:00 PM<br />
-                    Saturday-Sunday: 7:00 AM – 6:00 PM
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* 4-Step Process */}
-      <section className="section-spacing bg-white">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-6">
-              What Happens After You Reach Out
-            </h2>
-            <p className="text-lg text-gray-600">
-              Your journey from inquiry to first lesson—transparent, simple, pressure-free
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {steps.map((step, index) => {
-              const Icon = step.icon
-              return (
-                <AnimatedSection key={step.number} delay={index * 0.1}>
-                  <div className="card-lbta p-8 relative">
-                    <div className="absolute -left-3 top-8 w-10 h-10 bg-lbta-burnt text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                      {step.number}
-                    </div>
-                    <div className="pl-10">
-                      <div className="flex items-center gap-2 mb-3">
-                        <Icon className="w-5 h-5 text-lbta-burnt" />
-                        <h3 className="text-lg font-sans font-medium text-lbta-charcoal">
-                          {step.title}
-                        </h3>
-                      </div>
-                      <p className="text-gray-600 leading-relaxed">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              )
-            })}
-          </div>
-
-          <AnimatedSection delay={0.5} className="text-center mt-12">
-            <p className="text-gray-500 italic max-w-2xl mx-auto">
-              No pressure. No hard sell. Just honest guidance about whether LBTA is the right fit for you.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Contact Form */}
-      <section className="section-spacing bg-lbta-cream">
-        <div className="container-narrow">
-          <AnimatedSection>
-            <div className="card-lbta p-10">
-              <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-8 text-center">
-                Send Us a Message
-              </h2>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
-                      First Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.firstName}
-                      onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-lbta-burnt transition-all"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
-                      Last Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.lastName}
-                      onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-lbta-burnt transition-all"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-lbta-burnt transition-all"
-                    placeholder="your@email.com"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
-                    Phone *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-lbta-burnt transition-all"
-                    placeholder="(949) 555-1234"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
-                    Program Interest *
-                  </label>
-                  <select
-                    required
-                    value={formData.program}
-                    onChange={(e) => setFormData({...formData, program: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-lbta-burnt transition-all"
-                  >
-                    <option value="">Select a program</option>
-                    <option value="Little Tennis Stars (Ages 3-4)">Little Tennis Stars (Ages 3-4)</option>
-                    <option value="Junior Programs">Junior Programs</option>
-                    <option value="High Performance">High Performance</option>
-                    <option value="Adult Beginner">Adult Beginner</option>
-                    <option value="Adult Intermediate">Adult Intermediate</option>
-                    <option value="Adult Advanced">Adult Advanced</option>
-                    <option value="Cardio Tennis">Cardio Tennis</option>
-                    <option value="Private Lessons">Private Lessons</option>
-                    <option value="Not Sure">Not Sure - Help Me Choose</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-lbta-burnt transition-all resize-none"
-                    placeholder="Tell us about your tennis goals and any questions you have"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  className="btn-primary w-full justify-center disabled:opacity-50"
-                >
-                  {status === 'sending' ? (
-                    'Sending...'
-                  ) : status === 'success' ? (
-                    <>
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      Message Sent!
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4 mr-2" />
-                      SEND MESSAGE
-                    </>
-                  )}
-                </button>
-
-                {status === 'success' && (
-                  <p className="text-center text-sm text-green-600">
-                    Thank you! We'll get back to you within 24 hours.
-                  </p>
-                )}
-
-                <p className="text-xs text-center text-gray-500 leading-relaxed">
-                  Expect a response within 24 hours. We'll help you find the perfect program—or let you know honestly if another option might serve you better.
-                </p>
-              </form>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Additional Services */}
-      <section className="section-spacing bg-lbta-cream border-t border-gray-200">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-6">
-              Equipment Services
-            </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Need your racket restrung or new equipment? Visit our sister service.
-            </p>
-            <div className="card-lbta p-8 max-w-2xl mx-auto">
-              <h3 className="text-xl font-sans font-medium text-lbta-charcoal mb-4">
-                Racket Rescue
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Mobile racket restringing and equipment sales. Professional service with pickup and delivery throughout Laguna Beach.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="https://racketrescue.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary"
-                >
-                  VISIT RACKET RESCUE
-                </a>
-                <a
-                  href="tel:9495340457"
-                  className="btn-secondary"
-                >
-                  (949) 534-0457
-                </a>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Map */}
-      <section className="bg-gray-200">
-        <div className="h-96">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.8947!2d-117.7767!3d33.5428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDMyJzM0LjEiTiAxMTfCsDQ2JzM2LjEiVw!5e0!3m2!1sen!2sus!4v1234567890"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="LBTA Location"
+      {/* HERO SECTION */}
+      <section className="relative min-h-[65vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero/laguna-horizon.webp"
+            alt="Laguna Beach tennis courts at golden hour"
+            fill
+            className="object-cover"
+            style={{ objectPosition: '50% 60%' }}
+            sizes="100vw"
+            priority
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/25 to-transparent" />
+        </div>
+        
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+          <h1 className="font-serif text-[36px] md:text-[60px] font-bold leading-[1.1] mb-6 text-shadow">
+            Let's Start Your Tennis Journey.
+          </h1>
+          <p className="font-serif text-[18px] md:text-[24px] leading-[1.3] mb-8 text-white/95">
+            Movement. Discipline. Belonging — it starts here.
+          </p>
+          <p 
+            className="text-lbta-orange font-sans text-[14px] md:text-[16px] uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            Get in Touch ↓
+          </p>
         </div>
       </section>
+
+      {/* CONTACT INFO BAR */}
+      <section className="bg-[#FAF8F3] border-b border-black/10 py-8 md:py-12">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-center">
+            {/* Location */}
+            <div className="flex flex-col items-center gap-3">
+              <MapPin className="w-6 h-6 text-lbta-orange" aria-hidden="true" />
+              <div>
+                <p className="font-sans font-semibold text-[15px] text-black mb-1">Location</p>
+                <p className="font-sans text-[14px] text-black/70">1098 Balboa Ave</p>
+                <p className="font-sans text-[14px] text-black/70">Laguna Beach, CA 92651</p>
+              </div>
+            </div>
+            
+            {/* Phone */}
+            <div className="flex flex-col items-center gap-3">
+              <Phone className="w-6 h-6 text-lbta-orange" aria-hidden="true" />
+              <div>
+                <p className="font-sans font-semibold text-[15px] text-black mb-1">Phone</p>
+                <a 
+                  href="tel:9494646645" 
+                  className="font-sans text-[14px] text-black/70 hover:text-lbta-orange transition-colors"
+                  aria-label="Call us at (949) 464-6645"
+                >
+                  (949) 464-6645
+                </a>
+              </div>
+            </div>
+            
+            {/* Email */}
+            <div className="flex flex-col items-center gap-3">
+              <Mail className="w-6 h-6 text-lbta-orange" aria-hidden="true" />
+              <div>
+                <p className="font-sans font-semibold text-[15px] text-black mb-1">Email</p>
+                <a 
+                  href="mailto:support@lagunabeachtennisacademy.com" 
+                  className="font-sans text-[14px] text-black/70 hover:text-lbta-orange transition-colors break-all"
+                  aria-label="Email us at support@lagunabeachtennisacademy.com"
+                >
+                  support@lagunabeachtennisacademy.com
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MAIN FORM SECTION */}
+      <section id="contact-form" className="bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+          {status === 'success' ? (
+            /* SUCCESS STATE */
+            <div className="max-w-2xl mx-auto text-center py-12 bg-lbta-orange/10 rounded-2xl animate-fade-in-up">
+              <CheckCircle className="w-16 h-16 text-lbta-orange mx-auto mb-6" />
+              <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+                Message Sent!
+              </h3>
+              <p className="font-sans text-[16px] text-black/70 mb-8">
+                Our team will respond within 24 hours. We look forward to connecting with you!
+              </p>
+              <button
+                onClick={() => setStatus('idle')}
+                className="text-lbta-orange hover:underline font-sans font-semibold text-[15px]"
+              >
+                Send Another Message
+              </button>
+            </div>
+          ) : (
+            /* FORM STATE */
+            <div className="grid md:grid-cols-5 gap-8 md:gap-12">
+              {/* Form - 3 columns */}
+              <div className="md:col-span-3">
+                <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-black mb-3">
+                  Tell us a little about you.
+                </h2>
+                <p className="font-sans text-[15px] md:text-[16px] text-black/70 mb-8">
+                  We'll match you to the right program and reach out within 24 hours.
+                </p>
+                
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name */}
+                  <div>
+                    <label 
+                      htmlFor="name"
+                      className="block font-sans text-[15px] font-semibold text-black mb-2"
+                    >
+                      Your Name *
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all ${
+                        errors.name ? 'ring-2 ring-red-500' : ''
+                      }`}
+                      placeholder="Full name"
+                      aria-label="Your full name"
+                      aria-required="true"
+                      aria-invalid={!!errors.name}
+                    />
+                    {errors.name && (
+                      <p className="text-red-600 text-[13px] mt-2">{errors.name}</p>
+                    )}
+                  </div>
+                  
+                  {/* Email */}
+                  <div>
+                    <label 
+                      htmlFor="email"
+                      className="block font-sans text-[15px] font-semibold text-black mb-2"
+                    >
+                      Email Address *
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all ${
+                        errors.email ? 'ring-2 ring-red-500' : ''
+                      }`}
+                      placeholder="your@email.com"
+                      aria-label="Your email address"
+                      aria-required="true"
+                      aria-invalid={!!errors.email}
+                    />
+                    {errors.email && (
+                      <p className="text-red-600 text-[13px] mt-2">{errors.email}</p>
+                    )}
+                  </div>
+                  
+                  {/* Phone */}
+                  <div>
+                    <label 
+                      htmlFor="phone"
+                      className="block font-sans text-[15px] font-semibold text-black mb-2"
+                    >
+                      Phone Number *
+                    </label>
+                    <input
+                      id="phone"
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all ${
+                        errors.phone ? 'ring-2 ring-red-500' : ''
+                      }`}
+                      placeholder="(949) 555-1234"
+                      aria-label="Your phone number"
+                      aria-required="true"
+                      aria-invalid={!!errors.phone}
+                    />
+                    {errors.phone && (
+                      <p className="text-red-600 text-[13px] mt-2">{errors.phone}</p>
+                    )}
+                  </div>
+                  
+                  {/* Interested In */}
+                  <div>
+                    <label 
+                      htmlFor="interested"
+                      className="block font-sans text-[15px] font-semibold text-black mb-2"
+                    >
+                      Interested In (optional)
+                    </label>
+                    <select
+                      id="interested"
+                      value={formData.interestedIn}
+                      onChange={(e) => setFormData({...formData, interestedIn: e.target.value})}
+                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all cursor-pointer"
+                      aria-label="Select program interest"
+                    >
+                      <option value="">Select a program...</option>
+                      <option value="Junior Programs">Junior Programs (Ages 3-11)</option>
+                      <option value="Youth Development">Youth Development (Ages 11-15)</option>
+                      <option value="Adult Programs">Adult Programs</option>
+                      <option value="Fitness Programs">Fitness Programs</option>
+                      <option value="Summer Camps">Summer Camps</option>
+                      <option value="Private Lessons">Private Lessons</option>
+                      <option value="Not Sure">Not Sure - Help Me Choose</option>
+                    </select>
+                  </div>
+                  
+                  {/* Message */}
+                  <div>
+                    <label 
+                      htmlFor="message"
+                      className="block font-sans text-[15px] font-semibold text-black mb-2"
+                    >
+                      How can we help?
+                    </label>
+                    <textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      rows={4}
+                      className="w-full px-6 py-4 rounded-2xl bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all resize-none"
+                      placeholder="Tell us about your tennis goals and any questions you have..."
+                      aria-label="Your message to us"
+                    />
+                  </div>
+                  
+                  {/* Confirmation Text */}
+                  <p className="font-sans text-[13px] text-black/60 italic">
+                    We'll respond within 24 hours.
+                  </p>
+                  
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="w-full md:w-auto md:px-12 bg-lbta-orange hover:bg-lbta-red hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {status === 'sending' ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      'Send Message →'
+                    )}
+                  </button>
+                  
+                  {status === 'error' && (
+                    <p className="text-red-600 text-[14px] text-center">
+                      Error sending message. Please call (949) 464-6645
+                    </p>
+                  )}
+                </form>
+              </div>
+              
+              {/* Visual Accent - Desktop (2 columns) */}
+              <div className="hidden md:block md:col-span-2 relative aspect-[3/2] overflow-hidden rounded-2xl shadow-soft">
+                <Image
+                  src="/images/programs/private-specialty.webp"
+                  alt="LBTA private coaching session"
+                  fill
+                  className="object-cover"
+                  sizes="40vw"
+                />
+              </div>
+              
+              {/* Visual Accent - Mobile (below form) */}
+              <div className="md:hidden mt-8 relative aspect-[4/3] overflow-hidden rounded-2xl shadow-soft">
+                <Image
+                  src="/images/programs/private-specialty.webp"
+                  alt="LBTA coaching session"
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                  <p className="font-sans text-[14px] text-white italic">
+                    Our team will reach out to schedule your first conversation.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* PRE-FOOTER CTA */}
+      <section className="bg-[#FAF8F3] py-16 md:py-20">
+        <div className="max-w-[1200px] mx-auto px-4 text-center">
+          <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-6">
+            Ready to Train With Purpose?
+          </h2>
+          <p className="font-sans text-[16px] text-black/70 mb-8 max-w-2xl mx-auto">
+            Skip the form and book a trial session today. Experience LBTA firsthand.
+          </p>
+          <Link
+            href="/book"
+            className="inline-block bg-lbta-orange hover:bg-lbta-red text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px]"
+          >
+            Book a Trial →
+          </Link>
+        </div>
+      </section>
+      
+      {/* Sticky Mobile CTA */}
+      <StickyCTA text="Book a Trial" href="/book" showAfterScroll={800} />
     </>
   )
 }
