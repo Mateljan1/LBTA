@@ -438,6 +438,9 @@ export default function Programs() {
           </div>
         </div>
       </section>
+      
+      {/* Sticky Mobile CTA */}
+      <StickyCTA text="View Schedules" href="/schedules" showAfterScroll={600} />
     </>
   )
 }
