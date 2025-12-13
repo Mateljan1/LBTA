@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Work_Sans } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import { OrganizationSchema } from './schema'

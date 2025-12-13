@@ -1,51 +1,78 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://lbtennisacademy.com'
-  
   return [
     {
-      url: baseUrl,
+      url: 'https://lagunabeachtennisacademy.com',
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/programs`,
+      url: 'https://lagunabeachtennisacademy.com/programs',
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/about`,
+      url: 'https://lagunabeachtennisacademy.com/schedules',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: 'https://lagunabeachtennisacademy.com/book',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: 'https://lagunabeachtennisacademy.com/coaches',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/philosophy`,
+      url: 'https://lagunabeachtennisacademy.com/contact',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://lagunabeachtennisacademy.com/camps',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: 'https://lagunabeachtennisacademy.com/fitness',
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.9,
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/privacy`,
+      url: 'https://lagunabeachtennisacademy.com/about',
       lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
-      url: `${baseUrl}/terms`,
+      url: 'https://lagunabeachtennisacademy.com/faq',
       lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: 'https://lagunabeachtennisacademy.com/match-play',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: 'https://lagunabeachtennisacademy.com/pathway-planner',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
     },
   ]
 }
-
