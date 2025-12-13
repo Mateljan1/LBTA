@@ -161,6 +161,7 @@ export default function Programs() {
             alt="High performance athletes training under pro supervision at Laguna Beach Tennis Academy"
             fill
             className="object-cover"
+            style={{ objectPosition: '50% 50%' }}
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-black/25" />
