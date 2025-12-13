@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import TimelineSection from '@/components/TimelineSection'
@@ -11,6 +14,15 @@ const principles = [
 ]
 
 export default function AboutPage() {
+  const [heroParallax, setHeroParallax] = useState(0)
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setHeroParallax(window.scrollY * 0.4)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   return (
     <>
       {/* HERO SECTION */}
@@ -21,7 +33,10 @@ export default function AboutPage() {
             alt="Laguna Beach tennis courts with ocean horizon"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 60%' }}
+            style={{ 
+              objectPosition: '50% 60%',
+              transform: `translateY(${heroParallax}px)`
+            }}
             sizes="100vw"
             priority
           />

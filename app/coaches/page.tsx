@@ -1,8 +1,22 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 
-const coaches = [
+export default function CoachesPage() {
+  const [heroParallax, setHeroParallax] = useState(0)
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setHeroParallax(window.scrollY * 0.4)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+  
+  const coaches = [
   {
     name: "Andrew Mateljan",
     title: "Director & Head Coach",
@@ -49,8 +63,7 @@ const coaches = [
     image: "/images/coaches/andy.webp",
   }
 ]
-
-export default function CoachesPage() {
+  
   return (
     <>
       {/* HERO SECTION */}
@@ -61,7 +74,10 @@ export default function CoachesPage() {
             alt="Laguna Beach Tennis Academy coaches and players training together"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 40%' }}
+            style={{ 
+              objectPosition: '50% 40%',
+              transform: `translateY(${heroParallax}px)`
+            }}
             sizes="100vw"
             priority
           />
