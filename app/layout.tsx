@@ -99,13 +99,26 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* Google Analytics - Add your GA4 measurement ID when ready */}
-        {/* Placeholder removed - configure with real GA4 ID in production */}
-        
         {/* Schema Markup */}
         <OrganizationSchema />
       </head>
       <body className={`${workSans.className} flex flex-col min-h-screen`}>
+        {/* Google Analytics 4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-VCH0K84TSF"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-VCH0K84TSF', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
+        
         <ConditionalLayout>
           {children}
         </ConditionalLayout>
