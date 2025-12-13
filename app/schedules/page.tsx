@@ -20,7 +20,7 @@ export default function SchedulesPage() {
   const [selectedDays, setSelectedDays] = useState<string[]>([])
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null)
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false)
-  const [expandedAccordions, setExpandedAccordions] = useState<string[]>(['Junior'])
+  const [expandedAccordions, setExpandedAccordions] = useState<string[]>([])
   const [heroParallax, setHeroParallax] = useState(0)
   
   // Get current season data
@@ -156,7 +156,7 @@ export default function SchedulesPage() {
       </section>
 
       {/* STICKY FILTER BAR - Glass Morphism */}
-      <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 py-4 md:py-6 shadow-sm">
+      <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 py-4 md:py-6 shadow-sm">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6">
           {/* Season Toggle */}
           <div className="flex items-center justify-center gap-3 bg-white p-2 rounded-full shadow-sm w-fit mx-auto mb-4">

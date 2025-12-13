@@ -50,7 +50,7 @@ export default function MobileFilterOverlay({
   
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end md:hidden"
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-end md:hidden"
       onClick={onClose}
     >
       <div

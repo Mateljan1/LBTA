@@ -77,7 +77,7 @@ export default function Footer() {
       </div>
 
       {/* Main Footer */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-20 py-12 md:py-20">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-20 py-12 md:py-20 pb-[calc(48px+env(safe-area-inset-bottom))] md:pb-20">
         <div className="text-center">
           {/* Logo */}
           <div className="mb-8">

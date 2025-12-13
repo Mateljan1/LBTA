@@ -261,11 +261,11 @@
       "category": "Fitness",
       "program": "LiveBall Intermediate",
       "ages": "NTRP 2.0-3.5",
-      "location": "Moulton / LBHS",
-      "duration": "1-1.5 hr",
+      "location": "LBHS",
+      "duration": "1.5 hr",
       "schedule": [
-        { "day": "Thursday", "time": "6:00-7:30 PM", "coach": "Michelle", "location": "Moulton" },
-        { "day": "Sunday", "time": "9:00-10:00 AM", "coach": "Staff", "location": "LBHS" }
+        { "day": "Thursday", "time": "6:00-7:30 PM", "coach": "Staff", "location": "LBHS" },
+        { "day": "Sunday", "time": "9:00-10:30 AM", "coach": "Staff", "location": "LBHS" }
       ],
       "pricing": {
         "monthly": 150,
