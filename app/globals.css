@@ -58,6 +58,24 @@
   overflow: hidden;
 }
 
+/* CTA Button Interactions */
+.cta-button {
+  transition: transform 150ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.cta-button:active {
+  transform: scale(0.97);
+}
+
+/* Social Icon Hover */
+.social-icon {
+  transition: transform 200ms ease-out;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+}
+
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,

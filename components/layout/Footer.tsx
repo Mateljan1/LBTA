@@ -128,7 +128,7 @@ export default function Footer() {
               href="https://instagram.com/lagunabeachtennisacademy" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-black/60 hover:text-lbta-orange transition-colors"
+              className="social-icon text-black/60 hover:text-lbta-orange transition-all"
               aria-label="Follow us on Instagram"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -139,7 +139,7 @@ export default function Footer() {
               href="https://facebook.com/lagunabeachtennisacademy" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-black/60 hover:text-lbta-orange transition-colors"
+              className="social-icon text-black/60 hover:text-lbta-orange transition-all"
               aria-label="Follow us on Facebook"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
