@@ -16,54 +16,57 @@ export default function CoachesPage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   
-  const coaches = [
-  {
-    name: "Andrew Mateljan",
-    title: "Director & Head Coach",
-    specialization: "ATP/WTA Tour Coach",
-    bio: "20 years developing competitive players. Former #3 SoCal, #12 nationally ranked junior. Seven years coaching internationally across Spain, Croatia, and Norway. Currently coaches ATP #262 Karue Sell.",
-    quote: "Structure creates confidence.",
-    credentials: "Former Top Junior • ATP/WTA Tour Coach • 20+ D1 Placements",
-    image: "/images/coaches/andrew.webp",
-  },
-  {
-    name: "Kevin Jackson",
-    title: "Head Coach",
-    specialization: "College Recruitment Specialist",
-    bio: "Over 20 D1 college placements. Kevin specializes in NCAA recruitment strategy, tournament preparation, and developing college-bound athletes.",
-    quote: "Excellence through preparation.",
-    credentials: "20+ D1 Placements • NCAA Recruitment Expert • USPTA Elite",
-    image: "/images/coaches/kevin.webp",
-  },
-  {
-    name: "Michelle Bevins",
-    title: "Youth Director",
-    specialization: "Junior Development (Ages 3-12)",
-    bio: "Engaging, patient approach that builds confidence and love for tennis while developing proper technique through age-appropriate activities.",
-    quote: "Every child can shine.",
-    credentials: "Youth Development Specialist • Red/Orange Ball Certified",
-    image: "/images/coaches/michelle.webp",
-  },
-  {
-    name: "Savriyan Danilov",
-    title: "High Performance Coach",
-    specialization: "ATP Pro #556",
-    bio: "Professional tour experience brings real-world competitive insights to high-performance training. Specializes in advanced technique and match strategy.",
-    quote: "Champions train differently.",
-    credentials: "ATP Professional • 8 Years Tour Experience",
-    image: "/images/coaches/savriyan.webp",
-  },
-  {
-    name: "Andy Wu",
-    title: "Program Coach",
-    specialization: "Junior & Adult Development",
-    bio: "Solid fundamentals and progressive skill development. Works with all ages and skill levels with focus on building proper technique.",
-    quote: "Fundamentals create mastery.",
-    credentials: "USPTA Certified • EdD Educational Leadership",
-    image: "/images/coaches/andy.webp",
-  }
-]
+  const leadCoaches = [
+    {
+      name: "Andrew Mateljan",
+      title: "Director & Head Coach",
+      specialization: "ATP/WTA Tour Coach",
+      bio: "Twenty years developing competitive players from junior foundations to professional tour. Former #3 SoCal and #12 nationally ranked junior. Seven years coaching internationally across Spain, Croatia, and Norway shaped a movement-first approach grounded in clarity and accountability. Currently coaches ATP #262 Karue Sell. Training history includes Max McKennon (ATP #458), Ryan Seggerman (ATP #63 Doubles), with Masters 1000 experience at Indian Wells. Founder of Fit4Tennis platform serving 100K+ users worldwide. Every lesson reflects one belief: structure creates confidence, and confidence creates champions.",
+      quote: "Structure creates confidence.",
+      credentials: "Former Top Junior • ATP/WTA Tour Coach • 20+ D1 Placements",
+      image: "/images/coaches/andrew.webp",
+    },
+    {
+      name: "Kevin Jackson",
+      title: "Head Coach & Performance Director",
+      specialization: "Player Development · Global Systems Leadership",
+      bio: "Kevin Jackson is a performance architect with more than twenty-five years of experience in global player development, system design, and athlete management. He has coached and guided over 3,000 athletes worldwide — developing national champions, international juniors, and professional players across four continents. His approach combines clarity, structure, and adaptability to help athletes build long-term, sustainable performance systems. Kevin has directed full-time training environments, advised high-net-worth families on performance planning, and designed integrated development frameworks that merge technical, tactical, and mindset training. Career highlights include 3,000+ athletes trained, 550+ tournament victories, 20+ Division I scholarship athletes, and creating development systems combining data, psychology, and on-court performance. Kevin's coaching reflects a simple belief — that performance grows from clarity, discipline, and structure.",
+      quote: "Excellence through preparation.",
+      credentials: "25+ Years Experience • 3,000+ Athletes Trained • 20+ D1 Placements • Global Systems Leader",
+      image: "/images/coaches/kevin.webp",
+    }
+  ]
   
+  const programCoaches = [
+    {
+      name: "Michelle Bevins",
+      title: "Youth Director",
+      specialization: "Junior Development (Ages 3-12)",
+      bio: "Michelle brings engaging, patient coaching that builds confidence and genuine love for tennis while developing proper technique. Her approach creates the perfect learning environment for young children through age-appropriate activities, positive reinforcement, and structured fun. Specializing in Red Ball and Orange Ball certification, Michelle understands how to meet each child where they are and guide them toward their potential. Parents consistently praise her ability to make tennis feel like play while building real skills. With a 95% parent satisfaction rate and years of youth development expertise, Michelle has helped hundreds of young players discover movement, discipline, and belonging through tennis.",
+      quote: "Every child can shine.",
+      credentials: "Youth Development Specialist • Red/Orange Ball Certified • 95% Parent Satisfaction",
+      image: "/images/coaches/michelle.webp",
+    },
+    {
+      name: "Savriyan Danilov",
+      title: "High Performance Coach",
+      specialization: "ATP Pro #556",
+      bio: "Professional tour experience brings real-world competitive insights to high-performance training at LBTA. Savriyan specializes in advanced technique development, match strategy, and preparing players for competitive success at the highest levels. Eight years of ATP tour competition inform every session — from point construction to mental toughness under pressure. His training focuses on translating professional-level patterns into junior and collegiate development. Players working with Savriyan gain tactical sophistication, court positioning mastery, and the competitive mindset needed for tournament success. His approach balances technical precision with strategic awareness, creating players who can execute under pressure and adapt to any opponent or surface.",
+      quote: "Champions train differently.",
+      credentials: "ATP Professional • 8 Years Tour Experience • Match Strategy Expert",
+      image: "/images/coaches/savriyan.webp",
+    },
+    {
+      name: "Andy Wu",
+      title: "Program Coach",
+      specialization: "Junior & Adult Development",
+      bio: "Solid fundamentals and progressive skill development define Andy's coaching philosophy. With USPTA certification and an EdD in Educational Leadership, Andy combines technical expertise with deep understanding of how people learn and grow. Working with all ages and skill levels, he focuses on building proper technique from the ground up — ensuring every student develops repeatable strokes, tactical awareness, and confidence in their game. Andy's patient, systematic approach helps beginners feel comfortable while challenging advanced players to refine their skills. His background in education brings structure and clarity to every lesson, making complex concepts accessible and progress measurable for every student.",
+      quote: "Fundamentals create mastery.",
+      credentials: "USPTA Certified • EdD Educational Leadership • Fundamentals Specialist",
+      image: "/images/coaches/andy.webp",
+    }
+  ]
+
   return (
     <>
       {/* HERO SECTION */}
@@ -100,7 +103,7 @@ export default function CoachesPage() {
         </div>
       </section>
 
-      {/* COACHES GRID */}
+      {/* LEAD COACHES - Row 1 (2 coaches) */}
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20">
           <h2 className="font-serif text-[32px] md:text-[48px] font-semibold text-black mb-4 text-center">
@@ -110,8 +113,9 @@ export default function CoachesPage() {
             Every coach at LBTA shares one philosophy: Movement. Discipline. Belonging.
           </p>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {coaches.map((coach, index) => (
+          {/* Row 1: Lead Coaches */}
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-16 md:mb-24">
+            {leadCoaches.map((coach) => (
               <div 
                 key={coach.name}
                 className="group bg-[#FAF8F3] rounded-2xl overflow-hidden shadow-soft hover:shadow-hover transition-all duration-300"
@@ -123,11 +127,59 @@ export default function CoachesPage() {
                     alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    style={{ objectPosition: '50% 35%' }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   {/* Hover Quote Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                    <p className="font-serif text-[18px] md:text-[20px] italic text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-6">
+                    <p className="font-serif text-[20px] md:text-[24px] italic text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                      "{coach.quote}"
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Coach Info */}
+                <div className="p-6 md:p-8">
+                  <h3 className="font-serif text-[24px] font-bold text-black mb-1">
+                    {coach.name}
+                  </h3>
+                  <p className="font-sans text-[16px] font-medium text-lbta-orange mb-2">
+                    {coach.title}
+                  </p>
+                  <p className="font-sans text-[14px] text-black/60 mb-4">
+                    {coach.specialization}
+                  </p>
+                  <p className="font-sans text-[15px] text-black/80 leading-[1.7] mb-4">
+                    {coach.bio}
+                  </p>
+                  <p className="font-sans text-[13px] text-black/60 leading-relaxed">
+                    {coach.credentials}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Row 2: Program Coaches */}
+          <div className="grid md:grid-cols-3 gap-8 md:gap-10">
+            {programCoaches.map((coach) => (
+              <div 
+                key={coach.name}
+                className="group bg-[#FAF8F3] rounded-2xl overflow-hidden shadow-soft hover:shadow-hover transition-all duration-300"
+              >
+                {/* Coach Image with Hover Overlay */}
+                <div className="relative aspect-[3/4] overflow-hidden">
+                  <Image
+                    src={coach.image}
+                    alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    style={{ objectPosition: '50% 35%' }}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  {/* Hover Quote Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-6">
+                    <p className="font-serif text-[18px] md:text-[20px] italic text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-100">
                       "{coach.quote}"
                     </p>
                   </div>
@@ -144,7 +196,7 @@ export default function CoachesPage() {
                   <p className="font-sans text-[14px] text-black/60 mb-4">
                     {coach.specialization}
                   </p>
-                  <p className="font-sans text-[14px] text-black/80 leading-relaxed mb-4">
+                  <p className="font-sans text-[14px] md:text-[15px] text-black/80 leading-[1.7] mb-4">
                     {coach.bio}
                   </p>
                   <p className="font-sans text-[13px] text-black/60 leading-relaxed">
@@ -163,21 +215,21 @@ export default function CoachesPage() {
           <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-6">
             Work With Our Coaches
           </h2>
-          <p className="font-sans text-[16px] text-black/70 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Our coaches share one philosophy: movement, discipline, belonging. Each brings unique expertise, 
-            but all follow the same commitment to honest feedback and personalized development.
+          <p className="font-sans text-[16px] md:text-[17px] text-black/70 mb-8 max-w-2xl mx-auto leading-[1.7]">
+            Our coaches share one philosophy: movement, discipline, belonging. Each brings unique expertise 
+            but follows the same commitment to structure and growth.
           </p>
           <Link
-            href="/book"
-            className="inline-block bg-lbta-orange hover:bg-lbta-red text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px]"
+            href="/programs"
+            className="inline-block bg-lbta-orange hover:bg-lbta-red text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-300 shadow-md hover:shadow-lg min-h-[48px]"
           >
-            Book a Trial →
+            Explore Programs →
           </Link>
         </div>
       </section>
       
       {/* Sticky Mobile CTA */}
-      <StickyCTA text="Book a Trial" href="/book" showAfterScroll={600} />
+      <StickyCTA text="Explore Programs" href="/programs" showAfterScroll={600} />
     </>
   )
 }
