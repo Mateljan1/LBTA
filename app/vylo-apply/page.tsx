@@ -88,16 +88,15 @@ export default function VYLOApplyPage() {
         </div>
 
         {/* Headline */}
-        <div style={{ textAlign: 'center', marginBottom: '48px', maxWidth: '100%', margin: '0 auto 48px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '48px', maxWidth: '100%', margin: '0 auto 48px', padding: '0 20px' }}>
           <h1 style={{
             fontFamily: '"neue-haas-grotesk-display", sans-serif',
-            fontSize: 'clamp(28px, 5.5vw, 48px)',
+            fontSize: 'clamp(24px, 5.5vw, 48px)',
             fontWeight: 500,
             lineHeight: 1.1,
             color: '#FFFFFF',
             marginBottom: '32px',
             letterSpacing: '-0.03em',
-            whiteSpace: 'nowrap',
           }}>
             We build pros who can win under lights.
           </h1>
@@ -120,8 +119,72 @@ export default function VYLOApplyPage() {
             color: 'rgba(255, 255, 255, 0.5)',
             fontWeight: 400,
             letterSpacing: '0.02em',
+            marginBottom: '24px',
           }}>
             Roster capped. Entry earned.
+          </p>
+
+          {/* Program Details */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '12px 20px',
+            marginTop: '24px',
+            paddingTop: '24px',
+            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+          }}>
+            <span style={{
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
+              fontSize: 'clamp(11px, 2vw, 13px)',
+              color: '#F26522',
+              fontWeight: 500,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}>
+              UTR 9.0+
+            </span>
+            <span style={{
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
+              fontSize: 'clamp(11px, 2vw, 13px)',
+              color: '#F26522',
+              fontWeight: 500,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}>
+              Full-Time Commitment
+            </span>
+            <span style={{
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
+              fontSize: 'clamp(11px, 2vw, 13px)',
+              color: '#F26522',
+              fontWeight: 500,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}>
+              Ten Positions
+            </span>
+            <span style={{
+              fontFamily: '"neue-haas-grotesk-text", sans-serif',
+              fontSize: 'clamp(11px, 2vw, 13px)',
+              color: '#F26522',
+              fontWeight: 500,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}>
+              Laguna Beach, CA
+            </span>
+          </div>
+
+          <p style={{
+            fontFamily: '"neue-haas-grotesk-text", sans-serif',
+            fontSize: 'clamp(12px, 2vw, 14px)',
+            color: 'rgba(255, 255, 255, 0.4)',
+            fontWeight: 400,
+            marginTop: '20px',
+            lineHeight: 1.6,
+          }}>
+            Founding Cohort • January 2026 • 30+ D1 Placements • ATP/WTA Coaching
           </p>
         </div>
 
@@ -131,11 +194,12 @@ export default function VYLOApplyPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            marginBottom: '56px',
-            borderRadius: '12px',
+            marginBottom: 'clamp(40px, 7vw, 56px)',
+            borderRadius: 'clamp(8px, 2vw, 12px)',
             overflow: 'hidden',
             border: '1px solid rgba(255, 255, 255, 0.12)',
             boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
+            maxWidth: '100%',
           }}
         >
           <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
@@ -165,18 +229,18 @@ export default function VYLOApplyPage() {
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255, 255, 255, 0.08)',
               borderRadius: '8px',
-              padding: '48px 40px',
+              padding: 'clamp(32px, 6vw, 48px) clamp(24px, 5vw, 40px)',
             }}
           >
             <div style={{
               textAlign: 'center',
-              marginBottom: '32px',
-              paddingBottom: '32px',
+              marginBottom: 'clamp(24px, 5vw, 32px)',
+              paddingBottom: 'clamp(24px, 5vw, 32px)',
               borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
             }}>
               <div style={{
                 fontFamily: '"neue-haas-grotesk-text", sans-serif',
-                fontSize: '12px',
+                fontSize: 'clamp(11px, 2vw, 12px)',
                 fontWeight: 500,
                 letterSpacing: '0.2em',
                 textTransform: 'uppercase',
@@ -187,7 +251,7 @@ export default function VYLOApplyPage() {
               </div>
               <div style={{
                 fontFamily: '"neue-haas-grotesk-display", sans-serif',
-                fontSize: '28px',
+                fontSize: 'clamp(24px, 5vw, 28px)',
                 fontWeight: 500,
                 color: '#FFFFFF',
                 marginBottom: '8px',
@@ -197,7 +261,7 @@ export default function VYLOApplyPage() {
               </div>
               <div style={{
                 fontFamily: '"neue-haas-grotesk-text", sans-serif',
-                fontSize: '14px',
+                fontSize: 'clamp(13px, 2.5vw, 14px)',
                 color: 'rgba(255, 255, 255, 0.5)',
                 fontWeight: 400,
               }}>
@@ -429,7 +493,7 @@ export default function VYLOApplyPage() {
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(34, 197, 94, 0.2)',
               borderRadius: '8px',
-              padding: '48px 40px',
+              padding: 'clamp(32px, 6vw, 48px) clamp(24px, 5vw, 40px)',
               textAlign: 'center',
             }}
           >
