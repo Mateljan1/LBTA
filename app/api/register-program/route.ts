@@ -158,17 +158,18 @@ export async function POST(request: NextRequest) {
         }
       )
 
-      // Add tags to trigger automation
+      // Add tag to trigger automation
       if (contactResponse.data?.contact?.id) {
         const contactId = contactResponse.data.contact.id
         
-        // Add Winter 2026 tag (ID: 34)
+        // Add "Winter 2026 - Website Registration" tag (ID: 33)
+        // This triggers the LBTA Registration Confirmation automation
         await axios.post(
           `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
           {
             contactTag: {
               contact: contactId,
-              tag: 34  // Winter 2026 tag
+              tag: 33  // Winter 2026 - Website Registration (matches automation trigger)
             }
           },
           {
@@ -179,24 +180,7 @@ export async function POST(request: NextRequest) {
           }
         )
         
-        // Add Website Registration tag (ID: 36)
-        await axios.post(
-          `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
-          {
-            contactTag: {
-              contact: contactId,
-              tag: 36  // Website Registration tag
-            }
-          },
-          {
-            headers: {
-              'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
-              'Content-Type': 'application/json'
-            }
-          }
-        )
-        
-        console.log(`✅ ActiveCampaign contact synced with tags: ${data.email}`)
+        console.log(`✅ ActiveCampaign contact synced with tag 33: ${data.email}`)
       }
     } catch (acError) {
       console.error('ActiveCampaign error:', acError)
