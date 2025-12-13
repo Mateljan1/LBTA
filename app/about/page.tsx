@@ -1,14 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-
-const milestones = [
-  { year: '2020', title: 'LBTA Founded', description: 'Andrew returns to Laguna, begins ATP/WTA-level coaching locally.' },
-  { year: '2021', title: 'First D1 Placements', description: 'Three students earn Division I scholarships.' },
-  { year: '2022', title: 'Program Expansion', description: 'High Performance track introduced.' },
-  { year: '2023', title: 'ATP Success', description: 'Karue Sell rises 600 spots on ATP Tour.' },
-  { year: '2024', title: '20+ D1 Scholarships', description: 'Over 20 placements achieved.' },
-  { year: '2025', title: 'Continued Excellence', description: '200+ members, $25K+ annual scholarship fund.' },
-]
+import TimelineSection from '@/components/TimelineSection'
+import StickyCTA from '@/components/StickyCTA'
 
 const principles = [
   { title: 'The Work', description: 'Technique takes time. Mental clarity and discipline come first.' },
@@ -67,19 +60,19 @@ export default function AboutPage() {
               <div className="absolute inset-0 overlay-light" />
             </div>
             
-            <div className="space-y-6">
+            <div className="space-y-6 max-w-[700px]">
               <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black leading-tight">
                 Our Story
               </h2>
-              <p className="font-sans text-[16px] md:text-[17px] leading-relaxed text-black/85">
+              <p className="font-sans text-[16px] md:text-[17px] leading-[1.7] text-black/85">
                 Since 2020, students have learned that good tennis teaches more than strokes. 
                 It builds focus, resilience, and quiet confidence through disciplined effort.
               </p>
-              <p className="font-sans text-[16px] md:text-[17px] leading-relaxed text-black/85">
+              <p className="font-sans text-[16px] md:text-[17px] leading-[1.7] text-black/85">
                 Founded by Andrew Mateljan, LBTA brings ATP/WTA-level coaching to every player — 
                 from first rally to professional tour.
               </p>
-              <p className="font-sans text-[16px] md:text-[17px] leading-relaxed text-black/85">
+              <p className="font-sans text-[16px] md:text-[17px] leading-[1.7] text-black/85">
                 Today, our players compete globally, earn college scholarships, and carry themselves 
                 with the composure of true mastery.
               </p>
@@ -89,38 +82,7 @@ export default function AboutPage() {
       </section>
 
       {/* OUR JOURNEY - Timeline */}
-      <section className="bg-[#FAF8F3] py-16 md:py-24">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
-          <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-12 text-center">
-            Our Journey
-          </h2>
-          
-          <div className="relative">
-            {/* Timeline connector - desktop */}
-            <div className="hidden md:block absolute left-0 right-0 top-[60px] h-[2px] bg-lbta-orange/30" />
-            
-            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-6">
-              {milestones.map((milestone, index) => (
-                <div 
-                  key={milestone.year}
-                  className="relative bg-white rounded-xl p-6 shadow-soft hover:shadow-hover transition-all duration-300 text-center"
-                >
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-lbta-orange hidden md:block" />
-                  <div className="text-[24px] md:text-[28px] font-serif font-bold text-lbta-orange mb-2">
-                    {milestone.year}
-                  </div>
-                  <h3 className="font-serif text-[16px] md:text-[18px] font-semibold text-black mb-2 leading-tight">
-                    {milestone.title}
-                  </h3>
-                  <p className="font-sans text-[13px] md:text-[14px] text-black/70 leading-relaxed">
-                    {milestone.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <TimelineSection />
 
       {/* OUR FOUNDATION - Principles */}
       <section className="bg-white py-16 md:py-24">
@@ -178,6 +140,9 @@ export default function AboutPage() {
           </Link>
         </div>
       </section>
+      
+      {/* Sticky Mobile CTA */}
+      <StickyCTA text="Book Trial" href="/book" showAfterScroll={600} />
     </>
   )
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import StickyCTA from '@/components/StickyCTA'
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,16 @@ export default function Home() {
     phone: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [heroParallax, setHeroParallax] = useState(0)
+  
+  // Parallax effect on hero
+  useEffect(() => {
+    const handleScroll = () => {
+      setHeroParallax(window.scrollY * 0.4)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -50,29 +61,40 @@ export default function Home() {
           muted 
           playsInline 
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: '50% 70%' }}
+          style={{ 
+            objectPosition: '50% 70%',
+            transform: `translateY(${heroParallax}px)`
+          }}
           aria-label="Laguna Beach Tennis Academy training video"
           poster="/images/hero/poster.jpg"
         >
           <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-black/10" aria-hidden="true"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/25 to-transparent" aria-hidden="true"></div>
         
-        <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto w-[90%]">
+        <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto w-[90%] flex flex-col justify-center min-h-[65vh] md:min-h-0">
           <h1 
-            className="font-serif text-[32px] md:text-[72px] font-bold leading-[1.1] tracking-[-0.5px] mb-4 md:mb-6"
+            className="font-serif text-[36px] md:text-[72px] font-bold leading-[1.1] tracking-[-0.5px] mb-4 md:mb-6"
             style={{ textShadow: '0 2px 20px rgba(0,0,0,0.45)' }}
           >
             Tennis, as it should be taught.
           </h1>
           <p 
-            className="font-serif text-[20px] md:text-[32px] leading-[1.2] mb-8 md:mb-12"
+            className="font-serif text-[20px] md:text-[32px] leading-[1.2] mb-6 md:mb-8"
             style={{ textShadow: '0 2px 20px rgba(0,0,0,0.45)' }}
           >
             Movement. Discipline. Belonging.
           </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-6">
+            <Link
+              href="/book"
+              className="bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] inline-block"
+            >
+              Book a Trial →
+            </Link>
+          </div>
           <p 
-            className="text-lbta-orange font-sans text-[16px] uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
+            className="text-lbta-orange font-sans text-[14px] md:text-[16px] uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
             onClick={() => document.getElementById('founder')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Explore ↓
@@ -175,29 +197,32 @@ export default function Home() {
         className="bg-[#F8E6BB] py-12 md:py-20"
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-20">
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12 md:auto-rows-fr">
             {[
               {
                 image: '/images/philosophy/movement.webp',
                 title: 'Movement',
                 description: 'The foundation of repeatable success.',
+                detail: 'Technical precision through biomechanics and footwork mastery.'
               },
               {
                 image: '/images/philosophy/discipline.webp',
                 title: 'Discipline',
                 description: 'Structure that builds confidence.',
+                detail: 'Consistent practice routines create lasting mental toughness.'
               },
               {
                 image: '/images/philosophy/belonging.webp',
                 title: 'Belonging',
                 description: 'A community built on respect.',
+                detail: 'Players support each other through wins, losses, and growth.'
               },
             ].map((pillar, i) => (
               <div 
                 key={pillar.title}
-                className="group cursor-default"
+                className="group cursor-default flex flex-col"
               >
-                <div className="relative aspect-square overflow-hidden mb-6 transition-transform duration-200 group-hover:scale-[1.02] group-hover:shadow-[0_2px_16px_rgba(0,0,0,0.05)]">
+                <div className="relative aspect-square overflow-hidden mb-6 rounded-lg transition-all duration-200 group-hover:scale-[1.03] group-hover:shadow-hover">
                   <Image
                     src={pillar.image}
                     alt={`${pillar.title} - ${pillar.description}`}
@@ -209,8 +234,11 @@ export default function Home() {
                 <h3 className="font-serif text-[24px] font-semibold text-black mb-2">
                   {pillar.title}
                 </h3>
-                <p className="font-sans text-[16px] text-black/80 leading-[1.6]">
+                <p className="font-sans text-[16px] text-black/80 leading-[1.6] mb-2">
                   {pillar.description}
+                </p>
+                <p className="font-sans text-[14px] text-black/60 leading-[1.6]">
+                  {pillar.detail}
                 </p>
               </div>
             ))}
