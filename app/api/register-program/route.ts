@@ -43,35 +43,68 @@ function isEarlyBird(): boolean {
 
 // Helper function to determine class tag ID based on program name
 // This auto-adds registrants to the correct class segment in ActiveCampaign
+// LBTA Winter 2026 Schedule - Complete Tag Mapping
 function getClassTagId(programName: string): number | null {
   const program = programName.toLowerCase()
 
-  // Adult Programs
+  // ===== JUNIOR PROGRAMS (Moulton Meadows) =====
+  // Little Tennis Stars (Ages 3-4)
+  if (program.includes('little stars') || program.includes('little tennis stars')) {
+    return 37  // class:little_stars (ages 3-4)
+  }
+  // Red Ball (Ages 5-6)
+  if (program.includes('red ball')) {
+    return 38  // class:red_ball (ages 5-6)
+  }
+  // Orange Ball (Ages 7-8)
+  if (program.includes('orange ball')) {
+    return 39  // class:orange_ball (ages 7-8)
+  }
+  // Green Dot (Ages 9-11)
+  if (program.includes('green dot')) {
+    return 40  // class:green_dot (ages 9-11)
+  }
+
+  // ===== YOUTH PROGRAMS =====
+  // Youth Development (Ages 11-15) - Alta Laguna Park
+  if (program.includes('youth development') || program.includes('youth program')) {
+    return 21  // class:youth_development
+  }
+  // High Performance (Ages 12-17, UTR 5-8) - LBHS
+  if (program.includes('high performance')) {
+    return 41  // class:high_performance (elite juniors)
+  }
+
+  // ===== ADULT PROGRAMS =====
+  // Adult Beginner 2 / Bridge Program (Moulton) - check FIRST before generic beginner
+  if (program.includes('bridge') || program.includes('beginner 2')) {
+    return 42  // class:adult_beginner_bridge
+  }
+  // Adult Beginner 1 - True Beginner (LBHS)
   if (program.includes('beginner') && (program.includes('adult') || !program.includes('youth'))) {
     return 17  // class:adult_beginner
   }
+  // Adult Intermediate (NTRP 3.0-3.5) - LBHS
   if (program.includes('intermediate') && (program.includes('adult') || !program.includes('youth'))) {
     return 16  // class:adult_intermediate
   }
+  // Adult Advanced (NTRP 4.0+) - LBHS
   if (program.includes('advanced') && (program.includes('adult') || !program.includes('live'))) {
     return 15  // class:adult_advanced
   }
 
-  // Youth Programs
-  if (program.includes('youth development') || program.includes('youth program')) {
-    return 21  // class:youth_development
-  }
-
-  // Fitness Programs
+  // ===== FITNESS PROGRAMS =====
+  // Cardio Tennis - LBHS
   if (program.includes('cardio')) {
     return 14  // class:cardio
   }
+  // LiveBall (Adults)
   if (program.includes('liveball') || program.includes('live ball')) {
     if (program.includes('advanced')) {
-      return 18  // class:live_ball_advanced
+      return 18  // class:live_ball_advanced (Sun 10:30-12 @ LBHS)
     }
     if (program.includes('intermediate')) {
-      return 19  // class:live_ball_intermediate
+      return 19  // class:live_ball_intermediate (Thu @ Moulton, Sun 9-10 @ LBHS)
     }
     if (program.includes('drop') || program.includes('dropin')) {
       return 20  // class:live_ball_dropin
@@ -80,13 +113,11 @@ function getClassTagId(programName: string): number | null {
     return 19  // class:live_ball_intermediate
   }
 
+  // ===== SEASONAL PROGRAMS =====
   // Summer Camp
   if (program.includes('summer') || program.includes('camp')) {
     return 13  // class:summer_camp
   }
-
-  // Junior Programs (Little Stars, Red Ball, Orange Ball, Green Dot)
-  // These don't have class tags yet - can be added later if needed
 
   return null  // No matching class tag
 }
