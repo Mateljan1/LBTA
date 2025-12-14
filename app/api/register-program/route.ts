@@ -158,10 +158,31 @@ export async function POST(request: NextRequest) {
         }
       )
 
-      // Add tag to trigger automation
+      // Add to list and tag to trigger automation
       if (contactResponse.data?.contact?.id) {
         const contactId = contactResponse.data.contact.id
-        
+
+        // CRITICAL: Add contact to List ID 4 (Laguna Beach Tennis Academy)
+        // Contacts MUST be on a list to receive campaign emails
+        await axios.post(
+          `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactLists`,
+          {
+            contactList: {
+              list: 4,  // Laguna Beach Tennis Academy list
+              contact: contactId,
+              status: 1  // Active subscriber
+            }
+          },
+          {
+            headers: {
+              'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+
+        console.log(`✅ Contact added to List 4 (LBTA): ${data.email}`)
+
         // Add "LBTA_Winter2026" tag (ID: 27)
         // This triggers the LBTA Registration Confirmation automation (Automation 3)
         await axios.post(
@@ -179,7 +200,7 @@ export async function POST(request: NextRequest) {
             }
           }
         )
-        
+
         console.log(`✅ ActiveCampaign contact synced with tag 27 (LBTA_Winter2026): ${data.email}`)
       }
     } catch (acError) {
