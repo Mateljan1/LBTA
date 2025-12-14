@@ -136,8 +136,8 @@ export async function POST(request: NextRequest) {
       // Format days for display
       const daysSelected = (data.preferredDays || []).join(', ') || 'Not specified'
 
-      // Format tuition with dollar sign
-      const tuitionAmount = data.totalPrice ? `$${data.totalPrice}` : 'Contact for pricing'
+      // Format tuition (no $ sign - template already has it)
+      const tuitionAmount = data.totalPrice || 'Contact for pricing'
 
       // Create/update contact with all custom fields for email personalization
       const contactResponse = await axios.post(
