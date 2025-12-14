@@ -41,6 +41,56 @@ function isEarlyBird(): boolean {
   return now < earlyBirdDeadline
 }
 
+// Helper function to determine class tag ID based on program name
+// This auto-adds registrants to the correct class segment in ActiveCampaign
+function getClassTagId(programName: string): number | null {
+  const program = programName.toLowerCase()
+
+  // Adult Programs
+  if (program.includes('beginner') && (program.includes('adult') || !program.includes('youth'))) {
+    return 17  // class:adult_beginner
+  }
+  if (program.includes('intermediate') && (program.includes('adult') || !program.includes('youth'))) {
+    return 16  // class:adult_intermediate
+  }
+  if (program.includes('advanced') && (program.includes('adult') || !program.includes('live'))) {
+    return 15  // class:adult_advanced
+  }
+
+  // Youth Programs
+  if (program.includes('youth development') || program.includes('youth program')) {
+    return 21  // class:youth_development
+  }
+
+  // Fitness Programs
+  if (program.includes('cardio')) {
+    return 14  // class:cardio
+  }
+  if (program.includes('liveball') || program.includes('live ball')) {
+    if (program.includes('advanced')) {
+      return 18  // class:live_ball_advanced
+    }
+    if (program.includes('intermediate')) {
+      return 19  // class:live_ball_intermediate
+    }
+    if (program.includes('drop') || program.includes('dropin')) {
+      return 20  // class:live_ball_dropin
+    }
+    // Default LiveBall to intermediate
+    return 19  // class:live_ball_intermediate
+  }
+
+  // Summer Camp
+  if (program.includes('summer') || program.includes('camp')) {
+    return 13  // class:summer_camp
+  }
+
+  // Junior Programs (Little Stars, Red Ball, Orange Ball, Green Dot)
+  // These don't have class tags yet - can be added later if needed
+
+  return null  // No matching class tag
+}
+
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json()
@@ -208,6 +258,28 @@ export async function POST(request: NextRequest) {
         )
 
         console.log(`✅ ActiveCampaign contact synced with tag 27 (LBTA_Winter2026): ${data.email}`)
+
+        // AUTO-TAG: Add class-specific tag based on program selection
+        // This adds the registrant to the correct class segment for targeted emails
+        const classTagId = getClassTagId(data.program || '')
+        if (classTagId) {
+          await axios.post(
+            `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
+            {
+              contactTag: {
+                contact: contactId,
+                tag: classTagId
+              }
+            },
+            {
+              headers: {
+                'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
+                'Content-Type': 'application/json'
+              }
+            }
+          )
+          console.log(`✅ Auto-tagged with class tag ${classTagId} for program: ${data.program}`)
+        }
       }
     } catch (acError) {
       console.error('ActiveCampaign error:', acError)
