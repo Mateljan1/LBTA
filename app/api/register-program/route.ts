@@ -133,7 +133,13 @@ export async function POST(request: NextRequest) {
 
     // 2. Add to ActiveCampaign with automatic tagging
     try {
-      // Create/update contact
+      // Format days for display
+      const daysSelected = (data.preferredDays || []).join(', ') || 'Not specified'
+
+      // Format tuition with dollar sign
+      const tuitionAmount = data.totalPrice ? `$${data.totalPrice}` : 'Contact for pricing'
+
+      // Create/update contact with all custom fields for email personalization
       const contactResponse = await axios.post(
         `${process.env.ACTIVECAMPAIGN_URL}/api/3/contacts`,
         {
@@ -143,10 +149,10 @@ export async function POST(request: NextRequest) {
             lastName: data.lastName,
             phone: data.phone,
             fieldValues: [
-              {
-                field: '1',
-                value: data.program
-              }
+              { field: '7', value: data.program || 'Not specified' },        // PROGRAM
+              { field: '8', value: data.location || 'Not specified' },       // LOCATION
+              { field: '9', value: daysSelected },                           // DAYS_SELECTED
+              { field: '10', value: tuitionAmount }                          // TUITION
             ]
           }
         },
