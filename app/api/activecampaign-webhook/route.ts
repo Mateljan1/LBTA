@@ -28,7 +28,35 @@ const LEVEL_TO_TAG: { [key: string]: number } = {
   'advanced': 15,               // class:adult_advanced
 }
 
-// Tag mapping based on program/interest field or tags already applied
+// Tag mapping based on PROGRAM_INTEREST dropdown field values (field 3)
+// These match the exact values we added to the dropdown options
+const PROGRAM_VALUE_TO_TAG: { [key: string]: number } = {
+  // Junior Programs
+  'little_tennis_stars': 37,   // class:little_stars
+  'red_ball': 38,              // class:red_ball
+  'orange_ball': 39,           // class:orange_ball
+  'green_dot': 40,             // class:green_dot
+
+  // Youth Programs
+  'youth_development': 21,     // class:youth_development
+  'high_performance': 41,      // class:high_performance
+
+  // Adult Programs
+  'adult_beginner_1': 17,      // class:adult_beginner
+  'adult_beginner_2': 47,      // class:adult_beginner_2
+  'adult_intermediate': 16,    // class:adult_intermediate
+  'adult_advanced': 15,        // class:adult_advanced
+
+  // Fitness Programs
+  'liveball_intermediate': 19, // class:live_ball_intermediate
+  'liveball_advanced': 18,     // class:live_ball_advanced
+  'cardio_tennis': 14,         // class:cardio
+
+  // Special
+  'private_lessons': 48,       // class:private_lessons
+}
+
+// Tag mapping based on program/interest field text (fallback for text fields)
 const INTEREST_TO_TAG: { [key: string]: number } = {
   // Junior Programs
   'little stars': 37,
@@ -43,8 +71,8 @@ const INTEREST_TO_TAG: { [key: string]: number } = {
   'high performance': 41,
 
   // Adult Programs
-  'bridge': 42,
-  'beginner 2': 42,
+  'bridge': 47,
+  'beginner 2': 47,
   'adult beginner': 17,
   'adult intermediate': 16,
   'adult advanced': 15,
@@ -62,6 +90,10 @@ const INTEREST_TO_TAG: { [key: string]: number } = {
   // Seasonal
   'summer camp': 13,
   'camp': 13,
+
+  // Special
+  'private': 48,
+  'private lessons': 48,
 }
 
 // Lead source tags that indicate program interest
@@ -128,6 +160,19 @@ export async function POST(request: NextRequest) {
     )
 
     const fieldValues = fieldValuesResponse.data.fieldValues || []
+
+    // CRITICAL: Check if this is a website registration (already processed by /api/register-program)
+    // Field 15 = LEAD_SOURCE. If 'website', skip webhook processing to avoid duplication
+    const leadSourceField = fieldValues.find((fv: any) => fv.field === '15')
+    if (leadSourceField?.value === 'website') {
+      console.log('⏭️ Skipping webhook - website registration already processed by /api/register-program')
+      return NextResponse.json({ 
+        success: true, 
+        message: 'Website registration - skipped duplicate processing' 
+      })
+    }
+
+    console.log('✅ Facebook lead detected - proceeding with webhook processing')
 
     // Get contact's current tags
     const tagsResponse = await axios.get(
@@ -201,23 +246,33 @@ export async function POST(request: NextRequest) {
     // Step 4: Determine the appropriate class tag
     let classTagId: number | null = null
 
-    // Method 1: Check TENNIS_LEVEL field (field 5) for adult level
-    const tennisLevelField = fieldValues.find((fv: any) => fv.field === '5')
-    if (tennisLevelField?.value) {
-      classTagId = getClassTagFromLevel(tennisLevelField.value)
-      console.log(`📊 TENNIS_LEVEL: ${tennisLevelField.value} → Tag ${classTagId}`)
+    // Method 1: Check PROGRAM_INTEREST dropdown field (field 3) - most reliable
+    const programInterestField = fieldValues.find((fv: any) => fv.field === '3')
+    if (programInterestField?.value) {
+      const programValue = programInterestField.value.toLowerCase().replace(/[^a-z0-9_]/g, '_')
+      classTagId = PROGRAM_VALUE_TO_TAG[programValue] || null
+      console.log(`📊 PROGRAM_INTEREST (field 3): ${programInterestField.value} → Tag ${classTagId}`)
     }
 
-    // Method 2: Check PROGRAM field (field 7) for program interest
+    // Method 2: Check TENNIS_LEVEL field (field 5) for adult level (if no program specified)
+    const tennisLevelField = fieldValues.find((fv: any) => fv.field === '5')
+    if (!classTagId) {
+      if (tennisLevelField?.value) {
+        classTagId = getClassTagFromLevel(tennisLevelField.value)
+        console.log(`📊 TENNIS_LEVEL (field 5): ${tennisLevelField.value} → Tag ${classTagId}`)
+      }
+    }
+
+    // Method 3: Check PROGRAM field (field 7) for program interest text
     if (!classTagId) {
       const programField = fieldValues.find((fv: any) => fv.field === '7')
       if (programField?.value) {
         classTagId = getClassTagFromInterest(programField.value)
-        console.log(`📊 PROGRAM field: ${programField.value} → Tag ${classTagId}`)
+        console.log(`📊 PROGRAM (field 7): ${programField.value} → Tag ${classTagId}`)
       }
     }
 
-    // Method 3: Check existing source tags (Youth Dev Lead, High Perf Lead, Adult Lead)
+    // Method 4: Check existing source tags (Youth Dev Lead, High Perf Lead, Adult Lead)
     if (!classTagId) {
       for (const [sourceTagId, defaultClassTag] of Object.entries(SOURCE_TAG_TO_CLASS_TAG)) {
         if (currentTagIds.includes(parseInt(sourceTagId))) {

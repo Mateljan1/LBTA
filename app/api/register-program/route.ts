@@ -214,6 +214,12 @@ export async function POST(request: NextRequest) {
 
     // 2. Add to ActiveCampaign with automatic tagging
     try {
+      console.log('🎾 LBTA Registration Started:', {
+        email: data.email,
+        program: data.program,
+        timestamp: new Date().toISOString()
+      })
+
       // Format days for display
       const daysSelected = (data.preferredDays || []).join(', ') || 'Not specified'
 
@@ -233,7 +239,8 @@ export async function POST(request: NextRequest) {
               { field: '7', value: data.program || 'Not specified' },        // PROGRAM
               { field: '8', value: data.location || 'Not specified' },       // LOCATION
               { field: '9', value: daysSelected },                           // DAYS_SELECTED
-              { field: '10', value: tuitionAmount }                          // TUITION
+              { field: '10', value: tuitionAmount },                         // TUITION
+              { field: '15', value: 'website' }                              // LEAD_SOURCE (for webhook filtering)
             ]
           }
         },
@@ -245,12 +252,17 @@ export async function POST(request: NextRequest) {
         }
       )
 
-      // Add to list and tag to trigger automation
+      console.log('✅ AC Contact Created:', {
+        contactId: contactResponse.data.contact.id,
+        email: data.email
+      })
+
+      // Add to list to trigger automation
+      // CRITICAL: Add contact to List ID 4 (Laguna Beach Tennis Academy)
+      // This is the SINGLE automation trigger (automation will apply tags)
       if (contactResponse.data?.contact?.id) {
         const contactId = contactResponse.data.contact.id
 
-        // CRITICAL: Add contact to List ID 4 (Laguna Beach Tennis Academy)
-        // Contacts MUST be on a list to receive campaign emails
         await axios.post(
           `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactLists`,
           {
@@ -268,52 +280,22 @@ export async function POST(request: NextRequest) {
           }
         )
 
-        console.log(`✅ Contact added to List 4 (LBTA): ${data.email}`)
+        console.log('✅ Added to List 4:', {
+          contactId,
+          email: data.email,
+          listId: 4,
+          message: 'Automation will trigger on list subscription'
+        })
 
-        // Add "LBTA_Winter2026" tag (ID: 27)
-        // This triggers the LBTA Registration Confirmation automation (Automation 3)
-        await axios.post(
-          `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
-          {
-            contactTag: {
-              contact: contactId,
-              tag: 27  // LBTA_Winter2026 - triggers Automation 3
-            }
-          },
-          {
-            headers: {
-              'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
-              'Content-Type': 'application/json'
-            }
-          }
-        )
-
-        console.log(`✅ ActiveCampaign contact synced with tag 27 (LBTA_Winter2026): ${data.email}`)
-
-        // AUTO-TAG: Add class-specific tag based on program selection
-        // This adds the registrant to the correct class segment for targeted emails
-        const classTagId = getClassTagId(data.program || '')
-        if (classTagId) {
-          await axios.post(
-            `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
-            {
-              contactTag: {
-                contact: contactId,
-                tag: classTagId
-              }
-            },
-            {
-              headers: {
-                'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
-                'Content-Type': 'application/json'
-              }
-            }
-          )
-          console.log(`✅ Auto-tagged with class tag ${classTagId} for program: ${data.program}`)
-        }
+        // Tags will be applied BY THE AUTOMATION (not by API)
+        // This prevents race conditions and ensures reliable automation triggering
       }
-    } catch (acError) {
-      console.error('ActiveCampaign error:', acError)
+    } catch (acError: any) {
+      console.error('❌ ActiveCampaign Error:', {
+        email: data.email,
+        error: acError.response?.data || acError.message,
+        stack: acError.stack
+      })
       // Continue even if AC fails
     }
 
