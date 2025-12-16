@@ -43,14 +43,14 @@ function isEarlyBird(): boolean {
 
 // Helper function to determine class tag ID based on program name
 // This auto-adds registrants to the correct class segment in ActiveCampaign
-// LBTA Winter 2026 Schedule - Complete Tag Mapping
+// LBTA Winter 2026 Schedule - Complete Tag Mapping (Verified from form-config.ts)
 function getClassTagId(programName: string): number | null {
   const program = programName.toLowerCase()
 
   // ===== JUNIOR PROGRAMS (Moulton Meadows) =====
-  // Little Tennis Stars (Ages 3-4)
+  // Little Tennis Stars (Ages 3-5)
   if (program.includes('little stars') || program.includes('little tennis stars')) {
-    return 37  // class:little_stars (ages 3-4)
+    return 49  // class:little_tennis_stars
   }
   // Red Ball (Ages 5-6)
   if (program.includes('red ball')) {
@@ -287,8 +287,42 @@ export async function POST(request: NextRequest) {
           message: 'Automation will trigger on list subscription'
         })
 
-        // Tags will be applied BY THE AUTOMATION (not by API)
-        // This prevents race conditions and ensures reliable automation triggering
+        // Apply class-specific tag for program segmentation
+        const classTagId = getClassTagId(data.program)
+        if (classTagId) {
+          try {
+            await axios.post(
+              `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
+              {
+                contactTag: {
+                  contact: contactId,
+                  tag: classTagId.toString()
+                }
+              },
+              {
+                headers: {
+                  'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
+                  'Content-Type': 'application/json'
+                }
+              }
+            )
+            console.log('✅ Class Tag Applied:', {
+              contactId,
+              email: data.email,
+              tagId: classTagId,
+              program: data.program
+            })
+          } catch (tagError: any) {
+            console.error('⚠️ Failed to apply class tag:', {
+              contactId,
+              tagId: classTagId,
+              error: tagError.response?.data || tagError.message
+            })
+            // Continue even if tagging fails - contact is still in system
+          }
+        } else {
+          console.log('ℹ️ No class tag mapping for program:', data.program)
+        }
       }
     } catch (acError: any) {
       console.error('❌ ActiveCampaign Error:', {
