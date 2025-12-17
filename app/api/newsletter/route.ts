@@ -102,14 +102,27 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, message: 'Successfully subscribed!' })
   } catch (error: any) {
-    console.error('Newsletter error:', {
+    const errorDetails = {
       message: error.message,
       response: error.response?.data,
       status: error.response?.status,
-      stack: error.stack?.slice(0, 500)
-    })
+      code: error.code,
+      url: error.config?.url
+    }
+    console.error('Newsletter error:', errorDetails)
+    // Temporarily return detailed error for debugging
     return NextResponse.json(
-      { success: false, message: 'Error subscribing. Please try again.' },
+      {
+        success: false,
+        message: 'Error subscribing. Please try again.',
+        debug: {
+          errorMessage: error.message,
+          errorCode: error.code,
+          apiUrl: error.config?.url?.replace(/api-us1\.com.*/, 'api-us1.com/...'),
+          responseStatus: error.response?.status,
+          responseData: error.response?.data
+        }
+      },
       { status: 500 }
     )
   }
