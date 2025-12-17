@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import axios from 'axios'
 
-// ActiveCampaign newsletter signup handler - v2
+// ActiveCampaign newsletter signup handler - v3 (API key fix)
 
 export async function POST(request: NextRequest) {
   try {
