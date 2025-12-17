@@ -8,6 +8,22 @@ export async function POST(request: NextRequest) {
     const acUrl = process.env.ACTIVECAMPAIGN_URL
     const acApiKey = process.env.ACTIVECAMPAIGN_API_KEY
 
+    console.log('📧 Newsletter subscription request:', {
+      email,
+      acUrl: acUrl || 'NOT SET',
+      acApiKeyLength: acApiKey?.length || 0,
+      timestamp: new Date().toISOString()
+    })
+
+    // Validate environment variables
+    if (!acUrl || !acApiKey) {
+      console.error('Missing ActiveCampaign env vars:', { acUrl: !!acUrl, acApiKey: !!acApiKey })
+      return NextResponse.json(
+        { success: false, message: 'Server configuration error' },
+        { status: 500 }
+      )
+    }
+
     // Create/update contact in ActiveCampaign
     const contactResponse = await axios.post(
       `${acUrl}/api/3/contact/sync`,
@@ -84,7 +100,12 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, message: 'Successfully subscribed!' })
   } catch (error: any) {
-    console.error('Newsletter error:', error.response?.data || error.message)
+    console.error('Newsletter error:', {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+      stack: error.stack?.slice(0, 500)
+    })
     return NextResponse.json(
       { success: false, message: 'Error subscribing. Please try again.' },
       { status: 500 }
