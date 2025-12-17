@@ -1,11 +1,7 @@
 {
   "season": "Winter 2026",
-  "dates": "January 6 – April 5, 2026",
+  "dates": "January 5 – April 5, 2026",
   "weeks": 13,
-  "earlyBird": {
-    "discount": 50,
-    "deadline": "December 20, 2025"
-  },
   "programs": [
     {
       "id": "little-stars",
@@ -14,15 +10,17 @@
       "ages": "3-4",
       "location": "Moulton Meadows",
       "duration": "45 min",
+      "billingType": "monthly",
       "schedule": [
         { "day": "Monday", "time": "3:30-4:15 PM", "coach": "Michelle" },
         { "day": "Wednesday", "time": "3:30-4:15 PM", "coach": "Michelle" }
       ],
       "pricing": {
-        "1x": 260,
-        "2x": 520,
+        "1x": 120,
+        "2x": 200,
         "drop_in": 40
       },
+      "pricingNote": "Monthly pricing - flexible for young families",
       "description": "Introduction to tennis through play-based activities and movement fundamentals."
     },
     {
@@ -39,6 +37,7 @@
       "pricing": {
         "1x": 546,
         "2x": 1092,
+        "3x": 1635,
         "drop_in": 50
       },
       "description": "First structured tennis program using red balls on smaller courts."
@@ -71,6 +70,7 @@
       "ages": "7-8",
       "location": "Moulton Meadows",
       "duration": "1 hr",
+      "billingType": "monthly",
       "schedule": [
         { "day": "Friday", "time": "3:30-4:30 PM", "coach": "Michelle" }
       ],
@@ -94,6 +94,7 @@
       "pricing": {
         "1x": 546,
         "2x": 1092,
+        "3x": 1635,
         "drop_in": 50
       },
       "description": "Transition to full court play with green dot balls and advanced tactics."
@@ -105,6 +106,7 @@
       "ages": "9-11",
       "location": "Moulton Meadows",
       "duration": "1 hr",
+      "billingType": "monthly",
       "schedule": [
         { "day": "Friday", "time": "4:30-5:30 PM", "coach": "Michelle" }
       ],
@@ -126,7 +128,7 @@
         { "day": "Tuesday", "time": "4:00-5:30 PM", "coach": "Andy" },
         { "day": "Wednesday", "time": "4:00-5:30 PM", "coach": "Michelle" },
         { "day": "Thursday", "time": "4:00-5:30 PM", "coach": "Andy" },
-        { "day": "Friday", "time": "3:00-4:00 PM", "coach": "Staff", "note": "Match Play - Included" }
+        { "day": "Friday", "time": "4:00-5:00 PM", "coach": "Staff", "location": "LBHS", "note": "Match Play - Included" }
       ],
       "pricing": {
         "1x": 756,
@@ -141,8 +143,8 @@
     {
       "id": "high-performance",
       "category": "Youth",
-      "program": "High Performance Training",
-      "ages": "12-17 (UTR 5-8)",
+      "program": "High Performance",
+      "ages": "12-17 (UTR 5+)",
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
@@ -150,8 +152,7 @@
         { "day": "Tuesday", "time": "6:00-8:00 PM", "coach": "Savriyan" },
         { "day": "Wednesday", "time": "6:00-8:00 PM", "coach": "Kevin" },
         { "day": "Thursday", "time": "6:00-8:00 PM", "coach": "Savriyan" },
-        { "day": "Friday", "time": "5:30-7:30 PM", "coach": "Kevin", "note": "Match Play - Included" },
-        { "day": "Saturday", "time": "2:00-4:00 PM", "coach": "Kevin", "note": "Optional Match Play" }
+        { "day": "Friday", "time": "5:30-7:30 PM", "coach": "Kevin", "note": "Match Play - Included" }
       ],
       "pricing": {
         "1x": 810,
@@ -167,7 +168,7 @@
       "id": "adult-beginner-1",
       "category": "Adult",
       "program": "Adult Beginner 1",
-      "ages": "NTRP 1.0-2.0",
+      "ages": "True Beginner",
       "location": "Laguna Beach High School",
       "duration": "1 hr",
       "schedule": [
@@ -180,6 +181,7 @@
       "pricing": {
         "1x": 546,
         "2x": 797,
+        "saturday_only": 497,
         "drop_in": 55
       },
       "description": "Perfect for adults new to tennis or returning after years away."
@@ -231,7 +233,7 @@
       "duration": "2 hr",
       "schedule": [
         { "day": "Monday", "time": "12:00-2:00 PM", "coach": "Kevin" },
-        { "day": "Wednesday", "time": "12:00-2:00 PM", "coach": "Kevin" }
+        { "day": "Friday", "time": "12:00-2:00 PM", "coach": "Kevin" }
       ],
       "pricing": {
         "1x": 810,
@@ -247,6 +249,7 @@
       "ages": "All Levels",
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
+      "billingType": "monthly",
       "schedule": [
         { "day": "Friday", "time": "9:00-10:30 AM", "coach": "Staff" }
       ],
@@ -260,12 +263,13 @@
       "id": "liveball-intermediate",
       "category": "Fitness",
       "program": "LiveBall Intermediate",
-      "ages": "NTRP 2.0-3.5",
-      "location": "LBHS",
-      "duration": "1.5 hr",
+      "ages": "Adults",
+      "location": "Multiple",
+      "duration": "1-1.5 hr",
+      "billingType": "monthly",
       "schedule": [
-        { "day": "Thursday", "time": "6:00-7:30 PM", "coach": "Staff", "location": "LBHS" },
-        { "day": "Sunday", "time": "9:00-10:30 AM", "coach": "Staff", "location": "LBHS" }
+        { "day": "Thursday", "time": "6:00-7:30 PM", "coach": "Staff", "location": "Moulton Meadows" },
+        { "day": "Sunday", "time": "9:00-10:00 AM", "coach": "Staff", "location": "LBHS" }
       ],
       "pricing": {
         "monthly": 150,
@@ -277,11 +281,11 @@
       "id": "liveball-advanced",
       "category": "Fitness",
       "program": "LiveBall Advanced",
-      "ages": "NTRP 3.0+",
+      "ages": "Adults",
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
+      "billingType": "monthly",
       "schedule": [
-        { "day": "Saturday", "time": "11:30 AM-1:00 PM", "coach": "Staff" },
         { "day": "Sunday", "time": "10:30 AM-12:00 PM", "coach": "Staff" }
       ],
       "pricing": {
@@ -289,38 +293,6 @@
         "drop_in": 50
       },
       "description": "Fast-paced community play for advanced recreational players."
-    },
-    {
-      "id": "family-tennis",
-      "category": "Fitness",
-      "program": "Family Tennis",
-      "ages": "All Ages",
-      "location": "Laguna Beach High School",
-      "duration": "1 hr",
-      "schedule": [
-        { "day": "Sunday", "time": "11:00 AM-12:00 PM", "coach": "Staff" }
-      ],
-      "pricing": {
-        "monthly": 150,
-        "drop_in": 50
-      },
-      "description": "Fun tennis activities for families to play together."
-    },
-    {
-      "id": "adult-match-play",
-      "category": "Fitness",
-      "program": "Adult Match Play",
-      "ages": "Adults",
-      "location": "Laguna Beach High School",
-      "duration": "2 hr",
-      "schedule": [
-        { "day": "Friday", "time": "6:00-8:00 PM", "coach": "Staff" }
-      ],
-      "pricing": {
-        "monthly": 120,
-        "drop_in": 40
-      },
-      "description": "Organized match play for adults of all levels."
     }
   ]
 }
