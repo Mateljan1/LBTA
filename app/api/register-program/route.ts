@@ -330,13 +330,23 @@ export async function POST(request: NextRequest) {
         error: acError.response?.data || acError.message,
         stack: acError.stack
       })
-      // Continue even if AC fails
+      // Return error details for debugging
+      return NextResponse.json({
+        success: false,
+        message: 'ActiveCampaign integration error',
+        debug: {
+          error: acError.response?.data || acError.message,
+          status: acError.response?.status,
+          url: process.env.ACTIVECAMPAIGN_URL ? 'URL is set' : 'URL is NOT set',
+          apiKey: process.env.ACTIVECAMPAIGN_API_KEY ? 'Key is set' : 'Key is NOT set'
+        }
+      }, { status: 500 })
     }
 
     // 3. Return success
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Registration received! Our team will confirm within 24 hours.' 
+    return NextResponse.json({
+      success: true,
+      message: 'Registration received! Our team will confirm within 24 hours.'
     })
 
   } catch (error) {
