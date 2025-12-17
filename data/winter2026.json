@@ -265,11 +265,11 @@
       "program": "LiveBall Intermediate",
       "ages": "Adults",
       "location": "Multiple",
-      "duration": "1-1.5 hr",
+      "duration": "1.5 hr",
       "billingType": "monthly",
       "schedule": [
         { "day": "Thursday", "time": "6:00-7:30 PM", "coach": "Staff", "location": "Moulton Meadows" },
-        { "day": "Sunday", "time": "9:00-10:00 AM", "coach": "Staff", "location": "LBHS" }
+        { "day": "Sunday", "time": "9:00-10:30 AM", "coach": "Staff", "location": "LBHS" }
       ],
       "pricing": {
         "monthly": 150,
