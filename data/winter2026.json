@@ -244,7 +244,7 @@
     },
     {
       "id": "cardio-tennis",
-      "category": "Fitness",
+      "category": "Monthly Cardio & Liveball",
       "program": "Cardio Tennis",
       "ages": "All Levels",
       "location": "Laguna Beach High School",
@@ -261,7 +261,7 @@
     },
     {
       "id": "liveball-intermediate",
-      "category": "Fitness",
+      "category": "Monthly Cardio & Liveball",
       "program": "LiveBall Intermediate",
       "ages": "Adults",
       "location": "Multiple",
@@ -279,7 +279,7 @@
     },
     {
       "id": "liveball-advanced",
-      "category": "Fitness",
+      "category": "Monthly Cardio & Liveball",
       "program": "LiveBall Advanced",
       "ages": "Adults",
       "location": "Laguna Beach High School",
