@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-const ACTIVE_CAMPAIGN_API_URL = process.env.ACTIVE_CAMPAIGN_API_URL
-const ACTIVE_CAMPAIGN_API_KEY = process.env.ACTIVE_CAMPAIGN_API_KEY
+import axios from 'axios'
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,118 +12,118 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Step 1: Create or update contact in ActiveCampaign
-    const contactData = {
-      contact: {
-        email,
-        firstName,
-        lastName,
-        phone: phone || '',
-        fieldValues: playerUTR ? [
-          {
-            field: '1', // You'll need to replace this with the actual custom field ID for UTR
-            value: playerUTR,
-          }
-        ] : [],
-      }
-    }
+    const acUrl = process.env.ACTIVECAMPAIGN_URL
+    const acApiKey = process.env.ACTIVECAMPAIGN_API_KEY
 
-    const contactResponse = await fetch(`${ACTIVE_CAMPAIGN_API_URL}/api/3/contact/sync`, {
-      method: 'POST',
-      headers: {
-        'Api-Token': ACTIVE_CAMPAIGN_API_KEY || '',
-        'Content-Type': 'application/json',
+    // Create or update contact in ActiveCampaign
+    const contactResponse = await axios.post(
+      `${acUrl}/api/3/contact/sync`,
+      {
+        contact: {
+          email,
+          firstName,
+          lastName,
+          phone: phone || '',
+          fieldValues: [
+            { field: '15', value: 'vylo_interest' },  // LEAD_SOURCE
+            ...(playerUTR ? [{ field: '1', value: playerUTR }] : [])
+          ]
+        }
       },
-      body: JSON.stringify(contactData),
-    })
-
-    if (!contactResponse.ok) {
-      const errorData = await contactResponse.json()
-      console.error('ActiveCampaign contact error:', errorData)
-      throw new Error('Failed to create contact')
-    }
-
-    const contactResult = await contactResponse.json()
-    const contactId = contactResult.contact.id
-
-    // Step 2: Get or create the "VYLO - Founding Cohort Interest" tag
-    // First, search for the tag
-    const tagsResponse = await fetch(
-      `${ACTIVE_CAMPAIGN_API_URL}/api/3/tags?search=VYLO`,
       {
         headers: {
-          'Api-Token': ACTIVE_CAMPAIGN_API_KEY || '',
-        },
+          'Api-Token': acApiKey!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
       }
     )
 
+    const contactId = contactResponse.data.contact.id
+
+    // Add to main list
+    await axios.post(
+      `${acUrl}/api/3/contactLists`,
+      {
+        contactList: {
+          list: 4,
+          contact: contactId,
+          status: 1
+        }
+      },
+      {
+        headers: {
+          'Api-Token': acApiKey!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    )
+
+    // Search for VYLO tag or create it
     let tagId = null
-    if (tagsResponse.ok) {
-      const tagsData = await tagsResponse.json()
-      const vyloTag = tagsData.tags?.find((tag: any) =>
+    try {
+      const tagsResponse = await axios.get(
+        `${acUrl}/api/3/tags?search=VYLO`,
+        {
+          headers: { 'Api-Token': acApiKey! }
+        }
+      )
+      const vyloTag = tagsResponse.data.tags?.find((tag: any) =>
         tag.tag === 'VYLO - Founding Cohort Interest'
       )
       tagId = vyloTag?.id
-    }
 
-    // If tag doesn't exist, create it
-    if (!tagId) {
-      const createTagResponse = await fetch(`${ACTIVE_CAMPAIGN_API_URL}/api/3/tags`, {
-        method: 'POST',
-        headers: {
-          'Api-Token': ACTIVE_CAMPAIGN_API_KEY || '',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          tag: {
-            tag: 'VYLO - Founding Cohort Interest',
-            tagType: 'contact',
-            description: 'Leads who registered interest for VYLO Founding Cohort Jan 2026',
+      // Create tag if it doesn't exist
+      if (!tagId) {
+        const createTagResponse = await axios.post(
+          `${acUrl}/api/3/tags`,
+          {
+            tag: {
+              tag: 'VYLO - Founding Cohort Interest',
+              tagType: 'contact',
+              description: 'Leads who registered interest for VYLO Founding Cohort Jan 2026',
+            }
           },
-        }),
-      })
-
-      if (createTagResponse.ok) {
-        const tagData = await createTagResponse.json()
-        tagId = tagData.tag.id
+          {
+            headers: {
+              'Api-Token': acApiKey!,
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        tagId = createTagResponse.data.tag.id
       }
-    }
 
-    // Step 3: Add tag to contact
-    if (tagId) {
-      await fetch(`${ACTIVE_CAMPAIGN_API_URL}/api/3/contactTags`, {
-        method: 'POST',
-        headers: {
-          'Api-Token': ACTIVE_CAMPAIGN_API_KEY || '',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contactTag: {
-            contact: contactId,
-            tag: tagId,
+      // Apply tag
+      if (tagId) {
+        await axios.post(
+          `${acUrl}/api/3/contactTags`,
+          {
+            contactTag: {
+              contact: contactId,
+              tag: tagId
+            }
           },
-        }),
-      })
+          {
+            headers: {
+              'Api-Token': acApiKey!,
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+      }
+    } catch (tagError) {
+      console.error('VYLO tag error:', tagError)
     }
 
-    // Optional: Add to a specific list (if you have a VYLO list)
-    // Uncomment and update list ID when ready:
-    /*
-    await fetch(`${ACTIVE_CAMPAIGN_API_URL}/api/3/contactLists`, {
-      method: 'POST',
-      headers: {
-        'Api-Token': ACTIVE_CAMPAIGN_API_KEY || '',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contactList: {
-          list: 'YOUR_VYLO_LIST_ID', // Replace with actual list ID
-          contact: contactId,
-          status: 1, // 1 = subscribed
-        },
-      }),
+    console.log('✅ VYLO interest registered:', {
+      contactId,
+      email,
+      name: `${firstName} ${lastName}`,
+      utr: playerUTR,
+      timestamp: new Date().toISOString()
     })
-    */
 
     return NextResponse.json({
       success: true,
@@ -133,8 +131,8 @@ export async function POST(request: NextRequest) {
       contactId,
     })
 
-  } catch (error) {
-    console.error('VYLO Apply API Error:', error)
+  } catch (error: any) {
+    console.error('VYLO Apply API Error:', error.response?.data || error.message)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

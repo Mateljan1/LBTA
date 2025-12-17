@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit } from '@/lib/rate-limit'
+import axios from 'axios'
 
 export async function POST(request: NextRequest) {
   // Rate limiting: 5 requests per minute per IP
@@ -9,7 +10,7 @@ export async function POST(request: NextRequest) {
   if (!rateLimitResult.allowed) {
     return NextResponse.json(
       { success: false, message: 'Too many requests. Please try again later.' },
-      { 
+      {
         status: 429,
         headers: {
           'X-RateLimit-Remaining': '0',
@@ -21,51 +22,97 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json()
-    
-    // Here you would integrate with SendGrid, Resend, or email service
-    // For now, this is a placeholder that logs the submission
-    
-    console.log('Booking submission:', {
-      name: `${body.firstName} ${body.lastName}`,
-      email: body.email,
-      phone: body.phone,
-      program: body.program,
-      preferredTime: body.preferredTime,
-      experience: body.experience,
-      goals: body.goals,
-      timestamp: new Date().toISOString()
-    })
 
-    // TODO: Replace with actual email service
-    // Example with SendGrid:
-    /*
-    const sgMail = require('@sendgrid/mail')
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-    
-    await sgMail.send({
-      to: 'support@lagunabeachtennisacademy.com',
-      from: 'noreply@lagunabeachtennisacademy.com',
-      subject: `New Trial Request: ${body.firstName} ${body.lastName}`,
-      html: `
-        <h2>New Trial Class Request</h2>
-        <p><strong>Name:</strong> ${body.firstName} ${body.lastName}</p>
-        <p><strong>Email:</strong> ${body.email}</p>
-        <p><strong>Phone:</strong> ${body.phone}</p>
-        <p><strong>Program:</strong> ${body.program}</p>
-        <p><strong>Preferred Time:</strong> ${body.preferredTime}</p>
-        <p><strong>Experience:</strong> ${body.experience}</p>
-        <p><strong>Goals:</strong> ${body.goals}</p>
-      `
-    })
-    */
+    const acUrl = process.env.ACTIVECAMPAIGN_URL
+    const acApiKey = process.env.ACTIVECAMPAIGN_API_KEY
 
-    return NextResponse.json({ success: true, message: 'Request received' })
-  } catch (error) {
-    console.error('Booking error:', error)
+    // Create/update contact in ActiveCampaign
+    const contactResponse = await axios.post(
+      `${acUrl}/api/3/contact/sync`,
+      {
+        contact: {
+          email: body.email,
+          firstName: body.firstName,
+          lastName: body.lastName,
+          phone: body.phone,
+          fieldValues: [
+            { field: '7', value: body.program || 'Trial Request' },  // PROGRAM
+            { field: '15', value: 'trial_booking' }                   // LEAD_SOURCE
+          ]
+        }
+      },
+      {
+        headers: {
+          'Api-Token': acApiKey!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    )
+
+    if (contactResponse.data?.contact?.id) {
+      const contactId = contactResponse.data.contact.id
+
+      // Add to main list
+      await axios.post(
+        `${acUrl}/api/3/contactLists`,
+        {
+          contactList: {
+            list: 4,
+            contact: contactId,
+            status: 1
+          }
+        },
+        {
+          headers: {
+            'Api-Token': acApiKey!,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+      )
+
+      // Apply trial request tag (tag ID 51 - create this in AC if needed)
+      try {
+        await axios.post(
+          `${acUrl}/api/3/contactTags`,
+          {
+            contactTag: {
+              contact: contactId,
+              tag: '75'  // trial_request tag
+            }
+          },
+          {
+            headers: {
+              'Api-Token': acApiKey!,
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          }
+        )
+      } catch (tagError) {
+        console.error('Trial tag error:', tagError)
+      }
+
+      console.log('✅ Trial booking submitted:', {
+        contactId,
+        name: `${body.firstName} ${body.lastName}`,
+        email: body.email,
+        phone: body.phone,
+        program: body.program,
+        preferredTime: body.preferredTime,
+        experience: body.experience,
+        goals: body.goals,
+        timestamp: new Date().toISOString()
+      })
+    }
+
+    return NextResponse.json({ success: true, message: 'Trial request received! We\'ll contact you within 24 hours.' })
+  } catch (error: any) {
+    console.error('Booking error:', error.response?.data || error.message)
     return NextResponse.json(
-      { success: false, message: 'Error processing request' },
+      { success: false, message: 'Error processing request. Please call (949) 464-6645' },
       { status: 500 }
     )
   }
 }
-

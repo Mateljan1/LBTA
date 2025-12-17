@@ -1,9 +1,10 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import axios from 'axios'
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const data = await request.json()
-    
+
     // Validate required fields
     const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'age', 'skillLevel', 'experience']
     for (const field of requiredFields) {
@@ -15,43 +16,107 @@ export async function POST(request: Request) {
       }
     }
 
-    // Log registration data (you can replace this with email sending or CRM integration)
-    console.log('=== NEW REGISTRATION ===')
-    console.log('Program:', data.program)
-    console.log('Season:', data.season)
-    console.log('Early Bird:', data.earlyBird)
-    console.log('Final Price:', data.finalPrice)
-    console.log('Contact:', {
-      name: `${data.firstName} ${data.lastName}`,
-      email: data.email,
-      phone: data.phone
-    })
-    console.log('Player Info:', {
-      age: data.age,
-      skillLevel: data.skillLevel,
-      experience: data.experience,
-      goals: data.goals
-    })
-    if (data.notes) {
-      console.log('Notes:', data.notes)
-    }
-    console.log('========================')
+    const acUrl = process.env.ACTIVECAMPAIGN_URL
+    const acApiKey = process.env.ACTIVECAMPAIGN_API_KEY
 
-    // TODO: Send email notification using lib/email-config.ts
-    // TODO: Save to database/CRM
-    // TODO: Send confirmation email to user
+    // Create/update contact in ActiveCampaign
+    const contactResponse = await axios.post(
+      `${acUrl}/api/3/contact/sync`,
+      {
+        contact: {
+          email: data.email,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+          fieldValues: [
+            { field: '7', value: data.program || 'General Registration' },  // PROGRAM
+            { field: '15', value: 'registration' }                           // LEAD_SOURCE
+          ]
+        }
+      },
+      {
+        headers: {
+          'Api-Token': acApiKey!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    )
+
+    if (contactResponse.data?.contact?.id) {
+      const contactId = contactResponse.data.contact.id
+
+      // Add to main list
+      await axios.post(
+        `${acUrl}/api/3/contactLists`,
+        {
+          contactList: {
+            list: 4,
+            contact: contactId,
+            status: 1
+          }
+        },
+        {
+          headers: {
+            'Api-Token': acApiKey!,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+      )
+
+      // Create a note with registration details
+      try {
+        await axios.post(
+          `${acUrl}/api/3/notes`,
+          {
+            note: {
+              note: `REGISTRATION\n` +
+                    `Program: ${data.program || 'Not specified'}\n` +
+                    `Season: ${data.season || 'Not specified'}\n` +
+                    `Age: ${data.age}\n` +
+                    `Skill Level: ${data.skillLevel}\n` +
+                    `Experience: ${data.experience}\n` +
+                    `Goals: ${data.goals || 'Not specified'}\n` +
+                    `Early Bird: ${data.earlyBird ? 'Yes' : 'No'}\n` +
+                    `Price: ${data.finalPrice || 'Contact for pricing'}\n` +
+                    `Notes: ${data.notes || 'None'}`,
+              relid: contactId,
+              reltype: 'Subscriber'
+            }
+          },
+          {
+            headers: {
+              'Api-Token': acApiKey!,
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          }
+        )
+      } catch (noteError) {
+        console.error('Note creation error:', noteError)
+      }
+
+      console.log('✅ Registration submitted:', {
+        contactId,
+        program: data.program,
+        season: data.season,
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        timestamp: new Date().toISOString()
+      })
+    }
 
     return NextResponse.json({
       success: true,
       message: 'Registration received. We will contact you within 24 hours.'
     })
-    
-  } catch (error) {
-    console.error('Registration API error:', error)
+
+  } catch (error: any) {
+    console.error('Registration API error:', error.response?.data || error.message)
     return NextResponse.json(
       { success: false, error: 'Internal server error' },
       { status: 500 }
     )
   }
 }
-
