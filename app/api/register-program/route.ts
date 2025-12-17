@@ -231,9 +231,9 @@ export async function POST(request: NextRequest) {
       // Format tuition (no $ sign - template already has it)
       const tuitionAmount = data.totalPrice || 'Contact for pricing'
 
-      // Create/update contact with all custom fields for email personalization
+      // Create/update contact using sync endpoint (creates if not exists, updates if exists)
       const contactResponse = await axios.post(
-        `${process.env.ACTIVECAMPAIGN_URL}/api/3/contacts`,
+        `${acUrl}/api/3/contact/sync`,
         {
           contact: {
             email: data.email,
@@ -251,8 +251,9 @@ export async function POST(request: NextRequest) {
         },
         {
           headers: {
-            'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
-            'Content-Type': 'application/json'
+            'Api-Token': acApiKey!,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           }
         }
       )
@@ -269,7 +270,7 @@ export async function POST(request: NextRequest) {
         const contactId = contactResponse.data.contact.id
 
         await axios.post(
-          `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactLists`,
+          `${acUrl}/api/3/contactLists`,
           {
             contactList: {
               list: 4,  // Laguna Beach Tennis Academy list
@@ -279,8 +280,9 @@ export async function POST(request: NextRequest) {
           },
           {
             headers: {
-              'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
-              'Content-Type': 'application/json'
+              'Api-Token': acApiKey!,
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
             }
           }
         )
@@ -297,7 +299,7 @@ export async function POST(request: NextRequest) {
         if (classTagId) {
           try {
             await axios.post(
-              `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
+              `${acUrl}/api/3/contactTags`,
               {
                 contactTag: {
                   contact: contactId,
@@ -306,8 +308,9 @@ export async function POST(request: NextRequest) {
               },
               {
                 headers: {
-                  'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
-                  'Content-Type': 'application/json'
+                  'Api-Token': acApiKey!,
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
                 }
               }
             )
