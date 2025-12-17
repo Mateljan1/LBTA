@@ -214,10 +214,15 @@ export async function POST(request: NextRequest) {
 
     // 2. Add to ActiveCampaign with automatic tagging
     try {
+      const acUrl = process.env.ACTIVECAMPAIGN_URL
+      const acApiKey = process.env.ACTIVECAMPAIGN_API_KEY
+
       console.log('🎾 LBTA Registration Started:', {
         email: data.email,
         program: data.program,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        acUrl: acUrl,
+        acApiKeyLength: acApiKey?.length || 0
       })
 
       // Format days for display
@@ -337,8 +342,10 @@ export async function POST(request: NextRequest) {
         debug: {
           error: acError.response?.data || acError.message,
           status: acError.response?.status,
-          url: process.env.ACTIVECAMPAIGN_URL ? 'URL is set' : 'URL is NOT set',
-          apiKey: process.env.ACTIVECAMPAIGN_API_KEY ? 'Key is set' : 'Key is NOT set'
+          fullUrl: `${process.env.ACTIVECAMPAIGN_URL}/api/3/contacts`,
+          urlValue: process.env.ACTIVECAMPAIGN_URL,
+          apiKeyLength: process.env.ACTIVECAMPAIGN_API_KEY?.length || 0,
+          apiKeyFirst8: process.env.ACTIVECAMPAIGN_API_KEY?.substring(0, 8) || 'NOT SET'
         }
       }, { status: 500 })
     }
