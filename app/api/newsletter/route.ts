@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import axios from 'axios'
 
+// ActiveCampaign newsletter signup handler - v2
+
 export async function POST(request: NextRequest) {
   try {
     const { email, firstName, lastName } = await request.json()
