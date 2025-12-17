@@ -56,9 +56,17 @@ function getClassTagId(programName: string): number | null {
   if (program.includes('red ball')) {
     return 38  // class:red_ball (ages 5-6)
   }
+  // Orange Ball Match Play (Ages 7-8) - check BEFORE regular orange ball
+  if (program.includes('orange ball') && program.includes('match')) {
+    return 77  // class:orange_ball_match_play (Friday competitive play)
+  }
   // Orange Ball (Ages 7-8)
   if (program.includes('orange ball')) {
     return 39  // class:orange_ball (ages 7-8)
+  }
+  // Green Dot Match Play (Ages 9-11) - check BEFORE regular green dot
+  if (program.includes('green dot') && program.includes('match')) {
+    return 78  // class:green_dot_match_play (Friday competitive play)
   }
   // Green Dot (Ages 9-11)
   if (program.includes('green dot')) {
@@ -111,6 +119,14 @@ function getClassTagId(programName: string): number | null {
     }
     // Default LiveBall to intermediate
     return 19  // class:live_ball_intermediate
+  }
+  // Family Tennis - Sunday family sessions
+  if (program.includes('family')) {
+    return 79  // class:family_tennis
+  }
+  // Adult Match Play - Friday evening matches
+  if (program.includes('adult') && program.includes('match play')) {
+    return 80  // class:adult_match_play
   }
 
   // ===== SEASONAL PROGRAMS =====
