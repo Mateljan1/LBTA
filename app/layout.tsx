@@ -29,6 +29,14 @@ export const metadata: Metadata = {
   description: 'ATP/WTA coaching for ages 3-18 and adults. 20+ D1 college placements. Official City of Laguna Beach tennis partner since 2020. Free trial available.',
   keywords: 'tennis lessons Laguna Beach, ATP coaching, junior tennis academy, college tennis recruitment, D1 placement, private tennis lessons, USTA tennis',
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/logos/LBTAblktext.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logos/LBTAblktext.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: '/icons/icon-192x192.png',
+    shortcut: '/logos/LBTAblktext.png',
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
