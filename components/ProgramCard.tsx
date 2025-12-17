@@ -33,6 +33,8 @@ export interface Program {
   pricing: Pricing
   description: string
   coach?: string
+  billingType?: 'monthly' | 'quarterly'
+  pricingNote?: string
 }
 
 interface ProgramCardProps {
@@ -53,9 +55,15 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
   
   // Get billing period label
   const getBillingLabel = () => {
-    if (program.pricing['1x']) return 'per quarter'
+    if (program.billingType === 'monthly') return 'per month'
     if (program.pricing.monthly) return 'per month'
+    if (program.pricing['1x']) return 'per quarter'
     return ''
+  }
+
+  // Check if program is monthly billing
+  const isMonthlyBilling = () => {
+    return program.billingType === 'monthly' || !!program.pricing.monthly
   }
   
   // Get session info
@@ -114,7 +122,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               </div>
               
               {/* Billing Badge */}
-              {program.pricing.monthly ? (
+              {isMonthlyBilling() ? (
                 <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#F8E6BB] text-[#A3501B] text-[11px] md:text-[12px] font-sans font-semibold">
                   Monthly Plan
                 </span>
@@ -324,9 +332,9 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             
             {/* Billing Note */}
             <p className="font-sans text-[13px] text-black/70 font-medium mt-3">
-              {program.pricing['1x'] 
-                ? 'Quarterly billing (13 weeks)' 
-                : 'Monthly billing'}
+              {isMonthlyBilling()
+                ? 'Monthly billing'
+                : 'Quarterly billing (13 weeks)'}
             </p>
           </div>
           
