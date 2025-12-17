@@ -253,7 +253,8 @@ export async function POST(request: NextRequest) {
           headers: {
             'Api-Token': acApiKey!,
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'User-Agent': 'LBTA-Registration/1.0'
           }
         }
       )
@@ -345,10 +346,11 @@ export async function POST(request: NextRequest) {
         debug: {
           error: acError.response?.data || acError.message,
           status: acError.response?.status,
-          fullUrl: `${process.env.ACTIVECAMPAIGN_URL}/api/3/contacts`,
-          urlValue: process.env.ACTIVECAMPAIGN_URL,
-          apiKeyLength: process.env.ACTIVECAMPAIGN_API_KEY?.length || 0,
-          apiKeyFirst8: process.env.ACTIVECAMPAIGN_API_KEY?.substring(0, 8) || 'NOT SET'
+          fullUrl: `${acUrl}/api/3/contact/sync`,
+          urlValue: acUrl,
+          apiKeyLength: acApiKey?.length || 0,
+          apiKeyFirst8: acApiKey?.substring(0, 8) || 'NOT SET',
+          responseHeaders: acError.response?.headers || 'none'
         }
       }, { status: 500 })
     }
