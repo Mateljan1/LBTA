@@ -112,8 +112,8 @@ export default function SchedulesPage() {
   }, [selectedCategory, selectedLocation, selectedDays])
   
   const seasonLabel = selectedSeason === 'winter' ? 'Winter 2026' : 'Fall 2025'
-  const seasonDates = selectedSeason === 'winter' 
-    ? 'January 6 – April 5 · 13 Weeks' 
+  const seasonDates = selectedSeason === 'winter'
+    ? 'January 5 – April 5 · 13 Weeks'
     : 'September – December · 18 Weeks'
 
   return (
@@ -140,11 +140,8 @@ export default function SchedulesPage() {
           <h1 className="font-serif text-[36px] md:text-[60px] font-bold leading-[1.1] tracking-[-0.5px] mb-6 text-shadow">
             Winter 2026 Schedule & Pricing
           </h1>
-          <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-4 max-w-[90%] mx-auto">
+          <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-8 md:mb-10 max-w-[90%] mx-auto">
             {seasonDates}
-          </p>
-          <p className="font-sans text-[15px] md:text-[18px] text-white/90 mb-8 md:mb-10">
-            Early Bird Special: Save $50 on full-quarter enrollment through December 20
           </p>
           <Link 
             href="/programs"

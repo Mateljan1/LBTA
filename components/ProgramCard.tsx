@@ -18,6 +18,7 @@ interface Pricing {
   '4x'?: number
   '5x'?: number
   monthly?: number
+  saturday_only?: number
   drop_in?: number
 }
 
@@ -250,6 +251,14 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
                     </p>
                   </div>
                 )}
+                {program.pricing.saturday_only && (
+                  <div className="text-center p-3 bg-white rounded-lg">
+                    <p className="font-sans text-[12px] md:text-[13px] text-black/60 mb-1">Sat only</p>
+                    <p className="font-serif text-[18px] md:text-[20px] font-bold text-lbta-orange">
+                      ${program.pricing.saturday_only}
+                    </p>
+                  </div>
+                )}
                 {program.pricing.drop_in && (
                   <div className="text-center p-3 bg-gray-100 rounded-lg">
                     <p className="font-sans text-[12px] md:text-[13px] text-black/60 mb-1">Drop-in</p>
@@ -297,6 +306,12 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
                 <div className="flex justify-between items-center py-2.5 border-b border-gray-200">
                   <span className="font-sans text-[15px] text-black/70">Monthly</span>
                   <span className="font-serif text-[20px] font-bold text-lbta-orange">${program.pricing.monthly}</span>
+                </div>
+              )}
+              {program.pricing.saturday_only && (
+                <div className="flex justify-between items-center py-2.5 border-b border-gray-200">
+                  <span className="font-sans text-[15px] text-black/70">Saturday only</span>
+                  <span className="font-serif text-[20px] font-bold text-lbta-orange">${program.pricing.saturday_only}</span>
                 </div>
               )}
               {program.pricing.drop_in && (
