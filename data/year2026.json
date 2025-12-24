@@ -47,6 +47,22 @@
 
   "camps": [
     {
+      "id": "swim-tennis",
+      "name": "Swim & Tennis Camp",
+      "dates": "June 16 – August 14",
+      "days": "Weekly (Mon–Thu)",
+      "hours": "9:00 AM – 3:00 PM",
+      "ages": "5-11",
+      "location": "Alta Laguna Park",
+      "price": 495,
+      "perDay": 124,
+      "description": "Structured tennis lessons, swimming, and team-based activities that create lasting memories.",
+      "includes": ["Tennis instruction", "Supervised swimming", "Team activities", "Certified lifeguards"],
+      "coaches": ["Andrew Mateljan", "Michelle Bevins"],
+      "featured": true,
+      "safetyNote": "All participants must be able to swim independently."
+    },
+    {
       "id": "ski-week",
       "name": "Ski Week Camp",
       "dates": "February 16–20",

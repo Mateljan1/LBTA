@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronDown, ChevronUp, SlidersHorizontal, Calendar, DollarSign, Users, Trophy, Check } from 'lucide-react'
+import { ChevronDown, ChevronUp, SlidersHorizontal, Check } from 'lucide-react'
 import ProgramCard, { Program } from '@/components/ProgramCard'
 import EmbeddedRegistrationPanel from '@/components/EmbeddedRegistrationPanel'
 import AnalyticsDashboard from '@/components/AnalyticsDashboard'
@@ -245,27 +245,23 @@ export default function SchedulesPage() {
             })}
           </div>
           
-          {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            <div className="bg-[#FAF8F3] rounded-xl p-5 text-center">
-              <Calendar className="w-6 h-6 text-lbta-orange mx-auto mb-2" />
-              <div className="font-serif text-[28px] md:text-[36px] font-bold text-black">50</div>
-              <div className="font-sans text-[12px] md:text-[14px] text-black/60 uppercase tracking-wider">Weeks of Tennis</div>
+          {/* Quick Stats - Minimal Typography Only */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <div className="text-center">
+              <div className="font-serif text-[48px] md:text-[56px] font-light text-black leading-none">50</div>
+              <div className="font-sans text-[11px] md:text-[12px] text-black/50 uppercase tracking-[2px] mt-2">Weeks of Tennis</div>
             </div>
-            <div className="bg-[#FAF8F3] rounded-xl p-5 text-center">
-              <Users className="w-6 h-6 text-lbta-orange mx-auto mb-2" />
-              <div className="font-serif text-[28px] md:text-[36px] font-bold text-black">6</div>
-              <div className="font-sans text-[12px] md:text-[14px] text-black/60 uppercase tracking-wider">Holiday Camps</div>
+            <div className="text-center">
+              <div className="font-serif text-[48px] md:text-[56px] font-light text-black leading-none">7</div>
+              <div className="font-sans text-[11px] md:text-[12px] text-black/50 uppercase tracking-[2px] mt-2">Camp Programs</div>
             </div>
-            <div className="bg-[#FAF8F3] rounded-xl p-5 text-center">
-              <Trophy className="w-6 h-6 text-lbta-orange mx-auto mb-2" />
-              <div className="font-serif text-[28px] md:text-[36px] font-bold text-black">3</div>
-              <div className="font-sans text-[12px] md:text-[14px] text-black/60 uppercase tracking-wider">JTT Seasons</div>
+            <div className="text-center">
+              <div className="font-serif text-[48px] md:text-[56px] font-light text-black leading-none">3</div>
+              <div className="font-sans text-[11px] md:text-[12px] text-black/50 uppercase tracking-[2px] mt-2">JTT Seasons</div>
             </div>
-            <div className="bg-[#FAF8F3] rounded-xl p-5 text-center">
-              <DollarSign className="w-6 h-6 text-lbta-orange mx-auto mb-2" />
-              <div className="font-serif text-[28px] md:text-[36px] font-bold text-black">$50</div>
-              <div className="font-sans text-[12px] md:text-[14px] text-black/60 uppercase tracking-wider">Early Bird Savings</div>
+            <div className="text-center">
+              <div className="font-serif text-[48px] md:text-[56px] font-light text-lbta-orange leading-none">$50</div>
+              <div className="font-sans text-[11px] md:text-[12px] text-black/50 uppercase tracking-[2px] mt-2">Early Bird Savings</div>
             </div>
           </div>
         </div>
@@ -680,46 +676,139 @@ export default function SchedulesPage() {
 
       {/* CAMPS & JTT TAB */}
       {activeTab === 'calendar' && (
-        <section className="bg-[#FAF8F3] py-12 md:py-20">
-          <div className="max-w-[1200px] mx-auto px-4 md:px-6">
-            {/* Camps Section */}
-            <div className="mb-16">
-              <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
-                2026 Holiday Camps
-              </h2>
-              <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
-                Keep your player engaged during school breaks with our intensive camp programs
-              </p>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {year2026Data.camps.map((camp) => (
-                  <div key={camp.id} className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-lg transition-shadow">
-                    <div className="bg-lbta-orange text-white px-6 py-4">
-                      <h3 className="font-serif text-[18px] font-semibold">{camp.name}</h3>
-                      <p className="font-sans text-[13px] text-white/80">{camp.dates}</p>
-                    </div>
-                    <div className="p-6">
-                      <div className="flex justify-between items-start mb-4">
+        <section className="bg-white py-16 md:py-24">
+          <div className="max-w-[1200px] mx-auto px-6 md:px-8">
+            
+            {/* Featured: Swim & Tennis Camp */}
+            {year2026Data.camps.filter((c: any) => c.featured).map((camp: any) => (
+              <div key={camp.id} className="mb-20 md:mb-28">
+                <div className="text-center mb-12">
+                  <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-lbta-orange mb-3">
+                    Featured Program
+                  </p>
+                  <h2 className="font-serif text-[32px] md:text-[48px] font-light text-black leading-[1.1] mb-4">
+                    {camp.name}
+                  </h2>
+                  <p className="font-sans text-[15px] md:text-[17px] text-black/60 max-w-xl mx-auto leading-relaxed">
+                    {camp.description}
+                  </p>
+                </div>
+                
+                <div className="bg-[#FAF8F3] rounded-[2px] overflow-hidden">
+                  <div className="grid md:grid-cols-2">
+                    {/* Left: Details */}
+                    <div className="p-8 md:p-12">
+                      <div className="space-y-6">
                         <div>
-                          <div className="font-sans text-[13px] text-black/60">Ages {camp.ages}</div>
-                          <div className="font-sans text-[13px] text-black/60">{camp.hours}</div>
+                          <div className="font-sans text-[11px] uppercase tracking-[2px] text-black/40 mb-1">Led By</div>
+                          <div className="font-sans text-[15px] text-black">{camp.coaches?.join(' & ')}</div>
                         </div>
-                        <div className="text-right">
-                          <div className="font-serif text-[28px] font-bold text-black">${camp.price}</div>
-                          {camp.halfDay && (
-                            <div className="font-sans text-[12px] text-black/60">Half-day: ${camp.halfDay}</div>
-                          )}
+                        <div>
+                          <div className="font-sans text-[11px] uppercase tracking-[2px] text-black/40 mb-1">Dates</div>
+                          <div className="font-sans text-[15px] text-black">{camp.dates}</div>
+                        </div>
+                        <div>
+                          <div className="font-sans text-[11px] uppercase tracking-[2px] text-black/40 mb-1">Schedule</div>
+                          <div className="font-sans text-[15px] text-black">{camp.days} · {camp.hours}</div>
+                        </div>
+                        <div>
+                          <div className="font-sans text-[11px] uppercase tracking-[2px] text-black/40 mb-1">Ages</div>
+                          <div className="font-sans text-[15px] text-black">{camp.ages}</div>
+                        </div>
+                        <div>
+                          <div className="font-sans text-[11px] uppercase tracking-[2px] text-black/40 mb-1">Location</div>
+                          <div className="font-sans text-[15px] text-black">{camp.location}</div>
                         </div>
                       </div>
-                      <p className="font-sans text-[14px] text-black/70 mb-4">{camp.description}</p>
-                      <ul className="space-y-1">
-                        {camp.includes.map((item, i) => (
-                          <li key={i} className="flex items-center gap-2 font-sans text-[13px] text-black/60">
-                            <Check className="w-4 h-4 text-green-600" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
+                      
+                      {/* Safety Note */}
+                      {camp.safetyNote && (
+                        <div className="mt-8 p-4 bg-lbta-orange/10 border-l-2 border-lbta-orange">
+                          <div className="font-sans text-[12px] font-semibold text-lbta-red uppercase tracking-wider mb-1">
+                            Important
+                          </div>
+                          <p className="font-sans text-[13px] text-black/70">
+                            {camp.safetyNote}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Right: Pricing & Includes */}
+                    <div className="p-8 md:p-12 bg-white border-t md:border-t-0 md:border-l border-black/5">
+                      <div className="mb-8">
+                        <div className="font-sans text-[11px] uppercase tracking-[2px] text-black/40 mb-2">Weekly Rate</div>
+                        <div className="font-serif text-[48px] font-light text-black leading-none">${camp.price}</div>
+                        <div className="font-sans text-[13px] text-black/50 mt-1">${camp.perDay}/day</div>
+                      </div>
+                      
+                      <div>
+                        <div className="font-sans text-[11px] uppercase tracking-[2px] text-black/40 mb-4">Includes</div>
+                        <ul className="space-y-3">
+                          {camp.includes.map((item: string, i: number) => (
+                            <li key={i} className="flex items-start gap-3">
+                              <span className="w-1 h-1 bg-lbta-orange rounded-full mt-2 flex-shrink-0" />
+                              <span className="font-sans text-[14px] text-black/70">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <Link
+                        href="/book"
+                        className="mt-8 inline-block bg-black text-white font-sans text-[13px] font-medium tracking-[2px] uppercase py-4 px-8 hover:bg-lbta-orange transition-colors duration-300"
+                      >
+                        Register Now
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+            
+            {/* Holiday Camps Section */}
+            <div className="mb-20 md:mb-28">
+              <div className="text-center mb-12">
+                <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-black/40 mb-3">
+                  School Breaks
+                </p>
+                <h2 className="font-serif text-[32px] md:text-[48px] font-light text-black leading-[1.1]">
+                  Holiday Camps
+                </h2>
+              </div>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-black/5">
+                {year2026Data.camps.filter((c: any) => !c.featured).map((camp: any) => (
+                  <div key={camp.id} className="bg-white p-8 hover:bg-[#FAF8F3] transition-colors duration-300">
+                    <div className="mb-6">
+                      <h3 className="font-serif text-[20px] md:text-[24px] font-normal text-black mb-1">
+                        {camp.name}
+                      </h3>
+                      <p className="font-sans text-[13px] text-black/50">{camp.dates}</p>
+                    </div>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="flex justify-between">
+                        <span className="font-sans text-[12px] text-black/40 uppercase tracking-wider">Ages</span>
+                        <span className="font-sans text-[13px] text-black">{camp.ages}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="font-sans text-[12px] text-black/40 uppercase tracking-wider">Hours</span>
+                        <span className="font-sans text-[13px] text-black">{camp.hours}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="font-sans text-[12px] text-black/40 uppercase tracking-wider">Location</span>
+                        <span className="font-sans text-[13px] text-black">{camp.location?.split(' ').slice(0, 2).join(' ')}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="pt-6 border-t border-black/5">
+                      <div className="flex items-baseline justify-between">
+                        <span className="font-serif text-[32px] font-light text-black">${camp.price}</span>
+                        {camp.halfDay && (
+                          <span className="font-sans text-[12px] text-black/50">Half-day: ${camp.halfDay}</span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -728,48 +817,55 @@ export default function SchedulesPage() {
 
             {/* JTT Section */}
             <div>
-              <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
-                Junior Team Tennis (JTT)
-              </h2>
-              <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
-                USTA league competition with team practices, matches, and uniforms included
-              </p>
+              <div className="text-center mb-12">
+                <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-black/40 mb-3">
+                  USTA League Competition
+                </p>
+                <h2 className="font-serif text-[32px] md:text-[48px] font-light text-black leading-[1.1] mb-4">
+                  Junior Team Tennis
+                </h2>
+                <p className="font-sans text-[15px] md:text-[17px] text-black/60 max-w-xl mx-auto leading-relaxed">
+                  Team practices, Sunday matches, uniforms, and USTA registration included
+                </p>
+              </div>
               
-              <div className="grid md:grid-cols-3 gap-6">
-                {year2026Data.jtt.map((season) => (
-                  <div key={season.id} className="bg-white rounded-2xl overflow-hidden shadow-soft">
-                    <div className="bg-black text-white px-6 py-4">
-                      <h3 className="font-serif text-[18px] font-semibold">{season.name}</h3>
-                      <p className="font-sans text-[13px] text-white/70">{season.dates}</p>
-                    </div>
-                    <div className="p-6">
-                      <div className="font-sans text-[13px] text-black/60 mb-4">
+              <div className="grid md:grid-cols-3 gap-px bg-black/5">
+                {year2026Data.jtt.map((season: any) => (
+                  <div key={season.id} className="bg-white">
+                    <div className="p-8 border-b border-black/5">
+                      <h3 className="font-serif text-[24px] md:text-[28px] font-normal text-black mb-1">
+                        {season.name}
+                      </h3>
+                      <p className="font-sans text-[13px] text-black/50">{season.dates}</p>
+                      <p className="font-sans text-[12px] text-black/40 mt-2">
                         {season.weeks} weeks · {season.matchDay}
-                      </div>
-                      
-                      <div className="space-y-2 mb-4">
-                        {season.divisions.map((div) => (
-                          <div key={div.age} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
-                            <span className="font-sans text-[14px] font-medium text-black">{div.age}</span>
-                            <span className="font-sans text-[16px] font-semibold text-black">${div.price.toLocaleString()}</span>
+                      </p>
+                    </div>
+                    
+                    <div className="p-8">
+                      <div className="space-y-0">
+                        {season.divisions.map((div: any) => (
+                          <div key={div.age} className="flex justify-between items-center py-4 border-b border-black/5 last:border-0">
+                            <span className="font-sans text-[14px] text-black">{div.age}</span>
+                            <span className="font-serif text-[20px] font-light text-black">${div.price.toLocaleString()}</span>
                           </div>
                         ))}
-                      </div>
-                      
-                      <div className="pt-4 border-t border-gray-200">
-                        <div className="font-sans text-[12px] text-black/60 uppercase tracking-wider mb-2">Includes:</div>
-                        <ul className="space-y-1">
-                          {season.includes.map((item, i) => (
-                            <li key={i} className="flex items-center gap-2 font-sans text-[12px] text-black/60">
-                              <Check className="w-3 h-3 text-green-600" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
                       </div>
                     </div>
                   </div>
                 ))}
+              </div>
+              
+              {/* JTT Includes */}
+              <div className="mt-8 p-8 bg-[#FAF8F3]">
+                <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+                  {year2026Data.jtt[0].includes.map((item: string, i: number) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-lbta-orange rounded-full" />
+                      <span className="font-sans text-[13px] text-black/70">{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
