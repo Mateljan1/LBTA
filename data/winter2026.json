@@ -19,8 +19,7 @@
         { "day": "Wednesday", "time": "3:30-4:15 PM", "coach": "Michelle" }
       ],
       "pricing": {
-        "1x": 260,
-        "2x": 520,
+        "monthly": 120,
         "drop_in": 40
       },
       "description": "Introduction to tennis through play-based activities and movement fundamentals."
