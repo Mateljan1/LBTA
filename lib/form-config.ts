@@ -263,7 +263,151 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     classTagId: 18 // class:live_ball_advanced
   },
 
-  // Add more programs as they are identified in the JSON data...
+  // ===== CAMPS =====
+  'swim-tennis': {
+    programId: 'swim-tennis',
+    formEmbedCode: '',
+    acFormId: '',
+    prePopulateData: {
+      programName: 'Swim & Tennis Camp',
+      location: 'Alta Laguna Park',
+      duration: '6 hours (9 AM - 3 PM)',
+      pricing: '$495/week',
+      category: 'Camp',
+      ageGroup: '5-11 years',
+      billingCycle: 'quarterly'
+    },
+    classTagId: 60 // camp:swim_tennis
+  },
+
+  'ski-week': {
+    programId: 'ski-week',
+    formEmbedCode: '',
+    acFormId: '',
+    prePopulateData: {
+      programName: 'Ski Week Camp',
+      location: 'Laguna Beach High School',
+      duration: '6 hours (9 AM - 3 PM)',
+      pricing: '$525/week',
+      category: 'Camp',
+      ageGroup: '5-14 years',
+      billingCycle: 'quarterly'
+    },
+    classTagId: 61 // camp:ski_week
+  },
+
+  'spring-break': {
+    programId: 'spring-break',
+    formEmbedCode: '',
+    acFormId: '',
+    prePopulateData: {
+      programName: 'Spring Break Camp',
+      location: 'Laguna Beach High School',
+      duration: '6 hours (9 AM - 3 PM)',
+      pricing: '$525/week',
+      category: 'Camp',
+      ageGroup: '5-14 years',
+      billingCycle: 'quarterly'
+    },
+    classTagId: 62 // camp:spring_break
+  },
+
+  'summer-camp': {
+    programId: 'summer-camp',
+    formEmbedCode: '',
+    acFormId: '',
+    prePopulateData: {
+      programName: 'Summer Camps',
+      location: 'Laguna Beach High School',
+      duration: '6 hours (9 AM - 3 PM)',
+      pricing: '$725/week (Full Day) | $425/week (Half Day)',
+      category: 'Camp',
+      ageGroup: '5-17 years',
+      billingCycle: 'quarterly'
+    },
+    classTagId: 63 // camp:summer
+  },
+
+  'back-to-school': {
+    programId: 'back-to-school',
+    formEmbedCode: '',
+    acFormId: '',
+    prePopulateData: {
+      programName: 'Back-to-School Mini Camp',
+      location: 'Laguna Beach High School',
+      duration: '4 hours (9 AM - 1 PM)',
+      pricing: '$325/3 days',
+      category: 'Camp',
+      ageGroup: '5-14 years',
+      billingCycle: 'quarterly'
+    },
+    classTagId: 64 // camp:back_to_school
+  },
+
+  'thanksgiving': {
+    programId: 'thanksgiving',
+    formEmbedCode: '',
+    acFormId: '',
+    prePopulateData: {
+      programName: 'Thanksgiving Camp',
+      location: 'Laguna Beach High School',
+      duration: '4 hours (9 AM - 1 PM)',
+      pricing: '$325/3 days',
+      category: 'Camp',
+      ageGroup: '5-14 years',
+      billingCycle: 'quarterly'
+    },
+    classTagId: 65 // camp:thanksgiving
+  },
+
+  'winter-break': {
+    programId: 'winter-break',
+    formEmbedCode: '',
+    acFormId: '',
+    prePopulateData: {
+      programName: 'Winter Break Camp',
+      location: 'Laguna Beach High School',
+      duration: '4 hours (9 AM - 1 PM)',
+      pricing: '$425/session (4 days)',
+      category: 'Camp',
+      ageGroup: '5-14 years',
+      billingCycle: 'quarterly'
+    },
+    classTagId: 66 // camp:winter_break
+  },
+
+  // ===== JTT (Junior Team Tennis) =====
+  'spring-jtt': {
+    programId: 'spring-jtt',
+    formEmbedCode: '',
+    acFormId: '',
+    prePopulateData: {
+      programName: 'Spring JTT',
+      location: 'Various (Match locations vary)',
+      duration: '15 weeks (Jan 12 - Apr 26)',
+      pricing: '$2,350 (10U) | $2,800 (12U-18U)',
+      category: 'JTT',
+      ageGroup: '10U, 12U, 14U, 18U',
+      billingCycle: 'quarterly'
+    },
+    classTagId: 70 // jtt:spring
+  },
+
+  'fall-jtt': {
+    programId: 'fall-jtt',
+    formEmbedCode: '',
+    acFormId: '',
+    prePopulateData: {
+      programName: 'Fall JTT',
+      location: 'Various (Match locations vary)',
+      duration: '12 weeks (Sep 5 - Nov 22)',
+      pricing: '$2,350 (10U) | $2,800 (12U-18U)',
+      category: 'JTT',
+      ageGroup: '10U, 12U, 14U, 18U',
+      billingCycle: 'quarterly'
+    },
+    classTagId: 71 // jtt:fall
+  },
 }
 
 // Helper function to get form config by program ID

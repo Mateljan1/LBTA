@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { ChevronDown, ChevronUp, SlidersHorizontal, Check } from 'lucide-react'
 import ProgramCard, { Program } from '@/components/ProgramCard'
 import EmbeddedRegistrationPanel from '@/components/EmbeddedRegistrationPanel'
+import YearRegistrationModal from '@/components/YearRegistrationModal'
 import AnalyticsDashboard from '@/components/AnalyticsDashboard'
 import ComprehensiveFormTester from '@/components/ComprehensiveFormTester'
 import { trackProgramView, trackFormStart } from '@/lib/form-analytics'
@@ -19,6 +20,37 @@ import year2026Data from '@/data/year2026.json'
 
 type SeasonKey = 'winter' | 'spring' | 'summer' | 'fall' | 'fall2025'
 
+// Types for registration modal
+type RegistrationModalType = 'camp' | 'jtt' | 'seasonal' | 'inquiry'
+
+interface CampModalData {
+  id: string
+  name: string
+  dates: string
+  days: string | number
+  hours: string
+  ages: string
+  location: string
+  price: number
+  perDay?: number
+  halfDay?: number
+  description: string
+  includes?: string[]
+  safetyNote?: string
+  featured?: boolean
+}
+
+interface JTTModalData {
+  id: string
+  name: string
+  dates: string
+  weeks: number
+  matchDay: string
+  divisions: { age: string; price: number }[]
+  includes: string[]
+  description: string
+}
+
 export default function SchedulesPage() {
   const [selectedSeason, setSelectedSeason] = useState<SeasonKey>('winter')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
@@ -31,6 +63,25 @@ export default function SchedulesPage() {
   const [analyticsOpen, setAnalyticsOpen] = useState(false)
   const [formTesterOpen, setFormTesterOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<'programs' | 'calendar' | 'pricing'>('programs')
+  
+  // Registration modal state
+  const [registrationModalOpen, setRegistrationModalOpen] = useState(false)
+  const [registrationModalType, setRegistrationModalType] = useState<RegistrationModalType>('camp')
+  const [registrationModalData, setRegistrationModalData] = useState<CampModalData | JTTModalData | null>(null)
+
+  // Handle camp registration
+  const handleCampRegister = (camp: CampModalData) => {
+    setRegistrationModalType('camp')
+    setRegistrationModalData(camp)
+    setRegistrationModalOpen(true)
+  }
+
+  // Handle JTT registration
+  const handleJTTRegister = (jtt: JTTModalData) => {
+    setRegistrationModalType('jtt')
+    setRegistrationModalData(jtt)
+    setRegistrationModalOpen(true)
+  }
   
   // Get season data
   const seasons = year2026Data.seasons
@@ -754,12 +805,12 @@ export default function SchedulesPage() {
                         </ul>
                       </div>
                       
-                      <Link
-                        href="/book"
-                        className="mt-8 inline-block bg-black text-white font-sans text-[13px] font-medium tracking-[2px] uppercase py-4 px-8 hover:bg-lbta-orange transition-colors duration-300"
+                      <button
+                        onClick={() => handleCampRegister(camp as CampModalData)}
+                        className="mt-8 inline-block bg-black text-white font-sans text-[13px] font-medium tracking-[2px] uppercase py-4 px-8 hover:bg-lbta-orange transition-colors duration-300 cursor-pointer"
                       >
                         Register Now
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -809,12 +860,12 @@ export default function SchedulesPage() {
                           <span className="font-sans text-[12px] text-black/50">Half-day: ${camp.halfDay}</span>
                         )}
                       </div>
-                      <Link
-                        href={`/contact?inquiry=camp&camp=${encodeURIComponent(camp.name)}`}
-                        className="block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-lbta-orange transition-colors duration-300"
+                      <button
+                        onClick={() => handleCampRegister(camp as CampModalData)}
+                        className="block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-lbta-orange transition-colors duration-300 cursor-pointer"
                       >
-                        Inquire
-                      </Link>
+                        Register Now
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -858,12 +909,12 @@ export default function SchedulesPage() {
                         ))}
                       </div>
                       
-                      <Link
-                        href={`/contact?inquiry=jtt&season=${encodeURIComponent(season.name)}`}
-                        className="mt-6 block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-lbta-orange transition-colors duration-300"
+                      <button
+                        onClick={() => handleJTTRegister(season as JTTModalData)}
+                        className="mt-6 block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-lbta-orange transition-colors duration-300 cursor-pointer"
                       >
-                        Inquire About {season.name}
-                      </Link>
+                        Register for {season.name}
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -930,6 +981,18 @@ export default function SchedulesPage() {
       <EmbeddedRegistrationPanel 
         program={selectedProgram} 
         onClose={() => setSelectedProgram(null)} 
+      />
+      
+      {/* Year-Round Registration Modal (Camps & JTT) */}
+      <YearRegistrationModal
+        isOpen={registrationModalOpen}
+        onClose={() => {
+          setRegistrationModalOpen(false)
+          setRegistrationModalData(null)
+        }}
+        type={registrationModalType}
+        data={registrationModalData}
+        season={selectedSeason}
       />
       
       {/* Mobile Filter Overlay */}
