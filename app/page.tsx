@@ -240,15 +240,14 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator - Subtle */}
         <button 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-lbta-orange flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-2 hover:text-white/80 transition-colors duration-500"
           onClick={() => document.getElementById('founder')?.scrollIntoView({ behavior: 'smooth' })}
           aria-label="Scroll to content"
         >
-          <span className="text-eyebrow-sm tracking-widest">Explore</span>
-          <svg className="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ animationDuration: '2s' }}>
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          <svg className="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ animationDuration: '2.5s' }}>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </button>
       </section>
@@ -372,7 +371,7 @@ export default function Home() {
             </AnimatedSection>
             
             <AnimatedSection delay={300}>
-              <Link href="/success-stories" className="btn-ghost text-lbta-orange">
+              <Link href="/success-stories" className="btn-ghost text-white/80 hover:text-white">
                 <span>Watch His Journey</span>
                 <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

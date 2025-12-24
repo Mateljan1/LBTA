@@ -234,18 +234,18 @@
     transform: translateY(0) scale(0.98);
   }
 
-  /* Accent Button - Orange/Red */
+  /* Accent Button - Now Black (Luxury) */
   .btn-accent {
     @apply btn;
-    background: var(--color-red);
+    background: var(--color-black);
     color: var(--color-white);
-    box-shadow: 0 2px 12px rgba(240, 78, 35, 0.2);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   }
 
   .btn-accent:hover {
-    background: var(--color-orange);
+    background: #1a1a1a;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(248, 161, 33, 0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 
   .btn-accent:active {
@@ -270,11 +270,11 @@
     transform: translateY(0) scale(0.98);
   }
 
-  /* Ghost Button - Text only */
+  /* Ghost Button - Text only (Luxury Black) */
   .btn-ghost {
     @apply btn;
     background: transparent;
-    color: var(--color-orange);
+    color: var(--color-charcoal);
     padding: 0.5rem 0;
     min-height: auto;
   }
@@ -285,16 +285,20 @@
     bottom: 0;
     left: 0;
     width: 0;
-    height: 1.5px;
+    height: 1px;
     background: currentColor;
     transition: width 0.4s var(--ease-luxury);
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-black);
   }
 
   .btn-ghost:hover::after {
     width: 100%;
   }
 
-  /* Pill Button (for CTAs in hero) */
+  /* Pill Button (for CTAs in hero) - Luxury Black */
   .btn-pill {
     @apply btn;
     border-radius: 9999px;
@@ -303,28 +307,29 @@
 
   .btn-pill-primary {
     @apply btn-pill;
-    background: var(--color-red);
-    color: var(--color-white);
-    box-shadow: 0 4px 16px rgba(240, 78, 35, 0.25);
+    background: var(--color-white);
+    color: var(--color-black);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    font-weight: 600;
   }
 
   .btn-pill-primary:hover {
-    background: var(--color-orange);
+    background: var(--color-cream);
     transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(248, 161, 33, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
 
   .btn-pill-secondary {
     @apply btn-pill;
-    background: rgba(255, 255, 255, 0.1);
+    background: transparent;
     color: var(--color-white);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(8px);
   }
 
   .btn-pill-secondary:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.7);
   }
 }
 
