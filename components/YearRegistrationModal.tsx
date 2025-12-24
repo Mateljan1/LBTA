@@ -19,6 +19,8 @@ interface CampData {
   includes?: string[]
   safetyNote?: string
   featured?: boolean
+  season?: string
+  coaches?: string[]
 }
 
 interface JTTData {
