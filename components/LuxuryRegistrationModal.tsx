@@ -2,21 +2,12 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import type { Program } from '@/components/ProgramCard'
 
 // ============================================================
 // LUXURY REGISTRATION MODAL
 // Aman / Four Seasons / Apple-level design standards
 // ============================================================
-
-interface Program {
-  program: string
-  ages: string
-  location: string
-  duration: string
-  category?: string
-  schedule: { day: string; time: string }[]
-  pricing: Record<string, number>
-}
 
 interface LuxuryRegistrationModalProps {
   program: Program | null
@@ -84,7 +75,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
   const availableDays = program.schedule.map(s => s.day)
   
   const pricingOptions = Object.entries(program.pricing)
-    .filter(([key]) => key !== 'drop_in')
+    .filter(([key, value]) => key !== 'drop_in' && value !== undefined)
     .map(([key, value]) => {
       const labels: Record<string, string> = {
         monthly: 'Monthly',
@@ -94,9 +85,8 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
         '4x': '4× per week',
         '5x': '5× per week',
       }
-      return { label: labels[key] || key, value: key, price: value }
+      return { label: labels[key] || key, value: key, price: value as number }
     })
-    .filter(Boolean)
   
   const handleDayToggle = (day: string) => {
     setSelectedDays(prev =>
