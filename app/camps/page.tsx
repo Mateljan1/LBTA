@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
+import YearRegistrationModal from '@/components/YearRegistrationModal'
 
 // Camp data for 2026
 const camps = [
@@ -113,12 +114,54 @@ const camps = [
   }
 ]
 
+// Type for camp data to match YearRegistrationModal expectations
+interface CampModalData {
+  id: string
+  name: string
+  dates: string
+  days: string | number
+  hours: string
+  ages: string
+  location: string
+  price: number
+  perDay?: number
+  halfDay?: number
+  description: string
+  includes?: string[]
+  safetyNote?: string
+  featured?: boolean
+}
+
 export default function CampsPage() {
   const [selectedSeason, setSelectedSeason] = useState<string>('all')
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedCamp, setSelectedCamp] = useState<CampModalData | null>(null)
   
   const filteredCamps = selectedSeason === 'all' 
     ? camps 
     : camps.filter(camp => camp.season === selectedSeason)
+
+  const handleRegisterClick = (camp: typeof camps[0]) => {
+    // Convert camp data to modal format
+    const modalData: CampModalData = {
+      id: camp.id,
+      name: camp.name,
+      dates: camp.dates,
+      days: camp.days,
+      hours: camp.hours,
+      ages: camp.ages,
+      location: camp.location,
+      price: camp.price,
+      perDay: camp.perDay,
+      halfDay: camp.halfDay,
+      description: camp.description,
+      includes: camp.includes,
+      safetyNote: camp.safetyNote,
+      featured: camp.featured,
+    }
+    setSelectedCamp(modalData)
+    setIsModalOpen(true)
+  }
 
   return (
     <>
@@ -271,12 +314,12 @@ export default function CampsPage() {
                         </div>
                       </div>
                       
-                      <Link
-                        href="/book"
+                      <button
+                        onClick={() => handleRegisterClick(camp)}
                         className="block w-full text-center bg-black hover:bg-lbta-orange text-white font-sans font-semibold text-[13px] py-3 rounded transition-all duration-300 uppercase tracking-[1px]"
                       >
                         Register Now
-                      </Link>
+                      </button>
                     </div>
                     
                     {camp.safetyNote && (
@@ -465,24 +508,33 @@ export default function CampsPage() {
           <AnimatedSection delay={200}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
-                href="/book"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
-              >
-                Book Now
-              </Link>
-              <Link 
                 href="/contact"
-                className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 Contact Us
               </Link>
+              <a 
+                href="tel:9494646645"
+                className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+              >
+                Call (949) 464-6645
+              </a>
             </div>
           </AnimatedSection>
         </div>
       </section>
       
+      {/* Registration Modal */}
+      <YearRegistrationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        type="camp"
+        data={selectedCamp}
+        season={selectedCamp?.season || 'summer'}
+      />
+      
       {/* Sticky Mobile CTA */}
-      <StickyCTA text="Reserve Your Spot" href="/book" showAfterScroll={600} />
+      <StickyCTA text="Reserve Your Spot" href="#camps" showAfterScroll={600} />
     </>
   )
 }

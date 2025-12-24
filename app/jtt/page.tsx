@@ -1,9 +1,11 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
+import YearRegistrationModal from '@/components/YearRegistrationModal'
 
 // Team Divisions data
 const divisions = [
@@ -69,7 +71,27 @@ const included = [
   '15% private-lesson discount during the season'
 ]
 
+// JTT Program data for modal
+const jttProgramData = {
+  id: 'spring-jtt',
+  name: 'Spring 2026 Junior Team Tennis',
+  dates: 'January 12 – April 26, 2026',
+  weeks: 15,
+  matchDay: 'Saturdays & Sundays',
+  divisions: [
+    { age: '10U', price: 2350 },
+    { age: '12U', price: 2800 },
+    { age: '14U', price: 2800 },
+    { age: '16U', price: 2800 },
+    { age: '18U', price: 2800 },
+  ],
+  includes: included,
+  description: 'Competitive team-based tennis for juniors. 15 weeks of structured training with weekend matches against academies across Southern California.'
+}
+
 export default function JTTPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <>
       {/* HERO */}
@@ -111,12 +133,12 @@ export default function JTTPage() {
           </AnimatedSection>
           <AnimatedSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/book"
+              <button 
+                onClick={() => setIsModalOpen(true)}
                 className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 Register Now
-              </Link>
+              </button>
               <Link 
                 href="#schedule"
                 className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
@@ -405,9 +427,16 @@ export default function JTTPage() {
                     </ul>
                   </div>
                   
-                  <p className="font-sans text-[12px] text-black/50">
+                  <p className="font-sans text-[12px] text-black/50 mb-6">
                     USTA Registration: $33.15/player (paid directly to USTA)
                   </p>
+                  
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="w-full bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                  >
+                    Register Now
+                  </button>
                 </div>
               </AnimatedSection>
             </div>
@@ -508,8 +537,8 @@ export default function JTTPage() {
                 <div className="w-16 h-16 rounded-full bg-lbta-orange/10 flex items-center justify-center mx-auto mb-6">
                   <span className="font-serif text-[28px] font-semibold text-lbta-orange">1</span>
                 </div>
-                <h3 className="font-serif text-[20px] font-semibold text-black mb-3">Contact Us</h3>
-                <p className="font-sans text-[14px] text-black/70">Email or call to express interest and check availability.</p>
+                <h3 className="font-serif text-[20px] font-semibold text-black mb-3">Register Online</h3>
+                <p className="font-sans text-[14px] text-black/70">Click "Register Now" and fill out the registration form.</p>
               </div>
             </AnimatedSection>
             
@@ -518,8 +547,8 @@ export default function JTTPage() {
                 <div className="w-16 h-16 rounded-full bg-lbta-orange/10 flex items-center justify-center mx-auto mb-6">
                   <span className="font-serif text-[28px] font-semibold text-lbta-orange">2</span>
                 </div>
-                <h3 className="font-serif text-[20px] font-semibold text-black mb-3">Provide Details</h3>
-                <p className="font-sans text-[14px] text-black/70">Name, age, current level, and preferred division.</p>
+                <h3 className="font-serif text-[20px] font-semibold text-black mb-3">Receive Confirmation</h3>
+                <p className="font-sans text-[14px] text-black/70">Get an email with team placement and payment details.</p>
               </div>
             </AnimatedSection>
             
@@ -528,8 +557,8 @@ export default function JTTPage() {
                 <div className="w-16 h-16 rounded-full bg-lbta-orange/10 flex items-center justify-center mx-auto mb-6">
                   <span className="font-serif text-[28px] font-semibold text-lbta-orange">3</span>
                 </div>
-                <h3 className="font-serif text-[20px] font-semibold text-black mb-3">Complete Registration</h3>
-                <p className="font-sans text-[14px] text-black/70">Select payment, submit agreement, receive welcome packet.</p>
+                <h3 className="font-serif text-[20px] font-semibold text-black mb-3">Start Training</h3>
+                <p className="font-sans text-[14px] text-black/70">Complete payment and receive your welcome packet.</p>
               </div>
             </AnimatedSection>
           </div>
@@ -592,12 +621,12 @@ export default function JTTPage() {
           </AnimatedSection>
           <AnimatedSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/book"
+              <button 
+                onClick={() => setIsModalOpen(true)}
                 className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 Register Now
-              </Link>
+              </button>
               <Link 
                 href="/contact"
                 className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
@@ -624,9 +653,21 @@ export default function JTTPage() {
         </div>
       </section>
       
+      {/* Registration Modal */}
+      <YearRegistrationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        type="jtt"
+        data={jttProgramData}
+        season="spring"
+      />
+      
       {/* Sticky Mobile CTA */}
-      <StickyCTA text="Register for JTT" href="/book" showAfterScroll={600} />
+      <StickyCTA 
+        text="Register for JTT" 
+        onClick={() => setIsModalOpen(true)} 
+        showAfterScroll={600} 
+      />
     </>
   )
 }
-
