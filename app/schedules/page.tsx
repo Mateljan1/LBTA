@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronDown, ChevronUp, SlidersHorizontal, Check } from 'lucide-react'
 import ProgramCard, { Program } from '@/components/ProgramCard'
-import EmbeddedRegistrationPanel from '@/components/EmbeddedRegistrationPanel'
+import RegistrationModal from '@/components/RegistrationModal'
 import YearRegistrationModal from '@/components/YearRegistrationModal'
 import AnalyticsDashboard from '@/components/AnalyticsDashboard'
 import ComprehensiveFormTester from '@/components/ComprehensiveFormTester'
@@ -981,11 +981,13 @@ export default function SchedulesPage() {
         </div>
       </section>
       
-      {/* Registration Panel */}
-      <EmbeddedRegistrationPanel 
-        program={selectedProgram} 
-        onClose={() => setSelectedProgram(null)} 
-      />
+      {/* Registration Modal */}
+      {selectedProgram && (
+        <RegistrationModal 
+          program={selectedProgram} 
+          onClose={() => setSelectedProgram(null)} 
+        />
+      )}
       
       {/* Year-Round Registration Modal (Camps & JTT) */}
       <YearRegistrationModal
