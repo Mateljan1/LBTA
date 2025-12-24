@@ -5,8 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronDown, ChevronUp, SlidersHorizontal, Check } from 'lucide-react'
 import ProgramCard, { Program } from '@/components/ProgramCard'
-import RegistrationModal from '@/components/RegistrationModal'
-import YearRegistrationModal from '@/components/YearRegistrationModal'
+import LuxuryRegistrationModal from '@/components/LuxuryRegistrationModal'
+import LuxuryYearModal from '@/components/LuxuryYearModal'
 import AnalyticsDashboard from '@/components/AnalyticsDashboard'
 import ComprehensiveFormTester from '@/components/ComprehensiveFormTester'
 import { trackProgramView, trackFormStart } from '@/lib/form-analytics'
@@ -981,16 +981,16 @@ export default function SchedulesPage() {
         </div>
       </section>
       
-      {/* Registration Modal */}
+      {/* Luxury Registration Modal (Programs) */}
       {selectedProgram && (
-        <RegistrationModal 
+        <LuxuryRegistrationModal 
           program={selectedProgram} 
           onClose={() => setSelectedProgram(null)} 
         />
       )}
       
-      {/* Year-Round Registration Modal (Camps & JTT) */}
-      <YearRegistrationModal
+      {/* Luxury Year-Round Modal (Camps & JTT) */}
+      <LuxuryYearModal
         isOpen={registrationModalOpen}
         onClose={() => {
           setRegistrationModalOpen(false)

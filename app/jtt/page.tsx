@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
-import YearRegistrationModal from '@/components/YearRegistrationModal'
+import LuxuryYearModal from '@/components/LuxuryYearModal'
 
 // Team Divisions data
 const divisions = [
@@ -653,8 +653,8 @@ export default function JTTPage() {
         </div>
       </section>
       
-      {/* Registration Modal */}
-      <YearRegistrationModal
+      {/* Luxury Registration Modal */}
+      <LuxuryYearModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         type="jtt"

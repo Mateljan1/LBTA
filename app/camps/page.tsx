@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
-import YearRegistrationModal from '@/components/YearRegistrationModal'
+import LuxuryYearModal from '@/components/LuxuryYearModal'
 
 // Camp data for 2026
 const camps = [
@@ -528,8 +528,8 @@ export default function CampsPage() {
         </div>
       </section>
       
-      {/* Registration Modal */}
-      <YearRegistrationModal
+      {/* Luxury Registration Modal */}
+      <LuxuryYearModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         type="camp"
