@@ -126,8 +126,8 @@ export default function CampsPage() {
       <section className="relative min-h-[65vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/programs/juniors.webp"
-            alt="Kids playing tennis at Laguna Beach Tennis Academy summer camp"
+            src="/images/community/community-3.webp"
+            alt="Young boy celebrating on the tennis court at Laguna Beach Tennis Academy camp"
             fill
             className="object-cover"
             style={{ objectPosition: '50% 50%' }}
