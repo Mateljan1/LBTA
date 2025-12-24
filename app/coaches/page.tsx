@@ -151,6 +151,7 @@ export default function CoachesPage() {
             src="/images/programs/schedules-hero.webp"
             alt="Laguna Beach Tennis Academy coaches and players training together"
             fill
+            priority
             className="object-cover"
             quality={90}
             style={{ 

@@ -210,6 +210,7 @@ export default function SchedulesPage() {
             src="/images/programs/schedules-hero.webp"
             alt="Laguna Beach Tennis Academy training at sunset"
             fill
+            priority
             className="object-cover"
             quality={90}
             style={{ 

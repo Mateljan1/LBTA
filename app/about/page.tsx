@@ -34,6 +34,7 @@ export default function AboutPage() {
             src="/images/hero/laguna-horizon.webp"
             alt="Laguna Beach tennis courts with ocean horizon"
             fill
+            priority
             className="object-cover"
             quality={90}
             style={{ 

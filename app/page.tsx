@@ -271,6 +271,7 @@ export default function Home() {
                   src="/images/founder/andrew-portrait.webp"
                   alt="Andrew Mateljan, Founder & Head Coach"
                   fill
+                  priority
                   className="object-cover"
                   style={{ objectPosition: '50% 30%' }}
                   sizes="(max-width: 1024px) 100vw, 50vw"
