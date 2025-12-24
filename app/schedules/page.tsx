@@ -558,7 +558,7 @@ export default function SchedulesPage() {
                           ${program.winterPrices['2x']}
                         </td>
                         <td className="text-center px-4 py-4 font-sans text-[16px] text-black">
-                          {program.winterPrices['3x'] ? `$${program.winterPrices['3x']}` : '—'}
+                          {'3x' in program.winterPrices ? `$${(program.winterPrices as any)['3x']}` : '—'}
                         </td>
                         <td className="text-center px-4 py-4 font-sans text-[14px] text-black/60">
                           ${program.dropIn}
