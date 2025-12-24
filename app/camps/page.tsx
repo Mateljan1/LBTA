@@ -6,7 +6,7 @@ import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
 
-// Camp data from year2026.json
+// Camp data for 2026
 const camps = [
   {
     id: "swim-tennis",
@@ -113,42 +113,6 @@ const camps = [
   }
 ]
 
-// JTT data
-const jttPrograms = [
-  {
-    id: "spring-jtt",
-    name: "Spring JTT",
-    dates: "January 12 – April 26",
-    weeks: 15,
-    matchDay: "Sundays",
-    practiceIncluded: true,
-    divisions: [
-      { age: "10U", price: 2350 },
-      { age: "12U", price: 2800 },
-      { age: "14U", price: 2800 },
-      { age: "18U", price: 2800 }
-    ],
-    includes: ["Weekly practice (2x)", "Sunday matches", "Team uniform", "USTA registration"],
-    description: "USTA Junior Team Tennis league play. Compete against other academies in Southern California."
-  },
-  {
-    id: "fall-jtt",
-    name: "Fall JTT",
-    dates: "September 5 – November 22",
-    weeks: 12,
-    matchDay: "Sundays",
-    practiceIncluded: true,
-    divisions: [
-      { age: "10U", price: 2350 },
-      { age: "12U", price: 2800 },
-      { age: "14U", price: 2800 },
-      { age: "18U", price: 2800 }
-    ],
-    includes: ["Weekly practice (2x)", "Sunday matches", "Team uniform", "USTA registration"],
-    description: "Fall league competition season. Build teamwork and competitive experience."
-  }
-]
-
 export default function CampsPage() {
   const [selectedSeason, setSelectedSeason] = useState<string>('all')
   
@@ -176,17 +140,17 @@ export default function CampsPage() {
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-24">
           <AnimatedSection delay={0}>
             <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/80 mb-4">
-              Year-Round Programming
+              Holiday & Summer Programs
             </p>
           </AnimatedSection>
           <AnimatedSection delay={100}>
             <h1 className="font-serif text-[40px] md:text-[64px] font-bold leading-[1.05] mb-6 text-shadow">
-              Camps & Junior Team Tennis
+              Tennis Camps
             </h1>
           </AnimatedSection>
           <AnimatedSection delay={200}>
             <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-10 max-w-[85%] mx-auto">
-              From holiday break camps to competitive USTA league play — development opportunities all year long.
+              From holiday break camps to full summer programs — high-energy development with our movement-first philosophy.
             </p>
           </AnimatedSection>
           <AnimatedSection delay={300}>
@@ -198,10 +162,10 @@ export default function CampsPage() {
                 View Camps
               </Link>
               <Link 
-                href="#jtt"
+                href="/jtt"
                 className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
-                Junior Team Tennis
+                Junior Team Tennis →
               </Link>
             </div>
           </AnimatedSection>
@@ -273,17 +237,17 @@ export default function CampsPage() {
                       {camp.description}
                     </p>
                     
-                    <div className="space-y-2 mb-4 font-sans text-[13px] text-black/80">
-                      <div className="flex items-center gap-2">
-                        <span className="text-lbta-orange">📅</span>
+                    <div className="space-y-2 mb-4 font-sans text-[13px] text-black/70">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-lbta-orange font-semibold text-[11px] uppercase tracking-wide w-16">Dates</span>
                         <span>{camp.dates}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-lbta-orange">⏰</span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-lbta-orange font-semibold text-[11px] uppercase tracking-wide w-16">Time</span>
                         <span>{camp.hours}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-lbta-orange">📍</span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-lbta-orange font-semibold text-[11px] uppercase tracking-wide w-16">Location</span>
                         <span>{camp.location}</span>
                       </div>
                     </div>
@@ -327,135 +291,103 @@ export default function CampsPage() {
         </div>
       </section>
 
-      {/* WHAT'S INCLUDED */}
-      <section className="bg-[#FAF8F3] py-16 md:py-24">
+      {/* OUR FOUNDATION */}
+      <section className="bg-[#FAF8F3] py-20 md:py-32">
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
-            <div className="text-center mb-12">
-              <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-4">
-                What Makes LBTA Camps Different
+            <div className="text-center mb-16">
+              <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+                Our Foundation
+              </p>
+              <h2 className="font-serif text-[36px] md:text-[52px] font-semibold text-black mb-6">
+                What Makes LBTA Different
               </h2>
-              <p className="font-sans text-[16px] text-black/70 max-w-2xl mx-auto">
-                Every camp follows our movement-first philosophy with professional coaching and structured development.
+              <p className="font-sans text-[16px] md:text-[18px] text-black/70 max-w-2xl mx-auto leading-relaxed">
+                Everything we teach is built on three core principles that develop complete tennis players.
               </p>
             </div>
           </AnimatedSection>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Movement',
-                description: 'Footwork, agility, and dynamic movement patterns that transfer to match play.',
-                icon: '🏃'
-              },
-              {
-                title: 'Discipline',
-                description: 'Structured sessions with clear goals, feedback, and measurable improvement.',
-                icon: '🎯'
-              },
-              {
-                title: 'Belonging',
-                description: 'Team activities, new friendships, and a supportive community atmosphere.',
-                icon: '🤝'
-              },
-            ].map((pillar, index) => (
-              <AnimatedSection key={pillar.title} delay={100 + index * 100}>
-                <div className="bg-white p-8 rounded-lg text-center">
-                  <div className="text-4xl mb-4">{pillar.icon}</div>
-                  <h3 className="font-serif text-[24px] font-semibold text-black mb-3">
-                    {pillar.title}
-                  </h3>
-                  <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                    {pillar.description}
-                  </p>
+          <div className="grid md:grid-cols-3 gap-10 md:gap-12">
+            <AnimatedSection delay={100}>
+              <div className="text-center">
+                <div className="mb-6">
+                  <span className="font-serif text-[72px] md:text-[96px] font-light text-lbta-orange/20 leading-none">
+                    01
+                  </span>
                 </div>
-              </AnimatedSection>
-            ))}
+                <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+                  Movement
+                </h3>
+                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
+                  Athletic footwork and court coverage form the foundation of every great player. We train efficient movement patterns that become instinctive.
+                </p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection delay={200}>
+              <div className="text-center">
+                <div className="mb-6">
+                  <span className="font-serif text-[72px] md:text-[96px] font-light text-lbta-orange/20 leading-none">
+                    02
+                  </span>
+                </div>
+                <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+                  Discipline
+                </h3>
+                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
+                  Focus, consistency, and mental toughness separate good players from great ones. We build habits that transfer to school and life.
+                </p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection delay={300}>
+              <div className="text-center">
+                <div className="mb-6">
+                  <span className="font-serif text-[72px] md:text-[96px] font-light text-lbta-orange/20 leading-none">
+                    03
+                  </span>
+                </div>
+                <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+                  Belonging
+                </h3>
+                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
+                  Being part of a team creates motivation, accountability, and friendships. Players push each other to improve while having fun together.
+                </p>
+              </div>
+            </AnimatedSection>
           </div>
+          
+          <AnimatedSection delay={400}>
+            <p className="font-serif text-[20px] md:text-[24px] text-black/80 text-center mt-16 italic">
+              Movement. Discipline. Belonging.
+            </p>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* JTT SECTION */}
-      <section id="jtt" className="bg-white py-20 md:py-32">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-12">
+      {/* JTT PROMO */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="max-w-[1000px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
-            <div className="text-center mb-12">
+            <div className="bg-black text-white p-8 md:p-12 rounded-lg text-center">
               <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
                 USTA League Play
               </p>
-              <h2 className="font-serif text-[36px] md:text-[52px] font-semibold text-black mb-4">
+              <h2 className="font-serif text-[32px] md:text-[44px] font-semibold mb-4">
                 Junior Team Tennis
               </h2>
-              <p className="font-sans text-[16px] md:text-[18px] text-black/70 max-w-2xl mx-auto">
-                Competitive team-based tennis for juniors. Weekly practices and Sunday matches against academies across Southern California.
+              <p className="font-sans text-[16px] md:text-[18px] text-white/80 max-w-2xl mx-auto mb-8">
+                Competitive team-based tennis for juniors. 15 weeks of structured training with weekend matches against academies across Southern California.
               </p>
+              <Link 
+                href="/jtt"
+                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+              >
+                Learn More About JTT →
+              </Link>
             </div>
           </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {jttPrograms.map((program, index) => (
-              <AnimatedSection key={program.id} delay={100 + index * 100}>
-                <div className="bg-[#FAF8F3] rounded-lg p-8">
-                  <div className="flex items-start justify-between mb-6">
-                    <div>
-                      <h3 className="font-serif text-[28px] font-semibold text-black mb-1">
-                        {program.name}
-                      </h3>
-                      <p className="font-sans text-[14px] text-black/60">
-                        {program.weeks} weeks · Matches on {program.matchDay}
-                      </p>
-                    </div>
-                    <span className="bg-lbta-orange/10 text-lbta-orange px-3 py-1 rounded-full font-sans text-[12px] font-semibold uppercase tracking-wide">
-                      USTA
-                    </span>
-                  </div>
-                  
-                  <p className="font-sans text-[15px] text-black/70 mb-6 leading-relaxed">
-                    {program.description}
-                  </p>
-                  
-                  <div className="space-y-2 mb-6 font-sans text-[14px] text-black/80">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lbta-orange">📅</span>
-                      <span>{program.dates}</span>
-                    </div>
-                  </div>
-                  
-                  {/* What's Included */}
-                  <div className="mb-6">
-                    <p className="font-sans text-[12px] uppercase tracking-wide text-black/50 mb-3">Includes</p>
-                    <div className="flex flex-wrap gap-2">
-                      {program.includes.map((item) => (
-                        <span key={item} className="bg-white px-3 py-1.5 rounded-full font-sans text-[12px] text-black/70">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  {/* Divisions & Pricing */}
-                  <div className="border-t border-black/10 pt-6">
-                    <p className="font-sans text-[12px] uppercase tracking-wide text-black/50 mb-4">Divisions & Pricing</p>
-                    <div className="grid grid-cols-2 gap-3">
-                      {program.divisions.map((division) => (
-                        <div key={division.age} className="bg-white p-4 rounded-lg text-center">
-                          <p className="font-sans text-[14px] font-semibold text-black mb-1">{division.age}</p>
-                          <p className="font-serif text-[20px] font-semibold text-lbta-orange">${division.price.toLocaleString()}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <Link
-                    href="/book"
-                    className="block w-full text-center bg-black hover:bg-lbta-orange text-white font-sans font-semibold text-[13px] py-4 rounded transition-all duration-300 uppercase tracking-[1px] mt-6"
-                  >
-                    Register for {program.name}
-                  </Link>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
         </div>
       </section>
 

@@ -8,10 +8,10 @@ import { Menu, X, Phone } from 'lucide-react'
 const navigation = [
   { name: 'Programs', href: '/programs' },
   { name: 'Camps', href: '/camps' },
+  { name: 'JTT', href: '/jtt' },
   { name: 'Fitness', href: '/fitness' },
   { name: 'Schedules', href: '/schedules' },
   { name: 'Coaches', href: '/coaches' },
-  { name: 'Racquet Rescue', href: '/racquet-rescue' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ]
