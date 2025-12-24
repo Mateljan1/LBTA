@@ -4,6 +4,7 @@ import Script from 'next/script'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import { OrganizationSchema } from './schema'
+import ExitIntentPopup from '@/components/ExitIntentPopup'
 
 // LBTA Typography System - Playfair Display + Work Sans
 const playfair = Playfair_Display({
@@ -122,6 +123,9 @@ export default function RootLayout({
         <ConditionalLayout>
           {children}
         </ConditionalLayout>
+        
+        {/* Exit Intent Popup for Lead Capture */}
+        <ExitIntentPopup />
       </body>
     </html>
   )

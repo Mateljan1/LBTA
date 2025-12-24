@@ -5,6 +5,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
 import StickyCTA from '@/components/StickyCTA'
+import TrustBadges from '@/components/TrustBadges'
+import FAQSection from '@/components/FAQSection'
+import AnimatedSection from '@/components/AnimatedSection'
 
 // LocalBusiness Schema for SEO
 const localBusinessSchema = {
@@ -175,6 +178,14 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/25 to-transparent" aria-hidden="true"></div>
         
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto w-[90%] flex flex-col justify-center min-h-[65vh] md:min-h-0">
+          {/* Eyebrow */}
+          <p 
+            className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/80 mb-4 md:mb-6"
+            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
+          >
+            Laguna Beach, California
+          </p>
+          
           <h1 
             className="font-serif text-[36px] md:text-[72px] font-bold leading-[1.1] tracking-[-0.5px] mb-4 md:mb-6"
             style={{ textShadow: '0 2px 20px rgba(0,0,0,0.45)' }}
@@ -187,22 +198,50 @@ export default function Home() {
           >
             Movement. Discipline. Belonging.
           </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-6">
+          
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-4">
             <Link
               href="/book"
-              className="bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] inline-block"
+              className="group bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] md:text-[15px] py-4 px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl min-h-[48px] inline-flex items-center gap-2 hover:-translate-y-0.5"
             >
-              Book a Trial →
+              Book Your Free Trial
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
+            <Link
+              href="/programs"
+              className="text-white/90 hover:text-white font-sans text-[14px] md:text-[15px] py-3 px-6 rounded-full transition-all duration-300 border border-white/30 hover:border-white/60 hover:bg-white/10"
+            >
+              View Programs
             </Link>
           </div>
+          
+          {/* Social proof under CTA */}
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="flex -space-x-2">
+              {[1, 2, 3, 4].map((i) => (
+                <div 
+                  key={i} 
+                  className="w-8 h-8 rounded-full bg-gradient-to-br from-white/30 to-white/10 border-2 border-white/50 backdrop-blur-sm"
+                />
+              ))}
+            </div>
+            <p className="font-sans text-[13px] text-white/80">
+              <span className="font-semibold text-white">500+</span> players trained this year
+            </p>
+          </div>
+          
           <p 
-            className="text-lbta-orange font-sans text-[14px] md:text-[16px] uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
+            className="text-lbta-orange font-sans text-[13px] md:text-[14px] uppercase tracking-[2px] cursor-pointer hover:opacity-80 transition-opacity animate-bounce"
             onClick={() => document.getElementById('founder')?.scrollIntoView({ behavior: 'smooth' })}
+            style={{ animationDuration: '2s' }}
           >
             Explore ↓
           </p>
         </div>
       </section>
+
+      {/* TRUST BADGES - Social Proof */}
+      <TrustBadges />
 
       {/* SCENE 2: FOUNDER - "The Vision" */}
       <section 
@@ -550,6 +589,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FAQ SECTION */}
+      <FAQSection />
 
       {/* SCENE 8: CTA - "The Invitation" */}
       <section 

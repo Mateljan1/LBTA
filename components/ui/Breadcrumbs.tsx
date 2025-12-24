@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, Home } from 'lucide-react'
+import Script from 'next/script'
 
 interface BreadcrumbItem {
   label: string
@@ -11,41 +12,70 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
+  // Generate BreadcrumbList schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://lagunabeachtennisacademy.com"
+      },
+      ...items.map((item, index) => ({
+        "@type": "ListItem",
+        "position": index + 2,
+        "name": item.label,
+        "item": item.href ? `https://lagunabeachtennisacademy.com${item.href}` : undefined
+      }))
+    ]
+  }
+
   return (
-    <nav aria-label="Breadcrumb" className="container-lbta py-6">
-      <ol className="flex items-center space-x-2 text-sm font-sans">
-        <li>
-          <Link 
-            href="/" 
-            className="text-gray-500 hover:text-lbta-charcoal transition-colors"
-          >
-            Home
-          </Link>
-        </li>
-        
-        {items.map((item, index) => {
-          const isLast = index === items.length - 1
+    <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      
+      <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-6 py-4 md:py-6">
+        <ol className="flex items-center flex-wrap gap-1 text-[13px] font-sans">
+          <li className="flex items-center">
+            <Link 
+              href="/" 
+              className="flex items-center gap-1.5 text-black/50 hover:text-lbta-orange transition-colors"
+            >
+              <Home className="w-3.5 h-3.5" />
+              <span className="sr-only md:not-sr-only">Home</span>
+            </Link>
+          </li>
           
-          return (
-            <li key={item.label} className="flex items-center space-x-2">
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-              {item.href && !isLast ? (
-                <Link 
-                  href={item.href}
-                  className="text-gray-500 hover:text-lbta-charcoal transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <span className="text-lbta-charcoal font-medium">
-                  {item.label}
-                </span>
-              )}
-            </li>
-          )
-        })}
-      </ol>
-    </nav>
+          {items.map((item, index) => {
+            const isLast = index === items.length - 1
+            
+            return (
+              <li key={item.label} className="flex items-center gap-1">
+                <ChevronRight className="w-3.5 h-3.5 text-black/30" />
+                {item.href && !isLast ? (
+                  <Link 
+                    href={item.href}
+                    className="text-black/50 hover:text-lbta-orange transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <span className="text-black/80 font-medium">
+                    {item.label}
+                  </span>
+                )}
+              </li>
+            )
+          })}
+        </ol>
+      </nav>
+    </>
   )
 }
 

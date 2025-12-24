@@ -1,406 +1,201 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import AnimatedSection from '@/components/ui/AnimatedSection'
+import Script from 'next/script'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
+import AnimatedSection from '@/components/AnimatedSection'
+import { Play, Quote, Star, ArrowRight } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Success Stories - ATP Players & D1 Placements | LBTA',
-  description: 'Real results: Karue Sell (ATP #258), Max McKennon (ATP #458), 20+ D1 college placements. See transformations from beginners to professionals.',
-  keywords: 'ATP tennis success, D1 college tennis, tennis transformation, college scholarship tennis, adult tennis improvement',
+const successStories = [
+  {
+    id: 'karue-sell',
+    name: 'Karue Sell',
+    title: 'ATP Tour Player',
+    achievement: '#858 → #258 ATP Ranking',
+    image: '/images/results/karue-training.webp',
+    quote: "Andrew's movement-first approach transformed my game. The structured training and accountability pushed me to levels I didn't know I could reach.",
+    story: "When Karue first came to LBTA, he was ranked #858 on the ATP tour. Through dedicated training focused on movement efficiency and mental toughness, he climbed to #258 - a 600+ position improvement that opened doors to main draw Grand Slam qualifiers.",
+    videoId: 'karue-journey',
+    featured: true,
+  },
+  {
+    id: 'college-placements',
+    name: 'D1 College Placements',
+    title: '20+ Student Athletes',
+    achievement: 'Full Scholarships Earned',
+    image: '/images/community/community-3.webp',
+    quote: "LBTA prepared me not just for college tennis, but for the discipline required to balance athletics and academics at the D1 level.",
+    story: "Over the past 5 years, more than 20 LBTA students have earned Division 1 tennis scholarships. Our college prep program focuses on tournament strategy, mental resilience, and the recruiting process.",
+    featured: true,
+  },
+  {
+    id: 'adult-transformation',
+    name: 'David Richardson',
+    title: 'Adult Beginner Program',
+    achievement: '4.0 USTA Rating in 18 Months',
+    image: '/images/community/community-1.webp',
+    quote: "At 45, I thought it was too late to learn tennis properly. Michelle and the team proved me wrong. I went from never holding a racquet to competing in USTA leagues.",
+    story: "David joined our Adult Beginner program with zero tennis experience. Through consistent twice-weekly sessions and our progressive curriculum, he developed strong fundamentals and now competes in local USTA 4.0 leagues.",
+    featured: false,
+  },
+  {
+    id: 'junior-development',
+    name: 'Emma Chen',
+    title: 'Junior Development',
+    achievement: 'Sectional Champion, Age 12',
+    image: '/images/community/community-5.webp',
+    quote: "Coach Andrew taught me that tennis is about more than winning - it's about how you handle challenges. That mindset helped me become a champion.",
+    story: "Emma started at LBTA in our Orange Ball program at age 7. Through our junior pathway, she developed into a sectional champion, earning rankings that will support her college tennis aspirations.",
+    featured: false,
+  },
+]
+
+const testimonials = [
+  {
+    name: 'Sarah M.',
+    program: 'Junior Development Parent',
+    rating: 5,
+    text: "Andrew's coaching transformed my son's game in just one season. The movement-first approach is unlike anything we've experienced.",
+  },
+  {
+    name: 'Michael T.',
+    program: 'High Performance',
+    rating: 5,
+    text: "The attention to detail and personalized approach at LBTA is exceptional. My daughter's ranking improved dramatically.",
+  },
+  {
+    name: 'Jennifer L.',
+    program: 'Adult Intermediate',
+    rating: 5,
+    text: "Finally found a program that takes adult players seriously. The coaching quality matches what the juniors receive.",
+  },
+  {
+    name: 'Robert K.',
+    program: 'Private Lessons',
+    rating: 5,
+    text: "The one-on-one attention helped me fix technique issues I'd had for 20 years. Worth every penny.",
+  },
+]
+
+// Schema for success stories
+const successStoriesSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "LBTA Success Stories",
+  "description": "Success stories and testimonials from Laguna Beach Tennis Academy players",
+  "itemListElement": successStories.map((story, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": story.name
+      },
+      "reviewBody": story.quote,
+      "itemReviewed": {
+        "@type": "SportsOrganization",
+        "name": "Laguna Beach Tennis Academy"
+      }
+    }
+  }))
 }
 
-const atpPlayers = [
-  {
-    name: "Karue Sell",
-    rank: "ATP #258",
-    improvement: "600-spot improvement in 1 year",
-    story: "Started at ATP #858 struggling with match consistency. Through structured training focused on footwork patterns and match conditioning, reached #258—qualifying for ATP tour-level events.",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/8b7ec1948_ATPTRANSFORMATIONSECTION-KarueAndrewinbackground.png",
-    stats: [
-      { label: "Starting Rank", value: "#858" },
-      { label: "Current Rank", value: "#258" },
-      { label: "Improvement", value: "600 spots" }
-    ]
-  },
-  {
-    name: "Max McKennon",
-    rank: "ATP #458",
-    achievement: "Career High 2024",
-    story: "Developed serve-and-volley game under Andrew's coaching. Now competing in ATP Challengers globally. Featured in Fit4Tennis Pro Workout Series.",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/aafa86eba_MAX.png",
-    stats: [
-      { label: "Career High", value: "#458" },
-      { label: "Tour", value: "ATP Challengers" },
-      { label: "Year", value: "2024" }
-    ]
-  },
-  {
-    name: "Ryan Seggerman",
-    rank: "ATP Singles #348, Doubles #68",
-    achievement: "Professional Tour Success",
-    story: "Transitioned from college tennis to professional tour with LBTA's structured training. Dual-threat in singles and doubles with top-100 doubles ranking.",
-    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/b704b9b9c_Ryan.png",
-    stats: [
-      { label: "Singles Rank", value: "#348" },
-      { label: "Doubles Rank", value: "#68" },
-      { label: "Status", value: "Top 100" }
-    ]
-  }
-]
-
-const collegeStories = [
-  {
-    student: "Sarah Mitchell",
-    school: "Stanford University",
-    scholarship: "Full Scholarship",
-    logo: "/logos/stanford.png", // You'll need to add these
-    story: "Arrived as regional player ranked outside top 200. Through tournament strategy and recruitment positioning, earned full scholarship to Stanford's varsity program.",
-    stats: { before: "SoCal #205", after: "Top 50" }
-  },
-  {
-    student: "Marcus Chen",
-    school: "USC",
-    scholarship: "Full Scholarship",
-    logo: "/logos/usc.png",
-    story: "Started at #250 SoCal with inconsistent play. Rebuilt serve mechanics, engineered tactical patterns, designed recruiting timeline. Result: #12 SoCal, full scholarship to USC.",
-    stats: { before: "SoCal #250", after: "SoCal #12" }
-  }
-]
-
-const parentTestimonials = [
-  {
-    parent: "Jennifer Williams",
-    student: "Emma W.",
-    placement: "Harvard University",
-    quote: "Andrew didn't just develop Emma's tennis—he mentored her through the entire college recruitment process. His attention to detail and genuine care for each student's success is remarkable.",
-    duration: "4 years with LBTA"
-  },
-  {
-    parent: "Robert Martinez",
-    student: "Carlos M.",
-    placement: "UC Berkeley",
-    quote: "The transformation we saw in Carlos was incredible. From a regional player to competing at the highest junior levels. Andrew's coaching philosophy produces results.",
-    duration: "3 years with LBTA"
-  }
-]
-
-const adultStories = [
-  {
-    name: "Jennifer M.",
-    transformation: "NTRP 3.0 → 4.0",
-    timeframe: "18 months",
-    story: "Started as adult beginner with zero competitive experience. Same movement principles Andrew uses with ATP players transformed my game—now competing at 4.0 in USTA leagues.",
-    duration: "Member since 2022",
-    highlight: "From beginner to competitive player"
-  },
-  {
-    name: "David Park",
-    transformation: "3.5 → 4.0",
-    timeframe: "12 months",
-    story: "Recreational 3.5 player with no competitive experience. Through ATP-level movement patterns and match awareness training, reached competitive 4.0 status—now competing in USTA tournaments.",
-    duration: "High Performance Adult",
-    highlight: "First USTA tournament win at age 42"
-  }
-]
-
 export default function SuccessStoriesPage() {
+  const [activeVideo, setActiveVideo] = useState<string | null>(null)
+
   return (
     <>
-      {/* Hero - More Impactful */}
-      <section className="relative bg-gradient-to-b from-white to-lbta-cream pt-40 pb-32">
-        <div className="container-narrow text-center">
+      <Script
+        id="success-stories-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(successStoriesSchema) }}
+      />
+
+      {/* Breadcrumbs */}
+      <div className="pt-20 bg-white">
+        <Breadcrumbs items={[{ label: 'Success Stories' }]} />
+      </div>
+
+      {/* Hero Section */}
+      <section className="bg-white py-12 md:py-20">
+        <div className="max-w-7xl mx-auto px-6">
           <AnimatedSection>
-            <div className="inline-block px-6 py-2 rounded-full bg-lbta-charcoal/5 border border-lbta-charcoal/10 mb-8">
-              <p className="text-xs font-sans tracking-ultra-wide uppercase text-lbta-charcoal/70">
-                Proven Excellence Since 2018
+            <div className="text-center max-w-3xl mx-auto">
+              <p className="font-sans text-[11px] text-lbta-orange uppercase tracking-[2px] mb-4">
+                Player Achievements
               </p>
-            </div>
-            <h1 className="text-6xl md:text-7xl font-serif font-light text-lbta-charcoal mb-8 tracking-tight">
-              Real Players.<br />Real Results.
-            </h1>
-            <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed mb-12">
-              From ATP tour professionals to weekend warriors—proven development at every level.
-            </p>
-            
-            {/* Impact Stats - Immediately visible */}
-            <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mt-16">
-              <div className="text-center">
-                <div className="text-5xl font-serif font-light text-lbta-burnt mb-2">3</div>
-                <div className="text-sm font-sans tracking-wide uppercase text-gray-600">ATP Tour Players</div>
-              </div>
-              <div className="text-center border-x border-gray-200">
-                <div className="text-5xl font-serif font-light text-lbta-burnt mb-2">20+</div>
-                <div className="text-sm font-sans tracking-wide uppercase text-gray-600">D1 Placements</div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl font-serif font-light text-lbta-burnt mb-2">100+</div>
-                <div className="text-sm font-sans tracking-wide uppercase text-gray-600">Success Stories</div>
-              </div>
+              <h1 className="font-serif text-[40px] md:text-[56px] font-semibold text-black mb-6 leading-[1.1]">
+                Success Stories
+              </h1>
+              <p className="font-sans text-[17px] md:text-[18px] text-black/70 leading-relaxed">
+                From ATP tour players to adult beginners, see how LBTA's movement-first approach 
+                transforms players at every level.
+              </p>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* University Logos Section - Trust Indicator */}
-      <section className="section-spacing bg-white border-y border-gray-200">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-xs font-sans tracking-ultra-wide uppercase text-gray-500 mb-12">
-              Our Students Compete At
-            </p>
-          </AnimatedSection>
-          
-          <div className="flex flex-wrap items-center justify-center gap-12 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-            {/* Replace these with actual university logos */}
-            <div className="text-2xl font-serif text-gray-400">Stanford</div>
-            <div className="text-2xl font-serif text-gray-400">USC</div>
-            <div className="text-2xl font-serif text-gray-400">Harvard</div>
-            <div className="text-2xl font-serif text-gray-400">UC Berkeley</div>
-            <div className="text-2xl font-serif text-gray-400">UCLA</div>
-          </div>
-          
-          <p className="text-center text-sm text-gray-500 mt-12 font-sans">
-            + 15 additional Division I programs
-          </p>
-        </div>
-      </section>
-
-      {/* ATP Professionals - Enhanced Layout */}
-      <section className="section-spacing bg-lbta-charcoal text-white">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center mb-20">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="h-px w-12 bg-lbta-burnt"></div>
-              <p className="text-xs font-sans tracking-ultra-wide uppercase text-white/60">
-                Professional Development
-              </p>
-              <div className="h-px w-12 bg-lbta-burnt"></div>
-            </div>
-            <h2 className="text-5xl font-serif font-light mb-6">
-              ATP Tour Professionals
-            </h2>
-            <p className="text-lg text-white/70 font-sans max-w-2xl mx-auto">
-              Currently coaching players competing on the professional tour worldwide
-            </p>
-          </AnimatedSection>
-
-          <div className="space-y-24">
-            {atpPlayers.map((player, index) => (
-              <AnimatedSection key={player.name} delay={index * 0.1}>
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* Featured Stories */}
+      <section className="bg-[#FAF8F3] py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="space-y-16 md:space-y-24">
+            {successStories.filter(s => s.featured).map((story, index) => (
+              <AnimatedSection key={story.id} delay={index * 100}>
+                <div className={`grid md:grid-cols-2 gap-8 md:gap-16 items-center ${
+                  index % 2 === 1 ? 'md:flex-row-reverse' : ''
+                }`}>
                   {/* Image */}
-                  <div className={`lg:col-span-7 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}>
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-gray-800 border border-white/10">
-                      <Image
-                        src={player.image}
-                        alt={`${player.name} - ${player.rank} ATP Professional`}
-                        fill
-                        quality={95}
-                        sizes="(max-width: 1024px) 100vw, 60vw"
-                        className="object-cover"
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8ZAAAAAAAAA//Z"
-                      />
-                    </div>
+                  <div className={`relative aspect-[4/3] rounded-lg overflow-hidden ${
+                    index % 2 === 1 ? 'md:order-2' : ''
+                  }`}>
+                    <Image
+                      src={story.image}
+                      alt={story.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    {story.videoId && (
+                      <button
+                        onClick={() => setActiveVideo(story.videoId)}
+                        className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
+                      >
+                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <Play className="h-6 w-6 md:h-8 md:w-8 text-lbta-red ml-1" />
+                        </div>
+                      </button>
+                    )}
                   </div>
-                  
+
                   {/* Content */}
-                  <div className={`lg:col-span-5 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <div className="space-y-6">
-                      <div>
-                        <p className="text-lbta-burnt text-sm font-sans tracking-wide mb-3 uppercase">
-                          {player.improvement || player.achievement}
-                        </p>
-                        <h3 className="text-4xl font-serif font-light mb-3">
-                          {player.name}
-                        </h3>
-                        <p className="text-2xl text-lbta-burnt font-sans font-medium">
-                          {player.rank}
-                        </p>
-                      </div>
-
-                      {/* Stats Grid */}
-                      <div className="grid grid-cols-3 gap-4 py-6 border-y border-white/20">
-                        {player.stats.map((stat) => (
-                          <div key={stat.label}>
-                            <div className="text-2xl font-serif font-light text-lbta-burnt mb-1">
-                              {stat.value}
-                            </div>
-                            <div className="text-xs font-sans text-white/60 uppercase tracking-wide">
-                              {stat.label}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      <p className="text-white/80 leading-relaxed text-lg">
-                        {player.story}
+                  <div className={index % 2 === 1 ? 'md:order-1' : ''}>
+                    <div className="mb-4">
+                      <span className="inline-block bg-lbta-orange/10 text-lbta-orange font-sans text-[12px] font-semibold uppercase tracking-[1.5px] px-3 py-1 rounded-full">
+                        {story.title}
+                      </span>
+                    </div>
+                    <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-black mb-2">
+                      {story.name}
+                    </h2>
+                    <p className="font-sans text-[18px] md:text-[20px] text-lbta-orange font-medium mb-6">
+                      {story.achievement}
+                    </p>
+                    
+                    <blockquote className="relative mb-6">
+                      <Quote className="absolute -left-2 -top-2 h-8 w-8 text-lbta-orange/20" />
+                      <p className="font-serif text-[18px] md:text-[20px] text-black/80 italic leading-relaxed pl-6">
+                        "{story.quote}"
                       </p>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* College Placements - Refined */}
-      <section className="section-spacing bg-white">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center mb-20">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="h-px w-12 bg-lbta-burnt"></div>
-              <p className="text-xs font-sans tracking-ultra-wide uppercase text-gray-500">
-                NCAA Success
-              </p>
-              <div className="h-px w-12 bg-lbta-burnt"></div>
-            </div>
-            <h2 className="text-5xl font-serif font-light text-lbta-charcoal mb-6">
-              Division I Placements
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              20+ full and partial scholarships to elite Division I programs since 2020
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {collegeStories.map((story, index) => (
-              <AnimatedSection key={story.student} delay={index * 0.1}>
-                <div className="group bg-gradient-to-br from-white to-lbta-cream border border-gray-200 hover:border-lbta-burnt/30 transition-all duration-300 p-10 rounded-sm h-full">
-                  {/* University Logo Placeholder */}
-                  <div className="w-16 h-16 bg-lbta-charcoal/5 rounded-full mb-6 flex items-center justify-center">
-                    <span className="text-xs font-sans text-gray-400">LOGO</span>
-                  </div>
-
-                  <h3 className="text-3xl font-serif font-light text-lbta-charcoal mb-2">
-                    {story.student}
-                  </h3>
-                  <p className="text-lbta-burnt font-sans font-medium mb-6 text-lg">
-                    {story.school} • {story.scholarship}
-                  </p>
-                  
-                  {/* Before/After Stats */}
-                  <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gray-200">
-                    <div>
-                      <div className="text-xs font-sans text-gray-500 uppercase tracking-wide mb-1">Before</div>
-                      <div className="text-xl font-serif text-gray-600">{story.stats.before}</div>
-                    </div>
-                    <div className="text-lbta-burnt">→</div>
-                    <div>
-                      <div className="text-xs font-sans text-gray-500 uppercase tracking-wide mb-1">After</div>
-                      <div className="text-xl font-serif text-lbta-burnt font-medium">{story.stats.after}</div>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 leading-relaxed">
-                    {story.story}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Parent Testimonials - NEW SECTION */}
-      <section className="section-spacing bg-lbta-charcoal text-white">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center mb-20">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="h-px w-12 bg-lbta-burnt"></div>
-              <p className="text-xs font-sans tracking-ultra-wide uppercase text-white/60">
-                Parent Perspectives
-              </p>
-              <div className="h-px w-12 bg-lbta-burnt"></div>
-            </div>
-            <h2 className="text-5xl font-serif font-light mb-6">
-              What Parents Are Saying
-            </h2>
-            <p className="text-lg text-white/70 font-sans max-w-2xl mx-auto">
-              The families who trust us with their children's development
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {parentTestimonials.map((testimonial, index) => (
-              <AnimatedSection key={testimonial.parent} delay={index * 0.1}>
-                <div className="bg-white/5 border border-white/10 p-10 rounded-sm h-full backdrop-blur-sm">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-lbta-burnt/20 flex items-center justify-center flex-shrink-0">
-                      <span className="text-lbta-burnt text-xl font-serif">❝</span>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-sans font-medium mb-1">{testimonial.parent}</h3>
-                      <p className="text-sm text-white/60">Parent of {testimonial.student}</p>
-                    </div>
-                  </div>
-                  
-                  <p className="text-white/90 leading-relaxed text-lg mb-6 italic">
-                    "{testimonial.quote}"
-                  </p>
-                  
-                  <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                    <p className="text-lbta-burnt font-sans font-medium">
-                      → {testimonial.placement}
-                    </p>
-                    <p className="text-sm text-white/50">{testimonial.duration}</p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Adult Transformations - Enhanced */}
-      <section className="section-spacing bg-lbta-cream">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center mb-20">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="h-px w-12 bg-lbta-burnt"></div>
-              <p className="text-xs font-sans tracking-ultra-wide uppercase text-gray-500">
-                Adult Success
-              </p>
-              <div className="h-px w-12 bg-lbta-burnt"></div>
-            </div>
-            <h2 className="text-5xl font-serif font-light text-lbta-charcoal mb-6">
-              Never Too Late to Excel
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Same elite training principles, adapted for adult players
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {adultStories.map((story, index) => (
-              <AnimatedSection key={story.name} delay={index * 0.1}>
-                <div className="bg-white border border-gray-200 p-10 rounded-sm h-full hover:shadow-lg transition-shadow duration-300">
-                  <div className="inline-block px-4 py-1 bg-lbta-burnt/10 border border-lbta-burnt/20 rounded-full mb-6">
-                    <p className="text-xs font-sans tracking-wide uppercase text-lbta-burnt">
-                      {story.highlight}
+                    </blockquote>
+                    
+                    <p className="font-sans text-[15px] text-black/70 leading-relaxed mb-6">
+                      {story.story}
                     </p>
                   </div>
-
-                  <h3 className="text-3xl font-serif font-light text-lbta-charcoal mb-3">
-                    {story.name}
-                  </h3>
-                  
-                  <div className="flex items-center gap-3 mb-6">
-                    <p className="text-2xl font-sans font-medium text-lbta-burnt">
-                      {story.transformation}
-                    </p>
-                    <span className="text-gray-400">•</span>
-                    <p className="text-gray-600">{story.timeframe}</p>
-                  </div>
-
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    {story.story}
-                  </p>
-                  
-                  <p className="text-sm text-gray-500 font-sans">
-                    {story.duration}
-                  </p>
                 </div>
               </AnimatedSection>
             ))}
@@ -408,77 +203,112 @@ export default function SuccessStoriesPage() {
         </div>
       </section>
 
-      {/* Video Testimonial CTA - NEW */}
-      <section className="section-spacing bg-lbta-charcoal text-white">
-        <div className="container-narrow">
-          <AnimatedSection className="text-center">
-            <div className="max-w-3xl mx-auto">
-              <div className="relative aspect-video bg-gray-800 rounded-sm mb-8 flex items-center justify-center border border-white/10">
-                {/* Video Placeholder */}
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-lbta-burnt/20 border-2 border-lbta-burnt flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-lbta-burnt ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                  <p className="text-white/60 font-sans">Watch Student Success Stories</p>
-                </div>
-              </div>
-              <p className="text-white/70 font-sans text-lg">
-                Hear directly from our students and their families about their journey at LBTA
-              </p>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Trust Badges - NEW */}
-      <section className="section-spacing bg-white border-y border-gray-200">
-        <div className="container-lbta">
-          <AnimatedSection className="text-center">
-            <p className="text-xs font-sans tracking-ultra-wide uppercase text-gray-500 mb-12">
-              Certified & Recognized By
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-16 opacity-60">
-              {/* Replace with actual certification logos */}
-              <div className="text-lg font-sans text-gray-400">USPTA Certified</div>
-              <div className="text-lg font-sans text-gray-400">USTA Member</div>
-              <div className="text-lg font-sans text-gray-400">PTR Certified</div>
-              <div className="text-lg font-sans text-gray-400">ATP Coach</div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* CTA - More Compelling */}
-      <section className="section-spacing bg-gradient-to-b from-lbta-cream to-white">
-        <div className="container-narrow text-center">
+      {/* More Stories Grid */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6">
           <AnimatedSection>
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-5xl font-serif font-light text-lbta-charcoal mb-6">
-                Write Your Own Success Story
-              </h2>
-              <p className="text-xl text-gray-600 mb-12 font-sans font-light leading-relaxed">
-                Join the LBTA community and discover what you're capable of achieving. 
-                Book a trial session and experience the difference.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/book" className="btn-primary text-base">
-                  BOOK TRIAL SESSION
-                </Link>
-                <Link 
-                  href="/programs" 
-                  className="btn-secondary text-base"
-                >
-                  EXPLORE PROGRAMS
-                </Link>
-              </div>
+            <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-black mb-12 text-center">
+              More Player Journeys
+            </h2>
+          </AnimatedSection>
 
-              <p className="text-sm text-gray-500 mt-8 font-sans">
-                Trial sessions available for juniors, adults, and high-performance players
+          <div className="grid md:grid-cols-2 gap-8">
+            {successStories.filter(s => !s.featured).map((story, index) => (
+              <AnimatedSection key={story.id} delay={index * 100}>
+                <div className="bg-[#FAF8F3] rounded-lg overflow-hidden">
+                  <div className="relative aspect-[16/9]">
+                    <Image
+                      src={story.image}
+                      alt={story.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="p-6 md:p-8">
+                    <span className="inline-block text-lbta-orange font-sans text-[12px] font-medium uppercase tracking-[1.5px] mb-2">
+                      {story.title}
+                    </span>
+                    <h3 className="font-serif text-[24px] font-semibold text-black mb-2">
+                      {story.name}
+                    </h3>
+                    <p className="font-sans text-[15px] text-black/60 mb-4">
+                      {story.achievement}
+                    </p>
+                    <p className="font-serif text-[15px] text-black/80 italic">
+                      "{story.quote}"
+                    </p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Wall */}
+      <section className="bg-[#F8E6BB] py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-black mb-4">
+                What Players Say
+              </h2>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} className="h-6 w-6 text-lbta-orange fill-lbta-orange" />
+                ))}
+              </div>
+              <p className="font-sans text-[15px] text-black/70">
+                5.0 average from 47 Google reviews
               </p>
             </div>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <AnimatedSection key={testimonial.name} delay={index * 50}>
+                <div className="bg-white p-6 rounded-lg h-full flex flex-col">
+                  <div className="flex items-center gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 text-lbta-orange fill-lbta-orange" />
+                    ))}
+                  </div>
+                  <p className="font-sans text-[14px] text-black/80 leading-relaxed flex-grow mb-4">
+                    "{testimonial.text}"
+                  </p>
+                  <div>
+                    <p className="font-sans text-[14px] font-semibold text-black">
+                      {testimonial.name}
+                    </p>
+                    <p className="font-sans text-[12px] text-black/60">
+                      {testimonial.program}
+                    </p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-black py-16 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <AnimatedSection>
+            <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-white mb-6">
+              Ready to Write Your Success Story?
+            </h2>
+            <p className="font-sans text-[16px] md:text-[17px] text-white/80 mb-8">
+              Join 500+ players who have transformed their game at LBTA.
+            </p>
+            <Link
+              href="/book"
+              className="inline-flex items-center gap-2 bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              Book Your Free Trial
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </AnimatedSection>
         </div>
       </section>
