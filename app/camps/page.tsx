@@ -130,6 +130,8 @@ interface CampModalData {
   includes?: string[]
   safetyNote?: string
   featured?: boolean
+  season?: string
+  coaches?: string[]
 }
 
 export default function CampsPage() {
@@ -158,6 +160,8 @@ export default function CampsPage() {
       includes: camp.includes,
       safetyNote: camp.safetyNote,
       featured: camp.featured,
+      season: camp.season,
+      coaches: camp.coaches,
     }
     setSelectedCamp(modalData)
     setIsModalOpen(true)
