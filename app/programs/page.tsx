@@ -23,6 +23,7 @@ export default function Programs() {
             style={{ objectPosition: '50% 70%' }}
             sizes="100vw"
             priority
+            quality={90}
           />
           <div className="absolute inset-0 bg-black/25" />
         </div>
@@ -59,6 +60,7 @@ export default function Programs() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                quality={90}
               />
               <div className="absolute inset-0 bg-black/10" />
             </div>
@@ -146,6 +148,7 @@ export default function Programs() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                quality={90}
               />
               <div className="absolute inset-0 bg-black/10" />
             </div>
@@ -163,6 +166,7 @@ export default function Programs() {
             className="object-cover"
             style={{ objectPosition: '50% 50%' }}
             sizes="100vw"
+            quality={90}
           />
           <div className="absolute inset-0 bg-black/25" />
         </div>
@@ -255,6 +259,7 @@ export default function Programs() {
                     className="object-cover"
                     style={{ objectPosition: '50% 30%' }}
                     sizes="(max-width: 768px) 100vw, 33vw"
+                    quality={90}
                   />
                   <div className="absolute inset-0 bg-black/10" />
                 </div>
@@ -302,6 +307,7 @@ export default function Programs() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                quality={90}
               />
               <div className="absolute inset-0 bg-black/10" />
             </div>
@@ -395,6 +401,7 @@ export default function Programs() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                quality={90}
               />
               <div className="absolute inset-0 bg-black/25" />
             </div>
@@ -411,6 +418,7 @@ export default function Programs() {
             fill
             className="object-cover"
             sizes="100vw"
+            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25" />
         </div>

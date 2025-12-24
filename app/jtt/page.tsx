@@ -83,6 +83,7 @@ export default function JTTPage() {
             style={{ objectPosition: '50% 40%' }}
             sizes="100vw"
             priority
+            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
         </div>
@@ -563,6 +564,7 @@ export default function JTTPage() {
             fill
             className="object-cover"
             sizes="100vw"
+            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
         </div>

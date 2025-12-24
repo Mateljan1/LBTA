@@ -209,6 +209,7 @@ export default function SchedulesPage() {
             alt="Laguna Beach Tennis Academy training at sunset"
             fill
             className="object-cover"
+            quality={90}
             style={{ 
               objectPosition: '50% 70%',
               transform: `translateY(${heroParallax}px)`
@@ -946,6 +947,7 @@ export default function SchedulesPage() {
             className="object-cover"
             sizes="100vw"
             loading="lazy"
+            quality={90}
           />
           <div className="absolute inset-0 bg-black/30" />
         </div>

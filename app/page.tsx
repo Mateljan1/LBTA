@@ -274,6 +274,7 @@ export default function Home() {
                   className="object-cover"
                   style={{ objectPosition: '50% 30%' }}
                   sizes="(max-width: 1024px) 100vw, 50vw"
+                  quality={90}
                 />
               </div>
             </AnimatedSection>
@@ -341,6 +342,7 @@ export default function Home() {
             className="object-cover"
             style={{ objectPosition: '50% 35%' }}
             sizes="100vw"
+            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
         </div>
@@ -420,6 +422,7 @@ export default function Home() {
                       fill
                       className="object-cover image-zoom"
                       sizes="(max-width: 768px) 100vw, 33vw"
+                      quality={90}
                     />
                   </div>
                   <h3 className="font-serif text-headline-sm mb-3 group-hover:text-lbta-orange transition-colors">
@@ -481,6 +484,7 @@ export default function Home() {
                       fill
                       className="object-cover image-zoom"
                       sizes="(max-width: 768px) 100vw, 33vw"
+                      quality={90}
                     />
                   </div>
                   <h3 className="font-serif text-headline-sm mb-2 group-hover:text-lbta-orange transition-colors duration-300">
@@ -513,6 +517,7 @@ export default function Home() {
             fill
             className="object-cover"
             sizes="100vw"
+            quality={90}
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
@@ -553,6 +558,7 @@ export default function Home() {
                     className="object-cover image-zoom"
                     style={{ objectPosition: '50% 20%' }}
                     sizes="(max-width: 768px) 50vw, 33vw"
+                    quality={90}
                   />
                 </div>
               </AnimatedSection>
@@ -643,6 +649,7 @@ export default function Home() {
             fill
             className="object-cover"
             sizes="100vw"
+            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30" />
         </div>

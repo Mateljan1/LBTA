@@ -133,6 +133,7 @@ export default function CampsPage() {
             style={{ objectPosition: '50% 50%' }}
             sizes="100vw"
             priority
+            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
         </div>
@@ -445,6 +446,7 @@ export default function CampsPage() {
             fill
             className="object-cover"
             sizes="100vw"
+            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/20" />
         </div>

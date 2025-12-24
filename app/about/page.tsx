@@ -35,6 +35,7 @@ export default function AboutPage() {
             alt="Laguna Beach tennis courts with ocean horizon"
             fill
             className="object-cover"
+            quality={90}
             style={{ 
               objectPosition: '50% 60%',
               transform: `translateY(${heroParallax}px)`
@@ -73,6 +74,7 @@ export default function AboutPage() {
                 className="object-cover"
                 style={{ objectPosition: '50% 55%' }}
                 sizes="(max-width: 768px) 100vw, 50vw"
+                quality={90}
               />
               <div className="absolute inset-0 overlay-light" />
             </div>
@@ -138,6 +140,7 @@ export default function AboutPage() {
             fill
             className="object-cover cta-img"
             sizes="100vw"
+            quality={90}
           />
           <div className="absolute inset-0 overlay-strong" />
         </div>
