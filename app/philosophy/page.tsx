@@ -20,7 +20,7 @@ const principles = [
   {
     icon: Zap,
     title: 'Progress Over Perfection',
-    description: 'Growth happens in increments. We celebrate small improvements and consistent effort over flashy results. By focusing on the process rather than outcome alone, we build sustainable development and genuine mastery.',
+    description: 'Growth happens in increments. We celebrate small improvements and consistent effort over flashy results. By focusing on the process rather than outcome alone, we build sustainable development and lasting skill.',
   },
   {
     icon: Users,

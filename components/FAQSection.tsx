@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     question: "What is your coaching philosophy?",
-    answer: "Our movement-first approach focuses on building proper footwork and body mechanics before technical stroke development. This foundation creates more consistent, powerful, and injury-resistant players. We believe that 'Movement builds mastery. Discipline builds confidence.' - combining technical excellence with mental toughness and a supportive community."
+    answer: "Our movement-first approach focuses on building proper footwork and body mechanics before technical stroke development. This foundation creates more consistent, powerful, and injury-resistant players. We believe that structure creates confidence — combining technical excellence with mental toughness and a supportive community."
   },
   {
     question: "Where are your tennis courts located?",

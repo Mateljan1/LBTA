@@ -115,7 +115,7 @@ export default function AboutPage() {
                 </p>
                 <p className="font-sans text-[16px] text-[#444] leading-[1.8]">
                   Today, our players compete globally, earn college scholarships, and carry themselves 
-                  with the composure of true mastery.
+                  with the composure that only real preparation creates.
                 </p>
               </div>
               
@@ -150,8 +150,8 @@ export default function AboutPage() {
             Our Philosophy
           </p>
           <blockquote className="font-serif text-[28px] md:text-[40px] font-medium text-[#1a1a1a] leading-[1.3] tracking-[-0.02em] mb-8">
-            &ldquo;Movement builds mastery. Discipline builds confidence. 
-            Community builds champions.&rdquo;
+            &ldquo;Structure creates confidence. Confidence creates results. 
+            That&apos;s how champions are built.&rdquo;
           </blockquote>
           <p className="font-sans text-[14px] text-[#666]">
             — Andrew Mateljan, Founder

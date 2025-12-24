@@ -300,7 +300,7 @@ export default function BookPage() {
                       What would you like to achieve?
                     </h2>
                     <p className="font-sans text-[15px] text-black/70 leading-relaxed mb-6">
-                      Whether it's confidence, competition results, or technical mastery — tell us your goal.
+                      Whether it's confidence, competition results, or technical development — tell us your goal.
                     </p>
                     <textarea
                       placeholder="Share your tennis goals with us..."

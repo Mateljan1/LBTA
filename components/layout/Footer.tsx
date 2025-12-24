@@ -140,7 +140,7 @@ export default function Footer() {
             </Link>
             
             <p className="text-body-sm text-white/50 mb-6 max-w-sm leading-relaxed">
-              Movement builds mastery. Discipline builds confidence. 
+              Structure creates confidence. Discipline creates results. 
               Training the next generation of players in Laguna Beach since 2018.
             </p>
             

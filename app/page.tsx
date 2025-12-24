@@ -310,7 +310,7 @@ export default function Home() {
               <AnimatedSection delay={500}>
                 <blockquote className="border-l-2 border-lbta-orange pl-6 mb-8">
                   <p className="font-serif text-[1.5rem] italic text-lbta-charcoal leading-relaxed mb-3">
-                    "Movement builds mastery. Discipline builds confidence."
+                    "Structure creates confidence. Confidence creates results."
                   </p>
                   <footer className="text-body-sm text-lbta-slate">
                     — Andrew Mateljan
@@ -399,7 +399,7 @@ export default function Home() {
                 image: '/images/philosophy/movement.webp',
                 title: 'Movement',
                 description: 'The foundation of repeatable success.',
-                detail: 'Technical precision through biomechanics and footwork mastery.'
+                detail: 'Technical precision through biomechanics and footwork fundamentals.'
               },
               {
                 image: '/images/philosophy/discipline.webp',

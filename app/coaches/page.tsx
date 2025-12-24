@@ -134,7 +134,7 @@ export default function CoachesPage() {
       title: "Program Coach",
       specialization: "Junior & Adult Development",
       bio: "Solid fundamentals and progressive skill development define Andy's coaching philosophy. With USPTA certification and an EdD in Educational Leadership, Andy combines technical expertise with deep understanding of how people learn and grow. His patient, systematic approach helps beginners feel comfortable while challenging advanced players.",
-      quote: "Fundamentals create mastery.",
+      quote: "Fundamentals first. Always.",
       credentials: ["USPTA Certified", "EdD Educational Leadership"],
       image: "/images/coaches/andy.webp",
       imagePosition: "50% 30%",
