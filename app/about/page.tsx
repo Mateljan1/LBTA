@@ -6,6 +6,8 @@ import Image from 'next/image'
 import TimelineSection from '@/components/TimelineSection'
 import StickyCTA from '@/components/StickyCTA'
 
+// Note: Metadata is defined in about/layout.tsx for client components
+
 const principles = [
   { title: 'The Work', description: 'Technique takes time. Mental clarity and discipline come first.' },
   { title: 'Your Path', description: 'Every athlete develops uniquely. Training is personalized.' },

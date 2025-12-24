@@ -3,7 +3,102 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import Script from 'next/script'
 import StickyCTA from '@/components/StickyCTA'
+
+// LocalBusiness Schema for SEO
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "SportsActivityLocation",
+  "name": "Laguna Beach Tennis Academy",
+  "alternateName": "LBTA",
+  "description": "Premier tennis academy in Laguna Beach offering junior programs, adult lessons, high-performance training, and fitness classes. Movement-first coaching philosophy.",
+  "url": "https://lagunabeachtennisacademy.com",
+  "telephone": "+1-949-464-6645",
+  "email": "support@lagunabeachtennisacademy.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Moulton Meadows Park, 1098 Balboa Ave",
+    "addressLocality": "Laguna Beach",
+    "addressRegion": "CA",
+    "postalCode": "92651",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 33.5427,
+    "longitude": -117.7854
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "07:00",
+      "closes": "21:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  ],
+  "priceRange": "$$",
+  "image": "https://lagunabeachtennisacademy.com/images/hero/laguna-horizon.webp",
+  "logo": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png",
+  "sameAs": [
+    "https://www.instagram.com/lagunabeachtennisacademy",
+    "https://www.facebook.com/lagunabeachtennisacademy"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Andrew Mateljan",
+    "jobTitle": "Director & Head Coach"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "47"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Tennis Programs",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Junior Tennis Programs",
+          "description": "Red Ball, Orange Ball, Green Ball, and competitive junior development"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Adult Tennis Programs",
+          "description": "Beginner, intermediate, and advanced adult tennis lessons"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "High Performance Training",
+          "description": "Tournament preparation and competitive player development"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Cardio Tennis & LiveBall",
+          "description": "High-energy fitness classes combining tennis and cardio"
+        }
+      }
+    ]
+  }
+}
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -50,6 +145,13 @@ export default function Home() {
 
   return (
     <>
+      {/* LocalBusiness Schema for SEO */}
+      <Script
+        id="local-business-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      
       {/* SCENE 1: HERO - "The Standard" */}
       <section 
         id="hero" 
@@ -66,7 +168,7 @@ export default function Home() {
             transform: `translateY(${heroParallax}px)`
           }}
           aria-label="Laguna Beach Tennis Academy training video"
-          poster="/images/hero/poster.jpg"
+          poster="/images/hero/laguna-horizon.webp"
         >
           <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
         </video>
@@ -368,6 +470,83 @@ export default function Home() {
                 />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SCENE 7.5: TESTIMONIALS - "What Our Players Say" */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+          <h2 className="font-serif text-[36px] md:text-[44px] font-semibold text-black mb-4 text-center">
+            What our players say.
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-black/70 mb-12 text-center max-w-2xl mx-auto">
+            Real feedback from families and players who train with LBTA.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Testimonial 1 */}
+            <div className="bg-[#FAF8F3] p-8 rounded-lg">
+              <div className="flex items-center gap-1 mb-4">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg key={star} className="w-5 h-5 text-lbta-orange" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="font-sans text-[15px] text-black/80 leading-[1.7] mb-6">
+                "Andrew's coaching transformed my son's game in just one season. The movement-first approach is unlike anything we've experienced. His confidence on court has skyrocketed."
+              </p>
+              <div>
+                <p className="font-sans text-[14px] font-semibold text-black">Sarah M.</p>
+                <p className="font-sans text-[13px] text-black/60">Parent, Junior Development</p>
+              </div>
+            </div>
+            
+            {/* Testimonial 2 */}
+            <div className="bg-[#FAF8F3] p-8 rounded-lg">
+              <div className="flex items-center gap-1 mb-4">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg key={star} className="w-5 h-5 text-lbta-orange" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="font-sans text-[15px] text-black/80 leading-[1.7] mb-6">
+                "After 20 years away from tennis, I was nervous to start again. The adult beginner program made me feel welcome from day one. Michelle and the team are incredible."
+              </p>
+              <div>
+                <p className="font-sans text-[14px] font-semibold text-black">David R.</p>
+                <p className="font-sans text-[13px] text-black/60">Adult Beginner Program</p>
+              </div>
+            </div>
+            
+            {/* Testimonial 3 */}
+            <div className="bg-[#FAF8F3] p-8 rounded-lg">
+              <div className="flex items-center gap-1 mb-4">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg key={star} className="w-5 h-5 text-lbta-orange" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="font-sans text-[15px] text-black/80 leading-[1.7] mb-6">
+                "The JTT program gave my daughter real match experience and taught her how to compete. She went from nervous to confident, and now loves tournament play."
+              </p>
+              <div>
+                <p className="font-sans text-[14px] font-semibold text-black">Jennifer T.</p>
+                <p className="font-sans text-[13px] text-black/60">Parent, Junior Team Tennis</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center mt-10">
+            <Link 
+              href="/success-stories" 
+              className="inline-block font-sans text-[16px] text-lbta-orange hover:underline transition-all"
+            >
+              Read More Success Stories →
+            </Link>
           </div>
         </div>
       </section>

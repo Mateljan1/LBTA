@@ -4,8 +4,76 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
+import Script from 'next/script'
 
 export default function CoachesPage() {
+  // Schema markup for coaches
+  const coachesSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "Person",
+        "position": 1,
+        "name": "Andrew Mateljan",
+        "jobTitle": "Director & Head Coach",
+        "worksFor": {
+          "@type": "SportsOrganization",
+          "name": "Laguna Beach Tennis Academy"
+        },
+        "description": "ATP/WTA Tour Coach with 20+ years experience. Former #3 SoCal and #12 nationally ranked junior.",
+        "image": "https://lagunabeachtennisacademy.com/images/coaches/andrew.webp"
+      },
+      {
+        "@type": "Person",
+        "position": 2,
+        "name": "Kevin Jackson",
+        "jobTitle": "Head Coach & Performance Director",
+        "worksFor": {
+          "@type": "SportsOrganization",
+          "name": "Laguna Beach Tennis Academy"
+        },
+        "description": "Performance architect with 25+ years experience, 3,000+ athletes trained worldwide.",
+        "image": "https://lagunabeachtennisacademy.com/images/coaches/kevin.webp"
+      },
+      {
+        "@type": "Person",
+        "position": 3,
+        "name": "Michelle Bevins",
+        "jobTitle": "Youth Director",
+        "worksFor": {
+          "@type": "SportsOrganization",
+          "name": "Laguna Beach Tennis Academy"
+        },
+        "description": "Youth Development Specialist with Red/Orange Ball Certification and 95% parent satisfaction.",
+        "image": "https://lagunabeachtennisacademy.com/images/coaches/michelle.webp"
+      },
+      {
+        "@type": "Person",
+        "position": 4,
+        "name": "Savriyan Danilov",
+        "jobTitle": "High Performance Coach",
+        "worksFor": {
+          "@type": "SportsOrganization",
+          "name": "Laguna Beach Tennis Academy"
+        },
+        "description": "ATP Professional #556 with 8 years tour experience.",
+        "image": "https://lagunabeachtennisacademy.com/images/coaches/savriyan.webp"
+      },
+      {
+        "@type": "Person",
+        "position": 5,
+        "name": "Andy Wu",
+        "jobTitle": "Program Coach",
+        "worksFor": {
+          "@type": "SportsOrganization",
+          "name": "Laguna Beach Tennis Academy"
+        },
+        "description": "USPTA Certified with EdD in Educational Leadership.",
+        "image": "https://lagunabeachtennisacademy.com/images/coaches/andy.webp"
+      }
+    ]
+  }
   const [heroParallax, setHeroParallax] = useState(0)
   
   useEffect(() => {
@@ -69,6 +137,13 @@ export default function CoachesPage() {
 
   return (
     <>
+      {/* Schema Markup */}
+      <Script
+        id="coaches-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(coachesSchema) }}
+      />
+      
       {/* HERO SECTION */}
       <section className="relative min-h-[65vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
