@@ -19,25 +19,16 @@ const navigation = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
     
-    // Check viewport width on mount and resize
-    const checkViewport = () => {
-      setIsDesktop(window.innerWidth >= 1024)
-    }
-    
-    checkViewport()
     window.addEventListener('scroll', handleScroll)
-    window.addEventListener('resize', checkViewport)
     
     return () => {
       window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', checkViewport)
     }
   }, [])
 
@@ -73,55 +64,51 @@ export default function Header() {
               />
             </Link>
 
-            {/* Desktop Navigation - JS-controlled for reliability */}
-            {isDesktop && (
-              <div className="flex items-center gap-1 xl:gap-2">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="px-3 py-2 text-[13px] font-sans font-medium text-[#1a1a1a] hover:text-lbta-orange transition-colors duration-300 tracking-wide whitespace-nowrap relative group"
-                  >
-                    {item.name}
-                    <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-lbta-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                  </Link>
-                ))}
+            {/* Desktop Navigation - CSS-controlled with Tailwind (lg: = 1024px) */}
+            <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+              {navigation.map((item) => (
                 <Link
-                  href="/book"
-                  className="ml-4 bg-lbta-red text-white px-6 py-2.5 rounded-full text-[12px] font-semibold hover:bg-lbta-orange transition-all duration-300 uppercase tracking-[1.5px] whitespace-nowrap shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                  key={item.name}
+                  href={item.href}
+                  className="px-3 py-2 text-[13px] font-sans font-medium text-[#1a1a1a] hover:text-lbta-orange transition-colors duration-300 tracking-wide whitespace-nowrap relative group"
                 >
-                  Book Trial
+                  {item.name}
+                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-lbta-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </Link>
-              </div>
-            )}
+              ))}
+              <Link
+                href="/book"
+                className="ml-4 bg-lbta-red text-white px-6 py-2.5 rounded-full text-[12px] font-semibold hover:bg-lbta-orange transition-all duration-300 uppercase tracking-[1.5px] whitespace-nowrap shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              >
+                Book Trial
+              </Link>
+            </div>
 
-            {/* Mobile Menu Button - JS-controlled */}
-            {!isDesktop && (
-              <div className="flex items-center gap-3">
-                <a 
-                  href="tel:9494646645" 
-                  className="p-2.5 text-[#134252] hover:text-lbta-orange transition-colors"
-                  aria-label="Call us"
-                >
-                  <Phone className="h-5 w-5" />
-                </a>
-                <button
-                  type="button"
-                  className="p-3 text-[#134252] bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center"
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-                  aria-expanded={mobileMenuOpen}
-                >
-                  {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                </button>
-              </div>
-            )}
+            {/* Mobile Menu Button - CSS-controlled (shows below lg: 1024px) */}
+            <div className="flex lg:hidden items-center gap-3">
+              <a 
+                href="tel:9494646645" 
+                className="p-2.5 text-[#134252] hover:text-lbta-orange transition-colors"
+                aria-label="Call us"
+              >
+                <Phone className="h-5 w-5" />
+              </a>
+              <button
+                type="button"
+                className="p-3 text-[#134252] bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
           </div>
         </nav>
       </header>
 
       {/* Mobile Menu - Enhanced with animations */}
-      {mobileMenuOpen && !isDesktop && (
+      {mobileMenuOpen && (
         <div className="fixed inset-0 z-[90]">
           {/* Backdrop with fade animation */}
           <div 
