@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LBTA Winter 2026 Schedule & Pricing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Work Sans', sans-serif;
+      color: rgba(0,0,0,0.85);
+      background: #FFFFFF;
+      line-height: 1.6;
+    }
+    
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      padding: 0.75in;
+      margin: 0 auto 20px auto;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    @media print {
+      .page { 
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      body { background: white; }
+    }
+    
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #FAF8F3 0%, #FFFFFF 100%);
+      border: 4px solid #F8A121;
+    }
+    
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+    
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: #000000;
+      margin: 30px 0 20px 0;
+      line-height: 1.1;
+    }
+    
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #000000;
+      margin: 25px 0 15px 0;
+      border-bottom: 2px solid #F8A121;
+      padding-bottom: 8px;
+    }
+    
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #F04E23;
+      margin: 18px 0 10px 0;
+    }
+    
+    p, li {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: rgba(0,0,0,0.85);
+    }
+    
+    .subtitle {
+      font-size: 22px;
+      color: #F04E23;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .date-range {
+      font-size: 24px;
+      color: rgba(0,0,0,0.70);
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+    
+    .tagline {
+      font-size: 22px;
+      font-style: italic;
+      color: #F04E23;
+      font-family: 'Playfair Display', serif;
+      margin-top: 40px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      background: white;
+    }
+    
+    th {
+      background: #FAF8F3;
+      padding: 10px;
+      text-align: left;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(0,0,0,0.70);
+      border-bottom: 2px solid #F8A121;
+    }
+    
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(248,161,33,0.15);
+      font-size: 13px;
+    }
+    
+    tr:hover {
+      background: #FAF8F3;
+    }
+    
+    .price {
+      color: #F8A121;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .location-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 15px 0 10px 0;
+    }
+    
+    .moulton { background: #F8A121; color: white; }
+    .alta { background: #F8E6BB; color: #000; border: 1px solid #F8A121; }
+    .lbhs { background: #F04E23; color: white; }
+    
+    .schedule-item {
+      padding: 8px 12px;
+      margin: 5px 0;
+      background: #FAF8F3;
+      border-left: 3px solid #F8A121;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+    
+    .policy-box {
+      background: #FAF8F3;
+      border: 2px solid #F8A121;
+      border-radius: 8px;
+      padding: 18px;
+      margin: 15px 0;
+    }
+    
+    .policy-box p {
+      margin-bottom: 10px;
+    }
+    
+    .contact-box {
+      background: #FAF8F3;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 15px;
+      border-top: 2px solid #F8A121;
+      color: rgba(0,0,0,0.60);
+      font-size: 12px;
+    }
+    
+    strong { font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="page cover">
+  <div class="logo-text">LAGUNA BEACH<br/>TENNIS ACADEMY</div>
+  <h1>Winter 2026<br/>Schedule & Pricing</h1>
+  <p class="date-range">January 5 – April 5, 2026</p>
+  <p class="subtitle">13-Week Quarter</p>
+  <div class="tagline">Movement. Discipline. Belonging.</div>
+</div>
+
+<!-- SCHEDULE PAGE 1: MOULTON & ALTA -->
+<div class="page">
+  <h2>PROGRAM SCHEDULE – All Locations</h2>
+  
+  <div class="location-badge moulton">MOULTON MEADOWS</div>
+  <p style="font-size: 13px; color: rgba(0,0,0,0.60); margin-bottom: 15px;">1 Court • Junior Foundations + Adult Bridge Programs</p>
+  
+  <h3>Monday</h3>
+  <div class="schedule-item">3:30–4:15 PM • Little Stars (Ages 3–4)</div>
+  <div class="schedule-item">4:15–5:15 PM • Red Ball (Ages 5–6)</div>
+  <div class="schedule-item">5:15–6:15 PM • Orange Ball (Ages 7–8)</div>
+  <div class="schedule-item">6:30–7:30 PM • Adult Beginner 2 (NTRP 2.0-2.5)</div>
+  
+  <h3>Tuesday</h3>
+  <div class="schedule-item">3:30–4:30 PM • Orange Ball (Ages 7–8)</div>
+  <div class="schedule-item">4:30–5:30 PM • Green Dot (Ages 9–11)</div>
+  <div class="schedule-item">5:30–7:00 PM • Private Lessons Available</div>
+  
+  <h3>Wednesday</h3>
+  <div class="schedule-item">3:30–4:15 PM • Little Stars (Ages 3–4)</div>
+  <div class="schedule-item">4:15–5:15 PM • Red Ball (Ages 5–6)</div>
+  <div class="schedule-item">5:15–6:15 PM • Orange Ball (Ages 7–8)</div>
+  <div class="schedule-item">6:30–7:30 PM • Adult Beginner 2</div>
+  
+  <h3>Thursday</h3>
+  <div class="schedule-item">3:30–4:30 PM • Orange Ball (Ages 7–8)</div>
+  <div class="schedule-item">4:30–5:30 PM • Green Dot (Ages 9–11)</div>
+  <div class="schedule-item">6:00–7:30 PM • LiveBall Intermediate (Adults)</div>
+  
+  <h3>Friday</h3>
+  <div class="schedule-item">3:30–4:30 PM • Orange Ball Match Play</div>
+  <div class="schedule-item">4:30–5:30 PM • Green Dot Match Play</div>
+  
+  <div style="margin-top: 30px;"></div>
+  <div class="location-badge alta">ALTA LAGUNA PARK</div>
+  <p style="font-size: 13px; color: rgba(0,0,0,0.60); margin-bottom: 15px;">Youth Development (No Lights)</p>
+  
+  <h3>Monday – Thursday</h3>
+  <div class="schedule-item">4:00–5:30 PM • Youth Development (Ages 11–15)</div>
+  
+  <h3>Friday</h3>
+  <div class="schedule-item">3:00–4:00 PM • Green Dot Match Play (Overflow)</div>
+</div>
+
+<!-- SCHEDULE PAGE 2: LBHS -->
+<div class="page">
+  <div class="location-badge lbhs">LAGUNA BEACH HIGH SCHOOL</div>
+  <p style="font-size: 13px; color: rgba(0,0,0,0.60); margin-bottom: 15px;">High Performance + Adult Programs + Weekends (2-4 Courts)</p>
+  
+  <h3>Monday</h3>
+  <div class="schedule-item">12:00–2:00 PM • Adult Advanced (NTRP 4.0+)</div>
+  <div class="schedule-item">6:00–7:00 PM • Adult Beginner 1</div>
+  <div class="schedule-item">6:00–8:00 PM • High Performance (UTR 5-8)</div>
+  
+  <h3>Tuesday</h3>
+  <div class="schedule-item">10:00–11:00 AM • Adult Beginner 1</div>
+  <div class="schedule-item">11:00–12:30 PM • Adult Intermediate (NTRP 3.0-3.5)</div>
+  <div class="schedule-item">4:00–5:30 PM • Youth Development</div>
+  <div class="schedule-item">6:00–8:00 PM • High Performance</div>
+  
+  <h3>Wednesday</h3>
+  <div class="schedule-item">12:00–2:00 PM • Adult Advanced</div>
+  <div class="schedule-item">6:00–7:00 PM • Adult Beginner 1</div>
+  <div class="schedule-item">6:00–8:00 PM • High Performance</div>
+  
+  <h3>Thursday</h3>
+  <div class="schedule-item">10:00–11:00 AM • Adult Beginner 1</div>
+  <div class="schedule-item">11:00–12:30 PM • Adult Intermediate</div>
+  <div class="schedule-item">4:00–5:30 PM • Youth Development</div>
+  <div class="schedule-item">6:00–8:00 PM • High Performance</div>
+  
+  <h3>Friday</h3>
+  <div class="schedule-item">9:00–10:30 AM • Cardio Tennis</div>
+  <div class="schedule-item">4:00–5:00 PM • Youth Development Match Play</div>
+  <div class="schedule-item">5:30–7:30 PM • High Performance Match Play</div>
+  
+  <h3>Saturday</h3>
+  <div class="schedule-item">9:00–10:00 AM • Adult Beginner 1</div>
+  <div class="schedule-item">10:00–11:30 AM • Adult Intermediate</div>
+  <div class="schedule-item">11:30–1:00 PM • LiveBall Advanced</div>
+  <div class="schedule-item">2:00–4:00 PM • HP Match Play (Optional)</div>
+  
+  <h3>Sunday</h3>
+  <div class="schedule-item">9:00–10:00 AM • LiveBall Intermediate</div>
+  <div class="schedule-item">10:30 AM–12:00 PM • LiveBall Advanced</div>
+  <div class="schedule-item">11:00 AM–12:00 PM • Family Tennis</div>
+</div>
+
+<!-- PRICING PAGE 1: JUNIOR & YOUTH -->
+<div class="page">
+  <h2>Winter 2026 Pricing (13-Week Quarter)</h2>
+  <p style="font-style: italic; color: rgba(0,0,0,0.60); margin-bottom: 20px; font-size: 13px;">
+    All quarterly pricing converted from Fall 18-week rates. Early Bird: $50 off through December 20, 2025.
+  </p>
+  
+  <h3>Junior Programs (Moulton Meadows)</h3>
+  <table>
+    <tr>
+      <th>Program</th>
+      <th>Duration</th>
+      <th>1×/week</th>
+      <th>2×/week</th>
+      <th>3×/week</th>
+      <th>Drop-in</th>
+    </tr>
+    <tr>
+      <td><strong>Little Stars</strong> (Ages 3-4)</td>
+      <td>45 min</td>
+      <td class="price">$260</td>
+      <td class="price">$520</td>
+      <td>—</td>
+      <td>$40</td>
+    </tr>
+    <tr>
+      <td><strong>Red Ball</strong> (Ages 5-6)</td>
+      <td>60 min</td>
+      <td class="price">$546</td>
+      <td class="price">$1,092</td>
+      <td class="price">$1,635</td>
+      <td>$50</td>
+    </tr>
+    <tr>
+      <td><strong>Orange Ball</strong> (Ages 7-8)</td>
+      <td>60 min</td>
+      <td class="price">$546</td>
+      <td class="price">$1,092</td>
+      <td class="price">$1,635</td>
+      <td>$50</td>
+    </tr>
+    <tr>
+      <td><strong>Green Dot</strong> (Ages 9-11)</td>
+      <td>60 min</td>
+      <td class="price">$546</td>
+      <td class="price">$1,092</td>
+      <td class="price">$1,635</td>
+      <td>$50</td>
+    </tr>
+    <tr>
+      <td><strong>Friday Match Play</strong></td>
+      <td>60 min</td>
+      <td colspan="3" class="price">$85/month</td>
+      <td>$25</td>
+    </tr>
+  </table>
+  
+  <h3>Youth Development (Alta Laguna Park – 90 min)</h3>
+  <table>
+    <tr>
+      <th>Ages 11-15</th>
+      <th>1×/week</th>
+      <th>2×/week</th>
+      <th>3×/week</th>
+      <th>4×/week</th>
+      <th>5×/week</th>
+    </tr>
+    <tr>
+      <td><strong>Youth Development</strong></td>
+      <td class="price">$756</td>
+      <td class="price">$1,437</td>
+      <td class="price">$2,160</td>
+      <td class="price">$2,880</td>
+      <td class="price">$3,250</td>
+    </tr>
+    <tr>
+      <td colspan="6" style="font-size: 12px; color: rgba(0,0,0,0.60);">
+        Drop-in: $70 • Friday Match Play included
+      </td>
+    </tr>
+  </table>
+  
+  <h3>High Performance (LBHS – 2 hours, UTR 5-8)</h3>
+  <table>
+    <tr>
+      <th>Ages 12-17</th>
+      <th>1×/week</th>
+      <th>2×/week</th>
+      <th>3×/week</th>
+      <th>4×/week</th>
+      <th>5×/week</th>
+    </tr>
+    <tr>
+      <td><strong>High Performance</strong></td>
+      <td class="price">$810</td>
+      <td class="price">$1,620</td>
+      <td class="price">$2,268</td>
+      <td class="price">$2,916</td>
+      <td class="price">$3,200</td>
+    </tr>
+    <tr>
+      <td colspan="6" style="font-size: 12px; color: rgba(0,0,0,0.60);">
+        Drop-in: $100 • Friday HP Match Play included
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- PRICING PAGE 2: ADULT PROGRAMS -->
+<div class="page">
+  <h2>Adult Program Pricing</h2>
+  
+  <h3>Adult Beginner</h3>
+  <table>
+    <tr>
+      <th>Program</th>
+      <th>Location</th>
+      <th>Duration</th>
+      <th>1×/week</th>
+      <th>2×/week</th>
+      <th>Drop-in</th>
+    </tr>
+    <tr>
+      <td><strong>Adult Beginner 1</strong><br/>(NTRP 1.0-2.0)</td>
+      <td>LBHS</td>
+      <td>60 min</td>
+      <td class="price">$546</td>
+      <td class="price">$797</td>
+      <td>$55</td>
+    </tr>
+    <tr>
+      <td><strong>Adult Beginner 2</strong><br/>(NTRP 2.0-2.5, Bridge)</td>
+      <td>Moulton</td>
+      <td>60 min</td>
+      <td class="price">$546</td>
+      <td class="price">$797</td>
+      <td>$55</td>
+    </tr>
+  </table>
+  
+  <h3>Adult Intermediate & Advanced</h3>
+  <table>
+    <tr>
+      <th>Program</th>
+      <th>Location</th>
+      <th>Duration</th>
+      <th>1×/week</th>
+      <th>2×/week</th>
+      <th>3×/week</th>
+      <th>Drop-in</th>
+    </tr>
+    <tr>
+      <td><strong>Adult Intermediate</strong><br/>(NTRP 3.0-3.5)</td>
+      <td>LBHS</td>
+      <td>90 min</td>
+      <td class="price">$756</td>
+      <td class="price">$1,437</td>
+      <td class="price">$2,042</td>
+      <td>$70</td>
+    </tr>
+    <tr>
+      <td><strong>Adult Advanced</strong><br/>(NTRP 4.0+)</td>
+      <td>LBHS</td>
+      <td>2 hours</td>
+      <td class="price">$810</td>
+      <td class="price">$1,620</td>
+      <td>—</td>
+      <td>$90</td>
+    </tr>
+  </table>
+  
+  <h3>Fitness & Community Programs (Monthly)</h3>
+  <table>
+    <tr>
+      <th>Program</th>
+      <th>Schedule</th>
+      <th>Duration</th>
+      <th>Monthly</th>
+      <th>Drop-in</th>
+    </tr>
+    <tr>
+      <td><strong>Cardio Tennis</strong></td>
+      <td>Friday 9:00-10:30 AM</td>
+      <td>90 min</td>
+      <td class="price">$150</td>
+      <td>$50</td>
+    </tr>
+    <tr>
+      <td><strong>LiveBall Intermediate</strong></td>
+      <td>Thu 7:30-9 PM + Sun 9-10 AM</td>
+      <td>90 min</td>
+      <td class="price">$150</td>
+      <td>$50</td>
+    </tr>
+    <tr>
+      <td><strong>LiveBall Advanced</strong></td>
+      <td>Sun 10:30 AM-12 PM</td>
+      <td>90 min</td>
+      <td class="price">$150</td>
+      <td>$50</td>
+    </tr>
+    <tr>
+      <td><strong>Adult Match Play</strong></td>
+      <td>Friday 6-8 PM</td>
+      <td>2 hours</td>
+      <td class="price">$120</td>
+      <td>$35</td>
+    </tr>
+  </table>
+</div>
+
+<!-- POLICIES & PRIVATE LESSONS PAGE -->
+<div class="page">
+  <h2>Private Lessons</h2>
+  <table>
+    <tr>
+      <th>Coach</th>
+      <th>Credentials</th>
+      <th>Hourly Rate</th>
+      <th>10-Pack (5% off)</th>
+    </tr>
+    <tr>
+      <td><strong>Andrew Mateljan</strong></td>
+      <td>Director & ATP/WTA Tour Coach</td>
+      <td class="price">$250</td>
+      <td class="price">$2,375</td>
+    </tr>
+    <tr>
+      <td><strong>Kevin Jackson</strong></td>
+      <td>Head Coach, NCAA Recruitment</td>
+      <td class="price">$150</td>
+      <td class="price">$1,425</td>
+    </tr>
+    <tr>
+      <td><strong>Staff Coaches</strong></td>
+      <td>USPTA Certified</td>
+      <td class="price">$120</td>
+      <td class="price">$1,140</td>
+    </tr>
+  </table>
+  
+  <h2 style="margin-top: 40px;">Registration Policies</h2>
+  <div class="policy-box">
+    <p><strong>✓ Early Bird Discount:</strong> $50 off full-quarter programs registered by December 20, 2025</p>
+    <p><strong>✓ Payment Plans:</strong> Available with full 13-week commitment required</p>
+    <p><strong>✓ Drop-ins:</strong> Accepted only if space permits (call ahead recommended)</p>
+    <p><strong>✓ City Facility Fee:</strong> 30% fee included in all pricing</p>
+    <p><strong>✓ Weather Make-ups:</strong> Offered for rain cancellations only</p>
+    <p><strong>✓ Refund Policy:</strong> Accepted until December 25, 2025 (minus 5% processing fee)</p>
+  </div>
+  
+  <h2 style="margin-top: 40px;">Contact & Registration</h2>
+  <div class="contact-box">
+    <p style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #000;">
+      <strong>Laguna Beach Tennis Academy</strong>
+    </p>
+    <p><strong>Phone:</strong> (949) 464-6645</p>
+    <p><strong>Email:</strong> support@lagunabeachtennisacademy.com</p>
+    <p><strong>Website:</strong> lagunabeachtennisacademy.com</p>
+    <p style="margin-top: 12px; font-size: 13px; color: rgba(0,0,0,0.60);">
+      1098 Balboa Ave, Laguna Beach, CA 92651
+    </p>
+  </div>
+  
+  <div class="footer">
+    <p style="font-family: 'Playfair Display', serif; font-size: 16px; font-style: italic; color: #F04E23; margin-bottom: 8px;">
+      Movement. Discipline. Belonging.
+    </p>
+    <p>© 2026 Laguna Beach Tennis Academy • All Rights Reserved</p>
+    <p style="margin-top: 8px;">Tennis, as it should be taught.</p>
+  </div>
+</div>
+
+</body>
+</html>

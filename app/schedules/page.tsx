@@ -3,18 +3,24 @@
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronDown, ChevronUp, SlidersHorizontal } from 'lucide-react'
+import { ChevronDown, ChevronUp, SlidersHorizontal, Calendar, DollarSign, Users, Trophy, Check } from 'lucide-react'
 import ProgramCard, { Program } from '@/components/ProgramCard'
-import RegistrationModal from '@/components/RegistrationModal'
+import EmbeddedRegistrationPanel from '@/components/EmbeddedRegistrationPanel'
+import AnalyticsDashboard from '@/components/AnalyticsDashboard'
+import ComprehensiveFormTester from '@/components/ComprehensiveFormTester'
+import { trackProgramView, trackFormStart } from '@/lib/form-analytics'
 import MobileFilterOverlay from '@/components/MobileFilterOverlay'
 import BackToTopButton from '@/components/BackToTopButton'
 
 // Import data
 import winter2026Data from '@/data/winter2026.json'
 import fall2025Data from '@/data/fall2025.json'
+import year2026Data from '@/data/year2026.json'
+
+type SeasonKey = 'winter' | 'spring' | 'summer' | 'fall' | 'fall2025'
 
 export default function SchedulesPage() {
-  const [selectedSeason, setSelectedSeason] = useState<'winter' | 'fall'>('winter')
+  const [selectedSeason, setSelectedSeason] = useState<SeasonKey>('winter')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedLocation, setSelectedLocation] = useState<string>('all')
   const [selectedDays, setSelectedDays] = useState<string[]>([])
@@ -22,10 +28,27 @@ export default function SchedulesPage() {
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false)
   const [expandedAccordions, setExpandedAccordions] = useState<string[]>([])
   const [heroParallax, setHeroParallax] = useState(0)
+  const [analyticsOpen, setAnalyticsOpen] = useState(false)
+  const [formTesterOpen, setFormTesterOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState<'programs' | 'calendar' | 'pricing'>('programs')
   
-  // Get current season data
-  const seasonData = selectedSeason === 'winter' ? winter2026Data : fall2025Data
-  const allPrograms = seasonData.programs as Program[]
+  // Get season data
+  const seasons = year2026Data.seasons
+  const currentSeasonData = selectedSeason === 'fall2025' ? null : seasons[selectedSeason as keyof typeof seasons]
+  
+  // Get programs for selected season (Winter 2026 or Fall 2025 have actual program data)
+  const allPrograms = selectedSeason === 'winter' 
+    ? (winter2026Data.programs as Program[])
+    : selectedSeason === 'fall2025'
+    ? (fall2025Data.programs as Program[])
+    : (winter2026Data.programs as Program[]) // Use winter as base for other seasons
+  
+  // Calculate season-adjusted pricing
+  const getSeasonPrice = (basePrice: number): number => {
+    if (selectedSeason === 'fall2025') return basePrice
+    const multiplier = currentSeasonData?.multiplier || 1
+    return Math.round(basePrice * multiplier)
+  }
   
   // Get unique categories and locations
   const categories = ['all', ...Array.from(new Set(allPrograms.map(p => p.category)))]
@@ -53,16 +76,12 @@ export default function SchedulesPage() {
     return groups
   }, [filteredPrograms])
   
-  // Handle accordion toggle with auto-collapse and smooth scroll
+  // Handle accordion toggle
   const toggleAccordion = (category: string) => {
     const willExpand = !expandedAccordions.includes(category)
-    
-    // Auto-collapse others, open only this one (or close if already open)
     setExpandedAccordions(prev =>
       prev.includes(category) ? [] : [category]
     )
-    
-    // Smooth scroll to accordion header when expanding
     if (willExpand) {
       setTimeout(() => {
         const element = document.getElementById(`accordion-header-${category}`)
@@ -73,21 +92,37 @@ export default function SchedulesPage() {
   
   // Handle registration
   const handleRegister = (program: Program) => {
+    trackFormStart(program.id, program.program, program.category, 'embedded')
     setSelectedProgram(program)
   }
   
-  // Parallax effect on hero
+  // Parallax effect
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY
       setHeroParallax(scrollY * 0.3)
     }
-    
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   
-  // Restore filter state from localStorage
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.code === 'KeyA') {
+        e.preventDefault()
+        setAnalyticsOpen(true)
+      }
+      if (e.ctrlKey && e.shiftKey && e.code === 'KeyT') {
+        e.preventDefault()
+        setFormTesterOpen(true)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+  
+  // Restore filter state
   useEffect(() => {
     const savedFilters = localStorage.getItem('lbta-schedule-filters')
     if (savedFilters) {
@@ -96,13 +131,11 @@ export default function SchedulesPage() {
         setSelectedCategory(filters.category || 'all')
         setSelectedLocation(filters.location || 'all')
         setSelectedDays(filters.days || [])
-      } catch (e) {
-        // Ignore parse errors
-      }
+      } catch (e) {}
     }
   }, [])
   
-  // Save filter state to localStorage
+  // Save filter state
   useEffect(() => {
     localStorage.setItem('lbta-schedule-filters', JSON.stringify({
       category: selectedCategory,
@@ -111,14 +144,13 @@ export default function SchedulesPage() {
     }))
   }, [selectedCategory, selectedLocation, selectedDays])
   
-  const seasonLabel = selectedSeason === 'winter' ? 'Winter 2026' : 'Fall 2025'
-  const seasonDates = selectedSeason === 'winter'
-    ? 'January 5 – April 5 · 13 Weeks'
-    : 'September – December · 18 Weeks'
+  const seasonLabel = currentSeasonData?.name || 'Fall 2025'
+  const seasonDates = currentSeasonData?.dates || 'September – December 2025'
+  const seasonWeeks = currentSeasonData?.weeks || 18
 
   return (
     <>
-      {/* HERO SECTION - Enhanced with Gradient Overlay */}
+      {/* HERO SECTION */}
       <section className="relative min-h-[65vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -133,197 +165,618 @@ export default function SchedulesPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-lbta-orange/20 to-lbta-beige/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
         </div>
         
         <div className="relative z-10 text-center text-white px-4 md:px-6 max-w-4xl mx-auto py-24">
-          <h1 className="font-serif text-[36px] md:text-[60px] font-bold leading-[1.1] tracking-[-0.5px] mb-6 text-shadow">
-            Winter 2026 Schedule & Pricing
-          </h1>
-          <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-8 md:mb-10 max-w-[90%] mx-auto">
-            {seasonDates}
+          <p className="font-sans text-[12px] md:text-[14px] uppercase tracking-[3px] text-lbta-orange mb-4">
+            Plan Your 2026
           </p>
-          <Link 
-            href="/programs"
-            className="inline-block border-2 border-white hover:bg-lbta-red hover:border-lbta-red text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
-          >
-            View Programs →
-          </Link>
+          <h1 className="font-serif text-[36px] md:text-[60px] font-bold leading-[1.1] tracking-[-0.5px] mb-6 text-shadow">
+            Schedule & Pricing
+          </h1>
+          <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-4 max-w-[90%] mx-auto">
+            Four seasons of structured training, holiday camps, and competitive league play
+          </p>
+          <p className="font-sans text-[14px] md:text-[16px] text-lbta-orange font-semibold mb-8">
+            Winter 2026 Registration Now Open — Save $50 with Early Bird
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="#programs"
+              className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            >
+              View Programs
+            </Link>
+            <Link 
+              href="#pricing"
+              className="inline-block border-2 border-white hover:bg-white/10 text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            >
+              See Pricing
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* STICKY FILTER BAR - Glass Morphism */}
-      <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 py-4 md:py-6 shadow-sm">
+      {/* YEAR AT A GLANCE */}
+      <section className="bg-white py-12 md:py-20 border-b border-gray-100">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6">
-          {/* Season Toggle */}
-          <div className="flex items-center justify-center gap-3 bg-white p-2 rounded-full shadow-sm w-fit mx-auto mb-4">
-            <button
-              onClick={() => setSelectedSeason('winter')}
-              className={`px-6 md:px-8 py-2.5 md:py-3 rounded-full font-sans font-semibold text-[14px] md:text-[16px] transition-all duration-200 ${
-                selectedSeason === 'winter'
-                  ? 'bg-lbta-red text-white shadow-sm'
-                  : 'text-lbta-red hover:bg-lbta-orange/10'
-              }`}
-            >
-              Winter 2026
-            </button>
-            <button
-              onClick={() => setSelectedSeason('fall')}
-              className={`px-6 md:px-8 py-2.5 md:py-3 rounded-full font-sans font-semibold text-[14px] md:text-[16px] transition-all duration-200 ${
-                selectedSeason === 'fall'
-                  ? 'bg-lbta-red text-white shadow-sm'
-                  : 'text-lbta-red hover:bg-lbta-orange/10'
-              }`}
-            >
-              Fall 2025
-            </button>
-          </div>
-          
-          {/* Desktop Filters Row */}
-          <div className="hidden md:flex items-center justify-center gap-4">
-            {/* Program Type */}
-            <select 
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 font-sans cursor-pointer min-w-[160px] transition-all"
-              aria-label="Filter by program type"
-            >
-              <option value="all">All Programs</option>
-              {categories.slice(1).map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </select>
-            
-            {/* Location */}
-            <select 
-              value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-              className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 font-sans cursor-pointer min-w-[160px] transition-all"
-              aria-label="Filter by location"
-            >
-              <option value="all">All Locations</option>
-              <option value="moulton">Moulton Meadows</option>
-              <option value="alta">Alta Laguna Park</option>
-              <option value="lbhs">Laguna Beach High School</option>
-            </select>
-          </div>
-          
-          {/* Billing Info Legend */}
-          <p className="hidden md:block text-center text-[13px] text-black/60 font-sans mt-4 italic">
-            All Junior, Youth, and Adult programs billed quarterly (13 weeks). Fitness programs billed monthly.
+          <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
+            2026 Year at a Glance
+          </h2>
+          <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
+            50 weeks of tennis across four seasons, plus holiday camps and competitive leagues
           </p>
+          
+          {/* Season Cards */}
+          <div className="grid md:grid-cols-4 gap-4 md:gap-6 mb-12">
+            {Object.entries(seasons).map(([key, season]) => {
+              const isActive = selectedSeason === key
+              const isOpen = season.status === 'registration_open'
+              
+              return (
+                <button
+                  key={key}
+                  onClick={() => setSelectedSeason(key as SeasonKey)}
+                  className={`relative p-6 rounded-2xl text-left transition-all duration-300 ${
+                    isActive 
+                      ? 'bg-lbta-red text-white shadow-lg scale-[1.02]' 
+                      : 'bg-[#FAF8F3] hover:bg-lbta-orange/10 text-black'
+                  }`}
+                >
+                  {isOpen && (
+                    <span className={`absolute top-4 right-4 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-full ${
+                      isActive ? 'bg-white/20 text-white' : 'bg-green-100 text-green-700'
+                    }`}>
+                      Open
+                    </span>
+                  )}
+                  <h3 className={`font-serif text-[20px] md:text-[24px] font-semibold mb-2 ${isActive ? 'text-white' : 'text-black'}`}>
+                    {season.name.split(' ')[0]}
+                  </h3>
+                  <p className={`font-sans text-[13px] mb-3 ${isActive ? 'text-white/80' : 'text-black/60'}`}>
+                    {season.dates}
+                  </p>
+                  <div className={`font-sans text-[14px] font-medium ${isActive ? 'text-white' : 'text-lbta-orange'}`}>
+                    {season.weeks} weeks
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+          
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="bg-[#FAF8F3] rounded-xl p-5 text-center">
+              <Calendar className="w-6 h-6 text-lbta-orange mx-auto mb-2" />
+              <div className="font-serif text-[28px] md:text-[36px] font-bold text-black">50</div>
+              <div className="font-sans text-[12px] md:text-[14px] text-black/60 uppercase tracking-wider">Weeks of Tennis</div>
+            </div>
+            <div className="bg-[#FAF8F3] rounded-xl p-5 text-center">
+              <Users className="w-6 h-6 text-lbta-orange mx-auto mb-2" />
+              <div className="font-serif text-[28px] md:text-[36px] font-bold text-black">6</div>
+              <div className="font-sans text-[12px] md:text-[14px] text-black/60 uppercase tracking-wider">Holiday Camps</div>
+            </div>
+            <div className="bg-[#FAF8F3] rounded-xl p-5 text-center">
+              <Trophy className="w-6 h-6 text-lbta-orange mx-auto mb-2" />
+              <div className="font-serif text-[28px] md:text-[36px] font-bold text-black">3</div>
+              <div className="font-sans text-[12px] md:text-[14px] text-black/60 uppercase tracking-wider">JTT Seasons</div>
+            </div>
+            <div className="bg-[#FAF8F3] rounded-xl p-5 text-center">
+              <DollarSign className="w-6 h-6 text-lbta-orange mx-auto mb-2" />
+              <div className="font-serif text-[28px] md:text-[36px] font-bold text-black">$50</div>
+              <div className="font-sans text-[12px] md:text-[14px] text-black/60 uppercase tracking-wider">Early Bird Savings</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TAB NAVIGATION */}
+      <div className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-6">
+          {/* Main Tabs */}
+          <div className="flex justify-center gap-2 py-4" role="tablist">
+            <button
+              onClick={() => setActiveTab('programs')}
+              role="tab"
+              aria-selected={activeTab === 'programs'}
+              className={`px-6 py-2.5 rounded-full font-sans font-semibold text-[14px] transition-all ${
+                activeTab === 'programs'
+                  ? 'bg-lbta-red text-white'
+                  : 'text-black/70 hover:bg-gray-100'
+              }`}
+            >
+              Programs
+            </button>
+            <button
+              onClick={() => setActiveTab('pricing')}
+              role="tab"
+              aria-selected={activeTab === 'pricing'}
+              className={`px-6 py-2.5 rounded-full font-sans font-semibold text-[14px] transition-all ${
+                activeTab === 'pricing'
+                  ? 'bg-lbta-red text-white'
+                  : 'text-black/70 hover:bg-gray-100'
+              }`}
+            >
+              Pricing
+            </button>
+            <button
+              onClick={() => setActiveTab('calendar')}
+              role="tab"
+              aria-selected={activeTab === 'calendar'}
+              className={`px-6 py-2.5 rounded-full font-sans font-semibold text-[14px] transition-all ${
+                activeTab === 'calendar'
+                  ? 'bg-lbta-red text-white'
+                  : 'text-black/70 hover:bg-gray-100'
+              }`}
+            >
+              Camps & JTT
+            </button>
+          </div>
         </div>
       </div>
-      
-      {/* Mobile Filter Button */}
-      <button
-        onClick={() => setMobileFilterOpen(true)}
-        className="md:hidden fixed bottom-6 right-6 z-30 bg-lbta-red hover:bg-lbta-orange text-white px-5 py-3.5 rounded-full shadow-lg font-sans font-semibold text-[14px] flex items-center gap-2 min-h-[48px] transition-all duration-200"
-        aria-label="Open filters"
-      >
-        <SlidersHorizontal className="w-4 h-4" />
-        Filters
-      </button>
 
-      {/* PROGRAM ACCORDION SECTIONS */}
-      <section className="bg-[#FAF8F3] py-12 md:py-20">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-6">
-          <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-black mb-2 text-center">
-            {seasonLabel} Programs
-          </h2>
-          <p className="font-sans text-[14px] md:text-[16px] text-black/60 mb-10 md:mb-16 text-center">
-            {filteredPrograms.length} program{filteredPrograms.length !== 1 ? 's' : ''} available
-          </p>
-          
-          {/* Check if we have programs */}
-          {filteredPrograms.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-2xl">
-              <p className="font-sans text-[16px] text-black/60">
-                No programs match your filters. Try adjusting your selection.
-              </p>
-              <button
-                onClick={() => {
-                  setSelectedCategory('all')
-                  setSelectedLocation('all')
-                  setSelectedDays([])
-                }}
-                className="mt-4 text-lbta-orange hover:underline font-sans font-semibold text-[15px]"
-              >
-                Clear all filters
-              </button>
-            </div>
-          ) : (
-            /* ACCORDION GROUPS BY CATEGORY */
-            <div className="space-y-6 md:space-y-10">
-              {Object.entries(groupedPrograms).map(([category, programs], index) => {
-                const isExpanded = expandedAccordions.includes(category)
-                
-                return (
-                  <div 
-                    key={category} 
-                    id={`accordion-header-${category}`}
-                    style={{ animationDelay: `${index * 100}ms` }}
-                    className="bg-white rounded-3xl shadow-soft overflow-hidden animate-fade-in-up"
+      {/* PROGRAMS TAB */}
+      {activeTab === 'programs' && (
+        <>
+          {/* Season Filter Bar */}
+          <div className="bg-[#FAF8F3] py-4 border-b border-gray-200">
+            <div className="max-w-[1440px] mx-auto px-4 md:px-6">
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <span className="font-sans text-[14px] text-black/60 mr-2">Season:</span>
+                {Object.entries(seasons).map(([key, season]) => (
+                  <button
+                    key={key}
+                    onClick={() => setSelectedSeason(key as SeasonKey)}
+                    className={`px-4 py-2 rounded-full font-sans text-[13px] font-medium transition-all ${
+                      selectedSeason === key
+                        ? 'bg-lbta-red text-white'
+                        : 'bg-white text-black/70 hover:bg-lbta-orange/10 border border-gray-200'
+                    }`}
                   >
-                    {/* Accordion Header */}
-                    <button
-                      onClick={() => toggleAccordion(category)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault()
-                          toggleAccordion(category)
-                        }
-                      }}
-                      className="accordion-header w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between bg-[#FAF8F3] hover:bg-lbta-orange/10 focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all duration-200"
-                      aria-expanded={isExpanded}
-                      aria-controls={`accordion-${category}`}
-                      aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${category} Programs section`}
-                    >
-                      <div className="flex items-center gap-3 md:gap-4">
-                        <h3 className="font-serif text-[24px] md:text-[32px] font-bold text-black">
-                          {category} Programs
-                        </h3>
-                        <span className="font-sans text-[16px] md:text-[18px] text-lbta-orange font-semibold bg-lbta-orange/10 px-3 py-1 rounded-full">
-                          {programs.length}
-                        </span>
-                      </div>
-                      <div className="flex-shrink-0">
-                        {isExpanded ? (
-                          <ChevronUp className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
-                        ) : (
-                          <ChevronDown className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
+                    {season.name.split(' ')[0]}
+                    {season.status === 'registration_open' && (
+                      <span className="ml-1.5 w-2 h-2 bg-green-400 rounded-full inline-block" />
+                    )}
+                  </button>
+                ))}
+                <button
+                  onClick={() => setSelectedSeason('fall2025')}
+                  className={`px-4 py-2 rounded-full font-sans text-[13px] font-medium transition-all ${
+                    selectedSeason === 'fall2025'
+                      ? 'bg-lbta-red text-white'
+                      : 'bg-white text-black/70 hover:bg-lbta-orange/10 border border-gray-200'
+                  }`}
+                >
+                  Fall 2025
+                </button>
+              </div>
+              
+              {/* Desktop Filters */}
+              <div className="hidden md:flex items-center justify-center gap-4 mt-4">
+                <select 
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none font-sans cursor-pointer min-w-[160px]"
+                  aria-label="Filter by program type"
+                >
+                  <option value="all">All Programs</option>
+                  {categories.slice(1).map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+                
+                <select 
+                  value={selectedLocation}
+                  onChange={(e) => setSelectedLocation(e.target.value)}
+                  className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none font-sans cursor-pointer min-w-[160px]"
+                  aria-label="Filter by location"
+                >
+                  <option value="all">All Locations</option>
+                  <option value="moulton">Moulton Meadows</option>
+                  <option value="alta">Alta Laguna Park</option>
+                  <option value="lbhs">Laguna Beach High School</option>
+                </select>
+              </div>
+              
+              <p className="hidden md:block text-center text-[13px] text-black/60 font-sans mt-4 italic">
+                {seasonLabel}: {seasonDates} · {seasonWeeks} weeks · Prices adjust by season length
+              </p>
+            </div>
+          </div>
+
+          {/* Mobile Filter Button */}
+          <button
+            onClick={() => setMobileFilterOpen(true)}
+            className="md:hidden fixed bottom-6 right-6 z-30 bg-lbta-red hover:bg-lbta-orange text-white px-5 py-3.5 rounded-full shadow-lg font-sans font-semibold text-[14px] flex items-center gap-2 min-h-[48px]"
+            aria-label="Open filters"
+          >
+            <SlidersHorizontal className="w-4 h-4" />
+            Filters
+          </button>
+
+          {/* Program Accordions */}
+          <section id="programs" className="bg-[#FAF8F3] py-12 md:py-20">
+            <div className="max-w-[1440px] mx-auto px-4 md:px-6">
+              <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-black mb-2 text-center">
+                {seasonLabel} Programs
+              </h2>
+              <p className="font-sans text-[14px] md:text-[16px] text-black/60 mb-10 text-center">
+                {filteredPrograms.length} program{filteredPrograms.length !== 1 ? 's' : ''} available
+              </p>
+              
+              {filteredPrograms.length === 0 ? (
+                <div className="text-center py-16 bg-white rounded-2xl">
+                  <p className="font-sans text-[16px] text-black/60">
+                    No programs match your filters.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setSelectedCategory('all')
+                      setSelectedLocation('all')
+                      setSelectedDays([])
+                    }}
+                    className="mt-4 text-lbta-orange hover:underline font-sans font-semibold"
+                  >
+                    Clear all filters
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-6 md:space-y-10">
+                  {Object.entries(groupedPrograms).map(([category, programs], index) => {
+                    const isExpanded = expandedAccordions.includes(category)
+                    
+                    return (
+                      <div 
+                        key={category} 
+                        id={`accordion-header-${category}`}
+                        className="bg-white rounded-3xl shadow-soft overflow-hidden"
+                      >
+                        <button
+                          onClick={() => toggleAccordion(category)}
+                          className="accordion-header w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between bg-[#FAF8F3] hover:bg-lbta-orange/10 focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                          aria-expanded={isExpanded}
+                          aria-controls={`accordion-${category}`}
+                        >
+                          <div className="flex items-center gap-3 md:gap-4">
+                            <h3 className="font-serif text-[24px] md:text-[32px] font-bold text-black">
+                              {category} Programs
+                            </h3>
+                            <span className="font-sans text-[16px] md:text-[18px] text-lbta-orange font-semibold bg-lbta-orange/10 px-3 py-1 rounded-full">
+                              {programs.length}
+                            </span>
+                          </div>
+                          {isExpanded ? (
+                            <ChevronUp className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
+                          ) : (
+                            <ChevronDown className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
+                          )}
+                        </button>
+                        
+                        {isExpanded && (
+                          <div 
+                            id={`accordion-${category}`}
+                            className="accordion-content px-4 md:px-6 py-6 md:py-8 bg-white"
+                          >
+                            <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+                              {programs.map((program) => (
+                                <ProgramCard
+                                  key={program.id}
+                                  program={program}
+                                  onRegister={handleRegister}
+                                />
+                              ))}
+                            </div>
+                          </div>
                         )}
                       </div>
-                    </button>
-                    
-                    {/* Accordion Content */}
-                    {isExpanded && (
-                      <div 
-                        id={`accordion-${category}`}
-                        className="accordion-content px-4 md:px-6 py-6 md:py-8 bg-white min-h-[200px]"
-                        role="region"
-                        aria-labelledby={`accordion-header-${category}`}
-                      >
-                        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-                          {programs.map((program) => (
-                            <ProgramCard
-                              key={program.id}
-                              program={program}
-                              onRegister={handleRegister}
-                            />
-                          ))}
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          </section>
+        </>
+      )}
+
+      {/* PRICING TAB */}
+      {activeTab === 'pricing' && (
+        <section id="pricing" className="bg-[#FAF8F3] py-12 md:py-20">
+          <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+            <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
+              2026 Program Pricing
+            </h2>
+            <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
+              Prices adjust by season length. Winter (13 weeks) is our base rate. 
+              <span className="text-lbta-orange font-medium"> 2x/week is most popular</span> — best value for consistent improvement.
+            </p>
+
+            {/* Season Price Comparison */}
+            <div className="bg-white rounded-2xl p-6 md:p-8 mb-10 shadow-soft">
+              <h3 className="font-serif text-[20px] md:text-[24px] font-semibold mb-6 text-center">
+                Seasonal Price Adjustments
+              </h3>
+              <div className="grid md:grid-cols-4 gap-4">
+                {Object.entries(seasons).map(([key, season]) => (
+                  <div 
+                    key={key}
+                    className={`p-4 rounded-xl text-center ${
+                      key === 'winter' ? 'bg-lbta-orange/10 border-2 border-lbta-orange' : 'bg-gray-50'
+                    }`}
+                  >
+                    <div className="font-sans text-[13px] text-black/60 uppercase tracking-wider mb-1">
+                      {season.name.split(' ')[0]}
+                    </div>
+                    <div className="font-serif text-[24px] font-bold text-black">
+                      {season.weeks} weeks
+                    </div>
+                    <div className={`font-sans text-[14px] mt-1 ${key === 'winter' ? 'text-lbta-orange font-semibold' : 'text-black/60'}`}>
+                      {key === 'winter' ? 'Base Rate' : `${Math.round(season.multiplier * 100)}% of Winter`}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quarterly Programs Pricing */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8">
+              <div className="bg-black text-white px-6 py-4">
+                <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+                  Quarterly Programs
+                </h3>
+                <p className="font-sans text-[13px] text-white/70 mt-1">
+                  Billed per season · Winter 2026 prices shown
+                </p>
+              </div>
+              
+              <div className="overflow-x-auto">
+                <table className="w-full" role="table">
+                  <thead>
+                    <tr className="border-b border-gray-200">
+                      <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Program</th>
+                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">1x/week</th>
+                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider bg-lbta-orange/5">
+                        2x/week
+                        <span className="block text-[10px] text-lbta-orange normal-case">Most Popular</span>
+                      </th>
+                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">3x/week</th>
+                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Drop-in</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(year2026Data.basePricing).map(([key, program]) => (
+                      <tr key={key} className="border-b border-gray-100 hover:bg-gray-50">
+                        <td className="px-6 py-4">
+                          <div className="font-sans text-[15px] font-semibold text-black">{program.label}</div>
+                          <div className="font-sans text-[12px] text-black/60">{program.subtitle}</div>
+                          <div className="font-sans text-[11px] text-black/40 mt-1">{program.ages} · {program.duration}</div>
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black">
+                          ${program.winterPrices['1x']}
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] font-semibold text-lbta-orange bg-lbta-orange/5">
+                          ${program.winterPrices['2x']}
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black">
+                          {program.winterPrices['3x'] ? `$${program.winterPrices['3x']}` : '—'}
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[14px] text-black/60">
+                          ${program.dropIn}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Monthly Programs */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8">
+              <div className="bg-lbta-orange text-white px-6 py-4">
+                <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+                  Monthly Programs
+                </h3>
+                <p className="font-sans text-[13px] text-white/80 mt-1">
+                  Flexible month-to-month billing
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                {Object.entries(year2026Data.monthlyPrograms).map(([key, program]) => (
+                  <div key={key} className="p-6 text-center">
+                    <div className="font-sans text-[16px] font-semibold text-black mb-1">{program.label}</div>
+                    <div className="font-sans text-[12px] text-black/60 mb-3">{program.subtitle}</div>
+                    <div className="font-serif text-[32px] font-bold text-black">${program.price}</div>
+                    <div className="font-sans text-[12px] text-black/60">/month</div>
+                    <div className="font-sans text-[13px] text-black/50 mt-2">Drop-in: ${program.dropIn}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Private Coaching */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8">
+              <div className="bg-black text-white px-6 py-4">
+                <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+                  Private Coaching
+                </h3>
+              </div>
+              
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-gray-200">
+                      <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">Coach</th>
+                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">60 min</th>
+                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">90 min</th>
+                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">Availability</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {year2026Data.privateCoaching.map((coach) => (
+                      <tr key={coach.coach} className="border-b border-gray-100 hover:bg-gray-50">
+                        <td className="px-6 py-4">
+                          <div className="font-sans text-[15px] font-semibold text-black">{coach.coach}</div>
+                          <div className="font-sans text-[12px] text-black/60">{coach.title}</div>
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black">${coach.rate60}</td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black">${coach.rate90}</td>
+                        <td className="text-center px-4 py-4">
+                          <span className={`font-sans text-[12px] px-3 py-1 rounded-full ${
+                            coach.availability === 'Limited' 
+                              ? 'bg-orange-100 text-orange-700' 
+                              : 'bg-green-100 text-green-700'
+                          }`}>
+                            {coach.availability}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Discounts & Scholarships */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-2xl p-6 shadow-soft">
+                <h3 className="font-serif text-[20px] font-semibold mb-4">Available Discounts</h3>
+                <ul className="space-y-3">
+                  {Object.entries(year2026Data.discounts).map(([key, discount]) => (
+                    <li key={key} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <span className="font-sans text-[15px] font-medium text-black">
+                          {discount.type === 'fixed' ? `$${discount.amount}` : `${discount.amount}%`} off
+                        </span>
+                        <span className="font-sans text-[14px] text-black/60 ml-1">— {discount.description}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="bg-lbta-beige rounded-2xl p-6">
+                <h3 className="font-serif text-[20px] font-semibold mb-4">Scholarship Program</h3>
+                <p className="font-sans text-[14px] text-black/70 mb-4">
+                  We believe tennis should be accessible to all. Our scholarship program provides {year2026Data.scholarships.coverage} tuition assistance for qualifying families.
+                </p>
+                <Link 
+                  href={`mailto:${year2026Data.scholarships.email}`}
+                  className="inline-flex items-center font-sans text-[14px] font-semibold text-lbta-orange hover:text-lbta-red"
+                >
+                  Apply for Scholarship →
+                </Link>
+              </div>
+            </div>
+
+            {/* Payment Note */}
+            <p className="text-center font-sans text-[13px] text-black/50 mt-8 italic">
+              Payment plans available for quarterly programs. Contact us for details.
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* CAMPS & JTT TAB */}
+      {activeTab === 'calendar' && (
+        <section className="bg-[#FAF8F3] py-12 md:py-20">
+          <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+            {/* Camps Section */}
+            <div className="mb-16">
+              <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
+                2026 Holiday Camps
+              </h2>
+              <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
+                Keep your player engaged during school breaks with our intensive camp programs
+              </p>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {year2026Data.camps.map((camp) => (
+                  <div key={camp.id} className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-lg transition-shadow">
+                    <div className="bg-lbta-orange text-white px-6 py-4">
+                      <h3 className="font-serif text-[18px] font-semibold">{camp.name}</h3>
+                      <p className="font-sans text-[13px] text-white/80">{camp.dates}</p>
+                    </div>
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <div className="font-sans text-[13px] text-black/60">Ages {camp.ages}</div>
+                          <div className="font-sans text-[13px] text-black/60">{camp.hours}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-serif text-[28px] font-bold text-black">${camp.price}</div>
+                          {camp.halfDay && (
+                            <div className="font-sans text-[12px] text-black/60">Half-day: ${camp.halfDay}</div>
+                          )}
                         </div>
                       </div>
-                    )}
+                      <p className="font-sans text-[14px] text-black/70 mb-4">{camp.description}</p>
+                      <ul className="space-y-1">
+                        {camp.includes.map((item, i) => (
+                          <li key={i} className="flex items-center gap-2 font-sans text-[13px] text-black/60">
+                            <Check className="w-4 h-4 text-green-600" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                )
-              })}
+                ))}
+              </div>
             </div>
-          )}
-        </div>
-      </section>
 
-      {/* NEW PRE-FOOTER CTA SECTION */}
+            {/* JTT Section */}
+            <div>
+              <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
+                Junior Team Tennis (JTT)
+              </h2>
+              <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
+                USTA league competition with team practices, matches, and uniforms included
+              </p>
+              
+              <div className="grid md:grid-cols-3 gap-6">
+                {year2026Data.jtt.map((season) => (
+                  <div key={season.id} className="bg-white rounded-2xl overflow-hidden shadow-soft">
+                    <div className="bg-black text-white px-6 py-4">
+                      <h3 className="font-serif text-[18px] font-semibold">{season.name}</h3>
+                      <p className="font-sans text-[13px] text-white/70">{season.dates}</p>
+                    </div>
+                    <div className="p-6">
+                      <div className="font-sans text-[13px] text-black/60 mb-4">
+                        {season.weeks} weeks · {season.matchDay}
+                      </div>
+                      
+                      <div className="space-y-2 mb-4">
+                        {season.divisions.map((div) => (
+                          <div key={div.age} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
+                            <span className="font-sans text-[14px] font-medium text-black">{div.age}</span>
+                            <span className="font-sans text-[16px] font-semibold text-black">${div.price.toLocaleString()}</span>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      <div className="pt-4 border-t border-gray-200">
+                        <div className="font-sans text-[12px] text-black/60 uppercase tracking-wider mb-2">Includes:</div>
+                        <ul className="space-y-1">
+                          {season.includes.map((item, i) => (
+                            <li key={i} className="flex items-center gap-2 font-sans text-[12px] text-black/60">
+                              <Check className="w-3 h-3 text-green-600" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CTA SECTION */}
       <section className="relative min-h-[400px] md:min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -334,35 +787,38 @@ export default function SchedulesPage() {
             sizes="100vw"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0 bg-black/30" />
         </div>
         
-        <div className="relative z-10 text-center text-white px-6 py-20 animate-fade-in-up">
-          <h2 className="font-serif text-[36px] md:text-[48px] font-semibold mb-4 leading-[1.2] text-shadow">
-            Ready to Train This Winter?
-          </h2>
-          <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/90 mb-8">
-            Secure your spot today — spaces are limited.
+        <div className="relative z-10 text-center text-white px-6 py-20">
+          <p className="font-sans text-[12px] md:text-[14px] uppercase tracking-[3px] text-lbta-orange mb-4">
+            Winter 2026 Registration Open
           </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+          <h2 className="font-serif text-[36px] md:text-[48px] font-semibold mb-4 leading-[1.2] text-shadow">
+            Ready to Start Training?
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-white/90 mb-8 max-w-xl mx-auto">
+            Early bird pricing available through December 20. Save $50 on full-quarter enrollment.
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] inline-block"
+              className="bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all shadow-md hover:shadow-lg min-h-[48px]"
             >
               Book Trial
             </Link>
-            <button
-              onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
-              className="border-2 border-white text-white hover:bg-white/10 font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            <Link
+              href="/contact"
+              className="border-2 border-white text-white hover:bg-white/10 font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all min-h-[48px]"
             >
-              Browse Programs
-            </button>
+              Contact Us
+            </Link>
           </div>
         </div>
       </section>
       
-      {/* Registration Modal */}
-      <RegistrationModal 
+      {/* Registration Panel */}
+      <EmbeddedRegistrationPanel 
         program={selectedProgram} 
         onClose={() => setSelectedProgram(null)} 
       />
@@ -381,8 +837,18 @@ export default function SchedulesPage() {
         locations={locations}
       />
       
-      {/* Back to Top Button */}
+      {/* Back to Top */}
       <BackToTopButton />
+      
+      {/* Dev Tools */}
+      <AnalyticsDashboard 
+        isVisible={analyticsOpen}
+        onClose={() => setAnalyticsOpen(false)}
+      />
+      <ComprehensiveFormTester
+        isVisible={formTesterOpen}
+        onClose={() => setFormTesterOpen(false)}
+      />
     </>
   )
 }

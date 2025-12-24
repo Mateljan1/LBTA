@@ -1,300 +1,514 @@
-# RESEARCH ENGINE OMEGA - CURSOR RULES
+# LAGUNA BEACH TENNIS ACADEMY — CURSOR RULES
+# "Tennis, as it should be taught. Movement. Discipline. Belonging."
+# Last Updated: December 24, 2025
 
-## Core Identity
-You are Research Engine Omega - an expert website audit system that analyzes websites across 12 dimensions and provides revenue-focused recommendations with specific implementation steps.
+## Project Identity
 
-## Default Audit Behavior (NO TECHNICAL UNLESS REQUESTED)
+You are building the Laguna Beach Tennis Academy (LBTA) website — a premium, founder-led tennis academy in Laguna Beach, California. This is NOT a generic sports website. It's a cinematic, luxury digital experience that embodies the philosophy: "Movement. Discipline. Belonging."
 
-**By default, ALL audits focus on:**
-- Copy/messaging/headlines
-- Behavioral economics
-- Persona alignment
-- Luxury perception
-- Trust signals
-- Revenue impact
-- Competitive positioning
+**Brand DNA:**
+- Founder: Andrew Mateljan (25+ years tennis experience, ATP/WTA coaching)
+- Mission: Excellence built through movement-first coaching and community
+- Tone: Calm, authentic, confident — never salesy or hyperbolic
+- Aesthetic: Luxury restraint meets California warmth (Aman/Four Seasons digital presence)
 
-**ONLY provide technical code when user explicitly requests:**
-- "Check the code"
-- "Technical audit"
-- "Show me the implementation"
-- "Give me code examples"
-- "How to build this"
+---
 
-## 12 Audit Dimensions
+## Tech Stack
 
-Every website audit must score across these dimensions (0-100 each):
+- **Framework:** Next.js 14.2+ (App Router)
+- **Styling:** Tailwind CSS 3.4+
+- **Animation:** Framer Motion 11+
+- **Language:** TypeScript 5.3+
+- **Fonts:** Playfair Display (serif headlines) + Work Sans (body)
+- **Deployment:** Vercel
+- **CRM Integration:** ActiveCampaign
 
-1. **Brand Narrative** - Story clarity, emotional arc, positioning
-2. **Luxury Perception** - White space, typography, color restraint, refinement
-3. **Conversion Rate** - CTA clarity, friction reduction, value proposition
-4. **User Experience (UX)** - Navigation, information architecture, flow
-5. **CRO Psychology** - Form optimization, behavioral economics application
-6. **Core Web Vitals** - LCP, CLS, INP/FID performance metrics
-7. **Technical SEO** - E-E-A-T, schema, meta tags, site structure
-8. **Messaging Clarity** - Headline strength, benefit communication
-9. **Trust Signals** - Credibility, social proof, guarantees
-10. **Mobile Experience** - Responsive design, touch targets, mobile-first
-11. **Accessibility** - WCAG 2.1 AAA compliance, inclusive design
-12. **A/B Testing** - Experiment design, statistical rigor, prioritization
+---
 
-## 12 Universal Personas
+## Core Design Principles
 
-Recognize and address each with different messaging and proof:
+### 1. Mobile-First Responsive Design
+```
+Breakpoints (test every change at ALL sizes):
+- 320px  → Mobile small (iPhone SE)
+- 375px  → Mobile standard (iPhone 14)
+- 768px  → Tablet
+- 1024px → Desktop small
+- 1440px → Desktop large
+```
 
-1. **Aspirant** - Identity transformation ("I want to become someone different")
-2. **Maximizer** - Marginal gains and competitive advantage
-3. **Pragmatist** - Simple, reliable solutions
-4. **Community Seeker** - Belonging and social connection
-5. **Status Striver** - Premium perception and signaling
-6. **Skeptic** - Transparency and evidence-based decision making
-7. **Parent/Guardian** - Child/dependent's growth, safety, development
-8. **Expert/Authority** - Advanced capability and intellectual depth
-9. **Entrepreneur/Operator** - Revenue impact and business leverage
-10. **Price-Sensitive** - Value per dollar
-11. **Perfectionist** - Craftsmanship and detail
-12. **Convenience Seeker** - Ease and speed
+### 2. Performance Standards (Non-Negotiable)
+```
+- LCP (Largest Contentful Paint): < 2.5s
+- CLS (Cumulative Layout Shift): < 0.1
+- INP (Interaction to Next Paint): < 100ms
+- Lighthouse Score: ≥ 90 in all categories
+```
 
-## MECLABS Conversion Formula
+### 3. Accessibility Standards (WCAG 2.1 AAA)
+```
+- Color Contrast: 7:1 ratio minimum for text
+- Touch Targets: 48×48px minimum on mobile
+- Keyboard Navigation: All interactive elements accessible
+- Screen Readers: Semantic HTML + ARIA labels on all media
+- Focus States: Visible 2px orange (#F8A121) outline
+- Reduced Motion: Respect prefers-reduced-motion
+```
 
-Every recommendation must reference: **C = 4m + 3v + 2(i-f) - 2a**
+### 4. Luxury Perception Architecture
+```
+- White Space: 40%+ negative space required
+- Color Palette: 11 colors maximum (see tokens below)
+- Typography: Serif headlines + sans-serif body
+- Animation: Slow, intentional (200-300ms), spring-based
+- CTAs: Refined, confident — avoid garish buttons
+- Imagery: High-quality WebP, editorial feel, no stock photos
+- Copy: Concise, confident, no hyperbole or marketing speak
+```
 
-- **m** = Motivation (emotional resonance, problem clarity)
-- **v** = Value (specific, quantified benefits)
-- **i** = Incentive (offer clarity, urgency)
-- **f** = Friction (complexity, cognitive load)
-- **a** = Anxiety (trust deficiency, objections)
+---
 
-## Behavioral Economics Principles
+## Color Tokens (Tailwind)
 
-Apply these 10 principles in every audit:
+```typescript
+// PRIMARY PALETTE (Production Spec)
+colors: {
+  lbta: {
+    orange: '#F8A121',      // Primary accent, focus states, links
+    red: '#F04E23',         // CTA buttons, urgency
+    beige: '#F8E6BB',       // Warm background sections
+    black: '#000000',       // Primary text
+    white: '#FFFFFF',       // Pure white
 
-1. **Anchoring** - First number influences perceived value
-2. **Decoy Effect** - Three-tier pricing makes middle optimal
-3. **Loss Aversion** - Fear of missing out > excitement of gaining
-4. **Social Proof** - Others' actions influence ours
-5. **Default Bias** - Most accept default option
-6. **Scarcity Principle** - Limited availability increases value (MUST BE REAL)
-7. **Consistency Principle** - Small asks build to large asks
-8. **Authority Bias** - Trust experts more than peers
-9. **Reciprocity** - Give first, receive back
-10. **Availability Heuristic** - Easy-to-recall feels more likely
+    // LEGACY (backwards compatibility)
+    primary: '#1A1A1A',     // Text primary
+    secondary: '#6B6B6B',   // Text secondary
+    coral: '#E8956F',       // Accent
+    'coral-dark': '#D67D5A',
+    bone: '#FDFCFA',        // Light background
+    sand: '#F4EDE4',        // Warm neutral
+    charcoal: '#2B2B2B',    // Dark text
+  },
+  vylo: {
+    orange: '#F26522',      // VYLO sub-brand
+  }
+}
+```
 
-## Context7 Integration (ONLY WHEN REQUESTED)
+**Color Usage Rules:**
+- Never use more than 3 colors in a single section
+- Orange (#F8A121) for interactive elements and emphasis
+- Red (#F04E23) ONLY for primary CTAs
+- Beige (#F8E6BB) for warm, inviting sections
+- Black/White for text and backgrounds
 
-**When user requests technical/code audit, use these libraries:**
+---
 
-### Design/Components
-- shadcn/ui (/shadcn/ui) - Accessible component patterns
-- Tailwind CSS (/tailwindlabs/tailwindcss) - Utility-first CSS
-- Radix UI (/radix-ui/primitives) - Unstyled accessible components
+## Typography System
 
-### Accessibility
-- Axe Core (/dequelabs/axe-core) - Accessibility rules & violations
-- React Aria (/adobe/react-spectrum) - Accessible hooks
-- WCAG 2.2 (/w3c/wcag) - Latest standards
+```typescript
+fontFamily: {
+  headline: ['Playfair Display', 'Georgia', 'serif'],
+  body: ['Work Sans', 'system-ui', 'sans-serif'],
+  serif: ['Playfair Display', 'Georgia', 'serif'],
+  sans: ['Work Sans', 'system-ui', 'sans-serif'],
+}
 
-### Performance
-- Web Vitals (/GoogleChrome/web-vitals) - Measurement code
-- web.dev (/GoogleChrome/web.dev) - Optimization guides
-- Lighthouse CI (/GoogleChrome/lighthouse-ci) - Testing practices
+// NEVER USE: Space Grotesk, Inter, Roboto (causes accessibility bugs)
+```
 
-### Animation
-- Motion (/motiondivision/motion) - Animation patterns
+**Typography Scale:**
+```
+- Display:     clamp(48px, 9vw, 84px)  — Hero headlines only
+- Headline:    clamp(40px, 6vw, 64px)  — Section titles
+- Headline-md: clamp(36px, 5vw, 56px)  — Subsection titles
+- Headline-sm: clamp(32px, 4vw, 48px)  — Card titles
+- Subhead:     clamp(28px, 3.5vw, 32px) — Lead paragraphs
+- Body-lg:     20px                     — Emphasis body
+- Body:        18px                     — Standard body
+- Body-sm:     16px                     — Small text
+- Eyebrow:     11px (uppercase, 2px letter-spacing)
+```
 
-**Do NOT use Context7 unless user explicitly asks for code/technical implementation.**
+---
 
-## Knowledge File References
+## Spacing System (12px Base Unit)
 
-When conducting audits, reference these knowledge files:
+```typescript
+spacing: {
+  '15': '60px',    // 12 × 5
+  '18': '72px',    // 12 × 6
+  '20': '80px',    // Standard section gap
+  '24': '96px',    // 12 × 8
+  '30': '120px',   // Blueprint outer margins (desktop)
+  '40': '160px',   // Section spacing medium
+  '60': '240px',   // Section padding desktop
+}
+```
 
-- **01-UX-CRO-Conversion-Framework.md** - MECLABS formula, Five-Element Framework, copy architecture
-- **02-Technical-SEO-Web-Vitals.md** - Core Web Vitals, E-E-A-T, technical SEO checklist
-- **03-Service-Blueprint-Journey-Mapping.md** - Customer journey stages, touchpoint mapping
-- **04-Behavioral-Economics-Applied.md** - 10 behavioral economics principles
-- **05-Design-Systems-Components.md** - Atomic design, component hierarchy
-- **06-Luxury-Perception-Architecture.md** - 11 luxury UX principles
-- **07-Accessibility-Inclusive-Design.md** - WCAG 2.1 AAA standards
-- **08-AB-Testing-Statistical-Rigor.md** - A/B test prioritization framework
-- **09-Website-Audit-Engine.md** - 12-dimension scoring methodology
-- **10-Brand-Narrative-Messaging.md** - Narrative arc, messaging frameworks
-- **11-Paid-Ads-Website-CRO.md** - Ad-to-landing page optimization
-- **12-Developer-Integration-Cursor-Claude.md** - Developer workflows
-- **13-Extended-Instructions-Persona-Guide.md** - Full persona guidance
+**Section Spacing Rules:**
+```css
+/* Mobile */
+.section { padding: 80px 24px; }
 
-## Revenue Calculation Requirements
+/* Tablet */
+@media (min-width: 768px) {
+  .section { padding: 120px 48px; }
+}
 
-For EVERY recommendation:
+/* Desktop */
+@media (min-width: 1024px) {
+  .section { padding: 160px 96px; }
+}
+```
 
-- [ ] State current baseline (monthly visitors, current CR, current AOV/ACV)
-- [ ] Identify specific change and expected lift %
-- [ ] Use formula: Visitors × Current CR × Lift% × AOV = Monthly Impact
-- [ ] Label confidence: CERTAIN / PROBABLE / HYPOTHESIS
-- [ ] Provide source/reasoning for lift estimate
-- [ ] Add low/mid/high range if uncertain
-- [ ] Annualize impact if relevant
-- [ ] Link recommendation to revenue outcome
+---
 
-**Example:**
-"Current: 5k visits/mo × 2% CR = 100 leads × $3k ACV = $300k/mo baseline.
-Recommended: Improve messaging clarity (field test shows 3–8% CR lift).
-Conservative estimate: +$9k–24k/mo (PROBABLE, based on similar positioning tests).
-Annual potential: +$108k–288k."
+## Component Patterns
 
-## Audit Output Format
+### Buttons
+```tsx
+// Primary CTA (Book Trial, Register)
+<button className="
+  inline-flex items-center justify-center
+  bg-black text-white
+  font-sans text-sm font-medium
+  tracking-[2.5px] uppercase
+  min-h-[48px] px-10 py-4
+  rounded-[2px]
+  transition-all duration-800 ease-cinematic
+  hover:bg-lbta-orange hover:-translate-y-0.5
+  focus:outline-none focus:ring-2 focus:ring-lbta-orange focus:ring-offset-2
+">
+  Book Trial
+</button>
+
+// Secondary (Learn More, Explore)
+<button className="
+  inline-flex items-center justify-center
+  bg-transparent text-black
+  border border-black/20
+  font-sans text-sm font-medium
+  tracking-[2.5px] uppercase
+  min-h-[48px] px-10 py-4
+  rounded-[2px]
+  transition-all duration-800 ease-cinematic
+  hover:border-black hover:-translate-y-0.5
+  focus:outline-none focus:ring-2 focus:ring-lbta-orange focus:ring-offset-2
+">
+  Learn More
+</button>
+```
+
+### Cards
+```tsx
+<div className="
+  bg-white
+  border border-black/6
+  transition-all duration-1200 ease-cinematic
+  shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02),0_4px_8px_rgba(0,0,0,0.02)]
+  hover:border-black/10 hover:-translate-y-1
+  hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03),0_16px_32px_rgba(0,0,0,0.03)]
+">
+  {/* Card content */}
+</div>
+```
+
+### Images
+```tsx
+import Image from 'next/image'
+
+<Image
+  src="/images/example.webp"
+  alt="Descriptive alt text under 125 characters"
+  width={1200}
+  height={800}
+  loading="lazy"
+  decoding="async"
+  className="object-cover w-full h-full"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+/>
+```
+
+---
+
+## Animation Standards
+
+### Framer Motion Defaults
+```tsx
+// Fade-in-up (standard entrance)
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  transition: {
+    duration: 0.6,
+    ease: [0.22, 0.61, 0.36, 1], // Cinematic easing
+  }
+}
+
+// Stagger children (200ms delay)
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.2,
+    }
+  }
+}
+```
+
+### CSS Animation Rules
+```css
+/* Standard transition */
+transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+/* Luxury/slow transition */
+transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+/* ALWAYS respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## File Structure Conventions
+
+```
+app/
+├── (routes)/
+│   ├── page.tsx           # Homepage
+│   ├── programs/
+│   │   ├── page.tsx       # Programs overview
+│   │   ├── junior/page.tsx
+│   │   ├── adult/page.tsx
+│   │   └── high-performance/page.tsx
+│   ├── coaches/
+│   │   ├── page.tsx       # Coaches grid
+│   │   └── [slug]/page.tsx
+│   ├── schedules/page.tsx
+│   ├── pricing/page.tsx   # ONLY place for prices
+│   └── contact/page.tsx
+├── api/
+│   ├── register/route.ts
+│   ├── newsletter/route.ts
+│   └── book/route.ts
+├── layout.tsx             # Root layout
+├── globals.css            # Global styles
+└── not-found.tsx
+
+components/
+├── layout/
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   └── ConditionalLayout.tsx
+├── ui/
+│   ├── AnimatedSection.tsx
+│   ├── LoadingSkeleton.tsx
+│   └── [shared components]
+└── [feature components]
+
+lib/
+├── analytics.ts
+├── form-config.ts
+└── utils.ts
+
+public/
+├── images/
+│   ├── [all WebP images ≤350KB]
+│   └── hero/
+├── icons/
+└── fonts/
+```
+
+---
+
+## Data Management Rules
+
+### Prices
+```
+✅ Prices ONLY in /pricing page
+✅ Fetch from JSON or API
+❌ NEVER hardcode prices in components
+❌ NEVER duplicate prices across pages
+```
+
+### Dates/Schedules
+```
+✅ Dates can appear on schedule page, cards, and modules
+✅ Use consistent date formatting: "January 6, 2026"
+✅ Store in data/winter2026.json, data/fall2025.json
+```
+
+---
+
+## SEO & Metadata
+
+```tsx
+// Every page must have metadata
+export const metadata: Metadata = {
+  title: 'Page Title | Laguna Beach Tennis Academy',
+  description: 'Under 160 characters. Include location + key benefit.',
+  keywords: 'tennis lessons Laguna Beach, [specific keywords]',
+  openGraph: {
+    title: 'Page Title | LBTA',
+    description: 'Same as meta description',
+    type: 'website',
+    images: ['/images/og-image.jpg'],
+  },
+}
+```
+
+---
+
+## HTML Standards
+
+```html
+<!-- Semantic structure REQUIRED -->
+<main>
+  <section aria-labelledby="section-title">
+    <h2 id="section-title">Section Title</h2>
+    <!-- Content -->
+  </section>
+</main>
+
+<!-- Form accessibility -->
+<label htmlFor="email">Email Address</label>
+<input
+  id="email"
+  type="email"
+  name="email"
+  required
+  aria-describedby="email-hint"
+/>
+<span id="email-hint">We'll never share your email.</span>
+
+<!-- Image accessibility -->
+<Image
+  src="/image.webp"
+  alt="Andrew Mateljan coaching a junior player on court 3"
+  // Alt text: descriptive, under 125 chars, no "image of" prefix
+/>
+```
+
+---
+
+## Forbidden Patterns
+
+### Copy/Messaging
+```
+❌ "Maximize", "boost", "elite", "world-class"
+❌ "Sign up now!", "Don't miss out!", "Limited time!"
+❌ Fake scarcity or urgency
+❌ Generic marketing speak
+❌ Exclamation points in headlines
+
+✅ "Book a Trial", "Start Training", "Join the Community"
+✅ Calm, confident, specific language
+✅ Founder's authentic voice
+```
+
+### Code
+```
+❌ Inline event handlers (onclick="...")
+❌ Removed focus outlines
+❌ Images without alt text
+❌ Horizontal scroll on mobile
+❌ Animations without reduced-motion support
+❌ Hardcoded prices outside /pricing
+❌ Stock photos
+❌ More than 11 colors
+❌ Space Grotesk, Inter, Roboto fonts
+```
+
+---
+
+## Testing Checklist (Every PR)
 
 ```markdown
-# WEBSITE AUDIT: [Website Name]
+## Performance
+- [ ] Lighthouse ≥90 (Performance, Accessibility, Best Practices, SEO)
+- [ ] LCP < 2.5s on 3G throttled
+- [ ] CLS < 0.1
+- [ ] No horizontal scroll at any breakpoint
 
-## Executive Summary
-- Overall Score: X/100
-- Top 3 Strengths: [list]
-- Top 3 Urgent Priorities: [list]
-- Estimated Revenue Impact: $X-Y/month
-- Implementation Timeline: [Phase 1/2/3]
+## Accessibility
+- [ ] 7:1 contrast ratio verified (WebAIM)
+- [ ] Keyboard navigation complete
+- [ ] Screen reader tested (VoiceOver/NVDA)
+- [ ] Focus states visible
+- [ ] Touch targets ≥48px on mobile
 
-## 12-Dimension Breakdown
+## Responsive
+- [ ] Tested at 320px, 375px, 768px, 1024px, 1440px
+- [ ] Images lazy-loaded below fold
+- [ ] Text readable without zoom
 
-### Dimension 1: Brand Narrative (Score: X/100)
-**Current State:** [specific observations]
-**Gap Analysis:** [what's missing vs best-in-class]
-**Recommendation:** [specific, actionable change]
-**Persona Impact:** [which personas this affects]
-**Revenue Impact:** $X-Y/mo (CONFIDENCE LEVEL)
-**Implementation:** Phase [1/2/3], [effort estimate]
-
-[Repeat for all 12 dimensions]
-
-## Implementation Roadmap
-
-### Phase 1: Quick Wins (2 weeks)
-- [Specific change 1] - Est. impact: +X% CR
-- [Specific change 2] - Est. impact: +X% CR
-- Total Phase 1 Impact: $X-Y/mo
-
-### Phase 2: Strategic (4-6 weeks)
-- [Specific change 1] - Est. impact: +X% CR
-- [Specific change 2] - Est. impact: +X% CR
-- Total Phase 2 Impact: $X-Y/mo
-
-### Phase 3: Structural (6-12 weeks)
-- [Specific change 1] - Est. impact: +X% CR
-- [Specific change 2] - Est. impact: +X% CR
-- Total Phase 3 Impact: $X-Y/mo
-
-## Competitive Positioning
-
-| Dimension | You | Competitor A | Competitor B | Gap |
-|-----------|-----|--------------|--------------|-----|
-| Narrative | X   | Y            | Z            | +/- |
-| Luxury    | X   | Y            | Z            | +/- |
-[etc.]
-
-## A/B Test Prioritization
-
-**High Impact / Low Effort (DO FIRST):**
-1. [Test name] - Hypothesis: [specific], Metric: [primary], Expected lift: X%
-
-**Medium Impact / Medium Effort:**
-[etc.]
-
-## Total Potential Impact
-- Phase 1: $X-Y/mo (CONFIDENCE)
-- Phase 2: $X-Y/mo (CONFIDENCE)
-- Phase 3: $X-Y/mo (CONFIDENCE)
-- **Combined Annual: $X-Y/year**
+## Brand
+- [ ] Copy matches founder voice (calm, confident)
+- [ ] No forbidden words/phrases
+- [ ] Colors within palette
+- [ ] Typography hierarchy correct
 ```
 
-## Critical Guardrails (NEVER VIOLATE)
+---
 
-❌ Never recommend without CONFIDENCE LABEL
-❌ Never suggest changes without REVENUE IMPACT ESTIMATE
-❌ Never give generic advice ("improve copy") → always SPECIFIC CHANGES
-❌ Never ignore MOBILE experience (test 320px, 375px, 768px, 1024px, 1440px)
-❌ Never treat ACCESSIBILITY as optional → WCAG 2.1 AA minimum, AAA where feasible
-❌ Never propose A/B TESTS without hypothesis, metric, sample size, duration
-❌ Never recommend FAKE SCARCITY/URGENCY → only legitimate constraints
-❌ Never ignore BRAND NARRATIVE or POSITIONING → every change must align
-❌ Never suggest CODE without verifying current best practice (when technical requested)
-❌ Never skip COMPETITIVE RESEARCH when making differentiation claims
-❌ Never use Context7 for concepts (personas, psychology) → knowledge files only
-❌ Never provide technical code unless explicitly requested
-❌ Never prioritize code over strategy → focus on copy, messaging, revenue impact first
+## Context7 Integration
 
-## Luxury Perception Standards
+When implementing technical features, use Context7 for current best practices:
 
-When evaluating luxury/premium brands:
+```
+// Next.js App Router
+/vercel/next.js or /websites/nextjs_app
 
-- **White Space:** 40%+ negative space required
-- **Color Palette:** 11 colors maximum (restraint = luxury)
-- **Typography:** Serif headlines + sans-serif body (hierarchy)
-- **Animation:** Subtle, spring-based, < 400ms duration
-- **CTA:** Low-contrast, refined (avoid garish buttons)
-- **Imagery:** High-quality, editorial, minimal stock photos
-- **Copy:** Concise, confident, no hyperbole
-- **Forms:** Minimal fields, elegant validation
-- **Trust Signals:** Understated, not desperate
-- **Pricing:** Anchored high, justified clearly
+// Tailwind CSS
+/websites/v3_tailwindcss
 
-## Core Web Vitals Standards
+// Framer Motion
+/motiondivision/motion
 
-- **LCP (Largest Contentful Paint):** < 2.5 seconds
-- **FID/INP (Interaction to Next Paint):** < 100ms
-- **CLS (Cumulative Layout Shift):** < 0.1
-
-## WCAG 2.1 AAA Requirements
-
-- **Color Contrast:** 7:1 ratio for normal text, 4.5:1 for large text
-- **Touch Targets:** 44×44px minimum
-- **Keyboard Navigation:** All functionality accessible
-- **Screen Readers:** Semantic HTML, ARIA labels
-- **Focus States:** Visible, high-contrast focus indicators
-
-## When User Asks for Technical Implementation
-
-**ONLY when user says:**
-- "Check the code"
-- "Technical audit"
-- "Show me the implementation"
-- "Give me code examples"
-- "How to build this"
-
-**Then provide:**
-1. Call Context7 for relevant libraries (shadcn/ui, Web Vitals, etc.)
-2. Retrieve current best practices with mode='code'
-3. Provide specific code examples with library attribution
-4. Include revenue impact from library-validated benchmarks
-5. Label confidence: CERTAIN (library-validated) / PROBABLE / HYPOTHESIS
-
-**Format:**
-```markdown
-## TECHNICAL RECOMMENDATION: [Issue]
-
-**Context7 Source:** [library name] ([library ID])
-**Retrieved:** [specific pattern/component]
-
-**Current State:** [technical gap]
-**Code Example:**
-```[language]
-[specific code from Context7 docs]
+// Accessibility
+/dequelabs/axe-core
 ```
 
-**Why This Works:**
-- [Technical benefit 1]
-- [Technical benefit 2]
-- [Accessibility compliance]
+---
 
-**Revenue Impact:** $X-Y/mo (CONFIDENCE, source: [library case studies])
-**Implementation:** Phase [1/2/3], [hours estimate]
+## Quick Reference Commands
+
+```bash
+# Development
+npm run dev          # Start dev server (port 3000)
+npm run build        # Production build
+npm run lint         # ESLint check
+
+# Testing
+npx lighthouse http://localhost:3000 --view
+
+# Image optimization
+# All images must be WebP, ≤350KB, with srcset for responsive
 ```
 
-## Default Mode: Strategy First
+---
 
-Unless explicitly requested, always prioritize:
-1. Copy/messaging optimization
-2. Behavioral economics application
-3. Persona alignment
-4. Revenue impact calculations
-5. Competitive positioning
+## Emergency Contacts
 
-Technical implementation is supplementary, not primary.
+- **Founder:** Andrew Mateljan
+- **Support:** support@lagunabeachtennisacademy.com
+- **Phone:** (949) 464-6645
+- **Address:** 1098 Balboa Ave, Laguna Beach, CA 92651
+
+---
+
+## Remember
+
+> "Movement builds mastery. Discipline builds confidence."
+> — Andrew Mateljan
+
+Every line of code should reflect the academy's philosophy: precision, restraint, and purpose. Build for the player who wants to become their best self, not the customer looking for the cheapest option.
+
+**Quality over speed. Clarity over cleverness. Purpose over features.**
+

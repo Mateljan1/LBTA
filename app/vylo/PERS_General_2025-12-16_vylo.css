@@ -1,0 +1,275 @@
+/* ================================
+   VYLO PAGE — SCOPED STYLES
+   Neue Haas Grotesk typography system
+   ================================ */
+
+/* ================================
+   CSS VARIABLES
+   ================================ */
+
+.vylo-page {
+  /* Typography */
+  --font-display: 'neue-haas-grotesk-display', sans-serif;
+  --font-text: 'neue-haas-grotesk-text', sans-serif;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  /* Colors - Warm Palette */
+  --color-black: #0D0D0D;
+  --color-charcoal: #1A1A1A;
+  --color-white: #FAFAFA;
+  --color-cream: #F5F5F3;
+  --color-gray-100: #F0F0EE;
+  --color-gray-200: #E5E5E3;
+  --color-gray-400: #8A8A87;
+  --color-gray-500: #6A6A67;
+  --color-gray-600: #4A4A47;
+
+  /* Spacing */
+  --section-padding-desktop: 200px;
+  --section-padding-tablet: 140px;
+  --section-padding-mobile: 100px;
+  --content-max-width: 1200px;
+  --content-padding-x: 48px;
+  --content-padding-x-mobile: 24px;
+
+  /* Transitions */
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-medium: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ================================
+   BASE STYLES
+   ================================ */
+
+.vylo-page {
+  font-family: var(--font-text);
+  font-weight: var(--font-weight-regular);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--color-black);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.vylo-page * {
+  box-sizing: border-box;
+}
+
+.vylo-page h1,
+.vylo-page h2,
+.vylo-page h3,
+.vylo-page h4,
+.vylo-page h5,
+.vylo-page h6,
+.vylo-page p {
+  margin: 0;
+  padding: 0;
+}
+
+/* ================================
+   TYPOGRAPHY
+   ================================ */
+
+/* Headlines - Display font, medium weight */
+.vylo-page h1,
+.vylo-page .vylo-headline-xl {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.vylo-page h2,
+.vylo-page .vylo-headline-lg {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.vylo-page h3,
+.vylo-page .vylo-headline-md {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Labels - Tracked out, uppercase */
+.vylo-page .vylo-label {
+  font-family: var(--font-text);
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gray-400);
+}
+
+/* Body Text */
+.vylo-page .vylo-body {
+  font-family: var(--font-text);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: var(--color-gray-600);
+}
+
+.vylo-page .vylo-body-lg {
+  font-family: var(--font-text);
+  font-size: 18px;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+}
+
+.vylo-page .vylo-body-sm {
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.6;
+}
+
+/* ================================
+   BUTTONS
+   ================================ */
+
+.vylo-page .vylo-button {
+  display: inline-block;
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 18px 48px;
+  min-height: 44px;
+  min-width: 44px;
+  border: 1px solid;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  /* Enhanced touch targets for mobile */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.vylo-page .vylo-button-light {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--color-white);
+}
+
+.vylo-page .vylo-button-light:hover {
+  background: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.vylo-page .vylo-button-dark {
+  border-color: var(--color-black);
+  color: var(--color-black);
+}
+
+.vylo-page .vylo-button-dark:hover {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+/* ================================
+   LAYOUT
+   ================================ */
+
+.vylo-page .vylo-section {
+  padding: var(--section-padding-desktop) var(--content-padding-x);
+}
+
+.vylo-page .vylo-container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+/* ================================
+   ANIMATIONS
+   ================================ */
+
+.vylo-page .vylo-animate {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.vylo-page .vylo-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.vylo-page .vylo-stagger > *:nth-child(1) { transition-delay: 0.1s; }
+.vylo-page .vylo-stagger > *:nth-child(2) { transition-delay: 0.2s; }
+.vylo-page .vylo-stagger > *:nth-child(3) { transition-delay: 0.3s; }
+.vylo-page .vylo-stagger > *:nth-child(4) { transition-delay: 0.4s; }
+
+/* ================================
+   IMAGES
+   ================================ */
+
+.vylo-page .vylo-image {
+  filter: saturate(0.95) contrast(1.01);
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 1024px) {
+  .vylo-page .vylo-section {
+    padding: var(--section-padding-tablet) var(--content-padding-x);
+  }
+}
+
+@media (max-width: 768px) {
+  .vylo-page .vylo-section {
+    padding: var(--section-padding-mobile) var(--content-padding-x-mobile);
+  }
+
+  .vylo-page .vylo-button {
+    width: 100%;
+    text-align: center;
+    /* Enhanced mobile touch targets */
+    padding: 20px 48px;
+    min-height: 56px;
+  }
+
+  /* Mobile typography optimizations */
+  .vylo-page h1,
+  .vylo-page .vylo-headline-xl {
+    font-size: clamp(32px, 8vw, 56px);
+  }
+
+  .vylo-page h2,
+  .vylo-page .vylo-headline-lg {
+    font-size: clamp(24px, 6vw, 40px);
+  }
+
+  .vylo-page h3,
+  .vylo-page .vylo-headline-md {
+    font-size: clamp(20px, 5vw, 32px);
+  }
+
+  /* Improved mobile scrolling */
+  .vylo-page {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  .vylo-page * {
+    max-width: 100%;
+  }
+}

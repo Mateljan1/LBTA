@@ -1,0 +1,22 @@
+# Large video files - upload to CDN separately
+public/videos/vylo-hero.mp4
+public/vylo-hero.MP4
+
+# NOTE: Gallery photos are now imported statically for build-time optimization
+# They must be included in the build, not ignored
+# Large unoptimized images - uploading to Vercel for Next.js optimization
+public/photos/playerhousing.png
+public/photos/Closeupcourt.png
+public/photos/MaxResting.jpg
+
+# Build artifacts
+.next/
+node_modules/
+.git/
+
+# Development files
+*.swp
+*.backup
+*.working
+*.txt
+*.md
