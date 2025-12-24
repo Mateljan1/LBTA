@@ -158,7 +158,7 @@ function getApplicableTags(data: any): number[] {
     }
   }
   
-  return [...new Set(tags)]  // Remove duplicates
+  return Array.from(new Set(tags))  // Remove duplicates
 }
 
 export async function POST(request: NextRequest) {
