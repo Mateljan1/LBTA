@@ -161,22 +161,6 @@
       "description": "USTA Junior Team Tennis league play"
     },
     {
-      "id": "summer-jtt",
-      "name": "Summer Flex JTT",
-      "dates": "June 1 – July 26",
-      "weeks": 8,
-      "matchDay": "Flexible scheduling",
-      "practiceIncluded": true,
-      "divisions": [
-        { "age": "10U", "price": 2350 },
-        { "age": "12U", "price": 2800 },
-        { "age": "14U", "price": 2800 },
-        { "age": "18U", "price": 2800 }
-      ],
-      "includes": ["Flexible match scheduling", "Weekly practice", "Team uniform", "USTA registration"],
-      "description": "Flexible summer league with tournament preparation"
-    },
-    {
       "id": "fall-jtt",
       "name": "Fall JTT",
       "dates": "September 5 – November 22",

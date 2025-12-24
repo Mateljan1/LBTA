@@ -11,6 +11,7 @@ const navigation = [
   { name: 'Fitness', href: '/fitness' },
   { name: 'Schedules', href: '/schedules' },
   { name: 'Coaches', href: '/coaches' },
+  { name: 'Racquet Rescue', href: '/racquet-rescue' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ]

@@ -256,7 +256,7 @@ export default function SchedulesPage() {
               <div className="font-sans text-[11px] md:text-[12px] text-black/50 uppercase tracking-[2px] mt-2">Camp Programs</div>
             </div>
             <div className="text-center">
-              <div className="font-serif text-[48px] md:text-[56px] font-light text-black leading-none">3</div>
+              <div className="font-serif text-[48px] md:text-[56px] font-light text-black leading-none">2</div>
               <div className="font-sans text-[11px] md:text-[12px] text-black/50 uppercase tracking-[2px] mt-2">JTT Seasons</div>
             </div>
             <div className="text-center">
@@ -779,7 +779,7 @@ export default function SchedulesPage() {
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-black/5">
                 {year2026Data.camps.filter((c: any) => !c.featured).map((camp: any) => (
-                  <div key={camp.id} className="bg-white p-8 hover:bg-[#FAF8F3] transition-colors duration-300">
+                  <div key={camp.id} className="bg-white p-8 hover:bg-[#FAF8F3] transition-colors duration-300 flex flex-col">
                     <div className="mb-6">
                       <h3 className="font-serif text-[20px] md:text-[24px] font-normal text-black mb-1">
                         {camp.name}
@@ -802,13 +802,19 @@ export default function SchedulesPage() {
                       </div>
                     </div>
                     
-                    <div className="pt-6 border-t border-black/5">
-                      <div className="flex items-baseline justify-between">
+                    <div className="pt-6 border-t border-black/5 flex-grow">
+                      <div className="flex items-baseline justify-between mb-4">
                         <span className="font-serif text-[32px] font-light text-black">${camp.price}</span>
                         {camp.halfDay && (
                           <span className="font-sans text-[12px] text-black/50">Half-day: ${camp.halfDay}</span>
                         )}
                       </div>
+                      <Link
+                        href={`/contact?inquiry=camp&camp=${encodeURIComponent(camp.name)}`}
+                        className="block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-lbta-orange transition-colors duration-300"
+                      >
+                        Inquire
+                      </Link>
                     </div>
                   </div>
                 ))}
@@ -829,9 +835,9 @@ export default function SchedulesPage() {
                 </p>
               </div>
               
-              <div className="grid md:grid-cols-3 gap-px bg-black/5">
+              <div className="grid md:grid-cols-2 gap-px bg-black/5">
                 {year2026Data.jtt.map((season: any) => (
-                  <div key={season.id} className="bg-white">
+                  <div key={season.id} className="bg-white flex flex-col">
                     <div className="p-8 border-b border-black/5">
                       <h3 className="font-serif text-[24px] md:text-[28px] font-normal text-black mb-1">
                         {season.name}
@@ -842,7 +848,7 @@ export default function SchedulesPage() {
                       </p>
                     </div>
                     
-                    <div className="p-8">
+                    <div className="p-8 flex-grow">
                       <div className="space-y-0">
                         {season.divisions.map((div: any) => (
                           <div key={div.age} className="flex justify-between items-center py-4 border-b border-black/5 last:border-0">
@@ -851,6 +857,13 @@ export default function SchedulesPage() {
                           </div>
                         ))}
                       </div>
+                      
+                      <Link
+                        href={`/contact?inquiry=jtt&season=${encodeURIComponent(season.name)}`}
+                        className="mt-6 block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-lbta-orange transition-colors duration-300"
+                      >
+                        Inquire About {season.name}
+                      </Link>
                     </div>
                   </div>
                 ))}
