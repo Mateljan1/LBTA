@@ -42,7 +42,6 @@ export default function AboutPage() {
               transform: `translateY(${heroParallax}px)`
             }}
             sizes="100vw"
-            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/15 to-transparent" />
         </div>

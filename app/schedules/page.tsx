@@ -218,7 +218,6 @@ export default function SchedulesPage() {
               transform: `translateY(${heroParallax}px)`
             }}
             sizes="100vw"
-            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
         </div>

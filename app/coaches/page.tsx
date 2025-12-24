@@ -159,7 +159,6 @@ export default function CoachesPage() {
               transform: `translateY(${heroParallax}px)`
             }}
             sizes="100vw"
-            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/25 to-transparent" />
         </div>
