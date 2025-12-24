@@ -1,0 +1,137 @@
+{
+  "year": 2026,
+  "lastUpdated": "2025-12-24",
+  "quarters": [
+    {
+      "season": "Winter",
+      "dates": "January 5 – April 4",
+      "weeks": 13,
+      "registrationOpen": "December 1, 2025",
+      "earlyBirdDeadline": "December 20, 2025",
+      "earlyBirdDiscount": 50,
+      "status": "registration_open"
+    },
+    {
+      "season": "Spring",
+      "dates": "April 6 – June 13",
+      "weeks": 10,
+      "registrationOpen": "March 1, 2026",
+      "earlyBirdDeadline": "March 20, 2026",
+      "earlyBirdDiscount": 50,
+      "status": "coming_soon"
+    },
+    {
+      "season": "Summer",
+      "dates": "June 15 – August 21",
+      "weeks": 10,
+      "registrationOpen": "May 1, 2026",
+      "earlyBirdDeadline": "May 20, 2026",
+      "earlyBirdDiscount": 50,
+      "status": "coming_soon"
+    },
+    {
+      "season": "Fall",
+      "dates": "August 24 – December 19",
+      "weeks": 17,
+      "registrationOpen": "July 15, 2026",
+      "earlyBirdDeadline": "August 1, 2026",
+      "earlyBirdDiscount": 50,
+      "status": "coming_soon"
+    }
+  ],
+  "camps": [
+    {
+      "name": "Ski Week Camp",
+      "dates": "February 16–20",
+      "days": 5,
+      "hours": "9:00 AM – 3:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "description": "Full-day tennis camp during Presidents' Week break"
+    },
+    {
+      "name": "Spring Break Camp",
+      "dates": "March 30 – April 3",
+      "days": 5,
+      "hours": "9:00 AM – 3:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "description": "Intensive training during spring break"
+    },
+    {
+      "name": "Summer Camps",
+      "dates": "June 15 – August 14",
+      "days": "Weekly sessions",
+      "hours": "9:00 AM – 3:00 PM",
+      "ages": "5-17",
+      "location": "Laguna Beach High School",
+      "description": "Full-day summer tennis camps with half-day options"
+    },
+    {
+      "name": "Back-to-School Mini Camp",
+      "dates": "August 17–19",
+      "days": 3,
+      "hours": "9:00 AM – 1:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "description": "Get back in the groove before school starts"
+    },
+    {
+      "name": "Thanksgiving Camp",
+      "dates": "November 23–25",
+      "days": 3,
+      "hours": "9:00 AM – 1:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "description": "Holiday tennis fun during Thanksgiving break"
+    },
+    {
+      "name": "Winter Break Camp",
+      "dates": "December 21–24 & December 28–31",
+      "days": "8 (2 sessions)",
+      "hours": "9:00 AM – 1:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "description": "Holiday camps during winter break"
+    }
+  ],
+  "jtt": [
+    {
+      "season": "Spring JTT",
+      "dates": "January 12 – April 26",
+      "weeks": 15,
+      "matchDay": "Sundays",
+      "practiceIncluded": true,
+      "divisions": ["10U", "12U", "14U", "18U"],
+      "description": "USTA Junior Team Tennis league play"
+    },
+    {
+      "season": "Summer Flex JTT",
+      "dates": "June 1 – July 26",
+      "weeks": 8,
+      "matchDay": "Flexible scheduling",
+      "practiceIncluded": true,
+      "divisions": ["10U", "12U", "14U", "18U"],
+      "description": "Flexible summer league with tournament preparation"
+    },
+    {
+      "season": "Fall JTT",
+      "dates": "September 5 – November 22",
+      "weeks": 12,
+      "matchDay": "Sundays",
+      "practiceIncluded": true,
+      "divisions": ["10U", "12U", "14U", "18U"],
+      "description": "Fall league competition season"
+    }
+  ],
+  "holidays": [
+    { "name": "Martin Luther King Jr. Day", "date": "January 19", "status": "no_classes" },
+    { "name": "Presidents' Day", "date": "February 16", "status": "camp_only" },
+    { "name": "Memorial Day", "date": "May 25", "status": "no_classes" },
+    { "name": "Independence Day", "date": "July 4", "status": "no_classes" },
+    { "name": "Labor Day", "date": "September 7", "status": "no_classes" },
+    { "name": "Thanksgiving", "date": "November 26-27", "status": "camp_only" },
+    { "name": "Winter Break", "date": "December 21 – January 4", "status": "camp_only" }
+  ]
+}
+
