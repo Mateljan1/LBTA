@@ -1,13 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
 import StickyCTA from '@/components/StickyCTA'
 import TrustBadges from '@/components/TrustBadges'
 import FAQSection from '@/components/FAQSection'
-import AnimatedSection from '@/components/AnimatedSection'
 
 // LocalBusiness Schema for SEO
 const localBusinessSchema = {
@@ -62,45 +61,54 @@ const localBusinessSchema = {
     "@type": "AggregateRating",
     "ratingValue": "5.0",
     "reviewCount": "47"
-  },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Tennis Programs",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Junior Tennis Programs",
-          "description": "Red Ball, Orange Ball, Green Ball, and competitive junior development"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Adult Tennis Programs",
-          "description": "Beginner, intermediate, and advanced adult tennis lessons"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "High Performance Training",
-          "description": "Tournament preparation and competitive player development"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Cardio Tennis & LiveBall",
-          "description": "High-energy fitness classes combining tennis and cardio"
-        }
-      }
-    ]
   }
+}
+
+// Intersection Observer hook for scroll animations
+function useInView(options = {}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsInView(true)
+        observer.disconnect()
+      }
+    }, { threshold: 0.1, rootMargin: '-50px', ...options })
+
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
+  return { ref, isInView }
+}
+
+// Animated Section Component
+function AnimatedSection({ 
+  children, 
+  className = '', 
+  delay = 0 
+}: { 
+  children: React.ReactNode
+  className?: string
+  delay?: number 
+}) {
+  const { ref, isInView } = useInView()
+  
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-luxury ${className}`}
+      style={{
+        opacity: isInView ? 1 : 0,
+        transform: isInView ? 'translateY(0)' : 'translateY(32px)',
+        transitionDelay: `${delay}ms`
+      }}
+    >
+      {children}
+    </div>
+  )
 }
 
 export default function Home() {
@@ -115,7 +123,7 @@ export default function Home() {
   // Parallax effect on hero
   useEffect(() => {
     const handleScroll = () => {
-      setHeroParallax(window.scrollY * 0.4)
+      setHeroParallax(window.scrollY * 0.3)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
@@ -155,10 +163,12 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
       
-      {/* SCENE 1: HERO - "The Standard" */}
+      {/* ============================================
+          SCENE 1: HERO - "The Standard"
+          ============================================ */}
       <section 
         id="hero" 
-        className="relative min-h-[65vh] md:h-screen md:min-h-[600px] flex items-center justify-center overflow-hidden"
+        className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center overflow-hidden"
       >
         <video 
           autoPlay 
@@ -168,136 +178,161 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ 
             objectPosition: '50% 70%',
-            transform: `translateY(${heroParallax}px)`
+            transform: `translateY(${heroParallax}px) scale(1.1)`
           }}
           aria-label="Laguna Beach Tennis Academy training video"
           poster="/images/hero/laguna-horizon.webp"
         >
           <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/25 to-transparent" aria-hidden="true"></div>
         
-        <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto w-[90%] flex flex-col justify-center min-h-[65vh] md:min-h-0">
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" aria-hidden="true" />
+        
+        <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
           {/* Eyebrow */}
-          <p 
-            className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/80 mb-4 md:mb-6"
-            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
-          >
+          <p className="text-eyebrow text-white/70 mb-6 text-shadow-subtle">
             Laguna Beach, California
           </p>
           
-          <h1 
-            className="font-serif text-[36px] md:text-[72px] font-bold leading-[1.1] tracking-[-0.5px] mb-4 md:mb-6"
-            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.45)' }}
-          >
+          {/* Main Headline */}
+          <h1 className="font-serif text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-[1.05] tracking-[-0.02em] mb-6 text-shadow-hero">
             Tennis, as it should be taught.
           </h1>
-          <p 
-            className="font-serif text-[20px] md:text-[32px] leading-[1.2] mb-6 md:mb-8"
-            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.45)' }}
-          >
+          
+          {/* Subheadline */}
+          <p className="font-serif text-[clamp(1.25rem,3vw,1.75rem)] text-white/90 mb-10 text-shadow-subtle">
             Movement. Discipline. Belonging.
           </p>
           
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-4">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Link
               href="/book"
-              className="group bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] md:text-[15px] py-4 px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl min-h-[48px] inline-flex items-center gap-2 hover:-translate-y-0.5"
+              className="btn-pill-primary group"
             >
-              Book Your Free Trial
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
+              <span>Book Your Free Trial</span>
+              <svg className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
             <Link
               href="/programs"
-              className="text-white/90 hover:text-white font-sans text-[14px] md:text-[15px] py-3 px-6 rounded-full transition-all duration-300 border border-white/30 hover:border-white/60 hover:bg-white/10"
+              className="btn-pill-secondary"
             >
               View Programs
             </Link>
           </div>
           
-          {/* Social proof under CTA */}
-          <div className="flex items-center justify-center gap-3 mb-6">
+          {/* Social Proof */}
+          <div className="flex items-center justify-center gap-4">
             <div className="flex -space-x-2">
               {[1, 2, 3, 4].map((i) => (
                 <div 
                   key={i} 
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-white/30 to-white/10 border-2 border-white/50 backdrop-blur-sm"
+                  className="w-8 h-8 rounded-full bg-gradient-to-br from-white/30 to-white/10 border-2 border-white/40"
                 />
               ))}
             </div>
-            <p className="font-sans text-[13px] text-white/80">
+            <p className="text-body-sm text-white/70">
               <span className="font-semibold text-white">500+</span> players trained this year
             </p>
           </div>
-          
-          <p 
-            className="text-lbta-orange font-sans text-[13px] md:text-[14px] uppercase tracking-[2px] cursor-pointer hover:opacity-80 transition-opacity animate-bounce"
-            onClick={() => document.getElementById('founder')?.scrollIntoView({ behavior: 'smooth' })}
-            style={{ animationDuration: '2s' }}
-          >
-            Explore ↓
-          </p>
         </div>
+        
+        {/* Scroll Indicator */}
+        <button 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-lbta-orange flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity"
+          onClick={() => document.getElementById('founder')?.scrollIntoView({ behavior: 'smooth' })}
+          aria-label="Scroll to content"
+        >
+          <span className="text-eyebrow-sm tracking-widest">Explore</span>
+          <svg className="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ animationDuration: '2s' }}>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </button>
       </section>
 
-      {/* TRUST BADGES - Social Proof */}
+      {/* ============================================
+          TRUST BADGES - Social Proof
+          ============================================ */}
       <TrustBadges />
 
-      {/* SCENE 2: FOUNDER - "The Vision" */}
-      <section 
-        id="founder" 
-        className="bg-[#F8E6BB] py-12 md:py-20"
-      >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-            {/* Left: Image */}
-            <div className="relative aspect-[4/3] md:aspect-[3/4] overflow-hidden">
-              <Image
-                src="/images/founder/andrew-portrait.webp"
-                alt="Andrew Mateljan, Founder & Head Coach"
-                fill
-                className="object-cover"
-                style={{ objectPosition: '50% 30%' }}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
+      {/* ============================================
+          SCENE 2: FOUNDER - "The Vision"
+          ============================================ */}
+      <section id="founder" className="bg-lbta-beige section-lg">
+        <div className="container-lbta">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Image */}
+            <AnimatedSection>
+              <div className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden rounded-subtle">
+                <Image
+                  src="/images/founder/andrew-portrait.webp"
+                  alt="Andrew Mateljan, Founder & Head Coach"
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: '50% 30%' }}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </AnimatedSection>
             
-            {/* Right: Story */}
-            <div className="space-y-6">
-              <h2 className="font-serif text-[28px] md:text-[48px] leading-[1.1] font-semibold text-black">
-                Founded in Laguna Beach by Andrew Mateljan
-              </h2>
-              <p className="font-sans text-[16px] leading-[1.8] text-black/85">
-                A lifetime in the game — from international courts to California's coast.
-              </p>
-              <p className="font-sans text-[16px] leading-[1.8] text-black/85">
-                25 years in tennis as a top-ranked junior and international coach. 
-                Years spent coaching in Spain and Croatia shaped a movement-first approach 
-                grounded in clarity and accountability. Now guiding players of every level 
-                toward their best version of the game.
-              </p>
-              <blockquote className="font-serif italic text-[24px] leading-[1.4] text-lbta-orange pt-6">
-                "Movement builds mastery. Discipline builds confidence."
-                <footer className="font-sans text-[16px] not-italic text-black/70 mt-2">
-                  — Andrew Mateljan
-                </footer>
-              </blockquote>
-              <Link 
-                href="/about" 
-                className="inline-block font-sans font-semibold text-[16px] text-lbta-red hover:underline transition-all"
-              >
-                Read Andrew's Story →
-              </Link>
+            {/* Content */}
+            <div className="lg:py-8">
+              <AnimatedSection delay={100}>
+                <span className="text-eyebrow mb-4 block">Our Founder</span>
+              </AnimatedSection>
+              
+              <AnimatedSection delay={200}>
+                <h2 className="text-headline mb-6">
+                  Founded in Laguna Beach by Andrew Mateljan
+                </h2>
+              </AnimatedSection>
+              
+              <AnimatedSection delay={300}>
+                <p className="text-subhead mb-6">
+                  A lifetime in the game — from international courts to California's coast.
+                </p>
+              </AnimatedSection>
+              
+              <AnimatedSection delay={400}>
+                <p className="text-body text-lbta-slate mb-8">
+                  25 years in tennis as a top-ranked junior and international coach. 
+                  Years spent coaching in Spain and Croatia shaped a movement-first approach 
+                  grounded in clarity and accountability. Now guiding players of every level 
+                  toward their best version of the game.
+                </p>
+              </AnimatedSection>
+              
+              <AnimatedSection delay={500}>
+                <blockquote className="border-l-2 border-lbta-orange pl-6 mb-8">
+                  <p className="font-serif text-[1.5rem] italic text-lbta-charcoal leading-relaxed mb-3">
+                    "Movement builds mastery. Discipline builds confidence."
+                  </p>
+                  <footer className="text-body-sm text-lbta-slate">
+                    — Andrew Mateljan
+                  </footer>
+                </blockquote>
+              </AnimatedSection>
+              
+              <AnimatedSection delay={600}>
+                <Link href="/about" className="btn-ghost">
+                  <span>Read Andrew's Story</span>
+                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </AnimatedSection>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SCENE 3: RESULTS - "Results in Motion" */}
-      <section 
-        id="results" 
-        className="relative min-h-[60vh] md:h-[80vh] md:min-h-[500px] flex items-center overflow-hidden"
-      >
+      {/* ============================================
+          SCENE 3: RESULTS - "Results in Motion"
+          ============================================ */}
+      <section id="results" className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/results/karue-training.webp"
@@ -307,38 +342,55 @@ export default function Home() {
             style={{ objectPosition: '50% 35%' }}
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
         </div>
         
-        <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-20 lg:px-40 w-full">
-          <div className="max-w-2xl">
-            <h2 className="font-serif text-[60px] md:text-[72px] font-bold text-white leading-[1.1] tracking-[-0.5px] mb-4">
-              #858 → #258 ATP
-            </h2>
-            <p className="font-sans text-[18px] text-white/90 leading-[1.6] mb-3">
-              Guided by structure, repetition, and trust.
-            </p>
-            <p className="font-sans text-[16px] text-white/80 mb-6">
-              Karue Sell — ATP Tour Player<br />
-              Coached by Andrew Mateljan | Laguna Beach Tennis Academy
-            </p>
-            <Link 
-              href="/success-stories" 
-              className="inline-block font-sans text-[16px] text-lbta-orange hover:underline transition-all"
-            >
-              Watch His Journey →
-            </Link>
+        <div className="relative z-10 container-lbta">
+          <div className="max-w-xl">
+            <AnimatedSection>
+              <span className="text-eyebrow text-lbta-orange mb-4 block">Player Success</span>
+            </AnimatedSection>
+            
+            <AnimatedSection delay={100}>
+              <h2 className="font-serif text-[clamp(3rem,8vw,5rem)] font-bold text-white leading-[1] tracking-[-0.02em] mb-6">
+                #858 → #258
+                <span className="block text-[0.5em] font-normal text-white/70 mt-2">ATP World Ranking</span>
+              </h2>
+            </AnimatedSection>
+            
+            <AnimatedSection delay={200}>
+              <p className="text-body-lg text-white/80 mb-2">
+                Guided by structure, repetition, and trust.
+              </p>
+              <p className="text-body text-white/60 mb-8">
+                Karue Sell — ATP Tour Player<br />
+                Coached by Andrew Mateljan
+              </p>
+            </AnimatedSection>
+            
+            <AnimatedSection delay={300}>
+              <Link href="/success-stories" className="btn-ghost text-lbta-orange">
+                <span>Watch His Journey</span>
+                <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* SCENE 4: PHILOSOPHY - "Our System" */}
-      <section 
-        id="philosophy" 
-        className="bg-[#F8E6BB] py-12 md:py-20"
-      >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20">
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12 md:auto-rows-fr">
+      {/* ============================================
+          SCENE 4: PHILOSOPHY - "Our System"
+          ============================================ */}
+      <section id="philosophy" className="bg-lbta-beige section-lg">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-16">
+            <span className="text-eyebrow mb-4 block">Our Philosophy</span>
+            <h2 className="text-headline">The Three Pillars</h2>
+          </AnimatedSection>
+          
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
             {[
               {
                 image: '/images/philosophy/movement.webp',
@@ -359,45 +411,47 @@ export default function Home() {
                 detail: 'Players support each other through wins, losses, and growth.'
               },
             ].map((pillar, i) => (
-              <div 
-                key={pillar.title}
-                className="group cursor-default flex flex-col"
-              >
-                <div className="relative aspect-square overflow-hidden mb-6 rounded-lg transition-all duration-200 group-hover:scale-[1.03] group-hover:shadow-hover">
-                  <Image
-                    src={pillar.image}
-                    alt={`${pillar.title} - ${pillar.description}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
+              <AnimatedSection key={pillar.title} delay={i * 150}>
+                <div className="group">
+                  <div className="relative aspect-square overflow-hidden rounded-subtle mb-6">
+                    <Image
+                      src={pillar.image}
+                      alt={`${pillar.title} - ${pillar.description}`}
+                      fill
+                      className="object-cover image-zoom"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <h3 className="font-serif text-headline-sm mb-3 group-hover:text-lbta-orange transition-colors">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-body text-lbta-charcoal mb-2">
+                    {pillar.description}
+                  </p>
+                  <p className="text-body-sm text-lbta-slate">
+                    {pillar.detail}
+                  </p>
                 </div>
-                <h3 className="font-serif text-[24px] font-semibold text-black mb-2">
-                  {pillar.title}
-                </h3>
-                <p className="font-sans text-[16px] text-black/80 leading-[1.6] mb-2">
-                  {pillar.description}
-                </p>
-                <p className="font-sans text-[14px] text-black/60 leading-[1.6]">
-                  {pillar.detail}
-                </p>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SCENE 5: PROGRAMS - "Pathways for Every Player" */}
-      <section 
-        id="programs" 
-        className="bg-[#FAF8F3] py-12 md:py-20"
-      >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20">
-          <h2 className="font-serif text-[40px] md:text-[48px] font-semibold text-black mb-12 text-center">
-            Pathways for Every Player
-          </h2>
+      {/* ============================================
+          SCENE 5: PROGRAMS - "Pathways for Every Player"
+          ============================================ */}
+      <section id="programs" className="bg-lbta-cream section-lg">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-16">
+            <span className="text-eyebrow mb-4 block">Our Programs</span>
+            <h2 className="text-headline mb-4">Pathways for Every Player</h2>
+            <p className="text-subhead max-w-2xl mx-auto">
+              From first serves to tournament victories, we have a program for you.
+            </p>
+          </AnimatedSection>
           
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-12">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-10 mb-12">
             {[
               {
                 image: '/images/programs/juniors.webp',
@@ -417,47 +471,41 @@ export default function Home() {
                 description: 'Personal sessions built around your goals.',
                 link: '/book',
               },
-            ].map((program) => (
-              <Link 
-                key={program.title}
-                href={program.link}
-                className="group block"
-              >
-                <div className="relative aspect-[3/2] overflow-hidden mb-4 bg-gray-100">
-                  <Image
-                    src={program.image}
-                    alt={program.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <h3 className="font-serif text-[24px] font-semibold text-black mb-2 group-hover:text-lbta-orange transition-colors">
-                  {program.title}
-                </h3>
-                <p className="font-sans text-[16px] text-black/70">
-                  {program.description}
-                </p>
-              </Link>
+            ].map((program, i) => (
+              <AnimatedSection key={program.title} delay={i * 150}>
+                <Link href={program.link} className="group block">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-subtle mb-5">
+                    <Image
+                      src={program.image}
+                      alt={program.title}
+                      fill
+                      className="object-cover image-zoom"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <h3 className="font-serif text-headline-sm mb-2 group-hover:text-lbta-orange transition-colors duration-300">
+                    {program.title}
+                  </h3>
+                  <p className="text-body text-lbta-slate">
+                    {program.description}
+                  </p>
+                </Link>
+              </AnimatedSection>
             ))}
           </div>
           
-          <div className="text-center">
-            <Link 
-              href="/programs" 
-              className="inline-block font-sans text-[16px] text-lbta-orange hover:underline transition-all"
-            >
-              View All Programs →
+          <AnimatedSection className="text-center">
+            <Link href="/programs" className="btn-secondary">
+              <span>View All Programs</span>
             </Link>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* SCENE 6: DESTINATION - "Laguna Advantage" */}
-      <section 
-        id="destination" 
-        className="relative min-h-[50vh] md:h-[70vh] md:min-h-[500px] flex items-center justify-center overflow-hidden"
-      >
+      {/* ============================================
+          SCENE 6: DESTINATION - "Laguna Advantage"
+          ============================================ */}
+      <section id="destination" className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/hero/laguna-horizon.webp"
@@ -465,139 +513,129 @@ export default function Home() {
             fill
             className="object-cover"
             sizes="100vw"
-            priority={false}
           />
-          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
         
-        <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
-          <h2 className="font-serif text-[40px] md:text-[48px] font-semibold leading-[1.2] mb-4">
-            Train where focus meets horizon.
-          </h2>
-          <p className="font-sans text-[18px] md:text-[20px] leading-[1.6] text-white/90">
-            Laguna Beach — where performance meets perspective.
-          </p>
+        <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">
+          <AnimatedSection>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-semibold leading-[1.2] mb-4 text-shadow-hero">
+              Train where focus meets horizon.
+            </h2>
+            <p className="text-body-lg text-white/80 text-shadow-subtle">
+              Laguna Beach — where performance meets perspective.
+            </p>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* SCENE 7: COMMUNITY - "Players Who Train Our Way" */}
-      <section 
-        id="community" 
-        className="bg-[#F8E6BB]/20 py-12 md:py-20"
-      >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-20">
-          <h2 className="font-serif text-[40px] font-semibold text-black mb-4 text-center">
-            Players who train our way.
-          </h2>
-          <p className="font-sans text-[18px] text-black/85 mb-12 text-center max-w-3xl mx-auto">
-            From junior pathways to ATP courts, each player shares the same standard.
-          </p>
+      {/* ============================================
+          SCENE 7: COMMUNITY - "Players Who Train Our Way"
+          ============================================ */}
+      <section id="community" className="bg-lbta-cream section-lg">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-12">
+            <span className="text-eyebrow mb-4 block">Our Community</span>
+            <h2 className="text-headline mb-4">Players who train our way.</h2>
+            <p className="text-subhead max-w-2xl mx-auto">
+              From junior pathways to ATP courts, each player shares the same standard.
+            </p>
+          </AnimatedSection>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            {[1, 2, 3, 4, 5, 6].map((num) => (
-              <div 
-                key={num}
-                className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded"
-              >
-                <Image
-                  src={`/images/community/community-${num}.webp`}
-                  alt={`LBTA community member ${num}`}
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: '50% 20%' }}
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                />
-              </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {[1, 2, 3, 4, 5, 6].map((num, i) => (
+              <AnimatedSection key={num} delay={i * 100}>
+                <div className="relative aspect-[3/4] overflow-hidden rounded-subtle">
+                  <Image
+                    src={`/images/community/community-${num}.webp`}
+                    alt={`LBTA community member ${num}`}
+                    fill
+                    className="object-cover image-zoom"
+                    style={{ objectPosition: '50% 20%' }}
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SCENE 7.5: TESTIMONIALS - "What Our Players Say" */}
-      <section className="bg-white py-16 md:py-24">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-          <h2 className="font-serif text-[36px] md:text-[44px] font-semibold text-black mb-4 text-center">
-            What our players say.
-          </h2>
-          <p className="font-sans text-[16px] md:text-[18px] text-black/70 mb-12 text-center max-w-2xl mx-auto">
-            Real feedback from families and players who train with LBTA.
-          </p>
+      {/* ============================================
+          SCENE 7.5: TESTIMONIALS - "What Our Players Say"
+          ============================================ */}
+      <section className="bg-white section">
+        <div className="container-lbta max-w-5xl">
+          <AnimatedSection className="text-center mb-12">
+            <span className="text-eyebrow mb-4 block">Testimonials</span>
+            <h2 className="text-headline mb-4">What our players say.</h2>
+            <p className="text-subhead max-w-xl mx-auto">
+              Real feedback from families and players who train with LBTA.
+            </p>
+          </AnimatedSection>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Testimonial 1 */}
-            <div className="bg-[#FAF8F3] p-8 rounded-lg">
-              <div className="flex items-center gap-1 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <svg key={star} className="w-5 h-5 text-lbta-orange" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="font-sans text-[15px] text-black/80 leading-[1.7] mb-6">
-                "Andrew's coaching transformed my son's game in just one season. The movement-first approach is unlike anything we've experienced. His confidence on court has skyrocketed."
-              </p>
-              <div>
-                <p className="font-sans text-[14px] font-semibold text-black">Sarah M.</p>
-                <p className="font-sans text-[13px] text-black/60">Parent, Junior Development</p>
-              </div>
-            </div>
-            
-            {/* Testimonial 2 */}
-            <div className="bg-[#FAF8F3] p-8 rounded-lg">
-              <div className="flex items-center gap-1 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <svg key={star} className="w-5 h-5 text-lbta-orange" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="font-sans text-[15px] text-black/80 leading-[1.7] mb-6">
-                "After 20 years away from tennis, I was nervous to start again. The adult beginner program made me feel welcome from day one. Michelle and the team are incredible."
-              </p>
-              <div>
-                <p className="font-sans text-[14px] font-semibold text-black">David R.</p>
-                <p className="font-sans text-[13px] text-black/60">Adult Beginner Program</p>
-              </div>
-            </div>
-            
-            {/* Testimonial 3 */}
-            <div className="bg-[#FAF8F3] p-8 rounded-lg">
-              <div className="flex items-center gap-1 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <svg key={star} className="w-5 h-5 text-lbta-orange" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="font-sans text-[15px] text-black/80 leading-[1.7] mb-6">
-                "The JTT program gave my daughter real match experience and taught her how to compete. She went from nervous to confident, and now loves tournament play."
-              </p>
-              <div>
-                <p className="font-sans text-[14px] font-semibold text-black">Jennifer T.</p>
-                <p className="font-sans text-[13px] text-black/60">Parent, Junior Team Tennis</p>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              {
+                quote: "Andrew's coaching transformed my son's game in just one season. The movement-first approach is unlike anything we've experienced.",
+                name: "Sarah M.",
+                role: "Parent, Junior Development"
+              },
+              {
+                quote: "After 20 years away from tennis, I was nervous to start again. The adult beginner program made me feel welcome from day one.",
+                name: "David R.",
+                role: "Adult Beginner Program"
+              },
+              {
+                quote: "The JTT program gave my daughter real match experience. She went from nervous to confident, and now loves tournament play.",
+                name: "Jennifer T.",
+                role: "Parent, Junior Team Tennis"
+              },
+            ].map((testimonial, i) => (
+              <AnimatedSection key={i} delay={i * 150}>
+                <div className="card-flat p-8 h-full flex flex-col">
+                  {/* Stars */}
+                  <div className="flex gap-1 mb-5">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <svg key={star} className="w-4 h-4 text-lbta-orange" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  
+                  <p className="text-body text-lbta-charcoal mb-6 flex-grow">
+                    "{testimonial.quote}"
+                  </p>
+                  
+                  <div>
+                    <p className="text-ui font-semibold text-lbta-black">{testimonial.name}</p>
+                    <p className="text-ui-sm text-lbta-slate">{testimonial.role}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
           
-          <div className="text-center mt-10">
-            <Link 
-              href="/success-stories" 
-              className="inline-block font-sans text-[16px] text-lbta-orange hover:underline transition-all"
-            >
-              Read More Success Stories →
+          <AnimatedSection className="text-center mt-12">
+            <Link href="/success-stories" className="btn-ghost">
+              <span>Read More Success Stories</span>
+              <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* FAQ SECTION */}
+      {/* ============================================
+          FAQ SECTION
+          ============================================ */}
       <FAQSection />
 
-      {/* SCENE 8: CTA - "The Invitation" */}
-      <section 
-        id="cta" 
-        className="relative min-h-[500px] md:min-h-[600px] flex items-center justify-center overflow-hidden"
-      >
+      {/* ============================================
+          SCENE 8: CTA - "The Invitation"
+          ============================================ */}
+      <section id="cta" className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/cta/cta-background.webp"
@@ -606,51 +644,61 @@ export default function Home() {
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30" />
         </div>
         
-        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto py-20">
-          <h2 className="font-serif text-[40px] md:text-[48px] font-semibold mb-8 leading-[1.2]">
-            Start training with purpose.
-          </h2>
+        <div className="relative z-10 text-center text-white px-6 max-w-lg mx-auto py-20">
+          <AnimatedSection>
+            <span className="text-eyebrow text-lbta-orange mb-4 block">Get Started</span>
+          </AnimatedSection>
           
-          <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto mb-8">
-            <input
-              type="text"
-              placeholder="Name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              required
-              className="w-full px-6 py-4 bg-[#F8F8F5] text-black rounded-lg font-sans text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              required
-              className="w-full px-6 py-4 bg-[#F8F8F5] text-black rounded-lg font-sans text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
-            />
-            <input
-              type="tel"
-              placeholder="Phone"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              required
-              className="w-full px-6 py-4 bg-[#F8F8F5] text-black rounded-lg font-sans text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
-            />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-lbta-red hover:bg-gradient-to-r hover:from-lbta-red hover:to-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200 ease-out disabled:opacity-50"
-            >
-              {isSubmitting ? 'Sending...' : 'Claim Your Spot →'}
-            </button>
-          </form>
+          <AnimatedSection delay={100}>
+            <h2 className="font-serif text-[clamp(2rem,5vw,2.75rem)] font-semibold mb-8 leading-[1.2] text-shadow-hero">
+              Start training with purpose.
+            </h2>
+          </AnimatedSection>
           
-          <p className="font-sans text-[14px] text-white/80">
-            30-Day Money-Back Guarantee · No Long-Term Commitment
-          </p>
+          <AnimatedSection delay={200}>
+            <form onSubmit={handleSubmit} className="space-y-4 mb-8">
+              <input
+                type="text"
+                placeholder="Name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                required
+                className="input-dark"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                className="input-dark"
+              />
+              <input
+                type="tel"
+                placeholder="Phone"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                required
+                className="input-dark"
+              />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-accent w-full"
+              >
+                {isSubmitting ? 'Sending...' : 'Claim Your Spot'}
+              </button>
+            </form>
+          </AnimatedSection>
+          
+          <AnimatedSection delay={300}>
+            <p className="text-body-sm text-white/60">
+              30-Day Money-Back Guarantee · No Long-Term Commitment
+            </p>
+          </AnimatedSection>
         </div>
       </section>
     </>

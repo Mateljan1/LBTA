@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
 import Script from 'next/script'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const faqs = [
   {
@@ -57,7 +57,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="bg-[#FAF8F3] py-16 md:py-24">
+    <section className="bg-lbta-cream section">
       {/* FAQ Schema */}
       <Script
         id="faq-schema"
@@ -65,69 +65,123 @@ export default function FAQSection() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
-      <div className="max-w-3xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <p className="font-sans text-[11px] text-lbta-orange uppercase tracking-[2px] mb-4">
-            Common Questions
-          </p>
-          <h2 className="font-serif text-[36px] md:text-[44px] font-semibold text-black mb-4">
+      <div className="container-narrow">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="text-eyebrow mb-4 block">Common Questions</span>
+          <h2 className="text-headline mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="font-sans text-[16px] text-black/70 max-w-xl mx-auto">
+          <p className="text-subhead max-w-xl mx-auto">
             Everything you need to know about training at Laguna Beach Tennis Academy.
           </p>
         </div>
 
+        {/* FAQ List */}
         <div className="space-y-3">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-white border border-gray-100 rounded-lg overflow-hidden transition-all duration-300 hover:border-gray-200"
-            >
-              <button
-                className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-lbta-orange focus-visible:ring-inset"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                aria-expanded={openIndex === index}
-              >
-                <span className="font-sans text-[15px] md:text-[16px] font-medium text-[#1a1a1a] pr-4">
-                  {faq.question}
-                </span>
-                <ChevronDown 
-                  className={`h-5 w-5 text-lbta-orange flex-shrink-0 transition-transform duration-300 ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index
+            
+            return (
               <div
-                className={`overflow-hidden transition-all duration-300 ease-out ${
-                  openIndex === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
-                }`}
+                key={index}
+                className={`
+                  bg-white rounded-subtle overflow-hidden
+                  border transition-all duration-500 ease-luxury
+                  ${isOpen 
+                    ? 'border-lbta-orange shadow-medium' 
+                    : 'border-lbta-stone hover:border-lbta-slate'
+                  }
+                `}
               >
-                <div className="px-6 pb-5 pt-0">
-                  <p className="font-sans text-[14px] md:text-[15px] text-black/70 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
+                <button
+                  className="w-full px-6 py-5 text-left flex items-center justify-between gap-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-lbta-orange focus-visible:ring-inset group"
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  aria-expanded={isOpen}
+                >
+                  <span className={`
+                    font-sans text-body font-medium transition-colors duration-300
+                    ${isOpen ? 'text-lbta-orange' : 'text-lbta-black group-hover:text-lbta-orange'}
+                  `}>
+                    {faq.question}
+                  </span>
+                  
+                  {/* Custom animated icon */}
+                  <span className={`
+                    flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center
+                    transition-all duration-500 ease-luxury
+                    ${isOpen 
+                      ? 'bg-lbta-orange text-white rotate-180' 
+                      : 'bg-lbta-cream text-lbta-orange group-hover:bg-lbta-beige'
+                    }
+                  `}>
+                    <svg 
+                      width="12" 
+                      height="12" 
+                      viewBox="0 0 12 12" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="transition-transform duration-500"
+                    >
+                      <path 
+                        d="M2 4L6 8L10 4" 
+                        stroke="currentColor" 
+                        strokeWidth="1.5" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ 
+                        duration: 0.4, 
+                        ease: [0.22, 0.61, 0.36, 1],
+                        opacity: { duration: 0.25 }
+                      }}
+                    >
+                      <div className="px-6 pb-6">
+                        {/* Subtle divider */}
+                        <div className="w-12 h-px bg-lbta-orange/30 mb-4" />
+                        <p className="text-body-sm text-lbta-slate leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
-        {/* CTA after FAQ */}
-        <div className="text-center mt-12">
-          <p className="font-sans text-[15px] text-black/60 mb-4">
+        {/* CTA */}
+        <div className="text-center mt-16">
+          <p className="text-body-sm text-lbta-slate mb-4">
             Still have questions?
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 font-sans text-[14px] font-semibold text-lbta-orange hover:text-lbta-red transition-colors"
+            className="inline-flex items-center gap-2 font-sans text-ui font-medium text-lbta-orange hover:text-lbta-red transition-colors group"
           >
-            Contact Us →
+            <span>Contact Us</span>
+            <svg 
+              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </a>
         </div>
       </div>
     </section>
   )
 }
-
