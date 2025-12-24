@@ -58,72 +58,88 @@ export default function TimelineSection() {
   }, [])
   
   return (
-    <section className="bg-white py-16 md:py-24">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-20">
-        <h2 className="font-serif text-[32px] md:text-[48px] font-bold text-black text-center mb-16">
-          Our Journey
-        </h2>
+    <section className="bg-[#fafafa] py-20 md:py-28">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-16">
+        <div className="mb-16">
+          <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-4">
+            Our Journey
+          </p>
+          <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-[#1a1a1a] tracking-[-0.02em]">
+            Building Excellence
+          </h2>
+        </div>
         
         {/* Desktop: Horizontal Timeline */}
         <div className="hidden md:block relative">
-          <div className="absolute top-1/2 left-0 right-0 h-1 bg-lbta-orange/20" />
+          {/* Timeline line */}
+          <div className="absolute top-8 left-0 right-0 h-[1px] bg-[#e0e0e0]" />
+          
           <div className="grid grid-cols-4 gap-8 relative">
             {milestones.map((milestone, index) => (
               <div
                 key={milestone.year}
                 ref={el => { milestonesRef.current[index] = el }}
-                className={`text-center transition-all duration-500 ${
+                className={`relative transition-all duration-700 ${
                   visibleMilestones.includes(index)
                     ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-4'
+                    : 'opacity-0 translate-y-6'
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div className="bg-lbta-orange text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-serif font-bold text-[18px] shadow-lg">
-                  {milestone.year}
+                {/* Year marker */}
+                <div className="relative mb-8">
+                  <div className="w-4 h-4 rounded-full bg-[#1a1a1a] mx-auto" />
                 </div>
-                <h3 className="font-serif text-[20px] font-semibold text-black mb-2">
-                  {milestone.title}
-                </h3>
-                <p className="font-sans text-[14px] text-black/70 leading-relaxed">
-                  {milestone.description}
-                </p>
+                
+                {/* Content */}
+                <div className="text-center">
+                  <span className="font-serif text-[32px] font-medium text-[#1a1a1a] tracking-[-0.02em]">
+                    {milestone.year}
+                  </span>
+                  <h3 className="font-sans text-[14px] font-semibold text-[#1a1a1a] uppercase tracking-[0.1em] mt-2 mb-3">
+                    {milestone.title}
+                  </h3>
+                  <p className="font-sans text-[14px] text-[#666] leading-[1.6]">
+                    {milestone.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
         
         {/* Mobile: Vertical Timeline */}
-        <div className="md:hidden space-y-8">
-          {milestones.map((milestone, index) => (
-            <div
-              key={milestone.year}
-              ref={el => { milestonesRef.current[index] = el }}
-              className={`flex gap-4 transition-all duration-500 ${
-                visibleMilestones.includes(index)
-                  ? 'opacity-100 translate-x-0'
-                  : 'opacity-0 -translate-x-4'
-              }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              <div className="flex-shrink-0">
-                <div className="bg-lbta-orange text-white w-14 h-14 rounded-full flex items-center justify-center font-serif font-bold text-[16px] shadow-lg">
+        <div className="md:hidden relative">
+          {/* Vertical line */}
+          <div className="absolute top-0 bottom-0 left-[7px] w-[1px] bg-[#e0e0e0]" />
+          
+          <div className="space-y-10">
+            {milestones.map((milestone, index) => (
+              <div
+                key={milestone.year}
+                ref={el => { milestonesRef.current[index] = el }}
+                className={`relative pl-10 transition-all duration-700 ${
+                  visibleMilestones.includes(index)
+                    ? 'opacity-100 translate-x-0'
+                    : 'opacity-0 -translate-x-4'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                {/* Dot marker */}
+                <div className="absolute left-0 top-1 w-[14px] h-[14px] rounded-full bg-[#1a1a1a]" />
+                
+                <span className="font-serif text-[28px] font-medium text-[#1a1a1a] tracking-[-0.02em]">
                   {milestone.year}
-                </div>
-                {index < milestones.length - 1 && (
-                  <div className="w-0.5 h-12 bg-lbta-orange/20 mx-auto mt-2" />
-                )}
-              </div>
-              <div className="flex-1 pb-4">
-                <h3 className="font-serif text-[18px] font-semibold text-black mb-1">
+                </span>
+                <h3 className="font-sans text-[13px] font-semibold text-[#1a1a1a] uppercase tracking-[0.1em] mt-1 mb-2">
                   {milestone.title}
                 </h3>
-                <p className="font-sans text-[14px] text-black/70 leading-relaxed">
+                <p className="font-sans text-[14px] text-[#666] leading-[1.6]">
                   {milestone.description}
                 </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
