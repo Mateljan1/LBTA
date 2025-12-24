@@ -42,7 +42,7 @@ interface JTTData {
 interface LuxuryYearModalProps {
   isOpen: boolean
   onClose: () => void
-  type: 'camp' | 'jtt' | 'seasonal'
+  type: 'camp' | 'jtt' | 'seasonal' | 'inquiry'
   data: CampData | JTTData | null
   season?: string
 }
