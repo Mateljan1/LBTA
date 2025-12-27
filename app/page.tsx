@@ -196,14 +196,14 @@ export default function Home() {
             Laguna Beach, California
           </p>
           
-          {/* Main Headline - Quantified Value Proposition */}
+          {/* Main Headline - Authentic Value Proposition */}
           <h1 className="font-serif text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-[1.05] tracking-[-0.02em] mb-6 text-shadow-hero">
-            93% of players improve<br className="hidden sm:block" /> within 8 weeks.
+            Tennis, as it should<br className="hidden sm:block" /> be taught.
           </h1>
           
           {/* Subheadline - Transformation Promise */}
           <p className="font-serif text-[clamp(1.25rem,3vw,1.75rem)] text-white/90 mb-10 text-shadow-subtle">
-            Movement-first coaching trusted by 500+ Laguna Beach families.
+            Movement. Discipline. Belonging.
           </p>
           
           {/* CTA Buttons */}
