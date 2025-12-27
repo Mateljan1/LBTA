@@ -248,7 +248,11 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                   {selectedPrice && (
                     <div className="flex justify-between items-center py-4 border-t border-[#e8e8e8] mb-8">
                       <span className="font-sans text-[13px] text-[#888] uppercase tracking-[0.05em]">
-                        {program.pricing['1x'] ? 'Quarterly Investment' : 'Monthly Investment'}
+                        {selectedPlan === 'drop_in' 
+                          ? 'Single Class' 
+                          : selectedPlan === 'monthly' 
+                            ? 'Monthly Investment' 
+                            : 'Quarterly Investment'}
                       </span>
                       <span className="font-serif text-[28px] font-medium text-[#1a1a1a]">
                         ${selectedPrice}
