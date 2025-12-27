@@ -188,7 +188,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link 
                         href={item.href}
-                        className="text-body-sm text-white/60 hover:text-white transition-colors duration-300"
+                        className="text-body-sm text-white/60 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-lbta-black rounded-sm"
                       >
                         {item.name}
                       </Link>
@@ -211,7 +211,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link 
                         href={item.href}
-                        className="text-body-sm text-white/60 hover:text-white transition-colors duration-300"
+                        className="text-body-sm text-white/60 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-lbta-black rounded-sm"
                       >
                         {item.name}
                       </Link>
