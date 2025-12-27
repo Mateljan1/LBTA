@@ -277,7 +277,7 @@ export default function Home() {
       {/* ============================================
           SCENE 2: FOUNDER - "The Vision"
           ============================================ */}
-      <section id="founder" className="bg-lbta-beige section-lg">
+      <section id="founder" className="bg-[#FAFAF9] section-lg">
         <div className="container-lbta">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Image */}
@@ -402,7 +402,7 @@ export default function Home() {
       {/* ============================================
           SCENE 4: PHILOSOPHY - "Our System"
           ============================================ */}
-      <section id="philosophy" className="bg-lbta-beige section-lg">
+      <section id="philosophy" className="bg-[#FAFAF9] section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
             <span className="text-eyebrow mb-4 block">Our Philosophy</span>
@@ -461,7 +461,7 @@ export default function Home() {
       {/* ============================================
           SCENE 5: PROGRAMS - "Pathways for Every Player"
           ============================================ */}
-      <section id="programs" className="bg-lbta-cream section-lg">
+      <section id="programs" className="bg-white section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
             <span className="text-eyebrow mb-4 block">Our Programs</span>
@@ -554,7 +554,7 @@ export default function Home() {
       {/* ============================================
           SCENE 7: COMMUNITY - "Players Who Train Our Way"
           ============================================ */}
-      <section id="community" className="bg-lbta-cream section-lg">
+      <section id="community" className="bg-white section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-12">
             <span className="text-eyebrow mb-4 block">Our Community</span>
