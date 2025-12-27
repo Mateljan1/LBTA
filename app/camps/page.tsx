@@ -205,7 +205,7 @@ export default function CampsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="#camps"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 View Camps
               </Link>
@@ -225,7 +225,7 @@ export default function CampsPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-12">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+              <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                 2026 Camp Schedule
               </p>
               <h2 className="font-serif text-[36px] md:text-[52px] font-semibold text-black mb-4">
@@ -260,9 +260,9 @@ export default function CampsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCamps.map((camp, index) => (
               <AnimatedSection key={camp.id} delay={150 + index * 50}>
-                <div className={`bg-[#FAF8F3] rounded-lg overflow-hidden h-full flex flex-col ${camp.featured ? 'ring-2 ring-lbta-orange' : ''}`}>
+                <div className={`bg-[#FAF8F3] rounded-lg overflow-hidden h-full flex flex-col ${camp.featured ? 'ring-2 ring-black' : ''}`}>
                   {camp.featured && (
-                    <div className="bg-lbta-orange text-white text-center py-2 font-sans text-[11px] uppercase tracking-[2px] font-semibold">
+                    <div className="bg-black text-white text-center py-2 font-sans text-[11px] uppercase tracking-[2px] font-semibold">
                       Featured Camp
                     </div>
                   )}
@@ -272,7 +272,7 @@ export default function CampsPage() {
                         <h3 className="font-serif text-[22px] font-semibold text-black mb-1">
                           {camp.name}
                         </h3>
-                        <p className="font-sans text-[13px] text-lbta-orange uppercase tracking-wide">
+                        <p className="font-sans text-[13px] text-black/60 uppercase tracking-wide">
                           Ages {camp.ages}
                         </p>
                       </div>
@@ -287,15 +287,15 @@ export default function CampsPage() {
                     
                     <div className="space-y-2 mb-4 font-sans text-[13px] text-black/70">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-lbta-orange font-semibold text-[11px] uppercase tracking-wide w-16">Dates</span>
+                        <span className="text-black/50 font-semibold text-[11px] uppercase tracking-wide w-16">Dates</span>
                         <span>{camp.dates}</span>
                       </div>
                       <div className="flex items-baseline gap-2">
-                        <span className="text-lbta-orange font-semibold text-[11px] uppercase tracking-wide w-16">Time</span>
+                        <span className="text-black/50 font-semibold text-[11px] uppercase tracking-wide w-16">Time</span>
                         <span>{camp.hours}</span>
                       </div>
                       <div className="flex items-baseline gap-2">
-                        <span className="text-lbta-orange font-semibold text-[11px] uppercase tracking-wide w-16">Location</span>
+                        <span className="text-black/50 font-semibold text-[11px] uppercase tracking-wide w-16">Location</span>
                         <span>{camp.location}</span>
                       </div>
                     </div>
@@ -320,7 +320,7 @@ export default function CampsPage() {
                       
                       <button
                         onClick={() => handleRegisterClick(camp)}
-                        className="block w-full text-center bg-black hover:bg-lbta-orange text-white font-sans font-semibold text-[13px] py-3 rounded transition-all duration-300 uppercase tracking-[1px]"
+                        className="block w-full text-center bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[13px] py-3 rounded transition-all duration-300 uppercase tracking-[1px]"
                       >
                         Register Now
                       </button>
@@ -344,7 +344,7 @@ export default function CampsPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-16">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+              <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                 Our Foundation
               </p>
               <h2 className="font-serif text-[36px] md:text-[52px] font-semibold text-black mb-6">
@@ -360,7 +360,7 @@ export default function CampsPage() {
             <AnimatedSection delay={100}>
               <div className="text-center">
                 <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-lbta-orange/20 leading-none">
+                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
                     01
                   </span>
                 </div>
@@ -376,7 +376,7 @@ export default function CampsPage() {
             <AnimatedSection delay={200}>
               <div className="text-center">
                 <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-lbta-orange/20 leading-none">
+                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
                     02
                   </span>
                 </div>
@@ -392,7 +392,7 @@ export default function CampsPage() {
             <AnimatedSection delay={300}>
               <div className="text-center">
                 <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-lbta-orange/20 leading-none">
+                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
                     03
                   </span>
                 </div>
@@ -419,7 +419,7 @@ export default function CampsPage() {
         <div className="max-w-[1000px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="bg-black text-white p-8 md:p-12 rounded-lg text-center">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+              <p className="font-sans text-[11px] uppercase tracking-[2px] text-white/70 mb-4">
                 USTA League Play
               </p>
               <h2 className="font-serif text-[32px] md:text-[44px] font-semibold mb-4">
@@ -430,7 +430,7 @@ export default function CampsPage() {
               </p>
               <Link 
                 href="/jtt"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-white hover:bg-gray-100 text-black font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 Learn More About JTT →
               </Link>
@@ -513,7 +513,7 @@ export default function CampsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/contact"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 Contact Us
               </Link>

@@ -102,7 +102,7 @@ export default function BookPage() {
           </p>
           <a 
             href="#book-form"
-            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
           >
             Book a Trial →
           </a>
@@ -119,14 +119,14 @@ export default function BookPage() {
             <div className="flex flex-col md:flex-row gap-4 md:gap-6">
               <a 
                 href="tel:9494646645" 
-                className="flex items-center gap-2 text-lbta-red font-sans font-semibold text-[15px] md:text-[16px] hover:text-lbta-orange transition-colors"
+                className="flex items-center gap-2 text-black font-sans font-semibold text-[15px] md:text-[16px] hover:text-black/70 transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 (949) 464-6645
               </a>
               <a 
                 href="mailto:support@lagunabeachtennisacademy.com" 
-                className="flex items-center gap-2 text-lbta-red font-sans font-semibold text-[15px] md:text-[16px] hover:text-lbta-orange transition-colors"
+                className="flex items-center gap-2 text-black font-sans font-semibold text-[15px] md:text-[16px] hover:text-black/70 transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 Email Us
@@ -147,7 +147,7 @@ export default function BookPage() {
                   <div
                     key={step}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      step === currentStep ? 'bg-lbta-orange w-8' : step < currentStep ? 'bg-lbta-orange' : 'bg-gray-300'
+                      step === currentStep ? 'bg-black w-8' : step < currentStep ? 'bg-black' : 'bg-gray-300'
                     }`}
                   />
                 ))}
@@ -170,7 +170,7 @@ export default function BookPage() {
                       value={formData.firstName}
                       onChange={(e) => setFormData({...formData, firstName: e.target.value})}
                       required
-                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] md:text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] md:text-[16px] focus:outline-none focus:ring-2 focus:ring-black transition-all"
                     />
                     <input
                       type="text"
@@ -178,7 +178,7 @@ export default function BookPage() {
                       value={formData.lastName}
                       onChange={(e) => setFormData({...formData, lastName: e.target.value})}
                       required
-                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] md:text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] md:text-[16px] focus:outline-none focus:ring-2 focus:ring-black transition-all"
                     />
                     <input
                       type="email"
@@ -186,7 +186,7 @@ export default function BookPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                       required
-                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] md:text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] md:text-[16px] focus:outline-none focus:ring-2 focus:ring-black transition-all"
                     />
                     <input
                       type="tel"
@@ -194,12 +194,12 @@ export default function BookPage() {
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
                       required
-                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] md:text-[16px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] md:text-[16px] focus:outline-none focus:ring-2 focus:ring-black transition-all"
                     />
                     <button
                       type="button"
                       onClick={() => setCurrentStep(2)}
-                      className="w-full bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 mt-4 min-h-[48px]"
+                      className="w-full bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 mt-4 min-h-[48px]"
                     >
                       Next →
                     </button>
@@ -244,7 +244,7 @@ export default function BookPage() {
                             onClick={() => handleDayToggle(day)}
                             className={`px-4 py-3 rounded-full font-sans text-[14px] font-medium transition-all duration-200 ${
                               formData.preferredDays.includes(day)
-                                ? 'bg-lbta-orange text-white'
+                                ? 'bg-black text-white'
                                 : 'bg-[#FAF8F3] text-black/70 hover:bg-gray-200'
                             }`}
                           >
@@ -264,7 +264,7 @@ export default function BookPage() {
                             onClick={() => setFormData({...formData, experience: level})}
                             className={`px-6 py-3 rounded-full font-sans text-[14px] md:text-[15px] font-medium transition-all duration-200 ${
                               formData.experience === level
-                                ? 'bg-lbta-red text-white'
+                                ? 'bg-black text-white'
                                 : 'bg-[#FAF8F3] text-black/70 hover:bg-gray-200'
                             }`}
                           >
@@ -278,14 +278,14 @@ export default function BookPage() {
                       <button
                         type="button"
                         onClick={() => setCurrentStep(1)}
-                        className="flex-1 border-2 border-lbta-red text-lbta-red hover:bg-lbta-red/5 font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
+                        className="flex-1 border-2 border-black text-black hover:bg-black/5 font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
                       >
                         ← Back
                       </button>
                       <button
                         type="button"
                         onClick={() => setCurrentStep(3)}
-                        className="flex-1 bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
+                        className="flex-1 bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
                       >
                         Next →
                       </button>
@@ -314,14 +314,14 @@ export default function BookPage() {
                       <button
                         type="button"
                         onClick={() => setCurrentStep(2)}
-                        className="flex-1 border-2 border-lbta-red text-lbta-red hover:bg-lbta-red/5 font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
+                        className="flex-1 border-2 border-black text-black hover:bg-black/5 font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
                       >
                         ← Back
                       </button>
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="flex-1 bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 disabled:opacity-50 min-h-[48px] flex items-center justify-center gap-2"
+                        className="flex-1 bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 rounded-full transition-all duration-200 disabled:opacity-50 min-h-[48px] flex items-center justify-center gap-2"
                       >
                         {isSubmitting ? (
                           <>
@@ -340,7 +340,7 @@ export default function BookPage() {
           ) : (
             /* SUCCESS STATE */
             <div className="bg-white rounded-2xl shadow-soft p-8 md:p-12 text-center">
-              <CheckCircle className="w-16 h-16 text-lbta-orange mx-auto mb-6" />
+              <CheckCircle className="w-16 h-16 text-black mx-auto mb-6" />
               <h2 className="font-serif text-[28px] md:text-[36px] font-semibold text-black mb-4">
                 Thank you!
               </h2>
@@ -349,7 +349,7 @@ export default function BookPage() {
               </p>
               <Link
                 href="/"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200"
               >
                 Return to Home →
               </Link>
@@ -377,7 +377,7 @@ export default function BookPage() {
                 className="bg-[#FAF8F3] rounded-2xl p-6 md:p-8 text-center shadow-soft hover:shadow-hover transition-all duration-300"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="text-[36px] md:text-[42px] text-lbta-orange font-serif font-bold mb-3">
+                <div className="text-[36px] md:text-[42px] text-black font-serif font-bold mb-3">
                   {step.num}
                 </div>
                 <h3 className="font-serif text-[20px] md:text-[22px] font-semibold text-black mb-3">
@@ -414,7 +414,7 @@ export default function BookPage() {
           </p>
           <a
             href="#book-form"
-            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
           >
             Request Consultation →
           </a>

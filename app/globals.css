@@ -170,7 +170,7 @@
     line-height: 1.4;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-orange);
+    color: var(--color-charcoal);
   }
 }
 
@@ -196,7 +196,7 @@
     cursor: pointer;
   }
 
-  /* Primary Button - Solid Black */
+  /* Primary Button - Solid Black (Luxury) */
   .btn-primary {
     @apply btn;
     background: var(--color-black);
@@ -204,30 +204,10 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--color-orange);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s var(--ease-luxury);
-    z-index: 0;
-  }
-
-  .btn-primary span,
-  .btn-primary svg {
-    position: relative;
-    z-index: 1;
-  }
-
   .btn-primary:hover {
+    background: #1a1a1a;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  }
-
-  .btn-primary:hover::before {
-    transform: scaleX(1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 
   .btn-primary:active {
@@ -314,7 +294,8 @@
   }
 
   .btn-pill-primary:hover {
-    background: var(--color-cream);
+    background: var(--color-black);
+    color: var(--color-white);
     transform: translateY(-3px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }

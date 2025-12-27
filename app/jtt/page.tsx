@@ -135,7 +135,7 @@ export default function JTTPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 Register Now
               </button>
@@ -156,7 +156,7 @@ export default function JTTPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
               <AnimatedSection delay={0}>
-                <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+                <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                   Season Overview
                 </p>
                 <h2 className="font-serif text-[36px] md:text-[48px] font-semibold text-black mb-6 leading-tight">
@@ -202,7 +202,7 @@ export default function JTTPage() {
                 <div className="space-y-4">
                   {keyDates.map((item, index) => (
                     <div key={index} className="flex items-baseline gap-4 pb-4 border-b border-white/10 last:border-0 last:pb-0">
-                      <span className="font-sans text-[14px] text-lbta-orange font-semibold min-w-[100px]">
+                      <span className="font-sans text-[14px] text-black/60 font-semibold min-w-[100px]">
                         {item.date}
                       </span>
                       <span className="font-sans text-[14px] text-white/80">
@@ -222,7 +222,7 @@ export default function JTTPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-16">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+              <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                 Our Foundation
               </p>
               <h2 className="font-serif text-[36px] md:text-[48px] font-semibold text-black mb-6">
@@ -238,7 +238,7 @@ export default function JTTPage() {
             <AnimatedSection delay={100}>
               <div className="text-center">
                 <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-lbta-orange/20 leading-none">
+                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
                     01
                   </span>
                 </div>
@@ -254,7 +254,7 @@ export default function JTTPage() {
             <AnimatedSection delay={200}>
               <div className="text-center">
                 <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-lbta-orange/20 leading-none">
+                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
                     02
                   </span>
                 </div>
@@ -270,7 +270,7 @@ export default function JTTPage() {
             <AnimatedSection delay={300}>
               <div className="text-center">
                 <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-lbta-orange/20 leading-none">
+                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
                     03
                   </span>
                 </div>
@@ -291,7 +291,7 @@ export default function JTTPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-16">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+              <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                 Age Groups
               </p>
               <h2 className="font-serif text-[36px] md:text-[48px] font-semibold text-black mb-6">
@@ -335,7 +335,7 @@ export default function JTTPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-16">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+              <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                 Training Schedule
               </p>
               <h2 className="font-serif text-[36px] md:text-[48px] font-semibold text-black mb-6">
@@ -371,7 +371,7 @@ export default function JTTPage() {
                   </div>
                   <div>
                     <span className="md:hidden font-sans text-[11px] uppercase tracking-wide text-black/50 block mb-1">Time</span>
-                    <span className="font-sans text-[14px] text-lbta-orange font-semibold">{item.time}</span>
+                    <span className="font-sans text-[14px] text-black/60 font-semibold">{item.time}</span>
                   </div>
                 </div>
               ))}
@@ -393,7 +393,7 @@ export default function JTTPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
               <AnimatedSection delay={0}>
-                <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+                <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                   Season Pricing
                 </p>
                 <h2 className="font-serif text-[36px] md:text-[48px] font-semibold text-black mb-6 leading-tight">
@@ -414,7 +414,7 @@ export default function JTTPage() {
                     <span className="font-sans text-[14px] text-black/50">per season</span>
                   </div>
                   
-                  <div className="bg-lbta-orange/10 text-lbta-orange px-4 py-3 rounded-lg mb-8">
+                  <div className="bg-black/5 text-black/60 px-4 py-3 rounded-lg mb-8">
                     <p className="font-sans text-[14px] font-semibold">Pay-in-Full: $2,750 <span className="font-normal">(save $50)</span></p>
                   </div>
                   
@@ -449,7 +449,7 @@ export default function JTTPage() {
                 <div className="space-y-4">
                   {included.map((item, index) => (
                     <div key={index} className="flex items-start gap-4 pb-4 border-b border-black/10 last:border-0">
-                      <span className="font-serif text-[24px] text-lbta-orange/30 font-light leading-none mt-1">
+                      <span className="font-serif text-[24px] text-black/20 font-light leading-none mt-1">
                         {String(index + 1).padStart(2, '0')}
                       </span>
                       <span className="font-sans text-[15px] text-black/70 leading-relaxed">
@@ -468,7 +468,7 @@ export default function JTTPage() {
       <section className="bg-[#FAF8F3] py-20 md:py-32">
         <div className="max-w-[1000px] mx-auto px-4 md:px-12 text-center">
           <AnimatedSection delay={0}>
-            <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+            <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
               Our Coaching Approach
             </p>
             <h2 className="font-serif text-[36px] md:text-[48px] font-semibold text-black mb-8">
@@ -519,7 +519,7 @@ export default function JTTPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-16">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange mb-4">
+              <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                 Get Started
               </p>
               <h2 className="font-serif text-[36px] md:text-[48px] font-semibold text-black mb-6">
@@ -534,8 +534,8 @@ export default function JTTPage() {
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <AnimatedSection delay={100}>
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-lbta-orange/10 flex items-center justify-center mx-auto mb-6">
-                  <span className="font-serif text-[28px] font-semibold text-lbta-orange">1</span>
+                <div className="w-16 h-16 rounded-full bg-black/5 flex items-center justify-center mx-auto mb-6">
+                  <span className="font-serif text-[28px] font-semibold text-black/60">1</span>
                 </div>
                 <h3 className="font-serif text-[20px] font-semibold text-black mb-3">Register Online</h3>
                 <p className="font-sans text-[14px] text-black/70">Click "Register Now" and fill out the registration form.</p>
@@ -544,8 +544,8 @@ export default function JTTPage() {
             
             <AnimatedSection delay={200}>
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-lbta-orange/10 flex items-center justify-center mx-auto mb-6">
-                  <span className="font-serif text-[28px] font-semibold text-lbta-orange">2</span>
+                <div className="w-16 h-16 rounded-full bg-black/5 flex items-center justify-center mx-auto mb-6">
+                  <span className="font-serif text-[28px] font-semibold text-black/60">2</span>
                 </div>
                 <h3 className="font-serif text-[20px] font-semibold text-black mb-3">Receive Confirmation</h3>
                 <p className="font-sans text-[14px] text-black/70">Get an email with team placement and payment details.</p>
@@ -554,8 +554,8 @@ export default function JTTPage() {
             
             <AnimatedSection delay={300}>
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-lbta-orange/10 flex items-center justify-center mx-auto mb-6">
-                  <span className="font-serif text-[28px] font-semibold text-lbta-orange">3</span>
+                <div className="w-16 h-16 rounded-full bg-black/5 flex items-center justify-center mx-auto mb-6">
+                  <span className="font-serif text-[28px] font-semibold text-black/60">3</span>
                 </div>
                 <h3 className="font-serif text-[20px] font-semibold text-black mb-3">Start Training</h3>
                 <p className="font-sans text-[14px] text-black/70">Complete payment and receive your welcome packet.</p>
@@ -623,7 +623,7 @@ export default function JTTPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 Register Now
               </button>
@@ -643,10 +643,10 @@ export default function JTTPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-12 text-center">
           <p className="font-sans text-[14px] text-white/60 mb-2">Questions? We're here to help.</p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center">
-            <a href="mailto:support@lagunabeachtennisacademy.com" className="font-sans text-[16px] text-white hover:text-lbta-orange transition-colors">
+            <a href="mailto:support@lagunabeachtennisacademy.com" className="font-sans text-[16px] text-white hover:text-white transition-colors">
               support@lagunabeachtennisacademy.com
             </a>
-            <a href="tel:9494646645" className="font-sans text-[16px] text-white hover:text-lbta-orange transition-colors">
+            <a href="tel:9494646645" className="font-sans text-[16px] text-white hover:text-white transition-colors">
               (949) 464-6645
             </a>
           </div>

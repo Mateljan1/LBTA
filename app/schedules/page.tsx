@@ -223,7 +223,7 @@ export default function SchedulesPage() {
         </div>
         
         <div className="relative z-10 text-center text-white px-4 md:px-6 max-w-4xl mx-auto py-24">
-          <p className="font-sans text-[12px] md:text-[14px] uppercase tracking-[3px] text-lbta-orange mb-4">
+          <p className="font-sans text-[12px] md:text-[14px] uppercase tracking-[3px] text-white/70 mb-4">
             Plan Your 2026
           </p>
           <h1 className="font-serif text-[36px] md:text-[60px] font-bold leading-[1.1] tracking-[-0.5px] mb-6 text-shadow">
@@ -232,13 +232,13 @@ export default function SchedulesPage() {
           <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-4 max-w-[90%] mx-auto">
             Four seasons of structured training, holiday camps, and competitive league play
           </p>
-          <p className="font-sans text-[14px] md:text-[16px] text-lbta-orange font-semibold mb-8">
+          <p className="font-sans text-[14px] md:text-[16px] text-white/90 font-semibold mb-8">
             Winter 2026 Registration Now Open — Save $50 with Early Bird
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="#programs"
-              className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+              className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
             >
               View Programs
             </Link>
@@ -274,8 +274,8 @@ export default function SchedulesPage() {
                   onClick={() => setSelectedSeason(key as SeasonKey)}
                   className={`relative p-6 rounded-2xl text-left transition-all duration-300 ${
                     isActive 
-                      ? 'bg-lbta-red text-white shadow-lg scale-[1.02]' 
-                      : 'bg-[#FAF8F3] hover:bg-lbta-orange/10 text-black'
+                      ? 'bg-black text-white shadow-lg scale-[1.02]' 
+                      : 'bg-[#FAF8F3] hover:bg-gray-100 text-black'
                   }`}
                 >
                   {isOpen && (
@@ -291,7 +291,7 @@ export default function SchedulesPage() {
                   <p className={`font-sans text-[13px] mb-3 ${isActive ? 'text-white/80' : 'text-black/60'}`}>
                     {season.dates}
                   </p>
-                  <div className={`font-sans text-[14px] font-medium ${isActive ? 'text-white' : 'text-lbta-orange'}`}>
+                  <div className={`font-sans text-[14px] font-medium ${isActive ? 'text-white' : 'text-black'}`}>
                     {season.weeks} weeks
                   </div>
                 </button>
@@ -314,7 +314,7 @@ export default function SchedulesPage() {
               <div className="font-sans text-[11px] md:text-[12px] text-black/50 uppercase tracking-[2px] mt-2">JTT Seasons</div>
             </div>
             <div className="text-center">
-              <div className="font-serif text-[48px] md:text-[56px] font-light text-lbta-orange leading-none">$50</div>
+              <div className="font-serif text-[48px] md:text-[56px] font-light text-black leading-none">$50</div>
               <div className="font-sans text-[11px] md:text-[12px] text-black/50 uppercase tracking-[2px] mt-2">Early Bird Savings</div>
             </div>
           </div>
@@ -332,7 +332,7 @@ export default function SchedulesPage() {
               aria-selected={activeTab === 'programs'}
               className={`px-6 py-2.5 rounded-full font-sans font-semibold text-[14px] transition-all ${
                 activeTab === 'programs'
-                  ? 'bg-lbta-red text-white'
+                  ? 'bg-black text-white'
                   : 'text-black/70 hover:bg-gray-100'
               }`}
             >
@@ -344,7 +344,7 @@ export default function SchedulesPage() {
               aria-selected={activeTab === 'pricing'}
               className={`px-6 py-2.5 rounded-full font-sans font-semibold text-[14px] transition-all ${
                 activeTab === 'pricing'
-                  ? 'bg-lbta-red text-white'
+                  ? 'bg-black text-white'
                   : 'text-black/70 hover:bg-gray-100'
               }`}
             >
@@ -356,7 +356,7 @@ export default function SchedulesPage() {
               aria-selected={activeTab === 'calendar'}
               className={`px-6 py-2.5 rounded-full font-sans font-semibold text-[14px] transition-all ${
                 activeTab === 'calendar'
-                  ? 'bg-lbta-red text-white'
+                  ? 'bg-black text-white'
                   : 'text-black/70 hover:bg-gray-100'
               }`}
             >
@@ -380,8 +380,8 @@ export default function SchedulesPage() {
                     onClick={() => setSelectedSeason(key as SeasonKey)}
                     className={`px-4 py-2 rounded-full font-sans text-[13px] font-medium transition-all ${
                       selectedSeason === key
-                        ? 'bg-lbta-red text-white'
-                        : 'bg-white text-black/70 hover:bg-lbta-orange/10 border border-gray-200'
+                        ? 'bg-black text-white'
+                        : 'bg-white text-black/70 hover:bg-gray-100 border border-gray-200'
                     }`}
                   >
                     {season.name.split(' ')[0]}
@@ -394,8 +394,8 @@ export default function SchedulesPage() {
                   onClick={() => setSelectedSeason('fall2025')}
                   className={`px-4 py-2 rounded-full font-sans text-[13px] font-medium transition-all ${
                     selectedSeason === 'fall2025'
-                      ? 'bg-lbta-red text-white'
-                      : 'bg-white text-black/70 hover:bg-lbta-orange/10 border border-gray-200'
+                      ? 'bg-black text-white'
+                      : 'bg-white text-black/70 hover:bg-gray-100 border border-gray-200'
                   }`}
                 >
                   Fall 2025
@@ -407,7 +407,7 @@ export default function SchedulesPage() {
                 <select 
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none font-sans cursor-pointer min-w-[160px]"
+                  className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-black focus:outline-none font-sans cursor-pointer min-w-[160px]"
                   aria-label="Filter by program type"
                 >
                   <option value="all">All Programs</option>
@@ -419,7 +419,7 @@ export default function SchedulesPage() {
                 <select 
                   value={selectedLocation}
                   onChange={(e) => setSelectedLocation(e.target.value)}
-                  className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none font-sans cursor-pointer min-w-[160px]"
+                  className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-black focus:outline-none font-sans cursor-pointer min-w-[160px]"
                   aria-label="Filter by location"
                 >
                   <option value="all">All Locations</option>
@@ -438,7 +438,7 @@ export default function SchedulesPage() {
           {/* Mobile Filter Button */}
           <button
             onClick={() => setMobileFilterOpen(true)}
-            className="md:hidden fixed bottom-6 right-6 z-30 bg-lbta-red hover:bg-lbta-orange text-white px-5 py-3.5 rounded-full shadow-lg font-sans font-semibold text-[14px] flex items-center gap-2 min-h-[48px]"
+            className="md:hidden fixed bottom-6 right-6 z-30 bg-black hover:bg-[#1a1a1a] text-white px-5 py-3.5 rounded-full shadow-lg font-sans font-semibold text-[14px] flex items-center gap-2 min-h-[48px]"
             aria-label="Open filters"
           >
             <SlidersHorizontal className="w-4 h-4" />
@@ -466,7 +466,7 @@ export default function SchedulesPage() {
                       setSelectedLocation('all')
                       setSelectedDays([])
                     }}
-                    className="mt-4 text-lbta-orange hover:underline font-sans font-semibold"
+                    className="mt-4 text-black hover:underline font-sans font-semibold"
                   >
                     Clear all filters
                   </button>
@@ -484,7 +484,7 @@ export default function SchedulesPage() {
                       >
                         <button
                           onClick={() => toggleAccordion(category)}
-                          className="accordion-header w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between bg-[#FAF8F3] hover:bg-lbta-orange/10 focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                          className="accordion-header w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between bg-[#FAF8F3] hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black/20 transition-all"
                           aria-expanded={isExpanded}
                           aria-controls={`accordion-${category}`}
                         >
@@ -492,14 +492,14 @@ export default function SchedulesPage() {
                             <h3 className="font-serif text-[24px] md:text-[32px] font-bold text-black">
                               {category} Programs
                             </h3>
-                            <span className="font-sans text-[16px] md:text-[18px] text-lbta-orange font-semibold bg-lbta-orange/10 px-3 py-1 rounded-full">
+                            <span className="font-sans text-[16px] md:text-[18px] text-black font-semibold bg-black/5 px-3 py-1 rounded-full">
                               {programs.length}
                             </span>
                           </div>
                           {isExpanded ? (
-                            <ChevronUp className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
+                            <ChevronUp className="w-6 h-6 md:w-7 md:h-7 text-black" />
                           ) : (
-                            <ChevronDown className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
+                            <ChevronDown className="w-6 h-6 md:w-7 md:h-7 text-black" />
                           )}
                         </button>
                         
@@ -538,7 +538,7 @@ export default function SchedulesPage() {
             </h2>
             <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
               Prices adjust by season length. Winter (13 weeks) is our base rate. 
-              <span className="text-lbta-orange font-medium"> 2x/week is most popular</span> — best value for consistent improvement.
+              <span className="text-black font-medium"> 2x/week is most popular</span> — best value for consistent improvement.
             </p>
 
             {/* Season Price Comparison */}
@@ -551,7 +551,7 @@ export default function SchedulesPage() {
                   <div 
                     key={key}
                     className={`p-4 rounded-xl text-center ${
-                      key === 'winter' ? 'bg-lbta-orange/10 border-2 border-lbta-orange' : 'bg-gray-50'
+                      key === 'winter' ? 'bg-black/5 border-2 border-black' : 'bg-gray-50'
                     }`}
                   >
                     <div className="font-sans text-[13px] text-black/60 uppercase tracking-wider mb-1">
@@ -560,7 +560,7 @@ export default function SchedulesPage() {
                     <div className="font-serif text-[24px] font-bold text-black">
                       {season.weeks} weeks
                     </div>
-                    <div className={`font-sans text-[14px] mt-1 ${key === 'winter' ? 'text-lbta-orange font-semibold' : 'text-black/60'}`}>
+                    <div className={`font-sans text-[14px] mt-1 ${key === 'winter' ? 'text-black font-semibold' : 'text-black/60'}`}>
                       {key === 'winter' ? 'Base Rate' : `${Math.round(season.multiplier * 100)}% of Winter`}
                     </div>
                   </div>
@@ -585,9 +585,9 @@ export default function SchedulesPage() {
                     <tr className="border-b border-gray-200">
                       <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Program</th>
                       <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">1x/week</th>
-                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider bg-lbta-orange/5">
+                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider bg-black/5">
                         2x/week
-                        <span className="block text-[10px] text-lbta-orange normal-case">Most Popular</span>
+                        <span className="block text-[10px] text-black/60 normal-case">Most Popular</span>
                       </th>
                       <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">3x/week</th>
                       <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Drop-in</th>
@@ -604,7 +604,7 @@ export default function SchedulesPage() {
                         <td className="text-center px-4 py-4 font-sans text-[16px] text-black">
                           ${program.winterPrices['1x']}
                         </td>
-                        <td className="text-center px-4 py-4 font-sans text-[16px] font-semibold text-lbta-orange bg-lbta-orange/5">
+                        <td className="text-center px-4 py-4 font-sans text-[16px] font-semibold text-black bg-black/5">
                           ${program.winterPrices['2x']}
                         </td>
                         <td className="text-center px-4 py-4 font-sans text-[16px] text-black">
@@ -622,7 +622,7 @@ export default function SchedulesPage() {
 
             {/* Monthly Programs */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8">
-              <div className="bg-lbta-orange text-white px-6 py-4">
+              <div className="bg-black text-white px-6 py-4">
                 <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
                   Monthly Programs
                 </h3>
@@ -713,7 +713,7 @@ export default function SchedulesPage() {
                 </p>
                 <Link 
                   href={`mailto:${year2026Data.scholarships.email}`}
-                  className="inline-flex items-center font-sans text-[14px] font-semibold text-lbta-orange hover:text-lbta-red"
+                  className="inline-flex items-center font-sans text-[14px] font-semibold text-black hover:text-black/70"
                 >
                   Apply for Scholarship →
                 </Link>
@@ -737,7 +737,7 @@ export default function SchedulesPage() {
             {year2026Data.camps.filter((c: any) => c.featured).map((camp: any) => (
               <div key={camp.id} className="mb-20 md:mb-28">
                 <div className="text-center mb-12">
-                  <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-lbta-orange mb-3">
+                  <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-black/60 mb-3">
                     Featured Program
                   </p>
                   <h2 className="font-serif text-[32px] md:text-[48px] font-light text-black leading-[1.1] mb-4">
@@ -777,8 +777,8 @@ export default function SchedulesPage() {
                       
                       {/* Safety Note */}
                       {camp.safetyNote && (
-                        <div className="mt-8 p-4 bg-lbta-orange/10 border-l-2 border-lbta-orange">
-                          <div className="font-sans text-[12px] font-semibold text-lbta-red uppercase tracking-wider mb-1">
+                        <div className="mt-8 p-4 bg-gray-100 border-l-2 border-black">
+                          <div className="font-sans text-[12px] font-semibold text-black uppercase tracking-wider mb-1">
                             Important
                           </div>
                           <p className="font-sans text-[13px] text-black/70">
@@ -801,7 +801,7 @@ export default function SchedulesPage() {
                         <ul className="space-y-3">
                           {camp.includes.map((item: string, i: number) => (
                             <li key={i} className="flex items-start gap-3">
-                              <span className="w-1 h-1 bg-lbta-orange rounded-full mt-2 flex-shrink-0" />
+                              <span className="w-1 h-1 bg-black rounded-full mt-2 flex-shrink-0" />
                               <span className="font-sans text-[14px] text-black/70">{item}</span>
                             </li>
                           ))}
@@ -810,7 +810,7 @@ export default function SchedulesPage() {
                       
                       <button
                         onClick={() => handleCampRegister(camp as CampModalData)}
-                        className="mt-8 inline-block bg-black text-white font-sans text-[13px] font-medium tracking-[2px] uppercase py-4 px-8 hover:bg-lbta-orange transition-colors duration-300 cursor-pointer"
+                        className="mt-8 inline-block bg-black text-white font-sans text-[13px] font-medium tracking-[2px] uppercase py-4 px-8 hover:bg-[#1a1a1a] transition-colors duration-300 cursor-pointer"
                       >
                         Register Now
                       </button>
@@ -865,7 +865,7 @@ export default function SchedulesPage() {
                       </div>
                       <button
                         onClick={() => handleCampRegister(camp as CampModalData)}
-                        className="block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-lbta-orange transition-colors duration-300 cursor-pointer"
+                        className="block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-[#1a1a1a] transition-colors duration-300 cursor-pointer"
                       >
                         Register Now
                       </button>
@@ -914,7 +914,7 @@ export default function SchedulesPage() {
                       
                       <button
                         onClick={() => handleJTTRegister(season as JTTModalData)}
-                        className="mt-6 block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-lbta-orange transition-colors duration-300 cursor-pointer"
+                        className="mt-6 block w-full text-center bg-black text-white font-sans text-[12px] font-medium tracking-[1.5px] uppercase py-3 hover:bg-[#1a1a1a] transition-colors duration-300 cursor-pointer"
                       >
                         Register for {season.name}
                       </button>
@@ -928,7 +928,7 @@ export default function SchedulesPage() {
                 <div className="flex flex-wrap justify-center gap-8 md:gap-16">
                   {year2026Data.jtt[0].includes.map((item: string, i: number) => (
                     <div key={i} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-lbta-orange rounded-full" />
+                      <span className="w-1.5 h-1.5 bg-black rounded-full" />
                       <span className="font-sans text-[13px] text-black/70">{item}</span>
                     </div>
                   ))}
@@ -955,7 +955,7 @@ export default function SchedulesPage() {
         </div>
         
         <div className="relative z-10 text-center text-white px-6 py-20">
-          <p className="font-sans text-[12px] md:text-[14px] uppercase tracking-[3px] text-lbta-orange mb-4">
+          <p className="font-sans text-[12px] md:text-[14px] uppercase tracking-[3px] text-white/70 mb-4">
             Winter 2026 Registration Open
           </p>
           <h2 className="font-serif text-[36px] md:text-[48px] font-semibold mb-4 leading-[1.2] text-shadow">
@@ -967,7 +967,7 @@ export default function SchedulesPage() {
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all shadow-md hover:shadow-lg min-h-[48px]"
+              className="bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all shadow-md hover:shadow-lg min-h-[48px]"
             >
               Book Trial
             </Link>

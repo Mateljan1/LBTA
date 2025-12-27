@@ -101,7 +101,7 @@ export default function FAQSection() {
                 >
                   <span className={`
                     font-sans text-body font-medium transition-colors duration-300
-                    ${isOpen ? 'text-lbta-orange' : 'text-lbta-black group-hover:text-lbta-orange'}
+                    ${isOpen ? 'text-black' : 'text-lbta-black group-hover:text-black'}
                   `}>
                     {faq.question}
                   </span>
@@ -111,8 +111,8 @@ export default function FAQSection() {
                     flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center
                     transition-all duration-500 ease-luxury
                     ${isOpen 
-                      ? 'bg-lbta-orange text-white rotate-180' 
-                      : 'bg-lbta-cream text-lbta-orange group-hover:bg-lbta-beige'
+                      ? 'bg-black text-white rotate-180' 
+                      : 'bg-gray-100 text-black group-hover:bg-gray-200'
                     }
                   `}>
                     <svg 
@@ -148,7 +148,7 @@ export default function FAQSection() {
                     >
                       <div className="px-6 pb-6">
                         {/* Subtle divider */}
-                        <div className="w-12 h-px bg-lbta-orange/30 mb-4" />
+                        <div className="w-12 h-px bg-black/20 mb-4" />
                         <p className="text-body-sm text-lbta-slate leading-relaxed">
                           {faq.answer}
                         </p>
@@ -168,7 +168,7 @@ export default function FAQSection() {
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 font-sans text-ui font-medium text-lbta-orange hover:text-lbta-red transition-colors group"
+            className="inline-flex items-center gap-2 font-sans text-ui font-medium text-black hover:text-black/70 transition-colors group"
           >
             <span>Contact Us</span>
             <svg 

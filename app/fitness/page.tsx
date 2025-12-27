@@ -36,7 +36,7 @@ export default function FitnessPage() {
           </p>
           <Link 
             href="/book"
-            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
           >
             Join a Session →
           </Link>
@@ -72,7 +72,7 @@ export default function FitnessPage() {
               </p>
               <Link 
                 href="/schedules#fitness"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-full transition-all duration-200 min-h-[44px]"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-full transition-all duration-200 min-h-[44px]"
               >
                 View Schedule →
               </Link>
@@ -98,7 +98,7 @@ export default function FitnessPage() {
               </p>
               <Link 
                 href="/schedules#fitness"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-full transition-all duration-200 min-h-[44px]"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-full transition-all duration-200 min-h-[44px]"
               >
                 View Schedule →
               </Link>
@@ -127,7 +127,7 @@ export default function FitnessPage() {
           </h2>
           
           <div className="bg-[#FAF8F3] rounded-xl shadow-sm overflow-hidden">
-            <div className="divide-y divide-lbta-orange/20">
+            <div className="divide-y divide-black/10">
               {fitnessClasses.map((session, index) => (
                 <div key={index} className="p-5 md:p-6 hover:bg-white/50 transition-colors">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
@@ -140,12 +140,12 @@ export default function FitnessPage() {
                       </p>
                     </div>
                     <div className="flex items-center gap-4">
-                      <span className="font-sans text-[16px] md:text-[17px] font-semibold text-lbta-orange">
+                      <span className="font-sans text-[16px] md:text-[17px] font-semibold text-black">
                         {session.price}
                       </span>
                       <Link
                         href="/book"
-                        className="bg-lbta-red hover:bg-lbta-orange text-white px-5 py-2 rounded-full font-sans font-semibold text-[13px] md:text-[14px] transition-all duration-200 whitespace-nowrap min-h-[44px] flex items-center"
+                        className="bg-black hover:bg-[#1a1a1a] text-white px-5 py-2 rounded-full font-sans font-semibold text-[13px] md:text-[14px] transition-all duration-200 whitespace-nowrap min-h-[44px] flex items-center"
                       >
                         Book →
                       </Link>
@@ -159,7 +159,7 @@ export default function FitnessPage() {
           <div className="text-center mt-8">
             <Link 
               href="/schedules"
-              className="inline-block font-sans text-[15px] text-lbta-orange hover:underline transition-all"
+              className="inline-block font-sans text-[15px] text-black hover:underline transition-all"
             >
               View Full Schedule →
             </Link>
@@ -189,7 +189,7 @@ export default function FitnessPage() {
           </p>
           <Link 
             href="/book"
-            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
           >
             Book a Class →
           </Link>

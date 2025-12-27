@@ -41,7 +41,7 @@ export default function Programs() {
           </p>
           <Link 
             href="/schedules"
-            className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
+            className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
           >
             View Schedules →
           </Link>
@@ -73,7 +73,7 @@ export default function Programs() {
                   Ages 3–11
                 </span>
               </h2>
-              <h3 className="font-serif text-[24px] text-lbta-orange italic">
+              <h3 className="font-serif text-[24px] text-black/70 italic">
                 Where it begins.
               </h3>
               <p className="font-sans text-[18px] leading-[1.8] text-black/85">
@@ -87,13 +87,13 @@ export default function Programs() {
                 <p className="font-sans text-[16px] text-black/70 mb-2">
                   <strong>Format:</strong> 45–60 min · Small groups · Quarterly billing
                 </p>
-                <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+                <blockquote className="font-serif italic text-[20px] text-black/70 border-l-2 border-black/30 pl-4 mt-6">
                   "Confidence before competition."
                 </blockquote>
               </div>
               <Link 
                 href="/schedules#junior"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
               >
                 View Junior Schedule →
               </Link>
@@ -114,7 +114,7 @@ export default function Programs() {
                   Ages 11–18
                 </span>
               </h2>
-              <h3 className="font-serif text-[24px] text-lbta-orange italic">
+              <h3 className="font-serif text-[24px] text-black/70 italic">
                 For players growing into competitors.
               </h3>
               <p className="font-sans text-[18px] leading-[1.8] text-black/85">
@@ -128,13 +128,13 @@ export default function Programs() {
                 <p className="font-sans text-[16px] text-black/70 mb-2">
                   <strong>Format:</strong> 90 min · Max 6 per court · Moulton / LBHS
                 </p>
-                <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+                <blockquote className="font-serif italic text-[20px] text-black/70 border-l-2 border-black/30 pl-4 mt-6">
                   "Discipline creates confidence."
                 </blockquote>
               </div>
               <Link 
                 href="/schedules#youth"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
               >
                 View Youth Schedule →
               </Link>
@@ -179,7 +179,7 @@ export default function Programs() {
             <p className="font-sans text-[20px] text-white/90 mb-6">
               UTR 5–8 & College Bound UTR 8+
             </p>
-            <h3 className="font-serif text-[24px] text-lbta-orange italic mb-6">
+            <h3 className="font-serif text-[24px] text-black/70 italic mb-6">
               Where ambition meets structure.
             </h3>
             <p className="font-sans text-[18px] leading-[1.8] text-white/90 mb-4">
@@ -193,13 +193,13 @@ export default function Programs() {
               <p className="font-sans text-[16px] text-white/80">
                 <strong>Format:</strong> 2 hrs · LBHS facility · Application required
               </p>
-              <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+              <blockquote className="font-serif italic text-[20px] text-black/70 border-l-2 border-black/30 pl-4 mt-6">
                 "We don't chase points — we build players who can win anywhere."
               </blockquote>
             </div>
             <Link 
               href="/apply-scholarship"
-              className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
+              className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
             >
               Apply for High Performance →
             </Link>
@@ -217,7 +217,7 @@ export default function Programs() {
                 Beginner – Advanced
               </span>
             </h2>
-            <h3 className="font-serif text-[24px] text-lbta-orange italic">
+            <h3 className="font-serif text-[24px] text-black/70 italic">
               Progression with purpose.
             </h3>
             <p className="font-sans text-[18px] leading-[1.8] text-black/85 mt-6 max-w-3xl mx-auto">
@@ -280,13 +280,13 @@ export default function Programs() {
             <p className="font-sans text-[16px] text-black/70">
               <strong>Format:</strong> 60–120 min · LBHS / Moulton · 13-week season
             </p>
-            <blockquote className="font-serif italic text-[20px] text-lbta-orange max-w-2xl mx-auto">
+            <blockquote className="font-serif italic text-[20px] text-black/70 max-w-2xl mx-auto">
               "Serious training, relaxed atmosphere."
             </blockquote>
             <div className="pt-4">
               <Link 
                 href="/adult-trial"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200"
               >
                 Book Adult Trial →
               </Link>
@@ -320,7 +320,7 @@ export default function Programs() {
                   Cardio / LiveBall
                 </span>
               </h2>
-              <h3 className="font-serif text-[24px] text-lbta-orange italic">
+              <h3 className="font-serif text-[24px] text-black/70 italic">
                 Play harder. Move smarter.
               </h3>
               <p className="font-sans text-[18px] leading-[1.8] text-black/85">
@@ -338,13 +338,13 @@ export default function Programs() {
                 <p className="font-sans text-[16px] text-black/70 mb-2">
                   <strong>Format:</strong> 90 min · Monthly · All levels welcome
                 </p>
-                <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+                <blockquote className="font-serif italic text-[20px] text-black/70 border-l-2 border-black/30 pl-4 mt-6">
                   "Community built through play."
                 </blockquote>
               </div>
               <Link 
                 href="/schedules#fitness"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
               >
                 Join a Session →
               </Link>
@@ -362,7 +362,7 @@ export default function Programs() {
               <h2 className="font-serif text-[40px] md:text-[48px] leading-[1.1] font-semibold text-black">
                 Private & Specialty Training
               </h2>
-              <h3 className="font-serif text-[24px] text-lbta-orange italic">
+              <h3 className="font-serif text-[24px] text-black/70 italic">
                 Precision in every detail.
               </h3>
               <p className="font-sans text-[18px] leading-[1.8] text-black/85">
@@ -381,13 +381,13 @@ export default function Programs() {
                   <li>Head Coach: $150/hr</li>
                   <li>Staff Coach: $120/hr</li>
                 </ul>
-                <blockquote className="font-serif italic text-[20px] text-lbta-orange border-l-2 border-lbta-orange pl-4 mt-6">
+                <blockquote className="font-serif italic text-[20px] text-black/70 border-l-2 border-black/30 pl-4 mt-6">
                   "Every player deserves precision."
                 </blockquote>
               </div>
               <Link 
                 href="/book"
-                className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
+                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-lg transition-all duration-200 mt-4"
               >
                 Request Private →
               </Link>
@@ -433,7 +433,7 @@ export default function Programs() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link 
               href="/schedules"
-              className="inline-block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200 w-full sm:w-auto"
+              className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-lg transition-all duration-200 w-full sm:w-auto"
             >
               View Schedules →
             </Link>

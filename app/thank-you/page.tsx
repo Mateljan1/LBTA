@@ -9,7 +9,7 @@ export default function ThankYouPage() {
       <section className="relative bg-lbta-charcoal text-white py-32 min-h-[400px] flex items-center">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <CheckCircle className="w-20 h-20 text-lbta-orange mx-auto mb-8" />
+            <CheckCircle className="w-20 h-20 text-black mx-auto mb-8" />
             <h1 className="text-4xl md:text-5xl font-serif font-light mb-6">
               Your Request is Confirmed
             </h1>
@@ -94,7 +94,7 @@ export default function ThankYouPage() {
             <AnimatedSection delay={0.1}>
               <Link href="/schedules">
                 <div className="card-lbta p-8 text-center hover:border-lbta-charcoal group cursor-pointer">
-                  <Calendar className="w-10 h-10 text-lbta-burnt mx-auto mb-4 group-hover:text-lbta-orange transition-colors" />
+                  <Calendar className="w-10 h-10 text-lbta-burnt mx-auto mb-4 group-hover:text-black/70 transition-colors" />
                   <h3 className="font-sans font-medium text-lbta-charcoal mb-2">
                     Class Schedules
                   </h3>
@@ -108,7 +108,7 @@ export default function ThankYouPage() {
             <AnimatedSection delay={0.2}>
               <Link href="/programs">
                 <div className="card-lbta p-8 text-center hover:border-lbta-charcoal group cursor-pointer">
-                  <CheckCircle className="w-10 h-10 text-lbta-burnt mx-auto mb-4 group-hover:text-lbta-orange transition-colors" />
+                  <CheckCircle className="w-10 h-10 text-lbta-burnt mx-auto mb-4 group-hover:text-black/70 transition-colors" />
                   <h3 className="font-sans font-medium text-lbta-charcoal mb-2">
                     View Programs
                   </h3>
@@ -122,7 +122,7 @@ export default function ThankYouPage() {
             <AnimatedSection delay={0.3}>
               <Link href="/coaches">
                 <div className="card-lbta p-8 text-center hover:border-lbta-charcoal group cursor-pointer">
-                  <Users className="w-10 h-10 text-lbta-burnt mx-auto mb-4 group-hover:text-lbta-orange transition-colors" />
+                  <Users className="w-10 h-10 text-lbta-burnt mx-auto mb-4 group-hover:text-black/70 transition-colors" />
                   <h3 className="font-sans font-medium text-lbta-charcoal mb-2">
                     Meet Coaches
                   </h3>
@@ -136,7 +136,7 @@ export default function ThankYouPage() {
             <AnimatedSection delay={0.4}>
               <Link href="/faq">
                 <div className="card-lbta p-8 text-center hover:border-lbta-charcoal group cursor-pointer">
-                  <Phone className="w-10 h-10 text-lbta-burnt mx-auto mb-4 group-hover:text-lbta-orange transition-colors" />
+                  <Phone className="w-10 h-10 text-lbta-burnt mx-auto mb-4 group-hover:text-black/70 transition-colors" />
                   <h3 className="font-sans font-medium text-lbta-charcoal mb-2">
                     FAQ
                   </h3>
@@ -164,7 +164,7 @@ export default function ThankYouPage() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
               <a
                 href="tel:9494646645"
-                className="flex items-center gap-3 text-lbta-burnt hover:text-lbta-orange transition-colors"
+                className="flex items-center gap-3 text-lbta-burnt hover:text-black/70 transition-colors"
               >
                 <Phone className="w-5 h-5" />
                 (949) 464-6645
@@ -172,7 +172,7 @@ export default function ThankYouPage() {
               <span className="hidden sm:block text-gray-300">|</span>
               <a
                 href="mailto:support@lagunabeachtennisacademy.com"
-                className="flex items-center gap-3 text-lbta-burnt hover:text-lbta-orange transition-colors"
+                className="flex items-center gap-3 text-lbta-burnt hover:text-black/70 transition-colors"
               >
                 <Mail className="w-5 h-5" />
                 support@lagunabeachtennisacademy.com

@@ -92,7 +92,7 @@ export default function ContactPage() {
             Movement. Discipline. Belonging — it starts here.
           </p>
           <p 
-            className="text-lbta-orange font-sans text-[14px] md:text-[16px] uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
+            className="text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
             onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Get in Touch ↓
@@ -106,7 +106,7 @@ export default function ContactPage() {
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-center">
             {/* Location */}
             <div className="flex flex-col items-center gap-3">
-              <MapPin className="w-6 h-6 text-lbta-orange" aria-hidden="true" />
+              <MapPin className="w-6 h-6 text-black" aria-hidden="true" />
               <div>
                 <p className="font-sans font-semibold text-[15px] text-black mb-1">Location</p>
                 <p className="font-sans text-[14px] text-black/70">1098 Balboa Ave</p>
@@ -116,12 +116,12 @@ export default function ContactPage() {
             
             {/* Phone */}
             <div className="flex flex-col items-center gap-3">
-              <Phone className="w-6 h-6 text-lbta-orange" aria-hidden="true" />
+              <Phone className="w-6 h-6 text-black" aria-hidden="true" />
               <div>
                 <p className="font-sans font-semibold text-[15px] text-black mb-1">Phone</p>
                 <a 
                   href="tel:9494646645" 
-                  className="font-sans text-[14px] text-black/70 hover:text-lbta-orange transition-colors"
+                  className="font-sans text-[14px] text-black/70 hover:text-black/70 transition-colors"
                   aria-label="Call us at (949) 464-6645"
                 >
                   (949) 464-6645
@@ -131,12 +131,12 @@ export default function ContactPage() {
             
             {/* Email */}
             <div className="flex flex-col items-center gap-3">
-              <Mail className="w-6 h-6 text-lbta-orange" aria-hidden="true" />
+              <Mail className="w-6 h-6 text-black" aria-hidden="true" />
               <div>
                 <p className="font-sans font-semibold text-[15px] text-black mb-1">Email</p>
                 <a 
                   href="mailto:support@lagunabeachtennisacademy.com" 
-                  className="font-sans text-[14px] text-black/70 hover:text-lbta-orange transition-colors break-all"
+                  className="font-sans text-[14px] text-black/70 hover:text-black/70 transition-colors break-all"
                   aria-label="Email us at support@lagunabeachtennisacademy.com"
                 >
                   support@lagunabeachtennisacademy.com
@@ -152,8 +152,8 @@ export default function ContactPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-6">
           {status === 'success' ? (
             /* SUCCESS STATE */
-            <div className="max-w-2xl mx-auto text-center py-12 bg-lbta-orange/10 rounded-2xl animate-fade-in-up">
-              <CheckCircle className="w-16 h-16 text-lbta-orange mx-auto mb-6" />
+            <div className="max-w-2xl mx-auto text-center py-12 bg-black/5 rounded-2xl animate-fade-in-up">
+              <CheckCircle className="w-16 h-16 text-black mx-auto mb-6" />
               <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
                 Message Sent!
               </h3>
@@ -162,7 +162,7 @@ export default function ContactPage() {
               </p>
               <button
                 onClick={() => setStatus('idle')}
-                className="text-lbta-orange hover:underline font-sans font-semibold text-[15px]"
+                className="text-black hover:underline font-sans font-semibold text-[15px]"
               >
                 Send Another Message
               </button>
@@ -194,7 +194,7 @@ export default function ContactPage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all ${
+                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
                         errors.name ? 'ring-2 ring-red-500' : ''
                       }`}
                       placeholder="Full name"
@@ -221,7 +221,7 @@ export default function ContactPage() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all ${
+                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
                         errors.email ? 'ring-2 ring-red-500' : ''
                       }`}
                       placeholder="your@email.com"
@@ -248,7 +248,7 @@ export default function ContactPage() {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all ${
+                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
                         errors.phone ? 'ring-2 ring-red-500' : ''
                       }`}
                       placeholder="(949) 555-1234"
@@ -273,7 +273,7 @@ export default function ContactPage() {
                       id="interested"
                       value={formData.interestedIn}
                       onChange={(e) => setFormData({...formData, interestedIn: e.target.value})}
-                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all cursor-pointer"
+                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all cursor-pointer"
                       aria-label="Select program interest"
                     >
                       <option value="">Select a program...</option>
@@ -300,7 +300,7 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
                       rows={4}
-                      className="w-full px-6 py-4 rounded-2xl bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all resize-none"
+                      className="w-full px-6 py-4 rounded-2xl bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all resize-none"
                       placeholder="Tell us about your tennis goals and any questions you have..."
                       aria-label="Your message to us"
                     />
@@ -315,7 +315,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="w-full md:w-auto md:px-12 bg-lbta-orange hover:bg-lbta-red hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full md:w-auto md:px-12 bg-black hover:bg-[#1a1a1a] hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {status === 'sending' ? (
                       <>
@@ -377,7 +377,7 @@ export default function ContactPage() {
           </p>
           <Link
             href="/book"
-            className="inline-block bg-lbta-orange hover:bg-lbta-red text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px]"
+            className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px]"
           >
             Book a Trial →
           </Link>

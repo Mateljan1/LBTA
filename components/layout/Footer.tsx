@@ -40,9 +40,9 @@ export default function Footer() {
         <div className="container-lbta py-20 md:py-24">
           <div className="max-w-2xl mx-auto text-center">
             {/* Decorative element */}
-            <div className="w-px h-12 bg-gradient-to-b from-transparent via-lbta-orange to-transparent mx-auto mb-8" />
+            <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent mx-auto mb-8" />
             
-            <span className="text-eyebrow text-lbta-orange mb-4 block">
+            <span className="text-eyebrow text-white/60 mb-4 block">
               Stay Connected
             </span>
             <h3 className="font-serif text-[28px] md:text-[36px] font-semibold mb-4 text-white">
@@ -68,7 +68,7 @@ export default function Footer() {
                     rounded-l-subtle
                     text-white placeholder-white/40 
                     font-sans text-body-sm
-                    focus:outline-none focus:border-lbta-orange focus:bg-white/10
+                    focus:outline-none focus:border-white/40 focus:bg-white/10
                     transition-all duration-300
                     disabled:opacity-50
                   "
@@ -78,10 +78,10 @@ export default function Footer() {
                   disabled={status === 'loading' || status === 'success'}
                   className="
                     px-6 py-4 
-                    bg-lbta-orange text-white 
+                    bg-white text-black 
                     font-sans text-ui font-medium tracking-wide
                     rounded-r-subtle
-                    hover:bg-lbta-red
+                    hover:bg-gray-100
                     transition-all duration-300
                     disabled:opacity-70
                     flex items-center gap-2
@@ -109,7 +109,7 @@ export default function Footer() {
               
               {/* Status Messages */}
               {status === 'success' && (
-                <p className="absolute -bottom-8 left-0 right-0 text-sm text-lbta-orange">
+                <p className="absolute -bottom-8 left-0 right-0 text-sm text-white">
                   Welcome to the community!
                 </p>
               )}
@@ -150,7 +150,7 @@ export default function Footer() {
                 href="https://instagram.com/lagunabeachtennisacademy" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-lbta-orange hover:text-white transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-white/20 hover:text-white transition-all duration-300"
                 aria-label="Follow us on Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -161,7 +161,7 @@ export default function Footer() {
                 href="https://facebook.com/lagunabeachtennisacademy" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-lbta-orange hover:text-white transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-white/20 hover:text-white transition-all duration-300"
                 aria-label="Follow us on Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -188,7 +188,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link 
                         href={item.href}
-                        className="text-body-sm text-white/60 hover:text-lbta-orange transition-colors duration-300"
+                        className="text-body-sm text-white/60 hover:text-white transition-colors duration-300"
                       >
                         {item.name}
                       </Link>
@@ -211,7 +211,7 @@ export default function Footer() {
                     <li key={item.name}>
                       <Link 
                         href={item.href}
-                        className="text-body-sm text-white/60 hover:text-lbta-orange transition-colors duration-300"
+                        className="text-body-sm text-white/60 hover:text-white transition-colors duration-300"
                       >
                         {item.name}
                       </Link>
