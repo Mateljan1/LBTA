@@ -6,6 +6,7 @@ import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
 // Camp data for 2026
 const camps = [
@@ -218,6 +219,11 @@ export default function CampsPage() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Breadcrumbs */}
+      <div className="bg-white pt-4">
+        <Breadcrumbs items={[{ label: 'Camps' }]} />
+      </div>
 
       {/* CAMPS SECTION */}
       <section id="camps" className="bg-white py-20 md:py-32">

@@ -6,6 +6,7 @@ import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
 // Team Divisions data
 const divisions = [
@@ -149,6 +150,11 @@ export default function JTTPage() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Breadcrumbs */}
+      <div className="bg-white pt-4">
+        <Breadcrumbs items={[{ label: 'Junior Team Tennis' }]} />
+      </div>
 
       {/* SEASON OVERVIEW */}
       <section className="bg-white py-20 md:py-32">

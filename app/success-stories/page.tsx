@@ -140,6 +140,48 @@ export default function SuccessStoriesPage() {
         </div>
       </section>
 
+      {/* Results by Numbers */}
+      <section className="bg-black py-16 md:py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <AnimatedSection>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+              <div>
+                <p className="font-serif text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
+                  20+
+                </p>
+                <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
+                  D1 Placements
+                </p>
+              </div>
+              <div>
+                <p className="font-serif text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
+                  500+
+                </p>
+                <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
+                  Players Trained
+                </p>
+              </div>
+              <div>
+                <p className="font-serif text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
+                  5.0
+                </p>
+                <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
+                  Google Rating
+                </p>
+              </div>
+              <div>
+                <p className="font-serif text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
+                  25+
+                </p>
+                <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
+                  Years Experience
+                </p>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Featured Stories */}
       <section className="bg-[#FAF8F3] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6">

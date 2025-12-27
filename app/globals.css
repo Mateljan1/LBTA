@@ -75,11 +75,61 @@
     color: var(--color-black);
   }
 
-  /* Focus styles - Accessibility */
+  /* Focus styles - Accessibility (WCAG 2.1 AAA) */
   *:focus-visible {
-    outline: 2px solid var(--color-orange);
+    outline: 2px solid var(--color-black);
     outline-offset: 3px;
     border-radius: 2px;
+  }
+  
+  /* High contrast focus for dark backgrounds */
+  .dark *:focus-visible,
+  [data-theme="dark"] *:focus-visible {
+    outline-color: white;
+  }
+  
+  /* Skip to content link for keyboard users */
+  .skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 9999;
+  }
+  
+  .skip-to-content:focus {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: auto;
+    height: auto;
+    padding: 16px 24px;
+    background: var(--color-black);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+  }
+  
+  /* Visible focus ring for interactive elements */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 2px;
+  }
+  
+  /* Focus within for complex components */
+  .focus-within-ring:focus-within {
+    outline: 2px solid var(--color-black);
+    outline-offset: 2px;
   }
 
   /* Smooth scrollbar */

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 interface StickyCTAProps {
@@ -11,14 +12,34 @@ interface StickyCTAProps {
   urgencyText?: string
 }
 
+// Context-aware urgency messages based on page
+const getContextualMessage = (pathname: string): { text: string; highlight?: string } => {
+  if (pathname.includes('/schedules')) {
+    return { text: 'Winter 2026 Registration Open', highlight: 'View Programs' }
+  }
+  if (pathname.includes('/camps')) {
+    return { text: 'Summer Camps · Limited Spots', highlight: 'Reserve Now' }
+  }
+  if (pathname.includes('/jtt')) {
+    return { text: 'JTT Season Starting Soon', highlight: 'Join Team' }
+  }
+  if (pathname.includes('/fitness')) {
+    return { text: 'Fit4Tennis · First Session Free', highlight: 'Get Started' }
+  }
+  return { text: 'Winter 2026 · Registration Open' }
+}
+
 export default function StickyCTA({ 
   text, 
   href, 
   onClick, 
   showAfterScroll = 400,
-  urgencyText = "Winter 2026 · Only 12 spots left"
+  urgencyText
 }: StickyCTAProps) {
   const [isVisible, setIsVisible] = useState(false)
+  const pathname = usePathname()
+  const contextMessage = getContextualMessage(pathname)
+  const displayUrgency = urgencyText || contextMessage.text
   
   useEffect(() => {
     const handleScroll = () => {
@@ -35,14 +56,14 @@ export default function StickyCTA({
   
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 px-4 py-3 pb-[calc(12px+env(safe-area-inset-bottom))] shadow-lg animate-slide-up">
-      {/* Urgency Text */}
-      {urgencyText && (
+      {/* Urgency Text with Context */}
+      {displayUrgency && (
         <div className="flex items-center justify-center gap-2 mb-2.5">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
           </span>
-          <span className="font-sans text-[12px] text-black/60">{urgencyText}</span>
+          <span className="font-sans text-[12px] text-black/60">{displayUrgency}</span>
         </div>
       )}
       

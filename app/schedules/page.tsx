@@ -12,6 +12,7 @@ import ComprehensiveFormTester from '@/components/ComprehensiveFormTester'
 import { trackProgramView, trackFormStart } from '@/lib/form-analytics'
 import MobileFilterOverlay from '@/components/MobileFilterOverlay'
 import BackToTopButton from '@/components/BackToTopButton'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
 // Import data
 import winter2026Data from '@/data/winter2026.json'
@@ -251,6 +252,11 @@ export default function SchedulesPage() {
           </div>
         </div>
       </section>
+
+      {/* Breadcrumbs */}
+      <div className="bg-white pt-4">
+        <Breadcrumbs items={[{ label: 'Schedules & Pricing' }]} />
+      </div>
 
       {/* YEAR AT A GLANCE */}
       <section className="bg-white py-12 md:py-20 border-b border-gray-100">
