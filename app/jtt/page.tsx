@@ -202,7 +202,7 @@ export default function JTTPage() {
                 <div className="space-y-4">
                   {keyDates.map((item, index) => (
                     <div key={index} className="flex items-baseline gap-4 pb-4 border-b border-white/10 last:border-0 last:pb-0">
-                      <span className="font-sans text-[14px] text-black/60 font-semibold min-w-[100px]">
+                      <span className="font-sans text-[14px] text-white/60 font-semibold min-w-[100px]">
                         {item.date}
                       </span>
                       <span className="font-sans text-[14px] text-white/80">
@@ -234,15 +234,10 @@ export default function JTTPage() {
             </div>
           </AnimatedSection>
           
-          <div className="grid md:grid-cols-3 gap-10 md:gap-16">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             <AnimatedSection delay={100}>
-              <div className="text-center">
-                <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
-                    01
-                  </span>
-                </div>
-                <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+              <div className="bg-white p-8 rounded-lg text-center h-full">
+                <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
                   Movement
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
@@ -252,13 +247,8 @@ export default function JTTPage() {
             </AnimatedSection>
             
             <AnimatedSection delay={200}>
-              <div className="text-center">
-                <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
-                    02
-                  </span>
-                </div>
-                <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+              <div className="bg-white p-8 rounded-lg text-center h-full">
+                <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
                   Discipline
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
@@ -268,13 +258,8 @@ export default function JTTPage() {
             </AnimatedSection>
             
             <AnimatedSection delay={300}>
-              <div className="text-center">
-                <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
-                    03
-                  </span>
-                </div>
-                <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+              <div className="bg-white p-8 rounded-lg text-center h-full">
+                <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
                   Belonging
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
@@ -448,10 +433,10 @@ export default function JTTPage() {
                 </h3>
                 <div className="space-y-4">
                   {included.map((item, index) => (
-                    <div key={index} className="flex items-start gap-4 pb-4 border-b border-black/10 last:border-0">
-                      <span className="font-serif text-[24px] text-black/20 font-light leading-none mt-1">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
+                    <div key={index} className="flex items-start gap-3 pb-4 border-b border-black/10 last:border-0">
+                      <svg className="w-5 h-5 text-black/40 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                       <span className="font-sans text-[15px] text-black/70 leading-relaxed">
                         {item}
                       </span>

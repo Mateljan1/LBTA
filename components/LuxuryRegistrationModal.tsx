@@ -83,9 +83,9 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
   if (!program) return null
 
-  // Build pricing options from program data
+  // Build pricing options from program data - include drop-in
   const pricingOptions = Object.entries(program.pricing)
-    .filter(([key, value]) => key !== 'drop_in' && value !== undefined)
+    .filter(([, value]) => value !== undefined)
     .map(([key, value]) => {
       const labels: Record<string, string> = {
         monthly: 'Monthly',
@@ -94,6 +94,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
         '3x': '3× weekly',
         '4x': '4× weekly',
         '5x': '5× weekly',
+        'drop_in': 'Drop-in (single class)',
       }
       return { label: labels[key] || key, value: key, price: value as number }
     })

@@ -176,13 +176,12 @@ export default function CampsPage() {
             src="/images/community/community-3.webp"
             alt="Young boy celebrating on the tennis court at Laguna Beach Tennis Academy camp"
             fill
-            className="object-cover"
-            style={{ objectPosition: '50% 50%' }}
+            className="object-cover object-center"
             sizes="100vw"
             priority
             quality={90}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
         </div>
         
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-24">
@@ -257,16 +256,16 @@ export default function CampsPage() {
           </AnimatedSection>
 
           {/* Camp Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
             {filteredCamps.map((camp, index) => (
               <AnimatedSection key={camp.id} delay={150 + index * 50}>
-                <div className={`bg-[#FAF8F3] rounded-lg overflow-hidden h-full flex flex-col ${camp.featured ? 'ring-2 ring-black' : ''}`}>
+                <div className={`bg-white rounded-lg overflow-hidden ${camp.featured ? 'ring-2 ring-black' : 'border border-black/10'}`}>
                   {camp.featured && (
                     <div className="bg-black text-white text-center py-2 font-sans text-[11px] uppercase tracking-[2px] font-semibold">
                       Featured Camp
                     </div>
                   )}
-                  <div className="p-6 flex-grow flex flex-col">
+                  <div className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="font-serif text-[22px] font-semibold text-black mb-1">
@@ -281,7 +280,7 @@ export default function CampsPage() {
                       </span>
                     </div>
                     
-                    <p className="font-sans text-[14px] text-black/70 mb-4 leading-relaxed flex-grow">
+                    <p className="font-sans text-[14px] text-black/70 mb-4 leading-relaxed">
                       {camp.description}
                     </p>
                     
@@ -300,22 +299,16 @@ export default function CampsPage() {
                       </div>
                     </div>
                     
-                    <div className="border-t border-black/10 pt-4 mt-auto">
-                      <div className="flex items-end justify-between mb-4">
-                        <div>
-                          <p className="font-sans text-[12px] text-black/50 uppercase tracking-wide">Starting at</p>
-                          <p className="font-serif text-[28px] font-semibold text-black">
-                            ${camp.price}
-                            {camp.halfDay && (
-                              <span className="font-sans text-[14px] text-black/50 ml-2">
-                                (Half-day: ${camp.halfDay})
-                              </span>
-                            )}
-                          </p>
-                          <p className="font-sans text-[12px] text-black/50">
-                            ${camp.perDay}/day
-                          </p>
-                        </div>
+                    <div className="border-t border-black/10 pt-4">
+                      <div className="mb-4">
+                        <p className="font-sans text-[12px] text-black/50 uppercase tracking-wide">Starting at</p>
+                        <p className="font-serif text-[28px] font-semibold text-black">
+                          ${camp.price}
+                        </p>
+                        <p className="font-sans text-[12px] text-black/50">
+                          ${camp.perDay}/day
+                          {camp.halfDay && ` · Half-day: $${camp.halfDay}`}
+                        </p>
                       </div>
                       
                       <button
@@ -324,13 +317,13 @@ export default function CampsPage() {
                       >
                         Register Now
                       </button>
+                      
+                      {camp.safetyNote && (
+                        <p className="font-sans text-[11px] text-black/50 mt-3 italic">
+                          * {camp.safetyNote}
+                        </p>
+                      )}
                     </div>
-                    
-                    {camp.safetyNote && (
-                      <p className="font-sans text-[11px] text-black/50 mt-3 italic">
-                        * {camp.safetyNote}
-                      </p>
-                    )}
                   </div>
                 </div>
               </AnimatedSection>
@@ -356,15 +349,10 @@ export default function CampsPage() {
             </div>
           </AnimatedSection>
           
-          <div className="grid md:grid-cols-3 gap-10 md:gap-12">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             <AnimatedSection delay={100}>
-              <div className="text-center">
-                <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
-                    01
-                  </span>
-                </div>
-                <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+              <div className="bg-white p-8 rounded-lg text-center h-full">
+                <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
                   Movement
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
@@ -374,13 +362,8 @@ export default function CampsPage() {
             </AnimatedSection>
             
             <AnimatedSection delay={200}>
-              <div className="text-center">
-                <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
-                    02
-                  </span>
-                </div>
-                <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+              <div className="bg-white p-8 rounded-lg text-center h-full">
+                <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
                   Discipline
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
@@ -390,13 +373,8 @@ export default function CampsPage() {
             </AnimatedSection>
             
             <AnimatedSection delay={300}>
-              <div className="text-center">
-                <div className="mb-6">
-                  <span className="font-serif text-[72px] md:text-[96px] font-light text-black/10 leading-none">
-                    03
-                  </span>
-                </div>
-                <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+              <div className="bg-white p-8 rounded-lg text-center h-full">
+                <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
                   Belonging
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
