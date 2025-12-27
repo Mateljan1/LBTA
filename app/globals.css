@@ -175,7 +175,7 @@
 }
 
 /* =====================================================
-   BUTTON SYSTEM - Premium Design
+   BUTTON SYSTEM - Premium Design with Micro-interactions
    ===================================================== */
 
 @layer components {
@@ -190,10 +190,33 @@
     padding: 1rem 2rem;
     min-height: 48px;
     border-radius: 2px;
-    transition: all var(--transition-base);
+    transition: all var(--transition-base), transform 0.15s var(--ease-bounce);
     position: relative;
     overflow: hidden;
     cursor: pointer;
+  }
+
+  /* Ripple effect on click */
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .btn:active::before {
+    width: 300px;
+    height: 300px;
+    opacity: 1;
+    transition: width 0s, height 0s, opacity 0s;
   }
 
   /* Primary Button - Solid Black (Luxury) */
@@ -206,12 +229,13 @@
 
   .btn-primary:hover {
     background: #1a1a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
   }
 
   .btn-primary:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   }
 
   /* Accent Button - Now Black (Luxury) */
@@ -224,12 +248,13 @@
 
   .btn-accent:hover {
     background: #1a1a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
   }
 
   .btn-accent:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
 
   /* Secondary Button - Outlined */
@@ -240,14 +265,19 @@
     border: 1.5px solid rgba(0, 0, 0, 0.15);
   }
 
+  .btn-secondary::before {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
   .btn-secondary:hover {
     border-color: var(--color-black);
     background: rgba(0, 0, 0, 0.02);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   }
 
   .btn-secondary:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(-1px) scale(0.98);
   }
 
   /* Ghost Button - Text only (Luxury Black) */
@@ -257,6 +287,10 @@
     color: var(--color-charcoal);
     padding: 0.5rem 0;
     min-height: auto;
+  }
+
+  .btn-ghost::before {
+    display: none;
   }
 
   .btn-ghost::after {
@@ -293,11 +327,24 @@
     font-weight: 600;
   }
 
+  .btn-pill-primary::before {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
   .btn-pill-primary:hover {
     background: var(--color-black);
     color: var(--color-white);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn-pill-primary:hover::before {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-pill-primary:active {
+    transform: translateY(-2px) scale(0.98);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
   }
 
   .btn-pill-secondary {
@@ -309,8 +356,27 @@
   }
 
   .btn-pill-secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-3px);
+  }
+
+  .btn-pill-secondary:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+
+  /* Pulse animation for urgency CTAs */
+  .btn-pulse {
+    animation: btn-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes btn-pulse {
+    0%, 100% {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 8px rgba(0, 0, 0, 0.04);
+    }
   }
 }
 
@@ -516,6 +582,52 @@
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Slide-up animation for sticky CTAs */
+  .animate-slide-up {
+    animation: slideUp 0.4s var(--ease-bounce) forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fade-in animation */
+  .animate-fade-in {
+    animation: fadeIn 0.5s var(--ease-luxury) forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Scale-in animation */
+  .animate-scale-in {
+    animation: scaleIn 0.3s var(--ease-bounce) forwards;
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   /* Stagger delays */

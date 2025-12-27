@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Script from 'next/script'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import AnimatedSection from '@/components/AnimatedSection'
+import VideoTestimonials from '@/components/VideoTestimonials'
 import { Play, Quote, Star, ArrowRight } from 'lucide-react'
 
 const successStories = [
@@ -245,6 +246,9 @@ export default function SuccessStoriesPage() {
           </div>
         </div>
       </section>
+
+      {/* Video Testimonials */}
+      <VideoTestimonials />
 
       {/* Testimonials Wall */}
       <section className="bg-[#F8E6BB] py-16 md:py-24">

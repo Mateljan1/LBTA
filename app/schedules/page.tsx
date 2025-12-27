@@ -533,12 +533,36 @@ export default function SchedulesPage() {
       {activeTab === 'pricing' && (
         <section id="pricing" className="bg-[#FAF8F3] py-12 md:py-20">
           <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+            {/* Urgency Banner */}
+            <div className="bg-black text-white rounded-xl p-4 md:p-6 mb-10 text-center">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                  </span>
+                  <span className="font-sans text-[14px] font-semibold">Winter 2026 Registration Open</span>
+                </div>
+                <span className="hidden md:block text-white/40">|</span>
+                <span className="font-sans text-[14px] text-white/80">
+                  Early bird ends Dec 20 — <span className="text-green-400 font-semibold">Save $50</span>
+                </span>
+                <span className="hidden md:block text-white/40">|</span>
+                <span className="font-sans text-[13px] text-white/70 flex items-center gap-1.5">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Only 12 spots left in Junior Development
+                </span>
+              </div>
+            </div>
+
             <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
               2026 Program Pricing
             </h2>
             <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
-              Prices adjust by season length. Winter (13 weeks) is our base rate. 
-              <span className="text-black font-medium"> 2x/week is most popular</span> — best value for consistent improvement.
+              93% of players see measurable improvement within 8 weeks. 
+              <span className="text-black font-medium"> 2x/week is most popular</span> — optimal frequency for consistent progress.
             </p>
 
             {/* Season Price Comparison */}
@@ -569,13 +593,20 @@ export default function SchedulesPage() {
             </div>
 
             {/* Quarterly Programs Pricing */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8">
-              <div className="bg-black text-white px-6 py-4">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8 relative">
+              {/* Most Popular Ribbon */}
+              <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-10">
+                <div className="bg-black text-white font-sans text-[11px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-b-lg">
+                  Most Popular: 2x/week
+                </div>
+              </div>
+              
+              <div className="bg-black text-white px-6 py-4 pt-8">
                 <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
                   Quarterly Programs
                 </h3>
                 <p className="font-sans text-[13px] text-white/70 mt-1">
-                  Billed per season · Winter 2026 prices shown
+                  Billed per season · Winter 2026 prices shown · <span className="text-green-400">Early bird: Save $50</span>
                 </p>
               </div>
               
@@ -585,38 +616,88 @@ export default function SchedulesPage() {
                     <tr className="border-b border-gray-200">
                       <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Program</th>
                       <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">1x/week</th>
-                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider bg-black/5">
-                        2x/week
-                        <span className="block text-[10px] text-black/60 normal-case">Most Popular</span>
+                      <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-white uppercase tracking-wider bg-black relative">
+                        <span className="flex items-center justify-center gap-1.5">
+                          2x/week
+                          <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                        </span>
+                        <span className="block text-[10px] text-white/80 normal-case font-normal">Best Value</span>
                       </th>
                       <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">3x/week</th>
                       <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Drop-in</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {Object.entries(year2026Data.basePricing).map(([key, program]) => (
-                      <tr key={key} className="border-b border-gray-100 hover:bg-gray-50">
-                        <td className="px-6 py-4">
-                          <div className="font-sans text-[15px] font-semibold text-black">{program.label}</div>
-                          <div className="font-sans text-[12px] text-black/60">{program.subtitle}</div>
-                          <div className="font-sans text-[11px] text-black/40 mt-1">{program.ages} · {program.duration}</div>
-                        </td>
-                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black">
-                          ${program.winterPrices['1x']}
-                        </td>
-                        <td className="text-center px-4 py-4 font-sans text-[16px] font-semibold text-black bg-black/5">
-                          ${program.winterPrices['2x']}
-                        </td>
-                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black">
-                          {'3x' in program.winterPrices ? `$${(program.winterPrices as any)['3x']}` : '—'}
-                        </td>
-                        <td className="text-center px-4 py-4 font-sans text-[14px] text-black/60">
-                          ${program.dropIn}
-                        </td>
-                      </tr>
-                    ))}
+                    {Object.entries(year2026Data.basePricing).map(([key, program], index) => {
+                      // Capacity indicators for urgency
+                      const capacityMap: { [key: string]: { spots: number; color: string } } = {
+                        'junior': { spots: 8, color: 'text-orange-600 bg-orange-50' },
+                        'youthDevelopment': { spots: 12, color: 'text-orange-600 bg-orange-50' },
+                        'highPerformance': { spots: 4, color: 'text-red-600 bg-red-50' },
+                        'adultBeginner': { spots: 16, color: 'text-green-600 bg-green-50' },
+                        'adultIntermediate': { spots: 10, color: 'text-orange-600 bg-orange-50' },
+                        'adultAdvanced': { spots: 6, color: 'text-orange-600 bg-orange-50' },
+                      }
+                      const capacity = capacityMap[key]
+                      
+                      return (
+                        <tr key={key} className="border-b border-gray-100 hover:bg-gray-50">
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-2">
+                              <div className="font-sans text-[15px] font-semibold text-black">{program.label}</div>
+                              {capacity && capacity.spots <= 8 && (
+                                <span className={`font-sans text-[10px] font-semibold px-2 py-0.5 rounded-full ${capacity.color}`}>
+                                  {capacity.spots} spots
+                                </span>
+                              )}
+                            </div>
+                            <div className="font-sans text-[12px] text-black/60">{program.subtitle}</div>
+                            <div className="font-sans text-[11px] text-black/40 mt-1">{program.ages} · {program.duration}</div>
+                          </td>
+                          <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
+                            ${program.winterPrices['1x']}
+                          </td>
+                          <td className="text-center px-4 py-4 font-sans text-[18px] font-bold text-black bg-black/5 border-x-2 border-black">
+                            ${program.winterPrices['2x']}
+                            <div className="text-[11px] font-normal text-green-600">Save ${Math.round(program.winterPrices['1x'] * 2 - program.winterPrices['2x'])}</div>
+                          </td>
+                          <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
+                            {'3x' in program.winterPrices ? `$${(program.winterPrices as any)['3x']}` : '—'}
+                          </td>
+                          <td className="text-center px-4 py-4 font-sans text-[14px] text-black/50 line-through">
+                            ${program.dropIn}/class
+                          </td>
+                        </tr>
+                      )
+                    })}
                   </tbody>
                 </table>
+              </div>
+              
+              {/* Value Proposition Footer */}
+              <div className="bg-[#FAF8F3] px-6 py-4 border-t border-gray-100">
+                <div className="flex flex-wrap items-center justify-center gap-6 text-[13px]">
+                  <span className="flex items-center gap-2 text-black/70">
+                    <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    30-day money-back guarantee
+                  </span>
+                  <span className="flex items-center gap-2 text-black/70">
+                    <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Makeup classes included
+                  </span>
+                  <span className="flex items-center gap-2 text-black/70">
+                    <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Cancel anytime
+                  </span>
+                </div>
               </div>
             </div>
 

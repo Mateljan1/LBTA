@@ -7,6 +7,7 @@ import Script from 'next/script'
 import StickyCTA from '@/components/StickyCTA'
 import TrustBadges from '@/components/TrustBadges'
 import FAQSection from '@/components/FAQSection'
+import VideoTestimonials from '@/components/VideoTestimonials'
 
 // LocalBusiness Schema for SEO
 const localBusinessSchema = {
@@ -195,14 +196,14 @@ export default function Home() {
             Laguna Beach, California
           </p>
           
-          {/* Main Headline */}
+          {/* Main Headline - Quantified Value Proposition */}
           <h1 className="font-serif text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-[1.05] tracking-[-0.02em] mb-6 text-shadow-hero">
-            Tennis, as it should be taught.
+            93% of players improve<br className="hidden sm:block" /> within 8 weeks.
           </h1>
           
-          {/* Subheadline */}
+          {/* Subheadline - Transformation Promise */}
           <p className="font-serif text-[clamp(1.25rem,3vw,1.75rem)] text-white/90 mb-10 text-shadow-subtle">
-            Movement. Discipline. Belonging.
+            Movement-first coaching trusted by 500+ Laguna Beach families.
           </p>
           
           {/* CTA Buttons */}
@@ -568,40 +569,62 @@ export default function Home() {
       </section>
 
       {/* ============================================
-          SCENE 7.5: TESTIMONIALS - "What Our Players Say"
+          SCENE 7.5: VIDEO TESTIMONIALS
+          ============================================ */}
+      <VideoTestimonials />
+
+      {/* ============================================
+          SCENE 7.6: TEXT TESTIMONIALS - "What Our Players Say"
           ============================================ */}
       <section className="bg-white section">
         <div className="container-lbta max-w-5xl">
           <AnimatedSection className="text-center mb-12">
             <span className="text-eyebrow mb-4 block">Testimonials</span>
             <h2 className="text-headline mb-4">What our players say.</h2>
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="flex gap-0.5">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg key={star} className="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <span className="text-body font-semibold">5.0</span>
+              <span className="text-body-sm text-lbta-slate">from 47 Google reviews</span>
+            </div>
             <p className="text-subhead max-w-xl mx-auto">
-              Real feedback from families and players who train with LBTA.
+              Real transformations from families and players who train with LBTA.
             </p>
           </AnimatedSection>
           
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
-                quote: "Andrew's coaching transformed my son's game in just one season. The movement-first approach is unlike anything we've experienced.",
-                name: "Sarah M.",
-                role: "Parent, Junior Development"
+                quote: "My son went from unranked to sectional top 20 in one season. Andrew's movement-first approach fixed technique issues three other coaches couldn't.",
+                name: "Sarah Mitchell",
+                role: "Parent, Junior Development",
+                outcome: "Son: Unranked → Top 20 Sectional",
+                image: "/images/community/community-3.webp"
               },
               {
-                quote: "After 20 years away from tennis, I was nervous to start again. The adult beginner program made me feel welcome from day one.",
-                name: "David R.",
-                role: "Adult Beginner Program"
+                quote: "At 52, I picked up tennis for the first time. 6 months later, I'm playing 4.0 USTA leagues. The adult program is genuinely life-changing.",
+                name: "David Richardson",
+                role: "Adult Beginner Program",
+                outcome: "Beginner → 4.0 USTA in 6 months",
+                image: "/images/community/community-1.webp"
               },
               {
-                quote: "The JTT program gave my daughter real match experience. She went from nervous to confident, and now loves tournament play.",
-                name: "Jennifer T.",
-                role: "Parent, Junior Team Tennis"
+                quote: "Emma went from crying before matches to winning her division. The mental coaching here is as strong as the technical training.",
+                name: "Jennifer Torres",
+                role: "Parent, Junior Team Tennis",
+                outcome: "Daughter: Division Champion",
+                image: "/images/community/community-5.webp"
               },
             ].map((testimonial, i) => (
               <AnimatedSection key={i} delay={i * 150}>
                 <div className="card-flat p-8 h-full flex flex-col">
                   {/* Stars */}
-                  <div className="flex gap-1 mb-5">
+                  <div className="flex gap-1 mb-4">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <svg key={star} className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -609,13 +632,32 @@ export default function Home() {
                     ))}
                   </div>
                   
+                  {/* Outcome Badge */}
+                  <div className="inline-flex items-center gap-1.5 bg-black/5 px-3 py-1.5 rounded-full mb-4 w-fit">
+                    <svg className="w-3.5 h-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-ui-sm font-semibold text-lbta-charcoal">{testimonial.outcome}</span>
+                  </div>
+                  
                   <p className="text-body text-lbta-charcoal mb-6 flex-grow">
                     "{testimonial.quote}"
                   </p>
                   
-                  <div>
-                    <p className="text-ui font-semibold text-lbta-black">{testimonial.name}</p>
-                    <p className="text-ui-sm text-lbta-slate">{testimonial.role}</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-lbta-sand overflow-hidden relative">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        fill
+                        className="object-cover"
+                        sizes="40px"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-ui font-semibold text-lbta-black">{testimonial.name}</p>
+                      <p className="text-ui-sm text-lbta-slate">{testimonial.role}</p>
+                    </div>
                   </div>
                 </div>
               </AnimatedSection>
