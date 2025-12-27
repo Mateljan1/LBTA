@@ -2,22 +2,24 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-// Removed framer-motion to avoid conflicts
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
-const programs = [
+// Data from winter2026.json - matches schedules page
+const winterPrograms = [
   {
-    id: "foundation",
-    name: "Foundation Building",
+    id: "little-stars",
+    name: "Little Tennis Stars",
     ages: "Ages 3-4",
-    duration: "45 minutes",
-    monthly_1x: 140,
-    monthly_2x: 260,
-    quarterly_prepay: 420,
-    drop_in: 45,
-    description: "First tennis experience through play-based learning. Builds coordination and confidence using foam balls.",
-    badge: "Foundation Building",
+    duration: "45 min",
+    location: "Moulton Meadows",
+    schedule: "Mon & Wed 3:30-4:15 PM",
+    coach: "Michelle",
+    pricing: {
+      monthly: 120,
+      drop_in: 40
+    },
+    description: "Introduction to tennis through play-based activities and movement fundamentals.",
     features: [
       "Movement fundamentals",
       "Coordination through play",
@@ -27,15 +29,18 @@ const programs = [
   },
   {
     id: "red-ball",
-    name: "Rally-Ready Training",
-    ages: "Ages 5-7",
-    duration: "60 minutes",
-    monthly_1x: 140,
-    monthly_2x: 260,
-    quarterly_prepay: 420,
-    drop_in: 45,
-    description: "Build stroke fundamentals and rally skills on small courts. Most students rally within 12 weeks.",
-    badge: "Rally-Ready in 12 Weeks",
+    name: "Red Ball Tennis",
+    ages: "Ages 5-6",
+    duration: "1 hr",
+    location: "Moulton Meadows",
+    schedule: "Mon & Wed 4:15-5:15 PM",
+    coach: "Michelle",
+    pricing: {
+      "1x": 546,
+      "2x": 1092,
+      drop_in: 50
+    },
+    description: "First structured tennis program using red balls on smaller courts.",
     features: [
       "Forehand & backhand foundations",
       "Serving mechanics",
@@ -45,33 +50,60 @@ const programs = [
   },
   {
     id: "orange-ball",
-    name: "Tournament Introduction",
-    ages: "Ages 7-9",
-    duration: "60 minutes",
-    monthly_1x: 140,
-    monthly_2x: 260,
-    quarterly_prepay: 420,
-    drop_in: 45,
-    description: "Transition to competitive tennis. Develop spin, positioning, and early match awareness.",
-    badge: "Tournament Introduction",
+    name: "Orange Ball Tennis",
+    ages: "Ages 7-8",
+    duration: "1 hr",
+    location: "Moulton Meadows",
+    schedule: "Mon-Thu various times",
+    coach: "Michelle & Andy",
+    pricing: {
+      "1x": 546,
+      "2x": 1092,
+      "3x": 1635,
+      drop_in: 50
+    },
+    description: "Technical development and match play preparation for advancing juniors.",
     features: [
       "Topspin & slice technique",
       "Court positioning",
       "Point construction",
-      "First tournament prep"
+      "Match play preparation"
+    ]
+  },
+  {
+    id: "orange-ball-match",
+    name: "Orange Ball Match Play",
+    ages: "Ages 7-8",
+    duration: "1 hr",
+    location: "Moulton Meadows",
+    schedule: "Fri 3:30-4:30 PM",
+    coach: "Michelle",
+    pricing: {
+      monthly: 85,
+      drop_in: 25
+    },
+    description: "Weekly competitive match play for Orange Ball players.",
+    features: [
+      "Organized match play",
+      "Score tracking",
+      "Competitive experience",
+      "Sportsmanship development"
     ]
   },
   {
     id: "green-dot",
-    name: "Competitive Development",
+    name: "Green Dot Tennis",
     ages: "Ages 9-11",
-    duration: "60 minutes",
-    monthly_1x: 140,
-    monthly_2x: 260,
-    quarterly_prepay: 420,
-    drop_in: 45,
-    description: "Full court training with tactical focus. Prepare for competitive tournaments and match situations.",
-    badge: "Competitive Development",
+    duration: "1 hr",
+    location: "Moulton Meadows",
+    schedule: "Tue & Thu 4:30-5:30 PM",
+    coach: "Andy",
+    pricing: {
+      "1x": 546,
+      "2x": 1092,
+      drop_in: 50
+    },
+    description: "Transition to full court play with green dot balls and advanced tactics.",
     features: [
       "Advanced mechanics",
       "Tactical patterns",
@@ -80,27 +112,77 @@ const programs = [
     ]
   },
   {
-    id: "youth",
-    name: "Scholarship Pathway",
+    id: "green-dot-match",
+    name: "Green Dot Match Play",
+    ages: "Ages 9-11",
+    duration: "1 hr",
+    location: "Moulton Meadows",
+    schedule: "Fri 4:30-5:30 PM",
+    coach: "Michelle",
+    pricing: {
+      monthly: 85,
+      drop_in: 25
+    },
+    description: "Weekly competitive match play for Green Dot players.",
+    features: [
+      "Organized match play",
+      "Score tracking",
+      "Competitive experience",
+      "Tournament prep"
+    ]
+  },
+  {
+    id: "youth-development",
+    name: "Youth Development",
     ages: "Ages 11-15",
-    duration: "90 minutes",
-    monthly_1x: 200,
-    monthly_2x: 380,
-    quarterly_prepay: 610,
-    drop_in: 60,
-    description: "Structured training for college-bound athletes. Proven track record with 20+ D1 placements.",
-    badge: "20 D1 Placements Since 2020",
+    duration: "1.5 hr",
+    location: "Alta Laguna Park",
+    schedule: "Mon-Fri various times",
+    coach: "Michelle & Andy",
+    pricing: {
+      "1x": 756,
+      "2x": 1437,
+      "3x": 2160,
+      "4x": 2880,
+      "5x": 3250,
+      drop_in: 70
+    },
+    description: "Comprehensive training for competitive juniors with match play included.",
     features: [
       "Advanced match tactics",
       "Physical conditioning",
       "Mental resilience",
-      "NCAA recruitment prep"
+      "Friday match play included"
+    ]
+  },
+  {
+    id: "high-performance",
+    name: "High Performance Training",
+    ages: "Ages 12-17 (UTR 5-8)",
+    duration: "2 hr",
+    location: "Laguna Beach High School",
+    schedule: "Mon-Sat various times",
+    coach: "Kevin & Savriyan",
+    pricing: {
+      "1x": 810,
+      "2x": 1620,
+      "3x": 2268,
+      "4x": 2916,
+      "5x": 3200,
+      drop_in: 100
+    },
+    description: "Elite training for college-bound players with tournament preparation.",
+    features: [
+      "College recruiting guidance",
+      "Video analysis",
+      "Strength & conditioning",
+      "Tournament coaching"
     ]
   }
 ]
 
 export default function JuniorProgramsPage() {
-  const [activeSeason, setActiveSeason] = useState<'fall' | 'winter'>('fall')
+  const [activeSeason, setActiveSeason] = useState<'winter'>('winter')
 
   return (
     <>
@@ -125,81 +207,50 @@ export default function JuniorProgramsPage() {
         </div>
       </section>
 
-      {/* Season Toggle */}
-      <section className="bg-lbta-cream border-b border-gray-200 sticky top-24 z-40 py-6">
-        <div className="container-lbta">
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={() => setActiveSeason('fall')}
-              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
-                activeSeason === 'fall'
-                  ? 'bg-lbta-charcoal text-white'
-                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
-              }`}
-            >
-              FALL 2025 (JOIN NOW)
-            </button>
-            <button
-              onClick={() => setActiveSeason('winter')}
-              className={`px-8 py-3 rounded-sm font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
-                activeSeason === 'winter'
-                  ? 'bg-lbta-charcoal text-white'
-                  : 'bg-white text-gray-600 border border-gray-300 hover:border-lbta-charcoal'
-              }`}
-            >
-              WINTER 2026
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* Season Info Banner */}
-      <section
-        key={activeSeason}
-        className={`py-6 ${activeSeason === 'fall' ? 'bg-lbta-tan' : 'bg-blue-50'} border-b border-gray-200 transition-all duration-300`}
-      >
+      <section className="py-6 bg-[#FAF8F3] border-b border-gray-200">
         <div className="container-lbta text-center">
-          {activeSeason === 'fall' ? (
-            <p className="text-sm text-gray-600 font-sans">
-              <strong>Fall 2025:</strong> Join anytime through December • Prorated pricing based on remaining weeks
-            </p>
-          ) : (
-            <p className="text-sm text-gray-600 font-sans">
-              <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Opens December 1, 2025
-            </p>
-          )}
+          <p className="text-sm text-gray-600 font-sans">
+            <strong>Winter 2026:</strong> January 6 – April 5 (13 weeks) • Registration Now Open
+          </p>
+          <Link 
+            href="/schedules" 
+            className="inline-block mt-2 text-sm text-black/70 hover:text-black underline underline-offset-4"
+          >
+            View Full Schedule →
+          </Link>
         </div>
       </section>
 
       {/* Programs */}
-      <section className="section-spacing bg-white">
-        <div className="container-lbta space-y-16">
-          {programs.map((program, index) => (
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6 space-y-16">
+          {winterPrograms.map((program, index) => (
             <AnimatedSection key={program.id} delay={index * 0.1}>
               <div id={program.id} className="scroll-mt-32">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                   {/* Left: Info */}
                   <div>
-                    <span className="inline-block px-3 py-1 bg-lbta-charcoal text-white text-xs font-sans tracking-wider mb-4">
-                      {program.badge}
-                    </span>
-                    <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-4">
+                    <h2 className="text-3xl font-serif font-light text-black mb-4">
                       {program.name}
                     </h2>
-                    <p className="text-lg text-lbta-burnt font-sans font-medium mb-6">
+                    <p className="text-lg text-black/60 font-sans font-medium mb-2">
                       {program.ages} • {program.duration}
+                    </p>
+                    <p className="text-sm text-black/50 font-sans mb-6">
+                      {program.location} • {program.schedule}
                     </p>
                     <p className="text-gray-600 leading-relaxed mb-8">
                       {program.description}
                     </p>
 
-                    <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-4">
+                    <h3 className="text-lg font-sans font-medium text-black mb-4">
                       What You'll Learn
                     </h3>
                     <ul className="space-y-2">
                       {program.features.map((feature) => (
                         <li key={feature} className="flex items-start gap-3 text-gray-600">
-                          <span className="text-lbta-burnt mt-1">•</span>
+                          <span className="text-black/40 mt-1">•</span>
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -208,67 +259,85 @@ export default function JuniorProgramsPage() {
 
                   {/* Right: Pricing */}
                   <div>
-                    <div
-                      key={activeSeason}
-                      className="card-lbta p-8 transition-all duration-300"
-                    >
-                        <h3 className="text-lg font-sans font-medium text-lbta-charcoal mb-6">
-                          {activeSeason === 'fall' ? 'Fall 2025 Pricing' : 'Winter 2026 Pricing'}
-                        </h3>
-                        <div className="space-y-4">
-                          <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                            <span className="text-gray-600">Monthly (1x/week)</span>
-                            <span className="text-xl font-serif font-light text-lbta-charcoal">
-                              ${program.monthly_1x}
+                    <div className="bg-[#FAF8F3] rounded-lg p-8">
+                      <h3 className="text-lg font-sans font-medium text-black mb-6">
+                        Winter 2026 Pricing
+                      </h3>
+                      <div className="space-y-4">
+                        {/* Monthly pricing */}
+                        {program.pricing.monthly && (
+                          <div className="flex justify-between items-center pb-3 border-b border-black/10">
+                            <span className="text-gray-600">Monthly</span>
+                            <span className="text-xl font-serif font-light text-black">
+                              ${program.pricing.monthly}
                             </span>
                           </div>
-                          <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                            <span className="text-gray-600">Monthly (2x/week)</span>
-                            <span className="text-xl font-serif font-light text-lbta-charcoal">
-                              ${program.monthly_2x}
-                            </span>
-                          </div>
-                          {activeSeason === 'fall' && (
-                            <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                              <span className="text-gray-600">Remaining weeks</span>
-                              <span className="text-lg font-serif font-light text-lbta-charcoal">
-                                Prorated
-                              </span>
-                            </div>
-                          )}
-                          {activeSeason === 'winter' && (
-                            <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                              <span className="text-gray-600">Quarterly (prepay)</span>
-                              <span className="text-xl font-serif font-light text-lbta-charcoal">
-                                ${program.quarterly_prepay}
-                              </span>
-                            </div>
-                          )}
-                          <div className="flex justify-between items-center pt-2">
-                            <span className="text-gray-600">Drop-in Rate</span>
-                            <span className="text-xl font-serif font-light text-lbta-charcoal">
-                              ${program.drop_in}
-                            </span>
-                          </div>
-                        </div>
-
-                        <Link
-                          href="/book"
-                          className="btn-primary w-full mt-8 justify-center"
-                        >
-                          {activeSeason === 'fall' ? 'JOIN NOW' : 'GET NOTIFIED'}
-                        </Link>
+                        )}
                         
-                        {activeSeason === 'fall' && (
-                          <p className="text-xs text-center text-gray-500 mt-3">
-                            Prorated pricing available • Join anytime
-                          </p>
+                        {/* Quarterly pricing options */}
+                        {program.pricing['1x'] && (
+                          <div className="flex justify-between items-center pb-3 border-b border-black/10">
+                            <span className="text-gray-600">Quarterly (1x/week)</span>
+                            <span className="text-xl font-serif font-light text-black">
+                              ${program.pricing['1x']}
+                            </span>
+                          </div>
                         )}
-                        {activeSeason === 'winter' && (
-                          <p className="text-xs text-center text-gray-500 mt-3">
-                            Registration opens December 1, 2025
-                          </p>
+                        {program.pricing['2x'] && (
+                          <div className="flex justify-between items-center pb-3 border-b border-black/10 bg-gray-50 -mx-4 px-4 py-2">
+                            <div>
+                              <span className="text-gray-600">Quarterly (2x/week)</span>
+                              <span className="ml-2 text-xs text-black/50">Most Popular</span>
+                            </div>
+                            <span className="text-xl font-serif font-light text-black">
+                              ${program.pricing['2x']}
+                            </span>
+                          </div>
                         )}
+                        {program.pricing['3x'] && (
+                          <div className="flex justify-between items-center pb-3 border-b border-black/10">
+                            <span className="text-gray-600">Quarterly (3x/week)</span>
+                            <span className="text-xl font-serif font-light text-black">
+                              ${program.pricing['3x']}
+                            </span>
+                          </div>
+                        )}
+                        {program.pricing['4x'] && (
+                          <div className="flex justify-between items-center pb-3 border-b border-black/10">
+                            <span className="text-gray-600">Quarterly (4x/week)</span>
+                            <span className="text-xl font-serif font-light text-black">
+                              ${program.pricing['4x']}
+                            </span>
+                          </div>
+                        )}
+                        {program.pricing['5x'] && (
+                          <div className="flex justify-between items-center pb-3 border-b border-black/10">
+                            <span className="text-gray-600">Quarterly (5x/week)</span>
+                            <span className="text-xl font-serif font-light text-black">
+                              ${program.pricing['5x']}
+                            </span>
+                          </div>
+                        )}
+                        
+                        {/* Drop-in */}
+                        <div className="flex justify-between items-center pt-2">
+                          <span className="text-gray-600">Drop-in Rate</span>
+                          <span className="text-xl font-serif font-light text-black">
+                            ${program.pricing.drop_in}
+                          </span>
+                        </div>
+                      </div>
+
+                      <Link
+                        href="/schedules"
+                        className="block w-full mt-8 bg-black text-white text-center py-4 font-sans text-sm font-medium tracking-wider uppercase hover:bg-gray-800 transition-colors"
+                      >
+                        Register Now
+                      </Link>
+                      
+                      <p className="text-xs text-center text-gray-500 mt-3">
+                        $50 Early Bird Discount • Register by Dec 20
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -279,25 +348,32 @@ export default function JuniorProgramsPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-spacing bg-lbta-cream">
+      <section className="py-16 md:py-24 bg-[#FAF8F3]">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
+            <h2 className="text-4xl font-serif font-light text-black mb-8">
               Begin Your Tennis Journey
             </h2>
             <p className="text-lg text-gray-600 mb-10 leading-relaxed">
               Experience professional coaching. Zero commitment required.
             </p>
-            <Link
-              href="/book"
-              className="btn-primary"
-            >
-              START FREE TRIAL
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/book"
+                className="inline-block bg-black text-white px-10 py-4 font-sans text-sm font-medium tracking-wider uppercase hover:bg-gray-800 transition-colors"
+              >
+                Book Free Trial
+              </Link>
+              <Link
+                href="/schedules"
+                className="inline-block bg-transparent text-black px-10 py-4 font-sans text-sm font-medium tracking-wider uppercase border border-black/20 hover:border-black transition-colors"
+              >
+                View Full Schedule
+              </Link>
+            </div>
           </AnimatedSection>
         </div>
       </section>
     </>
   )
 }
-
