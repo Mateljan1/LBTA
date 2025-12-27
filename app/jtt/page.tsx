@@ -79,7 +79,7 @@ const jttProgramData = {
   weeks: 15,
   matchDay: 'Saturdays & Sundays',
   divisions: [
-    { age: '10U', price: 2350 },
+    { age: '10U', price: 2800 },
     { age: '12U', price: 2800 },
     { age: '14U', price: 2800 },
     { age: '16U', price: 2800 },

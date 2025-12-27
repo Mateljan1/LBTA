@@ -204,7 +204,7 @@
       "label": "Spring JTT",
       "dates": "January 12 – April 26",
       "divisions": {
-        "10U": { "price": 2350, "practiceIncluded": true },
+        "10U": { "price": 2800, "practiceIncluded": true },
         "12U": { "price": 2800, "practiceIncluded": true },
         "14U": { "price": 2800, "practiceIncluded": true },
         "18U": { "price": 2800, "practiceIncluded": true }
@@ -215,7 +215,7 @@
       "label": "Summer Flex JTT",
       "dates": "June 1 – July 26",
       "divisions": {
-        "10U": { "price": 2350, "practiceIncluded": true },
+        "10U": { "price": 2800, "practiceIncluded": true },
         "12U": { "price": 2800, "practiceIncluded": true },
         "14U": { "price": 2800, "practiceIncluded": true },
         "18U": { "price": 2800, "practiceIncluded": true }
@@ -226,7 +226,7 @@
       "label": "Fall JTT",
       "dates": "September 5 – November 22",
       "divisions": {
-        "10U": { "price": 2350, "practiceIncluded": true },
+        "10U": { "price": 2800, "practiceIncluded": true },
         "12U": { "price": 2800, "practiceIncluded": true },
         "14U": { "price": 2800, "practiceIncluded": true },
         "18U": { "price": 2800, "practiceIncluded": true }

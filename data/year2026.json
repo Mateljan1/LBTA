@@ -152,7 +152,7 @@
       "matchDay": "Sundays",
       "practiceIncluded": true,
       "divisions": [
-        { "age": "10U", "price": 2350 },
+        { "age": "10U", "price": 2800 },
         { "age": "12U", "price": 2800 },
         { "age": "14U", "price": 2800 },
         { "age": "18U", "price": 2800 }
@@ -168,7 +168,7 @@
       "matchDay": "Sundays",
       "practiceIncluded": true,
       "divisions": [
-        { "age": "10U", "price": 2350 },
+        { "age": "10U", "price": 2800 },
         { "age": "12U", "price": 2800 },
         { "age": "14U", "price": 2800 },
         { "age": "18U", "price": 2800 }
