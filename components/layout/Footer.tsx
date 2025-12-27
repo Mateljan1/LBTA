@@ -179,11 +179,11 @@ export default function Footer() {
                 <h4 className="text-eyebrow text-white/40 mb-5">Programs</h4>
                 <ul className="space-y-3">
                   {[
-                    { name: 'Junior Pathway', href: '/programs/junior' },
-                    { name: 'Adult Training', href: '/programs/adult' },
-                    { name: 'High Performance', href: '/programs/high-performance' },
+                    { name: 'All Programs', href: '/schedules' },
                     { name: 'Camps', href: '/camps' },
+                    { name: 'JTT', href: '/jtt' },
                     { name: 'Fitness', href: '/fitness' },
+                    { name: 'Private Lessons', href: '/book' },
                   ].map((item) => (
                     <li key={item.name}>
                       <Link 
