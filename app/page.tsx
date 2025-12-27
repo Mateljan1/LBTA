@@ -5,12 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
 import StickyCTA from '@/components/StickyCTA'
-import TrustBadges from '@/components/TrustBadges'
 import FAQSection from '@/components/FAQSection'
 import VideoTestimonials from '@/components/VideoTestimonials'
-import FloatingCallButton from '@/components/FloatingCallButton'
-import GuaranteeBadge from '@/components/GuaranteeBadge'
-import PersonaEntryPoints from '@/components/PersonaEntryPoints'
 
 // LocalBusiness Schema for SEO
 const localBusinessSchema = {
@@ -209,42 +205,18 @@ export default function Home() {
             Movement. Discipline. Belonging.
           </p>
           
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+          {/* Single CTA - Clean & Confident */}
+          <div className="flex flex-col items-center gap-8">
             <Link
               href="/book"
-              className="btn-pill-primary group"
+              className="inline-flex items-center justify-center bg-white text-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 rounded-none hover:bg-white/90 transition-all duration-300"
             >
-              <span>Book Your Free Trial</span>
-              <svg className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              Book a Trial
             </Link>
-            <Link
-              href="/programs"
-              className="btn-pill-secondary"
-            >
-              View Programs
-            </Link>
-          </div>
-          
-          {/* Guarantee Badge */}
-          <div className="mb-8">
-            <GuaranteeBadge variant="dark" />
-          </div>
-          
-          {/* Social Proof */}
-          <div className="flex items-center justify-center gap-4">
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div 
-                  key={i} 
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-white/30 to-white/10 border-2 border-white/40"
-                />
-              ))}
-            </div>
-            <p className="text-body-sm text-white/70">
-              <span className="font-semibold text-white">500+</span> players trained this year
+            
+            {/* Subtle Social Proof - Editorial Style */}
+            <p className="font-sans text-[13px] text-white/60 tracking-wide">
+              5.0 ★ on Google · 500+ players trained since 2018
             </p>
           </div>
         </div>
@@ -260,19 +232,6 @@ export default function Home() {
           </svg>
         </button>
       </section>
-
-      {/* ============================================
-          TRUST BADGES - Social Proof
-          ============================================ */}
-      <TrustBadges />
-
-      {/* ============================================
-          PERSONA ENTRY POINTS - Quick Navigation
-          ============================================ */}
-      <PersonaEntryPoints />
-
-      {/* Mobile Click-to-Call Button */}
-      <FloatingCallButton />
 
       {/* ============================================
           SCENE 2: FOUNDER - "The Vision"
