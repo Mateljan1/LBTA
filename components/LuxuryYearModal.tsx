@@ -168,25 +168,62 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
     setIsSubmitting(true)
 
     try {
+      // Build the payload to match API expectations
+      const payload: Record<string, unknown> = {
+        registrationType: type,  // API expects 'registrationType' not 'type'
+        season: season || '',
+        programId: data.id || programInfo.name,
+        program: programInfo.name,  // API expects 'program' not 'programName'
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        playerName: formData.playerName || `${formData.firstName} ${formData.lastName}`,
+        playerAge: formData.playerAge,
+        studentName: formData.playerName || `${formData.firstName} ${formData.lastName}`,
+        studentAge: formData.playerAge,
+        experience: formData.experience,
+        notes: formData.notes || '',
+        price: selectedPrice,
+        totalPrice: selectedPrice,
+      }
+
+      // Add type-specific fields
+      if (type === 'camp') {
+        const campData = data as CampData
+        payload.campName = campData.name
+        payload.campDates = campData.dates
+        payload.campId = campData.id
+        payload.location = campData.location
+      }
+
+      if (type === 'jtt') {
+        const jttData = data as JTTData
+        payload.jttSeason = jttData.name
+        payload.division = selectedOption  // The division they selected
+        payload.jttId = jttData.id
+      }
+
+      console.log('📤 Submitting registration:', payload)
+
       const response = await fetch('/api/register-year', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type,
-          season,
-          programId: data.id || programInfo.name,
-          programName: programInfo.name,
-          selectedOption,
-          totalPrice: selectedPrice,
-          ...formData
-        })
+        body: JSON.stringify(payload)
       })
 
-      if (response.ok) {
+      const result = await response.json()
+      console.log('📥 Registration response:', result)
+
+      if (response.ok && result.success) {
         setIsSuccess(true)
+      } else {
+        console.error('Registration failed:', result)
+        alert(result.message || 'Registration failed. Please try again or call (949) 464-6645')
       }
     } catch (error) {
       console.error('Registration error:', error)
+      alert('Registration failed. Please try again or call (949) 464-6645')
     } finally {
       setIsSubmitting(false)
     }
