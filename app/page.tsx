@@ -8,6 +8,9 @@ import StickyCTA from '@/components/StickyCTA'
 import TrustBadges from '@/components/TrustBadges'
 import FAQSection from '@/components/FAQSection'
 import VideoTestimonials from '@/components/VideoTestimonials'
+import FloatingCallButton from '@/components/FloatingCallButton'
+import GuaranteeBadge from '@/components/GuaranteeBadge'
+import PersonaEntryPoints from '@/components/PersonaEntryPoints'
 
 // LocalBusiness Schema for SEO
 const localBusinessSchema = {
@@ -187,8 +190,8 @@ export default function Home() {
           <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
         </video>
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" aria-hidden="true" />
+        {/* Gradient Overlay - Enhanced for WCAG AAA contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" aria-hidden="true" />
         
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
           {/* Eyebrow */}
@@ -207,7 +210,7 @@ export default function Home() {
           </p>
           
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
             <Link
               href="/book"
               className="btn-pill-primary group"
@@ -223,6 +226,11 @@ export default function Home() {
             >
               View Programs
             </Link>
+          </div>
+          
+          {/* Guarantee Badge */}
+          <div className="mb-8">
+            <GuaranteeBadge variant="dark" />
           </div>
           
           {/* Social Proof */}
@@ -257,6 +265,14 @@ export default function Home() {
           TRUST BADGES - Social Proof
           ============================================ */}
       <TrustBadges />
+
+      {/* ============================================
+          PERSONA ENTRY POINTS - Quick Navigation
+          ============================================ */}
+      <PersonaEntryPoints />
+
+      {/* Mobile Click-to-Call Button */}
+      <FloatingCallButton />
 
       {/* ============================================
           SCENE 2: FOUNDER - "The Vision"
