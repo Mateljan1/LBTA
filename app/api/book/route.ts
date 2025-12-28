@@ -171,7 +171,7 @@ export async function POST(request: NextRequest) {
           )
           console.log(`✅ Tag ${tagId} applied to contact ${contactId}`)
         } catch (tagError: any) {
-          console.error(`⚠️ Failed to apply tag ${tagId}:`, tagError.response?.data || tagError.message)
+          console.error(`⚠️ Failed to apply tag ${tagId}:`, tagError.message)
         }
       }
 
@@ -180,7 +180,7 @@ export async function POST(request: NextRequest) {
     } catch (acError: any) {
       console.error('❌ ActiveCampaign Error:', {
         email: body.email,
-        error: acError.response?.data || acError.message
+        error: acError.message
       })
       // Continue even if AC fails - we don't want to block the user
     }
