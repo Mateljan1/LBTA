@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { X, Gift, CheckCircle } from 'lucide-react'
+import { X, CheckCircle } from 'lucide-react'
 import Image from 'next/image'
 
 export default function ExitIntentPopup() {
@@ -92,95 +92,96 @@ export default function ExitIntentPopup() {
         onClick={() => setIsVisible(false)}
       />
 
-      {/* Modal */}
+      {/* Modal - Luxury LBTA Design */}
       <div 
-        className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-scale-in"
+        className="relative bg-lbta-cream max-w-2xl w-full overflow-hidden animate-scale-in border border-black/10"
         style={{
-          animation: 'scaleIn 0.3s ease-out forwards'
+          animation: 'fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards',
+          borderRadius: '2px'
         }}
       >
-        {/* Close button */}
+        {/* Close button - Luxury style */}
         <button
           onClick={() => setIsVisible(false)}
-          className="absolute top-4 right-4 p-2 text-black/40 hover:text-black/70 transition-colors z-10"
+          className="absolute top-6 right-6 p-2 text-black/30 hover:text-black transition-colors z-10 rounded-full hover:bg-black/5"
           aria-label="Close"
         >
           <X className="h-5 w-5" />
         </button>
 
         {isSuccess ? (
-          /* Success State */
-          <div className="p-8 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="h-8 w-8 text-green-600" />
+          /* Success State - Calm & Confident */}
+          <div className="p-12 text-center">
+            <div className="w-20 h-20 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="h-10 w-10 text-black" strokeWidth={1.5} />
             </div>
-            <h3 className="font-serif text-[24px] font-semibold text-black mb-2">
-              You're In!
+            <h3 className="font-serif text-[32px] font-semibold text-black mb-3 leading-tight">
+              See you on the court.
             </h3>
-            <p className="font-sans text-[15px] text-black/70">
-              Check your email for your free trial details. We can't wait to see you on the court!
+            <p className="font-sans text-[16px] text-lbta-slate leading-relaxed max-w-sm mx-auto">
+              Check your email for next steps. We'll be in touch within 24 hours.
             </p>
           </div>
         ) : (
-          <>
-            {/* Image Header */}
-            <div className="relative h-40 bg-gradient-to-br from-lbta-beige to-lbta-orange/20">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <Gift className="h-12 w-12 text-lbta-orange mx-auto mb-2" />
-                  <span className="font-sans text-[11px] uppercase tracking-[2px] text-lbta-orange font-medium">
-                    Special Offer
-                  </span>
-                </div>
-              </div>
+          <div className="grid md:grid-cols-2 min-h-[500px]">
+            {/* Left: Image */}
+            <div className="relative h-64 md:h-auto">
+              <Image
+                src="/images/founder/andrew-portrait.webp"
+                alt="Andrew Mateljan coaching at LBTA"
+                fill
+                className="object-cover"
+                style={{ objectPosition: '50% 30%' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={90}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent md:hidden" />
             </div>
 
-            {/* Content */}
-            <div className="p-6 md:p-8">
-              <h3 className="font-serif text-[26px] md:text-[28px] font-semibold text-black text-center mb-2">
-                Wait! Don't Miss Out
+            {/* Right: Content */}
+            <div className="p-8 md:p-12 flex flex-col justify-center">
+              {/* Eyebrow */}
+              <span className="text-eyebrow text-lbta-charcoal mb-4 block">
+                Before You Go
+              </span>
+
+              {/* Headline - Calm, not salesy */}
+              <h3 className="font-serif text-[32px] md:text-[36px] font-semibold text-black mb-4 leading-[1.1]">
+                Start training with purpose.
               </h3>
-              <p className="font-sans text-[15px] text-black/70 text-center mb-6">
-                Get a <span className="font-semibold text-lbta-orange">FREE trial lesson</span> and discover why 500+ players trust LBTA.
+
+              {/* Subhead - Value proposition */}
+              <p className="font-sans text-[16px] text-lbta-slate leading-relaxed mb-8">
+                Book a complimentary trial lesson. Experience the movement-first approach that's guided players from first serves to ATP courts.
               </p>
 
+              {/* Form - Minimal & Elegant */}
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-lg font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange focus:border-transparent transition-all"
+                  className="w-full px-5 py-4 bg-white border border-black/10 font-sans text-[15px] focus:outline-none focus:border-black transition-all"
+                  style={{ borderRadius: '2px' }}
                 />
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 rounded-lg transition-all duration-300 uppercase tracking-[1.5px] disabled:opacity-50 shadow-md hover:shadow-lg"
+                  className="w-full bg-black text-white font-sans font-medium text-[13px] py-4 uppercase tracking-[0.15em] disabled:opacity-50 hover:bg-lbta-charcoal transition-all duration-300"
+                  style={{ borderRadius: '2px' }}
                 >
-                  {isSubmitting ? 'Sending...' : 'Claim My Free Trial'}
+                  {isSubmitting ? 'Sending...' : 'Book Trial'}
                 </button>
               </form>
 
-              <p className="font-sans text-[12px] text-black/50 text-center mt-4">
-                No spam, ever. Unsubscribe anytime.
+              {/* Trust line - Subtle */}
+              <p className="font-sans text-[13px] text-lbta-slate text-center mt-6">
+                5.0 ★ on Google · 500+ players trained since 2018
               </p>
-
-              {/* Trust indicators */}
-              <div className="flex items-center justify-center gap-4 mt-6 pt-4 border-t border-gray-100">
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <svg key={star} className="w-4 h-4 text-lbta-orange fill-current" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <span className="font-sans text-[12px] text-black/60">
-                  5.0 rating from 47 reviews
-                </span>
-              </div>
             </div>
-          </>
+          </div>
         )}
       </div>
 
