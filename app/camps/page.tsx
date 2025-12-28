@@ -358,7 +358,7 @@ export default function CampsPage() {
                                   {week.label}: {week.dates}
                                 </p>
                                 <p className="font-sans text-[11px] text-black/50">
-                                  {week.days} days{week.halfDay && ` · Half-day: $${week.halfDay}`}
+                                  {week.days} days{'halfDay' in week && week.halfDay && ` · Half-day: $${week.halfDay}`}
                                 </p>
                               </div>
                               <div className="flex items-center gap-2">
