@@ -90,51 +90,54 @@ export async function POST(request: NextRequest) {
 
     // 1. Create/Update contact in ActiveCampaign
     try {
-      const contactResponse = await axios.post(
+      const contactResponse = await fetch(
         `${process.env.ACTIVECAMPAIGN_URL}/api/3/contacts`,
         {
-          contact: {
-            email: body.email,
-            firstName: body.firstName,
-            lastName: body.lastName,
-            phone: body.phone,
-            fieldValues: [
-              { field: '7', value: body.program || 'Trial Request' },    // PROGRAM
-              { field: '8', value: body.location || 'Not specified' },   // LOCATION
-              { field: '9', value: daysSelected },                        // DAYS_SELECTED
-              { field: '15', value: 'website' },                          // LEAD_SOURCE
-              { field: '16', value: 'trial' },                            // REGISTRATION_TYPE
-              { field: '22', value: body.experience || 'Not specified' }, // EXPERIENCE_LEVEL
-              { field: '23', value: body.goals || '' },                   // GOALS
-            ]
-          }
-        },
-        {
+          method: 'POST',
           headers: {
             'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
             'Content-Type': 'application/json'
-          }
+          },
+          body: JSON.stringify({
+            contact: {
+              email: body.email,
+              firstName: body.firstName,
+              lastName: body.lastName,
+              phone: body.phone,
+              fieldValues: [
+                { field: '7', value: body.program || 'Trial Request' },    // PROGRAM
+                { field: '8', value: body.location || 'Not specified' },   // LOCATION
+                { field: '9', value: daysSelected },                        // DAYS_SELECTED
+                { field: '15', value: 'website' },                          // LEAD_SOURCE
+                { field: '16', value: 'trial' },                            // REGISTRATION_TYPE
+                { field: '22', value: body.experience || 'Not specified' }, // EXPERIENCE_LEVEL
+                { field: '23', value: body.goals || '' },                   // GOALS
+              ]
+            }
+          })
         }
       )
 
-      const contactId = contactResponse.data.contact.id
+      const contactData = await contactResponse.json()
+      const contactId = contactData.contact.id
       console.log('✅ AC Contact Created:', { contactId, email: body.email })
 
       // 2. Add to list (triggers welcome/confirmation automation)
-      await axios.post(
+      await fetch(
         `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactLists`,
         {
-          contactList: {
-            list: 4,  // Laguna Beach Tennis Academy list
-            contact: contactId,
-            status: 1  // Active subscriber
-          }
-        },
-        {
+          method: 'POST',
           headers: {
             'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
             'Content-Type': 'application/json'
-          }
+          },
+          body: JSON.stringify({
+            contactList: {
+              list: 4,  // Laguna Beach Tennis Academy list
+              contact: contactId,
+              status: 1  // Active subscriber
+            }
+          })
         }
       )
 
@@ -150,19 +153,20 @@ export async function POST(request: NextRequest) {
 
       for (const tagId of tagsToApply) {
         try {
-          await axios.post(
+          await fetch(
             `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
             {
-              contactTag: {
-                contact: contactId,
-                tag: tagId.toString()
-              }
-            },
-            {
+              method: 'POST',
               headers: {
                 'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
                 'Content-Type': 'application/json'
-              }
+              },
+              body: JSON.stringify({
+                contactTag: {
+                  contact: contactId,
+                  tag: tagId.toString()
+                }
+              })
             }
           )
           console.log(`✅ Tag ${tagId} applied to contact ${contactId}`)
