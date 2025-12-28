@@ -8,6 +8,32 @@ import AnimatedSection from '@/components/AnimatedSection'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
+// Summer camp weeks for 2026
+const summerWeeks = [
+  { week: 1, dates: "June 15–19", label: "Week 1" },
+  { week: 2, dates: "June 22–26", label: "Week 2" },
+  { week: 3, dates: "June 29 – July 3", label: "Week 3" },
+  { week: 4, dates: "July 7–11", label: "Week 4" },
+  { week: 5, dates: "July 14–18", label: "Week 5" },
+  { week: 6, dates: "July 21–25", label: "Week 6" },
+  { week: 7, dates: "July 28 – August 1", label: "Week 7" },
+  { week: 8, dates: "August 4–8", label: "Week 8" },
+  { week: 9, dates: "August 11–15", label: "Week 9" },
+]
+
+// Swim & Tennis camp weeks
+const swimTennisWeeks = [
+  { week: 1, dates: "June 16–19", label: "Week 1" },
+  { week: 2, dates: "June 23–26", label: "Week 2" },
+  { week: 3, dates: "June 30 – July 3", label: "Week 3" },
+  { week: 4, dates: "July 7–10", label: "Week 4" },
+  { week: 5, dates: "July 14–17", label: "Week 5" },
+  { week: 6, dates: "July 21–24", label: "Week 6" },
+  { week: 7, dates: "July 28–31", label: "Week 7" },
+  { week: 8, dates: "August 4–7", label: "Week 8" },
+  { week: 9, dates: "August 11–14", label: "Week 9" },
+]
+
 // Camp data for 2026
 const camps = [
   {
@@ -25,7 +51,8 @@ const camps = [
     coaches: ["Andrew Mateljan", "Michelle Bevins"],
     featured: true,
     safetyNote: "All participants must be able to swim independently.",
-    season: "summer"
+    season: "summer",
+    weeks: swimTennisWeeks
   },
   {
     id: "ski-week",
@@ -57,9 +84,9 @@ const camps = [
   },
   {
     id: "summer",
-    name: "Summer Tennis Camps",
-    dates: "June 15 – August 14",
-    days: "Weekly (5 days)",
+    name: "Summer Tennis Camp",
+    dates: "June 15 – August 15",
+    days: "Weekly (Mon–Fri)",
     hours: "9:00 AM – 3:00 PM",
     ages: "5-17",
     location: "Laguna Beach High School",
@@ -69,7 +96,8 @@ const camps = [
     description: "Full-day summer tennis camps with half-day options. Our flagship camp program with comprehensive training.",
     includes: ["Lunch provided", "Swimming breaks", "Tournament prep option", "Skills assessment"],
     featured: true,
-    season: "summer"
+    season: "summer",
+    weeks: summerWeeks
   },
   {
     id: "back-to-school",
@@ -83,7 +111,7 @@ const camps = [
     perDay: 108,
     description: "Get back in the groove before school starts. A fun way to transition from summer to fall.",
     includes: ["Snacks provided", "Skills refresher", "Fun games", "Team competitions"],
-    season: "summer"
+    season: "fall"
   },
   {
     id: "thanksgiving",
@@ -115,6 +143,13 @@ const camps = [
   }
 ]
 
+// Type for week data
+interface CampWeek {
+  week: number
+  dates: string
+  label: string
+}
+
 // Type for camp data to match YearRegistrationModal expectations
 interface CampModalData {
   id: string
@@ -133,6 +168,8 @@ interface CampModalData {
   featured?: boolean
   season?: string
   coaches?: string[]
+  weeks?: CampWeek[]
+  selectedWeek?: CampWeek
 }
 
 export default function CampsPage() {
@@ -144,12 +181,16 @@ export default function CampsPage() {
     ? camps 
     : camps.filter(camp => camp.season === selectedSeason)
 
-  const handleRegisterClick = (camp: typeof camps[0]) => {
+  const handleRegisterClick = (camp: typeof camps[0] & { selectedWeek?: CampWeek }) => {
     // Convert camp data to modal format
     const modalData: CampModalData = {
       id: camp.id,
-      name: camp.name,
-      dates: camp.dates,
+      name: camp.selectedWeek 
+        ? `${camp.name} - ${camp.selectedWeek.label}` 
+        : camp.name,
+      dates: camp.selectedWeek 
+        ? camp.selectedWeek.dates 
+        : camp.dates,
       days: camp.days,
       hours: camp.hours,
       ages: camp.ages,
@@ -163,6 +204,7 @@ export default function CampsPage() {
       featured: camp.featured,
       season: camp.season,
       coaches: camp.coaches,
+      selectedWeek: camp.selectedWeek,
     }
     setSelectedCamp(modalData)
     setIsModalOpen(true)
@@ -292,10 +334,6 @@ export default function CampsPage() {
                     
                     <div className="space-y-2 mb-4 font-sans text-[13px] text-black/70">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-black/50 font-semibold text-[11px] uppercase tracking-wide w-16">Dates</span>
-                        <span>{camp.dates}</span>
-                      </div>
-                      <div className="flex items-baseline gap-2">
                         <span className="text-black/50 font-semibold text-[11px] uppercase tracking-wide w-16">Time</span>
                         <span>{camp.hours}</span>
                       </div>
@@ -305,31 +343,73 @@ export default function CampsPage() {
                       </div>
                     </div>
                     
-                    <div className="border-t border-black/10 pt-4">
-                      <div className="mb-4">
-                        <p className="font-sans text-[12px] text-black/50 uppercase tracking-wide">Starting at</p>
-                        <p className="font-serif text-[28px] font-semibold text-black">
-                          ${camp.price}
+                    {/* Week Selection for Multi-Week Camps */}
+                    {camp.weeks && camp.weeks.length > 0 ? (
+                      <div className="border-t border-black/10 pt-4">
+                        <p className="font-sans text-[12px] text-black/50 uppercase tracking-wide mb-3">
+                          Select a Week ({camp.weeks.length} available)
                         </p>
+                        <div className="max-h-[200px] overflow-y-auto space-y-2 mb-4 pr-1">
+                          {camp.weeks.map((week) => (
+                            <button
+                              key={week.week}
+                              onClick={() => handleRegisterClick({ ...camp, selectedWeek: week })}
+                              className="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors group text-left"
+                            >
+                              <div>
+                                <p className="font-sans text-[14px] font-medium text-black group-hover:text-black">
+                                  {week.label}: {week.dates}
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className="font-sans text-[14px] font-semibold text-black">
+                                  ${camp.price}
+                                </span>
+                                <svg className="w-4 h-4 text-black/40 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
                         <p className="font-sans text-[12px] text-black/50">
                           ${camp.perDay}/day
-                          {camp.halfDay && ` · Half-day: $${camp.halfDay}`}
+                          {camp.halfDay && ` · Half-day option: $${camp.halfDay}`}
                         </p>
                       </div>
-                      
-                      <button
-                        onClick={() => handleRegisterClick(camp)}
-                        className="block w-full text-center bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[13px] py-3 rounded transition-all duration-300 uppercase tracking-[1px]"
-                      >
-                        Register Now
-                      </button>
-                      
-                      {camp.safetyNote && (
-                        <p className="font-sans text-[11px] text-black/50 mt-3 italic">
-                          * {camp.safetyNote}
-                        </p>
-                      )}
-                    </div>
+                    ) : (
+                      <div className="border-t border-black/10 pt-4">
+                        <div className="space-y-2 mb-4 font-sans text-[13px] text-black/70">
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-black/50 font-semibold text-[11px] uppercase tracking-wide w-16">Dates</span>
+                            <span>{camp.dates}</span>
+                          </div>
+                        </div>
+                        <div className="mb-4">
+                          <p className="font-sans text-[12px] text-black/50 uppercase tracking-wide">Price</p>
+                          <p className="font-serif text-[28px] font-semibold text-black">
+                            ${camp.price}
+                          </p>
+                          <p className="font-sans text-[12px] text-black/50">
+                            ${camp.perDay}/day
+                            {camp.halfDay && ` · Half-day: $${camp.halfDay}`}
+                          </p>
+                        </div>
+                        
+                        <button
+                          onClick={() => handleRegisterClick(camp)}
+                          className="block w-full text-center bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[13px] py-3 rounded transition-all duration-300 uppercase tracking-[1px]"
+                        >
+                          Register Now
+                        </button>
+                      </div>
+                    )}
+                    
+                    {camp.safetyNote && (
+                      <p className="font-sans text-[11px] text-black/50 mt-3 italic">
+                        * {camp.safetyNote}
+                      </p>
+                    )}
                   </div>
                 </div>
               </AnimatedSection>
