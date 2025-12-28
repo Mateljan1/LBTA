@@ -1,66 +1,49 @@
-// Simple in-memory rate limiter for API routes
-// Note: This resets on server restart and doesn't work across multiple instances
-// For production, consider using Upstash Redis or Vercel Edge Config
+// Production-ready rate limiter using Vercel KV (Redis)
+// Scales across serverless functions and persists across deployments
 
-interface RateLimitStore {
-  [key: string]: {
-    count: number
-    resetTime: number
-  }
-}
-
-const store: RateLimitStore = {}
-
-// Cleanup old entries every 10 minutes
-setInterval(() => {
-  const now = Date.now()
-  Object.keys(store).forEach(key => {
-    if (store[key].resetTime < now) {
-      delete store[key]
-    }
-  })
-}, 10 * 60 * 1000)
+import { kv } from '@vercel/kv'
 
 export interface RateLimitConfig {
   interval: number // Time window in milliseconds
   maxRequests: number // Max requests per interval
 }
 
-export function rateLimit(
+export async function rateLimit(
   identifier: string,
   config: RateLimitConfig = { interval: 60000, maxRequests: 10 }
-): { allowed: boolean; remaining: number; resetTime: number } {
+): Promise<{ allowed: boolean; remaining: number; resetTime: number }> {
+  const key = `rate-limit:${identifier}`
   const now = Date.now()
-  const key = identifier
-
-  // Initialize or reset if expired
-  if (!store[key] || store[key].resetTime < now) {
-    store[key] = {
-      count: 1,
-      resetTime: now + config.interval,
+  
+  try {
+    // Get current count and increment atomically
+    const count = await kv.incr(key)
+    
+    // Set expiry on first request
+    if (count === 1) {
+      await kv.expire(key, Math.ceil(config.interval / 1000))
     }
+    
+    // Get TTL for resetTime calculation
+    const ttl = await kv.ttl(key)
+    const resetTime = now + (ttl * 1000)
+    
+    // Check if limit exceeded
+    const allowed = count <= config.maxRequests
+    const remaining = Math.max(0, config.maxRequests - count)
+    
+    return {
+      allowed,
+      remaining,
+      resetTime
+    }
+  } catch (error) {
+    // Fallback to allowing request if Redis is unavailable
+    console.error('Rate limit error:', error)
     return {
       allowed: true,
-      remaining: config.maxRequests - 1,
-      resetTime: store[key].resetTime,
+      remaining: config.maxRequests,
+      resetTime: now + config.interval
     }
-  }
-
-  // Check if limit exceeded
-  if (store[key].count >= config.maxRequests) {
-    return {
-      allowed: false,
-      remaining: 0,
-      resetTime: store[key].resetTime,
-    }
-  }
-
-  // Increment count
-  store[key].count++
-
-  return {
-    allowed: true,
-    remaining: config.maxRequests - store[key].count,
-    resetTime: store[key].resetTime,
   }
 }

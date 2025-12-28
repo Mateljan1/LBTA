@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit } from '@/lib/rate-limit'
-import axios from 'axios'
 
 // ============================================================
 // LBTA Booking/Trial Request API
@@ -52,7 +51,7 @@ function determineCategory(program: string): string {
 export async function POST(request: NextRequest) {
   // Rate limiting: 5 requests per minute per IP
   const ip = request.ip || request.headers.get('x-forwarded-for') || 'anonymous'
-  const rateLimitResult = rateLimit(`book:${ip}`, { interval: 60000, maxRequests: 5 })
+  const rateLimitResult = await rateLimit(`book:${ip}`, { interval: 60000, maxRequests: 5 })
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(
