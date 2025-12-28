@@ -8,30 +8,32 @@ import AnimatedSection from '@/components/AnimatedSection'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
-// Summer camp weeks for 2026
+// Summer camp weeks for 2026 (5-day weeks = $725, 3-day short week = $435)
 const summerWeeks = [
-  { week: 1, dates: "June 15–19", label: "Week 1" },
-  { week: 2, dates: "June 22–26", label: "Week 2" },
-  { week: 3, dates: "June 29 – July 3", label: "Week 3" },
-  { week: 4, dates: "July 7–11", label: "Week 4" },
-  { week: 5, dates: "July 14–18", label: "Week 5" },
-  { week: 6, dates: "July 21–25", label: "Week 6" },
-  { week: 7, dates: "July 28 – August 1", label: "Week 7" },
-  { week: 8, dates: "August 4–8", label: "Week 8" },
-  { week: 9, dates: "August 11–15", label: "Week 9" },
+  { week: 1, dates: "June 15–19", label: "Week 1", days: 5, price: 725, halfDay: 425 },
+  { week: 2, dates: "June 22–26", label: "Week 2", days: 5, price: 725, halfDay: 425 },
+  { week: 3, dates: "June 29 – July 3", label: "Week 3", days: 5, price: 725, halfDay: 425 },
+  { week: 4, dates: "July 7–11", label: "Week 4", days: 5, price: 725, halfDay: 425 },
+  { week: 5, dates: "July 14–18", label: "Week 5", days: 5, price: 725, halfDay: 425 },
+  { week: 6, dates: "July 21–25", label: "Week 6", days: 5, price: 725, halfDay: 425 },
+  { week: 7, dates: "July 28 – August 1", label: "Week 7", days: 5, price: 725, halfDay: 425 },
+  { week: 8, dates: "August 4–8", label: "Week 8", days: 5, price: 725, halfDay: 425 },
+  { week: 9, dates: "August 11–15", label: "Week 9", days: 5, price: 725, halfDay: 425 },
+  { week: 10, dates: "August 17–19", label: "Back-to-School (3 days)", days: 3, price: 435, halfDay: 255 },
 ]
 
-// Swim & Tennis camp weeks
+// Swim & Tennis camp weeks (4-day weeks = $495, 3-day short week = $375)
 const swimTennisWeeks = [
-  { week: 1, dates: "June 16–19", label: "Week 1" },
-  { week: 2, dates: "June 23–26", label: "Week 2" },
-  { week: 3, dates: "June 30 – July 3", label: "Week 3" },
-  { week: 4, dates: "July 7–10", label: "Week 4" },
-  { week: 5, dates: "July 14–17", label: "Week 5" },
-  { week: 6, dates: "July 21–24", label: "Week 6" },
-  { week: 7, dates: "July 28–31", label: "Week 7" },
-  { week: 8, dates: "August 4–7", label: "Week 8" },
-  { week: 9, dates: "August 11–14", label: "Week 9" },
+  { week: 1, dates: "June 16–19", label: "Week 1", days: 4, price: 495 },
+  { week: 2, dates: "June 23–26", label: "Week 2", days: 4, price: 495 },
+  { week: 3, dates: "June 30 – July 3", label: "Week 3", days: 4, price: 495 },
+  { week: 4, dates: "July 7–10", label: "Week 4", days: 4, price: 495 },
+  { week: 5, dates: "July 14–17", label: "Week 5", days: 4, price: 495 },
+  { week: 6, dates: "July 21–24", label: "Week 6", days: 4, price: 495 },
+  { week: 7, dates: "July 28–31", label: "Week 7", days: 4, price: 495 },
+  { week: 8, dates: "August 4–7", label: "Week 8", days: 4, price: 495 },
+  { week: 9, dates: "August 11–14", label: "Week 9", days: 4, price: 495 },
+  { week: 10, dates: "August 17–19", label: "Back-to-School (3 days)", days: 3, price: 375 },
 ]
 
 // Camp data for 2026
@@ -100,20 +102,6 @@ const camps = [
     weeks: summerWeeks
   },
   {
-    id: "back-to-school",
-    name: "Back-to-School Mini",
-    dates: "August 17–19",
-    days: "3 days",
-    hours: "9:00 AM – 1:00 PM",
-    ages: "5-14",
-    location: "Laguna Beach High School",
-    price: 325,
-    perDay: 108,
-    description: "Get back in the groove before school starts. A fun way to transition from summer to fall.",
-    includes: ["Snacks provided", "Skills refresher", "Fun games", "Team competitions"],
-    season: "fall"
-  },
-  {
     id: "thanksgiving",
     name: "Thanksgiving Camp",
     dates: "November 23–25",
@@ -148,6 +136,9 @@ interface CampWeek {
   week: number
   dates: string
   label: string
+  days: number
+  price: number
+  halfDay?: number
 }
 
 // Type for camp data to match YearRegistrationModal expectations
@@ -182,7 +173,7 @@ export default function CampsPage() {
     : camps.filter(camp => camp.season === selectedSeason)
 
   const handleRegisterClick = (camp: typeof camps[0] & { selectedWeek?: CampWeek }) => {
-    // Convert camp data to modal format
+    // Convert camp data to modal format - use week-specific pricing if available
     const modalData: CampModalData = {
       id: camp.id,
       name: camp.selectedWeek 
@@ -191,13 +182,19 @@ export default function CampsPage() {
       dates: camp.selectedWeek 
         ? camp.selectedWeek.dates 
         : camp.dates,
-      days: camp.days,
+      days: camp.selectedWeek 
+        ? `${camp.selectedWeek.days} days`
+        : camp.days,
       hours: camp.hours,
       ages: camp.ages,
       location: camp.location,
-      price: camp.price,
-      perDay: camp.perDay,
-      halfDay: camp.halfDay,
+      price: camp.selectedWeek 
+        ? camp.selectedWeek.price 
+        : camp.price,
+      perDay: camp.selectedWeek 
+        ? Math.round(camp.selectedWeek.price / camp.selectedWeek.days)
+        : camp.perDay,
+      halfDay: camp.selectedWeek?.halfDay || camp.halfDay,
       description: camp.description,
       includes: camp.includes,
       safetyNote: camp.safetyNote,
@@ -360,10 +357,13 @@ export default function CampsPage() {
                                 <p className="font-sans text-[14px] font-medium text-black group-hover:text-black">
                                   {week.label}: {week.dates}
                                 </p>
+                                <p className="font-sans text-[11px] text-black/50">
+                                  {week.days} days{week.halfDay && ` · Half-day: $${week.halfDay}`}
+                                </p>
                               </div>
                               <div className="flex items-center gap-2">
                                 <span className="font-sans text-[14px] font-semibold text-black">
-                                  ${camp.price}
+                                  ${week.price}
                                 </span>
                                 <svg className="w-4 h-4 text-black/40 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -372,10 +372,6 @@ export default function CampsPage() {
                             </button>
                           ))}
                         </div>
-                        <p className="font-sans text-[12px] text-black/50">
-                          ${camp.perDay}/day
-                          {camp.halfDay && ` · Half-day option: $${camp.halfDay}`}
-                        </p>
                       </div>
                     ) : (
                       <div className="border-t border-black/10 pt-4">
