@@ -33,7 +33,6 @@ export default function ExitIntentPopup() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       if (currentScrollY < lastScrollY - 100 && currentScrollY < 200 && !hasShown) {
-        // User scrolled up significantly near top of page
         setIsVisible(true)
         setHasShown(true)
         sessionStorage.setItem('exitPopupShown', 'true')
@@ -90,6 +89,7 @@ export default function ExitIntentPopup() {
       <div 
         className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in"
         onClick={() => setIsVisible(false)}
+        aria-hidden="true"
       />
 
       {/* Modal - Luxury LBTA Design */}
@@ -110,7 +110,7 @@ export default function ExitIntentPopup() {
         </button>
 
         {isSuccess ? (
-          /* Success State - Calm & Confident */}
+          /* Success State - Calm & Confident */
           <div className="p-12 text-center">
             <div className="w-20 h-20 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="h-10 w-10 text-black" strokeWidth={1.5} />
@@ -187,18 +187,17 @@ export default function ExitIntentPopup() {
 
       {/* CSS for animations */}
       <style jsx>{`
-        @keyframes scaleIn {
+        @keyframes fadeInUp {
           from {
             opacity: 0;
-            transform: scale(0.95);
+            transform: translateY(24px);
           }
           to {
             opacity: 1;
-            transform: scale(1);
+            transform: translateY(0);
           }
         }
       `}</style>
     </div>
   )
 }
-
