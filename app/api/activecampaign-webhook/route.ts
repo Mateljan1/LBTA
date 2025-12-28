@@ -1,5 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
-import axios from 'axios'
+
+// Helper function for ActiveCampaign API calls
+async function acFetch(endpoint: string, options: RequestInit = {}) {
+  const AC_URL = process.env.ACTIVECAMPAIGN_URL
+  const AC_API_KEY = process.env.ACTIVECAMPAIGN_API_KEY
+  
+  const response = await fetch(`${AC_URL}${endpoint}`, {
+    ...options,
+    headers: {
+      'Api-Token': AC_API_KEY!,
+      'Content-Type': 'application/json',
+      ...options.headers
+    }
+  })
+  
+  return response.json()
+}
 
 // ============================================================
 // ActiveCampaign Webhook Handler - LBTA Auto-Tagging System
@@ -142,24 +158,12 @@ export async function POST(request: NextRequest) {
     console.log(`🔄 Processing contact ID: ${contactId}, Email: ${contactEmail}`)
 
     // Step 1: Get full contact details including custom fields and tags
-    const contactResponse = await axios.get(
-      `${AC_URL}/api/3/contacts/${contactId}`,
-      {
-        headers: { 'Api-Token': AC_API_KEY! }
-      }
-    )
-
-    const contact = contactResponse.data.contact
+    const contactResponse = await acFetch(`/api/3/contacts/${contactId}`)
+    const contact = contactResponse.contact
 
     // Get contact's field values
-    const fieldValuesResponse = await axios.get(
-      `${AC_URL}/api/3/contacts/${contactId}/fieldValues`,
-      {
-        headers: { 'Api-Token': AC_API_KEY! }
-      }
-    )
-
-    const fieldValues = fieldValuesResponse.data.fieldValues || []
+    const fieldValuesResponse = await acFetch(`/api/3/contacts/${contactId}/fieldValues`)
+    const fieldValues = fieldValuesResponse.fieldValues || []
 
     // CRITICAL: Check lead source and handle appropriately
     // Field 15 = LEAD_SOURCE
@@ -181,48 +185,30 @@ export async function POST(request: NextRequest) {
     }
 
     // Get contact's current tags
-    const tagsResponse = await axios.get(
-      `${AC_URL}/api/3/contacts/${contactId}/contactTags`,
-      {
-        headers: { 'Api-Token': AC_API_KEY! }
-      }
-    )
-
-    const contactTags = tagsResponse.data.contactTags || []
+    const tagsResponse = await acFetch(`/api/3/contacts/${contactId}/contactTags`)
+    const contactTags = tagsResponse.contactTags || []
     const currentTagIds = contactTags.map((ct: any) => parseInt(ct.tag))
 
     console.log(`📋 Current tags for contact: ${currentTagIds.join(', ')}`)
 
     // Step 2: Check if contact is already on List 4
-    const listMembershipResponse = await axios.get(
-      `${AC_URL}/api/3/contacts/${contactId}/contactLists`,
-      {
-        headers: { 'Api-Token': AC_API_KEY! }
-      }
-    )
-
-    const listMemberships = listMembershipResponse.data.contactLists || []
+    const listMembershipResponse = await acFetch(`/api/3/contacts/${contactId}/contactLists`)
+    const listMemberships = listMembershipResponse.contactLists || []
     const isOnList4 = listMemberships.some((lm: any) => lm.list === '4' && lm.status === '1')
 
     // Add to List 4 if not already on it
     if (!isOnList4) {
       console.log(`📝 Adding contact to List 4 (LBTA)...`)
-      await axios.post(
-        `${AC_URL}/api/3/contactLists`,
-        {
+      await acFetch('/api/3/contactLists', {
+        method: 'POST',
+        body: JSON.stringify({
           contactList: {
             list: 4,
             contact: contactId,
             status: 1
           }
-        },
-        {
-          headers: {
-            'Api-Token': AC_API_KEY!,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
+        })
+      })
       console.log(`✅ Contact added to List 4`)
     } else {
       console.log(`✓ Contact already on List 4`)
@@ -231,21 +217,15 @@ export async function POST(request: NextRequest) {
     // Step 3: Apply LBTA_Winter2026 tag (27) if not already applied
     if (!currentTagIds.includes(27)) {
       console.log(`🏷️ Applying LBTA_Winter2026 tag (27)...`)
-      await axios.post(
-        `${AC_URL}/api/3/contactTags`,
-        {
+      await acFetch('/api/3/contactTags', {
+        method: 'POST',
+        body: JSON.stringify({
           contactTag: {
             contact: contactId,
             tag: 27
           }
-        },
-        {
-          headers: {
-            'Api-Token': AC_API_KEY!,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
+        })
+      })
       console.log(`✅ LBTA_Winter2026 tag applied`)
     }
 
@@ -297,21 +277,15 @@ export async function POST(request: NextRequest) {
     // Step 5: Apply class tag if determined and not already applied
     if (classTagId && !currentTagIds.includes(classTagId)) {
       console.log(`🏷️ Applying class tag ${classTagId}...`)
-      await axios.post(
-        `${AC_URL}/api/3/contactTags`,
-        {
+      await acFetch('/api/3/contactTags', {
+        method: 'POST',
+        body: JSON.stringify({
           contactTag: {
             contact: contactId,
             tag: classTagId
           }
-        },
-        {
-          headers: {
-            'Api-Token': AC_API_KEY!,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
+        })
+      })
       console.log(`✅ Class tag ${classTagId} applied`)
     } else if (classTagId) {
       console.log(`✓ Class tag ${classTagId} already applied`)

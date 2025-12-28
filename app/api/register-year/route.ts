@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Client } from '@notionhq/client'
-import axios from 'axios'
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 
@@ -276,43 +275,46 @@ export async function POST(request: NextRequest) {
       }
 
       // Create/update contact
-      const contactResponse = await axios.post(
+      const contactResponse = await fetch(
         `${process.env.ACTIVECAMPAIGN_URL}/api/3/contacts`,
         {
-          contact: {
-            email: data.email,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            phone: data.phone,
-            fieldValues
-          }
-        },
-        {
+          method: 'POST',
           headers: {
             'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
             'Content-Type': 'application/json'
-          }
+          },
+          body: JSON.stringify({
+            contact: {
+              email: data.email,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              phone: data.phone,
+              fieldValues
+            }
+          })
         }
       )
 
-      const contactId = contactResponse.data.contact.id
+      const contactData = await contactResponse.json()
+      const contactId = contactData.contact.id
       console.log('✅ AC Contact Created:', { contactId, email: data.email })
 
       // Add to list (triggers automation)
-      await axios.post(
+      await fetch(
         `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactLists`,
         {
-          contactList: {
-            list: 4,  // Laguna Beach Tennis Academy list
-            contact: contactId,
-            status: 1  // Active subscriber
-          }
-        },
-        {
+          method: 'POST',
           headers: {
             'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
             'Content-Type': 'application/json'
-          }
+          },
+          body: JSON.stringify({
+            contactList: {
+              list: 4,  // Laguna Beach Tennis Academy list
+              contact: contactId,
+              status: 1  // Active subscriber
+            }
+          })
         }
       )
 
@@ -323,19 +325,20 @@ export async function POST(request: NextRequest) {
       
       for (const tagId of tags) {
         try {
-          await axios.post(
+          await fetch(
             `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
             {
-              contactTag: {
-                contact: contactId,
-                tag: tagId.toString()
-              }
-            },
-            {
+              method: 'POST',
               headers: {
                 'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
                 'Content-Type': 'application/json'
-              }
+              },
+              body: JSON.stringify({
+                contactTag: {
+                  contact: contactId,
+                  tag: tagId.toString()
+                }
+              })
             }
           )
           console.log(`✅ Tag ${tagId} applied to contact ${contactId}`)
