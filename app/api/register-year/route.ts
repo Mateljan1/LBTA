@@ -343,7 +343,7 @@ export async function POST(request: NextRequest) {
           )
           console.log(`✅ Tag ${tagId} applied to contact ${contactId}`)
         } catch (tagError: any) {
-          console.error(`⚠️ Failed to apply tag ${tagId}:`, tagError.message)
+          console.error(`⚠️ Failed to apply tag ${tagId}:`, tagError.response?.data || tagError.message)
         }
       }
 
@@ -352,7 +352,7 @@ export async function POST(request: NextRequest) {
     } catch (acError: any) {
       console.error('❌ ActiveCampaign Error:', {
         email: data.email,
-        error: acError.message
+        error: acError.response?.data || acError.message
       })
       // Continue even if AC fails
     }

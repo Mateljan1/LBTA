@@ -319,7 +319,7 @@ export async function POST(request: NextRequest) {
             console.error('⚠️ Failed to apply class tag:', {
               contactId,
               tagId: classTagId,
-              error: tagError.message
+              error: tagError.response?.data || tagError.message
             })
             // Continue even if tagging fails - contact is still in system
           }
@@ -330,7 +330,7 @@ export async function POST(request: NextRequest) {
     } catch (acError: any) {
       console.error('❌ ActiveCampaign Error:', {
         email: data.email,
-        error: acError.message,
+        error: acError.response?.data || acError.message,
         stack: acError.stack
       })
       // Continue even if AC fails
