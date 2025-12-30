@@ -1,0 +1,32 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Athlete Silhouette Mid-Sprint -->
+  <!-- Head -->
+  <circle cx="20" cy="8" r="3" fill="#F26522" opacity="0.9"/>
+  
+  <!-- Body (simplified running pose) -->
+  <path d="M 20 11 L 20 20" stroke="#F26522" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Arms (running motion) -->
+  <path d="M 20 13 L 15 16" stroke="#F26522" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 20 13 L 25 10" stroke="#F26522" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Legs (mid-stride) -->
+  <path d="M 20 20 L 16 28" stroke="#F26522" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 20 20 L 24 26" stroke="#F26522" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Lower legs -->
+  <path d="M 16 28 L 15 33" stroke="#F26522" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 24 26 L 26 31" stroke="#F26522" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Anatomical Force Vectors (movement lines) -->
+  <line x1="20" y1="8" x2="22" y2="6" stroke="#F26522" stroke-width="0.5" opacity="0.5"/>
+  <line x1="25" y1="10" x2="28" y2="8" stroke="#F26522" stroke-width="0.5" opacity="0.5"/>
+  <line x1="16" y1="28" x2="14" y2="30" stroke="#F26522" stroke-width="0.5" opacity="0.5"/>
+  <line x1="24" y1="26" x2="26" y2="28" stroke="#F26522" stroke-width="0.5" opacity="0.5"/>
+  
+  <!-- Key Muscle Group Accents -->
+  <circle cx="20" cy="15" r="1.5" fill="#F26522" opacity="0.6"/>
+  <circle cx="18" cy="25" r="1.5" fill="#F26522" opacity="0.6"/>
+  <circle cx="24" cy="23" r="1.5" fill="#F26522" opacity="0.6"/>
+</svg>
+

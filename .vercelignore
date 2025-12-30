@@ -1,0 +1,6 @@
+racket-rescue-site/
+skills/
+docs/
+audit-knowledge/
+*.md
+!README.md

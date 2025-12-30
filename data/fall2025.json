@@ -1,0 +1,97 @@
+{
+  "season": "Fall 2025",
+  "dates": "September 2025 – December 2025",
+  "weeks": 18,
+  "programs": [
+    {
+      "id": "jtt-practice-1",
+      "category": "Junior",
+      "program": "JTT Practice - 10U Orange Ball",
+      "ages": "Team",
+      "location": "Alta Laguna Park",
+      "duration": "90 min",
+      "schedule": [
+        { "day": "Monday", "time": "3:30-5:00 PM", "coach": "Staff" }
+      ],
+      "pricing": {
+        "1x": 795
+      },
+      "description": "Junior Team Tennis practice sessions for competitive team play."
+    },
+    {
+      "id": "jtt-practice-2",
+      "category": "Junior",
+      "program": "JTT Practice - 10U Orange Ball",
+      "ages": "Team",
+      "location": "Alta Laguna Park",
+      "duration": "90 min",
+      "schedule": [
+        { "day": "Wednesday", "time": "3:30-5:00 PM", "coach": "Staff" }
+      ],
+      "pricing": {
+        "1x": 795
+      },
+      "description": "Junior Team Tennis practice sessions for competitive team play."
+    },
+    {
+      "id": "jtt-practice-3",
+      "category": "Junior",
+      "program": "JTT Practice - 10U Orange Ball",
+      "ages": "Team",
+      "location": "Alta Laguna Park",
+      "duration": "90 min",
+      "schedule": [
+        { "day": "Friday", "time": "3:30-5:00 PM", "coach": "Staff" }
+      ],
+      "pricing": {
+        "1x": 795
+      },
+      "description": "Junior Team Tennis practice sessions for competitive team play."
+    },
+    {
+      "id": "adult-beginner-fall",
+      "category": "Adult",
+      "program": "Adult Beginner",
+      "ages": "NTRP 1.0-2.5",
+      "location": "Moulton Meadows",
+      "duration": "1 hr",
+      "schedule": [
+        { "day": "Monday", "time": "7:00-8:00 PM", "coach": "Staff" }
+      ],
+      "pricing": {
+        "1x": 550
+      },
+      "description": "Introduction to tennis for adult beginners."
+    },
+    {
+      "id": "cardio-tennis-fall",
+      "category": "Fitness",
+      "program": "Cardio Tennis",
+      "ages": "All Levels",
+      "location": "Moulton Meadows",
+      "duration": "1.5 hr",
+      "schedule": [
+        { "day": "Wednesday", "time": "6:00-7:30 PM", "coach": "Staff" }
+      ],
+      "pricing": {
+        "1x": 610
+      },
+      "description": "High-energy fitness workout combining tennis drills with cardio intervals."
+    },
+    {
+      "id": "liveball-intermediate-fall",
+      "category": "Fitness",
+      "program": "LiveBall - Intermediate",
+      "ages": "NTRP 3.0-3.5",
+      "location": "Moulton Meadows",
+      "duration": "1.5 hr",
+      "schedule": [
+        { "day": "Thursday", "time": "6:00-7:30 PM", "coach": "Staff" }
+      ],
+      "pricing": {
+        "1x": 610
+      },
+      "description": "Community play sessions for intermediate players."
+    }
+  ]
+}

@@ -1,0 +1,890 @@
+/* Import embedded forms styling - must be before @tailwind */
+@import './embedded-forms.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   LBTA DESIGN SYSTEM v2.0
+   Luxury Sports Academy Standard
+   ===================================================== */
+
+@layer base {
+  :root {
+    /* Color System */
+    --color-black: #0A0A0A;
+    --color-white: #FFFFFF;
+    --color-cream: #FAF8F3;
+    --color-beige: #F8E6BB;
+    --color-sand: #F4EDE4;
+    --color-stone: #E8E4DF;
+    --color-slate: #6B6B6B;
+    --color-charcoal: #2B2B2B;
+    --color-orange: #F8A121;
+    --color-red: #F04E23;
+    
+    /* Typography */
+    --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Work Sans', system-ui, -apple-system, sans-serif;
+    
+    /* Spacing Scale */
+    --space-unit: 8px;
+    --space-xs: calc(var(--space-unit) * 1);
+    --space-sm: calc(var(--space-unit) * 2);
+    --space-md: calc(var(--space-unit) * 3);
+    --space-lg: calc(var(--space-unit) * 4);
+    --space-xl: calc(var(--space-unit) * 6);
+    --space-2xl: calc(var(--space-unit) * 8);
+    --space-3xl: calc(var(--space-unit) * 12);
+    --space-4xl: calc(var(--space-unit) * 16);
+    
+    /* Animation Timing */
+    --ease-luxury: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* Transitions */
+    --transition-fast: 150ms var(--ease-smooth);
+    --transition-base: 300ms var(--ease-luxury);
+    --transition-slow: 600ms var(--ease-luxury);
+    --transition-slower: 800ms var(--ease-luxury);
+  }
+
+  * {
+    @apply border-lbta-stone;
+  }
+
+  html {
+    @apply scroll-smooth;
+    scroll-padding-top: 100px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-lbta-cream text-lbta-charcoal;
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  /* Selection styling */
+  ::selection {
+    background-color: rgba(248, 161, 33, 0.2);
+    color: var(--color-black);
+  }
+
+  /* Focus styles - Accessibility (WCAG 2.1 AAA) */
+  *:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  
+  /* High contrast focus for dark backgrounds */
+  .dark *:focus-visible,
+  [data-theme="dark"] *:focus-visible {
+    outline-color: white;
+  }
+  
+  /* Skip to content link for keyboard users */
+  .skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 9999;
+  }
+  
+  .skip-to-content:focus {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: auto;
+    height: auto;
+    padding: 16px 24px;
+    background: var(--color-black);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+  }
+  
+  /* Visible focus ring for interactive elements */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 2px;
+  }
+  
+  /* Focus within for complex components */
+  .focus-within-ring:focus-within {
+    outline: 2px solid var(--color-black);
+    outline-offset: 2px;
+  }
+
+  /* Smooth scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-cream);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-stone);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-slate);
+  }
+}
+
+/* =====================================================
+   TYPOGRAPHY CLASSES
+   ===================================================== */
+
+@layer components {
+  /* Display Headlines - Hero only */
+  .text-display {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 7vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--color-black);
+  }
+
+  /* Section Headlines */
+  .text-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--color-black);
+  }
+
+  .text-headline-sm {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--color-black);
+  }
+
+  /* Subheadlines */
+  .text-subhead {
+    font-family: var(--font-sans);
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-slate);
+  }
+
+  /* Body Text */
+  .text-body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-charcoal);
+  }
+
+  .text-body-lg {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--color-charcoal);
+  }
+
+  /* Eyebrow/Overline */
+  .text-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-charcoal);
+  }
+}
+
+/* =====================================================
+   BUTTON SYSTEM - Premium Design with Micro-interactions
+   ===================================================== */
+
+@layer components {
+  /* Base Button */
+  .btn {
+    @apply inline-flex items-center justify-center;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    min-height: 48px;
+    border-radius: 2px;
+    transition: all var(--transition-base), transform 0.15s var(--ease-bounce);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  /* Ripple effect on click */
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .btn:active::before {
+    width: 300px;
+    height: 300px;
+    opacity: 1;
+    transition: width 0s, height 0s, opacity 0s;
+  }
+
+  /* Primary Button - Solid Black (Luxury) */
+  .btn-primary {
+    @apply btn;
+    background: var(--color-black);
+    color: var(--color-white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn-primary:hover {
+    background: #1a1a1a;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  }
+
+  .btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Accent Button - Now Black (Luxury) */
+  .btn-accent {
+    @apply btn;
+    background: var(--color-black);
+    color: var(--color-white);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-accent:hover {
+    background: #1a1a1a;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  }
+
+  .btn-accent:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Secondary Button - Outlined */
+  .btn-secondary {
+    @apply btn;
+    background: transparent;
+    color: var(--color-black);
+    border: 1.5px solid rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-secondary::before {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-black);
+    background: rgba(0, 0, 0, 0.02);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+
+  /* Ghost Button - Text only (Luxury Black) */
+  .btn-ghost {
+    @apply btn;
+    background: transparent;
+    color: var(--color-charcoal);
+    padding: 0.5rem 0;
+    min-height: auto;
+  }
+
+  .btn-ghost::before {
+    display: none;
+  }
+
+  .btn-ghost::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.4s var(--ease-luxury);
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-black);
+  }
+
+  .btn-ghost:hover::after {
+    width: 100%;
+  }
+
+  /* Pill Button (for CTAs in hero) - Luxury Black */
+  .btn-pill {
+    @apply btn;
+    border-radius: 9999px;
+    padding: 1rem 2.5rem;
+  }
+
+  .btn-pill-primary {
+    @apply btn-pill;
+    background: var(--color-white);
+    color: var(--color-black);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    font-weight: 600;
+  }
+
+  .btn-pill-primary::before {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-pill-primary:hover {
+    background: var(--color-black);
+    color: var(--color-white);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn-pill-primary:hover::before {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-pill-primary:active {
+    transform: translateY(-2px) scale(0.98);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  }
+
+  .btn-pill-secondary {
+    @apply btn-pill;
+    background: transparent;
+    color: var(--color-white);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-pill-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-3px);
+  }
+
+  .btn-pill-secondary:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+
+  /* Pulse animation for urgency CTAs */
+  .btn-pulse {
+    animation: btn-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes btn-pulse {
+    0%, 100% {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 8px rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+/* =====================================================
+   FORM INPUTS - Premium Styling
+   ===================================================== */
+
+@layer components {
+  .input {
+    @apply w-full;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 1rem 1.25rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-stone);
+    border-radius: 4px;
+    color: var(--color-black);
+    transition: all var(--transition-base);
+  }
+
+  .input::placeholder {
+    color: var(--color-slate);
+    opacity: 0.7;
+  }
+
+  .input:hover {
+    border-color: var(--color-slate);
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--color-orange);
+    box-shadow: 0 0 0 3px rgba(248, 161, 33, 0.15);
+  }
+
+  /* Dark variant for overlay forms */
+  .input-dark {
+    @apply input;
+    background: rgba(255, 255, 255, 0.95);
+    border-color: transparent;
+  }
+
+  .input-dark:focus {
+    background: var(--color-white);
+    border-color: var(--color-orange);
+  }
+
+  /* Label */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-charcoal);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+}
+
+/* =====================================================
+   CARD SYSTEM
+   ===================================================== */
+
+@layer components {
+  .card {
+    background: var(--color-white);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+    transition: all 0.6s var(--ease-luxury);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  .card:hover {
+    border-color: rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03), 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-flat {
+    background: var(--color-cream);
+    border: none;
+    border-radius: 8px;
+    transition: all 0.4s var(--ease-luxury);
+  }
+
+  .card-flat:hover {
+    background: var(--color-sand);
+  }
+}
+
+/* =====================================================
+   SECTION LAYOUTS
+   ===================================================== */
+
+@layer components {
+  .container-lbta {
+    @apply mx-auto w-full;
+    max-width: 1440px;
+    padding-left: clamp(1.5rem, 5vw, 5rem);
+    padding-right: clamp(1.5rem, 5vw, 5rem);
+  }
+
+  .container-narrow {
+    @apply mx-auto w-full;
+    max-width: 48rem;
+    padding-left: clamp(1.5rem, 5vw, 3rem);
+    padding-right: clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .section {
+    padding-top: clamp(4rem, 10vw, 8rem);
+    padding-bottom: clamp(4rem, 10vw, 8rem);
+  }
+
+  .section-lg {
+    padding-top: clamp(5rem, 12vw, 10rem);
+    padding-bottom: clamp(5rem, 12vw, 10rem);
+  }
+
+  .section-sm {
+    padding-top: clamp(3rem, 8vw, 5rem);
+    padding-bottom: clamp(3rem, 8vw, 5rem);
+  }
+}
+
+/* =====================================================
+   ACCORDION - Premium FAQ Styling
+   ===================================================== */
+
+@layer components {
+  .accordion-item {
+    background: var(--color-white);
+    border: 1px solid var(--color-stone);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.4s var(--ease-luxury);
+  }
+
+  .accordion-item:hover {
+    border-color: var(--color-slate);
+  }
+
+  .accordion-item[data-state="open"] {
+    border-color: var(--color-orange);
+    box-shadow: 0 4px 16px rgba(248, 161, 33, 0.08);
+  }
+
+  .accordion-trigger {
+    @apply w-full flex items-center justify-between gap-4;
+    padding: 1.25rem 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-black);
+    text-align: left;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+
+  .accordion-trigger:hover {
+    color: var(--color-orange);
+  }
+
+  .accordion-icon {
+    @apply flex-shrink-0;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-orange);
+    transition: transform 0.4s var(--ease-luxury);
+  }
+
+  .accordion-item[data-state="open"] .accordion-icon {
+    transform: rotate(180deg);
+  }
+
+  .accordion-content {
+    padding: 0 1.5rem 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-slate);
+  }
+}
+
+/* =====================================================
+   ANIMATIONS & TRANSITIONS
+   ===================================================== */
+
+@layer utilities {
+  /* Scroll-triggered animations */
+  .animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Reveal animation base */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s var(--ease-luxury), transform 0.7s var(--ease-luxury);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Slide-up animation for sticky CTAs */
+  .animate-slide-up {
+    animation: slideUp 0.4s var(--ease-bounce) forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fade-in animation */
+  .animate-fade-in {
+    animation: fadeIn 0.5s var(--ease-luxury) forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Scale-in animation */
+  .animate-scale-in {
+    animation: scaleIn 0.3s var(--ease-bounce) forwards;
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Stagger delays */
+  .delay-100 { transition-delay: 100ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-300 { transition-delay: 300ms; }
+  .delay-400 { transition-delay: 400ms; }
+  .delay-500 { transition-delay: 500ms; }
+
+  /* Image hover effects */
+  .image-zoom {
+    transition: transform 1s var(--ease-luxury);
+    will-change: transform;
+  }
+
+  .image-zoom:hover {
+    transform: scale(1.04);
+  }
+
+  /* Link underline animation */
+  .link-animated {
+    position: relative;
+    color: var(--color-orange);
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+
+  .link-animated::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: currentColor;
+    transition: width 0.4s var(--ease-luxury);
+  }
+
+  .link-animated:hover::after {
+    width: 100%;
+  }
+
+  /* Shimmer effect for loading states */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+/* =====================================================
+   OVERLAY & GRADIENT UTILITIES
+   ===================================================== */
+
+@layer utilities {
+  .overlay-dark {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.25) 50%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+  }
+
+  .overlay-light {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .text-shadow-hero {
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-shadow-subtle {
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* =====================================================
+   SECTION DIVIDERS
+   ===================================================== */
+
+@layer components {
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-stone), transparent);
+    margin: 0 auto;
+  }
+
+  .divider-gold {
+    width: 40px;
+    height: 2px;
+    background: var(--color-orange);
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================================================
+   MOBILE TOUCH TARGETS
+   ===================================================== */
+
+@media (max-width: 768px) {
+  button,
+  a[role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  select,
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    min-height: 48px;
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+}
+
+/* =====================================================
+   UTILITY CLASSES
+   ===================================================== */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .gpu-accelerate {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+}
+
+/* =====================================================
+   LEGACY SUPPORT (Backwards Compatibility)
+   ===================================================== */
+
+.btn-lbta {
+  @apply btn-primary;
+}
+
+.card-lbta {
+  @apply card;
+}
+
+.section-spacing {
+  @apply section;
+}
+
+/* Social icon hover */
+.social-icon {
+  transition: transform 200ms ease-out;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+}
+
+/* React Big Calendar Custom Styles */
+.lbta-calendar .rbc-header {
+  @apply font-sans text-[14px] font-semibold text-black/80 py-3 border-b border-gray-200;
+}
+
+.lbta-calendar .rbc-event {
+  @apply font-sans;
+}
+
+/* City Logo Blend */
+.city-logo-tan-blend {
+  filter: contrast(1.15) brightness(0.90) saturate(1.1);
+  mix-blend-mode: darken;
+}

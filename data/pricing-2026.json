@@ -1,0 +1,324 @@
+{
+  "lastUpdated": "2025-12-24",
+  "currency": "USD",
+  "taxIncluded": false,
+  "paymentPlans": true,
+  "paymentPlanNote": "3-month payment plans available for quarterly programs",
+  
+  "seasonMultipliers": {
+    "Winter": 1.0,
+    "Spring": 0.769,
+    "Summer": 0.769,
+    "Fall": 1.308
+  },
+  
+  "seasonWeeks": {
+    "Winter": 13,
+    "Spring": 10,
+    "Summer": 10,
+    "Fall": 17
+  },
+
+  "basePricing": {
+    "junior": {
+      "label": "Junior Programs",
+      "subtitle": "Red Ball / Orange Ball / Green Dot",
+      "ages": "3-11",
+      "duration": "45-60 min",
+      "billing": "Quarterly",
+      "frequencies": {
+        "1x": { "price": 546, "perSession": 42 },
+        "2x": { "price": 1092, "perSession": 42, "popular": true },
+        "3x": { "price": 1635, "perSession": 42 }
+      },
+      "dropIn": 50,
+      "includes": ["Professional instruction", "Ball machine time", "Video analysis (2x+)"]
+    },
+    "youthDevelopment": {
+      "label": "Youth Development",
+      "subtitle": "Competitive Training Track",
+      "ages": "11-15",
+      "duration": "1.5 hr",
+      "billing": "Quarterly",
+      "frequencies": {
+        "1x": { "price": 756, "perSession": 58 },
+        "2x": { "price": 1437, "perSession": 55, "popular": true },
+        "3x": { "price": 2160, "perSession": 55 }
+      },
+      "dropIn": 70,
+      "includes": ["Match play Fridays", "Tournament prep", "Mental game coaching"]
+    },
+    "highPerformance": {
+      "label": "High Performance",
+      "subtitle": "College Prep & Tournament Players",
+      "ages": "12-18 (UTR 5+)",
+      "duration": "2 hr",
+      "billing": "Quarterly",
+      "frequencies": {
+        "1x": { "price": 810, "perSession": 62 },
+        "2x": { "price": 1620, "perSession": 62, "popular": true },
+        "3x": { "price": 2268, "perSession": 58 }
+      },
+      "dropIn": 100,
+      "includes": ["College recruiting guidance", "Video analysis", "Strength & conditioning"]
+    },
+    "adultBeginner": {
+      "label": "Adult Beginner",
+      "subtitle": "New to Tennis or Returning",
+      "ages": "NTRP 1.0-2.5",
+      "duration": "1 hr",
+      "billing": "Quarterly",
+      "frequencies": {
+        "1x": { "price": 546, "perSession": 42 },
+        "2x": { "price": 797, "perSession": 31, "popular": true, "savings": 295 }
+      },
+      "dropIn": 55,
+      "includes": ["Stroke fundamentals", "Rally practice", "Beginner match play"]
+    },
+    "adultIntermediate": {
+      "label": "Adult Intermediate",
+      "subtitle": "Developing Competitive Skills",
+      "ages": "NTRP 3.0-3.5",
+      "duration": "1.5 hr",
+      "billing": "Quarterly",
+      "frequencies": {
+        "1x": { "price": 756, "perSession": 58 },
+        "2x": { "price": 1437, "perSession": 55, "popular": true },
+        "3x": { "price": 2042, "perSession": 52 }
+      },
+      "dropIn": 70,
+      "includes": ["Strategy sessions", "Doubles tactics", "League preparation"]
+    },
+    "adultAdvanced": {
+      "label": "Adult Advanced",
+      "subtitle": "Competitive & Tournament Players",
+      "ages": "NTRP 4.0+",
+      "duration": "2 hr",
+      "billing": "Quarterly",
+      "frequencies": {
+        "1x": { "price": 810, "perSession": 62 },
+        "2x": { "price": 1620, "perSession": 62, "popular": true }
+      },
+      "dropIn": 90,
+      "includes": ["Advanced tactics", "Match analysis", "Tournament coaching"]
+    }
+  },
+
+  "monthlyPrograms": {
+    "liveball": {
+      "label": "LiveBall",
+      "subtitle": "Community Play Sessions",
+      "duration": "1.5 hr",
+      "billing": "Monthly",
+      "price": 150,
+      "dropIn": 50,
+      "levels": ["Intermediate (3.0-3.5)", "Advanced (4.0+)"],
+      "includes": ["Unlimited sessions", "Social play", "All skill levels welcome"]
+    },
+    "cardioTennis": {
+      "label": "Cardio Tennis",
+      "subtitle": "Fitness-Focused Tennis",
+      "duration": "1.5 hr",
+      "billing": "Monthly",
+      "price": 150,
+      "dropIn": 50,
+      "includes": ["High-energy workout", "Music & motivation", "No experience needed"]
+    },
+    "matchPlay": {
+      "label": "Friday Match Play",
+      "subtitle": "Organized Competition",
+      "duration": "1-2 hr",
+      "billing": "Monthly",
+      "price": 85,
+      "dropIn": 25,
+      "includes": ["Structured matches", "Score tracking", "All ages"]
+    }
+  },
+
+  "camps": {
+    "skiWeek": {
+      "label": "Ski Week Camp",
+      "dates": "February 16–20",
+      "days": 5,
+      "hours": "9 AM – 3 PM",
+      "price": 525,
+      "perDay": 105,
+      "ages": "5-14",
+      "includes": ["Lunch provided", "Skills clinics", "Match play"]
+    },
+    "springBreak": {
+      "label": "Spring Break Camp",
+      "dates": "March 30 – April 3",
+      "days": 5,
+      "hours": "9 AM – 3 PM",
+      "price": 525,
+      "perDay": 105,
+      "ages": "5-14",
+      "includes": ["Lunch provided", "Skills clinics", "Match play"]
+    },
+    "summer": {
+      "label": "Summer Camp",
+      "dates": "June 15 – August 14",
+      "days": "Weekly (5 days)",
+      "hours": "9 AM – 3 PM",
+      "price": 725,
+      "perDay": 145,
+      "halfDay": 425,
+      "ages": "5-17",
+      "includes": ["Lunch provided", "Swimming breaks", "Tournament prep option"]
+    },
+    "backToSchool": {
+      "label": "Back-to-School Mini",
+      "dates": "August 17–19",
+      "days": 3,
+      "hours": "9 AM – 1 PM",
+      "price": 325,
+      "perDay": 108,
+      "ages": "5-14",
+      "includes": ["Snacks provided", "Skills refresher", "Fun games"]
+    },
+    "thanksgiving": {
+      "label": "Thanksgiving Camp",
+      "dates": "November 23–25",
+      "days": 3,
+      "hours": "9 AM – 1 PM",
+      "price": 325,
+      "perDay": 108,
+      "ages": "5-14",
+      "includes": ["Snacks provided", "Holiday activities", "Match play"]
+    },
+    "winterBreak": {
+      "label": "Winter Break Camp",
+      "dates": "Dec 21–24 & Dec 28–31",
+      "days": "4 per session",
+      "hours": "9 AM – 1 PM",
+      "price": 425,
+      "perDay": 106,
+      "ages": "5-14",
+      "includes": ["Snacks provided", "Holiday fun", "Two session options"]
+    }
+  },
+
+  "jtt": {
+    "spring": {
+      "label": "Spring JTT",
+      "dates": "January 12 – April 26",
+      "divisions": {
+        "10U": { "price": 2800, "practiceIncluded": true },
+        "12U": { "price": 2800, "practiceIncluded": true },
+        "14U": { "price": 2800, "practiceIncluded": true },
+        "18U": { "price": 2800, "practiceIncluded": true }
+      },
+      "includes": ["Weekly practice (2x)", "Sunday matches", "Team uniform", "USTA registration"]
+    },
+    "summerFlex": {
+      "label": "Summer Flex JTT",
+      "dates": "June 1 – July 26",
+      "divisions": {
+        "10U": { "price": 2800, "practiceIncluded": true },
+        "12U": { "price": 2800, "practiceIncluded": true },
+        "14U": { "price": 2800, "practiceIncluded": true },
+        "18U": { "price": 2800, "practiceIncluded": true }
+      },
+      "includes": ["Flexible match scheduling", "Weekly practice", "Team uniform", "USTA registration"]
+    },
+    "fall": {
+      "label": "Fall JTT",
+      "dates": "September 5 – November 22",
+      "divisions": {
+        "10U": { "price": 2800, "practiceIncluded": true },
+        "12U": { "price": 2800, "practiceIncluded": true },
+        "14U": { "price": 2800, "practiceIncluded": true },
+        "18U": { "price": 2800, "practiceIncluded": true }
+      },
+      "includes": ["Weekly practice (2x)", "Sunday matches", "Team uniform", "USTA registration"]
+    }
+  },
+
+  "privateCoaching": {
+    "rates": [
+      {
+        "coach": "Andrew Mateljan",
+        "title": "Founder & Head Coach",
+        "specialty": "ATP/WTA Coaching",
+        "rate60": 250,
+        "rate90": 350,
+        "availability": "Limited"
+      },
+      {
+        "coach": "Kevin Jackson",
+        "title": "Director of Performance",
+        "specialty": "College Prep & Tournament",
+        "rate60": 150,
+        "rate90": 200,
+        "availability": "Available"
+      },
+      {
+        "coach": "Savriyan Danilov",
+        "title": "ATP Pro #556",
+        "specialty": "High Performance",
+        "rate60": 120,
+        "rate90": 165,
+        "availability": "Available"
+      },
+      {
+        "coach": "Andy Wu",
+        "title": "USPTA Certified",
+        "specialty": "Junior Development",
+        "rate60": 100,
+        "rate90": 135,
+        "availability": "Available"
+      },
+      {
+        "coach": "Michelle Bevins",
+        "title": "Youth Director",
+        "specialty": "Beginner & Youth",
+        "rate60": 120,
+        "rate90": 165,
+        "availability": "Available"
+      }
+    ],
+    "packages": [
+      { "sessions": 5, "discount": 5, "label": "5-Pack" },
+      { "sessions": 10, "discount": 10, "label": "10-Pack" },
+      { "sessions": 20, "discount": 15, "label": "20-Pack" }
+    ]
+  },
+
+  "scholarships": {
+    "available": true,
+    "annualBudget": 25000,
+    "coverageRange": "25-50%",
+    "requirements": {
+      "income": "Household income < $75,000",
+      "commitment": "2+ sessions per week",
+      "gpa": "3.5+ GPA for students"
+    },
+    "applicationDeadline": "Rolling basis",
+    "contactEmail": "scholarships@lagunabeachtennisacademy.com"
+  },
+
+  "discounts": {
+    "earlyBird": {
+      "amount": 50,
+      "type": "fixed",
+      "description": "Register before early bird deadline"
+    },
+    "sibling": {
+      "amount": 10,
+      "type": "percent",
+      "description": "10% off second child enrollment"
+    },
+    "multiProgram": {
+      "amount": 5,
+      "type": "percent",
+      "description": "5% off when enrolling in 2+ programs"
+    },
+    "annual": {
+      "amount": 10,
+      "type": "percent",
+      "description": "10% off when paying for full year upfront"
+    }
+  }
+}
+

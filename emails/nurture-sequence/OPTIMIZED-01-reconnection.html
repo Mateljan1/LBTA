@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <title>Quick note from Laguna Beach Tennis Academy</title>
+  <style>
+    /* Client-specific Styles */
+    body, table, td, p, a, li, blockquote { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; }
+    
+    /* Reset Styles */
+    body { margin: 0 !important; padding: 0 !important; width: 100% !important; height: 100% !important; }
+    table { border-collapse: collapse !important; }
+    
+    /* Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Work+Sans:wght@300;400;500;600&display=swap');
+    
+    /* Base Styles */
+    body {
+      font-family: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #FAF8F3;
+      color: #1a1a1a;
+      line-height: 1.7;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      color: #1a1a1a;
+      margin: 0;
+      padding: 0;
+      line-height: 1.3;
+      font-weight: 500;
+    }
+    
+    p {
+      font-family: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #444444;
+      margin: 0 0 16px 0;
+    }
+    
+    ul {
+      margin: 0 0 16px 0;
+      padding-left: 24px;
+    }
+    
+    li {
+      margin-bottom: 12px;
+      line-height: 1.7;
+      color: #444444;
+    }
+    
+    .eyebrow {
+      font-family: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #888888;
+      margin: 0 0 12px 0;
+    }
+    
+    /* Insight Box */
+    .insight-box {
+      background-color: #F8E6BB;
+      border-left: 3px solid #1a1a1a;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    
+    .insight-title {
+      font-family: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 12px 0;
+    }
+    
+    /* Links */
+    a {
+      color: #1a1a1a;
+      text-decoration: underline;
+    }
+    
+    /* Responsive */
+    @media only screen and (max-width: 640px) {
+      .container {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .mobile-padding {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+      }
+      h1 {
+        font-size: 28px !important;
+      }
+      .insight-box {
+        padding: 20px !important;
+      }
+    }
+    
+    @media only screen and (max-width: 480px) {
+      .mobile-padding {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #FAF8F3;">
+  
+  <!-- Preheader Text (Hidden but shown in email preview) -->
+  <div style="display: none; max-height: 0px; overflow: hidden;">
+    {% if contact.program_interest == "Junior" %}We wanted to reconnect about junior tennis training for your child.{% elseif contact.program_interest == "Adult" %}We wanted to reconnect about adult tennis lessons.{% else %}We wanted to reconnect about training at LBTA.{% endif %}
+  </div>
+  
+  <!-- 100% background wrapper (white background) -->
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FAF8F3;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        
+        <!-- 640px container -->
+        <table role="presentation" cellpadding="0" cellspacing="0" width="640" class="container" style="background-color: #ffffff; max-width: 640px; width: 100%;">
+          
+          <!-- Header with Logo -->
+          <tr>
+            <td align="center" style="padding: 48px 40px 32px 40px; border-bottom: 1px solid #f0f0f0;">
+              <a href="https://lagunabeachtennisacademy.com?utm_source=email&utm_medium=nurture&utm_campaign=day1" target="_blank" style="text-decoration: none;">
+                <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png" alt="Laguna Beach Tennis Academy" width="160" style="display: block; margin: 0 auto;">
+              </a>
+            </td>
+          </tr>
+          
+          <!-- Main Content -->
+          <tr>
+            <td style="padding: 48px 48px 56px 48px;" class="mobile-padding">
+              
+              <!-- Greeting -->
+              <p style="font-size: 18px; color: #1a1a1a; margin-bottom: 24px; font-weight: 400;">
+                Hi {{contact.first_name}},
+              </p>
+              
+              <!-- Conditional Opening Based on Program Interest -->
+              {% if contact.program_interest == "Junior" %}
+              <p style="margin-bottom: 24px;">
+                You reached out about junior tennis training for your child not long ago. We wanted to reconnect as we finalize rosters for our upcoming programs.
+              </p>
+              {% elseif contact.program_interest == "Adult" %}
+              <p style="margin-bottom: 24px;">
+                You reached out about adult tennis lessons not long ago. We wanted to reconnect as we finalize schedules for our upcoming programs.
+              </p>
+              {% else %}
+              <p style="margin-bottom: 24px;">
+                You reached out about training at Laguna Beach Tennis Academy not long ago. We wanted to reconnect as we prepare for our upcoming session.
+              </p>
+              {% endif %}
+              
+              <!-- Value Proposition -->
+              <p style="margin-bottom: 24px;">
+                LBTA serves a range of players—from young kids learning to love the sport, to competitive juniors preparing for tournaments and team competition, to adults looking for structured improvement.
+              </p>
+              
+              <p style="margin-bottom: 24px;">
+                What ties it all together is how we train: <strong>small groups, clear instruction, measurable progress.</strong>
+              </p>
+              
+              <!-- What's Coming -->
+              <p style="margin-bottom: 16px; font-weight: 500; color: #1a1a1a;">
+                Over the next few days, we'll share:
+              </p>
+              
+              <ul style="margin: 0 0 32px 0; padding-left: 24px;">
+                <li style="margin-bottom: 12px;">What training at LBTA looks like (for any age or level)</li>
+                <li style="margin-bottom: 12px;">How we place players into the right programs</li>
+                <li style="margin-bottom: 12px;">Options like Junior Team Tennis for competitive juniors</li>
+                <li style="margin-bottom: 0;">What adult players can expect</li>
+              </ul>
+              
+              <!-- LBTA Insight Box -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin: 24px 0;">
+                <tr>
+                  <td class="insight-box" style="background-color: #F8E6BB; border-left: 3px solid #1a1a1a; padding: 24px;">
+                    <p class="eyebrow" style="font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: #888888; margin: 0 0 12px 0;">
+                      LBTA INSIGHT
+                    </p>
+                    <p class="insight-title" style="font-family: 'Work Sans', Arial, sans-serif; font-size: 18px; font-weight: 600; color: #1a1a1a; margin: 0 0 12px 0;">
+                      Why Movement Comes First
+                    </p>
+                    <p style="margin: 0; color: #1a1a1a;">
+                      Before stroke technique, before tactics—there's movement. A player who moves well can learn any shot. A player who doesn't will struggle no matter how many lessons they take. That's why every LBTA session starts with footwork, not forehands.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+              
+              <!-- Call to Action -->
+              <p style="margin-bottom: 24px;">
+                If you're thinking about this winter, now is the right time to get in touch.
+              </p>
+              
+              <p style="margin-bottom: 32px;">
+                Just reply to this email and we'll guide you from there.
+              </p>
+              
+              <!-- Signature -->
+              <p style="margin-bottom: 4px; color: #1a1a1a; font-weight: 400;">
+                — Laguna Beach Tennis Academy
+              </p>
+              <p style="font-family: 'Playfair Display', Georgia, serif; font-size: 14px; font-style: italic; color: #888888; margin: 0;">
+                Movement. Discipline. Belonging.
+              </p>
+              
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px 48px; background-color: #1a1a1a; text-align: center;" class="mobile-padding">
+              
+              <!-- Contact Info -->
+              <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 12px; line-height: 1.6;">
+                1098 Balboa Ave · Laguna Beach, CA 92651
+              </p>
+              
+              <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 16px; line-height: 1.6;">
+                <a href="tel:9494646645" style="color: rgba(255,255,255,0.7); text-decoration: none;">(949) 464-6645</a>
+                <span style="color: rgba(255,255,255,0.4);"> · </span>
+                <a href="mailto:support@lagunabeachtennisacademy.com" style="color: rgba(255,255,255,0.7); text-decoration: none;">support@lagunabeachtennisacademy.com</a>
+              </p>
+              
+              <!-- Unsubscribe -->
+              <p style="font-size: 12px; color: rgba(255,255,255,0.4); margin: 0; line-height: 1.6;">
+                <a href="{{unsubscribe_link}}" style="color: rgba(255,255,255,0.4); text-decoration: underline;">Unsubscribe</a>
+                <span style="color: rgba(255,255,255,0.3);"> · </span>
+                <a href="https://lagunabeachtennisacademy.com/privacy" style="color: rgba(255,255,255,0.4); text-decoration: underline;">Privacy Policy</a>
+              </p>
+              
+            </td>
+          </tr>
+          
+        </table>
+        <!-- End 640px container -->
+        
+      </td>
+    </tr>
+  </table>
+  <!-- End 100% background wrapper -->
+  
+</body>
+</html>
+

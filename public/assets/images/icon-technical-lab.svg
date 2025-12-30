@@ -1,0 +1,18 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Video Camera with Serve Arc -->
+  <!-- Camera Body -->
+  <rect x="8" y="14" width="16" height="12" stroke="#F26522" stroke-width="1.5" fill="none"/>
+  <!-- Lens -->
+  <circle cx="16" cy="20" r="3.5" stroke="#F26522" stroke-width="1.5" fill="none"/>
+  <!-- Viewfinder -->
+  <rect x="24" y="17" width="6" height="6" stroke="#F26522" stroke-width="1.5" fill="none"/>
+  
+  <!-- Serve Trajectory Arc with Degree Markers -->
+  <path d="M 30 30 Q 34 20 32 10" stroke="#F26522" stroke-width="1.5" fill="none" stroke-dasharray="2 2"/>
+  <!-- Degree Markers -->
+  <text x="33" y="12" font-size="4" fill="#F26522" font-family="system-ui">45°</text>
+  <circle cx="32" cy="10" r="1" fill="#F26522"/>
+  <circle cx="34" cy="20" r="1" fill="#F26522"/>
+  <circle cx="30" cy="30" r="1" fill="#F26522"/>
+</svg>
+

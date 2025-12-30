@@ -1,0 +1,305 @@
+{
+  "year": 2026,
+  "lastUpdated": "2025-12-24",
+  
+  "seasons": {
+    "winter": {
+      "name": "Winter 2026",
+      "dates": "January 5 – April 4",
+      "weeks": 13,
+      "registrationOpen": "December 1, 2025",
+      "earlyBirdDeadline": "December 20, 2025",
+      "earlyBirdDiscount": 50,
+      "status": "registration_open",
+      "multiplier": 1.0
+    },
+    "spring": {
+      "name": "Spring 2026",
+      "dates": "April 6 – June 13",
+      "weeks": 10,
+      "registrationOpen": "March 1, 2026",
+      "earlyBirdDeadline": "March 20, 2026",
+      "earlyBirdDiscount": 50,
+      "status": "coming_soon",
+      "multiplier": 0.769
+    },
+    "summer": {
+      "name": "Summer 2026",
+      "dates": "June 15 – August 21",
+      "weeks": 10,
+      "registrationOpen": "May 1, 2026",
+      "earlyBirdDeadline": "May 20, 2026",
+      "earlyBirdDiscount": 50,
+      "status": "coming_soon",
+      "multiplier": 0.769
+    },
+    "fall": {
+      "name": "Fall 2026",
+      "dates": "August 24 – December 19",
+      "weeks": 17,
+      "registrationOpen": "July 15, 2026",
+      "earlyBirdDeadline": "August 1, 2026",
+      "earlyBirdDiscount": 50,
+      "status": "coming_soon",
+      "multiplier": 1.308
+    }
+  },
+
+  "camps": [
+    {
+      "id": "swim-tennis",
+      "name": "Swim & Tennis Camp",
+      "dates": "June 16 – August 14",
+      "days": "Weekly (Mon–Thu)",
+      "hours": "9:00 AM – 3:00 PM",
+      "ages": "5-11",
+      "location": "Alta Laguna Park",
+      "price": 495,
+      "perDay": 124,
+      "description": "Structured tennis lessons, swimming, and team-based activities that create lasting memories.",
+      "includes": ["Tennis instruction", "Supervised swimming", "Team activities", "Certified lifeguards"],
+      "coaches": ["Andrew Mateljan", "Michelle Bevins"],
+      "featured": true,
+      "safetyNote": "All participants must be able to swim independently."
+    },
+    {
+      "id": "ski-week",
+      "name": "Ski Week Camp",
+      "dates": "February 16–20",
+      "days": 5,
+      "hours": "9:00 AM – 3:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "price": 525,
+      "perDay": 105,
+      "description": "Full-day tennis camp during Presidents' Week break",
+      "includes": ["Lunch provided", "Skills clinics", "Match play"]
+    },
+    {
+      "id": "spring-break",
+      "name": "Spring Break Camp",
+      "dates": "March 30 – April 3",
+      "days": 5,
+      "hours": "9:00 AM – 3:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "price": 525,
+      "perDay": 105,
+      "description": "Intensive training during spring break",
+      "includes": ["Lunch provided", "Skills clinics", "Match play"]
+    },
+    {
+      "id": "summer",
+      "name": "Summer Camps",
+      "dates": "June 15 – August 14",
+      "days": "Weekly (5 days)",
+      "hours": "9:00 AM – 3:00 PM",
+      "ages": "5-17",
+      "location": "Laguna Beach High School",
+      "price": 725,
+      "halfDay": 425,
+      "perDay": 145,
+      "description": "Full-day summer tennis camps with half-day options",
+      "includes": ["Lunch provided", "Swimming breaks", "Tournament prep option"]
+    },
+    {
+      "id": "back-to-school",
+      "name": "Back-to-School Mini",
+      "dates": "August 17–19",
+      "days": 3,
+      "hours": "9:00 AM – 1:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "price": 325,
+      "perDay": 108,
+      "description": "Get back in the groove before school starts",
+      "includes": ["Snacks provided", "Skills refresher", "Fun games"]
+    },
+    {
+      "id": "thanksgiving",
+      "name": "Thanksgiving Camp",
+      "dates": "November 23–25",
+      "days": 3,
+      "hours": "9:00 AM – 1:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "price": 325,
+      "perDay": 108,
+      "description": "Holiday tennis fun during Thanksgiving break",
+      "includes": ["Snacks provided", "Holiday activities", "Match play"]
+    },
+    {
+      "id": "winter-break",
+      "name": "Winter Break Camp",
+      "dates": "Dec 21–24 & Dec 28–31",
+      "days": "4 per session",
+      "hours": "9:00 AM – 1:00 PM",
+      "ages": "5-14",
+      "location": "Laguna Beach High School",
+      "price": 425,
+      "perDay": 106,
+      "description": "Holiday camps during winter break",
+      "includes": ["Snacks provided", "Holiday fun", "Two session options"]
+    }
+  ],
+
+  "jtt": [
+    {
+      "id": "spring-jtt",
+      "name": "Spring JTT",
+      "dates": "January 12 – April 26",
+      "weeks": 15,
+      "matchDay": "Sundays",
+      "practiceIncluded": true,
+      "divisions": [
+        { "age": "10U", "price": 2800 },
+        { "age": "12U", "price": 2800 },
+        { "age": "14U", "price": 2800 },
+        { "age": "18U", "price": 2800 }
+      ],
+      "includes": ["Weekly practice (2x)", "Sunday matches", "Team uniform", "USTA registration"],
+      "description": "USTA Junior Team Tennis league play"
+    },
+    {
+      "id": "fall-jtt",
+      "name": "Fall JTT",
+      "dates": "September 5 – November 22",
+      "weeks": 12,
+      "matchDay": "Sundays",
+      "practiceIncluded": true,
+      "divisions": [
+        { "age": "10U", "price": 2800 },
+        { "age": "12U", "price": 2800 },
+        { "age": "14U", "price": 2800 },
+        { "age": "18U", "price": 2800 }
+      ],
+      "includes": ["Weekly practice (2x)", "Sunday matches", "Team uniform", "USTA registration"],
+      "description": "Fall league competition season"
+    }
+  ],
+
+  "basePricing": {
+    "junior": {
+      "label": "Junior Programs",
+      "subtitle": "Red Ball / Orange Ball / Green Dot",
+      "ages": "3-11",
+      "duration": "45-60 min",
+      "winterPrices": {
+        "1x": 546,
+        "2x": 1092,
+        "3x": 1635
+      },
+      "dropIn": 50,
+      "popular": "2x"
+    },
+    "youthDevelopment": {
+      "label": "Youth Development",
+      "subtitle": "Competitive Training Track",
+      "ages": "11-15",
+      "duration": "1.5 hr",
+      "winterPrices": {
+        "1x": 756,
+        "2x": 1437,
+        "3x": 2160
+      },
+      "dropIn": 70,
+      "popular": "2x"
+    },
+    "highPerformance": {
+      "label": "High Performance",
+      "subtitle": "College Prep & Tournament",
+      "ages": "12-18 (UTR 5+)",
+      "duration": "2 hr",
+      "winterPrices": {
+        "1x": 810,
+        "2x": 1620,
+        "3x": 2268
+      },
+      "dropIn": 100,
+      "popular": "2x"
+    },
+    "adultBeginner": {
+      "label": "Adult Beginner",
+      "subtitle": "NTRP 1.0-2.5",
+      "ages": "18+",
+      "duration": "1 hr",
+      "winterPrices": {
+        "1x": 546,
+        "2x": 797
+      },
+      "dropIn": 55,
+      "popular": "2x"
+    },
+    "adultIntermediate": {
+      "label": "Adult Intermediate",
+      "subtitle": "NTRP 3.0-3.5",
+      "ages": "18+",
+      "duration": "1.5 hr",
+      "winterPrices": {
+        "1x": 756,
+        "2x": 1437,
+        "3x": 2042
+      },
+      "dropIn": 70,
+      "popular": "2x"
+    },
+    "adultAdvanced": {
+      "label": "Adult Advanced",
+      "subtitle": "NTRP 4.0+",
+      "ages": "18+",
+      "duration": "2 hr",
+      "winterPrices": {
+        "1x": 810,
+        "2x": 1620
+      },
+      "dropIn": 90,
+      "popular": "2x"
+    }
+  },
+
+  "monthlyPrograms": {
+    "liveball": {
+      "label": "LiveBall",
+      "subtitle": "Community Play Sessions",
+      "duration": "1.5 hr",
+      "price": 150,
+      "dropIn": 50
+    },
+    "cardioTennis": {
+      "label": "Cardio Tennis",
+      "subtitle": "Fitness-Focused Tennis",
+      "duration": "1.5 hr",
+      "price": 150,
+      "dropIn": 50
+    },
+    "matchPlay": {
+      "label": "Friday Match Play",
+      "subtitle": "Organized Competition",
+      "duration": "1-2 hr",
+      "price": 85,
+      "dropIn": 25
+    }
+  },
+
+  "privateCoaching": [
+    { "coach": "Andrew Mateljan", "title": "Founder", "rate60": 250, "rate90": 350, "availability": "Limited" },
+    { "coach": "Kevin Jackson", "title": "Director of Performance", "rate60": 150, "rate90": 200, "availability": "Available" },
+    { "coach": "Savriyan Danilov", "title": "ATP Pro #556", "rate60": 120, "rate90": 165, "availability": "Available" },
+    { "coach": "Andy Wu", "title": "USPTA Certified", "rate60": 100, "rate90": 135, "availability": "Available" },
+    { "coach": "Michelle Bevins", "title": "Youth Director", "rate60": 120, "rate90": 165, "availability": "Available" }
+  ],
+
+  "discounts": {
+    "earlyBird": { "amount": 50, "type": "fixed", "description": "Register before early bird deadline" },
+    "sibling": { "amount": 10, "type": "percent", "description": "10% off second child" },
+    "multiProgram": { "amount": 5, "type": "percent", "description": "5% off 2+ programs" },
+    "annual": { "amount": 10, "type": "percent", "description": "10% off full year payment" }
+  },
+
+  "scholarships": {
+    "available": true,
+    "coverage": "25-50%",
+    "email": "scholarships@lagunabeachtennisacademy.com"
+  }
+}
+

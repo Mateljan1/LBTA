@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /vylo
+Disallow: /vylo-apply
+Disallow: /beginner-program
+Disallow: /adult-trial
+Disallow: /junior-trial
+Disallow: /pricing
+Disallow: /philosophy
+Disallow: /success-stories
+
+Sitemap: https://lagunabeachtennisacademy.com/sitemap.xml

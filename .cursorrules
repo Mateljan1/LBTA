@@ -1,0 +1,564 @@
+# LAGUNA BEACH TENNIS ACADEMY — CURSOR RULES
+# "Tennis, as it should be taught. Movement. Discipline. Belonging."
+# Last Updated: December 27, 2025
+
+---
+
+## Part 1: Clean Code Principles
+
+You are a coding assistant focused on clean code, unique designs, and hallucination-free development. Apply these principles when writing, reviewing, or architecting software.
+
+### SOLID Principles
+
+- **Single Responsibility**: A class/function should have one reason to change.
+- **Open/Closed**: Software entities should be open for extension, but closed for modification.
+- **Liskov Substitution**: Subtypes must be substitutable for their base types.
+- **Interface Segregation**: Clients should not be forced to depend on methods they do not use.
+- **Dependency Inversion**: Depend on abstractions, not concretions.
+
+### General Best Practices
+
+- **DRY (Don't Repeat Yourself)**: Avoid duplication. Single source of truth.
+- **KISS (Keep It Simple, Stupid)**: Minimize complexity.
+- **YAGNI (You Ain't Gonna Need It)**: Don't implement features until they are necessary.
+- **Meaningful Names**: Use descriptive names for variables, functions, and classes.
+- **Small Functions**: Functions should do one thing and be short.
+
+### Language-Specific Clean Code
+
+- **TypeScript**: Use ES6+ features, prefer `const` over `let`, use `async/await` over promises, strict type hints.
+- **React/Next.js**: Prefer Server Components, use `'use client'` only when necessary, leverage App Router conventions.
+- **CSS/Tailwind**: Use design tokens, avoid magic numbers, maintain consistent spacing scale.
+
+---
+
+## Part 2: Hallucination Prevention
+
+Strictly verify all API calls, library methods, and environment capabilities.
+
+### Verification Strategies
+
+- **Cross-Reference Documentation**: Always check official docs for library APIs.
+- **Run Tests**: Write and execute unit tests to verify behavior.
+- **Use Type Checkers**: Utilize TypeScript strict mode and ESLint.
+- **Check Environment**: Verify available tool versions in the current workspace.
+
+### Anti-Hallucination Checklist
+
+Before suggesting or writing code, ask yourself:
+
+1. Does this library/method actually exist in the specified version?
+2. Are the parameters in the correct order and type?
+3. Did I assume a feature exists because it "should" exist?
+4. Can I verify this with a quick script or shell command?
+5. Am I using the correct Next.js 14 App Router patterns (not Pages Router)?
+
+---
+
+## Part 3: Unique Design Philosophy
+
+Avoid generic templates. Strive for unique, purposeful designs that reflect the Aman/Four Seasons aesthetic.
+
+### Beyond Templates
+
+- **Avoid Bootstrap/Material defaults**: Don't use stock components without customization.
+- **Custom Typography**: Playfair Display + Work Sans. No generic fonts (Inter, Roboto, Arial).
+- **Asymmetric Layouts**: Break the grid occasionally to create visual interest.
+- **Micro-interactions**: Use subtle animations to enhance user experience.
+- **Luxury Restraint**: 40%+ white space, max 3 colors per section, no garish elements.
+
+### Creative Process
+
+- **Moodboarding**: Draw inspiration from luxury hospitality (Aman, Four Seasons, Edition Hotels).
+- **First Principles Design**: Design from scratch based on the core user problem.
+- **Accessibility with Flair**: Ensure WCAG 2.1 AAA while maintaining distinct visual identity.
+
+---
+
+## Part 4: Project Identity
+
+You are building the Laguna Beach Tennis Academy (LBTA) website — a premium, founder-led tennis academy in Laguna Beach, California. This is NOT a generic sports website. It's a cinematic, luxury digital experience that embodies the philosophy: "Movement. Discipline. Belonging."
+
+**Brand DNA:**
+- Founder: Andrew Mateljan (25+ years tennis experience, ATP/WTA coaching)
+- Mission: Excellence built through movement-first coaching and community
+- Tone: Calm, authentic, confident — never salesy or hyperbolic
+- Aesthetic: Luxury restraint meets California warmth
+
+---
+
+## Part 5: Tech Stack
+
+- **Framework:** Next.js 14.2+ (App Router)
+- **Styling:** Tailwind CSS 3.4+
+- **Animation:** Framer Motion 11+
+- **Language:** TypeScript 5.3+
+- **Fonts:** Playfair Display (serif headlines) + Work Sans (body)
+- **Deployment:** Vercel
+- **CRM Integration:** ActiveCampaign
+- **Data:** JSON files in `/data` directory (single source of truth)
+
+---
+
+## Part 6: Core Design Principles
+
+### Mobile-First Responsive Design
+```
+Breakpoints (test every change at ALL sizes):
+- 320px  → Mobile small (iPhone SE)
+- 375px  → Mobile standard (iPhone 14)
+- 768px  → Tablet
+- 1024px → Desktop small
+- 1440px → Desktop large
+```
+
+### Performance Standards (Non-Negotiable)
+```
+- LCP (Largest Contentful Paint): < 2.5s
+- CLS (Cumulative Layout Shift): < 0.1
+- INP (Interaction to Next Paint): < 100ms
+- Lighthouse Score: ≥ 90 in all categories
+```
+
+### Accessibility Standards (WCAG 2.1 AAA)
+```
+- Color Contrast: 7:1 ratio minimum for text
+- Touch Targets: 48×48px minimum on mobile
+- Keyboard Navigation: All interactive elements accessible
+- Screen Readers: Semantic HTML + ARIA labels on all media
+- Focus States: Visible 2px ring (black or white depending on context)
+- Reduced Motion: Respect prefers-reduced-motion
+```
+
+### Luxury Perception Architecture
+```
+- White Space: 40%+ negative space required
+- Color Palette: 11 colors maximum (see tokens below)
+- Typography: Serif headlines + sans-serif body
+- Animation: Slow, intentional (200-300ms), spring-based
+- CTAs: Black/white luxury palette — no garish orange/red buttons
+- Imagery: High-quality WebP, editorial feel, no stock photos
+- Copy: Concise, confident, no hyperbole or marketing speak
+```
+
+---
+
+## Part 7: Color Tokens (Tailwind)
+
+```typescript
+// PRIMARY PALETTE (Production Spec)
+colors: {
+  lbta: {
+    orange: '#F8A121',      // Accent only (sparingly)
+    red: '#F04E23',         // Legacy — avoid in new code
+    beige: '#F8E6BB',       // Warm background sections
+    black: '#000000',       // Primary text, buttons
+    white: '#FFFFFF',       // Pure white
+
+    // LEGACY (backwards compatibility)
+    primary: '#1A1A1A',     // Text primary
+    secondary: '#6B6B6B',   // Text secondary
+    coral: '#E8956F',       // Accent (legacy)
+    'coral-dark': '#D67D5A',
+    bone: '#FDFCFA',        // Light background
+    sand: '#F4EDE4',        // Warm neutral
+    charcoal: '#2B2B2B',    // Dark text
+  }
+}
+```
+
+**Color Usage Rules:**
+- Never use more than 3 colors in a single section
+- **Buttons**: Black background, white text (luxury standard)
+- **Accents**: Use sparingly — prefer black/gray over orange
+- Beige (#F8E6BB) for warm, inviting sections
+- Black/White for text and backgrounds
+
+---
+
+## Part 8: Typography System
+
+```typescript
+fontFamily: {
+  headline: ['Playfair Display', 'Georgia', 'serif'],
+  body: ['Work Sans', 'system-ui', 'sans-serif'],
+  serif: ['Playfair Display', 'Georgia', 'serif'],
+  sans: ['Work Sans', 'system-ui', 'sans-serif'],
+}
+
+// NEVER USE: Space Grotesk, Inter, Roboto, Arial (generic AI aesthetic)
+```
+
+**Typography Scale:**
+```
+- Display:     clamp(48px, 9vw, 84px)  — Hero headlines only
+- Headline:    clamp(40px, 6vw, 64px)  — Section titles
+- Headline-md: clamp(36px, 5vw, 56px)  — Subsection titles
+- Headline-sm: clamp(32px, 4vw, 48px)  — Card titles
+- Subhead:     clamp(28px, 3.5vw, 32px) — Lead paragraphs
+- Body-lg:     20px                     — Emphasis body
+- Body:        18px                     — Standard body
+- Body-sm:     16px                     — Small text
+- Eyebrow:     11px (uppercase, 2px letter-spacing)
+```
+
+---
+
+## Part 9: Spacing System (12px Base Unit)
+
+```typescript
+spacing: {
+  '15': '60px',    // 12 × 5
+  '18': '72px',    // 12 × 6
+  '20': '80px',    // Standard section gap
+  '24': '96px',    // 12 × 8
+  '30': '120px',   // Blueprint outer margins (desktop)
+  '40': '160px',   // Section spacing medium
+  '60': '240px',   // Section padding desktop
+}
+```
+
+**Section Spacing Rules:**
+```css
+/* Mobile */
+.section { padding: 80px 24px; }
+
+/* Tablet */
+@media (min-width: 768px) {
+  .section { padding: 120px 48px; }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .section { padding: 160px 96px; }
+}
+```
+
+---
+
+## Part 10: Component Patterns
+
+### Buttons (Luxury Black/White Standard)
+```tsx
+// Primary CTA (Book Trial, Register)
+<button className="
+  inline-flex items-center justify-center
+  bg-black text-white
+  font-sans text-sm font-medium
+  tracking-[2.5px] uppercase
+  min-h-[48px] px-10 py-4
+  rounded-[2px]
+  transition-all duration-300 ease-out
+  hover:bg-gray-800 hover:-translate-y-0.5
+  focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2
+">
+  Book Trial
+</button>
+
+// Secondary (Learn More, Explore)
+<button className="
+  inline-flex items-center justify-center
+  bg-transparent text-black
+  border border-black/20
+  font-sans text-sm font-medium
+  tracking-[2.5px] uppercase
+  min-h-[48px] px-10 py-4
+  rounded-[2px]
+  transition-all duration-300 ease-out
+  hover:border-black hover:-translate-y-0.5
+  focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2
+">
+  Learn More
+</button>
+```
+
+### Cards
+```tsx
+<div className="
+  bg-white
+  border border-black/6
+  transition-all duration-500 ease-out
+  shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02),0_4px_8px_rgba(0,0,0,0.02)]
+  hover:border-black/10 hover:-translate-y-1
+  hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03),0_16px_32px_rgba(0,0,0,0.03)]
+">
+  {/* Card content */}
+</div>
+```
+
+### Images
+```tsx
+import Image from 'next/image'
+
+<Image
+  src="/images/example.webp"
+  alt="Descriptive alt text under 125 characters"
+  width={1200}
+  height={800}
+  loading="lazy"
+  quality={90}
+  className="object-cover w-full h-full"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+/>
+
+// For hero/above-fold images, add priority
+<Image ... priority />
+```
+
+---
+
+## Part 11: Animation Standards
+
+### Framer Motion Defaults
+```tsx
+// Fade-in-up (standard entrance)
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  transition: {
+    duration: 0.6,
+    ease: [0.22, 0.61, 0.36, 1], // Cinematic easing
+  }
+}
+
+// Stagger children (200ms delay)
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.2,
+    }
+  }
+}
+```
+
+### CSS Animation Rules
+```css
+/* Standard transition */
+transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+/* Luxury/slow transition */
+transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+/* ALWAYS respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## Part 12: Data Management Rules
+
+### Single Source of Truth
+```
+✅ /schedules page is THE source for all programs, pricing, schedules
+✅ Data lives in /data/*.json files
+✅ Program pages redirect to /schedules (no duplicate content)
+❌ NEVER hardcode prices in components
+❌ NEVER duplicate data across pages
+```
+
+### Dates/Schedules
+```
+✅ Dates can appear on schedule page, cards, and modules
+✅ Use consistent date formatting: "January 6, 2026"
+✅ Store in data/winter2026.json, data/fall2025.json
+```
+
+---
+
+## Part 13: File Structure
+
+```
+app/
+├── page.tsx               # Homepage
+├── schedules/page.tsx     # THE source for programs/pricing
+├── camps/page.tsx         # Camp information
+├── jtt/page.tsx           # Junior Team Tennis
+├── fitness/page.tsx       # Fitness programs
+├── coaches/page.tsx       # Coach profiles
+├── about/page.tsx         # About the academy
+├── contact/page.tsx       # Contact form
+├── book/page.tsx          # Trial booking
+├── programs/
+│   ├── page.tsx           # Programs overview
+│   ├── junior/page.tsx    # Redirects to /schedules
+│   ├── adult/page.tsx     # Redirects to /schedules
+│   └── high-performance/page.tsx  # Redirects to /schedules
+├── api/
+│   ├── register-program/route.ts
+│   ├── register-year/route.ts
+│   ├── newsletter/route.ts
+│   └── book/route.ts
+├── layout.tsx
+├── globals.css
+└── not-found.tsx
+
+components/
+├── layout/
+│   ├── Header.tsx
+│   └── Footer.tsx
+├── ui/
+│   ├── AnimatedSection.tsx
+│   ├── Breadcrumbs.tsx
+│   └── [shared components]
+├── ProgramCard.tsx
+├── LuxuryRegistrationModal.tsx
+├── LuxuryYearModal.tsx
+└── FAQSection.tsx
+
+data/
+├── winter2026.json        # Single source of truth
+├── fall2025.json
+├── pricing-2026.json
+└── schedule-2026.json
+
+lib/
+├── activecampaign.ts
+├── notion.ts
+└── utils.ts
+```
+
+---
+
+## Part 14: Forbidden Patterns
+
+### Copy/Messaging
+```
+❌ "Maximize", "boost", "elite", "world-class", "mastery"
+❌ "Sign up now!", "Don't miss out!", "Limited time!"
+❌ Fake scarcity or urgency
+❌ Generic marketing speak
+❌ Exclamation points in headlines
+❌ "AI slop" language that sounds generated
+
+✅ "Book a Trial", "Start Training", "Join the Community"
+✅ Calm, confident, specific language
+✅ Founder's authentic voice
+```
+
+### Code
+```
+❌ Inline event handlers (onclick="...")
+❌ Removed focus outlines
+❌ Images without alt text
+❌ Horizontal scroll on mobile
+❌ Animations without reduced-motion support
+❌ Hardcoded prices outside data files
+❌ Stock photos
+❌ More than 11 colors
+❌ Space Grotesk, Inter, Roboto, Arial fonts
+❌ Orange/red CTA buttons (use black/white)
+❌ Duplicate content across pages
+❌ Generic emoji icons (🎾 ⭐ etc.)
+```
+
+---
+
+## Part 15: Workflows
+
+### Code Creation
+1. **Analyze Requirements**: Understand the core problem.
+2. **Verify APIs**: Check documentation or run quick tests to ensure library methods exist.
+3. **Design for Uniqueness**: Avoid default layouts. Think Aman/Four Seasons.
+4. **Implementation**: Write clean, modular code.
+5. **Review**: Self-review against the hallucination prevention checklist.
+
+### Code Review
+When reviewing existing code:
+1. Check for **SOLID** violations.
+2. Identify **DRY/KISS** improvements.
+3. Suggest **unique design** refinements for UI components.
+4. Verify all external calls are valid.
+5. Ensure single source of truth for data.
+
+---
+
+## Part 16: Testing Checklist (Every PR)
+
+```markdown
+## Performance
+- [ ] Lighthouse ≥90 (Performance, Accessibility, Best Practices, SEO)
+- [ ] LCP < 2.5s on 3G throttled
+- [ ] CLS < 0.1
+- [ ] No horizontal scroll at any breakpoint
+
+## Accessibility
+- [ ] 7:1 contrast ratio verified (WebAIM)
+- [ ] Keyboard navigation complete
+- [ ] Screen reader tested (VoiceOver/NVDA)
+- [ ] Focus states visible
+- [ ] Touch targets ≥48px on mobile
+
+## Responsive
+- [ ] Tested at 320px, 375px, 768px, 1024px, 1440px
+- [ ] Images lazy-loaded below fold
+- [ ] Text readable without zoom
+
+## Brand
+- [ ] Copy matches founder voice (calm, confident)
+- [ ] No forbidden words/phrases
+- [ ] Colors within palette (black/white primary)
+- [ ] Typography hierarchy correct
+- [ ] No duplicate data across pages
+```
+
+---
+
+## Part 17: Context7 Integration
+
+When implementing technical features, use Context7 for current best practices:
+
+```
+// Next.js App Router
+/vercel/next.js
+
+// Tailwind CSS
+/websites/v3_tailwindcss
+
+// Framer Motion
+/motiondivision/motion
+
+// Accessibility
+/dequelabs/axe-core
+```
+
+---
+
+## Part 18: Quick Reference Commands
+
+```bash
+# Development
+npm run dev          # Start dev server (port 3000)
+npm run build        # Production build
+npm run lint         # ESLint check
+
+# Testing
+npx lighthouse http://localhost:3000 --view
+
+# Image optimization
+# All images must be WebP, ≤350KB, with srcset for responsive
+```
+
+---
+
+## Part 19: Emergency Contacts
+
+- **Founder:** Andrew Mateljan
+- **Support:** support@lagunabeachtennisacademy.com
+- **Phone:** (949) 464-6645
+- **Address:** 1098 Balboa Ave, Laguna Beach, CA 92651
+
+---
+
+## Remember
+
+> "Structure creates confidence. Discipline creates results."
+> — Andrew Mateljan
+
+Every line of code should reflect the academy's philosophy: precision, restraint, and purpose. Build for the player who wants to become their best self, not the customer looking for the cheapest option.
+
+**Quality over speed. Clarity over cleverness. Purpose over features.**
