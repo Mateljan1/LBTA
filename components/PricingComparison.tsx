@@ -70,12 +70,12 @@ const tiers: PricingTier[] = [
 
 export default function PricingComparison() {
   return (
-    <section className="bg-lbta-cream py-16 md:py-24">
+    <section className="bg-lbta-cream py-16 md:py-24" aria-labelledby="pricing-heading">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
           <p className="text-eyebrow text-lbta-charcoal/60 mb-4">Simple Pricing</p>
-          <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-lbta-charcoal leading-tight mb-4">
+          <h2 id="pricing-heading" className="font-serif text-[32px] md:text-[40px] font-semibold text-lbta-charcoal leading-tight mb-4">
             Choose Your Path
           </h2>
           <p className="font-sans text-[16px] text-lbta-slate max-w-xl mx-auto">
@@ -153,10 +153,10 @@ export default function PricingComparison() {
                 </Link>
 
                 {/* Features */}
-                <ul className="mt-8 space-y-3">
+                <ul className="mt-8 space-y-3" aria-label={`${tier.name} plan features`}>
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
                       <span className="font-sans text-[14px] text-lbta-charcoal">
                         {feature}
                       </span>
@@ -169,10 +169,10 @@ export default function PricingComparison() {
         </div>
 
         {/* Trust Line */}
-        <div className="mt-12 text-center">
+        <div className="mt-12 text-center" role="contentinfo" aria-label="Pricing guarantees">
           <p className="font-sans text-[13px] text-lbta-slate">
             <span className="inline-flex items-center gap-2">
-              <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
               30-Day Money-Back Guarantee
