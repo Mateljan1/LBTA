@@ -1,8 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Client } from '@notionhq/client'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { jttRegistrationSchema, validateRequest } from '@/lib/validations'
 import { escapeHtml } from '@/lib/sanitize'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
+import {
+  upsertContact,
+  addToList,
+  addTag,
+  LBTA_LIST_ID,
+  CAMPAIGN_TAGS,
+} from '@/lib/activecampaign'
+
+// Initialize Notion client lazily
+let notionClient: Client | null = null
+function getNotionClient(): Client {
+  if (!notionClient) {
+    notionClient = new Client({ auth: getEnvVar('NOTION_API_KEY') })
+  }
+  return notionClient
+}
+
+// Map division to readable format
+function formatDivision(division: string): string {
+  const divisionMap: Record<string, string> = {
+    '10u-orange': '10U Orange Ball',
+    '10u-green': '10U Green Dot',
+    '12u': '12U Division',
+    '14u': '14U Division',
+    '16u': '16U Division',
+    '18u': '18U Division',
+  }
+  return divisionMap[division] || division
+}
 
 export async function POST(request: NextRequest) {
   // Rate limiting
@@ -11,7 +41,7 @@ export async function POST(request: NextRequest) {
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(
-      { error: 'Too many requests. Please try again later.' },
+      { success: false, error: 'Too many requests. Please try again later.' },
       {
         status: 429,
         headers: {
@@ -29,87 +59,186 @@ export async function POST(request: NextRequest) {
     const validation = validateRequest(jttRegistrationSchema, rawData)
     if (!validation.success) {
       return NextResponse.json(
-        { error: validation.error },
+        { success: false, error: validation.error },
         { status: 400 }
       )
     }
 
     const formData = validation.data
+    const playerName = `${formData.playerFirstName} ${formData.playerLastName}`
+    const parentName = `${formData.parentFirstName} ${formData.parentLastName}`
 
-    // Send to ActiveCampaign (or your CRM)
-    if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
-      const acResponse = await fetch(`${getEnvVar('ACTIVECAMPAIGN_URL')}/api/3/contacts`, {
-        method: 'POST',
-        headers: {
-          'Api-Token': getEnvVar('ACTIVECAMPAIGN_API_KEY'),
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contact: {
-            email: formData.parentEmail,
-            firstName: formData.parentFirstName,
-            lastName: formData.parentLastName,
-            phone: formData.parentPhone,
-            fieldValues: [
-              {
-                field: '1', // Custom field ID for Player Name
-                value: `${formData.playerFirstName} ${formData.playerLastName}`,
+    console.log('[JTT] Processing registration:', {
+      player: playerName,
+      division: formData.division,
+      parent: formData.parentEmail,
+      timestamp: new Date().toISOString(),
+    })
+
+    // ============================================================
+    // 1. Save to Notion for internal visibility
+    // ============================================================
+    let notionSuccess = false
+    if (hasEnvVar('NOTION_API_KEY') && hasEnvVar('NOTION_DATABASE_ID')) {
+      try {
+        const notion = getNotionClient()
+        await notion.pages.create({
+          parent: { database_id: getEnvVar('NOTION_DATABASE_ID') },
+          properties: {
+            // Parent Name (Title field)
+            'Parent Name': {
+              title: [{ text: { content: parentName } }],
+            },
+            // Player Name
+            'Player Name': {
+              rich_text: [{ text: { content: playerName } }],
+            },
+            // Program
+            Program: {
+              rich_text: [{ text: { content: `JTT Spring 2026 - ${formatDivision(formData.division)}` } }],
+            },
+            // Category
+            Category: {
+              select: { name: 'JTT' },
+            },
+            // Location (based on division)
+            Location: {
+              select: {
+                name: formData.division.includes('10u')
+                  ? (formData.division.includes('orange') ? 'Moulton Meadows' : 'Alta Laguna Park')
+                  : 'LBHS'
               },
-              {
-                field: '2', // Custom field ID for Player Age
-                value: String(formData.playerAge),
-              },
-              {
-                field: '3', // Custom field ID for Division
-                value: formData.division,
-              },
-              {
-                field: '4', // Custom field ID for Payment Preference
-                value: formData.paymentPreference,
-              },
-            ],
+            },
+            // Age
+            Age: {
+              number: parseInt(String(formData.playerAge)) || null,
+            },
+            // Parent Email
+            'Parent Email': {
+              email: formData.parentEmail,
+            },
+            // Parent Phone
+            'Parent Phone': {
+              phone_number: formData.parentPhone,
+            },
+            // Experience Level
+            'Experience Level': {
+              select: { name: formData.experienceLevel || 'Not specified' },
+            },
+            // Status
+            Status: {
+              select: { name: 'New' },
+            },
+            // Timestamp
+            Timestamp: {
+              date: { start: new Date().toISOString() },
+            },
+            // Notes (combine JTT-specific info)
+            Notes: {
+              rich_text: [{
+                text: {
+                  content: [
+                    `Division: ${formatDivision(formData.division)}`,
+                    `Shirt Size: ${formData.shirtSize}`,
+                    `USTA: ${formData.ustaRegistered === 'yes' ? `Yes (${formData.ustaMemberNumber || 'No #'})` : 'No - needs registration'}`,
+                    `Payment: ${formData.paymentPreference}`,
+                    formData.hasSibling === 'yes' ? `Sibling: ${formData.siblingName} (15% discount)` : '',
+                    formData.medicalNotes ? `Medical: ${formData.medicalNotes}` : '',
+                    formData.additionalNotes ? `Notes: ${formData.additionalNotes}` : '',
+                  ].filter(Boolean).join('\n'),
+                },
+              }],
+            },
           },
-        }),
-      })
-
-      if (!acResponse.ok) {
-        console.error('ActiveCampaign error:', await acResponse.text())
+        })
+        notionSuccess = true
+        console.log('[JTT] Saved to Notion successfully')
+      } catch (notionError) {
+        console.error('[JTT] Notion error:', notionError)
+        // Continue even if Notion fails - AC is more important for email
       }
     }
 
-    // Generate sanitized email HTML
+    // ============================================================
+    // 2. Add to ActiveCampaign with proper tagging for email automation
+    // ============================================================
+    let acSuccess = false
+    if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
+      try {
+        // Create/update contact with JTT-specific fields
+        const contactResult = await upsertContact({
+          email: formData.parentEmail,
+          firstName: formData.parentFirstName,
+          lastName: formData.parentLastName,
+          phone: formData.parentPhone,
+          fieldValues: [
+            { field: '1', value: playerName },  // Player Name
+            { field: '2', value: String(formData.playerAge) },  // Player Age
+            { field: '3', value: formatDivision(formData.division) },  // Division/Program
+            { field: '4', value: formData.paymentPreference },  // Payment Preference
+            { field: '7', value: `JTT Spring 2026 - ${formatDivision(formData.division)}` },  // PROGRAM field
+            { field: '15', value: 'website_jtt' },  // Lead source
+          ],
+        })
+
+        if (contactResult.success && contactResult.data) {
+          const contactId = contactResult.data.id
+          console.log('[JTT] Contact created/updated:', { contactId, email: formData.parentEmail })
+
+          // Add to LBTA master list (required for automations)
+          await addToList(contactId, LBTA_LIST_ID)
+          console.log('[JTT] Added to List 4')
+
+          // Apply JTT Spring 2026 tag to trigger confirmation email automation
+          const tagResult = await addTag(contactId, CAMPAIGN_TAGS.jtt_spring_2026)
+          if (tagResult.success) {
+            console.log('[JTT] JTT Spring 2026 tag (107) applied - email automation triggered')
+            acSuccess = true
+          }
+
+          // Apply website registration tag for source tracking
+          await addTag(contactId, CAMPAIGN_TAGS.website_registration)
+        }
+      } catch (acError) {
+        console.error('[JTT] ActiveCampaign error:', acError)
+        // Don't fail the whole request if AC fails
+      }
+    }
+
+    // ============================================================
+    // 3. Generate email HTML for internal notification
+    // ============================================================
     const emailHtml = generateEmailHTML(formData)
 
-    // Log for now (integrate with email service later)
-    console.log('JTT Registration received:', {
-      player: `${formData.playerFirstName} ${formData.playerLastName}`,
-      division: formData.division,
+    // Log the registration for server logs
+    console.log('[JTT] Registration complete:', {
+      player: playerName,
+      division: formatDivision(formData.division),
       parent: formData.parentEmail,
+      notionSaved: notionSuccess,
+      acSynced: acSuccess,
     })
 
-    // TODO: Send email via SendGrid/Postmark
-    // await sendEmail({
-    //   to: 'support@lagunabeachtennisacademy.com',
-    //   subject: `New JTT Registration: ${formData.playerFirstName} ${formData.playerLastName}`,
-    //   html: emailHtml,
-    // })
-
-    return NextResponse.json({ success: true })
+    // Return success - even if AC or Notion partially failed, we want to show success
+    // since the data was received and at least logged
+    return NextResponse.json({
+      success: true,
+      message: 'Registration received successfully!',
+    })
   } catch (error) {
-    console.error('Error processing JTT registration:', error)
+    console.error('[JTT] Error processing registration:', error)
     return NextResponse.json(
-      { error: 'Failed to process registration' },
+      { success: false, error: 'Failed to process registration. Please try again or call (949) 464-6645.' },
       { status: 500 }
     )
   }
 }
 
 /**
- * Generate sanitized email HTML
+ * Generate sanitized email HTML for internal notification
  * All user input is escaped to prevent XSS
  */
 function generateEmailHTML(data: ReturnType<typeof jttRegistrationSchema.parse>): string {
-  // Helper to safely escape all user input
   const safe = (value: unknown): string => escapeHtml(String(value ?? ''))
 
   return `

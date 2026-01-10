@@ -61,6 +61,7 @@ export const CAMPAIGN_TAGS = {
   website_registration: 33,
   trial_request: 82,
   not_sure: 81,
+  jtt_spring_2026: 107,  // JTT Spring 2026 registrations (triggers email automation)
 } as const
 
 /**

@@ -107,13 +107,19 @@ export default function JTTRegistrationForm() {
         body: JSON.stringify(formData),
       })
 
-      if (response.ok) {
+      const result = await response.json()
+
+      if (response.ok && result.success) {
         setIsSuccess(true)
         window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        // Handle API errors (validation, server errors, etc.)
+        const errorMessage = result.error || result.message || 'Registration could not be processed.'
+        alert(`Registration Error: ${errorMessage}\n\nPlease try again or call (949) 464-6645 for assistance.`)
       }
     } catch (error) {
       console.error('Error submitting form:', error)
-      alert('There was an error submitting your registration. Please try again or call (949) 464-6645.')
+      alert('There was a network error submitting your registration. Please check your connection and try again, or call (949) 464-6645.')
     } finally {
       setIsSubmitting(false)
     }
