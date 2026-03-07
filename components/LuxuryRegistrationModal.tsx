@@ -226,7 +226,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h2 className="font-serif text-[28px] font-medium text-brand-pacific-dusk mb-3">
+                  <h2 id="modal-title" className="font-serif text-[28px] font-medium text-brand-pacific-dusk mb-3">
                     Registration Received
                   </h2>
                   <p className="font-sans text-[15px] text-lbta-slate leading-relaxed mb-8 max-w-[320px] mx-auto">
@@ -424,10 +424,10 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     </div>
 
                     {/* Experience Level */}
-                    <div>
-                      <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                    <fieldset>
+                      <legend className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                         Experience Level
-                      </label>
+                      </legend>
                       <div className="flex gap-2">
                         {['beginner', 'intermediate', 'advanced'].map((level) => (
                           <button
@@ -445,7 +445,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           </button>
                         ))}
                       </div>
-                    </div>
+                    </fieldset>
                   </div>
 
                   {/* Action Buttons */}

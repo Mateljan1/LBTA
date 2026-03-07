@@ -46,13 +46,13 @@ export default function CampsJTTTab({ camps, jtt, onCampRegister, onJTTRegister 
         {camps.filter((c: any) => c.featured).map((camp: any) => (
           <div key={camp.id} className="mb-20 md:mb-28">
             <div className="text-center mb-12">
-              <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-black/60 mb-3">
+              <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-brand-pacific-dusk/80 mb-3">
                 Featured Program
               </p>
               <h2 className="font-serif text-[32px] md:text-[48px] font-light text-black leading-[1.1] mb-4">
                 {camp.name}
               </h2>
-              <p className="font-sans text-[15px] md:text-[17px] text-black/60 max-w-xl mx-auto leading-relaxed">
+              <p className="font-sans text-[15px] md:text-[17px] text-brand-pacific-dusk/80 max-w-xl mx-auto leading-relaxed">
                 {camp.description}
               </p>
             </div>
@@ -193,7 +193,7 @@ export default function CampsJTTTab({ camps, jtt, onCampRegister, onJTTRegister 
             <h2 className="font-serif text-[32px] md:text-[48px] font-light text-black leading-[1.1] mb-4">
               Junior Team Tennis
             </h2>
-            <p className="font-sans text-[15px] md:text-[17px] text-black/60 max-w-xl mx-auto leading-relaxed">
+            <p className="font-sans text-[15px] md:text-[17px] text-brand-pacific-dusk/80 max-w-xl mx-auto leading-relaxed">
               Team practices, Sunday matches, uniforms, and USTA registration included
             </p>
           </div>

@@ -48,7 +48,14 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const modalRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!errorMessage) return
+    const timer = setTimeout(() => setErrorMessage(null), 8000)
+    return () => clearTimeout(timer)
+  }, [errorMessage])
 
   // Lock body scroll
   useEffect(() => {
@@ -139,11 +146,11 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
           window.location.href = '/thank-you'
         }, 2500)
       } else {
-        alert('Error submitting. Please call (949) 534-0457')
+        setErrorMessage('Something went wrong. Please call (949) 534-0457.')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert('Error submitting. Please call (949) 534-0457')
+      setErrorMessage('Something went wrong. Please call (949) 534-0457.')
     } finally {
       setIsSubmitting(false)
     }
@@ -155,6 +162,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
 
   const handleClose = () => {
     setIsSuccess(false)
+    setErrorMessage(null)
     setFormData({
       firstName: '',
       lastName: '',
@@ -212,7 +220,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-tide-pool/10 flex items-center justify-center">
                     <CheckCircle className="w-8 h-8 text-brand-tide-pool" />
                   </div>
-                  <h2 className="font-serif text-[32px] font-medium text-brand-pacific-dusk mb-3">Trial Lesson Requested!</h2>
+                  <h2 id="modal-title" className="font-serif text-[32px] font-medium text-brand-pacific-dusk mb-3">Trial Lesson Requested!</h2>
                   <p className="font-sans text-[15px] text-lbta-slate leading-relaxed mb-8 max-w-[400px] mx-auto">
                     Thank you, <strong>{formData.firstName}</strong>! We'll contact you within 24 hours to schedule your free trial lesson.
                   </p>
@@ -356,6 +364,24 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                       />
                     </div>
                   </div>
+
+                  {errorMessage && (
+                    <div className="bg-red-50 border border-red-200 rounded-[2px] p-4 mt-6">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="font-sans text-[14px] text-red-800">{errorMessage}</p>
+                        <button
+                          type="button"
+                          onClick={() => setErrorMessage(null)}
+                          className="text-red-400 hover:text-red-600 transition-colors flex-shrink-0"
+                          aria-label="Dismiss error"
+                        >
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Submit Button */}
                   <button

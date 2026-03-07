@@ -59,6 +59,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const modalRef = useRef<HTMLDivElement>(null)
   
   const [formData, setFormData] = useState({
@@ -79,6 +80,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
       setSelectedOption(null)
       setSelectedPrice(null)
       setIsSuccess(false)
+      setErrorMessage(null)
       setFormData({
         firstName: '',
         lastName: '',
@@ -91,6 +93,12 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
       })
     }
   }, [isOpen])
+
+  useEffect(() => {
+    if (!errorMessage) return
+    const timer = setTimeout(() => setErrorMessage(null), 8000)
+    return () => clearTimeout(timer)
+  }, [errorMessage])
 
   // Lock body scroll
   useEffect(() => {
@@ -251,11 +259,11 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
         setIsSuccess(true)
       } else {
         console.error('Registration failed:', result)
-        alert(result.message || 'Registration failed. Please try again or call (949) 534-0457')
+        setErrorMessage(result.message || 'Registration failed. Please try again or call (949) 534-0457.')
       }
     } catch (error) {
       console.error('Registration error:', error)
-      alert('Registration failed. Please try again or call (949) 534-0457')
+      setErrorMessage('Registration failed. Please try again or call (949) 534-0457.')
     } finally {
       setIsSubmitting(false)
     }
@@ -324,7 +332,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h2 className="font-serif text-[28px] font-medium text-brand-pacific-dusk mb-3">
+                  <h2 id="modal-title" className="font-serif text-[28px] font-medium text-brand-pacific-dusk mb-3">
                     Registration Received
                   </h2>
                   <p className="font-sans text-[15px] text-lbta-slate leading-relaxed mb-8 max-w-[320px] mx-auto">
@@ -524,10 +532,10 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                     </div>
 
                     {/* Experience Level */}
-                    <div>
-                      <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                    <fieldset>
+                      <legend className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                         Experience Level
-                      </label>
+                      </legend>
                       <div className="flex gap-2">
                         {['beginner', 'intermediate', 'advanced'].map((level) => (
                           <button
@@ -545,8 +553,26 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           </button>
                         ))}
                       </div>
-                    </div>
+                    </fieldset>
                   </div>
+
+                  {errorMessage && (
+                    <div className="bg-red-50 border border-red-200 rounded-[2px] p-4 mb-6">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="font-sans text-[14px] text-red-800">{errorMessage}</p>
+                        <button
+                          type="button"
+                          onClick={() => setErrorMessage(null)}
+                          className="text-red-400 hover:text-red-600 transition-colors flex-shrink-0"
+                          aria-label="Dismiss error"
+                        >
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Action Buttons */}
                   <div className="flex gap-3">

@@ -27,6 +27,7 @@ export default function BookPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -41,6 +42,12 @@ export default function BookPage() {
   useEffect(() => {
     setIsModalOpen(true)
   }, [])
+
+  useEffect(() => {
+    if (!errorMessage) return
+    const timer = setTimeout(() => setErrorMessage(null), 8000)
+    return () => clearTimeout(timer)
+  }, [errorMessage])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -57,12 +64,12 @@ export default function BookPage() {
         setIsSuccess(true)
         setTimeout(() => router.push('/thank-you'), 2000)
       } else {
-        alert('Error submitting. Please call (949) 534-0457')
+        setErrorMessage('Something went wrong. Please call (949) 534-0457.')
         setIsSubmitting(false)
       }
     } catch (error) {
       console.error('Error:', error)
-      alert('Error submitting. Please call (949) 534-0457')
+      setErrorMessage('Something went wrong. Please call (949) 534-0457.')
       setIsSubmitting(false)
     }
   }

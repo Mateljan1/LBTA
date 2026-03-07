@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import pricingData from '@/data/pricing-supplemental.json'
 
@@ -15,6 +15,13 @@ export default function BeginnerProgramLanding() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!errorMessage) return
+    const timer = setTimeout(() => setErrorMessage(null), 8000)
+    return () => clearTimeout(timer)
+  }, [errorMessage])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -48,7 +55,7 @@ export default function BeginnerProgramLanding() {
       }
     } catch (error) {
       console.error('Submission error:', error)
-      alert('Something went wrong. Please call us at (949) 534-0457')
+      setErrorMessage('Something went wrong. Please call us at (949) 534-0457.')
     } finally {
       setIsSubmitting(false)
     }
@@ -466,6 +473,24 @@ export default function BeginnerProgramLanding() {
                           ))}
                         </select>
                       </div>
+
+                      {errorMessage && (
+                        <div className="bg-red-50 border border-red-200 rounded-[2px] p-4">
+                          <div className="flex items-start justify-between gap-3">
+                            <p className="font-sans text-[14px] text-red-800">{errorMessage}</p>
+                            <button
+                              type="button"
+                              onClick={() => setErrorMessage(null)}
+                              className="text-red-400 hover:text-red-600 transition-colors flex-shrink-0"
+                              aria-label="Dismiss error"
+                            >
+                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      )}
 
                       <button
                         type="submit"

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: 'Junior Tennis Registration | Laguna Beach Tennis Academy',
@@ -19,8 +20,9 @@ export default function JuniorTrialLayout({
 }) {
   return (
     <>
-      {/* Meta Pixel for Landing Page */}
-      <script
+      <Script
+        id="fb-pixel-junior"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             !function(f,b,e,v,n,t,s)

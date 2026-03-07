@@ -44,7 +44,7 @@ export default function YearAtAGlance({ seasons, selectedSeason, onSeasonChange 
                 <h3 className={`font-serif text-[18px] md:text-[20px] font-semibold mb-1 ${isActive ? 'text-white' : 'text-black'}`}>
                   {season.name.split(' ')[0]}
                 </h3>
-                <p className={`font-sans text-[12px] mb-1 ${isActive ? 'text-white/80' : 'text-black/60'}`}>
+                <p className={`font-sans text-[12px] mb-1 ${isActive ? 'text-white/80' : 'text-brand-pacific-dusk/80'}`}>
                   {season.dates}
                 </p>
                 <div className={`font-sans text-[13px] font-medium ${isActive ? 'text-white' : 'text-black'}`}>

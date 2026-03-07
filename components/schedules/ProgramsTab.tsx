@@ -68,7 +68,7 @@ export default function ProgramsTab({
               <button
                 key={key}
                 onClick={() => onSeasonChange(key as SeasonKey)}
-                className={`px-4 py-2 rounded-full font-sans text-[13px] font-medium transition-all ${
+                className={`px-4 py-2 min-h-[48px] rounded-full font-sans text-[13px] font-medium transition-all ${
                   selectedSeason === key
                     ? 'bg-black text-white'
                     : 'bg-white text-black/70 hover:bg-gray-100 border border-gray-200'
@@ -82,7 +82,7 @@ export default function ProgramsTab({
             ))}
             <button
               onClick={() => onSeasonChange('fall2025')}
-              className={`px-4 py-2 rounded-full font-sans text-[13px] font-medium transition-all ${
+              className={`px-4 py-2 min-h-[48px] rounded-full font-sans text-[13px] font-medium transition-all ${
                 selectedSeason === 'fall2025'
                   ? 'bg-black text-white'
                   : 'bg-white text-black/70 hover:bg-gray-100 border border-gray-200'
