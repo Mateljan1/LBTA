@@ -282,7 +282,7 @@ export default function Header() {
               <a
                 href="tel:9495340457"
                 className="p-3 min-w-[48px] min-h-[48px] flex items-center justify-center text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors"
-                aria-label="Call us"
+                aria-label="Call (949) 534-0457"
               >
                 <Phone className="h-5 w-5" />
               </a>
