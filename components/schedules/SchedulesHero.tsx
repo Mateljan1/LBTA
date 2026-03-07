@@ -3,11 +3,12 @@ import Link from 'next/link'
 
 interface SchedulesHeroProps {
   heroParallax: number
+  ctaText?: string
 }
 
-export default function SchedulesHero({ heroParallax }: SchedulesHeroProps) {
+export default function SchedulesHero({ heroParallax, ctaText }: SchedulesHeroProps) {
   return (
-    <section className="relative min-h-[65vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[40vh] md:min-h-[50vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <Image
           src="/images/programs/schedules-hero.webp"
@@ -36,18 +37,18 @@ export default function SchedulesHero({ heroParallax }: SchedulesHeroProps) {
           Four seasons of structured training, holiday camps, and competitive league play
         </p>
         <p className="font-sans text-[14px] md:text-[16px] text-white/90 font-semibold mb-8">
-          Winter 2026 Registration Now Open — Save $50 with Early Bird
+          {ctaText || 'Registration open for upcoming seasons'}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link 
             href="#programs"
-            className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
           >
             View Programs
           </Link>
           <Link 
             href="#pricing"
-            className="inline-block border-2 border-white hover:bg-white/10 text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            className="inline-block border-2 border-white hover:bg-white/10 text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
           >
             See Pricing
           </Link>

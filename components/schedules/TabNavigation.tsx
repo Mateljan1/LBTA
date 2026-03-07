@@ -1,4 +1,4 @@
-export type ScheduleTab = 'programs' | 'calendar' | 'pricing'
+export type ScheduleTab = 'programs' | 'calendar'
 
 interface TabNavigationProps {
   activeTab: ScheduleTab
@@ -14,37 +14,27 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
             onClick={() => onTabChange('programs')}
             role="tab"
             aria-selected={activeTab === 'programs'}
-            className={`px-6 py-2.5 rounded-full font-sans font-semibold text-[14px] transition-all ${
+            aria-controls="programs-panel"
+            className={`px-6 py-2.5 min-h-[48px] rounded-[2px] font-sans font-semibold text-[14px] transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
               activeTab === 'programs'
                 ? 'bg-black text-white'
                 : 'text-black/70 hover:bg-gray-100'
             }`}
           >
-            Programs
-          </button>
-          <button
-            onClick={() => onTabChange('pricing')}
-            role="tab"
-            aria-selected={activeTab === 'pricing'}
-            className={`px-6 py-2.5 rounded-full font-sans font-semibold text-[14px] transition-all ${
-              activeTab === 'pricing'
-                ? 'bg-black text-white'
-                : 'text-black/70 hover:bg-gray-100'
-            }`}
-          >
-            Pricing
+            Programs & Pricing
           </button>
           <button
             onClick={() => onTabChange('calendar')}
             role="tab"
             aria-selected={activeTab === 'calendar'}
-            className={`px-6 py-2.5 rounded-full font-sans font-semibold text-[14px] transition-all ${
+            aria-controls="calendar-panel"
+            className={`px-6 py-2.5 min-h-[48px] rounded-[2px] font-sans font-semibold text-[14px] transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
               activeTab === 'calendar'
                 ? 'bg-black text-white'
                 : 'text-black/70 hover:bg-gray-100'
             }`}
           >
-            Camps & JTT
+            Camps & Leagues
           </button>
         </div>
       </div>

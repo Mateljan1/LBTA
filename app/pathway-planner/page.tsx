@@ -51,27 +51,27 @@ function PathwayPlannerInteractive() {
       pathway.program = formData.experience === 'advanced' ? 'Green Dot Tennis' : 'Orange Ball Tennis'
       pathway.nextProgram = 'Youth Development'
       pathway.timeline = '2-4 years to high school varsity'
-      pathway.coach = 'Michelle Bevins or Kevin Jackson'
+      pathway.coach = 'Michelle Bevins or Robert LeBuhn'
     } else if (formData.age === '9-11') {
       pathway.program = 'Green Dot Tennis'
       pathway.nextProgram = 'Youth Development → High Performance'
       pathway.timeline = '4-6 years to college recruitment'
-      pathway.coach = 'Kevin Jackson'
+      pathway.coach = 'Robert LeBuhn'
     } else if (formData.age === '11-15') {
       pathway.program = 'Youth Development'
       pathway.nextProgram = 'High Performance → College Bound'
       pathway.timeline = '3-5 years to D1 scholarship readiness'
-      pathway.coach = 'Kevin Jackson'
+      pathway.coach = 'Robert LeBuhn'
     } else if (formData.age === '15-18') {
       pathway.program = 'High Performance'
       pathway.nextProgram = 'College Recruitment Active'
       pathway.timeline = '1-3 years to college placement'
-      pathway.coach = 'Andrew Mateljan or Kevin Jackson'
+      pathway.coach = 'Andrew Mateljan or Robert LeBuhn'
     } else {
       pathway.program = 'Adult Programs'
       pathway.nextProgram = 'Competitive Match Play'
       pathway.timeline = 'Ongoing development'
-      pathway.coach = 'Savriyan Danilov or Andy Wu'
+      pathway.coach = 'Peter DeFrantz or Robert LeBuhn'
     }
 
     // Calculate investment
@@ -103,7 +103,7 @@ function PathwayPlannerInteractive() {
     } else if (formData.goal === 'high-school') {
       pathway.recommendation = 'Pathway Track - Structured development for high school varsity'
     } else if (formData.goal === 'college') {
-      pathway.recommendation = 'College Pathway - NCAA recruitment guidance with Kevin Jackson'
+      pathway.recommendation = 'College Pathway - NCAA recruitment guidance with our coaching team'
     } else {
       pathway.recommendation = 'High Performance Track - Professional development pathway; explore High Performance programs'
     }

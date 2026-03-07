@@ -12,18 +12,18 @@ interface StickyCTAProps {
   urgencyText?: string
 }
 
-// Context-aware urgency messages based on page
+// Context-aware messages based on page
 const getContextualMessage = (pathname: string): { text: string; highlight?: string } => {
   if (pathname.includes('/schedules')) {
-    return { text: 'Winter 2026 Registration Open', highlight: 'View Programs' }
+    return { text: 'Spring & Summer 2026 Registration Open', highlight: 'View Programs' }
   }
   if (pathname.includes('/camps')) {
-    return { text: 'Summer Camps · Limited Spots', highlight: 'Reserve Now' }
+    return { text: 'Summer Camps Now Enrolling', highlight: 'Reserve Now' }
   }
   if (pathname.includes('/fitness')) {
     return { text: 'Fit4Tennis · First Session Free', highlight: 'Get Started' }
   }
-  return { text: 'Winter 2026 · Registration Open' }
+  return { text: 'Registration Open · View Programs' }
 }
 
 export default function StickyCTA({ 
@@ -49,17 +49,12 @@ export default function StickyCTA({
   
   if (!isVisible) return null
   
-  const buttonClasses = "flex-1 bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[15px] py-3.5 rounded-full transition-all duration-200 shadow-md text-center min-h-[48px] active:scale-[0.98] flex items-center justify-center gap-2"
+  const buttonClasses = "flex-1 bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[15px] py-3.5 rounded-[2px] transition-all duration-200 shadow-md text-center min-h-[48px] active:scale-[0.98] flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
   
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 px-4 py-3 pb-[calc(12px+env(safe-area-inset-bottom))] shadow-lg animate-slide-up">
-      {/* Urgency Text with Context */}
       {displayUrgency && (
         <div className="flex items-center justify-center gap-2 mb-2.5">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-tide-pool opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-tide-pool"></span>
-          </span>
           <span className="font-sans text-[12px] text-black/60">{displayUrgency}</span>
         </div>
       )}
@@ -91,7 +86,7 @@ export default function StickyCTA({
         {/* Secondary CTA - Call */}
         <a
           href="tel:+19495340457"
-          className="flex items-center justify-center w-14 h-14 bg-brand-morning-light rounded-full border border-black/10 active:scale-95 transition-transform"
+          className="flex items-center justify-center w-14 h-14 bg-brand-morning-light rounded-full border border-black/10 active:scale-95 transition-transform focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
           aria-label="Call (949) 534-0457"
         >
           <svg className="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

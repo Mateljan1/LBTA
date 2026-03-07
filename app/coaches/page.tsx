@@ -27,14 +27,14 @@ export default function CoachesPage() {
       {
         "@type": "Person",
         "position": 2,
-        "name": "Kevin Jackson",
-        "jobTitle": "Head Coach & Performance Director",
+        "name": "Robert LeBuhn",
+        "jobTitle": "Director of Tennis Operations",
         "worksFor": {
           "@type": "SportsOrganization",
           "name": "Laguna Beach Tennis Academy"
         },
-        "description": "Performance architect with 25+ years experience, 3,000+ athletes trained worldwide.",
-        "image": "https://lagunabeachtennisacademy.com/images/coaches/kevin.webp"
+        "description": "USPTR-certified professional with 25+ years developing players from junior foundations to collegiate competition. NCAA D1 at Lafayette College.",
+        "image": "https://lagunabeachtennisacademy.com/images/coaches/robert.webp"
       },
       {
         "@type": "Person",
@@ -45,32 +45,20 @@ export default function CoachesPage() {
           "@type": "SportsOrganization",
           "name": "Laguna Beach Tennis Academy"
         },
-        "description": "Youth Development Specialist with Red/Orange Ball Certification and 95% parent satisfaction.",
+        "description": "Youth Development Specialist with Red/Orange Ball Certification.",
         "image": "https://lagunabeachtennisacademy.com/images/coaches/michelle.webp"
       },
       {
         "@type": "Person",
         "position": 4,
-        "name": "Savriyan Danilov",
-        "jobTitle": "High Performance Coach",
+        "name": "Peter DeFrantz",
+        "jobTitle": "Senior Coach",
         "worksFor": {
           "@type": "SportsOrganization",
           "name": "Laguna Beach Tennis Academy"
         },
-        "description": "ATP Professional #556 with 8 years tour experience.",
-        "image": "https://lagunabeachtennisacademy.com/images/coaches/savriyan.webp"
-      },
-      {
-        "@type": "Person",
-        "position": 5,
-        "name": "Andy Wu",
-        "jobTitle": "Program Coach",
-        "worksFor": {
-          "@type": "SportsOrganization",
-          "name": "Laguna Beach Tennis Academy"
-        },
-        "description": "USPTA Certified with EdD in Educational Leadership.",
-        "image": "https://lagunabeachtennisacademy.com/images/coaches/andy.webp"
+        "description": "Dual USPTA and PTR certified professional with 8+ years coaching in Southern California. Ranked #1 in SoCal college tennis.",
+        "image": "https://lagunabeachtennisacademy.com/images/coaches/peter.webp"
       }
     ]
   }
@@ -97,14 +85,14 @@ export default function CoachesPage() {
       imagePosition: "50% 25%",
     },
     {
-      name: "Kevin Jackson",
-      title: "Head Coach & Performance Director",
-      specialization: "Player Development · Global Systems Leadership",
-      bio: "Performance architect with more than twenty-five years of experience in global player development, system design, and athlete management. He has coached and guided over 3,000 athletes worldwide — developing national champions, international juniors, and professional players across four continents. Career highlights include 550+ tournament victories, 20+ Division I scholarship athletes, and creating development systems combining data, psychology, and on-court performance.",
-      quote: "Excellence through preparation.",
-      credentials: ["25+ Years Experience", "3,000+ Athletes Trained", "Global Systems Leader"],
-      image: "/images/coaches/kevin.webp",
-      imagePosition: "50% 35%",
+      name: "Robert LeBuhn",
+      title: "Director of Tennis Operations",
+      specialization: "Director of Tennis Operations · USPTR Certified",
+      bio: "Twenty-five years developing players from junior foundations to collegiate competition. USPTR-certified professional who trained at the Harry Hopman Academy and competed as a Top 20 USTA Eastern junior and 1983 New Jersey State Singles Champion. Played NCAA Division I tennis at Lafayette College. Multiple Coach of the Year honoree across New Jersey, Union County, Somerset County, and San Diego CIF. Certified in Adaptive Tennis, Cardio Tennis, and CPR/AED.",
+      quote: "Development never stops.",
+      credentials: ["USPTR Certified", "25+ Years Experience", "NCAA D1 Lafayette", "Multiple Coach of Year"],
+      image: "/images/coaches/robert.webp",
+      imagePosition: "50% 30%",
     }
   ]
   
@@ -118,25 +106,16 @@ export default function CoachesPage() {
       credentials: ["Youth Development Specialist", "Red/Orange Ball Certified"],
       image: "/images/coaches/michelle.webp",
       imagePosition: "50% 30%",
+      availability: "On leave — may return Spring 2026",
     },
     {
-      name: "Savriyan Danilov",
-      title: "High Performance Coach",
-      specialization: "ATP Pro #556",
-      bio: "Professional tour experience brings real-world competitive insights to high-performance training. Eight years of ATP tour competition inform every session — from point construction to mental toughness under pressure. Players gain tactical sophistication and the competitive mindset needed for tournament success.",
-      quote: "Champions train differently.",
-      credentials: ["ATP Professional", "8 Years Tour Experience"],
-      image: "/images/coaches/savriyan.webp",
-      imagePosition: "50% 25%",
-    },
-    {
-      name: "Andy Wu",
-      title: "Program Coach",
-      specialization: "Junior & Adult Development",
-      bio: "Solid fundamentals and progressive skill development define Andy's coaching philosophy. With USPTA certification and an EdD in Educational Leadership, Andy combines technical expertise with deep understanding of how people learn and grow. His patient, systematic approach helps beginners feel comfortable while challenging advanced players.",
-      quote: "Fundamentals first. Always.",
-      credentials: ["USPTA Certified", "EdD Educational Leadership"],
-      image: "/images/coaches/andy.webp",
+      name: "Peter DeFrantz",
+      title: "Senior Coach",
+      specialization: "USPTA & PTR Certified · College Tennis",
+      bio: "Dual USPTA and PTR certified professional with eight years of coaching experience in Southern California. Competed at Mt. San Jacinto College, ranked number one in Southern California and number two in California. Progressive teaching approach focused on clear communication, player development, and building confidence through structured fundamentals and fitness.",
+      quote: "Build the player, not just the game.",
+      credentials: ["USPTA & PTR Certified", "8+ Years Coaching", "#1 SoCal College Tennis"],
+      image: "/images/coaches/peter.webp",
       imagePosition: "50% 30%",
     }
   ]
@@ -266,40 +245,42 @@ export default function CoachesPage() {
             </h2>
           </div>
           
-          {/* Lead Coach - Kevin */}
+          {/* Associate Head Coach - Robert */}
           <div className="mb-16 md:mb-20">
-            <div className="grid lg:grid-cols-[1fr,1.5fr] gap-8 md:gap-12 items-start bg-white rounded-2xl overflow-hidden">
+            <div className="grid lg:grid-cols-[1fr,1.5fr] gap-8 md:gap-12 items-start bg-white rounded-lg overflow-hidden">
               <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full min-h-[400px]">
                 <Image
-                  src="/images/coaches/kevin.webp"
-                  alt="Kevin Jackson, Head Coach & Performance Director"
+                  src="/images/coaches/robert.webp"
+                  alt="Robert LeBuhn, Director of Tennis Operations at Laguna Beach Tennis Academy"
                   fill
                   className="object-cover"
-                  style={{ objectPosition: '50% 35%' }}
+                  style={{ objectPosition: '50% 30%' }}
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   quality={90}
                 />
               </div>
               <div className="p-8 md:p-12 lg:py-16">
                 <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-3">
-                  Head Coach & Performance Director
+                  Director of Tennis Operations
                 </p>
                 <h3 className="font-serif text-[28px] md:text-[36px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.01em]">
-                  Kevin Jackson
+                  Robert LeBuhn
                 </h3>
                 <p className="font-sans text-[14px] text-lbta-slate mb-6">
-                  Player Development · Global Systems Leadership
+                  Director of Tennis Operations · USPTR Certified
                 </p>
                 <p className="font-sans text-[15px] text-brand-pacific-dusk leading-[1.8] mb-6">
-                  Performance architect with more than twenty-five years of experience in global player development, 
-                  system design, and athlete management. He has coached and guided over 3,000 athletes worldwide — 
-                  developing national champions, international juniors, and professional players across four continents.
+                  Twenty-five years developing players from junior foundations to collegiate competition. 
+                  USPTR-certified professional who trained at the Harry Hopman Academy and competed as a 
+                  Top 20 USTA Eastern junior and 1983 New Jersey State Singles Champion. Played NCAA Division I 
+                  tennis at Lafayette College. Multiple Coach of the Year honoree across New Jersey, Union County, 
+                  Somerset County, and San Diego CIF. Certified in Adaptive Tennis, Cardio Tennis, and CPR/AED.
                 </p>
                 <p className="font-serif text-[18px] text-brand-pacific-dusk italic mb-6">
-                  &ldquo;Excellence through preparation.&rdquo;
+                  &ldquo;Development never stops.&rdquo;
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {["25+ Years Experience", "3,000+ Athletes", "550+ Tournament Wins", "20+ D1 Athletes"].map((cred) => (
+                  {["USPTR Certified", "25+ Years Experience", "NCAA D1 Lafayette", "Multiple Coach of Year"].map((cred) => (
                     <span 
                       key={cred}
                       className="font-sans text-[11px] text-lbta-slate px-3 py-1.5 bg-brand-sandstone rounded-full"
@@ -313,11 +294,11 @@ export default function CoachesPage() {
           </div>
           
           {/* Program Coaches Grid */}
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-[960px]">
             {programCoaches.map((coach) => (
               <div 
                 key={coach.name}
-                className="bg-white rounded-xl overflow-hidden group"
+                className="bg-white rounded-lg overflow-hidden group"
               >
                 <div className="relative aspect-[3/4] overflow-hidden">
                   <Image
@@ -326,10 +307,9 @@ export default function CoachesPage() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     style={{ objectPosition: coach.imagePosition }}
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     quality={90}
                   />
-                  {/* Subtle gradient overlay on hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                     <p className="font-serif text-[16px] text-white italic">
@@ -348,6 +328,11 @@ export default function CoachesPage() {
                   <p className="font-sans text-[13px] text-lbta-slate mb-4">
                     {coach.specialization}
                   </p>
+                  {'availability' in coach && (
+                    <p className="font-sans text-[12px] text-brand-pacific-dusk/50 italic mb-4">
+                      {(coach as { availability: string }).availability}
+                    </p>
+                  )}
                   <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.7] mb-4">
                     {coach.bio}
                   </p>
@@ -381,13 +366,13 @@ export default function CoachesPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-lg hover:bg-white/90 transition-all min-h-[52px]"
+              className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/90 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
             >
               Book Trial Session
             </Link>
             <Link
               href="/programs"
-              className="inline-flex items-center justify-center border border-white/30 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-lg hover:bg-white/10 transition-all min-h-[52px]"
+              className="inline-flex items-center justify-center border border-white/30 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/10 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
             >
               View Programs
             </Link>

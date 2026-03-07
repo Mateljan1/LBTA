@@ -3,7 +3,7 @@
 import { ChevronDown, ChevronUp, SlidersHorizontal } from 'lucide-react'
 import ProgramCard, { Program } from '@/components/ProgramCard'
 
-type SeasonKey = 'winter' | 'spring' | 'summer' | 'fall' | 'fall2025'
+import type { ExtendedSeasonKey as SeasonKey } from '@/lib/season-utils'
 
 interface Season {
   name: string

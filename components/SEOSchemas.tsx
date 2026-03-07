@@ -120,7 +120,7 @@ export function ReviewSchema() {
           "name": "Jennifer L."
         },
         "datePublished": "2024-09-10",
-        "reviewBody": "Both my kids train here and the improvement has been remarkable. Coach Kevin's attention to detail and positive reinforcement makes every session productive. Highly recommend for families.",
+        "reviewBody": "Both my kids train here and the improvement has been remarkable. The coaches' attention to detail and positive reinforcement makes every session productive. Highly recommend for families.",
         "reviewRating": {
           "@type": "Rating",
           "ratingValue": "5",
@@ -174,8 +174,8 @@ export function OrganizationSchema() {
     "employee": [
       {
         "@type": "Person",
-        "name": "Kevin Jackson",
-        "jobTitle": "Head Coach & Performance Director"
+        "name": "Robert LeBuhn",
+        "jobTitle": "Director of Tennis Operations"
       },
       {
         "@type": "Person",
@@ -184,13 +184,8 @@ export function OrganizationSchema() {
       },
       {
         "@type": "Person",
-        "name": "Savriyan Danilov",
-        "jobTitle": "High Performance Coach"
-      },
-      {
-        "@type": "Person",
-        "name": "Andy Wu",
-        "jobTitle": "Program Coach"
+        "name": "Peter DeFrantz",
+        "jobTitle": "Senior Coach"
       }
     ],
     "sameAs": [

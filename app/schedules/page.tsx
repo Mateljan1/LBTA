@@ -23,8 +23,7 @@ import winter2026Data from '@/data/winter2026.json'
 import fall2025Data from '@/data/fall2025.json'
 import year2026Data from '@/data/year2026.json'
 import { getSpringProgramsForDisplay, getSummerProgramsForDisplay, getSpringSummer2026 } from '@/lib/programs-data'
-
-type SeasonKey = 'winter' | 'spring' | 'summer' | 'fall' | 'fall2025'
+import { getCurrentSeason, getSeasonCTA, type ExtendedSeasonKey as SeasonKey } from '@/lib/season-utils'
 
 type RegistrationModalType = 'camp' | 'jtt' | 'seasonal' | 'inquiry'
 
@@ -59,7 +58,8 @@ interface JTTModalData {
 }
 
 export default function SchedulesPage() {
-  const [selectedSeason, setSelectedSeason] = useState<SeasonKey>('winter')
+  const seasonCta = useMemo(() => getSeasonCTA(), [])
+  const [selectedSeason, setSelectedSeason] = useState<SeasonKey>(() => getCurrentSeason())
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedLocation, setSelectedLocation] = useState<string>('all')
   const [selectedDays, setSelectedDays] = useState<string[]>([])
@@ -192,7 +192,7 @@ export default function SchedulesPage() {
 
   return (
     <>
-      <SchedulesHero heroParallax={heroParallax} />
+      <SchedulesHero heroParallax={heroParallax} ctaText={seasonCta.headline} />
 
       <div className="bg-white pt-4">
         <Breadcrumbs items={[{ label: 'Schedules & Pricing' }]} />
@@ -207,52 +207,53 @@ export default function SchedulesPage() {
       <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
 
       {activeTab === 'programs' && (
-        <ProgramsTab
-          seasons={seasons}
-          selectedSeason={selectedSeason}
-          onSeasonChange={setSelectedSeason}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-          selectedLocation={selectedLocation}
-          onLocationChange={setSelectedLocation}
-          selectedDays={selectedDays}
-          onDaysChange={setSelectedDays}
-          categories={categories}
-          filteredPrograms={filteredPrograms}
-          groupedPrograms={groupedPrograms}
-          expandedAccordions={expandedAccordions}
-          onToggleAccordion={toggleAccordion}
-          onRegister={handleRegister}
-          onMobileFilterOpen={() => setMobileFilterOpen(true)}
-          seasonLabel={seasonLabel}
-          seasonDates={seasonDates}
-          seasonWeeks={seasonWeeks}
-        />
-      )}
-
-      {activeTab === 'pricing' && (
-        <PricingTab
-          seasons={seasons}
-          selectedSeason={selectedSeason}
-          springSummerData={getSpringSummer2026()}
-          basePricing={year2026Data.basePricing}
-          monthlyPrograms={year2026Data.monthlyPrograms}
-          privateCoaching={year2026Data.privateCoaching}
-          discounts={year2026Data.discounts}
-          scholarships={year2026Data.scholarships}
-        />
+        <div id="programs-panel" role="tabpanel" aria-labelledby="programs-tab">
+          <ProgramsTab
+            seasons={seasons}
+            selectedSeason={selectedSeason}
+            onSeasonChange={setSelectedSeason}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+            selectedLocation={selectedLocation}
+            onLocationChange={setSelectedLocation}
+            selectedDays={selectedDays}
+            onDaysChange={setSelectedDays}
+            categories={categories}
+            filteredPrograms={filteredPrograms}
+            groupedPrograms={groupedPrograms}
+            expandedAccordions={expandedAccordions}
+            onToggleAccordion={toggleAccordion}
+            onRegister={handleRegister}
+            onMobileFilterOpen={() => setMobileFilterOpen(true)}
+            seasonLabel={seasonLabel}
+            seasonDates={seasonDates}
+            seasonWeeks={seasonWeeks}
+          />
+          <PricingTab
+            seasons={seasons}
+            selectedSeason={selectedSeason}
+            springSummerData={getSpringSummer2026()}
+            basePricing={year2026Data.basePricing}
+            monthlyPrograms={year2026Data.monthlyPrograms}
+            privateCoaching={year2026Data.privateCoaching}
+            discounts={year2026Data.discounts}
+            scholarships={year2026Data.scholarships}
+          />
+        </div>
       )}
 
       {activeTab === 'calendar' && (
+        <div id="calendar-panel" role="tabpanel" aria-labelledby="calendar-tab">
         <CampsJTTTab
           camps={year2026Data.camps}
           jtt={year2026Data.jtt}
           onCampRegister={handleCampRegister}
           onJTTRegister={handleJTTRegister}
         />
+        </div>
       )}
 
-      <SchedulesCTA />
+      <SchedulesCTA ctaHeadline={seasonCta.headline} ctaSubline={seasonCta.subline} />
       
       {selectedProgram && (
         <LuxuryRegistrationModal 

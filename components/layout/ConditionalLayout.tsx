@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import Header from './Header'
 import Footer from './Footer'
-import WinterCountdown from '@/components/ui/WinterCountdown'
+import SeasonBanner from '@/components/ui/SeasonBanner'
 import BackToTop from '@/components/ui/BackToTop'
 import ChatWidget from '@/components/ChatWidget'
 
@@ -24,7 +24,7 @@ export default function ConditionalLayout({
   // All other pages get LBTA header/footer
   return (
     <>
-      <WinterCountdown />
+      <SeasonBanner />
       <Header />
       <main id="main-content" className="flex-grow">
         {children}

@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { Check } from 'lucide-react'
 import type { getSpringSummer2026 } from '@/lib/programs-data'
 
-export type SeasonKey = 'winter' | 'fall' | 'fall2025' | 'spring' | 'summer'
+import type { ExtendedSeasonKey as SeasonKey } from '@/lib/season-utils'
+export type { SeasonKey }
 
 interface Season {
   name: string
@@ -34,6 +35,8 @@ interface PrivateCoach {
   title: string
   rate60: number
   rate90: number
+  pack10: number
+  pack20: number
   availability: string
 }
 
@@ -99,46 +102,21 @@ export default function PricingTab({
   return (
     <section id="pricing" className="bg-brand-morning-light py-12 md:py-20">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
-        {/* Urgency Banner */}
-        <div className="bg-black text-white rounded-xl p-4 md:p-6 mb-10 text-center">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-tide-pool opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-tide-pool"></span>
-              </span>
-              <span className="font-sans text-[14px] font-semibold">Winter 2026 Registration Open</span>
-            </div>
-            <span className="hidden md:block text-white/40">|</span>
-            <span className="font-sans text-[14px] text-white/80">
-              Early bird ends Dec 20 — <span className="text-brand-tide-pool font-semibold">Save $50</span>
-            </span>
-            <span className="hidden md:block text-white/40">|</span>
-            <span className="font-sans text-[13px] text-white/70 flex items-center gap-1.5">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              Only 12 spots left in Junior Development
-            </span>
-          </div>
-        </div>
-
         <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
           2026 Program Pricing
         </h2>
         <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
-          93% of players see measurable improvement within 8 weeks. 
-          <span className="text-black font-medium"> 2x/week is most popular</span> — optimal frequency for consistent progress.
+          Quarterly, monthly, and private coaching options. All programs include makeup classes.
         </p>
 
         {/* Spring or Summer 2026 Program Pricing (when season tab is Spring/Summer) */}
         {showSpringSummerPricing && seasonMeta && (
-          <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-10">
-            <div className="bg-black text-white px-6 py-4">
-              <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+          <div className="bg-white rounded-lg overflow-hidden shadow-soft mb-10">
+            <div className="bg-brand-sandstone px-6 py-4">
+              <h3 className="font-serif text-[20px] md:text-[24px] font-semibold text-brand-pacific-dusk">
                 {seasonMeta.label} Program Pricing
               </h3>
-              <p className="font-sans text-[13px] text-white/70 mt-1">
+              <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
                 {seasonMeta.dates}
                 {seasonMeta.weeks != null && ` · ${seasonMeta.weeks} weeks`}
               </p>
@@ -210,7 +188,7 @@ export default function PricingTab({
         )}
 
         {/* Season Price Comparison */}
-        <div className="bg-white rounded-2xl p-6 md:p-8 mb-10 shadow-soft">
+        <div className="bg-white rounded-lg p-6 md:p-8 mb-10 shadow-soft">
           <h3 className="font-serif text-[20px] md:text-[24px] font-semibold mb-6 text-center">
             Seasonal Price Adjustments
           </h3>
@@ -218,7 +196,7 @@ export default function PricingTab({
             {Object.entries(seasons).map(([key, season]) => (
               <div 
                 key={key}
-                className={`p-4 rounded-xl text-center ${
+                className={`p-4 rounded-lg text-center ${
                   key === 'winter' ? 'bg-black/5 border-2 border-black' : 'bg-gray-50'
                 }`}
               >
@@ -237,84 +215,51 @@ export default function PricingTab({
         </div>
 
         {/* Quarterly Programs Pricing */}
-        <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8 relative">
-          {/* Most Popular Ribbon */}
-          <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-10">
-            <div className="bg-black text-white font-sans text-[11px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-b-lg">
-              Most Popular: 2x/week
-            </div>
-          </div>
-          
-          <div className="bg-black text-white px-6 py-4 pt-8">
-            <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+        <div className="bg-white rounded-lg overflow-hidden shadow-soft mb-8">
+          <div className="bg-brand-sandstone px-6 py-4">
+            <h3 className="font-serif text-[20px] md:text-[24px] font-semibold text-brand-pacific-dusk">
               Quarterly Programs
             </h3>
-            <p className="font-sans text-[13px] text-white/70 mt-1">
-              Billed per season · Winter 2026 prices shown · <span className="text-brand-tide-pool">Early bird: Save $50</span>
+            <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
+              Billed per season · Prices shown are for Winter 2026 (13 weeks)
             </p>
           </div>
           
           <div className="overflow-x-auto">
-            <table className="w-full" role="table">
+            <table className="w-full" role="table" aria-label="Quarterly program pricing">
               <thead>
                 <tr className="border-b border-gray-200">
                   <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Program</th>
                   <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">1x/week</th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-white uppercase tracking-wider bg-black relative">
-                    <span className="flex items-center justify-center gap-1.5">
-                      2x/week
-                      <svg className="w-4 h-4 text-brand-tide-pool" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    </span>
-                    <span className="block text-[10px] text-white/80 normal-case font-normal">Best Value</span>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">
+                    2x/week
                   </th>
                   <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">3x/week</th>
                   <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Drop-in</th>
                 </tr>
               </thead>
               <tbody>
-                {Object.entries(basePricing).map(([key, program]) => {
-                  const capacityMap: { [key: string]: { spots: number; color: string } } = {
-                    'junior': { spots: 8, color: 'text-brand-sunset-cliff bg-brand-sunset-cliff/10' },
-                    'youthDevelopment': { spots: 12, color: 'text-brand-sunset-cliff bg-brand-sunset-cliff/10' },
-                    'highPerformance': { spots: 4, color: 'text-red-600 bg-red-50' },
-                    'adultBeginner': { spots: 16, color: 'text-brand-tide-pool bg-brand-tide-pool/10' },
-                    'adultIntermediate': { spots: 10, color: 'text-brand-sunset-cliff bg-brand-sunset-cliff/10' },
-                    'adultAdvanced': { spots: 6, color: 'text-brand-sunset-cliff bg-brand-sunset-cliff/10' },
-                  }
-                  const capacity = capacityMap[key]
-                  
-                  return (
+                {Object.entries(basePricing).map(([key, program]) => (
                     <tr key={key} className="border-b border-gray-100 hover:bg-gray-50">
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-2">
-                          <div className="font-sans text-[15px] font-semibold text-black">{program.label}</div>
-                          {capacity && capacity.spots <= 8 && (
-                            <span className={`font-sans text-[10px] font-semibold px-2 py-0.5 rounded-full ${capacity.color}`}>
-                              {capacity.spots} spots
-                            </span>
-                          )}
-                        </div>
+                        <div className="font-sans text-[15px] font-semibold text-black">{program.label}</div>
                         <div className="font-sans text-[12px] text-black/60">{program.subtitle}</div>
                         <div className="font-sans text-[11px] text-black/40 mt-1">{program.ages} · {program.duration}</div>
                       </td>
                       <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
                         ${program.winterPrices['1x']}
                       </td>
-                      <td className="text-center px-4 py-4 font-sans text-[18px] font-bold text-black bg-black/5 border-x-2 border-black">
+                      <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
                         ${program.winterPrices['2x']}
-                        <div className="text-[11px] font-normal text-brand-tide-pool">Save ${Math.round(program.winterPrices['1x'] * 2 - program.winterPrices['2x'])}</div>
                       </td>
                       <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
                         {'3x' in program.winterPrices ? `$${(program.winterPrices as any)['3x']}` : '—'}
                       </td>
-                      <td className="text-center px-4 py-4 font-sans text-[14px] text-black/50 line-through">
+                      <td className="text-center px-4 py-4 font-sans text-[14px] text-black/50">
                         ${program.dropIn}/class
                       </td>
                     </tr>
-                  )
-                })}
+                  ))}
               </tbody>
             </table>
           </div>
@@ -345,12 +290,12 @@ export default function PricingTab({
         </div>
 
         {/* Monthly Programs */}
-        <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8">
-          <div className="bg-black text-white px-6 py-4">
-            <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+        <div className="bg-white rounded-lg overflow-hidden shadow-soft mb-8">
+          <div className="bg-brand-sandstone px-6 py-4">
+            <h3 className="font-serif text-[20px] md:text-[24px] font-semibold text-brand-pacific-dusk">
               Monthly Programs
             </h3>
-            <p className="font-sans text-[13px] text-white/80 mt-1">
+            <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
               Flexible month-to-month billing
             </p>
           </div>
@@ -369,20 +314,22 @@ export default function PricingTab({
         </div>
 
         {/* Private Coaching */}
-        <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8">
-          <div className="bg-black text-white px-6 py-4">
-            <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+        <div className="bg-white rounded-lg overflow-hidden shadow-soft mb-8">
+          <div className="bg-brand-sandstone px-6 py-4">
+            <h3 className="font-serif text-[20px] md:text-[24px] font-semibold text-brand-pacific-dusk">
               Private Coaching
             </h3>
           </div>
           
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full" role="table" aria-label="Private coaching rates by coach">
               <thead>
                 <tr className="border-b border-gray-200">
                   <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">Coach</th>
                   <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">60 min</th>
                   <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">90 min</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">10-Pack</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">20-Pack</th>
                   <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">Availability</th>
                 </tr>
               </thead>
@@ -395,6 +342,8 @@ export default function PricingTab({
                     </td>
                     <td className="text-center px-4 py-4 font-sans text-[16px] text-black">${coach.rate60}</td>
                     <td className="text-center px-4 py-4 font-sans text-[16px] text-black">${coach.rate90}</td>
+                    <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">${coach.pack10}</td>
+                    <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">${coach.pack20}</td>
                     <td className="text-center px-4 py-4">
                       <span className={`font-sans text-[12px] px-3 py-1 rounded-full ${
                         coach.availability === 'Limited' 
@@ -413,7 +362,7 @@ export default function PricingTab({
 
         {/* Discounts & Scholarships */}
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl p-6 shadow-soft">
+          <div className="bg-white rounded-lg p-6 shadow-soft">
             <h3 className="font-serif text-[20px] font-semibold mb-4">Available Discounts</h3>
             <ul className="space-y-3">
               {Object.entries(discounts).map(([key, discount]) => (
@@ -430,7 +379,7 @@ export default function PricingTab({
             </ul>
           </div>
           
-          <div className="bg-brand-sandstone rounded-2xl p-6">
+          <div className="bg-brand-sandstone rounded-lg p-6">
             <h3 className="font-serif text-[20px] font-semibold mb-4">Scholarship Program</h3>
             <p className="font-sans text-[14px] text-black/70 mb-4">
               We believe tennis should be accessible to all. Our scholarship program provides {scholarships.coverage} tuition assistance for qualifying families.

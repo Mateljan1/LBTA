@@ -97,13 +97,12 @@ export default function Programs() {
             <Link href="/schedules" className="btn-primary">
               View Schedules →
             </Link>
-            <a
-              href="/LBTA_Winter2026_Optimized.pdf"
-              download
+            <Link
+              href="/schedules"
               className="btn-secondary border-white/30 text-white hover:border-white hover:bg-white/10"
             >
-              Download Winter 2026 Schedule
-            </a>
+              View Full Schedule
+            </Link>
           </div>
         </div>
       </section>
