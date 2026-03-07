@@ -178,7 +178,7 @@ export default function CoachesPage() {
           </h1>
           <p className="font-sans text-[16px] md:text-[18px] text-white/85 max-w-[600px] leading-[1.7]">
             ATP/WTA-trained coaches who understand that tennis teaches more than technique. 
-            Movement. Discipline. Belonging.
+            Movement. Craft. Community.
           </p>
         </div>
       </section>
@@ -198,15 +198,14 @@ export default function CoachesPage() {
                   style={{ objectPosition: '50% 25%' }}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   quality={95}
-                  priority
                 />
               </div>
               {/* Quote overlay */}
               <div className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 bg-white p-6 md:p-8 shadow-lg max-w-[280px] md:max-w-[320px]">
-                <p className="font-serif text-[18px] md:text-[20px] text-[#1a1a1a] italic leading-[1.5] mb-3">
+                <p className="font-serif text-[18px] md:text-[20px] text-brand-pacific-dusk italic leading-[1.5] mb-3">
                   &ldquo;Structure creates confidence, and confidence creates champions.&rdquo;
                 </p>
-                <p className="font-sans text-[12px] text-[#888] uppercase tracking-[0.1em]">
+                <p className="font-sans text-[12px] text-brand-pacific-dusk/60 uppercase tracking-[0.1em]">
                   — Andrew Mateljan
                 </p>
               </div>
@@ -214,26 +213,26 @@ export default function CoachesPage() {
             
             {/* Content */}
             <div className="lg:pt-8">
-              <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-4">
+              <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
                 Founder & Director
               </p>
-              <h2 className="font-serif text-[36px] md:text-[48px] font-medium text-[#1a1a1a] mb-2 tracking-[-0.02em]">
+              <h2 className="font-serif text-[36px] md:text-[48px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.02em]">
                 Andrew Mateljan
               </h2>
-              <p className="font-sans text-[14px] text-[#666] mb-8">
+              <p className="font-sans text-[14px] text-lbta-slate mb-8">
                 ATP/WTA Tour Coach · 20+ Years Experience
               </p>
               
               <div className="space-y-5 mb-10">
-                <p className="font-sans text-[16px] text-[#444] leading-[1.8]">
+                <p className="font-sans text-[16px] text-brand-pacific-dusk leading-[1.8]">
                   Twenty years developing competitive players from junior foundations to professional tour. 
                   Former #3 SoCal and #12 nationally ranked junior.
                 </p>
-                <p className="font-sans text-[16px] text-[#444] leading-[1.8]">
+                <p className="font-sans text-[16px] text-brand-pacific-dusk leading-[1.8]">
                   Seven years coaching internationally across Spain, Croatia, and Norway shaped a 
                   movement-first approach grounded in clarity and accountability.
                 </p>
-                <p className="font-sans text-[16px] text-[#444] leading-[1.8]">
+                <p className="font-sans text-[16px] text-brand-pacific-dusk leading-[1.8]">
                   Currently coaches ATP #262 Karue Sell. Training history includes Max McKennon (ATP #458), 
                   Ryan Seggerman (ATP #63 Doubles), with Masters 1000 experience at Indian Wells.
                 </p>
@@ -244,7 +243,7 @@ export default function CoachesPage() {
                 {["Former Top Junior", "ATP/WTA Tour Coach", "20+ D1 Placements", "100K+ Fit4Tennis Users"].map((cred) => (
                   <span 
                     key={cred}
-                    className="font-sans text-[12px] text-[#666] px-4 py-2 bg-[#f8f8f8] rounded-full"
+                    className="font-sans text-[12px] text-lbta-slate px-4 py-2 bg-brand-sandstone rounded-full"
                   >
                     {cred}
                   </span>
@@ -256,13 +255,13 @@ export default function CoachesPage() {
       </section>
 
       {/* COACHING TEAM - Clean Grid */}
-      <section className="bg-[#fafafa] py-20 md:py-28">
+      <section className="bg-brand-sandstone py-20 md:py-28">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
           <div className="mb-16 md:mb-20">
-            <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-4">
+            <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
               Coaching Team
             </p>
-            <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-[#1a1a1a] tracking-[-0.02em]">
+            <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
               Meet the Team
             </h2>
           </div>
@@ -282,28 +281,28 @@ export default function CoachesPage() {
                 />
               </div>
               <div className="p-8 md:p-12 lg:py-16">
-                <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-3">
+                <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-3">
                   Head Coach & Performance Director
                 </p>
-                <h3 className="font-serif text-[28px] md:text-[36px] font-medium text-[#1a1a1a] mb-2 tracking-[-0.01em]">
+                <h3 className="font-serif text-[28px] md:text-[36px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.01em]">
                   Kevin Jackson
                 </h3>
-                <p className="font-sans text-[14px] text-[#666] mb-6">
+                <p className="font-sans text-[14px] text-lbta-slate mb-6">
                   Player Development · Global Systems Leadership
                 </p>
-                <p className="font-sans text-[15px] text-[#444] leading-[1.8] mb-6">
+                <p className="font-sans text-[15px] text-brand-pacific-dusk leading-[1.8] mb-6">
                   Performance architect with more than twenty-five years of experience in global player development, 
                   system design, and athlete management. He has coached and guided over 3,000 athletes worldwide — 
                   developing national champions, international juniors, and professional players across four continents.
                 </p>
-                <p className="font-serif text-[18px] text-[#1a1a1a] italic mb-6">
+                <p className="font-serif text-[18px] text-brand-pacific-dusk italic mb-6">
                   &ldquo;Excellence through preparation.&rdquo;
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {["25+ Years Experience", "3,000+ Athletes", "550+ Tournament Wins", "20+ D1 Athletes"].map((cred) => (
                     <span 
                       key={cred}
-                      className="font-sans text-[11px] text-[#666] px-3 py-1.5 bg-[#f5f5f5] rounded-full"
+                      className="font-sans text-[11px] text-lbta-slate px-3 py-1.5 bg-brand-sandstone rounded-full"
                     >
                       {cred}
                     </span>
@@ -340,23 +339,23 @@ export default function CoachesPage() {
                 </div>
                 
                 <div className="p-6">
-                  <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.1em] mb-2">
+                  <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.1em] mb-2">
                     {coach.title}
                   </p>
-                  <h3 className="font-serif text-[22px] font-medium text-[#1a1a1a] mb-1 tracking-[-0.01em]">
+                  <h3 className="font-serif text-[22px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em]">
                     {coach.name}
                   </h3>
-                  <p className="font-sans text-[13px] text-[#666] mb-4">
+                  <p className="font-sans text-[13px] text-lbta-slate mb-4">
                     {coach.specialization}
                   </p>
-                  <p className="font-sans text-[14px] text-[#555] leading-[1.7] mb-4">
+                  <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.7] mb-4">
                     {coach.bio}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {coach.credentials.map((cred) => (
                       <span 
                         key={cred}
-                        className="font-sans text-[10px] text-[#777] px-2.5 py-1 bg-[#f5f5f5] rounded-full"
+                        className="font-sans text-[10px] text-lbta-slate px-2.5 py-1 bg-brand-sandstone rounded-full"
                       >
                         {cred}
                       </span>
@@ -370,7 +369,7 @@ export default function CoachesPage() {
       </section>
 
       {/* CTA SECTION - Minimal */}
-      <section className="bg-[#1a1a1a] py-20 md:py-28">
+      <section className="bg-lbta-black py-20 md:py-28">
         <div className="max-w-[800px] mx-auto px-6 text-center">
           <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-white mb-6 tracking-[-0.02em]">
             Train With Us
@@ -382,7 +381,7 @@ export default function CoachesPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-white text-[#1a1a1a] font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-lg hover:bg-white/90 transition-all min-h-[52px]"
+              className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-lg hover:bg-white/90 transition-all min-h-[52px]"
             >
               Book Trial Session
             </Link>

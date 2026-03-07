@@ -97,19 +97,19 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
         <div className="flex items-start justify-between gap-6">
           <div className="flex-1 min-w-0">
             {/* Program Name */}
-            <h3 className="font-serif text-[22px] md:text-[24px] font-medium text-[#1a1a1a] mb-1.5 leading-tight tracking-[-0.01em]">
+            <h3 className="font-serif text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk mb-1.5 leading-tight tracking-[-0.01em]">
               {program.program}
             </h3>
             
             {/* Age + Duration */}
-            <p className="font-sans text-[14px] text-[#666] mb-4">
+            <p className="font-sans text-[14px] text-lbta-slate mb-4">
               Ages {program.ages} · {program.duration}
             </p>
             
             {/* Meta Info Row */}
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-[#888]">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-brand-pacific-dusk/60">
               <span className="font-sans">{program.location}</span>
-              <span className="w-1 h-1 rounded-full bg-[#ccc]" />
+              <span className="w-1 h-1 rounded-full bg-lbta-stone" />
               <span className="font-sans">{getSessionInfo()}</span>
             </div>
           </div>
@@ -118,21 +118,21 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
           <div className="flex-shrink-0 text-right">
             {basePrice && (
               <div className="mb-3">
-                <span className="font-serif text-[28px] md:text-[32px] font-medium text-[#1a1a1a] tracking-[-0.02em]">
+                <span className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
                   ${basePrice}
                 </span>
-                <span className="font-sans text-[13px] text-[#888] ml-0.5">
+                <span className="font-sans text-[13px] text-brand-pacific-dusk/60 ml-0.5">
                   {getBillingLabel()}
                 </span>
               </div>
             )}
             
             {/* Expand Icon */}
-            <div className={`w-8 h-8 rounded-full border border-[#e5e5e5] flex items-center justify-center transition-all duration-300 ${
-              isExpanded ? 'bg-[#1a1a1a] border-[#1a1a1a]' : 'bg-white hover:border-[#ccc]'
+            <div className={`w-8 h-8 rounded-full border border-lbta-stone flex items-center justify-center transition-all duration-300 ${
+              isExpanded ? 'bg-lbta-black border-lbta-black' : 'bg-white hover:border-lbta-stone'
             }`}>
               <svg 
-                className={`w-4 h-4 transition-all duration-300 ${isExpanded ? 'text-white rotate-180' : 'text-[#666]'}`}
+                className={`w-4 h-4 transition-all duration-300 ${isExpanded ? 'text-white rotate-180' : 'text-lbta-slate'}`}
                 fill="none" 
                 viewBox="0 0 24 24" 
                 stroke="currentColor"
@@ -148,16 +148,16 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
       {isExpanded && (
         <div className="px-6 md:px-7 pb-6 md:pb-7 animate-fade-in-up">
           {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-[#e5e5e5] to-transparent mb-6" />
+          <div className="h-px bg-gradient-to-r from-transparent via-lbta-stone to-transparent mb-6" />
           
           {/* Description */}
-          <p className="font-sans text-[15px] text-[#555] leading-[1.7] mb-8">
+          <p className="font-sans text-[15px] text-brand-pacific-dusk/80 leading-[1.7] mb-8">
             {program.description}
           </p>
           
           {/* Schedule */}
           <div className="mb-8">
-            <h4 className="font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.1em] mb-4">
+            <h4 className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-4">
               Schedule
             </h4>
             <div className="space-y-0">
@@ -165,13 +165,13 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
                 <div 
                   key={index} 
                   className={`flex justify-between items-center py-3 ${
-                    index !== program.schedule.length - 1 ? 'border-b border-[#f0f0f0]' : ''
+                    index !== program.schedule.length - 1 ? 'border-b border-lbta-stone' : ''
                   }`}
                 >
-                  <span className="font-sans text-[15px] text-[#1a1a1a] font-medium">
+                  <span className="font-sans text-[15px] text-brand-pacific-dusk font-medium">
                     {slot.day}
                   </span>
-                  <span className="font-sans text-[15px] text-[#666]">
+                  <span className="font-sans text-[15px] text-lbta-slate">
                     {slot.time}
                   </span>
                 </div>
@@ -181,54 +181,54 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
           
           {/* Pricing */}
           <div className="mb-8">
-            <h4 className="font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.1em] mb-4">
+            <h4 className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-4">
               Investment
             </h4>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {program.pricing.monthly && (
-                <div className="bg-[#fafafa] rounded-lg p-4 text-center">
-                  <p className="font-sans text-[12px] text-[#888] mb-1">Monthly</p>
-                  <p className="font-serif text-[22px] font-medium text-[#1a1a1a]">
+                <div className="bg-brand-sandstone rounded-lg p-4 text-center">
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">Monthly</p>
+                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing.monthly}
                   </p>
                 </div>
               )}
               {program.pricing['1x'] && (
-                <div className="bg-[#fafafa] rounded-lg p-4 text-center">
-                  <p className="font-sans text-[12px] text-[#888] mb-1">1× weekly</p>
-                  <p className="font-serif text-[22px] font-medium text-[#1a1a1a]">
+                <div className="bg-brand-sandstone rounded-lg p-4 text-center">
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">1× weekly</p>
+                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing['1x']}
                   </p>
                 </div>
               )}
               {program.pricing['2x'] && (
-                <div className="bg-[#fafafa] rounded-lg p-4 text-center">
-                  <p className="font-sans text-[12px] text-[#888] mb-1">2× weekly</p>
-                  <p className="font-serif text-[22px] font-medium text-[#1a1a1a]">
+                <div className="bg-brand-sandstone rounded-lg p-4 text-center">
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">2× weekly</p>
+                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing['2x']}
                   </p>
                 </div>
               )}
               {program.pricing['3x'] && (
-                <div className="bg-[#fafafa] rounded-lg p-4 text-center">
-                  <p className="font-sans text-[12px] text-[#888] mb-1">3× weekly</p>
-                  <p className="font-serif text-[22px] font-medium text-[#1a1a1a]">
+                <div className="bg-brand-sandstone rounded-lg p-4 text-center">
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">3× weekly</p>
+                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing['3x']}
                   </p>
                 </div>
               )}
               {program.pricing['4x'] && (
-                <div className="bg-[#fafafa] rounded-lg p-4 text-center">
-                  <p className="font-sans text-[12px] text-[#888] mb-1">4× weekly</p>
-                  <p className="font-serif text-[22px] font-medium text-[#1a1a1a]">
+                <div className="bg-brand-sandstone rounded-lg p-4 text-center">
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">4× weekly</p>
+                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing['4x']}
                   </p>
                 </div>
               )}
               {program.pricing.drop_in && (
-                <div className="bg-white border border-[#e8e8e8] rounded-lg p-4 text-center">
-                  <p className="font-sans text-[12px] text-[#888] mb-1">Drop-in</p>
-                  <p className="font-serif text-[20px] font-medium text-[#666]">
+                <div className="bg-white border border-lbta-stone rounded-lg p-4 text-center">
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">Drop-in</p>
+                  <p className="font-serif text-[20px] font-medium text-lbta-slate">
                     ${program.pricing.drop_in}
                   </p>
                 </div>
@@ -236,7 +236,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             </div>
             
             {/* Billing Note */}
-            <p className="font-sans text-[12px] text-[#999] mt-3">
+            <p className="font-sans text-[12px] text-brand-pacific-dusk/50 mt-3">
               {program.pricing['1x'] 
                 ? 'Billed quarterly · 13 weeks' 
                 : 'Billed monthly'}
@@ -249,7 +249,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               e.stopPropagation()
               onRegister(program)
             }}
-            className="hidden md:flex w-full items-center justify-center gap-2 bg-[#1a1a1a] hover:bg-[#333] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-lg transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2"
+            className="hidden md:flex w-full items-center justify-center gap-2 bg-lbta-black hover:bg-brand-pacific-dusk/80 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-lg transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2"
           >
             <span>Begin Registration</span>
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -261,13 +261,13 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
       
       {/* Mobile Sticky Register Button (only when expanded) */}
       {isExpanded && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-sm border-t border-[#e8e8e8] px-4 py-3">
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-sm border-t border-lbta-stone px-4 py-3">
           <button
             onClick={(e) => {
               e.stopPropagation()
               onRegister(program)
             }}
-            className="w-full flex items-center justify-center gap-2 bg-[#1a1a1a] active:bg-[#333] active:scale-[0.98] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-lg transition-all duration-200 min-h-[52px]"
+            className="w-full flex items-center justify-center gap-2 bg-lbta-black active:bg-brand-pacific-dusk/80 active:scale-[0.98] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-lg transition-all duration-200 min-h-[52px]"
             onTouchStart={() => {}}
           >
             <span>Begin Registration</span>

@@ -125,7 +125,7 @@ export default function SuccessStoriesPage() {
         <div className="max-w-7xl mx-auto px-6">
           <AnimatedSection>
             <div className="text-center max-w-3xl mx-auto">
-              <p className="font-sans text-[11px] text-lbta-orange uppercase tracking-[2px] mb-4">
+              <p className="font-sans text-[11px] text-brand-sunset-cliff uppercase tracking-[2px] mb-4">
                 Player Achievements
               </p>
               <h1 className="font-serif text-[40px] md:text-[56px] font-semibold text-black mb-6 leading-[1.1]">
@@ -183,7 +183,7 @@ export default function SuccessStoriesPage() {
       </section>
 
       {/* Featured Stories */}
-      <section className="bg-[#FAF8F3] py-16 md:py-24">
+      <section className="bg-brand-morning-light py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="space-y-16 md:space-y-24">
             {successStories.filter(s => s.featured).map((story, index) => (
@@ -208,7 +208,7 @@ export default function SuccessStoriesPage() {
                         className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
                       >
                         <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <Play className="h-6 w-6 md:h-8 md:w-8 text-lbta-red ml-1" />
+                          <Play className="h-6 w-6 md:h-8 md:w-8 text-brand-sunset-cliff ml-1" />
                         </div>
                       </button>
                     )}
@@ -217,19 +217,19 @@ export default function SuccessStoriesPage() {
                   {/* Content */}
                   <div className={index % 2 === 1 ? 'md:order-1' : ''}>
                     <div className="mb-4">
-                      <span className="inline-block bg-lbta-orange/10 text-lbta-orange font-sans text-[12px] font-semibold uppercase tracking-[1.5px] px-3 py-1 rounded-full">
+                      <span className="inline-block bg-brand-sunset-cliff/10 text-brand-sunset-cliff font-sans text-[12px] font-semibold uppercase tracking-[1.5px] px-3 py-1 rounded-full">
                         {story.title}
                       </span>
                     </div>
                     <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-black mb-2">
                       {story.name}
                     </h2>
-                    <p className="font-sans text-[18px] md:text-[20px] text-lbta-orange font-medium mb-6">
+                    <p className="font-sans text-[18px] md:text-[20px] text-brand-sunset-cliff font-medium mb-6">
                       {story.achievement}
                     </p>
                     
                     <blockquote className="relative mb-6">
-                      <Quote className="absolute -left-2 -top-2 h-8 w-8 text-lbta-orange/20" />
+                      <Quote className="absolute -left-2 -top-2 h-8 w-8 text-brand-sunset-cliff/20" />
                       <p className="font-serif text-[18px] md:text-[20px] text-black/80 italic leading-relaxed pl-6">
                         "{story.quote}"
                       </p>
@@ -258,7 +258,7 @@ export default function SuccessStoriesPage() {
           <div className="grid md:grid-cols-2 gap-8">
             {successStories.filter(s => !s.featured).map((story, index) => (
               <AnimatedSection key={story.id} delay={index * 100}>
-                <div className="bg-[#FAF8F3] rounded-lg overflow-hidden">
+                <div className="bg-brand-morning-light rounded-lg overflow-hidden">
                   <div className="relative aspect-[16/9]">
                     <Image
                       src={story.image}
@@ -269,7 +269,7 @@ export default function SuccessStoriesPage() {
                     />
                   </div>
                   <div className="p-6 md:p-8">
-                    <span className="inline-block text-lbta-orange font-sans text-[12px] font-medium uppercase tracking-[1.5px] mb-2">
+                    <span className="inline-block text-brand-sunset-cliff font-sans text-[12px] font-medium uppercase tracking-[1.5px] mb-2">
                       {story.title}
                     </span>
                     <h3 className="font-serif text-[24px] font-semibold text-black mb-2">
@@ -293,7 +293,7 @@ export default function SuccessStoriesPage() {
       <VideoTestimonials />
 
       {/* Testimonials Wall */}
-      <section className="bg-[#F8E6BB] py-16 md:py-24">
+      <section className="bg-lbta-beige py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimatedSection>
             <div className="text-center mb-12">
@@ -302,7 +302,7 @@ export default function SuccessStoriesPage() {
               </h2>
               <div className="flex items-center justify-center gap-2 mb-2">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="h-6 w-6 text-lbta-orange fill-lbta-orange" />
+                  <Star key={star} className="h-6 w-6 text-brand-sunset-cliff fill-brand-sunset-cliff" />
                 ))}
               </div>
               <p className="font-sans text-[15px] text-black/70">
@@ -317,7 +317,7 @@ export default function SuccessStoriesPage() {
                 <div className="bg-white p-6 rounded-lg h-full flex flex-col">
                   <div className="flex items-center gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-lbta-orange fill-lbta-orange" />
+                      <Star key={i} className="h-4 w-4 text-brand-sunset-cliff fill-brand-sunset-cliff" />
                     ))}
                   </div>
                   <p className="font-sans text-[14px] text-black/80 leading-relaxed flex-grow mb-4">
@@ -350,7 +350,7 @@ export default function SuccessStoriesPage() {
             </p>
             <Link
               href="/book"
-              className="inline-flex items-center gap-2 bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
               Book Your Free Trial
               <ArrowRight className="h-4 w-4" />

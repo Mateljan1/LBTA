@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LBTA — Spring & Summer 2026 Program Overview</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+
+:root {
+  --pacific-dusk: #1B3A5C;
+  --deep-water: #0F2237;
+  --victoria-cove: #2E8B8B;
+  --sunset-cliff: #E8834A;
+  --thousand-steps: #C4963C;
+  --sandstone: #F5F0E5;
+  --morning-light: #FAF8F4;
+  --tide-pool: #3A8B6E;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+@page { size: 10in 14.17in; margin: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--pacific-dusk);
+  -webkit-font-smoothing: antialiased;
+  margin: 0; padding: 0;
+}
+
+@media screen {
+  body {
+    padding: 32px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #111;
+    gap: 32px;
+  }
+  .page { box-shadow: 0 12px 60px rgba(0,0,0,0.6); border-radius: 4px; overflow: hidden; }
+}
+
+.page {
+  width: 960px;
+  min-height: 1360px;
+  position: relative;
+  background: var(--morning-light);
+  page-break-after: always;
+  page-break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+}
+.page:last-child { page-break-after: auto; }
+
+/* ═══ HEADER BAR ═══ */
+.header-bar {
+  padding: 14px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--deep-water);
+  flex-shrink: 0;
+}
+.header-brand {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(245,240,229,0.7);
+}
+.header-season {
+  font-size: 10px; font-weight: 400;
+  color: rgba(245,240,229,0.35);
+}
+
+/* ═══ PAGE PAD ═══ */
+.pp {
+  padding: 40px 56px 36px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ═══ TYPOGRAPHY ═══ */
+.eyebrow {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--victoria-cove);
+}
+.heading-hero {
+  font-family: 'Cormorant', serif;
+  font-weight: 300; font-size: 62px; line-height: 1.0;
+}
+.heading-lg {
+  font-family: 'Cormorant', serif;
+  font-weight: 300; font-size: 36px; line-height: 1.08;
+  color: var(--pacific-dusk);
+}
+.heading-md {
+  font-family: 'Cormorant', serif;
+  font-weight: 400; font-size: 22px; line-height: 1.15;
+  color: var(--pacific-dusk);
+}
+.body-text {
+  font-weight: 300; font-size: 12.5px; line-height: 1.7;
+  color: rgba(27,58,92,0.5);
+}
+.fine-print {
+  font-size: 10px; font-weight: 300;
+  color: rgba(27,58,92,0.28); line-height: 1.6;
+}
+
+/* ═══ HORIZON LINE ═══ */
+.horizon-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--victoria-cove) 15%, var(--sunset-cliff) 35%, var(--thousand-steps) 50%, var(--sunset-cliff) 65%, var(--victoria-cove) 85%, transparent);
+  opacity: 0.3;
+}
+
+/* ═══ SECTION RULE ═══ */
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0 14px;
+}
+.section-rule::after {
+  content: ''; flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(27,58,92,0.08), transparent);
+}
+
+/* ═══ TABLES — separate Spring/Summer columns ═══ */
+.dt {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 12px;
+}
+.dt th {
+  background: var(--pacific-dusk);
+  color: rgba(245,240,229,0.85);
+  font-weight: 500; font-size: 10px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 9px 12px;
+  text-align: left;
+}
+/* Season column headers get distinct styling */
+.dt th.season-spring {
+  background: var(--victoria-cove);
+  color: white;
+}
+.dt th.season-summer {
+  background: var(--sunset-cliff);
+  color: white;
+}
+.dt td {
+  padding: 9px 12px;
+  font-weight: 300; font-size: 12px;
+  color: rgba(27,58,92,0.6);
+  background: white;
+  border-bottom: 1px solid rgba(27,58,92,0.04);
+}
+.dt tr:last-child td { border-bottom: none; }
+.dt tr:nth-child(even) td { background: rgba(27,58,92,0.012); }
+.dt td strong { font-weight: 500; color: var(--pacific-dusk); }
+.dt td.price { font-weight: 500; color: var(--pacific-dusk); }
+.dt .table-note td {
+  font-size: 10px; font-style: italic;
+  color: rgba(27,58,92,0.28); padding: 6px 12px;
+  background: rgba(27,58,92,0.015);
+}
+
+/* ═══ PROGRAM BLOCK ═══ */
+.prog {
+  position: relative;
+  padding: 18px 22px 18px 26px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid rgba(27,58,92,0.05);
+}
+.prog::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px; bottom: 10px;
+  width: 3px; border-radius: 3px;
+}
+.prog-teal::before { background: var(--victoria-cove); }
+.prog-orange::before { background: var(--sunset-cliff); }
+.prog-gold::before { background: var(--thousand-steps); }
+.prog-green::before { background: var(--tide-pool); }
+.prog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.prog-title {
+  font-family: 'Cormorant', serif;
+  font-weight: 400; font-size: 19px; line-height: 1.15;
+  color: var(--pacific-dusk);
+}
+.prog-badge {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.badge-age {
+  background: rgba(46,139,139,0.08);
+  color: var(--victoria-cove);
+  border: 1px solid rgba(46,139,139,0.15);
+}
+.badge-level {
+  background: rgba(232,131,74,0.08);
+  color: var(--sunset-cliff);
+  border: 1px solid rgba(232,131,74,0.15);
+}
+.prog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 14px;
+  margin-top: 3px;
+}
+.prog-meta-item {
+  font-size: 10.5px; font-weight: 400;
+  color: rgba(27,58,92,0.35);
+}
+.prog-desc {
+  font-weight: 300; font-size: 11.5px; line-height: 1.6;
+  color: rgba(27,58,92,0.42);
+  margin-top: 7px;
+}
+.prog .dt { margin-top: 10px; }
+
+/* ═══ PRICE PILLS ═══ */
+.price-row {
+  display: flex; flex-wrap: wrap;
+  gap: 5px; margin-top: 10px;
+}
+.price-pill {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 10.5px; font-weight: 400;
+  color: rgba(27,58,92,0.5);
+  background: rgba(27,58,92,0.03);
+  border: 1px solid rgba(27,58,92,0.05);
+}
+.price-pill b { font-weight: 600; color: var(--pacific-dusk); }
+
+/* ═══ DUAL SEASON PILLS ═══ */
+.season-prices {
+  display: flex; gap: 6px; margin-top: 10px;
+}
+.sp-card {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(27,58,92,0.06);
+}
+.sp-card.spring { background: rgba(46,139,139,0.03); border-color: rgba(46,139,139,0.1); }
+.sp-card.summer { background: rgba(232,131,74,0.03); border-color: rgba(232,131,74,0.1); }
+.sp-label {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.sp-card.spring .sp-label { color: var(--victoria-cove); }
+.sp-card.summer .sp-label { color: var(--sunset-cliff); }
+.sp-detail {
+  font-size: 10.5px; font-weight: 300;
+  color: rgba(27,58,92,0.45);
+  margin-top: 3px; line-height: 1.5;
+}
+.sp-detail b { font-weight: 600; color: var(--pacific-dusk); }
+
+/* ═══ DARK SECTION ═══ */
+.dark-section {
+  background: var(--deep-water);
+  border-radius: 12px;
+  padding: 26px 30px;
+  position: relative;
+  overflow: hidden;
+}
+.dark-section::after {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(46,139,139,0.07), transparent 70%);
+  pointer-events: none;
+}
+
+/* ═══ LOCATION BANNER ═══ */
+.loc-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  background: rgba(27,58,92,0.025);
+  border-radius: 8px;
+  border-left: 3px solid var(--victoria-cove);
+}
+.loc-name { font-weight: 600; font-size: 12.5px; color: var(--pacific-dusk); }
+.loc-detail { font-size: 10px; font-weight: 300; color: rgba(27,58,92,0.3); }
+.loc-coaches { font-size: 10px; font-weight: 400; color: var(--victoria-cove); margin-left: auto; }
+
+/* ═══ FOOTER ═══ */
+.page-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(27,58,92,0.04);
+}
+.footer-tagline {
+  font-size: 9px;
+  color: rgba(27,58,92,0.18);
+  letter-spacing: 0.06em;
+}
+.footer-page {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--pacific-dusk);
+  color: var(--sandstone);
+  font-size: 9px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ═══ RATE CARDS ═══ */
+.rate-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.rate-card {
+  text-align: center;
+  padding: 20px 14px;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid rgba(27,58,92,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.rate-card.featured {
+  border-color: var(--victoria-cove);
+  box-shadow: 0 4px 20px rgba(46,139,139,0.1);
+  background: linear-gradient(180deg, rgba(46,139,139,0.02), white 30%);
+}
+.rate-card.featured::before {
+  content: 'ACADEMY DIRECTOR';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  background: var(--victoria-cove);
+  color: white;
+  font-size: 8px; font-weight: 600;
+  letter-spacing: 0.15em;
+  padding: 4px 0;
+  text-align: center;
+}
+.rate-card.featured { padding-top: 30px; }
+.rc-name {
+  font-family: 'Cormorant', serif;
+  font-weight: 400; font-size: 16px;
+  color: var(--pacific-dusk);
+}
+.rc-price {
+  font-size: 28px; font-weight: 700;
+  color: var(--pacific-dusk);
+  margin-top: 4px; line-height: 1;
+}
+.rc-price span {
+  font-size: 12px; font-weight: 300;
+  color: rgba(27,58,92,0.3);
+}
+.rc-packs {
+  font-size: 10px; font-weight: 300;
+  color: rgba(27,58,92,0.3);
+  margin-top: 6px; line-height: 1.6;
+}
+
+/* ═══ DISCOUNT GRID ═══ */
+.disc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.disc-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid rgba(27,58,92,0.04);
+}
+.disc-pct {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(46,139,139,0.06);
+  color: var(--victoria-cove);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.disc-label { font-weight: 600; font-size: 12px; color: var(--pacific-dusk); }
+.disc-detail { font-weight: 300; font-size: 10px; color: rgba(27,58,92,0.35); }
+
+/* ═══ MONTHLY CARDS ═══ */
+.monthly-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.monthly-card {
+  padding: 16px 18px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid rgba(27,58,92,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.monthly-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--victoria-cove), var(--sunset-cliff));
+}
+.mc-title {
+  font-family: 'Cormorant', serif;
+  font-weight: 400; font-size: 16px;
+  color: var(--pacific-dusk);
+}
+.mc-desc {
+  font-size: 10.5px; font-weight: 300;
+  color: rgba(27,58,92,0.38);
+  line-height: 1.5;
+  margin-top: 5px;
+}
+.mc-schedule {
+  font-size: 10px; font-weight: 400;
+  color: rgba(27,58,92,0.3);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* ═══ JOURNEY STRIP ═══ */
+.journey-strip {
+  display: flex;
+  align-items: stretch;
+  background: rgba(27,58,92,0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(27,58,92,0.04);
+  overflow: hidden;
+}
+.journey-stage {
+  flex: 1;
+  text-align: center;
+  padding: 10px 8px;
+  position: relative;
+  border-right: 1px solid rgba(27,58,92,0.04);
+}
+.journey-stage:last-child { border-right: none; }
+.js-label {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(27,58,92,0.25);
+}
+.js-ages {
+  font-size: 8.5px; font-weight: 300;
+  color: rgba(27,58,92,0.18);
+  margin-top: 1px;
+}
+.js-bar {
+  height: 3px;
+  border-radius: 2px;
+  margin: 6px auto 0;
+  width: 70%;
+}
+
+/* ═══ CTA ═══ */
+.cta-section {
+  background: linear-gradient(135deg, var(--deep-water) 0%, #163350 100%);
+  border-radius: 14px;
+  padding: 32px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -40px; left: -40px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(46,139,139,0.1), transparent 70%);
+  pointer-events: none;
+}
+.cta-section::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(232,131,74,0.06), transparent 70%);
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 1 — COVER                                                 -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <!-- Hero -->
+  <div style="background: linear-gradient(165deg, var(--deep-water) 0%, #0a1b2e 60%, #0d1f33 100%); padding: 56px 56px 40px; position: relative; overflow: hidden; flex-shrink: 0;">
+    <div style="position: absolute; top: -80px; right: -60px; width: 320px; height: 320px; background: radial-gradient(circle, rgba(46,139,139,0.06), transparent 70%); pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -40px; left: -30px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(232,131,74,0.04), transparent 70%); pointer-events: none;"></div>
+
+    <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(245,240,229,0.3); margin-bottom: 16px;">Laguna Beach Tennis Academy</div>
+    <div class="heading-hero" style="color: var(--sandstone);">Spring &<br>Summer 2026</div>
+    <div style="height: 2px; width: 70px; background: linear-gradient(90deg, var(--victoria-cove), var(--sunset-cliff)); margin: 16px 0 12px; border-radius: 1px;"></div>
+    <div style="font-weight: 300; font-size: 13px; color: rgba(245,240,229,0.35); line-height: 1.6;">Complete Program Overview with Coach Assignments & Pricing</div>
+
+    <div style="display: flex; gap: 16px; margin-top: 24px;">
+      <div style="flex: 1; padding: 14px 18px; background: rgba(245,240,229,0.03); border: 1px solid rgba(245,240,229,0.06); border-radius: 8px;">
+        <div style="font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--victoria-cove);">Spring Session</div>
+        <div style="font-family: 'Cormorant', serif; font-size: 18px; font-weight: 400; color: var(--sandstone); margin-top: 3px;">April 6 – June 13</div>
+        <div style="font-size: 10px; color: rgba(245,240,229,0.25); margin-top: 2px;">10 weeks &bull; Skip: May 25</div>
+      </div>
+      <div style="flex: 1; padding: 14px 18px; background: rgba(245,240,229,0.03); border: 1px solid rgba(245,240,229,0.06); border-radius: 8px;">
+        <div style="font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sunset-cliff);">Summer Session</div>
+        <div style="font-family: 'Cormorant', serif; font-size: 18px; font-weight: 400; color: var(--sandstone); margin-top: 3px;">June 15 – Aug 29</div>
+        <div style="font-size: 10px; color: rgba(245,240,229,0.25); margin-top: 2px;">11 weeks &bull; Skip: June 19, July 4</div>
+      </div>
+      <div style="flex: 1; padding: 14px 18px; background: rgba(245,240,229,0.03); border: 1px solid rgba(245,240,229,0.06); border-radius: 8px;">
+        <div style="font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--thousand-steps);">Spring Break Camp</div>
+        <div style="font-family: 'Cormorant', serif; font-size: 18px; font-weight: 400; color: var(--sandstone); margin-top: 3px;">March 30 – April 3</div>
+        <div style="font-size: 10px; color: rgba(245,240,229,0.25); margin-top: 2px;">1 week &bull; Mon–Thu</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 28px 56px 36px; display: flex; flex-direction: column; flex: 1;">
+
+    <!-- Locations -->
+    <div class="section-rule" style="margin-top: 0;">
+      <span class="eyebrow">Locations</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px;">
+      <div class="loc-banner">
+        <div><div class="loc-name">Moulton Meadows Park</div><div class="loc-detail">Balboa Ave & Capistrano Ave, Laguna Beach 92651</div></div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--pacific-dusk); margin-left: auto;">2 Courts</div>
+      </div>
+      <div class="loc-banner">
+        <div><div class="loc-name">Laguna Beach High School</div><div class="loc-detail">625 Park Ave, Laguna Beach 92651</div></div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--pacific-dusk); margin-left: auto;">6 Courts</div>
+      </div>
+      <div class="loc-banner">
+        <div><div class="loc-name">Alta Laguna Park</div><div class="loc-detail">Alta Laguna Blvd, Laguna Beach 92651</div></div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--pacific-dusk); margin-left: auto;">2 Courts</div>
+      </div>
+    </div>
+
+    <!-- Camps -->
+    <div class="section-rule">
+      <span class="eyebrow">Camps</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px;">
+      <!-- Spring Break -->
+      <div class="dark-section" style="padding: 20px 22px;">
+        <div style="font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--thousand-steps); margin-bottom: 5px;">Spring Break</div>
+        <div style="font-family: 'Cormorant', serif; font-size: 20px; font-weight: 400; color: var(--sandstone);">March 30 – April 3</div>
+        <div style="font-size: 10px; color: rgba(245,240,229,0.3); margin-top: 2px;">Mon–Thu &bull; Half-day &bull; Coach: Peter DeFrantz</div>
+        <div style="display: flex; gap: 8px; margin-top: 12px;">
+          <div style="flex: 1; padding: 9px 12px; background: rgba(245,240,229,0.035); border-radius: 6px; border: 1px solid rgba(245,240,229,0.05);">
+            <div style="font-size: 10px; font-weight: 500; color: rgba(245,240,229,0.45);">Tennis & Games</div>
+            <div style="font-size: 9px; color: rgba(245,240,229,0.22); margin-top: 1px;">Ages 5–11 &bull; Alta Laguna</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--sandstone); margin-top: 3px;">$295<span style="font-size: 10px; font-weight: 300; color: rgba(245,240,229,0.3);">/wk</span></div>
+          </div>
+          <div style="flex: 1; padding: 9px 12px; background: rgba(245,240,229,0.035); border-radius: 6px; border: 1px solid rgba(245,240,229,0.05);">
+            <div style="font-size: 10px; font-weight: 500; color: rgba(245,240,229,0.45);">Junior Development</div>
+            <div style="font-size: 9px; color: rgba(245,240,229,0.22); margin-top: 1px;">Ages 12–17 &bull; LBHS</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--sandstone); margin-top: 3px;">$325<span style="font-size: 10px; font-weight: 300; color: rgba(245,240,229,0.3);">/wk</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Summer -->
+      <div class="dark-section" style="padding: 20px 22px;">
+        <div style="font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sunset-cliff); margin-bottom: 5px;">Summer Camps</div>
+        <div style="font-family: 'Cormorant', serif; font-size: 20px; font-weight: 400; color: var(--sandstone);">June 15 – Aug 28</div>
+        <div style="font-size: 10px; color: rgba(245,240,229,0.3); margin-top: 2px;">Mon–Thu &bull; Half & Full Day &bull; Coach: Peter DeFrantz</div>
+        <div style="display: flex; gap: 6px; margin-top: 12px;">
+          <div style="flex: 1; padding: 9px 10px; background: rgba(245,240,229,0.035); border-radius: 6px; border: 1px solid rgba(245,240,229,0.05);">
+            <div style="font-size: 9.5px; font-weight: 500; color: rgba(245,240,229,0.45);">T&G Full Day</div>
+            <div style="font-size: 8.5px; color: rgba(245,240,229,0.22);">5–11 &bull; 9am–3pm</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--sandstone); margin-top: 3px;">$495<span style="font-size: 9px; font-weight: 300; color: rgba(245,240,229,0.3);">/wk</span></div>
+          </div>
+          <div style="flex: 1; padding: 9px 10px; background: rgba(245,240,229,0.035); border-radius: 6px; border: 1px solid rgba(245,240,229,0.05);">
+            <div style="font-size: 9.5px; font-weight: 500; color: rgba(245,240,229,0.45);">T&G Half</div>
+            <div style="font-size: 8.5px; color: rgba(245,240,229,0.22);">5–11 &bull; AM or PM</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--sandstone); margin-top: 3px;">$295<span style="font-size: 9px; font-weight: 300; color: rgba(245,240,229,0.3);">/wk</span></div>
+          </div>
+          <div style="flex: 1; padding: 9px 10px; background: rgba(245,240,229,0.035); border-radius: 6px; border: 1px solid rgba(245,240,229,0.05);">
+            <div style="font-size: 9.5px; font-weight: 500; color: rgba(245,240,229,0.45);">Jr Dev</div>
+            <div style="font-size: 8.5px; color: rgba(245,240,229,0.22);">12–17 &bull; LBHS</div>
+            <div style="font-size: 15px; font-weight: 600; color: var(--sandstone); margin-top: 3px;">$325<span style="font-size: 9px; font-weight: 300; color: rgba(245,240,229,0.3);">/wk</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fine-print">Multi-week (4+): 10% off &bull; Sibling: 10% off additional siblings</div>
+
+    <!-- Player Journey -->
+    <div class="section-rule">
+      <span class="eyebrow">The LBTA Player Journey</span>
+    </div>
+    <div class="journey-strip">
+      <div class="journey-stage">
+        <div class="js-label">Discovery</div>
+        <div class="js-ages">Ages 3–6</div>
+        <div class="js-bar" style="background: var(--victoria-cove); opacity: 0.4;"></div>
+      </div>
+      <div class="journey-stage">
+        <div class="js-label">Foundation</div>
+        <div class="js-ages">Ages 5–8</div>
+        <div class="js-bar" style="background: var(--sunset-cliff); opacity: 0.4;"></div>
+      </div>
+      <div class="journey-stage">
+        <div class="js-label">Development</div>
+        <div class="js-ages">Ages 9–15</div>
+        <div class="js-bar" style="background: var(--thousand-steps); opacity: 0.4;"></div>
+      </div>
+      <div class="journey-stage">
+        <div class="js-label">Pathway</div>
+        <div class="js-ages">Ages 12–17</div>
+        <div class="js-bar" style="background: var(--tide-pool); opacity: 0.4;"></div>
+      </div>
+      <div class="journey-stage">
+        <div class="js-label">Pursuit</div>
+        <div class="js-ages">Ages 14+</div>
+        <div class="js-bar" style="background: var(--pacific-dusk); opacity: 0.3;"></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-tagline">Movement &bull; Discipline &bull; Belonging &nbsp;&nbsp;&nbsp; Tennis, as it should be taught.</span>
+      <span class="footer-page">1</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 2 — JUNIOR PROGRAMS                                       -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-bar">
+    <span class="header-brand">Laguna Beach Tennis Academy</span>
+    <span class="header-season">Spring & Summer 2026 &bull; Junior Programs</span>
+  </div>
+  <div class="pp">
+
+    <div class="eyebrow" style="margin-bottom: 5px;">Junior Programs</div>
+    <div class="heading-lg">Junior Programs</div>
+    <div class="horizon-line" style="margin: 6px 0 14px;"></div>
+
+    <!-- Moulton Meadows -->
+    <div class="loc-banner" style="margin-bottom: 12px;">
+      <div><div class="loc-name">Moulton Meadows Park</div><div class="loc-detail">Balboa Ave & Capistrano Ave</div></div>
+      <div class="loc-coaches">Peter DeFrantz &bull; Robert LeBuhn &bull; Andrew Mateljan</div>
+    </div>
+
+    <!-- Little Tennis Stars -->
+    <div class="prog prog-teal" style="margin-bottom: 10px;">
+      <div class="prog-header">
+        <div>
+          <div class="prog-title">Little Tennis Stars</div>
+          <div class="prog-meta"><span class="prog-meta-item">45 min &bull; Monthly &bull; Mon/Wed 3:30–4:15pm &bull; Sat 11:30am–12:15pm</span></div>
+        </div>
+        <span class="prog-badge badge-age">Ages 3–4</span>
+      </div>
+      <div class="prog-desc">The starting point for our youngest players. Movement games, coordination challenges, and playful racket exploration on a scaled 36-foot court with foam balls. Joy and discovery—building balance, tracking skills, and social confidence.</div>
+      <div class="price-row">
+        <div class="price-pill">1x/wk <b>$120/mo</b></div>
+        <div class="price-pill">2x/wk <b>$200/mo</b></div>
+        <div class="price-pill">Drop-in <b>$40</b></div>
+      </div>
+    </div>
+
+    <!-- Red Ball -->
+    <div class="prog prog-orange" style="margin-bottom: 10px;">
+      <div class="prog-header">
+        <div>
+          <div class="prog-title">Red Ball</div>
+          <div class="prog-meta"><span class="prog-meta-item">60 min &bull; Mon/Wed 4:15–5:15pm &bull; Sat 12:15–1:15pm</span></div>
+        </div>
+        <span class="prog-badge badge-age">Ages 5–6</span>
+      </div>
+      <div class="prog-desc">Where real tennis begins. Proper strokes, footwork, and rally skills on a 36-foot court. More contacts per session means faster development.</div>
+      <table class="dt">
+        <tr>
+          <th rowspan="2">Days</th>
+          <th colspan="3" class="season-spring" style="text-align: center;">Spring (10 wk)</th>
+          <th colspan="3" class="season-summer" style="text-align: center;">Summer (11 wk)</th>
+          <th rowspan="2">Drop-in</th>
+        </tr>
+        <tr>
+          <th class="season-spring">1x</th><th class="season-spring">2x</th><th class="season-spring">3x</th>
+          <th class="season-summer">1x</th><th class="season-summer">2x</th><th class="season-summer">3x</th>
+        </tr>
+        <tr>
+          <td><strong>Mon / Wed</strong></td>
+          <td class="price">$420</td><td class="price">$840</td><td class="price">$1,260</td>
+          <td class="price">$462</td><td class="price">$924</td><td class="price">$1,386</td>
+          <td class="price">$50</td>
+        </tr>
+        <tr>
+          <td><strong>Saturday</strong></td>
+          <td class="price">$380</td><td>—</td><td>—</td>
+          <td class="price">$418</td><td>—</td><td>—</td>
+          <td class="price">$50</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Orange Ball -->
+    <div class="prog prog-orange" style="margin-bottom: 10px;">
+      <div class="prog-header">
+        <div>
+          <div class="prog-title">Orange Ball</div>
+          <div class="prog-meta"><span class="prog-meta-item">60 min &bull; Same schedule & pricing as Red Ball</span></div>
+        </div>
+        <span class="prog-badge badge-age">Ages 7–8</span>
+      </div>
+      <div class="prog-desc">The 60-foot court changes everything. Real directional play—crosscourt, down-the-line, and the first seeds of tactical thinking. Optional Friday Match Play in a supportive format.</div>
+    </div>
+
+    <!-- Green Dot -->
+    <div class="prog prog-gold" style="margin-bottom: 14px;">
+      <div class="prog-header">
+        <div>
+          <div class="prog-title">Green Dot</div>
+          <div class="prog-meta"><span class="prog-meta-item">60 min &bull; Same schedule & pricing as Red Ball</span></div>
+        </div>
+        <span class="prog-badge badge-age">Ages 9–11</span>
+      </div>
+      <div class="prog-desc">Full-court tennis with purpose. The 78-foot court with a reduced-compression ball—building consistency, topspin mechanics, and point-construction skills. The critical developmental window.</div>
+      <div class="fine-print" style="margin-top: 5px;">Friday Match Play: $65/mo or $25/session</div>
+    </div>
+
+    <!-- Alta Laguna -->
+    <div class="loc-banner" style="margin-bottom: 12px; border-left-color: var(--sunset-cliff);">
+      <div><div class="loc-name">Alta Laguna Park</div><div class="loc-detail">Alta Laguna Blvd</div></div>
+      <div class="loc-coaches">Robert LeBuhn &bull; Andrew Mateljan</div>
+    </div>
+
+    <!-- Youth Development -->
+    <div class="prog prog-green">
+      <div class="prog-header">
+        <div>
+          <div class="prog-title">Youth Development</div>
+          <div class="prog-meta"><span class="prog-meta-item">90 min &bull; Mon–Thu &bull; Fri Match Play at LBHS</span></div>
+        </div>
+        <span class="prog-badge badge-age">Ages 11–15</span>
+      </div>
+      <div class="prog-desc">Serious training, accessible structure. The volume, tactical depth, and physical conditioning that competitive growth demands. Train up to five sessions per week.</div>
+      <table class="dt">
+        <tr>
+          <th>Frequency</th>
+          <th class="season-spring">Spring (10 wk)</th>
+          <th class="season-summer">Summer (11 wk)</th>
+          <th>Drop-in</th>
+        </tr>
+        <tr><td><strong>1x / week</strong></td><td class="price">$580</td><td class="price">$638</td><td class="price">$70</td></tr>
+        <tr><td><strong>2x / week</strong></td><td class="price">$1,105</td><td class="price">$1,216</td><td></td></tr>
+        <tr><td><strong>3x / week</strong></td><td class="price">$1,660</td><td class="price">$1,826</td><td></td></tr>
+        <tr><td><strong>4x / week</strong></td><td class="price">$2,215</td><td class="price">$2,437</td><td></td></tr>
+        <tr><td><strong>5x / week</strong> (incl. Fri)</td><td class="price">$2,500</td><td class="price">$2,750</td><td></td></tr>
+      </table>
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-tagline">Movement &bull; Discipline &bull; Belonging &nbsp;&nbsp;&nbsp; Tennis, as it should be taught.</span>
+      <span class="footer-page">2</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 3 — ADULT PROGRAMS                                        -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-bar">
+    <span class="header-brand">Laguna Beach Tennis Academy</span>
+    <span class="header-season">Spring & Summer 2026 &bull; Adult Programs</span>
+  </div>
+  <div class="pp">
+
+    <div class="eyebrow" style="margin-bottom: 5px;">Adult Programs</div>
+    <div class="heading-lg">Adult Programs</div>
+    <div class="horizon-line" style="margin: 6px 0 14px;"></div>
+
+    <!-- Adult Beginner 1 -->
+    <div class="prog prog-teal" style="margin-bottom: 12px;">
+      <div class="prog-header">
+        <div>
+          <div class="prog-title">Adult Beginner 1 — True Beginner</div>
+          <div class="prog-meta"><span class="prog-meta-item">60 min &bull; LB High School &bull; 3 schedule options</span></div>
+        </div>
+        <span class="prog-badge badge-level">Start Here</span>
+      </div>
+      <div class="prog-desc">Brand new to tennis? Start here. Strokes, footwork, serving, and scoring from scratch—in a supportive group where everyone is learning together. You'll be hitting rallies from the first session.</div>
+      <table class="dt">
+        <tr>
+          <th>Days</th><th>Time</th><th>Coach</th>
+          <th class="season-spring">Spring 1x</th><th class="season-spring">Spring 2x</th>
+          <th class="season-summer">Summer 1x</th><th class="season-summer">Summer 2x</th>
+          <th>Drop-in</th>
+        </tr>
+        <tr>
+          <td><strong>Mon / Wed</strong></td><td>6:00–7:00pm</td><td>Robert</td>
+          <td class="price">$420</td><td class="price">$615</td>
+          <td class="price">$462</td><td class="price">$677</td>
+          <td class="price">$55</td>
+        </tr>
+        <tr>
+          <td><strong>Tue / Thu</strong></td><td>10:00–11:00am</td><td>Andrew</td>
+          <td class="price">$420</td><td class="price">$615</td>
+          <td class="price">$462</td><td class="price">$677</td>
+          <td class="price">$55</td>
+        </tr>
+        <tr>
+          <td><strong>Saturday</strong></td><td>9:00–10:00am</td><td>Andrew & Robert</td>
+          <td class="price">$380</td><td>—</td>
+          <td class="price">$418</td><td>—</td>
+          <td class="price">$55</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Adult Beginner 2 — Bridge -->
+    <div class="prog prog-teal" style="margin-bottom: 12px;">
+      <div class="prog-header">
+        <div>
+          <div class="prog-title">Adult Beginner 2 — Bridge</div>
+          <div class="prog-meta">
+            <span class="prog-meta-item">60 min &bull; Moulton Meadows Park &bull; Mon/Wed 6:30–7:30pm</span>
+          </div>
+        </div>
+        <span class="prog-badge badge-level">Foundation</span>
+      </div>
+      <div style="font-size: 10px; color: var(--victoria-cove); margin-top: 3px;">Coaches: Peter DeFrantz &bull; Robert LeBuhn &bull; Andrew Mateljan</div>
+      <div class="prog-desc">You can hit—now learn to play. Develops your rallies into real points, introduces court positioning and doubles basics, and builds the consistency to step into intermediate groups.</div>
+      <div class="season-prices">
+        <div class="sp-card spring">
+          <div class="sp-label">Spring (10 wk)</div>
+          <div class="sp-detail">1x/wk <b>$420</b> &bull; 2x/wk <b>$615</b> &bull; Drop-in <b>$55</b></div>
+        </div>
+        <div class="sp-card summer">
+          <div class="sp-label">Summer (11 wk)</div>
+          <div class="sp-detail">1x/wk <b>$462</b> &bull; 2x/wk <b>$677</b> &bull; Drop-in <b>$55</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Adult Intermediate -->
+    <div class="prog prog-orange" style="margin-bottom: 12px;">
+      <div class="prog-header">
+        <div>
+          <div class="prog-title">Adult Intermediate</div>
+          <div class="prog-meta"><span class="prog-meta-item">90 min &bull; LB High School &bull; Coaches: Andrew Mateljan &bull; Robert LeBuhn</span></div>
+        </div>
+        <span class="prog-badge badge-level">NTRP 3.0–3.5</span>
+      </div>
+      <div class="prog-desc">Purposeful training for the developing player. Stroke reliability, tactical awareness, and match-play confidence through live-ball drills and coached competitive play.</div>
+      <table class="dt">
+        <tr>
+          <th>Days</th><th>Time</th>
+          <th class="season-spring">Spring 1x</th><th class="season-spring">Spring 2x</th><th class="season-spring">Spring 3x</th>
+          <th class="season-summer">Summer 1x</th><th class="season-summer">Summer 2x</th><th class="season-summer">Summer 3x</th>
+          <th>Drop-in</th>
+        </tr>
+        <tr>
+          <td><strong>Tue / Thu</strong></td><td>11am–12:30pm</td>
+          <td class="price">$580</td><td class="price">$1,105</td><td class="price">$1,570</td>
+          <td class="price">$638</td><td class="price">$1,216</td><td class="price">$1,727</td>
+          <td class="price">$70</td>
+        </tr>
+        <tr>
+          <td><strong>Saturday</strong></td><td>10–11:30am</td>
+          <td colspan="3" style="text-align: center; font-style: italic; color: rgba(27,58,92,0.3);">Included in 3x/wk</td>
+          <td colspan="3" style="text-align: center; font-style: italic; color: rgba(27,58,92,0.3);">Included in 3x/wk</td>
+          <td class="price">$70</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Adult Advanced -->
+    <div class="prog prog-gold">
+      <div class="prog-header">
+        <div>
+          <div class="prog-title">Adult Advanced</div>
+          <div class="prog-meta"><span class="prog-meta-item">120 min &bull; LB High School &bull; Mon/Fri 12:00–2:00pm</span></div>
+        </div>
+        <span class="prog-badge badge-level">NTRP 4.0+</span>
+      </div>
+      <div style="font-size: 10px; color: var(--victoria-cove); margin-top: 3px;">Coaches: Andrew Mateljan & Robert LeBuhn</div>
+      <div class="prog-desc">Coached intensity for competitive adults. Refining strokes under pressure, building tactical patterns, and replicating match conditions. For players who compete and want their training to reflect it.</div>
+      <div class="season-prices">
+        <div class="sp-card spring">
+          <div class="sp-label">Spring (10 wk)</div>
+          <div class="sp-detail">1x/wk <b>$625</b> &bull; 2x/wk <b>$1,250</b> &bull; Drop-in <b>$90</b></div>
+        </div>
+        <div class="sp-card summer">
+          <div class="sp-label">Summer (11 wk)</div>
+          <div class="sp-detail">1x/wk <b>$688</b> &bull; 2x/wk <b>$1,375</b> &bull; Drop-in <b>$90</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fine-print" style="margin-top: 12px; text-align: center;">All program registration through the City of Laguna Beach Recreation Department.</div>
+
+    <div class="page-footer">
+      <span class="footer-tagline">Movement &bull; Discipline &bull; Belonging &nbsp;&nbsp;&nbsp; Tennis, as it should be taught.</span>
+      <span class="footer-page">3</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 4 — HIGH PERFORMANCE + MONTHLY + DISCOUNTS                -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-bar">
+    <span class="header-brand">Laguna Beach Tennis Academy</span>
+    <span class="header-season">Spring & Summer 2026 &bull; High Performance & Monthly</span>
+  </div>
+  <div class="pp">
+
+    <div class="eyebrow" style="margin-bottom: 5px;">High Performance</div>
+    <div class="heading-lg">High Performance Academy</div>
+    <div class="horizon-line" style="margin: 6px 0 14px;"></div>
+
+    <!-- HP Dark Feature -->
+    <div class="dark-section" style="margin-bottom: 14px; padding: 28px 32px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+          <div style="font-size: 11px; color: rgba(245,240,229,0.3); margin-bottom: 4px;">LB High School &bull; Coaches: Andrew Mateljan &bull; Robert LeBuhn</div>
+          <div style="font-size: 12px; font-weight: 300; color: rgba(245,240,229,0.5); line-height: 1.6; max-width: 520px; margin-top: 6px;">Tournament-caliber training for ages 12–17. Two-hour sessions combining technical refinement, advanced tactical patterns, sport-specific conditioning, and mental performance coaching. Friday match play replicates tournament conditions.</div>
+        </div>
+        <div style="padding: 5px 14px; border-radius: 20px; background: rgba(232,131,74,0.12); border: 1px solid rgba(232,131,74,0.2); font-size: 10px; font-weight: 600; color: var(--sunset-cliff); white-space: nowrap; flex-shrink: 0;">UTR 5+ Required</div>
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 16px;">
+        <div style="flex: 1; padding: 10px 16px; background: rgba(245,240,229,0.035); border-radius: 6px; border: 1px solid rgba(245,240,229,0.05);">
+          <div style="font-size: 9px; font-weight: 500; color: rgba(245,240,229,0.3); text-transform: uppercase; letter-spacing: 0.1em;">Mon – Thu</div>
+          <div style="font-size: 14px; font-weight: 500; color: var(--sandstone); margin-top: 2px;">6:00 – 8:00 PM</div>
+          <div style="font-size: 9px; color: rgba(245,240,229,0.22);">Training &bull; 2 hours</div>
+        </div>
+        <div style="flex: 1; padding: 10px 16px; background: rgba(245,240,229,0.035); border-radius: 6px; border: 1px solid rgba(245,240,229,0.05);">
+          <div style="font-size: 9px; font-weight: 500; color: rgba(245,240,229,0.3); text-transform: uppercase; letter-spacing: 0.1em;">Friday</div>
+          <div style="font-size: 14px; font-weight: 500; color: var(--sandstone); margin-top: 2px;">5:30 – 7:30 PM</div>
+          <div style="font-size: 9px; color: rgba(245,240,229,0.22);">Match Play &bull; 2 hours</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="dt" style="margin-bottom: 22px;">
+      <tr>
+        <th>Frequency</th>
+        <th class="season-spring">Spring (10 wk)</th>
+        <th class="season-summer">Summer (11 wk)</th>
+        <th>Drop-in</th>
+      </tr>
+      <tr><td><strong>1x / week</strong></td><td class="price">$625</td><td class="price">$688</td><td class="price">$100</td></tr>
+      <tr><td><strong>2x / week</strong></td><td class="price">$1,250</td><td class="price">$1,375</td><td></td></tr>
+      <tr><td><strong>3x / week</strong></td><td class="price">$1,745</td><td class="price">$1,920</td><td></td></tr>
+      <tr><td><strong>4x / week</strong></td><td class="price">$2,245</td><td class="price">$2,470</td><td></td></tr>
+      <tr><td><strong>5x / week</strong> (incl. Fri)</td><td class="price">$2,460</td><td class="price">$2,706</td><td></td></tr>
+    </table>
+
+    <!-- Monthly Programs -->
+    <div class="section-rule">
+      <span class="eyebrow">Monthly Programs</span>
+    </div>
+    <div class="monthly-grid" style="margin-bottom: 18px;">
+      <div class="monthly-card">
+        <div class="mc-title">LiveBall Intermediate</div>
+        <div class="mc-desc">Coach-fed hitting with purpose. High-volume point play for extra reps and competitive energy.</div>
+        <div class="mc-schedule">
+          Thu 6:00–7:30pm &bull; Moulton Meadows<br>
+          Sun 9:00–10:00am &bull; LBHS
+        </div>
+        <div class="mc-price">
+          <div class="price-pill"><b>$150</b>/mo</div>
+          <div class="price-pill">Drop-in <b>$50</b></div>
+        </div>
+      </div>
+      <div class="monthly-card">
+        <div class="mc-title">LiveBall Advanced</div>
+        <div class="mc-desc">Ninety minutes of competitive-tempo, coach-fed point play for NTRP 3.5+ players.</div>
+        <div class="mc-schedule">
+          Sun 10:30am–12pm &bull; LBHS<br>
+          Coaches: Peter & Andrew
+        </div>
+        <div class="mc-price">
+          <div class="price-pill"><b>$150</b>/mo</div>
+          <div class="price-pill">Drop-in <b>$50</b></div>
+        </div>
+      </div>
+      <div class="monthly-card">
+        <div class="mc-title">Cardio Tennis</div>
+        <div class="mc-desc">Tennis as a workout. High-energy, fitness-focused hitting. All levels welcome.</div>
+        <div class="mc-schedule">
+          Fri 9:00–10:30am &bull; LBHS<br>
+          Coaches: Andrew & Robert
+        </div>
+        <div class="mc-price">
+          <div class="price-pill"><b>$150</b>/mo</div>
+          <div class="price-pill">Drop-in <b>$50</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discounts -->
+    <div class="section-rule">
+      <span class="eyebrow">Discounts</span>
+    </div>
+    <div class="disc-grid">
+      <div class="disc-item">
+        <div class="disc-pct">10%</div>
+        <div><div class="disc-label">Sibling</div><div class="disc-detail">Additional siblings in same program</div></div>
+      </div>
+      <div class="disc-item">
+        <div class="disc-pct">5%</div>
+        <div><div class="disc-label">Early Bird</div><div class="disc-detail">Registered 2+ weeks before session start</div></div>
+      </div>
+      <div class="disc-item">
+        <div class="disc-pct">5%</div>
+        <div><div class="disc-label">Multi-Session</div><div class="disc-detail">Register Spring + Summer together</div></div>
+      </div>
+      <div class="disc-item">
+        <div class="disc-pct">10%</div>
+        <div><div class="disc-label">Multi-Camp Week</div><div class="disc-detail">Booking 4+ weeks of camp</div></div>
+      </div>
+    </div>
+    <div class="fine-print" style="margin-top: 6px;">Discounts do not stack. The most favorable single discount is applied automatically.</div>
+
+    <div class="page-footer">
+      <span class="footer-tagline">Movement &bull; Discipline &bull; Belonging &nbsp;&nbsp;&nbsp; Tennis, as it should be taught.</span>
+      <span class="footer-page">4</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 5 — PRIVATE COACHING & CONTACT                            -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header-bar">
+    <span class="header-brand">Laguna Beach Tennis Academy</span>
+    <span class="header-season">Spring & Summer 2026 &bull; Private Coaching</span>
+  </div>
+  <div class="pp">
+
+    <div class="eyebrow" style="margin-bottom: 5px;">Private Coaching</div>
+    <div class="heading-lg">Private & Semi-Private Lessons</div>
+    <div class="horizon-line" style="margin: 6px 0 14px;"></div>
+
+    <div class="body-text" style="margin-bottom: 18px; max-width: 580px;">Customized one-on-one and small-group training tailored to each player's unique strengths, goals, and competitive timeline. All sessions are 1 hour unless otherwise arranged.</div>
+
+    <!-- Rate Cards -->
+    <div class="rate-cards" style="margin-bottom: 22px;">
+      <div class="rate-card featured">
+        <div class="rc-name">Andrew Mateljan</div>
+        <div class="rc-price">$250 <span>/hr</span></div>
+        <div class="rc-packs">10-Pack: $2,300<br>20-Pack: $4,200</div>
+      </div>
+      <div class="rate-card">
+        <div class="rc-name">Robert LeBuhn</div>
+        <div class="rc-price">$120 <span>/hr</span></div>
+        <div class="rc-packs">10-Pack: $1,100<br>20-Pack: $2,000</div>
+      </div>
+      <div class="rate-card">
+        <div class="rc-name">Peter DeFrantz</div>
+        <div class="rc-price">$120 <span>/hr</span></div>
+        <div class="rc-packs">10-Pack: $1,100<br>20-Pack: $2,000</div>
+      </div>
+      <div class="rate-card">
+        <div class="rc-name">Michelle Bevins</div>
+        <div class="rc-price">$120 <span>/hr</span></div>
+        <div class="rc-packs">10-Pack: $1,100<br>20-Pack: $2,000</div>
+        <div style="font-size: 9px; color: rgba(27,58,92,0.22); font-style: italic; margin-top: 6px;">Currently on leave; may return Spring 2026</div>
+      </div>
+    </div>
+
+    <!-- Side by side descriptions -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px;">
+      <div class="prog prog-teal">
+        <div class="prog-title" style="font-size: 17px;">Private Lessons</div>
+        <div class="prog-desc">One-on-one coaching tailored entirely to your game. Apply the LBTA Method to your specific goals—building fundamentals, fixing a forehand, preparing for tournaments, or accelerating between group sessions. Available at all three locations.</div>
+      </div>
+      <div class="prog prog-orange">
+        <div class="prog-title" style="font-size: 17px;">Semi-Private Lessons</div>
+        <div class="prog-desc">Personalized coaching shared with a training partner. 2–3 players of similar ability get focused instruction with live hitting and competitive dynamics. Great for siblings, friends, or doubles partners. Cost-sharing available.</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section" style="margin-bottom: 18px;">
+      <div style="position: relative; z-index: 1;">
+        <div style="font-family: 'Cormorant', serif; font-weight: 300; font-size: 30px; color: var(--sandstone);">Ready to Start?</div>
+        <div style="height: 2px; width: 50px; background: linear-gradient(90deg, var(--victoria-cove), var(--sunset-cliff)); margin: 12px auto 16px; border-radius: 1px;"></div>
+        <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 14px;">
+          <div>
+            <div style="font-size: 8px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,229,0.25); margin-bottom: 4px;">Email</div>
+            <div style="font-size: 14px; font-weight: 500; color: var(--sandstone);">support@lagunabeachtennisacademy.com</div>
+          </div>
+          <div>
+            <div style="font-size: 8px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,229,0.25); margin-bottom: 4px;">Phone</div>
+            <div style="font-size: 14px; font-weight: 500; color: var(--sandstone);">+1 (949) 534-0457</div>
+          </div>
+        </div>
+        <div style="font-size: 11px; color: rgba(245,240,229,0.2);">www.lagunabeachtennisacademy.com</div>
+      </div>
+    </div>
+
+    <div class="fine-print" style="text-align: center;">
+      All program registration through the City of Laguna Beach Recreation Department. Discounts do not stack—the most favorable single discount is applied automatically.
+    </div>
+
+    <div class="page-footer">
+      <span class="footer-tagline">Movement &bull; Discipline &bull; Belonging &nbsp;&nbsp;&nbsp; Tennis, as it should be taught.</span>
+      <span class="footer-page">5</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

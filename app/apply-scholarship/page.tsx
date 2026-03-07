@@ -72,7 +72,7 @@ export default function ApplyScholarshipPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-lbta-cream pt-40 pb-20">
+      <section className="relative bg-brand-morning-light pt-40 pb-20">
         <div className="container-narrow text-center">
           <AnimatedSection>
             <p className="text-overline mb-6">Scholarship Application</p>
@@ -109,12 +109,12 @@ export default function ApplyScholarshipPage() {
             
             {/* Student Information */}
             <div>
-              <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
+              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
                 Student Information
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Student Full Name *
                   </label>
                   <input
@@ -128,7 +128,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Age *
                   </label>
                   <input
@@ -142,7 +142,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Current Grade *
                   </label>
                   <input
@@ -156,7 +156,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Current GPA * (3.5+ required)
                   </label>
                   <input
@@ -176,12 +176,12 @@ export default function ApplyScholarshipPage() {
 
             {/* Parent/Guardian Information */}
             <div className="pt-8 border-t border-gray-200">
-              <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
+              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
                 Parent/Guardian Information
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Parent/Guardian Name *
                   </label>
                   <input
@@ -195,7 +195,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Email *
                   </label>
                   <input
@@ -209,7 +209,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Phone *
                   </label>
                   <input
@@ -223,7 +223,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Address *
                   </label>
                   <input
@@ -240,12 +240,12 @@ export default function ApplyScholarshipPage() {
 
             {/* Household Information */}
             <div className="pt-8 border-t border-gray-200">
-              <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
+              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
                 Household Information
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Household Income * (must be under $75,000)
                   </label>
                   <select
@@ -263,7 +263,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Household Size *
                   </label>
                   <input
@@ -281,12 +281,12 @@ export default function ApplyScholarshipPage() {
 
             {/* Tennis Background */}
             <div className="pt-8 border-t border-gray-200">
-              <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
+              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
                 Tennis Background
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Current Skill Level *
                   </label>
                   <select
@@ -304,7 +304,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Years Playing Tennis *
                   </label>
                   <input
@@ -319,7 +319,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Current LBTA Program (if enrolled)
                   </label>
                   <input
@@ -332,7 +332,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Desired Program *
                   </label>
                   <input
@@ -346,7 +346,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Committed Sessions Per Week * (minimum 2)
                   </label>
                   <select
@@ -367,13 +367,13 @@ export default function ApplyScholarshipPage() {
 
             {/* Commitment & Goals */}
             <div className="pt-8 border-t border-gray-200">
-              <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
+              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
                 Commitment & Goals
               </h2>
 
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Tennis Goals * (What do you hope to achieve?)
                   </label>
                   <textarea
@@ -387,7 +387,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Why This Scholarship Matters to Your Family *
                   </label>
                   <textarea
@@ -401,7 +401,7 @@ export default function ApplyScholarshipPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-sans font-medium text-lbta-charcoal mb-2">
+                  <label className="block text-sm font-sans font-medium text-brand-pacific-dusk mb-2">
                     Additional Information
                   </label>
                   <textarea
@@ -452,10 +452,10 @@ export default function ApplyScholarshipPage() {
       </section>
 
       {/* Info Section */}
-      <section className="section-spacing bg-lbta-cream">
+      <section className="section-spacing bg-brand-morning-light">
         <div className="container-narrow">
           <AnimatedSection className="text-center">
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-6">
+            <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-6">
               What Happens Next
             </h2>
           </AnimatedSection>
@@ -463,7 +463,7 @@ export default function ApplyScholarshipPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12">
             <div className="text-center">
               <div className="text-6xl font-serif font-light text-lbta-burnt/30 mb-4">01</div>
-              <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-2">
+              <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 We Review
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -473,7 +473,7 @@ export default function ApplyScholarshipPage() {
 
             <div className="text-center">
               <div className="text-6xl font-serif font-light text-lbta-burnt/30 mb-4">02</div>
-              <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-2">
+              <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 Interview
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -483,7 +483,7 @@ export default function ApplyScholarshipPage() {
 
             <div className="text-center">
               <div className="text-6xl font-serif font-light text-lbta-burnt/30 mb-4">03</div>
-              <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-2">
+              <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 Decision
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -493,7 +493,7 @@ export default function ApplyScholarshipPage() {
 
             <div className="text-center">
               <div className="text-6xl font-serif font-light text-lbta-burnt/30 mb-4">04</div>
-              <h3 className="text-base font-sans font-medium text-lbta-charcoal mb-2">
+              <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 You Begin
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -508,7 +508,7 @@ export default function ApplyScholarshipPage() {
       <section className="section-spacing bg-white">
         <div className="container-narrow">
           <AnimatedSection>
-            <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-6">
+            <h2 className="text-3xl font-serif font-light text-brand-pacific-dusk mb-6">
               Questions About Scholarships?
             </h2>
             <p className="text-lg text-gray-600 mb-8">

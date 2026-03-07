@@ -22,8 +22,8 @@ export default function ThankYouPage() {
         
         <div className="container-narrow text-center relative z-10">
           <AnimatedSection>
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 mb-8">
-              <CheckCircle className="w-12 h-12 text-green-400" />
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-tide-pool/20 mb-8">
+              <CheckCircle className="w-12 h-12 text-brand-tide-pool" />
             </div>
             <h1 className="font-serif text-[36px] md:text-[48px] font-semibold mb-6 leading-tight">
               You're All Set
@@ -56,9 +56,9 @@ export default function ThankYouPage() {
               <AnimatedSection delay={100}>
                 <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 relative">
                   <div className="md:w-1/2 md:text-right md:pr-12">
-                    <div className="bg-[#FAF8F3] p-6 md:p-8 rounded-lg">
-                      <div className="inline-flex items-center gap-2 text-green-600 font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
-                        <span className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600">1</span>
+                    <div className="bg-brand-morning-light p-6 md:p-8 rounded-lg">
+                      <div className="inline-flex items-center gap-2 text-brand-tide-pool font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
+                        <span className="w-6 h-6 rounded-full bg-brand-tide-pool/20 flex items-center justify-center text-brand-tide-pool">1</span>
                         Within 24 Hours
                       </div>
                       <h3 className="font-serif text-[22px] font-semibold text-black mb-2">
@@ -80,7 +80,7 @@ export default function ThankYouPage() {
                   <div className="md:w-1/2 md:pr-12" />
                   <div className="hidden md:flex items-center justify-center w-4 h-4 rounded-full bg-black absolute left-1/2 -translate-x-1/2" />
                   <div className="md:w-1/2 md:pl-12">
-                    <div className="bg-[#FAF8F3] p-6 md:p-8 rounded-lg">
+                    <div className="bg-brand-morning-light p-6 md:p-8 rounded-lg">
                       <div className="inline-flex items-center gap-2 text-blue-600 font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
                         <span className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">2</span>
                         Before Your Trial
@@ -100,9 +100,9 @@ export default function ThankYouPage() {
               <AnimatedSection delay={300}>
                 <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 relative">
                   <div className="md:w-1/2 md:text-right md:pr-12">
-                    <div className="bg-[#FAF8F3] p-6 md:p-8 rounded-lg">
-                      <div className="inline-flex items-center gap-2 text-orange-600 font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
-                        <span className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">3</span>
+                    <div className="bg-brand-morning-light p-6 md:p-8 rounded-lg">
+                      <div className="inline-flex items-center gap-2 text-brand-sunset-cliff font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
+                        <span className="w-6 h-6 rounded-full bg-brand-sunset-cliff/10 flex items-center justify-center text-brand-sunset-cliff">3</span>
                         Your First Session
                       </div>
                       <h3 className="font-serif text-[22px] font-semibold text-black mb-2">
@@ -123,7 +123,7 @@ export default function ThankYouPage() {
       </section>
 
       {/* Quick Links */}
-      <section className="py-16 md:py-20 bg-[#FAF8F3]">
+      <section className="py-16 md:py-20 bg-brand-morning-light">
         <div className="max-w-5xl mx-auto px-6">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-serif text-[28px] md:text-[32px] font-semibold text-black">
@@ -243,7 +243,7 @@ export default function ThankYouPage() {
       </section>
 
       {/* Contact */}
-      <section className="py-12 bg-[#FAF8F3] border-t border-black/5">
+      <section className="py-12 bg-brand-morning-light border-t border-black/5">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <AnimatedSection>
             <p className="font-sans text-[15px] text-black/60 mb-6">

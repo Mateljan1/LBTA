@@ -35,11 +35,11 @@ export default function ProgramPricingDropdown({ pricing, isQuarterly = true }: 
     <div className="mt-4">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center justify-between w-full text-left py-3 px-4 bg-[#FAF8F3] rounded-lg hover:bg-lbta-orange/10 transition-all duration-200"
+        className="flex items-center justify-between w-full text-left py-3 px-4 bg-brand-morning-light rounded-lg hover:bg-brand-sunset-cliff/10 transition-all duration-200"
         aria-expanded={isExpanded}
       >
         <div>
-          <span className="font-serif text-[18px] md:text-[20px] font-bold text-lbta-orange">
+          <span className="font-serif text-[18px] md:text-[20px] font-bold text-brand-sunset-cliff">
             ${basePrice}
           </span>
           <span className="font-sans text-[13px] text-black/60 ml-2">
@@ -47,9 +47,9 @@ export default function ProgramPricingDropdown({ pricing, isQuarterly = true }: 
           </span>
         </div>
         {isExpanded ? (
-          <ChevronUp className="w-5 h-5 text-lbta-orange" />
+          <ChevronUp className="w-5 h-5 text-brand-sunset-cliff" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-lbta-orange" />
+          <ChevronDown className="w-5 h-5 text-brand-sunset-cliff" />
         )}
       </button>
       
@@ -60,7 +60,7 @@ export default function ProgramPricingDropdown({ pricing, isQuarterly = true }: 
               <span className="font-sans text-[14px] md:text-[15px] text-black/70">
                 {option.label}
               </span>
-              <span className="font-serif text-[18px] font-bold text-lbta-orange">
+              <span className="font-serif text-[18px] font-bold text-brand-sunset-cliff">
                 ${option.price}
               </span>
             </div>

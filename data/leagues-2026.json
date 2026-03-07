@@ -1,0 +1,115 @@
+{
+  "usta": {
+    "totalSeasonCost": 5500,
+    "ustaMembershipAnnual": 48,
+    "leagues": [
+      {
+        "id": 1,
+        "name": "Adult 18 & Over",
+        "season": "Apr 17 – Jul 5, 2026",
+        "weeks": "~11 weeks",
+        "format": "2 singles + 3 doubles, same gender",
+        "levels": "2.5 / 3.0 / 3.5 / 4.0 / 4.5 / 5.0",
+        "pricing12": "$458",
+        "pricing14": "$393",
+        "weeklyApprox": "~$42/week",
+        "deadline": "April 1"
+      },
+      {
+        "id": 2,
+        "name": "Friday Women's League",
+        "season": "Apr 17 – Jul 5, 2026",
+        "weeks": "~11 weeks",
+        "format": "2 singles + 3 doubles, women only",
+        "levels": "2.5 / 3.0 / 3.5 / 4.0 / 4.5",
+        "pricing12": "$458",
+        "pricing14": "$393",
+        "weeklyApprox": "~$42/week",
+        "deadline": "April 1"
+      },
+      {
+        "id": 3,
+        "name": "Mixed 40+ Doubles",
+        "season": "Apr 18 – Sep 6, 2026",
+        "weeks": "~20 weeks",
+        "format": "3 doubles lines, mixed gender, combined NTRP",
+        "levels": "6.0 / 7.0 / 8.0 / 9.0 / 10.0 combined",
+        "pricing12": "$458",
+        "pricing14": "$393",
+        "weeklyApprox": "~$23/week",
+        "deadline": "April 1"
+      },
+      {
+        "id": 4,
+        "name": "Adult 55+ Doubles",
+        "season": "May 2 – Aug 16, 2026",
+        "weeks": "~15 weeks",
+        "format": "3 doubles lines, same gender, combined NTRP",
+        "levels": "6.0 / 7.0 / 8.0 / 9.0 combined",
+        "pricing12": "$458",
+        "pricing14": "$393",
+        "weeklyApprox": "~$31/week",
+        "deadline": "April 19"
+      }
+    ],
+    "ntrpGuide": [
+      { "level": "2.5", "desc": "Can rally but inconsistent. Learning serve. New to match play." },
+      { "level": "3.0", "desc": "Consistent rally. Developing serve. Playing points with intention." },
+      { "level": "3.5", "desc": "Reliable groundstrokes and serve. Can place the ball. Comfortable in doubles." },
+      { "level": "4.0", "desc": "Strong all-court game. Spin, pace variation, tactical patterns." },
+      { "level": "4.5+", "desc": "Tournament-level. Weapons on serve and groundstrokes. Advanced tactics." }
+    ]
+  },
+  "utr": {
+    "divisions": [
+      {
+        "name": "Color Ball",
+        "level": "Red / Orange / Green — Juniors",
+        "format": "Pod Round Robin",
+        "price": "$349",
+        "time": "1:30–4:00 PM",
+        "venue": "Alta Laguna Park"
+      },
+      {
+        "name": "UTR 2.0–4.0",
+        "level": "Intermediate (~NTRP 2.5–3.5)",
+        "format": "8-Game Pro Sets",
+        "price": "$399",
+        "time": "4:00–6:30 PM",
+        "venue": "Alta Laguna Park"
+      },
+      {
+        "name": "UTR 3.0–5.0",
+        "level": "Intermediate+ (~NTRP 3.0–4.0)",
+        "format": "Best of 3, 10-pt tiebreak",
+        "price": "$499",
+        "time": "1:30–4:00 PM",
+        "venue": "Laguna Beach HS"
+      },
+      {
+        "name": "UTR 5.0–7.0",
+        "level": "Advanced (~NTRP 4.0–5.0)",
+        "format": "Best of 3, 10-pt tiebreak",
+        "price": "$499",
+        "time": "4:00–6:30 PM",
+        "venue": "Laguna Beach HS"
+      },
+      {
+        "name": "Doubles Round Robin",
+        "level": "All levels",
+        "format": "8-Game Pro Sets",
+        "price": "$549",
+        "time": "6:30–9:00 PM",
+        "venue": "Laguna Beach HS"
+      }
+    ],
+    "ntrpToUtr": [
+      { "ntrp": "2.5", "men": "1.5–2.5", "women": "1.5–2.5" },
+      { "ntrp": "3.0", "men": "2.5–3.5", "women": "2.3–3.3" },
+      { "ntrp": "3.5", "men": "3.5–4.8", "women": "3.0–4.0" },
+      { "ntrp": "4.0", "men": "4.8–6.5", "women": "4.0–5.0" },
+      { "ntrp": "4.5", "men": "6.5–8.0", "women": "5.0–6.0" },
+      { "ntrp": "5.0+", "men": "8.0+", "women": "6.0+" }
+    ]
+  }
+}

@@ -57,7 +57,7 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
           <div className="flex items-center gap-3">
             <button
               onClick={handleExport}
-              className="flex items-center gap-2 px-4 py-2 bg-lbta-orange text-white rounded-full font-sans text-sm font-medium hover:bg-lbta-red transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-brand-sunset-cliff text-white rounded-full font-sans text-sm font-medium hover:bg-brand-sunset-cliff transition-colors"
             >
               <Download className="w-4 h-4" />
               Export Data
@@ -75,10 +75,10 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
           {/* A/B Test Results */}
           {testResults && (
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-brand-tide-pool/10 to-brand-tide-pool/5 border border-brand-tide-pool/30 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <TrendingUp className="w-5 h-5 text-green-600" />
+                  <div className="w-10 h-10 bg-brand-tide-pool/10 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-5 h-5 text-brand-tide-pool" />
                   </div>
                   <div>
                     <h3 className="font-serif text-xl font-semibold text-black">Embedded Forms</h3>
@@ -88,18 +88,18 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="font-sans text-sm text-black/60">Conversion Rate</p>
-                    <p className="font-serif text-2xl font-bold text-green-600">
+                    <p className="font-serif text-2xl font-bold text-brand-tide-pool">
                       {testResults.embedded.conversionRate.toFixed(1)}%
                     </p>
                   </div>
                   <div>
                     <p className="font-sans text-sm text-black/60">Completion Rate</p>
-                    <p className="font-serif text-2xl font-bold text-green-600">
+                    <p className="font-serif text-2xl font-bold text-brand-tide-pool">
                       {testResults.embedded.completionRate.toFixed(1)}%
                     </p>
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-green-200">
+                <div className="mt-4 pt-4 border-t border-brand-tide-pool/30">
                   <div className="grid grid-cols-4 gap-2 text-center">
                     <div>
                       <p className="font-sans text-xs text-black/50">Views</p>
@@ -173,15 +173,15 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
           {testResults && testResults.improvement !== 0 && (
             <div className={`rounded-xl p-6 border ${
               testResults.improvement > 0 
-                ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-green-200' 
+                ? 'bg-gradient-to-r from-brand-tide-pool/10 to-brand-tide-pool/5 border-brand-tide-pool/30' 
                 : 'bg-gradient-to-r from-red-50 to-pink-50 border-red-200'
             }`}>
               <div className="flex items-center gap-4">
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                  testResults.improvement > 0 ? 'bg-green-100' : 'bg-red-100'
+                  testResults.improvement > 0 ? 'bg-brand-tide-pool/10' : 'bg-red-100'
                 }`}>
                   <BarChart3 className={`w-6 h-6 ${
-                    testResults.improvement > 0 ? 'text-green-600' : 'text-red-600'
+                    testResults.improvement > 0 ? 'text-brand-tide-pool' : 'text-red-600'
                   }`} />
                 </div>
                 <div>
@@ -189,7 +189,7 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
                     Conversion Rate {testResults.improvement > 0 ? 'Improvement' : 'Decrease'}
                   </h3>
                   <p className={`font-serif text-3xl font-bold ${
-                    testResults.improvement > 0 ? 'text-green-600' : 'text-red-600'
+                    testResults.improvement > 0 ? 'text-brand-tide-pool' : 'text-red-600'
                   }`}>
                     {testResults.improvement > 0 ? '+' : ''}{testResults.improvement.toFixed(1)}%
                   </p>
@@ -208,7 +208,7 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
           {overallFunnel && (
             <div className="bg-gray-50 rounded-xl p-6">
               <div className="flex items-center gap-3 mb-6">
-                <Clock className="w-6 h-6 text-lbta-orange" />
+                <Clock className="w-6 h-6 text-brand-sunset-cliff" />
                 <h3 className="font-serif text-xl font-semibold text-black">Overall Performance</h3>
               </div>
               <div className="grid md:grid-cols-5 gap-4">
@@ -218,19 +218,19 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
                 </div>
                 <div className="text-center">
                   <p className="font-sans text-sm text-black/60 mb-2">Form Starts</p>
-                  <p className="font-serif text-2xl font-bold text-lbta-orange">{overallFunnel.formStart}</p>
+                  <p className="font-serif text-2xl font-bold text-brand-sunset-cliff">{overallFunnel.formStart}</p>
                 </div>
                 <div className="text-center">
                   <p className="font-sans text-sm text-black/60 mb-2">Form Completes</p>
-                  <p className="font-serif text-2xl font-bold text-lbta-orange">{overallFunnel.formComplete}</p>
+                  <p className="font-serif text-2xl font-bold text-brand-sunset-cliff">{overallFunnel.formComplete}</p>
                 </div>
                 <div className="text-center">
                   <p className="font-sans text-sm text-black/60 mb-2">Submissions</p>
-                  <p className="font-serif text-2xl font-bold text-green-600">{overallFunnel.formSubmit}</p>
+                  <p className="font-serif text-2xl font-bold text-brand-tide-pool">{overallFunnel.formSubmit}</p>
                 </div>
                 <div className="text-center">
                   <p className="font-sans text-sm text-black/60 mb-2">Conversion Rate</p>
-                  <p className="font-serif text-2xl font-bold text-green-600">{overallFunnel.conversionRate.toFixed(1)}%</p>
+                  <p className="font-serif text-2xl font-bold text-brand-tide-pool">{overallFunnel.conversionRate.toFixed(1)}%</p>
                 </div>
               </div>
             </div>
@@ -240,7 +240,7 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
           <div className="flex flex-col md:flex-row gap-4 pt-6 border-t border-gray-200">
             <button
               onClick={() => setRefreshKey(k => k + 1)}
-              className="flex-1 bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold py-3 px-6 rounded-full transition-colors"
+              className="flex-1 bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold py-3 px-6 rounded-full transition-colors"
             >
               Refresh Data
             </button>

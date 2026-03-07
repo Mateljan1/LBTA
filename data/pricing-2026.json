@@ -243,30 +243,28 @@
         "specialty": "ATP/WTA Coaching",
         "rate60": 250,
         "rate90": 350,
+        "pack10": 2300,
+        "pack20": 4200,
         "availability": "Limited"
       },
       {
-        "coach": "Kevin Jackson",
-        "title": "Director of Performance",
-        "specialty": "College Prep & Tournament",
-        "rate60": 150,
-        "rate90": 200,
-        "availability": "Available"
-      },
-      {
-        "coach": "Savriyan Danilov",
-        "title": "ATP Pro #556",
+        "coach": "Robert LeBuhn",
+        "title": "Senior Coach",
         "specialty": "High Performance",
         "rate60": 120,
         "rate90": 165,
+        "pack10": 1100,
+        "pack20": 2000,
         "availability": "Available"
       },
       {
-        "coach": "Andy Wu",
-        "title": "USPTA Certified",
-        "specialty": "Junior Development",
-        "rate60": 100,
-        "rate90": 135,
+        "coach": "Peter DeFrantz",
+        "title": "Senior Coach",
+        "specialty": "Junior & Adult",
+        "rate60": 120,
+        "rate90": 165,
+        "pack10": 1100,
+        "pack20": 2000,
         "availability": "Available"
       },
       {
@@ -275,7 +273,9 @@
         "specialty": "Beginner & Youth",
         "rate60": 120,
         "rate90": 165,
-        "availability": "Available"
+        "pack10": 1100,
+        "pack20": 2000,
+        "availability": "On leave; may return Spring 2026"
       }
     ],
     "packages": [

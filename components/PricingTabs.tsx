@@ -146,7 +146,7 @@ export default function PricingTabs({ data }: PricingTabsProps) {
             className={`
               relative px-6 md:px-10 py-3 md:py-4 font-sans text-sm md:text-base font-medium
               tracking-[1px] uppercase transition-all duration-300
-              focus:outline-none focus:ring-2 focus:ring-lbta-orange focus:ring-offset-2
+              focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff focus:ring-offset-2
               ${activeSeason === season 
                 ? 'bg-black text-white' 
                 : 'bg-white text-black border border-gray-200 hover:border-black'
@@ -157,7 +157,7 @@ export default function PricingTabs({ data }: PricingTabsProps) {
             {activeSeason === season && (
               <motion.div
                 layoutId="activeSeasonIndicator"
-                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-lbta-orange"
+                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-brand-sunset-cliff"
               />
             )}
           </button>
@@ -169,7 +169,7 @@ export default function PricingTabs({ data }: PricingTabsProps) {
         key={activeSeason}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-lbta-beige/50 border border-lbta-orange/20 rounded-sm p-4 md:p-6 text-center"
+        className="bg-brand-sandstone/50 border border-brand-sunset-cliff/20 rounded-sm p-4 md:p-6 text-center"
       >
         <p className="font-sans text-sm md:text-base text-gray-700">
           <span className="font-medium text-black">{activeSeason} 2026</span>
@@ -202,9 +202,9 @@ export default function PricingTabs({ data }: PricingTabsProps) {
             onClick={() => setActiveCategory(category.id as typeof activeCategory)}
             className={`
               px-4 md:px-6 py-2 font-sans text-sm font-medium transition-all duration-200
-              focus:outline-none focus:ring-2 focus:ring-lbta-orange
+              focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff
               ${activeCategory === category.id
-                ? 'text-lbta-orange border-b-2 border-lbta-orange -mb-[17px]'
+                ? 'text-brand-sunset-cliff border-b-2 border-brand-sunset-cliff -mb-[17px]'
                 : 'text-gray-500 hover:text-black'
               }
             `}
@@ -248,19 +248,19 @@ export default function PricingTabs({ data }: PricingTabsProps) {
         </h3>
         <ul className="space-y-2 font-sans text-sm text-gray-600">
           <li className="flex items-start gap-2">
-            <Info className="w-4 h-4 text-lbta-orange flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <Info className="w-4 h-4 text-brand-sunset-cliff flex-shrink-0 mt-0.5" aria-hidden="true" />
             Prices are per season unless noted. Payment plans available for quarterly programs.
           </li>
           <li className="flex items-start gap-2">
-            <Info className="w-4 h-4 text-lbta-orange flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <Info className="w-4 h-4 text-brand-sunset-cliff flex-shrink-0 mt-0.5" aria-hidden="true" />
             Early bird discount: Save $50 when registering before the deadline.
           </li>
           <li className="flex items-start gap-2">
-            <Info className="w-4 h-4 text-lbta-orange flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <Info className="w-4 h-4 text-brand-sunset-cliff flex-shrink-0 mt-0.5" aria-hidden="true" />
             Sibling discount: 10% off second child enrollment.
           </li>
           <li className="flex items-start gap-2">
-            <Info className="w-4 h-4 text-lbta-orange flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <Info className="w-4 h-4 text-brand-sunset-cliff flex-shrink-0 mt-0.5" aria-hidden="true" />
             Scholarships available for qualifying families. Contact us for details.
           </li>
         </ul>
@@ -340,7 +340,7 @@ function ProgramCard({ program }: { program: ProgramPricing }) {
   const popularFreq = frequencies.find(([, details]) => details.popular)
 
   return (
-    <article className="bg-white border border-gray-100 rounded-sm overflow-hidden hover:border-lbta-orange/30 hover:shadow-lg transition-all duration-500">
+    <article className="bg-white border border-gray-100 rounded-sm overflow-hidden hover:border-brand-sunset-cliff/30 hover:shadow-lg transition-all duration-500">
       <div className="p-6">
         <div className="mb-4">
           <h4 className="font-serif text-xl font-light text-black">{program.label}</h4>
@@ -349,11 +349,11 @@ function ProgramCard({ program }: { program: ProgramPricing }) {
 
         <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-6">
           <span className="flex items-center gap-1">
-            <Users className="w-4 h-4 text-lbta-orange" aria-hidden="true" />
+            <Users className="w-4 h-4 text-brand-sunset-cliff" aria-hidden="true" />
             {program.ages}
           </span>
           <span className="flex items-center gap-1">
-            <Clock className="w-4 h-4 text-lbta-orange" aria-hidden="true" />
+            <Clock className="w-4 h-4 text-brand-sunset-cliff" aria-hidden="true" />
             {program.duration}
           </span>
         </div>
@@ -366,13 +366,13 @@ function ProgramCard({ program }: { program: ProgramPricing }) {
               className={`
                 relative p-4 rounded-sm border transition-all
                 ${details.popular 
-                  ? 'border-lbta-orange bg-lbta-orange/5' 
+                  ? 'border-brand-sunset-cliff bg-brand-sunset-cliff/5' 
                   : 'border-gray-100 hover:border-gray-200'
                 }
               `}
             >
               {details.popular && (
-                <span className="absolute -top-2.5 left-4 px-2 py-0.5 bg-lbta-orange text-white text-xs font-medium rounded">
+                <span className="absolute -top-2.5 left-4 px-2 py-0.5 bg-brand-sunset-cliff text-white text-xs font-medium rounded">
                   Most Popular
                 </span>
               )}
@@ -390,7 +390,7 @@ function ProgramCard({ program }: { program: ProgramPricing }) {
                 </span>
               </div>
               {details.savings && (
-                <p className="font-sans text-xs text-green-600 mt-1">
+                <p className="font-sans text-xs text-brand-tide-pool mt-1">
                   Save {formatPrice(details.savings)} vs 1x/week
                 </p>
               )}
@@ -410,7 +410,7 @@ function ProgramCard({ program }: { program: ProgramPricing }) {
           <ul className="space-y-1">
             {program.includes.map((item, index) => (
               <li key={index} className="flex items-center gap-2 font-sans text-xs text-gray-600">
-                <Check className="w-3 h-3 text-green-500" aria-hidden="true" />
+                <Check className="w-3 h-3 text-brand-tide-pool" aria-hidden="true" />
                 {item}
               </li>
             ))}
@@ -428,7 +428,7 @@ function MonthlyPricing({ programs }: { programs: Record<string, MonthlyProgram>
       {Object.entries(programs).map(([key, program]) => (
         <article 
           key={key}
-          className="bg-white border border-gray-100 rounded-sm p-6 hover:border-lbta-orange/30 hover:shadow-lg transition-all duration-500"
+          className="bg-white border border-gray-100 rounded-sm p-6 hover:border-brand-sunset-cliff/30 hover:shadow-lg transition-all duration-500"
         >
           <h4 className="font-serif text-xl font-light text-black mb-1">{program.label}</h4>
           <p className="font-sans text-sm text-gray-500 mb-4">{program.subtitle}</p>
@@ -442,7 +442,7 @@ function MonthlyPricing({ programs }: { programs: Record<string, MonthlyProgram>
 
           <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
             <span className="flex items-center gap-1">
-              <Clock className="w-4 h-4 text-lbta-orange" aria-hidden="true" />
+              <Clock className="w-4 h-4 text-brand-sunset-cliff" aria-hidden="true" />
               {program.duration}
             </span>
           </div>
@@ -472,7 +472,7 @@ function MonthlyPricing({ programs }: { programs: Record<string, MonthlyProgram>
             <ul className="space-y-1">
               {program.includes.map((item, index) => (
                 <li key={index} className="flex items-center gap-2 font-sans text-xs text-gray-600">
-                  <Check className="w-3 h-3 text-green-500" aria-hidden="true" />
+                  <Check className="w-3 h-3 text-brand-tide-pool" aria-hidden="true" />
                   {item}
                 </li>
               ))}
@@ -519,7 +519,7 @@ function CampsPricing({ camps }: { camps: Record<string, Camp> }) {
           {Object.entries(camps).map(([key, camp], index) => (
             <tr 
               key={key}
-              className={`border-t border-gray-100 hover:bg-lbta-beige/30 transition-colors ${
+              className={`border-t border-gray-100 hover:bg-brand-sandstone/30 transition-colors ${
                 index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
               }`}
             >
@@ -570,7 +570,7 @@ function JTTPricing({ jtt }: { jtt: Record<string, JTTSeason> }) {
           key={key}
           className="bg-white border border-gray-100 rounded-sm overflow-hidden"
         >
-          <div className="bg-lbta-beige/50 px-6 py-4 border-b border-gray-100">
+          <div className="bg-brand-sandstone/50 px-6 py-4 border-b border-gray-100">
             <h4 className="font-serif text-xl font-light text-black">{season.label}</h4>
             <p className="font-sans text-sm text-gray-600">{season.dates}</p>
           </div>
@@ -587,7 +587,7 @@ function JTTPricing({ jtt }: { jtt: Record<string, JTTSeason> }) {
                     {formatPrice(details.price)}
                   </p>
                   {details.practiceIncluded && (
-                    <p className="font-sans text-xs text-green-600 mt-1">Practice included</p>
+                    <p className="font-sans text-xs text-brand-tide-pool mt-1">Practice included</p>
                   )}
                 </div>
               ))}
@@ -598,7 +598,7 @@ function JTTPricing({ jtt }: { jtt: Record<string, JTTSeason> }) {
               <ul className="grid grid-cols-2 gap-2">
                 {season.includes.map((item, index) => (
                   <li key={index} className="flex items-center gap-2 font-sans text-sm text-gray-600">
-                    <Check className="w-4 h-4 text-green-500" aria-hidden="true" />
+                    <Check className="w-4 h-4 text-brand-tide-pool" aria-hidden="true" />
                     {item}
                   </li>
                 ))}

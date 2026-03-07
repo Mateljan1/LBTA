@@ -1,41 +1,43 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
+import { registerSchema, validateRequest } from '@/lib/validations'
 
-export async function POST(request: Request) {
-  try {
-    const data = await request.json()
-    
-    // Validate required fields
-    const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'age', 'skillLevel', 'experience']
-    for (const field of requiredFields) {
-      if (!data[field]) {
-        return NextResponse.json(
-          { success: false, error: `Missing required field: ${field}` },
-          { status: 400 }
-        )
+export async function POST(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for') || 'anonymous'
+  const rateLimitResult = await rateLimit(`register:${ip}`, RATE_LIMITS.form)
+
+  if (!rateLimitResult.allowed) {
+    return NextResponse.json(
+      { success: false, error: 'Too many requests. Please try again later.' },
+      {
+        status: 429,
+        headers: {
+          'X-RateLimit-Remaining': '0',
+          'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
+        },
       }
+    )
+  }
+
+  try {
+    const rawData = await request.json()
+    const validation = validateRequest(registerSchema, rawData)
+
+    if (!validation.success) {
+      return NextResponse.json(
+        { success: false, error: validation.error },
+        { status: 400 }
+      )
     }
 
-    // Log registration data (you can replace this with email sending or CRM integration)
-    console.log('=== NEW REGISTRATION ===')
-    console.log('Program:', data.program)
-    console.log('Season:', data.season)
-    console.log('Early Bird:', data.earlyBird)
-    console.log('Final Price:', data.finalPrice)
-    console.log('Contact:', {
-      name: `${data.firstName} ${data.lastName}`,
-      email: data.email,
-      phone: data.phone
+    const data = validation.data
+
+    // Log without PII: program/season only
+    console.log('[register] Received', {
+      program: data.program ?? 'unspecified',
+      season: data.season ?? 'unspecified',
+      timestamp: new Date().toISOString(),
     })
-    console.log('Player Info:', {
-      age: data.age,
-      skillLevel: data.skillLevel,
-      experience: data.experience,
-      goals: data.goals
-    })
-    if (data.notes) {
-      console.log('Notes:', data.notes)
-    }
-    console.log('========================')
 
     // TODO: Send email notification using lib/email-config.ts
     // TODO: Save to database/CRM
@@ -43,15 +45,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Registration received. We will contact you within 24 hours.'
+      message: 'Registration received. We will contact you within 24 hours.',
     })
-    
   } catch (error) {
-    console.error('Registration API error:', error)
+    console.error('[register] Error:', error instanceof Error ? error.message : 'Unknown error')
     return NextResponse.json(
       { success: false, error: 'Internal server error' },
       { status: 500 }
     )
   }
 }
-

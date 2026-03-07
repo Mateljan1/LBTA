@@ -59,7 +59,7 @@ export default function TrustBadges() {
             href="https://www.google.com/maps/place/Laguna+Beach+Tennis+Academy" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group flex items-center gap-4 bg-[#FAF8F3] hover:bg-[#F4EDE4] px-6 py-4 rounded-full transition-all duration-300"
+            className="group flex items-center gap-4 bg-brand-morning-light hover:bg-brand-sandstone px-6 py-4 rounded-full transition-all duration-300"
           >
             {/* Google Logo */}
             <svg className="w-6 h-6" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@ export default function TrustBadges() {
             <div className="flex items-center gap-2">
               <div className="flex gap-0.5">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="w-5 h-5 text-[#FBBC05] fill-[#FBBC05]" />
+                  <Star key={star} className="w-5 h-5 text-brand-thousand-steps fill-brand-thousand-steps" />
                 ))}
               </div>
               <span className="font-sans text-[18px] font-bold text-black">5.0</span>
@@ -129,19 +129,19 @@ export default function TrustBadges() {
 
         {/* Trust Badges */}
         <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
-          <div className="flex items-center gap-2 text-[#1a1a1a]/70">
+          <div className="flex items-center gap-2 text-brand-pacific-dusk/70">
             <Shield className="h-5 w-5 text-black" />
             <span className="font-sans text-[13px] font-medium">USTA Certified</span>
           </div>
-          <div className="flex items-center gap-2 text-[#1a1a1a]/70">
+          <div className="flex items-center gap-2 text-brand-pacific-dusk/70">
             <Award className="h-5 w-5 text-black" />
             <span className="font-sans text-[13px] font-medium">PTR Certified</span>
           </div>
-          <div className="flex items-center gap-2 text-[#1a1a1a]/70">
-            <CheckCircle className="h-5 w-5 text-green-600" />
+          <div className="flex items-center gap-2 text-brand-pacific-dusk/70">
+            <CheckCircle className="h-5 w-5 text-brand-tide-pool" />
             <span className="font-sans text-[13px] font-medium">Background Checked</span>
           </div>
-          <div className="flex items-center gap-2 text-[#1a1a1a]/70">
+          <div className="flex items-center gap-2 text-brand-pacific-dusk/70">
             <Users className="h-5 w-5 text-black" />
             <span className="font-sans text-[13px] font-medium">ATP/WTA Coaching Experience</span>
           </div>

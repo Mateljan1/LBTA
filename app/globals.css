@@ -12,41 +12,65 @@
 
 @layer base {
   :root {
-    /* Color System */
+    /* Brand Kit — Laguna Beach Palette */
+    --pacific-dusk: #1B3A5C;
+    --deep-water: #0F2237;
+    --victoria-cove: #2E8B8B;
+    --thousand-steps: #C4963C;
+    --sunset-cliff: #E8834A;
+    --sandstone: #F5F0E5;
+    --morning-light: #FAF8F4;
+    --salt-air: #FFFFFF;
+    --tide-pool: #3A8B6E;
+    --sage-hill: #7A8B6E;
+    --driftwood: #B8A88A;
+
+    /* Transparent variants */
+    --cove-mist: rgba(46, 139, 139, 0.08);
+    --cliff-glow: rgba(232, 131, 74, 0.06);
+    --warm-shadow: rgba(27, 58, 92, 0.06);
+    --deep-shadow: rgba(27, 58, 92, 0.12);
+
+    /* Legacy aliases (backwards compat — prefer Brand Kit tokens) */
     --color-black: #0A0A0A;
     --color-white: #FFFFFF;
-    --color-cream: #FAF8F3;
-    --color-beige: #F8E6BB;
-    --color-sand: #F4EDE4;
+    --color-cream: #FAF8F4;
+    --color-beige: #F5F0E5;
+    --color-sand: #F5F0E5;
     --color-stone: #E8E4DF;
     --color-slate: #6B6B6B;
-    --color-charcoal: #2B2B2B;
-    --color-orange: #F8A121;
+    --color-charcoal: #1B3A5C;
+    --color-orange: #E8834A;
     --color-red: #F04E23;
-    
+
     /* Typography */
-    --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-    --font-sans: 'Work Sans', system-ui, -apple-system, sans-serif;
-    
-    /* Spacing Scale */
-    --space-unit: 8px;
-    --space-xs: calc(var(--space-unit) * 1);
-    --space-sm: calc(var(--space-unit) * 2);
-    --space-md: calc(var(--space-unit) * 3);
-    --space-lg: calc(var(--space-unit) * 4);
-    --space-xl: calc(var(--space-unit) * 6);
-    --space-2xl: calc(var(--space-unit) * 8);
-    --space-3xl: calc(var(--space-unit) * 12);
-    --space-4xl: calc(var(--space-unit) * 16);
-    
+    --font-serif: var(--font-cormorant, 'Cormorant'), Georgia, serif;
+    --font-sans: var(--font-dm-sans, 'DM Sans'), system-ui, sans-serif;
+
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+    --space-2xl: 4rem;
+    --space-3xl: 6rem;
+    --space-4xl: 10rem;
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+
     /* Animation Timing */
-    --ease-luxury: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-luxury: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
     --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-    
+
     /* Transitions */
     --transition-fast: 150ms var(--ease-smooth);
-    --transition-base: 300ms var(--ease-luxury);
+    --transition-base: 350ms var(--ease-luxury);
     --transition-slow: 600ms var(--ease-luxury);
     --transition-slower: 800ms var(--ease-luxury);
   }
@@ -69,10 +93,9 @@
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   }
 
-  /* Selection styling */
   ::selection {
-    background-color: rgba(248, 161, 33, 0.2);
-    color: var(--color-black);
+    background-color: var(--cove-mist);
+    color: var(--pacific-dusk);
   }
 
   /* Focus styles - Accessibility (WCAG 2.1 AAA) */
@@ -157,70 +180,82 @@
    ===================================================== */
 
 @layer components {
-  /* Display Headlines - Hero only */
   .text-display {
     font-family: var(--font-serif);
-    font-size: clamp(2.75rem, 7vw, 4.5rem);
-    font-weight: 400;
-    line-height: 1.0;
-    letter-spacing: -0.025em;
-    color: var(--color-black);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--pacific-dusk);
   }
 
-  /* Section Headlines */
+  .text-display-md {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--pacific-dusk);
+  }
+
   .text-headline {
     font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    color: var(--color-black);
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--pacific-dusk);
   }
 
   .text-headline-sm {
     font-family: var(--font-serif);
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: var(--color-black);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--pacific-dusk);
   }
 
-  /* Subheadlines */
   .text-subhead {
     font-family: var(--font-sans);
-    font-size: clamp(1.125rem, 2vw, 1.375rem);
-    font-weight: 400;
-    line-height: 1.5;
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    font-weight: 300;
+    line-height: 1.75;
     color: var(--color-slate);
   }
 
-  /* Body Text */
   .text-body {
     font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.7;
-    color: var(--color-charcoal);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--pacific-dusk);
   }
 
   .text-body-lg {
     font-family: var(--font-sans);
     font-size: 1.125rem;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.75;
-    color: var(--color-charcoal);
+    color: var(--pacific-dusk);
   }
 
-  /* Eyebrow/Overline */
   .text-eyebrow {
     font-family: var(--font-sans);
-    font-size: 0.6875rem;
-    font-weight: 500;
+    font-size: 0.7rem;
+    font-weight: 600;
     line-height: 1.4;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-charcoal);
+    color: var(--victoria-cove);
+  }
+
+  .text-caption {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--color-slate);
   }
 }
 
@@ -229,18 +264,17 @@
    ===================================================== */
 
 @layer components {
-  /* Base Button */
   .btn {
     @apply inline-flex items-center justify-center;
     font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 0.8125rem;
-    letter-spacing: 0.05em;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 1rem 2rem;
+    padding: 0.85rem 2rem;
     min-height: 48px;
-    border-radius: 2px;
-    transition: all var(--transition-base), transform 0.15s var(--ease-bounce);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -269,79 +303,68 @@
     transition: width 0s, height 0s, opacity 0s;
   }
 
-  /* Primary Button - Solid Black (Luxury) */
+  /* Primary — Sunset Cliff (warm action) */
   .btn-primary {
     @apply btn;
-    background: var(--color-black);
-    color: var(--color-white);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: var(--sunset-cliff);
+    color: var(--salt-air);
   }
 
   .btn-primary:hover {
-    background: #1a1a1a;
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    background: #D4773F;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232, 131, 74, 0.25);
   }
 
   .btn-primary:active {
-    transform: translateY(-1px) scale(0.98);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(0) scale(0.98);
   }
 
-  /* Accent Button - Now Black (Luxury) */
+  /* Accent — Pacific Dusk / Navy (authoritative) */
   .btn-accent {
     @apply btn;
-    background: var(--color-black);
-    color: var(--color-white);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    background: var(--pacific-dusk);
+    color: var(--sandstone);
   }
 
   .btn-accent:hover {
-    background: #1a1a1a;
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+    background: var(--deep-water);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(27, 58, 92, 0.25);
   }
 
   .btn-accent:active {
-    transform: translateY(-1px) scale(0.98);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(0) scale(0.98);
   }
 
-  /* Secondary Button - Outlined */
+  /* Secondary — Outlined */
   .btn-secondary {
     @apply btn;
     background: transparent;
-    color: var(--color-black);
-    border: 1.5px solid rgba(0, 0, 0, 0.15);
-  }
-
-  .btn-secondary::before {
-    background: rgba(0, 0, 0, 0.05);
+    color: var(--pacific-dusk);
+    border: 1.5px solid rgba(27, 58, 92, 0.2);
   }
 
   .btn-secondary:hover {
-    border-color: var(--color-black);
-    background: rgba(0, 0, 0, 0.02);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-color: var(--pacific-dusk);
+    background: var(--warm-shadow);
+    transform: translateY(-2px);
   }
 
   .btn-secondary:active {
-    transform: translateY(-1px) scale(0.98);
+    transform: translateY(0) scale(0.98);
   }
 
-  /* Ghost Button - Text only (Luxury Black) */
+  /* Ghost — Text link style */
   .btn-ghost {
     @apply btn;
     background: transparent;
-    color: var(--color-charcoal);
+    color: var(--pacific-dusk);
     padding: 0.5rem 0;
     min-height: auto;
   }
 
-  .btn-ghost::before {
-    display: none;
-  }
+  .btn-ghost::before { display: none; }
 
   .btn-ghost::after {
     content: '';
@@ -354,12 +377,20 @@
     transition: width 0.4s var(--ease-luxury);
   }
 
-  .btn-ghost:hover {
-    color: var(--color-black);
+  .btn-ghost:hover { color: var(--victoria-cove); }
+  .btn-ghost:hover::after { width: 100%; }
+
+  /* Cove — Victoria Cove accent (clarity, links) */
+  .btn-cove {
+    @apply btn;
+    background: transparent;
+    color: var(--victoria-cove);
+    border: 1.5px solid var(--victoria-cove);
   }
 
-  .btn-ghost:hover::after {
-    width: 100%;
+  .btn-cove:hover {
+    background: var(--cove-mist);
+    transform: translateY(-2px);
   }
 
   /* Pill Button (for CTAs in hero) - Luxury Black */
@@ -459,20 +490,20 @@
 
   .input:focus {
     outline: none;
-    border-color: var(--color-orange);
-    box-shadow: 0 0 0 3px rgba(248, 161, 33, 0.15);
+    border-color: var(--victoria-cove);
+    box-shadow: 0 0 0 3px var(--cove-mist);
   }
 
-  /* Dark variant for overlay forms */
   .input-dark {
     @apply input;
-    background: rgba(255, 255, 255, 0.95);
-    border-color: transparent;
+    background: var(--morning-light);
+    border: 1.5px solid rgba(27, 58, 92, 0.1);
   }
 
   .input-dark:focus {
-    background: var(--color-white);
-    border-color: var(--color-orange);
+    background: var(--salt-air);
+    border-color: var(--victoria-cove);
+    box-shadow: 0 0 0 3px var(--cove-mist);
   }
 
   /* Label */
@@ -537,18 +568,15 @@
   }
 
   .section {
-    padding-top: clamp(4rem, 10vw, 8rem);
-    padding-bottom: clamp(4rem, 10vw, 8rem);
+    padding: clamp(5rem, 12vh, 10rem) clamp(2rem, 6vw, 6rem);
   }
 
   .section-lg {
-    padding-top: clamp(5rem, 12vw, 10rem);
-    padding-bottom: clamp(5rem, 12vw, 10rem);
+    padding: clamp(6rem, 14vh, 12rem) clamp(2rem, 6vw, 6rem);
   }
 
   .section-sm {
-    padding-top: clamp(3rem, 8vw, 5rem);
-    padding-bottom: clamp(3rem, 8vw, 5rem);
+    padding: clamp(3rem, 8vh, 5rem) clamp(2rem, 6vw, 6rem);
   }
 }
 
@@ -570,8 +598,8 @@
   }
 
   .accordion-item[data-state="open"] {
-    border-color: var(--color-orange);
-    box-shadow: 0 4px 16px rgba(248, 161, 33, 0.08);
+    border-color: var(--victoria-cove);
+    box-shadow: 0 4px 16px var(--cove-mist);
   }
 
   .accordion-trigger {
@@ -587,14 +615,14 @@
   }
 
   .accordion-trigger:hover {
-    color: var(--color-orange);
+    color: var(--victoria-cove);
   }
 
   .accordion-icon {
     @apply flex-shrink-0;
     width: 1.25rem;
     height: 1.25rem;
-    color: var(--color-orange);
+    color: var(--sunset-cliff);
     transition: transform 0.4s var(--ease-luxury);
   }
 
@@ -697,10 +725,9 @@
     transform: scale(1.04);
   }
 
-  /* Link underline animation */
   .link-animated {
     position: relative;
-    color: var(--color-orange);
+    color: var(--victoria-cove);
     text-decoration: none;
     transition: color var(--transition-base);
   }
@@ -782,7 +809,40 @@
   .divider-gold {
     width: 40px;
     height: 2px;
-    background: var(--color-orange);
+    background: var(--thousand-steps);
+  }
+
+  /* Brand Kit Horizon Line — signature gradient divider */
+  .horizon-line {
+    width: 100%;
+    height: 2px;
+    border: none;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--victoria-cove) 15%,
+      var(--sunset-cliff) 35%,
+      var(--thousand-steps) 50%,
+      var(--sunset-cliff) 65%,
+      var(--victoria-cove) 85%,
+      transparent 100%
+    );
+    opacity: 0.5;
+  }
+
+  .horizon-line-thin {
+    width: 100%;
+    height: 1px;
+    border: none;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--victoria-cove) 15%,
+      var(--sunset-cliff) 35%,
+      var(--thousand-steps) 50%,
+      var(--sunset-cliff) 65%,
+      var(--victoria-cove) 85%,
+      transparent 100%
+    );
+    opacity: 0.3;
   }
 }
 

@@ -1,10 +1,10 @@
 {
   "season": "Winter 2026",
-  "dates": "January 6 – April 5, 2026",
+  "dates": "January 5 – April 5, 2026",
   "weeks": 13,
   "earlyBird": {
     "discount": 50,
-    "deadline": "December 20, 2025"
+    "deadline": "December 5, 2025"
   },
   "programs": [
     {
@@ -15,8 +15,8 @@
       "location": "Moulton Meadows",
       "duration": "45 min",
       "schedule": [
-        { "day": "Monday", "time": "3:30-4:15 PM", "coach": "Michelle" },
-        { "day": "Wednesday", "time": "3:30-4:15 PM", "coach": "Michelle" }
+        { "day": "Monday", "time": "3:30-4:15 PM", "coach": "Peter DeFrantz" },
+        { "day": "Wednesday", "time": "3:30-4:15 PM", "coach": "Robert LeBuhn" }
       ],
       "pricing": {
         "monthly": 120,
@@ -32,8 +32,8 @@
       "location": "Moulton Meadows",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Monday", "time": "4:15-5:15 PM", "coach": "Michelle" },
-        { "day": "Wednesday", "time": "4:15-5:15 PM", "coach": "Michelle" }
+        { "day": "Monday", "time": "4:15-5:15 PM", "coach": "Robert LeBuhn" },
+        { "day": "Wednesday", "time": "4:15-5:15 PM", "coach": "Andrew Mateljan" }
       ],
       "pricing": {
         "1x": 546,
@@ -50,10 +50,10 @@
       "location": "Moulton Meadows",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Monday", "time": "5:15-6:15 PM", "coach": "Michelle" },
-        { "day": "Tuesday", "time": "3:30-4:30 PM", "coach": "Andy" },
-        { "day": "Wednesday", "time": "5:15-6:15 PM", "coach": "Michelle" },
-        { "day": "Thursday", "time": "3:30-4:30 PM", "coach": "Andy" }
+        { "day": "Monday", "time": "5:15-6:15 PM", "coach": "Peter DeFrantz" },
+        { "day": "Tuesday", "time": "3:30-4:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Wednesday", "time": "5:15-6:15 PM", "coach": "Robert LeBuhn" },
+        { "day": "Thursday", "time": "3:30-4:30 PM", "coach": "Andrew Mateljan" }
       ],
       "pricing": {
         "1x": 546,
@@ -71,7 +71,7 @@
       "location": "Moulton Meadows",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Friday", "time": "3:30-4:30 PM", "coach": "Michelle" }
+        { "day": "Friday", "time": "3:30-4:30 PM", "coach": "Peter DeFrantz" }
       ],
       "pricing": {
         "monthly": 85,
@@ -87,8 +87,8 @@
       "location": "Moulton Meadows",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Tuesday", "time": "4:30-5:30 PM", "coach": "Andy" },
-        { "day": "Thursday", "time": "4:30-5:30 PM", "coach": "Andy" }
+        { "day": "Tuesday", "time": "4:30-5:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Thursday", "time": "4:30-5:30 PM", "coach": "Andrew Mateljan" }
       ],
       "pricing": {
         "1x": 546,
@@ -105,7 +105,7 @@
       "location": "Moulton Meadows",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Friday", "time": "4:30-5:30 PM", "coach": "Michelle" }
+        { "day": "Friday", "time": "4:30-5:30 PM", "coach": "Robert LeBuhn" }
       ],
       "pricing": {
         "monthly": 85,
@@ -121,11 +121,11 @@
       "location": "Alta Laguna Park",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Monday", "time": "4:00-5:30 PM", "coach": "Michelle" },
-        { "day": "Tuesday", "time": "4:00-5:30 PM", "coach": "Andy" },
-        { "day": "Wednesday", "time": "4:00-5:30 PM", "coach": "Michelle" },
-        { "day": "Thursday", "time": "4:00-5:30 PM", "coach": "Andy" },
-        { "day": "Friday", "time": "3:00-4:00 PM", "coach": "Staff", "note": "Match Play - Included" }
+        { "day": "Monday", "time": "4:00-5:30 PM", "coach": "Robert LeBuhn" },
+        { "day": "Tuesday", "time": "4:00-5:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Wednesday", "time": "4:00-5:30 PM", "coach": "Robert LeBuhn" },
+        { "day": "Thursday", "time": "4:00-5:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Friday", "time": "3:00-4:00 PM", "coach": "Andrew Mateljan", "note": "Match Play - Included" }
       ],
       "pricing": {
         "1x": 756,
@@ -145,12 +145,12 @@
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "6:00-8:00 PM", "coach": "Kevin" },
-        { "day": "Tuesday", "time": "6:00-8:00 PM", "coach": "Savriyan" },
-        { "day": "Wednesday", "time": "6:00-8:00 PM", "coach": "Kevin" },
-        { "day": "Thursday", "time": "6:00-8:00 PM", "coach": "Savriyan" },
-        { "day": "Friday", "time": "5:30-7:30 PM", "coach": "Kevin", "note": "Match Play - Included" },
-        { "day": "Saturday", "time": "2:00-4:00 PM", "coach": "Kevin", "note": "Optional Match Play" }
+        { "day": "Monday", "time": "6:00-8:00 PM", "coach": "Andrew Mateljan" },
+        { "day": "Tuesday", "time": "6:00-8:00 PM", "coach": "Robert LeBuhn" },
+        { "day": "Wednesday", "time": "6:00-8:00 PM", "coach": "Andrew Mateljan" },
+        { "day": "Thursday", "time": "6:00-8:00 PM", "coach": "Robert LeBuhn" },
+        { "day": "Friday", "time": "5:30-7:30 PM", "coach": "Andrew Mateljan", "note": "Match Play - Included" },
+        { "day": "Saturday", "time": "2:00-4:00 PM", "coach": "Andrew Mateljan", "note": "Optional Match Play" }
       ],
       "pricing": {
         "1x": 810,
@@ -160,7 +160,7 @@
         "5x": 3200,
         "drop_in": 100
       },
-      "description": "Elite training for college-bound players with tournament preparation."
+      "description": "Intensive training for college-bound players with tournament preparation."
     },
     {
       "id": "adult-beginner-1",
@@ -170,11 +170,11 @@
       "location": "Laguna Beach High School",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Monday", "time": "6:00-7:00 PM", "coach": "Staff" },
-        { "day": "Tuesday", "time": "10:00-11:00 AM", "coach": "Staff" },
-        { "day": "Wednesday", "time": "6:00-7:00 PM", "coach": "Staff" },
-        { "day": "Thursday", "time": "10:00-11:00 AM", "coach": "Staff" },
-        { "day": "Saturday", "time": "9:00-10:00 AM", "coach": "Staff" }
+        { "day": "Monday", "time": "6:00-7:00 PM", "coach": "Robert LeBuhn" },
+        { "day": "Tuesday", "time": "10:00-11:00 AM", "coach": "Andrew Mateljan" },
+        { "day": "Wednesday", "time": "6:00-7:00 PM", "coach": "Robert LeBuhn" },
+        { "day": "Thursday", "time": "10:00-11:00 AM", "coach": "Andrew Mateljan" },
+        { "day": "Saturday", "time": "9:00-10:00 AM", "coach": "Andrew Mateljan & Robert LeBuhn" }
       ],
       "pricing": {
         "1x": 546,
@@ -191,8 +191,8 @@
       "location": "Moulton Meadows",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Monday", "time": "6:30-7:30 PM", "coach": "Michelle" },
-        { "day": "Wednesday", "time": "6:30-7:30 PM", "coach": "Michelle" }
+        { "day": "Monday", "time": "6:30-7:30 PM", "coach": "Robert LeBuhn" },
+        { "day": "Wednesday", "time": "6:30-7:30 PM", "coach": "Peter DeFrantz" }
       ],
       "pricing": {
         "1x": 546,
@@ -209,9 +209,9 @@
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Tuesday", "time": "11:00 AM-12:30 PM", "coach": "Kevin" },
-        { "day": "Thursday", "time": "11:00 AM-12:30 PM", "coach": "Kevin" },
-        { "day": "Saturday", "time": "10:00-11:30 AM", "coach": "Kevin" }
+        { "day": "Tuesday", "time": "11:00 AM-12:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Thursday", "time": "11:00 AM-12:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Saturday", "time": "10:00-11:30 AM", "coach": "Andrew Mateljan" }
       ],
       "pricing": {
         "1x": 756,
@@ -229,8 +229,8 @@
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "12:00-2:00 PM", "coach": "Kevin" },
-        { "day": "Wednesday", "time": "12:00-2:00 PM", "coach": "Kevin" }
+        { "day": "Monday", "time": "12:00-2:00 PM", "coach": "Andrew Mateljan & Robert LeBuhn" },
+        { "day": "Friday", "time": "12:00-2:00 PM", "coach": "Andrew Mateljan & Robert LeBuhn" }
       ],
       "pricing": {
         "1x": 810,
@@ -247,7 +247,7 @@
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Friday", "time": "9:00-10:30 AM", "coach": "Staff" }
+        { "day": "Friday", "time": "9:00-10:30 AM", "coach": "Andrew Mateljan & Robert LeBuhn" }
       ],
       "pricing": {
         "monthly": 150,
@@ -263,8 +263,8 @@
       "location": "LBHS",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Thursday", "time": "6:00-7:30 PM", "coach": "Staff", "location": "LBHS" },
-        { "day": "Sunday", "time": "9:00-10:30 AM", "coach": "Staff", "location": "LBHS" }
+        { "day": "Thursday", "time": "6:00-7:30 PM", "coach": "TBD", "location": "Moulton Meadows" },
+        { "day": "Sunday", "time": "9:00-10:30 AM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "LBHS" }
       ],
       "pricing": {
         "monthly": 150,
@@ -280,8 +280,8 @@
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Saturday", "time": "11:30 AM-1:00 PM", "coach": "Staff" },
-        { "day": "Sunday", "time": "10:30 AM-12:00 PM", "coach": "Staff" }
+        { "day": "Saturday", "time": "11:30 AM-1:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" },
+        { "day": "Sunday", "time": "10:30 AM-12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" }
       ],
       "pricing": {
         "monthly": 150,
@@ -297,7 +297,7 @@
       "location": "Laguna Beach High School",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Sunday", "time": "11:00 AM-12:00 PM", "coach": "Staff" }
+        { "day": "Sunday", "time": "11:00 AM-12:00 PM", "coach": "Andrew Mateljan & Robert LeBuhn" }
       ],
       "pricing": {
         "monthly": 150,
@@ -313,7 +313,7 @@
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Friday", "time": "6:00-8:00 PM", "coach": "Staff" }
+        { "day": "Friday", "time": "6:00-8:00 PM", "coach": "Andrew Mateljan & Robert LeBuhn" }
       ],
       "pricing": {
         "monthly": 120,

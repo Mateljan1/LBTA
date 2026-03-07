@@ -18,7 +18,7 @@ export default function Error({
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
-        <h1 className="text-4xl font-serif font-bold text-[#1a2b3c] mb-4">
+        <h1 className="text-4xl font-serif font-bold text-brand-pacific-dusk mb-4">
           Something went wrong
         </h1>
         <p className="text-gray-600 mb-8">
@@ -27,13 +27,13 @@ export default function Error({
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={() => reset()}
-            className="px-6 py-3 bg-[#1a2b3c] text-white rounded hover:bg-[#2a3b4c] transition-colors"
+            className="px-6 py-3 bg-brand-pacific-dusk text-white rounded hover:bg-brand-deep-water transition-colors"
           >
             Try again
           </button>
           <Link
             href="/"
-            className="px-6 py-3 border border-[#1a2b3c] text-[#1a2b3c] rounded hover:bg-gray-50 transition-colors"
+            className="px-6 py-3 border border-brand-pacific-dusk text-brand-pacific-dusk rounded hover:bg-gray-50 transition-colors"
           >
             Return home
           </Link>

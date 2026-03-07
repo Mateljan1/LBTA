@@ -1,12 +1,25 @@
-// LBTA Registration Form Configuration
-// Maps program IDs to their metadata for native form submissions
-// Forms use RegistrationModal component which submits to /api/register-program
-// API applies class-specific ActiveCampaign tags automatically
+/**
+ * LBTA Registration Form Configuration.
+ *
+ * Maps program IDs to metadata consumed by the RegistrationModal
+ * component and the `/api/register-program` route, which handles
+ * Notion database entry, ActiveCampaign contact creation,
+ * list subscription, and class-specific tag application.
+ */
 
+/**
+ * Shape of a single program's registration configuration.
+ * Each entry drives the RegistrationModal UI and the API-side
+ * ActiveCampaign tagging logic.
+ */
 export interface FormConfig {
+  /** Unique slug used as the dictionary key (e.g. `'red-ball'`). */
   programId: string
-  formEmbedCode: string  // Legacy field - not used with native forms
-  acFormId: string       // Legacy field - not used with native forms
+  /** @deprecated Legacy embed code — unused with native forms. */
+  formEmbedCode: string
+  /** @deprecated Legacy AC form ID — unused with native forms. */
+  acFormId: string
+  /** Data pre-filled into the registration modal and forwarded to the API. */
   prePopulateData: {
     programName: string
     location: string
@@ -16,7 +29,8 @@ export interface FormConfig {
     ageGroup?: string
     billingCycle: 'quarterly' | 'monthly'
   }
-  classTagId: number // ActiveCampaign tag ID for this specific program (applied by API route)
+  /** ActiveCampaign tag ID applied by the API route for this program. */
+  classTagId: number
 }
 
 // Program Configuration for Native Form Submissions
@@ -410,28 +424,28 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
   },
 }
 
-// Helper function to get form config by program ID
+/** Look up a program's registration config by slug. Returns `null` if not found. */
 export function getFormConfig(programId: string): FormConfig | null {
   return FORM_CONFIGS[programId] || null
 }
 
-// Helper function to get all configured program IDs
+/** Return every configured program slug (useful for validation or iteration). */
 export function getAllConfiguredPrograms(): string[] {
   return Object.keys(FORM_CONFIGS)
 }
 
-// Helper function to check if a program has a configuration
+/** Check whether a given program slug has a registration configuration. */
 export function hasFormConfig(programId: string): boolean {
   return programId in FORM_CONFIGS
 }
 
-// Helper function to get pre-populate data for native form submission
+/** Return just the pre-populate payload for a program, or `null` if missing. */
 export function getPrepopulateData(programId: string): FormConfig['prePopulateData'] | null {
   const config = getFormConfig(programId)
   return config?.prePopulateData || null
 }
 
-// Helper function to get class tag ID for a program
+/** Return the ActiveCampaign tag ID for a program, or `null` if missing. */
 export function getClassTagId(programId: string): number | null {
   const config = getFormConfig(programId)
   return config?.classTagId || null

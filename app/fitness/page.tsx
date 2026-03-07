@@ -1,16 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
-
-const fitnessClasses = [
-  { name: "Cardio Tennis", day: "Tuesday", time: "6:00-7:00 PM", location: "Moulton", price: "$546/qtr" },
-  { name: "Cardio Tennis", day: "Wednesday", time: "6:00-7:30 PM", location: "Moulton", price: "$756/qtr" },
-  { name: "LiveBall - Beginner", day: "Thursday", time: "6:00-7:30 PM", location: "Moulton", price: "$756/qtr" },
-  { name: "LiveBall - Intermediate", day: "Monday", time: "7:00-9:30 AM", location: "LBHS", price: "$756/qtr" },
-  { name: "LiveBall - Int/Adv", day: "Saturday", time: "10:30 AM-12:00 PM", location: "LBHS", price: "$756/qtr" },
-]
+import { getFitnessClasses } from '@/lib/programs-data'
 
 export default function FitnessPage() {
+  const fitnessClasses = getFitnessClasses()
   return (
     <>
       {/* HERO */}
@@ -36,7 +30,7 @@ export default function FitnessPage() {
           </p>
           <Link 
             href="/book"
-            className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
           >
             Join a Session →
           </Link>
@@ -72,7 +66,7 @@ export default function FitnessPage() {
               </p>
               <Link 
                 href="/schedules#fitness"
-                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-full transition-all duration-200 min-h-[44px]"
+                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-full transition-all duration-200 min-h-[44px]"
               >
                 View Schedule →
               </Link>
@@ -82,7 +76,7 @@ export default function FitnessPage() {
       </section>
 
       {/* LIVEBALL */}
-      <section className="bg-[#FAF8F3] py-16 md:py-24">
+      <section className="bg-brand-morning-light py-16 md:py-24">
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div className="space-y-6 md:order-1">
@@ -98,7 +92,7 @@ export default function FitnessPage() {
               </p>
               <Link 
                 href="/schedules#fitness"
-                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-full transition-all duration-200 min-h-[44px]"
+                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-full transition-all duration-200 min-h-[44px]"
               >
                 View Schedule →
               </Link>
@@ -126,7 +120,7 @@ export default function FitnessPage() {
             Weekly Fitness Sessions
           </h2>
           
-          <div className="bg-[#FAF8F3] rounded-xl shadow-sm overflow-hidden">
+          <div className="bg-brand-morning-light rounded-xl shadow-sm overflow-hidden">
             <div className="divide-y divide-black/10">
               {fitnessClasses.map((session, index) => (
                 <div key={index} className="p-5 md:p-6 hover:bg-white/50 transition-colors">
@@ -145,7 +139,7 @@ export default function FitnessPage() {
                       </span>
                       <Link
                         href="/book"
-                        className="bg-black hover:bg-[#1a1a1a] text-white px-5 py-2 rounded-full font-sans font-semibold text-[13px] md:text-[14px] transition-all duration-200 whitespace-nowrap min-h-[44px] flex items-center"
+                        className="bg-black hover:bg-lbta-black text-white px-5 py-2 rounded-full font-sans font-semibold text-[13px] md:text-[14px] transition-all duration-200 whitespace-nowrap min-h-[44px] flex items-center"
                       >
                         Book →
                       </Link>
@@ -185,11 +179,11 @@ export default function FitnessPage() {
             Join a Session
           </h2>
           <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/95 mb-10">
-            Movement. Discipline. Belonging — for every player.
+            Movement. Craft. Community — for every player.
           </p>
           <Link 
             href="/book"
-            className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
           >
             Book a Class →
           </Link>

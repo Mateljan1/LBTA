@@ -93,7 +93,7 @@ export default function ExitIntentPopup() {
 
       {/* Modal */}
       <div
-        className="relative bg-lbta-cream w-full max-w-[440px] animate-scale-in"
+        className="relative bg-brand-morning-light w-full max-w-[440px] animate-scale-in"
         role="dialog"
         aria-modal="true"
         aria-labelledby="exit-popup-title"
@@ -101,7 +101,7 @@ export default function ExitIntentPopup() {
         {/* Close button */}
         <button
           onClick={() => setIsVisible(false)}
-          className="absolute top-5 right-5 p-2 text-lbta-charcoal/40 hover:text-lbta-charcoal transition-colors z-10"
+          className="absolute top-5 right-5 p-2 text-brand-pacific-dusk/40 hover:text-brand-pacific-dusk transition-colors z-10"
           aria-label="Close dialog"
         >
           <X className="h-5 w-5" strokeWidth={1.5} />
@@ -110,12 +110,12 @@ export default function ExitIntentPopup() {
         {isSuccess ? (
           /* Success State */
           <div className="px-10 py-16 text-center">
-            <div className="w-14 h-14 bg-lbta-charcoal rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-14 h-14 bg-brand-pacific-dusk rounded-full flex items-center justify-center mx-auto mb-6">
               <Check className="h-7 w-7 text-white" strokeWidth={2} />
             </div>
             <h3
               id="exit-popup-title"
-              className="font-serif text-[28px] font-semibold text-lbta-charcoal mb-3"
+              className="font-serif text-[28px] font-semibold text-brand-pacific-dusk mb-3"
             >
               You&apos;re In
             </h3>
@@ -126,26 +126,26 @@ export default function ExitIntentPopup() {
         ) : (
           <>
             {/* Top Accent Line */}
-            <div className="h-[3px] bg-lbta-charcoal" />
+            <div className="h-[3px] bg-brand-pacific-dusk" />
 
             {/* Content */}
             <div className="px-10 py-12 md:py-14">
               {/* Eyebrow */}
-              <p className="text-eyebrow text-lbta-charcoal/60 text-center mb-4">
+              <p className="text-eyebrow text-brand-pacific-dusk/60 text-center mb-4">
                 Complimentary Trial
               </p>
 
               {/* Headline */}
               <h3
                 id="exit-popup-title"
-                className="font-serif text-[32px] md:text-[36px] font-semibold text-lbta-charcoal text-center leading-[1.1] mb-4"
+                className="font-serif text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk text-center leading-[1.1] mb-4"
               >
                 Experience LBTA
               </h3>
 
               {/* Subhead */}
               <p className="font-sans text-[16px] text-lbta-slate text-center leading-relaxed mb-8 max-w-[320px] mx-auto">
-                Discover world-class tennis instruction with a complimentary private lesson.
+                Discover expert tennis instruction with a complimentary private lesson.
               </p>
 
               {/* Form */}
@@ -184,12 +184,12 @@ export default function ExitIntentPopup() {
               {/* Trust indicators */}
               <div className="flex items-center justify-center gap-6">
                 <div className="text-center">
-                  <p className="font-serif text-[24px] font-semibold text-lbta-charcoal">500+</p>
+                  <p className="font-serif text-[24px] font-semibold text-brand-pacific-dusk">500+</p>
                   <p className="font-sans text-[11px] text-lbta-slate uppercase tracking-wider">Players</p>
                 </div>
                 <div className="w-px h-10 bg-lbta-stone" />
                 <div className="text-center">
-                  <p className="font-serif text-[24px] font-semibold text-lbta-charcoal">15+</p>
+                  <p className="font-serif text-[24px] font-semibold text-brand-pacific-dusk">15+</p>
                   <p className="font-sans text-[11px] text-lbta-slate uppercase tracking-wider">Years</p>
                 </div>
                 <div className="w-px h-10 bg-lbta-stone" />
@@ -198,7 +198,7 @@ export default function ExitIntentPopup() {
                     {[1, 2, 3, 4, 5].map((star) => (
                       <svg
                         key={star}
-                        className="w-3.5 h-3.5 text-lbta-charcoal fill-current"
+                        className="w-3.5 h-3.5 text-brand-pacific-dusk fill-current"
                         viewBox="0 0 20 20"
                         aria-hidden="true"
                       >

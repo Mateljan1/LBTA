@@ -10,7 +10,7 @@ A founder-led, cinematic homepage that feels like a **short film about disciplin
 
 ### Creative DNA
 > "Tennis, as it should be taught."
-> Movement. Discipline. Belonging.
+> Movement. Craft. Community.
 
 ### Design Essence
 
@@ -28,7 +28,7 @@ A founder-led, cinematic homepage that feels like a **short film about disciplin
 
 | Scene | Asset(s) | Crop | Copy | Motion / Overlay |
 |-------|----------|------|------|------------------|
-| **1. Hero – "The Standard"** | `LBTA-Home-Hero.webm` | 16:9 (1920×1080) | "Tennis, as it should be taught." ↵ "Movement. Discipline. Belonging." | Fade-in stagger 200ms / Text-shadow rgba(0,0,0,0.35) / Scroll cue "Explore ↓" orange #F8A121 |
+| **1. Hero – "The Standard"** | `LBTA-Home-Hero.webm` | 16:9 (1920×1080) | "Tennis, as it should be taught." ↵ "Movement. Craft. Community." | Fade-in stagger 200ms / Text-shadow rgba(0,0,0,0.35) / Scroll cue "Explore ↓" orange #F8A121 |
 | **2. Founder – "The Vision"** | `andrew-portrait.webp` | 3:4 (1200×1600) | Headline + bio + quote + CTA | Split fade (L→R) / Background #F8E6BB / Quote orange italic |
 | **3. Results – "Results in Motion"** | `karue-training.webp` | 16:9 | "#858 → #258 ATP Guided by structure, repetition, and trust." | Overlay LHS text white / slow pan (5%) / CTA underline orange |
 | **4. Philosophy – "Our System"** | `movement-1` / `discipline-1` / `belonging-4.webp` | 1:1 (1000×1000) | 3 pillars with 1-line copy | Card hover scale 1.02 / shadow rgba(0,0,0,0.05) |

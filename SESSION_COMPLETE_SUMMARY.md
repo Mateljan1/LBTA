@@ -84,7 +84,7 @@
 - Enhanced gradient overlay
 - Secondary "Book a Trial" CTA
 - Mobile vertical centering
-- Movement/Discipline/Belonging cards enhanced
+- Movement/Craft/Community cards enhanced
 - Sticky mobile CTA
 
 ### About Page (COMPLETE)

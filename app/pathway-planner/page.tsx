@@ -105,7 +105,7 @@ function PathwayPlannerInteractive() {
     } else if (formData.goal === 'college') {
       pathway.recommendation = 'College Pathway - NCAA recruitment guidance with Kevin Jackson'
     } else {
-      pathway.recommendation = 'Elite Track - Professional development pathway, consider VYLO'
+      pathway.recommendation = 'High Performance Track - Professional development pathway; explore High Performance programs'
     }
 
     setResults(pathway)
@@ -129,11 +129,11 @@ function PathwayPlannerInteractive() {
       </section>
 
       {/* Form */}
-      <section className="section-spacing bg-lbta-cream">
+      <section className="section-spacing bg-brand-morning-light">
         <div className="container-narrow">
           <form onSubmit={calculatePathway} className="max-w-2xl mx-auto space-y-8">
             <div>
-              <label className="block text-lg font-sans font-medium text-lbta-charcoal mb-4">
+              <label className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
                 1. What is your (or your child's) age?
               </label>
               <select
@@ -154,7 +154,7 @@ function PathwayPlannerInteractive() {
             </div>
 
             <div>
-              <label className="block text-lg font-sans font-medium text-lbta-charcoal mb-4">
+              <label className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
                 2. What is your current tennis experience?
               </label>
               <select
@@ -173,7 +173,7 @@ function PathwayPlannerInteractive() {
             </div>
 
             <div>
-              <label className="block text-lg font-sans font-medium text-lbta-charcoal mb-4">
+              <label className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
                 3. What is your primary tennis goal?
               </label>
               <select
@@ -191,7 +191,7 @@ function PathwayPlannerInteractive() {
             </div>
 
             <div>
-              <label className="block text-lg font-sans font-medium text-lbta-charcoal mb-4">
+              <label className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
                 4. How many sessions per week can you commit to?
               </label>
               <select
@@ -204,7 +204,7 @@ function PathwayPlannerInteractive() {
                 <option value="1x">1 session per week</option>
                 <option value="2x">2 sessions per week</option>
                 <option value="3-4x">3-4 sessions per week</option>
-                <option value="5+">5+ sessions per week (Elite)</option>
+                <option value="5+">5+ sessions per week (Advanced)</option>
               </select>
             </div>
 
@@ -220,14 +220,14 @@ function PathwayPlannerInteractive() {
         <section className="section-spacing bg-white">
           <div className="container-narrow">
             <AnimatedSection>
-              <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-12 text-center">
+              <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-12 text-center">
                 Your Personalized Pathway
               </h2>
 
               <div className="space-y-8">
                 <div className="card-lbta p-8">
                   <h3 className="text-sm font-sans tracking-wide uppercase text-gray-500 mb-2">Start Here</h3>
-                  <p className="text-2xl font-serif font-light text-lbta-charcoal mb-3">
+                  <p className="text-2xl font-serif font-light text-brand-pacific-dusk mb-3">
                     {results.program}
                   </p>
                   <p className="text-gray-600 mb-4">
@@ -240,7 +240,7 @@ function PathwayPlannerInteractive() {
 
                 <div className="card-lbta p-8">
                   <h3 className="text-sm font-sans tracking-wide uppercase text-gray-500 mb-2">Timeline</h3>
-                  <p className="text-2xl font-serif font-light text-lbta-charcoal mb-3">
+                  <p className="text-2xl font-serif font-light text-brand-pacific-dusk mb-3">
                     {results.timeline}
                   </p>
                   <p className="text-gray-600">
@@ -253,13 +253,13 @@ function PathwayPlannerInteractive() {
                   <div className="grid grid-cols-2 gap-6">
                     <div>
                       <p className="text-sm text-gray-500 mb-1">Monthly</p>
-                      <p className="text-xl font-serif font-light text-lbta-charcoal">
+                      <p className="text-xl font-serif font-light text-brand-pacific-dusk">
                         {results.monthlyInvestment}
                       </p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500 mb-1">Annual</p>
-                      <p className="text-xl font-serif font-light text-lbta-charcoal">
+                      <p className="text-xl font-serif font-light text-brand-pacific-dusk">
                         {results.annualInvestment}
                       </p>
                     </div>
@@ -288,7 +288,7 @@ function PathwayPlannerInteractive() {
         <section className="section-spacing bg-white border-t border-gray-200">
           <div className="container-narrow text-center">
             <AnimatedSection>
-              <h2 className="text-3xl font-serif font-light text-lbta-charcoal mb-6">
+              <h2 className="text-3xl font-serif font-light text-brand-pacific-dusk mb-6">
                 Not Sure Where to Start?
               </h2>
               <p className="text-lg text-gray-600 mb-8">

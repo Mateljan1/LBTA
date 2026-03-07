@@ -3,13 +3,11 @@
    Luxury Brand Integration & Mobile Optimization
    ======================================== */
 
-/* Import luxury fonts */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
+/* Use LBTA design system fonts (Cormorant + DM Sans loaded via next/font in layout) */
 /* ===== GLOBAL FORM CONTAINER ===== */
 .ac-form-container {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #FAF8F3 0%, #FFFFFF 100%);
+  font-family: var(--font-dm-sans, 'DM Sans'), system-ui, sans-serif;
+  background: linear-gradient(135deg, var(--morning-light, #FAF8F4) 0%, #FFFFFF 100%);
   border-radius: 16px;
   padding: 0;
   overflow: hidden;
@@ -34,10 +32,10 @@
 .ac-form-container h2,
 .ac-form-container .form-title,
 .ac-form-container #_form_title {
-  font-family: 'Crimson Text', serif !important;
+  font-family: var(--font-cormorant, 'Cormorant'), Georgia, serif !important;
   font-size: 24px !important;
-  font-weight: 600 !important;
-  color: #1a1a1a !important;
+  font-weight: 400 !important;
+  color: var(--pacific-dusk, #1B3A5C) !important;
   margin: 0 0 20px 0 !important;
   padding: 0 !important;
   text-align: left !important;
@@ -47,7 +45,7 @@
 /* Form description */
 .ac-form-container p,
 .ac-form-container .form-description {
-  font-family: 'Inter', sans-serif !important;
+  font-family: var(--font-dm-sans, 'DM Sans'), sans-serif !important;
   font-size: 15px !important;
   font-weight: 400 !important;
   color: rgba(0, 0, 0, 0.7) !important;
@@ -68,10 +66,10 @@
 /* Field labels */
 .ac-form-container label,
 .ac-form-container .field-label {
-  font-family: 'Inter', sans-serif !important;
+  font-family: var(--font-dm-sans, 'DM Sans'), sans-serif !important;
   font-size: 14px !important;
   font-weight: 600 !important;
-  color: #1a1a1a !important;
+  color: var(--pacific-dusk, #1B3A5C) !important;
   margin-bottom: 8px !important;
   display: block !important;
   text-transform: none !important;
@@ -97,8 +95,8 @@
   padding: 16px 20px !important;
   border: 2px solid #e5e7eb !important;
   border-radius: 50px !important;
-  background: #FAF8F3 !important;
-  font-family: 'Inter', sans-serif !important;
+  background: var(--morning-light, #FAF8F4) !important;
+  font-family: var(--font-dm-sans, 'DM Sans'), sans-serif !important;
   font-size: 15px !important;
   font-weight: 400 !important;
   color: rgba(0, 0, 0, 0.85) !important;
@@ -114,7 +112,7 @@
   border-radius: 16px !important;
   resize: vertical !important;
   min-height: 100px !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: var(--font-dm-sans, 'DM Sans'), sans-serif !important;
   line-height: 1.5 !important;
 }
 
@@ -122,9 +120,9 @@
 .ac-form-container input:focus,
 .ac-form-container textarea:focus,
 .ac-form-container select:focus {
-  border-color: #f97316 !important; /* LBTA Orange */
+  border-color: var(--sunset-cliff, #E8834A) !important;
   background: #ffffff !important;
-  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1) !important;
+  box-shadow: 0 0 0 4px rgba(232, 131, 74, 0.1) !important;
   transform: translateY(-1px) !important;
 }
 
@@ -154,7 +152,7 @@
 .ac-form-container input[type="radio"] {
   margin-right: 12px !important;
   transform: scale(1.2) !important;
-  accent-color: #f97316 !important; /* LBTA Orange */
+  accent-color: var(--sunset-cliff, #E8834A) !important;
 }
 
 /* Checkbox/Radio labels */
@@ -175,12 +173,12 @@
 .ac-form-container .submit-button,
 .ac-form-container .btn-submit {
   width: 100% !important;
-  background: linear-gradient(135deg, #dc2626 0%, #f97316 100%) !important; /* LBTA Red to Orange */
+  background: var(--pacific-dusk, #1B3A5C) !important;
   color: #ffffff !important;
   border: none !important;
   border-radius: 50px !important;
   padding: 16px 32px !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: var(--font-dm-sans, 'DM Sans'), sans-serif !important;
   font-size: 16px !important;
   font-weight: 600 !important;
   cursor: pointer !important;
@@ -189,23 +187,23 @@
   letter-spacing: 0 !important;
   min-height: 56px !important;
   margin-top: 24px !important;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(27, 58, 92, 0.2) !important;
 }
 
 /* Submit button hover state */
 .ac-form-container input[type="submit"]:hover,
 .ac-form-container button[type="submit"]:hover,
 .ac-form-container .submit-button:hover {
-  background: linear-gradient(135deg, #b91c1c 0%, #ea580c 100%) !important;
+  background: var(--deep-water, #0F2237) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4) !important;
+  box-shadow: 0 6px 20px rgba(27, 58, 92, 0.25) !important;
 }
 
 /* Submit button active state */
 .ac-form-container input[type="submit"]:active,
 .ac-form-container button[type="submit"]:active {
   transform: translateY(0) !important;
-  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(27, 58, 92, 0.2) !important;
 }
 
 /* ===== ERROR & SUCCESS MESSAGES ===== */
@@ -219,7 +217,7 @@
   font-weight: 500 !important;
   margin-top: 6px !important;
   padding-left: 20px !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: var(--font-dm-sans, 'DM Sans'), sans-serif !important;
 }
 
 /* Success messages */
@@ -230,7 +228,7 @@
   border-radius: 12px !important;
   padding: 16px 20px !important;
   color: #059669 !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: var(--font-dm-sans, 'DM Sans'), sans-serif !important;
   font-size: 15px !important;
   font-weight: 500 !important;
   margin: 20px 0 !important;
@@ -299,8 +297,8 @@
   .ac-form-container input:focus,
   .ac-form-container textarea:focus,
   .ac-form-container select:focus {
-    box-shadow: 0 0 0 6px rgba(249, 115, 22, 0.15) !important;
-  }
+  box-shadow: 0 0 0 6px rgba(232, 131, 74, 0.15) !important;
+}
 }
 
 /* ===== ACCESSIBILITY ENHANCEMENTS ===== */
@@ -357,7 +355,7 @@
   width: 32px;
   height: 32px;
   border: 3px solid rgba(249, 115, 22, 0.3);
-  border-top: 3px solid #f97316;
+  border-top: 3px solid var(--sunset-cliff, #E8834A);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -400,7 +398,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #dc2626 0%, #f97316 50%, #dc2626 100%);
+  background: linear-gradient(90deg, var(--pacific-dusk, #1B3A5C) 0%, var(--victoria-cove, #2E8B8B) 50%, var(--pacific-dusk, #1B3A5C) 100%);
   background-size: 200% 100%;
   animation: gradientShift 3s ease-in-out infinite;
 }

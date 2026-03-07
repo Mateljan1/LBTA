@@ -19,7 +19,7 @@
 
 ### Homepage  
 - Hero enhanced (parallax, gradient overlay, secondary CTA, mobile centering)
-- Movement/Discipline/Belonging cards improved (hover effects, descriptions, equal heights)
+- Movement/Craft/Community cards improved (hover effects, descriptions, equal heights)
 
 ### About Page
 - Timeline section replaced with new animated component

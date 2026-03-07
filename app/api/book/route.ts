@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(
-      { success: false, message: 'Too many requests. Please try again later.' },
+      { success: false, error: 'Too many requests. Please try again later.' },
       {
         status: 429,
         headers: {
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     const validation = validateRequest(bookingSchema, rawData)
     if (!validation.success) {
       return NextResponse.json(
-        { success: false, message: validation.error },
+        { success: false, error: validation.error },
         { status: 400 }
       )
     }
@@ -68,8 +68,6 @@ export async function POST(request: NextRequest) {
     const body = validation.data
 
     console.log('[Trial] Request received:', {
-      name: `${body.firstName} ${body.lastName}`,
-      email: body.email,
       program: body.program,
       timestamp: new Date().toISOString(),
     })
@@ -100,11 +98,11 @@ export async function POST(request: NextRequest) {
 
         if (contactResult.success && contactResult.data) {
           const contactId = contactResult.data.id
-          console.log('[AC] Contact created:', { contactId, email: body.email })
+          console.log('[AC] Contact created:', { contactId })
 
           // Add to list (triggers welcome/confirmation automation)
           await addToList(contactId, LBTA_LIST_ID)
-          console.log('[AC] Added to List 4:', { contactId, email: body.email })
+          console.log('[AC] Added to List 4:', { contactId })
 
           // Build tag list
           const tagsToApply: number[] = [
@@ -140,7 +138,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[Booking] Error:', error)
     return NextResponse.json(
-      { success: false, message: 'Error processing request. Please call (949) 464-6645' },
+      { success: false, error: 'Error processing request. Please call (949) 464-6645' },
       { status: 500 }
     )
   }

@@ -84,8 +84,8 @@ export default function MobileFilterOverlay({
                   onClick={() => onCategoryChange(cat)}
                   className={`px-4 py-3.5 rounded-xl font-sans text-[15px] font-medium transition-all duration-200 min-h-[48px] ${
                     selectedCategory === cat
-                      ? 'bg-lbta-orange text-white shadow-md'
-                      : 'bg-[#FAF8F3] text-black/70 hover:bg-gray-200'
+                      ? 'bg-brand-sunset-cliff text-white shadow-md'
+                      : 'bg-brand-morning-light text-black/70 hover:bg-gray-200'
                   }`}
                 >
                   {cat === 'all' ? 'All Programs' : `${cat}`}
@@ -111,8 +111,8 @@ export default function MobileFilterOverlay({
                   onClick={() => onLocationChange(loc.value)}
                   className={`w-full px-4 py-3.5 rounded-xl font-sans text-[15px] font-medium transition-all duration-200 text-left min-h-[48px] ${
                     selectedLocation === loc.value
-                      ? 'bg-lbta-red text-white shadow-md'
-                      : 'bg-[#FAF8F3] text-black/70 hover:bg-gray-200'
+                      ? 'bg-brand-sunset-cliff text-white shadow-md'
+                      : 'bg-brand-morning-light text-black/70 hover:bg-gray-200'
                   }`}
                 >
                   {loc.label}
@@ -133,8 +133,8 @@ export default function MobileFilterOverlay({
                   onClick={() => handleDayToggle(day)}
                   className={`px-3 py-3 rounded-xl font-sans text-[14px] font-medium transition-all duration-200 min-h-[48px] ${
                     selectedDays.includes(day)
-                      ? 'bg-lbta-orange text-white shadow-sm'
-                      : 'bg-[#FAF8F3] text-black/70 hover:bg-gray-200'
+                      ? 'bg-brand-sunset-cliff text-white shadow-sm'
+                      : 'bg-brand-morning-light text-black/70 hover:bg-gray-200'
                   }`}
                 >
                   {day}
@@ -148,13 +148,13 @@ export default function MobileFilterOverlay({
         <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 flex gap-3">
           <button
             onClick={handleClearAll}
-            className="flex-1 border-2 border-lbta-red text-lbta-red hover:bg-lbta-red/5 font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
+            className="flex-1 border-2 border-brand-sunset-cliff text-brand-sunset-cliff hover:bg-brand-sunset-cliff/5 font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
           >
             Clear All
           </button>
           <button
             onClick={handleApply}
-            className="flex-1 bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md min-h-[48px]"
+            className="flex-1 bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md min-h-[48px]"
           >
             Apply Filters
           </button>

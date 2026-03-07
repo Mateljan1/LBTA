@@ -1,8 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Client } from '@notionhq/client'
 import axios from 'axios'
+import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
+import { registerYearSchema, validateRequest } from '@/lib/validations'
+import { getEnvVar, hasEnvVar } from '@/lib/env'
 
-const notion = new Client({ auth: process.env.NOTION_API_KEY })
+let notionClient: Client | null = null
+function getNotionClient(): Client {
+  if (!notionClient) {
+    notionClient = new Client({ auth: getEnvVar('NOTION_API_KEY') })
+  }
+  return notionClient
+}
 
 // ============================================================
 // LBTA Year-Round Registration API
@@ -162,21 +171,46 @@ function getApplicableTags(data: any): number[] {
 }
 
 export async function POST(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for') || 'anonymous'
+  const rateLimitResult = await rateLimit(`register-year:${ip}`, RATE_LIMITS.form)
+
+  if (!rateLimitResult.allowed) {
+    return NextResponse.json(
+      { success: false, error: 'Too many requests. Please try again later.' },
+      {
+        status: 429,
+        headers: {
+          'X-RateLimit-Remaining': '0',
+          'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
+        },
+      }
+    )
+  }
+
   try {
-    const data = await request.json()
-    
+    const rawData = await request.json()
+    const validation = validateRequest(registerYearSchema, rawData)
+
+    if (!validation.success) {
+      return NextResponse.json(
+        { success: false, error: validation.error },
+        { status: 400 }
+      )
+    }
+
+    const data = validation.data
     const registrationType = (data.registrationType || 'seasonal') as RegistrationType
     const category = determineCategory(data.program, registrationType)
     const frequency = (data.preferredDays || []).length
-    
-    console.log('🎾 LBTA Year-Round Registration:', {
+
+    // No PII in logs
+    console.log('[register-year] Received:', {
       type: registrationType,
-      program: data.program,
-      email: data.email,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     })
 
     // 1. Save to Notion
+    if (hasEnvVar('NOTION_API_KEY') && hasEnvVar('NOTION_DATABASE_ID')) {
     try {
       const notionProperties: any = {
         'Parent Name': {
@@ -214,8 +248,8 @@ export async function POST(request: NextRequest) {
         notionProperties['Days Selected'] = { multi_select: (data.preferredDays || []).map((day: string) => ({ name: day })) }
         notionProperties['Time Slot'] = { rich_text: [{ text: { content: data.timeSlot || '' } }] }
         notionProperties['Frequency (days/week)'] = { number: frequency }
-        notionProperties['Tuition'] = { number: parseInt(data.totalPrice) || 0 }
-        notionProperties['Age'] = { number: parseInt(data.studentAge) || null }
+        notionProperties['Tuition'] = { number: parseInt(String(data.totalPrice ?? ''), 10) || 0 }
+        notionProperties['Age'] = { number: parseInt(String(data.studentAge ?? ''), 10) || null }
         notionProperties['Experience Level'] = { select: { name: data.experience || 'Not specified' } }
         notionProperties['Early Bird Applied'] = { checkbox: isEarlyBird(data.season) }
       }
@@ -224,29 +258,32 @@ export async function POST(request: NextRequest) {
         notionProperties['Camp Name'] = { rich_text: [{ text: { content: data.campName || data.program } }] }
         notionProperties['Camp Dates'] = { rich_text: [{ text: { content: data.campDates || '' } }] }
         notionProperties['Camp Week'] = { rich_text: [{ text: { content: data.campWeek || '' } }] }
-        notionProperties['Tuition'] = { number: parseInt(data.price) || 0 }
-        notionProperties['Age'] = { number: parseInt(data.playerAge || data.studentAge) || null }
+        notionProperties['Tuition'] = { number: parseInt(String(data.price ?? ''), 10) || 0 }
+        notionProperties['Age'] = { number: parseInt(String(data.playerAge ?? data.studentAge ?? ''), 10) || null }
       }
 
       if (registrationType === 'jtt') {
         notionProperties['JTT Season'] = { rich_text: [{ text: { content: data.jttSeason || '' } }] }
         notionProperties['Division'] = { rich_text: [{ text: { content: data.division || '' } }] }
-        notionProperties['Tuition'] = { number: parseInt(data.price) || 0 }
-        notionProperties['Age'] = { number: parseInt(data.playerAge || data.studentAge) || null }
+        notionProperties['Tuition'] = { number: parseInt(String(data.price ?? ''), 10) || 0 }
+        notionProperties['Age'] = { number: parseInt(String(data.playerAge ?? data.studentAge ?? ''), 10) || null }
       }
 
+      const notion = getNotionClient()
       await notion.pages.create({
-        parent: { database_id: process.env.NOTION_DATABASE_ID! },
+        parent: { database_id: getEnvVar('NOTION_DATABASE_ID') },
         properties: notionProperties
       })
 
-      console.log('✅ Notion entry created:', { email: data.email, program: data.program })
+      console.log('[register-year] Notion entry created')
     } catch (notionError) {
-      console.error('❌ Notion error:', notionError)
+      console.error('[register-year] Notion error:', notionError)
       // Continue even if Notion fails
+    }
     }
 
     // 2. Add to ActiveCampaign with proper tagging
+    if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
     try {
       // Format display values
       const daysSelected = (data.preferredDays || []).join(', ') || 'N/A'
@@ -275,9 +312,12 @@ export async function POST(request: NextRequest) {
         fieldValues.push({ field: '21', value: data.division || '' })   // JTT_DIVISION
       }
 
+      const acUrl = getEnvVar('ACTIVECAMPAIGN_URL')
+      const acKey = getEnvVar('ACTIVECAMPAIGN_API_KEY')
+
       // Create/update contact
       const contactResponse = await axios.post(
-        `${process.env.ACTIVECAMPAIGN_URL}/api/3/contacts`,
+        `${acUrl}/api/3/contacts`,
         {
           contact: {
             email: data.email,
@@ -289,18 +329,18 @@ export async function POST(request: NextRequest) {
         },
         {
           headers: {
-            'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
+            'Api-Token': acKey,
             'Content-Type': 'application/json'
           }
         }
       )
 
       const contactId = contactResponse.data.contact.id
-      console.log('✅ AC Contact Created:', { contactId, email: data.email })
+      console.log('[register-year] AC contact created')
 
       // Add to list (triggers automation)
       await axios.post(
-        `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactLists`,
+        `${acUrl}/api/3/contactLists`,
         {
           contactList: {
             list: 4,  // Laguna Beach Tennis Academy list
@@ -310,21 +350,21 @@ export async function POST(request: NextRequest) {
         },
         {
           headers: {
-            'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
+            'Api-Token': acKey,
             'Content-Type': 'application/json'
           }
         }
       )
 
-      console.log('✅ Added to List 4:', { contactId, email: data.email })
+      console.log('[register-year] Added to list')
 
       // Apply all applicable tags
       const tags = getApplicableTags(data)
-      
+
       for (const tagId of tags) {
         try {
           await axios.post(
-            `${process.env.ACTIVECAMPAIGN_URL}/api/3/contactTags`,
+            `${acUrl}/api/3/contactTags`,
             {
               contactTag: {
                 contact: contactId,
@@ -333,25 +373,22 @@ export async function POST(request: NextRequest) {
             },
             {
               headers: {
-                'Api-Token': process.env.ACTIVECAMPAIGN_API_KEY!,
+                'Api-Token': acKey,
                 'Content-Type': 'application/json'
               }
             }
           )
-          console.log(`✅ Tag ${tagId} applied to contact ${contactId}`)
-        } catch (tagError: any) {
-          console.error(`⚠️ Failed to apply tag ${tagId}:`, tagError.response?.data || tagError.message)
+        } catch (tagError: unknown) {
+          const err = tagError as { response?: { data?: unknown }; message?: string }
+          console.error('[register-year] Failed to apply tag:', err.response?.data ?? err.message)
         }
       }
 
-      console.log('✅ All tags applied:', { contactId, tags, email: data.email })
-
-    } catch (acError: any) {
-      console.error('❌ ActiveCampaign Error:', {
-        email: data.email,
-        error: acError.response?.data || acError.message
-      })
+    } catch (acError: unknown) {
+      const err = acError as { response?: { data?: unknown }; message?: string }
+      console.error('[register-year] ActiveCampaign error:', err.response?.data ?? err.message)
       // Continue even if AC fails
+    }
     }
 
     // 3. Return success with confirmation message based on type
@@ -365,17 +402,14 @@ export async function POST(request: NextRequest) {
       confirmationMessage = `Thank you for your inquiry! Our team will reach out within 24 hours to discuss your options.`
     }
 
-    return NextResponse.json({ 
-      success: true, 
+    return NextResponse.json({
+      success: true,
       message: confirmationMessage,
-      registrationType,
-      tagsApplied: getApplicableTags(data).length
     })
-
   } catch (error) {
-    console.error('❌ Registration error:', error)
+    console.error('[register-year] Error:', error instanceof Error ? error.message : 'Unknown error')
     return NextResponse.json(
-      { success: false, message: 'Error processing registration. Please call (949) 464-6645' },
+      { success: false, error: 'Error processing registration. Please call (949) 464-6645' },
       { status: 500 }
     )
   }

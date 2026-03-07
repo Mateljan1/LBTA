@@ -62,13 +62,13 @@ function getStatusBadge(status: string) {
   switch (status) {
     case 'registration_open':
       return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-tide-pool/10 text-brand-tide-pool">
           Registration Open
         </span>
       )
     case 'in_progress':
       return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-lbta-orange/20 text-lbta-orange">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-sunset-cliff/20 text-brand-sunset-cliff">
           In Progress
         </span>
       )
@@ -95,7 +95,7 @@ export default function ScheduleTable({ data }: ScheduleTableProps) {
         aria-labelledby="quarters-heading"
       >
         <motion.div variants={fadeInUp} className="text-center mb-12">
-          <p className="font-sans text-xs tracking-[3px] uppercase text-lbta-orange mb-4">
+          <p className="font-sans text-xs tracking-[3px] uppercase text-brand-sunset-cliff mb-4">
             {data.year} Academic Year
           </p>
           <h2 id="quarters-heading" className="font-serif text-3xl md:text-5xl font-light text-black mb-4">
@@ -116,7 +116,7 @@ export default function ScheduleTable({ data }: ScheduleTableProps) {
             <motion.article
               key={quarter.season}
               variants={fadeInUp}
-              className="group bg-white border border-gray-100 rounded-sm p-6 md:p-8 hover:border-lbta-orange/30 hover:shadow-lg transition-all duration-500"
+              className="group bg-white border border-gray-100 rounded-sm p-6 md:p-8 hover:border-brand-sunset-cliff/30 hover:shadow-lg transition-all duration-500"
               role="listitem"
             >
               <div className="flex items-center justify-between mb-4">
@@ -128,11 +128,11 @@ export default function ScheduleTable({ data }: ScheduleTableProps) {
               
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Calendar className="w-4 h-4 text-lbta-orange" aria-hidden="true" />
+                  <Calendar className="w-4 h-4 text-brand-sunset-cliff" aria-hidden="true" />
                   <span className="font-sans text-sm">{quarter.dates}</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Clock className="w-4 h-4 text-lbta-orange" aria-hidden="true" />
+                  <Clock className="w-4 h-4 text-brand-sunset-cliff" aria-hidden="true" />
                   <span className="font-sans text-sm">{quarter.weeks} weeks</span>
                 </div>
               </div>
@@ -141,7 +141,7 @@ export default function ScheduleTable({ data }: ScheduleTableProps) {
                 <div className="pt-4 border-t border-gray-100">
                   <p className="font-sans text-xs text-gray-500 mb-1">Early Bird Deadline</p>
                   <p className="font-sans text-sm font-medium text-black">{quarter.earlyBirdDeadline}</p>
-                  <p className="font-sans text-xs text-green-600 mt-1">Save ${quarter.earlyBirdDiscount}</p>
+                  <p className="font-sans text-xs text-brand-tide-pool mt-1">Save ${quarter.earlyBirdDiscount}</p>
                 </div>
               )}
             </motion.article>
@@ -158,7 +158,7 @@ export default function ScheduleTable({ data }: ScheduleTableProps) {
         aria-labelledby="camps-heading"
       >
         <motion.div variants={fadeInUp} className="text-center mb-12">
-          <p className="font-sans text-xs tracking-[3px] uppercase text-lbta-orange mb-4">
+          <p className="font-sans text-xs tracking-[3px] uppercase text-brand-sunset-cliff mb-4">
             Holiday & Break Programs
           </p>
           <h2 id="camps-heading" className="font-serif text-3xl md:text-5xl font-light text-black mb-4">
@@ -198,7 +198,7 @@ export default function ScheduleTable({ data }: ScheduleTableProps) {
               {data.camps.map((camp, index) => (
                 <tr 
                   key={camp.name}
-                  className={`border-t border-gray-100 hover:bg-lbta-beige/30 transition-colors ${
+                  className={`border-t border-gray-100 hover:bg-brand-sandstone/30 transition-colors ${
                     index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
                   }`}
                 >
@@ -236,7 +236,7 @@ export default function ScheduleTable({ data }: ScheduleTableProps) {
         aria-labelledby="jtt-heading"
       >
         <motion.div variants={fadeInUp} className="text-center mb-12">
-          <p className="font-sans text-xs tracking-[3px] uppercase text-lbta-orange mb-4">
+          <p className="font-sans text-xs tracking-[3px] uppercase text-brand-sunset-cliff mb-4">
             USTA Competition
           </p>
           <h2 id="jtt-heading" className="font-serif text-3xl md:text-5xl font-light text-black mb-4">
@@ -257,10 +257,10 @@ export default function ScheduleTable({ data }: ScheduleTableProps) {
             <motion.article
               key={season.season}
               variants={fadeInUp}
-              className="bg-white border border-gray-100 rounded-sm overflow-hidden hover:border-lbta-orange/30 hover:shadow-lg transition-all duration-500"
+              className="bg-white border border-gray-100 rounded-sm overflow-hidden hover:border-brand-sunset-cliff/30 hover:shadow-lg transition-all duration-500"
               role="listitem"
             >
-              <div className="bg-lbta-beige/50 px-6 py-4">
+              <div className="bg-brand-sandstone/50 px-6 py-4">
                 <h3 className="font-serif text-xl md:text-2xl font-light text-black">
                   {season.season}
                 </h3>
@@ -268,17 +268,17 @@ export default function ScheduleTable({ data }: ScheduleTableProps) {
               
               <div className="p-6 space-y-4">
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Calendar className="w-4 h-4 text-lbta-orange flex-shrink-0" aria-hidden="true" />
+                  <Calendar className="w-4 h-4 text-brand-sunset-cliff flex-shrink-0" aria-hidden="true" />
                   <span className="font-sans text-sm">{season.dates}</span>
                 </div>
                 
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Clock className="w-4 h-4 text-lbta-orange flex-shrink-0" aria-hidden="true" />
+                  <Clock className="w-4 h-4 text-brand-sunset-cliff flex-shrink-0" aria-hidden="true" />
                   <span className="font-sans text-sm">{season.weeks} weeks</span>
                 </div>
                 
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Trophy className="w-4 h-4 text-lbta-orange flex-shrink-0" aria-hidden="true" />
+                  <Trophy className="w-4 h-4 text-brand-sunset-cliff flex-shrink-0" aria-hidden="true" />
                   <span className="font-sans text-sm">Matches: {season.matchDay}</span>
                 </div>
 

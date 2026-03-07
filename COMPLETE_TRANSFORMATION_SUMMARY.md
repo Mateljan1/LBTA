@@ -25,7 +25,7 @@
 - Video optimized (21 MB → 4.5 MB, 79% reduction)
 - Enhanced gradient overlay
 - Secondary "Book a Trial" CTA
-- Movement/Discipline/Belonging cards enhanced
+- Movement/Craft/Community cards enhanced
 - Hover animations (scale 1.03)
 - Detail descriptions added
 

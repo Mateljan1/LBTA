@@ -70,12 +70,12 @@ const tiers: PricingTier[] = [
 
 export default function PricingComparison() {
   return (
-    <section className="bg-lbta-cream py-16 md:py-24" aria-labelledby="pricing-heading">
+    <section className="bg-brand-morning-light py-16 md:py-24" aria-labelledby="pricing-heading">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-eyebrow text-lbta-charcoal/60 mb-4">Simple Pricing</p>
-          <h2 id="pricing-heading" className="font-serif text-[32px] md:text-[40px] font-semibold text-lbta-charcoal leading-tight mb-4">
+          <p className="text-eyebrow text-brand-pacific-dusk/60 mb-4">Simple Pricing</p>
+          <h2 id="pricing-heading" className="font-serif text-[32px] md:text-[40px] font-semibold text-brand-pacific-dusk leading-tight mb-4">
             Choose Your Path
           </h2>
           <p className="font-sans text-[16px] text-lbta-slate max-w-xl mx-auto">
@@ -90,13 +90,13 @@ export default function PricingComparison() {
               key={tier.name}
               className={`relative bg-white rounded-sm overflow-hidden transition-all duration-300 ${
                 tier.popular
-                  ? 'ring-2 ring-lbta-charcoal shadow-xl scale-[1.02] md:scale-105'
-                  : 'border border-lbta-stone hover:border-lbta-charcoal/30'
+                  ? 'ring-2 ring-brand-pacific-dusk shadow-xl scale-[1.02] md:scale-105'
+                  : 'border border-lbta-stone hover:border-brand-pacific-dusk/30'
               }`}
             >
               {/* Popular Badge */}
               {tier.popular && (
-                <div className="absolute top-0 left-0 right-0 bg-lbta-charcoal text-white text-center py-2">
+                <div className="absolute top-0 left-0 right-0 bg-brand-pacific-dusk text-white text-center py-2">
                   <span className="font-sans text-[11px] uppercase tracking-[2px] font-medium">
                     Most Popular
                   </span>
@@ -106,7 +106,7 @@ export default function PricingComparison() {
               {/* Savings Badge */}
               {tier.savings && !tier.popular && (
                 <div className="absolute top-4 right-4">
-                  <span className="font-sans text-[10px] uppercase tracking-wider bg-lbta-cream text-lbta-charcoal px-2 py-1 rounded-sm">
+                  <span className="font-sans text-[10px] uppercase tracking-wider bg-brand-morning-light text-brand-pacific-dusk px-2 py-1 rounded-sm">
                     {tier.savings}
                   </span>
                 </div>
@@ -120,7 +120,7 @@ export default function PricingComparison() {
 
                 {/* Price */}
                 <div className="mb-2">
-                  <span className="font-serif text-[48px] font-semibold text-lbta-charcoal">
+                  <span className="font-serif text-[48px] font-semibold text-brand-pacific-dusk">
                     {tier.price}
                   </span>
                   <span className="font-sans text-[14px] text-lbta-slate ml-1">
@@ -130,7 +130,7 @@ export default function PricingComparison() {
 
                 {/* Savings indicator for popular */}
                 {tier.popular && tier.savings && (
-                  <p className="font-sans text-[12px] text-green-600 font-medium mb-4">
+                  <p className="font-sans text-[12px] text-brand-tide-pool font-medium mb-4">
                     {tier.savings} vs drop-in
                   </p>
                 )}
@@ -145,8 +145,8 @@ export default function PricingComparison() {
                   href={tier.href}
                   className={`block w-full text-center py-4 font-sans text-[13px] uppercase tracking-wider font-medium transition-all duration-300 ${
                     tier.popular
-                      ? 'bg-lbta-charcoal text-white hover:bg-black'
-                      : 'border border-lbta-charcoal text-lbta-charcoal hover:bg-lbta-charcoal hover:text-white'
+                      ? 'bg-brand-pacific-dusk text-white hover:bg-black'
+                      : 'border border-brand-pacific-dusk text-brand-pacific-dusk hover:bg-brand-pacific-dusk hover:text-white'
                   }`}
                 >
                   {tier.cta}
@@ -156,8 +156,8 @@ export default function PricingComparison() {
                 <ul className="mt-8 space-y-3" aria-label={`${tier.name} plan features`}>
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                      <span className="font-sans text-[14px] text-lbta-charcoal">
+                      <Check className="w-5 h-5 text-brand-tide-pool flex-shrink-0 mt-0.5" aria-hidden="true" />
+                      <span className="font-sans text-[14px] text-brand-pacific-dusk">
                         {feature}
                       </span>
                     </li>
@@ -172,7 +172,7 @@ export default function PricingComparison() {
         <div className="mt-12 text-center" role="contentinfo" aria-label="Pricing guarantees">
           <p className="font-sans text-[13px] text-lbta-slate">
             <span className="inline-flex items-center gap-2">
-              <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <svg className="w-4 h-4 text-brand-tide-pool" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
               30-Day Money-Back Guarantee

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import axios from 'axios'
+import { getEnvVar, hasEnvVar } from '@/lib/env'
 
 // ============================================================
 // ActiveCampaign Webhook Handler - LBTA Auto-Tagging System
@@ -12,10 +13,35 @@ import axios from 'axios'
 // 1. Adds the contact to List 4 (LBTA master list)
 // 2. Applies the LBTA_Winter2026 tag (27) to trigger confirmation email
 // 3. Applies the appropriate class-specific tag based on their level/interest
+//
+// SECURITY MODEL:
+// Webhook authenticity is verified via a shared secret (AC_WEBHOOK_SECRET).
+// The caller must include the secret as either:
+//   - Header: x-webhook-secret
+//   - Query param: ?secret=<value>
+// If AC_WEBHOOK_SECRET is not set in env, verification is skipped to allow
+// local development and staging without configuration. In production, always
+// set AC_WEBHOOK_SECRET to a strong random value and configure ActiveCampaign
+// to send it with every webhook request.
 // ============================================================
 
-const AC_URL = process.env.ACTIVECAMPAIGN_URL
-const AC_API_KEY = process.env.ACTIVECAMPAIGN_API_KEY
+const AC_WEBHOOK_SECRET = process.env.AC_WEBHOOK_SECRET
+
+function verifyWebhookSecret(request: NextRequest): NextResponse | null {
+  if (!AC_WEBHOOK_SECRET) return null
+
+  const headerSecret = request.headers.get('x-webhook-secret')
+  const urlSecret = request.nextUrl.searchParams.get('secret')
+
+  if (headerSecret === AC_WEBHOOK_SECRET || urlSecret === AC_WEBHOOK_SECRET) {
+    return null
+  }
+
+  return NextResponse.json(
+    { success: false, error: 'Unauthorized' },
+    { status: 401 }
+  )
+}
 
 // Tag mapping based on TENNIS_LEVEL custom field values (from Facebook Lead Ads)
 const LEVEL_TO_TAG: { [key: string]: number } = {
@@ -123,29 +149,42 @@ function getClassTagFromLevel(level: string): number | null {
 }
 
 export async function POST(request: NextRequest) {
+  const authError = verifyWebhookSecret(request)
+  if (authError) return authError
+
   try {
+    if (!hasEnvVar('ACTIVECAMPAIGN_URL') || !hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
+      console.error('[activecampaign-webhook] Missing ACTIVECAMPAIGN_URL or ACTIVECAMPAIGN_API_KEY')
+      return NextResponse.json(
+        { success: false, error: 'Webhook not configured' },
+        { status: 503 }
+      )
+    }
+
+    const acUrl = getEnvVar('ACTIVECAMPAIGN_URL')
+    const acApiKey = getEnvVar('ACTIVECAMPAIGN_API_KEY')
+
     // Parse webhook payload from ActiveCampaign
     const data = await request.json()
 
-    console.log('📥 ActiveCampaign webhook received:', JSON.stringify(data, null, 2))
+    console.log('[activecampaign-webhook] Received', { hasContactId: !!(data.contact?.id || data.contact_id || data.id) })
 
     // ActiveCampaign sends different formats depending on webhook type
     // We need to extract the contact info
     const contactId = data.contact?.id || data.contact_id || data.id
-    const contactEmail = data.contact?.email || data.email
 
     if (!contactId) {
-      console.log('⚠️ No contact ID in webhook, skipping')
+      console.log('[activecampaign-webhook] No contact ID in webhook, skipping')
       return NextResponse.json({ success: true, message: 'No contact ID' })
     }
 
-    console.log(`🔄 Processing contact ID: ${contactId}, Email: ${contactEmail}`)
+    console.log('[activecampaign-webhook] Processing contact ID:', contactId)
 
     // Step 1: Get full contact details including custom fields and tags
     const contactResponse = await axios.get(
-      `${AC_URL}/api/3/contacts/${contactId}`,
+      `${acUrl}/api/3/contacts/${contactId}`,
       {
-        headers: { 'Api-Token': AC_API_KEY! }
+        headers: { 'Api-Token': acApiKey }
       }
     )
 
@@ -153,9 +192,9 @@ export async function POST(request: NextRequest) {
 
     // Get contact's field values
     const fieldValuesResponse = await axios.get(
-      `${AC_URL}/api/3/contacts/${contactId}/fieldValues`,
+      `${acUrl}/api/3/contacts/${contactId}/fieldValues`,
       {
-        headers: { 'Api-Token': AC_API_KEY! }
+        headers: { 'Api-Token': acApiKey }
       }
     )
 
@@ -182,9 +221,9 @@ export async function POST(request: NextRequest) {
 
     // Get contact's current tags
     const tagsResponse = await axios.get(
-      `${AC_URL}/api/3/contacts/${contactId}/contactTags`,
+      `${acUrl}/api/3/contacts/${contactId}/contactTags`,
       {
-        headers: { 'Api-Token': AC_API_KEY! }
+        headers: { 'Api-Token': acApiKey }
       }
     )
 
@@ -195,9 +234,9 @@ export async function POST(request: NextRequest) {
 
     // Step 2: Check if contact is already on List 4
     const listMembershipResponse = await axios.get(
-      `${AC_URL}/api/3/contacts/${contactId}/contactLists`,
+      `${acUrl}/api/3/contacts/${contactId}/contactLists`,
       {
-        headers: { 'Api-Token': AC_API_KEY! }
+        headers: { 'Api-Token': acApiKey }
       }
     )
 
@@ -208,7 +247,7 @@ export async function POST(request: NextRequest) {
     if (!isOnList4) {
       console.log(`📝 Adding contact to List 4 (LBTA)...`)
       await axios.post(
-        `${AC_URL}/api/3/contactLists`,
+        `${acUrl}/api/3/contactLists`,
         {
           contactList: {
             list: 4,
@@ -218,7 +257,7 @@ export async function POST(request: NextRequest) {
         },
         {
           headers: {
-            'Api-Token': AC_API_KEY!,
+            'Api-Token': acApiKey,
             'Content-Type': 'application/json'
           }
         }
@@ -232,7 +271,7 @@ export async function POST(request: NextRequest) {
     if (!currentTagIds.includes(27)) {
       console.log(`🏷️ Applying LBTA_Winter2026 tag (27)...`)
       await axios.post(
-        `${AC_URL}/api/3/contactTags`,
+        `${acUrl}/api/3/contactTags`,
         {
           contactTag: {
             contact: contactId,
@@ -241,7 +280,7 @@ export async function POST(request: NextRequest) {
         },
         {
           headers: {
-            'Api-Token': AC_API_KEY!,
+            'Api-Token': acApiKey,
             'Content-Type': 'application/json'
           }
         }
@@ -298,7 +337,7 @@ export async function POST(request: NextRequest) {
     if (classTagId && !currentTagIds.includes(classTagId)) {
       console.log(`🏷️ Applying class tag ${classTagId}...`)
       await axios.post(
-        `${AC_URL}/api/3/contactTags`,
+        `${acUrl}/api/3/contactTags`,
         {
           contactTag: {
             contact: contactId,
@@ -307,7 +346,7 @@ export async function POST(request: NextRequest) {
         },
         {
           headers: {
-            'Api-Token': AC_API_KEY!,
+            'Api-Token': acApiKey,
             'Content-Type': 'application/json'
           }
         }
@@ -321,27 +360,25 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      contactId,
-      addedToList4: !isOnList4,
-      classTagApplied: classTagId
+      message: 'Webhook processed successfully',
     })
 
   } catch (error: any) {
     console.error('❌ Webhook error:', error.response?.data || error.message)
-    // Return 200 even on error to prevent ActiveCampaign from retrying
     return NextResponse.json({
       success: false,
-      error: error.message
+      error: 'Webhook processing failed',
     })
   }
 }
 
 // Handle GET for webhook verification
 export async function GET(request: NextRequest) {
+  const authError = verifyWebhookSecret(request)
+  if (authError) return authError
+
   return NextResponse.json({
-    status: 'active',
-    endpoint: 'ActiveCampaign Webhook Handler',
-    purpose: 'Auto-tagging for LBTA Winter 2026 registrations',
-    version: '1.0'
+    success: true,
+    message: 'ActiveCampaign webhook endpoint is active',
   })
 }

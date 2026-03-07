@@ -59,7 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/jtt`,
+      url: `${baseUrl}/programs/leagues`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.85,

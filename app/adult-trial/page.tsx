@@ -107,7 +107,7 @@ export default function AdultTrialLanding() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#trial"
-                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-lbta-sand"
+                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone"
               >
                 Start Your Trial
               </a>
@@ -223,12 +223,12 @@ export default function AdultTrialLanding() {
       </section>
 
       {/* Trial Booking Section */}
-      <section id="trial" className="py-32 bg-lbta-sand">
+      <section id="trial" className="py-32 bg-brand-sandstone">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-white shadow-xl">
             <div className="grid lg:grid-cols-5">
               {/* Left: Context */}
-              <div className="lg:col-span-2 bg-lbta-charcoal p-12 flex flex-col justify-center">
+              <div className="lg:col-span-2 bg-brand-pacific-dusk p-12 flex flex-col justify-center">
                 <h3 className="font-serif text-3xl text-lbta-bone mb-6">
                   Your Trial Session
                 </h3>
@@ -356,7 +356,7 @@ export default function AdultTrialLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-lbta-charcoal py-12">
+      <footer className="bg-brand-pacific-dusk py-12">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <p className="text-sm text-lbta-bone/60 mb-3">
             Laguna Beach Tennis Academy • Official City of Laguna Beach Tennis Partner Since 2020

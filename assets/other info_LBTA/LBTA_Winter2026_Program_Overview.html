@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LBTA Winter 2026 — Complete Program Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pacific-dusk: #1B3A5C;
+    --victoria-cove: #2E8B8B;
+    --sunset-cliff: #E8834A;
+    --thousand-steps: #C4963C;
+    --sandstone: #F5F0E5;
+    --morning-light: #FAF8F4;
+    --dark-navy: #0F2237;
+    --white: #FFFFFF;
+    --driftwood: #B8A88A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--pacific-dusk);
+    font-size: 13px;
+    line-height: 1.55;
+    max-width: 816px;
+    margin: 0 auto;
+  }
+
+  /* ══════════════════════════════════
+     COVER
+     ══════════════════════════════════ */
+  .cover-header {
+    background: var(--dark-navy);
+    padding: 32px 48px 24px;
+    text-align: center;
+  }
+
+  .cover-horizon {
+    display: flex; height: 3px; margin-bottom: 0;
+  }
+  .cover-horizon .s1 { flex: 15; background: var(--victoria-cove); }
+  .cover-horizon .s2 { flex: 20; background: var(--sunset-cliff); }
+  .cover-horizon .s3 { flex: 30; background: var(--thousand-steps); }
+
+  .cover-logo { width: 160px; height: auto; margin-bottom: 20px; }
+
+  .cover-title {
+    font-family: 'Cormorant', Georgia, serif;
+    font-size: 38px; font-weight: 700; color: var(--white);
+    line-height: 1.1; margin-bottom: 4px;
+  }
+
+  .cover-subtitle {
+    font-family: 'Cormorant', Georgia, serif;
+    font-size: 15px; color: rgba(255,255,255,0.5);
+    font-style: italic;
+  }
+
+  .cover-pillars {
+    margin-top: 16px;
+    font-size: 8px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--thousand-steps);
+  }
+
+  /* ══════════════════════════════════
+     CONTENT AREA
+     ══════════════════════════════════ */
+  .content { padding: 28px 48px; }
+
+  /* ── Section banners ── */
+  .section-banner {
+    background: var(--sandstone);
+    padding: 9px 16px;
+    border-left: 3px solid var(--sunset-cliff);
+    margin: 24px 0 14px;
+  }
+
+  .section-banner:first-child { margin-top: 0; }
+
+  .section-banner h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--dark-navy); margin: 0;
+  }
+
+  /* ── Headings ── */
+  h3 {
+    font-family: 'Cormorant', Georgia, serif;
+    font-size: 22px; font-weight: 600;
+    color: var(--dark-navy); margin-bottom: 4px;
+  }
+
+  h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--dark-navy); margin-bottom: 2px;
+  }
+
+  /* ── Location labels ── */
+  .location-name {
+    font-size: 13px; font-weight: 700;
+    color: var(--sunset-cliff); margin-bottom: 1px;
+  }
+
+  .location-address {
+    font-size: 11px; color: rgba(27,58,92,0.45);
+    margin-bottom: 2px;
+  }
+
+  .coaches-label {
+    font-size: 11px; color: rgba(27,58,92,0.55);
+    margin-bottom: 14px;
+  }
+
+  /* ── Programs ── */
+  .program { margin-bottom: 18px; page-break-inside: avoid; }
+
+  .program-title {
+    font-size: 13px; font-weight: 700;
+    color: var(--dark-navy); margin-bottom: 2px;
+  }
+
+  .program-title .age { font-weight: 500; color: var(--victoria-cove); }
+
+  .program-desc {
+    font-size: 11.5px; color: rgba(27,58,92,0.65);
+    line-height: 1.5; margin-bottom: 8px;
+  }
+
+  .program-note {
+    font-size: 10.5px; color: rgba(27,58,92,0.4);
+    font-style: italic; margin-top: 4px;
+  }
+
+  /* ── Tables ── */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 4px; font-size: 12px;
+  }
+
+  thead th {
+    background: var(--dark-navy); color: var(--white);
+    font-weight: 600; font-size: 10px;
+    letter-spacing: 0.3px; padding: 6px 10px;
+    text-align: left;
+  }
+
+  tbody td {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(27,58,92,0.07);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  table.alt thead th {
+    background: var(--sandstone); color: var(--dark-navy);
+  }
+
+  /* ── Dividers ── */
+  .divider {
+    height: 1px; background: rgba(27,58,92,0.08);
+    margin: 18px 0;
+  }
+
+  /* ── Registration steps ── */
+  .steps { list-style: none; padding: 0; margin: 0 0 10px; }
+
+  .steps li {
+    display: flex; align-items: center;
+    margin-bottom: 6px; font-size: 12px;
+  }
+
+  .steps li .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; min-width: 20px;
+    border-radius: 50%; background: var(--victoria-cove);
+    color: var(--white); font-size: 10px; font-weight: 700;
+    margin-right: 10px;
+  }
+
+  /* ── Coach cards ── */
+  .coach-name {
+    font-family: 'Cormorant', Georgia, serif;
+    font-size: 24px; font-weight: 700;
+    color: var(--dark-navy); margin-bottom: 1px;
+  }
+
+  .coach-role {
+    font-size: 11.5px; font-weight: 600;
+    color: var(--sunset-cliff); margin-bottom: 10px;
+  }
+
+  .coach-bio { font-size: 12px; line-height: 1.6; margin-bottom: 8px; }
+  .coach-bio p { margin-bottom: 8px; }
+
+  .coach-sub {
+    font-size: 13px; font-weight: 700;
+    color: var(--dark-navy); margin: 12px 0 4px;
+  }
+
+  .coach-contact {
+    font-size: 10.5px; color: rgba(27,58,92,0.4);
+    margin-top: 10px;
+  }
+
+  /* ── Facilities ── */
+  .facility { margin-bottom: 14px; }
+  .facility-name { font-size: 13px; font-weight: 700; color: var(--dark-navy); }
+  .facility-addr { font-size: 11px; color: rgba(27,58,92,0.45); margin-bottom: 2px; }
+  .facility-info { font-size: 12px; }
+
+  /* ── Closing ── */
+  .closing {
+    text-align: center; padding: 24px 0 8px;
+  }
+
+  .closing-pillars {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--sunset-cliff);
+  }
+
+  .closing-tagline {
+    font-family: 'Cormorant', Georgia, serif;
+    font-size: 14px; font-style: italic;
+    color: rgba(27,58,92,0.35); margin-top: 4px;
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    display: flex; justify-content: space-between;
+    padding: 10px 48px;
+    border-top: 1px solid rgba(27,58,92,0.06);
+    font-size: 9px; color: rgba(27,58,92,0.3);
+  }
+
+  .page-footer a { color: rgba(27,58,92,0.3); text-decoration: none; }
+
+  /* ── Page break helpers ── */
+  .page-break { page-break-before: always; }
+  .no-break { page-break-inside: avoid; }
+
+  /* ── Print ── */
+  @media print {
+    body { background: white; }
+    .page-break { page-break-before: always; }
+    .no-break { page-break-inside: avoid; }
+    .program { page-break-inside: avoid; }
+    table { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     COVER
+     ═══════════════════════════════════ -->
+<div class="cover-horizon">
+  <div class="s1"></div><div class="s2"></div><div class="s3"></div><div class="s2"></div><div class="s1"></div>
+</div>
+<div class="cover-header">
+  <img src="logos/LBTA-stacked-white.png" alt="LBTA" class="cover-logo" />
+  <div class="cover-title">Winter 2026</div>
+  <div class="cover-subtitle">Complete Program Overview with Coach Assignments</div>
+  <div class="cover-pillars">Movement &middot; Craft &middot; Community</div>
+</div>
+
+<div class="content">
+  <div class="section-banner"><h2>Session Dates</h2></div>
+  <table>
+    <thead><tr><th>Session</th><th>Dates</th><th>Duration</th><th>Skip Dates</th></tr></thead>
+    <tbody><tr><td>Winter Session</td><td>January 5 &ndash; April 5, 2026</td><td>13 weeks</td><td>None</td></tr></tbody>
+  </table>
+
+  <div class="section-banner"><h2>Locations</h2></div>
+  <table>
+    <thead><tr><th>Location</th><th>Address</th><th>Courts</th><th>Surface</th></tr></thead>
+    <tbody>
+      <tr><td>Moulton Meadows Park</td><td>Balboa Ave &amp; Capistrano Ave, Laguna Beach, CA 92651</td><td>2</td><td>Hard Court</td></tr>
+      <tr><td>Laguna Beach High School</td><td>625 Park Ave, Laguna Beach, CA 92651</td><td>6</td><td>Hard Court</td></tr>
+      <tr><td>Alta Laguna Park</td><td>Alta Laguna Blvd, Laguna Beach, CA 92651</td><td>2</td><td>Hard Court</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-banner"><h2>How to Register</h2></div>
+  <ol class="steps">
+    <li><span class="num">1</span>Submit interest via the LBTA website</li>
+    <li><span class="num">2</span>Admin team confirms program fit and schedule availability</li>
+    <li><span class="num">3</span>Registration and payment are finalized</li>
+    <li><span class="num">4</span>Training begins January 5, 2026</li>
+  </ol>
+  <p class="program-note">Most programs run as 13-week seasonal programs. Little Tennis Stars runs month-to-month. LiveBall and Cardio Tennis run on a monthly model. Placement is confirmed by the admin team before payment.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     JUNIOR PROGRAMS
+     ═══════════════════════════════════ -->
+<div class="content page-break">
+  <div class="section-banner"><h2>Junior Programs</h2></div>
+  <h3>Junior Programs &mdash; Winter 2026</h3>
+
+  <div style="height:8px;"></div>
+  <div class="location-name">Moulton Meadows Park</div>
+  <div class="location-address">Balboa Ave &amp; Capistrano Ave, Laguna Beach, CA 92651</div>
+  <div class="coaches-label">Coaches: Peter DeFrantz | Robert LeBuhn | Andrew Mateljan</div>
+
+  <div class="program">
+    <div class="program-title">Little Tennis Stars <span class="age">(Ages 3&ndash;4)</span> &mdash; 45 min, monthly</div>
+    <div class="program-desc">Foam balls, mini courts, and movement games that build coordination, confidence, and a love for the court. The first step in the LBTA Player Journey.</div>
+    <table>
+      <thead><tr><th>Days</th><th>Time</th><th>1x/wk</th><th>2x/wk</th><th>Drop-in</th></tr></thead>
+      <tbody><tr><td>Mon / Wed</td><td>3:30&ndash;4:15pm</td><td>$120/mo</td><td>$200/mo</td><td>$40</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="program">
+    <div class="program-title">Red Ball <span class="age">(Ages 5&ndash;6)</span> &mdash; 60-minute sessions</div>
+    <div class="program-desc">Proper stroke development, footwork fundamentals, and rally building on a 36-foot court. Where the technical foundation begins.</div>
+    <table>
+      <thead><tr><th>Days</th><th>Time</th><th>1x/wk</th><th>2x/wk</th><th>3x/wk</th><th>Drop-in</th></tr></thead>
+      <tbody><tr><td>Mon / Wed</td><td>4:15&ndash;5:15pm</td><td>$546</td><td>$1,092</td><td>$1,635</td><td>$50</td></tr></tbody>
+    </table>
+    <p class="program-note">Pricing: 13-week season</p>
+  </div>
+
+  <div class="program">
+    <div class="program-title">Orange Ball <span class="age">(Ages 7&ndash;8)</span> &mdash; 60 min</div>
+    <div class="program-desc">Mid-court tennis where directional play, consistent rallies, and competitive instincts start to form.</div>
+    <table>
+      <thead><tr><th>Days</th><th>Time</th><th>1x/wk</th><th>2x/wk</th><th>3x/wk</th><th>Drop-in</th></tr></thead>
+      <tbody>
+        <tr><td>Mon / Wed</td><td>5:15&ndash;6:15pm</td><td>$546</td><td>$1,092</td><td>$1,635</td><td>$50</td></tr>
+        <tr><td>Tue / Thu</td><td>3:30&ndash;4:30pm</td><td>$546</td><td>$1,092</td><td>$1,635</td><td>$50</td></tr>
+      </tbody>
+    </table>
+    <p class="program-note">Friday Match Play: $25 drop-in or $85/month</p>
+  </div>
+
+  <div class="program">
+    <div class="program-title">Green Dot <span class="age">(Ages 9&ndash;11)</span> &mdash; 60 min</div>
+    <div class="program-desc">Full-court tennis with green balls &mdash; building consistency, tactical awareness, and the competitive mindset that carries forward.</div>
+    <table>
+      <thead><tr><th>Days</th><th>Time</th><th>1x/wk</th><th>2x/wk</th><th>3x/wk</th><th>Drop-in</th></tr></thead>
+      <tbody><tr><td>Tue / Thu</td><td>4:30&ndash;5:30pm</td><td>$546</td><td>$1,092</td><td>$1,635</td><td>$50</td></tr></tbody>
+    </table>
+    <p class="program-note">Friday Match Play: $25 drop-in or $85/month</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="location-name">Alta Laguna Park</div>
+  <div class="location-address">Alta Laguna Blvd, Laguna Beach, CA 92651</div>
+  <div class="coaches-label">Coaches: Robert LeBuhn | Andrew Mateljan</div>
+
+  <div class="program">
+    <div class="program-title">Youth Development <span class="age">(Ages 11&ndash;15)</span> &mdash; 90 min Mon&ndash;Thu</div>
+    <div class="program-desc">Serious training, accessible structure. Ninety-minute sessions building tactical depth, physical conditioning, and competitive readiness. Friday match play at LBHS. Train up to 5x/week.</div>
+    <table class="alt">
+      <thead><tr><th>Frequency</th><th>13-Week Price</th><th>Drop-in</th></tr></thead>
+      <tbody>
+        <tr><td>1x / week</td><td>$756</td><td>$70</td></tr>
+        <tr><td>2x / week</td><td>$1,437</td><td></td></tr>
+        <tr><td>3x / week</td><td>$2,160</td><td></td></tr>
+        <tr><td>4x / week</td><td>$2,880</td><td></td></tr>
+        <tr><td>5x / week (incl. Fri)</td><td>$3,250</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     ADULT PROGRAMS
+     ═══════════════════════════════════ -->
+<div class="content page-break">
+  <div class="section-banner"><h2>Adult Programs</h2></div>
+  <h3>Adult Programs &mdash; Winter 2026</h3>
+
+  <div style="height:8px;"></div>
+  <div class="location-name">Laguna Beach High School</div>
+  <div class="location-address">625 Park Ave, Laguna Beach, CA 92651</div>
+  <div style="height:14px;"></div>
+
+  <div class="program">
+    <div class="program-title">Adult Beginner 1 &mdash; True Beginner</div>
+    <div class="program-desc">Never played? Start here. Learn strokes, footwork, and scoring from scratch in a supportive group. Three weekly time slots.</div>
+    <table>
+      <thead><tr><th>Days</th><th>Time</th><th>Coach(es)</th><th>1x/wk</th><th>2x/wk</th><th>Drop-in</th></tr></thead>
+      <tbody>
+        <tr><td>Mon / Wed</td><td>6:00&ndash;7:00pm</td><td>Robert</td><td>$546</td><td>$797</td><td>$55</td></tr>
+        <tr><td>Tue / Thu</td><td>10:00&ndash;11:00am</td><td>Andrew</td><td>$546</td><td>$797</td><td>$55</td></tr>
+        <tr><td>Saturday</td><td>9:00&ndash;10:00am</td><td>Andrew &amp; Robert</td><td>$497</td><td>&mdash;</td><td>$55</td></tr>
+      </tbody>
+    </table>
+    <p class="program-note">Pricing: 13-week season</p>
+  </div>
+
+  <div class="program">
+    <div class="program-title">Adult Beginner 2 &mdash; Bridge</div>
+    <div class="program-desc">Know the basics? Bridge takes you from rallying to real match play &mdash; consistency, placement, and doubles positioning.</div>
+    <div class="location-address" style="margin-bottom:4px;">Moulton Meadows Park &bull; Balboa Ave &amp; Capistrano Ave, Laguna Beach, CA 92651</div>
+    <div class="coaches-label" style="margin-bottom:8px;">Coaches: Peter DeFrantz | Robert LeBuhn | Andrew Mateljan</div>
+    <table>
+      <thead><tr><th>Days</th><th>Time</th><th>1x/wk</th><th>2x/wk</th><th>Drop-in</th></tr></thead>
+      <tbody><tr><td>Mon / Wed</td><td>6:30&ndash;7:30pm</td><td>$546</td><td>$797</td><td>$55</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="program">
+    <div class="program-title">Adult Intermediate &mdash; NTRP 3.0&ndash;3.5</div>
+    <div class="program-desc">Ninety-minute sessions building consistent strokes, tactical understanding, and match-play confidence. Up to 3x/week.</div>
+    <div class="coaches-label" style="margin-bottom:8px;">Coaches: Andrew Mateljan | Robert LeBuhn (both available)</div>
+    <table>
+      <thead><tr><th>Days</th><th>Time</th><th>Coach</th><th>1x/wk</th><th>2x/wk</th><th>3x/wk</th><th>Drop-in</th></tr></thead>
+      <tbody>
+        <tr><td>Tue / Thu</td><td>11am&ndash;12:30pm</td><td>Andrew</td><td>$756</td><td>$1,437</td><td>$2,042</td><td>$70</td></tr>
+        <tr><td>Saturday</td><td>10&ndash;11:30am</td><td>Andrew</td><td>Incl. in 3x</td><td></td><td></td><td>$70</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="program">
+    <div class="program-title">Adult Advanced &mdash; NTRP 4.0+</div>
+    <div class="program-desc">Two-hour coached sessions building advanced technique, tactical patterns, and competitive sharpness.</div>
+    <table>
+      <thead><tr><th>Days</th><th>Time</th><th>Coach(es)</th><th>1x/wk</th><th>2x/wk</th><th>Drop-in</th></tr></thead>
+      <tbody><tr><td>Mon / Fri</td><td>12:00&ndash;2:00pm</td><td>Andrew &amp; Robert</td><td>$810</td><td>$1,620</td><td>$90</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     HIGH PERFORMANCE + MONTHLY + DISCOUNTS
+     ═══════════════════════════════════ -->
+<div class="content page-break">
+  <div class="section-banner"><h2>High Performance</h2></div>
+  <h3>High Performance Academy</h3>
+  <div class="location-address">Laguna Beach High School &bull; 625 Park Ave, Laguna Beach, CA 92651</div>
+  <div style="height:6px;"></div>
+  <div class="program-desc">Ages 12&ndash;17, UTR 5+. Two-hour sessions combining advanced technique, tactical depth, physical conditioning, and match-play intensity. Tournament-caliber training.</div>
+  <div class="coaches-label">Coaches: Andrew Mateljan | Robert LeBuhn</div>
+
+  <table>
+    <thead><tr><th>Days</th><th>Time</th><th>Duration</th><th>Focus</th></tr></thead>
+    <tbody>
+      <tr><td>Mon &ndash; Thu</td><td>6:00&ndash;8:00pm</td><td>2 hours</td><td>Training</td></tr>
+      <tr><td>Friday</td><td>5:30&ndash;7:30pm</td><td>2 hours</td><td>Match Play</td></tr>
+    </tbody>
+  </table>
+
+  <div style="height:8px;"></div>
+  <table class="alt">
+    <thead><tr><th>Frequency</th><th>13-Week Price</th><th>Drop-in</th></tr></thead>
+    <tbody>
+      <tr><td>1x / week</td><td>$810</td><td>$100</td></tr>
+      <tr><td>2x / week</td><td>$1,620</td><td></td></tr>
+      <tr><td>3x / week</td><td>$2,268</td><td></td></tr>
+      <tr><td>4x / week</td><td>$2,916</td><td></td></tr>
+      <tr><td>5x / week (incl. Fri)</td><td>$3,200</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-banner"><h2>Monthly Programs</h2></div>
+  <table>
+    <thead><tr><th>Program</th><th>Day</th><th>Time</th><th>Location</th><th>Coach(es)</th><th>Monthly</th><th>Drop-in</th></tr></thead>
+    <tbody>
+      <tr><td>LiveBall (Intermed.)</td><td>Thursday</td><td>6:00&ndash;7:30pm</td><td>Moulton Meadows</td><td>TBD</td><td>$150</td><td>$50</td></tr>
+      <tr><td>LiveBall (Intermed.)</td><td>Sunday</td><td>9:00&ndash;10:30am</td><td>LB High School</td><td>Peter &amp; Andrew</td><td>$150</td><td>$50</td></tr>
+      <tr><td>LiveBall (Advanced)</td><td>Sunday</td><td>10:30am&ndash;12pm</td><td>LB High School</td><td>Peter &amp; Andrew</td><td>$150</td><td>$50</td></tr>
+      <tr><td>Cardio Tennis</td><td>Friday</td><td>9:00&ndash;10:30am</td><td>LB High School</td><td>Andrew &amp; Robert</td><td>$150</td><td>$50</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-banner"><h2>Discounts</h2></div>
+  <table>
+    <thead><tr><th>Discount</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>Sibling</td><td>10% off additional siblings in same program</td></tr>
+      <tr><td>Early Bird</td><td>$50 off when registered by Dec 5, 2025</td></tr>
+      <tr><td>Payment Plan</td><td>Two installments available (50% at registration, 50% at mid-season)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     PRIVATE COACHING
+     ═══════════════════════════════════ -->
+<div class="content page-break">
+  <div class="section-banner"><h2>Private Coaching</h2></div>
+  <h3>Private &amp; Semi-Private Lesson Rates</h3>
+  <div style="height:6px;"></div>
+  <div class="program-desc">Customized one-on-one and small-group training tailored to each player&rsquo;s unique strengths, goals, and competitive timeline. All sessions are 1 hour unless otherwise arranged.</div>
+
+  <div style="height:8px;"></div>
+  <table>
+    <thead><tr><th>Coach</th><th>Single Lesson</th><th>10-Pack</th><th>20-Pack</th></tr></thead>
+    <tbody>
+      <tr><td>Andrew Mateljan</td><td>$250</td><td>$2,300</td><td>$4,200</td></tr>
+      <tr><td>Robert LeBuhn</td><td>$120</td><td>$1,100</td><td>$2,000</td></tr>
+      <tr><td>Peter DeFrantz</td><td>$120</td><td>$1,100</td><td>$2,000</td></tr>
+      <tr><td>Michelle Bevins *</td><td>$120</td><td>$1,100</td><td>$2,000</td></tr>
+    </tbody>
+  </table>
+  <p class="program-note">* Michelle Bevins is currently on leave; may return Spring 2026.</p>
+
+  <div style="height:12px;"></div>
+  <p style="font-size:12px;">To book, contact the academy at <a href="mailto:support@lagunabeachtennisacademy.com" style="color:var(--victoria-cove); text-decoration:none;">support@lagunabeachtennisacademy.com</a> or <a href="tel:9495340457" style="color:var(--victoria-cove); text-decoration:none;">+1 (949) 534-0457</a>.</p>
+
+  <div class="divider"></div>
+
+  <h4>Private Lessons</h4>
+  <div class="program-desc">One-on-one coaching for any age and level. Personalized technique, tactics, and development. Flexible scheduling at all LBTA locations.</div>
+
+  <div style="height:12px;"></div>
+  <h4>Semi-Private Lessons</h4>
+  <div class="program-desc">Coached sessions for 2&ndash;3 players of similar level. Personalized attention with the competitive spark of a training partner. Cost-sharing available.</div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     COACHING STAFF: ANDREW
+     ═══════════════════════════════════ -->
+<div class="content page-break">
+  <div class="section-banner"><h2>Coaching Staff</h2></div>
+
+  <div class="coach-name">Andrew Mateljan</div>
+  <div class="coach-role">Founder &amp; Academy Director | Head Coach, LBHS Boys Tennis</div>
+
+  <div class="coach-bio">
+    <p>Andrew Mateljan is one of Southern California&rsquo;s most respected player development coaches and the founder of Laguna Beach Tennis Academy &mdash; the official tennis partner of the City of Laguna Beach. With over 25 years in the sport as a nationally ranked junior competitor, ITF Futures professional, international touring coach, and academy director, Andrew has built a comprehensive development system serving nearly 2,000 families.</p>
+  </div>
+
+  <div class="coach-sub">Playing Career</div>
+  <div class="program-desc">Ranked #3 in SoCal and #12 nationally by USTA. Won The Ojai and captured multiple SoCal Sectional titles. Competed twice at the USTA Boys National Championships in Kalamazoo. Competed on the ITF Futures circuit across the US, South America, and internationally, earning an ITF World Junior Ranking.</div>
+
+  <div class="coach-sub">International Coaching</div>
+  <div class="program-desc">Seven years coaching internationally across Europe &mdash; Spain, Croatia, and Norway &mdash; training within boutique high-performance facilities and absorbing the European player development philosophy. GPTCA-ATP certified coach and featured speaker at the World Tennis Conference.</div>
+
+  <div class="coach-sub">Current &amp; Notable ATP Players Coached</div>
+  <table>
+    <thead><tr><th>Player</th><th>Career-High Ranking</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Karue Sell</td><td>ATP #258</td><td>Featured in LA Times (2024)</td></tr>
+      <tr><td>Colton Smith</td><td>ATP #133</td><td>Indian Wells ATP Masters 1000 (2025)</td></tr>
+      <tr><td>Ryan Seggerman</td><td>ATP #63 (Doubles)</td><td>Grand Slam competitor</td></tr>
+      <tr><td>Max McKennon</td><td>ATP #458</td><td>Developing under Andrew&rsquo;s mentorship</td></tr>
+    </tbody>
+  </table>
+
+  <div class="coach-sub">College &amp; Player Development Pipeline</div>
+  <div class="program-desc">Andrew has guided dozens of junior athletes into collegiate tennis programs at every level &mdash; from Division I scholarships to top Division III programs &mdash; with a track record spanning nationally ranked Blue Chip recruits, Five-Star prospects, and players who have gone on to compete professionally.</div>
+  <table>
+    <thead><tr><th>Player</th><th>University</th><th>Recruiting Rank</th></tr></thead>
+    <tbody>
+      <tr><td>Sean Daryabeigi</td><td>U. of South Carolina</td><td>Blue Chip &mdash; #2 nationally</td></tr>
+      <tr><td>Rebecca Lynn</td><td>Yale University</td><td>Blue Chip &mdash; #9 nationally</td></tr>
+      <tr><td>Lauren Stein</td><td>Cornell University</td><td>Five-Star &mdash; #9 nationally (G16s)</td></tr>
+    </tbody>
+  </table>
+  <p class="program-note">Pre-LBTA, Andrew coached Alex Michelsen (now ATP #30, 2022 Wimbledon Boys Doubles champion) at ages 12&ndash;13 in Orange County. Also founder of Fit4Tennis, a global tennis fitness platform with 100,000+ followers.</p>
+  <div class="coach-contact">andrew@lagunabeachtennisacademy.com | 949-241-0847</div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     COACHING STAFF: ROBERT
+     ═══════════════════════════════════ -->
+<div class="content page-break">
+  <div class="section-banner"><h2>Coaching Staff</h2></div>
+
+  <div class="coach-name">Robert W. LeBuhn</div>
+  <div class="coach-role">Director of Tennis Operations &amp; Growth | Associate Head Coach, LBHS Boys Tennis</div>
+
+  <div class="coach-bio">
+    <p>Robert LeBuhn is a USPTR-certified tennis professional with more than 25 years of coaching, teaching, and program-building experience across every level of the game &mdash; from junior development and high school to college, country club, resort, and professional settings.</p>
+    <p>At LBTA, Robert leads day-to-day operations, staff coordination, scheduling, parent communications, lead management, partnership development, and revenue growth &mdash; while remaining an active coaching presence on the court. He reports directly to Founder and Academy Director Andrew Mateljan.</p>
+  </div>
+
+  <div class="coach-sub">Playing Career</div>
+  <div class="program-desc">Harry Hopman Tennis Academy; Top 20 USTA Eastern junior. 1983 State Singles Champion, Lawrenceville School (NJ); National Prep Champion. NCAA Division I at Lafayette College (1983&ndash;85), two-time All-Conference; B.A. Government &amp; Law.</div>
+
+  <div class="coach-sub">Coaching Awards</div>
+  <div class="program-desc">NJ Boys Tennis Coach of the Year (Dwight-Englewood). Union County Girls Coach of the Year (Summit HS). Somerset County Girls Coach of the Year (Ridge HS). San Diego CIF Girls Coach of the Year (Coronado HS).</div>
+
+  <div class="coach-sub">Certifications</div>
+  <div class="program-desc">USPTR Professional (highest level). Adaptive Tennis (Special Olympics, ACEing Autism, Wheelchair, Deaf-Blind). Cardio Tennis. Red Cross CPR/AED &amp; First Aid.</div>
+
+  <div class="coach-sub">LBTA Strengths</div>
+  <div class="program-desc">Player Development &mdash; structured methods across juniors, college, resort, and pro settings. Operational Leadership &mdash; staff, scheduling, budgets, and client communications. Program Building &mdash; transforming programs from the ground up. Match Preparation &mdash; lineup decisions, scouting, and competitive play. Inclusive Tennis &mdash; adaptive and Special Olympics certification. Team Culture &mdash; disciplined, respectful environments.</div>
+
+  <div class="coach-contact">mrsandiegoca@gmail.com | 619-602-9713</div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     COACHING STAFF: PETER
+     ═══════════════════════════════════ -->
+<div class="content page-break">
+  <div class="section-banner"><h2>Coaching Staff</h2></div>
+
+  <div class="coach-name">Peter DeFrantz</div>
+  <div class="coach-role">USPTA &amp; PTR Certified Professional | College Tennis | 8+ Years Coaching</div>
+
+  <div class="coach-bio">
+    <p>Peter DeFrantz grew up on the tennis court. Raised by a father who coached high school tennis, he learned early that the game is about more than strokes &mdash; it&rsquo;s about how you carry yourself, how you compete, and how you treat the people around you.</p>
+    <p>He went on to play college tennis at Mt. San Jacinto College, where his team was ranked #1 in Southern California and #2 in the state. That competitive foundation &mdash; combined with dual USPTA and PTR certification &mdash; shapes how he coaches today: with structure, with intention, and with genuine care for every player he works with.</p>
+    <p>Over 8+ years of professional coaching across Southern California, Peter has built a reputation for making tennis accessible and engaging for players of all ages and abilities.</p>
+  </div>
+
+  <div class="coach-sub">Coaching Strengths</div>
+  <div class="program-desc">Communication &mdash; Connects with children of all ages using language and examples they understand. Teaching Method &mdash; Progressive, scaffolded approach starting inside the service line, gradually expanding distance and complexity. Player Development &mdash; Strong observation and evaluation skills with constructive feedback. Fitness Integration &mdash; Passionate about on-court and off-court fitness. Energy &amp; Attitude &mdash; Consistently positive presence; lessons are fun, challenging, and engaging.</div>
+
+  <div class="coach-sub">Credentials</div>
+  <table>
+    <thead><tr><th>Credential</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>USPTA</td><td>Certified Professional level</td></tr>
+      <tr><td>PTR</td><td>Certified Professional level</td></tr>
+      <tr><td>College Tennis</td><td>Mt. San Jacinto College &mdash; #1 SoCal, #2 California</td></tr>
+      <tr><td>Experience</td><td>8+ years coaching across Southern California</td></tr>
+      <tr><td>Levels</td><td>All ages: juniors through adults, beginner through competitive</td></tr>
+    </tbody>
+  </table>
+
+  <div class="coach-contact">peterdefrantz@gmail.com | (951) 591-5694</div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     CONTACT & FACILITIES
+     ═══════════════════════════════════ -->
+<div class="content page-break">
+  <div class="section-banner"><h2>Contact</h2></div>
+  <h3>Get in Touch</h3>
+  <div style="height:8px;"></div>
+  <table>
+    <thead><tr><th style="width:45%;"></th><th></th></tr></thead>
+    <tbody>
+      <tr><td><strong>Owner &amp; Academy Director</strong></td><td>Andrew Mateljan</td></tr>
+      <tr><td><strong>Academy Email</strong></td><td><a href="mailto:support@lagunabeachtennisacademy.com" style="color:var(--victoria-cove); text-decoration:none;">support@lagunabeachtennisacademy.com</a></td></tr>
+      <tr><td><strong>Academy Phone</strong></td><td><a href="tel:9495340457" style="color:var(--victoria-cove); text-decoration:none;">+1 (949) 534-0457</a></td></tr>
+      <tr><td><strong>Website</strong></td><td><a href="https://www.lagunabeachtennisacademy.com" style="color:var(--victoria-cove); text-decoration:none;">www.lagunabeachtennisacademy.com</a></td></tr>
+      <tr><td><strong>City of Laguna Beach &mdash; Recreation Dept.</strong></td><td>(949) 464-6645</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-banner"><h2>Facilities</h2></div>
+
+  <div class="facility">
+    <div class="facility-name">Moulton Meadows Park</div>
+    <div class="facility-addr">Balboa Ave &amp; Capistrano Ave, Laguna Beach, CA 92651</div>
+    <div class="facility-info">2 lighted hard courts &bull; Junior foundations, Little Tennis Stars, Red/Orange/Green Ball, Adult Bridge</div>
+  </div>
+
+  <div class="facility">
+    <div class="facility-name">Laguna Beach High School</div>
+    <div class="facility-addr">625 Park Ave, Laguna Beach, CA 92651</div>
+    <div class="facility-info">6 hard courts with lights &bull; High Performance, Adult programs, Monthly programs, Match Play</div>
+  </div>
+
+  <div class="facility">
+    <div class="facility-name">Alta Laguna Park</div>
+    <div class="facility-addr">Alta Laguna Blvd, Laguna Beach, CA 92651</div>
+    <div class="facility-info">2 hard courts with ocean views &bull; Youth Development (ages 11&ndash;15)</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="closing">
+    <div class="closing-pillars">Movement. Craft. Community.</div>
+    <div class="closing-tagline">Tennis, as it should be taught.</div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <span>www.lagunabeachtennisacademy.com</span>
+  <span>support@lagunabeachtennisacademy.com &nbsp;|&nbsp; (949) 534-0457</span>
+</div>
+
+</body>
+</html>

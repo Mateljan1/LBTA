@@ -15,7 +15,7 @@ export default function TestimonialQuote({ quote, author, role, className = '' }
           "{quote}"
         </p>
         <div>
-          <p className="text-sm font-sans font-medium text-lbta-charcoal">
+          <p className="text-sm font-sans font-medium text-brand-pacific-dusk">
             {author}
           </p>
           <p className="text-xs font-sans text-gray-500 mt-1">

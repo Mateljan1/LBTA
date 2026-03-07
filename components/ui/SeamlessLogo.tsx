@@ -19,7 +19,7 @@ export default function SeamlessLogo({
   className = '',
   containerClassName = '',
   priority = false,
-  backgroundColor = 'bg-lbta-cream'
+  backgroundColor = 'bg-brand-morning-light'
 }: SeamlessLogoProps) {
   return (
     <div className={`relative logo-container city-logo-blend ${containerClassName}`}>
@@ -41,7 +41,7 @@ export default function SeamlessLogo({
       
       {/* Dynamic gradient overlay based on background */}
       {backgroundColor !== 'bg-transparent' ? (
-        <div className="absolute inset-0 bg-gradient-to-br from-lbta-cream/5 via-transparent to-lbta-cream/5 pointer-events-none z-20 rounded-lg"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-morning-light/5 via-transparent to-brand-morning-light/5 pointer-events-none z-20 rounded-lg"></div>
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-lbta-tan/10 via-transparent to-lbta-tan/10 pointer-events-none z-20"></div>
       )}

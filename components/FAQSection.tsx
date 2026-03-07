@@ -57,7 +57,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="bg-lbta-cream section">
+    <section className="bg-brand-morning-light section">
       {/* FAQ Schema */}
       <Script
         id="faq-schema"
@@ -89,19 +89,19 @@ export default function FAQSection() {
                   bg-white rounded-subtle overflow-hidden
                   border transition-all duration-500 ease-luxury
                   ${isOpen 
-                    ? 'border-lbta-orange shadow-medium' 
+                    ? 'border-brand-sunset-cliff shadow-medium' 
                     : 'border-lbta-stone hover:border-lbta-slate'
                   }
                 `}
               >
                 <button
-                  className="w-full px-6 py-5 text-left flex items-center justify-between gap-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-lbta-orange focus-visible:ring-inset group"
+                  className="w-full px-6 py-5 text-left flex items-center justify-between gap-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-inset group"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   aria-expanded={isOpen}
                 >
                   <span className={`
                     font-sans text-body font-medium transition-colors duration-300
-                    ${isOpen ? 'text-black' : 'text-lbta-black group-hover:text-black'}
+                    ${isOpen ? 'text-black' : 'text-brand-deep-water group-hover:text-black'}
                   `}>
                     {faq.question}
                   </span>

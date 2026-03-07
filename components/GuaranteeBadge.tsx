@@ -12,7 +12,7 @@ export default function GuaranteeBadge({ variant = 'light', className = '' }: Gu
   
   return (
     <div className={`inline-flex items-center gap-2 ${className}`}>
-      <Shield className={`w-4 h-4 ${isLight ? 'text-green-600' : 'text-green-400'}`} />
+      <Shield className={`w-4 h-4 ${isLight ? 'text-brand-tide-pool' : 'text-brand-tide-pool'}`} />
       <span className={`font-sans text-[13px] font-medium ${isLight ? 'text-black/70' : 'text-white/80'}`}>
         30-Day Money-Back Guarantee
       </span>

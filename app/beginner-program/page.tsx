@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import pricingData from '@/data/pricing-supplemental.json'
+
+const bp = pricingData.beginnerProgram
 
 export default function BeginnerProgramLanding() {
   const [formData, setFormData] = useState({
@@ -55,7 +58,7 @@ export default function BeginnerProgramLanding() {
     <div className="min-h-screen bg-white">
       {/* Urgency Banner */}
       <div className="bg-lbta-coral text-white py-3 text-center text-sm font-medium tracking-wide">
-        <span className="font-bold">$50 OFF</span> January enrollment — Sign up by December 15th • Only 4 spots remaining
+        <span className="font-bold">${bp.discount} OFF</span> January enrollment — Sign up by {bp.discountDeadline} • Only {bp.spotsRemaining} spots remaining
       </div>
 
       {/* Header */}
@@ -113,7 +116,7 @@ export default function BeginnerProgramLanding() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#program"
-                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-lbta-sand"
+                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone"
               >
                 View Program Options
               </a>
@@ -252,7 +255,7 @@ export default function BeginnerProgramLanding() {
             </p>
           </div>
 
-          <div className="aspect-video overflow-hidden bg-lbta-charcoal shadow-2xl">
+          <div className="aspect-video overflow-hidden bg-brand-pacific-dusk shadow-2xl">
             <iframe
               src="https://player.vimeo.com/video/1134930901?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0"
               className="w-full h-full"
@@ -280,44 +283,44 @@ export default function BeginnerProgramLanding() {
             <div className="space-y-6">
               <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
                 <div>
-                  <h4 className="font-medium text-lbta-primary mb-1">12-24 Group Sessions</h4>
-                  <p className="text-sm text-lbta-secondary">ATP/WTA coaching, max 6:1 ratio</p>
+                  <h4 className="font-medium text-lbta-primary mb-1">{bp.valueStack.groupSessions.label}</h4>
+                  <p className="text-sm text-lbta-secondary">{bp.valueStack.groupSessions.description}</p>
                 </div>
-                <p className="text-xl font-serif text-lbta-secondary">$1,800</p>
+                <p className="text-xl font-serif text-lbta-secondary">${bp.valueStack.groupSessions.value.toLocaleString()}</p>
               </div>
 
               <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
                 <div>
-                  <h4 className="font-medium text-lbta-primary mb-1">Video Analysis Package</h4>
-                  <p className="text-sm text-lbta-secondary">Session recordings + technique breakdown</p>
+                  <h4 className="font-medium text-lbta-primary mb-1">{bp.valueStack.videoAnalysis.label}</h4>
+                  <p className="text-sm text-lbta-secondary">{bp.valueStack.videoAnalysis.description}</p>
                 </div>
-                <p className="text-xl font-serif text-lbta-secondary">$600</p>
+                <p className="text-xl font-serif text-lbta-secondary">${bp.valueStack.videoAnalysis.value.toLocaleString()}</p>
               </div>
 
               <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
                 <div>
-                  <h4 className="font-medium text-lbta-primary mb-1">Personalized Training Plan</h4>
-                  <p className="text-sm text-lbta-secondary">Custom progression roadmap + drills</p>
+                  <h4 className="font-medium text-lbta-primary mb-1">{bp.valueStack.trainingPlan.label}</h4>
+                  <p className="text-sm text-lbta-secondary">{bp.valueStack.trainingPlan.description}</p>
                 </div>
-                <p className="text-xl font-serif text-lbta-secondary">$400</p>
+                <p className="text-xl font-serif text-lbta-secondary">${bp.valueStack.trainingPlan.value.toLocaleString()}</p>
               </div>
 
               <div className="flex justify-between items-center pt-6">
                 <div>
                   <h4 className="font-medium text-lbta-primary text-lg">Total Value</h4>
                 </div>
-                <p className="text-3xl font-serif text-lbta-primary line-through opacity-50">$2,800</p>
+                <p className="text-3xl font-serif text-lbta-primary line-through opacity-50">${bp.valueStack.totalValue.toLocaleString()}</p>
               </div>
 
               <div className="bg-white p-6 -mx-6 -mb-6">
                 <div className="flex justify-between items-center">
                   <div>
                     <h4 className="font-medium text-lbta-coral text-2xl mb-1">Your Investment</h4>
-                    <p className="text-sm text-lbta-secondary">Plus $50 off with December 15th enrollment</p>
+                    <p className="text-sm text-lbta-secondary">Plus ${bp.discount} off with {bp.discountDeadline} enrollment</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-4xl font-serif text-lbta-coral">$447-$747</p>
-                    <p className="text-sm text-lbta-secondary">Normally $497-$797</p>
+                    <p className="text-4xl font-serif text-lbta-coral">${bp.schedules[0].discountedPrice}-${bp.schedules[2].discountedPrice}</p>
+                    <p className="text-sm text-lbta-secondary">Normally ${bp.schedules[0].price}-${bp.schedules[2].price}</p>
                   </div>
                 </div>
               </div>
@@ -339,54 +342,36 @@ export default function BeginnerProgramLanding() {
       </section>
 
       {/* Program Options & Booking Section */}
-      <section id="program" className="py-32 bg-lbta-sand">
+      <section id="program" className="py-32 bg-brand-sandstone">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-white shadow-xl">
             <div className="grid lg:grid-cols-5">
               {/* Left: Program Options */}
-              <div className="lg:col-span-2 bg-lbta-charcoal p-12 flex flex-col justify-center">
+              <div className="lg:col-span-2 bg-brand-pacific-dusk p-12 flex flex-col justify-center">
                 <div className="bg-lbta-coral text-white px-4 py-2 text-xs font-bold tracking-wider uppercase text-center mb-6 -mx-12 -mt-12">
-                  $50 OFF • Enroll by Dec 15th • 4 Spots Left
+                  ${bp.discount} OFF • Enroll by {bp.discountDeadline} • {bp.spotsRemaining} Spots Left
                 </div>
 
                 <h3 className="font-serif text-3xl text-lbta-bone mb-6">
                   January Cohort
                 </h3>
                 <div className="space-y-6 text-lbta-bone/80 text-sm leading-relaxed">
-                  <div className="border-b border-lbta-bone/20 pb-6">
-                    <p className="text-lbta-coral font-medium mb-2">Saturday 9:00am</p>
-                    <p className="mb-3">12 sessions • 1x per week</p>
-                    <div className="flex items-baseline gap-3">
-                      <p className="text-2xl font-serif text-lbta-bone">$447</p>
-                      <p className="text-lg text-lbta-bone/40 line-through">$497</p>
+                  {bp.schedules.map((sched, i) => (
+                    <div key={sched.id} className={i < bp.schedules.length - 1 ? 'border-b border-lbta-bone/20 pb-6' : 'pb-6'}>
+                      <p className="text-lbta-coral font-medium mb-2">{sched.label}</p>
+                      <p className="mb-3">{sched.sessions} sessions • {sched.frequency}</p>
+                      <div className="flex items-baseline gap-3">
+                        <p className="text-2xl font-serif text-lbta-bone">${sched.discountedPrice}</p>
+                        <p className="text-lg text-lbta-bone/40 line-through">${sched.price}</p>
+                      </div>
+                      <p className="text-xs text-lbta-coral mt-2">Save ${bp.discount} • Ends {bp.discountDeadline}</p>
                     </div>
-                    <p className="text-xs text-lbta-coral mt-2">Save $50 • Ends Dec 15th</p>
-                  </div>
-
-                  <div className="border-b border-lbta-bone/20 pb-6">
-                    <p className="text-lbta-coral font-medium mb-2">Tue/Thu 10:00am</p>
-                    <p className="mb-3">24 sessions • 2x per week</p>
-                    <div className="flex items-baseline gap-3">
-                      <p className="text-2xl font-serif text-lbta-bone">$747</p>
-                      <p className="text-lg text-lbta-bone/40 line-through">$797</p>
-                    </div>
-                    <p className="text-xs text-lbta-coral mt-2">Save $50 • Ends Dec 15th</p>
-                  </div>
-
-                  <div className="pb-6">
-                    <p className="text-lbta-coral font-medium mb-2">Mon/Wed 6:00pm</p>
-                    <p className="mb-3">24 sessions • 2x per week</p>
-                    <div className="flex items-baseline gap-3">
-                      <p className="text-2xl font-serif text-lbta-bone">$747</p>
-                      <p className="text-lg text-lbta-bone/40 line-through">$797</p>
-                    </div>
-                    <p className="text-xs text-lbta-coral mt-2">Save $50 • Ends Dec 15th</p>
-                  </div>
+                  ))}
 
                   <div className="bg-lbta-bone/10 -mx-6 px-6 py-4 mt-6">
-                    <p className="text-lbta-bone font-medium mb-2">What's Included:</p>
+                    <p className="text-lbta-bone font-medium mb-2">What&apos;s Included:</p>
                     <ul className="space-y-1 text-xs text-lbta-bone/70">
-                      <li>✓ Video analysis package ($600 value)</li>
+                      <li>✓ Video analysis package (${bp.valueStack.videoAnalysis.value} value)</li>
                       <li>✓ Personalized training plan</li>
                       <li>✓ 30-day satisfaction guarantee</li>
                       <li>✓ Alta Laguna Park courts</li>
@@ -414,7 +399,7 @@ export default function BeginnerProgramLanding() {
                         Secure Your Spot
                       </h4>
                       <p className="text-sm text-lbta-coral font-medium">
-                        $50 discount ends December 15th • Only 4 spots remaining
+                        ${bp.discount} discount ends {bp.discountDeadline} • Only {bp.spotsRemaining} spots remaining
                       </p>
                     </div>
 
@@ -476,9 +461,9 @@ export default function BeginnerProgramLanding() {
                           className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition bg-white"
                         >
                           <option value="">Select a schedule...</option>
-                          <option value="saturday">Saturday 9:00am ($497)</option>
-                          <option value="weekday-morning">Tue/Thu 10:00am ($797)</option>
-                          <option value="weekday-evening">Mon/Wed 6:00pm ($797)</option>
+                          {bp.schedules.map((sched) => (
+                            <option key={sched.id} value={sched.id}>{sched.label} (${sched.price})</option>
+                          ))}
                         </select>
                       </div>
 
@@ -487,7 +472,7 @@ export default function BeginnerProgramLanding() {
                         disabled={isSubmitting}
                         className="w-full bg-lbta-coral text-white font-medium py-4 px-6 tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {isSubmitting ? 'Submitting...' : 'Claim My $50 Discount →'}
+                        {isSubmitting ? 'Submitting...' : `Claim My $${bp.discount} Discount →`}
                       </button>
 
                       <p className="text-xs text-center text-gray-500">
@@ -529,7 +514,7 @@ export default function BeginnerProgramLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-lbta-charcoal py-12">
+      <footer className="bg-brand-pacific-dusk py-12">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <p className="text-sm text-lbta-bone/60 mb-3">
             Laguna Beach Tennis Academy • Official City of Laguna Beach Tennis Partner Since 2020

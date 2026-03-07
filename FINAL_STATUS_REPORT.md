@@ -135,4 +135,4 @@
 - Complete marketing automation
 - Production-grade quality
 
-**Movement. Discipline. Belonging - Now fully automated online.** 🎾
+**Movement. Craft. Community - Now fully automated online.** 🎾

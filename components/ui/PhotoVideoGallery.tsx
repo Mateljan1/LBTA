@@ -132,7 +132,7 @@ export default function PhotoVideoGallery({ className = '' }: PhotoVideoGalleryP
             onClick={() => goToSlide(index)}
             className={`transition-all duration-300 rounded-full ${
               index === currentIndex 
-                ? 'w-8 h-2 bg-lbta-charcoal' 
+                ? 'w-8 h-2 bg-brand-pacific-dusk' 
                 : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
             }`}
             aria-label={`Go to slide ${index + 1}`}

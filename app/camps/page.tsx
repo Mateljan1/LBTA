@@ -7,139 +7,9 @@ import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
+import { getCampsFromYear2026, type CampWeek } from '@/lib/camps-data'
 
-// Summer camp weeks for 2026 (5-day weeks = $725, 3-day short week = $435)
-const summerWeeks = [
-  { week: 1, dates: "June 15–19", label: "Week 1", days: 5, price: 725, halfDay: 425 },
-  { week: 2, dates: "June 22–26", label: "Week 2", days: 5, price: 725, halfDay: 425 },
-  { week: 3, dates: "June 29 – July 3", label: "Week 3", days: 5, price: 725, halfDay: 425 },
-  { week: 4, dates: "July 7–11", label: "Week 4", days: 5, price: 725, halfDay: 425 },
-  { week: 5, dates: "July 14–18", label: "Week 5", days: 5, price: 725, halfDay: 425 },
-  { week: 6, dates: "July 21–25", label: "Week 6", days: 5, price: 725, halfDay: 425 },
-  { week: 7, dates: "July 28 – August 1", label: "Week 7", days: 5, price: 725, halfDay: 425 },
-  { week: 8, dates: "August 4–8", label: "Week 8", days: 5, price: 725, halfDay: 425 },
-  { week: 9, dates: "August 11–15", label: "Week 9", days: 5, price: 725, halfDay: 425 },
-  { week: 10, dates: "August 17–19", label: "Back-to-School (3 days)", days: 3, price: 435, halfDay: 255 },
-]
-
-// Swim & Tennis camp weeks (4-day weeks = $495, 3-day short week = $375)
-const swimTennisWeeks = [
-  { week: 1, dates: "June 16–19", label: "Week 1", days: 4, price: 495 },
-  { week: 2, dates: "June 23–26", label: "Week 2", days: 4, price: 495 },
-  { week: 3, dates: "June 30 – July 3", label: "Week 3", days: 4, price: 495 },
-  { week: 4, dates: "July 7–10", label: "Week 4", days: 4, price: 495 },
-  { week: 5, dates: "July 14–17", label: "Week 5", days: 4, price: 495 },
-  { week: 6, dates: "July 21–24", label: "Week 6", days: 4, price: 495 },
-  { week: 7, dates: "July 28–31", label: "Week 7", days: 4, price: 495 },
-  { week: 8, dates: "August 4–7", label: "Week 8", days: 4, price: 495 },
-  { week: 9, dates: "August 11–14", label: "Week 9", days: 4, price: 495 },
-  { week: 10, dates: "August 17–19", label: "Back-to-School (3 days)", days: 3, price: 375 },
-]
-
-// Camp data for 2026
-const camps = [
-  {
-    id: "swim-tennis",
-    name: "Swim & Tennis Camp",
-    dates: "June 16 – August 14",
-    days: "Weekly (Mon–Thu)",
-    hours: "9:00 AM – 3:00 PM",
-    ages: "5-11",
-    location: "Alta Laguna Park",
-    price: 495,
-    perDay: 124,
-    description: "Structured tennis lessons, swimming, and team-based activities that create lasting memories.",
-    includes: ["Tennis instruction", "Supervised swimming", "Team activities", "Certified lifeguards"],
-    coaches: ["Andrew Mateljan", "Michelle Bevins"],
-    featured: true,
-    safetyNote: "All participants must be able to swim independently.",
-    season: "summer",
-    weeks: swimTennisWeeks
-  },
-  {
-    id: "ski-week",
-    name: "Ski Week Camp",
-    dates: "February 16–20",
-    days: "5 days",
-    hours: "9:00 AM – 3:00 PM",
-    ages: "5-14",
-    location: "Laguna Beach High School",
-    price: 525,
-    perDay: 105,
-    description: "Full-day tennis camp during Presidents' Week break. Perfect for keeping skills sharp while school is out.",
-    includes: ["Lunch provided", "Skills clinics", "Match play", "Games & activities"],
-    season: "winter"
-  },
-  {
-    id: "spring-break",
-    name: "Spring Break Camp",
-    dates: "March 30 – April 3",
-    days: "5 days",
-    hours: "9:00 AM – 3:00 PM",
-    ages: "5-14",
-    location: "Laguna Beach High School",
-    price: 525,
-    perDay: 105,
-    description: "Intensive training during spring break. Build skills and confidence before the summer season.",
-    includes: ["Lunch provided", "Skills clinics", "Match play", "Tournament prep"],
-    season: "spring"
-  },
-  {
-    id: "summer",
-    name: "Summer Tennis Camp",
-    dates: "June 15 – August 15",
-    days: "Weekly (Mon–Fri)",
-    hours: "9:00 AM – 3:00 PM",
-    ages: "5-17",
-    location: "Laguna Beach High School",
-    price: 725,
-    halfDay: 425,
-    perDay: 145,
-    description: "Full-day summer tennis camps with half-day options. Our flagship camp program with comprehensive training.",
-    includes: ["Lunch provided", "Swimming breaks", "Tournament prep option", "Skills assessment"],
-    featured: true,
-    season: "summer",
-    weeks: summerWeeks
-  },
-  {
-    id: "thanksgiving",
-    name: "Thanksgiving Camp",
-    dates: "November 23–25",
-    days: "3 days",
-    hours: "9:00 AM – 1:00 PM",
-    ages: "5-14",
-    location: "Laguna Beach High School",
-    price: 325,
-    perDay: 108,
-    description: "Holiday tennis fun during Thanksgiving break. Stay active while the family gathers.",
-    includes: ["Snacks provided", "Holiday activities", "Match play", "Team games"],
-    season: "fall"
-  },
-  {
-    id: "winter-break",
-    name: "Winter Break Camp",
-    dates: "Dec 21–24 & Dec 28–31",
-    days: "4 days per session",
-    hours: "9:00 AM – 1:00 PM",
-    ages: "5-14",
-    location: "Laguna Beach High School",
-    price: 425,
-    perDay: 106,
-    description: "Holiday camps during winter break. Choose one or both sessions for continuous play.",
-    includes: ["Snacks provided", "Holiday fun", "Two session options", "Skills development"],
-    season: "winter"
-  }
-]
-
-// Type for week data
-interface CampWeek {
-  week: number
-  dates: string
-  label: string
-  days: number
-  price: number
-  halfDay?: number
-}
+const camps = getCampsFromYear2026()
 
 // Type for camp data to match YearRegistrationModal expectations
 interface CampModalData {
@@ -244,12 +114,12 @@ export default function CampsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="#camps"
-                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 View Camps
               </Link>
               <Link 
-                href="/jtt"
+                href="/schedules"
                 className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 Junior Team Tennis →
@@ -394,7 +264,7 @@ export default function CampsPage() {
                         
                         <button
                           onClick={() => handleRegisterClick(camp)}
-                          className="block w-full text-center bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[13px] py-3 rounded transition-all duration-300 uppercase tracking-[1px]"
+                          className="block w-full text-center bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[13px] py-3 rounded transition-all duration-300 uppercase tracking-[1px]"
                         >
                           Register Now
                         </button>
@@ -415,7 +285,7 @@ export default function CampsPage() {
       </section>
 
       {/* OUR FOUNDATION */}
-      <section className="bg-[#FAF8F3] py-20 md:py-32">
+      <section className="bg-brand-morning-light py-20 md:py-32">
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-16">
@@ -446,7 +316,7 @@ export default function CampsPage() {
             <AnimatedSection delay={200}>
               <div className="bg-white p-8 rounded-lg text-center h-full">
                 <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
-                  Discipline
+                  Craft
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
                   Focus, consistency, and mental toughness separate good players from great ones. We build habits that transfer to school and life.
@@ -457,7 +327,7 @@ export default function CampsPage() {
             <AnimatedSection delay={300}>
               <div className="bg-white p-8 rounded-lg text-center h-full">
                 <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
-                  Belonging
+                  Community
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
                   Being part of a team creates motivation, accountability, and friendships. Players push each other to improve while having fun together.
@@ -468,7 +338,7 @@ export default function CampsPage() {
           
           <AnimatedSection delay={400}>
             <p className="font-serif text-[20px] md:text-[24px] text-black/80 text-center mt-16 italic">
-              Movement. Discipline. Belonging.
+              Movement. Craft. Community.
             </p>
           </AnimatedSection>
         </div>
@@ -489,10 +359,10 @@ export default function CampsPage() {
                 Competitive team-based tennis for juniors. 15 weeks of structured training with weekend matches against academies across Southern California.
               </p>
               <Link 
-                href="/jtt"
+                href="/schedules"
                 className="inline-block bg-white hover:bg-gray-100 text-black font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
-                Learn More About JTT →
+                View Schedule →
               </Link>
             </div>
           </AnimatedSection>
@@ -500,7 +370,7 @@ export default function CampsPage() {
       </section>
 
       {/* FAQ SECTION */}
-      <section className="bg-[#FAF8F3] py-16 md:py-24">
+      <section className="bg-brand-morning-light py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-12">
@@ -573,7 +443,7 @@ export default function CampsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/contact"
-                className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
                 Contact Us
               </Link>

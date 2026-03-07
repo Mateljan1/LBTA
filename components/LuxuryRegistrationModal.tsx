@@ -163,17 +163,17 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
           >
             {/* Progress Bar */}
             <div className="flex h-1">
-              <div className={`flex-1 transition-colors duration-300 ${step >= 1 ? 'bg-[#1a1a1a]' : 'bg-[#e8e8e8]'}`} />
-              <div className={`flex-1 transition-colors duration-300 ${step >= 2 ? 'bg-[#1a1a1a]' : 'bg-[#e8e8e8]'}`} />
+              <div className={`flex-1 transition-colors duration-300 ${step >= 1 ? 'bg-lbta-black' : 'bg-lbta-stone'}`} />
+              <div className={`flex-1 transition-colors duration-300 ${step >= 2 ? 'bg-lbta-black' : 'bg-lbta-stone'}`} />
             </div>
             
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-[#f5f5f5] hover:bg-[#eee] flex items-center justify-center transition-colors z-10"
+              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-brand-sandstone hover:bg-lbta-stone flex items-center justify-center transition-colors z-10"
               aria-label="Close"
             >
-              <svg className="w-5 h-5 text-[#666]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-lbta-slate" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -187,20 +187,20 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                   animate={{ opacity: 1, y: 0 }}
                   className="p-8 md:p-10 text-center"
                 >
-                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#f0f9f0] flex items-center justify-center">
-                    <svg className="w-8 h-8 text-[#2d8a2d]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-tide-pool/10 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-brand-tide-pool" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h2 className="font-serif text-[28px] font-medium text-[#1a1a1a] mb-3">
+                  <h2 className="font-serif text-[28px] font-medium text-brand-pacific-dusk mb-3">
                     Registration Received
                   </h2>
-                  <p className="font-sans text-[15px] text-[#666] leading-relaxed mb-8 max-w-[320px] mx-auto">
+                  <p className="font-sans text-[15px] text-lbta-slate leading-relaxed mb-8 max-w-[320px] mx-auto">
                     Thank you for registering for {program.program}. We&apos;ll confirm your spot within 24 hours.
                   </p>
                   <button
                     onClick={onClose}
-                    className="font-sans text-[14px] font-medium text-[#1a1a1a] underline underline-offset-4 hover:text-[#666] transition-colors"
+                    className="font-sans text-[14px] font-medium text-brand-pacific-dusk underline underline-offset-4 hover:text-lbta-slate transition-colors"
                   >
                     Close
                   </button>
@@ -208,13 +208,13 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
               ) : step === 1 ? (
                 // Step 1: Plan Selection
                 <div className="p-8 md:p-10">
-                  <p className="font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.15em] mb-2">
+                  <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
                     Select Plan
                   </p>
-                  <h2 className="font-serif text-[28px] md:text-[32px] font-medium text-[#1a1a1a] mb-1 tracking-[-0.02em]">
+                  <h2 className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
                     {program.program}
                   </h2>
-                  <p className="font-sans text-[14px] text-[#888] mb-8">
+                  <p className="font-sans text-[14px] text-brand-pacific-dusk/60 mb-8">
                     Ages {program.ages} · {program.location} · {program.duration}
                   </p>
 
@@ -226,8 +226,8 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         onClick={() => setSelectedPlan(option.value)}
                         className={`w-full p-5 rounded-xl text-left transition-all duration-200 ${
                           selectedPlan === option.value
-                            ? 'bg-[#1a1a1a] text-white'
-                            : 'bg-[#f8f8f8] hover:bg-[#f0f0f0] text-[#1a1a1a]'
+                            ? 'bg-lbta-black text-white'
+                            : 'bg-brand-sandstone hover:bg-lbta-stone text-brand-pacific-dusk'
                         }`}
                       >
                         <div className="flex justify-between items-center">
@@ -235,7 +235,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                             {option.label}
                           </span>
                           <span className={`font-serif text-[22px] font-medium ${
-                            selectedPlan === option.value ? 'text-white' : 'text-[#1a1a1a]'
+                            selectedPlan === option.value ? 'text-white' : 'text-brand-pacific-dusk'
                           }`}>
                             ${option.price}
                           </span>
@@ -246,15 +246,15 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
                   {/* Selected Price Display */}
                   {selectedPrice && (
-                    <div className="flex justify-between items-center py-4 border-t border-[#e8e8e8] mb-8">
-                      <span className="font-sans text-[13px] text-[#888] uppercase tracking-[0.05em]">
+                    <div className="flex justify-between items-center py-4 border-t border-lbta-stone mb-8">
+                      <span className="font-sans text-[13px] text-brand-pacific-dusk/60 uppercase tracking-[0.05em]">
                         {selectedPlan === 'drop_in' 
                           ? 'Single Class' 
                           : selectedPlan === 'monthly' 
                             ? 'Monthly Investment' 
                             : 'Quarterly Investment'}
                       </span>
-                      <span className="font-serif text-[28px] font-medium text-[#1a1a1a]">
+                      <span className="font-serif text-[28px] font-medium text-brand-pacific-dusk">
                         ${selectedPrice}
                       </span>
                     </div>
@@ -266,28 +266,28 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     disabled={!selectedPlan}
                     className={`w-full py-4 rounded-xl font-sans text-[14px] font-medium tracking-[0.02em] transition-all duration-200 ${
                       selectedPlan
-                        ? 'bg-[#1a1a1a] text-white hover:bg-[#333]'
-                        : 'bg-[#e8e8e8] text-[#999] cursor-not-allowed'
+                        ? 'bg-lbta-black text-white hover:bg-brand-pacific-dusk/80'
+                        : 'bg-lbta-stone text-brand-pacific-dusk/50 cursor-not-allowed'
                     }`}
                   >
                     Continue
                   </button>
 
                   {/* Trust Note */}
-                  <p className="font-sans text-[12px] text-[#999] text-center mt-6">
-                    Secure registration · Questions? <a href="tel:9494646645" className="text-[#666] hover:text-[#1a1a1a] transition-colors">(949) 464-6645</a>
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/50 text-center mt-6">
+                    Secure registration · Questions? <a href="tel:9494646645" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 464-6645</a>
                   </p>
                 </div>
               ) : (
                 // Step 2: Contact Information
                 <form onSubmit={handleSubmit} className="p-8 md:p-10">
-                  <p className="font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.15em] mb-2">
+                  <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
                     Your Details
                   </p>
-                  <h2 className="font-serif text-[28px] md:text-[32px] font-medium text-[#1a1a1a] mb-1 tracking-[-0.02em]">
+                  <h2 className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
                     {program.program}
                   </h2>
-                  <p className="font-sans text-[14px] text-[#888] mb-8">
+                  <p className="font-sans text-[14px] text-brand-pacific-dusk/60 mb-8">
                     Ages {program.ages} · {program.location} · {program.duration}
                   </p>
 
@@ -296,7 +296,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     {/* Name Row */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.1em] mb-2">
+                        <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                           First Name
                         </label>
                         <input
@@ -304,12 +304,12 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           required
                           value={formData.firstName}
                           onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] placeholder:text-[#bbb] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="First"
                         />
                       </div>
                       <div>
-                        <label className="block font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.1em] mb-2">
+                        <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                           Last Name
                         </label>
                         <input
@@ -317,7 +317,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           required
                           value={formData.lastName}
                           onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] placeholder:text-[#bbb] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="Last"
                         />
                       </div>
@@ -325,7 +325,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
                     {/* Email */}
                     <div>
-                      <label className="block font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.1em] mb-2">
+                      <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                         Email Address
                       </label>
                       <input
@@ -333,14 +333,14 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] placeholder:text-[#bbb] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                         placeholder="you@example.com"
                       />
                     </div>
 
                     {/* Phone */}
                     <div>
-                      <label className="block font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.1em] mb-2">
+                      <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                         Phone Number
                       </label>
                       <input
@@ -348,7 +348,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] placeholder:text-[#bbb] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                         placeholder="(949) 555-0123"
                       />
                     </div>
@@ -356,26 +356,26 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     {/* Player Info */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.1em] mb-2">
+                        <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                           Player Name
                         </label>
                         <input
                           type="text"
                           value={formData.studentName}
                           onChange={(e) => setFormData({...formData, studentName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] placeholder:text-[#bbb] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="Player's name"
                         />
                       </div>
                       <div>
-                        <label className="block font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.1em] mb-2">
+                        <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                           Age
                         </label>
                         <input
                           type="number"
                           value={formData.studentAge}
                           onChange={(e) => setFormData({...formData, studentAge: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] placeholder:text-[#bbb] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="Age"
                           min="3"
                           max="99"
@@ -385,7 +385,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
                     {/* Experience Level */}
                     <div>
-                      <label className="block font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.1em] mb-2">
+                      <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                         Experience Level
                       </label>
                       <div className="flex gap-2">
@@ -396,8 +396,8 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                             onClick={() => setFormData({...formData, experience: level})}
                             className={`flex-1 py-3 rounded-lg font-sans text-[13px] font-medium capitalize transition-all duration-200 ${
                               formData.experience === level
-                                ? 'bg-[#1a1a1a] text-white'
-                                : 'bg-[#f8f8f8] text-[#666] hover:bg-[#f0f0f0]'
+                                ? 'bg-lbta-black text-white'
+                                : 'bg-brand-sandstone text-lbta-slate hover:bg-lbta-stone'
                             }`}
                           >
                             {level}
@@ -412,22 +412,22 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="px-6 py-4 rounded-xl font-sans text-[14px] font-medium text-[#666] hover:text-[#1a1a1a] hover:bg-[#f5f5f5] transition-all"
+                      className="px-6 py-4 rounded-xl font-sans text-[14px] font-medium text-lbta-slate hover:text-brand-pacific-dusk hover:bg-brand-sandstone transition-all"
                     >
                       ← Back
                     </button>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="flex-1 py-4 rounded-xl bg-[#1a1a1a] text-white font-sans text-[14px] font-medium tracking-[0.02em] hover:bg-[#333] disabled:bg-[#ccc] transition-all"
+                      className="flex-1 py-4 rounded-xl bg-lbta-black text-white font-sans text-[14px] font-medium tracking-[0.02em] hover:bg-brand-pacific-dusk/80 disabled:bg-lbta-stone transition-all"
                     >
                       {isSubmitting ? 'Submitting...' : 'Complete Registration'}
                     </button>
                   </div>
 
                   {/* Trust Note */}
-                  <p className="font-sans text-[12px] text-[#999] text-center mt-6">
-                    Secure registration · Questions? <a href="tel:9494646645" className="text-[#666] hover:text-[#1a1a1a] transition-colors">(949) 464-6645</a>
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/50 text-center mt-6">
+                    Secure registration · Questions? <a href="tel:9494646645" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 464-6645</a>
                   </p>
                 </form>
               )}

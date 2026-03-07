@@ -19,7 +19,7 @@
 **Scene 1: Hero - "The Standard"**
 - Full-viewport video background (LBTA-Home-Hero.webm)
 - Centered headline: "Tennis, as it should be taught."
-- Philosophy tagline: "Movement. Discipline. Belonging."
+- Philosophy tagline: "Movement. Craft. Community."
 - Playfair Display 72px (desktop) / 42px (mobile)
 - Text shadow for readability
 - Scroll cue in orange
@@ -40,7 +40,7 @@
 
 **Scene 4: Philosophy - "Our System"**
 - 3-column card grid on beige background
-- Movement / Discipline / Belonging pillars
+- Movement / Craft / Community pillars
 - Each card: image + headline + one-line description
 - Hover: scale 1.02 with subtle shadow
 
@@ -215,7 +215,7 @@ Converted 17 JPG/PNG images to WebP format (75% quality):
 - Ocean horizon references
 
 **Brand Philosophy Integration:**
-- "Movement. Discipline. Belonging." featured in hero
+- "Movement. Craft. Community." featured in hero
 - Three pillars get dedicated scene
 - Founder Andrew Mateljan prominently featured
 - Results (Karue ATP jump) shows proof

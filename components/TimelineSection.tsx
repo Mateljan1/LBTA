@@ -19,6 +19,11 @@ const milestones = [
     description: 'Partnership with ATP-certified coaching program launched'
   },
   {
+    year: '2024',
+    title: 'Expanded Programs',
+    description: 'Junior and adult pathways expanded; UTR and league play integrated'
+  },
+  {
     year: '2025',
     title: '20+ College Placements',
     description: 'Over 20 students placed in Division 1 college tennis programs'
@@ -58,13 +63,13 @@ export default function TimelineSection() {
   }, [])
   
   return (
-    <section className="bg-[#fafafa] py-20 md:py-28">
+    <section className="bg-brand-sandstone py-20 md:py-28">
       <div className="max-w-[1200px] mx-auto px-6 md:px-16">
         <div className="mb-16">
-          <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-4">
+          <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
             Our Journey
           </p>
-          <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-[#1a1a1a] tracking-[-0.02em]">
+          <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
             Building Excellence
           </h2>
         </div>
@@ -72,9 +77,9 @@ export default function TimelineSection() {
         {/* Desktop: Horizontal Timeline */}
         <div className="hidden md:block relative">
           {/* Timeline line */}
-          <div className="absolute top-8 left-0 right-0 h-[1px] bg-[#e0e0e0]" />
+          <div className="absolute top-8 left-0 right-0 h-[1px] bg-lbta-stone" />
           
-          <div className="grid grid-cols-4 gap-8 relative">
+          <div className="grid grid-cols-5 gap-6 relative">
             {milestones.map((milestone, index) => (
               <div
                 key={milestone.year}
@@ -88,18 +93,18 @@ export default function TimelineSection() {
               >
                 {/* Year marker */}
                 <div className="relative mb-8">
-                  <div className="w-4 h-4 rounded-full bg-[#1a1a1a] mx-auto" />
+                  <div className="w-4 h-4 rounded-full bg-lbta-black mx-auto" />
                 </div>
                 
                 {/* Content */}
                 <div className="text-center">
-                  <span className="font-serif text-[32px] font-medium text-[#1a1a1a] tracking-[-0.02em]">
+                  <span className="font-serif text-[32px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
                     {milestone.year}
                   </span>
-                  <h3 className="font-sans text-[14px] font-semibold text-[#1a1a1a] uppercase tracking-[0.1em] mt-2 mb-3">
+                  <h3 className="font-sans text-[14px] font-semibold text-brand-pacific-dusk uppercase tracking-[0.1em] mt-2 mb-3">
                     {milestone.title}
                   </h3>
-                  <p className="font-sans text-[14px] text-[#666] leading-[1.6]">
+                  <p className="font-sans text-[14px] text-lbta-slate leading-[1.6]">
                     {milestone.description}
                   </p>
                 </div>
@@ -111,7 +116,7 @@ export default function TimelineSection() {
         {/* Mobile: Vertical Timeline */}
         <div className="md:hidden relative">
           {/* Vertical line */}
-          <div className="absolute top-0 bottom-0 left-[7px] w-[1px] bg-[#e0e0e0]" />
+          <div className="absolute top-0 bottom-0 left-[7px] w-[1px] bg-lbta-stone" />
           
           <div className="space-y-10">
             {milestones.map((milestone, index) => (
@@ -126,15 +131,15 @@ export default function TimelineSection() {
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 {/* Dot marker */}
-                <div className="absolute left-0 top-1 w-[14px] h-[14px] rounded-full bg-[#1a1a1a]" />
+                <div className="absolute left-0 top-1 w-[14px] h-[14px] rounded-full bg-lbta-black" />
                 
-                <span className="font-serif text-[28px] font-medium text-[#1a1a1a] tracking-[-0.02em]">
+                <span className="font-serif text-[28px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
                   {milestone.year}
                 </span>
-                <h3 className="font-sans text-[13px] font-semibold text-[#1a1a1a] uppercase tracking-[0.1em] mt-1 mb-2">
+                <h3 className="font-sans text-[13px] font-semibold text-brand-pacific-dusk uppercase tracking-[0.1em] mt-1 mb-2">
                   {milestone.title}
                 </h3>
-                <p className="font-sans text-[14px] text-[#666] leading-[1.6]">
+                <p className="font-sans text-[14px] text-lbta-slate leading-[1.6]">
                   {milestone.description}
                 </p>
               </div>

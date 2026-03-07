@@ -156,12 +156,12 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
         {isSuccess ? (
           /* SUCCESS STATE */
           <div className="p-8 md:p-12 text-center">
-            <CheckCircle className="w-16 h-16 text-lbta-orange mx-auto mb-6" />
+            <CheckCircle className="w-16 h-16 text-brand-sunset-cliff mx-auto mb-6" />
             <h2 className="font-serif text-[28px] md:text-[36px] font-semibold text-black mb-4">
               Registration Received!
             </h2>
             <p className="font-sans text-[16px] md:text-[18px] text-black/70 mb-4">
-              Thank you for registering for <span className="font-semibold text-lbta-orange">{program.program}</span>.
+              Thank you for registering for <span className="font-semibold text-brand-sunset-cliff">{program.program}</span>.
             </p>
             <p className="font-sans text-[15px] text-black/60">
               Our team will confirm your registration within 24 hours and follow up with payment details.
@@ -176,9 +176,9 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                   key={step}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     step === currentStep
-                      ? 'bg-lbta-orange w-8'
+                      ? 'bg-brand-sunset-cliff w-8'
                       : step < currentStep
-                      ? 'bg-lbta-orange'
+                      ? 'bg-brand-sunset-cliff'
                       : 'bg-gray-300'
                   }`}
                 />
@@ -202,7 +202,7 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                   </div>
                   
                   {/* Program Details */}
-                  <div className="bg-[#FAF8F3] rounded-xl p-4 md:p-6">
+                  <div className="bg-brand-morning-light rounded-xl p-4 md:p-6">
                     <h3 className="font-serif text-[20px] font-semibold text-black mb-2">
                       {program.program}
                     </h3>
@@ -225,8 +225,8 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                             onClick={() => handleDayToggle(day)}
                             className={`px-4 py-3 rounded-full font-sans text-[14px] font-medium transition-all duration-200 border-2 ${
                               selectedDays.includes(day)
-                                ? 'bg-lbta-orange text-white border-lbta-orange'
-                                : 'bg-white text-black/70 border-gray-300 hover:border-lbta-orange'
+                                ? 'bg-brand-sunset-cliff text-white border-brand-sunset-cliff'
+                                : 'bg-white text-black/70 border-gray-300 hover:border-brand-sunset-cliff'
                             }`}
                           >
                             {day}
@@ -249,8 +249,8 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                           onClick={() => handleFrequencyChange(option.value, option.price)}
                           className={`w-full flex items-center justify-between px-6 py-4 rounded-xl font-sans text-[15px] font-medium transition-all duration-200 border-2 ${
                             selectedFrequency === option.value
-                              ? 'bg-lbta-red text-white border-lbta-red'
-                              : 'bg-white text-black border-gray-300 hover:border-lbta-orange'
+                              ? 'bg-brand-sunset-cliff text-white border-brand-sunset-cliff'
+                              : 'bg-white text-black border-gray-300 hover:border-brand-sunset-cliff'
                           }`}
                         >
                           <span>{option.label}</span>
@@ -262,11 +262,11 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                   
                   {/* Total Price Display */}
                   {calculatedPrice > 0 && (
-                    <div className="bg-lbta-orange/10 border-2 border-lbta-orange rounded-xl p-4 flex items-center justify-between">
+                    <div className="bg-brand-sunset-cliff/10 border-2 border-brand-sunset-cliff rounded-xl p-4 flex items-center justify-between">
                       <span className="font-sans text-[16px] font-semibold text-black">
                         Total Investment:
                       </span>
-                      <span className="font-sans text-[28px] font-bold text-lbta-orange">
+                      <span className="font-sans text-[28px] font-bold text-brand-sunset-cliff">
                         ${calculatedPrice}
                       </span>
                     </div>
@@ -287,7 +287,7 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                       setCurrentStep(2)
                     }}
                     disabled={!selectedFrequency}
-                    className="w-full bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
+                    className="w-full bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
                   >
                     Continue to Contact Info →
                   </button>
@@ -326,7 +326,7 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                         required
-                        className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                        className="w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff transition-all"
                       />
                       <input
                         type="text"
@@ -334,7 +334,7 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                         required
-                        className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                        className="w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff transition-all"
                       />
                     </div>
                     
@@ -344,7 +344,7 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                      className="w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff transition-all"
                     />
                     
                     <input
@@ -353,7 +353,7 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       required
-                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                      className="w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff transition-all"
                     />
                   </div>
                   
@@ -370,7 +370,7 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                         value={formData.studentName}
                         onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
                         required={requiresStudentInfo}
-                        className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                        className="w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff transition-all"
                       />
                       
                       <input
@@ -381,7 +381,7 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                         required={requiresStudentInfo}
                         min="3"
                         max="18"
-                        className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all"
+                        className="w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff transition-all"
                       />
                     </div>
                   )}
@@ -399,8 +399,8 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                           onClick={() => setFormData({ ...formData, experience: level })}
                           className={`px-4 py-3 rounded-full font-sans text-[14px] font-medium transition-all duration-200 ${
                             formData.experience === level
-                              ? 'bg-lbta-red text-white'
-                              : 'bg-[#FAF8F3] text-black/70 hover:bg-gray-200'
+                              ? 'bg-brand-sunset-cliff text-white'
+                              : 'bg-brand-morning-light text-black/70 hover:bg-gray-200'
                           }`}
                         >
                           {level}
@@ -419,7 +419,7 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                       value={formData.notes}
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                       rows={3}
-                      className="w-full px-6 py-4 rounded-2xl bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all resize-none"
+                      className="w-full px-6 py-4 rounded-2xl bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff transition-all resize-none"
                     />
                   </div>
                   
@@ -439,14 +439,14 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
                         setCurrentStep(1)
                         setError(null)
                       }}
-                      className="flex-1 border-2 border-lbta-red text-lbta-red hover:bg-lbta-red/5 font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
+                      className="flex-1 border-2 border-brand-sunset-cliff text-brand-sunset-cliff hover:bg-brand-sunset-cliff/5 font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 min-h-[48px]"
                     >
                       ← Back
                     </button>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="flex-1 bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 disabled:opacity-50 min-h-[48px] flex items-center justify-center gap-2"
+                      className="flex-1 bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 disabled:opacity-50 min-h-[48px] flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? (
                         <>

@@ -213,7 +213,7 @@ Questions?
 See you on the courts!
 
 — Laguna Beach Tennis Academy
-Movement. Discipline. Belonging.
+Movement. Craft. Community.
 ```
 
 ---

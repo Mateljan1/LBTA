@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",
+    "test": "npx vitest run"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",
@@ -23,6 +24,8 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "jsdom": "^25.0.1",
+    "vitest": "^2.1.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/sanitize-html": "^2.16.0",

@@ -156,13 +156,13 @@ function LabCard({ lab, index }: LabCardProps) {
       <div className="p-12 md:p-16">
         {/* Icon */}
         <motion.div 
-          className="w-16 h-16 mb-8 text-lbta-charcoal transition-all duration-500 group-hover:text-lbta-burnt group-hover:scale-110"
+          className="w-16 h-16 mb-8 text-brand-pacific-dusk transition-all duration-500 group-hover:text-lbta-burnt group-hover:scale-110"
         >
           {lab.icon}
         </motion.div>
         
         {/* Title */}
-        <h3 className="text-lg font-sans font-semibold tracking-[0.02em] uppercase text-lbta-charcoal mb-5">
+        <h3 className="text-lg font-sans font-semibold tracking-[0.02em] uppercase text-brand-pacific-dusk mb-5">
           {lab.title}
         </h3>
         
@@ -234,7 +234,7 @@ export default function FourLabs() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <h2 className="text-4xl md:text-5xl font-serif font-light tracking-tight text-lbta-charcoal mb-6">
+          <h2 className="text-4xl md:text-5xl font-serif font-light tracking-tight text-brand-pacific-dusk mb-6">
             Built on Four Labs
           </h2>
           <p className="text-lg leading-relaxed text-gray-600 max-w-[700px] mx-auto">

@@ -159,7 +159,7 @@ export default function SchedulesPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-lbta-orange/20 to-lbta-beige/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-brand-sunset-cliff/20 to-brand-sandstone/40" />
         </div>
         
         <div className="relative z-10 text-center text-white px-4 md:px-6 max-w-4xl mx-auto py-24">
@@ -174,7 +174,7 @@ export default function SchedulesPage() {
           </p>
           <Link 
             href="/programs"
-            className="inline-block border-2 border-white hover:bg-lbta-red hover:border-lbta-red text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
+            className="inline-block border-2 border-white hover:bg-brand-sunset-cliff hover:border-brand-sunset-cliff text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-full transition-all duration-200 min-h-[48px]"
           >
             View Programs →
           </Link>
@@ -190,8 +190,8 @@ export default function SchedulesPage() {
               onClick={() => setSelectedSeason('winter')}
               className={`px-6 md:px-8 py-2.5 md:py-3 rounded-full font-sans font-semibold text-[14px] md:text-[16px] transition-all duration-200 ${
                 selectedSeason === 'winter'
-                  ? 'bg-lbta-red text-white shadow-sm'
-                  : 'text-lbta-red hover:bg-lbta-orange/10'
+                  ? 'bg-brand-sunset-cliff text-white shadow-sm'
+                  : 'text-brand-sunset-cliff hover:bg-brand-sunset-cliff/10'
               }`}
             >
               Winter 2026
@@ -200,8 +200,8 @@ export default function SchedulesPage() {
               onClick={() => setSelectedSeason('fall')}
               className={`px-6 md:px-8 py-2.5 md:py-3 rounded-full font-sans font-semibold text-[14px] md:text-[16px] transition-all duration-200 ${
                 selectedSeason === 'fall'
-                  ? 'bg-lbta-red text-white shadow-sm'
-                  : 'text-lbta-red hover:bg-lbta-orange/10'
+                  ? 'bg-brand-sunset-cliff text-white shadow-sm'
+                  : 'text-brand-sunset-cliff hover:bg-brand-sunset-cliff/10'
               }`}
             >
               Fall 2025
@@ -214,7 +214,7 @@ export default function SchedulesPage() {
             <select 
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 font-sans cursor-pointer min-w-[160px] transition-all"
+              className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 font-sans cursor-pointer min-w-[160px] transition-all"
               aria-label="Filter by program type"
             >
               <option value="all">All Programs</option>
@@ -227,7 +227,7 @@ export default function SchedulesPage() {
             <select 
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
-              className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 font-sans cursor-pointer min-w-[160px] transition-all"
+              className="border border-gray-300 rounded-full px-5 py-2.5 bg-white text-[14px] text-black/80 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 font-sans cursor-pointer min-w-[160px] transition-all"
               aria-label="Filter by location"
             >
               <option value="all">All Locations</option>
@@ -247,7 +247,7 @@ export default function SchedulesPage() {
       {/* Mobile Filter Button */}
       <button
         onClick={() => setMobileFilterOpen(true)}
-        className="md:hidden fixed bottom-6 right-6 z-30 bg-lbta-red hover:bg-lbta-orange text-white px-5 py-3.5 rounded-full shadow-lg font-sans font-semibold text-[14px] flex items-center gap-2 min-h-[48px] transition-all duration-200"
+        className="md:hidden fixed bottom-6 right-6 z-30 bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white px-5 py-3.5 rounded-full shadow-lg font-sans font-semibold text-[14px] flex items-center gap-2 min-h-[48px] transition-all duration-200"
         aria-label="Open filters"
       >
         <SlidersHorizontal className="w-4 h-4" />
@@ -255,7 +255,7 @@ export default function SchedulesPage() {
       </button>
 
       {/* PROGRAM ACCORDION SECTIONS */}
-      <section className="bg-[#FAF8F3] py-12 md:py-20">
+      <section className="bg-brand-morning-light py-12 md:py-20">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6">
           <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-black mb-2 text-center">
             {seasonLabel} Programs
@@ -276,7 +276,7 @@ export default function SchedulesPage() {
                   setSelectedLocation('all')
                   setSelectedDays([])
                 }}
-                className="mt-4 text-lbta-orange hover:underline font-sans font-semibold text-[15px]"
+                className="mt-4 text-brand-sunset-cliff hover:underline font-sans font-semibold text-[15px]"
               >
                 Clear all filters
               </button>
@@ -303,7 +303,7 @@ export default function SchedulesPage() {
                           toggleAccordion(category)
                         }
                       }}
-                      className="accordion-header w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between bg-[#FAF8F3] hover:bg-lbta-orange/10 focus:outline-none focus:ring-2 focus:ring-lbta-orange transition-all duration-200"
+                      className="accordion-header w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between bg-brand-morning-light hover:bg-brand-sunset-cliff/10 focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff transition-all duration-200"
                       aria-expanded={isExpanded}
                       aria-controls={`accordion-${category}`}
                       aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${category} Programs section`}
@@ -312,15 +312,15 @@ export default function SchedulesPage() {
                         <h3 className="font-serif text-[24px] md:text-[32px] font-bold text-black">
                           {category} Programs
                         </h3>
-                        <span className="font-sans text-[16px] md:text-[18px] text-lbta-orange font-semibold bg-lbta-orange/10 px-3 py-1 rounded-full">
+                        <span className="font-sans text-[16px] md:text-[18px] text-brand-sunset-cliff font-semibold bg-brand-sunset-cliff/10 px-3 py-1 rounded-full">
                           {programs.length}
                         </span>
                       </div>
                       <div className="flex-shrink-0">
                         {isExpanded ? (
-                          <ChevronUp className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
+                          <ChevronUp className="w-6 h-6 md:w-7 md:h-7 text-brand-sunset-cliff" />
                         ) : (
-                          <ChevronDown className="w-6 h-6 md:w-7 md:h-7 text-lbta-orange" />
+                          <ChevronDown className="w-6 h-6 md:w-7 md:h-7 text-brand-sunset-cliff" />
                         )}
                       </div>
                     </button>
@@ -376,7 +376,7 @@ export default function SchedulesPage() {
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
             <Link
               href="/book"
-              className="bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] inline-block"
+              className="bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] inline-block"
             >
               Book Trial
             </Link>

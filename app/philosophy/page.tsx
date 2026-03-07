@@ -99,7 +99,7 @@ export default function PhilosophyPage() {
                       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center">
                         <Icon className="h-6 w-6 text-sage-700" />
                       </div>
-                    <h3 className="subhead-sm text-lbta-charcoal mt-1">
+                    <h3 className="subhead-sm text-brand-pacific-dusk mt-1">
                       {principle.title}
                     </h3>
                     </div>
@@ -135,7 +135,7 @@ export default function PhilosophyPage() {
                     <div className="flex-shrink-0 w-10 h-10 rounded-full bg-sage-600 text-sand-50 flex items-center justify-center font-display text-lg">
                       {index + 1}
                     </div>
-                    <h3 className="subhead-sm text-lbta-charcoal">
+                    <h3 className="subhead-sm text-brand-pacific-dusk">
                       {item.phase}
                     </h3>
                   </div>
@@ -153,7 +153,7 @@ export default function PhilosophyPage() {
       <section className="section-spacing bg-clay-900 text-sand-100">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <blockquote className="subhead text-lbta-charcoal leading-relaxed mb-8">
+            <blockquote className="subhead text-brand-pacific-dusk leading-relaxed mb-8">
               "Tennis, at its highest level, is as much about character as it is about technique. 
               We develop both—because champions are made not just on the court, but in the mind and heart."
             </blockquote>

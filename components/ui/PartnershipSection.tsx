@@ -3,19 +3,12 @@
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 // Partnership logos - Using placeholder text until PNGs are uploaded
-// User has PNGs ready: Fit4Tennis, VYLO, Racket Rescue, RacquetIQ, GPTCA, Toroline, LBHS, City of LB
 const partners = [
   {
     name: "Fit4Tennis",
     description: "Movement & Performance",
     logo: "/logos/fit4tennis.png", // Upload PNG here
     url: "https://fit4tennis.com"
-  },
-  {
-    name: "VYLO",
-    description: "Performance Institute",
-    logo: "/logos/vylo.png", // Upload PNG here
-    url: "/vylo"
   },
   {
     name: "Racket Rescue",
@@ -65,7 +58,7 @@ export default function PartnershipSection({ className = '' }: PartnershipSectio
       <div className="container-lbta">
         <AnimatedSection className="text-center mb-16">
           <p className="text-overline mb-6">Our Network</p>
-          <h2 className="text-4xl font-serif font-light text-lbta-charcoal">
+          <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk">
             Partnership & Community
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">

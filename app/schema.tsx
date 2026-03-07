@@ -1,3 +1,7 @@
+import pricingSupplemental from '@/data/pricing-supplemental.json'
+
+const schemaPricing = pricingSupplemental.schema
+
 export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
@@ -21,7 +25,7 @@ export function OrganizationSchema() {
       "longitude": "-117.7854"
     },
     "openingHours": "Mo-Su 07:00-21:00",
-    "priceRange": "$120-$250",
+    "priceRange": schemaPricing.priceRange,
     "founder": {
       "@type": "Person",
       "name": "Andrew Mateljan",
@@ -50,7 +54,7 @@ export function CourseSchema() {
       },
       "offers": {
         "@type": "Offer",
-        "price": "120",
+        "price": String(schemaPricing.courses.juniorDevelopment),
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       }
@@ -65,7 +69,7 @@ export function CourseSchema() {
       },
       "offers": {
         "@type": "Offer",
-        "price": "756",
+        "price": String(schemaPricing.courses.youthDevelopment),
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       }
@@ -80,7 +84,7 @@ export function CourseSchema() {
       },
       "offers": {
         "@type": "Offer",
-        "price": "1437",
+        "price": String(schemaPricing.courses.highPerformance),
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       }
@@ -95,7 +99,7 @@ export function CourseSchema() {
       },
       "offers": {
         "@type": "Offer",
-        "price": "546",
+        "price": String(schemaPricing.courses.adultPrograms),
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       }
@@ -106,6 +110,52 @@ export function CourseSchema() {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(courses) }}
+    />
+  )
+}
+
+export function LeagueEventSchema({
+  name,
+  description,
+  startDate,
+  endDate,
+  location,
+}: {
+  name: string
+  description: string
+  startDate: string
+  endDate: string
+  location?: string
+}) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name,
+    description,
+    startDate,
+    endDate,
+    organizer: {
+      '@type': 'Organization',
+      name: 'Laguna Beach Tennis Academy',
+      url: 'https://lagunabeachtennisacademy.com',
+    },
+    ...(location && {
+      location: {
+        '@type': 'Place',
+        name: location,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Laguna Beach',
+          addressRegion: 'CA',
+          addressCountry: 'US',
+        },
+      },
+    }),
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   )
 }

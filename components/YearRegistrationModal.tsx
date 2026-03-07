@@ -289,7 +289,7 @@ export default function YearRegistrationModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-lbta-red to-lbta-orange p-6 text-white relative">
+        <div className="bg-gradient-to-r from-brand-sunset-cliff to-brand-sunset-cliff p-6 text-white relative">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors"
@@ -319,7 +319,7 @@ export default function YearRegistrationModal({
           {isSuccess ? (
             /* Success State */
             <div className="text-center py-8">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+              <CheckCircle className="w-16 h-16 text-brand-tide-pool mx-auto mb-4" />
               <h3 className="font-serif text-[24px] font-semibold text-black mb-2">
                 Registration Received!
               </h3>
@@ -331,7 +331,7 @@ export default function YearRegistrationModal({
               </p>
               <button
                 onClick={onClose}
-                className="bg-lbta-orange hover:bg-lbta-red text-white font-sans font-semibold text-[15px] py-3 px-8 rounded-full transition-all duration-200"
+                className="bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[15px] py-3 px-8 rounded-full transition-all duration-200"
               >
                 Continue Browsing
               </button>
@@ -352,7 +352,7 @@ export default function YearRegistrationModal({
                     type="text"
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange ${
+                    className={`w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff ${
                       errors.firstName ? 'ring-2 ring-red-500' : ''
                     }`}
                     placeholder="First name"
@@ -368,7 +368,7 @@ export default function YearRegistrationModal({
                     type="text"
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange ${
+                    className={`w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff ${
                       errors.lastName ? 'ring-2 ring-red-500' : ''
                     }`}
                     placeholder="Last name"
@@ -385,7 +385,7 @@ export default function YearRegistrationModal({
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className={`w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange ${
+                  className={`w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff ${
                     errors.email ? 'ring-2 ring-red-500' : ''
                   }`}
                   placeholder="your@email.com"
@@ -401,7 +401,7 @@ export default function YearRegistrationModal({
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className={`w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange ${
+                  className={`w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff ${
                     errors.phone ? 'ring-2 ring-red-500' : ''
                   }`}
                   placeholder="(949) 555-1234"
@@ -411,7 +411,7 @@ export default function YearRegistrationModal({
 
               <button
                 onClick={handleNext}
-                className="w-full bg-lbta-orange hover:bg-lbta-red text-white font-sans font-semibold text-[15px] py-4 rounded-full transition-all duration-200 mt-6"
+                className="w-full bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[15px] py-4 rounded-full transition-all duration-200 mt-6"
               >
                 Continue →
               </button>
@@ -432,7 +432,7 @@ export default function YearRegistrationModal({
                     type="text"
                     value={formData.playerName}
                     onChange={(e) => setFormData({ ...formData, playerName: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange ${
+                    className={`w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff ${
                       errors.playerName ? 'ring-2 ring-red-500' : ''
                     }`}
                     placeholder="Player's name"
@@ -450,7 +450,7 @@ export default function YearRegistrationModal({
                     max="18"
                     value={formData.playerAge}
                     onChange={(e) => setFormData({ ...formData, playerAge: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange ${
+                    className={`w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff ${
                       errors.playerAge ? 'ring-2 ring-red-500' : ''
                     }`}
                     placeholder="Age"
@@ -468,7 +468,7 @@ export default function YearRegistrationModal({
                   <select
                     value={formData.division}
                     onChange={(e) => setFormData({ ...formData, division: e.target.value })}
-                    className={`w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange cursor-pointer ${
+                    className={`w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff cursor-pointer ${
                       errors.division ? 'ring-2 ring-red-500' : ''
                     }`}
                   >
@@ -485,13 +485,13 @@ export default function YearRegistrationModal({
 
               {/* Camp Half Day Option */}
               {type === 'camp' && data && (data as CampData).halfDay && (
-                <div className="flex items-center gap-3 p-4 bg-[#FAF8F3] rounded-lg">
+                <div className="flex items-center gap-3 p-4 bg-brand-morning-light rounded-lg">
                   <input
                     type="checkbox"
                     id="halfDay"
                     checked={formData.halfDay}
                     onChange={(e) => setFormData({ ...formData, halfDay: e.target.checked })}
-                    className="w-5 h-5 accent-lbta-orange"
+                    className="w-5 h-5 accent-brand-sunset-cliff"
                   />
                   <label htmlFor="halfDay" className="font-sans text-[14px] text-black cursor-pointer">
                     Half Day Option (9 AM - 12 PM) - ${(data as CampData).halfDay}/week
@@ -520,7 +520,7 @@ export default function YearRegistrationModal({
                       type="text"
                       value={formData.emergencyContact}
                       onChange={(e) => setFormData({ ...formData, emergencyContact: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
+                      className="w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff"
                       placeholder="Emergency contact name"
                     />
                   </div>
@@ -529,7 +529,7 @@ export default function YearRegistrationModal({
                       type="tel"
                       value={formData.emergencyPhone}
                       onChange={(e) => setFormData({ ...formData, emergencyPhone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange"
+                      className="w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff"
                       placeholder="Emergency phone"
                     />
                   </div>
@@ -545,16 +545,16 @@ export default function YearRegistrationModal({
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   rows={3}
-                  className="w-full px-4 py-3 rounded-lg bg-[#FAF8F3] text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-lbta-orange resize-none"
+                  className="w-full px-4 py-3 rounded-lg bg-brand-morning-light text-black font-sans text-[14px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff resize-none"
                   placeholder="Any allergies, medical conditions, or special requests..."
                 />
               </div>
 
               {/* Price Display */}
               {getPrice() && (
-                <div className="flex justify-between items-center p-4 bg-lbta-beige/30 rounded-lg">
+                <div className="flex justify-between items-center p-4 bg-brand-sandstone/30 rounded-lg">
                   <span className="font-sans text-[14px] text-black/70">Total</span>
-                  <span className="font-serif text-[24px] font-semibold text-lbta-red">
+                  <span className="font-serif text-[24px] font-semibold text-brand-sunset-cliff">
                     {getPrice()}
                   </span>
                 </div>
@@ -578,7 +578,7 @@ export default function YearRegistrationModal({
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="flex-1 bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[15px] py-4 rounded-full transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="flex-1 bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[15px] py-4 rounded-full transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     <>
@@ -596,10 +596,10 @@ export default function YearRegistrationModal({
 
         {/* Footer */}
         {!isSuccess && (
-          <div className="px-6 py-4 bg-[#FAF8F3] border-t border-black/5">
+          <div className="px-6 py-4 bg-brand-morning-light border-t border-black/5">
             <p className="font-sans text-[12px] text-black/50 text-center">
               🔒 Your information is secure. Questions? Call{' '}
-              <a href="tel:+19494646645" className="text-lbta-orange hover:underline">
+              <a href="tel:+19494646645" className="text-brand-sunset-cliff hover:underline">
                 (949) 464-6645
               </a>
             </p>

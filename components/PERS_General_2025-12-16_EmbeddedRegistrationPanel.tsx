@@ -233,7 +233,7 @@ export default function EmbeddedRegistrationPanel({ program, onClose }: Embedded
           >
             <div className={`bg-gray-300 rounded-full transition-all duration-200 ${
               isMobile ? 'w-16 h-1.5' : 'w-12 h-1'
-            } ${isDragging ? 'bg-lbta-orange' : ''}`}>
+            } ${isDragging ? 'bg-brand-sunset-cliff' : ''}`}>
             </div>
           </div>
           {isMobile && (
@@ -248,19 +248,19 @@ export default function EmbeddedRegistrationPanel({ program, onClose }: Embedded
           {isSuccess ? (
             /* SUCCESS STATE */
             <div className="p-8 md:p-12 text-center">
-              <CheckCircle className="w-16 h-16 text-lbta-orange mx-auto mb-6" />
+              <CheckCircle className="w-16 h-16 text-brand-sunset-cliff mx-auto mb-6" />
               <h3 className="font-serif text-[24px] md:text-[32px] font-semibold text-black mb-4">
                 Registration Received!
               </h3>
               <p className="font-sans text-[16px] md:text-[18px] text-black/70 mb-4">
-                Thank you for registering for <span className="font-semibold text-lbta-orange">{program.program}</span>.
+                Thank you for registering for <span className="font-semibold text-brand-sunset-cliff">{program.program}</span>.
               </p>
               <p className="font-sans text-[15px] text-black/60 mb-6">
                 Our team will confirm your registration within 24 hours and follow up with payment details.
               </p>
               <button
                 onClick={handleClose}
-                className="bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-full transition-all duration-200"
+                className="bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[16px] py-3 px-8 rounded-full transition-all duration-200"
               >
                 Continue Browsing
               </button>
@@ -269,7 +269,7 @@ export default function EmbeddedRegistrationPanel({ program, onClose }: Embedded
             /* EMBEDDED ACTIVECAMPAIGN FORM */
             <div className="p-4 md:p-6">
               {/* Program Summary Card */}
-              <div className="bg-gradient-to-r from-lbta-beige/30 to-lbta-orange/10 rounded-xl p-4 md:p-6 mb-6 border border-lbta-orange/20">
+              <div className="bg-gradient-to-r from-brand-sandstone/30 to-brand-sunset-cliff/10 rounded-xl p-4 md:p-6 mb-6 border border-brand-sunset-cliff/20">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h3 className="font-serif text-[18px] md:text-[20px] font-semibold text-black mb-2">
@@ -285,7 +285,7 @@ export default function EmbeddedRegistrationPanel({ program, onClose }: Embedded
                     </div>
                   </div>
                   <div className="flex-shrink-0 ml-4">
-                    <span className="inline-block bg-lbta-orange text-white text-[12px] font-semibold px-3 py-1 rounded-full">
+                    <span className="inline-block bg-brand-sunset-cliff text-white text-[12px] font-semibold px-3 py-1 rounded-full">
                       {formConfig.prePopulateData.category}
                     </span>
                   </div>
@@ -309,19 +309,19 @@ export default function EmbeddedRegistrationPanel({ program, onClose }: Embedded
                   🔒 Your information is secure and will only be used for registration purposes.
                 </p>
                 <p className="font-sans text-[12px] text-black/50">
-                  Questions? Call us at <a href="tel:+19494646645" className="text-lbta-orange hover:underline">(949) 464-6645</a>
+                  Questions? Call us at <a href="tel:+19494646645" className="text-brand-sunset-cliff hover:underline">(949) 464-6645</a>
                 </p>
               </div>
             </div>
           ) : (
             /* FALLBACK - NO EMBEDDED FORM CONFIGURED */
             <div className="p-8 md:p-12 text-center">
-              <AlertCircle className="w-16 h-16 text-lbta-orange mx-auto mb-6" />
+              <AlertCircle className="w-16 h-16 text-brand-sunset-cliff mx-auto mb-6" />
               <h3 className="font-serif text-[24px] md:text-[32px] font-semibold text-black mb-4">
                 Almost Ready!
               </h3>
               <p className="font-sans text-[16px] md:text-[18px] text-black/70 mb-6">
-                We're setting up the registration form for <span className="font-semibold text-lbta-orange">{program.program}</span>.
+                We're setting up the registration form for <span className="font-semibold text-brand-sunset-cliff">{program.program}</span>.
               </p>
               <p className="font-sans text-[15px] text-black/60 mb-8">
                 In the meantime, please call us directly to secure your spot:
@@ -330,13 +330,13 @@ export default function EmbeddedRegistrationPanel({ program, onClose }: Embedded
               <div className="space-y-4">
                 <a
                   href="tel:+19494646645"
-                  className="block bg-lbta-red hover:bg-lbta-orange text-white font-sans font-semibold text-[16px] py-4 px-8 rounded-full transition-all duration-200 hover:shadow-lg"
+                  className="block bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[16px] py-4 px-8 rounded-full transition-all duration-200 hover:shadow-lg"
                 >
                   📞 Call (949) 464-6645
                 </a>
                 <button
                   onClick={handleClose}
-                  className="block w-full border-2 border-gray-300 hover:border-lbta-orange text-black/70 hover:text-lbta-orange font-sans font-semibold text-[16px] py-3 px-8 rounded-full transition-all duration-200"
+                  className="block w-full border-2 border-gray-300 hover:border-brand-sunset-cliff text-black/70 hover:text-brand-sunset-cliff font-sans font-semibold text-[16px] py-3 px-8 rounded-full transition-all duration-200"
                 >
                   Continue Browsing
                 </button>

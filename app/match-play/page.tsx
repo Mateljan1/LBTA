@@ -2,10 +2,13 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Clock, Users, Calendar, DollarSign, CheckCircle } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import pricingData from '@/data/pricing-supplemental.json'
+
+const mp = pricingData.matchPlay
 
 export const metadata: Metadata = {
   title: 'Match Play Friday - Competitive Tennis Event | LBTA',
-  description: 'Friday evening match play for all ages. Junior session 4-5:30pm ($25), Adult session 6-8pm ($35). Round robin doubles, drop-in friendly.',
+  description: `Friday evening match play for all ages. Junior session 4-5:30pm ($${mp.junior.dropIn}), Adult session 6-8pm ($${mp.adult.dropIn}). Round robin doubles, drop-in friendly.`,
   keywords: 'tennis match play Laguna Beach, Friday tennis, round robin tennis, competitive tennis, drop-in tennis',
 }
 
@@ -37,28 +40,28 @@ export default function MatchPlayPage() {
       </section>
 
       {/* Sessions */}
-      <section className="section-spacing bg-lbta-cream">
+      <section className="section-spacing bg-brand-morning-light">
         <div className="container-lbta">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Junior */}
             <AnimatedSection>
               <div className="card-lbta p-10">
-                <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
+                <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
                   Junior Competitive Play
                 </h2>
 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center gap-3">
                     <Users className="w-5 h-5 text-lbta-burnt" />
-                    <span className="text-gray-600"><strong>Ages:</strong> 8-18, All Skill Levels</span>
+                    <span className="text-gray-600"><strong>Ages:</strong> {mp.junior.ages}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Clock className="w-5 h-5 text-lbta-burnt" />
-                    <span className="text-gray-600"><strong>Time:</strong> Fridays 4:00-5:30 PM</span>
+                    <span className="text-gray-600"><strong>Time:</strong> {mp.junior.time}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Calendar className="w-5 h-5 text-lbta-burnt" />
-                    <span className="text-gray-600"><strong>Format:</strong> Round Robin Doubles</span>
+                    <span className="text-gray-600"><strong>Format:</strong> {mp.junior.format}</span>
                   </div>
                 </div>
 
@@ -70,10 +73,10 @@ export default function MatchPlayPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Drop-In</span>
-                      <span className="text-2xl font-serif font-light">$25</span>
+                      <span className="text-2xl font-serif font-light">${mp.junior.dropIn}</span>
                     </div>
                     <div className="text-sm text-gray-500">
-                      Monthly: 4 sessions for $85 (save $15)
+                      Monthly: {mp.junior.monthlySessions} sessions for ${mp.junior.monthlyPrice} (save ${mp.junior.monthlySavings})
                     </div>
                   </div>
                 </div>
@@ -90,22 +93,22 @@ export default function MatchPlayPage() {
             {/* Adult */}
             <AnimatedSection delay={0.2}>
               <div className="card-lbta p-10">
-                <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
+                <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
                   Adult League Play
                 </h2>
 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center gap-3">
                     <Users className="w-5 h-5 text-lbta-burnt" />
-                    <span className="text-gray-600"><strong>Level:</strong> NTRP 2.5-4.5+</span>
+                    <span className="text-gray-600"><strong>Level:</strong> {mp.adult.level}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Clock className="w-5 h-5 text-lbta-burnt" />
-                    <span className="text-gray-600"><strong>Time:</strong> Fridays 6:00-8:00 PM</span>
+                    <span className="text-gray-600"><strong>Time:</strong> {mp.adult.time}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Calendar className="w-5 h-5 text-lbta-burnt" />
-                    <span className="text-gray-600"><strong>Format:</strong> Round Robin Doubles</span>
+                    <span className="text-gray-600"><strong>Format:</strong> {mp.adult.format}</span>
                   </div>
                 </div>
 
@@ -117,10 +120,10 @@ export default function MatchPlayPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Drop-In</span>
-                      <span className="text-2xl font-serif font-light">$35</span>
+                      <span className="text-2xl font-serif font-light">${mp.adult.dropIn}</span>
                     </div>
                     <div className="text-sm text-gray-500">
-                      Monthly: 4 sessions for $120 (save $20)
+                      Monthly: {mp.adult.monthlySessions} sessions for ${mp.adult.monthlyPrice} (save ${mp.adult.monthlySavings})
                     </div>
                   </div>
                 </div>
@@ -139,10 +142,10 @@ export default function MatchPlayPage() {
             <div className="card-lbta p-8 max-w-md mx-auto">
               <h3 className="text-xl font-sans font-medium mb-4">Family Package</h3>
               <p className="text-gray-600 mb-4">Bring family members for discounted rates</p>
-              <div className="text-2xl font-serif font-light text-lbta-charcoal mb-2">
-                $60 drop-in
+              <div className="text-2xl font-serif font-light text-brand-pacific-dusk mb-2">
+                ${mp.family.dropIn} drop-in
               </div>
-              <p className="text-sm text-gray-500">Monthly: $200 for family</p>
+              <p className="text-sm text-gray-500">Monthly: ${mp.family.monthlyPrice} for family</p>
             </div>
           </AnimatedSection>
         </div>
@@ -152,7 +155,7 @@ export default function MatchPlayPage() {
       <section className="section-spacing bg-lbta-tan">
         <div className="container-narrow">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-6">
+            <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-6">
               What to Expect
             </h2>
           </AnimatedSection>

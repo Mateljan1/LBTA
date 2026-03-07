@@ -43,15 +43,15 @@ const nextConfig = {
         destination: '/fitness',
         permanent: true,
       },
-      // Pro Training redirect
+      // Pro Training redirect (VYLO discontinued → high-performance)
       {
         source: '/pro-training',
-        destination: '/vylo',
+        destination: '/programs/high-performance',
         permanent: true,
       },
       {
         source: '/pro-training/',
-        destination: '/vylo',
+        destination: '/programs/high-performance',
         permanent: true,
       },
       // Shop & Services redirects
@@ -139,16 +139,53 @@ const nextConfig = {
         destination: '/schedules',
         permanent: true,
       },
-      // Hide VYLO page temporarily
+      // VYLO discontinued — redirect to high-performance
       {
         source: '/vylo',
         destination: '/programs/high-performance',
-        permanent: false,
+        permanent: true,
       },
       {
         source: '/vylo/',
         destination: '/programs/high-performance',
-        permanent: false,
+        permanent: true,
+      },
+      {
+        source: '/vylo-apply',
+        destination: '/programs/high-performance',
+        permanent: true,
+      },
+      {
+        source: '/vylo-apply/',
+        destination: '/programs/high-performance',
+        permanent: true,
+      },
+      // Canonical schedule URL
+      {
+        source: '/schedule',
+        destination: '/schedules',
+        permanent: true,
+      },
+      // JTT removal — redirect to programs/leagues
+      {
+        source: '/jtt',
+        destination: '/programs/leagues',
+        permanent: true,
+      },
+      {
+        source: '/jtt/',
+        destination: '/programs/leagues',
+        permanent: true,
+      },
+      {
+        source: '/jtt/register',
+        destination: '/programs/leagues',
+        permanent: true,
+      },
+      {
+        source: '/jtt/register/',
+        destination: '/programs/leagues',
+        permanent: true,
       },
     ]
   },

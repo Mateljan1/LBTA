@@ -9,7 +9,7 @@ const faqs = [
   {
     icon: TrendingUp,
     question: "What if my child doesn't make it to ATP/WTA level?",
-    answer: "Let's be direct: 99.9% of junior players won't reach the ATP/WTA tour. That's not failure—that's reality. What LBTA provides is transferable excellence: discipline, resilience, strategic thinking, and work ethic that translates to every arena of life. Our college placement track record (20+ D1 scholarships) shows that elite development creates options. Tennis becomes the vehicle for becoming the kind of person who succeeds anywhere.",
+    answer: "Let's be direct: 99.9% of junior players won't reach the ATP/WTA tour. That's not failure—that's reality. What LBTA provides is transferable excellence: discipline, resilience, strategic thinking, and work ethic that translates to every arena of life. Our college placement track record (20+ D1 scholarships) shows that high-level development creates options. Tennis becomes the vehicle for becoming the kind of person who succeeds anywhere.",
     category: "Goals & Expectations"
   },
   {
@@ -99,7 +99,7 @@ export default function FAQInteractive() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-lbta-charcoal text-white py-32">
+      <section className="relative bg-brand-pacific-dusk text-white py-32">
         <div className="container-narrow text-center">
           <AnimatedSection>
             <HelpCircle className="w-16 h-16 text-lbta-burnt mx-auto mb-8" />
@@ -122,7 +122,7 @@ export default function FAQInteractive() {
           {categories.map((category) => (
             <div key={category} className="mb-16">
               <AnimatedSection>
-                <h2 className="text-2xl font-sans font-medium text-lbta-charcoal mb-8 pb-4 border-b-2 border-lbta-burnt">
+                <h2 className="text-2xl font-sans font-medium text-brand-pacific-dusk mb-8 pb-4 border-b-2 border-lbta-burnt">
                   {category}
                 </h2>
               </AnimatedSection>
@@ -142,7 +142,7 @@ export default function FAQInteractive() {
                           >
                             <Icon className="w-6 h-6 text-lbta-burnt flex-shrink-0 mt-1" />
                             <div className="flex-1">
-                              <h3 className="text-lg font-sans font-medium text-lbta-charcoal pr-8">
+                              <h3 className="text-lg font-sans font-medium text-brand-pacific-dusk pr-8">
                                 {faq.question}
                               </h3>
                             </div>
@@ -176,7 +176,7 @@ export default function FAQInteractive() {
       <section className="section-spacing bg-white border-t border-gray-200">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-8">
+            <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-8">
               Still Have Questions?
             </h2>
             <p className="text-lg text-gray-600 mb-10 font-sans leading-relaxed">

@@ -69,9 +69,7 @@ export async function POST(request: NextRequest) {
     const parentName = `${formData.parentFirstName} ${formData.parentLastName}`
 
     console.log('[JTT] Processing registration:', {
-      player: playerName,
       division: formData.division,
-      parent: formData.parentEmail,
       timestamp: new Date().toISOString(),
     })
 
@@ -183,7 +181,7 @@ export async function POST(request: NextRequest) {
 
         if (contactResult.success && contactResult.data) {
           const contactId = contactResult.data.id
-          console.log('[JTT] Contact created/updated:', { contactId, email: formData.parentEmail })
+          console.log('[JTT] Contact created/updated:', { contactId })
 
           // Add to LBTA master list (required for automations)
           await addToList(contactId, LBTA_LIST_ID)
@@ -212,9 +210,7 @@ export async function POST(request: NextRequest) {
 
     // Log the registration for server logs
     console.log('[JTT] Registration complete:', {
-      player: playerName,
       division: formatDivision(formData.division),
-      parent: formData.parentEmail,
       notionSaved: notionSuccess,
       acSynced: acSuccess,
     })

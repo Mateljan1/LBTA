@@ -1,0 +1,454 @@
+import Link from 'next/link'
+import { Check } from 'lucide-react'
+import type { getSpringSummer2026 } from '@/lib/programs-data'
+
+export type SeasonKey = 'winter' | 'fall' | 'fall2025' | 'spring' | 'summer'
+
+interface Season {
+  name: string
+  dates: string
+  weeks: number
+  status: string
+  multiplier: number
+  [key: string]: unknown
+}
+
+interface BasePricingProgram {
+  label: string
+  subtitle: string
+  ages: string
+  duration: string
+  winterPrices: { '1x': number; '2x': number; '3x'?: number }
+  dropIn: number
+}
+
+interface MonthlyProgram {
+  label: string
+  subtitle: string
+  price: number
+  dropIn: number
+}
+
+interface PrivateCoach {
+  coach: string
+  title: string
+  rate60: number
+  rate90: number
+  availability: string
+}
+
+interface Discount {
+  type: string
+  amount: number
+  description: string
+}
+
+interface Scholarships {
+  coverage: string
+  email: string
+}
+
+interface PricingTabProps {
+  seasons: Record<string, Season>
+  selectedSeason?: SeasonKey
+  springSummerData?: ReturnType<typeof getSpringSummer2026>
+  basePricing: Record<string, BasePricingProgram>
+  monthlyPrograms: Record<string, MonthlyProgram>
+  privateCoaching: PrivateCoach[]
+  discounts: Record<string, Discount>
+  scholarships: Scholarships
+}
+
+function formatSpringSummerPricing (
+  pricing: Record<string, unknown>,
+  season: 'spring' | 'summer'
+): { '1x'?: number; '2x'?: number; '3x'?: number; saturday1x?: number; monthly?: number; drop_in?: number } | null {
+  if (!pricing || typeof pricing !== 'object') return null
+  const seasonBlock = pricing[season] as Record<string, number> | undefined
+  const monthlyVal = pricing.monthly as number | Record<string, number> | undefined
+  const dropIn = pricing.drop_in as number | undefined
+  if (seasonBlock && typeof seasonBlock === 'object') {
+    return { ...seasonBlock, drop_in: dropIn }
+  }
+  if (typeof monthlyVal === 'number') {
+    return { monthly: monthlyVal, drop_in: dropIn }
+  }
+  if (monthlyVal && typeof monthlyVal === 'object') {
+    return { ...monthlyVal, drop_in: dropIn }
+  }
+  return null
+}
+
+export default function PricingTab({
+  seasons,
+  selectedSeason,
+  springSummerData,
+  basePricing,
+  monthlyPrograms,
+  privateCoaching,
+  discounts,
+  scholarships,
+}: PricingTabProps) {
+  const showSpringSummerPricing = (selectedSeason === 'spring' || selectedSeason === 'summer') && springSummerData
+  const springOrSummer = selectedSeason === 'spring' ? 'spring' : 'summer'
+  const seasonMeta = showSpringSummerPricing ? springSummerData[springOrSummer] : null
+  const seasonPrograms = showSpringSummerPricing
+    ? springSummerData.programs.filter((p) => formatSpringSummerPricing(p.pricing, springOrSummer))
+    : []
+
+  return (
+    <section id="pricing" className="bg-brand-morning-light py-12 md:py-20">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+        {/* Urgency Banner */}
+        <div className="bg-black text-white rounded-xl p-4 md:p-6 mb-10 text-center">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-tide-pool opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-tide-pool"></span>
+              </span>
+              <span className="font-sans text-[14px] font-semibold">Winter 2026 Registration Open</span>
+            </div>
+            <span className="hidden md:block text-white/40">|</span>
+            <span className="font-sans text-[14px] text-white/80">
+              Early bird ends Dec 20 — <span className="text-brand-tide-pool font-semibold">Save $50</span>
+            </span>
+            <span className="hidden md:block text-white/40">|</span>
+            <span className="font-sans text-[13px] text-white/70 flex items-center gap-1.5">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Only 12 spots left in Junior Development
+            </span>
+          </div>
+        </div>
+
+        <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
+          2026 Program Pricing
+        </h2>
+        <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
+          93% of players see measurable improvement within 8 weeks. 
+          <span className="text-black font-medium"> 2x/week is most popular</span> — optimal frequency for consistent progress.
+        </p>
+
+        {/* Spring or Summer 2026 Program Pricing (when season tab is Spring/Summer) */}
+        {showSpringSummerPricing && seasonMeta && (
+          <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-10">
+            <div className="bg-black text-white px-6 py-4">
+              <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+                {seasonMeta.label} Program Pricing
+              </h3>
+              <p className="font-sans text-[13px] text-white/70 mt-1">
+                {seasonMeta.dates}
+                {seasonMeta.weeks != null && ` · ${seasonMeta.weeks} weeks`}
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full" role="table" aria-label={`${seasonMeta.label} program prices`}>
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Program</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">1x/week</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">2x/week</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">3x/week</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Saturday 1x</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Monthly</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Drop-in</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {seasonPrograms.map((p) => {
+                    const row = formatSpringSummerPricing(p.pricing, springOrSummer)
+                    if (!row) return null
+                    return (
+                      <tr key={p.id} className="border-b border-gray-100 hover:bg-gray-50">
+                        <td className="px-6 py-4">
+                          <div className="font-sans text-[15px] font-semibold text-black">{p.program}</div>
+                          {p.category && (
+                            <div className="font-sans text-[12px] text-black/60">{p.category}</div>
+                          )}
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
+                          {row['1x'] != null ? `$${row['1x']}` : '—'}
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
+                          {row['2x'] != null ? `$${row['2x']}` : '—'}
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
+                          {row['3x'] != null ? `$${row['3x']}` : '—'}
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
+                          {row.saturday1x != null ? `$${row.saturday1x}` : '—'}
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
+                          {row.monthly != null ? `$${row.monthly}` : '—'}
+                        </td>
+                        <td className="text-center px-4 py-4 font-sans text-[14px] text-black/50">
+                          {row.drop_in != null ? `$${row.drop_in}` : '—'}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+            {springSummerData.discounts && springSummerData.discounts.length > 0 && (
+              <div className="px-6 py-4 bg-brand-morning-light border-t border-gray-100">
+                <h4 className="font-serif text-[18px] font-semibold text-black mb-3">Available Discounts</h4>
+                <ul className="space-y-2">
+                  {springSummerData.discounts.map((d, i) => (
+                    <li key={i} className="font-sans text-[14px] text-black/80 flex items-baseline gap-2">
+                      <span className="font-semibold text-black">{d.label}</span>
+                      {d.percent != null && <span className="text-black/60">{d.percent}%</span>}
+                      {d.description && <span className="text-black/60">— {d.description}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Season Price Comparison */}
+        <div className="bg-white rounded-2xl p-6 md:p-8 mb-10 shadow-soft">
+          <h3 className="font-serif text-[20px] md:text-[24px] font-semibold mb-6 text-center">
+            Seasonal Price Adjustments
+          </h3>
+          <div className="grid md:grid-cols-4 gap-4">
+            {Object.entries(seasons).map(([key, season]) => (
+              <div 
+                key={key}
+                className={`p-4 rounded-xl text-center ${
+                  key === 'winter' ? 'bg-black/5 border-2 border-black' : 'bg-gray-50'
+                }`}
+              >
+                <div className="font-sans text-[13px] text-black/60 uppercase tracking-wider mb-1">
+                  {season.name.split(' ')[0]}
+                </div>
+                <div className="font-serif text-[24px] font-bold text-black">
+                  {season.weeks} weeks
+                </div>
+                <div className={`font-sans text-[14px] mt-1 ${key === 'winter' ? 'text-black font-semibold' : 'text-black/60'}`}>
+                  {key === 'winter' ? 'Base Rate' : `${Math.round(season.multiplier * 100)}% of Winter`}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Quarterly Programs Pricing */}
+        <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8 relative">
+          {/* Most Popular Ribbon */}
+          <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-10">
+            <div className="bg-black text-white font-sans text-[11px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-b-lg">
+              Most Popular: 2x/week
+            </div>
+          </div>
+          
+          <div className="bg-black text-white px-6 py-4 pt-8">
+            <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+              Quarterly Programs
+            </h3>
+            <p className="font-sans text-[13px] text-white/70 mt-1">
+              Billed per season · Winter 2026 prices shown · <span className="text-brand-tide-pool">Early bird: Save $50</span>
+            </p>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="w-full" role="table">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Program</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">1x/week</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-white uppercase tracking-wider bg-black relative">
+                    <span className="flex items-center justify-center gap-1.5">
+                      2x/week
+                      <svg className="w-4 h-4 text-brand-tide-pool" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span className="block text-[10px] text-white/80 normal-case font-normal">Best Value</span>
+                  </th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">3x/week</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Drop-in</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(basePricing).map(([key, program]) => {
+                  const capacityMap: { [key: string]: { spots: number; color: string } } = {
+                    'junior': { spots: 8, color: 'text-brand-sunset-cliff bg-brand-sunset-cliff/10' },
+                    'youthDevelopment': { spots: 12, color: 'text-brand-sunset-cliff bg-brand-sunset-cliff/10' },
+                    'highPerformance': { spots: 4, color: 'text-red-600 bg-red-50' },
+                    'adultBeginner': { spots: 16, color: 'text-brand-tide-pool bg-brand-tide-pool/10' },
+                    'adultIntermediate': { spots: 10, color: 'text-brand-sunset-cliff bg-brand-sunset-cliff/10' },
+                    'adultAdvanced': { spots: 6, color: 'text-brand-sunset-cliff bg-brand-sunset-cliff/10' },
+                  }
+                  const capacity = capacityMap[key]
+                  
+                  return (
+                    <tr key={key} className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                          <div className="font-sans text-[15px] font-semibold text-black">{program.label}</div>
+                          {capacity && capacity.spots <= 8 && (
+                            <span className={`font-sans text-[10px] font-semibold px-2 py-0.5 rounded-full ${capacity.color}`}>
+                              {capacity.spots} spots
+                            </span>
+                          )}
+                        </div>
+                        <div className="font-sans text-[12px] text-black/60">{program.subtitle}</div>
+                        <div className="font-sans text-[11px] text-black/40 mt-1">{program.ages} · {program.duration}</div>
+                      </td>
+                      <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
+                        ${program.winterPrices['1x']}
+                      </td>
+                      <td className="text-center px-4 py-4 font-sans text-[18px] font-bold text-black bg-black/5 border-x-2 border-black">
+                        ${program.winterPrices['2x']}
+                        <div className="text-[11px] font-normal text-brand-tide-pool">Save ${Math.round(program.winterPrices['1x'] * 2 - program.winterPrices['2x'])}</div>
+                      </td>
+                      <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
+                        {'3x' in program.winterPrices ? `$${(program.winterPrices as any)['3x']}` : '—'}
+                      </td>
+                      <td className="text-center px-4 py-4 font-sans text-[14px] text-black/50 line-through">
+                        ${program.dropIn}/class
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+          
+          {/* Value Proposition Footer */}
+          <div className="bg-brand-morning-light px-6 py-4 border-t border-gray-100">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-[13px]">
+              <span className="flex items-center gap-2 text-black/70">
+<svg className="w-4 h-4 text-brand-tide-pool" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+                30-day money-back guarantee
+              </span>
+              <span className="flex items-center gap-2 text-black/70">
+<svg className="w-4 h-4 text-brand-tide-pool" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+                Makeup classes included
+              </span>
+              <span className="flex items-center gap-2 text-black/70">
+<svg className="w-4 h-4 text-brand-tide-pool" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+                Cancel anytime
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Monthly Programs */}
+        <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8">
+          <div className="bg-black text-white px-6 py-4">
+            <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+              Monthly Programs
+            </h3>
+            <p className="font-sans text-[13px] text-white/80 mt-1">
+              Flexible month-to-month billing
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+            {Object.entries(monthlyPrograms).map(([key, program]) => (
+              <div key={key} className="p-6 text-center">
+                <div className="font-sans text-[16px] font-semibold text-black mb-1">{program.label}</div>
+                <div className="font-sans text-[12px] text-black/60 mb-3">{program.subtitle}</div>
+                <div className="font-serif text-[32px] font-bold text-black">${program.price}</div>
+                <div className="font-sans text-[12px] text-black/60">/month</div>
+                <div className="font-sans text-[13px] text-black/50 mt-2">Drop-in: ${program.dropIn}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Private Coaching */}
+        <div className="bg-white rounded-2xl overflow-hidden shadow-soft mb-8">
+          <div className="bg-black text-white px-6 py-4">
+            <h3 className="font-serif text-[20px] md:text-[24px] font-semibold">
+              Private Coaching
+            </h3>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">Coach</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">60 min</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">90 min</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">Availability</th>
+                </tr>
+              </thead>
+              <tbody>
+                {privateCoaching.map((coach) => (
+                  <tr key={coach.coach} className="border-b border-gray-100 hover:bg-gray-50">
+                    <td className="px-6 py-4">
+                      <div className="font-sans text-[15px] font-semibold text-black">{coach.coach}</div>
+                      <div className="font-sans text-[12px] text-black/60">{coach.title}</div>
+                    </td>
+                    <td className="text-center px-4 py-4 font-sans text-[16px] text-black">${coach.rate60}</td>
+                    <td className="text-center px-4 py-4 font-sans text-[16px] text-black">${coach.rate90}</td>
+                    <td className="text-center px-4 py-4">
+                      <span className={`font-sans text-[12px] px-3 py-1 rounded-full ${
+                        coach.availability === 'Limited' 
+                          ? 'bg-brand-sunset-cliff/10 text-brand-sunset-cliff' 
+                          : 'bg-brand-tide-pool/10 text-brand-tide-pool'
+                      }`}>
+                        {coach.availability}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Discounts & Scholarships */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-2xl p-6 shadow-soft">
+            <h3 className="font-serif text-[20px] font-semibold mb-4">Available Discounts</h3>
+            <ul className="space-y-3">
+              {Object.entries(discounts).map(([key, discount]) => (
+                <li key={key} className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-brand-tide-pool flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-sans text-[15px] font-medium text-black">
+                      {discount.type === 'fixed' ? `$${discount.amount}` : `${discount.amount}%`} off
+                    </span>
+                    <span className="font-sans text-[14px] text-black/60 ml-1">— {discount.description}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          <div className="bg-brand-sandstone rounded-2xl p-6">
+            <h3 className="font-serif text-[20px] font-semibold mb-4">Scholarship Program</h3>
+            <p className="font-sans text-[14px] text-black/70 mb-4">
+              We believe tennis should be accessible to all. Our scholarship program provides {scholarships.coverage} tuition assistance for qualifying families.
+            </p>
+            <Link 
+              href={`mailto:${scholarships.email}`}
+              className="inline-flex items-center font-sans text-[14px] font-semibold text-black hover:text-black/70"
+            >
+              Apply for Scholarship →
+            </Link>
+          </div>
+        </div>
+
+        {/* Payment Note */}
+        <p className="text-center font-sans text-[13px] text-black/50 mt-8 italic">
+          Payment plans available for quarterly programs. Contact us for details.
+        </p>
+      </div>
+    </section>
+  )
+}

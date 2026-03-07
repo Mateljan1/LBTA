@@ -112,6 +112,87 @@ export const bookingSchema = contactSchema.extend({
 export type BookingRequest = z.infer<typeof bookingSchema>
 
 /**
+ * Newsletter signup schema
+ * Used by: /api/newsletter
+ */
+export const newsletterSchema = z.object({
+  email: emailSchema,
+})
+
+export type NewsletterSignup = z.infer<typeof newsletterSchema>
+
+/**
+ * Year-round registration schema (seasonal, camp, JTT, etc.)
+ * Used by: /api/register-year
+ */
+export const registerYearSchema = z.object({
+  registrationType: z.enum(['seasonal', 'camp', 'jtt', 'swim-tennis', 'private', 'inquiry']).optional().default('seasonal'),
+  firstName: nameSchema,
+  lastName: nameSchema,
+  email: emailSchema,
+  phone: phoneSchema,
+  program: z.string().min(1, 'Program is required').max(200),
+  studentName: z.string().max(200).optional(),
+  playerName: z.string().max(200).optional(),
+  preferredDays: z.array(z.string()).optional().default([]),
+  location: z.string().max(200).optional(),
+  timeSlot: z.string().max(100).optional(),
+  totalPrice: z.union([z.string(), z.number()]).optional(),
+  price: z.union([z.string(), z.number()]).optional(),
+  studentAge: z.union([z.string(), z.number()]).optional(),
+  playerAge: z.union([z.string(), z.number()]).optional(),
+  season: z.string().max(50).optional(),
+  experience: z.string().max(200).optional(),
+  notes: z.string().max(2000).optional(),
+  programId: z.string().max(100).optional(),
+  campId: z.string().max(100).optional(),
+  campName: z.string().max(200).optional(),
+  campDates: z.string().max(200).optional(),
+  campWeek: z.string().max(100).optional(),
+  jttId: z.string().max(100).optional(),
+  jttSeason: z.string().max(100).optional(),
+  division: z.string().max(100).optional(),
+}).passthrough()
+
+export type RegisterYearRequest = z.infer<typeof registerYearSchema>
+
+/**
+ * Scholarship application schema
+ * Used by: /api/scholarship
+ */
+export const scholarshipSchema = z.object({
+  studentName: nameSchema,
+  parentName: nameSchema,
+  email: emailSchema,
+  phone: phoneSchema.optional(),
+  studentGPA: z.string().max(20).optional(),
+  householdIncome: z.string().max(100).optional(),
+  sessionsPerWeek: z.union([z.string(), z.number()]).optional(),
+  commitment: z.string().max(200).optional(),
+  notes: z.string().max(2000).optional(),
+}).passthrough()
+
+export type ScholarshipApplication = z.infer<typeof scholarshipSchema>
+
+/**
+ * General registration schema (contact + player info)
+ * Used by: /api/register
+ */
+export const registerSchema = contactSchema.extend({
+  age: z.union([z.string(), z.number()]),
+  skillLevel: z.string().min(1, 'Skill level is required').max(100),
+  experience: z.string().min(1, 'Experience is required').max(500),
+  program: z.string().max(200).optional(),
+  season: z.string().max(50).optional(),
+  earlyBird: z.boolean().optional(),
+  finalPrice: z.union([z.string(), z.number()]).optional(),
+  goals: z.string().max(1000).optional(),
+  notes: z.string().max(2000).optional(),
+})
+
+export type RegisterRequest = z.infer<typeof registerSchema>
+
+/**
  * ActiveCampaign webhook payload schema
  * Used by: /api/activecampaign-webhook
  */

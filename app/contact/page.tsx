@@ -89,7 +89,7 @@ export default function ContactPage() {
             Let's Start Your Tennis Journey.
           </h1>
           <p className="font-serif text-[18px] md:text-[24px] leading-[1.3] mb-8 text-white/95">
-            Movement. Discipline. Belonging — it starts here.
+            Movement. Craft. Community — it starts here.
           </p>
           <p 
             className="text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
@@ -101,7 +101,7 @@ export default function ContactPage() {
       </section>
 
       {/* CONTACT INFO BAR */}
-      <section className="bg-[#FAF8F3] border-b border-black/10 py-8 md:py-12">
+      <section className="bg-brand-morning-light border-b border-black/10 py-8 md:py-12">
         <div className="max-w-[1200px] mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-center">
             {/* Location */}
@@ -194,7 +194,7 @@ export default function ContactPage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
+                      className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
                         errors.name ? 'ring-2 ring-red-500' : ''
                       }`}
                       placeholder="Full name"
@@ -221,7 +221,7 @@ export default function ContactPage() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
+                      className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
                         errors.email ? 'ring-2 ring-red-500' : ''
                       }`}
                       placeholder="your@email.com"
@@ -248,7 +248,7 @@ export default function ContactPage() {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className={`w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
+                      className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
                         errors.phone ? 'ring-2 ring-red-500' : ''
                       }`}
                       placeholder="(949) 555-1234"
@@ -273,7 +273,7 @@ export default function ContactPage() {
                       id="interested"
                       value={formData.interestedIn}
                       onChange={(e) => setFormData({...formData, interestedIn: e.target.value})}
-                      className="w-full px-6 py-4 rounded-full bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all cursor-pointer"
+                      className="w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all cursor-pointer"
                       aria-label="Select program interest"
                     >
                       <option value="">Select a program...</option>
@@ -300,7 +300,7 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
                       rows={4}
-                      className="w-full px-6 py-4 rounded-2xl bg-[#FAF8F3] text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all resize-none"
+                      className="w-full px-6 py-4 rounded-2xl bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all resize-none"
                       placeholder="Tell us about your tennis goals and any questions you have..."
                       aria-label="Your message to us"
                     />
@@ -315,7 +315,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="w-full md:w-auto md:px-12 bg-black hover:bg-[#1a1a1a] hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full md:w-auto md:px-12 bg-black hover:bg-lbta-black hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {status === 'sending' ? (
                       <>
@@ -367,7 +367,7 @@ export default function ContactPage() {
       </section>
 
       {/* PRE-FOOTER CTA */}
-      <section className="bg-[#FAF8F3] py-16 md:py-20">
+      <section className="bg-brand-morning-light py-16 md:py-20">
         <div className="max-w-[1200px] mx-auto px-4 text-center">
           <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-6">
             Ready to Train With Purpose?
@@ -377,7 +377,7 @@ export default function ContactPage() {
           </p>
           <Link
             href="/book"
-            className="inline-block bg-black hover:bg-[#1a1a1a] text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px]"
+            className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px]"
           >
             Book a Trial →
           </Link>

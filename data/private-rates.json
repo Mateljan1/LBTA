@@ -1,0 +1,6 @@
+[
+  { "coach": "Andrew Mateljan", "specialty": "ATP/WTA Coach", "rate_60": 250, "rate_90": 350, "pack_10": 2300, "pack_20": 4200 },
+  { "coach": "Robert LeBuhn", "specialty": "Senior Coach", "rate_60": 120, "rate_90": 165, "pack_10": 1100, "pack_20": 2000 },
+  { "coach": "Peter DeFrantz", "specialty": "Senior Coach", "rate_60": 120, "rate_90": 165, "pack_10": 1100, "pack_20": 2000 },
+  { "coach": "Michelle Bevins", "specialty": "Youth Director", "rate_60": 120, "rate_90": 165, "pack_10": 1100, "pack_20": 2000, "note": "On leave; may return Spring 2026" }
+]

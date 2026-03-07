@@ -13,7 +13,7 @@ export default function Chatbot() {
       {/* Floating Chatbot Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-lbta-burnt hover:bg-lbta-charcoal text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-lbta-burnt hover:bg-brand-pacific-dusk text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Open chat"
@@ -51,10 +51,10 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-6 z-50 w-[380px] h-[600px] bg-white rounded-lg shadow-2xl overflow-hidden border border-lbta-sand"
+            className="fixed bottom-24 right-6 z-50 w-[380px] h-[600px] bg-white rounded-lg shadow-2xl overflow-hidden border border-brand-sandstone"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-lbta-burnt to-lbta-charcoal text-white p-6 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-lbta-burnt to-brand-pacific-dusk text-white p-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                   <Image
@@ -73,7 +73,7 @@ export default function Chatbot() {
             </div>
 
             {/* Chat Messages Area */}
-            <div className="h-[calc(100%-180px)] overflow-y-auto p-6 bg-lbta-cream space-y-4">
+            <div className="h-[calc(100%-180px)] overflow-y-auto p-6 bg-brand-morning-light space-y-4">
               {/* Welcome Message */}
               <div className="flex gap-3">
                 <div className="w-8 h-8 bg-lbta-burnt rounded-full flex items-center justify-center flex-shrink-0">
@@ -86,23 +86,23 @@ export default function Chatbot() {
                   />
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow-sm max-w-[280px]">
-                  <p className="text-sm text-lbta-charcoal leading-relaxed">
+                  <p className="text-sm text-brand-pacific-dusk leading-relaxed">
                     Welcome to Laguna Beach Tennis Academy! 👋
                   </p>
-                  <p className="text-sm text-lbta-charcoal leading-relaxed mt-2">
+                  <p className="text-sm text-brand-pacific-dusk leading-relaxed mt-2">
                     How can I help you today?
                   </p>
                   <div className="mt-4 space-y-2">
-                    <button className="w-full text-left text-xs bg-lbta-sand/50 hover:bg-lbta-sand rounded px-3 py-2 transition-colors">
+                    <button className="w-full text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors">
                       📅 Book a free trial
                     </button>
-                    <button className="w-full text-left text-xs bg-lbta-sand/50 hover:bg-lbta-sand rounded px-3 py-2 transition-colors">
+                    <button className="w-full text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors">
                       🎾 View programs
                     </button>
-                    <button className="w-full text-left text-xs bg-lbta-sand/50 hover:bg-lbta-sand rounded px-3 py-2 transition-colors">
+                    <button className="w-full text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors">
                       💰 See pricing
                     </button>
-                    <button className="w-full text-left text-xs bg-lbta-sand/50 hover:bg-lbta-sand rounded px-3 py-2 transition-colors">
+                    <button className="w-full text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors">
                       📞 Contact us
                     </button>
                   </div>
@@ -111,14 +111,14 @@ export default function Chatbot() {
             </div>
 
             {/* Input Area */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-white border-t border-lbta-sand">
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-white border-t border-brand-sandstone">
               <div className="flex gap-2">
                 <input
                   type="text"
                   placeholder="Type your message..."
-                  className="flex-1 px-4 py-2 border border-lbta-sand rounded-lg focus:outline-none focus:ring-2 focus:ring-lbta-burnt text-sm"
+                  className="flex-1 px-4 py-2 border border-brand-sandstone rounded-lg focus:outline-none focus:ring-2 focus:ring-lbta-burnt text-sm"
                 />
-                <button className="bg-lbta-burnt hover:bg-lbta-charcoal text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium">
+                <button className="bg-lbta-burnt hover:bg-brand-pacific-dusk text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium">
                   Send
                 </button>
               </div>

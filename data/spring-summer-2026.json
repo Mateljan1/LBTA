@@ -1,0 +1,281 @@
+{
+  "season": "Spring & Summer 2026",
+  "spring": {
+    "label": "Spring",
+    "dates": "April 6 – June 13, 2026",
+    "weeks": 10,
+    "skipDates": ["May 25"]
+  },
+  "summer": {
+    "label": "Summer",
+    "dates": "June 15 – August 29, 2026",
+    "weeks": 11,
+    "skipDates": ["June 19", "July 4"]
+  },
+  "discounts": [
+    { "label": "Sibling", "percent": 10, "description": "Additional siblings in same program" },
+    { "label": "Early Bird", "percent": 5, "description": "Registered 2+ weeks before session start" },
+    { "label": "Multi-Session", "percent": 5, "description": "Register Spring + Summer together" },
+    { "label": "Multi-Camp Week", "percent": 10, "description": "Booking 4+ weeks of camp" }
+  ],
+  "camps": {
+    "springBreak": {
+      "label": "Spring Break Camp",
+      "dates": "March 30 – April 3, 2026",
+      "options": [
+        { "name": "Tennis & Games", "ages": "5-11", "location": "Alta Laguna", "pricePerWeek": 295 },
+        { "name": "Junior Development", "ages": "12-17", "location": "LBHS", "pricePerWeek": 325 }
+      ],
+      "coach": "Peter DeFrantz"
+    },
+    "summer": {
+      "label": "Summer Camps",
+      "dates": "June 15 – August 28, 2026",
+      "options": [
+        { "name": "Tennis & Games Full Day", "ages": "5-11", "hours": "9am-3pm", "pricePerWeek": 495 },
+        { "name": "Tennis & Games Half Day", "ages": "5-11", "pricePerWeek": 295 },
+        { "name": "Junior Development", "ages": "12-17", "location": "LBHS", "pricePerWeek": 325 }
+      ],
+      "coach": "Peter DeFrantz"
+    }
+  },
+  "programs": [
+    {
+      "id": "little-stars",
+      "category": "Junior",
+      "program": "Little Tennis Stars",
+      "ages": "3-4",
+      "location": "Moulton Meadows",
+      "duration": "45 min",
+      "schedule": [
+        { "day": "Monday", "time": "3:30-4:15 PM", "coach": "Peter DeFrantz" },
+        { "day": "Wednesday", "time": "3:30-4:15 PM", "coach": "Robert LeBuhn" },
+        { "day": "Saturday", "time": "11:30 AM-12:15 PM", "coach": "TBD" }
+      ],
+      "pricing": {
+        "monthly": { "1x": 120, "2x": 200 },
+        "drop_in": 40
+      },
+      "description": "Introduction to tennis through play-based activities and movement fundamentals."
+    },
+    {
+      "id": "red-ball",
+      "category": "Junior",
+      "program": "Red Ball Tennis",
+      "ages": "5-6",
+      "location": "Moulton Meadows",
+      "duration": "1 hr",
+      "schedule": [
+        { "day": "Monday", "time": "4:15-5:15 PM", "coach": "Robert LeBuhn" },
+        { "day": "Wednesday", "time": "4:15-5:15 PM", "coach": "Andrew Mateljan" },
+        { "day": "Saturday", "time": "12:15-1:15 PM", "coach": "TBD" }
+      ],
+      "pricing": {
+        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
+        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
+        "drop_in": 50
+      },
+      "description": "First structured tennis program using red balls on smaller courts."
+    },
+    {
+      "id": "orange-ball",
+      "category": "Junior",
+      "program": "Orange Ball Tennis",
+      "ages": "7-8",
+      "location": "Moulton Meadows",
+      "duration": "1 hr",
+      "schedule": [],
+      "pricing": {
+        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
+        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
+        "drop_in": 50
+      },
+      "pricingNote": "Same schedule and pricing as Red Ball.",
+      "description": "Technical development and match play preparation. Optional Friday Match Play."
+    },
+    {
+      "id": "green-dot",
+      "category": "Junior",
+      "program": "Green Dot Tennis",
+      "ages": "9-11",
+      "location": "Moulton Meadows",
+      "duration": "1 hr",
+      "schedule": [],
+      "pricing": {
+        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
+        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
+        "drop_in": 50
+      },
+      "matchPlay": { "monthly": 65, "drop_in": 25 },
+      "pricingNote": "Same schedule and pricing as Red Ball. Friday Match Play: $65/mo or $25/session.",
+      "description": "Full-court tennis with purpose. Building consistency, topspin, and point-construction skills."
+    },
+    {
+      "id": "youth-development",
+      "category": "Youth",
+      "program": "Youth Development",
+      "ages": "11-15",
+      "location": "Alta Laguna Park",
+      "duration": "1.5 hr",
+      "schedule": [
+        { "day": "Monday", "time": "4:00-5:30 PM", "coach": "Robert LeBuhn" },
+        { "day": "Tuesday", "time": "4:00-5:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Wednesday", "time": "4:00-5:30 PM", "coach": "Robert LeBuhn" },
+        { "day": "Thursday", "time": "4:00-5:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Friday", "time": "3:00-4:00 PM", "coach": "Andrew Mateljan", "location": "LBHS", "note": "Match Play - Included" }
+      ],
+      "pricing": {
+        "spring": { "1x": 580, "2x": 1105, "3x": 1660, "4x": 2215, "5x": 2500 },
+        "summer": { "1x": 638, "2x": 1216, "3x": 1826, "4x": 2437, "5x": 2750 },
+        "drop_in": 70
+      },
+      "description": "Serious training, accessible structure. Train up to five sessions per week."
+    },
+    {
+      "id": "adult-beginner-1",
+      "category": "Adult",
+      "program": "Adult Beginner 1 — True Beginner",
+      "ages": "NTRP 1.0-2.0",
+      "location": "Laguna Beach High School",
+      "duration": "1 hr",
+      "schedule": [
+        { "day": "Monday", "time": "6:00-7:00 PM", "coach": "Robert LeBuhn" },
+        { "day": "Wednesday", "time": "6:00-7:00 PM", "coach": "Robert LeBuhn" },
+        { "day": "Tuesday", "time": "10:00-11:00 AM", "coach": "Andrew Mateljan" },
+        { "day": "Thursday", "time": "10:00-11:00 AM", "coach": "Andrew Mateljan" },
+        { "day": "Saturday", "time": "9:00-10:00 AM", "coach": "Andrew Mateljan & Robert LeBuhn" }
+      ],
+      "pricing": {
+        "spring": { "1x": 420, "2x": 615, "saturday1x": 380 },
+        "summer": { "1x": 462, "2x": 677, "saturday1x": 418 },
+        "drop_in": 55
+      },
+      "description": "Brand new to tennis? Start here. Strokes, footwork, serving, and scoring from scratch."
+    },
+    {
+      "id": "adult-beginner-2",
+      "category": "Adult",
+      "program": "Adult Beginner 2 — Bridge",
+      "ages": "NTRP 2.0-2.5",
+      "location": "Moulton Meadows",
+      "duration": "1 hr",
+      "schedule": [
+        { "day": "Monday", "time": "6:30-7:30 PM", "coach": "Peter DeFrantz" },
+        { "day": "Wednesday", "time": "6:30-7:30 PM", "coach": "Robert LeBuhn" }
+      ],
+      "pricing": {
+        "spring": { "1x": 420, "2x": 615 },
+        "summer": { "1x": 462, "2x": 677 },
+        "drop_in": 55
+      },
+      "description": "You can hit—now learn to play. Court positioning, doubles basics, and consistency for intermediate."
+    },
+    {
+      "id": "adult-intermediate",
+      "category": "Adult",
+      "program": "Adult Intermediate",
+      "ages": "NTRP 3.0-3.5",
+      "location": "Laguna Beach High School",
+      "duration": "1.5 hr",
+      "schedule": [
+        { "day": "Tuesday", "time": "11:00 AM-12:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Thursday", "time": "11:00 AM-12:30 PM", "coach": "Andrew Mateljan" },
+        { "day": "Saturday", "time": "10:00-11:30 AM", "coach": "Andrew Mateljan" }
+      ],
+      "pricing": {
+        "spring": { "1x": 580, "2x": 1105, "3x": 1570 },
+        "summer": { "1x": 638, "2x": 1216, "3x": 1727 },
+        "drop_in": 70
+      },
+      "description": "Purposeful training for the developing player. Stroke reliability, tactical awareness, match-play confidence."
+    },
+    {
+      "id": "adult-advanced",
+      "category": "Adult",
+      "program": "Adult Advanced",
+      "ages": "NTRP 4.0+",
+      "location": "Laguna Beach High School",
+      "duration": "2 hr",
+      "schedule": [
+        { "day": "Monday", "time": "12:00-2:00 PM", "coach": "Andrew Mateljan & Robert LeBuhn" },
+        { "day": "Friday", "time": "12:00-2:00 PM", "coach": "Andrew Mateljan & Robert LeBuhn" }
+      ],
+      "pricing": {
+        "spring": { "1x": 625, "2x": 1250 },
+        "summer": { "1x": 688, "2x": 1375 },
+        "drop_in": 90
+      },
+      "description": "Coached intensity for competitive adults. Refining strokes under pressure and match conditions."
+    },
+    {
+      "id": "high-performance",
+      "category": "Youth",
+      "program": "High Performance Academy",
+      "ages": "12-17 (UTR 5+)",
+      "location": "Laguna Beach High School",
+      "duration": "2 hr",
+      "schedule": [
+        { "day": "Monday", "time": "6:00-8:00 PM", "coach": "Andrew Mateljan" },
+        { "day": "Tuesday", "time": "6:00-8:00 PM", "coach": "Robert LeBuhn" },
+        { "day": "Wednesday", "time": "6:00-8:00 PM", "coach": "Andrew Mateljan" },
+        { "day": "Thursday", "time": "6:00-8:00 PM", "coach": "Robert LeBuhn" },
+        { "day": "Friday", "time": "5:30-7:30 PM", "coach": "Andrew Mateljan", "note": "Match Play - Included" }
+      ],
+      "pricing": {
+        "spring": { "1x": 625, "2x": 1250, "3x": 1745, "4x": 2245, "5x": 2460 },
+        "summer": { "1x": 688, "2x": 1375, "3x": 1920, "4x": 2470, "5x": 2706 },
+        "drop_in": 100
+      },
+      "description": "Tournament-caliber training. Technical refinement, tactical patterns, conditioning, mental performance."
+    },
+    {
+      "id": "liveball-intermediate",
+      "category": "Fitness",
+      "program": "LiveBall Intermediate",
+      "ages": "NTRP 2.0-3.5",
+      "location": "Moulton Meadows / LBHS",
+      "duration": "1-1.5 hr",
+      "schedule": [
+        { "day": "Thursday", "time": "6:00-7:30 PM", "coach": "TBD", "location": "Moulton Meadows" },
+        { "day": "Sunday", "time": "9:00-10:00 AM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "LBHS" }
+      ],
+      "pricing": {
+        "monthly": 150,
+        "drop_in": 50
+      },
+      "description": "Coach-fed hitting with purpose. High-volume point play for extra reps and competitive energy."
+    },
+    {
+      "id": "liveball-advanced",
+      "category": "Fitness",
+      "program": "LiveBall Advanced",
+      "ages": "NTRP 3.5+",
+      "location": "Laguna Beach High School",
+      "duration": "1.5 hr",
+      "schedule": [
+        { "day": "Sunday", "time": "10:30 AM-12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" }
+      ],
+      "pricing": {
+        "monthly": 150,
+        "drop_in": 50
+      },
+      "description": "Ninety minutes of competitive-tempo, coach-fed point play for NTRP 3.5+ players."
+    },
+    {
+      "id": "cardio-tennis",
+      "category": "Fitness",
+      "program": "Cardio Tennis",
+      "ages": "All Levels",
+      "location": "Laguna Beach High School",
+      "duration": "1.5 hr",
+      "schedule": [
+        { "day": "Friday", "time": "9:00-10:30 AM", "coach": "Andrew Mateljan & Robert LeBuhn" }
+      ],
+      "pricing": {
+        "monthly": 150,
+        "drop_in": 50
+      },
+      "description": "Tennis as a workout. High-energy, fitness-focused hitting. All levels welcome."
+    }
+  ]
+}

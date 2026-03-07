@@ -301,7 +301,7 @@ Your Laguna Beach Tennis Academy website is now:
 - ✅ Professional brand consistency
 - ✅ Ready for Winter 2026
 
-**Movement. Discipline. Belonging — Now beautifully represented online.** ✨
+**Movement. Craft. Community — Now beautifully represented online.** ✨
 
 ---
 

@@ -1,6 +1,9 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import pricingData from '@/data/pricing-supplemental.json'
+
+const rr = pricingData.racquetRescue
 
 export const metadata: Metadata = {
   title: 'Racquet Rescue - Professional Racquet Stringing | Laguna Beach Tennis Academy',
@@ -26,6 +29,7 @@ export default function RacquetRescuePage() {
             fill
             className="object-cover brightness-[0.4]"
             priority
+            sizes="100vw"
           />
         </div>
 
@@ -53,7 +57,7 @@ export default function RacquetRescuePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Link
                 href="#services"
-                className="inline-flex items-center justify-center bg-lbta-orange text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:bg-lbta-red hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
               >
                 View Services
               </Link>
@@ -83,7 +87,7 @@ export default function RacquetRescuePage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Feature 1 */}
             <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-cinematic hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
-              <div className="text-lbta-orange text-4xl mb-4">⚡</div>
+              <div className="text-brand-sunset-cliff text-4xl mb-4">⚡</div>
               <h3 className="font-headline text-2xl mb-4">Same-Day Service</h3>
               <p className="font-body text-lbta-secondary leading-relaxed">
                 Drop off before noon, pick up the same day. We understand the urgency of tournament preparation.
@@ -92,7 +96,7 @@ export default function RacquetRescuePage() {
 
             {/* Feature 2 */}
             <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-cinematic hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
-              <div className="text-lbta-orange text-4xl mb-4">🎯</div>
+              <div className="text-brand-sunset-cliff text-4xl mb-4">🎯</div>
               <h3 className="font-headline text-2xl mb-4">Expert Precision</h3>
               <p className="font-body text-lbta-secondary leading-relaxed">
                 Certified stringers with 25+ years experience. Every racquet strung to exact specifications.
@@ -101,7 +105,7 @@ export default function RacquetRescuePage() {
 
             {/* Feature 3 */}
             <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-cinematic hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
-              <div className="text-lbta-orange text-4xl mb-4">🏆</div>
+              <div className="text-brand-sunset-cliff text-4xl mb-4">🏆</div>
               <h3 className="font-headline text-2xl mb-4">Premium Strings</h3>
               <p className="font-body text-lbta-secondary leading-relaxed">
                 Full selection of professional-grade strings from Luxilon, Babolat, Wilson, and more.
@@ -127,59 +131,59 @@ export default function RacquetRescuePage() {
             {/* Standard Stringing */}
             <div className="bg-lbta-bone p-10 border border-black/6">
               <div className="mb-6">
-                <h3 className="font-headline text-3xl mb-2">Standard Stringing</h3>
+                <h3 className="font-headline text-3xl mb-2">{rr.services.standard.label}</h3>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-headline text-5xl text-lbta-orange">$25</span>
-                  <span className="font-body text-lbta-secondary">per racquet</span>
+                  <span className="font-headline text-5xl text-brand-sunset-cliff">${rr.services.standard.price}</span>
+                  <span className="font-body text-lbta-secondary">{rr.services.standard.unit}</span>
                 </div>
               </div>
               <ul className="space-y-3 font-body text-lbta-secondary">
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Professional stringing to your specifications</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>2-3 day turnaround</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Tension range: 40-70 lbs</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>String recommendations included</span>
                 </li>
               </ul>
             </div>
 
             {/* Same-Day Stringing */}
-            <div className="bg-lbta-beige p-10 border border-lbta-orange/20 relative overflow-hidden">
-              <div className="absolute top-4 right-4 bg-lbta-orange text-white text-xs font-sans tracking-wider px-3 py-1 uppercase">
+            <div className="bg-brand-sandstone p-10 border border-brand-sunset-cliff/20 relative overflow-hidden">
+              <div className="absolute top-4 right-4 bg-brand-sunset-cliff text-white text-xs font-sans tracking-wider px-3 py-1 uppercase">
                 Popular
               </div>
               <div className="mb-6">
-                <h3 className="font-headline text-3xl mb-2">Same-Day Service</h3>
+                <h3 className="font-headline text-3xl mb-2">{rr.services.sameDay.label}</h3>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-headline text-5xl text-lbta-orange">$35</span>
-                  <span className="font-body text-lbta-secondary">per racquet</span>
+                  <span className="font-headline text-5xl text-brand-sunset-cliff">${rr.services.sameDay.price}</span>
+                  <span className="font-body text-lbta-secondary">{rr.services.sameDay.unit}</span>
                 </div>
               </div>
               <ul className="space-y-3 font-body text-lbta-secondary">
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Drop off before noon, pick up same day</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Priority service for tournament players</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>All standard service benefits</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Perfect for match preparation</span>
                 </li>
               </ul>
@@ -188,27 +192,27 @@ export default function RacquetRescuePage() {
             {/* Racquet Customization */}
             <div className="bg-white p-10 border border-black/6">
               <div className="mb-6">
-                <h3 className="font-headline text-3xl mb-2">Racquet Customization</h3>
+                <h3 className="font-headline text-3xl mb-2">{rr.services.customization.label}</h3>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-headline text-5xl text-lbta-orange">$50+</span>
-                  <span className="font-body text-lbta-secondary">per racquet</span>
+                  <span className="font-headline text-5xl text-brand-sunset-cliff">{rr.services.customization.priceLabel}</span>
+                  <span className="font-body text-lbta-secondary">{rr.services.customization.unit}</span>
                 </div>
               </div>
               <ul className="space-y-3 font-body text-lbta-secondary">
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Weight and balance adjustments</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Lead tape installation</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Grip customization</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Professional consultation included</span>
                 </li>
               </ul>
@@ -217,27 +221,27 @@ export default function RacquetRescuePage() {
             {/* Grip Replacement */}
             <div className="bg-white p-10 border border-black/6">
               <div className="mb-6">
-                <h3 className="font-headline text-3xl mb-2">Grip Replacement</h3>
+                <h3 className="font-headline text-3xl mb-2">{rr.services.grip.label}</h3>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-headline text-5xl text-lbta-orange">$10</span>
-                  <span className="font-body text-lbta-secondary">per racquet</span>
+                  <span className="font-headline text-5xl text-brand-sunset-cliff">${rr.services.grip.price}</span>
+                  <span className="font-body text-lbta-secondary">{rr.services.grip.unit}</span>
                 </div>
               </div>
               <ul className="space-y-3 font-body text-lbta-secondary">
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Premium replacement grips</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Overgrip installation available</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Multiple grip options</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-orange mt-1">✓</span>
+                  <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Quick turnaround</span>
                 </li>
               </ul>
@@ -249,22 +253,12 @@ export default function RacquetRescuePage() {
             <div className="bg-lbta-bone p-8 border border-black/6">
               <h3 className="font-headline text-2xl mb-6 text-center">Premium String Selection</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center font-body text-lbta-secondary">
-                <div>
-                  <p className="font-semibold text-lbta-primary mb-1">Luxilon</p>
-                  <p className="text-sm">$20-35</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lbta-primary mb-1">Babolat</p>
-                  <p className="text-sm">$18-30</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lbta-primary mb-1">Wilson</p>
-                  <p className="text-sm">$15-28</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lbta-primary mb-1">Solinco</p>
-                  <p className="text-sm">$15-25</p>
-                </div>
+                {Object.values(rr.strings).map((s) => (
+                  <div key={s.brand}>
+                    <p className="font-semibold text-lbta-primary mb-1">{s.brand}</p>
+                    <p className="text-sm">{s.range}</p>
+                  </div>
+                ))}
               </div>
               <p className="text-center text-sm text-lbta-secondary mt-6">
                 String prices vary by model. We'll help you choose the perfect string for your game.
@@ -298,7 +292,7 @@ export default function RacquetRescuePage() {
                     id="firstName"
                     name="firstName"
                     required
-                    className="w-full px-4 py-3 border border-black/20 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 transition-all"
+                    className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
                   />
                 </div>
                 <div>
@@ -310,7 +304,7 @@ export default function RacquetRescuePage() {
                     id="lastName"
                     name="lastName"
                     required
-                    className="w-full px-4 py-3 border border-black/20 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 transition-all"
+                    className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
                   />
                 </div>
               </div>
@@ -324,7 +318,7 @@ export default function RacquetRescuePage() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 border border-black/20 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 transition-all"
+                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
                 />
               </div>
 
@@ -337,7 +331,7 @@ export default function RacquetRescuePage() {
                   id="phone"
                   name="phone"
                   required
-                  className="w-full px-4 py-3 border border-black/20 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 transition-all"
+                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
                 />
               </div>
 
@@ -349,13 +343,13 @@ export default function RacquetRescuePage() {
                   id="service"
                   name="service"
                   required
-                  className="w-full px-4 py-3 border border-black/20 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 transition-all"
+                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
                 >
                   <option value="">Select a service</option>
-                  <option value="standard">Standard Stringing ($25)</option>
-                  <option value="same-day">Same-Day Service ($35)</option>
-                  <option value="customization">Racquet Customization ($50+)</option>
-                  <option value="grip">Grip Replacement ($10)</option>
+                  <option value="standard">{rr.services.standard.label} (${rr.services.standard.price})</option>
+                  <option value="same-day">{rr.services.sameDay.label} (${rr.services.sameDay.price})</option>
+                  <option value="customization">{rr.services.customization.label} ({rr.services.customization.priceLabel})</option>
+                  <option value="grip">{rr.services.grip.label} (${rr.services.grip.price})</option>
                 </select>
               </div>
 
@@ -370,7 +364,7 @@ export default function RacquetRescuePage() {
                   min="1"
                   max="10"
                   defaultValue="1"
-                  className="w-full px-4 py-3 border border-black/20 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 transition-all"
+                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
                 />
               </div>
 
@@ -383,13 +377,13 @@ export default function RacquetRescuePage() {
                   name="notes"
                   rows={4}
                   placeholder="String preferences, tension, special requests..."
-                  className="w-full px-4 py-3 border border-black/20 focus:border-lbta-orange focus:outline-none focus:ring-2 focus:ring-lbta-orange/20 transition-all resize-none"
+                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center bg-lbta-orange text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:bg-lbta-red hover:-translate-y-0.5"
+                className="w-full inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
               >
                 Submit Request
               </button>
@@ -420,7 +414,7 @@ export default function RacquetRescuePage() {
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center text-lbta-orange hover:text-lbta-red transition-colors"
+                  className="inline-flex items-center text-brand-sunset-cliff hover:text-brand-sunset-cliff transition-colors"
                 >
                   Get Directions →
                 </Link>
@@ -453,7 +447,7 @@ export default function RacquetRescuePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 md:py-32 bg-lbta-beige">
+      <section className="py-24 md:py-32 bg-brand-sandstone">
         <div className="container-lbta text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl mb-6">
@@ -465,7 +459,7 @@ export default function RacquetRescuePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="#booking"
-                className="inline-flex items-center justify-center bg-lbta-orange text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:bg-lbta-red hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
               >
                 Book Service
               </Link>

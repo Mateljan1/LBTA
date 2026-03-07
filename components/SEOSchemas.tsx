@@ -12,7 +12,7 @@ export const faqItems = [
   },
   {
     question: "What is your coaching philosophy?",
-    answer: "We focus on Movement, Discipline, and Belonging. Our movement-first approach builds proper technique through biomechanics and footwork fundamentals before adding complexity."
+    answer: "We focus on Movement, Craft, and Community. Our movement-first approach builds proper technique through biomechanics and footwork fundamentals before adding complexity."
   },
   {
     question: "How are groups organized?",
@@ -106,7 +106,7 @@ export function ReviewSchema() {
           "name": "David R."
         },
         "datePublished": "2024-10-22",
-        "reviewBody": "At 45, I thought it was too late to learn tennis properly. LBTA proved me wrong. In 18 months, I went from complete beginner to USTA 4.0. The coaching methodology is world-class.",
+        "reviewBody": "At 45, I thought it was too late to learn tennis properly. LBTA proved me wrong. In 18 months, I went from complete beginner to USTA 4.0. The coaching methodology is exceptional.",
         "reviewRating": {
           "@type": "Rating",
           "ratingValue": "5",

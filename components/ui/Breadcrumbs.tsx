@@ -45,7 +45,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
           <li className="flex items-center">
             <Link 
               href="/" 
-              className="flex items-center gap-1.5 text-black/50 hover:text-lbta-orange transition-colors"
+              className="flex items-center gap-1.5 text-black/50 hover:text-brand-sunset-cliff transition-colors"
             >
               <Home className="w-3.5 h-3.5" />
               <span className="sr-only md:not-sr-only">Home</span>
@@ -61,7 +61,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                 {item.href && !isLast ? (
                   <Link 
                     href={item.href}
-                    className="text-black/50 hover:text-lbta-orange transition-colors"
+                    className="text-black/50 hover:text-brand-sunset-cliff transition-colors"
                   >
                     {item.label}
                   </Link>

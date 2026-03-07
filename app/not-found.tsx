@@ -17,6 +17,7 @@ export default function NotFound() {
             fill
             className="object-cover"
             priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
         </div>
@@ -57,7 +58,7 @@ export default function NotFound() {
       </section>
 
       {/* Quick Links Section */}
-      <section className="py-16 md:py-24 bg-[#FAF8F3]">
+      <section className="py-16 md:py-24 bg-brand-morning-light">
         <div className="max-w-5xl mx-auto px-6">
           <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black text-center mb-12">
             Popular Destinations

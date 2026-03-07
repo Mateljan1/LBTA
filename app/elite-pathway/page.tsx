@@ -4,18 +4,18 @@ import Image from 'next/image'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'Elite Pathway | High Performance Tennis Training | LBTA',
+  title: 'High Performance Pathway | Tennis Training | LBTA',
   description: 'Invitation-only high performance tennis training for competitive players. UTR 5-8+, tournament preparation, and college pathway with ATP/WTA certified coaches.',
   openGraph: {
-    title: 'Elite Pathway | Laguna Beach Tennis Academy',
+    title: 'High Performance Pathway | Laguna Beach Tennis Academy',
     description: 'Where serious players become champions. ATP/WTA methodology for tournament and college preparation.',
   },
 }
 
-const eliteSchema = {
+const highPerformanceSchema = {
   "@context": "https://schema.org",
   "@type": "Course",
-  "name": "Elite Pathway - High Performance Tennis Training",
+  "name": "High Performance Pathway - Tennis Training",
   "description": "Invitation-only high performance tennis program for competitive players with UTR 5-8+",
   "provider": {
     "@type": "Organization",
@@ -72,9 +72,9 @@ export default function ElitePathwayPage() {
   return (
     <>
       <Script
-        id="elite-schema"
+        id="high-performance-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(eliteSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(highPerformanceSchema) }}
       />
 
       {/* Hero Section */}
@@ -96,7 +96,7 @@ export default function ElitePathwayPage() {
             Invitation Only
           </p>
           <h1 className="font-serif text-[clamp(2.5rem,7vw,4.5rem)] font-semibold leading-[1.05] mb-6">
-            The Elite Pathway
+            The High Performance Pathway
           </h1>
           <p className="font-sans text-[18px] md:text-[20px] text-white/80 max-w-2xl mx-auto mb-10">
             Where competitive players become champions. ATP/WTA methodology for those ready to commit to excellence.
@@ -111,7 +111,7 @@ export default function ElitePathwayPage() {
       </section>
 
       {/* Results Section */}
-      <section className="bg-lbta-charcoal py-16 md:py-20">
+      <section className="bg-brand-pacific-dusk py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {achievements.map((item) => (
@@ -132,11 +132,11 @@ export default function ElitePathwayPage() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="bg-lbta-cream py-20 md:py-28">
+      <section className="bg-brand-morning-light py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <p className="text-eyebrow text-lbta-charcoal/60 mb-4">Our Methodology</p>
-            <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-lbta-charcoal leading-tight mb-4">
+            <p className="text-eyebrow text-brand-pacific-dusk/60 mb-4">Our Methodology</p>
+            <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-brand-pacific-dusk leading-tight mb-4">
               The Four Pillars of Excellence
             </h2>
             <p className="font-sans text-[16px] text-lbta-slate max-w-2xl mx-auto">
@@ -153,7 +153,7 @@ export default function ElitePathwayPage() {
                 <span className="font-serif text-[48px] text-lbta-stone/30 leading-none">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <h3 className="font-serif text-[24px] font-semibold text-lbta-charcoal mt-4 mb-3">
+                <h3 className="font-serif text-[24px] font-semibold text-brand-pacific-dusk mt-4 mb-3">
                   {pillar.title}
                 </h3>
                 <p className="font-sans text-[15px] text-lbta-slate leading-relaxed">
@@ -180,11 +180,11 @@ export default function ElitePathwayPage() {
             </div>
 
             <div>
-              <p className="text-eyebrow text-lbta-charcoal/60 mb-4">Your Coach</p>
-              <h2 className="font-serif text-[32px] md:text-[36px] font-semibold text-lbta-charcoal leading-tight mb-6">
+              <p className="text-eyebrow text-brand-pacific-dusk/60 mb-4">Your Coach</p>
+              <h2 className="font-serif text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk leading-tight mb-6">
                 Andrew Mateljan
               </h2>
-              <p className="font-sans text-[14px] uppercase tracking-wider text-lbta-orange mb-6">
+              <p className="font-sans text-[14px] uppercase tracking-wider text-brand-sunset-cliff mb-6">
                 ATP/WTA Tour Coach · 25+ Years Experience
               </p>
               <div className="space-y-4 text-[15px] text-lbta-slate leading-relaxed">
@@ -195,11 +195,11 @@ export default function ElitePathwayPage() {
                   Current coach of ATP #262 Karue Sell. Previous players include ATP #458 and #63 Doubles ranked professionals. Over 20 Division I college placements since 2021.
                 </p>
                 <p>
-                  Elite Pathway players receive direct instruction and ongoing development plans personally designed by Andrew.
+                  High Performance Pathway players receive direct instruction and ongoing development plans personally designed by Andrew.
                 </p>
               </div>
-              <blockquote className="border-l-2 border-lbta-charcoal/30 pl-6 mt-8">
-                <p className="font-serif text-[20px] italic text-lbta-charcoal leading-relaxed">
+              <blockquote className="border-l-2 border-brand-pacific-dusk/30 pl-6 mt-8">
+                <p className="font-serif text-[20px] italic text-brand-pacific-dusk leading-relaxed">
                   &ldquo;Structure creates confidence. Confidence creates champions.&rdquo;
                 </p>
               </blockquote>
@@ -209,15 +209,15 @@ export default function ElitePathwayPage() {
       </section>
 
       {/* Requirements Section */}
-      <section className="bg-lbta-cream py-20 md:py-28">
+      <section className="bg-brand-morning-light py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-12">
-            <p className="text-eyebrow text-lbta-charcoal/60 mb-4">Requirements</p>
-            <h2 className="font-serif text-[32px] md:text-[36px] font-semibold text-lbta-charcoal leading-tight mb-4">
+            <p className="text-eyebrow text-brand-pacific-dusk/60 mb-4">Requirements</p>
+            <h2 className="font-serif text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk leading-tight mb-4">
               Is This Program For You?
             </h2>
             <p className="font-sans text-[16px] text-lbta-slate">
-              The Elite Pathway is selective by design. We invest deeply in players ready to match that commitment.
+              The High Performance Pathway is selective by design. We invest deeply in players ready to match that commitment.
             </p>
           </div>
 
@@ -225,23 +225,23 @@ export default function ElitePathwayPage() {
             <ul className="space-y-4">
               {requirements.map((req) => (
                 <li key={req} className="flex items-start gap-4">
-                  <svg className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-brand-tide-pool flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="font-sans text-[15px] text-lbta-charcoal">{req}</span>
+                  <span className="font-sans text-[15px] text-brand-pacific-dusk">{req}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           <p className="text-center font-sans text-[14px] text-lbta-slate mt-8">
-            Not sure if you qualify? <Link href="/book" className="text-lbta-charcoal underline hover:no-underline">Schedule a consultation</Link> to discuss your goals.
+            Not sure if you qualify? <Link href="/book" className="text-brand-pacific-dusk underline hover:no-underline">Schedule a consultation</Link> to discuss your goals.
           </p>
         </div>
       </section>
 
       {/* Application CTA */}
-      <section id="apply" className="bg-lbta-charcoal py-20 md:py-28">
+      <section id="apply" className="bg-brand-pacific-dusk py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="font-sans text-[11px] uppercase tracking-[3px] text-white/50 mb-6">
             Start Your Journey
@@ -250,12 +250,12 @@ export default function ElitePathwayPage() {
             Apply for Assessment
           </h2>
           <p className="font-sans text-[16px] text-white/70 mb-10 max-w-xl mx-auto">
-            The first step is a complimentary assessment session. We&apos;ll evaluate your current level, discuss your goals, and determine if the Elite Pathway is the right fit.
+            The first step is a complimentary assessment session. We&apos;ll evaluate your current level, discuss your goals, and determine if the High Performance Pathway is the right fit.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/book?program=elite-assessment"
+              href="/book?program=high-performance-assessment"
               className="inline-flex items-center justify-center bg-white text-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 hover:bg-white/90 transition-all duration-300"
             >
               Request Assessment

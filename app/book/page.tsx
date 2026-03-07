@@ -94,7 +94,7 @@ export default function BookPage() {
       </section>
 
       {/* CONTACT OPTIONS */}
-      <section className="bg-[#FAF8F3] py-12 md:py-16">
+      <section className="bg-brand-morning-light py-12 md:py-16">
         <div className="max-w-[600px] mx-auto px-4 md:px-6">
           <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm text-center">
             <h2 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
@@ -151,7 +151,7 @@ export default function BookPage() {
             ].map((step) => (
               <div 
                 key={step.num}
-                className="bg-[#FAF8F3] rounded-xl p-6 text-center"
+                className="bg-brand-morning-light rounded-xl p-6 text-center"
               >
                 <div className="w-10 h-10 rounded-full bg-black text-white font-serif text-[18px] font-bold flex items-center justify-center mx-auto mb-4">
                   {step.num}
@@ -181,11 +181,11 @@ export default function BookPage() {
               <span className="font-sans text-[13px] font-medium">PTR Certified</span>
             </div>
             <div className="flex items-center gap-2 text-black/70">
-              <CheckCircle className="h-5 w-5 text-green-600" />
+              <CheckCircle className="h-5 w-5 text-brand-tide-pool" />
               <span className="font-sans text-[13px] font-medium">Background Checked</span>
             </div>
             <div className="flex items-center gap-2 text-black/70">
-              <Shield className="h-5 w-5 text-green-600" />
+              <Shield className="h-5 w-5 text-brand-tide-pool" />
               <span className="font-sans text-[13px] font-medium">30-Day Guarantee</span>
             </div>
           </div>

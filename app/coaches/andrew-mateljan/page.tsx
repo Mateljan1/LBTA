@@ -61,11 +61,11 @@ export default function AndrewMateljanPage() {
       </section>
 
       {/* Playing Career */}
-      <section className="section-spacing bg-lbta-cream">
+      <section className="section-spacing bg-brand-morning-light">
         <div className="container-narrow">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <AnimatedSection>
-              <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
+              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
                 Playing Career
               </h2>
               <ul className="space-y-3 text-gray-600">
@@ -89,7 +89,7 @@ export default function AndrewMateljanPage() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <h2 className="text-2xl font-serif font-light text-lbta-charcoal mb-6">
+              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
                 Coaching Journey
               </h2>
               <ul className="space-y-3 text-gray-600">
@@ -116,7 +116,7 @@ export default function AndrewMateljanPage() {
       </section>
 
       {/* ATP Players */}
-      <section className="section-spacing bg-lbta-charcoal text-white">
+      <section className="section-spacing bg-brand-pacific-dusk text-white">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-4xl font-serif font-light mb-4">
@@ -147,7 +147,7 @@ export default function AndrewMateljanPage() {
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
             <p className="text-overline mb-6">Coaching Philosophy</p>
-            <h2 className="text-4xl font-serif font-light text-lbta-charcoal mb-6">
+            <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-6">
               Five Pillars
             </h2>
             <p className="text-lg text-gray-600 font-sans max-w-3xl mx-auto">
@@ -163,7 +163,7 @@ export default function AndrewMateljanPage() {
                     {pillar.number}
                   </div>
                   <div className="relative z-10">
-                    <h3 className="text-2xl font-sans font-medium text-lbta-charcoal mb-4">
+                    <h3 className="text-2xl font-sans font-medium text-brand-pacific-dusk mb-4">
                       {pillar.title}
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
@@ -177,41 +177,22 @@ export default function AndrewMateljanPage() {
         </div>
       </section>
 
-      {/* Fit4Tennis & VYLO */}
-      <section className="section-spacing bg-lbta-cream">
+      {/* Fit4Tennis */}
+      <section className="section-spacing bg-brand-morning-light">
         <div className="container-lbta">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <AnimatedSection>
-              <div className="card-lbta p-8">
-                <h3 className="text-2xl font-sans font-medium mb-4">Fit4Tennis</h3>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  Global tennis fitness platform with 100,000+ followers across Instagram, YouTube, and TikTok. Andrew shares professional-grade training methods, movement drills, and strength conditioning protocols used by ATP/WTA players.
-                </p>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• Pro workout series featuring Max McKennon (ATP #458)</li>
-                  <li>• Evidence-based strength, mobility, and conditioning</li>
-                  <li>• Movement-first philosophy applied globally</li>
-                </ul>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <div className="bg-gradient-to-br from-lbta-charcoal to-lbta-slate text-white p-8 rounded-sm border-2 border-vylo-orange">
-                <h3 className="text-2xl font-sans font-medium mb-4">VYLO Performance Institute</h3>
-                <p className="text-white/90 leading-relaxed mb-6">
-                  Co-founder of VYLO—a high-performance extension of LBTA philosophy. "Beyond the academy. Toward velocity." Elite training for serious athletes committed to professional or collegiate pathways.
-                </p>
-                <ul className="space-y-2 text-sm text-white/80 mb-6">
-                  <li>• 10 athletes maximum—personalized attention</li>
-                  <li>• Professional-grade training systems</li>
-                  <li>• Excellence, alignment, measurable progress</li>
-                </ul>
-                <a href="/vylo" className="text-sm font-sans text-white tracking-wide hover:text-vylo-orange transition-colors border-b border-white/30 hover:border-vylo-orange pb-1 inline-block">
-                  Learn About VYLO →
-                </a>
-              </div>
-            </AnimatedSection>
-          </div>
+          <AnimatedSection>
+            <div className="card-lbta p-8 max-w-2xl">
+              <h3 className="text-2xl font-sans font-medium mb-4">Fit4Tennis</h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Global tennis fitness platform with 100,000+ followers across Instagram, YouTube, and TikTok. Andrew shares professional-grade training methods, movement drills, and strength conditioning protocols used by ATP/WTA players.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>• Pro workout series featuring Max McKennon (ATP #458)</li>
+                <li>• Evidence-based strength, mobility, and conditioning</li>
+                <li>• Movement-first philosophy applied globally</li>
+              </ul>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

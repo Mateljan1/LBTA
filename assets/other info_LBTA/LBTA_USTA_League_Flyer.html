@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LBTA — USTA Spring League Tennis</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+
+:root {
+  --pacific-dusk: #1B3A5C;
+  --deep-water: #0F2237;
+  --victoria-cove: #2E8B8B;
+  --sunset-cliff: #E8834A;
+  --thousand-steps: #C4963C;
+  --sandstone: #F5F0E5;
+  --morning-light: #FAF8F4;
+  --tide-pool: #3A8B6E;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+@page { size: 10in 14.2in; margin: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--pacific-dusk);
+  -webkit-font-smoothing: antialiased;
+  margin: 0; padding: 0;
+}
+
+@media screen {
+  body {
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1a1a1a;
+    gap: 24px;
+  }
+  .page { box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+}
+
+.page {
+  width: 960px;
+  min-height: 1360px;
+  position: relative;
+  background: var(--morning-light);
+  page-break-after: always;
+  page-break-inside: avoid;
+}
+.page:last-child { page-break-after: auto; }
+.page-pad {
+  padding: 52px 64px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ═══ TYPOGRAPHY ═══ */
+.eyebrow {
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--victoria-cove);
+}
+.heading-lg {
+  font-family: 'Cormorant', serif;
+  font-weight: 300; font-size: 50px; line-height: 1.08;
+  color: var(--pacific-dusk);
+}
+.heading-md {
+  font-family: 'Cormorant', serif;
+  font-weight: 300; font-size: 28px; line-height: 1.15;
+  color: var(--pacific-dusk);
+}
+.heading-sm {
+  font-family: 'Cormorant', serif;
+  font-weight: 400; font-size: 20px; line-height: 1.2;
+  color: var(--pacific-dusk);
+}
+.body-text {
+  font-weight: 300; font-size: 14px; line-height: 1.7;
+  color: rgba(27, 58, 92, 0.55);
+}
+.fine-print {
+  font-size: 11px; font-weight: 300;
+  color: rgba(27, 58, 92, 0.3); line-height: 1.6;
+}
+.horizon-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--victoria-cove) 20%, var(--sunset-cliff) 40%, var(--thousand-steps) 50%, var(--sunset-cliff) 60%, var(--victoria-cove) 80%, transparent);
+  opacity: 0.35;
+}
+
+/* ═══ DARK BOX ═══ */
+.dark-box {
+  background: var(--deep-water);
+  border-radius: 12px;
+  padding: 28px 40px;
+}
+
+/* ═══ STEP ROWS ═══ */
+.step-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.step-row:last-child { margin-bottom: 0; }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--sunset-cliff); color: white;
+  font-size: 13px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step-title { font-weight: 600; font-size: 14px; color: var(--pacific-dusk); }
+.step-desc { font-weight: 300; font-size: 13px; color: rgba(27, 58, 92, 0.5); }
+
+/* ═══ PLAYING TIME ═══ */
+.pt-visual {
+  background: rgba(27, 58, 92, 0.04);
+  border: 1px solid rgba(27, 58, 92, 0.07);
+  border-radius: 8px;
+  padding: 14px 22px;
+}
+.pt-label { font-size: 11px; font-weight: 500; color: rgba(27, 58, 92, 0.45); margin-bottom: 8px; }
+.pt-row { display: flex; align-items: center; gap: 5px; }
+.pt-you { font-size: 11px; font-weight: 500; color: rgba(27, 58, 92, 0.4); width: 32px; flex-shrink: 0; }
+.pt-block {
+  width: 52px; height: 24px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600;
+}
+.pt-on { background: var(--victoria-cove); color: white; }
+.pt-off { background: rgba(27, 58, 92, 0.07); color: rgba(27, 58, 92, 0.3); }
+.pt-legend { display: flex; gap: 18px; margin-top: 6px; margin-left: 37px; }
+.pt-legend span { font-size: 10px; color: rgba(27, 58, 92, 0.4); }
+.pt-legend span strong { font-weight: 600; color: var(--victoria-cove); }
+.pt-legend span em { font-weight: 600; color: rgba(27, 58, 92, 0.3); font-style: normal; }
+
+/* ═══ COACH ═══ */
+.coach-name {
+  font-family: 'Cormorant', serif;
+  font-weight: 400; font-size: 20px;
+  color: var(--sandstone); text-align: center;
+}
+.coach-title {
+  font-size: 11px; color: rgba(245, 240, 229, 0.4);
+  text-align: center; margin-top: 2px;
+}
+.coach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 32px; margin-top: 14px;
+}
+.coach-cred { font-size: 11.5px; line-height: 1.5; }
+.coach-cred strong { color: var(--sunset-cliff); font-weight: 600; }
+.coach-cred span { color: rgba(245, 240, 229, 0.45); font-weight: 300; }
+.coach-quote {
+  font-family: 'Cormorant', serif;
+  font-style: italic; font-size: 13px;
+  color: rgba(245, 240, 229, 0.25);
+  text-align: center; margin-top: 14px;
+}
+
+/* ═══ INCLUDES ═══ */
+.includes-row {
+  display: flex; justify-content: center; gap: 36px;
+}
+.includes-item {
+  font-size: 13px; font-weight: 400;
+  color: rgba(27, 58, 92, 0.5);
+}
+.includes-item::before {
+  content: ''; display: inline-block;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--victoria-cove);
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* ═══ LEAGUE CARDS ═══ */
+.league-card {
+  border: 1px solid rgba(27, 58, 92, 0.08);
+  border-radius: 12px;
+  padding: 20px 28px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+.league-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--victoria-cove), var(--sunset-cliff));
+  border-radius: 12px 0 0 12px;
+  opacity: 0.5;
+}
+.league-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.league-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--sunset-cliff); color: white;
+  font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-right: 12px;
+}
+.league-name { font-weight: 600; font-size: 16px; color: var(--pacific-dusk); }
+.league-desc { font-size: 12px; font-weight: 300; color: rgba(27, 58, 92, 0.5); margin-bottom: 8px; padding-left: 36px; }
+.league-deadline {
+  background: var(--sunset-cliff); color: white;
+  font-size: 9.5px; font-weight: 600; letter-spacing: 0.05em;
+  padding: 4px 10px; border-radius: 4px; white-space: nowrap;
+}
+.league-details {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 3px 12px;
+  font-size: 12px;
+  padding-left: 36px;
+}
+.league-details dt { font-weight: 500; color: rgba(27, 58, 92, 0.38); }
+.league-details dd { font-weight: 400; color: rgba(27, 58, 92, 0.65); }
+.league-cost {
+  font-size: 11.5px; color: rgba(27, 58, 92, 0.6);
+  margin-top: 8px; padding-top: 8px; padding-left: 36px;
+  border-top: 1px solid rgba(27, 58, 92, 0.05);
+}
+.league-cost strong { color: var(--pacific-dusk); font-weight: 600; }
+
+/* ═══ NTRP BOX ═══ */
+.ntrp-row { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 4px; }
+.ntrp-level { font-weight: 700; font-size: 12px; color: var(--sunset-cliff); width: 28px; flex-shrink: 0; text-align: right; }
+.ntrp-desc { font-size: 11.5px; font-weight: 300; color: rgba(245, 240, 229, 0.55); line-height: 1.5; }
+
+/* ═══ CTAs ═══ */
+.cta-green {
+  background: var(--tide-pool);
+  border-radius: 12px;
+  padding: 20px 32px;
+  text-align: center;
+}
+.cta-green .cta-main { font-family: 'Cormorant', serif; font-weight: 400; font-size: 22px; color: white; }
+.cta-green .cta-sub { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.65); margin-top: 4px; }
+
+.cta-dark {
+  background: var(--deep-water);
+  border-radius: 12px;
+  padding: 20px 32px;
+  text-align: center;
+}
+.cta-dark .cta-main { font-family: 'Cormorant', serif; font-style: italic; font-weight: 400; font-size: 22px; color: var(--sunset-cliff); }
+.cta-dark .cta-sub { font-size: 12px; font-weight: 300; color: rgba(245, 240, 229, 0.4); margin-top: 4px; }
+.cta-dark .cta-sub a { color: rgba(245, 240, 229, 0.5); text-decoration: none; }
+
+/* ═══ FOOTER ═══ */
+.page-footer {
+  position: absolute;
+  bottom: 22px; left: 64px; right: 64px;
+  text-align: center;
+}
+.page-footer-brand {
+  font-family: 'Cormorant', serif;
+  font-weight: 400; font-size: 12px;
+  color: rgba(27, 58, 92, 0.18);
+  letter-spacing: 0.08em;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 1 — OVERVIEW
+     ═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-pad">
+
+    <div class="eyebrow" style="text-align: center; margin-bottom: 12px;">USTA League Tennis &nbsp;&middot;&nbsp; Orange County</div>
+    <div class="heading-lg" style="text-align: center; margin-bottom: 4px;">USTA Spring <em style="font-style: italic; font-weight: 400; color: var(--sunset-cliff);">League</em> Tennis</div>
+    <p class="body-text" style="text-align: center; margin-bottom: 4px;">Orange County &nbsp;|&nbsp; Spring &amp; Summer 2026</p>
+    <p class="body-text" style="text-align: center; margin-bottom: 8px;">We&rsquo;re forming LBTA teams. Weekly matches against OC clubs + coached practice every week.</p>
+    <div class="horizon-line" style="width: 80px; margin: 0 auto 22px;"></div>
+
+    <!-- WHAT IS USTA -->
+    <div class="dark-box" style="margin-bottom: 22px; text-align: center;">
+      <div class="heading-sm" style="color: var(--sunset-cliff); font-style: italic; margin-bottom: 10px;">What Is USTA League Tennis?</div>
+      <div style="font-size: 13px; font-weight: 300; color: rgba(245,240,229,0.65); line-height: 1.7; max-width: 640px; margin: 0 auto;">USTA leagues are the organized team competition system run by the United States Tennis Association. You join a team of 12&ndash;14 players at your skill level. Each week, your team plays a match against another Orange County club. You rotate in and out of the lineup so everyone gets fair court time. Think of it like a recreational sports league &mdash; except it&rsquo;s tennis, it&rsquo;s structured, and it&rsquo;s tracked nationally through USTA.</div>
+    </div>
+
+    <!-- MATCH DAY -->
+    <div class="heading-md" style="text-align: center; margin-bottom: 14px;">What Match Day Looks Like</div>
+    <div style="max-width: 700px; margin: 0 auto 20px;">
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div><span class="step-title">You get the lineup</span> <span class="step-desc">&mdash; Andrew sets the weekly lineup and sends it by text. You know your match, partner, and venue a few days ahead.</span></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div><span class="step-title">You show up and play</span> <span class="step-desc">&mdash; Arrive at the host club, warm up, and play your singles or doubles match. Matches take 60&ndash;90 minutes.</span></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div><span class="step-title">The team wins (or learns)</span> <span class="step-desc">&mdash; Win the majority of lines and your team wins the match. Results are reported to USTA for your record.</span></div>
+      </div>
+    </div>
+
+    <div class="horizon-line" style="width: 50px; margin: 0 auto 20px;"></div>
+
+    <!-- PLAYING TIME -->
+    <div class="heading-md" style="text-align: center; margin-bottom: 4px;">How Playing Time Works</div>
+    <p class="body-text" style="text-align: center; font-size: 13px; margin-bottom: 12px;">Andrew builds the lineup each week, rotating players so everyone gets roughly equal matches.</p>
+    <div class="pt-visual" style="max-width: 700px; margin: 0 auto 22px;">
+      <div class="pt-label">Example &nbsp;|&nbsp; 12-player roster, 11-week season, 8 spots per match</div>
+      <div class="pt-row">
+        <div class="pt-you">You:</div>
+        <div class="pt-block pt-on">&#10003;</div>
+        <div class="pt-block pt-on">&#10003;</div>
+        <div class="pt-block pt-off">OFF</div>
+        <div class="pt-block pt-on">&#10003;</div>
+        <div class="pt-block pt-on">&#10003;</div>
+        <div class="pt-block pt-off">OFF</div>
+        <div class="pt-block pt-on">&#10003;</div>
+        <div class="pt-block pt-on">&#10003;</div>
+        <div class="pt-block pt-off">OFF</div>
+        <div class="pt-block pt-on">&#10003;</div>
+        <div class="pt-block pt-on">&#10003;</div>
+      </div>
+      <div class="pt-legend">
+        <span><strong>8 match weeks</strong></span>
+        <span><em>3 off weeks</em> &mdash; you still practice every week</span>
+      </div>
+    </div>
+
+    <!-- COACH -->
+    <div class="dark-box" style="margin-bottom: 20px;">
+      <div class="heading-sm" style="color: var(--sunset-cliff); font-style: italic; text-align: center; margin-bottom: 6px;">Your Coach &amp; Captain</div>
+      <div class="coach-name">Andrew Mateljan</div>
+      <div class="coach-title">Founder &amp; Academy Director &nbsp;|&nbsp; LBHS Head Coach &nbsp;|&nbsp; GPTCA Member &amp; Speaker</div>
+      <div class="coach-grid">
+        <div class="coach-cred"><strong>ATP Tour Coach</strong><br><span>Current coach of Karu&eacute; Sell (ATP #258).</span></div>
+        <div class="coach-cred"><strong>7 Years International</strong><br><span>Coached across Spain, Croatia, and Norway.</span></div>
+        <div class="coach-cred"><strong>Two #1 Nationally Ranked Juniors</strong><br><span>Alex Michelsen (ATP #30), Sean Daryabeigi.</span></div>
+        <div class="coach-cred"><strong>D1 Player Development</strong><br><span>Players at Yale, Cornell, South Carolina.</span></div>
+        <div class="coach-cred"><strong>20+ Years Coaching</strong><br><span>Junior foundations through the professional tour.</span></div>
+        <div class="coach-cred"><strong>100K+ Social Following</strong><br><span>Founder of Fit4Tennis. Global coaching voice.</span></div>
+      </div>
+      <div class="coach-quote">&ldquo;Structure creates confidence. Confidence creates results.&rdquo;</div>
+    </div>
+
+    <!-- EVERY LEAGUE INCLUDES -->
+    <div style="border: 1px solid rgba(27,58,92,0.08); border-radius: 12px; padding: 16px 28px; margin-bottom: 14px;">
+      <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--victoria-cove); text-align: center; margin-bottom: 10px;">Every League Includes</div>
+      <div class="includes-row">
+        <div class="includes-item">Weekly team matches at your level</div>
+        <div class="includes-item">2-hour coached practice with Andrew</div>
+        <div class="includes-item">Scheduling, lineups, and captain coordination</div>
+      </div>
+    </div>
+
+    <p class="body-text" style="text-align: center; color: var(--sunset-cliff); font-weight: 500; font-size: 13px;">Four leagues available &mdash; see the next page for details, pricing, and how to join.</p>
+
+  </div>
+  <div class="page-footer">
+    <span class="page-footer-brand">Movement. &nbsp;Discipline. &nbsp;Belonging.</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 2 — CHOOSE YOUR LEAGUE
+     ═══════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-pad">
+
+    <div class="eyebrow" style="text-align: center; margin-bottom: 12px;">Spring &amp; Summer 2026</div>
+    <div class="heading-lg" style="text-align: center; margin-bottom: 4px;">Choose Your <em style="font-style: italic; font-weight: 400; color: var(--sunset-cliff);">League</em></div>
+    <p class="body-text" style="text-align: center; font-size: 13px; margin-bottom: 18px;">Season cost of $5,500 split across the roster. All leagues include weekly matches + 2-hour practice with Andrew.</p>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px;">
+
+      <!-- League 1 -->
+      <div class="league-card">
+        <div class="league-header">
+          <div style="display: flex; align-items: center;"><div class="league-num">1</div><div class="league-name">Adult 18 &amp; Over</div></div>
+          <div class="league-deadline">Roster due April 1</div>
+        </div>
+        <div class="league-desc">Competitive singles and doubles players who want weekly structured team matches.</div>
+        <dl class="league-details">
+          <dt>Season:</dt><dd>Apr 17 &ndash; Jul 5 &nbsp;(~11 weeks)</dd>
+          <dt>Format:</dt><dd>2 singles + 3 doubles &nbsp;|&nbsp; Same gender &nbsp;|&nbsp; Straight NTRP</dd>
+          <dt>Levels:</dt><dd>2.5 / 3.0 / 3.5 / 4.0 / 4.5 / 5.0</dd>
+        </dl>
+        <div class="league-cost">12 players = <strong>$458 ea</strong> &nbsp;|&nbsp; 14 players = <strong>$393 ea</strong> &nbsp;|&nbsp; ~$42/week</div>
+      </div>
+
+      <!-- League 2 -->
+      <div class="league-card">
+        <div class="league-header">
+          <div style="display: flex; align-items: center;"><div class="league-num">2</div><div class="league-name">Friday Women&rsquo;s League</div></div>
+          <div class="league-deadline">Roster due April 1</div>
+        </div>
+        <div class="league-desc">A dedicated Friday league with a supportive, competitive team. Women only.</div>
+        <dl class="league-details">
+          <dt>Season:</dt><dd>Apr 17 &ndash; Jul 5 &nbsp;(~11 weeks)</dd>
+          <dt>Format:</dt><dd>2 singles + 3 doubles &nbsp;|&nbsp; Women only &nbsp;|&nbsp; Straight NTRP</dd>
+          <dt>Levels:</dt><dd>2.5 / 3.0 / 3.5 / 4.0 / 4.5</dd>
+        </dl>
+        <div class="league-cost">12 players = <strong>$458 ea</strong> &nbsp;|&nbsp; 14 players = <strong>$393 ea</strong> &nbsp;|&nbsp; ~$42/week</div>
+      </div>
+
+      <!-- League 3 -->
+      <div class="league-card">
+        <div class="league-header">
+          <div style="display: flex; align-items: center;"><div class="league-num">3</div><div class="league-name">Mixed 40+ Doubles</div></div>
+          <div class="league-deadline">Roster due April 1</div>
+        </div>
+        <div class="league-desc">Couples, mixed partnerships, and doubles lovers. Longest season, lowest weekly cost.</div>
+        <dl class="league-details">
+          <dt>Season:</dt><dd>Apr 18 &ndash; Sep 6 &nbsp;(~20 weeks)</dd>
+          <dt>Format:</dt><dd>3 doubles lines &nbsp;|&nbsp; Mixed gender pairs &nbsp;|&nbsp; Combined NTRP (max 1.0 diff)</dd>
+          <dt>Levels:</dt><dd>6.0 / 7.0 / 8.0 / 9.0 / 10.0 combined</dd>
+        </dl>
+        <div class="league-cost">12 players = <strong>$458 ea</strong> &nbsp;|&nbsp; 14 players = <strong>$393 ea</strong> &nbsp;|&nbsp; ~$23/week</div>
+      </div>
+
+      <!-- League 4 -->
+      <div class="league-card">
+        <div class="league-header">
+          <div style="display: flex; align-items: center;"><div class="league-num">4</div><div class="league-name">Adult 55+ Doubles</div></div>
+          <div class="league-deadline">Roster due April 19</div>
+        </div>
+        <div class="league-desc">55+ players who want organized, weekly competitive doubles at their level.</div>
+        <dl class="league-details">
+          <dt>Season:</dt><dd>May 2 &ndash; Aug 16 &nbsp;(~15 weeks)</dd>
+          <dt>Format:</dt><dd>3 doubles lines &nbsp;|&nbsp; Same gender &nbsp;|&nbsp; Combined NTRP (max 1.0 diff)</dd>
+          <dt>Levels:</dt><dd>6.0 / 7.0 / 8.0 / 9.0 combined</dd>
+        </dl>
+        <div class="league-cost">12 players = <strong>$458 ea</strong> &nbsp;|&nbsp; 14 players = <strong>$393 ea</strong> &nbsp;|&nbsp; ~$31/week</div>
+      </div>
+    </div>
+
+    <!-- NTRP Guide -->
+    <div class="dark-box" style="margin-bottom: 14px;">
+      <div class="heading-sm" style="color: var(--sunset-cliff); font-style: italic; text-align: center; margin-bottom: 4px;">Not Sure of Your Level?</div>
+      <p style="font-size: 11px; color: rgba(245,240,229,0.45); text-align: center; margin-bottom: 12px;">NTRP is how USTA measures your skill. Here&rsquo;s a quick guide:</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3px 28px;">
+        <div class="ntrp-row"><div class="ntrp-level">2.5</div><div class="ntrp-desc">Can rally but inconsistent. Learning to serve. New to match play.</div></div>
+        <div class="ntrp-row"><div class="ntrp-level">4.0</div><div class="ntrp-desc">Strong all-court game. Spin, pace variation, tactical patterns.</div></div>
+        <div class="ntrp-row"><div class="ntrp-level">3.0</div><div class="ntrp-desc">Consistent rally. Developing serve. Playing points with intention.</div></div>
+        <div class="ntrp-row"><div class="ntrp-level">4.5+</div><div class="ntrp-desc">Tournament-level. Weapons on serve and groundstrokes. Advanced tactics.</div></div>
+        <div class="ntrp-row"><div class="ntrp-level">3.5</div><div class="ntrp-desc">Reliable groundstrokes and serve. Can place the ball. Comfortable in doubles.</div></div>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 6px;">
+      <div class="cta-green">
+        <div class="cta-main">Free NTRP Assessment</div>
+        <div class="cta-sub">Come hit with Andrew and we&rsquo;ll rate you. 30 minutes on court, no commitment.<br>Text Andrew to schedule: 949-241-0847</div>
+      </div>
+      <div class="cta-dark">
+        <div class="cta-main">Reply with your league number (1&ndash;4) and NTRP.</div>
+        <div class="cta-sub">Or just say &ldquo;I&rsquo;m interested.&rdquo;</div>
+        <div class="cta-sub" style="margin-top: 8px;"><a href="mailto:andrew@lagunabeachtennisacademy.com">andrew@lagunabeachtennisacademy.com</a> &nbsp;|&nbsp; 949-241-0847<br><a href="https://www.lagunabeachtennisacademy.com">www.lagunabeachtennisacademy.com</a></div>
+      </div>
+    </div>
+    <div class="fine-print" style="text-align: center;">League registration through USTA. Practice registration through the City of Laguna Beach. USTA membership ($48/year) required separately if not current.</div>
+
+  </div>
+  <div class="page-footer">
+    <span class="page-footer-brand">Movement. &nbsp;Discipline. &nbsp;Belonging.</span>
+  </div>
+</div>
+
+<script>
+(function() {
+  if (window.matchMedia('print').matches) return;
+  function scale() {
+    var pages = document.querySelectorAll('.page');
+    var s = Math.min(1, (window.innerWidth - 48) / 960);
+    pages.forEach(function(p) {
+      p.style.transform = 'scale(' + s + ')';
+      p.style.transformOrigin = 'top center';
+      var h = p.scrollHeight || 1360;
+      p.style.marginBottom = (-(h * (1 - s))) + 'px';
+    });
+  }
+  scale();
+  window.addEventListener('resize', scale);
+})();
+</script>
+</body>
+</html>

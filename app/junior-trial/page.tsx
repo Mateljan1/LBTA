@@ -2,115 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { getJuniorProgramDataFromWinter2026 } from '@/lib/junior-program-data'
+import pricingSupplemental from '@/data/pricing-supplemental.json'
 
-// Winter 2026 Program Data Structure
-const programData = {
-  '3-4': {
-    programs: {
-      'Little Tennis Stars': {
-        schedules: [
-          { day: 'Monday 3:30pm', location: 'Moulton', time: 'Mon 3:30-4:15 PM' },
-          { day: 'Tuesday 3:30pm', location: 'Moulton', time: 'Tue 3:30-4:15 PM' },
-          { day: 'Wednesday 3:30pm', location: 'Moulton', time: 'Wed 3:30-4:15 PM' },
-          { day: 'Thursday 2:45pm', location: 'Moulton', time: 'Thu 2:45-3:30 PM' },
-        ],
-        pricing: { '1x': 120, billing: 'per month' }
-      }
-    }
-  },
-  '5-7': {
-    programs: {
-      'Red Ball Beginner': {
-        schedules: [
-          { day: 'Monday 3:30pm', location: 'Alta Laguna', time: 'Mon 3:30-4:30 PM' },
-          { day: 'Monday 4:30pm', location: 'Moulton', time: 'Mon 4:30-5:30 PM' },
-          { day: 'Wednesday 3:30pm', location: 'Alta Laguna', time: 'Wed 3:30-4:30 PM' },
-          { day: 'Wednesday 4:30pm', location: 'Moulton', time: 'Wed 4:30-5:30 PM' },
-        ],
-        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
-      },
-      'Red Ball Advanced': {
-        schedules: [
-          { day: 'Monday 3:30pm', location: 'Alta Laguna', time: 'Mon 3:30-4:30 PM' },
-          { day: 'Wednesday 3:30pm', location: 'Alta Laguna', time: 'Wed 3:30-4:30 PM' },
-          { day: 'Saturday 9:00am', location: 'Alta Laguna', time: 'Sat 9:00-10:00 AM' },
-        ],
-        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
-      }
-    }
-  },
-  '7-9': {
-    programs: {
-      'Orange Ball Beginner': {
-        schedules: [
-          { day: 'Tuesday 4:30pm', location: 'Moulton', time: 'Tue 4:30-5:30 PM' },
-          { day: 'Wednesday 4:30pm', location: 'Alta Laguna', time: 'Wed 4:30-5:30 PM' },
-        ],
-        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
-      },
-      'Orange Ball Advanced': {
-        schedules: [
-          { day: 'Monday 4:30pm', location: 'Alta Laguna', time: 'Mon 4:30-5:30 PM' },
-          { day: 'Monday 5:30pm', location: 'Moulton', time: 'Mon 5:30-6:30 PM' },
-          { day: 'Thursday 3:30pm', location: 'Moulton', time: 'Thu 3:30-4:30 PM' },
-        ],
-        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
-      }
-    }
-  },
-  '9-11': {
-    programs: {
-      'Green Dot Beginner': {
-        schedules: [
-          { day: 'Wednesday 5:30pm', location: 'Moulton', time: 'Wed 5:30-6:30 PM' },
-        ],
-        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
-      },
-      'Green Dot Advanced': {
-        schedules: [
-          { day: 'Tuesday 3:30pm', location: 'Alta Laguna', time: 'Tue 3:30-4:30 PM' },
-          { day: 'Thursday 3:30pm', location: 'Alta Laguna', time: 'Thu 3:30-4:30 PM' },
-        ],
-        pricing: { '1x': 496, '2x': 896, billing: 'per quarter' }
-      }
-    }
-  },
-  '11-15': {
-    programs: {
-      'Youth Development (11-15)': {
-        schedules: [
-          { day: 'Monday 5:30pm', location: 'Alta Laguna', time: 'Mon 5:30-6:30 PM' },
-          { day: 'Tuesday 3:30pm', location: 'LBHS', time: 'Tue 3:30-5:00 PM' },
-          { day: 'Tuesday 4:30pm', location: 'Alta Laguna', time: 'Tue 4:30-6:00 PM' },
-          { day: 'Wednesday 5:30pm', location: 'Alta Laguna', time: 'Wed 5:30-6:30 PM' },
-          { day: 'Thursday 3:30pm', location: 'LBHS', time: 'Thu 3:30-5:00 PM' },
-          { day: 'Thursday 4:30pm', location: 'Alta Laguna', time: 'Thu 4:30-6:00 PM' },
-        ],
-        pricing: { '1x': 706, '2x': 1387, billing: 'per quarter' }
-      }
-    }
-  },
-  '13-18': {
-    programs: {
-      'Youth Development (13-18)': {
-        schedules: [
-          { day: 'Tuesday 3:30pm', location: 'LBHS', time: 'Tue 3:30-5:00 PM' },
-          { day: 'Thursday 3:30pm', location: 'LBHS', time: 'Thu 3:30-5:00 PM' },
-        ],
-        pricing: { '1x': 706, '2x': 1387, billing: 'per quarter' }
-      },
-      'High Performance Training': {
-        schedules: [
-          { day: 'Monday 3:30pm', location: 'LBHS', time: 'Mon 3:30-5:30 PM' },
-          { day: 'Tuesday 5:00pm', location: 'LBHS', time: 'Tue 5:00-7:00 PM' },
-          { day: 'Wednesday 3:30pm', location: 'LBHS', time: 'Wed 3:30-5:30 PM' },
-          { day: 'Thursday 5:00pm', location: 'LBHS', time: 'Thu 5:00-7:00 PM' },
-        ],
-        pricing: { '1x': 1387, '2x': 2637, billing: 'per quarter' }
-      }
-    }
-  }
-}
+const programData = getJuniorProgramDataFromWinter2026()
+const earlyBirdDiscount = pricingSupplemental.promotions.earlyBird.discount
 
 export default function JuniorWinter2026Landing() {
   const [step, setStep] = useState(1)
@@ -143,7 +39,7 @@ export default function JuniorWinter2026Landing() {
 
   const price = selectedProgramData?.pricing?.[formData.frequency as '1x' | '2x'] as number || 0
   const isEarlyBird = new Date() < new Date('2025-12-15')
-  const discount = isEarlyBird && price > 120 ? 50 : 0
+  const discount = isEarlyBird && price > 120 ? earlyBirdDiscount : 0
   const finalPrice = price - discount
 
   // Reset dependent fields when parent field changes
@@ -203,7 +99,7 @@ export default function JuniorWinter2026Landing() {
     <div className="min-h-screen bg-white">
       {/* Urgency Banner */}
       <div className="bg-lbta-coral text-white py-3 text-center text-sm font-medium tracking-wide">
-        <span className="font-bold">$50 OFF</span> Winter 2026 registration — Sign up by December 15th
+        <span className="font-bold">${earlyBirdDiscount} OFF</span> Winter 2026 registration — Sign up by December 15th
       </div>
 
       {/* Header */}
@@ -229,11 +125,11 @@ export default function JuniorWinter2026Landing() {
       <section className="relative h-[85vh] min-h-[700px] flex items-center">
         <div className="absolute inset-0">
           <Image
-            src="/UPDATED LBTA PICS/junior-program-hero.jpg"
-            alt="Junior tennis at LBTA"
+            src="/images/programs/juniors.webp"
+            alt="Junior tennis players training at Laguna Beach Tennis Academy"
             fill
             priority
-            quality={95}
+            quality={90}
             sizes="100vw"
             className="object-cover"
           />
@@ -262,16 +158,16 @@ export default function JuniorWinter2026Landing() {
 
             <a
               href="#register"
-              className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-lbta-sand"
+              className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone"
             >
-              Register Now & Save $50
+              Register Now & Save ${earlyBirdDiscount}
             </a>
           </div>
         </div>
       </section>
 
       {/* Smart Registration Form */}
-      <section id="register" className="py-32 bg-lbta-sand">
+      <section id="register" className="py-32 bg-brand-sandstone">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-white shadow-2xl">
             {submitted ? (
@@ -293,7 +189,7 @@ export default function JuniorWinter2026Landing() {
                     Register for Winter 2026
                   </h2>
                   <p className="text-lbta-coral font-medium">
-                    $50 discount ends December 15th • 13-week session
+                    ${earlyBirdDiscount} discount ends December 15th • 13-week session
                   </p>
                 </div>
 
@@ -416,7 +312,7 @@ export default function JuniorWinter2026Landing() {
                         {Object.entries(selectedProgramData.pricing)
                           .filter(([key]) => key !== 'billing')
                           .map(([freq, amount]: [string, any]) => {
-                            const freqDiscount = isEarlyBird && amount > 120 ? 50 : 0
+                            const freqDiscount = isEarlyBird && amount > 120 ? earlyBirdDiscount : 0
                             const freqPrice = amount - freqDiscount
                             return (
                               <label
@@ -439,7 +335,7 @@ export default function JuniorWinter2026Landing() {
                                   {freq === '1x' ? '1x per week' : '2x per week'}
                                 </span>
                                 <span className="float-right">
-                                  <span className="text-2xl font-serif text-lbta-charcoal">${freqPrice}</span>
+                                  <span className="text-2xl font-serif text-brand-pacific-dusk">${freqPrice}</span>
                                   {freqDiscount > 0 && (
                                     <span className="text-sm text-gray-400 line-through ml-2">${amount}</span>
                                   )}
@@ -462,7 +358,7 @@ export default function JuniorWinter2026Landing() {
                         <p><span className="font-medium">Frequency:</span> {formData.frequency === '1x' ? '1x per week' : '2x per week'}</p>
                         <p className="text-lg font-medium text-lbta-coral pt-2">
                           Price: ${finalPrice} {selectedProgramData?.pricing.billing}
-                          {discount > 0 && <span className="text-sm"> (Save $50)</span>}
+                          {discount > 0 && <span className="text-sm"> (Save ${earlyBirdDiscount})</span>}
                         </p>
                       </div>
                     </div>
@@ -474,7 +370,7 @@ export default function JuniorWinter2026Landing() {
                     disabled={isSubmitting || !formData.schedule}
                     className="w-full bg-lbta-coral text-white font-bold py-5 px-6 text-lg tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Processing...' : 'Claim My $50 Discount →'}
+                    {isSubmitting ? 'Processing...' : `Claim My $${earlyBirdDiscount} Discount →`}
                   </button>
 
                   <p className="text-xs text-center text-gray-500">
@@ -510,7 +406,7 @@ export default function JuniorWinter2026Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-lbta-charcoal py-12">
+      <footer className="bg-brand-pacific-dusk py-12">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <p className="text-sm text-lbta-bone/60 mb-3">
             Laguna Beach Tennis Academy • Official City Partner Since 2020

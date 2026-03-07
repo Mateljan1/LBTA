@@ -31,7 +31,7 @@
 - Video optimized (79% reduction: 21 MB → 4.5 MB)
 - Enhanced gradient overlay
 - "Book a Trial" CTA added
-- Movement/Discipline/Belonging cards refined
+- Movement/Craft/Community cards refined
 - Hover animations throughout
 
 ### About Page (Polished)

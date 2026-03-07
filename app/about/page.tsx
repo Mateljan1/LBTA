@@ -97,41 +97,41 @@ export default function AboutPage() {
             
             {/* Content */}
             <div>
-              <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-4">
+              <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
                 Our Story
               </p>
-              <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-[#1a1a1a] mb-8 tracking-[-0.02em] leading-[1.15]">
+              <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-8 tracking-[-0.02em] leading-[1.15]">
                 Building Champions<br className="hidden md:block" /> Since 2020
               </h2>
               
               <div className="space-y-5">
-                <p className="font-sans text-[16px] text-[#444] leading-[1.8]">
+                <p className="font-sans text-[16px] text-brand-pacific-dusk leading-[1.8]">
                   Since 2020, students have learned that good tennis teaches more than strokes. 
                   It builds focus, resilience, and quiet confidence through disciplined effort.
                 </p>
-                <p className="font-sans text-[16px] text-[#444] leading-[1.8]">
+                <p className="font-sans text-[16px] text-brand-pacific-dusk leading-[1.8]">
                   Founded by Andrew Mateljan, LBTA brings ATP/WTA-level coaching to every player — 
                   from first rally to professional tour.
                 </p>
-                <p className="font-sans text-[16px] text-[#444] leading-[1.8]">
+                <p className="font-sans text-[16px] text-brand-pacific-dusk leading-[1.8]">
                   Today, our players compete globally, earn college scholarships, and carry themselves 
                   with the composure that only real preparation creates.
                 </p>
               </div>
               
-              <div className="mt-10 pt-8 border-t border-[#eee]">
+              <div className="mt-10 pt-8 border-t border-lbta-stone">
                 <div className="grid grid-cols-3 gap-6">
                   <div>
-                    <span className="font-serif text-[36px] md:text-[42px] font-medium text-[#1a1a1a]">20+</span>
-                    <p className="font-sans text-[12px] text-[#666] uppercase tracking-[0.1em] mt-1">D1 Placements</p>
+                    <span className="font-serif text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">20+</span>
+                    <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">D1 Placements</p>
                   </div>
                   <div>
-                    <span className="font-serif text-[36px] md:text-[42px] font-medium text-[#1a1a1a]">5</span>
-                    <p className="font-sans text-[12px] text-[#666] uppercase tracking-[0.1em] mt-1">Expert Coaches</p>
+                    <span className="font-serif text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">5</span>
+                    <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">Expert Coaches</p>
                   </div>
                   <div>
-                    <span className="font-serif text-[36px] md:text-[42px] font-medium text-[#1a1a1a]">100+</span>
-                    <p className="font-sans text-[12px] text-[#666] uppercase tracking-[0.1em] mt-1">Active Students</p>
+                    <span className="font-serif text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">100+</span>
+                    <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">Active Students</p>
                   </div>
                 </div>
               </div>
@@ -146,27 +146,27 @@ export default function AboutPage() {
       {/* PHILOSOPHY SECTION - Quote */}
       <section className="bg-white py-20 md:py-28">
         <div className="max-w-[900px] mx-auto px-6 md:px-16 text-center">
-          <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-8">
+          <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-8">
             Our Philosophy
           </p>
-          <blockquote className="font-serif text-[28px] md:text-[40px] font-medium text-[#1a1a1a] leading-[1.3] tracking-[-0.02em] mb-8">
+          <blockquote className="font-serif text-[28px] md:text-[40px] font-medium text-brand-pacific-dusk leading-[1.3] tracking-[-0.02em] mb-8">
             &ldquo;Structure creates confidence. Confidence creates results. 
             That&apos;s how champions are built.&rdquo;
           </blockquote>
-          <p className="font-sans text-[14px] text-[#666]">
+          <p className="font-sans text-[14px] text-lbta-slate">
             — Andrew Mateljan, Founder
           </p>
         </div>
       </section>
 
       {/* OUR FOUNDATION - Principles */}
-      <section className="bg-[#fafafa] py-20 md:py-28">
+      <section className="bg-brand-sandstone py-20 md:py-28">
         <div className="max-w-[1200px] mx-auto px-6 md:px-16">
           <div className="mb-16">
-            <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-4">
+            <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
               Our Foundation
             </p>
-            <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-[#1a1a1a] tracking-[-0.02em]">
+            <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
               Guiding Principles
             </h2>
           </div>
@@ -177,13 +177,13 @@ export default function AboutPage() {
                 key={principle.title}
                 className="bg-white rounded-xl p-8 md:p-10"
               >
-                <span className="font-sans text-[12px] font-semibold text-[#999] tracking-[0.1em]">
+                <span className="font-sans text-[12px] font-semibold text-brand-pacific-dusk/50 tracking-[0.1em]">
                   {principle.number}
                 </span>
-                <h3 className="font-serif text-[24px] md:text-[28px] font-medium text-[#1a1a1a] mt-3 mb-4 tracking-[-0.01em]">
+                <h3 className="font-serif text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mt-3 mb-4 tracking-[-0.01em]">
                   {principle.title}
                 </h3>
-                <p className="font-sans text-[15px] text-[#555] leading-[1.7]">
+                <p className="font-sans text-[15px] text-brand-pacific-dusk/80 leading-[1.7]">
                   {principle.description}
                 </p>
               </div>
@@ -198,42 +198,42 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Content */}
             <div className="order-2 lg:order-1">
-              <p className="font-sans text-[11px] font-semibold text-[#888] uppercase tracking-[0.15em] mb-4">
+              <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
                 Our Home
               </p>
-              <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-[#1a1a1a] mb-6 tracking-[-0.02em]">
+              <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-6 tracking-[-0.02em]">
                 Laguna Beach, California
               </h2>
-              <p className="font-sans text-[16px] text-[#444] leading-[1.8] mb-6">
+              <p className="font-sans text-[16px] text-brand-pacific-dusk leading-[1.8] mb-6">
                 Nestled in one of California&apos;s most beautiful coastal communities, 
-                our academy offers world-class training in an inspiring environment.
+                our academy offers professional training in an inspiring environment.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-1 h-1 rounded-full bg-[#1a1a1a] mt-2.5 flex-shrink-0" />
-                  <p className="font-sans text-[15px] text-[#555]">
+                  <div className="w-1 h-1 rounded-full bg-lbta-black mt-2.5 flex-shrink-0" />
+                  <p className="font-sans text-[15px] text-brand-pacific-dusk/80">
                     Professional-grade hard courts with excellent lighting
                   </p>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-1 h-1 rounded-full bg-[#1a1a1a] mt-2.5 flex-shrink-0" />
-                  <p className="font-sans text-[15px] text-[#555]">
+                  <div className="w-1 h-1 rounded-full bg-lbta-black mt-2.5 flex-shrink-0" />
+                  <p className="font-sans text-[15px] text-brand-pacific-dusk/80">
                     Year-round ideal weather conditions
                   </p>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-1 h-1 rounded-full bg-[#1a1a1a] mt-2.5 flex-shrink-0" />
-                  <p className="font-sans text-[15px] text-[#555]">
+                  <div className="w-1 h-1 rounded-full bg-lbta-black mt-2.5 flex-shrink-0" />
+                  <p className="font-sans text-[15px] text-brand-pacific-dusk/80">
                     Convenient location with ample parking
                   </p>
                 </div>
               </div>
               
               <div className="mt-10">
-                <p className="font-sans text-[14px] text-[#666] mb-1">
+                <p className="font-sans text-[14px] text-lbta-slate mb-1">
                   1098 Balboa Ave
                 </p>
-                <p className="font-sans text-[14px] text-[#666]">
+                <p className="font-sans text-[14px] text-lbta-slate">
                   Laguna Beach, CA 92651
                 </p>
               </div>
@@ -257,7 +257,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA SECTION - Minimal */}
-      <section className="bg-[#1a1a1a] py-20 md:py-28">
+      <section className="bg-lbta-black py-20 md:py-28">
         <div className="max-w-[800px] mx-auto px-6 text-center">
           <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-white mb-6 tracking-[-0.02em]">
             Start Your Journey
@@ -269,7 +269,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-white text-[#1a1a1a] font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-lg hover:bg-white/90 transition-all min-h-[52px]"
+              className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-lg hover:bg-white/90 transition-all min-h-[52px]"
             >
               Book Trial Session
             </Link>

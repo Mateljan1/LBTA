@@ -80,7 +80,7 @@ Subtle:          #1A1A1A at 6% opacity
 ### 1. HERO
 **Blueprint Refinements:**
 - Copy: "Tennis as it should be taught"
-- Subhead: "Movement. Discipline. Belonging."
+- Subhead: "Movement. Craft. Community."
 - Typography: 84px Cormorant weight 300
 - Button: Coral #E8956F
 - Subtext: Space Grotesk eyebrow style

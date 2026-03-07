@@ -1,24 +1,24 @@
 import type { Metadata, Viewport } from 'next'
-import { Playfair_Display, Work_Sans } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import Script from 'next/script'
-import './globals.css'
+import './PERS_General_2025-12-16_globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import { OrganizationSchema } from './schema'
 
-// LBTA Typography System - Playfair Display + Work Sans
-const playfair = Playfair_Display({
+// PERS typography: Cormorant Garamond + DM Sans (per .cursorrules)
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-playfair',
+  variable: '--font-cormorant',
   display: 'swap',
   preload: true,
   adjustFontFallback: true,
 })
 
-const workSans = Work_Sans({
+const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600'],
-  variable: '--font-work-sans',
+  variable: '--font-dm-sans',
   display: 'swap',
   preload: true,
   adjustFontFallback: true,
@@ -57,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${workSans.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${cormorant.variable}`}>
       <head>
         {/* PWA & Mobile Optimization */}
         <link rel="manifest" href="/manifest.json" />
@@ -102,7 +102,7 @@ export default function RootLayout({
         {/* Schema Markup */}
         <OrganizationSchema />
       </head>
-      <body className={`${workSans.className} flex flex-col min-h-screen`}>
+      <body className={`${dmSans.className} flex flex-col min-h-screen`}>
         {/* Google Analytics 4 */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VCH0K84TSF"

@@ -65,12 +65,12 @@ export default function UrgencyBanner({
   if (!isVisible) return null
 
   return (
-    <div className="bg-lbta-charcoal text-white py-2.5 px-4 relative">
+    <div className="bg-brand-pacific-dusk text-white py-2.5 px-4 relative">
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 text-center">
         {/* Pulsing indicator */}
         <span className="relative flex h-2 w-2 flex-shrink-0">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-tide-pool opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-tide-pool"></span>
         </span>
 
         {/* Message */}
@@ -85,13 +85,13 @@ export default function UrgencyBanner({
           {spotsLeft && (
             <>
               <span className="mx-2 text-white/40">·</span>
-              <span className="text-orange-300 font-medium">Only {spotsLeft} spots left</span>
+              <span className="text-brand-sunset-cliff font-medium">Only {spotsLeft} spots left</span>
             </>
           )}
           {timeLeft && (
             <>
               <span className="mx-2 text-white/40">·</span>
-              <span className="text-orange-300 font-medium">{timeLeft}</span>
+              <span className="text-brand-sunset-cliff font-medium">{timeLeft}</span>
             </>
           )}
         </p>

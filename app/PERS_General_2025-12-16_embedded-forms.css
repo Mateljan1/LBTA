@@ -4,11 +4,11 @@
    ======================================== */
 
 /* Import luxury fonts */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
 /* ===== GLOBAL FORM CONTAINER ===== */
 .ac-form-container {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #FAF8F3 0%, #FFFFFF 100%);
   border-radius: 16px;
   padding: 0;
@@ -47,7 +47,7 @@
 /* Form description */
 .ac-form-container p,
 .ac-form-container .form-description {
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
   font-size: 15px !important;
   font-weight: 400 !important;
   color: rgba(0, 0, 0, 0.7) !important;
@@ -68,7 +68,7 @@
 /* Field labels */
 .ac-form-container label,
 .ac-form-container .field-label {
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
   font-size: 14px !important;
   font-weight: 600 !important;
   color: #1a1a1a !important;
@@ -98,7 +98,7 @@
   border: 2px solid #e5e7eb !important;
   border-radius: 50px !important;
   background: #FAF8F3 !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
   font-size: 15px !important;
   font-weight: 400 !important;
   color: rgba(0, 0, 0, 0.85) !important;
@@ -114,7 +114,7 @@
   border-radius: 16px !important;
   resize: vertical !important;
   min-height: 100px !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
   line-height: 1.5 !important;
 }
 
@@ -180,7 +180,7 @@
   border: none !important;
   border-radius: 50px !important;
   padding: 16px 32px !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
   font-size: 16px !important;
   font-weight: 600 !important;
   cursor: pointer !important;
@@ -219,7 +219,7 @@
   font-weight: 500 !important;
   margin-top: 6px !important;
   padding-left: 20px !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
 }
 
 /* Success messages */
@@ -230,7 +230,7 @@
   border-radius: 12px !important;
   padding: 16px 20px !important;
   color: #059669 !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
   font-size: 15px !important;
   font-weight: 500 !important;
   margin: 20px 0 !important;

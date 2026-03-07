@@ -13,12 +13,11 @@ export default function ConditionalLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
-  const isVYLO = pathname?.startsWith('/vylo')
   const isBeginnerLanding = pathname?.startsWith('/beginner-program')
   const isJuniorLanding = pathname?.startsWith('/junior-trial')
 
   // Standalone landing pages render without LBTA header/footer
-  if (isVYLO || isBeginnerLanding || isJuniorLanding) {
+  if (isBeginnerLanding || isJuniorLanding) {
     return <>{children}</>
   }
 
@@ -27,7 +26,7 @@ export default function ConditionalLayout({
     <>
       <WinterCountdown />
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         {children}
       </main>
       <Footer />

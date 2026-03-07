@@ -9,94 +9,99 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // LBTA Production Spec Colors - Luxury Palette
-        lbta: {
-          // PRIMARY COLORS (Production Spec)
-          orange: '#F8A121',      // Primary accent - warm gold
-          red: '#F04E23',         // CTA accent - confident coral
-          beige: '#F8E6BB',       // Soft beige background
-          black: '#0A0A0A',       // Rich black (not pure black)
-          white: '#FFFFFF',       // Pure white
-          
-          // REFINED NEUTRALS
-          cream: '#FAF8F3',       // Off-white background
-          sand: '#F4EDE4',        // Warm neutral
-          stone: '#E8E4DF',       // Border/divider color
-          charcoal: '#2B2B2B',    // Dark text
-          slate: '#6B6B6B',       // Secondary text
-          
-          // LEGACY (backwards compatibility)
-          primary: '#1A1A1A',     
-          secondary: '#6B6B6B',   
-          coral: '#E8956F',       
-          'coral-dark': '#D67D5A',
-          bone: '#FDFCFA',        
+        // LBTA Brand Kit — Laguna Beach Palette
+        brand: {
+          'pacific-dusk': '#1B3A5C',
+          'deep-water': '#0F2237',
+          'victoria-cove': '#2E8B8B',
+          'thousand-steps': '#C4963C',
+          'sunset-cliff': '#E8834A',
+          'sandstone': '#F5F0E5',
+          'morning-light': '#FAF8F4',
+          'salt-air': '#FFFFFF',
+          'tide-pool': '#3A8B6E',
+          'sage-hill': '#7A8B6E',
+          'driftwood': '#B8A88A',
         },
-        vylo: {
-          orange: '#F26522',
+        // LBTA mapped to Brand Kit + legacy compat
+        lbta: {
+          burnt: '#E8834A',       // Accent (alias for orange/sunset-cliff)
+          orange: '#E8834A',      // Sunset Cliff (was #F8A121)
+          red: '#F04E23',         // Legacy — avoid in new code
+          beige: '#F5F0E5',       // Sandstone (was #F8E6BB)
+          black: '#0A0A0A',       // Rich black
+          white: '#FFFFFF',
+          cream: '#FAF8F4',       // Morning Light (was #FAF8F3)
+          sand: '#F5F0E5',        // Sandstone (was #F4EDE4)
+          stone: '#E8E4DF',       // Border/divider
+          charcoal: '#1B3A5C',    // Pacific Dusk (was #2B2B2B)
+          slate: '#6B6B6B',       // Secondary text
+          primary: '#1B3A5C',     // Pacific Dusk
+          secondary: '#6B6B6B',
+          coral: '#E8834A',       // Sunset Cliff alias
+          'coral-dark': '#D4773F',
+          bone: '#FAF8F4',        // Morning Light
         },
       },
       fontFamily: {
-        // LBTA Final Font Stack (Playfair Display + Work Sans)
-        headline: ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
-        body: ['Work Sans', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
-        serif: ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
-        sans: ['Work Sans', 'system-ui', '-apple-system', 'sans-serif'],
+        headline: ['var(--font-cormorant)', 'Cormorant', 'Georgia', 'serif'],
+        body: ['var(--font-dm-sans)', 'DM Sans', 'system-ui', 'sans-serif'],
+        display: ['var(--font-cormorant)', 'Cormorant', 'Georgia', 'serif'],
+        serif: ['var(--font-cormorant)', 'Cormorant', 'Georgia', 'serif'],
+        sans: ['var(--font-dm-sans)', 'DM Sans', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        // REFINED Typography Scale - Luxury Hierarchy
-        // Display: Hero headlines only
-        'display-xl': ['clamp(3rem, 8vw, 5.25rem)', { 
-          lineHeight: '0.95', 
-          letterSpacing: '-0.03em', 
-          fontWeight: '300' 
+        // Brand Kit Typography Scale
+        'display-xl': ['clamp(3rem, 7vw, 5.5rem)', {
+          lineHeight: '0.95',
+          letterSpacing: '-0.02em',
+          fontWeight: '300'
         }],
-        'display': ['clamp(2.75rem, 7vw, 4.5rem)', { 
-          lineHeight: '1.0', 
-          letterSpacing: '-0.025em', 
-          fontWeight: '400' 
+        'display': ['clamp(2rem, 4.5vw, 3.5rem)', {
+          lineHeight: '1.05',
+          letterSpacing: '-0.015em',
+          fontWeight: '300'
         }],
-        // Headlines: Section titles
-        'headline-xl': ['clamp(2.5rem, 5vw, 3.5rem)', { 
-          lineHeight: '1.1', 
-          letterSpacing: '-0.02em', 
-          fontWeight: '600' 
+        'display-sm': ['clamp(1.5rem, 3vw, 2.2rem)', {
+          lineHeight: '1.15',
+          letterSpacing: '-0.01em',
+          fontWeight: '300'
         }],
-        'headline': ['clamp(2rem, 4vw, 2.75rem)', { 
-          lineHeight: '1.15', 
-          letterSpacing: '-0.015em', 
-          fontWeight: '600' 
+        'headline-xl': ['clamp(2.5rem, 5vw, 3.5rem)', {
+          lineHeight: '1.1',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
         }],
-        'headline-sm': ['clamp(1.5rem, 3vw, 2rem)', { 
-          lineHeight: '1.2', 
-          letterSpacing: '-0.01em', 
-          fontWeight: '600' 
+        'headline': ['clamp(1.6rem, 2.5vw, 2rem)', {
+          lineHeight: '1.2',
+          letterSpacing: '-0.01em',
+          fontWeight: '400'
         }],
-        // Subheads: Lead paragraphs
-        'subhead': ['clamp(1.25rem, 2.5vw, 1.5rem)', { 
-          lineHeight: '1.4', 
-          letterSpacing: '-0.005em', 
-          fontWeight: '400' 
+        'headline-sm': ['clamp(1.25rem, 2vw, 1.5rem)', {
+          lineHeight: '1.25',
+          letterSpacing: '-0.005em',
+          fontWeight: '400'
         }],
-        // Body text
-        'body-xl': ['1.25rem', { lineHeight: '1.75', letterSpacing: '0', fontWeight: '400' }],
-        'body-lg': ['1.125rem', { lineHeight: '1.75', letterSpacing: '0', fontWeight: '400' }],
+        'subhead': ['clamp(1.125rem, 2vw, 1.375rem)', {
+          lineHeight: '1.5',
+          letterSpacing: '0',
+          fontWeight: '400'
+        }],
+        'body-xl': ['1.25rem', { lineHeight: '1.75', letterSpacing: '0', fontWeight: '300' }],
+        'body-lg': ['1.05rem', { lineHeight: '1.75', letterSpacing: '0', fontWeight: '300' }],
         'body': ['1rem', { lineHeight: '1.7', letterSpacing: '0', fontWeight: '400' }],
         'body-sm': ['0.9375rem', { lineHeight: '1.65', letterSpacing: '0', fontWeight: '400' }],
-        // UI text
         'ui': ['0.875rem', { lineHeight: '1.5', letterSpacing: '0.01em', fontWeight: '500' }],
         'ui-sm': ['0.8125rem', { lineHeight: '1.4', letterSpacing: '0.01em', fontWeight: '500' }],
-        // Eyebrow/Overline
-        'eyebrow': ['0.6875rem', { 
-          lineHeight: '1.4', 
-          letterSpacing: '0.15em', 
-          fontWeight: '500' 
+        'eyebrow': ['0.7rem', {
+          lineHeight: '1.4',
+          letterSpacing: '0.18em',
+          fontWeight: '600'
         }],
-        'eyebrow-sm': ['0.625rem', { 
-          lineHeight: '1.4', 
-          letterSpacing: '0.12em', 
-          fontWeight: '500' 
+        'eyebrow-sm': ['0.65rem', {
+          lineHeight: '1.4',
+          letterSpacing: '0.12em',
+          fontWeight: '600'
         }],
       },
       spacing: {
@@ -138,7 +143,7 @@ const config: Config = {
         'luxury': '0 12px 48px rgba(0,0,0,0.12)',
         // Interactive shadows
         'hover': '0 8px 24px rgba(0,0,0,0.08)',
-        'focus': '0 0 0 3px rgba(248,161,33,0.2)',
+        'focus': '0 0 0 3px rgba(46,139,139,0.15)',
         // Card shadows
         'card': '0 1px 3px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.04)',
         'card-hover': '0 2px 6px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.06)',

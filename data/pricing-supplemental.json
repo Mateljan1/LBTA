@@ -1,0 +1,104 @@
+{
+  "promotions": {
+    "earlyBird": {
+      "discount": 50,
+      "label": "Save $50",
+      "description": "Save $50 on full-quarter enrollment"
+    }
+  },
+  "leagues": {
+    "perWeekApprox": "~$23",
+    "perSeason": "$349"
+  },
+  "schema": {
+    "priceRange": "$120-$250",
+    "courses": {
+      "juniorDevelopment": 120,
+      "youthDevelopment": 756,
+      "highPerformance": 1437,
+      "adultPrograms": 546
+    }
+  },
+  "beginnerProgram": {
+    "discount": 50,
+    "discountDeadline": "December 15th",
+    "spotsRemaining": 4,
+    "valueStack": {
+      "groupSessions": { "label": "12-24 Group Sessions", "description": "ATP/WTA coaching, max 6:1 ratio", "value": 1800 },
+      "videoAnalysis": { "label": "Video Analysis Package", "description": "Session recordings + technique breakdown", "value": 600 },
+      "trainingPlan": { "label": "Personalized Training Plan", "description": "Custom progression roadmap + drills", "value": 400 },
+      "totalValue": 2800
+    },
+    "schedules": [
+      {
+        "id": "saturday",
+        "label": "Saturday 9:00am",
+        "sessions": 12,
+        "frequency": "1x per week",
+        "price": 497,
+        "discountedPrice": 447
+      },
+      {
+        "id": "weekday-morning",
+        "label": "Tue/Thu 10:00am",
+        "sessions": 24,
+        "frequency": "2x per week",
+        "price": 797,
+        "discountedPrice": 747
+      },
+      {
+        "id": "weekday-evening",
+        "label": "Mon/Wed 6:00pm",
+        "sessions": 24,
+        "frequency": "2x per week",
+        "price": 797,
+        "discountedPrice": 747
+      }
+    ]
+  },
+  "matchPlay": {
+    "junior": {
+      "label": "Junior Competitive Play",
+      "ages": "8-18, All Skill Levels",
+      "time": "Fridays 4:00-5:30 PM",
+      "format": "Round Robin Doubles",
+      "dropIn": 25,
+      "monthlySessions": 4,
+      "monthlyPrice": 85,
+      "monthlySavings": 15
+    },
+    "adult": {
+      "label": "Adult League Play",
+      "level": "NTRP 2.5-4.5+",
+      "time": "Fridays 6:00-8:00 PM",
+      "format": "Round Robin Doubles",
+      "dropIn": 35,
+      "monthlySessions": 4,
+      "monthlyPrice": 120,
+      "monthlySavings": 20
+    },
+    "family": {
+      "dropIn": 60,
+      "monthlyPrice": 200
+    }
+  },
+  "ustaAdultLeague": {
+    "totalSeasonCost": 5500,
+    "ustaMembership": 48,
+    "ustaMembershipPeriod": "year"
+  },
+  "racquetRescue": {
+    "services": {
+      "standard": { "label": "Standard Stringing", "price": 25, "unit": "per racquet" },
+      "sameDay": { "label": "Same-Day Service", "price": 35, "unit": "per racquet" },
+      "customization": { "label": "Racquet Customization", "priceLabel": "$50+", "price": 50, "unit": "per racquet" },
+      "grip": { "label": "Grip Replacement", "price": 10, "unit": "per racquet" }
+    },
+    "strings": {
+      "luxilon": { "brand": "Luxilon", "range": "$20-35" },
+      "babolat": { "brand": "Babolat", "range": "$18-30" },
+      "wilson": { "brand": "Wilson", "range": "$15-28" },
+      "solinco": { "brand": "Solinco", "range": "$15-25" }
+    }
+  }
+}

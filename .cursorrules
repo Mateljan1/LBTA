@@ -1,6 +1,6 @@
 # LAGUNA BEACH TENNIS ACADEMY — CURSOR RULES
-# "Tennis, as it should be taught. Movement. Discipline. Belonging."
-# Last Updated: December 27, 2025
+# "Tennis, as it should be taught. Movement. Craft. Community."
+# Last Updated: March 6, 2026
 
 ---
 
@@ -62,7 +62,7 @@ Avoid generic templates. Strive for unique, purposeful designs that reflect the 
 ### Beyond Templates
 
 - **Avoid Bootstrap/Material defaults**: Don't use stock components without customization.
-- **Custom Typography**: Playfair Display + Work Sans. No generic fonts (Inter, Roboto, Arial).
+- **Custom Typography**: Cormorant (display/headlines) + DM Sans (body). No generic fonts (Inter, Roboto, Arial, Space Grotesk).
 - **Asymmetric Layouts**: Break the grid occasionally to create visual interest.
 - **Micro-interactions**: Use subtle animations to enhance user experience.
 - **Luxury Restraint**: 40%+ white space, max 3 colors per section, no garish elements.
@@ -77,7 +77,7 @@ Avoid generic templates. Strive for unique, purposeful designs that reflect the 
 
 ## Part 4: Project Identity
 
-You are building the Laguna Beach Tennis Academy (LBTA) website — a premium, founder-led tennis academy in Laguna Beach, California. This is NOT a generic sports website. It's a cinematic, luxury digital experience that embodies the philosophy: "Movement. Discipline. Belonging."
+You are building the Laguna Beach Tennis Academy (LBTA) website — a premium, founder-led tennis academy in Laguna Beach, California. This is NOT a generic sports website. It's a cinematic, luxury digital experience that embodies the philosophy: "Movement. Craft. Community."
 
 **Brand DNA:**
 - Founder: Andrew Mateljan (25+ years tennis experience, ATP/WTA coaching)
@@ -93,7 +93,7 @@ You are building the Laguna Beach Tennis Academy (LBTA) website — a premium, f
 - **Styling:** Tailwind CSS 3.4+
 - **Animation:** Framer Motion 11+
 - **Language:** TypeScript 5.3+
-- **Fonts:** Playfair Display (serif headlines) + Work Sans (body)
+- **Fonts:** Cormorant (serif display/headlines) + DM Sans (body)
 - **Deployment:** Vercel
 - **CRM Integration:** ActiveCampaign
 - **Data:** JSON files in `/data` directory (single source of truth)
@@ -146,33 +146,41 @@ Breakpoints (test every change at ALL sizes):
 ## Part 7: Color Tokens (Tailwind)
 
 ```typescript
-// PRIMARY PALETTE (Production Spec)
+// BRAND KIT — Laguna Beach Palette (March 2026)
 colors: {
+  brand: {
+    'pacific-dusk': '#1B3A5C',     // Primary text, headings
+    'deep-water': '#0F2237',       // Dark backgrounds, hero sections
+    'victoria-cove': '#2E8B8B',    // Links, focus states, clarity
+    'thousand-steps': '#C4963C',   // Prestige accent (sparingly)
+    'sunset-cliff': '#E8834A',     // Primary CTA color
+    'sandstone': '#F5F0E5',        // Warm surface, section backgrounds
+    'morning-light': '#FAF8F4',    // Default background
+    'salt-air': '#FFFFFF',         // White
+    'tide-pool': '#3A8B6E',        // Success, positive states
+    'sage-hill': '#7A8B6E',        // Secondary green
+    'driftwood': '#B8A88A',        // Neutral accent
+  },
+  // Legacy compatibility (maps to Brand Kit)
   lbta: {
-    orange: '#F8A121',      // Accent only (sparingly)
+    orange: '#E8834A',      // Sunset Cliff
     red: '#F04E23',         // Legacy — avoid in new code
-    beige: '#F8E6BB',       // Warm background sections
-    black: '#000000',       // Primary text, buttons
-    white: '#FFFFFF',       // Pure white
-
-    // LEGACY (backwards compatibility)
-    primary: '#1A1A1A',     // Text primary
-    secondary: '#6B6B6B',   // Text secondary
-    coral: '#E8956F',       // Accent (legacy)
-    'coral-dark': '#D67D5A',
-    bone: '#FDFCFA',        // Light background
-    sand: '#F4EDE4',        // Warm neutral
-    charcoal: '#2B2B2B',    // Dark text
+    beige: '#F5F0E5',       // Sandstone
+    black: '#0A0A0A',       // Rich black
+    white: '#FFFFFF',
+    cream: '#FAF8F4',       // Morning Light
+    charcoal: '#1B3A5C',    // Pacific Dusk
   }
 }
 ```
 
 **Color Usage Rules:**
 - Never use more than 3 colors in a single section
-- **Buttons**: Black background, white text (luxury standard)
-- **Accents**: Use sparingly — prefer black/gray over orange
-- Beige (#F8E6BB) for warm, inviting sections
-- Black/White for text and backgrounds
+- **Buttons**: Sunset Cliff (#E8834A) primary, Pacific Dusk (#1B3A5C) accent
+- **Links/Focus**: Victoria Cove (#2E8B8B)
+- **Backgrounds**: Morning Light (#FAF8F4) default, Sandstone (#F5F0E5) warm sections, Deep Water (#0F2237) dark sections
+- **Text**: Pacific Dusk (#1B3A5C) for headings/body, use opacity variants for secondary text
+- Prefer `brand-*` classes for new code; `lbta-*` for backwards compat only
 
 ---
 
@@ -180,13 +188,13 @@ colors: {
 
 ```typescript
 fontFamily: {
-  headline: ['Playfair Display', 'Georgia', 'serif'],
-  body: ['Work Sans', 'system-ui', 'sans-serif'],
-  serif: ['Playfair Display', 'Georgia', 'serif'],
-  sans: ['Work Sans', 'system-ui', 'sans-serif'],
+  headline: ['Cormorant', 'Georgia', 'serif'],
+  body: ['DM Sans', 'system-ui', 'sans-serif'],
+  serif: ['Cormorant', 'Georgia', 'serif'],
+  sans: ['DM Sans', 'system-ui', 'sans-serif'],
 }
 
-// NEVER USE: Space Grotesk, Inter, Roboto, Arial (generic AI aesthetic)
+// NEVER USE: Space Grotesk, Inter, Roboto, Arial, Playfair Display, Work Sans (old stack)
 ```
 
 **Typography Scale:**
@@ -377,7 +385,6 @@ app/
 ├── page.tsx               # Homepage
 ├── schedules/page.tsx     # THE source for programs/pricing
 ├── camps/page.tsx         # Camp information
-├── jtt/page.tsx           # Junior Team Tennis
 ├── fitness/page.tsx       # Fitness programs
 ├── coaches/page.tsx       # Coach profiles
 ├── about/page.tsx         # About the academy
@@ -386,8 +393,9 @@ app/
 ├── programs/
 │   ├── page.tsx           # Programs overview
 │   ├── junior/page.tsx    # Redirects to /schedules
-│   ├── adult/page.tsx     # Redirects to /schedules
-│   └── high-performance/page.tsx  # Redirects to /schedules
+│   ├── adult/page.tsx     # Full adult pathway (not redirect)
+│   ├── high-performance/page.tsx
+│   └── leagues/page.tsx  # Leagues (JTT redirects here)
 ├── api/
 │   ├── register-program/route.ts
 │   ├── register-year/route.ts
@@ -418,8 +426,13 @@ data/
 
 lib/
 ├── activecampaign.ts
-├── notion.ts
-└── utils.ts
+├── env.ts
+├── validations.ts
+├── rate-limit.ts
+├── sanitize.ts
+├── analytics.ts
+├── form-config.ts
+└── form-analytics.ts
 ```
 
 ---
@@ -450,8 +463,8 @@ lib/
 ❌ Hardcoded prices outside data files
 ❌ Stock photos
 ❌ More than 11 colors
-❌ Space Grotesk, Inter, Roboto, Arial fonts
-❌ Orange/red CTA buttons (use black/white)
+❌ Space Grotesk, Inter, Roboto, Arial, Playfair Display, Work Sans fonts
+❌ Hardcoded prices outside /data/*.json files
 ❌ Duplicate content across pages
 ❌ Generic emoji icons (🎾 ⭐ etc.)
 ```
@@ -556,7 +569,7 @@ npx lighthouse http://localhost:3000 --view
 
 ## Remember
 
-> "Structure creates confidence. Discipline creates results."
+> "Tennis, as it should be taught."
 > — Andrew Mateljan
 
 Every line of code should reflect the academy's philosophy: precision, restraint, and purpose. Build for the player who wants to become their best self, not the customer looking for the cheapest option.

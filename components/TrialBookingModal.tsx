@@ -151,9 +151,9 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-[#f5f5f5] hover:bg-[#eee] flex items-center justify-center transition-colors z-10"
+              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-brand-sandstone hover:bg-lbta-stone flex items-center justify-center transition-colors z-10"
             >
-              <svg className="w-5 h-5 text-[#666]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-lbta-slate" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -163,14 +163,14 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
               {isSuccess ? (
                 // Success Screen
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-8">
-                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-green-50 flex items-center justify-center">
-                    <CheckCircle className="w-8 h-8 text-green-600" />
+                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-tide-pool/10 flex items-center justify-center">
+                    <CheckCircle className="w-8 h-8 text-brand-tide-pool" />
                   </div>
-                  <h2 className="font-serif text-[32px] font-medium text-[#1a1a1a] mb-3">Trial Lesson Requested!</h2>
-                  <p className="font-sans text-[15px] text-[#666] leading-relaxed mb-8 max-w-[400px] mx-auto">
+                  <h2 className="font-serif text-[32px] font-medium text-brand-pacific-dusk mb-3">Trial Lesson Requested!</h2>
+                  <p className="font-sans text-[15px] text-lbta-slate leading-relaxed mb-8 max-w-[400px] mx-auto">
                     Thank you, <strong>{formData.firstName}</strong>! We'll contact you within 24 hours to schedule your free trial lesson.
                   </p>
-                  <p className="font-sans text-[13px] text-[#888]">
+                  <p className="font-sans text-[13px] text-brand-pacific-dusk/60">
                     Redirecting to confirmation page...
                   </p>
                 </motion.div>
@@ -179,13 +179,13 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                 <form onSubmit={handleSubmit}>
                   {/* Header */}
                   <div className="mb-8">
-                    <p className="font-sans text-[11px] font-semibold text-[#999] uppercase tracking-[0.15em] mb-2">
+                    <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
                       Free Trial Lesson
                     </p>
-                    <h2 className="font-serif text-[28px] md:text-[32px] font-medium text-[#1a1a1a] mb-1 tracking-[-0.02em]">
+                    <h2 className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
                       Experience LBTA
                     </h2>
-                    <p className="font-sans text-[13px] text-[#888]">
+                    <p className="font-sans text-[13px] text-brand-pacific-dusk/60">
                       One conversation. Honest guidance. A path built around you.
                     </p>
                   </div>
@@ -194,7 +194,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                     {/* Name */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block font-sans text-[12px] font-semibold text-[#666] mb-2">
+                        <label className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
                           First Name <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -202,12 +202,12 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                           required
                           value={formData.firstName}
                           onChange={(e) => updateField('firstName', e.target.value)}
-                          className="w-full px-4 py-3 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
+                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                           placeholder="First"
                         />
                       </div>
                       <div>
-                        <label className="block font-sans text-[12px] font-semibold text-[#666] mb-2">
+                        <label className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
                           Last Name <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -215,7 +215,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                           required
                           value={formData.lastName}
                           onChange={(e) => updateField('lastName', e.target.value)}
-                          className="w-full px-4 py-3 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
+                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                           placeholder="Last"
                         />
                       </div>
@@ -223,7 +223,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
 
                     {/* Email */}
                     <div>
-                      <label className="block font-sans text-[12px] font-semibold text-[#666] mb-2">
+                      <label className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
                         Email <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -231,14 +231,14 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         required
                         value={formData.email}
                         onChange={(e) => updateField('email', e.target.value)}
-                        className="w-full px-4 py-3 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                         placeholder="you@example.com"
                       />
                     </div>
 
                     {/* Phone */}
                     <div>
-                      <label className="block font-sans text-[12px] font-semibold text-[#666] mb-2">
+                      <label className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
                         Phone <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -246,21 +246,21 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         required
                         value={formData.phone}
                         onChange={(e) => updateField('phone', e.target.value)}
-                        className="w-full px-4 py-3 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                         placeholder="(949) 555-0123"
                       />
                     </div>
 
                     {/* Program */}
                     <div>
-                      <label className="block font-sans text-[12px] font-semibold text-[#666] mb-2">
+                      <label className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
                         Program Interest <span className="text-red-500">*</span>
                       </label>
                       <select
                         required
                         value={formData.program}
                         onChange={(e) => updateField('program', e.target.value)}
-                        className="w-full px-4 py-3 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                       >
                         <option value="">Select a program...</option>
                         {programs.map(p => (
@@ -274,14 +274,14 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                     {/* Player Age (if Junior/Youth program) */}
                     {formData.program && !formData.program.includes('adult') && formData.program !== 'not-sure' && (
                       <div>
-                        <label className="block font-sans text-[12px] font-semibold text-[#666] mb-2">
+                        <label className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
                           Player Age
                         </label>
                         <input
                           type="number"
                           value={formData.playerAge}
                           onChange={(e) => updateField('playerAge', e.target.value)}
-                          className="w-full px-4 py-3 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[15px] text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20"
+                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                           placeholder="Age"
                           min="3"
                           max="18"
@@ -291,14 +291,14 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
 
                     {/* Goals (Optional) */}
                     <div>
-                      <label className="block font-sans text-[12px] font-semibold text-[#666] mb-2">
-                        Tennis Goals <span className="text-[#999]">(Optional)</span>
+                      <label className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
+                        Tennis Goals <span className="text-brand-pacific-dusk/50">(Optional)</span>
                       </label>
                       <textarea
                         value={formData.goals}
                         onChange={(e) => updateField('goals', e.target.value)}
                         rows={3}
-                        className="w-full px-4 py-3 bg-[#f8f8f8] border-0 rounded-lg font-sans text-[14px] text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1a1a1a]/20 resize-none"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[14px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20 resize-none"
                         placeholder="Tell us what you'd like to achieve..."
                       />
                     </div>
@@ -310,28 +310,28 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                     disabled={isSubmitting}
                     className={`w-full py-4 rounded-xl font-sans text-[14px] font-medium tracking-[0.02em] mt-8 transition-all ${
                       isSubmitting
-                        ? 'bg-[#e8e8e8] text-[#999] cursor-not-allowed'
-                        : 'bg-[#1a1a1a] text-white hover:bg-[#333]'
+                        ? 'bg-lbta-stone text-brand-pacific-dusk/50 cursor-not-allowed'
+                        : 'bg-lbta-black text-white hover:bg-brand-pacific-dusk/80'
                     }`}
                   >
                     {isSubmitting ? 'Submitting...' : 'Request Free Trial'}
                   </button>
 
                   {/* Trust Signals */}
-                  <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-[#e8e8e8]">
+                  <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-lbta-stone">
                     <div className="flex items-center gap-2">
-                      <Shield className="w-4 h-4 text-green-600" />
-                      <span className="font-sans text-[11px] text-[#888]">30-Day Guarantee</span>
+                      <Shield className="w-4 h-4 text-brand-tide-pool" />
+                      <span className="font-sans text-[11px] text-brand-pacific-dusk/60">30-Day Guarantee</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-600" />
-                      <span className="font-sans text-[11px] text-[#888]">No Commitment</span>
+                      <CheckCircle className="w-4 h-4 text-brand-tide-pool" />
+                      <span className="font-sans text-[11px] text-brand-pacific-dusk/60">No Commitment</span>
                     </div>
                   </div>
 
                   {/* Contact Note */}
-                  <p className="font-sans text-[11px] text-[#999] text-center mt-4">
-                    Questions? <a href="tel:9494646645" className="text-[#666] hover:text-[#1a1a1a] transition-colors">(949) 464-6645</a>
+                  <p className="font-sans text-[11px] text-brand-pacific-dusk/50 text-center mt-4">
+                    Questions? <a href="tel:9494646645" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 464-6645</a>
                   </p>
                 </form>
               )}

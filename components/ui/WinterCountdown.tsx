@@ -48,7 +48,7 @@ export default function WinterCountdown() {
   if (isDismissed || timeLeft.days < 0) return null
 
   return (
-    <div className="relative bg-lbta-cream border-b border-gray-200 py-2">
+    <div className="relative bg-brand-morning-light border-b border-gray-200 py-2">
       <div className="container-lbta">
         <div className="flex items-center justify-between">
           <div className="flex-1 text-center">

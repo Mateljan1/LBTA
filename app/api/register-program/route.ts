@@ -31,11 +31,11 @@ function isEarlyBird(): boolean {
 export async function POST(request: NextRequest) {
   // Rate limiting
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
-  const rateLimitResult = await rateLimit(`register:${ip}`, RATE_LIMITS.form)
+  const rateLimitResult = await rateLimit(`register-program:${ip}`, RATE_LIMITS.form)
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(
-      { success: false, message: 'Too many requests. Please try again later.' },
+      { success: false, error: 'Too many requests. Please try again later.' },
       {
         status: 429,
         headers: {
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     const validation = validateRequest(programRegistrationSchema, rawData)
     if (!validation.success) {
       return NextResponse.json(
-        { success: false, message: validation.error },
+        { success: false, error: validation.error },
         { status: 400 }
       )
     }
@@ -155,7 +155,6 @@ export async function POST(request: NextRequest) {
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
       try {
         console.log('[AC] Processing registration:', {
-          email: data.email,
           program: data.program,
           timestamp: new Date().toISOString(),
         })
@@ -183,11 +182,11 @@ export async function POST(request: NextRequest) {
 
         if (contactResult.success && contactResult.data) {
           const contactId = contactResult.data.id
-          console.log('[AC] Contact created:', { contactId, email: data.email })
+          console.log('[AC] Contact created:', { contactId })
 
           // Add to list to trigger automation
           await addToList(contactId, LBTA_LIST_ID)
-          console.log('[AC] Added to List 4:', { contactId, email: data.email })
+          console.log('[AC] Added to List 4:', { contactId })
 
           // Apply class-specific tag for program segmentation
           const classTagId = getClassTagFromProgram(data.program)
@@ -218,7 +217,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[Registration] Error:', error)
     return NextResponse.json(
-      { success: false, message: 'Error processing registration. Please call (949) 464-6645' },
+      { success: false, error: 'Error processing registration. Please call (949) 464-6645' },
       { status: 500 }
     )
   }
