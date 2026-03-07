@@ -139,6 +139,17 @@ const nextConfig = {
         destination: '/schedules',
         permanent: true,
       },
+      // elite-pathway renamed to high-performance-pathway
+      {
+        source: '/elite-pathway',
+        destination: '/high-performance-pathway',
+        permanent: true,
+      },
+      {
+        source: '/elite-pathway/',
+        destination: '/high-performance-pathway',
+        permanent: true,
+      },
       // VYLO discontinued — redirect to high-performance
       {
         source: '/vylo',

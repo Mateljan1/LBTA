@@ -33,7 +33,7 @@ Combining luxury restraint with California warmth and founder-led excellence.
 /programs/leagues        → League play
 /camps                   → Camp information
 /fitness                 → Fitness & community programs
-/elite-pathway           → High Performance Pathway landing
+/high-performance-pathway → High Performance Pathway landing
 /racquet-rescue          → Racquet stringing services
 /book                    → Trial booking
 /contact                 → Contact form

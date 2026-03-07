@@ -140,7 +140,7 @@ function PathwayPlannerInteractive() {
                 required
                 value={formData.age}
                 onChange={(e) => setFormData({...formData, age: e.target.value})}
-                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-lbta-burnt focus:ring-offset-2 min-h-[48px]"
+                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff focus:ring-offset-2 min-h-[48px]"
               >
                 <option value="">Select age range</option>
                 <option value="3-4">Ages 3-4</option>
@@ -161,7 +161,7 @@ function PathwayPlannerInteractive() {
                 required
                 value={formData.experience}
                 onChange={(e) => setFormData({...formData, experience: e.target.value})}
-                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-lbta-burnt focus:ring-offset-2 min-h-[48px]"
+                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff focus:ring-offset-2 min-h-[48px]"
               >
                 <option value="">Select experience level</option>
                 <option value="never-played">Never Played</option>
@@ -180,7 +180,7 @@ function PathwayPlannerInteractive() {
                 required
                 value={formData.goal}
                 onChange={(e) => setFormData({...formData, goal: e.target.value})}
-                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-lbta-burnt focus:ring-offset-2 min-h-[48px]"
+                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff focus:ring-offset-2 min-h-[48px]"
               >
                 <option value="">Select your goal</option>
                 <option value="fun">Fun & Fitness</option>
@@ -198,7 +198,7 @@ function PathwayPlannerInteractive() {
                 required
                 value={formData.commitment}
                 onChange={(e) => setFormData({...formData, commitment: e.target.value})}
-                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-lbta-burnt focus:ring-offset-2 min-h-[48px]"
+                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff focus:ring-offset-2 min-h-[48px]"
               >
                 <option value="">Select commitment level</option>
                 <option value="1x">1 session per week</option>

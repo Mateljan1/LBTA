@@ -94,7 +94,7 @@ export default function PartnershipSection({ className = '' }: PartnershipSectio
 
         <AnimatedSection delay={0.8} className="text-center mt-16">
           <p className="text-sm text-gray-500 font-sans">
-            Interested in partnership opportunities? <a href="/contact" className="text-lbta-burnt hover:underline">Contact us</a>
+            Interested in partnership opportunities? <a href="/contact" className="text-brand-sunset-cliff hover:underline">Contact us</a>
           </p>
         </AnimatedSection>
       </div>

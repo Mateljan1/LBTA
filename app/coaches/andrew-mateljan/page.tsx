@@ -70,19 +70,19 @@ export default function AndrewMateljanPage() {
               </h2>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-burnt mt-1">•</span>
+                  <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>Ranked #3 Southern California, #12 Nationally</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-burnt mt-1">•</span>
+                  <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>Winner: The Ojai Tournament</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-burnt mt-1">•</span>
+                  <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>Multiple SoCal Junior Tournament Victories</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-burnt mt-1">•</span>
+                  <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>Finalist: Southern California Sectionals</span>
                 </li>
               </ul>
@@ -94,19 +94,19 @@ export default function AndrewMateljanPage() {
               </h2>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-burnt mt-1">•</span>
+                  <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>Started coaching at age 19</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-burnt mt-1">•</span>
+                  <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>7+ years international coaching (Spain, Croatia, Norway)</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-burnt mt-1">•</span>
+                  <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>ATP Masters 1000 tournament experience (Indian Wells)</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-lbta-burnt mt-1">•</span>
+                  <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>European player development philosophy</span>
                 </li>
               </ul>
@@ -132,7 +132,7 @@ export default function AndrewMateljanPage() {
               <AnimatedSection key={player.name} delay={index * 0.1}>
                 <div className="bg-white/10 p-6 rounded-sm border border-white/20 hover:bg-white/20 transition-colors text-center">
                   <p className="text-xl font-sans font-medium mb-2">{player.name}</p>
-                  <p className="text-lbta-burnt font-sans font-medium text-lg mb-2">{player.rank}</p>
+                  <p className="text-brand-sunset-cliff font-sans font-medium text-lg mb-2">{player.rank}</p>
                   <p className="text-sm text-white/70 mb-2">{player.status}</p>
                   <p className="text-xs text-white/50">{player.achievement}</p>
                 </div>
@@ -159,7 +159,7 @@ export default function AndrewMateljanPage() {
             {philosophy.map((pillar, index) => (
               <AnimatedSection key={pillar.number} delay={index * 0.1}>
                 <div className="card-lbta p-8 md:p-10 relative">
-                  <div className="absolute top-4 left-4 text-7xl font-serif font-light text-lbta-burnt/10 leading-none">
+                  <div className="absolute top-4 left-4 text-7xl font-serif font-light text-brand-sunset-cliff/10 leading-none">
                     {pillar.number}
                   </div>
                   <div className="relative z-10">
@@ -204,11 +204,11 @@ export default function AndrewMateljanPage() {
               Train with Andrew
             </h2>
             <div className="flex flex-col gap-4 mb-8 items-center">
-              <a href="mailto:andrew@tennisbeast.com" className="flex items-center gap-3 text-gray-600 hover:text-lbta-burnt transition-colors">
+              <a href="mailto:andrew@tennisbeast.com" className="flex items-center gap-3 text-gray-600 hover:text-brand-sunset-cliff transition-colors">
                 <Mail className="w-5 h-5" />
                 <span>andrew@tennisbeast.com</span>
               </a>
-              <a href="tel:9492410847" className="flex items-center gap-3 text-gray-600 hover:text-lbta-burnt transition-colors">
+              <a href="tel:9492410847" className="flex items-center gap-3 text-gray-600 hover:text-brand-sunset-cliff transition-colors">
                 <Phone className="w-5 h-5" />
                 <span>(949) 241-0847</span>
               </a>

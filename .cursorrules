@@ -382,28 +382,50 @@ transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
 
 ```
 app/
-├── page.tsx               # Homepage
-├── schedules/page.tsx     # THE source for programs/pricing
-├── camps/page.tsx         # Camp information
-├── fitness/page.tsx       # Fitness programs
-├── coaches/page.tsx       # Coach profiles
-├── about/page.tsx         # About the academy
-├── contact/page.tsx       # Contact form
-├── book/page.tsx          # Trial booking
-├── programs/
-│   ├── page.tsx           # Programs overview
-│   ├── junior/page.tsx    # Redirects to /schedules
-│   ├── adult/page.tsx     # Full adult pathway (not redirect)
-│   ├── high-performance/page.tsx
-│   └── leagues/page.tsx  # Leagues (JTT redirects here)
-├── api/
-│   ├── register-program/route.ts
-│   ├── register-year/route.ts
-│   ├── newsletter/route.ts
-│   └── book/route.ts
+├── page.tsx                        # Homepage (server shell + client islands)
 ├── layout.tsx
 ├── globals.css
-└── not-found.tsx
+├── not-found.tsx
+├── schema.tsx                      # JSON-LD structured data
+├── sitemap.ts
+├── schedules/page.tsx              # THE source for programs/pricing/schedule
+├── camps/page.tsx                  # Camp information
+├── fitness/page.tsx                # Fitness programs
+├── coaches/
+│   ├── page.tsx                    # Coach profiles
+│   └── andrew-mateljan/page.tsx    # Founder profile
+├── about/page.tsx                  # About the academy
+├── contact/page.tsx                # Contact form
+├── book/page.tsx                   # Trial booking
+├── programs/
+│   ├── page.tsx                    # Programs overview
+│   ├── junior/page.tsx             # Junior pathway
+│   ├── adult/page.tsx              # Full adult pathway
+│   ├── high-performance/page.tsx   # High performance pathway
+│   ├── leagues/page.tsx            # Leagues overview
+│   ├── usta-adult-league/page.tsx  # USTA Adult League
+│   └── utr-match-play/page.tsx     # UTR Match Play
+├── junior-trial/page.tsx           # Junior trial landing
+├── adult-trial/page.tsx            # Adult trial landing
+├── beginner-program/page.tsx       # Beginner program landing
+├── high-performance-pathway/page.tsx # High Performance Pathway landing
+├── match-play/page.tsx             # Match play info
+├── racquet-rescue/page.tsx         # Racquet restringing
+├── pathway-planner/page.tsx        # Pathway recommendation quiz
+├── apply-scholarship/page.tsx      # Scholarship application
+├── faq/page.tsx                    # FAQ
+├── philosophy/page.tsx             # Coaching philosophy
+├── success-stories/page.tsx        # Testimonials
+├── thank-you/page.tsx              # Post-form confirmation
+├── api/
+│   ├── book/route.ts               # Trial booking
+│   ├── register-program/route.ts   # Program registration
+│   ├── register-year/route.ts      # Year registration
+│   ├── register/route.ts           # General registration
+│   ├── newsletter/route.ts         # Newsletter signup
+│   ├── scholarship/route.ts        # Scholarship application
+│   ├── jtt-registration/route.ts   # JTT registration
+│   └── activecampaign-webhook/route.ts # AC webhook
 
 components/
 ├── layout/
@@ -412,27 +434,58 @@ components/
 ├── ui/
 │   ├── AnimatedSection.tsx
 │   ├── Breadcrumbs.tsx
+│   ├── BackToTop.tsx
+│   ├── Chatbot.tsx
+│   ├── FourLabs.tsx
+│   ├── PartnershipSection.tsx
+│   ├── PhotoVideoGallery.tsx
+│   ├── SocialProof.tsx
+│   ├── TestimonialQuote.tsx
 │   └── [shared components]
+├── schedules/
+│   ├── SchedulesHero.tsx
+│   ├── TabNavigation.tsx
+│   ├── ProgramsTab.tsx
+│   ├── PricingTab.tsx
+│   ├── CampsJTTTab.tsx
+│   ├── YearAtAGlance.tsx
+│   ├── SchedulesCTA.tsx
+│   └── index.ts
+├── HomeCTAForm.tsx
+├── HomeHero.tsx
+├── NewsletterForm.tsx
 ├── ProgramCard.tsx
 ├── LuxuryRegistrationModal.tsx
 ├── LuxuryYearModal.tsx
-└── FAQSection.tsx
+├── RegistrationModal.tsx
+├── TrialBookingModal.tsx
+├── YearRegistrationModal.tsx
+├── FAQSection.tsx
+├── StickyCTA.tsx
+├── PricingTabs.tsx
+└── ProgramPricingDropdown.tsx
 
 data/
-├── winter2026.json        # Single source of truth
-├── fall2025.json
-├── pricing-2026.json
-└── schedule-2026.json
+├── winter2026.json              # Winter 2026 programs/schedule
+├── spring-summer-2026.json      # Spring/Summer 2026 programs
+├── year2026.json                # Full year calendar, camps, base pricing
+├── fall2025.json                # Fall 2025 (historical)
+├── leagues-2026.json            # USTA/UTR league data
+├── pricing-supplemental.json    # Promo pricing, schema data
+└── private-rates.json           # Private lesson rates
 
 lib/
-├── activecampaign.ts
-├── env.ts
-├── validations.ts
-├── rate-limit.ts
-├── sanitize.ts
-├── analytics.ts
-├── form-config.ts
-└── form-analytics.ts
+├── activecampaign.ts            # ActiveCampaign API integration
+├── env.ts                       # Environment variable helpers
+├── validations.ts               # Zod schemas + validateRequest
+├── rate-limit.ts                # Rate limiting for API routes
+├── sanitize.ts                  # Input sanitization
+├── programs-data.ts             # Program data loaders
+├── camps-data.ts                # Camp data loaders
+├── junior-program-data.ts       # Junior program data loaders
+├── form-config.ts               # Form configuration
+├── form-analytics.ts            # Form analytics tracking
+└── webhook-tester.ts            # Webhook testing utility
 ```
 
 ---

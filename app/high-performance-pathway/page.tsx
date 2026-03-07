@@ -68,7 +68,7 @@ const requirements = [
   'Completion of assessment session',
 ]
 
-export default function ElitePathwayPage() {
+export default function HighPerformancePathwayPage() {
   return (
     <>
       <Script

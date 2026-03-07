@@ -13,7 +13,7 @@ export default function Chatbot() {
       {/* Floating Chatbot Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-lbta-burnt hover:bg-brand-pacific-dusk text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-brand-sunset-cliff hover:bg-brand-pacific-dusk text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Open chat"
@@ -54,7 +54,7 @@ export default function Chatbot() {
             className="fixed bottom-24 right-6 z-50 w-[380px] h-[600px] bg-white rounded-lg shadow-2xl overflow-hidden border border-brand-sandstone"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-lbta-burnt to-brand-pacific-dusk text-white p-6 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-brand-sunset-cliff to-brand-pacific-dusk text-white p-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                   <Image
@@ -76,7 +76,7 @@ export default function Chatbot() {
             <div className="h-[calc(100%-180px)] overflow-y-auto p-6 bg-brand-morning-light space-y-4">
               {/* Welcome Message */}
               <div className="flex gap-3">
-                <div className="w-8 h-8 bg-lbta-burnt rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-brand-sunset-cliff rounded-full flex items-center justify-center flex-shrink-0">
                   <Image
                     src="/UPDATED LBTA PICS/chatbot-logo.svg"
                     alt="LBTA"
@@ -116,9 +116,9 @@ export default function Chatbot() {
                 <input
                   type="text"
                   placeholder="Type your message..."
-                  className="flex-1 px-4 py-2 border border-brand-sandstone rounded-lg focus:outline-none focus:ring-2 focus:ring-lbta-burnt text-sm"
+                  className="flex-1 px-4 py-2 border border-brand-sandstone rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff text-sm"
                 />
-                <button className="bg-lbta-burnt hover:bg-brand-pacific-dusk text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium">
+                <button className="bg-brand-sunset-cliff hover:bg-brand-pacific-dusk text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium">
                   Send
                 </button>
               </div>

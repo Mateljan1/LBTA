@@ -102,14 +102,14 @@ export default function FAQInteractive() {
       <section className="relative bg-brand-pacific-dusk text-white py-32">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <HelpCircle className="w-16 h-16 text-lbta-burnt mx-auto mb-8" />
+            <HelpCircle className="w-16 h-16 text-brand-sunset-cliff mx-auto mb-8" />
             <h1 className="text-display-lg font-serif font-light mb-6">
               Frequently Asked Questions
             </h1>
             <p className="text-xl text-white/90 font-sans mb-4">
               Honest, unfiltered answers about tennis training, costs, and what it really takes
             </p>
-            <p className="text-sm text-lbta-burnt font-sans font-medium tracking-wide">
+            <p className="text-sm text-brand-sunset-cliff font-sans font-medium tracking-wide">
               No sales pitch. No sugar-coating. Just truth.
             </p>
           </AnimatedSection>
@@ -122,7 +122,7 @@ export default function FAQInteractive() {
           {categories.map((category) => (
             <div key={category} className="mb-16">
               <AnimatedSection>
-                <h2 className="text-2xl font-sans font-medium text-brand-pacific-dusk mb-8 pb-4 border-b-2 border-lbta-burnt">
+                <h2 className="text-2xl font-sans font-medium text-brand-pacific-dusk mb-8 pb-4 border-b-2 border-brand-sunset-cliff">
                   {category}
                 </h2>
               </AnimatedSection>
@@ -140,7 +140,7 @@ export default function FAQInteractive() {
                             onClick={() => setOpenIndex(openIndex === globalIndex ? null : globalIndex)}
                             className="w-full flex items-start gap-4 p-8 text-left hover:bg-gray-50 transition-colors"
                           >
-                            <Icon className="w-6 h-6 text-lbta-burnt flex-shrink-0 mt-1" />
+                            <Icon className="w-6 h-6 text-brand-sunset-cliff flex-shrink-0 mt-1" />
                             <div className="flex-1">
                               <h3 className="text-lg font-sans font-medium text-brand-pacific-dusk pr-8">
                                 {faq.question}
@@ -155,7 +155,7 @@ export default function FAQInteractive() {
 
                           {openIndex === globalIndex && (
                             <div className="px-8 pb-8 transition-all duration-300 ease-out">
-                              <div className="pl-10 pt-4 border-l-4 border-lbta-burnt">
+                              <div className="pl-10 pt-4 border-l-4 border-brand-sunset-cliff">
                                 <p className="text-gray-600 leading-relaxed">
                                   {faq.answer}
                                 </p>

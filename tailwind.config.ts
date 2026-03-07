@@ -25,7 +25,7 @@ const config: Config = {
         },
         // LBTA mapped to Brand Kit + legacy compat
         lbta: {
-          burnt: '#E8834A',       // Accent (alias for orange/sunset-cliff)
+          burnt: '#E8834A',       // Deprecated: use brand-sunset-cliff instead
           orange: '#E8834A',      // Sunset Cliff (was #F8A121)
           red: '#F04E23',         // Legacy — avoid in new code
           beige: '#F5F0E5',       // Sandstone (was #F8E6BB)

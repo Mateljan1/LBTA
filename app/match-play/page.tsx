@@ -52,22 +52,22 @@ export default function MatchPlayPage() {
 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5 text-lbta-burnt" />
+                    <Users className="w-5 h-5 text-brand-sunset-cliff" />
                     <span className="text-gray-600"><strong>Ages:</strong> {mp.junior.ages}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-lbta-burnt" />
+                    <Clock className="w-5 h-5 text-brand-sunset-cliff" />
                     <span className="text-gray-600"><strong>Time:</strong> {mp.junior.time}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-lbta-burnt" />
+                    <Calendar className="w-5 h-5 text-brand-sunset-cliff" />
                     <span className="text-gray-600"><strong>Format:</strong> {mp.junior.format}</span>
                   </div>
                 </div>
 
                 <div className="bg-lbta-tan rounded-sm p-6 mb-8">
                   <div className="flex items-center gap-2 mb-4">
-                    <DollarSign className="w-5 h-5 text-lbta-burnt" />
+                    <DollarSign className="w-5 h-5 text-brand-sunset-cliff" />
                     <h3 className="text-lg font-sans font-medium">Pricing</h3>
                   </div>
                   <div className="space-y-2">
@@ -99,22 +99,22 @@ export default function MatchPlayPage() {
 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5 text-lbta-burnt" />
+                    <Users className="w-5 h-5 text-brand-sunset-cliff" />
                     <span className="text-gray-600"><strong>Level:</strong> {mp.adult.level}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-lbta-burnt" />
+                    <Clock className="w-5 h-5 text-brand-sunset-cliff" />
                     <span className="text-gray-600"><strong>Time:</strong> {mp.adult.time}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-lbta-burnt" />
+                    <Calendar className="w-5 h-5 text-brand-sunset-cliff" />
                     <span className="text-gray-600"><strong>Format:</strong> {mp.adult.format}</span>
                   </div>
                 </div>
 
                 <div className="bg-lbta-tan rounded-sm p-6 mb-8">
                   <div className="flex items-center gap-2 mb-4">
-                    <DollarSign className="w-5 h-5 text-lbta-burnt" />
+                    <DollarSign className="w-5 h-5 text-brand-sunset-cliff" />
                     <h3 className="text-lg font-sans font-medium">Pricing</h3>
                   </div>
                   <div className="space-y-2">
@@ -164,7 +164,7 @@ export default function MatchPlayPage() {
             {features.map((feature, index) => (
               <AnimatedSection key={feature} delay={index * 0.05}>
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-lbta-burnt flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-brand-sunset-cliff flex-shrink-0 mt-0.5" />
                   <span className="text-gray-600">{feature}</span>
                 </div>
               </AnimatedSection>

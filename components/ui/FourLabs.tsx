@@ -147,7 +147,7 @@ function LabCard({ lab, index }: LabCardProps) {
     >
       {/* Top accent line - animates on hover */}
       <motion.div 
-        className="absolute top-0 left-0 w-full h-[2px] bg-lbta-burnt origin-left"
+        className="absolute top-0 left-0 w-full h-[2px] bg-brand-sunset-cliff origin-left"
         initial={{ scaleX: 0 }}
         whileHover={{ scaleX: 1 }}
         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
@@ -156,7 +156,7 @@ function LabCard({ lab, index }: LabCardProps) {
       <div className="p-12 md:p-16">
         {/* Icon */}
         <motion.div 
-          className="w-16 h-16 mb-8 text-brand-pacific-dusk transition-all duration-500 group-hover:text-lbta-burnt group-hover:scale-110"
+          className="w-16 h-16 mb-8 text-brand-pacific-dusk transition-all duration-500 group-hover:text-brand-sunset-cliff group-hover:scale-110"
         >
           {lab.icon}
         </motion.div>
@@ -175,7 +175,7 @@ function LabCard({ lab, index }: LabCardProps) {
         <div className="pt-8 border-t border-gray-100">
           {/* Stat Value */}
           <motion.div 
-            className="text-4xl md:text-5xl font-serif font-light text-lbta-burnt mb-2 tracking-tight"
+            className="text-4xl md:text-5xl font-serif font-light text-brand-sunset-cliff mb-2 tracking-tight"
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
