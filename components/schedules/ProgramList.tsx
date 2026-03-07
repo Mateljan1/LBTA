@@ -59,18 +59,18 @@ export default function ProgramList({
   }, [programs])
 
   return (
-    <section id="programs" className="bg-brand-morning-light py-10 md:py-16">
+    <section id="programs" className="bg-brand-morning-light py-8 md:py-12">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
 
-        {/* Season Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
+        {/* Season Pills + Meta — compact header */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
           {Object.entries(seasons).map(([key, season]) => (
             <button
               key={key}
               onClick={() => onSeasonChange(key as SeasonKey)}
               aria-label={`${season.name.split(' ')[0]}${season.status === 'registration_open' ? ', registration open' : ''}`}
               aria-pressed={selectedSeason === key}
-              className={`px-5 py-2.5 min-h-[48px] rounded-full font-sans text-[13px] font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
+              className={`px-4 py-2 min-h-[44px] rounded-full font-sans text-[12px] font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
                 selectedSeason === key
                   ? 'bg-black text-white shadow-md'
                   : 'bg-white text-black/70 hover:bg-gray-50 border border-black/10'
@@ -86,7 +86,7 @@ export default function ProgramList({
             onClick={() => onSeasonChange('fall2025')}
             aria-label="Fall 2025"
             aria-pressed={selectedSeason === 'fall2025'}
-            className={`px-5 py-2.5 min-h-[48px] rounded-full font-sans text-[13px] font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
+            className={`px-4 py-2 min-h-[44px] rounded-full font-sans text-[12px] font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
               selectedSeason === 'fall2025'
                 ? 'bg-black text-white shadow-md'
                 : 'bg-white text-black/70 hover:bg-gray-50 border border-black/10'
@@ -96,46 +96,36 @@ export default function ProgramList({
           </button>
         </div>
 
-        {/* Season Meta */}
-        <p className="text-center font-sans text-[13px] text-brand-pacific-dusk/60 mb-6">
-          {seasonLabel} · {seasonDates} · {seasonWeeks} weeks
-        </p>
-
-        {/* Category Jump Links */}
-        {groupedPrograms.length > 1 && (
-          <nav
-            aria-label="Jump to program category"
-            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-8"
-          >
-            <span className="font-sans text-[11px] text-brand-pacific-dusk/40 uppercase tracking-[2px]">
-              Jump to
-            </span>
-            {groupedPrograms.map(([category]) => (
-              <a
-                key={category}
-                href={`#${categoryAnchor(category)}`}
-                className="font-sans text-[13px] text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk transition-colors underline-offset-4 hover:underline"
-              >
-                {category}
-              </a>
-            ))}
-          </nav>
-        )}
-
-        {/* Program Count */}
-        <p className="text-center font-sans text-[14px] text-brand-pacific-dusk/60 mb-10">
-          {programs.length} program{programs.length !== 1 ? 's' : ''} this season
-        </p>
+        {/* Season meta + jump links on one line */}
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mb-6 text-center">
+          <span className="font-sans text-[12px] text-brand-pacific-dusk/50">
+            {seasonLabel} · {seasonDates} · {seasonWeeks} weeks · {programs.length} programs
+          </span>
+          {groupedPrograms.length > 1 && (
+            <nav aria-label="Jump to program category" className="flex items-center gap-3">
+              <span className="font-sans text-[10px] text-brand-pacific-dusk/30 uppercase tracking-[1.5px]">Jump to</span>
+              {groupedPrograms.map(([category]) => (
+                <a
+                  key={category}
+                  href={`#${categoryAnchor(category)}`}
+                  className="font-sans text-[12px] text-brand-pacific-dusk/60 hover:text-brand-pacific-dusk transition-colors underline-offset-4 hover:underline"
+                >
+                  {category}
+                </a>
+              ))}
+            </nav>
+          )}
+        </div>
 
         {/* Category Groups */}
-        <div className="space-y-12">
+        <div className="space-y-8">
           {groupedPrograms.map(([category, categoryPrograms]) => (
             <div key={category} id={categoryAnchor(category)}>
-              <div className="flex items-baseline justify-between mb-4 px-1">
-                <h2 className="font-serif text-[24px] md:text-[32px] font-semibold text-brand-pacific-dusk">
+              <div className="flex items-baseline justify-between mb-2 px-1">
+                <h2 className="font-serif text-[20px] md:text-[24px] font-semibold text-brand-pacific-dusk">
                   {category}
                 </h2>
-                <span className="font-sans text-[13px] text-brand-pacific-dusk/40">
+                <span className="font-sans text-[12px] text-brand-pacific-dusk/40">
                   {categoryPrograms.length} program{categoryPrograms.length !== 1 ? 's' : ''}
                 </span>
               </div>
