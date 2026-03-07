@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LBTA UTR Circuit — Season 1 Player Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+
+:root {
+  --pacific-dusk: #1B3A5C;
+  --deep-water: #0F2237;
+  --victoria-cove: #2E8B8B;
+  --sunset-cliff: #E8834A;
+  --thousand-steps: #C4963C;
+  --sandstone: #F5F0E5;
+  --morning-light: #FAF8F4;
+  --salt-air: #FFFFFF;
+  --tide-pool: #3A8B6E;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--pacific-dusk);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen {
+  body {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1a1a1a;
+    gap: 0;
+  }
+  .slide {
+    box-shadow: none;
+  }
+}
+
+.slide {
+  width: 1280px;
+  height: 720px;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+  page-break-inside: avoid;
+}
+.slide:last-child { page-break-after: auto; }
+
+.slide-light {
+  background: var(--morning-light);
+}
+
+.slide-pad {
+  padding: 60px 80px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--victoria-cove);
+  margin-bottom: 16px;
+}
+
+.heading-lg {
+  font-family: 'Cormorant', serif;
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 1.1;
+  color: var(--pacific-dusk);
+}
+
+.heading-md {
+  font-family: 'Cormorant', serif;
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 1.15;
+  color: var(--pacific-dusk);
+}
+
+.heading-sm {
+  font-family: 'Cormorant', serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--pacific-dusk);
+}
+
+.body-text {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(27, 58, 92, 0.8);
+}
+
+.label-text {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.horizon-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--victoria-cove) 15%, var(--sunset-cliff) 35%, var(--thousand-steps) 50%, var(--sunset-cliff) 65%, var(--victoria-cove) 85%, transparent 100%);
+  opacity: 0.4;
+}
+
+.page-footer {
+  position: absolute;
+  bottom: 24px;
+  left: 80px;
+  right: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-footer-brand {
+  font-family: 'Cormorant', serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: rgba(27, 58, 92, 0.4);
+  letter-spacing: 0.05em;
+}
+
+.page-footer-num {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(27, 58, 92, 0.35);
+  letter-spacing: 0.1em;
+}
+
+/* ═══ SLIDE 1: COVER ═══ */
+.cover {
+  background: var(--deep-water);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(232, 131, 74, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 30% 70%, rgba(46, 139, 139, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 60% at 70% 80%, rgba(196, 150, 60, 0.05) 0%, transparent 50%);
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: 35%;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(196, 150, 60, 0.25) 20%, rgba(232, 131, 74, 0.35) 40%, rgba(196, 150, 60, 0.4) 50%, rgba(232, 131, 74, 0.35) 60%, rgba(196, 150, 60, 0.25) 80%, transparent 95%);
+}
+.cover-content {
+  position: relative;
+  z-index: 2;
+}
+.cover-logo {
+  max-width: 160px;
+  margin-bottom: 32px;
+  opacity: 0.9;
+}
+.cover-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 229, 0.6);
+  margin-bottom: 8px;
+}
+.cover-title {
+  font-family: 'Cormorant', serif;
+  font-weight: 300;
+  font-size: 72px;
+  line-height: 1.05;
+  color: var(--sandstone);
+  margin-bottom: 8px;
+}
+.cover-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--sunset-cliff);
+}
+.cover-date {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: rgba(245, 240, 229, 0.6);
+  margin-bottom: 40px;
+  letter-spacing: 0.05em;
+}
+.cover-stats {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+.cover-stat {
+  text-align: center;
+}
+.cover-stat-val {
+  font-family: 'Cormorant', serif;
+  font-weight: 300;
+  font-size: 36px;
+  color: var(--sandstone);
+  line-height: 1;
+}
+.cover-stat-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 229, 0.5);
+  margin-top: 6px;
+}
+.cover-url {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: rgba(245, 240, 229, 0.2);
+  z-index: 2;
+}
+
+/* ═══ SLIDE 2: THE CIRCUIT ═══ */
+.slide-circuit {
+  background: linear-gradient(160deg, var(--deep-water) 0%, var(--pacific-dusk) 100%);
+  position: relative;
+}
+.slide-circuit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(46, 139, 139, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(232, 131, 74, 0.06) 0%, transparent 50%);
+}
+.circuit-fact {
+  background: rgba(245, 240, 229, 0.04);
+  border: 1px solid rgba(245, 240, 229, 0.08);
+  border-radius: 8px;
+  padding: 24px 20px;
+  text-align: center;
+}
+.circuit-fact-val {
+  font-family: 'Cormorant', serif;
+  font-weight: 300;
+  font-size: 40px;
+  color: var(--sandstone);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.circuit-fact-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sunset-cliff);
+  margin-bottom: 6px;
+}
+.circuit-fact-desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(245, 240, 229, 0.45);
+  line-height: 1.4;
+}
+.pull-quote {
+  font-family: 'Cormorant', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.45;
+  color: rgba(27, 58, 92, 0.85);
+  border-left: 3px solid var(--sunset-cliff);
+  padding-left: 24px;
+}
+
+/* ═══ SLIDE 3: HOW SATURDAYS WORK ═══ */
+.slide-steps {
+  padding: 60px 48px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.steps-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  flex: 1;
+  align-items: stretch;
+}
+.step-card {
+  padding: 36px 32px 32px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(27, 58, 92, 0.06);
+}
+.step-card:last-child { border-right: none; }
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.step-card:nth-child(1)::before { background: var(--victoria-cove); }
+.step-card:nth-child(2)::before { background: #3da8a8; }
+.step-card:nth-child(3)::before { background: var(--sunset-cliff); }
+.step-card:nth-child(4)::before { background: var(--thousand-steps); }
+.step-num {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+.step-card:nth-child(1) .step-num { color: var(--victoria-cove); }
+.step-card:nth-child(2) .step-num { color: #3da8a8; }
+.step-card:nth-child(3) .step-num { color: var(--sunset-cliff); }
+.step-card:nth-child(4) .step-num { color: var(--thousand-steps); }
+.step-title {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+  color: var(--pacific-dusk);
+}
+.step-desc {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(27, 58, 92, 0.7);
+}
+.step-arrow {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: rgba(27, 58, 92, 0.15);
+  z-index: 2;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ═══ SLIDE 4: UTR EXPLAINED ═══ */
+.utr-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  flex: 1;
+  align-items: start;
+  padding-top: 8px;
+}
+.utr-scale {
+  display: flex;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 20px 0 8px;
+}
+.utr-scale-seg { flex: 1; }
+.utr-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.utr-label-item {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(27, 58, 92, 0.6);
+  text-align: center;
+}
+.utr-label-item span {
+  display: block;
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--pacific-dusk);
+  margin-bottom: 2px;
+}
+.calc-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  align-items: flex-start;
+}
+.calc-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--victoria-cove);
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+.calc-text {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(27, 58, 92, 0.75);
+}
+.calc-text strong {
+  font-weight: 500;
+  color: var(--pacific-dusk);
+}
+.callout-box {
+  background: var(--sandstone);
+  border-radius: 4px;
+  padding: 24px;
+  border-left: 3px solid var(--sunset-cliff);
+  margin-top: 16px;
+}
+.callout-title {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.callout-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(27, 58, 92, 0.75);
+}
+
+/* ═══ SLIDES 5-6: DIVISIONS ═══ */
+.divisions-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+.div-row {
+  display: grid;
+  grid-template-columns: 280px 1fr 160px;
+  gap: 24px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(27, 58, 92, 0.06);
+}
+.div-row:first-child {
+  border-top: 1px solid rgba(27, 58, 92, 0.06);
+}
+.div-id {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ball {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ball-red { background: radial-gradient(circle at 35% 35%, #ff6b6b, #cc3333); }
+.ball-orange { background: radial-gradient(circle at 35% 35%, #ffaa55, #e87a20); }
+.ball-green { background: radial-gradient(circle at 35% 35%, #7dd87d, #3ba33b); }
+.ball-yellow { background: radial-gradient(circle at 35% 35%, #e8e44a, #c4bf20); }
+.div-balls {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.div-name {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.15;
+}
+.div-level {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--victoria-cove);
+  margin-top: 3px;
+}
+.div-center {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(27, 58, 92, 0.75);
+}
+.div-format-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--victoria-cove);
+  background: rgba(46, 139, 139, 0.08);
+  padding: 3px 8px;
+  border-radius: 100px;
+  margin-bottom: 6px;
+}
+.div-right {
+  text-align: right;
+}
+.div-price {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: 32px;
+  color: var(--sunset-cliff);
+  line-height: 1;
+}
+.div-meta {
+  font-size: 11px;
+  color: rgba(27, 58, 92, 0.55);
+  margin-top: 4px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.div-help {
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(27, 58, 92, 0.65);
+}
+.div-help a {
+  color: var(--victoria-cove);
+  text-decoration: none;
+}
+
+/* ═══ SLIDE 7: TWO TRACKS ═══ */
+.tracks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.track-card {
+  padding: 28px;
+  border-radius: 6px;
+}
+.track-utr {
+  background: rgba(46, 139, 139, 0.05);
+  border: 1px solid rgba(46, 139, 139, 0.12);
+}
+.track-season {
+  background: rgba(232, 131, 74, 0.05);
+  border: 1px solid rgba(232, 131, 74, 0.12);
+}
+.track-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.track-utr .track-label { color: var(--victoria-cove); }
+.track-season .track-label { color: var(--sunset-cliff); }
+.track-title {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.track-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.track-tag {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(27, 58, 92, 0.5);
+  background: rgba(27, 58, 92, 0.04);
+  border: 1px solid rgba(27, 58, 92, 0.06);
+  padding: 3px 8px;
+  border-radius: 100px;
+  font-weight: 500;
+}
+.track-how {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.track-how-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(27, 58, 92, 0.75);
+  font-weight: 400;
+  line-height: 1.5;
+}
+.track-how-icon {
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+}
+.pts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+}
+.pts-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(27, 58, 92, 0.05);
+}
+.pts-action {
+  font-size: 14px;
+  color: rgba(27, 58, 92, 0.75);
+  font-weight: 400;
+}
+.pts-val {
+  font-family: 'Cormorant', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--sunset-cliff);
+  min-width: 50px;
+  text-align: right;
+}
+.pts-row.mult .pts-action { color: var(--thousand-steps); font-style: italic; }
+.pts-row.mult .pts-val { color: var(--thousand-steps); }
+
+/* ═══ SLIDE 8: TIERS ═══ */
+.tiers-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  flex: 1;
+  align-items: center;
+}
+.tier-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tier-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--sandstone);
+  border-radius: 4px;
+  border-left: 3px solid rgba(27, 58, 92, 0.1);
+}
+.tier-card.t-legend {
+  border-left-color: var(--thousand-steps);
+  background: linear-gradient(90deg, rgba(196, 150, 60, 0.08), var(--sandstone));
+}
+.tier-card.t-champion { border-left-color: var(--thousand-steps); }
+.tier-card.t-elite { border-left-color: var(--sunset-cliff); }
+.tier-card.t-contender { border-left-color: var(--victoria-cove); }
+.tier-card.t-challenger { border-left-color: rgba(27, 58, 92, 0.15); }
+.tier-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.t-legend .tier-badge { background: rgba(196, 150, 60, 0.15); color: var(--thousand-steps); }
+.t-champion .tier-badge { background: rgba(196, 150, 60, 0.1); color: var(--thousand-steps); }
+.t-elite .tier-badge { background: rgba(232, 131, 74, 0.1); color: var(--sunset-cliff); }
+.t-contender .tier-badge { background: rgba(46, 139, 139, 0.1); color: var(--victoria-cove); }
+.t-challenger .tier-badge { background: rgba(27, 58, 92, 0.05); color: rgba(27, 58, 92, 0.3); }
+.tier-name {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+}
+.tier-pts {
+  font-size: 12px;
+  color: rgba(27, 58, 92, 0.55);
+  margin-top: 2px;
+  font-weight: 400;
+}
+.kicker-quote {
+  font-family: 'Cormorant', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+  color: rgba(27, 58, 92, 0.75);
+  border-top: 1px solid rgba(27, 58, 92, 0.08);
+  padding-top: 24px;
+  margin-top: 20px;
+}
+.kicker-quote strong {
+  font-weight: 600;
+  color: var(--pacific-dusk);
+}
+
+/* ═══ SLIDE 9: VENUES + SCHEDULE ═══ */
+.venues-sched {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  flex: 1;
+  align-items: start;
+  padding-top: 8px;
+}
+.venue-card {
+  background: var(--sandstone);
+  padding: 28px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.venue-name {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+.venue-addr {
+  font-size: 13px;
+  color: rgba(27, 58, 92, 0.55);
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+.venue-hosts {
+  font-size: 13px;
+  color: rgba(27, 58, 92, 0.7);
+  font-weight: 400;
+  line-height: 1.6;
+}
+.sched-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(27, 58, 92, 0.05);
+}
+.sched-time {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--sunset-cliff);
+}
+.sched-event {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(27, 58, 92, 0.75);
+  line-height: 1.5;
+}
+.gf-callout {
+  background: linear-gradient(135deg, var(--deep-water) 0%, var(--pacific-dusk) 100%);
+  border-radius: 6px;
+  padding: 24px 28px;
+  margin-top: 16px;
+}
+.gf-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--thousand-steps);
+  margin-bottom: 6px;
+}
+.gf-title {
+  font-family: 'Cormorant', serif;
+  font-weight: 300;
+  font-size: 28px;
+  color: var(--sandstone);
+  margin-bottom: 6px;
+}
+.gf-title em { font-style: italic; font-weight: 400; color: var(--sunset-cliff); }
+.gf-desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(245, 240, 229, 0.65);
+  line-height: 1.6;
+}
+
+/* ═══ SLIDE 10: FAQ + CLOSE ═══ */
+.faq-close {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  flex: 1;
+  align-items: start;
+  padding-top: 8px;
+}
+.faq-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(27, 58, 92, 0.06);
+}
+.faq-item:first-child {
+  border-top: 1px solid rgba(27, 58, 92, 0.06);
+}
+.faq-q {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--pacific-dusk);
+  margin-bottom: 6px;
+}
+.faq-a {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(27, 58, 92, 0.75);
+  line-height: 1.6;
+}
+.close-box {
+  background: var(--sandstone);
+  border-radius: 6px;
+  padding: 36px 32px;
+  text-align: center;
+}
+.close-heading {
+  font-family: 'Cormorant', serif;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.close-heading em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--sunset-cliff);
+}
+.close-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--sunset-cliff);
+  color: var(--salt-air);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.close-contact {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(27, 58, 92, 0.65);
+  line-height: 1.7;
+}
+.close-contact a {
+  color: var(--victoria-cove);
+  text-decoration: none;
+}
+.close-presented {
+  margin-top: 24px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(27, 58, 92, 0.4);
+}
+
+/* ═══ DESIGN POLISH ═══ */
+
+.venue-card,
+.callout-box,
+.close-box {
+  box-shadow: 0 1px 3px rgba(27,58,92,0.04), 0 6px 16px rgba(27,58,92,0.025);
+}
+
+.track-utr,
+.track-season {
+  box-shadow: 0 1px 2px rgba(27,58,92,0.03), 0 4px 12px rgba(27,58,92,0.02);
+}
+
+.tier-card {
+  box-shadow: 0 1px 3px rgba(27,58,92,0.025);
+}
+
+.gf-callout {
+  box-shadow: 0 4px 16px rgba(15,34,55,0.12), 0 8px 32px rgba(15,34,55,0.06);
+}
+
+
+.venue-card {
+  border-left: 3px solid rgba(27,58,92,0.06);
+}
+.venue-card:first-child { border-left-color: var(--victoria-cove); }
+.venue-card:last-child { border-left-color: var(--sunset-cliff); }
+
+.cover-stat {
+  padding: 14px 22px;
+  border: 1px solid rgba(245,240,229,0.06);
+  border-radius: 8px;
+  background: rgba(245,240,229,0.03);
+}
+
+.cover-logo { display: none; }
+.cover-title { font-size: 90px; margin-bottom: 12px; }
+.cover-label { margin-bottom: 14px; font-size: 12px; letter-spacing: 0.3em; }
+.cover-date { margin-bottom: 48px; }
+.cover::after { bottom: 28%; }
+.cover-url { color: rgba(245, 240, 229, 0.45); }
+
+.pull-quote {
+  border-left-width: 3px;
+  padding: 20px 0 20px 28px;
+}
+
+.kicker-quote {
+  border-top: none;
+  border-left: 3px solid var(--sunset-cliff);
+  padding: 4px 0 4px 28px;
+  margin-top: 0;
+  font-size: 24px;
+}
+
+.div-format-tag {
+  background: rgba(46, 139, 139, 0.1);
+  padding: 4px 10px;
+  letter-spacing: 0.1em;
+}
+
+.close-btn {
+  box-shadow: 0 2px 8px rgba(232,131,74,0.25), 0 4px 16px rgba(232,131,74,0.12);
+}
+
+.close-box {
+  border: 1px solid rgba(27,58,92,0.04);
+}
+
+.page-footer {
+  border-top: 1px solid rgba(27,58,92,0.04);
+  padding-top: 14px;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ SLIDE 1: COVER ═══ -->
+<div class="slide cover">
+  <div class="cover-content">
+    <img class="cover-logo" src="data:image/png;base64,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" alt="Laguna Beach Tennis Academy">
+    <div class="cover-label">Season 1 &middot; Player Guide</div>
+    <div class="cover-title">UTR <em>Circuit</em></div>
+    <div class="cover-date">April 11 &ndash; May 30, 2026 &nbsp;&middot;&nbsp; Laguna Beach, California</div>
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="cover-stat-val">8</div>
+        <div class="cover-stat-label">Saturdays</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val">5</div>
+        <div class="cover-stat-label">Divisions</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val">10</div>
+        <div class="cover-stat-label">Courts</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val">UTR</div>
+        <div class="cover-stat-label">Rated</div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-url">lagunabeachtennisacademy.com</div>
+</div>
+
+<!-- ═══ SLIDE 2: THE CIRCUIT ═══ -->
+<div class="slide slide-circuit">
+  <div class="slide-pad" style="padding: 56px 80px;">
+    <div class="eyebrow" style="color: var(--sunset-cliff);">The Circuit</div>
+    <div class="heading-lg" style="color: var(--sandstone); margin-bottom: 8px; font-size: 52px;">A structured, rated<br>matchplay series.</div>
+    <p style="font-size: 17px; font-weight: 400; color: rgba(245,240,229,0.65); line-height: 1.7; max-width: 640px; margin-bottom: 36px;">Every Saturday, you&rsquo;re seeded against players at your level. You play competitive matches, and your results go directly to UTR. Your rating moves. Your standing on the leaderboard moves. Real stakes.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px;">
+      <div class="circuit-fact">
+        <div class="circuit-fact-val">8</div>
+        <div class="circuit-fact-label">Consecutive Saturdays</div>
+        <div class="circuit-fact-desc">April 11 through May 30</div>
+      </div>
+      <div class="circuit-fact">
+        <div class="circuit-fact-val">5</div>
+        <div class="circuit-fact-label">Skill-Based Divisions</div>
+        <div class="circuit-fact-desc">Color Ball through UTR 7.0</div>
+      </div>
+      <div class="circuit-fact">
+        <div class="circuit-fact-val">UTR</div>
+        <div class="circuit-fact-label">Officially Rated</div>
+        <div class="circuit-fact-desc">Every match counts toward your rating</div>
+      </div>
+      <div class="circuit-fact">
+        <div class="circuit-fact-val">All</div>
+        <div class="circuit-fact-label">Ages &amp; Levels</div>
+        <div class="circuit-fact-desc">Juniors, adults, families &mdash; level-based</div>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid rgba(245,240,229,0.08); padding-top: 20px;">
+      <div class="pull-quote" style="color: rgba(245,240,229,0.6); border-left-color: var(--sunset-cliff); font-size: 22px;">&ldquo;Show up. Compete. Know where you stand.&rdquo;</div>
+    </div>
+
+    <div class="page-footer" style="border-top-color: rgba(245,240,229,0.06);">
+      <span class="page-footer-brand" style="color: rgba(245,240,229,0.25);">Laguna Beach Tennis Academy</span>
+      <span class="page-footer-num" style="color: rgba(245,240,229,0.2);">2 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 3: HOW EACH SATURDAY WORKS ═══ -->
+<div class="slide slide-light">
+  <div class="slide-steps">
+    <div style="padding: 0 32px;">
+      <div class="eyebrow">Every Saturday</div>
+      <div class="heading-lg" style="margin-bottom: 32px;">Same rhythm. <em style="font-style: italic; font-weight: 400; color: var(--sunset-cliff);">Every week.</em></div>
+    </div>
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="step-num">STEP 01</div>
+        <div class="step-title">Arrive &amp; Check In</div>
+        <div class="step-desc">Find your draw posted at check-in. Know your court, your opponent, and your match format before you step on.</div>
+        <div class="step-arrow">&rsaquo;</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 02</div>
+        <div class="step-title">Play Your Matches</div>
+        <div class="step-desc">Seeded by UTR rating. Best-of-3 sets or pro sets depending on your division. Every match counts.</div>
+        <div class="step-arrow">&rsaquo;</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 03</div>
+        <div class="step-title">Results Submitted</div>
+        <div class="step-desc">Scores go directly to UTR the same day. Your rating updates automatically based on who you played and how you performed.</div>
+        <div class="step-arrow">&rsaquo;</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">STEP 04</div>
+        <div class="step-title">Leaderboard Updates</div>
+        <div class="step-desc">Season standings refresh every Sunday morning. See where you rank in your division and across the circuit.</div>
+      </div>
+    </div>
+    <div class="page-footer" style="left: 48px; right: 48px;">
+      <span class="page-footer-brand">Laguna Beach Tennis Academy</span>
+      <span class="page-footer-num">3 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 4: UTR EXPLAINED ═══ -->
+<div class="slide slide-light">
+  <div class="slide-pad">
+    <div class="eyebrow">UTR Explained</div>
+    <div class="heading-lg" style="margin-bottom: 20px;">Universal Tennis Rating.</div>
+    <div class="utr-grid">
+      <div>
+        <p class="body-text" style="margin-bottom: 16px;">UTR is the global standard for measuring tennis ability. Used by NCAA programs, professional coaches, and junior academies worldwide, it gives every player a single number on a 1&ndash;16 scale that accurately reflects their current level.</p>
+        <div class="utr-scale">
+          <div class="utr-scale-seg" style="background: linear-gradient(90deg, #4ac4c4, #3aa0a0);"></div>
+          <div class="utr-scale-seg" style="background: linear-gradient(90deg, #3aa0a0, #2E8B8B);"></div>
+          <div class="utr-scale-seg" style="background: linear-gradient(90deg, #2E8B8B, #E8834A);"></div>
+          <div class="utr-scale-seg" style="background: linear-gradient(90deg, #E8834A, #C4963C);"></div>
+          <div class="utr-scale-seg" style="background: linear-gradient(90deg, #C4963C, #1B3A5C);"></div>
+        </div>
+        <div class="utr-labels">
+          <div class="utr-label-item"><span>1.0 &ndash; 3.0</span>Beginner</div>
+          <div class="utr-label-item"><span>3.0 &ndash; 5.0</span>Intermediate</div>
+          <div class="utr-label-item"><span>5.0 &ndash; 8.0</span>Advanced</div>
+          <div class="utr-label-item"><span>8.0 &ndash; 12.0</span>Elite</div>
+          <div class="utr-label-item"><span>12.0 &ndash; 16.0</span>Professional</div>
+        </div>
+        <div class="label-text" style="color: var(--victoria-cove); margin-bottom: 14px;">How Your Rating Is Calculated</div>
+        <div class="calc-item"><div class="calc-bullet"></div><div class="calc-text"><strong>Who you played</strong> &mdash; Beating a higher-rated opponent moves your rating more.</div></div>
+        <div class="calc-item"><div class="calc-bullet"></div><div class="calc-text"><strong>Score margin</strong> &mdash; A 6-1, 6-1 win moves it differently than 7-6, 7-6.</div></div>
+        <div class="calc-item"><div class="calc-bullet"></div><div class="calc-text"><strong>Recency</strong> &mdash; Recent matches carry more weight than older results.</div></div>
+      </div>
+      <div>
+        <div class="callout-box">
+          <div class="callout-title">Don&rsquo;t have a UTR yet?</div>
+          <div class="callout-text">No problem. If you&rsquo;re new to UTR we&rsquo;ll help you get your initial rating before the season starts. Your first few circuit matches establish a baseline &mdash; from there your rating moves based on results. For Color Ball players, we&rsquo;ll place you based on your USTA ball stage.</div>
+        </div>
+        <div style="margin-top: 20px;">
+          <div class="label-text" style="color: var(--victoria-cove); margin-bottom: 8px;">NTRP &rarr; UTR Quick Reference</div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; font-weight: 300;">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(27,58,92,0.1);">
+                <th style="text-align: left; padding: 5px 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(27,58,92,0.35);">NTRP</th>
+                <th style="text-align: left; padding: 5px 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(27,58,92,0.35);">UTR (Men)</th>
+                <th style="text-align: left; padding: 5px 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(27,58,92,0.35);">UTR (Women)</th>
+              </tr>
+            </thead>
+            <tbody style="color: rgba(27,58,92,0.55);">
+              <tr style="border-bottom: 1px solid rgba(27,58,92,0.04);"><td style="padding: 4px 8px;">2.5</td><td style="padding: 4px 8px;">1.5&ndash;2.5</td><td style="padding: 4px 8px;">1.5&ndash;2.5</td></tr>
+              <tr style="border-bottom: 1px solid rgba(27,58,92,0.04);"><td style="padding: 4px 8px;">3.0</td><td style="padding: 4px 8px;">2.5&ndash;3.5</td><td style="padding: 4px 8px;">2.3&ndash;3.3</td></tr>
+              <tr style="border-bottom: 1px solid rgba(27,58,92,0.04);"><td style="padding: 4px 8px;">3.5</td><td style="padding: 4px 8px;">3.5&ndash;4.8</td><td style="padding: 4px 8px;">3.0&ndash;4.0</td></tr>
+              <tr style="border-bottom: 1px solid rgba(27,58,92,0.04);"><td style="padding: 4px 8px;">4.0</td><td style="padding: 4px 8px;">4.8&ndash;6.5</td><td style="padding: 4px 8px;">4.0&ndash;5.0</td></tr>
+              <tr style="border-bottom: 1px solid rgba(27,58,92,0.04);"><td style="padding: 4px 8px;">4.5</td><td style="padding: 4px 8px;">6.5&ndash;8.0</td><td style="padding: 4px 8px;">5.0&ndash;6.0</td></tr>
+              <tr><td style="padding: 4px 8px;">5.0+</td><td style="padding: 4px 8px;">8.0+</td><td style="padding: 4px 8px;">6.0+</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span class="page-footer-brand">Laguna Beach Tennis Academy</span>
+      <span class="page-footer-num">4 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 5: DIVISIONS 1/2 ═══ -->
+<div class="slide slide-light">
+  <div class="slide-pad">
+    <div class="eyebrow">Divisions</div>
+    <div class="heading-lg" style="margin-bottom: 8px;">Find your level.</div>
+    <p class="body-text" style="margin-bottom: 8px; font-size: 14px;">All divisions are level-based &mdash; not age, not gender. Your UTR or ball stage determines your division.</p>
+    <div class="divisions-list">
+      <div class="div-row">
+        <div class="div-id">
+          <div class="div-balls"><div class="ball ball-red"></div><div class="ball ball-orange"></div><div class="ball ball-green"></div></div>
+          <div><div class="div-name">Color Ball</div><div class="div-level">Red &middot; Orange &middot; Green &mdash; Juniors</div></div>
+        </div>
+        <div class="div-center">
+          <div class="div-format-tag">Pod Round Robin</div>
+          <div>Structured competitive play for younger players in the USTA ball progression. Scored matches, real formats &mdash; for kids ready to compete.</div>
+        </div>
+        <div class="div-right">
+          <div class="div-price">$249</div>
+          <div class="div-meta">1:30 &ndash; 4:00 PM<br>Alta Laguna Park</div>
+        </div>
+      </div>
+      <div class="div-row">
+        <div class="div-id">
+          <div class="div-balls"><div class="ball ball-yellow"></div></div>
+          <div><div class="div-name">UTR 2.0 &ndash; 4.0</div><div class="div-level">Intermediate</div></div>
+        </div>
+        <div class="div-center">
+          <div class="div-format-tag">8-Game Pro Sets</div>
+          <div>Established players who want regular rated match experience. Roughly NTRP 2.5&ndash;3.5. Juniors and adults competing at the recreational-to-intermediate club level.</div>
+        </div>
+        <div class="div-right">
+          <div class="div-price">$279</div>
+          <div class="div-meta">4:00 &ndash; 6:30 PM<br>Alta Laguna Park</div>
+        </div>
+      </div>
+      <div class="div-row">
+        <div class="div-id">
+          <div class="div-balls"><div class="ball ball-yellow"></div></div>
+          <div><div class="div-name">UTR 3.0 &ndash; 5.0</div><div class="div-level">Intermediate+</div></div>
+        </div>
+        <div class="div-center">
+          <div class="div-format-tag">Best of 3 &middot; 10-pt Tiebreak</div>
+          <div>Solid intermediate-to-advanced club players. Roughly NTRP 3.0&ndash;4.0. Players who compete regularly and want weekly rated match pressure.</div>
+        </div>
+        <div class="div-right">
+          <div class="div-price">$349</div>
+          <div class="div-meta">1:30 &ndash; 4:00 PM<br>Laguna Beach HS</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span class="page-footer-brand">Laguna Beach Tennis Academy</span>
+      <span class="page-footer-num">5 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 6: DIVISIONS 2/2 ═══ -->
+<div class="slide slide-light">
+  <div class="slide-pad">
+    <div class="eyebrow">Divisions (continued)</div>
+    <div class="heading-lg" style="margin-bottom: 16px;">Under the lights.</div>
+    <div class="divisions-list" style="flex: 0;">
+      <div class="div-row">
+        <div class="div-id">
+          <div class="div-balls"><div class="ball ball-yellow"></div></div>
+          <div><div class="div-name">UTR 5.0 &ndash; 7.0</div><div class="div-level">Advanced</div></div>
+        </div>
+        <div class="div-center">
+          <div class="div-format-tag">Best of 3 &middot; 10-pt Tiebreak</div>
+          <div>Advanced-to-open level. Roughly NTRP 4.0&ndash;5.0. Tournament players, strong high school varsity, experienced adults. Under the LBHS lights. The most competitive division on the circuit.</div>
+        </div>
+        <div class="div-right">
+          <div class="div-price">$349</div>
+          <div class="div-meta">4:00 &ndash; 6:30 PM<br>Laguna Beach HS</div>
+        </div>
+      </div>
+      <div class="div-row">
+        <div class="div-id">
+          <div class="div-balls"><div class="ball ball-yellow"></div><div class="ball ball-yellow"></div></div>
+          <div><div class="div-name">Doubles Round Robin</div><div class="div-level">All Levels &middot; Under the Lights</div></div>
+        </div>
+        <div class="div-center">
+          <div class="div-format-tag">8-Game Pro Sets</div>
+          <div>Mixed ability &mdash; partners are assigned each week based on level. The most social session of the week. Popular as a second entry for players who competed in an earlier block.</div>
+        </div>
+        <div class="div-right">
+          <div class="div-price">$379</div>
+          <div class="div-meta">6:30 &ndash; 9:00 PM<br>Laguna Beach HS</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px;">
+      <div style="background: var(--sandstone); border-radius: 8px; padding: 28px 32px; border-left: 3px solid var(--victoria-cove);">
+        <div style="font-family: 'Cormorant', serif; font-weight: 500; font-size: 20px; margin-bottom: 8px; color: var(--pacific-dusk);">Not sure which division?</div>
+        <div style="font-size: 14px; font-weight: 400; color: rgba(27,58,92,0.7); line-height: 1.6; margin-bottom: 12px;">Email us your UTR or match history and we&rsquo;ll place you in the right division. No guessing.</div>
+        <div style="font-size: 13px; font-weight: 500; color: var(--victoria-cove);">info@lagunabeachtennisacademy.com</div>
+      </div>
+      <div style="background: var(--sandstone); border-radius: 8px; padding: 28px 32px; border-left: 3px solid var(--sunset-cliff);">
+        <div style="font-family: 'Cormorant', serif; font-weight: 500; font-size: 20px; margin-bottom: 8px; color: var(--pacific-dusk);">Register for multiple divisions</div>
+        <div style="font-size: 14px; font-weight: 400; color: rgba(27,58,92,0.7); line-height: 1.6;">Play singles in your afternoon division and add the Doubles Round Robin in the evening. Most popular combo on the circuit.</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-footer-brand">Laguna Beach Tennis Academy</span>
+      <span class="page-footer-num">6 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 7: TWO TRACKS + POINTS ═══ -->
+<div class="slide slide-light">
+  <div class="slide-pad">
+    <div class="eyebrow">The Leaderboard</div>
+    <div class="heading-lg" style="margin-bottom: 20px;">Two tracks. One season.</div>
+    <div class="tracks-grid">
+      <div class="track-card track-utr">
+        <div class="track-label">Track 1 &mdash; Your UTR Rating</div>
+        <div class="track-tags"><span class="track-tag">National</span><span class="track-tag">Skill-based</span><span class="track-tag">Win/loss driven</span></div>
+        <div class="track-how">
+          <div class="track-how-row"><span class="track-how-icon" style="color: var(--victoria-cove);">&uarr;</span><span>Beat a higher-rated player &mdash; your rating goes up</span></div>
+          <div class="track-how-row"><span class="track-how-icon" style="color: #cc5555;">&darr;</span><span>Lose to lower-rated &mdash; it goes down</span></div>
+        </div>
+      </div>
+      <div class="track-card track-season">
+        <div class="track-label">Track 2 &mdash; Season Points</div>
+        <div class="track-tags"><span class="track-tag">Local</span><span class="track-tag">Effort-based</span><span class="track-tag">Points only go up</span></div>
+        <div class="track-how">
+          <div class="track-how-row"><span class="track-how-icon" style="color: var(--sunset-cliff);">+</span><span>Show up &rarr; points. Win &rarr; more points.</span></div>
+          <div class="track-how-row"><span class="track-how-icon" style="color: var(--sunset-cliff);">+</span><span>Upset &rarr; bonus. 3-week streak &rarr; bonus.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="label-text" style="color: var(--victoria-cove); margin-bottom: 10px;">Season Points &mdash; Full Breakdown</div>
+    <div class="pts-grid">
+      <div>
+        <div class="pts-row"><span class="pts-action">Show up and compete</span><span class="pts-val">+10</span></div>
+        <div class="pts-row"><span class="pts-action">Win a match</span><span class="pts-val">+15</span></div>
+        <div class="pts-row"><span class="pts-action">Upset (UTR diff &ge; 0.5)</span><span class="pts-val">+25</span></div>
+        <div class="pts-row"><span class="pts-action">Complete all matches for the week</span><span class="pts-val">+10</span></div>
+      </div>
+      <div>
+        <div class="pts-row"><span class="pts-action">3-week attendance streak</span><span class="pts-val">+20</span></div>
+        <div class="pts-row"><span class="pts-action">UTR improves from previous week</span><span class="pts-val">+10</span></div>
+        <div class="pts-row mult"><span class="pts-action">Week 1 &mdash; double points</span><span class="pts-val">2&times;</span></div>
+        <div class="pts-row mult"><span class="pts-action">Grand Finals week</span><span class="pts-val">1.5&times;</span></div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span class="page-footer-brand">Laguna Beach Tennis Academy</span>
+      <span class="page-footer-num">7 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 8: SEASON TIERS ═══ -->
+<div class="slide slide-light">
+  <div class="slide-pad">
+    <div class="eyebrow">Season Tiers</div>
+    <div class="heading-lg" style="margin-bottom: 16px;">Climb the leaderboard.</div>
+    <div class="tiers-layout">
+      <div>
+        <p class="body-text" style="margin-bottom: 20px; font-size: 15px;">As points accumulate, you climb through tiers. Your tier appears next to your name on the weekly leaderboard every Sunday morning.</p>
+        <div class="tier-stack">
+          <div class="tier-card t-legend"><div class="tier-badge">&hearts;</div><div><div class="tier-name">Legend</div><div class="tier-pts">Grand Finals Top 3 &middot; Season Champion plays doubles with Karue Sell</div></div></div>
+          <div class="tier-card t-champion"><div class="tier-badge">&starf;</div><div><div class="tier-name">Champion</div><div class="tier-pts">450+ points</div></div></div>
+          <div class="tier-card t-elite"><div class="tier-badge">&diams;</div><div><div class="tier-name">Elite</div><div class="tier-pts">250 &ndash; 449 points</div></div></div>
+          <div class="tier-card t-contender"><div class="tier-badge">&blacktriangle;</div><div><div class="tier-name">Contender</div><div class="tier-pts">100 &ndash; 249 points</div></div></div>
+          <div class="tier-card t-challenger"><div class="tier-badge">&bull;</div><div><div class="tier-name">Challenger</div><div class="tier-pts">0 &ndash; 99 points</div></div></div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center; gap: 32px;">
+        <div style="background: linear-gradient(135deg, var(--deep-water) 0%, var(--pacific-dusk) 100%); border-radius: 8px; padding: 32px; text-align: center;">
+          <div style="font-family: 'Cormorant', serif; font-weight: 300; font-size: 52px; color: var(--sandstone); line-height: 1;">450+</div>
+          <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sunset-cliff); margin-top: 8px;">Points to Champion</div>
+          <div style="font-size: 13px; color: rgba(245,240,229,0.5); margin-top: 8px; line-height: 1.5;">Show up every week, win your matches, and you&rsquo;re in the conversation.</div>
+        </div>
+        <div class="pull-quote" style="font-size: 20px; color: rgba(27,58,92,0.65);">&ldquo;The leaderboard isn&rsquo;t just about talent. It rewards the players who show up every week and compete.&rdquo;</div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span class="page-footer-brand">Laguna Beach Tennis Academy</span>
+      <span class="page-footer-num">8 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 9: VENUES + SCHEDULE ═══ -->
+<div class="slide slide-light">
+  <div class="slide-pad">
+    <div class="eyebrow">Venues &amp; Schedule</div>
+    <div class="heading-lg" style="margin-bottom: 20px;">Two venues. One coastline.</div>
+    <div class="venues-sched">
+      <div>
+        <div class="venue-card">
+          <div class="venue-name">Laguna Beach High School</div>
+          <div class="venue-addr">605 Park Ave, Laguna Beach</div>
+          <div class="venue-hosts">6 courts &middot; 4 lit for evening play<br>Hosts: UTR 3.0&ndash;5.0 &middot; UTR 5.0&ndash;7.0 &middot; Doubles</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-name">Alta Laguna Park</div>
+          <div class="venue-addr">Alta Laguna Blvd, Laguna Beach</div>
+          <div class="venue-hosts">4 courts &middot; Afternoon sessions<br>Hosts: Color Ball &middot; UTR 2.0&ndash;4.0</div>
+        </div>
+      </div>
+      <div>
+        <div class="label-text" style="color: var(--victoria-cove); margin-bottom: 12px;">Weekly Schedule</div>
+        <div class="sched-row"><div class="sched-time">1:30</div><div class="sched-event">Courts open &middot; Player check-in (both venues)</div></div>
+        <div class="sched-row"><div class="sched-time">2:00</div><div class="sched-event">Color Ball + UTR 2.0&ndash;4.0 begin (Alta Laguna)</div></div>
+        <div class="sched-row"><div class="sched-time">4:00</div><div class="sched-event">UTR 3.0&ndash;5.0 + UTR 5.0&ndash;7.0 begin (LBHS)</div></div>
+        <div class="sched-row"><div class="sched-time">6:30</div><div class="sched-event">Doubles Round Robin &mdash; under the lights (LBHS)</div></div>
+        <div class="sched-row"><div class="sched-time">9:00</div><div class="sched-event">Evening wrap</div></div>
+        <div class="gf-callout" style="padding: 14px 20px;">
+          <div class="gf-label" style="margin-bottom: 4px;">No play May 23 &mdash; Memorial Day Weekend</div>
+          <div class="gf-label">Season Finale &mdash; May 30</div>
+          <div class="gf-desc" style="margin-top: 4px;">Grand Finals Night &mdash; full schedule on next page</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span class="page-footer-brand">Laguna Beach Tennis Academy</span>
+      <span class="page-footer-num">9 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 10: GRAND FINALS ═══ -->
+<div class="slide" style="background: linear-gradient(160deg, var(--deep-water) 0%, #0d1f33 100%);">
+  <div class="slide-pad">
+    <div class="eyebrow" style="color: var(--sunset-cliff);">May 30, 2026 &middot; Laguna Beach High School</div>
+    <div class="heading-lg" style="color: var(--sandstone); margin-bottom: 6px;">Grand Finals Night.</div>
+    <p class="body-text" style="color: rgba(245,240,229,0.7); font-size: 14px; margin-bottom: 20px;">The season closes under the lights. Five division champions. A pro exhibition. One night.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div>
+        <div class="label-text" style="color: var(--victoria-cove); margin-bottom: 10px;">Evening Schedule</div>
+        <div class="sched-row"><div class="sched-time" style="color: var(--sunset-cliff);">4:00</div><div class="sched-event" style="color: rgba(245,240,229,0.8);">Division Finals &mdash; all five divisions play their championship matches</div></div>
+        <div class="sched-row"><div class="sched-time" style="color: var(--sunset-cliff);">6:00</div><div class="sched-event" style="color: rgba(245,240,229,0.8);">Food trucks + social hour &middot; Season 2 registration table open</div></div>
+        <div class="sched-row"><div class="sched-time" style="color: var(--sunset-cliff);">7:00</div><div class="sched-event" style="color: rgba(245,240,229,0.8);">Awards ceremony &middot; Grand raffle &middot; Karue Sell presents a personalized video message to a young player</div></div>
+        <div class="sched-row"><div class="sched-time" style="color: var(--sunset-cliff);">8:00</div><div class="sched-event" style="color: rgba(245,240,229,0.8);">Exhibition 1 &mdash; Season Champion plays doubles alongside Karue Sell</div></div>
+        <div class="sched-row"><div class="sched-time" style="color: var(--sunset-cliff);">8:30</div><div class="sched-event" style="color: rgba(245,240,229,0.8);">Exhibition 2 &mdash; The 2v1 Challenge: Andrew Mateljan + Steven Forman vs. Karue Sell, under the lights</div></div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: rgba(245,240,229,0.1); border: 1px solid rgba(245,240,229,0.15); border-radius: 6px; padding: 18px 20px;">
+          <div class="label-text" style="color: var(--sunset-cliff); margin-bottom: 6px;">Season Champion Prize</div>
+          <div style="font-size: 13px; color: rgba(245,240,229,0.8); line-height: 1.6;">The top finisher on the season leaderboard earns a doubles exhibition match alongside Karue Sell at Grand Finals &mdash; under the lights, in front of the entire circuit.</div>
+        </div>
+        <div style="background: rgba(245,240,229,0.1); border: 1px solid rgba(245,240,229,0.15); border-radius: 6px; padding: 18px 20px;">
+          <div class="label-text" style="color: var(--victoria-cove); margin-bottom: 6px;">The Main Event</div>
+          <div style="font-size: 13px; color: rgba(245,240,229,0.8); line-height: 1.6;">The 2v1 Challenge. LBTA founder Andrew Mateljan and Steven Forman &mdash; former Wake Forest All-American, ranked No.&nbsp;5 nationally in D1 doubles &mdash; take the doubles court against Karue Sell playing singles. The match everyone stays for.</div>
+        </div>
+        <div style="background: rgba(245,240,229,0.1); border: 1px solid rgba(245,240,229,0.15); border-radius: 6px; padding: 18px 20px;">
+          <div class="label-text" style="color: var(--thousand-steps); margin-bottom: 6px;">Who is Karue Sell?</div>
+          <div style="font-size: 12px; color: rgba(245,240,229,0.7); line-height: 1.6;">Brazilian pro &middot; ATP No.&nbsp;258 &middot; UCLA All-American (104&ndash;31 career) &middot; Former hitting partner for Naomi Osaka &middot; 182K YouTube subscribers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer" style="border-top-color: rgba(245,240,229,0.06);">
+      <span class="page-footer-brand" style="color: rgba(245,240,229,0.2);">Laguna Beach Tennis Academy</span>
+      <span class="page-footer-num" style="color: rgba(245,240,229,0.2);">10 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 11: FAQ + REGISTRATION ═══ -->
+<div class="slide slide-light">
+  <div class="slide-pad">
+    <div class="eyebrow">Questions &amp; Registration</div>
+    <div class="heading-lg" style="margin-bottom: 20px;">Good questions.</div>
+    <div class="faq-close">
+      <div>
+        <div class="faq-item">
+          <div class="faq-q">Do I need a UTR rating to register?</div>
+          <div class="faq-a">No. If you&rsquo;re new to UTR we&rsquo;ll help you get your initial rating before the season starts. Your first few matches establish a baseline.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Is my child ready for Color Ball?</div>
+          <div class="faq-a">If they&rsquo;re working through the ball progression &mdash; Red, Orange, or Green Ball &mdash; yes. Designed for younger players ready for structured competitive play.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can adults and juniors compete together?</div>
+          <div class="faq-a">Yes. Divisions are level-based, not age-based. A junior with a 4.0 UTR competes alongside adults at the same level.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What if I miss a Saturday?</div>
+          <div class="faq-a">Season players hold their spot for all 8 weeks. Let us know 24 hours in advance. Two consecutive no-shows without notice may affect your spot.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can I register for more than one division?</div>
+          <div class="faq-a">Yes, if your rating qualifies. The Doubles Round Robin runs in the evening and is popular as a second session.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Who is Karue Sell?</div>
+          <div class="faq-a">Brazilian pro ranked as high as ATP No.&nbsp;258. UCLA standout (104&ndash;31 career singles, two NCAA final fours). Former hitting partner for Naomi Osaka and coach to ATP pro Marcos Giron. Runs a 182K-subscriber YouTube channel documenting life on tour. He&rsquo;ll be at Grand Finals for the pro exhibition and to play doubles with our Season Champion.</div>
+        </div>
+      </div>
+      <div>
+        <div class="close-box">
+          <div class="close-heading">8 Saturdays.<br>Pick your division.<br>See where you <em>land.</em></div>
+          <a href="https://lagunabeachtennisacademy.com" class="close-btn">Register Now &rarr;</a>
+          <div class="close-contact">
+            Questions?<br>
+            <a href="mailto:info@lagunabeachtennisacademy.com">info@lagunabeachtennisacademy.com</a>
+          </div>
+          <div class="close-presented">
+            <div style="width: 30px; height: 1px; background: rgba(27,58,92,0.1); margin: 16px auto 10px;"></div>
+            Presented by Laguna Beach Tennis Academy &amp; Fit4Tennis
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span class="page-footer-brand">Laguna Beach Tennis Academy &middot; lagunabeachtennisacademy.com</span>
+      <span class="page-footer-num">11 / 11</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  if (window.matchMedia('print').matches) return;
+  function scaleSlides() {
+    var slides = document.querySelectorAll('.slide');
+    var scale = window.innerWidth / 1280;
+    slides.forEach(function(s) {
+      s.style.transform = 'scale(' + scale + ')';
+      s.style.transformOrigin = 'top center';
+      s.style.marginBottom = (-(720 * (1 - scale))) + 'px';
+    });
+  }
+  scaleSlides();
+  window.addEventListener('resize', scaleSlides);
+})();
+</script>
+</body>
+</html>

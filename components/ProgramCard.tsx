@@ -249,7 +249,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               e.stopPropagation()
               onRegister(program)
             }}
-            className="hidden md:flex w-full items-center justify-center gap-2 bg-lbta-black hover:bg-brand-pacific-dusk/80 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-lg transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/50 focus-visible:ring-offset-2"
+            className="hidden md:flex w-full items-center justify-center gap-2 bg-lbta-black hover:bg-brand-pacific-dusk/80 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
           >
             <span>Begin Registration</span>
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -267,7 +267,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               e.stopPropagation()
               onRegister(program)
             }}
-            className="w-full flex items-center justify-center gap-2 bg-lbta-black active:bg-brand-pacific-dusk/80 active:scale-[0.98] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-lg transition-all duration-200 min-h-[52px]"
+            className="w-full flex items-center justify-center gap-2 bg-lbta-black active:bg-brand-pacific-dusk/80 active:scale-[0.98] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
             onTouchStart={() => {}}
           >
             <span>Begin Registration</span>

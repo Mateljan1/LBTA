@@ -21,8 +21,7 @@
   },
   "beginnerProgram": {
     "discount": 50,
-    "discountDeadline": "December 15th",
-    "spotsRemaining": 4,
+    "discountDeadline": "March 20th",
     "valueStack": {
       "groupSessions": { "label": "12-24 Group Sessions", "description": "ATP/WTA coaching, max 6:1 ratio", "value": 1800 },
       "videoAnalysis": { "label": "Video Analysis Package", "description": "Session recordings + technique breakdown", "value": 600 },

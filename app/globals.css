@@ -273,11 +273,16 @@
     text-transform: uppercase;
     padding: 0.85rem 2rem;
     min-height: 48px;
-    border-radius: var(--radius-md);
+    border-radius: 2px;
     transition: all var(--transition-base);
     position: relative;
     overflow: hidden;
     cursor: pointer;
+  }
+
+  .btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1), 0 0 0 4px rgba(0,0,0,0.05);
   }
 
   /* Ripple effect on click */

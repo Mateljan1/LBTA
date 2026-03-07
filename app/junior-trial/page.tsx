@@ -3,12 +3,11 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { getJuniorProgramDataFromWinter2026 } from '@/lib/junior-program-data'
-import pricingSupplemental from '@/data/pricing-supplemental.json'
+import { getSeasonCTA, getActiveSeason } from '@/lib/season-utils'
 
 const programData = getJuniorProgramDataFromWinter2026()
-const earlyBirdDiscount = pricingSupplemental.promotions.earlyBird.discount
 
-export default function JuniorWinter2026Landing() {
+export default function JuniorTrialLanding() {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     parentName: '',
@@ -38,7 +37,10 @@ export default function JuniorWinter2026Landing() {
     : null
 
   const price = selectedProgramData?.pricing?.[formData.frequency as '1x' | '2x'] as number || 0
-  const isEarlyBird = new Date() < new Date('2025-12-15')
+  const seasonCta = getSeasonCTA()
+  const activeSeason = getActiveSeason()
+  const isEarlyBird = seasonCta.showEarlyBird
+  const earlyBirdDiscount = seasonCta.earlyBirdDiscount
   const discount = isEarlyBird && price > 120 ? earlyBirdDiscount : 0
   const finalPrice = price - discount
 
@@ -62,7 +64,7 @@ export default function JuniorWinter2026Landing() {
     // Fire Meta Pixel Lead event
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'Lead', {
-        content_name: `Junior Winter 2026: ${formData.program}`,
+        content_name: `Junior Trial: ${formData.program}`,
         value: finalPrice,
         currency: 'USD',
       })
@@ -76,8 +78,8 @@ export default function JuniorWinter2026Landing() {
           ...formData,
           finalPrice,
           discount,
-          program: `Junior Winter 2026: ${formData.program}`,
-          source: 'junior-winter-2026-landing',
+          program: `Junior Trial: ${formData.program}`,
+          source: 'junior-trial-landing',
         }),
       })
 
@@ -97,9 +99,13 @@ export default function JuniorWinter2026Landing() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Urgency Banner */}
+      {/* Season Banner */}
       <div className="bg-lbta-coral text-white py-3 text-center text-sm font-medium tracking-wide">
-        <span className="font-bold">${earlyBirdDiscount} OFF</span> Winter 2026 registration — Sign up by December 15th
+        {isEarlyBird ? (
+          <><span className="font-bold">${earlyBirdDiscount} OFF</span> {activeSeason.name} registration — Sign up by {new Date(seasonCta.earlyBirdDeadline!).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</>
+        ) : (
+          <>Registration open for {activeSeason.name} — Secure your spot today</>
+        )}
       </div>
 
       {/* Header */}
@@ -143,7 +149,7 @@ export default function JuniorWinter2026Landing() {
             </p>
 
             <h1 className="font-serif text-6xl lg:text-7xl text-white mb-8 leading-[1.1]">
-              Winter 2026<br />
+              {activeSeason.name}<br />
               Junior Programs
             </h1>
 
@@ -153,14 +159,14 @@ export default function JuniorWinter2026Landing() {
               From Little Stars (ages 3-4) to High Performance training. 
             </p>
             <p className="text-lg text-white/80 mb-10">
-              13-week session: January 6 – April 5, 2026
+              {activeSeason.weeks}-week session: {activeSeason.dates}
             </p>
 
             <a
               href="#register"
               className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone"
             >
-              Register Now & Save ${earlyBirdDiscount}
+              {isEarlyBird ? `Register Now & Save $${earlyBirdDiscount}` : 'Register Now'}
             </a>
           </div>
         </div>
@@ -186,10 +192,12 @@ export default function JuniorWinter2026Landing() {
               <div className="p-12">
                 <div className="mb-10">
                   <h2 className="text-4xl font-serif text-lbta-primary mb-3">
-                    Register for Winter 2026
+                    Register for {activeSeason.name}
                   </h2>
                   <p className="text-lbta-coral font-medium">
-                    ${earlyBirdDiscount} discount ends December 15th • 13-week session
+                    {isEarlyBird
+                      ? `$${earlyBirdDiscount} discount ends ${new Date(seasonCta.earlyBirdDeadline!).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} • ${activeSeason.weeks}-week session`
+                      : `${activeSeason.weeks}-week session • Registration open`}
                   </p>
                 </div>
 
@@ -370,7 +378,7 @@ export default function JuniorWinter2026Landing() {
                     disabled={isSubmitting || !formData.schedule}
                     className="w-full bg-lbta-coral text-white font-bold py-5 px-6 text-lg tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Processing...' : `Claim My $${earlyBirdDiscount} Discount →`}
+                    {isSubmitting ? 'Processing...' : isEarlyBird ? `Claim My $${earlyBirdDiscount} Discount →` : 'Start My Trial →'}
                   </button>
 
                   <p className="text-xs text-center text-gray-500">

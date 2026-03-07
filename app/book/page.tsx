@@ -106,7 +106,7 @@ export default function BookPage() {
             
             <button
               onClick={() => setIsModalOpen(true)}
-              className="w-full bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[15px] py-4 rounded-xl transition-all duration-200 mb-4"
+              className="w-full bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[15px] py-4 rounded-[2px] transition-all duration-200 mb-4 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
             >
               Book Free Trial
             </button>

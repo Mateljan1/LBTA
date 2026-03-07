@@ -56,9 +56,9 @@ export default function BeginnerProgramLanding() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Urgency Banner */}
+      {/* Early Bird Banner */}
       <div className="bg-lbta-coral text-white py-3 text-center text-sm font-medium tracking-wide">
-        <span className="font-bold">${bp.discount} OFF</span> January enrollment — Sign up by {bp.discountDeadline} • Only {bp.spotsRemaining} spots remaining
+        <span className="font-bold">${bp.discount} OFF</span> Spring enrollment — Enroll by {bp.discountDeadline}
       </div>
 
       {/* Header */}
@@ -349,11 +349,11 @@ export default function BeginnerProgramLanding() {
               {/* Left: Program Options */}
               <div className="lg:col-span-2 bg-brand-pacific-dusk p-12 flex flex-col justify-center">
                 <div className="bg-lbta-coral text-white px-4 py-2 text-xs font-bold tracking-wider uppercase text-center mb-6 -mx-12 -mt-12">
-                  ${bp.discount} OFF • Enroll by {bp.discountDeadline} • {bp.spotsRemaining} Spots Left
+                  ${bp.discount} OFF • Enroll by {bp.discountDeadline}
                 </div>
 
                 <h3 className="font-serif text-3xl text-lbta-bone mb-6">
-                  January Cohort
+                  Spring 2026 Cohort
                 </h3>
                 <div className="space-y-6 text-lbta-bone/80 text-sm leading-relaxed">
                   {bp.schedules.map((sched, i) => (
@@ -396,10 +396,10 @@ export default function BeginnerProgramLanding() {
                   <>
                     <div className="mb-8">
                       <h4 className="text-2xl font-serif text-lbta-primary mb-2">
-                        Secure Your Spot
+                        Start Training
                       </h4>
                       <p className="text-sm text-lbta-coral font-medium">
-                        ${bp.discount} discount ends {bp.discountDeadline} • Only {bp.spotsRemaining} spots remaining
+                        ${bp.discount} early bird discount — enroll by {bp.discountDeadline}
                       </p>
                     </div>
 
@@ -472,7 +472,7 @@ export default function BeginnerProgramLanding() {
                         disabled={isSubmitting}
                         className="w-full bg-lbta-coral text-white font-medium py-4 px-6 tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {isSubmitting ? 'Submitting...' : `Claim My $${bp.discount} Discount →`}
+                        {isSubmitting ? 'Submitting...' : `Enroll Now — Save $${bp.discount}`}
                       </button>
 
                       <p className="text-xs text-center text-gray-500">

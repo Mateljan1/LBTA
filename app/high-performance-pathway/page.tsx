@@ -38,7 +38,7 @@ const highPerformanceSchema = {
 const achievements = [
   { stat: '#858 → #258', label: 'ATP Ranking Improvement', detail: 'Karue Sell' },
   { stat: '20+', label: 'D1 College Placements', detail: 'Since 2021' },
-  { stat: '95%', label: 'College Placement Rate', detail: 'For committed players' },
+  { stat: 'Strong', label: 'College Placement Track Record', detail: 'For committed players' },
 ]
 
 const pillars = [
@@ -55,7 +55,7 @@ const pillars = [
     description: 'Competition mindset training. Pressure simulation, match management, and psychological resilience.',
   },
   {
-    title: 'Physical Dominance',
+    title: 'Athletic Foundation',
     description: 'Tennis-specific conditioning, injury prevention, and athletic development for sustainable performance.',
   },
 ]
@@ -269,7 +269,7 @@ export default function HighPerformancePathwayPage() {
           </div>
 
           <p className="font-sans text-[13px] text-white/40 mt-8">
-            Limited spots available · Assessment does not guarantee acceptance
+            Assessment required for enrollment · Acceptance not guaranteed
           </p>
         </div>
       </section>

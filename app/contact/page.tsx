@@ -91,12 +91,13 @@ export default function ContactPage() {
           <p className="font-serif text-[18px] md:text-[24px] leading-[1.3] mb-8 text-white/95">
             Movement. Craft. Community — it starts here.
           </p>
-          <p 
-            className="text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity"
+          <button 
+            type="button"
+            className="text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide hover:opacity-80 transition-opacity min-h-[48px] px-6 rounded-[2px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
             onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Get in Touch ↓
-          </p>
+          </button>
         </div>
       </section>
 
@@ -315,7 +316,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="w-full md:w-auto md:px-12 bg-black hover:bg-lbta-black hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full md:w-auto md:px-12 bg-black hover:bg-lbta-black hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-[2px] transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-50 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                   >
                     {status === 'sending' ? (
                       <>
@@ -377,7 +378,7 @@ export default function ContactPage() {
           </p>
           <Link
             href="/book"
-            className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-full transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px]"
+            className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
           >
             Book a Trial →
           </Link>

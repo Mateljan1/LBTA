@@ -1,15 +1,12 @@
 import type { Metadata } from 'next'
-import pricingSupplemental from '@/data/pricing-supplemental.json'
-
-const earlyBirdDiscount = pricingSupplemental.promotions.earlyBird.discount
 
 export const metadata: Metadata = {
-  title: `Winter 2026 Junior Tennis Registration | $${earlyBirdDiscount} OFF | Laguna Beach Tennis Academy`,
-  description: `Register for Winter 2026 junior tennis programs. Ages 3-18, ATP/WTA coaching, small groups. $${earlyBirdDiscount} off by December 15th. 13-week session starts January 6.`,
-  keywords: 'junior tennis Laguna Beach, kids tennis Winter 2026, youth tennis program, tennis registration, ATP coaching juniors, college tennis recruitment',
+  title: 'Junior Tennis Registration | Laguna Beach Tennis Academy',
+  description: 'Register for junior tennis programs. Ages 3-18, ATP/WTA coaching, small groups. Quarterly sessions with early bird pricing available.',
+  keywords: 'junior tennis Laguna Beach, kids tennis program, youth tennis program, tennis registration, ATP coaching juniors, college tennis recruitment',
   openGraph: {
-    title: `Winter 2026 Junior Tennis - $${earlyBirdDiscount} OFF by Dec 15th`,
-    description: `ATP/WTA coaching for ages 3-18. Small groups, proven results. Register by December 15th and save $${earlyBirdDiscount}.`,
+    title: 'Junior Tennis Registration | Laguna Beach Tennis Academy',
+    description: 'Register for junior tennis programs. Ages 3-18, ATP/WTA coaching, small groups. Quarterly sessions with early bird pricing available.',
     type: 'website',
     url: 'https://lagunabeachtennisacademy.com/junior-trial',
   },
