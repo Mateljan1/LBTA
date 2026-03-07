@@ -78,7 +78,7 @@ export default function ChatWidget() {
       const assistantMessage: Message = {
         id: `assistant-${Date.now()}`,
         role: 'assistant',
-        content: data.reply || "I apologize, but I couldn't process that request. Please try again or call us at (949) 464-6645.",
+        content: data.reply || "I apologize, but I couldn't process that request. Please try again or call us at (949) 534-0457.",
         timestamp: new Date()
       }
 
@@ -88,7 +88,7 @@ export default function ChatWidget() {
       setMessages(prev => [...prev, {
         id: `error-${Date.now()}`,
         role: 'assistant',
-        content: "I'm having trouble connecting right now. Please call us directly at (949) 464-6645 or email info@lagunabeachtennisacademy.com",
+        content: "I'm having trouble connecting right now. Please call us directly at (949) 534-0457 or email info@lagunabeachtennisacademy.com",
         timestamp: new Date()
       }])
     } finally {
@@ -397,8 +397,8 @@ export default function ChatWidget() {
           >
             <p style={{ fontSize: '11px', color: '#9ca3af', margin: 0 }}>
               Need immediate help? Call{' '}
-              <a href="tel:9494646645" style={{ color: '#E8956F', textDecoration: 'none', fontWeight: 600 }}>
-                (949) 464-6645
+              <a href="tel:9495340457" style={{ color: '#E8956F', textDecoration: 'none', fontWeight: 600 }}>
+                (949) 534-0457
               </a>
             </p>
           </div>

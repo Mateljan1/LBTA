@@ -409,7 +409,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[register-year] Error:', error instanceof Error ? error.message : 'Unknown error')
     return NextResponse.json(
-      { success: false, error: 'Error processing registration. Please call (949) 464-6645' },
+      { success: false, error: 'Error processing registration. Please call (949) 534-0457' },
       { status: 500 }
     )
   }

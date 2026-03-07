@@ -522,10 +522,10 @@ export default function ApplyScholarshipPage() {
                 EMAIL SCHOLARSHIP TEAM
               </a>
               <a
-                href="tel:9494646645"
+                href="tel:9495340457"
                 className="btn-secondary"
               >
-                CALL (949) 464-6645
+                CALL (949) 534-0457
               </a>
             </div>
           </AnimatedSection>

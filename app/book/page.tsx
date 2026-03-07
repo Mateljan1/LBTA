@@ -57,12 +57,12 @@ export default function BookPage() {
         setIsSuccess(true)
         setTimeout(() => router.push('/thank-you'), 2000)
       } else {
-        alert('Error submitting. Please call (949) 464-6645')
+        alert('Error submitting. Please call (949) 534-0457')
         setIsSubmitting(false)
       }
     } catch (error) {
       console.error('Error:', error)
-      alert('Error submitting. Please call (949) 464-6645')
+      alert('Error submitting. Please call (949) 534-0457')
       setIsSubmitting(false)
     }
   }
@@ -117,11 +117,11 @@ export default function BookPage() {
               </p>
               <div className="flex gap-4">
                 <a 
-                  href="tel:9494646645" 
+                  href="tel:9495340457" 
                   className="flex items-center gap-2 text-black font-sans font-semibold text-[14px] hover:text-black/70 transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  (949) 464-6645
+                  (949) 534-0457
                 </a>
                 <a 
                   href="mailto:support@lagunabeachtennisacademy.com" 

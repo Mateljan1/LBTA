@@ -89,7 +89,7 @@ export default function JuniorWinter2026Landing() {
       }
     } catch (error) {
       console.error('Submission error:', error)
-      alert('Something went wrong. Please call us at (949) 464-6645')
+      alert('Something went wrong. Please call us at (949) 534-0457')
     } finally {
       setIsSubmitting(false)
     }
@@ -113,10 +113,10 @@ export default function JuniorWinter2026Landing() {
             className="h-14 w-auto brightness-0 invert"
           />
           <a
-            href="tel:9494646645"
+            href="tel:9495340457"
             className="text-white font-medium hover:text-white/80 transition text-sm tracking-wide"
           >
-            (949) 464-6645
+            (949) 534-0457
           </a>
         </div>
       </header>
@@ -412,7 +412,7 @@ export default function JuniorWinter2026Landing() {
             Laguna Beach Tennis Academy • Official City Partner Since 2020
           </p>
           <p className="text-sm text-lbta-bone/60">
-            <a href="tel:9494646645" className="text-lbta-coral">(949) 464-6645</a>
+            <a href="tel:9495340457" className="text-lbta-coral">(949) 534-0457</a>
             <span className="mx-3">•</span>
             <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral">
               info@lagunabeachtennisacademy.com

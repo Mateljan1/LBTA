@@ -48,7 +48,7 @@ export default function BeginnerProgramLanding() {
       }
     } catch (error) {
       console.error('Submission error:', error)
-      alert('Something went wrong. Please call us at (949) 464-6645')
+      alert('Something went wrong. Please call us at (949) 534-0457')
     } finally {
       setIsSubmitting(false)
     }
@@ -72,10 +72,10 @@ export default function BeginnerProgramLanding() {
             className="h-14 w-auto brightness-0 invert"
           />
           <a
-            href="tel:9494646645"
+            href="tel:9495340457"
             className="text-white font-medium hover:text-white/80 transition text-sm tracking-wide"
           >
-            (949) 464-6645
+            (949) 534-0457
           </a>
         </div>
       </header>
@@ -121,7 +121,7 @@ export default function BeginnerProgramLanding() {
                 View Program Options
               </a>
               <a
-                href="tel:9494646645"
+                href="tel:9495340457"
                 className="inline-flex items-center justify-center border border-white text-white px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-white/10"
               >
                 Call to Discuss
@@ -520,7 +520,7 @@ export default function BeginnerProgramLanding() {
             Laguna Beach Tennis Academy • Official City of Laguna Beach Tennis Partner Since 2020
           </p>
           <p className="text-sm text-lbta-bone/60 mb-3">
-            <a href="tel:9494646645" className="text-lbta-coral hover:text-lbta-coral-dark transition">(949) 464-6645</a>
+            <a href="tel:9495340457" className="text-lbta-coral hover:text-lbta-coral-dark transition">(949) 534-0457</a>
             <span className="mx-3">•</span>
             <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral hover:text-lbta-coral-dark transition">
               info@lagunabeachtennisacademy.com

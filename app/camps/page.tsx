@@ -448,10 +448,10 @@ export default function CampsPage() {
                 Contact Us
               </Link>
               <a 
-                href="tel:9494646645"
+                href="tel:9495340457"
                 className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
               >
-                Call (949) 464-6645
+                Call (949) 534-0457
               </a>
             </div>
           </AnimatedSection>

@@ -599,8 +599,8 @@ export default function YearRegistrationModal({
           <div className="px-6 py-4 bg-brand-morning-light border-t border-black/5">
             <p className="font-sans text-[12px] text-black/50 text-center">
               🔒 Your information is secure. Questions? Call{' '}
-              <a href="tel:+19494646645" className="text-brand-sunset-cliff hover:underline">
-                (949) 464-6645
+              <a href="tel:+19495340457" className="text-brand-sunset-cliff hover:underline">
+                (949) 534-0457
               </a>
             </p>
           </div>

@@ -280,7 +280,7 @@ export default function Header() {
             {/* Mobile controls */}
             <div className="flex lg:hidden items-center gap-3">
               <a
-                href="tel:9494646645"
+                href="tel:9495340457"
                 className="p-3 min-w-[48px] min-h-[48px] flex items-center justify-center text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors"
                 aria-label="Call us"
               >
@@ -389,11 +389,11 @@ export default function Header() {
               {/* Contact info */}
               <div className="mt-8 pt-6 border-t border-brand-pacific-dusk/5 space-y-3">
                 <a
-                  href="tel:9494646645"
+                  href="tel:9495340457"
                   className="flex items-center gap-3 text-[15px] text-brand-pacific-dusk hover:text-brand-sunset-cliff py-2 transition-colors"
                 >
                   <Phone className="h-4 w-4" />
-                  (949) 464-6645
+                  (949) 534-0457
                 </a>
                 <a
                   href="mailto:support@lagunabeachtennisacademy.com"

@@ -178,7 +178,7 @@ export default function EmbeddedRegistrationPanel({ program, onClose }: Embedded
   // Fallback to external form link if no embedded form configured
   const handleFallbackRegistration = () => {
     // Open contact form or phone call
-    window.open('tel:+19494646645', '_self')
+    window.open('tel:+19495340457', '_self')
   }
 
   return (
@@ -310,7 +310,7 @@ export default function EmbeddedRegistrationPanel({ program, onClose }: Embedded
                   🔒 Your information is secure and will only be used for registration purposes.
                 </p>
                 <p className="font-sans text-[12px] text-black/50">
-                  Questions? Call us at <a href="tel:+19494646645" className="text-brand-sunset-cliff hover:underline">(949) 464-6645</a>
+                  Questions? Call us at <a href="tel:+19495340457" className="text-brand-sunset-cliff hover:underline">(949) 534-0457</a>
                 </p>
               </div>
             </div>
@@ -330,10 +330,10 @@ export default function EmbeddedRegistrationPanel({ program, onClose }: Embedded
               
               <div className="space-y-4">
                 <a
-                  href="tel:+19494646645"
+                  href="tel:+19495340457"
                   className="block bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[16px] py-4 px-8 rounded-full transition-all duration-200 hover:shadow-lg"
                 >
-                  📞 Call (949) 464-6645
+                  📞 Call (949) 534-0457
                 </a>
                 <button
                   onClick={handleClose}

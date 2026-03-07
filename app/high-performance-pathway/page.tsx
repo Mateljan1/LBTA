@@ -261,10 +261,10 @@ export default function HighPerformancePathwayPage() {
               Request Assessment
             </Link>
             <a
-              href="tel:+19494646645"
+              href="tel:+19495340457"
               className="inline-flex items-center justify-center border border-white/30 text-white font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 hover:bg-white/10 transition-all duration-300"
             >
-              Call (949) 464-6645
+              Call (949) 534-0457
             </a>
           </div>
 

@@ -125,12 +125,12 @@ export default function RegistrationModal({ program, onClose }: RegistrationModa
           onClose()
         }, 3000)
       } else {
-        setError(data.message || 'Error processing registration. Please call (949) 464-6645.')
+        setError(data.message || 'Error processing registration. Please call (949) 534-0457.')
         setIsSubmitting(false)
       }
     } catch (err) {
       console.error('Registration error:', err)
-      setError('Error processing registration. Please call (949) 464-6645.')
+      setError('Error processing registration. Please call (949) 534-0457.')
       setIsSubmitting(false)
     }
   }

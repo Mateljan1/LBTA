@@ -120,11 +120,11 @@ export default function ContactPage() {
               <div>
                 <p className="font-sans font-semibold text-[15px] text-black mb-1">Phone</p>
                 <a 
-                  href="tel:9494646645" 
+                  href="tel:9495340457" 
                   className="font-sans text-[14px] text-black/70 hover:text-black/70 transition-colors"
-                  aria-label="Call us at (949) 464-6645"
+                  aria-label="Call us at (949) 534-0457"
                 >
-                  (949) 464-6645
+                  (949) 534-0457
                 </a>
               </div>
             </div>
@@ -329,7 +329,7 @@ export default function ContactPage() {
                   
                   {status === 'error' && (
                     <p className="text-red-600 text-[14px] text-center">
-                      Error sending message. Please call (949) 464-6645
+                      Error sending message. Please call (949) 534-0457
                     </p>
                   )}
                 </form>

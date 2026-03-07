@@ -5,7 +5,7 @@ import { Phone } from 'lucide-react'
 export default function FloatingCallButton() {
   return (
     <a
-      href="tel:9494646645"
+      href="tel:9495340457"
       className="
         fixed bottom-24 right-4 z-40
         md:hidden
@@ -18,7 +18,7 @@ export default function FloatingCallButton() {
         active:scale-95
         transition-all duration-200
       "
-      aria-label="Call (949) 464-6645"
+      aria-label="Call (949) 534-0457"
     >
       <Phone className="w-6 h-6" />
     </a>

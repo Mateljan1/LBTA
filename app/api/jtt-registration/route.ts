@@ -224,7 +224,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[JTT] Error processing registration:', error)
     return NextResponse.json(
-      { success: false, error: 'Failed to process registration. Please try again or call (949) 464-6645.' },
+      { success: false, error: 'Failed to process registration. Please try again or call (949) 534-0457.' },
       { status: 500 }
     )
   }

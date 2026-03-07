@@ -275,7 +275,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
                   {/* Trust Note */}
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/50 text-center mt-6">
-                    Secure registration · Questions? <a href="tel:9494646645" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 464-6645</a>
+                    Secure registration · Questions? <a href="tel:9495340457" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 534-0457</a>
                   </p>
                 </div>
               ) : (
@@ -427,7 +427,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
                   {/* Trust Note */}
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/50 text-center mt-6">
-                    Secure registration · Questions? <a href="tel:9494646645" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 464-6645</a>
+                    Secure registration · Questions? <a href="tel:9495340457" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 534-0457</a>
                   </p>
                 </form>
               )}

@@ -9,7 +9,7 @@ export function OrganizationSchema() {
     "name": "Laguna Beach Tennis Academy",
     "description": "Professional tennis training academy in Laguna Beach offering programs for ages 3 to professional, including junior development, adult programs, and high-performance training with ATP/WTA-trained coaches.",
     "url": "https://lagunabeachtennisacademy.com",
-    "telephone": "+1-949-464-6645",
+    "telephone": "+1-949-534-0457",
     "email": "support@lagunabeachtennisacademy.com",
     "address": {
       "@type": "PostalAddress",

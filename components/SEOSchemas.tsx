@@ -67,7 +67,7 @@ export function ReviewSchema() {
     "name": "Laguna Beach Tennis Academy",
     "@id": "https://lagunabeachtennisacademy.com",
     "image": "https://lagunabeachtennisacademy.com/images/hero/laguna-horizon.webp",
-    "telephone": "+1-949-464-6645",
+    "telephone": "+1-949-534-0457",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Moulton Meadows Park, 1098 Balboa Ave",

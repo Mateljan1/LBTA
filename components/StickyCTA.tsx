@@ -90,7 +90,7 @@ export default function StickyCTA({
         
         {/* Secondary CTA - Call */}
         <a
-          href="tel:+19494646645"
+          href="tel:+19495340457"
           className="flex items-center justify-center w-14 h-14 bg-brand-morning-light rounded-full border border-black/10 active:scale-95 transition-transform"
           aria-label="Call us"
         >

@@ -148,7 +148,7 @@ vercel --prod
 Pricing lives in `/data/*.json` files — never hardcode in components.
 
 ### Contact
-- Phone: (949) 464-6645
+- Phone: (949) 534-0457
 - Email: support@lagunabeachtennisacademy.com
 - Address: 1098 Balboa Ave, Laguna Beach, CA 92651
 - Hours: Mon-Fri 7AM-9PM, Sat-Sun 8AM-6PM
@@ -210,7 +210,7 @@ Edit coach data in `app/coaches/page.tsx`.
 
 For questions:
 - Email: support@lagunabeachtennisacademy.com
-- Phone: (949) 464-6645
+- Phone: (949) 534-0457
 
 ## License
 

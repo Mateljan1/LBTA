@@ -138,7 +138,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[Booking] Error:', error)
     return NextResponse.json(
-      { success: false, error: 'Error processing request. Please call (949) 464-6645' },
+      { success: false, error: 'Error processing request. Please call (949) 534-0457' },
       { status: 500 }
     )
   }

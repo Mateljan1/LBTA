@@ -219,11 +219,11 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
         setIsSuccess(true)
       } else {
         console.error('Registration failed:', result)
-        alert(result.message || 'Registration failed. Please try again or call (949) 464-6645')
+        alert(result.message || 'Registration failed. Please try again or call (949) 534-0457')
       }
     } catch (error) {
       console.error('Registration error:', error)
-      alert('Registration failed. Please try again or call (949) 464-6645')
+      alert('Registration failed. Please try again or call (949) 534-0457')
     } finally {
       setIsSubmitting(false)
     }
@@ -373,7 +373,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
 
                   {/* Trust Note */}
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/50 text-center mt-6">
-                    Secure registration · Questions? <a href="tel:9494646645" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 464-6645</a>
+                    Secure registration · Questions? <a href="tel:9495340457" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 534-0457</a>
                   </p>
                 </div>
               ) : (
@@ -525,7 +525,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
 
                   {/* Trust Note */}
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/50 text-center mt-6">
-                    Secure registration · Questions? <a href="tel:9494646645" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 464-6645</a>
+                    Secure registration · Questions? <a href="tel:9495340457" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 534-0457</a>
                   </p>
                 </form>
               )}

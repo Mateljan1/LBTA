@@ -17,7 +17,7 @@ const localBusinessSchema = {
   description:
     'Premier tennis academy in Laguna Beach offering junior programs, adult lessons, high-performance training, and fitness classes. Movement-first coaching philosophy.',
   url: 'https://lagunabeachtennisacademy.com',
-  telephone: '+1-949-464-6645',
+  telephone: '+1-949-534-0457',
   email: 'support@lagunabeachtennisacademy.com',
   address: {
     '@type': 'PostalAddress',
