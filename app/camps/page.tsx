@@ -114,13 +114,13 @@ export default function CampsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="#camps"
-                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
               >
                 View Camps
               </Link>
               <Link 
                 href="/schedules"
-                className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
               >
                 Junior Team Tennis →
               </Link>
@@ -158,7 +158,7 @@ export default function CampsPage() {
                 <button
                   key={season}
                   onClick={() => setSelectedSeason(season)}
-                  className={`px-6 py-2.5 rounded-full font-sans text-[13px] font-medium uppercase tracking-[1px] transition-all duration-300 ${
+                  className={`px-6 py-2.5 rounded-[2px] font-sans text-[13px] font-medium uppercase tracking-[1px] transition-all duration-300 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
                     selectedSeason === season
                       ? 'bg-black text-white'
                       : 'bg-gray-100 text-black/70 hover:bg-gray-200'
@@ -264,7 +264,7 @@ export default function CampsPage() {
                         
                         <button
                           onClick={() => handleRegisterClick(camp)}
-                          className="block w-full text-center bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[13px] py-3 rounded transition-all duration-300 uppercase tracking-[1px]"
+                          className="block w-full text-center bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[13px] py-3 rounded-[2px] transition-all duration-300 uppercase tracking-[1px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                         >
                           Register Now
                         </button>
@@ -360,7 +360,7 @@ export default function CampsPage() {
               </p>
               <Link 
                 href="/schedules"
-                className="inline-block bg-white hover:bg-gray-100 text-black font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-white hover:bg-gray-100 text-black font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
               >
                 View Schedule →
               </Link>
@@ -443,13 +443,13 @@ export default function CampsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/contact"
-                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
               >
                 Contact Us
               </Link>
               <a 
                 href="tel:9495340457"
-                className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px]"
+                className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
               >
                 Call (949) 534-0457
               </a>

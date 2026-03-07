@@ -64,7 +64,7 @@ export default function AdultTrialLanding() {
           />
           <a
             href="tel:9495340457"
-            className="text-white font-medium hover:text-white/80 transition text-sm tracking-wide"
+            className="text-white font-medium hover:text-white/80 transition text-sm tracking-wide focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-transparent rounded-sm"
           >
             (949) 534-0457
           </a>
@@ -107,13 +107,13 @@ export default function AdultTrialLanding() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#trial"
-                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone"
+                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone rounded-[2px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
               >
                 Start Your Trial
               </a>
               <a
                 href="tel:9495340457"
-                className="inline-flex items-center justify-center border border-white text-white px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-white/10"
+                className="inline-flex items-center justify-center border border-white text-white px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-white/10 rounded-[2px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
               >
                 Call to Discuss
               </a>
@@ -312,7 +312,7 @@ export default function AdultTrialLanding() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-lbta-coral text-white font-medium py-4 px-6 tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-lbta-coral text-white font-medium py-4 px-6 tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed rounded-[2px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                       >
                         {isSubmitting ? 'Submitting...' : 'Request Trial Session'}
                       </button>
@@ -362,16 +362,16 @@ export default function AdultTrialLanding() {
             Laguna Beach Tennis Academy • Official City of Laguna Beach Tennis Partner Since 2020
           </p>
           <p className="text-sm text-lbta-bone/60 mb-3">
-            <a href="tel:9495340457" className="text-lbta-coral hover:text-lbta-coral-dark transition">(949) 534-0457</a>
+            <a href="tel:9495340457" className="text-lbta-coral hover:text-lbta-coral-dark transition focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-pacific-dusk rounded-sm">(949) 534-0457</a>
             <span className="mx-3">•</span>
-            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral hover:text-lbta-coral-dark transition">
+            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral hover:text-lbta-coral-dark transition focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-pacific-dusk rounded-sm">
               info@lagunabeachtennisacademy.com
             </a>
           </p>
           <p className="text-xs text-lbta-bone/40">
-            <a href="/privacy" className="hover:text-lbta-coral transition">Privacy Policy</a>
+            <a href="/privacy" className="hover:text-lbta-coral transition focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-pacific-dusk rounded-sm">Privacy Policy</a>
             <span className="mx-2">•</span>
-            <a href="/terms" className="hover:text-lbta-coral transition">Terms of Service</a>
+            <a href="/terms" className="hover:text-lbta-coral transition focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-pacific-dusk rounded-sm">Terms of Service</a>
           </p>
         </div>
       </footer>

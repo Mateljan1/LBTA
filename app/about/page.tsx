@@ -269,13 +269,13 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-lg hover:bg-white/90 transition-all min-h-[52px]"
+              className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/90 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-lbta-black"
             >
               Book Trial Session
             </Link>
             <Link
               href="/coaches"
-              className="inline-flex items-center justify-center border border-white/30 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-lg hover:bg-white/10 transition-all min-h-[52px]"
+              className="inline-flex items-center justify-center border border-white/30 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/10 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-lbta-black"
             >
               Meet Our Coaches
             </Link>

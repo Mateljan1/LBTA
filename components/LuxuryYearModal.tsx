@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // ============================================================
@@ -59,6 +59,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const modalRef = useRef<HTMLDivElement>(null)
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -111,6 +112,37 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
     window.addEventListener('keydown', handleEscape)
     return () => window.removeEventListener('keydown', handleEscape)
   }, [onClose])
+
+  // Focus trap
+  useEffect(() => {
+    if (!isOpen) return
+    const modal = modalRef.current
+    if (!modal) return
+    const focusableElements = modal.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements[0]
+    const lastElement = focusableElements[focusableElements.length - 1]
+
+    firstElement?.focus()
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault()
+          lastElement?.focus()
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault()
+          firstElement?.focus()
+        }
+      }
+    }
+    modal.addEventListener('keydown', handleTab)
+    return () => modal.removeEventListener('keydown', handleTab)
+  }, [isOpen])
 
   if (!data) return null
 
@@ -250,12 +282,16 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
           
           {/* Modal */}
           <motion.div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 20 }}
             transition={springTransition}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[480px] max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-[480px] max-h-[90vh] bg-white rounded-lg shadow-2xl overflow-hidden"
           >
             {/* Progress Bar */}
             <div className="flex h-1">
@@ -307,7 +343,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                   <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
                     {type === 'camp' ? 'Camp Registration' : 'JTT Registration'}
                   </p>
-                  <h2 className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
+                  <h2 id="modal-title" className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
                     {programInfo.name}
                   </h2>
                   <p className="font-sans text-[14px] text-brand-pacific-dusk/60 mb-2">
@@ -326,7 +362,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           setSelectedOption(option.value)
                           setSelectedPrice(option.price)
                         }}
-                        className={`w-full p-5 rounded-xl text-left transition-all duration-200 ${
+                        className={`w-full p-5 rounded-[2px] text-left transition-all duration-200 ${
                           selectedOption === option.value
                             ? 'bg-lbta-black text-white'
                             : 'bg-brand-sandstone hover:bg-lbta-stone text-brand-pacific-dusk'
@@ -362,7 +398,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                   <button
                     onClick={() => selectedOption && setStep(2)}
                     disabled={!selectedOption}
-                    className={`w-full py-4 rounded-xl font-sans text-[14px] font-medium tracking-[0.02em] transition-all duration-200 ${
+                    className={`w-full py-4 rounded-[2px] min-h-[48px] font-sans text-[14px] font-medium tracking-[0.02em] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
                       selectedOption
                         ? 'bg-lbta-black text-white hover:bg-brand-pacific-dusk/80'
                         : 'bg-lbta-stone text-brand-pacific-dusk/50 cursor-not-allowed'
@@ -394,10 +430,11 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                     {/* Name Row */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-firstName" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                           First Name
                         </label>
                         <input
+                          id="modal-firstName"
                           type="text"
                           required
                           value={formData.firstName}
@@ -407,10 +444,11 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                         />
                       </div>
                       <div>
-                        <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-lastName" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                           Last Name
                         </label>
                         <input
+                          id="modal-lastName"
                           type="text"
                           required
                           value={formData.lastName}
@@ -423,10 +461,11 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
 
                     {/* Email */}
                     <div>
-                      <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                      <label htmlFor="modal-email" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                         Email Address
                       </label>
                       <input
+                        id="modal-email"
                         type="email"
                         required
                         value={formData.email}
@@ -438,10 +477,11 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
 
                     {/* Phone */}
                     <div>
-                      <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                      <label htmlFor="modal-phone" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                         Phone Number
                       </label>
                       <input
+                        id="modal-phone"
                         type="tel"
                         required
                         value={formData.phone}
@@ -454,10 +494,11 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                     {/* Player Info */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-playerName" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                           Player Name
                         </label>
                         <input
+                          id="modal-playerName"
                           type="text"
                           value={formData.playerName}
                           onChange={(e) => setFormData({...formData, playerName: e.target.value})}
@@ -466,10 +507,11 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                         />
                       </div>
                       <div>
-                        <label className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-playerAge" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
                           Age
                         </label>
                         <input
+                          id="modal-playerAge"
                           type="number"
                           value={formData.playerAge}
                           onChange={(e) => setFormData({...formData, playerAge: e.target.value})}
@@ -491,8 +533,9 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           <button
                             key={level}
                             type="button"
+                            aria-pressed={formData.experience === level}
                             onClick={() => setFormData({...formData, experience: level})}
-                            className={`flex-1 py-3 rounded-lg font-sans text-[13px] font-medium capitalize transition-all duration-200 ${
+                            className={`flex-1 py-3 min-h-[48px] rounded-lg font-sans text-[13px] font-medium capitalize transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/30 ${
                               formData.experience === level
                                 ? 'bg-lbta-black text-white'
                                 : 'bg-brand-sandstone text-lbta-slate hover:bg-lbta-stone'
@@ -510,14 +553,14 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="px-6 py-4 rounded-xl font-sans text-[14px] font-medium text-lbta-slate hover:text-brand-pacific-dusk hover:bg-brand-sandstone transition-all"
+                      className="px-6 py-4 rounded-[2px] min-h-[48px] font-sans text-[14px] font-medium text-lbta-slate hover:text-brand-pacific-dusk hover:bg-brand-sandstone transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                     >
                       ← Back
                     </button>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="flex-1 py-4 rounded-xl bg-lbta-black text-white font-sans text-[14px] font-medium tracking-[0.02em] hover:bg-brand-pacific-dusk/80 disabled:bg-lbta-stone transition-all"
+                      className="flex-1 py-4 rounded-[2px] min-h-[48px] bg-lbta-black text-white font-sans text-[14px] font-medium tracking-[0.02em] hover:bg-brand-pacific-dusk/80 disabled:bg-lbta-stone transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                     >
                       {isSubmitting ? 'Submitting...' : 'Complete Registration'}
                     </button>

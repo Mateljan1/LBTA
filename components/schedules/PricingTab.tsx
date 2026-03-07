@@ -105,7 +105,7 @@ export default function PricingTab({
         <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-center mb-4">
           2026 Program Pricing
         </h2>
-        <p className="font-sans text-[14px] md:text-[16px] text-black/60 text-center mb-10 max-w-2xl mx-auto">
+        <p className="font-sans text-[14px] md:text-[16px] text-brand-pacific-dusk/80 text-center mb-10 max-w-2xl mx-auto">
           Quarterly, monthly, and private coaching options. All programs include makeup classes.
         </p>
 
@@ -125,13 +125,13 @@ export default function PricingTab({
               <table className="w-full" role="table" aria-label={`${seasonMeta.label} program prices`}>
                 <thead>
                   <tr className="border-b border-gray-200">
-                    <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Program</th>
-                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">1x/week</th>
-                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">2x/week</th>
-                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">3x/week</th>
-                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Saturday 1x</th>
-                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Monthly</th>
-                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Drop-in</th>
+                    <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">Program</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">1x/week</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">2x/week</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">3x/week</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">Saturday 1x</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">Monthly</th>
+                    <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">Drop-in</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -143,7 +143,7 @@ export default function PricingTab({
                         <td className="px-6 py-4">
                           <div className="font-sans text-[15px] font-semibold text-black">{p.program}</div>
                           {p.category && (
-                            <div className="font-sans text-[12px] text-black/60">{p.category}</div>
+                            <div className="font-sans text-[12px] text-brand-pacific-dusk/80">{p.category}</div>
                           )}
                         </td>
                         <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
@@ -161,7 +161,7 @@ export default function PricingTab({
                         <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
                           {row.monthly != null ? `$${row.monthly}` : '—'}
                         </td>
-                        <td className="text-center px-4 py-4 font-sans text-[14px] text-black/50">
+                        <td className="text-center px-4 py-4 font-sans text-[14px] text-brand-pacific-dusk/70">
                           {row.drop_in != null ? `$${row.drop_in}` : '—'}
                         </td>
                       </tr>
@@ -177,8 +177,8 @@ export default function PricingTab({
                   {springSummerData.discounts.map((d, i) => (
                     <li key={i} className="font-sans text-[14px] text-black/80 flex items-baseline gap-2">
                       <span className="font-semibold text-black">{d.label}</span>
-                      {d.percent != null && <span className="text-black/60">{d.percent}%</span>}
-                      {d.description && <span className="text-black/60">— {d.description}</span>}
+                      {d.percent != null && <span className="text-brand-pacific-dusk/80">{d.percent}%</span>}
+                      {d.description && <span className="text-brand-pacific-dusk/80">— {d.description}</span>}
                     </li>
                   ))}
                 </ul>
@@ -200,13 +200,13 @@ export default function PricingTab({
                   key === 'winter' ? 'bg-black/5 border-2 border-black' : 'bg-gray-50'
                 }`}
               >
-                <div className="font-sans text-[13px] text-black/60 uppercase tracking-wider mb-1">
+                <div className="font-sans text-[13px] text-brand-pacific-dusk/80 uppercase tracking-wider mb-1">
                   {season.name.split(' ')[0]}
                 </div>
                 <div className="font-serif text-[24px] font-bold text-black">
                   {season.weeks} weeks
                 </div>
-                <div className={`font-sans text-[14px] mt-1 ${key === 'winter' ? 'text-black font-semibold' : 'text-black/60'}`}>
+                <div className={`font-sans text-[14px] mt-1 ${key === 'winter' ? 'text-black font-semibold' : 'text-brand-pacific-dusk/80'}`}>
                   {key === 'winter' ? 'Base Rate' : `${Math.round(season.multiplier * 100)}% of Winter`}
                 </div>
               </div>
@@ -229,13 +229,13 @@ export default function PricingTab({
             <table className="w-full" role="table" aria-label="Quarterly program pricing">
               <thead>
                 <tr className="border-b border-gray-200">
-                  <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Program</th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">1x/week</th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">
+                  <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">Program</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">1x/week</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">
                     2x/week
                   </th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">3x/week</th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase tracking-wider">Drop-in</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">3x/week</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-wider">Drop-in</th>
                 </tr>
               </thead>
               <tbody>
@@ -243,8 +243,8 @@ export default function PricingTab({
                     <tr key={key} className="border-b border-gray-100 hover:bg-gray-50">
                       <td className="px-6 py-4">
                         <div className="font-sans text-[15px] font-semibold text-black">{program.label}</div>
-                        <div className="font-sans text-[12px] text-black/60">{program.subtitle}</div>
-                        <div className="font-sans text-[11px] text-black/40 mt-1">{program.ages} · {program.duration}</div>
+                        <div className="font-sans text-[12px] text-brand-pacific-dusk/80">{program.subtitle}</div>
+                        <div className="font-sans text-[11px] text-brand-pacific-dusk/60 mt-1">{program.ages} · {program.duration}</div>
                       </td>
                       <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
                         ${program.winterPrices['1x']}
@@ -255,7 +255,7 @@ export default function PricingTab({
                       <td className="text-center px-4 py-4 font-sans text-[16px] text-black/70">
                         {'3x' in program.winterPrices ? `$${(program.winterPrices as any)['3x']}` : '—'}
                       </td>
-                      <td className="text-center px-4 py-4 font-sans text-[14px] text-black/50">
+                      <td className="text-center px-4 py-4 font-sans text-[14px] text-brand-pacific-dusk/70">
                         ${program.dropIn}/class
                       </td>
                     </tr>
@@ -304,10 +304,10 @@ export default function PricingTab({
             {Object.entries(monthlyPrograms).map(([key, program]) => (
               <div key={key} className="p-6 text-center">
                 <div className="font-sans text-[16px] font-semibold text-black mb-1">{program.label}</div>
-                <div className="font-sans text-[12px] text-black/60 mb-3">{program.subtitle}</div>
+                <div className="font-sans text-[12px] text-brand-pacific-dusk/80 mb-3">{program.subtitle}</div>
                 <div className="font-serif text-[32px] font-bold text-black">${program.price}</div>
-                <div className="font-sans text-[12px] text-black/60">/month</div>
-                <div className="font-sans text-[13px] text-black/50 mt-2">Drop-in: ${program.dropIn}</div>
+                <div className="font-sans text-[12px] text-brand-pacific-dusk/80">/month</div>
+                <div className="font-sans text-[13px] text-brand-pacific-dusk/70 mt-2">Drop-in: ${program.dropIn}</div>
               </div>
             ))}
           </div>
@@ -325,12 +325,12 @@ export default function PricingTab({
             <table className="w-full" role="table" aria-label="Private coaching rates by coach">
               <thead>
                 <tr className="border-b border-gray-200">
-                  <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">Coach</th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">60 min</th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">90 min</th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">10-Pack</th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">20-Pack</th>
-                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-black/60 uppercase">Availability</th>
+                  <th className="text-left px-6 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase">Coach</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase">60 min</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase">90 min</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase">10-Pack</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase">20-Pack</th>
+                  <th className="text-center px-4 py-4 font-sans text-[13px] font-semibold text-brand-pacific-dusk/80 uppercase">Availability</th>
                 </tr>
               </thead>
               <tbody>
@@ -338,7 +338,7 @@ export default function PricingTab({
                   <tr key={coach.coach} className="border-b border-gray-100 hover:bg-gray-50">
                     <td className="px-6 py-4">
                       <div className="font-sans text-[15px] font-semibold text-black">{coach.coach}</div>
-                      <div className="font-sans text-[12px] text-black/60">{coach.title}</div>
+                      <div className="font-sans text-[12px] text-brand-pacific-dusk/80">{coach.title}</div>
                     </td>
                     <td className="text-center px-4 py-4 font-sans text-[16px] text-black">${coach.rate60}</td>
                     <td className="text-center px-4 py-4 font-sans text-[16px] text-black">${coach.rate90}</td>
@@ -372,7 +372,7 @@ export default function PricingTab({
                     <span className="font-sans text-[15px] font-medium text-black">
                       {discount.type === 'fixed' ? `$${discount.amount}` : `${discount.amount}%`} off
                     </span>
-                    <span className="font-sans text-[14px] text-black/60 ml-1">— {discount.description}</span>
+                    <span className="font-sans text-[14px] text-brand-pacific-dusk/80 ml-1">— {discount.description}</span>
                   </div>
                 </li>
               ))}
@@ -394,7 +394,7 @@ export default function PricingTab({
         </div>
 
         {/* Payment Note */}
-        <p className="text-center font-sans text-[13px] text-black/50 mt-8 italic">
+        <p className="text-center font-sans text-[13px] text-brand-pacific-dusk/70 mt-8 italic">
           Payment plans available for quarterly programs. Contact us for details.
         </p>
       </div>

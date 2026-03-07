@@ -17,6 +17,7 @@ export default function FloatingCallButton() {
         hover:bg-gray-800
         active:scale-95
         transition-all duration-200
+        focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2
       "
       aria-label="Call (949) 534-0457"
     >

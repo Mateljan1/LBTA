@@ -63,7 +63,7 @@ export default function ProgramsTab({
       <div className="bg-brand-morning-light py-4 border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6">
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="font-sans text-[14px] text-black/60 mr-2">Season:</span>
+            <span className="font-sans text-[14px] text-brand-pacific-dusk/80 mr-2">Season:</span>
             {Object.entries(seasons).map(([key, season]) => (
               <button
                 key={key}
@@ -119,7 +119,7 @@ export default function ProgramsTab({
             </select>
           </div>
           
-          <p className="hidden md:block text-center text-[13px] text-black/60 font-sans mt-4 italic">
+          <p className="hidden md:block text-center text-[13px] text-brand-pacific-dusk/80 font-sans mt-4 italic">
             {seasonLabel}: {seasonDates} · {seasonWeeks} weeks · Prices adjust by season length
           </p>
         </div>
@@ -141,13 +141,13 @@ export default function ProgramsTab({
           <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-black mb-2 text-center">
             {seasonLabel} Programs
           </h2>
-          <p className="font-sans text-[14px] md:text-[16px] text-black/60 mb-10 text-center">
+          <p className="font-sans text-[14px] md:text-[16px] text-brand-pacific-dusk/80 mb-10 text-center">
             {filteredPrograms.length} program{filteredPrograms.length !== 1 ? 's' : ''} available
           </p>
           
           {filteredPrograms.length === 0 ? (
             <div className="text-center py-16 bg-white rounded-2xl">
-              <p className="font-sans text-[16px] text-black/60">
+              <p className="font-sans text-[16px] text-brand-pacific-dusk/80">
                 No programs match your filters.
               </p>
               <button

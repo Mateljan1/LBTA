@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-12 gap-12 md:gap-8">
           {/* Brand */}
           <div className="md:col-span-5">
-            <Link href="/" className="inline-block mb-6">
+            <Link href="/" className="inline-block mb-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm">
               <Image
                 src="/logos/LBTAblktext.png"
                 alt="Laguna Beach Tennis Academy"
@@ -34,7 +34,7 @@ export default function Footer() {
                 href="https://instagram.com/lagunabeachtennisacademy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/40 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300"
+                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/40 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
                 aria-label="Follow us on Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@ export default function Footer() {
                 href="https://facebook.com/lagunabeachtennisacademy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/40 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300"
+                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/40 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
                 aria-label="Follow us on Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -69,30 +69,30 @@ export default function Footer() {
                     { name: 'Schedule & Pricing', href: '/schedules' },
                   ].map((item) => (
                     <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                    <Link
+                      href={item.href}
+                      className="text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              <div>
-                <h4 className="text-eyebrow text-white/30 mb-5">Academy</h4>
-                <ul className="space-y-3">
-                  {[
-                    { name: 'About Us', href: '/about' },
-                    { name: 'Our Coaches', href: '/coaches' },
-                    { name: 'Book a Trial', href: '/book' },
-                    { name: 'Racquet Rescue', href: '/racquet-rescue' },
-                  ].map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300"
+            <div>
+              <h4 className="text-eyebrow text-white/30 mb-5">Academy</h4>
+              <ul className="space-y-3">
+                {[
+                  { name: 'About Us', href: '/about' },
+                  { name: 'Our Coaches', href: '/coaches' },
+                  { name: 'Book a Trial', href: '/book' },
+                  { name: 'Racquet Rescue', href: '/racquet-rescue' },
+                ].map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                       >
                         {item.name}
                       </Link>
@@ -107,7 +107,7 @@ export default function Footer() {
                   <li>
                     <a
                       href="tel:9495340457"
-                      className="text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300"
+                      className="text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       (949) 534-0457
                     </a>
@@ -115,7 +115,7 @@ export default function Footer() {
                   <li>
                     <a
                       href="mailto:support@lagunabeachtennisacademy.com"
-                      className="text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 break-all"
+                      className="text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       support@lbta.com
                     </a>
@@ -144,13 +144,13 @@ export default function Footer() {
             <div className="flex items-center gap-6">
               <Link
                 href="/privacy"
-                className="text-[12px] font-sans font-light text-white/30 hover:text-white/50 transition-colors"
+                className="text-[12px] font-sans font-light text-white/30 hover:text-white/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
               >
                 Privacy
               </Link>
               <Link
                 href="/terms"
-                className="text-[12px] font-sans font-light text-white/30 hover:text-white/50 transition-colors"
+                className="text-[12px] font-sans font-light text-white/30 hover:text-white/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
               >
                 Terms
               </Link>
