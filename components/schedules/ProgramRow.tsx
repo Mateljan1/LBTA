@@ -11,8 +11,8 @@ interface ProgramRowProps {
 
 export default function ProgramRow({ program, onRegister, isLast }: ProgramRowProps) {
   const getPrice = (): { amount: number; label: string } | null => {
-    if (program.pricing['1x']) return { amount: program.pricing['1x'], label: '/quarter' }
-    if (program.pricing.monthly) return { amount: program.pricing.monthly, label: '/month' }
+    if (program.pricing.monthly) return { amount: program.pricing.monthly, label: '/mo' }
+    if (program.pricing['1x']) return { amount: program.pricing['1x'], label: '/session' }
     return null
   }
 

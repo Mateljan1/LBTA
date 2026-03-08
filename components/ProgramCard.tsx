@@ -42,17 +42,15 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
   
-  // Get base price for display
   const getBasePrice = () => {
-    if (program.pricing['1x']) return program.pricing['1x']
     if (program.pricing.monthly) return program.pricing.monthly
+    if (program.pricing['1x']) return program.pricing['1x']
     return null
   }
   
-  // Get billing period label
   const getBillingLabel = () => {
-    if (program.pricing['1x']) return '/quarter'
-    if (program.pricing.monthly) return '/month'
+    if (program.pricing.monthly) return '/mo'
+    if (program.pricing['1x']) return '/session'
     return ''
   }
   
@@ -237,9 +235,9 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             
             {/* Billing Note */}
             <p className="font-sans text-[12px] text-brand-pacific-dusk/50 mt-3">
-              {program.pricing['1x'] 
-                ? 'Billed quarterly · 13 weeks' 
-                : 'Billed monthly'}
+              {program.pricing.monthly
+                ? 'Billed monthly'
+                : 'Billed per session'}
             </p>
           </div>
           

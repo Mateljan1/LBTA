@@ -155,10 +155,21 @@ export function springSummerToProgram(
 ): ProgramForDisplay {
   const raw = p.pricing as Record<string, unknown>
   const seasonPrices = raw[season] as Record<string, number> | undefined
-  const monthlyPrices = raw.monthly as Record<string, number> | undefined
+  const monthlyRaw = raw.monthly
   const dropIn = raw.drop_in as number | undefined
-  const source = seasonPrices ?? monthlyPrices ?? {}
-  const pricing: Record<string, number> = { ...source }
+  const pricing: Record<string, number> = {}
+
+  if (seasonPrices) {
+    Object.assign(pricing, seasonPrices)
+  } else if (typeof monthlyRaw === 'number') {
+    pricing.monthly = monthlyRaw
+  } else if (monthlyRaw && typeof monthlyRaw === 'object') {
+    const monthlyObj = monthlyRaw as Record<string, number>
+    Object.assign(pricing, monthlyObj)
+    const base = monthlyObj['1x'] ?? Math.min(...Object.values(monthlyObj).filter((v): v is number => typeof v === 'number'))
+    if (typeof base === 'number' && isFinite(base)) pricing.monthly = base
+  }
+
   if (typeof dropIn === 'number') pricing.drop_in = dropIn
   return {
     id: p.id,

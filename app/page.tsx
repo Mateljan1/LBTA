@@ -70,7 +70,7 @@ export default function Home() {
                   fill
                   priority
                   className="object-cover"
-                  style={{ objectPosition: '50% 30%' }}
+                  style={{ objectPosition: '50% 25%' }}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   quality={90}
                 />
@@ -239,13 +239,13 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {[1, 2, 3, 4, 5, 6].map((num, i) => (
               <AnimatedSection key={num} delay={i * 100}>
-                <div className="relative aspect-[3/4] overflow-hidden rounded-subtle">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
                   <Image
                     src={`/images/community/community-${num}.webp`}
                     alt={`LBTA community member ${num}`}
                     fill
                     className="object-cover image-zoom"
-                    style={{ objectPosition: '50% 20%' }}
+                    style={{ objectPosition: '50% 55%' }}
                     sizes="(max-width: 768px) 50vw, 33vw"
                     quality={90}
                   />
