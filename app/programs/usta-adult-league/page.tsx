@@ -3,6 +3,7 @@ import Link from 'next/link'
 import leagues2026 from '@/data/leagues-2026.json'
 import pricingData from '@/data/pricing-supplemental.json'
 import { LeagueEventSchema } from '@/app/schema'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 
 const usta = pricingData.ustaAdultLeague
 
@@ -38,7 +39,7 @@ export default function USTAAdultLeaguePage() {
           <span className="text-eyebrow text-brand-victoria-cove/80 mb-4 block">
             Spring & Summer 2026 — Orange County
           </span>
-          <h1 className="font-serif text-display-xl text-white mb-6 max-w-3xl">
+          <h1 className="font-headline text-display-xl text-white mb-6 max-w-3xl">
             USTA Adult League Play
           </h1>
           <p className="text-[1.1rem] font-sans font-light text-white/60 max-w-2xl leading-relaxed">
@@ -48,12 +49,12 @@ export default function USTAAdultLeaguePage() {
         </div>
       </section>
 
-      <div className="horizon-line" />
+      <HorizonDivider />
 
       {/* How it works */}
       <section className="container-lbta section">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-display text-brand-pacific-dusk mb-4">
+          <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">
             How It Works
           </h2>
           <p className="text-body text-brand-pacific-dusk/60 max-w-2xl mb-12 leading-relaxed">
@@ -84,7 +85,7 @@ export default function USTAAdultLeaguePage() {
                 <span className="text-eyebrow text-brand-sunset-cliff mb-3 block">
                   {item.step}
                 </span>
-                <h3 className="font-serif text-headline-sm text-brand-pacific-dusk mb-2">
+                <h3 className="font-headline text-headline-sm text-brand-pacific-dusk mb-2">
                   {item.title}
                 </h3>
                 <p className="text-[15px] font-sans font-light text-brand-pacific-dusk/55 leading-relaxed">
@@ -121,7 +122,7 @@ export default function USTAAdultLeaguePage() {
       <section className="bg-brand-morning-light">
         <div className="container-lbta section">
           <div className="max-w-4xl mx-auto">
-            <h2 className="font-serif text-display text-brand-pacific-dusk mb-4">
+            <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">
               Choose Your League
             </h2>
             <p className="text-body text-brand-pacific-dusk/60 mb-12">
@@ -145,7 +146,7 @@ export default function USTAAdultLeaguePage() {
                           Roster due {league.deadline}
                         </span>
                       </div>
-                      <h3 className="font-serif text-headline text-brand-pacific-dusk">
+                      <h3 className="font-headline text-headline text-brand-pacific-dusk">
                         {league.name}
                       </h3>
                     </div>
@@ -189,7 +190,7 @@ export default function USTAAdultLeaguePage() {
       {/* NTRP Guide */}
       <section className="container-lbta section-sm">
         <div className="max-w-4xl mx-auto">
-          <h3 className="font-serif text-display-sm text-brand-pacific-dusk mb-8">
+          <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-8">
             NTRP Quick Guide
           </h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -198,7 +199,7 @@ export default function USTAAdultLeaguePage() {
                 key={item.level}
                 className="bg-white rounded-lg p-5 border border-brand-pacific-dusk/5"
               >
-                <span className="text-[20px] font-serif font-medium text-brand-sunset-cliff block mb-2">
+                <span className="text-[20px] font-headline font-medium text-brand-sunset-cliff block mb-2">
                   {item.level}
                 </span>
                 <p className="text-[13px] font-sans font-light text-brand-pacific-dusk/55 leading-relaxed">
@@ -213,7 +214,7 @@ export default function USTAAdultLeaguePage() {
       {/* Sign up CTA */}
       <section className="bg-brand-deep-water text-white">
         <div className="container-lbta section text-center">
-          <h2 className="font-serif text-display text-white mb-4">
+          <h2 className="font-headline text-display text-white mb-4">
             Join an LBTA Team
           </h2>
           <p className="text-[1.05rem] font-sans font-light text-white/50 max-w-lg mx-auto mb-4">

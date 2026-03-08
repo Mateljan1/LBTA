@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import Script from 'next/script'
+import DarkSection from '@/components/ui/DarkSection'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 
 export default function CoachesPage() {
   // Schema markup for coaches
@@ -145,14 +147,14 @@ export default function CoachesPage() {
             }}
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/85 via-black/40 to-transparent" />
         </div>
         
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-16 pb-16 md:pb-24">
           <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/70 uppercase tracking-[0.2em] mb-4">
             Our Team
           </p>
-          <h1 className="font-serif text-[42px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-[-0.02em]">
+          <h1 className="font-headline text-[42px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-[-0.02em]">
             The Coaches
           </h1>
           <p className="font-sans text-[16px] md:text-[18px] text-white/85 max-w-[600px] leading-[1.7]">
@@ -162,6 +164,7 @@ export default function CoachesPage() {
         </div>
       </section>
 
+      <HorizonDivider />
       {/* FOUNDER SECTION - Editorial Feature */}
       <section className="bg-white py-20 md:py-32">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
@@ -181,7 +184,7 @@ export default function CoachesPage() {
               </div>
               {/* Quote overlay */}
               <div className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 bg-white p-6 md:p-8 shadow-lg max-w-[280px] md:max-w-[320px]">
-                <p className="font-serif text-[18px] md:text-[20px] text-brand-pacific-dusk italic leading-[1.5] mb-3">
+                <p className="font-headline text-[18px] md:text-[20px] text-brand-pacific-dusk italic leading-[1.5] mb-3">
                   &ldquo;Structure creates confidence, and confidence creates champions.&rdquo;
                 </p>
                 <p className="font-sans text-[12px] text-brand-pacific-dusk/60 uppercase tracking-[0.1em]">
@@ -195,7 +198,7 @@ export default function CoachesPage() {
               <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
                 Founder & Director
               </p>
-              <h2 className="font-serif text-[36px] md:text-[48px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.02em]">
+              <h2 className="font-headline text-[36px] md:text-[48px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.02em]">
                 Andrew Mateljan
               </h2>
               <p className="font-sans text-[14px] text-lbta-slate mb-8">
@@ -240,7 +243,7 @@ export default function CoachesPage() {
             <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
               Coaching Team
             </p>
-            <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
+            <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
               Meet the Team
             </h2>
           </div>
@@ -263,7 +266,7 @@ export default function CoachesPage() {
                 <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-3">
                   Director of Tennis Operations
                 </p>
-                <h3 className="font-serif text-[28px] md:text-[36px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.01em]">
+                <h3 className="font-headline text-[28px] md:text-[36px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.01em]">
                   Robert LeBuhn
                 </h3>
                 <p className="font-sans text-[14px] text-lbta-slate mb-6">
@@ -276,7 +279,7 @@ export default function CoachesPage() {
                   tennis at Lafayette College. Multiple Coach of the Year honoree across New Jersey, Union County, 
                   Somerset County, and San Diego CIF. Certified in Adaptive Tennis, Cardio Tennis, and CPR/AED.
                 </p>
-                <p className="font-serif text-[18px] text-brand-pacific-dusk italic mb-6">
+                <p className="font-headline text-[18px] text-brand-pacific-dusk italic mb-6">
                   &ldquo;Development never stops.&rdquo;
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -312,7 +315,7 @@ export default function CoachesPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <p className="font-serif text-[16px] text-white italic">
+                    <p className="font-headline text-[16px] text-white italic">
                       &ldquo;{coach.quote}&rdquo;
                     </p>
                   </div>
@@ -322,7 +325,7 @@ export default function CoachesPage() {
                   <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.1em] mb-2">
                     {coach.title}
                   </p>
-                  <h3 className="font-serif text-[22px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em]">
+                  <h3 className="font-headline text-[22px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em]">
                     {coach.name}
                   </h3>
                   <p className="font-sans text-[13px] text-lbta-slate mb-4">
@@ -353,32 +356,33 @@ export default function CoachesPage() {
         </div>
       </section>
 
-      {/* CTA SECTION - Minimal */}
-      <section className="bg-lbta-black py-20 md:py-28">
+      <HorizonDivider />
+      {/* CTA SECTION */}
+      <DarkSection className="py-20 md:py-28">
         <div className="max-w-[800px] mx-auto px-6 text-center">
-          <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-white mb-6 tracking-[-0.02em]">
+          <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-sandstone mb-6 tracking-[-0.02em]">
             Train With Us
           </h2>
-          <p className="font-sans text-[16px] text-white/70 mb-10 leading-[1.7] max-w-[500px] mx-auto">
+          <p className="font-sans text-[16px] text-white/85 mb-10 leading-[1.7] max-w-[500px] mx-auto">
             Experience coaching that develops more than your game. 
             Book a trial session to meet our team.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/90 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+              className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-brand-sunset-cliff/90 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/50 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
             >
               Book Trial Session
             </Link>
             <Link
               href="/programs"
-              className="inline-flex items-center justify-center border border-white/30 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/10 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+              className="inline-flex items-center justify-center border border-white/40 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/10 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
             >
               View Programs
             </Link>
           </div>
         </div>
-      </section>
+      </DarkSection>
       
       {/* Sticky Mobile CTA */}
       <StickyCTA text="Book Trial" href="/book" showAfterScroll={600} />

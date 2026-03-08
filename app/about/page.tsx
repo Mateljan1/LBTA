@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import TimelineSection from '@/components/TimelineSection'
 import StickyCTA from '@/components/StickyCTA'
+import DarkSection from '@/components/ui/DarkSection'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 
 // Note: Metadata is defined in about/layout.tsx for client components
 
@@ -60,14 +62,14 @@ export default function AboutPage() {
             }}
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/85 via-black/40 to-transparent" />
         </div>
         
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-16 pb-16 md:pb-24">
           <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/70 uppercase tracking-[0.2em] mb-4">
             About Us
           </p>
-          <h1 className="font-serif text-[42px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-[-0.02em]">
+          <h1 className="font-headline text-[42px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-[-0.02em]">
             Where Character<br className="hidden md:block" /> Meets Championship
           </h1>
           <p className="font-sans text-[16px] md:text-[18px] text-white/85 max-w-[550px] leading-[1.7]">
@@ -76,6 +78,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <HorizonDivider />
       {/* OUR STORY - Editorial Split */}
       <section className="bg-white py-20 md:py-32">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
@@ -100,7 +103,7 @@ export default function AboutPage() {
               <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
                 Our Story
               </p>
-              <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-8 tracking-[-0.02em] leading-[1.15]">
+              <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-8 tracking-[-0.02em] leading-[1.15]">
                 Building Champions<br className="hidden md:block" /> Since 2020
               </h2>
               
@@ -122,15 +125,15 @@ export default function AboutPage() {
               <div className="mt-10 pt-8 border-t border-lbta-stone">
                 <div className="grid grid-cols-3 gap-6">
                   <div>
-                    <span className="font-serif text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">20+</span>
+                    <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">20+</span>
                     <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">D1 Placements</p>
                   </div>
                   <div>
-                    <span className="font-serif text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">5</span>
+                    <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">5</span>
                     <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">Expert Coaches</p>
                   </div>
                   <div>
-                    <span className="font-serif text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">100+</span>
+                    <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">100+</span>
                     <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">Active Students</p>
                   </div>
                 </div>
@@ -149,7 +152,7 @@ export default function AboutPage() {
           <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-8">
             Our Philosophy
           </p>
-          <blockquote className="font-serif text-[28px] md:text-[40px] font-medium text-brand-pacific-dusk leading-[1.3] tracking-[-0.02em] mb-8">
+          <blockquote className="font-headline text-[28px] md:text-[40px] font-medium text-brand-pacific-dusk leading-[1.3] tracking-[-0.02em] mb-8">
             &ldquo;Structure creates confidence. Confidence creates results. 
             That&apos;s how champions are built.&rdquo;
           </blockquote>
@@ -166,7 +169,7 @@ export default function AboutPage() {
             <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
               Our Foundation
             </p>
-            <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
+            <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
               Guiding Principles
             </h2>
           </div>
@@ -180,7 +183,7 @@ export default function AboutPage() {
                 <span className="font-sans text-[12px] font-semibold text-brand-pacific-dusk/50 tracking-[0.1em]">
                   {principle.number}
                 </span>
-                <h3 className="font-serif text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mt-3 mb-4 tracking-[-0.01em]">
+                <h3 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mt-3 mb-4 tracking-[-0.01em]">
                   {principle.title}
                 </h3>
                 <p className="font-sans text-[15px] text-brand-pacific-dusk/80 leading-[1.7]">
@@ -201,7 +204,7 @@ export default function AboutPage() {
               <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
                 Our Home
               </p>
-              <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-6 tracking-[-0.02em]">
+              <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-6 tracking-[-0.02em]">
                 Laguna Beach, California
               </h2>
               <p className="font-sans text-[16px] text-brand-pacific-dusk leading-[1.8] mb-6">
@@ -256,32 +259,33 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA SECTION - Minimal */}
-      <section className="bg-lbta-black py-20 md:py-28">
+      <HorizonDivider />
+      {/* CTA SECTION */}
+      <DarkSection className="py-20 md:py-28">
         <div className="max-w-[800px] mx-auto px-6 text-center">
-          <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-white mb-6 tracking-[-0.02em]">
+          <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-sandstone mb-6 tracking-[-0.02em]">
             Start Your Journey
           </h2>
-          <p className="font-sans text-[16px] text-white/70 mb-10 leading-[1.7] max-w-[500px] mx-auto">
+          <p className="font-sans text-[16px] text-white/85 mb-10 leading-[1.7] max-w-[500px] mx-auto">
             Professional coaching for all ages and levels. 
             Experience the LBTA difference with a trial session.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/90 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-lbta-black"
+              className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-brand-sunset-cliff/90 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/50 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
             >
               Book Trial Session
             </Link>
             <Link
               href="/coaches"
-              className="inline-flex items-center justify-center border border-white/30 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/10 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-lbta-black"
+              className="inline-flex items-center justify-center border border-white/40 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/10 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
             >
               Meet Our Coaches
             </Link>
           </div>
         </div>
-      </section>
+      </DarkSection>
       
       {/* Sticky Mobile CTA */}
       <StickyCTA text="Book Trial" href="/book" showAfterScroll={600} />

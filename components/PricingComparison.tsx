@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Check } from 'lucide-react'
+import comparisonTiersData from '@/data/pricing-supplemental.json'
 
 interface PricingTier {
   name: string
@@ -15,58 +16,7 @@ interface PricingTier {
   savings?: string
 }
 
-const tiers: PricingTier[] = [
-  {
-    name: 'Drop-In',
-    price: '$50',
-    period: 'per session',
-    description: 'Try before you commit',
-    features: [
-      'Single group session',
-      'All skill levels welcome',
-      'No commitment required',
-      'Same expert coaching',
-    ],
-    cta: 'Book a Session',
-    href: '/book',
-  },
-  {
-    name: 'Seasonal',
-    price: '$546',
-    period: 'per quarter',
-    description: 'Most popular choice',
-    features: [
-      '13 weeks of training',
-      '1x per week sessions',
-      'Progress tracking',
-      'Priority scheduling',
-      'Community events access',
-      '$42/session value',
-    ],
-    cta: 'Start Training',
-    href: '/book',
-    popular: true,
-    savings: 'Save 16%',
-  },
-  {
-    name: 'Committed',
-    price: '$1,292',
-    period: 'per quarter',
-    description: 'Maximum results',
-    features: [
-      '13 weeks of training',
-      '2x per week sessions',
-      'Accelerated progress',
-      'Video analysis included',
-      'Private coach access',
-      'Competition preparation',
-      '$50/session value',
-    ],
-    cta: 'Go All In',
-    href: '/book',
-    savings: 'Best Value',
-  },
-]
+const tiers: PricingTier[] = (comparisonTiersData as { comparisonTiers: PricingTier[] }).comparisonTiers
 
 export default function PricingComparison() {
   return (
@@ -75,7 +25,7 @@ export default function PricingComparison() {
         {/* Header */}
         <div className="text-center mb-12">
           <p className="text-eyebrow text-brand-pacific-dusk/60 mb-4">Simple Pricing</p>
-          <h2 id="pricing-heading" className="font-serif text-[32px] md:text-[40px] font-semibold text-brand-pacific-dusk leading-tight mb-4">
+          <h2 id="pricing-heading" className="font-headline text-[32px] md:text-[40px] font-semibold text-brand-pacific-dusk leading-tight mb-4">
             Choose Your Path
           </h2>
           <p className="font-sans text-[16px] text-lbta-slate max-w-xl mx-auto">
@@ -120,7 +70,7 @@ export default function PricingComparison() {
 
                 {/* Price */}
                 <div className="mb-2">
-                  <span className="font-serif text-[48px] font-semibold text-brand-pacific-dusk">
+                  <span className="font-headline text-[48px] font-semibold text-brand-pacific-dusk">
                     {tier.price}
                   </span>
                   <span className="font-sans text-[14px] text-lbta-slate ml-1">

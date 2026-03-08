@@ -32,7 +32,7 @@ export default function SeasonBanner() {
         <div className="flex items-center justify-between">
           <div className="flex-1 text-center">
             <p className="text-sm font-sans text-gray-600">
-              <span className="font-serif font-light">{cta.headline}</span>
+              <span className="font-headline font-light">{cta.headline}</span>
               {cta.subline && (
                 <span className="ml-2 hidden sm:inline text-xs text-gray-400">
                   {cta.subline}

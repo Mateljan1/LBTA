@@ -52,7 +52,7 @@ export default function PrivateCoachingSection({
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           ONE-ON-ONE
         </p>
-        <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
+        <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
           Private Coaching
         </h2>
         <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[600px] mb-10">
@@ -93,7 +93,7 @@ export default function PrivateCoachingSection({
                   key={c.coach}
                   className={i < coaches.length - 1 ? 'border-b border-black/[0.06]' : ''}
                 >
-                  <td className="font-serif text-[16px] font-medium text-brand-pacific-dusk px-6 py-4">
+                  <td className="font-headline text-[16px] font-medium text-brand-pacific-dusk px-6 py-4">
                     {c.coach}
                   </td>
                   <td className="font-sans text-[14px] text-brand-pacific-dusk/60 px-4 py-4">
@@ -128,7 +128,7 @@ export default function PrivateCoachingSection({
               key={c.coach}
               className="bg-white border border-black/[0.06] rounded-lg p-5"
             >
-              <h3 className="font-serif text-[18px] font-medium text-brand-pacific-dusk">
+              <h3 className="font-headline text-[18px] font-medium text-brand-pacific-dusk">
                 {c.coach}
               </h3>
               <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mt-0.5">
@@ -168,7 +168,7 @@ export default function PrivateCoachingSection({
           <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
             DROP-IN & MONTHLY
           </p>
-          <h3 className="font-serif text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mb-6">
+          <h3 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mb-6">
             Monthly Programs
           </h3>
 
@@ -178,14 +178,14 @@ export default function PrivateCoachingSection({
                 key={prog.label}
                 className="bg-white border border-black/[0.06] rounded-lg p-6 transition-all duration-500 ease-out hover:border-black/10 hover:-translate-y-0.5 hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]"
               >
-                <h4 className="font-serif text-[20px] font-medium text-brand-pacific-dusk">
+                <h4 className="font-headline text-[20px] font-medium text-brand-pacific-dusk">
                   {prog.label}
                 </h4>
                 <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mt-1">
                   {prog.subtitle} · {prog.duration}
                 </p>
                 <div className="mt-4 flex items-baseline gap-3">
-                  <span className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
+                  <span className="font-headline text-[22px] font-medium text-brand-pacific-dusk">
                     ${prog.price}
                     <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">/mo</span>
                   </span>
@@ -201,7 +201,7 @@ export default function PrivateCoachingSection({
         {/* Discounts & Scholarships */}
         <div className="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <h3 className="font-serif text-[20px] font-medium text-brand-pacific-dusk mb-4">
+            <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-4">
               Available Discounts
             </h3>
             <ul className="space-y-2">
@@ -218,7 +218,7 @@ export default function PrivateCoachingSection({
 
           {scholarships.available && (
             <div>
-              <h3 className="font-serif text-[20px] font-medium text-brand-pacific-dusk mb-4">
+              <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-4">
                 Scholarships
               </h3>
               <p className="font-sans text-[14px] text-brand-pacific-dusk/70 mb-3">

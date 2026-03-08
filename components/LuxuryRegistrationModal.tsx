@@ -226,7 +226,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h2 id="modal-title" className="font-serif text-[28px] font-medium text-brand-pacific-dusk mb-3">
+                  <h2 id="modal-title" className="font-headline text-[28px] font-medium text-brand-pacific-dusk mb-3">
                     Registration Received
                   </h2>
                   <p className="font-sans text-[15px] text-lbta-slate leading-relaxed mb-8 max-w-[320px] mx-auto">
@@ -245,7 +245,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                   <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
                     Select Plan
                   </p>
-                  <h2 id="modal-title" className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
+                  <h2 id="modal-title" className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
                     {program.program}
                   </h2>
                   <p className="font-sans text-[14px] text-brand-pacific-dusk/60 mb-8">
@@ -268,7 +268,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           <span className="font-sans text-[15px] font-medium">
                             {option.label}
                           </span>
-                          <span className={`font-serif text-[22px] font-medium ${
+                          <span className={`font-headline text-[22px] font-medium ${
                             selectedPlan === option.value ? 'text-white' : 'text-brand-pacific-dusk'
                           }`}>
                             ${option.price}
@@ -288,7 +288,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                             ? 'Monthly Investment' 
                             : 'Quarterly Investment'}
                       </span>
-                      <span className="font-serif text-[28px] font-medium text-brand-pacific-dusk">
+                      <span className="font-headline text-[28px] font-medium text-brand-pacific-dusk">
                         ${selectedPrice}
                       </span>
                     </div>
@@ -318,7 +318,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                   <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
                     Your Details
                   </p>
-                  <h2 className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
+                  <h2 className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
                     {program.program}
                   </h2>
                   <p className="font-sans text-[14px] text-brand-pacific-dusk/60 mb-8">

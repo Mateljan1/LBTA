@@ -70,7 +70,7 @@ export default function ProgramsSection({ onRegister }: ProgramsSectionProps) {
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           SEASONAL PROGRAMS
         </p>
-        <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-8">
+        <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-8">
           Programs & Schedule
         </h2>
 
@@ -110,7 +110,7 @@ export default function ProgramsSection({ onRegister }: ProgramsSectionProps) {
               <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-2">
                 {CATEGORY_EYEBROWS[category] || category.toUpperCase()}
               </p>
-              <h3 className="font-serif text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mb-4">
+              <h3 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mb-4">
                 {category === 'Youth' ? 'Youth & High Performance' : `${category} Programs`}
               </h3>
 

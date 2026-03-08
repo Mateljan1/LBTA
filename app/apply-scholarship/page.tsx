@@ -109,7 +109,7 @@ export default function ApplyScholarshipPage() {
             
             {/* Student Information */}
             <div>
-              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
+              <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Student Information
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -176,7 +176,7 @@ export default function ApplyScholarshipPage() {
 
             {/* Parent/Guardian Information */}
             <div className="pt-8 border-t border-gray-200">
-              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
+              <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Parent/Guardian Information
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -240,7 +240,7 @@ export default function ApplyScholarshipPage() {
 
             {/* Household Information */}
             <div className="pt-8 border-t border-gray-200">
-              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
+              <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Household Information
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -281,7 +281,7 @@ export default function ApplyScholarshipPage() {
 
             {/* Tennis Background */}
             <div className="pt-8 border-t border-gray-200">
-              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
+              <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Tennis Background
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -367,7 +367,7 @@ export default function ApplyScholarshipPage() {
 
             {/* Commitment & Goals */}
             <div className="pt-8 border-t border-gray-200">
-              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
+              <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Commitment & Goals
               </h2>
 
@@ -455,14 +455,14 @@ export default function ApplyScholarshipPage() {
       <section className="section-spacing bg-brand-morning-light">
         <div className="container-narrow">
           <AnimatedSection className="text-center">
-            <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-6">
+            <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk mb-6">
               What Happens Next
             </h2>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12">
             <div className="text-center">
-              <div className="text-6xl font-serif font-light text-brand-sunset-cliff/30 mb-4">01</div>
+              <div className="text-6xl font-headline font-light text-brand-sunset-cliff/30 mb-4">01</div>
               <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 We Review
               </h3>
@@ -472,7 +472,7 @@ export default function ApplyScholarshipPage() {
             </div>
 
             <div className="text-center">
-              <div className="text-6xl font-serif font-light text-brand-sunset-cliff/30 mb-4">02</div>
+              <div className="text-6xl font-headline font-light text-brand-sunset-cliff/30 mb-4">02</div>
               <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 Interview
               </h3>
@@ -482,7 +482,7 @@ export default function ApplyScholarshipPage() {
             </div>
 
             <div className="text-center">
-              <div className="text-6xl font-serif font-light text-brand-sunset-cliff/30 mb-4">03</div>
+              <div className="text-6xl font-headline font-light text-brand-sunset-cliff/30 mb-4">03</div>
               <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 Decision
               </h3>
@@ -492,7 +492,7 @@ export default function ApplyScholarshipPage() {
             </div>
 
             <div className="text-center">
-              <div className="text-6xl font-serif font-light text-brand-sunset-cliff/30 mb-4">04</div>
+              <div className="text-6xl font-headline font-light text-brand-sunset-cliff/30 mb-4">04</div>
               <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 You Begin
               </h3>
@@ -508,7 +508,7 @@ export default function ApplyScholarshipPage() {
       <section className="section-spacing bg-white">
         <div className="container-narrow">
           <AnimatedSection>
-            <h2 className="text-3xl font-serif font-light text-brand-pacific-dusk mb-6">
+            <h2 className="text-3xl font-headline font-light text-brand-pacific-dusk mb-6">
               Questions About Scholarships?
             </h2>
             <p className="text-lg text-gray-600 mb-8">

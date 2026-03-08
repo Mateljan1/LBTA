@@ -175,7 +175,7 @@ function LabCard({ lab, index }: LabCardProps) {
         <div className="pt-8 border-t border-gray-100">
           {/* Stat Value */}
           <motion.div 
-            className="text-4xl md:text-5xl font-serif font-light text-brand-sunset-cliff mb-2 tracking-tight"
+            className="text-4xl md:text-5xl font-headline font-light text-brand-sunset-cliff mb-2 tracking-tight"
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
@@ -234,7 +234,7 @@ export default function FourLabs() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <h2 className="text-4xl md:text-5xl font-serif font-light tracking-tight text-brand-pacific-dusk mb-6">
+          <h2 className="text-4xl md:text-5xl font-headline font-light tracking-tight text-brand-pacific-dusk mb-6">
             Built on Four Labs
           </h2>
           <p className="text-lg leading-relaxed text-gray-600 max-w-[700px] mx-auto">

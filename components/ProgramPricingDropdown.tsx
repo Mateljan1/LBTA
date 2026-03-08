@@ -39,7 +39,7 @@ export default function ProgramPricingDropdown({ pricing, isQuarterly = true }: 
         aria-expanded={isExpanded}
       >
         <div>
-          <span className="font-serif text-[18px] md:text-[20px] font-bold text-brand-sunset-cliff">
+          <span className="font-headline text-[18px] md:text-[20px] font-bold text-brand-sunset-cliff">
             ${basePrice}
           </span>
           <span className="font-sans text-[13px] text-black/60 ml-2">
@@ -60,7 +60,7 @@ export default function ProgramPricingDropdown({ pricing, isQuarterly = true }: 
               <span className="font-sans text-[14px] md:text-[15px] text-black/70">
                 {option.label}
               </span>
-              <span className="font-serif text-[18px] font-bold text-brand-sunset-cliff">
+              <span className="font-headline text-[18px] font-bold text-brand-sunset-cliff">
                 ${option.price}
               </span>
             </div>
@@ -68,7 +68,7 @@ export default function ProgramPricingDropdown({ pricing, isQuarterly = true }: 
           {pricing.drop_in && (
             <div className="flex justify-between items-center py-2 pt-3 border-t border-gray-200">
               <span className="font-sans text-[14px] text-black/60">Drop-in</span>
-              <span className="font-serif text-[16px] font-semibold text-black/80">
+              <span className="font-headline text-[16px] font-semibold text-black/80">
                 ${pricing.drop_in}
               </span>
             </div>

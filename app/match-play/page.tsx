@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Clock, Users, Calendar, DollarSign, CheckCircle } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import HorizonDivider from '@/components/ui/HorizonDivider'
+import DarkSection from '@/components/ui/DarkSection'
 import pricingData from '@/data/pricing-supplemental.json'
 
 const mp = pricingData.matchPlay
@@ -39,6 +41,8 @@ export default function MatchPlayPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Sessions */}
       <section className="section-spacing bg-brand-morning-light">
         <div className="container-lbta">
@@ -46,7 +50,7 @@ export default function MatchPlayPage() {
             {/* Junior */}
             <AnimatedSection>
               <div className="card-lbta p-10">
-                <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
+                <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                   Junior Competitive Play
                 </h2>
 
@@ -73,7 +77,7 @@ export default function MatchPlayPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Drop-In</span>
-                      <span className="text-2xl font-serif font-light">${mp.junior.dropIn}</span>
+                      <span className="text-2xl font-headline font-light">${mp.junior.dropIn}</span>
                     </div>
                     <div className="text-sm text-gray-500">
                       Monthly: {mp.junior.monthlySessions} sessions for ${mp.junior.monthlyPrice} (save ${mp.junior.monthlySavings})
@@ -93,7 +97,7 @@ export default function MatchPlayPage() {
             {/* Adult */}
             <AnimatedSection delay={0.2}>
               <div className="card-lbta p-10">
-                <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
+                <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                   Adult League Play
                 </h2>
 
@@ -120,7 +124,7 @@ export default function MatchPlayPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Drop-In</span>
-                      <span className="text-2xl font-serif font-light">${mp.adult.dropIn}</span>
+                      <span className="text-2xl font-headline font-light">${mp.adult.dropIn}</span>
                     </div>
                     <div className="text-sm text-gray-500">
                       Monthly: {mp.adult.monthlySessions} sessions for ${mp.adult.monthlyPrice} (save ${mp.adult.monthlySavings})
@@ -142,7 +146,7 @@ export default function MatchPlayPage() {
             <div className="card-lbta p-8 max-w-md mx-auto">
               <h3 className="text-xl font-sans font-medium mb-4">Family Package</h3>
               <p className="text-gray-600 mb-4">Bring family members for discounted rates</p>
-              <div className="text-2xl font-serif font-light text-brand-pacific-dusk mb-2">
+              <div className="text-2xl font-headline font-light text-brand-pacific-dusk mb-2">
                 ${mp.family.dropIn} drop-in
               </div>
               <p className="text-sm text-gray-500">Monthly: ${mp.family.monthlyPrice} for family</p>
@@ -151,11 +155,13 @@ export default function MatchPlayPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* What to Expect */}
       <section className="section-spacing bg-lbta-tan">
         <div className="container-narrow">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-6">
+            <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk mb-6">
               What to Expect
             </h2>
           </AnimatedSection>
@@ -173,25 +179,24 @@ export default function MatchPlayPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-spacing bg-white">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h2 className="text-4xl font-serif font-light mb-8">
-              Join Friday
-            </h2>
-            <p className="text-lg text-gray-600 mb-10">
-              Competitive play. Balanced pairings. Weekly.
-            </p>
-            <Link
-              href="/book"
-              className="btn-primary"
-            >
-              RESERVE SPOT
-            </Link>
-          </AnimatedSection>
+      <HorizonDivider />
+
+      <DarkSection className="py-20 md:py-24">
+        <div className="max-w-[720px] mx-auto text-center">
+          <h2 className="font-headline text-[32px] md:text-[48px] font-medium text-white leading-[1.15] mb-4">
+            Join Friday
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-white/80 mb-8">
+            Competitive play. Balanced pairings. Weekly.
+          </p>
+          <Link
+            href="/book"
+            className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+          >
+            Reserve Spot
+          </Link>
         </div>
-      </section>
+      </DarkSection>
     </>
   )
 }

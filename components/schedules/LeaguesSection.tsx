@@ -20,7 +20,7 @@ export default function LeaguesSection() {
           <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
             USTA LEAGUE TENNIS
           </p>
-          <h3 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-4">
+          <h3 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-4">
             Join an LBTA Team
           </h3>
           <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[700px] mb-10">
@@ -56,7 +56,7 @@ export default function LeaguesSection() {
           <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
             UTR CIRCUIT · SEASON 1
           </p>
-          <h3 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-4">
+          <h3 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-4">
             Saturday Matchplay Series
           </h3>
           <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[700px] mb-3">

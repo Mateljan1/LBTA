@@ -225,7 +225,7 @@ export default function ComprehensiveFormTester({ isVisible, onClose }: Comprehe
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
           <div>
-            <h2 className="font-serif text-2xl font-bold text-black">Comprehensive Form Testing</h2>
+            <h2 className="font-headline text-2xl font-bold text-black">Comprehensive Form Testing</h2>
             <p className="font-sans text-sm text-black/60">Testing all {totalTests} program forms for functionality, integration, and performance</p>
           </div>
           <div className="flex items-center gap-3">
@@ -279,11 +279,11 @@ export default function ComprehensiveFormTester({ isVisible, onClose }: Comprehe
             <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6 border">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-serif text-xl font-semibold text-black">Overall Test Score</h3>
+                  <h3 className="font-headline text-xl font-semibold text-black">Overall Test Score</h3>
                   <p className="font-sans text-sm text-black/60">Average score across all {testResults.length} programs</p>
                 </div>
                 <div className="text-right">
-                  <p className={`font-serif text-4xl font-bold ${getScoreColor(overallScore)}`}>
+                  <p className={`font-headline text-4xl font-bold ${getScoreColor(overallScore)}`}>
                     {overallScore.toFixed(0)}/100
                   </p>
                   <p className="font-sans text-sm text-black/60">
@@ -297,17 +297,17 @@ export default function ComprehensiveFormTester({ isVisible, onClose }: Comprehe
           {/* Test Results */}
           {testResults.length > 0 && (
             <div className="space-y-4">
-              <h3 className="font-serif text-xl font-semibold text-black">Individual Program Results</h3>
+              <h3 className="font-headline text-xl font-semibold text-black">Individual Program Results</h3>
               
               {testResults.map((result) => (
                 <div key={result.programId} className="border border-gray-200 rounded-xl p-6 hover:shadow-sm transition-shadow">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h4 className="font-serif text-lg font-semibold text-black">{result.programName}</h4>
+                      <h4 className="font-headline text-lg font-semibold text-black">{result.programName}</h4>
                       <p className="font-sans text-sm text-black/60">{result.category} • {result.programId}</p>
                     </div>
                     <div className="text-right">
-                      <p className={`font-serif text-2xl font-bold ${getScoreColor(result.score)}`}>
+                      <p className={`font-headline text-2xl font-bold ${getScoreColor(result.score)}`}>
                         {result.score.toFixed(0)}/100
                       </p>
                     </div>
@@ -372,7 +372,7 @@ export default function ComprehensiveFormTester({ isVisible, onClose }: Comprehe
           {/* Instructions */}
           {testResults.length === 0 && !isRunning && (
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 text-center">
-              <h4 className="font-serif text-lg font-semibold text-blue-900 mb-3">Ready to Test</h4>
+              <h4 className="font-headline text-lg font-semibold text-blue-900 mb-3">Ready to Test</h4>
               <p className="font-sans text-sm text-blue-800 mb-4">
                 This comprehensive test will verify all {totalTests} program forms for:
               </p>

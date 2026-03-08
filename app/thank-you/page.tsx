@@ -25,7 +25,7 @@ export default function ThankYouPage() {
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-tide-pool/20 mb-8">
               <CheckCircle className="w-12 h-12 text-brand-tide-pool" />
             </div>
-            <h1 className="font-serif text-[36px] md:text-[48px] font-semibold mb-6 leading-tight">
+            <h1 className="font-headline text-[36px] md:text-[48px] font-semibold mb-6 leading-tight">
               You're All Set
             </h1>
             <p className="font-sans text-[18px] md:text-[20px] text-white/80 max-w-lg mx-auto">
@@ -42,7 +42,7 @@ export default function ThankYouPage() {
             <p className="font-sans text-[11px] text-black/50 uppercase tracking-[2px] mb-4">
               Next Steps
             </p>
-            <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-black">
+            <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-black">
               What Happens Now
             </h2>
           </AnimatedSection>
@@ -61,7 +61,7 @@ export default function ThankYouPage() {
                         <span className="w-6 h-6 rounded-full bg-brand-tide-pool/20 flex items-center justify-center text-brand-tide-pool">1</span>
                         Within 24 Hours
                       </div>
-                      <h3 className="font-serif text-[22px] font-semibold text-black mb-2">
+                      <h3 className="font-headline text-[22px] font-semibold text-black mb-2">
                         We'll Reach Out
                       </h3>
                       <p className="font-sans text-[15px] text-black/70 leading-relaxed">
@@ -85,7 +85,7 @@ export default function ThankYouPage() {
                         <span className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">2</span>
                         Before Your Trial
                       </div>
-                      <h3 className="font-serif text-[22px] font-semibold text-black mb-2">
+                      <h3 className="font-headline text-[22px] font-semibold text-black mb-2">
                         What to Bring
                       </h3>
                       <p className="font-sans text-[15px] text-black/70 leading-relaxed">
@@ -105,7 +105,7 @@ export default function ThankYouPage() {
                         <span className="w-6 h-6 rounded-full bg-brand-sunset-cliff/10 flex items-center justify-center text-brand-sunset-cliff">3</span>
                         Your First Session
                       </div>
-                      <h3 className="font-serif text-[22px] font-semibold text-black mb-2">
+                      <h3 className="font-headline text-[22px] font-semibold text-black mb-2">
                         What to Expect
                       </h3>
                       <p className="font-sans text-[15px] text-black/70 leading-relaxed">
@@ -126,7 +126,7 @@ export default function ThankYouPage() {
       <section className="py-16 md:py-20 bg-brand-morning-light">
         <div className="max-w-5xl mx-auto px-6">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="font-serif text-[28px] md:text-[32px] font-semibold text-black">
+            <h2 className="font-headline text-[28px] md:text-[32px] font-semibold text-black">
               While You Wait
             </h2>
           </AnimatedSection>
@@ -197,7 +197,7 @@ export default function ThankYouPage() {
           <AnimatedSection>
             <div className="bg-black rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1 text-center md:text-left">
-                <h2 className="font-serif text-[28px] md:text-[32px] font-semibold text-white mb-4">
+                <h2 className="font-headline text-[28px] md:text-[32px] font-semibold text-white mb-4">
                   Download the LBTA App
                 </h2>
                 <p className="font-sans text-[16px] text-white/70 mb-6">

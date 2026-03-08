@@ -122,6 +122,20 @@ export const newsletterSchema = z.object({
 export type NewsletterSignup = z.infer<typeof newsletterSchema>
 
 /**
+ * Chat widget schema
+ * Used by: /api/chat
+ */
+export const chatSchema = z.object({
+  message: z.string().min(1, 'Message is required').max(2000),
+  history: z.array(z.object({
+    role: z.enum(['user', 'assistant']),
+    content: z.string(),
+  })).optional().default([]),
+})
+
+export type ChatPayload = z.infer<typeof chatSchema>
+
+/**
  * Year-round registration schema (seasonal, camp, JTT, etc.)
  * Used by: /api/register-year
  */

@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import HorizonDivider from '@/components/ui/HorizonDivider'
+import DarkSection from '@/components/ui/DarkSection'
 
 export default function AdultTrialLanding() {
   const [formData, setFormData] = useState({
@@ -99,7 +102,7 @@ export default function AdultTrialLanding() {
               Laguna Beach Tennis Academy
             </p>
 
-            <h1 className="font-serif text-6xl lg:text-7xl text-white mb-8 leading-[1.1]">
+            <h1 className="font-headline text-6xl lg:text-7xl text-white mb-8 leading-[1.1]">
               It's never<br />
               too late<br />
               to start.
@@ -136,7 +139,7 @@ export default function AdultTrialLanding() {
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
               The 12-Week Foundation
             </p>
-            <h2 className="font-serif text-4xl lg:text-5xl text-lbta-primary mb-6">
+            <h2 className="font-headline text-4xl lg:text-5xl text-lbta-primary mb-6">
               From Zero to Match-Ready
             </h2>
             <p className="text-lg text-lbta-secondary max-w-2xl mx-auto font-light">
@@ -146,7 +149,7 @@ export default function AdultTrialLanding() {
 
           <div className="grid md:grid-cols-3 gap-12">
             <div>
-              <div className="text-7xl font-serif font-light text-lbta-coral mb-6">01</div>
+              <div className="text-7xl font-headline font-light text-lbta-coral mb-6">01</div>
               <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 1-4</h3>
               <p className="text-lbta-secondary leading-relaxed">
                 Fundamentals. Movement patterns, grip, contact point. The building blocks that prevent bad habits from forming.
@@ -154,7 +157,7 @@ export default function AdultTrialLanding() {
             </div>
 
             <div>
-              <div className="text-7xl font-serif font-light text-lbta-coral mb-6">02</div>
+              <div className="text-7xl font-headline font-light text-lbta-coral mb-6">02</div>
               <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 5-8</h3>
               <p className="text-lbta-secondary leading-relaxed">
                 Rally development. Consistency over power. Learning to sustain points and recognize patterns in play.
@@ -162,7 +165,7 @@ export default function AdultTrialLanding() {
             </div>
 
             <div>
-              <div className="text-7xl font-serif font-light text-lbta-coral mb-6">03</div>
+              <div className="text-7xl font-headline font-light text-lbta-coral mb-6">03</div>
               <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 9-12</h3>
               <p className="text-lbta-secondary leading-relaxed">
                 Match preparation. Scoring, strategy, singles and doubles play. You're ready to compete.
@@ -180,7 +183,7 @@ export default function AdultTrialLanding() {
               <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
                 The System
               </p>
-              <h2 className="font-serif text-4xl text-lbta-primary mb-6">
+              <h2 className="font-headline text-4xl text-lbta-primary mb-6">
                 Why adult beginners succeed here.
               </h2>
               <div className="space-y-6 text-lbta-secondary leading-relaxed">
@@ -236,7 +239,7 @@ export default function AdultTrialLanding() {
             <div className="grid lg:grid-cols-5">
               {/* Left: Context */}
               <div className="lg:col-span-2 bg-brand-pacific-dusk p-12 flex flex-col justify-center">
-                <h3 className="font-serif text-3xl text-lbta-bone mb-6">
+                <h3 className="font-headline text-3xl text-lbta-bone mb-6">
                   Your Trial Session
                 </h3>
                 <div className="space-y-6 text-lbta-bone/80 text-sm leading-relaxed">
@@ -261,12 +264,12 @@ export default function AdultTrialLanding() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h4 className="text-2xl font-serif text-lbta-primary mb-3">Request Received</h4>
+                    <h4 className="text-2xl font-headline text-lbta-primary mb-3">Request Received</h4>
                     <p className="text-lbta-secondary">We'll contact you within 24 hours to schedule your trial session.</p>
                   </div>
                 ) : (
                   <>
-                    <h4 className="text-2xl font-serif text-lbta-primary mb-8">
+                    <h4 className="text-2xl font-headline text-lbta-primary mb-8">
                       Request Your Trial
                     </h4>
 
@@ -354,31 +357,60 @@ export default function AdultTrialLanding() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Final Credibility */}
       <section className="py-20 bg-white border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
             <div>
-              <div className="text-3xl font-serif text-lbta-primary mb-1">5.0</div>
+              <div className="text-3xl font-headline text-lbta-primary mb-1">5.0</div>
               <p className="text-sm text-lbta-secondary">Google Rating</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
-              <div className="text-3xl font-serif text-lbta-primary mb-1">200+</div>
+              <div className="text-3xl font-headline text-lbta-primary mb-1">200+</div>
               <p className="text-sm text-lbta-secondary">Adult Members</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
-              <div className="text-3xl font-serif text-lbta-primary mb-1">Since 2020</div>
+              <div className="text-3xl font-headline text-lbta-primary mb-1">Since 2020</div>
               <p className="text-sm text-lbta-secondary">Official City Partner</p>
             </div>
           </div>
         </div>
       </section>
+
+      <HorizonDivider />
+
+      <DarkSection className="py-20 md:py-24">
+        <div className="max-w-[720px] mx-auto text-center">
+          <h2 className="font-headline text-[32px] md:text-[48px] font-medium text-white leading-[1.15] mb-4">
+            Ready to Start Training?
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-white/80 mb-8">
+            Book a trial or get in touch. We will respond within 24 hours.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/book"
+              className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            >
+              Book Trial
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center bg-transparent text-white border border-white/50 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </DarkSection>
 
       {/* Footer */}
       <footer className="bg-brand-pacific-dusk py-12">

@@ -26,7 +26,7 @@ export default function SchedulesCTA({ ctaHeadline, ctaSubline }: SchedulesCTAPr
         <p className="font-sans text-[12px] md:text-[14px] uppercase tracking-[3px] text-white/70 mb-4">
           {ctaHeadline || 'Registration Open'}
         </p>
-        <h2 className="font-serif text-[36px] md:text-[48px] font-semibold mb-4 leading-[1.2] text-shadow">
+        <h2 className="font-headline text-[36px] md:text-[48px] font-semibold mb-4 leading-[1.2] text-shadow">
           Ready to Start Training?
         </h2>
         <p className="font-sans text-[16px] md:text-[18px] text-white/90 mb-8 max-w-xl mx-auto">

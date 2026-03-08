@@ -30,7 +30,7 @@ export default function CampsSection({ camps, onRegister }: CampsSectionProps) {
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           SEASONAL & HOLIDAY
         </p>
-        <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
+        <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
           Holiday Camps
         </h2>
         <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[600px] mb-10">

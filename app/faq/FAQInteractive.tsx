@@ -103,7 +103,7 @@ export default function FAQInteractive() {
         <div className="container-narrow text-center">
           <AnimatedSection>
             <HelpCircle className="w-16 h-16 text-brand-sunset-cliff mx-auto mb-8" />
-            <h1 className="text-display-lg font-serif font-light mb-6">
+            <h1 className="text-display-lg font-headline font-light mb-6">
               Frequently Asked Questions
             </h1>
             <p className="text-xl text-white/90 font-sans mb-4">
@@ -176,7 +176,7 @@ export default function FAQInteractive() {
       <section className="section-spacing bg-white border-t border-gray-200">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-8">
+            <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk mb-8">
               Still Have Questions?
             </h2>
             <p className="text-lg text-gray-600 mb-10 font-sans leading-relaxed">

@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, CheckCircle } from 'lucide-react'
+import { getTrialProgramOptions } from '@/lib/programs-data'
 
 interface TrialBookingModalProps {
   isOpen: boolean
@@ -20,22 +21,8 @@ interface FormData {
   goals: string
 }
 
-const programs = [
-  { value: "little-tennis-stars", label: "Little Tennis Stars", ages: "Ages 3-4" },
-  { value: "red-ball", label: "Red Ball Tennis", ages: "Ages 5-7" },
-  { value: "orange-ball", label: "Orange Ball Tennis", ages: "Ages 7-9" },
-  { value: "green-dot", label: "Green Dot Tennis", ages: "Ages 9-11" },
-  { value: "youth-development", label: "Youth Development", ages: "Ages 11-15" },
-  { value: "high-performance", label: "High Performance", ages: "Ages 12-17" },
-  { value: "adult-beginner", label: "Adult Beginner", ages: "NTRP 1.0-2.5" },
-  { value: "adult-intermediate", label: "Adult Intermediate", ages: "NTRP 3.0-3.5" },
-  { value: "adult-advanced", label: "Adult Advanced", ages: "NTRP 4.0+" },
-  { value: "cardio-tennis", label: "Cardio Tennis", ages: "All Levels" },
-  { value: "private-lessons", label: "Private Lessons", ages: "All Ages" },
-  { value: "not-sure", label: "Not Sure - Help Me Choose", ages: "" },
-]
-
 export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: TrialBookingModalProps) {
+  const programs = useMemo(() => getTrialProgramOptions(), [])
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -50,6 +37,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
   const [isSuccess, setIsSuccess] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const modalRef = useRef<HTMLDivElement>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     if (!errorMessage) return
@@ -69,6 +57,23 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
     }
   }, [isOpen])
 
+  const handleClose = useCallback(() => {
+    previousFocusRef.current?.focus()
+    previousFocusRef.current = null
+    setIsSuccess(false)
+    setErrorMessage(null)
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      program: defaultProgram || '',
+      playerAge: '',
+      goals: '',
+    })
+    onClose()
+  }, [onClose, defaultProgram])
+
   // Close on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -76,6 +81,16 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
     }
     if (isOpen) window.addEventListener('keydown', handleEscape)
     return () => window.removeEventListener('keydown', handleEscape)
+  }, [isOpen, handleClose])
+
+  // Capture focus when opening; restore when closing
+  useEffect(() => {
+    if (isOpen) {
+      previousFocusRef.current = document.activeElement as HTMLElement | null
+    } else {
+      previousFocusRef.current?.focus()
+      previousFocusRef.current = null
+    }
   }, [isOpen])
 
   // Focus trap
@@ -160,21 +175,6 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
-  const handleClose = () => {
-    setIsSuccess(false)
-    setErrorMessage(null)
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      program: defaultProgram || '',
-      playerAge: '',
-      goals: '',
-    })
-    onClose()
-  }
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -220,7 +220,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-tide-pool/10 flex items-center justify-center">
                     <CheckCircle className="w-8 h-8 text-brand-tide-pool" />
                   </div>
-                  <h2 id="modal-title" className="font-serif text-[32px] font-medium text-brand-pacific-dusk mb-3">Trial Lesson Requested!</h2>
+                  <h2 id="modal-title" className="font-headline text-[32px] font-medium text-brand-pacific-dusk mb-3">Trial Lesson Requested!</h2>
                   <p className="font-sans text-[15px] text-lbta-slate leading-relaxed mb-8 max-w-[400px] mx-auto">
                     Thank you, <strong>{formData.firstName}</strong>! We'll contact you within 24 hours to schedule your free trial lesson.
                   </p>
@@ -236,7 +236,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                     <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
                       Free Trial Lesson
                     </p>
-                    <h2 id="modal-title" className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
+                    <h2 id="modal-title" className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
                       Experience LBTA
                     </h2>
                     <p className="font-sans text-[13px] text-brand-pacific-dusk/60">

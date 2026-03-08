@@ -11,7 +11,7 @@ export default function TestimonialQuote({ quote, author, role, className = '' }
   return (
     <AnimatedSection className={className}>
       <div className="border-l-2 border-brand-sunset-cliff pl-8 py-4">
-        <p className="text-xl md:text-2xl font-serif font-light text-gray-600 italic mb-6 leading-relaxed">
+        <p className="text-xl md:text-2xl font-headline font-light text-gray-600 italic mb-6 leading-relaxed">
           "{quote}"
         </p>
         <div>

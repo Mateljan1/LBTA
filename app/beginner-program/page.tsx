@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import HorizonDivider from '@/components/ui/HorizonDivider'
+import DarkSection from '@/components/ui/DarkSection'
 import pricingData from '@/data/pricing-supplemental.json'
 
 const bp = pricingData.beginnerProgram
@@ -108,7 +111,7 @@ export default function BeginnerProgramLanding() {
               Laguna Beach Tennis Academy
             </p>
 
-            <h1 className="font-serif text-6xl lg:text-7xl text-white mb-8 leading-[1.1]">
+            <h1 className="font-headline text-6xl lg:text-7xl text-white mb-8 leading-[1.1]">
               It's never<br />
               too late<br />
               to start.
@@ -145,7 +148,7 @@ export default function BeginnerProgramLanding() {
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
               The 12-Week Foundation
             </p>
-            <h2 className="font-serif text-4xl lg:text-5xl text-lbta-primary mb-6">
+            <h2 className="font-headline text-4xl lg:text-5xl text-lbta-primary mb-6">
               From Zero to Match-Ready
             </h2>
             <p className="text-lg text-lbta-secondary max-w-2xl mx-auto font-light">
@@ -155,7 +158,7 @@ export default function BeginnerProgramLanding() {
 
           <div className="grid md:grid-cols-3 gap-12">
             <div>
-              <div className="text-7xl font-serif font-light text-lbta-coral mb-6">01</div>
+              <div className="text-7xl font-headline font-light text-lbta-coral mb-6">01</div>
               <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 1-4: Foundation</h3>
               <p className="text-lbta-secondary leading-relaxed mb-4">
                 Master the fundamentals that prevent bad habits. By week 4, you'll have proper grip, balanced stance, and clean contact point on both groundstrokes.
@@ -166,7 +169,7 @@ export default function BeginnerProgramLanding() {
             </div>
 
             <div>
-              <div className="text-7xl font-serif font-light text-lbta-coral mb-6">02</div>
+              <div className="text-7xl font-headline font-light text-lbta-coral mb-6">02</div>
               <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 5-8: Rally Development</h3>
               <p className="text-lbta-secondary leading-relaxed mb-4">
                 Consistency over power. Learning to sustain cross-court and down-the-line rallies. Pattern recognition and court positioning.
@@ -177,7 +180,7 @@ export default function BeginnerProgramLanding() {
             </div>
 
             <div>
-              <div className="text-7xl font-serif font-light text-lbta-coral mb-6">03</div>
+              <div className="text-7xl font-headline font-light text-lbta-coral mb-6">03</div>
               <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 9-12: Match Ready</h3>
               <p className="text-lbta-secondary leading-relaxed mb-4">
                 Scoring, serve mechanics, return positioning, singles and doubles strategy. You'll play your first competitive match.
@@ -198,7 +201,7 @@ export default function BeginnerProgramLanding() {
               <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
                 The System
               </p>
-              <h2 className="font-serif text-4xl text-lbta-primary mb-6">
+              <h2 className="font-headline text-4xl text-lbta-primary mb-6">
                 Why adult beginners succeed here.
               </h2>
               <div className="space-y-6 text-lbta-secondary leading-relaxed">
@@ -254,7 +257,7 @@ export default function BeginnerProgramLanding() {
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
               Real Results
             </p>
-            <h2 className="font-serif text-4xl lg:text-5xl text-lbta-primary mb-6">
+            <h2 className="font-headline text-4xl lg:text-5xl text-lbta-primary mb-6">
               Hear From Our Members
             </h2>
             <p className="text-lg text-lbta-secondary max-w-2xl mx-auto font-light">
@@ -281,7 +284,7 @@ export default function BeginnerProgramLanding() {
             <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
               Complete Package
             </p>
-            <h2 className="font-serif text-4xl lg:text-5xl text-lbta-primary mb-6">
+            <h2 className="font-headline text-4xl lg:text-5xl text-lbta-primary mb-6">
               Everything Included
             </h2>
           </div>
@@ -293,7 +296,7 @@ export default function BeginnerProgramLanding() {
                   <h4 className="font-medium text-lbta-primary mb-1">{bp.valueStack.groupSessions.label}</h4>
                   <p className="text-sm text-lbta-secondary">{bp.valueStack.groupSessions.description}</p>
                 </div>
-                <p className="text-xl font-serif text-lbta-secondary">${bp.valueStack.groupSessions.value.toLocaleString()}</p>
+                <p className="text-xl font-headline text-lbta-secondary">${bp.valueStack.groupSessions.value.toLocaleString()}</p>
               </div>
 
               <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
@@ -301,7 +304,7 @@ export default function BeginnerProgramLanding() {
                   <h4 className="font-medium text-lbta-primary mb-1">{bp.valueStack.videoAnalysis.label}</h4>
                   <p className="text-sm text-lbta-secondary">{bp.valueStack.videoAnalysis.description}</p>
                 </div>
-                <p className="text-xl font-serif text-lbta-secondary">${bp.valueStack.videoAnalysis.value.toLocaleString()}</p>
+                <p className="text-xl font-headline text-lbta-secondary">${bp.valueStack.videoAnalysis.value.toLocaleString()}</p>
               </div>
 
               <div className="flex justify-between items-center pb-4 border-b border-lbta-primary/10">
@@ -309,14 +312,14 @@ export default function BeginnerProgramLanding() {
                   <h4 className="font-medium text-lbta-primary mb-1">{bp.valueStack.trainingPlan.label}</h4>
                   <p className="text-sm text-lbta-secondary">{bp.valueStack.trainingPlan.description}</p>
                 </div>
-                <p className="text-xl font-serif text-lbta-secondary">${bp.valueStack.trainingPlan.value.toLocaleString()}</p>
+                <p className="text-xl font-headline text-lbta-secondary">${bp.valueStack.trainingPlan.value.toLocaleString()}</p>
               </div>
 
               <div className="flex justify-between items-center pt-6">
                 <div>
                   <h4 className="font-medium text-lbta-primary text-lg">Total Value</h4>
                 </div>
-                <p className="text-3xl font-serif text-lbta-primary line-through opacity-50">${bp.valueStack.totalValue.toLocaleString()}</p>
+                <p className="text-3xl font-headline text-lbta-primary line-through opacity-50">${bp.valueStack.totalValue.toLocaleString()}</p>
               </div>
 
               <div className="bg-white p-6 -mx-6 -mb-6">
@@ -326,7 +329,7 @@ export default function BeginnerProgramLanding() {
                     <p className="text-sm text-lbta-secondary">Plus ${bp.discount} off with {bp.discountDeadline} enrollment</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-4xl font-serif text-lbta-coral">${bp.schedules[0].discountedPrice}-${bp.schedules[2].discountedPrice}</p>
+                    <p className="text-4xl font-headline text-lbta-coral">${bp.schedules[0].discountedPrice}-${bp.schedules[2].discountedPrice}</p>
                     <p className="text-sm text-lbta-secondary">Normally ${bp.schedules[0].price}-${bp.schedules[2].price}</p>
                   </div>
                 </div>
@@ -359,7 +362,7 @@ export default function BeginnerProgramLanding() {
                   ${bp.discount} OFF • Enroll by {bp.discountDeadline}
                 </div>
 
-                <h3 className="font-serif text-3xl text-lbta-bone mb-6">
+                <h3 className="font-headline text-3xl text-lbta-bone mb-6">
                   Spring 2026 Cohort
                 </h3>
                 <div className="space-y-6 text-lbta-bone/80 text-sm leading-relaxed">
@@ -368,7 +371,7 @@ export default function BeginnerProgramLanding() {
                       <p className="text-lbta-coral font-medium mb-2">{sched.label}</p>
                       <p className="mb-3">{sched.sessions} sessions • {sched.frequency}</p>
                       <div className="flex items-baseline gap-3">
-                        <p className="text-2xl font-serif text-lbta-bone">${sched.discountedPrice}</p>
+                        <p className="text-2xl font-headline text-lbta-bone">${sched.discountedPrice}</p>
                         <p className="text-lg text-lbta-bone/40 line-through">${sched.price}</p>
                       </div>
                       <p className="text-xs text-lbta-coral mt-2">Save ${bp.discount} • Ends {bp.discountDeadline}</p>
@@ -396,13 +399,13 @@ export default function BeginnerProgramLanding() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h4 className="text-2xl font-serif text-lbta-primary mb-3">Request Received</h4>
+                    <h4 className="text-2xl font-headline text-lbta-primary mb-3">Request Received</h4>
                     <p className="text-lbta-secondary">We'll contact you within 24 hours to schedule your trial session.</p>
                   </div>
                 ) : (
                   <>
                     <div className="mb-8">
-                      <h4 className="text-2xl font-serif text-lbta-primary mb-2">
+                      <h4 className="text-2xl font-headline text-lbta-primary mb-2">
                         Start Training
                       </h4>
                       <p className="text-sm text-lbta-coral font-medium">
@@ -512,31 +515,60 @@ export default function BeginnerProgramLanding() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Final Credibility */}
       <section className="py-20 bg-white border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
             <div>
-              <div className="text-3xl font-serif text-lbta-primary mb-1">5.0</div>
+              <div className="text-3xl font-headline text-lbta-primary mb-1">5.0</div>
               <p className="text-sm text-lbta-secondary">Google Rating</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
-              <div className="text-3xl font-serif text-lbta-primary mb-1">200+</div>
+              <div className="text-3xl font-headline text-lbta-primary mb-1">200+</div>
               <p className="text-sm text-lbta-secondary">Adult Members</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
-              <div className="text-3xl font-serif text-lbta-primary mb-1">Since 2020</div>
+              <div className="text-3xl font-headline text-lbta-primary mb-1">Since 2020</div>
               <p className="text-sm text-lbta-secondary">Official City Partner</p>
             </div>
           </div>
         </div>
       </section>
+
+      <HorizonDivider />
+
+      <DarkSection className="py-20 md:py-24">
+        <div className="max-w-[720px] mx-auto text-center">
+          <h2 className="font-headline text-[32px] md:text-[48px] font-medium text-white leading-[1.15] mb-4">
+            Ready to Start Training?
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-white/80 mb-8">
+            Book a trial or get in touch. We will respond within 24 hours.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/book"
+              className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            >
+              Book Trial
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center bg-transparent text-white border border-white/50 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </DarkSection>
 
       {/* Footer */}
       <footer className="bg-brand-pacific-dusk py-12">

@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 
 export const metadata: Metadata = {
   title: 'High Performance Pathway | Tennis Training | LBTA',
@@ -95,7 +96,7 @@ export default function HighPerformancePathwayPage() {
           <p className="font-sans text-[11px] uppercase tracking-[3px] text-white/60 mb-6">
             Invitation Only
           </p>
-          <h1 className="font-serif text-[clamp(2.5rem,7vw,4.5rem)] font-semibold leading-[1.05] mb-6">
+          <h1 className="font-headline text-[clamp(2.5rem,7vw,4.5rem)] font-semibold leading-[1.05] mb-6">
             The High Performance Pathway
           </h1>
           <p className="font-sans text-[18px] md:text-[20px] text-white/80 max-w-2xl mx-auto mb-10">
@@ -110,13 +111,15 @@ export default function HighPerformancePathwayPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Results Section */}
       <section className="bg-brand-pacific-dusk py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {achievements.map((item) => (
               <div key={item.label} className="text-center">
-                <p className="font-serif text-[48px] md:text-[56px] font-semibold text-white leading-none mb-2">
+                <p className="font-headline text-[48px] md:text-[56px] font-semibold text-white leading-none mb-2">
                   {item.stat}
                 </p>
                 <p className="font-sans text-[14px] uppercase tracking-wider text-white/60 mb-1">
@@ -131,12 +134,14 @@ export default function HighPerformancePathwayPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Philosophy Section */}
       <section className="bg-brand-morning-light py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <p className="text-eyebrow text-brand-pacific-dusk/60 mb-4">Our Methodology</p>
-            <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-brand-pacific-dusk leading-tight mb-4">
+            <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-brand-pacific-dusk leading-tight mb-4">
               The Four Pillars of Excellence
             </h2>
             <p className="font-sans text-[16px] text-lbta-slate max-w-2xl mx-auto">
@@ -150,10 +155,10 @@ export default function HighPerformancePathwayPage() {
                 key={pillar.title}
                 className="bg-white p-8 md:p-10 border border-lbta-stone/50"
               >
-                <span className="font-serif text-[48px] text-lbta-stone/30 leading-none">
+                <span className="font-headline text-[48px] text-lbta-stone/30 leading-none">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <h3 className="font-serif text-[24px] font-semibold text-brand-pacific-dusk mt-4 mb-3">
+                <h3 className="font-headline text-[24px] font-semibold text-brand-pacific-dusk mt-4 mb-3">
                   {pillar.title}
                 </h3>
                 <p className="font-sans text-[15px] text-lbta-slate leading-relaxed">
@@ -164,6 +169,8 @@ export default function HighPerformancePathwayPage() {
           </div>
         </div>
       </section>
+
+      <HorizonDivider />
 
       {/* Coach Section */}
       <section className="bg-white py-20 md:py-28">
@@ -181,7 +188,7 @@ export default function HighPerformancePathwayPage() {
 
             <div>
               <p className="text-eyebrow text-brand-pacific-dusk/60 mb-4">Your Coach</p>
-              <h2 className="font-serif text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk leading-tight mb-6">
+              <h2 className="font-headline text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk leading-tight mb-6">
                 Andrew Mateljan
               </h2>
               <p className="font-sans text-[14px] uppercase tracking-wider text-brand-sunset-cliff mb-6">
@@ -199,7 +206,7 @@ export default function HighPerformancePathwayPage() {
                 </p>
               </div>
               <blockquote className="border-l-2 border-brand-pacific-dusk/30 pl-6 mt-8">
-                <p className="font-serif text-[20px] italic text-brand-pacific-dusk leading-relaxed">
+                <p className="font-headline text-[20px] italic text-brand-pacific-dusk leading-relaxed">
                   &ldquo;Structure creates confidence. Confidence creates champions.&rdquo;
                 </p>
               </blockquote>
@@ -208,12 +215,14 @@ export default function HighPerformancePathwayPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Requirements Section */}
       <section className="bg-brand-morning-light py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-eyebrow text-brand-pacific-dusk/60 mb-4">Requirements</p>
-            <h2 className="font-serif text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk leading-tight mb-4">
+            <h2 className="font-headline text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk leading-tight mb-4">
               Is This Program For You?
             </h2>
             <p className="font-sans text-[16px] text-lbta-slate">
@@ -240,13 +249,15 @@ export default function HighPerformancePathwayPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Application CTA */}
       <section id="apply" className="bg-brand-pacific-dusk py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="font-sans text-[11px] uppercase tracking-[3px] text-white/50 mb-6">
             Start Your Journey
           </p>
-          <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-white leading-tight mb-6">
+          <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-white leading-tight mb-6">
             Apply for Assessment
           </h2>
           <p className="font-sans text-[16px] text-white/70 mb-10 max-w-xl mx-auto">

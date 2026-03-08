@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
 import { CourseSchema } from '../schema'
+import HorizonDivider from '@/components/ui/HorizonDivider'
+import DarkSection from '@/components/ui/DarkSection'
 import { getProgramsOverview } from '@/lib/programs-data'
 
 export const metadata: Metadata = {
@@ -31,7 +33,7 @@ export default function Programs() {
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
           <span className="text-eyebrow text-brand-victoria-cove/90 mb-4 block">Choose Your Path</span>
-          <h1 className="font-serif text-display-xl text-white mb-6">
+          <h1 className="font-headline text-display-xl text-white mb-6">
             Programs for Every Player.
           </h1>
           <p className="font-sans text-body-lg font-light text-white/85 max-w-2xl mx-auto">
@@ -40,7 +42,7 @@ export default function Programs() {
         </div>
       </section>
 
-      <div className="horizon-line" />
+      <HorizonDivider />
 
       {/* Card Grid */}
       <section className="container-lbta section bg-brand-morning-light">
@@ -54,7 +56,7 @@ export default function Programs() {
               <span className="text-eyebrow text-brand-victoria-cove mb-3 block">
                 {program.eyebrow}
               </span>
-              <h2 className="font-serif text-headline text-brand-pacific-dusk mb-3 group-hover:text-brand-deep-water transition-colors">
+              <h2 className="font-headline text-headline text-brand-pacific-dusk mb-3 group-hover:text-brand-deep-water transition-colors">
                 {program.title}
               </h2>
               <p className="text-body font-light text-brand-pacific-dusk/70 mb-4 flex-1 leading-relaxed">
@@ -73,39 +75,32 @@ export default function Programs() {
         </div>
       </section>
 
-      {/* Schedule CTA */}
-      <section className="relative min-h-[400px] flex items-center justify-center overflow-hidden bg-brand-deep-water">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero/laguna-horizon.webp"
-            alt="View of Laguna Beach tennis courts overlooking ocean horizon at sunset"
-            fill
-            className="object-cover opacity-50"
-            sizes="100vw"
-            quality={90}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/80 to-brand-deep-water/40" />
-        </div>
-        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto py-16">
-          <h2 className="font-serif text-display-md text-white mb-4">
+      <HorizonDivider />
+
+      <DarkSection className="py-20 md:py-24">
+        <div className="max-w-[720px] mx-auto text-center">
+          <h2 className="font-headline text-[28px] md:text-[40px] font-medium text-white leading-[1.15] mb-4">
             View Full Schedule & Pricing
           </h2>
-          <p className="text-body font-light text-white/80 mb-8">
+          <p className="font-sans text-[16px] md:text-[18px] text-white/80 mb-8">
             Schedules, pricing, and registration for all programs.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href="/schedules" className="btn-primary">
-              View Schedules →
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/schedules"
+              className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            >
+              View Schedules
             </Link>
             <Link
               href="/schedules"
-              className="btn-secondary border-white/30 text-white hover:border-white hover:bg-white/10"
+              className="inline-flex items-center justify-center bg-transparent text-white border border-white/50 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
             >
               View Full Schedule
             </Link>
           </div>
         </div>
-      </section>
+      </DarkSection>
     </>
   )
 }

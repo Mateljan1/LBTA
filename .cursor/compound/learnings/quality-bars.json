@@ -1,0 +1,56 @@
+{
+  "project": "lbta-website",
+  "updated": "2026-03-06",
+  "qualityBars": {
+    "dataIntegrity": {
+      "rule": "No hardcoded prices or duplicate program/option lists in components",
+      "source": "Single source in /data/*.json or lib/programs-data",
+      "enforcement": "must"
+    },
+    "apiErrorStatus": {
+      "rule": "API error responses use correct HTTP status",
+      "detail": "500 for server/processing failure; 400 for invalid body/JSON",
+      "enforcement": "must"
+    },
+    "webhookAuth": {
+      "rule": "Webhooks require and enforce auth secret in production",
+      "enforcement": "must"
+    },
+    "modalFocusRestore": {
+      "rule": "Modals restore focus to trigger element on close",
+      "enforcement": "must"
+    },
+    "iconButtonA11y": {
+      "rule": "Icon-only buttons have aria-label or visible text",
+      "enforcement": "must"
+    },
+    "noDeadEndpoints": {
+      "rule": "UI must not call API routes that do not exist",
+      "enforcement": "must"
+    },
+    "reducedMotion": {
+      "rule": "Animated sections respect useReducedMotion(); static fallback when true",
+      "enforcement": "should"
+    },
+    "noUnusedStateRefs": {
+      "rule": "Remove unused state and refs before merge",
+      "enforcement": "should"
+    },
+    "resizeThrottle": {
+      "rule": "Throttle resize listeners when used for layout (e.g. 150–200ms)",
+      "enforcement": "should"
+    },
+    "ctaConsistency": {
+      "rule": "Bottom CTA on program pages uses DarkSection; primary CTA styling consistent",
+      "enforcement": "should"
+    },
+    "docNonObvious": {
+      "rule": "JSDoc or short comment for non-obvious behavior (handleClose reset, auto-advance, reduced-motion)",
+      "enforcement": "should"
+    },
+    "brandTokens": {
+      "rule": "Prefer brand-* for new code; error states use brand/semantic token over raw red",
+      "enforcement": "should"
+    }
+  }
+}

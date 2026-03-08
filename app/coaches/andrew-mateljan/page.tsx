@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { Mail, Phone } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
+import HorizonDivider from '@/components/ui/HorizonDivider'
+import DarkSection from '@/components/ui/DarkSection'
 
 const philosophy = [
   {
@@ -60,12 +62,14 @@ export default function AndrewMateljanPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Playing Career */}
       <section className="section-spacing bg-brand-morning-light">
         <div className="container-narrow">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <AnimatedSection>
-              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
+              <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Playing Career
               </h2>
               <ul className="space-y-3 text-gray-600">
@@ -89,7 +93,7 @@ export default function AndrewMateljanPage() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <h2 className="text-2xl font-serif font-light text-brand-pacific-dusk mb-6">
+              <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Coaching Journey
               </h2>
               <ul className="space-y-3 text-gray-600">
@@ -115,11 +119,13 @@ export default function AndrewMateljanPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* ATP Players */}
       <section className="section-spacing bg-brand-pacific-dusk text-white">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
-            <h2 className="text-4xl font-serif font-light mb-4">
+            <h2 className="text-4xl font-headline font-light mb-4">
               Currently Coaching ATP-Ranked Players
             </h2>
             <p className="text-lg text-white/70 font-sans">
@@ -142,12 +148,14 @@ export default function AndrewMateljanPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Philosophy */}
       <section className="section-spacing bg-white">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
             <p className="text-overline mb-6">Coaching Philosophy</p>
-            <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-6">
+            <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk mb-6">
               Five Pillars
             </h2>
             <p className="text-lg text-gray-600 font-sans max-w-3xl mx-auto">
@@ -159,7 +167,7 @@ export default function AndrewMateljanPage() {
             {philosophy.map((pillar, index) => (
               <AnimatedSection key={pillar.number} delay={index * 0.1}>
                 <div className="card-lbta p-8 md:p-10 relative">
-                  <div className="absolute top-4 left-4 text-7xl font-serif font-light text-brand-sunset-cliff/10 leading-none">
+                  <div className="absolute top-4 left-4 text-7xl font-headline font-light text-brand-sunset-cliff/10 leading-none">
                     {pillar.number}
                   </div>
                   <div className="relative z-10">
@@ -176,6 +184,8 @@ export default function AndrewMateljanPage() {
           </div>
         </div>
       </section>
+
+      <HorizonDivider />
 
       {/* Fit4Tennis */}
       <section className="section-spacing bg-brand-morning-light">
@@ -196,32 +206,31 @@ export default function AndrewMateljanPage() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="section-spacing bg-white">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h2 className="text-4xl font-serif font-light mb-8">
-              Train with Andrew
-            </h2>
-            <div className="flex flex-col gap-4 mb-8 items-center">
-              <a href="mailto:andrew@tennisbeast.com" className="flex items-center gap-3 text-gray-600 hover:text-brand-sunset-cliff transition-colors">
-                <Mail className="w-5 h-5" />
-                <span>andrew@tennisbeast.com</span>
-              </a>
-              <a href="tel:9492410847" className="flex items-center gap-3 text-gray-600 hover:text-brand-sunset-cliff transition-colors">
-                <Phone className="w-5 h-5" />
-                <span>(949) 241-0847</span>
-              </a>
-            </div>
-            <Link
-              href="/book"
-              className="btn-primary"
-            >
-              SCHEDULE SESSION
-            </Link>
-          </AnimatedSection>
+      <HorizonDivider />
+
+      <DarkSection className="py-20 md:py-24">
+        <div className="max-w-[720px] mx-auto text-center">
+          <h2 className="font-headline text-[32px] md:text-[48px] font-medium text-white leading-[1.15] mb-6">
+            Train with Andrew
+          </h2>
+          <div className="flex flex-col gap-4 mb-8 items-center">
+            <a href="mailto:andrew@tennisbeast.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+              <Mail className="w-5 h-5" />
+              <span>andrew@tennisbeast.com</span>
+            </a>
+            <a href="tel:9492410847" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+              <Phone className="w-5 h-5" />
+              <span>(949) 241-0847</span>
+            </a>
+          </div>
+          <Link
+            href="/book"
+            className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+          >
+            Schedule Session
+          </Link>
         </div>
-      </section>
+      </DarkSection>
     </>
   )
 }

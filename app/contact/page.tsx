@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MapPin, Phone, Mail, CheckCircle, Loader2 } from 'lucide-react'
 import StickyCTA from '@/components/StickyCTA'
+import DarkSection from '@/components/ui/DarkSection'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -81,14 +83,14 @@ export default function ContactPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/50 to-black/25" />
         </div>
         
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="font-serif text-[36px] md:text-[60px] font-bold leading-[1.1] mb-6 text-shadow">
+          <h1 className="font-headline text-[36px] md:text-[60px] font-bold leading-[1.1] mb-6 text-shadow">
             Let's Start Your Tennis Journey.
           </h1>
-          <p className="font-serif text-[18px] md:text-[24px] leading-[1.3] mb-8 text-white/95">
+          <p className="font-headline text-[18px] md:text-[24px] leading-[1.3] mb-8 text-white/95">
             Movement. Craft. Community — it starts here.
           </p>
           <button 
@@ -101,28 +103,29 @@ export default function ContactPage() {
         </div>
       </section>
 
+      <HorizonDivider />
       {/* CONTACT INFO BAR */}
-      <section className="bg-brand-morning-light border-b border-black/10 py-8 md:py-12">
+      <section className="bg-brand-sandstone border-b border-black/10 py-8 md:py-12">
         <div className="max-w-[1200px] mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-center">
             {/* Location */}
             <div className="flex flex-col items-center gap-3">
-              <MapPin className="w-6 h-6 text-black" aria-hidden="true" />
+              <MapPin className="w-6 h-6 text-brand-victoria-cove" aria-hidden="true" />
               <div>
-                <p className="font-sans font-semibold text-[15px] text-black mb-1">Location</p>
-                <p className="font-sans text-[14px] text-black/70">1098 Balboa Ave</p>
-                <p className="font-sans text-[14px] text-black/70">Laguna Beach, CA 92651</p>
+                <p className="font-sans font-semibold text-[15px] text-brand-pacific-dusk mb-1">Location</p>
+                <p className="font-sans text-[14px] text-brand-pacific-dusk/80">1098 Balboa Ave</p>
+                <p className="font-sans text-[14px] text-brand-pacific-dusk/80">Laguna Beach, CA 92651</p>
               </div>
             </div>
             
             {/* Phone */}
             <div className="flex flex-col items-center gap-3">
-              <Phone className="w-6 h-6 text-black" aria-hidden="true" />
+              <Phone className="w-6 h-6 text-brand-victoria-cove" aria-hidden="true" />
               <div>
-                <p className="font-sans font-semibold text-[15px] text-black mb-1">Phone</p>
+                <p className="font-sans font-semibold text-[15px] text-brand-pacific-dusk mb-1">Phone</p>
                 <a 
                   href="tel:9495340457" 
-                  className="font-sans text-[14px] text-black/70 hover:text-black/70 transition-colors"
+                  className="font-sans text-[14px] text-brand-victoria-cove hover:text-brand-victoria-cove/80 transition-colors"
                   aria-label="Call us at (949) 534-0457"
                 >
                   (949) 534-0457
@@ -132,12 +135,12 @@ export default function ContactPage() {
             
             {/* Email */}
             <div className="flex flex-col items-center gap-3">
-              <Mail className="w-6 h-6 text-black" aria-hidden="true" />
+              <Mail className="w-6 h-6 text-brand-victoria-cove" aria-hidden="true" />
               <div>
-                <p className="font-sans font-semibold text-[15px] text-black mb-1">Email</p>
+                <p className="font-sans font-semibold text-[15px] text-brand-pacific-dusk mb-1">Email</p>
                 <a 
                   href="mailto:support@lagunabeachtennisacademy.com" 
-                  className="font-sans text-[14px] text-black/70 hover:text-black/70 transition-colors break-all"
+                  className="font-sans text-[14px] text-brand-victoria-cove hover:text-brand-victoria-cove/80 transition-colors break-all"
                   aria-label="Email us at support@lagunabeachtennisacademy.com"
                 >
                   support@lagunabeachtennisacademy.com
@@ -150,12 +153,12 @@ export default function ContactPage() {
 
       {/* MAIN FORM SECTION */}
       <section id="contact-form" className="bg-white py-16 md:py-24">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6 md:pl-10 border-l-0 md:border-l-4 md:border-brand-sandstone">
           {status === 'success' ? (
             /* SUCCESS STATE */
             <div className="max-w-2xl mx-auto text-center py-12 bg-black/5 rounded-2xl animate-fade-in-up">
               <CheckCircle className="w-16 h-16 text-black mx-auto mb-6" />
-              <h3 className="font-serif text-[28px] md:text-[32px] font-semibold text-black mb-4">
+              <h3 className="font-headline text-[28px] md:text-[32px] font-semibold text-black mb-4">
                 Message Sent!
               </h3>
               <p className="font-sans text-[16px] text-black/70 mb-8">
@@ -173,7 +176,7 @@ export default function ContactPage() {
             <div className="grid md:grid-cols-5 gap-8 md:gap-12">
               {/* Form - 3 columns */}
               <div className="md:col-span-3">
-                <h2 className="font-serif text-[28px] md:text-[40px] font-semibold text-black mb-3">
+                <h2 className="font-headline text-[28px] md:text-[40px] font-semibold text-black mb-3">
                   Tell us a little about you.
                 </h2>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 mb-8">
@@ -367,23 +370,24 @@ export default function ContactPage() {
         </div>
       </section>
 
+      <HorizonDivider />
       {/* PRE-FOOTER CTA */}
-      <section className="bg-brand-morning-light py-16 md:py-20">
+      <DarkSection className="py-16 md:py-20">
         <div className="max-w-[1200px] mx-auto px-4 text-center">
-          <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-6">
+          <h2 className="font-headline text-[32px] md:text-[44px] font-semibold text-brand-sandstone mb-6">
             Ready to Train With Purpose?
           </h2>
-          <p className="font-sans text-[16px] text-black/70 mb-8 max-w-2xl mx-auto">
+          <p className="font-sans text-[16px] text-white/85 mb-8 max-w-2xl mx-auto">
             Skip the form and book a trial session today. Experience LBTA firsthand.
           </p>
           <Link
             href="/book"
-            className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+            className="inline-block bg-brand-sunset-cliff hover:bg-brand-sunset-cliff/90 text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/50 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
           >
             Book a Trial →
           </Link>
         </div>
-      </section>
+      </DarkSection>
       
       {/* Sticky Mobile CTA */}
       <StickyCTA text="Book a Trial" href="/book" showAfterScroll={800} />

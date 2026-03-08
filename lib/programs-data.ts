@@ -316,3 +316,35 @@ export function getFitnessClasses(): Array<{ name: string; day: string; time: st
     }))
   })
 }
+
+/** Trial program options for booking modal and book page (single source). Values match API/PROGRAM_TAGS. */
+export interface TrialProgramOption {
+  value: string
+  label: string
+  ages: string
+}
+
+export function getTrialProgramOptions(): TrialProgramOption[] {
+  const fromWinter = winter2026.programs
+    .filter(p =>
+      ['little-stars', 'red-ball', 'orange-ball', 'green-dot', 'youth-development', 'high-performance',
+        'adult-beginner-1', 'adult-beginner-2', 'adult-intermediate', 'adult-advanced', 'cardio-tennis'].includes(p.id)
+    )
+    .map(p => {
+      const value = p.id === 'little-stars' ? 'little-tennis-stars' : p.id === 'adult-beginner-1' || p.id === 'adult-beginner-2' ? 'adult-beginner' : p.id
+      const label = p.id === 'adult-beginner-2' ? 'Adult Beginner (Bridge)' : p.program
+      return { value, label, ages: p.ages }
+    })
+  const uniq = fromWinter.filter((o, i, a) => a.findIndex(x => x.value === o.value) === i)
+  const ordered: TrialProgramOption[] = []
+  const order = ['little-tennis-stars', 'red-ball', 'orange-ball', 'green-dot', 'youth-development', 'high-performance', 'adult-beginner', 'adult-intermediate', 'adult-advanced', 'cardio-tennis']
+  for (const v of order) {
+    const found = uniq.find(o => o.value === v)
+    if (found) ordered.push(found)
+  }
+  ordered.push(
+    { value: 'private-lessons', label: 'Private Lessons', ages: 'All Ages' },
+    { value: 'not-sure', label: 'Not Sure - Help Me Choose', ages: '' }
+  )
+  return ordered
+}

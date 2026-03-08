@@ -7,6 +7,8 @@ import Script from 'next/script'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import AnimatedSection from '@/components/AnimatedSection'
 import VideoTestimonials from '@/components/VideoTestimonials'
+import HorizonDivider from '@/components/ui/HorizonDivider'
+import DarkSection from '@/components/ui/DarkSection'
 import { Play, Quote, Star, ArrowRight } from 'lucide-react'
 
 const successStories = [
@@ -128,7 +130,7 @@ export default function SuccessStoriesPage() {
               <p className="font-sans text-[11px] text-brand-sunset-cliff uppercase tracking-[2px] mb-4">
                 Player Achievements
               </p>
-              <h1 className="font-serif text-[40px] md:text-[56px] font-semibold text-black mb-6 leading-[1.1]">
+              <h1 className="font-headline text-[40px] md:text-[56px] font-semibold text-black mb-6 leading-[1.1]">
                 Success Stories
               </h1>
               <p className="font-sans text-[17px] md:text-[18px] text-black/70 leading-relaxed">
@@ -146,7 +148,7 @@ export default function SuccessStoriesPage() {
           <AnimatedSection>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
               <div>
-                <p className="font-serif text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
+                <p className="font-headline text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
                   20+
                 </p>
                 <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
@@ -154,7 +156,7 @@ export default function SuccessStoriesPage() {
                 </p>
               </div>
               <div>
-                <p className="font-serif text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
+                <p className="font-headline text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
                   500+
                 </p>
                 <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
@@ -162,7 +164,7 @@ export default function SuccessStoriesPage() {
                 </p>
               </div>
               <div>
-                <p className="font-serif text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
+                <p className="font-headline text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
                   5.0
                 </p>
                 <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
@@ -170,7 +172,7 @@ export default function SuccessStoriesPage() {
                 </p>
               </div>
               <div>
-                <p className="font-serif text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
+                <p className="font-headline text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
                   25+
                 </p>
                 <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
@@ -221,7 +223,7 @@ export default function SuccessStoriesPage() {
                         {story.title}
                       </span>
                     </div>
-                    <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-black mb-2">
+                    <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-black mb-2">
                       {story.name}
                     </h2>
                     <p className="font-sans text-[18px] md:text-[20px] text-brand-sunset-cliff font-medium mb-6">
@@ -230,7 +232,7 @@ export default function SuccessStoriesPage() {
                     
                     <blockquote className="relative mb-6">
                       <Quote className="absolute -left-2 -top-2 h-8 w-8 text-brand-sunset-cliff/20" />
-                      <p className="font-serif text-[18px] md:text-[20px] text-black/80 italic leading-relaxed pl-6">
+                      <p className="font-headline text-[18px] md:text-[20px] text-black/80 italic leading-relaxed pl-6">
                         "{story.quote}"
                       </p>
                     </blockquote>
@@ -250,7 +252,7 @@ export default function SuccessStoriesPage() {
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimatedSection>
-            <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-black mb-12 text-center">
+            <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-black mb-12 text-center">
               More Player Journeys
             </h2>
           </AnimatedSection>
@@ -272,13 +274,13 @@ export default function SuccessStoriesPage() {
                     <span className="inline-block text-brand-sunset-cliff font-sans text-[12px] font-medium uppercase tracking-[1.5px] mb-2">
                       {story.title}
                     </span>
-                    <h3 className="font-serif text-[24px] font-semibold text-black mb-2">
+                    <h3 className="font-headline text-[24px] font-semibold text-black mb-2">
                       {story.name}
                     </h3>
                     <p className="font-sans text-[15px] text-black/60 mb-4">
                       {story.achievement}
                     </p>
-                    <p className="font-serif text-[15px] text-black/80 italic">
+                    <p className="font-headline text-[15px] text-black/80 italic">
                       "{story.quote}"
                     </p>
                   </div>
@@ -289,15 +291,19 @@ export default function SuccessStoriesPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Video Testimonials */}
       <VideoTestimonials />
+
+      <HorizonDivider />
 
       {/* Testimonials Wall */}
       <section className="bg-lbta-beige py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-black mb-4">
+              <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-black mb-4">
                 What Players Say
               </h2>
               <div className="flex items-center justify-center gap-2 mb-2">
@@ -338,26 +344,25 @@ export default function SuccessStoriesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-black py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <AnimatedSection>
-            <h2 className="font-serif text-[32px] md:text-[40px] font-semibold text-white mb-6">
-              Ready to Write Your Success Story?
-            </h2>
-            <p className="font-sans text-[16px] md:text-[17px] text-white/80 mb-8">
-              Join 500+ players who have transformed their game at LBTA.
-            </p>
-            <Link
-              href="/book"
-              className="inline-flex items-center gap-2 bg-brand-sunset-cliff hover:bg-brand-sunset-cliff text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-full transition-all duration-300 uppercase tracking-[1.5px] shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              Book Your Free Trial
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </AnimatedSection>
+      <HorizonDivider />
+
+      <DarkSection className="py-20 md:py-24">
+        <div className="max-w-[720px] mx-auto text-center">
+          <h2 className="font-headline text-[32px] md:text-[48px] font-medium text-white leading-[1.15] mb-4">
+            Ready to Write Your Success Story?
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-white/80 mb-8">
+            Join 500+ players who have transformed their game at LBTA.
+          </p>
+          <Link
+            href="/book"
+            className="inline-flex items-center gap-2 bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+          >
+            Book Your Free Trial
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
-      </section>
+      </DarkSection>
     </>
   )
 }

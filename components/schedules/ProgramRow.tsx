@@ -30,7 +30,7 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
       <div className="hidden md:grid md:grid-cols-[1fr_auto_auto] md:items-center gap-8 px-6 py-5">
         {/* Col 1: Program info */}
         <div className="min-w-0">
-          <h3 className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-snug">
+          <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-snug">
             {program.program}
           </h3>
           <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
@@ -59,7 +59,7 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
         <div className="flex items-center gap-6 flex-shrink-0">
           <div className="text-right w-[120px]">
             {price && (
-              <p className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-tight">
+              <p className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-tight">
                 ${price.amount}
                 <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
                   {price.label}
@@ -88,7 +88,7 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
 
       {/* Mobile — stacked card */}
       <div className="md:hidden px-4 py-5">
-        <h3 className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-snug">
+        <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-snug">
           {program.program}
         </h3>
         <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
@@ -113,7 +113,7 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
 
         <div className="mt-4 flex items-baseline gap-3">
           {price && (
-            <span className="font-serif text-[18px] font-medium text-brand-pacific-dusk">
+            <span className="font-headline text-[18px] font-medium text-brand-pacific-dusk">
               ${price.amount}
               <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
                 {price.label}

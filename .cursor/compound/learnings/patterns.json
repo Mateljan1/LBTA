@@ -1,0 +1,60 @@
+{
+  "project": "lbta-website",
+  "updated": "2026-03-06",
+  "patterns": [
+    {
+      "name": "single-source-dropdown-options",
+      "when": "Modal or page shows a list of programs/options also used elsewhere",
+      "example": "Trial program list: one data file or lib helper; TrialBookingModal and book page both import",
+      "tags": ["data", "DRY"]
+    },
+    {
+      "name": "prices-in-data-only",
+      "when": "Component displays pricing (tiers, sessions, membership)",
+      "example": "PricingComparison, LeaguesSection read from /data/*.json or lib/programs-data",
+      "tags": ["data-integrity"]
+    },
+    {
+      "name": "modal-focus-restore",
+      "when": "Any modal/dialog that traps focus",
+      "example": "On open save document.activeElement; on close call previousFocus?.focus() in close handler and effect cleanup",
+      "tags": ["a11y", "focus"]
+    },
+    {
+      "name": "icon-button-aria-label",
+      "when": "Button has only an icon, no visible text",
+      "example": "aria-label=\"Send message\" or \"Close\"",
+      "tags": ["a11y"]
+    },
+    {
+      "name": "webhook-error-500",
+      "when": "API route processes webhooks",
+      "example": "On catch: NextResponse.json({ success: false, error: '...' }, { status: 500 })",
+      "tags": ["api"]
+    },
+    {
+      "name": "reduced-motion-section",
+      "when": "Section uses Framer Motion whileInView or entrance animation",
+      "example": "useReducedMotion(); when true render plain element with no motion props (DarkSection)",
+      "tags": ["a11y", "motion"]
+    },
+    {
+      "name": "next-image-logos",
+      "when": "Displaying logos or partner images (not tracking pixel)",
+      "example": "Next/Image with width, height, descriptive alt (ChatWidget logo, PartnershipSection)",
+      "tags": ["performance", "a11y"]
+    },
+    {
+      "name": "zod-validate-api-body",
+      "when": "API route accepts JSON body",
+      "example": "validateRequest(schema, body); return 400 on parse/validation failure",
+      "tags": ["api", "validation"]
+    },
+    {
+      "name": "stub-api-friendly-reply",
+      "when": "Implementing a placeholder API (e.g. chat) without backend/LLM",
+      "example": "POST validates with Zod, rate-limits, returns 200 with friendly reply directing user to contact/phone; 500 on error with same fallback message",
+      "tags": ["api", "product", "ux"]
+    }
+  ]
+}

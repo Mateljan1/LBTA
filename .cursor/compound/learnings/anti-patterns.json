@@ -1,0 +1,62 @@
+{
+  "project": "lbta-website",
+  "updated": "2026-03-06",
+  "antiPatterns": [
+    {
+      "id": "hardcoded-prices",
+      "description": "Hardcoding prices or tier amounts in components",
+      "avoid": "PricingComparison tiers with $50, $546 in TSX; LeaguesSection $48/year in copy",
+      "instead": "Source from /data/*.json or lib/programs-data; component only renders",
+      "tags": ["data-integrity", "single-source"]
+    },
+    {
+      "id": "duplicate-program-lists",
+      "description": "Same list of programs/options defined in multiple places",
+      "avoid": "TrialBookingModal programs array and app/book/page.tsx programs constant",
+      "instead": "Single source (data file or lib helper); both modal and page import",
+      "tags": ["DRY", "single-source"]
+    },
+    {
+      "id": "webhook-200-on-error",
+      "description": "Returning 200 with success: false on webhook processing failure",
+      "avoid": "catch block returns NextResponse.json({ success: false }) with no status",
+      "instead": "NextResponse.json(..., { status: 500 }) for server/processing errors",
+      "tags": ["api", "http-status"]
+    },
+    {
+      "id": "modal-no-focus-restore",
+      "description": "Closing a modal without restoring focus to the trigger",
+      "avoid": "handleClose only calls onClose(); user tab lands nowhere predictable",
+      "instead": "Save document.activeElement (or trigger ref) on open; focus() in close",
+      "tags": ["a11y", "focus-management"]
+    },
+    {
+      "id": "icon-button-no-label",
+      "description": "Icon-only button with no accessible name",
+      "avoid": "<button><SendIcon /></button>",
+      "instead": "aria-label=\"Send message\" or visible text",
+      "tags": ["a11y", "aria"]
+    },
+    {
+      "id": "ui-calls-missing-api",
+      "description": "UI component that POSTs to an API route that does not exist",
+      "avoid": "ChatWidget POST /api/chat with no app/api/chat/route.ts",
+      "instead": "Implement the route with validation and rate limit, or disable the UI",
+      "tags": ["product", "api"]
+    },
+    {
+      "id": "webhook-secret-optional",
+      "description": "Making webhook verification skip when secret env is unset",
+      "avoid": "if (!secret) return null; // skip verification",
+      "instead": "In production, require secret and reject request when unset",
+      "tags": ["security", "webhook"]
+    },
+    {
+      "id": "unused-state-and-refs",
+      "description": "Keeping state or refs that are set but never read",
+      "avoid": "isMobile, setIsMobile + resize effect; containerRef with no .current read",
+      "instead": "Remove before merge (YAGNI)",
+      "tags": ["simplicity", "cleanup"]
+    }
+  ]
+}

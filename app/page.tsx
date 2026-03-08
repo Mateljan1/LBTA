@@ -4,8 +4,8 @@ import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import FAQSection from '@/components/FAQSection'
 import VideoTestimonials from '@/components/VideoTestimonials'
-import PressBanner from '@/components/PressBanner'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
 
@@ -58,9 +58,9 @@ export default function Home() {
 
       <HomeHero />
 
+      <HorizonDivider />
       <section id="founder" className="bg-brand-morning-light section-lg">
         <div className="container-lbta">
-          <hr className="horizon-line mb-0" />
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center pt-16">
             <AnimatedSection>
               <div className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden rounded-subtle">
@@ -114,8 +114,6 @@ export default function Home() {
         </div>
       </section>
 
-      <PressBanner />
-
       <section id="results" className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -127,7 +125,7 @@ export default function Home() {
             sizes="100vw"
             quality={90}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-deep-water/95 via-black/70 to-transparent" />
         </div>
         <div className="relative z-10 container-lbta">
           <div className="max-w-xl">
@@ -156,9 +154,9 @@ export default function Home() {
         </div>
       </section>
 
+      <HorizonDivider />
       <section id="philosophy" className="bg-brand-morning-light section-lg">
         <div className="container-lbta">
-          <hr className="horizon-line mb-16" />
           <AnimatedSection className="text-center mb-16">
             <span className="text-eyebrow mb-4 block">Our Philosophy</span>
             <h2 className="font-headline text-headline font-light">The Three Pillars</h2>
@@ -184,9 +182,9 @@ export default function Home() {
         </div>
       </section>
 
+      <HorizonDivider />
       <section id="programs" className="bg-white section-lg">
         <div className="container-lbta">
-          <hr className="horizon-line mb-16" />
           <AnimatedSection className="text-center mb-16">
             <span className="text-eyebrow mb-4 block">Our Programs</span>
             <h2 className="font-headline text-headline font-light mb-4">Pathways for Every Player</h2>
@@ -220,7 +218,7 @@ export default function Home() {
       <section id="destination" className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image src="/images/hero/laguna-horizon.webp" alt="Laguna Beach tennis courts with ocean view" fill className="object-cover" sizes="100vw" quality={90} />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-brand-deep-water/80" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">
           <AnimatedSection>
@@ -230,9 +228,9 @@ export default function Home() {
         </div>
       </section>
 
+      <HorizonDivider />
       <section id="community" className="bg-white section-lg">
         <div className="container-lbta">
-          <hr className="horizon-line mb-12" />
           <AnimatedSection className="text-center mb-12">
             <span className="text-eyebrow mb-4 block">Our Community</span>
             <h2 className="font-headline text-headline font-light mb-4">Players who train our way.</h2>
@@ -265,7 +263,7 @@ export default function Home() {
       <section id="cta" className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image src="/images/cta/cta-background.webp" alt="Laguna Beach tennis courts at sunset" fill className="object-cover" sizes="100vw" quality={90} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/90 via-black/50 to-black/30" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-lg mx-auto py-20">
           <AnimatedSection>

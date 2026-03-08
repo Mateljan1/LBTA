@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface VideoTestimonial {
@@ -40,16 +40,6 @@ const videoTestimonials: VideoTestimonial[] = [
 export default function VideoTestimonials() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isMobile, setIsMobile] = useState(false)
-
-  // Check for mobile on mount
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
 
   const totalSlides = videoTestimonials.length
 
@@ -72,12 +62,14 @@ export default function VideoTestimonials() {
 
   // Auto-advance slides (paused when user interacts)
   const [isPaused, setIsPaused] = useState(false)
-  
+
   useEffect(() => {
     if (isPaused) return
-    const interval = setInterval(nextSlide, 8000) // 8 seconds per slide
+    const interval = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % totalSlides)
+    }, 8000)
     return () => clearInterval(interval)
-  }, [currentIndex, isPaused])
+  }, [isPaused, totalSlides])
 
   return (
     <section 
@@ -91,7 +83,7 @@ export default function VideoTestimonials() {
           <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/50 mb-4">
             Player Stories
           </p>
-          <h2 className="font-serif text-[28px] md:text-[40px] font-light text-white leading-[1.15]">
+          <h2 className="font-headline text-[28px] md:text-[40px] font-light text-white leading-[1.15]">
             Hear from our community
           </h2>
         </div>
@@ -116,10 +108,7 @@ export default function VideoTestimonials() {
           </button>
 
           {/* Slides Container */}
-          <div 
-            ref={containerRef}
-            className="relative overflow-hidden rounded-lg"
-          >
+          <div className="relative overflow-hidden rounded-lg">
             <div 
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}

@@ -220,14 +220,14 @@ function PathwayPlannerInteractive() {
         <section className="section-spacing bg-white">
           <div className="container-narrow">
             <AnimatedSection>
-              <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk mb-12 text-center">
+              <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk mb-12 text-center">
                 Your Personalized Pathway
               </h2>
 
               <div className="space-y-8">
                 <div className="card-lbta p-8">
                   <h3 className="text-sm font-sans tracking-wide uppercase text-gray-500 mb-2">Start Here</h3>
-                  <p className="text-2xl font-serif font-light text-brand-pacific-dusk mb-3">
+                  <p className="text-2xl font-headline font-light text-brand-pacific-dusk mb-3">
                     {results.program}
                   </p>
                   <p className="text-gray-600 mb-4">
@@ -240,7 +240,7 @@ function PathwayPlannerInteractive() {
 
                 <div className="card-lbta p-8">
                   <h3 className="text-sm font-sans tracking-wide uppercase text-gray-500 mb-2">Timeline</h3>
-                  <p className="text-2xl font-serif font-light text-brand-pacific-dusk mb-3">
+                  <p className="text-2xl font-headline font-light text-brand-pacific-dusk mb-3">
                     {results.timeline}
                   </p>
                   <p className="text-gray-600">
@@ -253,13 +253,13 @@ function PathwayPlannerInteractive() {
                   <div className="grid grid-cols-2 gap-6">
                     <div>
                       <p className="text-sm text-gray-500 mb-1">Monthly</p>
-                      <p className="text-xl font-serif font-light text-brand-pacific-dusk">
+                      <p className="text-xl font-headline font-light text-brand-pacific-dusk">
                         {results.monthlyInvestment}
                       </p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500 mb-1">Annual</p>
-                      <p className="text-xl font-serif font-light text-brand-pacific-dusk">
+                      <p className="text-xl font-headline font-light text-brand-pacific-dusk">
                         {results.annualInvestment}
                       </p>
                     </div>
@@ -288,7 +288,7 @@ function PathwayPlannerInteractive() {
         <section className="section-spacing bg-white border-t border-gray-200">
           <div className="container-narrow text-center">
             <AnimatedSection>
-              <h2 className="text-3xl font-serif font-light text-brand-pacific-dusk mb-6">
+              <h2 className="text-3xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Not Sure Where to Start?
               </h2>
               <p className="text-lg text-gray-600 mb-8">

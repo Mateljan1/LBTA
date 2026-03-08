@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import Image from 'next/image'
 
 interface Message {
   id: string
@@ -71,14 +72,23 @@ export default function ChatWidget() {
         }),
       })
 
-      if (!response.ok) throw new Error('Failed to get response')
+      const data = await response.json().catch(() => ({}))
+      const reply = data?.reply || "I apologize, but I couldn't process that request. Please try again or call us at (949) 534-0457."
 
-      const data = await response.json()
+      if (!response.ok) {
+        setMessages(prev => [...prev, {
+          id: `assistant-${Date.now()}`,
+          role: 'assistant',
+          content: reply,
+          timestamp: new Date()
+        }])
+        return
+      }
 
       const assistantMessage: Message = {
         id: `assistant-${Date.now()}`,
         role: 'assistant',
-        content: data.reply || "I apologize, but I couldn't process that request. Please try again or call us at (949) 534-0457.",
+        content: reply,
         timestamp: new Date()
       }
 
@@ -205,14 +215,12 @@ export default function ChatWidget() {
                   justifyContent: 'center',
                 }}
               >
-                <img 
-                  src="/logos/chatbot-logo.svg" 
-                  alt="LBTA" 
-                  style={{ 
-                    width: '32px', 
-                    height: '32px',
-                    objectFit: 'contain'
-                  }} 
+                <Image
+                  src="/logos/chatbot-logo.svg"
+                  alt="LBTA"
+                  width={32}
+                  height={32}
+                  className="object-contain"
                 />
               </div>
               <div>
@@ -364,8 +372,10 @@ export default function ChatWidget() {
                 onBlur={(e) => (e.target.style.borderColor = '#e5e7eb')}
               />
               <button
+                type="button"
                 onClick={sendMessage}
                 disabled={!input.trim() || isLoading}
+                aria-label="Send message"
                 style={{
                   width: '44px',
                   height: '44px',

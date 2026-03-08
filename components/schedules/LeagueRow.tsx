@@ -40,7 +40,7 @@ export default function LeagueRow({
       <div className="hidden md:grid md:grid-cols-[1fr_auto_auto] md:items-center gap-8 px-6 py-5">
         {/* Col 1: League info */}
         <div className="min-w-0">
-          <h3 className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-snug">
+          <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-snug">
             {name}
           </h3>
           {subtitle && (
@@ -75,7 +75,7 @@ export default function LeagueRow({
         {/* Col 3: Price + Action */}
         <div className="flex items-center gap-6 flex-shrink-0">
           <div className="text-right w-[120px]">
-            <p className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-tight">
+            <p className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-tight">
               {price}
             </p>
             {weeklyApprox && (
@@ -100,7 +100,7 @@ export default function LeagueRow({
 
       {/* Mobile — stacked card */}
       <div className="md:hidden px-4 py-5">
-        <h3 className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-snug">
+        <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-snug">
           {name}
         </h3>
         {subtitle && (
@@ -127,7 +127,7 @@ export default function LeagueRow({
         </div>
 
         <div className="mt-4 flex items-baseline gap-3">
-          <span className="font-serif text-[18px] font-medium text-brand-pacific-dusk">
+          <span className="font-headline text-[18px] font-medium text-brand-pacific-dusk">
             {price}
           </span>
           {weeklyApprox && (

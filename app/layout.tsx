@@ -103,6 +103,7 @@ export default function RootLayout({
           `}
         </Script>
         <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element -- Facebook 1x1 tracking pixel; noscript fallback requires img */}
           <img
             height="1"
             width="1"

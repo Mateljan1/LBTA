@@ -1,5 +1,7 @@
 import { Brain, Compass, Lightbulb, Target, Users, Zap } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import HorizonDivider from '@/components/ui/HorizonDivider'
+import DarkSection from '@/components/ui/DarkSection'
 
 const principles = [
   {
@@ -75,6 +77,8 @@ export default function PhilosophyPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Core Beliefs */}
       <section className="section-spacing bg-white">
         <div className="container-luxury">
@@ -114,6 +118,8 @@ export default function PhilosophyPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Methodology */}
       <section className="section-spacing bg-sand-50">
         <div className="container-luxury">
@@ -149,6 +155,8 @@ export default function PhilosophyPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Quote */}
       <section className="section-spacing bg-clay-900 text-sand-100">
         <div className="container-narrow text-center">
@@ -164,22 +172,24 @@ export default function PhilosophyPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-spacing bg-white">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h2 className="text-display-sm heading-display mb-6">
-              See It in Action
-            </h2>
-            <p className="body-text text-clay-600 mb-10 max-w-2xl mx-auto">
-              Book your complimentary trial session and experience our approach firsthand.
-            </p>
-            <a href="/book" className="btn-primary">
-              BOOK TRIAL
-            </a>
-          </AnimatedSection>
+      <HorizonDivider />
+
+      <DarkSection className="py-20 md:py-24">
+        <div className="max-w-[720px] mx-auto text-center">
+          <h2 className="font-headline text-[32px] md:text-[48px] font-medium text-white leading-[1.15] mb-4">
+            See It in Action
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-white/80 mb-8">
+            Book your complimentary trial session and experience our approach firsthand.
+          </p>
+          <a
+            href="/book"
+            className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+          >
+            Book Trial
+          </a>
         </div>
-      </section>
+      </DarkSection>
     </>
   )
 }

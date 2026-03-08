@@ -115,7 +115,7 @@ export default function ExitIntentPopup() {
             </div>
             <h3
               id="exit-popup-title"
-              className="font-serif text-[28px] font-semibold text-brand-pacific-dusk mb-3"
+              className="font-headline text-[28px] font-semibold text-brand-pacific-dusk mb-3"
             >
               You&apos;re In
             </h3>
@@ -138,7 +138,7 @@ export default function ExitIntentPopup() {
               {/* Headline */}
               <h3
                 id="exit-popup-title"
-                className="font-serif text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk text-center leading-[1.1] mb-4"
+                className="font-headline text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk text-center leading-[1.1] mb-4"
               >
                 Experience LBTA
               </h3>
@@ -184,12 +184,12 @@ export default function ExitIntentPopup() {
               {/* Trust indicators */}
               <div className="flex items-center justify-center gap-6">
                 <div className="text-center">
-                  <p className="font-serif text-[24px] font-semibold text-brand-pacific-dusk">500+</p>
+                  <p className="font-headline text-[24px] font-semibold text-brand-pacific-dusk">500+</p>
                   <p className="font-sans text-[11px] text-lbta-slate uppercase tracking-wider">Players</p>
                 </div>
                 <div className="w-px h-10 bg-lbta-stone" />
                 <div className="text-center">
-                  <p className="font-serif text-[24px] font-semibold text-brand-pacific-dusk">15+</p>
+                  <p className="font-headline text-[24px] font-semibold text-brand-pacific-dusk">15+</p>
                   <p className="font-sans text-[11px] text-lbta-slate uppercase tracking-wider">Years</p>
                 </div>
                 <div className="w-px h-10 bg-lbta-stone" />

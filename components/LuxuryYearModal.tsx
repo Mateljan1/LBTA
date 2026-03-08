@@ -332,7 +332,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h2 id="modal-title" className="font-serif text-[28px] font-medium text-brand-pacific-dusk mb-3">
+                  <h2 id="modal-title" className="font-headline text-[28px] font-medium text-brand-pacific-dusk mb-3">
                     Registration Received
                   </h2>
                   <p className="font-sans text-[15px] text-lbta-slate leading-relaxed mb-8 max-w-[320px] mx-auto">
@@ -351,7 +351,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                   <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
                     {type === 'camp' ? 'Camp Registration' : 'JTT Registration'}
                   </p>
-                  <h2 id="modal-title" className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
+                  <h2 id="modal-title" className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
                     {programInfo.name}
                   </h2>
                   <p className="font-sans text-[14px] text-brand-pacific-dusk/60 mb-2">
@@ -380,7 +380,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           <span className="font-sans text-[15px] font-medium">
                             {option.label}
                           </span>
-                          <span className={`font-serif text-[22px] font-medium ${
+                          <span className={`font-headline text-[22px] font-medium ${
                             selectedOption === option.value ? 'text-white' : 'text-brand-pacific-dusk'
                           }`}>
                             ${option.price}
@@ -396,7 +396,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                       <span className="font-sans text-[13px] text-brand-pacific-dusk/60 uppercase tracking-[0.05em]">
                         Total
                       </span>
-                      <span className="font-serif text-[28px] font-medium text-brand-pacific-dusk">
+                      <span className="font-headline text-[28px] font-medium text-brand-pacific-dusk">
                         ${selectedPrice}
                       </span>
                     </div>
@@ -426,7 +426,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                   <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
                     Your Details
                   </p>
-                  <h2 className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
+                  <h2 className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
                     {programInfo.name}
                   </h2>
                   <p className="font-sans text-[14px] text-brand-pacific-dusk/60 mb-8">

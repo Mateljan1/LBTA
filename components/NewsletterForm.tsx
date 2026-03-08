@@ -35,7 +35,7 @@ export default function NewsletterForm() {
         <div className="max-w-2xl mx-auto text-center">
           <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent mx-auto mb-8" />
           <span className="text-eyebrow text-brand-victoria-cove/80 mb-4 block">Stay Connected</span>
-          <h3 className="font-serif text-[28px] md:text-[36px] font-light mb-4 text-white tracking-tight">
+          <h3 className="font-headline text-[28px] md:text-[36px] font-light mb-4 text-white tracking-tight">
             Join the LBTA Community
           </h3>
           <p className="text-[15px] font-sans font-light text-white/50 mb-8 max-w-md mx-auto leading-relaxed">

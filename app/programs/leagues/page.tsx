@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import pricingSupplemental from '@/data/pricing-supplemental.json'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 
 const leaguePricing = pricingSupplemental.leagues
 
@@ -41,7 +42,7 @@ export default function LeaguesPage() {
           <span className="text-eyebrow text-brand-victoria-cove/80 mb-6 block">
             Competitive Play
           </span>
-          <h1 className="font-serif text-display-xl text-white mb-6 max-w-3xl mx-auto">
+          <h1 className="font-headline text-display-xl text-white mb-6 max-w-3xl mx-auto">
             Leagues & Circuit
           </h1>
           <p className="text-[1.1rem] font-sans font-light text-white/60 max-w-xl mx-auto leading-relaxed">
@@ -51,7 +52,7 @@ export default function LeaguesPage() {
         </div>
       </section>
 
-      <div className="horizon-line" />
+      <HorizonDivider />
 
       {/* Two cards */}
       <section className="container-lbta section">
@@ -69,7 +70,7 @@ export default function LeaguesPage() {
                 <span className={`text-eyebrow ${league.accent} mb-3`}>
                   {league.season}
                 </span>
-                <h2 className="font-serif text-headline text-brand-pacific-dusk mb-4 group-hover:text-brand-sunset-cliff transition-colors">
+                <h2 className="font-headline text-headline text-brand-pacific-dusk mb-4 group-hover:text-brand-sunset-cliff transition-colors">
                   {league.name}
                 </h2>
                 <p className="text-body text-brand-pacific-dusk/60 mb-6 leading-relaxed flex-1">
@@ -101,7 +102,7 @@ export default function LeaguesPage() {
       {/* CTA */}
       <section className="bg-brand-sandstone">
         <div className="container-lbta section-sm text-center">
-          <h3 className="font-serif text-display-sm text-brand-pacific-dusk mb-4">
+          <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-4">
             Not sure which league is right for you?
           </h3>
           <p className="text-body text-brand-pacific-dusk/60 max-w-lg mx-auto mb-8">

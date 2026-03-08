@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import leagues2026 from '@/data/leagues-2026.json'
 import { LeagueEventSchema } from '@/app/schema'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 
 export const metadata: Metadata = {
   title: 'UTR Match Play Series | Laguna Beach Tennis Academy',
@@ -35,7 +36,7 @@ export default function UTRMatchPlayPage() {
           <span className="text-eyebrow text-brand-sunset-cliff/80 mb-4 block">
             Season 1 — April 4 to June 13, 2026
           </span>
-          <h1 className="font-serif text-display-xl text-white mb-6 max-w-3xl">
+          <h1 className="font-headline text-display-xl text-white mb-6 max-w-3xl">
             UTR Match Play Series
           </h1>
           <p className="text-[1.1rem] font-sans font-light text-white/60 max-w-2xl leading-relaxed">
@@ -46,12 +47,12 @@ export default function UTRMatchPlayPage() {
         </div>
       </section>
 
-      <div className="horizon-line" />
+      <HorizonDivider />
 
       {/* Saturday Flow */}
       <section className="container-lbta section">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-display text-brand-pacific-dusk mb-4">
+          <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">
             Every Saturday
           </h2>
           <p className="text-body text-brand-pacific-dusk/60 max-w-2xl mb-12 leading-relaxed">
@@ -70,7 +71,7 @@ export default function UTRMatchPlayPage() {
                 <span className="text-eyebrow text-brand-sunset-cliff mb-3 block">
                   {item.step}
                 </span>
-                <h3 className="font-serif text-headline-sm text-brand-pacific-dusk mb-2">
+                <h3 className="font-headline text-headline-sm text-brand-pacific-dusk mb-2">
                   {item.title}
                 </h3>
                 <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/55 leading-relaxed">
@@ -86,7 +87,7 @@ export default function UTRMatchPlayPage() {
       <section className="bg-brand-sandstone">
         <div className="container-lbta section">
           <div className="max-w-5xl mx-auto">
-            <h2 className="font-serif text-display text-brand-pacific-dusk mb-4">
+            <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">
               Five Divisions
             </h2>
             <p className="text-body text-brand-pacific-dusk/60 mb-12">
@@ -100,7 +101,7 @@ export default function UTRMatchPlayPage() {
                   className="bg-white rounded-lg border border-brand-pacific-dusk/5 p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-4 md:gap-8 hover:shadow-soft transition-all"
                 >
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-serif text-headline text-brand-pacific-dusk mb-1">
+                    <h3 className="font-headline text-headline text-brand-pacific-dusk mb-1">
                       {d.name}
                     </h3>
                     <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/50">
@@ -132,7 +133,7 @@ export default function UTRMatchPlayPage() {
       <section className="container-lbta section">
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="font-serif text-display-sm text-brand-pacific-dusk mb-6">
+            <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-6">
               Season Points
             </h3>
             <p className="text-[15px] font-sans font-light text-brand-pacific-dusk/55 mb-6 leading-relaxed">
@@ -164,7 +165,7 @@ export default function UTRMatchPlayPage() {
           </div>
 
           <div>
-            <h3 className="font-serif text-display-sm text-brand-pacific-dusk mb-6">
+            <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-6">
               Grand Finals
             </h3>
             <p className="text-eyebrow text-brand-sunset-cliff mb-4">
@@ -222,7 +223,7 @@ export default function UTRMatchPlayPage() {
       <section className="bg-white border-y border-brand-pacific-dusk/5">
         <div className="container-lbta section-sm">
           <div className="max-w-3xl mx-auto">
-            <h3 className="font-serif text-display-sm text-brand-pacific-dusk mb-6 text-center">
+            <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-6 text-center">
               NTRP to UTR Reference
             </h3>
             <div className="overflow-x-auto">
@@ -267,7 +268,7 @@ export default function UTRMatchPlayPage() {
       {/* Venues */}
       <section className="container-lbta section-sm">
         <div className="max-w-4xl mx-auto">
-          <h3 className="font-serif text-display-sm text-brand-pacific-dusk mb-8 text-center">
+          <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-8 text-center">
             Venues
           </h3>
           <div className="grid sm:grid-cols-2 gap-6">
@@ -289,7 +290,7 @@ export default function UTRMatchPlayPage() {
                 key={v.name}
                 className="bg-brand-sandstone rounded-lg p-6"
               >
-                <h4 className="font-serif text-headline-sm text-brand-pacific-dusk mb-2">
+                <h4 className="font-headline text-headline-sm text-brand-pacific-dusk mb-2">
                   {v.name}
                 </h4>
                 <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/50 mb-1">
@@ -310,7 +311,7 @@ export default function UTRMatchPlayPage() {
       {/* Sign Up */}
       <section className="bg-brand-deep-water text-white">
         <div className="container-lbta section text-center">
-          <h2 className="font-serif text-display text-white mb-4">
+          <h2 className="font-headline text-display text-white mb-4">
             Register for Season 1
           </h2>
           <p className="text-[1.05rem] font-sans font-light text-white/50 max-w-lg mx-auto mb-8">

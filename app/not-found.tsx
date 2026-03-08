@@ -27,10 +27,10 @@ export default function NotFound() {
           <p className="font-sans text-[11px] text-white/60 uppercase tracking-[3px] mb-4">
             Page Not Found
           </p>
-          <h1 className="font-serif text-[80px] md:text-[120px] font-light text-white mb-4 leading-none">
+          <h1 className="font-headline text-[80px] md:text-[120px] font-light text-white mb-4 leading-none">
             404
           </h1>
-          <h2 className="font-serif text-[28px] md:text-[36px] font-semibold text-white mb-6">
+          <h2 className="font-headline text-[28px] md:text-[36px] font-semibold text-white mb-6">
             Out of Bounds
           </h2>
           <p className="font-sans text-[16px] md:text-[18px] text-white/80 mb-10 leading-relaxed max-w-md mx-auto">
@@ -60,7 +60,7 @@ export default function NotFound() {
       {/* Quick Links Section */}
       <section className="py-16 md:py-24 bg-brand-morning-light">
         <div className="max-w-5xl mx-auto px-6">
-          <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black text-center mb-12">
+          <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black text-center mb-12">
             Popular Destinations
           </h3>
           

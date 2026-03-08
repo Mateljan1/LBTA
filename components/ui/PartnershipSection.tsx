@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 // Partnership logos - Using placeholder text until PNGs are uploaded
@@ -58,7 +59,7 @@ export default function PartnershipSection({ className = '' }: PartnershipSectio
       <div className="container-lbta">
         <AnimatedSection className="text-center mb-16">
           <p className="text-overline mb-6">Our Network</p>
-          <h2 className="text-4xl font-serif font-light text-brand-pacific-dusk">
+          <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk">
             Partnership & Community
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
@@ -77,9 +78,11 @@ export default function PartnershipSection({ className = '' }: PartnershipSectio
                   title={`${partner.name} - ${partner.description}`}
                 >
                   <div className="relative h-28 w-36 flex items-center justify-center transition-all duration-300">
-                    <img
+                    <Image
                       src={partner.logo}
                       alt={`${partner.name} - ${partner.description}`}
+                      width={144}
+                      height={80}
                       className="max-h-20 max-w-full w-auto object-contain opacity-70 group-hover:opacity-100 transition-all duration-300"
                     />
                   </div>

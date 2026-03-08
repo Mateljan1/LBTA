@@ -33,7 +33,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
       <div className="hidden md:grid md:grid-cols-[1fr_auto_auto] md:items-center gap-8 px-6 py-5">
         {/* Col 1: Camp info */}
         <div className="min-w-0">
-          <h3 className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-snug">
+          <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-snug">
             {camp.name}
           </h3>
           <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
@@ -57,7 +57,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
         {/* Col 3: Price + Register */}
         <div className="flex items-center gap-6 flex-shrink-0">
           <div className="text-right w-[120px]">
-            <p className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-tight">
+            <p className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-tight">
               ${camp.price}
               <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">/week</span>
             </p>
@@ -83,7 +83,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
 
       {/* Mobile — stacked card */}
       <div className="md:hidden px-4 py-5">
-        <h3 className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-snug">
+        <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-snug">
           {camp.name}
         </h3>
         <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
@@ -99,7 +99,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
         </div>
 
         <div className="mt-4 flex items-baseline gap-3">
-          <span className="font-serif text-[18px] font-medium text-brand-pacific-dusk">
+          <span className="font-headline text-[18px] font-medium text-brand-pacific-dusk">
             ${camp.price}
             <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">/week</span>
           </span>

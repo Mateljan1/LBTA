@@ -7,6 +7,8 @@ import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
+import DarkSection from '@/components/ui/DarkSection'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 import { getCampsFromYear2026, type CampWeek } from '@/lib/camps-data'
 
 const camps = getCampsFromYear2026()
@@ -91,7 +93,8 @@ export default function CampsPage() {
             priority
             quality={90}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
+          <div className="absolute inset-0 bg-brand-deep-water/90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-brand-deep-water/30" />
         </div>
         
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-24">
@@ -101,7 +104,7 @@ export default function CampsPage() {
             </p>
           </AnimatedSection>
           <AnimatedSection delay={100}>
-            <h1 className="font-serif text-[40px] md:text-[64px] font-bold leading-[1.05] mb-6 text-shadow">
+            <h1 className="font-headline text-[40px] md:text-[64px] font-bold leading-[1.05] mb-6 text-shadow">
               Tennis Camps
             </h1>
           </AnimatedSection>
@@ -135,14 +138,14 @@ export default function CampsPage() {
       </div>
 
       {/* CAMPS SECTION */}
-      <section id="camps" className="bg-white py-20 md:py-32">
+      <section id="camps" className="bg-brand-sandstone py-20 md:py-32">
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-12">
               <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                 2026 Camp Schedule
               </p>
-              <h2 className="font-serif text-[36px] md:text-[52px] font-semibold text-black mb-4">
+              <h2 className="font-headline text-[36px] md:text-[52px] font-semibold text-black mb-4">
                 Tennis Camps
               </h2>
               <p className="font-sans text-[16px] md:text-[18px] text-black/70 max-w-2xl mx-auto">
@@ -174,7 +177,7 @@ export default function CampsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
             {filteredCamps.map((camp, index) => (
               <AnimatedSection key={camp.id} delay={150 + index * 50}>
-                <div className={`bg-white rounded-lg overflow-hidden ${camp.featured ? 'ring-2 ring-black' : 'border border-black/10'}`}>
+                <div className={`bg-white rounded-lg overflow-hidden border-l-4 ${camp.featured ? 'border-l-brand-sunset-cliff ring-2 ring-black/10' : 'border-l-brand-victoria-cove/40 border border-black/10'}`}>
                   {camp.featured && (
                     <div className="bg-black text-white text-center py-2 font-sans text-[11px] uppercase tracking-[2px] font-semibold">
                       Featured Camp
@@ -183,7 +186,7 @@ export default function CampsPage() {
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="font-serif text-[22px] font-semibold text-black mb-1">
+                        <h3 className="font-headline text-[22px] font-semibold text-black mb-1">
                           {camp.name}
                         </h3>
                         <p className="font-sans text-[13px] text-black/60 uppercase tracking-wide">
@@ -253,7 +256,7 @@ export default function CampsPage() {
                         </div>
                         <div className="mb-4">
                           <p className="font-sans text-[12px] text-black/50 uppercase tracking-wide">Price</p>
-                          <p className="font-serif text-[28px] font-semibold text-black">
+                          <p className="font-headline text-[28px] font-semibold text-black">
                             ${camp.price}
                           </p>
                           <p className="font-sans text-[12px] text-black/50">
@@ -284,6 +287,7 @@ export default function CampsPage() {
         </div>
       </section>
 
+      <HorizonDivider />
       {/* OUR FOUNDATION */}
       <section className="bg-brand-morning-light py-20 md:py-32">
         <div className="max-w-[1200px] mx-auto px-4 md:px-12">
@@ -292,7 +296,7 @@ export default function CampsPage() {
               <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
                 Our Foundation
               </p>
-              <h2 className="font-serif text-[36px] md:text-[52px] font-semibold text-black mb-6">
+              <h2 className="font-headline text-[36px] md:text-[52px] font-semibold text-black mb-6">
                 What Makes LBTA Different
               </h2>
               <p className="font-sans text-[16px] md:text-[18px] text-black/70 max-w-2xl mx-auto leading-relaxed">
@@ -304,7 +308,7 @@ export default function CampsPage() {
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             <AnimatedSection delay={100}>
               <div className="bg-white p-8 rounded-lg text-center h-full">
-                <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
+                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-4">
                   Movement
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
@@ -315,7 +319,7 @@ export default function CampsPage() {
             
             <AnimatedSection delay={200}>
               <div className="bg-white p-8 rounded-lg text-center h-full">
-                <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
+                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-4">
                   Craft
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
@@ -326,7 +330,7 @@ export default function CampsPage() {
             
             <AnimatedSection delay={300}>
               <div className="bg-white p-8 rounded-lg text-center h-full">
-                <h3 className="font-serif text-[24px] md:text-[28px] font-semibold text-black mb-4">
+                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-4">
                   Community
                 </h3>
                 <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
@@ -337,44 +341,46 @@ export default function CampsPage() {
           </div>
           
           <AnimatedSection delay={400}>
-            <p className="font-serif text-[20px] md:text-[24px] text-black/80 text-center mt-16 italic">
+            <p className="font-headline text-[20px] md:text-[24px] text-black/80 text-center mt-16 italic">
               Movement. Craft. Community.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
+      <HorizonDivider />
       {/* JTT PROMO */}
-      <section className="bg-white py-16 md:py-24">
+      <DarkSection className="py-16 md:py-24">
         <div className="max-w-[1000px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
-            <div className="bg-black text-white p-8 md:p-12 rounded-lg text-center">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-white/70 mb-4">
+            <div className="text-center">
+              <p className="font-sans text-[11px] uppercase tracking-[2px] text-brand-sandstone/80 mb-4">
                 USTA League Play
               </p>
-              <h2 className="font-serif text-[32px] md:text-[44px] font-semibold mb-4">
+              <h2 className="font-headline text-[32px] md:text-[44px] font-semibold text-brand-sandstone mb-4">
                 Junior Team Tennis
               </h2>
-              <p className="font-sans text-[16px] md:text-[18px] text-white/80 max-w-2xl mx-auto mb-8">
+              <p className="font-sans text-[16px] md:text-[18px] text-white/85 max-w-2xl mx-auto mb-8">
                 Competitive team-based tennis for juniors. 15 weeks of structured training with weekend matches against academies across Southern California.
               </p>
               <Link 
                 href="/schedules"
-                className="inline-block bg-white hover:bg-gray-100 text-black font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                className="inline-block bg-brand-sunset-cliff hover:bg-brand-sunset-cliff/90 text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/50 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
               >
                 View Schedule →
               </Link>
             </div>
           </AnimatedSection>
         </div>
-      </section>
+      </DarkSection>
 
+      <HorizonDivider />
       {/* FAQ SECTION */}
       <section className="bg-brand-morning-light py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center mb-12">
-              <h2 className="font-serif text-[32px] md:text-[44px] font-semibold text-black mb-4">
+              <h2 className="font-headline text-[32px] md:text-[44px] font-semibold text-black mb-4">
                 Camp FAQs
               </h2>
             </div>
@@ -415,27 +421,16 @@ export default function CampsPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative min-h-[450px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero/laguna-horizon.webp"
-            alt="Laguna Beach sunset over tennis courts"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            quality={90}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/20" />
-        </div>
-        
-        <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto py-20">
+      <HorizonDivider />
+      <DarkSection className="py-20 md:py-28">
+        <div className="max-w-3xl mx-auto px-4 text-center">
           <AnimatedSection delay={0}>
-            <h2 className="font-serif text-[36px] md:text-[52px] font-semibold mb-6 leading-[1.15] text-shadow">
+            <h2 className="font-headline text-[36px] md:text-[52px] font-semibold text-brand-sandstone mb-6 leading-[1.15]">
               Reserve Your Spot
             </h2>
           </AnimatedSection>
           <AnimatedSection delay={100}>
-            <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/95 mb-10">
+            <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/90 mb-10">
               Camp spaces fill quickly — secure your week today. Questions? We're here to help.
             </p>
           </AnimatedSection>
@@ -443,20 +438,20 @@ export default function CampsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/contact"
-                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                className="inline-block bg-brand-sunset-cliff hover:bg-brand-sunset-cliff/90 text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/50 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
               >
                 Contact Us
               </Link>
               <a 
                 href="tel:9495340457"
-                className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+                className="inline-block bg-white/10 hover:bg-white/20 text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
               >
                 Call (949) 534-0457
               </a>
             </div>
           </AnimatedSection>
         </div>
-      </section>
+      </DarkSection>
       
       {/* Luxury Registration Modal */}
       <LuxuryYearModal

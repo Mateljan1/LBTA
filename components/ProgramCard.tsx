@@ -97,7 +97,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
         <div className="flex items-start justify-between gap-6">
           <div className="flex-1 min-w-0">
             {/* Program Name */}
-            <h3 className="font-serif text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk mb-1.5 leading-tight tracking-[-0.01em]">
+            <h3 className="font-headline text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk mb-1.5 leading-tight tracking-[-0.01em]">
               {program.program}
             </h3>
             
@@ -118,7 +118,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
           <div className="flex-shrink-0 text-right">
             {basePrice && (
               <div className="mb-3">
-                <span className="font-serif text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
+                <span className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
                   ${basePrice}
                 </span>
                 <span className="font-sans text-[13px] text-brand-pacific-dusk/60 ml-0.5">
@@ -188,7 +188,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               {program.pricing.monthly && (
                 <div className="bg-brand-sandstone rounded-lg p-4 text-center">
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">Monthly</p>
-                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
+                  <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing.monthly}
                   </p>
                 </div>
@@ -196,7 +196,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               {program.pricing['1x'] && (
                 <div className="bg-brand-sandstone rounded-lg p-4 text-center">
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">1× weekly</p>
-                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
+                  <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing['1x']}
                   </p>
                 </div>
@@ -204,7 +204,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               {program.pricing['2x'] && (
                 <div className="bg-brand-sandstone rounded-lg p-4 text-center">
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">2× weekly</p>
-                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
+                  <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing['2x']}
                   </p>
                 </div>
@@ -212,7 +212,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               {program.pricing['3x'] && (
                 <div className="bg-brand-sandstone rounded-lg p-4 text-center">
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">3× weekly</p>
-                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
+                  <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing['3x']}
                   </p>
                 </div>
@@ -220,7 +220,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               {program.pricing['4x'] && (
                 <div className="bg-brand-sandstone rounded-lg p-4 text-center">
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">4× weekly</p>
-                  <p className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
+                  <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing['4x']}
                   </p>
                 </div>
@@ -228,7 +228,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
               {program.pricing.drop_in && (
                 <div className="bg-white border border-lbta-stone rounded-lg p-4 text-center">
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">Drop-in</p>
-                  <p className="font-serif text-[20px] font-medium text-lbta-slate">
+                  <p className="font-headline text-[20px] font-medium text-lbta-slate">
                     ${program.pricing.drop_in}
                   </p>
                 </div>

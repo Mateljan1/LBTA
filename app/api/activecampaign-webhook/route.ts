@@ -152,6 +152,13 @@ export async function POST(request: NextRequest) {
   const authError = verifyWebhookSecret(request)
   if (authError) return authError
 
+  if (process.env.NODE_ENV === 'production' && !AC_WEBHOOK_SECRET) {
+    return NextResponse.json(
+      { success: false, error: 'Webhook not configured' },
+      { status: 503 }
+    )
+  }
+
   try {
     if (!hasEnvVar('ACTIVECAMPAIGN_URL') || !hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
       console.error('[activecampaign-webhook] Missing ACTIVECAMPAIGN_URL or ACTIVECAMPAIGN_API_KEY')
@@ -365,10 +372,10 @@ export async function POST(request: NextRequest) {
 
   } catch (error: any) {
     console.error('❌ Webhook error:', error.response?.data || error.message)
-    return NextResponse.json({
-      success: false,
-      error: 'Webhook processing failed',
-    })
+    return NextResponse.json(
+      { success: false, error: 'Webhook processing failed' },
+      { status: 500 }
+    )
   }
 }
 

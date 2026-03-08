@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import HorizonDivider from '@/components/ui/HorizonDivider'
 
 export const metadata: Metadata = {
   title: 'Adult Programs | Laguna Beach Tennis Academy',
@@ -47,7 +48,7 @@ export default function AdultProgramsPage() {
           <span className="text-eyebrow text-brand-victoria-cove/80 mb-4 block">
             Beginner – Advanced
           </span>
-          <h1 className="font-serif text-display-xl text-white mb-6 max-w-3xl">
+          <h1 className="font-headline text-display-xl text-white mb-6 max-w-3xl">
             Adult Programs
           </h1>
           <p className="text-[1.1rem] font-sans font-light text-white/60 max-w-2xl leading-relaxed">
@@ -56,12 +57,12 @@ export default function AdultProgramsPage() {
         </div>
       </section>
 
-      <div className="horizon-line" />
+      <HorizonDivider />
 
       {/* Progression */}
       <section className="container-lbta section">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-display text-brand-pacific-dusk mb-4">
+          <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">
             Your Path
           </h2>
           <p className="text-body text-brand-pacific-dusk/60 max-w-2xl mb-12 leading-relaxed">
@@ -79,7 +80,7 @@ export default function AdultProgramsPage() {
                     <span className="text-eyebrow text-brand-sunset-cliff mb-2 block">
                       {item.ntrp}
                     </span>
-                    <h3 className="font-serif text-headline text-brand-pacific-dusk mb-2">
+                    <h3 className="font-headline text-headline text-brand-pacific-dusk mb-2">
                       {item.stage}
                     </h3>
                     <p className="text-[15px] font-sans font-light text-brand-pacific-dusk/60 leading-relaxed">
@@ -99,13 +100,13 @@ export default function AdultProgramsPage() {
         </div>
       </section>
 
-      <div className="horizon-line" />
+      <HorizonDivider />
 
       {/* Leagues & UTR */}
       <section className="bg-brand-morning-light">
         <div className="container-lbta section">
           <div className="max-w-4xl mx-auto">
-            <h2 className="font-serif text-display text-brand-pacific-dusk mb-4">
+            <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">
               Leagues & Circuit
             </h2>
             <p className="text-body text-brand-pacific-dusk/60 mb-8 leading-relaxed">
@@ -120,7 +121,7 @@ export default function AdultProgramsPage() {
                 <span className="text-eyebrow text-brand-victoria-cove mb-3 block">
                   USTA
                 </span>
-                <h3 className="font-serif text-headline text-brand-pacific-dusk mb-2 group-hover:text-brand-deep-water transition-colors">
+                <h3 className="font-headline text-headline text-brand-pacific-dusk mb-2 group-hover:text-brand-deep-water transition-colors">
                   Adult League Play
                 </h3>
                 <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/60 mb-4 leading-relaxed">
@@ -138,7 +139,7 @@ export default function AdultProgramsPage() {
                 <span className="text-eyebrow text-brand-sunset-cliff mb-3 block">
                   UTR
                 </span>
-                <h3 className="font-serif text-headline text-brand-pacific-dusk mb-2 group-hover:text-brand-deep-water transition-colors">
+                <h3 className="font-headline text-headline text-brand-pacific-dusk mb-2 group-hover:text-brand-deep-water transition-colors">
                   Match Play Series
                 </h3>
                 <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/60 mb-4 leading-relaxed">
@@ -156,7 +157,7 @@ export default function AdultProgramsPage() {
       {/* Schedule & Book CTA */}
       <section className="bg-brand-deep-water text-white">
         <div className="container-lbta section text-center">
-          <h2 className="font-serif text-display text-white mb-4">
+          <h2 className="font-headline text-display text-white mb-4">
             Schedule & Trial
           </h2>
           <p className="text-[1.05rem] font-sans font-light text-white/50 max-w-lg mx-auto mb-8">

@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { getJuniorProgramDataFromWinter2026 } from '@/lib/junior-program-data'
 import { getSeasonCTA, getActiveSeason } from '@/lib/season-utils'
+import HorizonDivider from '@/components/ui/HorizonDivider'
+import DarkSection from '@/components/ui/DarkSection'
 
 const programData = getJuniorProgramDataFromWinter2026()
 
@@ -155,7 +158,7 @@ export default function JuniorTrialLanding() {
               Laguna Beach Tennis Academy
             </p>
 
-            <h1 className="font-serif text-6xl lg:text-7xl text-white mb-8 leading-[1.1]">
+            <h1 className="font-headline text-6xl lg:text-7xl text-white mb-8 leading-[1.1]">
               {activeSeason.name}<br />
               Junior Programs
             </h1>
@@ -190,7 +193,7 @@ export default function JuniorTrialLanding() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h4 className="text-3xl font-serif text-lbta-primary mb-4">Registration Received</h4>
+                <h4 className="text-3xl font-headline text-lbta-primary mb-4">Registration Received</h4>
                 <p className="text-lbta-secondary text-lg">
                   We'll contact you within 24 hours to confirm your spot and finalize details.
                 </p>
@@ -198,7 +201,7 @@ export default function JuniorTrialLanding() {
             ) : (
               <div className="p-12">
                 <div className="mb-10">
-                  <h2 className="text-4xl font-serif text-lbta-primary mb-3">
+                  <h2 className="text-4xl font-headline text-lbta-primary mb-3">
                     Register for {activeSeason.name}
                   </h2>
                   <p className="text-lbta-coral font-medium">
@@ -350,7 +353,7 @@ export default function JuniorTrialLanding() {
                                   {freq === '1x' ? '1x per week' : '2x per week'}
                                 </span>
                                 <span className="float-right">
-                                  <span className="text-2xl font-serif text-brand-pacific-dusk">${freqPrice}</span>
+                                  <span className="text-2xl font-headline text-brand-pacific-dusk">${freqPrice}</span>
                                   {freqDiscount > 0 && (
                                     <span className="text-sm text-gray-400 line-through ml-2">${amount}</span>
                                   )}
@@ -416,27 +419,56 @@ export default function JuniorTrialLanding() {
         </div>
       </section>
 
+      <HorizonDivider />
+
       {/* Social Proof */}
       <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center">
             <div>
-              <div className="text-4xl font-serif text-lbta-primary mb-1">20+</div>
+              <div className="text-4xl font-headline text-lbta-primary mb-1">20+</div>
               <p className="text-sm text-lbta-secondary">D1 Placements</p>
             </div>
             <div className="hidden md:block w-px h-12 bg-gray-200" />
             <div>
-              <div className="text-4xl font-serif text-lbta-primary mb-1">200+</div>
+              <div className="text-4xl font-headline text-lbta-primary mb-1">200+</div>
               <p className="text-sm text-lbta-secondary">Active Juniors</p>
             </div>
             <div className="hidden md:block w-px h-12 bg-gray-200" />
             <div>
-              <div className="text-4xl font-serif text-lbta-primary mb-1">Since 2020</div>
+              <div className="text-4xl font-headline text-lbta-primary mb-1">Since 2020</div>
               <p className="text-sm text-lbta-secondary">City Partner</p>
             </div>
           </div>
         </div>
       </section>
+
+      <HorizonDivider />
+
+      <DarkSection className="py-20 md:py-24">
+        <div className="max-w-[720px] mx-auto text-center">
+          <h2 className="font-headline text-[32px] md:text-[48px] font-medium text-white leading-[1.15] mb-4">
+            Ready to Start Training?
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-white/80 mb-8">
+            Book a trial or get in touch. We will respond within 24 hours.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/book"
+              className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            >
+              Book Trial
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center bg-transparent text-white border border-white/50 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </DarkSection>
 
       {/* Footer */}
       <footer className="bg-brand-pacific-dusk py-12">

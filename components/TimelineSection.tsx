@@ -69,7 +69,7 @@ export default function TimelineSection() {
           <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
             Our Journey
           </p>
-          <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
+          <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
             Building Excellence
           </h2>
         </div>
@@ -98,7 +98,7 @@ export default function TimelineSection() {
                 
                 {/* Content */}
                 <div className="text-center">
-                  <span className="font-serif text-[32px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
+                  <span className="font-headline text-[32px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
                     {milestone.year}
                   </span>
                   <h3 className="font-sans text-[14px] font-semibold text-brand-pacific-dusk uppercase tracking-[0.1em] mt-2 mb-3">
@@ -133,7 +133,7 @@ export default function TimelineSection() {
                 {/* Dot marker */}
                 <div className="absolute left-0 top-1 w-[14px] h-[14px] rounded-full bg-lbta-black" />
                 
-                <span className="font-serif text-[28px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
+                <span className="font-headline text-[28px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
                   {milestone.year}
                 </span>
                 <h3 className="font-sans text-[13px] font-semibold text-brand-pacific-dusk uppercase tracking-[0.1em] mt-1 mb-2">
