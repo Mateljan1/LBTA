@@ -403,9 +403,10 @@ export default function Header() {
               <div className="mt-8 pt-6 border-t border-brand-pacific-dusk/5 space-y-3">
                 <a
                   href="tel:9495340457"
+                  aria-label="Call (949) 534-0457"
                   className="flex items-center gap-3 text-[15px] text-brand-pacific-dusk hover:text-brand-sunset-cliff py-2 transition-colors"
                 >
-                  <Phone className="h-4 w-4" />
+                  <Phone className="h-4 w-4" aria-hidden="true" />
                   (949) 534-0457
                 </a>
                 <a

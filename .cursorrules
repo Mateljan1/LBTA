@@ -178,7 +178,7 @@ colors: {
 
 **Color Usage Rules:**
 - Never use more than 3 colors in a single section
-- **Buttons**: Sunset Cliff (#E8834A) primary, Pacific Dusk (#1B3A5C) accent
+- **Buttons**: Black/white for primary CTAs; Sunset Cliff (#E8834A) for hover/accent only
 - **Links/Focus**: Victoria Cove (#2E8B8B)
 - **Backgrounds**: Morning Light (#FAF8F4) default, Sandstone (#F5F0E5) warm sections, Deep Water (#0F2237) dark sections
 - **Text**: Pacific Dusk (#1B3A5C) for headings/body, use opacity variants for secondary text

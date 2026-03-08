@@ -50,7 +50,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
   
   const getBillingLabel = () => {
     if (program.pricing.monthly) return '/mo'
-    if (program.pricing['1x']) return '/session'
+    if (program.pricing['1x']) return '/season'
     return ''
   }
   
@@ -237,7 +237,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             <p className="font-sans text-[12px] text-brand-pacific-dusk/50 mt-3">
               {program.pricing.monthly
                 ? 'Billed monthly'
-                : 'Billed per session'}
+                : 'Billed per season'}
             </p>
           </div>
           
