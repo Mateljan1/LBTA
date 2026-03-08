@@ -48,6 +48,7 @@ export const metadata = {
     title: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
     description: 'Movement. Craft. Community. Premier tennis in Laguna Beach. Free trial.',
     type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy courts' }],
   },
 }
 
