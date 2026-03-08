@@ -66,11 +66,11 @@ export default function AdultTrialLanding() {
       <header className="absolute top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/40 to-transparent">
         <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
           <Image
-            src="/logos/lbta-logo.svg"
-            alt="LBTA"
+            src="/logos/LBTAblktext.png"
+            alt="Laguna Beach Tennis Academy"
             width={140}
-            height={48}
-            className="h-12 w-auto brightness-0 invert"
+            height={56}
+            className="h-14 w-auto brightness-0 invert"
           />
           <a
             href="tel:9495340457"

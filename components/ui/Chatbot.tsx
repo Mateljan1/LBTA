@@ -58,11 +58,11 @@ export default function Chatbot() {
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                   <Image
-                    src="/UPDATED LBTA PICS/chatbot-logo.svg"
+                    src="/logos/LBTAblktext.png"
                     alt="LBTA Chat"
                     width={32}
                     height={32}
-                    className="w-8 h-8"
+                    className="w-8 h-8 object-contain"
                   />
                 </div>
                 <div>
@@ -78,11 +78,11 @@ export default function Chatbot() {
               <div className="flex gap-3">
                 <div className="w-8 h-8 bg-brand-sunset-cliff rounded-full flex items-center justify-center flex-shrink-0">
                   <Image
-                    src="/UPDATED LBTA PICS/chatbot-logo.svg"
+                    src="/logos/LBTAblktext.png"
                     alt="LBTA"
                     width={20}
                     height={20}
-                    className="w-5 h-5"
+                    className="w-5 h-5 object-contain"
                   />
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow-sm max-w-[280px]">

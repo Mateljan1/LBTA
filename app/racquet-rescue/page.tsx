@@ -24,8 +24,8 @@ export default function RacquetRescuePage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero/courts-aerial.webp"
-            alt="Tennis courts at Laguna Beach Tennis Academy"
+            src="/images/hero/laguna-horizon.webp"
+            alt="Laguna Beach tennis courts overlooking the ocean"
             fill
             className="object-cover brightness-[0.4]"
             priority

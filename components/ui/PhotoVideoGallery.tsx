@@ -9,7 +9,7 @@ import courtSetting from '../../public/photos/LBCOURTSETTING.webp'
 import videoRoom from '../../public/photos/VideoAnalysisRoom.webp'
 import gymSetting from '../../public/photos/GymSetting.webp'
 import oncourtTraining from '../../public/photos/OncourtTraining.webp'
-import courtSettingWide from '../../public/photos/Court setting.png'
+import courtSettingWide from '../../public/photos/Court setting.webp'
 
 // Gallery items - Premium facility photos
 const galleryItems = [

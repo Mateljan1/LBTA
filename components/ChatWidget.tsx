@@ -216,7 +216,7 @@ export default function ChatWidget() {
                 }}
               >
                 <Image
-                  src="/logos/chatbot-logo.svg"
+                  src="/logos/LBTAblktext.png"
                   alt="LBTA"
                   width={32}
                   height={32}
