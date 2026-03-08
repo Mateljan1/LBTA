@@ -407,7 +407,7 @@ export default function ChatWidget() {
           >
             <p style={{ fontSize: '11px', color: '#9ca3af', margin: 0 }}>
               Need immediate help? Call{' '}
-              <a href="tel:9495340457" style={{ color: '#E8956F', textDecoration: 'none', fontWeight: 600 }}>
+              <a href="tel:9495340457" aria-label="Call (949) 534-0457" style={{ color: '#E8956F', textDecoration: 'none', fontWeight: 600 }}>
                 (949) 534-0457
               </a>
             </p>

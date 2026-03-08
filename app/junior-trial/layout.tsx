@@ -2,14 +2,23 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'Junior Tennis Registration | Laguna Beach Tennis Academy',
-  description: 'Register for junior tennis programs. Ages 3-18, ATP/WTA coaching, small groups. Quarterly sessions with early bird pricing available.',
-  keywords: 'junior tennis Laguna Beach, kids tennis program, youth tennis program, tennis registration, ATP coaching juniors, college tennis recruitment',
+  title: 'Junior Tennis Trial | Ages 3-17 | Laguna Beach Tennis Academy',
+  description:
+    'Book a free junior tennis trial at LBTA. Programs from Little Stars (age 3) through High Performance. Laguna Beach, CA.',
   openGraph: {
-    title: 'Junior Tennis Registration | Laguna Beach Tennis Academy',
-    description: 'Register for junior tennis programs. Ages 3-18, ATP/WTA coaching, small groups. Quarterly sessions with early bird pricing available.',
+    title: 'Junior Tennis Trial | Ages 3-17 | Laguna Beach Tennis Academy',
+    description:
+      'Book a free junior tennis trial at LBTA. Programs from Little Stars (age 3) through High Performance. Laguna Beach, CA.',
     type: 'website',
     url: 'https://lagunabeachtennisacademy.com/junior-trial',
+    images: [
+      {
+        url: '/images/hero/laguna-horizon.webp',
+        width: 1920,
+        height: 1080,
+        alt: 'Laguna Beach Tennis Academy',
+      },
+    ],
   },
 }
 

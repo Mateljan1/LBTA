@@ -1,9 +1,21 @@
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { Mail, Phone } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
+
+export const metadata: Metadata = {
+  title: 'Andrew Mateljan — Founder & Head Coach | Laguna Beach Tennis Academy',
+  description: '25 years of tennis coaching experience. Former top-ranked junior, ATP/WTA tour coach, and founder of LBTA. Currently coaching ATP #262 Karue Sell.',
+  openGraph: {
+    title: 'Andrew Mateljan — Founder & Head Coach | Laguna Beach Tennis Academy',
+    description: '25 years of tennis coaching experience. Former top-ranked junior, ATP/WTA tour coach, and founder of LBTA. Currently coaching ATP #262 Karue Sell.',
+    type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
+  },
+}
 
 const philosophy = [
   {

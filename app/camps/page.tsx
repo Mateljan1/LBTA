@@ -442,8 +442,9 @@ export default function CampsPage() {
               >
                 Contact Us
               </Link>
-              <a 
+              <a
                 href="tel:9495340457"
+                aria-label="Call (949) 534-0457"
                 className="inline-block bg-white/10 hover:bg-white/20 text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
               >
                 Call (949) 534-0457

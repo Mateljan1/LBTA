@@ -478,7 +478,7 @@ export default function JuniorTrialLanding() {
             Laguna Beach Tennis Academy • Official City Partner Since 2020
           </p>
           <p className="text-sm text-lbta-bone/60">
-            <a href="tel:9495340457" className="text-lbta-coral">(949) 534-0457</a>
+            <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-lbta-coral">(949) 534-0457</a>
             <span className="mx-3">•</span>
             <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral">
               info@lagunabeachtennisacademy.com

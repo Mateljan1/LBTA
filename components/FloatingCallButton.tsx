@@ -21,7 +21,7 @@ export default function FloatingCallButton() {
       "
       aria-label="Call (949) 534-0457"
     >
-      <Phone className="w-6 h-6" />
+      <Phone className="w-6 h-6" aria-hidden="true" />
     </a>
   )
 }

@@ -1,7 +1,19 @@
+import { Metadata } from 'next'
 import { Brain, Compass, Lightbulb, Target, Users, Zap } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
+
+export const metadata: Metadata = {
+  title: 'Our Philosophy — Movement. Craft. Community. | LBTA',
+  description: 'The LBTA coaching philosophy: movement-first technique, structured development, and a community built on respect and accountability.',
+  openGraph: {
+    title: 'Our Philosophy — Movement. Craft. Community. | LBTA',
+    description: 'The LBTA coaching philosophy: movement-first technique, structured development, and a community built on respect and accountability.',
+    type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
+  },
+}
 
 const principles = [
   {

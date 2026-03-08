@@ -53,10 +53,11 @@ export default function BookPage() {
               </p>
               <div className="flex gap-4">
                 <a 
-                  href="tel:9495340457" 
+                  href="tel:9495340457"
+                  aria-label="Call (949) 534-0457"
                   className="flex items-center gap-2 text-black font-sans font-semibold text-[14px] hover:text-black/70 transition-colors"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4" aria-hidden="true" />
                   (949) 534-0457
                 </a>
                 <a 

@@ -83,6 +83,7 @@ export default function BeginnerProgramLanding() {
           />
           <a
             href="tel:9495340457"
+            aria-label="Call (949) 534-0457"
             className="text-white font-medium hover:text-white/80 transition text-sm tracking-wide"
           >
             (949) 534-0457
@@ -132,6 +133,7 @@ export default function BeginnerProgramLanding() {
               </a>
               <a
                 href="tel:9495340457"
+                aria-label="Call (949) 534-0457"
                 className="inline-flex items-center justify-center border border-white text-white px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-white/10"
               >
                 Call to Discuss
@@ -577,7 +579,7 @@ export default function BeginnerProgramLanding() {
             Laguna Beach Tennis Academy • Official City of Laguna Beach Tennis Partner Since 2020
           </p>
           <p className="text-sm text-lbta-bone/60 mb-3">
-            <a href="tel:9495340457" className="text-lbta-coral hover:text-lbta-coral-dark transition">(949) 534-0457</a>
+            <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-lbta-coral hover:text-lbta-coral-dark transition">(949) 534-0457</a>
             <span className="mx-3">•</span>
             <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral hover:text-lbta-coral-dark transition">
               info@lagunabeachtennisacademy.com

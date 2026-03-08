@@ -107,6 +107,7 @@ export default function Footer() {
                   <li>
                     <a
                       href="tel:9495340457"
+                      aria-label="Call (949) 534-0457"
                       className="text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       (949) 534-0457

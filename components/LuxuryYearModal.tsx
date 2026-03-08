@@ -417,7 +417,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
 
                   {/* Trust Note */}
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/50 text-center mt-6">
-                    Secure registration · Questions? <a href="tel:9495340457" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 534-0457</a>
+                    Secure registration · Questions? <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 534-0457</a>
                   </p>
                 </div>
               ) : (
@@ -594,7 +594,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
 
                   {/* Trust Note */}
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/50 text-center mt-6">
-                    Secure registration · Questions? <a href="tel:9495340457" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 534-0457</a>
+                    Secure registration · Questions? <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-lbta-slate hover:text-brand-pacific-dusk transition-colors">(949) 534-0457</a>
                   </p>
                 </form>
               )}

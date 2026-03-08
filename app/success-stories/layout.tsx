@@ -1,14 +1,13 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Success Stories | Laguna Beach Tennis Academy',
-  description: 'Read inspiring success stories from LBTA players - from ATP tour professionals to adult beginners. See how our movement-first coaching transforms games.',
-  keywords: 'tennis success stories, ATP player training, college tennis placement, tennis transformation, LBTA testimonials',
+  title: 'Success Stories & Testimonials | Laguna Beach Tennis Academy',
+  description: 'Player stories from LBTA. From junior development to ATP tour, see how our coaching philosophy creates lasting results.',
   openGraph: {
-    title: 'Success Stories | Laguna Beach Tennis Academy',
-    description: 'Read inspiring success stories from LBTA players - from ATP tour professionals to adult beginners.',
+    title: 'Success Stories & Testimonials | Laguna Beach Tennis Academy',
+    description: 'Player stories from LBTA. From junior development to ATP tour, see how our coaching philosophy creates lasting results.',
     type: 'website',
-    images: ['/images/results/karue-training.webp'],
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
   },
 }
 

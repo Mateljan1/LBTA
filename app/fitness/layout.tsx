@@ -1,14 +1,13 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cardio Tennis & LiveBall Fitness | Laguna Beach Tennis Academy',
-  description: 'High-energy cardio tennis and LiveBall fitness classes in Laguna Beach. Fun, social tennis workouts for all skill levels.',
-  keywords: 'cardio tennis Laguna Beach, LiveBall tennis, tennis fitness class, social tennis Orange County',
+  title: 'Fitness Programs — Cardio Tennis & LiveBall | LBTA',
+  description: 'High-energy fitness tennis in Laguna Beach. Cardio Tennis, LiveBall Intermediate, and LiveBall Advanced. All levels welcome.',
   openGraph: {
-    title: 'Cardio Tennis & LiveBall Fitness | Laguna Beach Tennis Academy',
-    description: 'High-energy cardio tennis and LiveBall fitness classes in Laguna Beach.',
+    title: 'Fitness Programs — Cardio Tennis & LiveBall | LBTA',
+    description: 'High-energy fitness tennis in Laguna Beach. Cardio Tennis, LiveBall Intermediate, and LiveBall Advanced. All levels welcome.',
     type: 'website',
-    images: ['/images/programs/fitness.webp'],
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
   },
 }
 

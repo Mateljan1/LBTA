@@ -1,14 +1,13 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us | Laguna Beach Tennis Academy',
-  description: 'Meet founder Andrew Mateljan and learn about LBTA\'s movement-first coaching philosophy. 25+ years of tennis excellence in Laguna Beach, California.',
-  keywords: 'Andrew Mateljan, Laguna Beach tennis coach, tennis academy founder, movement-first coaching, tennis philosophy',
+  title: 'About Laguna Beach Tennis Academy | Movement. Craft. Community.',
+  description: 'Founded by Andrew Mateljan, LBTA is Laguna Beach\'s premier tennis academy. Official City of Laguna Beach partner since 2020.',
   openGraph: {
-    title: 'About Us | Laguna Beach Tennis Academy',
-    description: 'Meet founder Andrew Mateljan and learn about LBTA\'s movement-first coaching philosophy.',
+    title: 'About Laguna Beach Tennis Academy | Movement. Craft. Community.',
+    description: 'Founded by Andrew Mateljan, LBTA is Laguna Beach\'s premier tennis academy. Official City of Laguna Beach partner since 2020.',
     type: 'website',
-    images: ['/images/founder/andrew-portrait.webp'],
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
   },
 }
 

@@ -1,27 +1,23 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Adult Tennis Trial Lesson | Free | Laguna Beach Tennis Academy',
-  description: 'Start or elevate your tennis journey with ATP/WTA coaching. All skill levels welcome - beginner to advanced. Flexible scheduling for busy professionals. Official City of Laguna Beach partner. Free trial lesson.',
-  keywords: 'adult tennis lessons Laguna Beach, tennis trial lesson adults, ATP coaching adults, beginner tennis lessons adults, adult tennis training, professional tennis lessons',
+  title: 'Adult Tennis Trial | Laguna Beach Tennis Academy',
+  description:
+    'Book a free adult tennis trial at LBTA. Programs for all levels from true beginners to NTRP 4.0+. Laguna Beach, CA.',
   openGraph: {
-    title: 'Adult Tennis Trial Lesson - Free',
-    description: '🎾 Start or elevate your tennis journey with ATP/WTA-level coaching. Whether you\'re a complete beginner or returning player, we\'ll meet you where you are.',
+    title: 'Adult Tennis Trial | Laguna Beach Tennis Academy',
+    description:
+      'Book a free adult tennis trial at LBTA. Programs for all levels from true beginners to NTRP 4.0+. Laguna Beach, CA.',
     type: 'website',
     url: 'https://lagunabeachtennisacademy.com/adult-trial',
     images: [
       {
-        url: '/og-adult-trial.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'LBTA Adult Tennis Trial Lesson',
+        url: '/images/hero/laguna-horizon.webp',
+        width: 1920,
+        height: 1080,
+        alt: 'Laguna Beach Tennis Academy',
       },
     ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Adult Tennis Trial Lesson - Free',
-    description: 'Professional ATP/WTA coaching for all skill levels. Free trial lesson included.',
   },
 }
 

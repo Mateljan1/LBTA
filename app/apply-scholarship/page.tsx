@@ -509,6 +509,7 @@ export default function ApplyScholarshipPage() {
               </a>
               <a
                 href="tel:9495340457"
+                aria-label="Call (949) 534-0457"
                 className="btn-secondary"
               >
                 CALL (949) 534-0457

@@ -251,10 +251,11 @@ export default function ThankYouPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6">
               <a 
-                href="tel:9495340457" 
+                href="tel:9495340457"
+                aria-label="Call (949) 534-0457"
                 className="inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4" aria-hidden="true" />
                 <span className="font-sans text-[15px]">(949) 534-0457</span>
               </a>
               <span className="hidden sm:block text-black/20">|</span>

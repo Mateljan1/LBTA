@@ -298,7 +298,7 @@ function PathwayPlannerInteractive() {
                 <Link href="/book" className="btn-primary">
                   SCHEDULE CONSULTATION
                 </Link>
-                <a href="tel:9495340457" className="btn-secondary">
+                <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="btn-secondary">
                   (949) 534-0457
                 </a>
               </div>

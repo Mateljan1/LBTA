@@ -116,7 +116,7 @@ export default function NotFound() {
               aria-label="Call (949) 534-0457"
               className="inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors"
             >
-              <Phone className="h-4 w-4" />
+              <Phone className="h-4 w-4" aria-hidden="true" />
               <span className="font-sans text-[15px]">(949) 534-0457</span>
             </a>
             <span className="hidden sm:block text-black/20">|</span>
