@@ -1,0 +1,91 @@
+'use client'
+
+import LeagueRow from './LeagueRow'
+import leaguesData from '@/data/leagues-2026.json'
+
+function handleInquiry() {
+  window.location.href = '/contact'
+}
+
+export default function LeaguesSection() {
+  const { usta, utr } = leaguesData
+
+  return (
+    <section id="leagues" className="bg-white py-16 md:py-24">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+
+        {/* USTA Leagues */}
+        <div id="usta-leagues" className="mb-16 md:mb-20">
+          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/40 uppercase tracking-[0.2em] mb-3">
+            USTA LEAGUE TENNIS
+          </p>
+          <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-4">
+            Join an LBTA Team
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[700px] mb-10">
+            Weekly team matches against Orange County clubs, plus a 2-hour coached
+            practice session with Andrew Mateljan every week. Season cost of $5,500
+            split across the roster.
+          </p>
+
+          <div className="bg-white border border-black/[0.06] rounded-lg overflow-hidden">
+            {usta.leagues.map((league, i) => (
+              <LeagueRow
+                key={league.id}
+                name={league.name}
+                season={league.season}
+                weeks={league.weeks}
+                format={league.format}
+                levels={league.levels}
+                price={league.pricing12}
+                weeklyApprox={league.weeklyApprox}
+                deadline={league.deadline}
+                onAction={handleInquiry}
+                actionLabel="Inquire"
+              />
+            ))}
+          </div>
+
+          <p className="font-sans text-[13px] text-brand-pacific-dusk/45 mt-4">
+            USTA membership ($48/year) required separately.
+          </p>
+        </div>
+
+        {/* UTR Circuit */}
+        <div id="utr-circuit">
+          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/40 uppercase tracking-[0.2em] mb-3">
+            UTR CIRCUIT · SEASON 1
+          </p>
+          <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-4">
+            Saturday Matchplay Series
+          </h2>
+          <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[700px] mb-3">
+            Eight consecutive Saturdays of UTR-rated competitive play. Every match
+            counts toward your Universal Tennis Rating. Five divisions from Color Ball
+            juniors through advanced adults.
+          </p>
+          <p className="font-sans text-[14px] font-medium text-brand-pacific-dusk/50 mb-10">
+            April 4 – June 13, 2026 · Grand Finals Night June 13
+          </p>
+
+          <div className="bg-white border border-black/[0.06] rounded-lg overflow-hidden">
+            {utr.divisions.map((div, i) => (
+              <LeagueRow
+                key={div.name}
+                name={div.name}
+                format={div.format}
+                levels={div.level}
+                price={div.price}
+                time={div.time}
+                venue={div.venue}
+                onAction={handleInquiry}
+                actionLabel="Register"
+              />
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  )
+}
