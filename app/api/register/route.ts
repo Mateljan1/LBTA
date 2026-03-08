@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { registerSchema, validateRequest } from '@/lib/validations'
+import { storeLead } from '@/lib/leads-store'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -39,9 +40,13 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     })
 
-    // TODO: Send email notification using lib/email-config.ts
-    // TODO: Save to database/CRM
-    // TODO: Send confirmation email to user
+    void storeLead({
+      source: 'register',
+      email: data.email,
+      name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
+      phone: data.phone ?? undefined,
+      payload: { program: data.program, season: data.season },
+    })
 
     return NextResponse.json({
       success: true,

@@ -96,6 +96,7 @@ You are building the Laguna Beach Tennis Academy (LBTA) website — a premium, f
 - **Fonts:** Cormorant (serif display/headlines) + DM Sans (body)
 - **Deployment:** Vercel
 - **CRM Integration:** ActiveCampaign
+- **Optional:** Supabase (lead store). Env: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`. See `lib/leads-store.ts`.
 - **Data:** JSON files in `/data` directory (single source of truth)
 
 ---
@@ -365,6 +366,7 @@ transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
 ✅ /schedules page is THE source for all programs, pricing, schedules
 ✅ Data lives in /data/*.json files
 ✅ Program pages redirect to /schedules (no duplicate content)
+✅ Form submissions (optional): lib/leads-store writes to Supabase leads table when env is set
 ❌ NEVER hardcode prices in components
 ❌ NEVER duplicate data across pages
 ```
@@ -379,6 +381,8 @@ transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
 ---
 
 ## Part 13: File Structure
+
+VYLO pages removed; legacy URLs redirect from next.config. JTT exists as API route only.
 
 ```
 app/
@@ -476,6 +480,7 @@ data/
 
 lib/
 ├── activecampaign.ts            # ActiveCampaign API integration
+├── leads-store.ts               # Optional Supabase lead store (form submissions)
 ├── env.ts                       # Environment variable helpers
 ├── validations.ts               # Zod schemas + validateRequest
 ├── rate-limit.ts                # Rate limiting for API routes

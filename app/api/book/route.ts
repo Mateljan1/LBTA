@@ -11,6 +11,7 @@ import {
   LBTA_LIST_ID,
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
+import { storeLead } from '@/lib/leads-store'
 
 // ============================================================
 // LBTA Booking/Trial Request API
@@ -129,6 +130,14 @@ export async function POST(request: NextRequest) {
         // Continue even if AC fails - we don't want to block the user
       }
     }
+
+    void storeLead({
+      source: 'book',
+      email: body.email,
+      name: `${body.firstName ?? ''} ${body.lastName ?? ''}`.trim() || undefined,
+      phone: body.phone ?? undefined,
+      payload: { program: body.program, location: body.location },
+    })
 
     return NextResponse.json({
       success: true,

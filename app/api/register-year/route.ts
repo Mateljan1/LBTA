@@ -4,6 +4,7 @@ import axios from 'axios'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { registerYearSchema, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
+import { storeLead } from '@/lib/leads-store'
 
 let notionClient: Client | null = null
 function getNotionClient(): Client {
@@ -390,6 +391,18 @@ export async function POST(request: NextRequest) {
       // Continue even if AC fails
     }
     }
+
+    void storeLead({
+      source: 'register-year',
+      email: data.email,
+      name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
+      phone: data.phone ?? undefined,
+      payload: {
+        registrationType: data.registrationType,
+        program: data.program,
+        season: data.season,
+      },
+    })
 
     // 3. Return success with confirmation message based on type
     let confirmationMessage = 'Registration received! Our team will confirm within 24 hours.'

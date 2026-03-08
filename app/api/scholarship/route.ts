@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { scholarshipSchema, validateRequest } from '@/lib/validations'
+import { storeLead } from '@/lib/leads-store'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -35,7 +36,13 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     })
 
-    // TODO: Send to email service (e.g., Resend, SendGrid, or your Base44 backend)
+    void storeLead({
+      source: 'scholarship',
+      email: validation.data.email,
+      name: validation.data.parentName ?? undefined,
+      phone: validation.data.phone ?? undefined,
+      payload: { studentName: validation.data.studentName },
+    })
 
     return NextResponse.json({
       success: true,

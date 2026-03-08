@@ -11,6 +11,7 @@ import {
   LBTA_LIST_ID,
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
+import { storeLead } from '@/lib/leads-store'
 
 // Initialize Notion client lazily
 let notionClient: Client | null = null
@@ -202,6 +203,14 @@ export async function POST(request: NextRequest) {
         // Don't fail the whole request if AC fails
       }
     }
+
+    void storeLead({
+      source: 'jtt-registration',
+      email: formData.parentEmail,
+      name: `${formData.parentFirstName ?? ''} ${formData.parentLastName ?? ''}`.trim() || undefined,
+      phone: formData.parentPhone ?? undefined,
+      payload: { division: formData.division },
+    })
 
     // ============================================================
     // 3. Generate email HTML for internal notification

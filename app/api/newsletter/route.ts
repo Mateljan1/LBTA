@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { newsletterSchema, validateRequest } from '@/lib/validations'
 import { upsertContact, addToList, addTag, CAMPAIGN_TAGS } from '@/lib/activecampaign'
+import { storeLead } from '@/lib/leads-store'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -53,6 +54,8 @@ export async function POST(request: NextRequest) {
     }
 
     await addTag(result.data.id, CAMPAIGN_TAGS.website_registration)
+
+    void storeLead({ source: 'newsletter', email: email.trim() })
 
     return NextResponse.json({ success: true, message: 'Subscribed successfully' })
   } catch (err) {

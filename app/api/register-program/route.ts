@@ -11,6 +11,7 @@ import {
   getProgramCategory,
   LBTA_LIST_ID,
 } from '@/lib/activecampaign'
+import { storeLead } from '@/lib/leads-store'
 
 // Initialize Notion client lazily
 let notionClient: Client | null = null
@@ -209,7 +210,14 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 3. Return success
+    void storeLead({
+      source: 'register-program',
+      email: data.email,
+      name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
+      phone: data.phone ?? undefined,
+      payload: { program: data.program, location: data.location },
+    })
+
     return NextResponse.json({
       success: true,
       message: 'Registration received! Our team will confirm within 24 hours.',
