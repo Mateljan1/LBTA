@@ -49,7 +49,7 @@ export default function LeagueRow({
             </p>
           )}
           {secondLine && (
-            <p className="font-sans text-[12px] text-brand-pacific-dusk/45 mt-0.5">
+            <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
               {secondLine}
             </p>
           )}
@@ -79,7 +79,7 @@ export default function LeagueRow({
               {price}
             </p>
             {weeklyApprox && (
-              <p className="font-sans text-[12px] text-brand-pacific-dusk/45 mt-0.5">
+              <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
                 ~{weeklyApprox}/week
               </p>
             )}
@@ -109,7 +109,7 @@ export default function LeagueRow({
           </p>
         )}
         {secondLine && (
-          <p className="font-sans text-[12px] text-brand-pacific-dusk/45 mt-0.5">
+          <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
             {secondLine}
           </p>
         )}
@@ -131,7 +131,7 @@ export default function LeagueRow({
             {price}
           </span>
           {weeklyApprox && (
-            <span className="font-sans text-[12px] text-brand-pacific-dusk/45">
+            <span className="font-sans text-[12px] text-brand-pacific-dusk/70">
               · ~{weeklyApprox}/week
             </span>
           )}

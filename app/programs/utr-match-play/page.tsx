@@ -6,7 +6,7 @@ import { LeagueEventSchema } from '@/app/schema'
 export const metadata: Metadata = {
   title: 'UTR Match Play Series | Laguna Beach Tennis Academy',
   description:
-    'LBTA UTR Circuit — Season 1. 12 Saturdays of rated matchplay in Laguna Beach. 5 divisions from Color Ball juniors to advanced adults. April–June 2026.',
+    'LBTA UTR Circuit — Season 1. 8 Saturdays of rated matchplay in Laguna Beach. 5 divisions from Color Ball juniors to advanced adults. April–June 2026.',
 }
 
 const divisions = leagues2026.utr.divisions
@@ -17,7 +17,7 @@ export default function UTRMatchPlayPage() {
     <div>
       <LeagueEventSchema
         name="UTR Match Play Series — Season 1"
-        description="12 Saturdays of rated matchplay in Laguna Beach. 5 divisions from Color Ball juniors to advanced adults. April–June 2026."
+        description="8 Saturdays of rated matchplay in Laguna Beach. 5 divisions from Color Ball juniors to advanced adults. April–June 2026."
         startDate="2026-04-04"
         endDate="2026-06-13"
         location="Laguna Beach"
@@ -39,7 +39,7 @@ export default function UTRMatchPlayPage() {
             UTR Match Play Series
           </h1>
           <p className="text-[1.1rem] font-sans font-light text-white/60 max-w-2xl leading-relaxed">
-            12 Saturdays of structured, rated matchplay in Laguna Beach. Five
+            8 Saturdays of structured, rated matchplay in Laguna Beach. Five
             divisions from Color Ball juniors to advanced adults. Every result
             submitted to UTR.
           </p>
@@ -314,7 +314,7 @@ export default function UTRMatchPlayPage() {
             Register for Season 1
           </h2>
           <p className="text-[1.05rem] font-sans font-light text-white/50 max-w-lg mx-auto mb-8">
-            12 Saturdays of competitive, rated matchplay. Choose your division
+            8 Saturdays of competitive, rated matchplay. Choose your division
             and secure your spot.
           </p>
           <div className="flex flex-wrap justify-center gap-4">

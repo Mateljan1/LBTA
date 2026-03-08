@@ -17,7 +17,7 @@ export default function LeaguesSection() {
 
         {/* USTA Leagues */}
         <div id="usta-leagues" className="mb-16 md:mb-20">
-          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/40 uppercase tracking-[0.2em] mb-3">
+          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
             USTA LEAGUE TENNIS
           </p>
           <h3 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-4">
@@ -53,7 +53,7 @@ export default function LeaguesSection() {
 
         {/* UTR Circuit */}
         <div id="utr-circuit">
-          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/40 uppercase tracking-[0.2em] mb-3">
+          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
             UTR CIRCUIT · SEASON 1
           </p>
           <h3 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-4">
@@ -64,7 +64,7 @@ export default function LeaguesSection() {
             counts toward your Universal Tennis Rating. Five divisions from Color Ball
             juniors through advanced adults.
           </p>
-          <p className="font-sans text-[14px] font-medium text-brand-pacific-dusk/50 mb-10">
+          <p className="font-sans text-[14px] font-medium text-brand-pacific-dusk/70 mb-10">
             April 4 – June 13, 2026 · Grand Finals Night June 13
           </p>
 

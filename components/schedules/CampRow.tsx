@@ -39,7 +39,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
           <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
             {camp.dates}
           </p>
-          <p className="font-sans text-[12px] text-brand-pacific-dusk/45 mt-0.5">
+          <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
             {camp.location}
           </p>
         </div>
@@ -59,10 +59,10 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
           <div className="text-right w-[120px]">
             <p className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-tight">
               ${camp.price}
-              <span className="font-sans text-[12px] text-brand-pacific-dusk/50 ml-0.5">/week</span>
+              <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">/week</span>
             </p>
             {camp.perDay != null && (
-              <p className="font-sans text-[12px] text-brand-pacific-dusk/45 mt-0.5">
+              <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
                 ${camp.perDay}/day
               </p>
             )}
@@ -89,7 +89,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
         <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
           {camp.dates}
         </p>
-        <p className="font-sans text-[12px] text-brand-pacific-dusk/45 mt-0.5">
+        <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
           {camp.location}
         </p>
 
@@ -101,10 +101,10 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
         <div className="mt-4 flex items-baseline gap-3">
           <span className="font-serif text-[18px] font-medium text-brand-pacific-dusk">
             ${camp.price}
-            <span className="font-sans text-[12px] text-brand-pacific-dusk/50 ml-0.5">/week</span>
+            <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">/week</span>
           </span>
           {camp.perDay != null && (
-            <span className="font-sans text-[12px] text-brand-pacific-dusk/45">
+            <span className="font-sans text-[12px] text-brand-pacific-dusk/70">
               · ${camp.perDay}/day
             </span>
           )}

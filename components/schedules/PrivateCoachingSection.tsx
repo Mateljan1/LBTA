@@ -49,7 +49,7 @@ export default function PrivateCoachingSection({
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
 
         {/* Private Coaching */}
-        <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/40 uppercase tracking-[0.2em] mb-3">
+        <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           ONE-ON-ONE
         </p>
         <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
@@ -165,7 +165,7 @@ export default function PrivateCoachingSection({
 
         {/* Monthly Programs */}
         <div className="mt-16 md:mt-20">
-          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/40 uppercase tracking-[0.2em] mb-3">
+          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
             DROP-IN & MONTHLY
           </p>
           <h3 className="font-serif text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mb-6">
@@ -187,7 +187,7 @@ export default function PrivateCoachingSection({
                 <div className="mt-4 flex items-baseline gap-3">
                   <span className="font-serif text-[22px] font-medium text-brand-pacific-dusk">
                     ${prog.price}
-                    <span className="font-sans text-[12px] text-brand-pacific-dusk/50 ml-0.5">/mo</span>
+                    <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">/mo</span>
                   </span>
                   <span className="font-sans text-[12px] text-brand-pacific-dusk/60">
                     Drop-in ${prog.dropIn}

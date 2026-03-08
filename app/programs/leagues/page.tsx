@@ -25,7 +25,7 @@ const leagues = [
     href: '/programs/utr-match-play',
     season: 'Season 1 — April–June 2026',
     desc: 'Structured, rated matchplay every Saturday in Laguna Beach. Five divisions from Color Ball juniors to advanced adults. UTR-rated results.',
-    highlights: ['12 Saturdays, 5 divisions', 'Juniors and adults by level', `From ${leaguePricing.perSeason}/season`],
+    highlights: ['8 Saturdays, 5 divisions', 'Juniors and adults by level', `From ${leaguePricing.perSeason}/season`],
     color: 'from-brand-sunset-cliff to-brand-thousand-steps',
     accent: 'text-brand-sunset-cliff',
   },

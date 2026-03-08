@@ -37,7 +37,7 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
             Ages {program.ages} · {program.duration} · {program.location}
           </p>
           {coach && (
-            <p className="font-sans text-[12px] text-brand-pacific-dusk/45 mt-0.5">
+            <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
               Coach: {coach}
             </p>
           )}
@@ -61,13 +61,13 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
             {price && (
               <p className="font-serif text-[20px] font-medium text-brand-pacific-dusk leading-tight">
                 ${price.amount}
-                <span className="font-sans text-[12px] text-brand-pacific-dusk/50 ml-0.5">
+                <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
                   {price.label}
                 </span>
               </p>
             )}
             {program.pricing.drop_in != null && (
-              <p className="font-sans text-[12px] text-brand-pacific-dusk/45 mt-0.5">
+              <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
                 Drop-in: ${program.pricing.drop_in}
               </p>
             )}
@@ -95,7 +95,7 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
           Ages {program.ages} · {program.duration}
         </p>
         {coach && (
-          <p className="font-sans text-[12px] text-brand-pacific-dusk/45 mt-0.5">
+          <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
             Coach: {coach}
           </p>
         )}
@@ -115,13 +115,13 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
           {price && (
             <span className="font-serif text-[18px] font-medium text-brand-pacific-dusk">
               ${price.amount}
-              <span className="font-sans text-[12px] text-brand-pacific-dusk/50 ml-0.5">
+              <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
                 {price.label}
               </span>
             </span>
           )}
           {program.pricing.drop_in != null && (
-            <span className="font-sans text-[12px] text-brand-pacific-dusk/45">
+            <span className="font-sans text-[12px] text-brand-pacific-dusk/70">
               · Drop-in ${program.pricing.drop_in}
             </span>
           )}

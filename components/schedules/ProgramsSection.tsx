@@ -67,7 +67,7 @@ export default function ProgramsSection({ onRegister }: ProgramsSectionProps) {
     <section id="programs" className="bg-white py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
         {/* Section heading */}
-        <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/40 uppercase tracking-[0.2em] mb-3">
+        <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           SEASONAL PROGRAMS
         </p>
         <h2 className="font-serif text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-8">
@@ -107,7 +107,7 @@ export default function ProgramsSection({ onRegister }: ProgramsSectionProps) {
         <div className="space-y-12">
           {grouped.map(({ category, programs: catPrograms }) => (
             <div key={category}>
-              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/40 uppercase tracking-[0.2em] mb-2">
+              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-2">
                 {CATEGORY_EYEBROWS[category] || category.toUpperCase()}
               </p>
               <h3 className="font-serif text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mb-4">
