@@ -82,7 +82,7 @@ export default function ProgramsSection({ onRegister }: ProgramsSectionProps) {
               onClick={() => setActiveSeason(key)}
               className={`
                 font-sans text-[13px] font-medium tracking-[0.05em] px-5 py-2 rounded-[2px]
-                transition-all duration-200 min-h-[40px]
+                transition-all duration-200 min-h-[48px]
                 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2
                 ${activeSeason === key
                   ? 'bg-black text-white'
@@ -98,7 +98,7 @@ export default function ProgramsSection({ onRegister }: ProgramsSectionProps) {
 
         {/* Season info line */}
         {seasonInfoLine && (
-          <p className="font-sans text-[13px] text-brand-pacific-dusk/50 mb-10">
+          <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-10">
             {seasonInfoLine}
           </p>
         )}

@@ -64,25 +64,25 @@ export default function PrivateCoachingSection({
           <table className="w-full text-left">
             <thead>
               <tr className="bg-brand-sandstone">
-                <th className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-6 py-3">
+                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-6 py-3">
                   Coach
                 </th>
-                <th className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3">
+                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3">
                   Title
                 </th>
-                <th className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
                   60 min
                 </th>
-                <th className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
                   90 min
                 </th>
-                <th className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
                   10-Pack
                 </th>
-                <th className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
                   20-Pack
                 </th>
-                <th className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3">
+                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3">
                   Availability
                 </th>
               </tr>
@@ -111,9 +111,10 @@ export default function PrivateCoachingSection({
                   <td className="font-sans text-[14px] text-brand-pacific-dusk px-4 py-4 text-right">
                     ${c.pack20.toLocaleString()}
                   </td>
-                  <td className="font-sans text-[13px] text-brand-pacific-dusk/50 px-4 py-4">
+                  <td className="font-sans text-[13px] text-brand-pacific-dusk/70 px-4 py-4">
                     {c.availability}
                   </td>
+
                 </tr>
               ))}
             </tbody>
@@ -130,24 +131,24 @@ export default function PrivateCoachingSection({
               <h3 className="font-serif text-[18px] font-medium text-brand-pacific-dusk">
                 {c.coach}
               </h3>
-              <p className="font-sans text-[13px] text-brand-pacific-dusk/50 mt-0.5">
+              <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mt-0.5">
                 {c.title} · {c.availability}
               </p>
               <div className="grid grid-cols-2 gap-x-6 gap-y-2 mt-4">
                 <div>
-                  <p className="font-sans text-[11px] text-brand-pacific-dusk/40 uppercase tracking-wider">60 min</p>
+                  <p className="font-sans text-[11px] text-brand-pacific-dusk/60 uppercase tracking-wider">60 min</p>
                   <p className="font-sans text-[15px] text-brand-pacific-dusk font-medium">${c.rate60}</p>
                 </div>
                 <div>
-                  <p className="font-sans text-[11px] text-brand-pacific-dusk/40 uppercase tracking-wider">90 min</p>
+                  <p className="font-sans text-[11px] text-brand-pacific-dusk/60 uppercase tracking-wider">90 min</p>
                   <p className="font-sans text-[15px] text-brand-pacific-dusk font-medium">${c.rate90}</p>
                 </div>
                 <div>
-                  <p className="font-sans text-[11px] text-brand-pacific-dusk/40 uppercase tracking-wider">10-Pack</p>
+                  <p className="font-sans text-[11px] text-brand-pacific-dusk/60 uppercase tracking-wider">10-Pack</p>
                   <p className="font-sans text-[15px] text-brand-pacific-dusk font-medium">${c.pack10.toLocaleString()}</p>
                 </div>
                 <div>
-                  <p className="font-sans text-[11px] text-brand-pacific-dusk/40 uppercase tracking-wider">20-Pack</p>
+                  <p className="font-sans text-[11px] text-brand-pacific-dusk/60 uppercase tracking-wider">20-Pack</p>
                   <p className="font-sans text-[15px] text-brand-pacific-dusk font-medium">${c.pack20.toLocaleString()}</p>
                 </div>
               </div>
@@ -180,7 +181,7 @@ export default function PrivateCoachingSection({
                 <h4 className="font-serif text-[20px] font-medium text-brand-pacific-dusk">
                   {prog.label}
                 </h4>
-                <p className="font-sans text-[13px] text-brand-pacific-dusk/50 mt-1">
+                <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mt-1">
                   {prog.subtitle} · {prog.duration}
                 </p>
                 <div className="mt-4 flex items-baseline gap-3">
@@ -188,7 +189,7 @@ export default function PrivateCoachingSection({
                     ${prog.price}
                     <span className="font-sans text-[12px] text-brand-pacific-dusk/50 ml-0.5">/mo</span>
                   </span>
-                  <span className="font-sans text-[12px] text-brand-pacific-dusk/40">
+                  <span className="font-sans text-[12px] text-brand-pacific-dusk/60">
                     Drop-in ${prog.dropIn}
                   </span>
                 </div>
