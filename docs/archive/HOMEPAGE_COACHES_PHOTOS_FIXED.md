@@ -16,21 +16,21 @@ The homepage was displaying incorrect coach photos. Updated all three coaches to
 
 ### **Kevin Jackson - College Recruitment Director**
 - **OLD:** `/photos/CQ8A0023.jpg` (incorrect photo)
-- **NEW:** `https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/0505f2a39_kevinJacksonPic.png`
+- **NEW:** `https://mapbbmrjgpusegjvbkod.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/0505f2a39_kevinJacksonPic.png`
 - **Updated:** Line 308 in `app/page.tsx`
 - **Positioning:** Changed from `object-[50%_20%]` to `object-top` for better framing
 - **Quality:** Added `quality={90}` for optimal rendering
 
 ### **Michelle Bevins - Youth Development**
 - **OLD:** `/photos/CQ8A0103.jpg` (incorrect photo)
-- **NEW:** `https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/97b8fa461_MichelleBevinsPic.png`
+- **NEW:** `https://mapbbmrjgpusegjvbkod.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/97b8fa461_MichelleBevinsPic.png`
 - **Updated:** Line 327 in `app/page.tsx`
 - **Positioning:** Changed from `object-[50%_30%]` to `object-top` for consistency
 - **Quality:** Added `quality={90}` for optimal rendering
 
 ### **Savriyan Danilov - ATP #556**
 - **OLD:** `/photos/CQ8A0046_1.jpg` (incorrect photo)
-- **NEW:** `https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/57a63569f_Savriyan.png`
+- **NEW:** `https://mapbbmrjgpusegjvbkod.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/57a63569f_Savriyan.png`
 - **Updated:** Line 346 in `app/page.tsx`
 - **Positioning:** Changed from `object-[50%_20%]` to `object-top` for consistency
 - **Quality:** Added `quality={90}` for optimal rendering

@@ -308,17 +308,17 @@
     transition: width 0s, height 0s, opacity 0s;
   }
 
-  /* Primary — Sunset Cliff (warm action) */
+  /* Primary — black (luxury CTA per .cursorrules) */
   .btn-primary {
     @apply btn;
-    background: var(--sunset-cliff);
+    background: var(--lbta-black, #0a0a0a);
     color: var(--salt-air);
   }
 
   .btn-primary:hover {
-    background: #D4773F;
+    background: #27272a; /* gray-800 */
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(232, 131, 74, 0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 
   .btn-primary:active {

@@ -97,6 +97,7 @@ You are building the Laguna Beach Tennis Academy (LBTA) website — a premium, f
 - **Deployment:** Vercel
 - **CRM Integration:** ActiveCampaign
 - **Optional:** Supabase (lead store). Env: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`. See `lib/leads-store.ts`.
+- **Supabase migrations:** Run via **Supabase CLI** only (not manual SQL or dashboard). From repo root: `supabase link` (one-time, then `supabase db push` to apply `supabase/migrations/*.sql`).
 - **Data:** JSON files in `/data` directory (single source of truth)
 
 ---
@@ -248,6 +249,9 @@ spacing: {
 ## Part 10: Component Patterns
 
 ### Buttons (Luxury Black/White Standard)
+
+**CTA color decision:** Primary CTAs (header "Book Trial," key actions) use black/white only. Sunset Cliff is for hover states and accents only — not primary button fill. No orange/red primary buttons.
+
 ```tsx
 // Primary CTA (Book Trial, Register)
 <button className="
@@ -313,6 +317,8 @@ import Image from 'next/image'
 // For hero/above-fold images, add priority
 <Image ... priority />
 ```
+
+**Logo usage:** Header and Footer use local `/logos/LBTAblktext.png` (Footer inverts on dark). PartnershipSection uses `/logos/*` with descriptive alt. No external logo URLs; keep assets in `public/logos/`.
 
 ---
 

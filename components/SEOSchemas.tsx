@@ -1,6 +1,13 @@
 import Script from 'next/script'
+import year2026 from '@/data/year2026.json'
+import privateRates from '@/data/private-rates.json'
 
-// FAQ Schema for /faq page
+const rates = privateRates.map((r: { rate_60: number }) => r.rate_60)
+const privateMin = rates.length ? Math.min(...rates) : 100
+const privateMax = rates.length ? Math.max(...rates) : 250
+const { awardedAnnually, coverage } = year2026.scholarships
+
+// FAQ Schema for /faq page — private and scholarship copy from data; rest static
 export const faqItems = [
   {
     question: "What ages do you accept at LBTA?",
@@ -24,7 +31,7 @@ export const faqItems = [
   },
   {
     question: "Do you offer private lessons?",
-    answer: "Yes, private lessons are available with all our coaches. Rates range from $100-250 per hour depending on the coach. Contact us to schedule."
+    answer: `Yes, private lessons are available with all our coaches. Rates range from $${privateMin}-${privateMax} per hour depending on the coach. Contact us to schedule.`
   },
   {
     question: "Where are your courts located?",
@@ -32,7 +39,7 @@ export const faqItems = [
   },
   {
     question: "Do you offer scholarships?",
-    answer: "Yes, we award over $25,000 annually in scholarships to families demonstrating financial need and commitment. Scholarships cover 25-50% of tuition."
+    answer: `Yes, we award over $${awardedAnnually.toLocaleString()} annually in scholarships to families demonstrating financial need and commitment. Scholarships cover ${coverage} of tuition.`
   }
 ]
 
@@ -162,7 +169,7 @@ export function OrganizationSchema() {
     "name": "Laguna Beach Tennis Academy",
     "alternateName": "LBTA",
     "url": "https://lagunabeachtennisacademy.com",
-    "logo": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png",
+    "logo": "https://lagunabeachtennisacademy.com/logos/LBTAblktext.png",
     "description": "Premier tennis academy in Laguna Beach, California offering junior development, adult programs, and high-performance training with ATP/WTA certified coaches.",
     "sport": "Tennis",
     "foundingDate": "2018",

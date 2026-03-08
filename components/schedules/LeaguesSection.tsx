@@ -47,7 +47,7 @@ export default function LeaguesSection() {
           </div>
 
           <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mt-4">
-            USTA membership ($48/year) required separately.
+            {`USTA membership ($${leaguesData.usta.ustaMembershipAnnual}/year) required separately.`}
           </p>
         </div>
 

@@ -43,6 +43,10 @@ export const metadata: Metadata = {
     description: 'ATP/WTA coaching for ages 3 to professional. Small by design.',
     type: 'website',
   },
+  icons: {
+    icon: '/icons/icon-192x192.png',
+    apple: '/icons/icon-192x192.png',
+  },
 }
 
 export const viewport: Viewport = {
@@ -65,6 +69,7 @@ export default function RootLayout({
       <head>
         {/* PWA & Mobile Optimization */}
         <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/icons/icon-192x192.png" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

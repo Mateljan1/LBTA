@@ -72,7 +72,7 @@ Combining luxury restraint with California warmth and founder-led excellence.
 ### Colors (Tailwind brand tokens)
 
 - **Text/Headings:** `brand-pacific-dusk` (#1B3A5C)
-- **Primary CTA:** `brand-sunset-cliff` (#E8834A)
+- **Primary CTA:** Black/white (per .cursorrules); `brand-sunset-cliff` for hover/accent only
 - **Links/Focus:** `brand-victoria-cove` (#2E8B8B)
 - **Success/positive:** `brand-tide-pool` (#3A8B6E)
 - **Warm sections:** `brand-sandstone` (#F5F0E5)
@@ -127,6 +127,39 @@ vercel --prod
 1. Push to GitHub
 2. Import to Vercel
 3. Deploy automatically
+
+### Lead store (Supabase, optional)
+
+Form submissions (book, newsletter, register, scholarship, JTT, etc.) can be stored in Supabase as a single source of truth for leads, independent of ActiveCampaign.
+
+**Using the Supabase CLI (recommended):**
+
+1. **Log in and link** (one-time):
+   ```bash
+   npx supabase login
+   npx supabase link --project-ref mapbbmrjgpusegjvbkod
+   ```
+   Use the same project as your existing storage (`mapbbmrjgpusegjvbkod.supabase.co`).
+
+2. **Apply the leads table migration:**
+   ```bash
+   npx supabase db push
+   ```
+   This runs `supabase/migrations/20260306000000_create_leads_table.sql` on the linked project.
+
+3. **Set environment variables** in Vercel (and optionally in local `.env`):
+   - `SUPABASE_URL` — Project URL (e.g. `https://mapbbmrjgpusegjvbkod.supabase.co`)
+   - `SUPABASE_SERVICE_ROLE_KEY` — Service role key (Settings → API; keep secret)
+
+**Alternative (run from repo with your DB URL):**
+  ```bash
+  DATABASE_URL='postgresql://postgres.[ref]:[PASSWORD]@...' node scripts/run-leads-migration.js
+  ```
+  Get the connection string from Supabase Dashboard → Project Settings → Database → Connection string (URI). Requires `psql` (PostgreSQL client) installed.
+
+**Alternative (no CLI, no script):** In Supabase Dashboard → SQL Editor, run the contents of `supabase/leads.sql` once.
+
+If the env vars are not set, the app still works; the lead store no-ops.
 
 ## Content Overview
 

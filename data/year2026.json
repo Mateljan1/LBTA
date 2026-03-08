@@ -301,6 +301,7 @@
 
   "scholarships": {
     "available": true,
+    "awardedAnnually": 25000,
     "coverage": "25-50%",
     "email": "scholarships@lagunabeachtennisacademy.com"
   }

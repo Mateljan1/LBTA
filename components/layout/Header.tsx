@@ -1,5 +1,11 @@
 'use client'
 
+/**
+ * Site header: logo (local /logos/LBTAblktext.png per .cursorrules), "The Academy" wordmark,
+ * desktop nav (Programs mega-panel, Schedule, Coaches, About, Contact, Camp), primary CTA (Book Trial),
+ * and mobile drawer with focus trap. No external logo URLs.
+ */
+
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -29,10 +35,12 @@ const programsDropdown = [
 ]
 
 const navigation = [
+  { name: 'Home', href: '/' },
   { name: 'Schedule', href: '/schedules' },
   { name: 'Coaches', href: '/coaches' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
+  { name: 'Camp', href: '/camps' },
 ]
 
 export default function Header() {
@@ -178,14 +186,17 @@ export default function Header() {
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
           <div className="flex items-center justify-between">
-            <Link href="/" className="group flex-shrink-0">
+            <Link href="/" className="group flex-shrink-0 flex items-center gap-3 min-h-[48px] min-w-[48px]">
               <Image
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png"
+                src="/logos/LBTAblktext.png"
                 alt="Laguna Beach Tennis Academy"
                 width={120}
                 height={56}
                 className="h-10 md:h-12 w-auto group-hover:opacity-80 transition-opacity duration-300"
               />
+              <span className="font-headline text-lg md:text-xl font-medium text-brand-pacific-dusk tracking-wide hidden sm:inline" aria-hidden="true">
+                The Academy
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -199,14 +210,16 @@ export default function Header() {
               >
                 <button
                   type="button"
-                  className="inline-flex items-center gap-1 px-3 py-2 text-[13px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors duration-300 tracking-wide whitespace-nowrap"
+                  className="inline-flex items-center gap-1 px-3 py-2 min-h-[48px] text-[13px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors duration-300 tracking-wide whitespace-nowrap"
                   aria-expanded={programsOpen}
+                  aria-haspopup="menu"
                   aria-controls="programs-panel"
                   onClick={() => setProgramsOpen(!programsOpen)}
                 >
                   Programs
                   <ChevronDown
                     className={`h-3.5 w-3.5 transition-transform duration-300 ${programsOpen ? 'rotate-180' : ''}`}
+                    aria-hidden="true"
                   />
                 </button>
 
@@ -262,7 +275,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-3 py-2 text-[13px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors duration-300 tracking-wide whitespace-nowrap relative group"
+                  className="px-3 py-2 min-h-[48px] inline-flex items-center text-[13px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors duration-300 tracking-wide whitespace-nowrap relative group"
                 >
                   {item.name}
                   <span className="absolute bottom-0 left-3 right-3 h-[1.5px] bg-brand-sunset-cliff scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -284,7 +297,7 @@ export default function Header() {
                 className="p-3 min-w-[48px] min-h-[48px] flex items-center justify-center text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors"
                 aria-label="Call (949) 534-0457"
               >
-                <Phone className="h-5 w-5" />
+                <Phone className="h-5 w-5" aria-hidden="true" />
               </a>
               <button
                 ref={mobileMenuButtonRef}
@@ -362,7 +375,7 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block text-[16px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff py-3.5 border-b border-brand-pacific-dusk/5 transition-all duration-200"
+                    className="block text-[16px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff py-3.5 min-h-[48px] border-b border-brand-pacific-dusk/5 transition-all duration-200"
                     onClick={() => setMobileMenuOpen(false)}
                     style={{
                       animation: `fadeInUp 0.25s ease-out ${(index + 4) * 0.05}s forwards`,

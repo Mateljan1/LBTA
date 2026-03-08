@@ -34,7 +34,7 @@ const localBusinessSchema = {
   ],
   priceRange: '$$',
   image: 'https://lagunabeachtennisacademy.com/images/hero/laguna-horizon.webp',
-  logo: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png',
+  logo: 'https://lagunabeachtennisacademy.com/logos/LBTAblktext.png',
   sameAs: ['https://www.instagram.com/lagunabeachtennisacademy', 'https://www.facebook.com/lagunabeachtennisacademy'],
   founder: { '@type': 'Person', name: 'Andrew Mateljan', jobTitle: 'Director & Head Coach' },
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '47' },

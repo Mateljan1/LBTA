@@ -160,7 +160,7 @@ images: {
   imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   remotePatterns: [{
     protocol: 'https',
-    hostname: 'qtrypzzcjebvfcihiynt.supabase.co',
+    hostname: 'mapbbmrjgpusegjvbkod.supabase.co',
   }],
 }
 ```
@@ -170,7 +170,7 @@ images: {
 **Usage Example (page.tsx:50-60):**
 ```typescript
 <Image
-  src="https://qtrypzzcjebvfcihiynt.supabase.co/..."
+  src="https://mapbbmrjgpusegjvbkod.supabase.co/..."
   alt="Laguna Beach Tennis Academy courts at sunset"
   fill
   priority              // ✅ Priority loading for hero
@@ -359,7 +359,7 @@ const ratelimit = new Ratelimit({
    ```javascript
    remotePatterns: [{
      protocol: 'https',  // ✅ HTTPS only
-     hostname: 'qtrypzzcjebvfcihiynt.supabase.co',
+     hostname: 'mapbbmrjgpusegjvbkod.supabase.co',
    }],
    ```
 
@@ -980,7 +980,7 @@ console.log('Newsletter subscription:', { email })  // ⚠️ Remove in producti
 **Location:** Multiple files
 
 ```typescript
-src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/..."
+src="https://mapbbmrjgpusegjvbkod.supabase.co/storage/v1/object/public/..."
 ```
 
 **Better:** Use environment variables or configuration file.

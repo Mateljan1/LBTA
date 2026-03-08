@@ -75,7 +75,7 @@ export default function BeginnerProgramLanding() {
       <header className="absolute top-12 left-0 right-0 z-50 bg-gradient-to-b from-black/60 to-transparent">
         <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
           <Image
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png"
+            src="https://mapbbmrjgpusegjvbkod.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png"
             alt="Laguna Beach Tennis Academy"
             width={140}
             height={56}

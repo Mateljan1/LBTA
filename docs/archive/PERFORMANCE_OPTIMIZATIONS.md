@@ -31,7 +31,7 @@
 - **Impact**: 100-200ms faster image load times
 
 ```html
-<link rel="preconnect" href="https://qtrypzzcjebvfcihiynt.supabase.co" />
+<link rel="preconnect" href="https://mapbbmrjgpusegjvbkod.supabase.co" />
 ```
 
 ---

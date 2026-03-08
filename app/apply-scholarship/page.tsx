@@ -75,35 +75,21 @@ export default function ApplyScholarshipPage() {
       <section className="relative bg-brand-morning-light pt-40 pb-20">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <p className="text-overline mb-6">Scholarship Application</p>
-            <h1 className="text-display-lg heading-display mb-6">
-              Tennis Scholarship Program
+            <h1 className="text-display-lg heading-display mb-10">
+              Apply
             </h1>
-            <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              $25,000+ awarded annually to families demonstrating need and commitment. 
-              Scholarships cover 25-50% of program tuition.
-            </p>
+            <a
+              href="#application"
+              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+            >
+              Apply
+            </a>
           </AnimatedSection>
-
-          <div className="flex flex-wrap justify-center gap-6 mt-10 text-sm text-gray-600">
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-brand-sunset-cliff" />
-              <span>Household income &lt; $75K</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-brand-sunset-cliff" />
-              <span>2+ sessions/week commitment</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-brand-sunset-cliff" />
-              <span>3.5+ GPA required</span>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Application Form */}
-      <section className="section-spacing bg-white">
+      <section id="application" className="section-spacing bg-white">
         <div className="container-narrow">
           <form onSubmit={handleSubmit} className="space-y-12">
             
