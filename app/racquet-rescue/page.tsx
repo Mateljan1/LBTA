@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: 'Racquet Rescue | LBTA',
     description: 'Professional racquet stringing and customization services',
     type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
   },
 }
 
@@ -57,13 +58,13 @@ export default function RacquetRescuePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Link
                 href="#services"
-                className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
               >
                 View Services
               </Link>
               <Link
                 href="#booking"
-                className="inline-flex items-center justify-center bg-transparent text-white border border-white/40 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:border-white hover:bg-white/10 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center bg-transparent text-white border border-white/40 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:border-white hover:bg-white/10 hover:-translate-y-0.5"
               >
                 Book Service
               </Link>
@@ -86,8 +87,8 @@ export default function RacquetRescuePage() {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Feature 1 */}
-            <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-cinematic hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
-              <div className="text-brand-sunset-cliff text-4xl mb-4">⚡</div>
+            <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-luxury hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
+              <div className="text-brand-sunset-cliff mb-4"><svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
               <h3 className="font-headline text-2xl mb-4">Same-Day Service</h3>
               <p className="font-body text-lbta-secondary leading-relaxed">
                 Drop off before noon, pick up the same day. We understand the urgency of tournament preparation.
@@ -95,8 +96,8 @@ export default function RacquetRescuePage() {
             </div>
 
             {/* Feature 2 */}
-            <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-cinematic hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
-              <div className="text-brand-sunset-cliff text-4xl mb-4">🎯</div>
+            <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-luxury hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
+              <div className="text-brand-sunset-cliff mb-4"><svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div>
               <h3 className="font-headline text-2xl mb-4">Expert Precision</h3>
               <p className="font-body text-lbta-secondary leading-relaxed">
                 Certified stringers with 25+ years experience. Every racquet strung to exact specifications.
@@ -104,8 +105,8 @@ export default function RacquetRescuePage() {
             </div>
 
             {/* Feature 3 */}
-            <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-cinematic hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
-              <div className="text-brand-sunset-cliff text-4xl mb-4">🏆</div>
+            <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-luxury hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
+              <div className="text-brand-sunset-cliff mb-4"><svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg></div>
               <h3 className="font-headline text-2xl mb-4">Premium Strings</h3>
               <p className="font-body text-lbta-secondary leading-relaxed">
                 Full selection of professional-grade strings from Luxilon, Babolat, Wilson, and more.
@@ -383,7 +384,7 @@ export default function RacquetRescuePage() {
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
+                className="w-full inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
               >
                 Submit Request
               </button>
@@ -459,13 +460,13 @@ export default function RacquetRescuePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="#booking"
-                className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
               >
                 Book Service
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-transparent text-lbta-primary border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-cinematic hover:border-black hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center bg-transparent text-lbta-primary border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:border-black hover:-translate-y-0.5"
               >
                 Contact Us
               </Link>

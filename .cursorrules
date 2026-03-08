@@ -453,12 +453,13 @@ components/
 │   ├── TestimonialQuote.tsx
 │   └── [shared components]
 ├── schedules/
-│   ├── SchedulesHero.tsx
-│   ├── TabNavigation.tsx
-│   ├── ProgramsTab.tsx
-│   ├── PricingTab.tsx
-│   ├── CampsJTTTab.tsx
-│   ├── YearAtAGlance.tsx
+│   ├── ProgramsSection.tsx
+│   ├── ProgramRow.tsx
+│   ├── CampsSection.tsx
+│   ├── CampRow.tsx
+│   ├── LeaguesSection.tsx
+│   ├── LeagueRow.tsx
+│   ├── PrivateCoachingSection.tsx
 │   ├── SchedulesCTA.tsx
 │   └── index.ts
 ├── HomeCTAForm.tsx

@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     title: 'Laguna Beach Tennis Academy | Excellence Built Here',
     description: 'ATP/WTA coaching for ages 3 to professional. Small by design.',
     type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy courts' }],
   },
   icons: {
     icon: '/icons/icon-192x192.png',

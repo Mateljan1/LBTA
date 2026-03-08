@@ -9,6 +9,7 @@ export const metadata: Metadata = {
     description:
       'Book a free trial lesson at LBTA. One conversation, honest guidance, and a path built around you.',
     type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy courts' }],
   },
 }
 
