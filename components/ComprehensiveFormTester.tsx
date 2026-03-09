@@ -208,13 +208,13 @@ export default function ComprehensiveFormTester({ isVisible, onClose }: Comprehe
   }
 
   const getStatusIcon = (passed: boolean) => {
-    return passed ? <CheckCircle className="w-4 h-4 text-brand-tide-pool" /> : <XCircle className="w-4 h-4 text-red-600" />
+    return passed ? <CheckCircle className="w-4 h-4 text-brand-tide-pool" /> : <XCircle className="w-4 h-4 text-lbta-red" />
   }
 
   const getScoreColor = (score: number) => {
     if (score >= 90) return 'text-brand-tide-pool'
     if (score >= 70) return 'text-yellow-600'
-    return 'text-red-600'
+    return 'text-lbta-red'
   }
 
   if (!isVisible) return null
@@ -351,7 +351,7 @@ export default function ComprehensiveFormTester({ isVisible, onClose }: Comprehe
                   {(result.errors.length > 0 || result.warnings.length > 0) && (
                     <div className="space-y-2">
                       {result.errors.map((error, index) => (
-                        <div key={index} className="flex items-center gap-2 text-red-600 text-sm">
+                        <div key={index} className="flex items-center gap-2 text-lbta-red text-sm">
                           <XCircle className="w-4 h-4" />
                           <span>{error}</span>
                         </div>

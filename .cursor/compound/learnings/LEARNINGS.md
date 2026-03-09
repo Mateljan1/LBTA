@@ -59,7 +59,7 @@ Extracted from the Code Review Summary (12-agent parallel review). Use these for
 - **Data integrity:** No hardcoded program lists or prices; single source in data/ or lib.
 - **API:** 400 for invalid JSON/body; 500 for processing errors; webhook secret required in prod.
 - **A11y:** Focus restore on modal close; aria-label on icon-only buttons; useReducedMotion for motion.
-- **Simplicity:** No unused state or refs; YAGNI for optional props (e.g. as on HorizonDivider if unused).
+- **Simplicity:** No unused state or refs; YAGNI for optional props. HorizonDivider always renders `<hr>`; no `as` prop.
 
 ---
 

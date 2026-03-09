@@ -141,6 +141,20 @@
       "avoid": "bg-lbta-tan or text-lbta-tan when lbta.tan is not in config",
       "instead": "Use only defined tokens: lbta-beige or brand-sandstone for warm backgrounds; grep config before adding custom color classes",
       "tags": ["tailwind", "brand", "config"]
+    },
+    {
+      "id": "error-text-raw-red",
+      "description": "Form error or required text using raw Tailwind red (text-red-400, text-red-500, text-red-800)",
+      "avoid": "text-red-400, text-red-800 for error message; text-red-500 for required asterisk; bg-red-50 border-red-200 for error box",
+      "instead": "Use text-lbta-red for error and required; error callout use bg-lbta-red/5 border-lbta-red/20; dismiss button text-lbta-red hover:opacity-80",
+      "tags": ["brand", "forms", "error-state"]
+    },
+    {
+      "id": "horizon-divider-as-prop",
+      "description": "HorizonDivider with optional as prop (e.g. as=\"hr\" or as=\"div\")",
+      "avoid": "Passing as prop to HorizonDivider; component was simplified to always render <hr>",
+      "instead": "Use HorizonDivider with variant and className only; no as prop (YAGNI)",
+      "tags": ["simplicity", "YAGNI", "HorizonDivider"]
     }
   ]
 }

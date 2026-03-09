@@ -86,7 +86,7 @@ export default function NewsletterForm() {
               </p>
             )}
             {status === 'error' && (
-              <p className="absolute -bottom-8 left-0 right-0 text-sm text-red-400" role="alert">
+              <p className="absolute -bottom-8 left-0 right-0 text-sm text-lbta-red" role="alert">
                 Something went wrong. Please try again.
               </p>
             )}

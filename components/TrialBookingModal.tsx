@@ -249,7 +249,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="modal-firstName" className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
-                          First Name <span className="text-red-500">*</span>
+                          First Name <span className="text-lbta-red">*</span>
                         </label>
                         <input
                           id="modal-firstName"
@@ -263,7 +263,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                       </div>
                       <div>
                         <label htmlFor="modal-lastName" className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
-                          Last Name <span className="text-red-500">*</span>
+                          Last Name <span className="text-lbta-red">*</span>
                         </label>
                         <input
                           id="modal-lastName"
@@ -280,7 +280,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                     {/* Email */}
                     <div>
                       <label htmlFor="modal-email" className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
-                        Email <span className="text-red-500">*</span>
+                        Email <span className="text-lbta-red">*</span>
                       </label>
                       <input
                         id="modal-email"
@@ -296,7 +296,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                     {/* Phone */}
                     <div>
                       <label htmlFor="modal-phone" className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
-                        Phone <span className="text-red-500">*</span>
+                        Phone <span className="text-lbta-red">*</span>
                       </label>
                       <input
                         id="modal-phone"
@@ -312,7 +312,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                     {/* Program */}
                     <div>
                       <label htmlFor="modal-program" className="block font-sans text-[12px] font-semibold text-lbta-slate mb-2">
-                        Program Interest <span className="text-red-500">*</span>
+                        Program Interest <span className="text-lbta-red">*</span>
                       </label>
                       <select
                         id="modal-program"
@@ -366,13 +366,13 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                   </div>
 
                   {errorMessage && (
-                    <div className="bg-red-50 border border-red-200 rounded-[2px] p-4 mt-6">
+                    <div className="bg-lbta-red/5 border border-lbta-red/20 rounded-[2px] p-4 mt-6">
                       <div className="flex items-start justify-between gap-3">
-                        <p className="font-sans text-[14px] text-red-800">{errorMessage}</p>
+                        <p className="font-sans text-[14px] text-lbta-red">{errorMessage}</p>
                         <button
                           type="button"
                           onClick={() => setErrorMessage(null)}
-                          className="text-red-400 hover:text-red-600 transition-colors flex-shrink-0"
+                          className="text-lbta-red hover:opacity-80 transition-opacity flex-shrink-0"
                           aria-label="Dismiss error"
                         >
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">

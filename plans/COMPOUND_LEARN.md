@@ -49,6 +49,8 @@
 | Inline blockquote with solid border instead of Brand Guide pull-quote | Use `<PullQuote>` or class `section-quote` for gradient left edge (Victoria Cove → Sunset Cliff); keeps single source for quote styling. |
 | Decorative inline SVG (e.g. arrow icons in links) without aria-hidden | Add `aria-hidden="true"` so screen readers don’t announce them. |
 | Using Tailwind classes not in config (e.g. lbta-tan) | Use only defined tokens: `lbta-beige` or `brand-sandstone` for warm backgrounds; grep tailwind.config before adding custom color classes. |
+| Error/required text using raw red (text-red-400, text-red-500, text-red-800) | Use `text-lbta-red` for error messages and required indicators (asterisks) so error state matches brand palette. |
+| HorizonDivider with optional `as` prop | Component always renders `<hr>`; use `variant` and `className` only. No `as` prop (YAGNI). |
 
 ---
 
@@ -90,6 +92,8 @@
 | Pull quotes use section-quote | Any blockquote or “section quote” that should match Brand Guide | Use `<PullQuote>` or apply class `section-quote` (gradient left border); avoid inline `border-l-2 border-brand-pacific-dusk/30` so one source drives quote styling. |
 | Parallax / scroll animation gate | Any page or component with parallax or scroll-driven motion | Check `prefers-reduced-motion` (e.g. `matchMedia`) and disable parallax or use static fallback when true; same pattern as HomeHero. |
 | Decorative SVG in links/buttons | Icons (arrows, chevrons) that are purely visual | Add `aria-hidden="true"` to the `<svg>` so assistive tech skips them. |
+| Error/required text | Form error messages and required field indicators | Use `text-lbta-red`; error boxes use `bg-lbta-red/5 border-lbta-red/20` (no raw red-50/red-200). |
+| HorizonDivider | Section divider per Brand Guide | Always renders `<hr>`; use `variant="thin"` (or default) and `className`; no `as` prop. |
 
 ---
 
@@ -129,6 +133,8 @@
 | Pull quotes must use PullQuote or .section-quote (Brand Guide) | Should |
 | Decorative SVGs (icons in links/buttons) must have aria-hidden="true" | Should |
 | Only use Tailwind color classes defined in config (no lbta-tan, etc.) | Should |
+| Error/required text: use text-lbta-red (not raw text-red-*) | Should |
+| Verify error text contrast for WCAG AAA (7:1) when using lbta-red on light backgrounds | Should — use WebAIM Contrast Checker; lbta-red #F04E23 on morning-light #FAF8F4 may be below 7:1; add a darker semantic error token if needed. |
 
 ---
 
@@ -159,6 +165,8 @@
 - Inline blockquote with solid border instead of PullQuote or .section-quote (Brand Guide gradient)
 - Decorative SVG (arrow, icon) inside link/button without aria-hidden="true"
 - Using Tailwind color classes not in config (e.g. lbta-tan); use lbta-beige or brand-sandstone
+- Error/required text with raw text-red-*; use text-lbta-red and brand error box (bg-lbta-red/5 border-lbta-red/20)
+- HorizonDivider with `as` prop; component always renders `<hr>`, no `as` prop
 
 ---
 
@@ -205,3 +213,6 @@
 | 2026-03-08 | Optional follow-up: webhook Zod, ExitIntentPopup, single FAQ | **Done:** (1) activecampaign-webhook validates body with `webhookPayloadSchema`; returns 400 on invalid JSON or validation failure. (2) ExitIntentPopup: no raw black/slate — privacy line and labels use `text-brand-pacific-dusk/70` and `text-brand-pacific-dusk/80`; dividers use `bg-brand-pacific-dusk/15`. Trust stats (500+, 15+, 5.0) now from `data/site-stats.json` (single source; update there for accuracy). (3) Single FAQ source: `data/faq.json` added; FAQSection and SEOSchemas use it; SEOSchemas overrides private + adds scholarship answer dynamically. **Learnings:** Trust stats and marketing numbers from data; no raw black/slate in trust sections (brand tokens only); single FAQ source for homepage + schema. |
 | 2026-03-08 | `/compound:learn` after review → validate → deploy | Fixes: Footer contrast (text-white/50+ on deep-water); About/Contact primary CTAs black/white; Contact hero CTA solid bg; activecampaign-webhook contactId validated as positive int + 400 if invalid; webhook secret with crypto.timingSafeEqual. Deploy: production 100/100. **Learnings:** 4 corrections, 4 anti-patterns, 3 quality bars, 3 patterns (footer contrast, hero CTA on dark, webhook ID validation, webhook timing-safe secret). |
 | 2026-03-09 | `/compound:learn` after review → validate → deploy (brand guide) | Scope: Apply Brand Guide (--horizon, .section-quote, .section-horizon, HorizonDivider). Review: 6 agents, PASS + warnings. Deploy: production https://lbta-website.vercel.app. **Learnings:** 4 corrections (parallax reduced-motion, pull quote use section-quote, decorative SVG aria-hidden, no undefined Tailwind e.g. lbta-tan); 3 patterns (pull quote section-quote, parallax gate, decorative SVG aria-hidden); 4 standards; 4 anti-patterns. Optional follow-up: About parallax gate, homepage/high-perf blockquotes → PullQuote, lbta-tan → brand-sandstone, SVG aria-hidden on homepage CTAs. |
+| 2026-03-09 | Compound work: error text + contrast + HorizonDivider docs | **Contrast:** lbta-red (#F04E23) on morning-light (#FAF8F4) may be below WCAG AAA 7:1 — verify with WebAIM; add darker error token if needed. **Standardized:** NewsletterForm, TrialBookingModal, LuxuryYearModal use text-lbta-red for error/required; error boxes use bg-lbta-red/5 border-lbta-red/20. **HorizonDivider:** Docs updated — always renders `<hr>`, no `as` prop (YAGNI). |
+| 2026-03-09 | `/compound:learn` (full run) | **Extraction:** From compound work (error text, contrast, HorizonDivider). **corrections.jsonl:** +4 (error/required → text-lbta-red; error box tokens; HorizonDivider no as; lbta-red contrast verify). **anti-patterns.json:** +2 (error-text-raw-red, horizon-divider-as-prop). quality-bars.json and patterns.json already updated in same session. |
+| 2026-03-09 | Optional: internal tools lbta-red + `/compound:learn` | **Work:** AnalyticsDashboard and ComprehensiveFormTester — all raw red (text-red-600, bg-red-50, border-red-200, etc.) replaced with text-lbta-red, bg-lbta-red/5, border-lbta-red/20, bg-lbta-red/10. **Learn:** corrections.jsonl +1 (internal tools use lbta-red for error/destructive UI for brand consistency). |

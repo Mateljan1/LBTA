@@ -174,14 +174,14 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
             <div className={`rounded-xl p-6 border ${
               testResults.improvement > 0 
                 ? 'bg-gradient-to-r from-brand-tide-pool/10 to-brand-tide-pool/5 border-brand-tide-pool/30' 
-                : 'bg-gradient-to-r from-red-50 to-pink-50 border-red-200'
+                : 'bg-lbta-red/5 border-lbta-red/20'
             }`}>
               <div className="flex items-center gap-4">
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                  testResults.improvement > 0 ? 'bg-brand-tide-pool/10' : 'bg-red-100'
+                  testResults.improvement > 0 ? 'bg-brand-tide-pool/10' : 'bg-lbta-red/10'
                 }`}>
                   <BarChart3 className={`w-6 h-6 ${
-                    testResults.improvement > 0 ? 'text-brand-tide-pool' : 'text-red-600'
+                    testResults.improvement > 0 ? 'text-brand-tide-pool' : 'text-lbta-red'
                   }`} />
                 </div>
                 <div>
@@ -189,7 +189,7 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
                     Conversion Rate {testResults.improvement > 0 ? 'Improvement' : 'Decrease'}
                   </h3>
                   <p className={`font-headline text-3xl font-bold ${
-                    testResults.improvement > 0 ? 'text-brand-tide-pool' : 'text-red-600'
+                    testResults.improvement > 0 ? 'text-brand-tide-pool' : 'text-lbta-red'
                   }`}>
                     {testResults.improvement > 0 ? '+' : ''}{testResults.improvement.toFixed(1)}%
                   </p>
@@ -246,7 +246,7 @@ export default function AnalyticsDashboard({ isVisible, onClose }: DashboardProp
             </button>
             <button
               onClick={handleClearData}
-              className="flex-1 border border-red-300 text-red-600 hover:bg-red-50 font-sans font-semibold py-3 px-6 rounded-full transition-colors"
+              className="flex-1 border border-lbta-red/20 text-lbta-red hover:bg-lbta-red/5 font-sans font-semibold py-3 px-6 rounded-full transition-colors"
             >
               Clear All Data
             </button>

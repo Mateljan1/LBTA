@@ -107,6 +107,14 @@
     "tailwindColorDefined": {
       "rule": "Only use Tailwind color classes defined in config (no lbta-tan etc.); use lbta-beige or brand-sandstone",
       "enforcement": "should"
+    },
+    "errorTextLbtaRed": {
+      "rule": "Error and required field text use text-lbta-red; error boxes use bg-lbta-red/5 border-lbta-red/20 (no raw red-*)",
+      "enforcement": "should"
+    },
+    "errorTextContrastWcagAaa": {
+      "rule": "Verify error text contrast for WCAG AAA (7:1) when using lbta-red on light backgrounds; use WebAIM; add darker semantic token if needed",
+      "enforcement": "should"
     }
   }
 }

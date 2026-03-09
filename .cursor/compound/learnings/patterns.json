@@ -127,6 +127,12 @@
       "when": "SVG is purely decorative (arrow, chevron, icon in link/button)",
       "example": "Add aria-hidden=\"true\" to the <svg> so assistive tech skips it",
       "tags": ["a11y", "svg", "aria-hidden"]
+    },
+    {
+      "name": "error-required-text-lbta-red",
+      "when": "Form error messages or required field indicators (e.g. asterisk)",
+      "example": "Use text-lbta-red; error callout use bg-lbta-red/5 border-lbta-red/20; verify contrast for WCAG AAA with WebAIM if on light background",
+      "tags": ["brand", "a11y", "forms"]
     }
   ]
 }
