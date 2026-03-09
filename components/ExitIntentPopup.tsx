@@ -179,14 +179,14 @@ export default function ExitIntentPopup() {
           className="absolute top-5 right-5 min-w-[48px] min-h-[48px] flex items-center justify-center text-brand-pacific-dusk/40 hover:text-brand-pacific-dusk transition-colors z-10 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-inset"
           aria-label="Close dialog"
         >
-          <X className="h-5 w-5" strokeWidth={1.5} />
+          <X className="h-5 w-5" strokeWidth={1.5} aria-hidden />
         </button>
 
         {isSuccess ? (
           /* Success State */
           <div className="px-10 py-16 text-center">
             <div className="w-14 h-14 bg-brand-pacific-dusk rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="h-7 w-7 text-white" strokeWidth={2} />
+              <Check className="h-7 w-7 text-white" strokeWidth={2} aria-hidden />
             </div>
             <h3
               id="exit-popup-title"

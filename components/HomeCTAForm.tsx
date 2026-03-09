@@ -103,7 +103,7 @@ export default function HomeCTAForm() {
         />
       </div>
       {submitError && (
-        <div role="alert" aria-live="assertive" className="text-sm text-red-600 font-sans">
+        <div role="alert" aria-live="assertive" className="text-sm text-lbta-red font-sans">
           {submitError}
         </div>
       )}

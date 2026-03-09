@@ -134,6 +134,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
                 fill="none" 
                 viewBox="0 0 24 24" 
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
               </svg>
@@ -250,7 +251,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             className="hidden md:flex w-full items-center justify-center gap-2 bg-lbta-black hover:bg-brand-pacific-dusk/80 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
           >
             <span>Begin Registration</span>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
@@ -269,7 +270,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             onTouchStart={() => {}}
           >
             <span>Begin Registration</span>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>

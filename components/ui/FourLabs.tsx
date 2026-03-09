@@ -16,7 +16,7 @@ const labs = [
       percent: 75
     },
     icon: (
-      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full" aria-hidden="true">
         <circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth="1.5"/>
         <circle cx="24" cy="24" r="10" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3"/>
         <path d="M24 6 L24 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -39,7 +39,7 @@ const labs = [
       percent: 87
     },
     icon: (
-      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full" aria-hidden="true">
         <rect x="6" y="10" width="36" height="28" rx="1" stroke="currentColor" strokeWidth="1.5"/>
         <line x1="24" y1="10" x2="24" y2="38" stroke="currentColor" strokeWidth="1"/>
         <line x1="6" y1="24" x2="42" y2="24" stroke="currentColor" strokeWidth="1"/>
@@ -61,7 +61,7 @@ const labs = [
       percent: 65
     },
     icon: (
-      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full" aria-hidden="true">
         <path d="M8 36 L16 18 L24 28 L32 10 L40 22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         <circle cx="16" cy="18" r="3" fill="currentColor" className="opacity-70"/>
         <circle cx="32" cy="10" r="3" fill="currentColor"/>
@@ -82,7 +82,7 @@ const labs = [
       percent: 87
     },
     icon: (
-      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full" aria-hidden="true">
         <rect x="12" y="8" width="24" height="32" rx="2" stroke="currentColor" strokeWidth="1.5"/>
         <path d="M16 16 L32 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
         <path d="M16 22 L32 22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>

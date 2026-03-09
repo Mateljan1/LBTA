@@ -63,6 +63,7 @@ export default function BackToTopButton() {
       <svg 
         className="absolute inset-0 w-full h-full -rotate-90"
         viewBox="0 0 48 48"
+        aria-hidden="true"
       >
         <circle
           cx="24"
@@ -87,7 +88,7 @@ export default function BackToTopButton() {
       </svg>
       
       {/* Arrow Icon */}
-      <ArrowUp className="w-5 h-5 relative z-10 transition-transform duration-200 group-hover:-translate-y-0.5" />
+      <ArrowUp className="w-5 h-5 relative z-10 transition-transform duration-200 group-hover:-translate-y-0.5" aria-hidden />
     </button>
   )
 }

@@ -143,11 +143,11 @@ export default function ChatWidget() {
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
         {isOpen ? (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" aria-hidden="true">
             <path d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" aria-hidden="true">
             <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
         )}
@@ -266,7 +266,7 @@ export default function ChatWidget() {
               onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.4')}
               aria-label="Close chat"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2" aria-hidden="true">
                 <path d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -389,7 +389,7 @@ export default function ChatWidget() {
                   transition: 'all 0.2s',
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={input.trim() && !isLoading ? 'white' : '#9ca3af'} strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={input.trim() && !isLoading ? 'white' : '#9ca3af'} strokeWidth="2" aria-hidden="true">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                 </svg>
               </button>

@@ -37,7 +37,7 @@ export default function BackToTop() {
         pointerEvents: show ? 'auto' : 'none',
       }}
     >
-      <ArrowUp className="w-5 h-5 group-hover:scale-110 transition-transform" />
+      <ArrowUp className="w-5 h-5 group-hover:scale-110 transition-transform" aria-hidden />
     </button>
   )
 }

@@ -3,9 +3,9 @@ import { Cormorant, DM_Sans } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
+import ExitIntentPopupLoader from '@/components/ExitIntentPopupLoader'
 import { OrganizationSchema } from './schema'
 import { ReviewSchema } from '@/components/SEOSchemas'
-import ExitIntentPopup from '@/components/ExitIntentPopup'
 
 const cormorant = Cormorant({
   subsets: ['latin'],
@@ -140,7 +140,7 @@ export default function RootLayout({
         </ConditionalLayout>
         
         {/* Exit Intent Popup for Lead Capture */}
-        <ExitIntentPopup />
+        <ExitIntentPopupLoader />
       </body>
     </html>
   )

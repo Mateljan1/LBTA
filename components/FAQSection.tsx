@@ -95,6 +95,7 @@ export default function FAQSection() {
                       fill="none" 
                       xmlns="http://www.w3.org/2000/svg"
                       className="transition-transform duration-500"
+                      aria-hidden="true"
                     >
                       <path 
                         d="M2 4L6 8L10 4" 
@@ -164,6 +165,7 @@ export default function FAQSection() {
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

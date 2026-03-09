@@ -207,7 +207,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
               className="absolute top-5 right-5 min-w-[48px] min-h-[48px] w-10 h-10 rounded-full bg-brand-sandstone hover:bg-lbta-stone flex items-center justify-center transition-colors z-10"
               aria-label="Close"
             >
-              <svg className="w-5 h-5 text-lbta-slate" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-lbta-slate" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -222,7 +222,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                   className="p-8 md:p-10 text-center"
                 >
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-tide-pool/10 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-brand-tide-pool" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-8 h-8 text-brand-tide-pool" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
