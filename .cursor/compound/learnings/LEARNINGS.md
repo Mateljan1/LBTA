@@ -75,3 +75,39 @@ Extracted from the Code Review Summary (12-agent parallel review). Use these for
 
 - **Fixes applied:** Single source trial programs (lib/programs-data + TrialBookingModal + book page); TrialBookingModal focus restore; PricingComparison from data/pricing-supplemental.json; activecampaign-webhook 500 on error + 503 when AC_WEBHOOK_SECRET missing in production; ChatWidget aria-label + type="button"; VideoTestimonials dead code removed; **/api/chat stub** added (POST, Zod chatSchema, rate limit, friendly reply).
 - **New pattern:** Stub API with validation + rate limit + friendly reply when no backend yet (see patterns.json `stub-api-friendly-reply`).
+
+---
+
+## Session 2026-03-08 (Review + Validate + Learn)
+
+- **Source:** Code Review (13 agents) + Validation (5 agents), then learning extraction.
+- **Scores:** Review 82/100, Validation 90/100. No critical issues; warnings only.
+- **Scope:** API parseJsonBody/400, register-year/webhook safety, site-stats single source, Footer Contact, ExitIntentPopup/FAQSection a11y, CTA conventions, tests for parseJsonBody and chat/webhook.
+
+### New corrections (added to corrections.jsonl)
+
+- Modal success timeout: clear in useEffect cleanup; restore focus when timeout fires before closing.
+- All JSON routes: use parseJsonBody (webhook included); no inline request.json() try/catch.
+- Primary CTAs: black/white per .cursorrules; Sunset Cliff accent only.
+- LuxuryYearModal: show result.error when present.
+- FAQ/accordion: add ARIA and useReducedMotion; close buttons 48×48px.
+
+### New patterns (added to patterns.json)
+
+- **parseJsonBody-then-validateRequest** — Every JSON route uses shared helper.
+- **modal-timeout-cleanup** — Clear setTimeout in useEffect cleanup and close().
+- **restore-focus-on-auto-close** — Timeout callback restores focus then closes.
+- **trust-stats-from-site-stats** — Single source data/site-stats.json for trust numbers.
+
+### New anti-patterns (added to anti-patterns.json)
+
+- Inline request.json() when parseJsonBody exists.
+- Modal timeout not cleared on unmount.
+- Modal auto-close without focus restore.
+- Primary CTA orange (Sunset Cliff as primary fill).
+
+### New quality bars (added to quality-bars.json)
+
+- parseJsonBodyAllRoutes (should), modalTimeoutCleanup (must), modalFocusOnAutoClose (must), primaryCtaBlackWhite (should), faqAriaReducedMotion (should), closeButton48px (must).
+
+Full extraction: `.cursor/compound/learnings/2026-03-08-extraction.md`.

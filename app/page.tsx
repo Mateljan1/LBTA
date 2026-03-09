@@ -8,6 +8,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
+import siteStats from '@/data/site-stats.json'
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
@@ -37,7 +38,11 @@ const localBusinessSchema = {
   logo: 'https://lagunabeachtennisacademy.com/logos/LBTAblktext.png',
   sameAs: ['https://www.instagram.com/lagunabeachtennisacademy', 'https://www.facebook.com/lagunabeachtennisacademy'],
   founder: { '@type': 'Person', name: 'Andrew Mateljan', jobTitle: 'Director & Head Coach' },
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', reviewCount: '47' },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: siteStats.trustStats.rating,
+    reviewCount: siteStats.trustStats.reviewCount,
+  },
 }
 
 export const metadata = {

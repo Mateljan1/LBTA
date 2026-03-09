@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Client } from '@notionhq/client'
 import axios from 'axios'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { registerYearSchema, validateRequest } from '@/lib/validations'
+import { parseJsonBody, registerYearSchema, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
 import { storeLead } from '@/lib/leads-store'
 
@@ -189,8 +189,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const rawData = await request.json()
-    const validation = validateRequest(registerYearSchema, rawData)
+    const parsed = await parseJsonBody(request)
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid request format' },
+        { status: 400 }
+      )
+    }
+    const validation = validateRequest(registerYearSchema, parsed.data)
 
     if (!validation.success) {
       return NextResponse.json(
@@ -284,6 +290,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Add to ActiveCampaign with proper tagging
+    let acSynced = false
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
     try {
       // Format display values
@@ -336,7 +343,19 @@ export async function POST(request: NextRequest) {
         }
       )
 
-      const contactId = contactResponse.data.contact.id
+      const rawContactId = contactResponse.data?.contact?.id
+      const contactId =
+        typeof rawContactId === 'number' && Number.isInteger(rawContactId) && rawContactId > 0
+          ? rawContactId
+          : null
+      if (contactId == null) {
+        console.error('[register-year] ActiveCampaign did not return a valid contact id:', rawContactId)
+        return NextResponse.json(
+          { success: false, error: 'Registration received. We could not complete all steps; we will contact you shortly.', acSynced: false },
+          { status: 503 }
+        )
+      }
+      acSynced = true
       console.log('[register-year] AC contact created')
 
       // Add to list (triggers automation)
@@ -388,7 +407,8 @@ export async function POST(request: NextRequest) {
     } catch (acError: unknown) {
       const err = acError as { response?: { data?: unknown }; message?: string }
       console.error('[register-year] ActiveCampaign error:', err.response?.data ?? err.message)
-      // Continue even if AC fails
+      acSynced = false
+      // Continue; response will include acSynced: false
     }
     }
 
@@ -418,6 +438,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: confirmationMessage,
+      acSynced: hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY') ? acSynced : undefined,
     })
   } catch (error) {
     console.error('[register-year] Error:', error instanceof Error ? error.message : 'Unknown error')

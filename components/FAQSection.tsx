@@ -2,42 +2,10 @@
 
 import { useState } from 'react'
 import Script from 'next/script'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import faqsData from '@/data/faq.json'
 
-const faqs = [
-  {
-    question: "What age groups do you offer tennis lessons for?",
-    answer: "We offer programs for all ages starting from 3 years old. Our Little Tennis Stars program (ages 3-4) introduces children to tennis through play-based activities. We have progressive programs through Red Ball (5-6), Orange Ball (7-8), Green Ball (9-10), Youth Development (11-14), High Performance (competitive juniors), and comprehensive adult programs for beginners through advanced players."
-  },
-  {
-    question: "Do I need to bring my own equipment?",
-    answer: "No equipment is required for your first trial lesson - we provide racquets appropriate for your age and skill level. For ongoing classes, we can recommend equipment based on your needs. Our Racquet Rescue service also offers professional stringing and equipment consultation."
-  },
-  {
-    question: "What is your coaching philosophy?",
-    answer: "Our movement-first approach focuses on building proper footwork and body mechanics before technical stroke development. This foundation creates more consistent, powerful, and injury-resistant players. We believe that structure creates confidence — combining technical excellence with mental toughness and a supportive community."
-  },
-  {
-    question: "Where are your tennis courts located?",
-    answer: "Our primary location is Moulton Meadows Park at 1098 Balboa Ave, Laguna Beach, CA 92651. We also utilize Alta Laguna Park for our summer Swim & Tennis camps. Both locations offer beautiful ocean views and well-maintained courts."
-  },
-  {
-    question: "What is your cancellation policy?",
-    answer: "We offer a 30-day money-back guarantee for new students. For ongoing classes, we request 24-hour notice for cancellations to allow rescheduling. Weather-related cancellations are automatically rescheduled at no charge."
-  },
-  {
-    question: "Do you offer private lessons?",
-    answer: "Yes! Private and semi-private lessons are available with all our coaches. Private lessons allow for personalized attention and accelerated improvement. Contact us to discuss your goals and we'll match you with the ideal coach for your needs."
-  },
-  {
-    question: "What is Junior Team Tennis (JTT)?",
-    answer: "JTT is a USTA-sanctioned team tennis league that provides match play experience in a supportive team environment. Players compete in age-based divisions (10U, 12U, 14U, 18U) with weekly matches on Sundays. Our JTT program includes twice-weekly practice sessions, team uniforms, and USTA registration."
-  },
-  {
-    question: "How do I get started?",
-    answer: "The best way to start is by booking a trial lesson. This allows us to assess your current level and discuss your tennis goals. From there, we'll recommend the ideal program for you or your child. Click 'Book a Trial' to schedule your first session!"
-  }
-]
+const faqs = faqsData as Array<{ id: string; question: string; answer: string }>
 
 // Generate FAQ Schema
 const faqSchema = {
@@ -55,6 +23,7 @@ const faqSchema = {
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const reduceMotion = useReducedMotion()
 
   return (
     <section className="bg-brand-morning-light section">
@@ -81,23 +50,27 @@ export default function FAQSection() {
         <div className="space-y-3">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index
-            
+            const panelId = `faq-panel-${faq.id}`
+            const buttonId = `faq-button-${faq.id}`
+
             return (
               <div
-                key={index}
+                key={faq.id}
                 className={`
                   bg-white rounded-subtle overflow-hidden
                   border transition-all duration-500 ease-luxury
                   ${isOpen 
                     ? 'border-brand-sunset-cliff shadow-medium' 
-                    : 'border-lbta-stone hover:border-lbta-slate'
+                    : 'border-brand-pacific-dusk/10 hover:border-brand-pacific-dusk/25'
                   }
                 `}
               >
                 <button
+                  id={buttonId}
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
                   className="w-full px-6 py-5 text-left flex items-center justify-between gap-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-inset group"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  aria-expanded={isOpen}
                 >
                   <span className={`
                     font-sans text-body font-medium transition-colors duration-300
@@ -134,28 +107,43 @@ export default function FAQSection() {
                   </span>
                 </button>
                 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ 
-                        duration: 0.4, 
-                        ease: [0.22, 0.61, 0.36, 1],
-                        opacity: { duration: 0.25 }
-                      }}
-                    >
+                {reduceMotion ? (
+                  isOpen && (
+                    <div id={panelId} role="region" aria-labelledby={buttonId}>
                       <div className="px-6 pb-6">
-                        {/* Subtle divider */}
                         <div className="w-12 h-px bg-black/20 mb-4" />
-                        <p className="text-body-sm text-lbta-slate leading-relaxed">
+                        <p className="text-body-sm text-brand-pacific-dusk/80 leading-relaxed">
                           {faq.answer}
                         </p>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                  )
+                ) : (
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={panelId}
+                        role="region"
+                        aria-labelledby={buttonId}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ 
+                          duration: 0.4, 
+                          ease: [0.22, 0.61, 0.36, 1],
+                          opacity: { duration: 0.25 }
+                        }}
+                      >
+                        <div className="px-6 pb-6">
+                          <div className="w-12 h-px bg-black/20 mb-4" />
+                          <p className="text-body-sm text-brand-pacific-dusk/80 leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
               </div>
             )
           })}
@@ -163,7 +151,7 @@ export default function FAQSection() {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <p className="text-body-sm text-lbta-slate mb-4">
+          <p className="text-body-sm text-brand-pacific-dusk/80 mb-4">
             Still have questions?
           </p>
           <a

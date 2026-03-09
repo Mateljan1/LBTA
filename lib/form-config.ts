@@ -5,6 +5,10 @@
  * component and the `/api/register-program` route, which handles
  * Notion database entry, ActiveCampaign contact creation,
  * list subscription, and class-specific tag application.
+ *
+ * Note: Pricing and program copy in prePopulateData are a secondary
+ * display source; canonical program and pricing data lives in /data/*.json.
+ * Keep modal copy aligned with /data when updating programs or prices.
  */
 
 /**

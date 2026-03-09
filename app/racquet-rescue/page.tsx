@@ -58,7 +58,7 @@ export default function RacquetRescuePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Link
                 href="#services"
-                className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
               >
                 View Services
               </Link>
@@ -384,7 +384,7 @@ export default function RacquetRescuePage() {
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
+                className="w-full inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
               >
                 Submit Request
               </button>
@@ -460,7 +460,7 @@ export default function RacquetRescuePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="#booking"
-                className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:bg-brand-sunset-cliff hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
               >
                 Book Service
               </Link>

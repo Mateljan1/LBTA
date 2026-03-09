@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ages",
+    "question": "What age groups do you offer tennis lessons for?",
+    "answer": "We offer programs for all ages starting from 3 years old. Our Little Tennis Stars program (ages 3-4) introduces children to tennis through play-based activities. We have progressive programs through Red Ball (5-6), Orange Ball (7-8), Green Ball (9-10), Youth Development (11-14), High Performance (competitive juniors), and comprehensive adult programs for beginners through advanced players."
+  },
+  {
+    "id": "equipment",
+    "question": "Do I need to bring my own equipment?",
+    "answer": "No equipment is required for your first trial lesson - we provide racquets appropriate for your age and skill level. For ongoing classes, we can recommend equipment based on your needs. Our Racquet Rescue service also offers professional stringing and equipment consultation."
+  },
+  {
+    "id": "philosophy",
+    "question": "What is your coaching philosophy?",
+    "answer": "Our movement-first approach focuses on building proper footwork and body mechanics before technical stroke development. This foundation creates more consistent, powerful, and injury-resistant players. We believe that structure creates confidence — combining technical excellence with mental toughness and a supportive community."
+  },
+  {
+    "id": "location",
+    "question": "Where are your tennis courts located?",
+    "answer": "Our primary location is Moulton Meadows Park at 1098 Balboa Ave, Laguna Beach, CA 92651. We also utilize Alta Laguna Park for our summer Swim & Tennis camps. Both locations offer beautiful ocean views and well-maintained courts."
+  },
+  {
+    "id": "cancellation",
+    "question": "What is your cancellation policy?",
+    "answer": "We offer a 30-day money-back guarantee for new students. For ongoing classes, we request 24-hour notice for cancellations to allow rescheduling. Weather-related cancellations are automatically rescheduled at no charge."
+  },
+  {
+    "id": "private",
+    "question": "Do you offer private lessons?",
+    "answer": "Yes! Private and semi-private lessons are available with all our coaches. Private lessons allow for personalized attention and accelerated improvement. Contact us to discuss your goals and we'll match you with the ideal coach for your needs."
+  },
+  {
+    "id": "jtt",
+    "question": "What is Junior Team Tennis (JTT)?",
+    "answer": "JTT is a USTA-sanctioned team tennis league that provides match play experience in a supportive team environment. Players compete in age-based divisions (10U, 12U, 14U, 18U) with weekly matches on Sundays. Our JTT program includes twice-weekly practice sessions, team uniforms, and USTA registration."
+  },
+  {
+    "id": "get-started",
+    "question": "How do I get started?",
+    "answer": "The best way to start is by booking a trial lesson. This allows us to assess your current level and discuss your tennis goals. From there, we'll recommend the ideal program for you or your child. Click 'Book a Trial' to schedule your first session!"
+  }
+]

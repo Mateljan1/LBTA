@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-06",
+  "updated": "2026-03-08",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -51,6 +51,46 @@
     "brandTokens": {
       "rule": "Prefer brand-* for new code; error states use brand/semantic token over raw red",
       "enforcement": "should"
+    },
+    "parseJsonBodyAllRoutes": {
+      "rule": "All JSON-consuming API routes use parseJsonBody(request) then validateRequest; no inline request.json() try/catch",
+      "enforcement": "should"
+    },
+    "modalTimeoutCleanup": {
+      "rule": "Modals that use setTimeout/setInterval clear the timer in useEffect cleanup and in close()",
+      "enforcement": "must"
+    },
+    "modalFocusOnAutoClose": {
+      "rule": "When a modal closes via timeout (e.g. success), restore focus before setVisible(false)",
+      "enforcement": "must"
+    },
+    "primaryCtaBlackWhite": {
+      "rule": "Primary CTAs (hero, main section) use black/white or btn-primary; Sunset Cliff for accent/hover only per .cursorrules",
+      "enforcement": "should"
+    },
+    "faqAriaReducedMotion": {
+      "rule": "FAQ/accordion components have aria-controls, id, aria-expanded; useReducedMotion() with static fallback",
+      "enforcement": "should"
+    },
+    "closeButton48px": {
+      "rule": "Close buttons on modals/dialogs are at least 48×48px (min-w-[48px] min-h-[48px])",
+      "enforcement": "must"
+    },
+    "footerContrast": {
+      "rule": "Footer text on deep-water (or dark sections) must meet WCAG 7:1; use text-white/50 or higher for tagline and secondary text",
+      "enforcement": "must"
+    },
+    "webhookIdValidation": {
+      "rule": "Webhook routes must validate payload IDs (e.g. contactId) as positive integers before use in URLs or request bodies; return 400 if invalid",
+      "enforcement": "must"
+    },
+    "webhookTimingSafeSecret": {
+      "rule": "Webhook secret comparison must use timing-safe comparison (crypto.timingSafeEqual) with same-length buffers",
+      "enforcement": "must"
+    },
+    "heroCtaContrast": {
+      "rule": "Hero CTAs on dark backgrounds must have solid background (e.g. bg-white) or high-contrast text; no text-only on dark gradient",
+      "enforcement": "must"
     }
   }
 }

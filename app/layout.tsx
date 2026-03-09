@@ -70,7 +70,7 @@ export default function RootLayout({
       <head>
         {/* PWA & Mobile Optimization */}
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/icons/icon-192x192.png" />
+        <link rel="icon" href="/icons/icon-192x192.png" type="image/png" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -84,7 +84,7 @@ export default function RootLayout({
         <OrganizationSchema />
         <ReviewSchema />
       </head>
-      <body className={`${dmSans.className} flex flex-col min-h-screen`}>
+      <body className={`${dmSans.className} flex flex-col min-h-screen overflow-x-hidden`}>
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"

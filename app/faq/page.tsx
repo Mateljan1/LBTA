@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { FAQSchema } from '@/components/SEOSchemas'
 import FAQInteractive from './FAQInteractive'
 
 export const metadata: Metadata = {
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default function FAQPage() {
-  return <FAQInteractive />
+  return (
+    <>
+      <FAQSchema />
+      <FAQInteractive />
+    </>
+  )
 }

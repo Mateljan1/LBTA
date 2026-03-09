@@ -201,10 +201,10 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
               <div className={`flex-1 transition-colors duration-300 ${step >= 2 ? 'bg-lbta-black' : 'bg-lbta-stone'}`} />
             </div>
             
-            {/* Close Button */}
+            {/* Close Button — 48×48px touch target per a11y */}
             <button
               onClick={onClose}
-              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-brand-sandstone hover:bg-lbta-stone flex items-center justify-center transition-colors z-10"
+              className="absolute top-5 right-5 min-w-[48px] min-h-[48px] w-10 h-10 rounded-full bg-brand-sandstone hover:bg-lbta-stone flex items-center justify-center transition-colors z-10"
               aria-label="Close"
             >
               <svg className="w-5 h-5 text-lbta-slate" fill="none" viewBox="0 0 24 24" stroke="currentColor">

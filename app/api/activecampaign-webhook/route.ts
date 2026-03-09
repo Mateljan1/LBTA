@@ -1,6 +1,22 @@
+import { timingSafeEqual } from 'crypto'
 import { NextRequest, NextResponse } from 'next/server'
 import axios from 'axios'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
+import { parseJsonBody, validateRequest, webhookPayloadSchema, type WebhookPayload } from '@/lib/validations'
+
+/** Minimal types for ActiveCampaign API responses (avoid `any`) */
+interface AcContactResponse {
+  contact?: { id?: string; [key: string]: unknown }
+}
+interface AcFieldValuesResponse {
+  fieldValues?: Array<{ field: string; value?: string; [key: string]: unknown }>
+}
+interface AcContactTagsResponse {
+  contactTags?: Array<{ tag: string; [key: string]: unknown }>
+}
+interface AcContactListsResponse {
+  contactLists?: Array<{ list: string; status: string; [key: string]: unknown }>
+}
 
 // ============================================================
 // ActiveCampaign Webhook Handler - LBTA Auto-Tagging System
@@ -32,15 +48,24 @@ function verifyWebhookSecret(request: NextRequest): NextResponse | null {
 
   const headerSecret = request.headers.get('x-webhook-secret')
   const urlSecret = request.nextUrl.searchParams.get('secret')
+  const provided = headerSecret ?? urlSecret ?? ''
 
-  if (headerSecret === AC_WEBHOOK_SECRET || urlSecret === AC_WEBHOOK_SECRET) {
+  try {
+    const expected = Buffer.from(AC_WEBHOOK_SECRET, 'utf8')
+    const actual = Buffer.from(provided, 'utf8')
+    if (expected.length !== actual.length || !timingSafeEqual(expected, actual)) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      )
+    }
     return null
+  } catch {
+    return NextResponse.json(
+      { success: false, error: 'Unauthorized' },
+      { status: 401 }
+    )
   }
-
-  return NextResponse.json(
-    { success: false, error: 'Unauthorized' },
-    { status: 401 }
-  )
 }
 
 // Tag mapping based on TENNIS_LEVEL custom field values (from Facebook Lead Ads)
@@ -171,45 +196,64 @@ export async function POST(request: NextRequest) {
     const acUrl = getEnvVar('ACTIVECAMPAIGN_URL')
     const acApiKey = getEnvVar('ACTIVECAMPAIGN_API_KEY')
 
-    // Parse webhook payload from ActiveCampaign
-    const data = await request.json()
+    // Parse and validate webhook payload from ActiveCampaign
+    const parsed = await parseJsonBody(request)
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid JSON body' },
+        { status: 400 }
+      )
+    }
+    const validation = validateRequest(webhookPayloadSchema, parsed.data)
+    if (!validation.success) {
+      return NextResponse.json(
+        { success: false, error: validation.error },
+        { status: 400 }
+      )
+    }
+    const data: WebhookPayload = validation.data
 
     console.log('[activecampaign-webhook] Received', { hasContactId: !!(data.contact?.id || data.contact_id || data.id) })
 
-    // ActiveCampaign sends different formats depending on webhook type
-    // We need to extract the contact info
-    const contactId = data.contact?.id || data.contact_id || data.id
-
-    if (!contactId) {
+    // ActiveCampaign sends different formats depending on webhook type.
+    // Normalize to a positive integer to prevent path manipulation.
+    const rawContactId = data.contact?.id ?? data.contact_id ?? data.id
+    if (rawContactId == null || rawContactId === '') {
       console.log('[activecampaign-webhook] No contact ID in webhook, skipping')
       return NextResponse.json({ success: true, message: 'No contact ID' })
     }
+    const contactIdNum =
+      typeof rawContactId === 'number'
+        ? rawContactId
+        : parseInt(String(rawContactId), 10)
+    if (!Number.isInteger(contactIdNum) || contactIdNum < 1) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid contact ID' },
+        { status: 400 }
+      )
+    }
+    const contactId = contactIdNum
 
     console.log('[activecampaign-webhook] Processing contact ID:', contactId)
 
-    // Step 1: Get full contact details including custom fields and tags
-    const contactResponse = await axios.get(
-      `${acUrl}/api/3/contacts/${contactId}`,
-      {
-        headers: { 'Api-Token': acApiKey }
-      }
-    )
+    // Step 1: Get contact details and field values in parallel (2 GETs)
+    const [contactResponse, fieldValuesResponse] = await Promise.all([
+      axios.get<AcContactResponse>(
+        `${acUrl}/api/3/contacts/${contactId}`,
+        { headers: { 'Api-Token': acApiKey } }
+      ),
+      axios.get<AcFieldValuesResponse>(
+        `${acUrl}/api/3/contacts/${contactId}/fieldValues`,
+        { headers: { 'Api-Token': acApiKey } }
+      ),
+    ])
 
     const contact = contactResponse.data.contact
-
-    // Get contact's field values
-    const fieldValuesResponse = await axios.get(
-      `${acUrl}/api/3/contacts/${contactId}/fieldValues`,
-      {
-        headers: { 'Api-Token': acApiKey }
-      }
-    )
-
-    const fieldValues = fieldValuesResponse.data.fieldValues || []
+    const fieldValues = fieldValuesResponse.data.fieldValues ?? []
 
     // CRITICAL: Check lead source and handle appropriately
     // Field 15 = LEAD_SOURCE
-    const leadSourceField = fieldValues.find((fv: any) => fv.field === '15')
+    const leadSourceField = fieldValues.find((fv) => fv.field === '15')
     const leadSource = leadSourceField?.value || 'unknown'
     
     if (leadSource === 'website') {
@@ -226,29 +270,25 @@ export async function POST(request: NextRequest) {
       console.log('✅ Facebook/external lead detected - proceeding with webhook processing')
     }
 
-    // Get contact's current tags
-    const tagsResponse = await axios.get(
-      `${acUrl}/api/3/contacts/${contactId}/contactTags`,
-      {
-        headers: { 'Api-Token': acApiKey }
-      }
-    )
+    // Get contact's current tags and list memberships in parallel (2 GETs)
+    const [tagsResponse, listMembershipResponse] = await Promise.all([
+      axios.get<AcContactTagsResponse>(
+        `${acUrl}/api/3/contacts/${contactId}/contactTags`,
+        { headers: { 'Api-Token': acApiKey } }
+      ),
+      axios.get<AcContactListsResponse>(
+        `${acUrl}/api/3/contacts/${contactId}/contactLists`,
+        { headers: { 'Api-Token': acApiKey } }
+      ),
+    ])
 
-    const contactTags = tagsResponse.data.contactTags || []
-    const currentTagIds = contactTags.map((ct: any) => parseInt(ct.tag))
+    const contactTags = tagsResponse.data.contactTags ?? []
+    const currentTagIds = contactTags.map((ct) => parseInt(ct.tag, 10))
 
     console.log(`📋 Current tags for contact: ${currentTagIds.join(', ')}`)
 
-    // Step 2: Check if contact is already on List 4
-    const listMembershipResponse = await axios.get(
-      `${acUrl}/api/3/contacts/${contactId}/contactLists`,
-      {
-        headers: { 'Api-Token': acApiKey }
-      }
-    )
-
-    const listMemberships = listMembershipResponse.data.contactLists || []
-    const isOnList4 = listMemberships.some((lm: any) => lm.list === '4' && lm.status === '1')
+    const listMemberships = listMembershipResponse.data.contactLists ?? []
+    const isOnList4 = listMemberships.some((lm) => lm.list === '4' && lm.status === '1')
 
     // Add to List 4 if not already on it
     if (!isOnList4) {
@@ -299,7 +339,7 @@ export async function POST(request: NextRequest) {
     let classTagId: number | null = null
 
     // Method 1: Check PROGRAM_INTEREST dropdown field (field 3) - most reliable
-    const programInterestField = fieldValues.find((fv: any) => fv.field === '3')
+    const programInterestField = fieldValues.find((fv) => fv.field === '3')
     if (programInterestField?.value) {
       const programValue = programInterestField.value.toLowerCase().replace(/[^a-z0-9_]/g, '_')
       classTagId = PROGRAM_VALUE_TO_TAG[programValue] || null
@@ -307,7 +347,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Method 2: Check TENNIS_LEVEL field (field 5) for adult level (if no program specified)
-    const tennisLevelField = fieldValues.find((fv: any) => fv.field === '5')
+    const tennisLevelField = fieldValues.find((fv) => fv.field === '5')
     if (!classTagId) {
       if (tennisLevelField?.value) {
         classTagId = getClassTagFromLevel(tennisLevelField.value)
@@ -317,7 +357,7 @@ export async function POST(request: NextRequest) {
 
     // Method 3: Check PROGRAM field (field 7) for program interest text
     if (!classTagId) {
-      const programField = fieldValues.find((fv: any) => fv.field === '7')
+      const programField = fieldValues.find((fv) => fv.field === '7')
       if (programField?.value) {
         classTagId = getClassTagFromInterest(programField.value)
         console.log(`📊 PROGRAM (field 7): ${programField.value} → Tag ${classTagId}`)
@@ -370,8 +410,9 @@ export async function POST(request: NextRequest) {
       message: 'Webhook processed successfully',
     })
 
-  } catch (error: any) {
-    console.error('❌ Webhook error:', error.response?.data || error.message)
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error)
+    console.error('❌ Webhook error:', message)
     return NextResponse.json(
       { success: false, error: 'Webhook processing failed' },
       { status: 500 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Client } from '@notionhq/client'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { jttRegistrationSchema, validateRequest } from '@/lib/validations'
+import { jttRegistrationSchema, parseJsonBody, validateRequest } from '@/lib/validations'
 import { escapeHtml } from '@/lib/sanitize'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
 import {
@@ -54,10 +54,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const rawData = await request.json()
-
-    // Validate input with Zod
-    const validation = validateRequest(jttRegistrationSchema, rawData)
+    const parsed = await parseJsonBody(request)
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid request format' },
+        { status: 400 }
+      )
+    }
+    const validation = validateRequest(jttRegistrationSchema, parsed.data)
     if (!validation.success) {
       return NextResponse.json(
         { success: false, error: validation.error },

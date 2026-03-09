@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { bookingSchema, validateRequest } from '@/lib/validations'
+import { bookingSchema, parseJsonBody, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
 import {
   upsertContact,
@@ -55,10 +55,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const rawData = await request.json()
-
-    // Validate input with Zod
-    const validation = validateRequest(bookingSchema, rawData)
+    const parsed = await parseJsonBody(request)
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid request format' },
+        { status: 400 }
+      )
+    }
+    const validation = validateRequest(bookingSchema, parsed.data)
     if (!validation.success) {
       return NextResponse.json(
         { success: false, error: validation.error },

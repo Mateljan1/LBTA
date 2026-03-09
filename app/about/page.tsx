@@ -273,7 +273,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-brand-sunset-cliff text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-brand-sunset-cliff/90 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/50 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
+              className="inline-flex items-center justify-center bg-black text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-gray-800 hover:-translate-y-0.5 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
             >
               Book Trial Session
             </Link>

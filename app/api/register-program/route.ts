@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Client } from '@notionhq/client'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { programRegistrationSchema, validateRequest } from '@/lib/validations'
+import { parseJsonBody, programRegistrationSchema, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
 import {
   upsertContact,
@@ -48,10 +48,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const rawData = await request.json()
-
-    // Validate input with Zod
-    const validation = validateRequest(programRegistrationSchema, rawData)
+    const parsed = await parseJsonBody(request)
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid request format' },
+        { status: 400 }
+      )
+    }
+    const validation = validateRequest(programRegistrationSchema, parsed.data)
     if (!validation.success) {
       return NextResponse.json(
         { success: false, error: validation.error },

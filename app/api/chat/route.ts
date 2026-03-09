@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { chatSchema, validateRequest } from '@/lib/validations'
+import { chatSchema, parseJsonBody, validateRequest } from '@/lib/validations'
 
 /**
  * Chat widget stub: validates input, rate limits, and returns a friendly
@@ -26,8 +26,16 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const rawData = await request.json()
-    const validation = validateRequest(chatSchema, rawData)
+    const parsed = await parseJsonBody(request)
+    if (!parsed.ok) {
+      return NextResponse.json(
+        {
+          reply: "Please send a short message and we'll get back to you. You can also call (949) 534-0457.",
+        },
+        { status: 400 }
+      )
+    }
+    const validation = validateRequest(chatSchema, parsed.data)
 
     if (!validation.success) {
       return NextResponse.json(

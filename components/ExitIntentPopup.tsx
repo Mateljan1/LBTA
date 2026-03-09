@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { X, Check } from 'lucide-react'
+import siteStats from '@/data/site-stats.json'
 
 export default function ExitIntentPopup() {
   const [isVisible, setIsVisible] = useState(false)
@@ -9,6 +10,9 @@ export default function ExitIntentPopup() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [email, setEmail] = useState('')
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const previousActiveRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     // Check if already shown in this session
@@ -52,6 +56,16 @@ export default function ExitIntentPopup() {
     }
   }, [hasShown])
 
+  // Clear success timeout on unmount to avoid setState after unmount
+  useEffect(() => {
+    return () => {
+      if (successTimeoutRef.current) {
+        clearTimeout(successTimeoutRef.current)
+        successTimeoutRef.current = null
+      }
+    }
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -69,7 +83,9 @@ export default function ExitIntentPopup() {
 
       if (response.ok) {
         setIsSuccess(true)
-        setTimeout(() => {
+        successTimeoutRef.current = setTimeout(() => {
+          previousActiveRef.current?.focus()
+          successTimeoutRef.current = null
           setIsVisible(false)
         }, 3000)
       }
@@ -80,6 +96,52 @@ export default function ExitIntentPopup() {
     }
   }
 
+  const close = useCallback(() => {
+    if (successTimeoutRef.current) {
+      clearTimeout(successTimeoutRef.current)
+      successTimeoutRef.current = null
+    }
+    setIsVisible(false)
+    previousActiveRef.current?.focus()
+  }, [])
+
+  useEffect(() => {
+    if (!isVisible || !dialogRef.current) return
+    previousActiveRef.current = document.activeElement as HTMLElement | null
+    const dialog = dialogRef.current
+    const focusable = dialog.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    const first = focusable[0]
+    if (first) first.focus()
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        close()
+        return
+      }
+      if (e.key !== 'Tab' || focusable.length === 0) return
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      previousActiveRef.current?.focus()
+    }
+  }, [isVisible, close])
+
   if (!isVisible) return null
 
   return (
@@ -87,21 +149,24 @@ export default function ExitIntentPopup() {
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
-        onClick={() => setIsVisible(false)}
+        onClick={close}
         aria-hidden="true"
       />
 
       {/* Modal */}
       <div
-        className="relative bg-brand-morning-light w-full max-w-[440px] animate-scale-in"
+        ref={dialogRef}
+        tabIndex={-1}
+        className="relative bg-brand-morning-light w-full max-w-[440px] animate-scale-in outline-none"
         role="dialog"
         aria-modal="true"
         aria-labelledby="exit-popup-title"
       >
-        {/* Close button */}
+        {/* Close button — 48×48px touch target */}
         <button
-          onClick={() => setIsVisible(false)}
-          className="absolute top-5 right-5 p-2 text-brand-pacific-dusk/40 hover:text-brand-pacific-dusk transition-colors z-10"
+          type="button"
+          onClick={close}
+          className="absolute top-5 right-5 min-w-[48px] min-h-[48px] flex items-center justify-center text-brand-pacific-dusk/40 hover:text-brand-pacific-dusk transition-colors z-10 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-inset"
           aria-label="Close dialog"
         >
           <X className="h-5 w-5" strokeWidth={1.5} />
@@ -119,7 +184,7 @@ export default function ExitIntentPopup() {
             >
               You&apos;re In
             </h3>
-            <p className="font-sans text-[15px] text-lbta-slate leading-relaxed max-w-[280px] mx-auto">
+            <p className="font-sans text-[15px] text-brand-pacific-dusk/80 leading-relaxed max-w-[280px] mx-auto">
               Check your email for your complimentary trial details. We look forward to seeing you on the court.
             </p>
           </div>
@@ -144,7 +209,7 @@ export default function ExitIntentPopup() {
               </h3>
 
               {/* Subhead */}
-              <p className="font-sans text-[16px] text-lbta-slate text-center leading-relaxed mb-8 max-w-[320px] mx-auto">
+              <p className="font-sans text-[16px] text-brand-pacific-dusk/80 text-center leading-relaxed mb-8 max-w-[320px] mx-auto">
                 Discover expert tennis instruction with a complimentary private lesson.
               </p>
 
@@ -173,26 +238,26 @@ export default function ExitIntentPopup() {
                 </button>
               </form>
 
-              {/* Privacy note */}
-              <p className="font-sans text-[12px] text-lbta-slate/60 text-center mt-5">
+              {/* Privacy note — brand token only (no raw black/slate) */}
+              <p className="font-sans text-[12px] text-brand-pacific-dusk/70 text-center mt-5">
                 No spam, ever. Unsubscribe anytime.
               </p>
 
               {/* Divider */}
-              <div className="divider my-8" />
+              <div className="my-8 h-px w-12 mx-auto bg-brand-pacific-dusk/15" aria-hidden="true" />
 
-              {/* Trust indicators */}
+              {/* Trust indicators — from single source: data/site-stats.json */}
               <div className="flex items-center justify-center gap-6">
                 <div className="text-center">
-                  <p className="font-headline text-[24px] font-semibold text-brand-pacific-dusk">500+</p>
-                  <p className="font-sans text-[11px] text-lbta-slate uppercase tracking-wider">Players</p>
+                  <p className="font-headline text-[24px] font-semibold text-brand-pacific-dusk">{siteStats.trustStats.playersCount}</p>
+                  <p className="font-sans text-[11px] text-brand-pacific-dusk/80 uppercase tracking-wider">Players</p>
                 </div>
-                <div className="w-px h-10 bg-lbta-stone" />
+                <div className="w-px h-10 bg-brand-pacific-dusk/15" aria-hidden="true" />
                 <div className="text-center">
-                  <p className="font-headline text-[24px] font-semibold text-brand-pacific-dusk">15+</p>
-                  <p className="font-sans text-[11px] text-lbta-slate uppercase tracking-wider">Years</p>
+                  <p className="font-headline text-[24px] font-semibold text-brand-pacific-dusk">{siteStats.trustStats.yearsExperience}</p>
+                  <p className="font-sans text-[11px] text-brand-pacific-dusk/80 uppercase tracking-wider">Years</p>
                 </div>
-                <div className="w-px h-10 bg-lbta-stone" />
+                <div className="w-px h-10 bg-brand-pacific-dusk/15" aria-hidden="true" />
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-0.5 mb-0.5">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -206,7 +271,7 @@ export default function ExitIntentPopup() {
                       </svg>
                     ))}
                   </div>
-                  <p className="font-sans text-[11px] text-lbta-slate uppercase tracking-wider">5.0 Rating</p>
+                  <p className="font-sans text-[11px] text-brand-pacific-dusk/80 uppercase tracking-wider">{siteStats.trustStats.rating} Rating</p>
                 </div>
               </div>
             </div>

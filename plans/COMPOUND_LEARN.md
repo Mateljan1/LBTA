@@ -35,6 +35,16 @@
 | Framer Motion delay in ms instead of seconds | Framer Motion `transition.delay` expects SECONDS. When accepting `delay` prop in ms (100, 200), divide by 1000: `delay: delay / 1000`. Without this, `delay={100}` = 100 second wait = invisible content. |
 | Large 1100+ line page file | Extract into focused components under a subdirectory (e.g. `components/schedules/`). Page becomes composition layer (296 lines). |
 | Undocumented PERS_* legacy files | Create a README documenting what they are and that they're not served in production. |
+| Schema component defined but not rendered on target page | Import and render the schema in the page or layout that needs it (e.g. FAQSchema in `app/faq/page.tsx`). |
+| Footer or nav links with small tap targets | Use `inline-flex items-center min-h-[48px]` (or equivalent) so every interactive link meets 48px touch target. |
+| Duplicate JSON-LD schema (server + client same id) | Use a single schema source per page. If the page already renders a schema component (e.g. `<FAQSchema />`), remove any client `useEffect` that injects a script with the same id; duplicate id is invalid HTML and cleanup can remove the server-rendered script. |
+| Using Tailwind classes not defined in config | Use only font/display tokens that exist in tailwind.config (e.g. `text-display-xl` not `text-display-lg` unless `display-lg` is defined). Check config before adding custom text-* or font-* classes. |
+| Trust/marketing stats (e.g. "500+ players") hardcoded in components | Single source in `data/site-stats.json`; components import and display. Update numbers in one place so they stay accurate. |
+| Raw black or lbta-slate in trust/footer sections | Use brand tokens only (e.g. `text-brand-pacific-dusk/70` for secondary text, `bg-brand-pacific-dusk/15` for dividers). |
+| Footer text on deep-water at low opacity (text-white/40, /25) | Use text-white/50 or higher for tagline and secondary text to meet WCAG 7:1. |
+| Hero CTA with only text color on dark gradient | Use solid background (e.g. bg-white text-black) so contrast meets WCAG. |
+| Webhook using payload ID in URLs/bodies without validation | Normalize to positive integer; return 400 if invalid; use only validated number. |
+| Webhook secret compared with === | Use crypto.timingSafeEqual with same-length buffers. |
 
 ---
 
@@ -55,6 +65,15 @@
 | Component barrel exports | Multi-component directories | Add `index.ts` with named exports for clean imports: `import { Hero, Tabs } from '@/components/schedules'` |
 | Test pyramid | lib → API → E2E | Unit tests for schemas/utilities, contract tests for API routes, E2E for critical flows |
 | Legacy file documentation | Orphan/A/B test files | Create a README next to legacy files explaining their origin, status, and cleanup timeline |
+| Env + smoke check documentation | After adding env vars or deploy steps | Add .env.example with comments; add a short README section (e.g. Environment variables, Post-deploy smoke check) so onboarding and deploys are repeatable. |
+| Run compound:learn after a plan | When a plan is completed or after review/validate | Update `plans/COMPOUND_LEARN.md` (log + any new corrections/patterns); keeps future work from repeating mistakes. See README "When to run compound:learn". |
+| Single schema source per page | When adding JSON-LD (FAQ, Organization, etc.) to a page | Render schema only on the server (e.g. in page or layout); do not inject a second script with the same id in a client component. Prevents duplicate id and wrong script removed on unmount. |
+| Webhook body validation | External webhook routes (e.g. ActiveCampaign) | Validate webhook request body with Zod (or existing schema); return 400 for malformed payloads instead of 500. |
+| Single source for trust/marketing stats | Any "500+ players", "15+ years", "5.0 rating" style copy | Keep in `data/site-stats.json`; components (e.g. ExitIntentPopup) import and display. Update numbers in one place so they stay accurate. |
+| Single FAQ data source | Homepage FAQSection and FAQ schema (SEOSchemas) | Use `data/faq.json` as canonical list; FAQSection and SEOSchemas import from it. SEOSchemas may override private/scholarship answers with dynamic data. /faq page (FAQInteractive) can keep its own high-performance FAQ set. |
+| Webhook ID validate then use | Webhook payload ID used in URLs or request bodies | Normalize to positive integer; return 400 if invalid; use only validated number in URLs and bodies. |
+| Webhook secret timing-safe | Verifying webhook authenticity | Buffer.from both; same length; crypto.timingSafeEqual; reject on mismatch. |
+| Hero CTA on dark solid bg | Primary CTA on dark hero/gradient | Use bg-white text-black (or bg-black text-white); avoid text-only on dark for contrast. |
 
 ---
 
@@ -83,6 +102,13 @@
 | API contract tests (route exports + schema validation) | Should |
 | Legacy/PERS_* files documented with README | Should |
 | API integration tests | Should (when CI is set up) |
+| After completing a plan: run /compound:learn | Should (update COMPOUND_LEARN.md so learnings compound) |
+| Only use Tailwind tokens defined in tailwind.config | Should (avoids undefined classes like text-display-lg when only display-xl exists) |
+| Webhook routes validate request body with Zod | Should (return 400 for malformed payloads) |
+| Footer text on deep-water: text-white/50+ for WCAG 7:1 | Must |
+| Webhook payload IDs validated as positive integer before use | Must |
+| Webhook secret comparison timing-safe (crypto.timingSafeEqual) | Must |
+| Hero CTAs on dark backgrounds: solid background for contrast | Must |
 
 ---
 
@@ -102,6 +128,13 @@
 - Leaving dead route files when redirects already handle the URL
 - Letting page files grow past 500 lines without extraction
 - Leaving undocumented legacy/A/B test files in the repo
+- Injecting a client-side script with the same id as a server-rendered schema (duplicate id; unmount cleanup can remove the wrong script)
+- Using Tailwind classes not defined in tailwind.config (e.g. text-display-lg when only display, display-sm, display-xl exist)
+- Using raw black or generic slate/gray (e.g. text-lbta-slate) in trust blocks or footer; use brand tokens (text-brand-pacific-dusk with opacity) instead
+- Footer text at text-white/40 or /25 on deep-water (fails WCAG 7:1); use /50 or higher
+- Hero primary button with only text color on dark gradient (no solid background)
+- Using webhook payload ID in URLs or request bodies without validating as positive integer
+- Comparing webhook secret with === (use crypto.timingSafeEqual with same-length buffers)
 
 ---
 
@@ -143,3 +176,7 @@
 | 2026-03-06 | `/compound:full` 100/100 pass | Complete rework: 13 corrections, 9 patterns, 16 standards. Review → 94/100, validation → 95/100. |
 | 2026-03-06 | `/compound:learn` final pass | Fixed all remaining non-blocking: centralized promo prices ($50 early bird, leagues, schema), hero image WebP, schedules extraction (1124→296 lines, 8 components), 53 new API contract tests (106 total), thank-you orange tokens, PERS docs, PERS data "elite" fix. Added 5 new corrections, 4 new patterns, 5 new standards. All categories approaching 98-100/100. |
 | 2026-03-06 | `/compound:learn` animation bug | **CRITICAL BUG FOUND:** `components/ui/AnimatedSection.tsx` passed `delay` (in ms: 100, 200, 300) directly to Framer Motion's `transition.delay` which expects seconds. Result: text elements with delay > 0 waited 100+ seconds to appear, making them invisible. Fix: `delay: delay / 1000`. **New correction added:** Always verify Framer Motion delay units are in seconds, not milliseconds. |
+| 2026-03-08 | `/compound:learn` after product improvements A1–A5 | Plan executed: .env.example, FAQ schema on /faq, Footer 48px touch targets, image discipline in .cursorrules, post-deploy smoke check in README. New: wire schema components to the page that needs them; document env and smoke check so deploys are repeatable; run learn after completing a plan (see README "When to run compound:learn"). |
+| 2026-03-08 | `/compound:learn` after review + validate | Review (8 agents): fixed duplicate FAQ schema (removed client useEffect in FAQInteractive), Footer Privacy/Terms 48px + mailto aria-label, text-display-lg → text-display-xl. Validation (5 agents): 92/100, no blockers; functional 98, data integrity 95. New corrections: single schema source per page (no client duplicate id); use only Tailwind tokens defined in config. New patterns: single schema source per page; webhook body validation. New standards: Tailwind tokens from config; webhook Zod validation. New anti-patterns: duplicate schema id; undefined Tailwind classes. |
+| 2026-03-08 | Optional follow-up: webhook Zod, ExitIntentPopup, single FAQ | **Done:** (1) activecampaign-webhook validates body with `webhookPayloadSchema`; returns 400 on invalid JSON or validation failure. (2) ExitIntentPopup: no raw black/slate — privacy line and labels use `text-brand-pacific-dusk/70` and `text-brand-pacific-dusk/80`; dividers use `bg-brand-pacific-dusk/15`. Trust stats (500+, 15+, 5.0) now from `data/site-stats.json` (single source; update there for accuracy). (3) Single FAQ source: `data/faq.json` added; FAQSection and SEOSchemas use it; SEOSchemas overrides private + adds scholarship answer dynamically. **Learnings:** Trust stats and marketing numbers from data; no raw black/slate in trust sections (brand tokens only); single FAQ source for homepage + schema. |
+| 2026-03-08 | `/compound:learn` after review → validate → deploy | Fixes: Footer contrast (text-white/50+ on deep-water); About/Contact primary CTAs black/white; Contact hero CTA solid bg; activecampaign-webhook contactId validated as positive int + 400 if invalid; webhook secret with crypto.timingSafeEqual. Deploy: production 100/100. **Learnings:** 4 corrections, 4 anti-patterns, 3 quality bars, 3 patterns (footer contrast, hero CTA on dark, webhook ID validation, webhook timing-safe secret). |

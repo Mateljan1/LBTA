@@ -16,6 +16,7 @@ const ENV_VARS = {
   // Optional — when set, form submissions are stored in Supabase `leads` table
   SUPABASE_URL: 'Supabase project URL (optional lead store)',
   SUPABASE_SERVICE_ROLE_KEY: 'Supabase service role key (optional lead store)',
+  AC_WEBHOOK_SECRET: 'ActiveCampaign webhook shared secret for verification (optional; required in production)',
 } as const
 
 type EnvVarName = keyof typeof ENV_VARS

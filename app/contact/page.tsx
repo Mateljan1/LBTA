@@ -95,7 +95,7 @@ export default function ContactPage() {
           </p>
           <button 
             type="button"
-            className="text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide hover:opacity-80 transition-opacity min-h-[48px] px-6 rounded-[2px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            className="bg-white text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide hover:bg-white/90 transition-colors min-h-[48px] px-6 rounded-[2px] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
             onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Get in Touch ↓
@@ -382,7 +382,7 @@ export default function ContactPage() {
           </p>
           <Link
             href="/book"
-            className="inline-block bg-brand-sunset-cliff hover:bg-brand-sunset-cliff/90 text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/50 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
+            className="inline-block bg-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
           >
             Book a Trial →
           </Link>

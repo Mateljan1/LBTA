@@ -10,6 +10,7 @@ import VideoTestimonials from '@/components/VideoTestimonials'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 import { Play, Quote, Star, ArrowRight } from 'lucide-react'
+import siteStats from '@/data/site-stats.json'
 
 const successStories = [
   {
@@ -157,7 +158,7 @@ export default function SuccessStoriesPage() {
               </div>
               <div>
                 <p className="font-headline text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
-                  500+
+                  {siteStats.trustStats.playersCount}
                 </p>
                 <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
                   Players Trained
@@ -165,7 +166,7 @@ export default function SuccessStoriesPage() {
               </div>
               <div>
                 <p className="font-headline text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
-                  5.0
+                  {siteStats.trustStats.rating}
                 </p>
                 <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
                   Google Rating
@@ -173,7 +174,7 @@ export default function SuccessStoriesPage() {
               </div>
               <div>
                 <p className="font-headline text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
-                  25+
+                  {siteStats.trustStats.yearsExperience}
                 </p>
                 <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
                   Years Experience
@@ -312,7 +313,7 @@ export default function SuccessStoriesPage() {
                 ))}
               </div>
               <p className="font-sans text-[15px] text-black/70">
-                5.0 average from 47 Google reviews
+                {siteStats.trustStats.rating} average from {siteStats.trustStats.reviewCount} Google reviews
               </p>
             </div>
           </AnimatedSection>
@@ -352,11 +353,11 @@ export default function SuccessStoriesPage() {
             Ready to Write Your Success Story?
           </h2>
           <p className="font-sans text-[16px] md:text-[18px] text-white/80 mb-8">
-            Join 500+ players who have transformed their game at LBTA.
+            Join {siteStats.trustStats.playersCount} players who have transformed their game at LBTA.
           </p>
           <Link
             href="/book"
-            className="inline-flex items-center gap-2 bg-brand-sunset-cliff text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            className="inline-flex items-center gap-2 bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
           >
             Book Your Free Trial
             <ArrowRight className="h-4 w-4" />

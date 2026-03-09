@@ -15,4 +15,8 @@ This folder holds outputs from the compound-engineering workflow (plan → work 
 ## Use
 
 - Before implementing or reviewing, load **learnings/** (especially `anti-patterns.json` and `quality-bars.json`) to avoid repeating past issues.
-- After a compound review, run **/compound:learn** to update these files from the latest review summary.
+- **When to run /compound:learn** (so you don’t have to remember):
+  1. **After completing a plan** — e.g. right after `/compound:work` on a plan is done.
+  2. **After a review or validation pass** — after `/compound:review` or `/compound:validate`.
+  3. **End of a significant session** — before closing a long work session.
+- Main learnings doc: `plans/COMPOUND_LEARN.md`. Update it (and optionally this folder) when you run learn.

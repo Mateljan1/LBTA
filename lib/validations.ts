@@ -223,6 +223,22 @@ export const webhookPayloadSchema = z.object({
 export type WebhookPayload = z.infer<typeof webhookPayloadSchema>
 
 /**
+ * Parse JSON body from request. Returns 400 result on invalid JSON (SyntaxError).
+ * Use in API routes for consistent client-error handling.
+ */
+export async function parseJsonBody(
+  request: Request
+): Promise<{ ok: true; data: unknown } | { ok: false; status: 400 }> {
+  try {
+    const data = await request.json()
+    return { ok: true, data }
+  } catch (err) {
+    if (err instanceof SyntaxError) return { ok: false, status: 400 }
+    throw err
+  }
+}
+
+/**
  * Validate request body with a Zod schema
  * Returns parsed data or throws with user-friendly error message
  */

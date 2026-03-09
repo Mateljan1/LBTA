@@ -111,6 +111,15 @@ npm run build
 npm start
 ```
 
+## Environment variables
+
+Copy `.env.example` to `.env.local` and set values for the features you use. The app runs without any of these; forms and lead capture require ActiveCampaign (and optionally Supabase). See `.env.example` for comments and `lib/env.ts` for validation.
+
+- **Run/build:** No env vars required for static pages.
+- **Forms (book, contact, register, etc.):** `ACTIVECAMPAIGN_URL`, `ACTIVECAMPAIGN_API_KEY`.
+- **Lead store (optional):** `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — see "Lead store (Supabase)" below.
+- **Rate limiting (optional):** `KV_REST_API_URL`, `KV_REST_API_TOKEN` (Vercel KV).
+
 ## Deployment to Vercel
 
 ### Quick Deploy
@@ -127,6 +136,34 @@ vercel --prod
 1. Push to GitHub
 2. Import to Vercel
 3. Deploy automatically
+
+### Post-deploy smoke check
+
+Run these after each deploy to confirm key flows and SEO:
+
+1. **FAQ schema (rich results)**  
+   Open [Google Rich Results Test](https://search.google.com/test/rich-results) and enter your live FAQ URL (e.g. `https://lagunabeachtennisacademy.com/faq`). Confirm the tool detects the FAQPage structured data and shows no errors.
+
+2. **Contact form**  
+   Visit `/contact`, fill and submit the form once. Confirm you see the loading state (“Sending…”), then either success or the inline error message. Verifies form submission and loading/error UI.
+
+3. **Book Trial (optional)**  
+   Open `/book`, open the trial modal, and submit once. Confirm “Submitting…” and success or error message.
+
+4. **Critical pages load**  
+   Quick click-through: `/` → `/schedules` → `/programs` → `/contact`. No blank or broken layout.
+
+**Local check (before pushing):** Run `npm run build` and `npm start`, then open `http://localhost:3000/faq` and `http://localhost:3000/contact` and run steps 1–2 against localhost if you want to validate before deploy.
+
+### When to run compound:learn
+
+Run **`/compound:learn`** (or have your agent run it) in these situations so you don’t have to remember:
+
+1. **After completing a plan** — When you finish executing a plan (e.g. product improvements, a feature), run learn to capture corrections, patterns, and standards in `plans/COMPOUND_LEARN.md`.
+2. **After a code review or validation pass** — After `/compound:review` or `/compound:validate`, run learn to update the learnings file from the latest findings.
+3. **End of a significant session** — Before closing a long work session, run learn so the next session (or another agent) benefits from what you fixed or decided.
+
+**Where learnings live:** `plans/COMPOUND_LEARN.md` (CORRECTIONS, PATTERNS, STANDARDS, log). Optionally sync to `.cursor/compound/learnings/` if you use that folder. No need to remember the exact moment — use the three triggers above as a checklist.
 
 ### Lead store (Supabase, optional)
 

@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-06",
+  "updated": "2026-03-08",
   "patterns": [
     {
       "name": "single-source-dropdown-options",
@@ -55,6 +55,48 @@
       "when": "Implementing a placeholder API (e.g. chat) without backend/LLM",
       "example": "POST validates with Zod, rate-limits, returns 200 with friendly reply directing user to contact/phone; 500 on error with same fallback message",
       "tags": ["api", "product", "ux"]
+    },
+    {
+      "name": "parseJsonBody-then-validateRequest",
+      "when": "API route accepts JSON body",
+      "example": "const parsed = await parseJsonBody(request); if (!parsed.ok) return parsed.response; validateRequest(schema, parsed.data); same for all 9 JSON routes including webhook",
+      "tags": ["api", "validation", "DRY"]
+    },
+    {
+      "name": "modal-timeout-cleanup",
+      "when": "Modal uses setTimeout or setInterval (e.g. success message then close)",
+      "example": "Store timeout id in ref; useEffect cleanup: return () => { if (ref.current) clearTimeout(ref.current); }; clear ref in close() too",
+      "tags": ["react", "memory", "modal"]
+    },
+    {
+      "name": "restore-focus-on-auto-close",
+      "when": "Dialog can close by user action or by timeout",
+      "example": "In timeout callback: previousActiveRef.current?.focus(); then setVisible(false). Same focus restore as manual close",
+      "tags": ["a11y", "focus", "modal"]
+    },
+    {
+      "name": "trust-stats-from-site-stats",
+      "when": "Component shows players trained, years experience, rating, review count",
+      "example": "Import siteStats from @/data/site-stats.json; use trustStats (playersCount, yearsExperience, rating, reviewCount); no hardcoded numbers",
+      "tags": ["data-integrity", "single-source"]
+    },
+    {
+      "name": "webhook-id-validate-then-use",
+      "when": "Webhook payload contains an ID used in URLs or request bodies (e.g. contactId)",
+      "example": "Normalize: id = typeof raw === 'number' ? raw : parseInt(String(raw), 10); if (!Number.isInteger(id) || id < 1) return 400; use only id in URLs and bodies",
+      "tags": ["security", "webhook", "validation"]
+    },
+    {
+      "name": "webhook-secret-timing-safe",
+      "when": "Verifying webhook authenticity with a shared secret",
+      "example": "Buffer.from(secret, 'utf8'); same length check; crypto.timingSafeEqual(expected, provided); reject on catch or mismatch",
+      "tags": ["security", "webhook"]
+    },
+    {
+      "name": "hero-cta-on-dark-solid-bg",
+      "when": "Primary CTA button sits on a dark hero or gradient background",
+      "example": "Use bg-white text-black (or bg-black text-white) with focus ring; avoid text-only (e.g. text-black) on dark gradient for contrast",
+      "tags": ["a11y", "contrast", "CTA"]
     }
   ]
 }

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { newsletterSchema, validateRequest } from '@/lib/validations'
+import { newsletterSchema, parseJsonBody, validateRequest } from '@/lib/validations'
 import { upsertContact, addToList, addTag, CAMPAIGN_TAGS } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 
@@ -22,8 +22,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const rawData = await request.json()
-    const validation = validateRequest(newsletterSchema, rawData)
+    const parsed = await parseJsonBody(request)
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid request format' },
+        { status: 400 }
+      )
+    }
+    const validation = validateRequest(newsletterSchema, parsed.data)
 
     if (!validation.success) {
       return NextResponse.json(
@@ -59,16 +65,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, message: 'Subscribed successfully' })
   } catch (err) {
-    const isValidationError = err instanceof SyntaxError
     console.error('[newsletter] Error:', err instanceof Error ? err.message : 'Unknown error')
     return NextResponse.json(
-      {
-        success: false,
-        error: isValidationError
-          ? 'Invalid request format'
-          : 'Subscription unavailable. Please try again later.',
-      },
-      { status: isValidationError ? 400 : 500 }
+      { success: false, error: 'Subscription unavailable. Please try again later.' },
+      { status: 500 }
     )
   }
 }

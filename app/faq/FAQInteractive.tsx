@@ -5,6 +5,18 @@ import Link from 'next/link'
 import { ChevronDown, TrendingUp, DollarSign, Award, Users, Shield, AlertCircle, HelpCircle } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
+function useReducedMotion(): boolean {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setPrefersReducedMotion(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  return prefersReducedMotion
+}
+
 const faqs = [
   {
     icon: TrendingUp,
@@ -66,35 +78,7 @@ const categories = Array.from(new Set(faqs.map(faq => faq.category)))
 
 export default function FAQInteractive() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-
-  // Add FAQ Schema for rich snippets
-  useEffect(() => {
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
-        }
-      }))
-    }
-
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.text = JSON.stringify(faqSchema)
-    script.id = 'faq-schema'
-    document.head.appendChild(script)
-
-    return () => {
-      const existingScript = document.getElementById('faq-schema')
-      if (existingScript) {
-        existingScript.remove()
-      }
-    }
-  }, [])
+  const reducedMotion = useReducedMotion()
 
   return (
     <>
@@ -103,7 +87,7 @@ export default function FAQInteractive() {
         <div className="container-narrow text-center">
           <AnimatedSection>
             <HelpCircle className="w-16 h-16 text-brand-sunset-cliff mx-auto mb-8" />
-            <h1 className="text-display-lg font-headline font-light mb-6">
+            <h1 className="text-display-xl font-headline font-light mb-6">
               Frequently Asked Questions
             </h1>
             <p className="text-xl text-white/90 font-sans mb-4">
@@ -137,24 +121,33 @@ export default function FAQInteractive() {
                       <AnimatedSection key={globalIndex} delay={index * 0.05}>
                         <div className="card-lbta overflow-hidden">
                           <button
+                            type="button"
                             onClick={() => setOpenIndex(openIndex === globalIndex ? null : globalIndex)}
                             className="w-full flex items-start gap-4 p-8 text-left hover:bg-gray-50 transition-colors"
+                            aria-expanded={openIndex === globalIndex}
+                            aria-controls={`faq-panel-${globalIndex}`}
                           >
                             <Icon className="w-6 h-6 text-brand-sunset-cliff flex-shrink-0 mt-1" />
                             <div className="flex-1">
-                              <h3 className="text-lg font-sans font-medium text-brand-pacific-dusk pr-8">
+                              <h3 id={`faq-question-${globalIndex}`} className="text-lg font-sans font-medium text-brand-pacific-dusk pr-8">
                                 {faq.question}
                               </h3>
                             </div>
                             <ChevronDown
-                              className={`w-6 h-6 text-gray-400 flex-shrink-0 transition-transform duration-300 ${
+                              className={`w-6 h-6 text-gray-400 flex-shrink-0 ${reducedMotion ? '' : 'transition-transform duration-300'} ${
                                 openIndex === globalIndex ? "rotate-180" : ""
                               }`}
+                              aria-hidden
                             />
                           </button>
 
                           {openIndex === globalIndex && (
-                            <div className="px-8 pb-8 transition-all duration-300 ease-out">
+                            <div
+                              id={`faq-panel-${globalIndex}`}
+                              role="region"
+                              aria-labelledby={`faq-question-${globalIndex}`}
+                              className={`px-8 pb-8 ${reducedMotion ? '' : 'transition-all duration-300 ease-out'}`}
+                            >
                               <div className="pl-10 pt-4 border-l-4 border-brand-sunset-cliff">
                                 <p className="text-gray-600 leading-relaxed">
                                   {faq.answer}

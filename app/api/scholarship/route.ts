@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { scholarshipSchema, validateRequest } from '@/lib/validations'
+import { parseJsonBody, scholarshipSchema, validateRequest } from '@/lib/validations'
 import { storeLead } from '@/lib/leads-store'
 
 export async function POST(request: NextRequest) {
@@ -21,8 +21,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const rawData = await request.json()
-    const validation = validateRequest(scholarshipSchema, rawData)
+    const parsed = await parseJsonBody(request)
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid request format' },
+        { status: 400 }
+      )
+    }
+    const validation = validateRequest(scholarshipSchema, parsed.data)
 
     if (!validation.success) {
       return NextResponse.json(

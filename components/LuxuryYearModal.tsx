@@ -259,7 +259,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
         setIsSuccess(true)
       } else {
         console.error('Registration failed:', result)
-        setErrorMessage(result.message || 'Registration failed. Please try again or call (949) 534-0457.')
+        setErrorMessage((result as { error?: string; message?: string }).error ?? (result as { message?: string }).message ?? 'Registration failed. Please try again or call (949) 534-0457.')
       }
     } catch (error) {
       console.error('Registration error:', error)
@@ -310,7 +310,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-brand-sandstone hover:bg-lbta-stone flex items-center justify-center transition-colors z-10"
+              className="absolute top-5 right-5 min-w-[48px] min-h-[48px] w-10 h-10 rounded-full bg-brand-sandstone hover:bg-lbta-stone flex items-center justify-center transition-colors z-10"
               aria-label="Close"
             >
               <svg className="w-5 h-5 text-lbta-slate" fill="none" viewBox="0 0 24 24" stroke="currentColor">

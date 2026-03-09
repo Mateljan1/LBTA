@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-06",
+  "updated": "2026-03-08",
   "antiPatterns": [
     {
       "id": "hardcoded-prices",
@@ -57,6 +57,62 @@
       "avoid": "isMobile, setIsMobile + resize effect; containerRef with no .current read",
       "instead": "Remove before merge (YAGNI)",
       "tags": ["simplicity", "cleanup"]
+    },
+    {
+      "id": "inline-request-json-when-parseJsonBody-exists",
+      "description": "API route reimplements JSON parse with request.json() try/catch when parseJsonBody exists",
+      "avoid": "try { body = await request.json() } catch { return 400 } in one route while others use parseJsonBody",
+      "instead": "Use parseJsonBody(request) from lib/validations for every JSON route; return parsed.response when !parsed.ok",
+      "tags": ["api", "DRY"]
+    },
+    {
+      "id": "modal-timeout-not-cleared-on-unmount",
+      "description": "Modal that uses setTimeout/setInterval does not clear it on unmount",
+      "avoid": "setTimeout id stored but cleanup never runs clearTimeout; setState may run after unmount",
+      "instead": "Store id in ref; useEffect cleanup: return () => { if (ref.current) clearTimeout(ref.current); }",
+      "tags": ["memory", "modal", "react"]
+    },
+    {
+      "id": "modal-auto-close-without-focus-restore",
+      "description": "Modal that auto-closes (e.g. success timeout) does not restore focus",
+      "avoid": "Only manual close restores focus; timeout callback only setVisible(false)",
+      "instead": "In timeout callback: previousActiveRef.current?.focus(); then setVisible(false)",
+      "tags": ["a11y", "focus", "modal"]
+    },
+    {
+      "id": "primary-cta-orange",
+      "description": "Using Sunset Cliff (orange) as primary CTA fill on page heroes",
+      "avoid": "bg-brand-sunset-cliff for main hero or primary section CTA",
+      "instead": "Black/white or .btn-primary per .cursorrules; Sunset Cliff for hover/accent only",
+      "tags": ["brand", "cursorrules"]
+    },
+    {
+      "id": "footer-low-contrast",
+      "description": "Footer or dark-section text at low opacity failing WCAG 7:1",
+      "avoid": "text-white/40 or text-white/25 on bg-brand-deep-water for body or tagline",
+      "instead": "Use text-white/50 or higher (or verify 7:1 with WebAIM); secondary text at least /50",
+      "tags": ["a11y", "contrast", "footer"]
+    },
+    {
+      "id": "hero-button-no-bg",
+      "description": "Primary hero button with only text color on dark background",
+      "avoid": "text-black or text-white with no background on dark gradient (e.g. from-black/75)",
+      "instead": "Use solid background (bg-white text-black or bg-black text-white) so contrast meets WCAG",
+      "tags": ["a11y", "contrast", "hero", "CTA"]
+    },
+    {
+      "id": "webhook-unvalidated-id",
+      "description": "Using payload ID in webhook URLs or request bodies without validating",
+      "avoid": "contactId = data.contact?.id; then `${baseUrl}/contacts/${contactId}` without type/length check",
+      "instead": "Normalize to positive integer; return 400 if invalid; use only the validated number in URLs and bodies",
+      "tags": ["security", "webhook", "injection"]
+    },
+    {
+      "id": "webhook-secret-non-timing-safe",
+      "description": "Comparing webhook secret with == or === (timing side-channel)",
+      "avoid": "if (headerSecret === AC_WEBHOOK_SECRET) return null",
+      "instead": "Buffer.from both; ensure same length; crypto.timingSafeEqual(expected, provided); reject on mismatch or length diff",
+      "tags": ["security", "webhook", "timing-safe"]
     }
   ]
 }

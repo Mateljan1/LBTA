@@ -20,7 +20,7 @@ export default function FitnessPage() {
           </p>
           <Link 
             href="/book"
-            className="inline-block bg-brand-sunset-cliff hover:bg-brand-sunset-cliff/90 text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/50 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
+            className="inline-block bg-black text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
           >
             Join a Session →
           </Link>
@@ -165,7 +165,7 @@ export default function FitnessPage() {
           </p>
           <Link 
             href="/book"
-            className="inline-block bg-brand-sunset-cliff hover:bg-brand-sunset-cliff/90 text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/50 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
+            className="inline-block bg-black text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
           >
             Book a Class →
           </Link>

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { registerSchema, validateRequest } from '@/lib/validations'
+import { parseJsonBody, registerSchema, validateRequest } from '@/lib/validations'
 import { storeLead } from '@/lib/leads-store'
 
 export async function POST(request: NextRequest) {
@@ -21,8 +21,14 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const rawData = await request.json()
-    const validation = validateRequest(registerSchema, rawData)
+    const parsed = await parseJsonBody(request)
+    if (!parsed.ok) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid request format' },
+        { status: 400 }
+      )
+    }
+    const validation = validateRequest(registerSchema, parsed.data)
 
     if (!validation.success) {
       return NextResponse.json(

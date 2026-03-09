@@ -10,6 +10,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, Phone, ChevronDown } from 'lucide-react'
+import siteStats from '@/data/site-stats.json'
 
 const programsDropdown = [
   {
@@ -427,7 +428,7 @@ export default function Header() {
                       ))}
                     </div>
                     <p className="text-[12px] text-brand-pacific-dusk/50">
-                      <span className="font-medium text-brand-pacific-dusk">500+</span> players trained
+                      <span className="font-medium text-brand-pacific-dusk">{siteStats.trustStats.playersCount}</span> players trained
                     </p>
                   </div>
                 </div>

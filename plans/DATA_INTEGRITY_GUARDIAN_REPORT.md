@@ -1,45 +1,62 @@
-# Data Integrity Guardian Report — LBTA
+# Data Integrity Guardian — LBTA Codebase Review
 
-**Review date:** March 6, 2026  
-**Scope:** Single source of truth, no hardcoded prices, data in `/data`; pathway-planner and partner content vs removed products; schedules as source for programs.  
-**Reference:** `plans/REVIEW_SCOPE.md`, `.cursorrules` Part 12 (Data Management), Part 13 (File Structure).
-
----
-
-## Status: ❌ ISSUES
-
-Critical data-integrity issues exist: duplicate program/camp data and hardcoded prices in multiple pages. Pathway-planner and partnership content correctly avoid removed products; schedules remain the intended source for programs but several pages bypass `/data`.
+**Date:** 2026-03-08  
+**Scope:** Single source of truth (site-stats.json, faq.json), hardcoded prices in components, register-year ActiveCampaign response handling, migration safety.
 
 ---
 
-## Findings
+## Status: **WARNINGS**
 
-| Severity | Location | Issue | Recommendation |
-|----------|----------|--------|----------------|
-| 🔴 Critical | `app/junior-trial/page.tsx` | Full `programData` object (schedules + pricing for all age bands) is hardcoded in the file. Duplicates content that exists in `data/winter2026.json` (and related season data). | Source program list, schedules, and pricing from `/data` (e.g. `winter2026.json` / `fall2025.json`) or a shared module. Remove inline `programData` and align with schedules page. |
-| 🔴 Critical | `app/camps/page.tsx` | `summerWeeks`, `swimTennisWeeks`, and full `camps` array (with prices) are hardcoded. `data/year2026.json` already defines camps with prices; camps page does not import it. | Import camp and week data from `data/year2026.json` (or a dedicated camps JSON). Use that as single source; remove duplicate inline camp/week and price definitions. |
-| 🟡 Warning | `app/pathway-planner/page.tsx` | Investment ranges (monthly 140–200, 260–380, 400–650, 700–1200; annual derived) are hardcoded. Program names align with current data; no VYLO reference. | Move investment ranges to `/data` (e.g. `pricing-2026.json` or pathway-specific JSON) and consume in component. Keep program names in sync with schedules/data. |
-| 🟡 Warning | `app/programs/page.tsx` | `programs` array includes hardcoded `fromPrice` (42, 55, 58, 31, 120, 50, 25). Page links to `/schedules` but “from” prices are not sourced from data. | Derive “from” prices from `/data` (e.g. min price per category from winter2026/year2026) or add a small programs-overview JSON in `/data` and import it. |
-| 🟡 Warning | `app/fitness/page.tsx` | Fitness schedule and prices (e.g. `$546/qtr`, `$756/qtr`) are hardcoded in the component. | Move fitness schedule and pricing to `/data` (e.g. `schedule-2026.json` or `fitness-2026.json`) and import. |
-| 🟡 Warning | `app/schema.tsx` | `priceRange` ("$120-$250") and all Course `offers.price` values (120, 756, 1437, 546) are hardcoded. | Derive from `/data` (e.g. min/max from winter2026 or pricing-2026) or a small schema-specific JSON; keep schema in sync with live program pricing. |
-| 🟡 Warning | `app/programs/usta-adult-league/page.tsx` | Narrative copy contains hardcoded “Total season cost: $5,500” and “USTA membership ($48/year)”. League table uses `leagues2026` from `/data` correctly. | Move team season cost and USTA membership amount to `data/leagues-2026.json` (or shared copy) and reference in template so one source drives both copy and tables. |
-| 🟢 Note | `app/racquet-rescue/page.tsx` | Service pricing ($25, $35, $50+, $10, string ranges) is hardcoded. This is non-LBTA program (equipment/stringing) pricing. | Acceptable as-is for non-program pricing; optionally move to a small `data/racquet-rescue.json` if you want all dollar values out of components. |
-| 🟢 Note | `app/faq/FAQInteractive.tsx` | “$150,000-$300,000+” and “$1,500-$3,000/month” are informational 10-year pathway cost ranges, not product prices. | Low priority; could move to a copy/data file if you want zero dollar figures in components. |
+No critical data-integrity failures. Minor warnings and one design trade-off to document or tighten.
 
 ---
 
-## Positive checks
+## Findings Table
 
-- **Pathway-planner:** No VYLO reference; elite recommendation says “explore High Performance programs”. Program names (Little Tennis Stars, Red Ball, Orange Ball, Green Dot, Youth Development, High Performance, Adult Programs) align with current offerings; no removed products.
-- **PartnershipSection:** No VYLO or removed product; partner list is current (Fit4Tennis, Racket Rescue, RacquetIQ, GPTCA, Toroline, Tennis Beast, Laguna Beach High School).
-- **Schedules as source:** `app/schedules/page.tsx` correctly uses `data/winter2026.json`, `data/fall2025.json`, `data/year2026.json` for programs, pricing, and camps. Single source of truth for the schedules page is respected.
-- **Programs/junior:** `app/programs/junior/page.tsx` redirects to `/schedules#programs`; no duplicate program content.
-- **Leagues:** `app/programs/utr-match-play/page.tsx` and `app/programs/usta-adult-league/page.tsx` use `data/leagues-2026.json` for divisions/leagues; UTR prices come from data.
-- **VYLO redirects:** `next.config.js` correctly redirects `/vylo` and `/vylo-apply` to `/programs/high-performance` (no broken links to removed product).
-- **Data directory:** `/data` contains `winter2026.json`, `fall2025.json`, `year2026.json`, `leagues-2026.json`, `schedule-2026.json`, `pricing-2026.json`; structure supports single source of truth where used.
+| # | Area | Finding | Severity | Location |
+|---|------|---------|----------|----------|
+| 1 | **site-stats.json** | Single source used everywhere: `Header`, `ExitIntentPopup`, `success-stories/page`, `app/page` (localBusinessSchema), `SEOSchemas` (ReviewSchema). All trust stats (playersCount, yearsExperience, rating, reviewCount) come from `data/site-stats.json`. | PASS | `data/site-stats.json`; consumers above |
+| 2 | **faq.json** | Homepage FAQ (FAQSection) and FAQ schema (SEOSchemas) use `data/faq.json`. SEOSchemas overrides private-lessons and scholarship answers from `private-rates.json` and `year2026.json`. | PASS | `data/faq.json`; `FAQSection.tsx`, `SEOSchemas.tsx` |
+| 3 | **FAQ page mismatch** | On `/faq`, visible content is `FAQInteractive` (inline “honest” Q&A); schema is from `FAQSchema` (faq.json + dynamic). Schema and visible Q&A differ by design. | WARNING | `app/faq/page.tsx`, `app/faq/FAQInteractive.tsx` |
+| 4 | **Prices in components** | Schedules and program UIs get pricing from data: `ProgramRow`, `CampRow`, `LeagueRow`, `PrivateCoachingSection`, `ProgramCard`, `LuxuryRegistrationModal`, `LuxuryYearModal`, `ProgramPricingDropdown`, `PricingComparison` use `winter2026`, `year2026`, `leagues-2026`, `private-rates`, `pricing-supplemental`. No numeric prices hardcoded in components. | PASS | `lib/programs-data.ts`, `app/schedules/page.tsx`, schedule components |
+| 5 | **form-config pricing** | `lib/form-config.ts` holds `prePopulateData.pricing` strings (e.g. `$260 (1x/week) - $520 (2x/week)`). Used as modal labels only; canonical program pricing remains in `/data`. Duplicate source that can drift from JSON data. | WARNING | `lib/form-config.ts` |
+| 6 | **register-year AC — missing contact id** | If ActiveCampaign returns no contact id, API correctly returns **500** and user-friendly message. | PASS | `app/api/register-year/route.ts` (lines 343–349) |
+| 7 | **register-year AC — request failure** | If AC contact create **throws** (network, 5xx, etc.), error is caught, logged, and execution continues; API still returns **200** with success message. Lead may be stored in Notion and Supabase but not in AC. | WARNING | `app/api/register-year/route.ts` (lines 398–404) |
+| 8 | **register-year AC — list/tags** | List add and tag apply failures are caught and logged; success still returned (degraded success). Intentional; contact exists in AC. | INFO | Same route |
+| 9 | **Migrations** | Single migration `20260306000000_create_leads_table.sql`: `CREATE TABLE IF NOT EXISTS`, indexes `IF NOT EXISTS`, rollback steps in comments. Applied via Supabase CLI only (per .cursorrules). | PASS | `supabase/migrations/` |
 
 ---
 
 ## Summary
 
-Pathway-planner and partner content do not reference removed products, and the schedules page correctly uses `/data` as the source for programs and pricing. However, **junior-trial** and **camps** duplicate program/camp and price data that already exists in `/data`, and **pathway-planner**, **programs overview**, **fitness**, **schema**, and **USTA narrative** use hardcoded prices or copy. Remediate the two critical duplicates first (junior-trial and camps), then move remaining prices and narrative amounts into `/data` so the site has a single source of truth and no hardcoded program pricing in components.
+- **Single source of truth**
+  - **site-stats.json:** One source; all trust stats (playersCount, yearsExperience, rating, reviewCount) consumed from it. No remaining hardcoded stats in reviewed components/pages.
+  - **faq.json:** One source for homepage FAQ and FAQ schema; SEOSchemas extends with dynamic private/scholarship from other data files. On `/faq`, visible content intentionally uses a different set (FAQInteractive); document or align if SEO/schema consistency is a goal.
+
+- **Prices**
+  - No hardcoded prices in UI components; schedules and program/camp/league/private UIs read from `/data` (winter2026, year2026, leagues-2026, private-rates, pricing-supplemental).  
+  - **Caveat:** `lib/form-config.ts` holds pricing strings for registration modal labels; consider deriving from data or documenting as display-only to avoid drift.
+
+- **register-year and ActiveCampaign**
+  - Missing contact id → 500 and clear message (correct).
+  - AC contact create failure (exception) → 200 and “success” (lead may be in Notion/Supabase but not in AC). Consider returning 503 or a distinct response when AC is required and fails, and/or surfacing a warning for ops.
+
+- **Migrations**
+  - Single, additive, idempotent migration with rollback notes; Supabase CLI–only usage is respected.
+
+---
+
+## Score: **88 / 100**
+
+| Category | Weight | Score | Notes |
+|----------|--------|-------|------|
+| Single source (site-stats) | 25 | 25 | Fully centralized and used consistently. |
+| Single source (faq) | 20 | 18 | faq.json + schema aligned; /faq visible vs schema mismatch by design. |
+| No hardcoded prices in components | 25 | 22 | Components use data; form-config has duplicate pricing strings. |
+| register-year AC handling | 20 | 15 | 500 on missing id is correct; AC failure still returns 200. |
+| Migration safety | 10 | 10 | Additive, idempotent, rollback documented. |
+
+**Recommendations (short term)**  
+1. Document that faq.json = homepage + schema and FAQInteractive = intentional “honest” set for /faq (and add /faq-specific schema only if desired for SEO).  
+2. Either derive form-config pricing labels from `/data` or add a comment that they are display-only and must be kept in sync with data.  
+3. In register-year: on AC contact create failure, return 503 (or 200 with a flag like `acSynced: false`) so frontend/ops can distinguish “saved but not in AC” from “fully synced.”

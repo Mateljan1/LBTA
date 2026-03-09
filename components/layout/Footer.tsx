@@ -22,10 +22,10 @@ export default function Footer() {
               />
             </Link>
 
-            <p className="text-[15px] font-sans font-light text-white/40 mb-3 max-w-sm leading-relaxed">
+            <p className="text-[15px] font-sans font-light text-white/50 mb-3 max-w-sm leading-relaxed">
               Tennis, as it should be taught.
             </p>
-            <p className="text-[13px] font-sans font-light text-white/25 mb-6 max-w-sm leading-relaxed">
+            <p className="text-[13px] font-sans font-light text-white/50 mb-6 max-w-sm leading-relaxed">
               Movement &middot; Craft &middot; Community
             </p>
 
@@ -59,7 +59,7 @@ export default function Footer() {
           <div className="md:col-span-7">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
               <div>
-                <h4 className="text-eyebrow text-white/30 mb-5">Programs</h4>
+                <h4 className="text-eyebrow text-white/50 mb-5">Programs</h4>
                 <ul className="space-y-3">
                   {[
                     { name: 'All Programs', href: '/programs' },
@@ -71,7 +71,7 @@ export default function Footer() {
                     <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       {item.name}
                     </Link>
@@ -81,18 +81,19 @@ export default function Footer() {
             </div>
 
             <div>
-              <h4 className="text-eyebrow text-white/30 mb-5">Academy</h4>
+              <h4 className="text-eyebrow text-white/50 mb-5">Academy</h4>
               <ul className="space-y-3">
                 {[
                   { name: 'About Us', href: '/about' },
                   { name: 'Our Coaches', href: '/coaches' },
                   { name: 'Book a Trial', href: '/book' },
+                  { name: 'Contact', href: '/contact' },
                   { name: 'Racquet Rescue', href: '/racquet-rescue' },
                 ].map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                       >
                         {item.name}
                       </Link>
@@ -102,13 +103,13 @@ export default function Footer() {
               </div>
 
               <div className="col-span-2 sm:col-span-1">
-                <h4 className="text-eyebrow text-white/30 mb-5">Contact</h4>
+                <h4 className="text-eyebrow text-white/50 mb-5">Contact</h4>
                 <ul className="space-y-3">
                   <li>
                     <a
                       href="tel:9495340457"
                       aria-label="Call (949) 534-0457"
-                      className="text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       (949) 534-0457
                     </a>
@@ -116,13 +117,14 @@ export default function Footer() {
                   <li>
                     <a
                       href="mailto:support@lagunabeachtennisacademy.com"
-                      className="text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      aria-label="Email support at support@lbta.com"
+                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       support@lbta.com
                     </a>
                   </li>
                   <li className="pt-2">
-                    <p className="text-[13px] font-sans font-light text-white/30 leading-relaxed">
+                    <p className="text-[13px] font-sans font-light text-white/50 leading-relaxed">
                       Moulton Meadows Park<br />
                       1098 Balboa Ave<br />
                       Laguna Beach, CA 92651
@@ -139,19 +141,19 @@ export default function Footer() {
       <div className="border-t border-white/8">
         <div className="container-lbta py-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] md:pb-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-[12px] font-sans font-light text-white/30">
+            <p className="text-[12px] font-sans font-light text-white/50">
               &copy; {new Date().getFullYear()} Laguna Beach Tennis Academy. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <Link
                 href="/privacy"
-                className="text-[12px] font-sans font-light text-white/30 hover:text-white/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                className="inline-flex items-center min-h-[48px] text-[12px] font-sans font-light text-white/50 hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
               >
                 Privacy
               </Link>
               <Link
                 href="/terms"
-                className="text-[12px] font-sans font-light text-white/30 hover:text-white/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                className="inline-flex items-center min-h-[48px] text-[12px] font-sans font-light text-white/50 hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
               >
                 Terms
               </Link>
