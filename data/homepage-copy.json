@@ -1,0 +1,82 @@
+{
+  "hero": {
+    "eyebrow": "Laguna Beach, California",
+    "tagline": "Tennis, as it should be taught.",
+    "pillars": "Movement. Craft. Community.",
+    "subline": "Premier tennis in Laguna Beach — from first swings to college pathway. Free trial.",
+    "ctaPrimary": "Book a Trial",
+    "ctaPrimaryHref": "/book",
+    "scrollAriaLabel": "Scroll to content"
+  },
+  "founder": {
+    "eyebrow": "Our Founder",
+    "headline": "Founded in Laguna Beach by Andrew Mateljan",
+    "subhead": "A lifetime in the game — from international courts to California's coast.",
+    "body": "25 years in tennis as a top-ranked junior and international coach. Years spent coaching in Spain and Croatia shaped a movement-first approach grounded in clarity and accountability. Now guiding players of every level toward their best version of the game.",
+    "quote": "Structure creates confidence. Confidence creates results.",
+    "quoteAttribution": "— Andrew Mateljan",
+    "ctaSecondary": "Read Andrew's Story",
+    "ctaSecondaryHref": "/about"
+  },
+  "results": {
+    "eyebrow": "Player Success",
+    "headline": "Guided by structure, repetition, and trust.",
+    "subline": "Karue Sell — ATP Tour player coached by Andrew Mateljan.",
+    "ctaSecondary": "Watch His Journey",
+    "ctaSecondaryHref": "/success-stories"
+  },
+  "philosophy": {
+    "eyebrow": "Our Philosophy",
+    "headline": "The Three Pillars",
+    "pillars": [
+      {
+        "title": "Movement",
+        "description": "The foundation of repeatable success.",
+        "detail": "Technical precision through biomechanics and footwork fundamentals."
+      },
+      {
+        "title": "Craft",
+        "description": "Structure that builds confidence.",
+        "detail": "Consistent practice routines create lasting mental toughness."
+      },
+      {
+        "title": "Community",
+        "description": "A community built on respect.",
+        "detail": "Players support each other through wins, losses, and growth."
+      }
+    ]
+  },
+  "programs": {
+    "eyebrow": "Our Programs",
+    "headline": "Pathways for Every Player",
+    "subline": "From first serves to tournament play, we have a program for you.",
+    "items": [
+      { "title": "Junior Pathway", "description": "From red ball to college prep.", "link": "/programs/junior" },
+      { "title": "Adult Training", "description": "Focused development for any level.", "link": "/programs/adult" },
+      { "title": "Private Coaching", "description": "Personal sessions built around your goals.", "link": "/book" }
+    ],
+    "ctaSecondary": "View All Programs",
+    "ctaSecondaryHref": "/programs"
+  },
+  "destination": {
+    "headline": "Train where focus meets horizon.",
+    "subline": "Laguna Beach — where performance meets perspective."
+  },
+  "community": {
+    "eyebrow": "Our Community",
+    "headline": "Players who train our way.",
+    "subline": "From junior pathways to professional courts, each player shares the same standard."
+  },
+  "cta": {
+    "eyebrow": "Get Started",
+    "headline": "Start training with purpose.",
+    "formSubmitLabel": "Request a Trial",
+    "formSubmittingLabel": "Sending...",
+    "guarantee": "30-Day Money-Back Guarantee · No Long-Term Commitment"
+  },
+  "stickyCta": {
+    "text": "Book Trial",
+    "href": "/book",
+    "showAfterScroll": 600
+  }
+}

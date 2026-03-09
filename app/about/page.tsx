@@ -35,14 +35,22 @@ const principles = [
 
 export default function AboutPage() {
   const [heroParallax, setHeroParallax] = useState(0)
-  
+  const [reduceMotion, setReduceMotion] = useState(false)
+
   useEffect(() => {
-    const handleScroll = () => {
-      setHeroParallax(window.scrollY * 0.3)
-    }
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReduceMotion(mq.matches)
+    const handler = () => setReduceMotion(mq.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  useEffect(() => {
+    if (reduceMotion) return
+    const handleScroll = () => setHeroParallax(window.scrollY * 0.3)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [reduceMotion])
   
   return (
     <>
@@ -56,9 +64,9 @@ export default function AboutPage() {
             priority
             className="object-cover"
             quality={90}
-            style={{ 
+            style={{
               objectPosition: '50% 60%',
-              transform: `translateY(${heroParallax}px)`
+              transform: reduceMotion ? undefined : `translateY(${heroParallax}px)`,
             }}
             sizes="100vw"
           />
@@ -72,6 +80,7 @@ export default function AboutPage() {
           <h1 className="font-headline text-[42px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-[-0.02em]">
             Where Character<br className="hidden md:block" /> Meets Championship
           </h1>
+          <div className="section-horizon mb-6 opacity-90" aria-hidden="true" />
           <p className="font-sans text-[16px] md:text-[18px] text-white/85 max-w-[550px] leading-[1.7]">
             Tennis as craft. Coaching as mentorship. Development as life preparation.
           </p>

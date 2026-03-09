@@ -111,3 +111,32 @@ Extracted from the Code Review Summary (12-agent parallel review). Use these for
 - parseJsonBodyAllRoutes (should), modalTimeoutCleanup (must), modalFocusOnAutoClose (must), primaryCtaBlackWhite (should), faqAriaReducedMotion (should), closeButton48px (must).
 
 Full extraction: `.cursor/compound/learnings/2026-03-08-extraction.md`.
+
+---
+
+## 2026-03-09 — Brand guide review → validate → deploy
+
+**Trigger:** `/compound:learn` after review (6 agents), validate, deploy (production live).
+
+### New corrections (corrections.jsonl)
+
+- Parallax without reduced-motion → gate with matchMedia; disable when true (e.g. About like HomeHero).
+- Inline blockquote with solid border → use PullQuote or .section-quote for Brand Guide gradient.
+- Decorative SVG in links/buttons → add aria-hidden="true" to svg.
+- Tailwind class not in config (e.g. lbta-tan) → use lbta-beige or brand-sandstone; check config.
+
+### New patterns (patterns.json)
+
+- **pull-quote-section-quote** — Use PullQuote or .section-quote for all pull quotes.
+- **parallax-reduced-motion-gate** — Gate parallax/scroll motion with prefers-reduced-motion.
+- **decorative-svg-aria-hidden** — aria-hidden="true" on decorative SVGs in links/buttons.
+
+### New anti-patterns (anti-patterns.json)
+
+- parallax-without-reduced-motion, inline-blockquote-instead-of-section-quote, decorative-svg-without-aria-hidden, undefined-tailwind-color.
+
+### New quality bars (quality-bars.json)
+
+- parallaxReducedMotion (should), pullQuoteSectionQuote (should), decorativeSvgAriaHidden (should), tailwindColorDefined (should).
+
+Source: `plans/2026-03-09-compound-review-validate-deploy-summary.md` and `plans/COMPOUND_LEARN.md` learn run log.

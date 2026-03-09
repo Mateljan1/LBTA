@@ -69,7 +69,7 @@ export default function MatchPlayPage() {
                   </div>
                 </div>
 
-                <div className="bg-lbta-tan rounded-sm p-6 mb-8">
+                <div className="bg-brand-sandstone rounded-sm p-6 mb-8">
                   <div className="flex items-center gap-2 mb-4">
                     <DollarSign className="w-5 h-5 text-brand-sunset-cliff" />
                     <h3 className="text-lg font-sans font-medium">Pricing</h3>
@@ -116,7 +116,7 @@ export default function MatchPlayPage() {
                   </div>
                 </div>
 
-                <div className="bg-lbta-tan rounded-sm p-6 mb-8">
+                <div className="bg-brand-sandstone rounded-sm p-6 mb-8">
                   <div className="flex items-center gap-2 mb-4">
                     <DollarSign className="w-5 h-5 text-brand-sunset-cliff" />
                     <h3 className="text-lg font-sans font-medium">Pricing</h3>
@@ -158,7 +158,7 @@ export default function MatchPlayPage() {
       <HorizonDivider />
 
       {/* What to Expect */}
-      <section className="section-spacing bg-lbta-tan">
+      <section className="section-spacing bg-brand-sandstone">
         <div className="container-narrow">
           <AnimatedSection className="text-center mb-12">
             <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk mb-6">

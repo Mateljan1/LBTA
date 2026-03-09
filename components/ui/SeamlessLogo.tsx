@@ -43,7 +43,7 @@ export default function SeamlessLogo({
       {backgroundColor !== 'bg-transparent' ? (
         <div className="absolute inset-0 bg-gradient-to-br from-brand-morning-light/5 via-transparent to-brand-morning-light/5 pointer-events-none z-20 rounded-lg"></div>
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-lbta-tan/10 via-transparent to-lbta-tan/10 pointer-events-none z-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-sandstone/10 via-transparent to-brand-sandstone/10 pointer-events-none z-20"></div>
       )}
     </div>
   )

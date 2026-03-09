@@ -183,6 +183,7 @@ colors: {
 - **Backgrounds**: Morning Light (#FAF8F4) default, Sandstone (#F5F0E5) warm sections, Deep Water (#0F2237) dark sections
 - **Text**: Pacific Dusk (#1B3A5C) for headings/body, use opacity variants for secondary text
 - Prefer `brand-*` classes for new code; `lbta-*` for backwards compat only
+- **Brand Guide**: Visual and section accents follow the LBTA Brand Guide — horizon gradient (`--horizon`), `.section-quote` for pull quotes, and HorizonDivider or `.section-horizon` under key section headings.
 
 ---
 
@@ -324,6 +325,8 @@ import Image from 'next/image'
 **Logo usage:** Header and Footer use local `/logos/LBTAblktext.png` (Footer inverts on dark). PartnershipSection uses `/logos/*` with descriptive alt. No external logo URLs; keep assets in `public/logos/`.
 
 **Footer and dark sections:** On bg-brand-deep-water (or any dark section), use text-white/50 or higher for tagline and secondary text to meet WCAG 7:1 contrast. Avoid text-white/40 or text-white/25 for body or tagline.
+
+**Section accents:** Use HorizonDivider or the `.section-horizon` utility under key section headings per Brand Guide; pull quotes use `.section-quote` (gradient left edge).
 
 ---
 

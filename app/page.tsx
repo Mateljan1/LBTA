@@ -6,9 +6,11 @@ import FAQSection from '@/components/FAQSection'
 import VideoTestimonials from '@/components/VideoTestimonials'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
+import PullQuote from '@/components/ui/PullQuote'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
 import siteStats from '@/data/site-stats.json'
+import homepageCopy from '@/data/homepage-copy.json'
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
@@ -84,33 +86,30 @@ export default function Home() {
             </AnimatedSection>
             <div className="lg:py-8">
               <AnimatedSection delay={100}>
-                <span className="text-eyebrow mb-4 block">Our Founder</span>
+                <span className="text-eyebrow mb-4 block">{homepageCopy.founder.eyebrow}</span>
               </AnimatedSection>
               <AnimatedSection delay={200}>
-                <h2 className="font-headline text-headline font-light mb-6">Founded in Laguna Beach by Andrew Mateljan</h2>
+                <h2 className="font-headline text-headline font-light mb-4">{homepageCopy.founder.headline}</h2>
+                <div className="section-horizon" aria-hidden="true" />
               </AnimatedSection>
               <AnimatedSection delay={300}>
-                <p className="text-subhead font-light mb-6">A lifetime in the game — from international courts to California&apos;s coast.</p>
+                <p className="text-subhead font-light mb-6">{homepageCopy.founder.subhead}</p>
               </AnimatedSection>
               <AnimatedSection delay={400}>
-                <p className="text-body text-lbta-slate mb-8">
-                  25 years in tennis as a top-ranked junior and international coach. Years spent coaching in Spain and Croatia shaped a
-                  movement-first approach grounded in clarity and accountability. Now guiding players of every level toward their best version
-                  of the game.
-                </p>
+                <p className="text-body text-lbta-slate mb-8">{homepageCopy.founder.body}</p>
               </AnimatedSection>
               <AnimatedSection delay={500}>
-                <blockquote className="border-l-2 border-brand-pacific-dusk/30 pl-6 mb-8">
-                  <p className="font-headline text-[1.5rem] italic text-brand-pacific-dusk font-light leading-relaxed mb-3">
-                    &quot;Structure creates confidence. Confidence creates results.&quot;
-                  </p>
-                  <footer className="text-body-sm text-lbta-slate">— Andrew Mateljan</footer>
-                </blockquote>
+                <PullQuote
+                  quote={homepageCopy.founder.quote}
+                  attribution={homepageCopy.founder.quoteAttribution}
+                  variant="light"
+                  className="mb-8"
+                />
               </AnimatedSection>
               <AnimatedSection delay={600}>
-                <Link href="/about" className="btn-ghost">
-                  <span>Read Andrew&apos;s Story</span>
-                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <Link href={homepageCopy.founder.ctaSecondaryHref} className="btn-ghost inline-flex items-center min-h-[48px]">
+                  <span>{homepageCopy.founder.ctaSecondary}</span>
+                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
@@ -124,7 +123,7 @@ export default function Home() {
         <div className="absolute inset-0">
           <Image
             src="/images/results/karue-training.webp"
-            alt="Karue Sell ATP training session"
+            alt="ATP player in training session at LBTA"
             fill
             className="object-cover"
             style={{ objectPosition: '50% 35%' }}
@@ -136,22 +135,20 @@ export default function Home() {
         <div className="relative z-10 container-lbta">
           <div className="max-w-xl">
             <AnimatedSection>
-              <span className="text-eyebrow text-black mb-4 block">Player Success</span>
+              <span className="text-eyebrow text-white/90 mb-4 block">{homepageCopy.results.eyebrow}</span>
             </AnimatedSection>
             <AnimatedSection delay={100}>
-              <h2 className="font-headline text-[clamp(3rem,8vw,5rem)] font-light text-white leading-[1] tracking-[-0.02em] mb-6">
-                #858 → #258
-                <span className="block text-[0.5em] font-normal text-white/70 mt-2">ATP World Ranking</span>
+              <h2 className="font-headline text-[clamp(2.5rem,6vw,4rem)] font-light text-white leading-[1.15] tracking-[-0.02em] mb-6">
+                {homepageCopy.results.headline}
               </h2>
             </AnimatedSection>
             <AnimatedSection delay={200}>
-              <p className="text-body-lg text-white/80 mb-2 font-light">Guided by structure, repetition, and trust.</p>
-              <p className="text-body text-white/60 mb-8">Karue Sell — ATP Tour Player<br />Coached by Andrew Mateljan</p>
+              <p className="text-body-lg text-white/80 mb-8">{homepageCopy.results.subline}</p>
             </AnimatedSection>
             <AnimatedSection delay={300}>
-              <Link href="/success-stories" className="btn-ghost text-white/80 hover:text-white">
-                <span>Watch His Journey</span>
-                <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <Link href={homepageCopy.results.ctaSecondaryHref} className="btn-ghost text-white/80 hover:text-white inline-flex items-center min-h-[48px]">
+                <span>{homepageCopy.results.ctaSecondary}</span>
+                <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
@@ -164,26 +161,25 @@ export default function Home() {
       <section id="philosophy" className="bg-brand-morning-light section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
-            <span className="text-eyebrow mb-4 block">Our Philosophy</span>
-            <h2 className="font-headline text-headline font-light">The Three Pillars</h2>
+            <span className="text-eyebrow mb-4 block">{homepageCopy.philosophy.eyebrow}</span>
+            <h2 className="font-headline text-headline font-light">{homepageCopy.philosophy.headline}</h2>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-            {[
-              { image: '/images/philosophy/movement.webp', title: 'Movement', description: 'The foundation of repeatable success.', detail: 'Technical precision through biomechanics and footwork fundamentals.' },
-              { image: '/images/philosophy/discipline.webp', title: 'Craft', description: 'Structure that builds confidence.', detail: 'Consistent practice routines create lasting mental toughness.' },
-              { image: '/images/philosophy/belonging.webp', title: 'Community', description: 'A community built on respect.', detail: 'Players support each other through wins, losses, and growth.' },
-            ].map((pillar, i) => (
+            {homepageCopy.philosophy.pillars.map((pillar, i) => {
+              const images = ['/images/philosophy/movement.webp', '/images/philosophy/discipline.webp', '/images/philosophy/belonging.webp']
+              return (
               <AnimatedSection key={pillar.title} delay={i * 150}>
                 <div className="group">
                   <div className="relative aspect-square overflow-hidden rounded-subtle mb-6">
-                    <Image src={pillar.image} alt={`${pillar.title} - ${pillar.description}`} fill className="object-cover image-zoom" sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
+                    <Image src={images[i]} alt={`${pillar.title} — ${pillar.description}`} fill className="object-cover image-zoom" sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
                   </div>
                   <h3 className="font-headline text-headline-sm font-light mb-3 group-hover:text-brand-pacific-dusk/70 transition-colors">{pillar.title}</h3>
                   <p className="text-body text-brand-pacific-dusk mb-2">{pillar.description}</p>
                   <p className="text-body-sm text-lbta-slate">{pillar.detail}</p>
                 </div>
               </AnimatedSection>
-            ))}
+            );
+            })}
           </div>
         </div>
       </section>
@@ -192,30 +188,29 @@ export default function Home() {
       <section id="programs" className="bg-white section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
-            <span className="text-eyebrow mb-4 block">Our Programs</span>
-            <h2 className="font-headline text-headline font-light mb-4">Pathways for Every Player</h2>
-            <p className="text-subhead max-w-2xl mx-auto font-light">From first serves to tournament victories, we have a program for you.</p>
+            <span className="text-eyebrow mb-4 block">{homepageCopy.programs.eyebrow}</span>
+            <h2 className="font-headline text-headline font-light mb-4">{homepageCopy.programs.headline}</h2>
+            <p className="text-subhead max-w-2xl mx-auto font-light">{homepageCopy.programs.subline}</p>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10 mb-12">
-            {[
-              { image: '/images/programs/juniors.webp', title: 'Junior Pathway', description: 'From red ball to college prep.', link: '/programs/junior' },
-              { image: '/images/programs/adults.webp', title: 'Adult Training', description: 'Focused development for any level.', link: '/programs/adult' },
-              { image: '/images/programs/private-lessons.webp', title: 'Private Coaching', description: 'Personal sessions built around your goals.', link: '/book' },
-            ].map((program, i) => (
-              <AnimatedSection key={program.title} delay={i * 150}>
-                <Link href={program.link} className="group block">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-subtle mb-5">
-                    <Image src={program.image} alt={program.title} fill className="object-cover image-zoom" sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
-                  </div>
-                  <h3 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">{program.title}</h3>
-                  <p className="text-body text-lbta-slate">{program.description}</p>
-                </Link>
-              </AnimatedSection>
-            ))}
+            {homepageCopy.programs.items.map((program, i) => {
+              const images = ['/images/programs/juniors.webp', '/images/programs/adults.webp', '/images/programs/private-lessons.webp']
+              return (
+                <AnimatedSection key={program.title} delay={i * 150}>
+                  <Link href={program.link} className="group block">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-subtle mb-5">
+                      <Image src={images[i]} alt={program.title} fill className="object-cover image-zoom" sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
+                    </div>
+                    <h3 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">{program.title}</h3>
+                    <p className="text-body text-lbta-slate">{program.description}</p>
+                  </Link>
+                </AnimatedSection>
+              )
+            })}
           </div>
           <AnimatedSection className="text-center">
-            <Link href="/programs" className="btn-secondary">
-              <span>View All Programs</span>
+            <Link href={homepageCopy.programs.ctaSecondaryHref} className="btn-secondary">
+              <span>{homepageCopy.programs.ctaSecondary}</span>
             </Link>
           </AnimatedSection>
         </div>
@@ -228,8 +223,8 @@ export default function Home() {
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">
           <AnimatedSection>
-            <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] font-light leading-[1.2] mb-4 text-shadow-hero">Train where focus meets horizon.</h2>
-            <p className="text-body-lg text-white/80 text-shadow-subtle font-light">Laguna Beach — where performance meets perspective.</p>
+            <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] font-light leading-[1.2] mb-4 text-shadow-hero">{homepageCopy.destination.headline}</h2>
+            <p className="text-body-lg text-white/80 text-shadow-subtle font-light">{homepageCopy.destination.subline}</p>
           </AnimatedSection>
         </div>
       </section>
@@ -238,9 +233,9 @@ export default function Home() {
       <section id="community" className="bg-white section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-12">
-            <span className="text-eyebrow mb-4 block">Our Community</span>
-            <h2 className="font-headline text-headline font-light mb-4">Players who train our way.</h2>
-            <p className="text-subhead max-w-2xl mx-auto font-light">From junior pathways to ATP courts, each player shares the same standard.</p>
+            <span className="text-eyebrow mb-4 block">{homepageCopy.community.eyebrow}</span>
+            <h2 className="font-headline text-headline font-light mb-4">{homepageCopy.community.headline}</h2>
+            <p className="text-subhead max-w-2xl mx-auto font-light">{homepageCopy.community.subline}</p>
           </AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {[1, 2, 3, 4, 5, 6].map((num, i) => (
@@ -273,21 +268,21 @@ export default function Home() {
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-lg mx-auto py-20">
           <AnimatedSection>
-            <span className="text-eyebrow text-black mb-4 block">Get Started</span>
+            <span className="text-eyebrow text-white/90 mb-4 block">{homepageCopy.cta.eyebrow}</span>
           </AnimatedSection>
           <AnimatedSection delay={100}>
-            <h2 className="font-headline text-[clamp(2rem,5vw,2.75rem)] font-light mb-8 leading-[1.2] text-shadow-hero">Start training with purpose.</h2>
+            <h2 className="font-headline text-[clamp(2rem,5vw,2.75rem)] font-light mb-8 leading-[1.2] text-shadow-hero">{homepageCopy.cta.headline}</h2>
           </AnimatedSection>
           <AnimatedSection delay={200}>
             <HomeCTAForm />
           </AnimatedSection>
           <AnimatedSection delay={300}>
-            <p className="text-body-sm text-white/60">30-Day Money-Back Guarantee · No Long-Term Commitment</p>
+            <p className="text-body-sm text-white/60">{homepageCopy.cta.guarantee}</p>
           </AnimatedSection>
         </div>
       </section>
 
-      <StickyCTA text="Book Trial" href="/book" showAfterScroll={600} />
+      <StickyCTA text={homepageCopy.stickyCta.text} href={homepageCopy.stickyCta.href} showAfterScroll={homepageCopy.stickyCta.showAfterScroll} />
     </>
   )
 }

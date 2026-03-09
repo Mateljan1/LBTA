@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-08",
+  "updated": "2026-03-09",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -91,6 +91,22 @@
     "heroCtaContrast": {
       "rule": "Hero CTAs on dark backgrounds must have solid background (e.g. bg-white) or high-contrast text; no text-only on dark gradient",
       "enforcement": "must"
+    },
+    "parallaxReducedMotion": {
+      "rule": "Parallax or scroll-driven motion must respect prefers-reduced-motion (gate like HomeHero)",
+      "enforcement": "should"
+    },
+    "pullQuoteSectionQuote": {
+      "rule": "Pull quotes must use PullQuote component or .section-quote class (Brand Guide gradient left edge)",
+      "enforcement": "should"
+    },
+    "decorativeSvgAriaHidden": {
+      "rule": "Decorative SVGs (icons in links/buttons) must have aria-hidden=\"true\"",
+      "enforcement": "should"
+    },
+    "tailwindColorDefined": {
+      "rule": "Only use Tailwind color classes defined in config (no lbta-tan etc.); use lbta-beige or brand-sandstone",
+      "enforcement": "should"
     }
   }
 }

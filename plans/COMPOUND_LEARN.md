@@ -45,6 +45,10 @@
 | Hero CTA with only text color on dark gradient | Use solid background (e.g. bg-white text-black) so contrast meets WCAG. |
 | Webhook using payload ID in URLs/bodies without validation | Normalize to positive integer; return 400 if invalid; use only validated number. |
 | Webhook secret compared with === | Use crypto.timingSafeEqual with same-length buffers. |
+| Parallax or scroll-driven animation without reduced-motion check | Gate with `matchMedia('(prefers-reduced-motion: reduce)')`; disable or use `transform: none` when true (e.g. About hero like HomeHero). |
+| Inline blockquote with solid border instead of Brand Guide pull-quote | Use `<PullQuote>` or class `section-quote` for gradient left edge (Victoria Cove → Sunset Cliff); keeps single source for quote styling. |
+| Decorative inline SVG (e.g. arrow icons in links) without aria-hidden | Add `aria-hidden="true"` so screen readers don’t announce them. |
+| Using Tailwind classes not in config (e.g. lbta-tan) | Use only defined tokens: `lbta-beige` or `brand-sandstone` for warm backgrounds; grep tailwind.config before adding custom color classes. |
 
 ---
 
@@ -83,6 +87,9 @@
 | Pattern | When to use | Example |
 |---------|-------------|---------|
 | In-page anchor nav (long schedules/pricing) | Single long page with multiple sections (programs, private, camps, leagues) | Sticky nav with anchor links; section ids + scroll-mt-* so heading isn’t under nav; aria-label="Jump to section"; min-h-[48px] links; smooth scroll gated by prefers-reduced-motion (SchedulesAnchorNav). |
+| Pull quotes use section-quote | Any blockquote or “section quote” that should match Brand Guide | Use `<PullQuote>` or apply class `section-quote` (gradient left border); avoid inline `border-l-2 border-brand-pacific-dusk/30` so one source drives quote styling. |
+| Parallax / scroll animation gate | Any page or component with parallax or scroll-driven motion | Check `prefers-reduced-motion` (e.g. `matchMedia`) and disable parallax or use static fallback when true; same pattern as HomeHero. |
+| Decorative SVG in links/buttons | Icons (arrows, chevrons) that are purely visual | Add `aria-hidden="true"` to the `<svg>` so assistive tech skips them. |
 
 ---
 
@@ -118,6 +125,10 @@
 | Webhook payload IDs validated as positive integer before use | Must |
 | Webhook secret comparison timing-safe (crypto.timingSafeEqual) | Must |
 | Hero CTAs on dark backgrounds: solid background for contrast | Must |
+| Parallax / scroll-driven motion must respect prefers-reduced-motion | Should |
+| Pull quotes must use PullQuote or .section-quote (Brand Guide) | Should |
+| Decorative SVGs (icons in links/buttons) must have aria-hidden="true" | Should |
+| Only use Tailwind color classes defined in config (no lbta-tan, etc.) | Should |
 
 ---
 
@@ -144,6 +155,10 @@
 - Hero primary button with only text color on dark gradient (no solid background)
 - Using webhook payload ID in URLs or request bodies without validating as positive integer
 - Comparing webhook secret with === (use crypto.timingSafeEqual with same-length buffers)
+- Parallax or scroll-driven animation without checking prefers-reduced-motion (gate like HomeHero)
+- Inline blockquote with solid border instead of PullQuote or .section-quote (Brand Guide gradient)
+- Decorative SVG (arrow, icon) inside link/button without aria-hidden="true"
+- Using Tailwind color classes not in config (e.g. lbta-tan); use lbta-beige or brand-sandstone
 
 ---
 
@@ -189,3 +204,4 @@
 | 2026-03-08 | `/compound:learn` after review + validate | Review (8 agents): fixed duplicate FAQ schema (removed client useEffect in FAQInteractive), Footer Privacy/Terms 48px + mailto aria-label, text-display-lg → text-display-xl. Validation (5 agents): 92/100, no blockers; functional 98, data integrity 95. New corrections: single schema source per page (no client duplicate id); use only Tailwind tokens defined in config. New patterns: single schema source per page; webhook body validation. New standards: Tailwind tokens from config; webhook Zod validation. New anti-patterns: duplicate schema id; undefined Tailwind classes. |
 | 2026-03-08 | Optional follow-up: webhook Zod, ExitIntentPopup, single FAQ | **Done:** (1) activecampaign-webhook validates body with `webhookPayloadSchema`; returns 400 on invalid JSON or validation failure. (2) ExitIntentPopup: no raw black/slate — privacy line and labels use `text-brand-pacific-dusk/70` and `text-brand-pacific-dusk/80`; dividers use `bg-brand-pacific-dusk/15`. Trust stats (500+, 15+, 5.0) now from `data/site-stats.json` (single source; update there for accuracy). (3) Single FAQ source: `data/faq.json` added; FAQSection and SEOSchemas use it; SEOSchemas overrides private + adds scholarship answer dynamically. **Learnings:** Trust stats and marketing numbers from data; no raw black/slate in trust sections (brand tokens only); single FAQ source for homepage + schema. |
 | 2026-03-08 | `/compound:learn` after review → validate → deploy | Fixes: Footer contrast (text-white/50+ on deep-water); About/Contact primary CTAs black/white; Contact hero CTA solid bg; activecampaign-webhook contactId validated as positive int + 400 if invalid; webhook secret with crypto.timingSafeEqual. Deploy: production 100/100. **Learnings:** 4 corrections, 4 anti-patterns, 3 quality bars, 3 patterns (footer contrast, hero CTA on dark, webhook ID validation, webhook timing-safe secret). |
+| 2026-03-09 | `/compound:learn` after review → validate → deploy (brand guide) | Scope: Apply Brand Guide (--horizon, .section-quote, .section-horizon, HorizonDivider). Review: 6 agents, PASS + warnings. Deploy: production https://lbta-website.vercel.app. **Learnings:** 4 corrections (parallax reduced-motion, pull quote use section-quote, decorative SVG aria-hidden, no undefined Tailwind e.g. lbta-tan); 3 patterns (pull quote section-quote, parallax gate, decorative SVG aria-hidden); 4 standards; 4 anti-patterns. Optional follow-up: About parallax gate, homepage/high-perf blockquotes → PullQuote, lbta-tan → brand-sandstone, SVG aria-hidden on homepage CTAs. |

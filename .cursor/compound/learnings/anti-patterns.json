@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-08",
+  "updated": "2026-03-09",
   "antiPatterns": [
     {
       "id": "hardcoded-prices",
@@ -113,6 +113,34 @@
       "avoid": "if (headerSecret === AC_WEBHOOK_SECRET) return null",
       "instead": "Buffer.from both; ensure same length; crypto.timingSafeEqual(expected, provided); reject on mismatch or length diff",
       "tags": ["security", "webhook", "timing-safe"]
+    },
+    {
+      "id": "parallax-without-reduced-motion",
+      "description": "Parallax or scroll-driven animation without checking prefers-reduced-motion",
+      "avoid": "useEffect scroll listener that updates transform/parallax state on every scroll with no reduceMotion check",
+      "instead": "Gate with matchMedia('(prefers-reduced-motion: reduce)'); when true disable parallax or use static fallback (same as HomeHero)",
+      "tags": ["a11y", "motion", "parallax"]
+    },
+    {
+      "id": "inline-blockquote-instead-of-section-quote",
+      "description": "Blockquote with solid left border instead of Brand Guide pull-quote style",
+      "avoid": "border-l-2 border-brand-pacific-dusk/30 or similar on blockquote",
+      "instead": "Use <PullQuote> or class section-quote for gradient left edge (Victoria Cove → Sunset Cliff); single source for quote styling",
+      "tags": ["brand-guide", "pull-quote", "section-quote"]
+    },
+    {
+      "id": "decorative-svg-without-aria-hidden",
+      "description": "Decorative SVG (arrow, icon) inside link or button without aria-hidden",
+      "avoid": "<Link><svg>...</svg> Text</Link> with no aria-hidden on svg",
+      "instead": "Add aria-hidden=\"true\" to the svg so screen readers don't announce the icon",
+      "tags": ["a11y", "svg", "aria-hidden"]
+    },
+    {
+      "id": "undefined-tailwind-color",
+      "description": "Using Tailwind color class not defined in tailwind.config (e.g. lbta-tan)",
+      "avoid": "bg-lbta-tan or text-lbta-tan when lbta.tan is not in config",
+      "instead": "Use only defined tokens: lbta-beige or brand-sandstone for warm backgrounds; grep config before adding custom color classes",
+      "tags": ["tailwind", "brand", "config"]
     }
   ]
 }

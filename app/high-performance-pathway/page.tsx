@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
 import HorizonDivider from '@/components/ui/HorizonDivider'
+import PullQuote from '@/components/ui/PullQuote'
 
 export const metadata: Metadata = {
   title: 'High Performance Pathway | Tennis Training | LBTA',
@@ -205,11 +206,11 @@ export default function HighPerformancePathwayPage() {
                   High Performance Pathway players receive direct instruction and ongoing development plans personally designed by Andrew.
                 </p>
               </div>
-              <blockquote className="border-l-2 border-brand-pacific-dusk/30 pl-6 mt-8">
-                <p className="font-headline text-[20px] italic text-brand-pacific-dusk leading-relaxed">
-                  &ldquo;Structure creates confidence. Confidence creates champions.&rdquo;
-                </p>
-              </blockquote>
+              <PullQuote
+                quote="Structure creates confidence. Confidence creates champions."
+                variant="light"
+                className="mt-8"
+              />
             </div>
           </div>
         </div>

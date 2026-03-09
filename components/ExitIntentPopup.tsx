@@ -13,6 +13,8 @@ export default function ExitIntentPopup() {
   const dialogRef = useRef<HTMLDivElement>(null)
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const previousActiveRef = useRef<HTMLElement | null>(null)
+  const hasScrolledPastThresholdRef = useRef(false)
+  const SCROLL_THRESHOLD_PX = 200
 
   useEffect(() => {
     // Check if already shown in this session
@@ -22,20 +24,27 @@ export default function ExitIntentPopup() {
       return
     }
 
-    // Exit intent detection
+    // Track scroll so we never show on initial load — only after user has engaged (scrolled)
+    const handleScrollTrack = () => {
+      if (window.scrollY > SCROLL_THRESHOLD_PX) hasScrolledPastThresholdRef.current = true
+    }
+    window.addEventListener('scroll', handleScrollTrack, { passive: true })
+
+    // Exit intent: only show if user has scrolled past threshold first (never on first paint)
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !hasShown) {
+      if (e.clientY <= 0 && !hasShown && hasScrolledPastThresholdRef.current) {
         setIsVisible(true)
         setHasShown(true)
         sessionStorage.setItem('exitPopupShown', 'true')
       }
     }
 
-    // Mobile: detect scroll up (potential exit)
+    // Mobile: detect scroll up (potential exit) — only after they've scrolled down first
     let lastScrollY = window.scrollY
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      if (currentScrollY < lastScrollY - 100 && currentScrollY < 200 && !hasShown) {
+      if (currentScrollY > SCROLL_THRESHOLD_PX) hasScrolledPastThresholdRef.current = true
+      if (currentScrollY < lastScrollY - 100 && currentScrollY < 200 && !hasShown && hasScrolledPastThresholdRef.current) {
         setIsVisible(true)
         setHasShown(true)
         sessionStorage.setItem('exitPopupShown', 'true')
@@ -43,14 +52,15 @@ export default function ExitIntentPopup() {
       lastScrollY = currentScrollY
     }
 
-    // Delay adding listeners to avoid showing immediately
+    // Delay adding exit-intent/scroll listeners to avoid showing on load
     const timer = setTimeout(() => {
       document.addEventListener('mouseleave', handleMouseLeave)
       window.addEventListener('scroll', handleScroll, { passive: true })
-    }, 10000) // Wait 10 seconds before enabling
+    }, 10000)
 
     return () => {
       clearTimeout(timer)
+      window.removeEventListener('scroll', handleScrollTrack)
       document.removeEventListener('mouseleave', handleMouseLeave)
       window.removeEventListener('scroll', handleScroll)
     }

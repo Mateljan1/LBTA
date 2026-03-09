@@ -1,6 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import homepageCopy from '@/data/homepage-copy.json'
+
+const ctaCopy = homepageCopy.cta as (typeof homepageCopy)['cta']
 
 export default function HomeCTAForm() {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '' })
@@ -105,7 +108,7 @@ export default function HomeCTAForm() {
         </div>
       )}
       <button type="submit" disabled={isSubmitting} className="btn-accent w-full min-h-[48px]">
-        {isSubmitting ? 'Sending...' : 'Claim Your Spot'}
+        {isSubmitting ? ctaCopy.formSubmittingLabel : ctaCopy.formSubmitLabel}
       </button>
     </form>
   )

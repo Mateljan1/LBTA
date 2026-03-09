@@ -109,6 +109,24 @@
       "when": "Using scrollIntoView with behavior: 'smooth' in JS",
       "example": "prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches; behavior: prefersReducedMotion ? 'auto' : 'smooth'",
       "tags": ["a11y", "motion"]
+    },
+    {
+      "name": "pull-quote-section-quote",
+      "when": "Any blockquote or section quote that should match Brand Guide",
+      "example": "Use <PullQuote> or apply class section-quote (gradient left border); avoid inline border-l-2 so one source drives quote styling",
+      "tags": ["brand-guide", "pull-quote", "section-quote"]
+    },
+    {
+      "name": "parallax-reduced-motion-gate",
+      "when": "Page or component has parallax or scroll-driven motion",
+      "example": "matchMedia('(prefers-reduced-motion: reduce)'); when true disable parallax or use static fallback (HomeHero, About hero)",
+      "tags": ["a11y", "motion", "parallax"]
+    },
+    {
+      "name": "decorative-svg-aria-hidden",
+      "when": "SVG is purely decorative (arrow, chevron, icon in link/button)",
+      "example": "Add aria-hidden=\"true\" to the <svg> so assistive tech skips it",
+      "tags": ["a11y", "svg", "aria-hidden"]
     }
   ]
 }
