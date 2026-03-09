@@ -74,6 +74,15 @@
 | Webhook ID validate then use | Webhook payload ID used in URLs or request bodies | Normalize to positive integer; return 400 if invalid; use only validated number in URLs and bodies. |
 | Webhook secret timing-safe | Verifying webhook authenticity | Buffer.from both; same length; crypto.timingSafeEqual; reject on mismatch. |
 | Hero CTA on dark solid bg | Primary CTA on dark hero/gradient | Use bg-white text-black (or bg-black text-white); avoid text-only on dark for contrast. |
+| JS scrollIntoView(behavior: 'smooth') without reduced-motion check | Any anchor nav or "scroll to section" that uses scrollIntoView | Gate smooth scroll: `const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches`; use `behavior: prefersReducedMotion ? 'auto' : 'smooth'`. Per .cursorrules and WCAG. |
+
+---
+
+## PATTERNS (continued — Schedules UX Overhaul March 2026)
+
+| Pattern | When to use | Example |
+|---------|-------------|---------|
+| In-page anchor nav (long schedules/pricing) | Single long page with multiple sections (programs, private, camps, leagues) | Sticky nav with anchor links; section ids + scroll-mt-* so heading isn’t under nav; aria-label="Jump to section"; min-h-[48px] links; smooth scroll gated by prefers-reduced-motion (SchedulesAnchorNav). |
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-08",
+  "updated": "2026-03-09",
   "patterns": [
     {
       "name": "single-source-dropdown-options",
@@ -97,6 +97,18 @@
       "when": "Primary CTA button sits on a dark hero or gradient background",
       "example": "Use bg-white text-black (or bg-black text-white) with focus ring; avoid text-only (e.g. text-black) on dark gradient for contrast",
       "tags": ["a11y", "contrast", "CTA"]
+    },
+    {
+      "name": "in-page-anchor-nav",
+      "when": "Long single page with multiple sections (e.g. schedules, pricing) where users need to jump",
+      "example": "Sticky nav with anchor links; section id + scroll-mt-* on targets; aria-label; min-h-[48px]; scrollIntoView with behavior gated by prefers-reduced-motion (SchedulesAnchorNav)",
+      "tags": ["a11y", "ux", "navigation"]
+    },
+    {
+      "name": "scroll-into-view-reduced-motion",
+      "when": "Using scrollIntoView with behavior: 'smooth' in JS",
+      "example": "prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches; behavior: prefersReducedMotion ? 'auto' : 'smooth'",
+      "tags": ["a11y", "motion"]
     }
   ]
 }

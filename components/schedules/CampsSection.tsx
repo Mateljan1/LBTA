@@ -25,7 +25,7 @@ interface CampsSectionProps {
 
 export default function CampsSection({ camps, onRegister }: CampsSectionProps) {
   return (
-    <section id="camps" className="bg-brand-morning-light py-16 md:py-24">
+    <section id="camps" className="scroll-mt-28 bg-brand-morning-light py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           SEASONAL & HOLIDAY

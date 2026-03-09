@@ -45,7 +45,7 @@ export default function PrivateCoachingSection({
   const monthlyList = Object.values(monthlyPrograms)
 
   return (
-    <section id="private" className="bg-brand-morning-light py-16 md:py-24">
+    <section id="private" className="scroll-mt-28 bg-brand-morning-light py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
 
         {/* Private Coaching */}

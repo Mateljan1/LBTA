@@ -64,7 +64,7 @@ export default function ProgramsSection({ onRegister }: ProgramsSectionProps) {
     : ''
 
   return (
-    <section id="programs" className="bg-white py-16 md:py-24">
+    <section id="programs" className="scroll-mt-28 bg-white py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
         {/* Section heading */}
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">

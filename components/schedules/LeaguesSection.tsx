@@ -11,7 +11,7 @@ export default function LeaguesSection() {
   const { usta, utr } = leaguesData
 
   return (
-    <section id="leagues" className="bg-white py-16 md:py-24">
+    <section id="leagues" className="scroll-mt-28 bg-white py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
         <h2 className="sr-only">Leagues & Competitive Play</h2>
 

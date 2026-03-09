@@ -13,6 +13,7 @@ import ProgramsSection from '@/components/schedules/ProgramsSection'
 import CampsSection from '@/components/schedules/CampsSection'
 import LeaguesSection from '@/components/schedules/LeaguesSection'
 import PrivateCoachingSection from '@/components/schedules/PrivateCoachingSection'
+import SchedulesAnchorNav from '@/components/schedules/SchedulesAnchorNav'
 
 import year2026Data from '@/data/year2026.json'
 
@@ -43,7 +44,18 @@ export default function SchedulesPage() {
         <Breadcrumbs items={[{ label: 'Schedule & Pricing' }]} />
       </div>
 
+      <SchedulesAnchorNav />
+
       <ProgramsSection onRegister={setSelectedProgram} />
+
+      <HorizonDivider />
+
+      <PrivateCoachingSection
+        coaches={year2026Data.privateCoaching}
+        monthlyPrograms={year2026Data.monthlyPrograms}
+        discounts={year2026Data.discounts}
+        scholarships={year2026Data.scholarships}
+      />
 
       <HorizonDivider />
 
@@ -55,15 +67,6 @@ export default function SchedulesPage() {
       <HorizonDivider />
 
       <LeaguesSection />
-
-      <HorizonDivider />
-
-      <PrivateCoachingSection
-        coaches={year2026Data.privateCoaching}
-        monthlyPrograms={year2026Data.monthlyPrograms}
-        discounts={year2026Data.discounts}
-        scholarships={year2026Data.scholarships}
-      />
 
       <HorizonDivider />
 
@@ -87,7 +90,7 @@ export default function SchedulesPage() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center bg-transparent text-white border border-white/50 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-2"
+              className="inline-flex items-center justify-center bg-transparent text-white border border-white/50 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2"
             >
               Contact Us
             </Link>
