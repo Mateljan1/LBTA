@@ -51,6 +51,14 @@
 | Using Tailwind classes not in config (e.g. lbta-tan) | Use only defined tokens: `lbta-beige` or `brand-sandstone` for warm backgrounds; grep tailwind.config before adding custom color classes. |
 | Error/required text using raw red (text-red-400, text-red-500, text-red-800) | Use `text-lbta-red` for error messages and required indicators (asterisks) so error state matches brand palette. |
 | HorizonDivider with optional `as` prop | Component always renders `<hr>`; use `variant` and `className` only. No `as` prop (YAGNI). |
+| Framer Motion entrance without reduced-motion gate | AnimatedSection (and any component using motion initial/whileInView) runs JS-driven animation; `globals.css` reduced-motion only affects CSS. | Use Framer’s `useReducedMotion()`; when true render a plain `<div>` (or motion with `duration: 0` / no motion) so entrance respects user preference. |
+| Hardcoded section paragraphs when data exists | FounderSection (or any section) with fixed `<p>` text while a data field (e.g. `founder.bio`) holds the same content. | Drive copy from data: e.g. `founder.bio.split(/(?<=\.)\s+/).filter(Boolean).map(...)` or `bioParagraphs` in JSON; single source of truth. |
+| Full client page when only some parts need client | Page with `'use client'` so schema and all sections run on client; only hero, nav, StickyCTA need interactivity. | Make page a Server Component; render JSON-LD (and static shell) on server; wrap interactive parts in one client component (e.g. CoachesPageClient). |
+| Schema builder assuming required fields | getCoachesForSchema() (or any JSON-LD builder) using `coach.image` or `coach.schemaDescription` without guard. | Guard optional fields: only add `image` when present; use `description: coach.schemaDescription ?? coach.bio ?? ''`; use `process.env.NEXT_PUBLIC_SITE_URL` with fallback for base URL. |
+| List key by name only | `key={coach.name}` when slug or order is available; names can duplicate or one coach has null slug. | Use stable, unique key: `key={coach.slug ?? \`order-${coach.order}\`}` (or slug-only when guaranteed unique). |
+| New code using lbta-slate for secondary text | FounderSection, CoachCard using `text-lbta-slate`; .cursorrules say new code should use brand-*. | Use `text-brand-pacific-dusk/70` (or appropriate opacity) for secondary text and pills. |
+| CTA focus ring too weak on dark | `focus:ring-white/30` on dark section; may fail focus-indicator contrast. | Use `focus:ring-white` or `focus:ring-white/60` so focus meets 3:1 (or rely on global focus-visible). |
+| Anchor sections without scroll-margin | Sticky in-page nav; sections with id=#leadership, #team, #book; scroll lands with heading under nav. | Add `scroll-mt-28` (or equivalent) to section roots that are anchor targets; consistent with SchedulesAnchorNav. |
 
 ---
 
@@ -94,6 +102,12 @@
 | Decorative SVG in links/buttons | Icons (arrows, chevrons) that are purely visual | Add `aria-hidden="true"` to the `<svg>` so assistive tech skips them. |
 | Error/required text | Form error messages and required field indicators | Use `text-lbta-red`; error boxes use `bg-lbta-red/5 border-lbta-red/20` (no raw red-50/red-200). |
 | HorizonDivider | Section divider per Brand Guide | Always renders `<hr>`; use `variant="thin"` (or default) and `className`; no `as` prop. |
+| AnimatedSection useReducedMotion | Any Framer Motion entrance (initial/whileInView) in a shared component | Call `useReducedMotion()`; when true render `<div className={...}>{children}</div>` with no motion so CSS reduced-motion isn’t enough (motion is JS). |
+| Server Component + client island for JSON-LD | Page that needs JSON-LD in initial HTML and interactive sections | Server page: call getSchema(), render `<script type="application/ld+json">`; render single client wrapper (e.g. PageClient) that contains nav, hero, sections, StickyCTA. |
+| Section copy from data | Section with narrative/paragraphs that exist in a data field | Use data (e.g. `founder.bio`) and split/format in component; avoid hardcoded paragraphs that duplicate or drift from data. |
+| Schema builder defensive + env | Building JSON-LD (Person, ItemList, etc.) from app data | Guard optional fields (image, url); description fallback (schemaDescription ?? bio ?? ''); base URL from process.env.NEXT_PUBLIC_SITE_URL with fallback. |
+| Stable list keys | Mapping over list items that have slug or order | Use `key={item.slug ?? \`order-${item.order}\`}` (or slug when unique) so keys are stable and unique. |
+| Anchor section scroll-margin | In-page anchor nav with sticky bar; sections have id for #hash links | Add `scroll-mt-28` (or match nav height) to section roots so scroll-to-section doesn’t hide heading under nav. |
 
 ---
 
@@ -135,6 +149,10 @@
 | Only use Tailwind color classes defined in config (no lbta-tan, etc.) | Should |
 | Error/required text: use text-lbta-red (not raw text-red-*) | Should |
 | Verify error text contrast for WCAG AAA (7:1) when using lbta-red on light backgrounds | Should — use WebAIM Contrast Checker; lbta-red #F04E23 on morning-light #FAF8F4 may be below 7:1; add a darker semantic error token if needed. |
+| Framer Motion entrance (AnimatedSection, etc.) must respect useReducedMotion() | Must — JS-driven motion is not gated by CSS prefers-reduced-motion; use useReducedMotion() and render static when true. |
+| JSON-LD rendered on server when page can be Server Component | Should — schema in initial HTML; smaller client bundle; run getSchema() on server. |
+| Schema builders guard optional fields (image, description) and use env for base URL | Should — avoid runtime throw; description fallback; NEXT_PUBLIC_SITE_URL with fallback. |
+| Anchor sections (targets of in-page nav) have scroll-margin-top so heading isn’t under sticky nav | Should — add scroll-mt-28 (or equivalent) to section roots. |
 
 ---
 
@@ -167,6 +185,14 @@
 - Using Tailwind color classes not in config (e.g. lbta-tan); use lbta-beige or brand-sandstone
 - Error/required text with raw text-red-*; use text-lbta-red and brand error box (bg-lbta-red/5 border-lbta-red/20)
 - HorizonDivider with `as` prop; component always renders `<hr>`, no `as` prop
+- AnimatedSection (or any Framer Motion entrance) without useReducedMotion() — JS motion not gated by CSS reduced-motion
+- Hardcoded section paragraphs when the same content exists in data (e.g. founder.bio); breaks single source of truth
+- Full client page when only hero/nav/StickyCTA need client; schema and static sections should be server-rendered
+- Schema builder using coach.image or optional fields without guard (throws if missing); use fallbacks and env for base URL
+- List key by name only when slug or order is available (use slug ?? `order-${order}` for stable unique keys)
+- New components using text-lbta-slate; use text-brand-pacific-dusk/70 for secondary text (brand-* in new code)
+- CTA focus ring too weak on dark (ring-white/30); use ring-white or ring-white/60 for focus contrast
+- Anchor section targets (#leadership, #team, #book) without scroll-mt-* so sticky nav hides heading
 
 ---
 
@@ -216,3 +242,4 @@
 | 2026-03-09 | Compound work: error text + contrast + HorizonDivider docs | **Contrast:** lbta-red (#F04E23) on morning-light (#FAF8F4) may be below WCAG AAA 7:1 — verify with WebAIM; add darker error token if needed. **Standardized:** NewsletterForm, TrialBookingModal, LuxuryYearModal use text-lbta-red for error/required; error boxes use bg-lbta-red/5 border-lbta-red/20. **HorizonDivider:** Docs updated — always renders `<hr>`, no `as` prop (YAGNI). |
 | 2026-03-09 | `/compound:learn` (full run) | **Extraction:** From compound work (error text, contrast, HorizonDivider). **corrections.jsonl:** +4 (error/required → text-lbta-red; error box tokens; HorizonDivider no as; lbta-red contrast verify). **anti-patterns.json:** +2 (error-text-raw-red, horizon-divider-as-prop). quality-bars.json and patterns.json already updated in same session. |
 | 2026-03-09 | Optional: internal tools lbta-red + `/compound:learn` | **Work:** AnalyticsDashboard and ComprehensiveFormTester — all raw red (text-red-600, bg-red-50, border-red-200, etc.) replaced with text-lbta-red, bg-lbta-red/5, border-lbta-red/20, bg-lbta-red/10. **Learn:** corrections.jsonl +1 (internal tools use lbta-red for error/destructive UI for brand consistency). |
+| 2026-03-09 | `/compound:learn` after coaches overhaul review + fixes | **Scope:** Coaches page overhaul (data/coaches.json, lib/coaches-data.ts, components/coaches/*, app/coaches). **Review:** 78/100; 1 critical (AnimatedSection not gated by reduced motion), 8 warnings. **Fixes applied:** AnimatedSection useReducedMotion(); FounderSection from founder.bio + brand tokens; Server Component page + CoachesPageClient island; getCoachesForSchema guards + SITE_URL env; stable list keys; CTA focus ring; scroll-mt-28 on anchor sections; CoachCard brand tokens. **Learnings:** 9 corrections (Framer Motion entrance useReducedMotion; hardcoded section copy → data; full client → server + island; schema builder guards + env; stable list keys; lbta-slate → brand-*; CTA focus on dark; anchor scroll-margin). 6 patterns (AnimatedSection useReducedMotion; Server Component + client island for JSON-LD; section copy from data; schema defensive + env; stable list keys; anchor scroll-margin). 5 standards; 9 anti-patterns. quality-bars and .cursor/compound/learnings/*.json updated. |

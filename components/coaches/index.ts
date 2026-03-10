@@ -1,0 +1,6 @@
+export { default as CoachesHero } from './CoachesHero'
+export { default as FounderSection } from './FounderSection'
+export { default as CoachCard } from './CoachCard'
+export { default as CoachingTeamSection } from './CoachingTeamSection'
+export { default as CoachesCTA } from './CoachesCTA'
+export { default as CoachesAnchorNav } from './CoachesAnchorNav'

@@ -32,6 +32,22 @@
       "rule": "Animated sections respect useReducedMotion(); static fallback when true",
       "enforcement": "should"
     },
+    "framerMotionEntranceReducedMotion": {
+      "rule": "Framer Motion entrance (AnimatedSection, initial/whileInView) must use useReducedMotion(); when true render plain div — JS motion not gated by CSS",
+      "enforcement": "must"
+    },
+    "jsonLdOnServer": {
+      "rule": "When page can be Server Component, render JSON-LD on server (schema in initial HTML)",
+      "enforcement": "should"
+    },
+    "schemaBuilderGuards": {
+      "rule": "Schema builders guard optional fields (image, description fallback); use env for base URL (NEXT_PUBLIC_SITE_URL with fallback)",
+      "enforcement": "should"
+    },
+    "anchorSectionScrollMargin": {
+      "rule": "Anchor section targets (#hash) have scroll-mt-28 (or match nav height) when sticky in-page nav is present",
+      "enforcement": "should"
+    },
     "noUnusedStateRefs": {
       "rule": "Remove unused state and refs before merge",
       "enforcement": "should"

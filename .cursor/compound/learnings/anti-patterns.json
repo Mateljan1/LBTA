@@ -3,6 +3,62 @@
   "updated": "2026-03-09",
   "antiPatterns": [
     {
+      "id": "animated-section-without-reduced-motion",
+      "description": "AnimatedSection or any Framer Motion entrance without useReducedMotion()",
+      "avoid": "motion.div with initial/whileInView and no reduceMotion check; globals.css only affects CSS, not JS-driven motion",
+      "instead": "useReducedMotion(); when true render plain div (or motion with duration: 0); when false use motion props",
+      "tags": ["a11y", "motion", "framer-motion"]
+    },
+    {
+      "id": "hardcoded-section-copy-with-data",
+      "description": "Section with hardcoded paragraphs when same content exists in data",
+      "avoid": "FounderSection with three fixed <p> while founder.bio holds the text",
+      "instead": "Drive from data: founder.bio.split(/(?<=.)\\s+/).filter(Boolean).map(...) or bioParagraphs in JSON",
+      "tags": ["single-source", "data-integrity"]
+    },
+    {
+      "id": "full-client-page-when-server-possible",
+      "description": "Entire page is client when only some parts need interactivity",
+      "avoid": "'use client' on page so schema and all sections run on client",
+      "instead": "Server Component page: render JSON-LD on server; single client wrapper (e.g. PageClient) for nav, hero, StickyCTA",
+      "tags": ["performance", "architecture", "nextjs"]
+    },
+    {
+      "id": "list-key-unstable",
+      "description": "List key by name when slug or order is available",
+      "avoid": "key={coach.name} when coach.slug or coach.order exist; names can duplicate or slug null",
+      "instead": "key={coach.slug ?? `order-${coach.order}`} for stable unique keys",
+      "tags": ["react", "lists", "keys"]
+    },
+    {
+      "id": "schema-builder-no-guards",
+      "description": "JSON-LD builder using optional fields without guard or fallback",
+      "avoid": "coach.image.startsWith('http') without check; description: coach.schemaDescription with no fallback; hardcoded SITE_URL",
+      "instead": "Guard image; description: coach.schemaDescription ?? coach.bio ?? ''; SITE_URL from process.env.NEXT_PUBLIC_SITE_URL with fallback",
+      "tags": ["data-integrity", "schema", "env"]
+    },
+    {
+      "id": "anchor-section-no-scroll-margin",
+      "description": "Anchor targets (#hash) without scroll-margin when sticky nav is present",
+      "avoid": "Section id=\"team\" with no scroll-mt; scroll lands with heading under sticky nav",
+      "instead": "Add scroll-mt-28 (or match nav height) to section roots that are anchor targets",
+      "tags": ["a11y", "ux", "anchor-nav"]
+    },
+    {
+      "id": "cta-focus-weak-on-dark",
+      "description": "Focus ring too weak on dark background (e.g. ring-white/30)",
+      "avoid": "focus:ring-white/30 on DarkSection CTAs; may fail focus-indicator contrast",
+      "instead": "focus:ring-white or focus:ring-white/60; or rely on global focus-visible",
+      "tags": ["a11y", "contrast", "focus"]
+    },
+    {
+      "id": "new-code-lbta-slate",
+      "description": "New components using text-lbta-slate instead of brand tokens",
+      "avoid": "text-lbta-slate in new CoachCard, FounderSection; .cursorrules say new code use brand-*",
+      "instead": "text-brand-pacific-dusk/70 (or appropriate opacity) for secondary text",
+      "tags": ["brand", "cursorrules"]
+    },
+    {
       "id": "hardcoded-prices",
       "description": "Hardcoding prices or tier amounts in components",
       "avoid": "PricingComparison tiers with $50, $546 in TSX; LeaguesSection $48/year in copy",

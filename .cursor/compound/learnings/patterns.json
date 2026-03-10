@@ -39,6 +39,42 @@
       "tags": ["a11y", "motion"]
     },
     {
+      "name": "animated-section-use-reduced-motion",
+      "when": "Shared component (e.g. AnimatedSection) uses Framer Motion initial/whileInView",
+      "example": "useReducedMotion(); if (reduceMotion) return <div className={...}>{children}</div>; else return motion.div with animation props. CSS reduced-motion does not gate JS motion.",
+      "tags": ["a11y", "motion", "framer-motion"]
+    },
+    {
+      "name": "server-component-json-ld-client-island",
+      "when": "Page needs JSON-LD in initial HTML and interactive sections (nav, hero, StickyCTA)",
+      "example": "Server page: getCoachesForSchema(); <script type=\"application/ld+json\" dangerouslySetInnerHTML={...} />; <CoachesPageClient />. Client wrapper contains only interactive parts.",
+      "tags": ["nextjs", "performance", "seo"]
+    },
+    {
+      "name": "section-copy-from-data",
+      "when": "Section displays narrative/paragraphs that exist in a data field",
+      "example": "founder.bio.split(/(?<=.)\\s+/).filter(Boolean).map((p, i) => <p key={i}>{p.trim()}</p>); or bioParagraphs array in JSON",
+      "tags": ["single-source", "data-integrity"]
+    },
+    {
+      "name": "schema-builder-defensive-env",
+      "when": "Building JSON-LD (Person, ItemList) from app data",
+      "example": "Guard image (only add when present); description: schemaDescription ?? bio ?? ''; base URL from process.env.NEXT_PUBLIC_SITE_URL ?? 'https://...'",
+      "tags": ["schema", "data-integrity", "env"]
+    },
+    {
+      "name": "stable-list-keys",
+      "when": "Mapping over items that have slug or order",
+      "example": "key={coach.slug ?? `order-${coach.order}`} so keys are stable and unique",
+      "tags": ["react", "lists"]
+    },
+    {
+      "name": "anchor-section-scroll-margin",
+      "when": "In-page anchor nav with sticky bar; sections have id for #hash links",
+      "example": "Add scroll-mt-28 to section roots (CoachesHero, CoachingTeamSection, CoachesCTA) so scroll-to-section does not hide heading under nav",
+      "tags": ["a11y", "ux", "anchor-nav"]
+    },
+    {
       "name": "next-image-logos",
       "when": "Displaying logos or partner images (not tracking pixel)",
       "example": "Next/Image with width, height, descriptive alt (ChatWidget logo, PartnershipSection)",
