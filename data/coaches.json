@@ -30,21 +30,6 @@
       "schemaDescription": "USPTR-certified professional with 25+ years developing players from junior foundations to collegiate competition. NCAA D1 at Lafayette College."
     },
     {
-      "slug": null,
-      "name": "Michelle Bevins",
-      "title": "Youth Director",
-      "specialization": "Junior Development (Ages 3-12)",
-      "bio": "Michelle brings engaging, patient coaching that builds confidence and genuine love for tennis while developing proper technique. Specializing in Red Ball and Orange Ball certification, Michelle understands how to meet each child where they are and guide them toward their potential.",
-      "quote": "Every child can shine.",
-      "credentials": ["Youth Development Specialist", "Red/Orange Ball Certified"],
-      "image": "/images/coaches/michelle.webp",
-      "imagePosition": "50% 30%",
-      "availability": "On leave — may return Spring 2026",
-      "role": "program",
-      "order": 3,
-      "schemaDescription": "Youth Development Specialist with Red/Orange Ball Certification."
-    },
-    {
       "slug": "peter-defrantz",
       "name": "Peter DeFrantz",
       "title": "Senior Coach",
@@ -55,7 +40,7 @@
       "image": "/images/coaches/peter-defrantz.png",
       "imagePosition": "50% 30%",
       "role": "program",
-      "order": 4,
+      "order": 3,
       "schemaDescription": "Dual USPTA and PTR certified professional with 8+ years coaching in Southern California. Ranked #1 in SoCal college tennis."
     },
     {
@@ -69,7 +54,7 @@
       "image": "/images/coaches/allison-cronk.png",
       "imagePosition": "50% 25%",
       "role": "program",
-      "order": 5,
+      "order": 4,
       "schemaDescription": "Collegiate player and educator. 5+ years coaching across five academies. NCAA and NAIA tennis. B.A. History, Education minor."
     }
   ]
