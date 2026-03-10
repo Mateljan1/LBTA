@@ -7,6 +7,13 @@ export default function Footer() {
     <footer className="bg-brand-deep-water text-white">
       <NewsletterForm />
 
+      {/* JOIN OUR COMMUNITY — above main footer block */}
+      <div className="container-lbta pt-8 pb-2">
+        <h2 className="text-center font-headline text-[clamp(1.5rem,4vw,2rem)] font-light text-white/80 tracking-wide">
+          JOIN OUR COMMUNITY
+        </h2>
+      </div>
+
       {/* Main Footer */}
       <div className="container-lbta py-16 md:py-20">
         <div className="grid md:grid-cols-12 gap-12 md:gap-8">

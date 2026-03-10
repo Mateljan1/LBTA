@@ -59,7 +59,10 @@ export const metadata = {
   },
 }
 
+type WhyChooseCopy = { headline: string; subline: string; image1: string; image2: string; image1Alt: string; image2Alt: string }
+
 export default function Home() {
+  const whyChoose = (homepageCopy as { whyChoose?: WhyChooseCopy }).whyChoose
   return (
     <>
       <Script id="local-business-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
@@ -216,6 +219,47 @@ export default function Home() {
         </div>
       </section>
 
+      <HorizonDivider />
+      <section id="why-choose" className="bg-brand-sandstone section-lg">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-headline text-headline font-light mb-4">
+              {whyChoose?.headline ?? 'Why Choose Laguna Beach Tennis Academy'}
+            </h2>
+            <p className="text-subhead max-w-2xl mx-auto font-light text-brand-pacific-dusk">
+              {whyChoose?.subline ?? ''}
+            </p>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <AnimatedSection delay={100}>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
+                <Image
+                  src={whyChoose?.image1 ?? '/images/why-choose/why-choose-1.webp'}
+                  alt={whyChoose?.image1Alt ?? 'LBTA coach and players on court'}
+                  fill
+                  className="object-cover image-zoom"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={90}
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={200}>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
+                <Image
+                  src={whyChoose?.image2 ?? '/images/why-choose/why-choose-2.webp'}
+                  alt={whyChoose?.image2Alt ?? 'Laguna Beach tennis facility and community'}
+                  fill
+                  className="object-cover image-zoom"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={90}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <HorizonDivider />
       <section id="destination" className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image src="/images/hero/laguna-horizon.webp" alt="Laguna Beach tennis courts with ocean view" fill className="object-cover" sizes="100vw" quality={90} />

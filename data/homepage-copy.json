@@ -51,12 +51,20 @@
     "headline": "Pathways for Every Player",
     "subline": "From first serves to tournament play, we have a program for you.",
     "items": [
-      { "title": "Junior Pathway", "description": "From red ball to college prep.", "link": "/programs/junior" },
-      { "title": "Adult Training", "description": "Focused development for any level.", "link": "/programs/adult" },
+      { "title": "Junior Programs", "description": "From red ball to college prep.", "link": "/programs/junior" },
+      { "title": "Adult Programs", "description": "Focused development for any level.", "link": "/programs/adult" },
       { "title": "Private Coaching", "description": "Personal sessions built around your goals.", "link": "/book" }
     ],
     "ctaSecondary": "View All Programs",
     "ctaSecondaryHref": "/programs"
+  },
+  "whyChoose": {
+    "headline": "Why Choose Laguna Beach Tennis Academy",
+    "subline": "Movement-first coaching, clear pathways from first swings to college and beyond, and a community built on respect and accountability.",
+    "image1": "/images/why-choose/why-choose-1.webp",
+    "image2": "/images/why-choose/why-choose-2.webp",
+    "image1Alt": "LBTA coach and players on court",
+    "image2Alt": "Laguna Beach tennis facility and community"
   },
   "destination": {
     "headline": "Train where focus meets horizon.",
