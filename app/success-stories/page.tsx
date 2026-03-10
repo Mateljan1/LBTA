@@ -40,7 +40,7 @@ const successStories = [
     title: 'Adult Beginner Program',
     achievement: '4.0 USTA Rating in 18 Months',
     image: '/images/community/community-1.webp',
-    quote: "At 45, I thought it was too late to learn tennis properly. Allison and the team proved me wrong. I went from never holding a racquet to competing in USTA leagues.",
+    quote: "At 45, I thought it was too late to learn tennis properly. Michelle and the team proved me wrong. I went from never holding a racquet to competing in USTA leagues.",
     story: "David joined our Adult Beginner program with zero tennis experience. Through consistent twice-weekly sessions and our progressive curriculum, he developed strong fundamentals and now competes in local USTA 4.0 leagues.",
     featured: false,
   },

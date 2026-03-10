@@ -41,17 +41,17 @@ function PathwayPlannerInteractive() {
       pathway.program = 'Little Tennis Stars'
       pathway.nextProgram = 'Red Ball Tennis'
       pathway.timeline = '1-2 years to progress'
-      pathway.coach = 'Allison Cronk'
+      pathway.coach = 'Michelle Bevins'
     } else if (formData.age === '5-7') {
       pathway.program = formData.experience === 'never-played' ? 'Red Ball Tennis' : 'Orange Ball Tennis'
       pathway.nextProgram = 'Green Dot Tennis'
       pathway.timeline = '2-3 years to competitive level'
-      pathway.coach = 'Allison Cronk'
+      pathway.coach = 'Michelle Bevins'
     } else if (formData.age === '7-9') {
       pathway.program = formData.experience === 'advanced' ? 'Green Dot Tennis' : 'Orange Ball Tennis'
       pathway.nextProgram = 'Youth Development'
       pathway.timeline = '2-4 years to high school varsity'
-      pathway.coach = 'Allison Cronk or Robert LeBuhn'
+      pathway.coach = 'Michelle Bevins or Robert LeBuhn'
     } else if (formData.age === '9-11') {
       pathway.program = 'Green Dot Tennis'
       pathway.nextProgram = 'Youth Development → High Performance'

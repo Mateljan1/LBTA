@@ -12,7 +12,7 @@ export default function FounderSection() {
     <section className="bg-white py-20 md:py-32" id="leadership-content">
       <div className="max-w-[1400px] mx-auto px-6 md:px-16">
         <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-start">
-          <AnimatedSection>
+          <AnimatedSection className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
               <Image
                 src={founder.image}
@@ -22,6 +22,14 @@ export default function FounderSection() {
                 style={{ objectPosition: founder.imagePosition }}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 quality={95}
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 bg-white p-6 md:p-8 shadow-lg max-w-[280px] md:max-w-[320px]">
+              <PullQuote
+                quote={founder.quoteExtended ?? founder.quote}
+                attribution={founder.name}
+                variant="light"
+                className="!mb-0 !py-0"
               />
             </div>
           </AnimatedSection>
@@ -42,15 +50,9 @@ export default function FounderSection() {
                   {founder.name}
                 </h2>
               )}
-              <p className="font-sans text-[14px] text-brand-pacific-dusk/70 mb-6">
+              <p className="font-sans text-[14px] text-brand-pacific-dusk/70 mb-8">
                 {founder.specialization}
               </p>
-              <PullQuote
-                quote={founder.quoteExtended ?? founder.quote}
-                attribution={founder.name}
-                variant="light"
-                className="mb-8"
-              />
             </AnimatedSection>
 
             <AnimatedSection delay={200}>

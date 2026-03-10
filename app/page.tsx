@@ -76,7 +76,7 @@ export default function Home() {
             <AnimatedSection>
               <div className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden rounded-subtle">
                 <Image
-                  src="/images/founder/andrew-portrait.webp"
+                  src="/images/coaches/andrew-headshot.png"
                   alt="Andrew Mateljan, Founder & Head Coach"
                   fill
                   priority

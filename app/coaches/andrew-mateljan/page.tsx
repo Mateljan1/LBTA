@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Mail, Phone } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Andrew Mateljan — Founder & Head Coach | Laguna Beach Tennis Academy',
     description: '25 years of tennis coaching experience. Former top-ranked junior, ATP/WTA tour coach, and founder of LBTA. Currently coaching ATP #262 Karue Sell.',
     type: 'website',
-    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
+    images: [{ url: '/images/coaches/andrew-headshot.png', width: 800, height: 1000, alt: 'Andrew Mateljan, Founder & Head Coach' }],
   },
 }
 
@@ -62,15 +63,30 @@ export default function AndrewMateljanPage() {
       
       {/* Hero */}
       <section className="relative bg-white pt-32 pb-20">
-        <div className="container-narrow text-center">
-          <AnimatedSection>
-            <h1 className="text-display-lg heading-display mb-6">
-              Andrew Mateljan
-            </h1>
-            <p className="text-xl font-sans font-light text-gray-600 leading-relaxed">
-              ATP/WTA Coach. Founder. Building championship-level players for 25 years.
-            </p>
-          </AnimatedSection>
+        <div className="container-narrow">
+          <div className="grid md:grid-cols-[200px_1fr] gap-10 items-start">
+            <AnimatedSection className="relative aspect-[200/260] overflow-hidden rounded-xl border border-black/5 shrink-0">
+              <Image
+                src="/images/coaches/andrew-headshot.png"
+                alt="Andrew Mateljan, Founder & Head Coach at Laguna Beach Tennis Academy"
+                fill
+                className="object-cover object-top"
+                sizes="200px"
+                quality={90}
+              />
+            </AnimatedSection>
+            <div>
+              <AnimatedSection>
+                <p className="font-sans text-[10px] font-semibold uppercase tracking-widest text-brand-thousand-steps mb-2">Founder & Director</p>
+                <h1 className="text-display-lg heading-display mb-2">
+                  Andrew Mateljan
+                </h1>
+                <p className="text-xl font-sans font-light text-gray-600 leading-relaxed">
+                  ATP/WTA Coach. Founder. Building championship-level players for 25 years.
+                </p>
+              </AnimatedSection>
+            </div>
+          </div>
         </div>
       </section>
 

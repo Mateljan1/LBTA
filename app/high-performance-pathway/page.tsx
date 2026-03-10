@@ -179,7 +179,7 @@ export default function HighPerformancePathwayPage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
-                src="/images/founder/andrew-portrait.webp"
+                src="/images/coaches/andrew-headshot.png"
                 alt="Andrew Mateljan - ATP/WTA Tour Coach"
                 fill
                 className="object-cover"
