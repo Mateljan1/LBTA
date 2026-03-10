@@ -22,7 +22,7 @@ export default function PullQuote({
     ? 'font-sans text-body-sm text-white/70 mt-2'
     : 'font-sans text-body-sm text-brand-pacific-dusk/70 mt-2'
   return (
-    <blockquote className={`section-quote ${className}`}>
+    <blockquote className={`section-quote text-left ${className}`}>
       <p className={quoteClass}>{quote}</p>
       {attribution && <footer className={attrClass}>— {attribution}</footer>}
     </blockquote>

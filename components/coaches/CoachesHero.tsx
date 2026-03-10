@@ -26,7 +26,7 @@ export default function CoachesHero() {
   return (
     <section
       id="leadership"
-      className="relative min-h-[60vh] md:min-h-[75vh] flex items-end overflow-hidden scroll-mt-28"
+      className="relative min-h-[65vh] md:min-h-[78vh] flex items-end overflow-hidden scroll-mt-28"
     >
       <div className="absolute inset-0">
         <Image
@@ -34,7 +34,7 @@ export default function CoachesHero() {
           alt="Laguna Beach Tennis Academy coaches and players training together"
           fill
           priority
-          className="object-cover"
+          className="object-cover [filter:brightness(1.08)]"
           quality={90}
           style={{
             objectPosition: '50% 40%',
@@ -42,17 +42,17 @@ export default function CoachesHero() {
           }}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/85 via-black/40 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/75 via-black/25 to-transparent" aria-hidden="true" />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-16 pb-16 md:pb-24">
-        <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/70 uppercase tracking-[0.2em] mb-4">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-16 pb-20 md:pb-32 pt-8">
+        <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/80 uppercase tracking-[0.2em] mb-4">
           Our Team
         </p>
         <h1 className="font-headline text-[42px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-[-0.02em]">
           The Coaches
         </h1>
-        <p className="font-sans text-[16px] md:text-[18px] text-white/85 max-w-[600px] leading-[1.7]">
+        <p className="font-sans text-[16px] md:text-[18px] text-white/90 max-w-[600px] leading-[1.75]">
           ATP/WTA-trained coaches who understand that tennis teaches more than technique. Movement. Craft. Community.
         </p>
       </div>

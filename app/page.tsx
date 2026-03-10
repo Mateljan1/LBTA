@@ -72,22 +72,22 @@ export default function Home() {
       <HorizonDivider />
       <section id="founder" className="bg-brand-morning-light section-lg">
         <div className="container-lbta">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center pt-16">
+          <div className="grid lg:grid-cols-[minmax(0,0.45fr)_1fr] gap-12 lg:gap-20 items-start pt-16">
             <AnimatedSection>
-              <div className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden rounded-subtle">
+              <div className="relative aspect-[3/4] max-w-[480px] mx-auto lg:mx-0 overflow-hidden rounded-subtle [filter:brightness(1.12)_contrast(1.05)]">
                 <Image
                   src="/images/coaches/andrew-headshot.png"
                   alt="Andrew Mateljan, Founder & Head Coach"
                   fill
                   priority
                   className="object-cover"
-                  style={{ objectPosition: '50% 25%' }}
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  style={{ objectPosition: '50% 40%' }}
+                  sizes="(max-width: 1024px) 100vw, 45vw"
                   quality={90}
                 />
               </div>
             </AnimatedSection>
-            <div className="lg:py-8">
+            <div className="lg:py-8 w-full text-left">
               <AnimatedSection delay={100}>
                 <span className="text-eyebrow mb-4 block">{homepageCopy.founder.eyebrow}</span>
               </AnimatedSection>

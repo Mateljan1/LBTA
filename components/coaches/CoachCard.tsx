@@ -78,19 +78,19 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
 
   if (variant === 'featured') {
     return (
-      <div className="grid lg:grid-cols-[1fr,1.5fr] gap-8 md:gap-12 items-start bg-white rounded-lg overflow-hidden">
-        <div className="relative aspect-[4/5] lg:aspect-auto lg:h-full min-h-[400px]">
+      <div className="grid lg:grid-cols-[minmax(0,320px)_1fr] gap-8 md:gap-12 items-start bg-white rounded-lg overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+        <div className="relative aspect-[3/4] w-full max-w-[320px] mx-auto lg:mx-0 lg:max-w-none">
           <Image
             src={coach.image}
             alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
             fill
             className="object-cover"
             style={{ objectPosition: coach.imagePosition }}
-            sizes="(max-width: 1024px) 100vw, 40vw"
+            sizes="(max-width: 1024px) 100vw, 320px"
             quality={90}
           />
         </div>
-        <div className="p-8 md:p-12 lg:py-16">
+        <div className="p-8 md:p-10 lg:py-12 flex flex-col justify-center min-h-0 text-left">
           <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-3">
             {coach.title}
           </p>

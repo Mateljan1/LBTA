@@ -64,14 +64,15 @@ export default function AndrewMateljanPage() {
       {/* Hero */}
       <section className="relative bg-white pt-32 pb-20">
         <div className="container-narrow">
-          <div className="grid md:grid-cols-[200px_1fr] gap-10 items-start">
-            <AnimatedSection className="relative aspect-[200/260] overflow-hidden rounded-xl border border-black/5 shrink-0">
+          <div className="grid md:grid-cols-[minmax(240px,320px)_1fr] gap-10 md:gap-14 items-start">
+            <AnimatedSection className="relative aspect-[3/4] overflow-hidden rounded-xl border border-black/5 shrink-0 max-w-[320px] [filter:brightness(1.12)_contrast(1.05)]">
               <Image
                 src="/images/coaches/andrew-headshot.png"
                 alt="Andrew Mateljan, Founder & Head Coach at Laguna Beach Tennis Academy"
                 fill
-                className="object-cover object-top"
-                sizes="200px"
+                className="object-cover"
+                style={{ objectPosition: '50% 40%' }}
+                sizes="(max-width: 768px) 240px, 320px"
                 quality={90}
               />
             </AnimatedSection>
