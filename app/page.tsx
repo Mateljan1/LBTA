@@ -69,25 +69,27 @@ export default function Home() {
 
       <HomeHero />
 
-      <HorizonDivider />
+      <HorizonDivider animate />
       <section id="founder" className="bg-brand-morning-light section-lg">
         <div className="container-lbta">
-          <div className="grid lg:grid-cols-[minmax(0,0.45fr)_1fr] gap-12 lg:gap-20 items-start pt-16">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center pt-16">
             <AnimatedSection>
-              <div className="relative aspect-[3/4] max-w-[480px] mx-auto lg:mx-0 overflow-hidden rounded-subtle [filter:brightness(1.12)_contrast(1.05)]">
-                <Image
-                  src="/images/coaches/andrew-headshot.png"
-                  alt="Andrew Mateljan, Founder & Head Coach"
-                  fill
-                  priority
-                  className="object-cover"
-                  style={{ objectPosition: '50% 40%' }}
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  quality={90}
-                />
+              <div className="bracket relative max-w-[480px] mx-auto lg:mx-0">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-subtle">
+                  <Image
+                    src="/images/coaches/andrew-headshot.png"
+                    alt="Andrew Mateljan, Founder & Head Coach"
+                    fill
+                    priority
+                    className="object-cover"
+                    style={{ objectPosition: '50% 40%' }}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    quality={90}
+                  />
+                </div>
               </div>
             </AnimatedSection>
-            <div className="lg:py-8 w-full text-left">
+            <div className="lg:py-8">
               <AnimatedSection delay={100}>
                 <span className="text-eyebrow mb-4 block">{homepageCopy.founder.eyebrow}</span>
               </AnimatedSection>
@@ -110,13 +112,37 @@ export default function Home() {
                 />
               </AnimatedSection>
               <AnimatedSection delay={600}>
-                <Link href={homepageCopy.founder.ctaSecondaryHref} className="btn-ghost inline-flex items-center min-h-[48px]">
+                <Link href={homepageCopy.founder.ctaSecondaryHref} className="btn-horizon">
                   <span>{homepageCopy.founder.ctaSecondary}</span>
-                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <svg className="w-4 h-4 ml-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
               </AnimatedSection>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <HorizonDivider animate />
+      <section id="stat-strip" className="bg-brand-deep-water py-12 md:py-14" aria-label="Academy at a glance">
+        <div className="container-lbta">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
+            <div className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10">
+              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">{siteStats.trustStats.yearsExperience}</p>
+              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">Years Experience</p>
+            </div>
+            <div className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10">
+              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">{siteStats.trustStats.playersCount}</p>
+              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">Players Coached</p>
+            </div>
+            <div className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10">
+              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">{siteStats.trustStats.rating}</p>
+              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">Google Rating</p>
+            </div>
+            <div className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10">
+              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">{siteStats.trustStats.reviewCount}</p>
+              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">Reviews</p>
             </div>
           </div>
         </div>
@@ -160,7 +186,7 @@ export default function Home() {
         </div>
       </section>
 
-      <HorizonDivider />
+      <HorizonDivider animate />
       <section id="philosophy" className="bg-brand-morning-light section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
@@ -187,7 +213,7 @@ export default function Home() {
         </div>
       </section>
 
-      <HorizonDivider />
+      <HorizonDivider animate />
       <section id="programs" className="bg-white section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-16">
@@ -212,14 +238,14 @@ export default function Home() {
             })}
           </div>
           <AnimatedSection className="text-center">
-            <Link href={homepageCopy.programs.ctaSecondaryHref} className="btn-secondary">
+            <Link href={homepageCopy.programs.ctaSecondaryHref} className="btn-horizon">
               <span>{homepageCopy.programs.ctaSecondary}</span>
             </Link>
           </AnimatedSection>
         </div>
       </section>
 
-      <HorizonDivider />
+      <HorizonDivider animate />
       <section id="why-choose" className="bg-brand-sandstone section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-12">
@@ -259,7 +285,7 @@ export default function Home() {
         </div>
       </section>
 
-      <HorizonDivider />
+      <HorizonDivider animate />
       <section id="destination" className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image src="/images/hero/laguna-horizon.webp" alt="Laguna Beach tennis courts with ocean view" fill className="object-cover" sizes="100vw" quality={90} />
@@ -273,7 +299,7 @@ export default function Home() {
         </div>
       </section>
 
-      <HorizonDivider />
+      <HorizonDivider animate />
       <section id="community" className="bg-white section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-12">

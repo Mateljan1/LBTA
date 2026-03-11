@@ -28,7 +28,7 @@ export default function HomeHero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[70vh] md:min-h-screen flex flex-col justify-end overflow-hidden"
     >
       <video
         autoPlay
@@ -45,9 +45,13 @@ export default function HomeHero() {
       >
         <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" aria-hidden="true" />
+      <div
+        className="absolute inset-0"
+        style={{ background: 'var(--golden-hour-overlay)' }}
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
+      <div className="relative z-10 text-left text-white px-6 md:px-12 lg:px-16 pb-24 md:pb-32 max-w-[600px]">
         <p className="text-eyebrow text-white/70 mb-6 text-shadow-subtle">{hero.eyebrow}</p>
         <h1 className="font-headline text-[clamp(2.5rem,8vw,5rem)] font-light leading-[1.05] tracking-[-0.02em] mb-6 text-shadow-hero">
           Tennis, as it should
@@ -56,10 +60,10 @@ export default function HomeHero() {
         <p className="font-headline text-[clamp(1.25rem,3vw,1.75rem)] font-light text-white/90 text-shadow-subtle">
           {hero.pillars}
         </p>
-        <p className="font-sans text-[clamp(1rem,2.5vw,1.25rem)] font-light text-white/80 mt-4 mb-10 text-shadow-subtle max-w-2xl mx-auto">
+        <p className="font-sans text-[clamp(1rem,2.5vw,1.25rem)] font-light text-white/80 mt-4 mb-10 text-shadow-subtle max-w-2xl">
           {hero.subline}
         </p>
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-start gap-8">
           <Link
             href={hero.ctaPrimaryHref}
             className="inline-flex items-center justify-center bg-white text-lbta-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 rounded-none hover:bg-white/90 transition-all duration-300 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
@@ -71,7 +75,7 @@ export default function HomeHero() {
 
       <button
         type="button"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center justify-center gap-2 hover:text-white/80 transition-colors duration-500 min-h-[48px] min-w-[48px] p-2 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        className="absolute bottom-8 left-6 md:left-12 flex flex-col items-center gap-2 text-white/60 hover:text-white/80 transition-colors duration-500 min-h-[48px] min-w-[48px] p-2 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         onClick={() => {
           const el = document.getElementById('founder')
           if (el) {
@@ -81,9 +85,12 @@ export default function HomeHero() {
         }}
         aria-label={hero.scrollAriaLabel}
       >
-        <svg className={`w-5 h-5 shrink-0 ${reduceMotion ? '' : 'animate-bounce'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" style={reduceMotion ? undefined : { animationDuration: '2.5s' }} aria-hidden>
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
+        <span
+          className={`block w-px h-10 bg-white/50 ${reduceMotion ? '' : 'animate-pulse'}`}
+          style={reduceMotion ? undefined : { animationDuration: '2.5s' }}
+          aria-hidden
+        />
+        <span className="font-sans text-[11px] tracking-[0.25em] uppercase">Scroll</span>
       </button>
     </section>
   )
