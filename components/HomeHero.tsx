@@ -51,8 +51,8 @@ export default function HomeHero() {
         aria-hidden="true"
       />
 
-      {/* Content area starts below fixed header (pt-20/24), pinned to bottom of that area */}
-      <div className="absolute top-20 md:top-24 left-0 right-0 bottom-0 z-10 flex flex-col justify-end px-6 md:px-12 lg:px-16 pb-24 md:pb-32 pt-12 md:pt-16">
+      {/* Content area starts below fixed header; extra top clearance so headline isn't clipped in all browsers */}
+      <div className="absolute top-24 md:top-28 left-0 right-0 bottom-0 z-10 flex flex-col justify-end px-6 md:px-12 lg:px-16 pb-24 md:pb-32 pt-16 md:pt-20">
         <div className="max-w-[600px] w-full text-left text-white [text-rendering:geometricPrecision]">
           <p className="text-eyebrow text-white/70 mb-6 text-shadow-subtle">{hero.eyebrow}</p>
           <h1 className="font-headline text-[clamp(3rem,9vw,5.25rem)] font-light leading-[1.12] tracking-[-0.02em] mb-6 text-shadow-hero block overflow-visible" style={{ marginLeft: 0, paddingLeft: 0 }}>
