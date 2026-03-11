@@ -95,7 +95,7 @@ export default function ContactPage() {
           </p>
           <button 
             type="button"
-            className="bg-white text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide hover:bg-white/90 transition-colors min-h-[48px] px-6 rounded-[2px] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+            className="bg-white text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide hover:bg-white/90 transition-colors min-h-[48px] px-6 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
             onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Get in Touch ↓
