@@ -55,9 +55,10 @@ export default function HomeHero() {
       <div className="absolute bottom-0 left-0 right-0 z-10 px-6 md:px-12 lg:px-16 pb-24 md:pb-32 pt-12 md:pt-16">
         <div className="max-w-[600px] w-full text-left text-white [text-rendering:geometricPrecision]">
           <p className="text-eyebrow text-white/70 mb-6 text-shadow-subtle">{hero.eyebrow}</p>
-          <h1 className="font-headline text-[clamp(2.5rem,8vw,5rem)] font-light leading-[1.12] tracking-[-0.02em] mb-6 text-shadow-hero block overflow-visible" style={{ marginLeft: 0, paddingLeft: 0 }}>
-            <span className="block">Tennis, as it should</span>
-            <span className="block">be taught.</span>
+          <h1 className="font-headline text-[clamp(3rem,9vw,5.25rem)] font-light leading-[1.12] tracking-[-0.02em] mb-6 text-shadow-hero block overflow-visible" style={{ marginLeft: 0, paddingLeft: 0 }}>
+            {(hero.tagline ?? 'Tennis, as it should be taught.').split('\n').map((line, i) => (
+              <span key={i} className="block">{line}</span>
+            ))}
           </h1>
           <p className="font-headline text-[clamp(1.25rem,3vw,1.75rem)] font-light text-white/90 text-shadow-subtle">
             {hero.pillars}
