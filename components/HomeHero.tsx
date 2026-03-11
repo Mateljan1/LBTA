@@ -28,7 +28,7 @@ export default function HomeHero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen overflow-hidden pt-20 md:pt-24"
+      className="relative min-h-screen overflow-hidden"
     >
       <video
         autoPlay
@@ -51,8 +51,8 @@ export default function HomeHero() {
         aria-hidden="true"
       />
 
-      {/* Content pinned bottom-left per Golden Hour design */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 px-6 md:px-12 lg:px-16 pb-24 md:pb-32 pt-12 md:pt-16">
+      {/* Content area starts below fixed header (pt-20/24), pinned to bottom of that area */}
+      <div className="absolute top-20 md:top-24 left-0 right-0 bottom-0 z-10 flex flex-col justify-end px-6 md:px-12 lg:px-16 pb-24 md:pb-32 pt-12 md:pt-16">
         <div className="max-w-[600px] w-full text-left text-white [text-rendering:geometricPrecision]">
           <p className="text-eyebrow text-white/70 mb-6 text-shadow-subtle">{hero.eyebrow}</p>
           <h1 className="font-headline text-[clamp(3rem,9vw,5.25rem)] font-light leading-[1.12] tracking-[-0.02em] mb-6 text-shadow-hero block overflow-visible" style={{ marginLeft: 0, paddingLeft: 0 }}>
