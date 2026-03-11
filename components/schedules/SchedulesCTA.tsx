@@ -35,13 +35,13 @@ export default function SchedulesCTA({ ctaHeadline, ctaSubline }: SchedulesCTAPr
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <Link
             href="/book"
-            className="bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all shadow-md hover:shadow-lg min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            className="bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all shadow-md hover:shadow-lg min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
           >
             Book Trial
           </Link>
           <Link
             href="/contact"
-            className="border-2 border-white text-white hover:bg-white/10 font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+            className="border-2 border-white text-white hover:bg-white/10 font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
           >
             Contact Us
           </Link>

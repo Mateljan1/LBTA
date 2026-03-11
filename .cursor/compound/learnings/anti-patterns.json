@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-09",
+  "updated": "2026-03-11",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -211,6 +211,13 @@
       "avoid": "Passing as prop to HorizonDivider; component was simplified to always render <hr>",
       "instead": "Use HorizonDivider with variant and className only; no as prop (YAGNI)",
       "tags": ["simplicity", "YAGNI", "HorizonDivider"]
+    },
+    {
+      "id": "hero-short-min-height-with-bottom-content",
+      "description": "Hero with short min-height and bottom-aligned content clips headline at top",
+      "avoid": "min-h-[70vh] (or similar) with absolute bottom-0 content and overflow-hidden; on short viewports content block is taller than section and top gets clipped",
+      "instead": "Use min-h-screen so section is always full viewport height; full headline (e.g. 'Tennis, as it should be taught') stays visible",
+      "tags": ["hero", "layout", "overflow", "ux"]
     }
   ]
 }

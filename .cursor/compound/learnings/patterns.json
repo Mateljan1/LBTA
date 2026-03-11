@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-09",
+  "updated": "2026-03-11",
   "patterns": [
     {
       "name": "single-source-dropdown-options",
@@ -175,6 +175,12 @@
       "when": "User or compound workflow says 'deploy' or 'review then validate then deploy'",
       "example": "1) Commit changes. 2) git push to GitHub (origin). 3) Run vercel --prod (or ensure Vercel Git integration deploys from main). Do not stop at preview deploy or local build only.",
       "tags": ["deploy", "compound", "workflow"]
+    },
+    {
+      "name": "hero-bottom-content-no-clip",
+      "when": "Hero section has bottom-pinned content (absolute bottom-0) and overflow-hidden",
+      "example": "Use min-h-screen so section is always full viewport height; otherwise on short viewports the content block extends above the section and gets clipped (e.g. first line of headline 'Tennis, as it should be taught' cut off).",
+      "tags": ["hero", "layout", "ux", "overflow"]
     }
   ]
 }
