@@ -14,7 +14,7 @@ export default function ExitIntentPopup() {
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const previousActiveRef = useRef<HTMLElement | null>(null)
   const hasScrolledPastThresholdRef = useRef(false)
-  const SCROLL_THRESHOLD_PX = 200
+  const SCROLL_THRESHOLD_PX = 200 // Never show on initial load: only after user has scrolled past this
 
   useEffect(() => {
     // Check if already shown in this session

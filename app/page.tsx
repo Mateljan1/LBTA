@@ -347,7 +347,7 @@ export default function Home() {
             <HomeCTAForm />
           </AnimatedSection>
           <AnimatedSection delay={300}>
-            <p className="text-body-sm text-white/60">{homepageCopy.cta.guarantee}</p>
+            <p className="text-body-sm text-white/70">{homepageCopy.cta.guarantee}</p>
           </AnimatedSection>
         </div>
       </section>

@@ -103,11 +103,16 @@ export default function HomeCTAForm() {
         />
       </div>
       {submitError && (
-        <div role="alert" aria-live="assertive" className="text-sm text-lbta-red font-sans">
+        <div id="home-cta-error" role="alert" aria-live="assertive" className="text-sm text-lbta-red font-sans">
           {submitError}
         </div>
       )}
-      <button type="submit" disabled={isSubmitting} className="btn-accent w-full min-h-[48px]">
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="btn-accent w-full min-h-[48px]"
+        aria-describedby={submitError ? 'home-cta-error' : undefined}
+      >
         {isSubmitting ? ctaCopy.formSubmittingLabel : ctaCopy.formSubmitLabel}
       </button>
     </form>

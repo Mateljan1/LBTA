@@ -29,10 +29,10 @@ export default function Footer() {
               />
             </Link>
 
-            <p className="text-[15px] font-sans font-light text-white/50 mb-3 max-w-sm leading-relaxed">
+            <p className="text-[15px] font-sans font-light text-white/70 mb-3 max-w-sm leading-relaxed">
               Tennis, as it should be taught.
             </p>
-            <p className="text-[13px] font-sans font-light text-white/50 mb-6 max-w-sm leading-relaxed">
+            <p className="text-[13px] font-sans font-light text-white/70 mb-6 max-w-sm leading-relaxed">
               Movement &middot; Craft &middot; Community
             </p>
 
@@ -41,7 +41,7 @@ export default function Footer() {
                 href="https://instagram.com/lagunabeachtennisacademy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/40 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
                 aria-label="Follow us on Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -52,7 +52,7 @@ export default function Footer() {
                 href="https://facebook.com/lagunabeachtennisacademy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/40 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
                 aria-label="Follow us on Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -66,7 +66,7 @@ export default function Footer() {
           <div className="md:col-span-7">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
               <div>
-                <h4 className="text-eyebrow text-white/50 mb-5">Programs</h4>
+                <h4 className="text-eyebrow text-white/70 mb-5">Programs</h4>
                 <ul className="space-y-3">
                   {[
                     { name: 'All Programs', href: '/programs' },
@@ -78,7 +78,7 @@ export default function Footer() {
                     <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       {item.name}
                     </Link>
@@ -88,7 +88,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <h4 className="text-eyebrow text-white/50 mb-5">Academy</h4>
+              <h4 className="text-eyebrow text-white/70 mb-5">Academy</h4>
               <ul className="space-y-3">
                 {[
                   { name: 'About Us', href: '/about' },
@@ -100,7 +100,7 @@ export default function Footer() {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/50 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                       >
                         {item.name}
                       </Link>
@@ -110,13 +110,13 @@ export default function Footer() {
               </div>
 
               <div className="col-span-2 sm:col-span-1">
-                <h4 className="text-eyebrow text-white/50 mb-5">Contact</h4>
+                <h4 className="text-eyebrow text-white/70 mb-5">Contact</h4>
                 <ul className="space-y-3">
                   <li>
                     <a
                       href="tel:9495340457"
                       aria-label="Call (949) 534-0457"
-                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       (949) 534-0457
                     </a>
@@ -125,13 +125,13 @@ export default function Footer() {
                     <a
                       href="mailto:support@lagunabeachtennisacademy.com"
                       aria-label="Email support at support@lbta.com"
-                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/50 hover:text-brand-sunset-cliff transition-colors duration-300 break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       support@lbta.com
                     </a>
                   </li>
                   <li className="pt-2">
-                    <p className="text-[13px] font-sans font-light text-white/50 leading-relaxed">
+                    <p className="text-[13px] font-sans font-light text-white/70 leading-relaxed">
                       Moulton Meadows Park<br />
                       1098 Balboa Ave<br />
                       Laguna Beach, CA 92651
@@ -148,19 +148,19 @@ export default function Footer() {
       <div className="border-t border-white/8">
         <div className="container-lbta py-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] md:pb-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-[12px] font-sans font-light text-white/50">
+            <p className="text-[12px] font-sans font-light text-white/70">
               &copy; {new Date().getFullYear()} Laguna Beach Tennis Academy. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <Link
                 href="/privacy"
-                className="inline-flex items-center min-h-[48px] text-[12px] font-sans font-light text-white/50 hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                className="inline-flex items-center min-h-[48px] text-[12px] font-sans font-light text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
               >
                 Privacy
               </Link>
               <Link
                 href="/terms"
-                className="inline-flex items-center min-h-[48px] text-[12px] font-sans font-light text-white/50 hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                className="inline-flex items-center min-h-[48px] text-[12px] font-sans font-light text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
               >
                 Terms
               </Link>

@@ -38,7 +38,7 @@ export default function NewsletterForm() {
           <h3 className="font-headline text-[28px] md:text-[36px] font-light mb-4 text-white tracking-tight">
             Join the LBTA Community
           </h3>
-          <p className="text-[15px] font-sans font-light text-white/50 mb-8 max-w-md mx-auto leading-relaxed">
+          <p className="text-[15px] font-sans font-light text-white/70 mb-8 max-w-md mx-auto leading-relaxed">
             Tennis insights, program updates, and early access to seasonal registration.
           </p>
           <form onSubmit={handleSubmit} className="relative max-w-md mx-auto" aria-live="polite" aria-atomic="true">
