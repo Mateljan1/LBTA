@@ -2,6 +2,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, scholarshipSchema, validateRequest } from '@/lib/validations'
 import { storeLead } from '@/lib/leads-store'
+import { hasEnvVar } from '@/lib/env'
+import {
+  upsertContact,
+  addToList,
+  addTag,
+  LBTA_LIST_ID,
+  CAMPAIGN_TAGS,
+} from '@/lib/activecampaign'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -49,6 +57,23 @@ export async function POST(request: NextRequest) {
       phone: validation.data.phone ?? undefined,
       payload: { studentName: validation.data.studentName },
     })
+
+    if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
+      const parentName = (validation.data.parentName ?? '').trim()
+      const spaceIdx = parentName.indexOf(' ')
+      const firstName = spaceIdx > 0 ? parentName.slice(0, spaceIdx) : parentName
+      const lastName = spaceIdx > 0 ? parentName.slice(spaceIdx + 1) : ''
+      const acResult = await upsertContact({
+        email: validation.data.email,
+        firstName: firstName || 'Parent',
+        lastName: lastName || '',
+        phone: validation.data.phone ?? undefined,
+      })
+      if (acResult.success && acResult.data?.id) {
+        await addToList(acResult.data.id, LBTA_LIST_ID)
+        await addTag(acResult.data.id, CAMPAIGN_TAGS.scholarship)
+      }
+    }
 
     return NextResponse.json({
       success: true,

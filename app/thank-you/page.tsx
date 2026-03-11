@@ -1,14 +1,49 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { CheckCircle, Phone, Calendar, Clock, Mail, Users, ArrowRight, Download } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Thank You | Laguna Beach Tennis Academy',
-  description: 'Your booking request has been confirmed. We will contact you within 24 hours.',
+  description: 'Your request has been received. We will contact you within 24 hours.',
 }
 
-export default function ThankYouPage() {
+type ThankYouType = 'trial' | 'program' | 'year' | 'scholarship'
+
+const COPY_BY_TYPE: Record<ThankYouType, { headline: string; firstLine: string }> = {
+  trial: {
+    headline: "You're All Set",
+    firstLine: "We've received your request and will contact you within 24 hours to confirm your trial.",
+  },
+  program: {
+    headline: 'Registration Received',
+    firstLine: "We've received your program registration and will confirm your spot within 24 hours.",
+  },
+  year: {
+    headline: 'Registration Received',
+    firstLine: "We've received your registration and will confirm your spot within 24 hours.",
+  },
+  scholarship: {
+    headline: 'Application Received',
+    firstLine: "We've received your scholarship application and will review it shortly.",
+  },
+}
+
+function getThankYouType(raw: string | string[] | undefined): ThankYouType {
+  const type = Array.isArray(raw) ? raw[0] : raw
+  if (type === 'program' || type === 'year' || type === 'scholarship') return type
+  return 'trial'
+}
+
+export default function ThankYouPage({
+  searchParams,
+}: {
+  searchParams?: { type?: string | string[] }
+}) {
+  const type = getThankYouType(searchParams?.type)
+  const { headline, firstLine } = COPY_BY_TYPE[type]
+
   return (
     <>
       {/* Hero - Success Confirmation */}
@@ -26,10 +61,10 @@ export default function ThankYouPage() {
               <CheckCircle className="w-12 h-12 text-brand-tide-pool" />
             </div>
             <h1 className="font-headline text-[36px] md:text-[48px] font-semibold mb-6 leading-tight">
-              You're All Set
+              {headline}
             </h1>
             <p className="font-sans text-[18px] md:text-[20px] text-white/80 max-w-lg mx-auto">
-              We've received your request and will contact you within 24 hours to confirm your trial.
+              {firstLine}
             </p>
           </AnimatedSection>
         </div>
@@ -279,7 +314,7 @@ export default function ThankYouPage() {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 font-sans text-[14px] text-black/60 hover:text-black transition-colors"
+            className="min-h-[48px] inline-flex items-center justify-center gap-2 py-3 font-sans text-[14px] text-black/60 hover:text-black transition-colors"
           >
             <ArrowRight className="w-4 h-4 rotate-180" />
             Return to Homepage

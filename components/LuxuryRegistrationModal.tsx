@@ -28,7 +28,8 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const modalRef = useRef<HTMLDivElement>(null)
-  
+  const successPrimaryRef = useRef<HTMLButtonElement>(null)
+
   // Form state
   const [formData, setFormData] = useState({
     firstName: '',
@@ -40,6 +41,13 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
     experience: 'beginner',
     notes: ''
   })
+
+  // Focus primary button when success state is shown (a11y)
+  useEffect(() => {
+    if (isSuccess && program) {
+      successPrimaryRef.current?.focus()
+    }
+  }, [isSuccess, program])
 
   // Reset on program change
   useEffect(() => {
@@ -232,12 +240,21 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                   <p className="font-sans text-[15px] text-lbta-slate leading-relaxed mb-8 max-w-[320px] mx-auto">
                     Thank you for registering for {program.program}. We&apos;ll confirm your spot within 24 hours.
                   </p>
-                  <button
-                    onClick={onClose}
-                    className="font-sans text-[14px] font-medium text-brand-pacific-dusk underline underline-offset-4 hover:text-lbta-slate transition-colors"
-                  >
-                    Close
-                  </button>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <button
+                      ref={successPrimaryRef}
+                      onClick={() => { window.location.href = '/thank-you?type=program' }}
+                      className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-8 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                    >
+                      View next steps
+                    </button>
+                    <button
+                      onClick={onClose}
+                      className="min-h-[48px] inline-flex items-center justify-center px-4 py-3 font-sans text-[14px] font-medium text-brand-pacific-dusk underline underline-offset-4 hover:text-lbta-slate transition-colors"
+                    >
+                      Close
+                    </button>
+                  </div>
                 </motion.div>
               ) : step === 1 ? (
                 // Step 1: Plan Selection

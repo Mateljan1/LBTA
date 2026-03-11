@@ -62,6 +62,7 @@ export const CAMPAIGN_TAGS = {
   trial_request: 82,
   not_sure: 81,
   jtt_spring_2026: 107,  // JTT Spring 2026 registrations (triggers email automation)
+  scholarship: 108,      // Scholarship applications; create "Scholarship" tag in AC and set ID here if different
 } as const
 
 /**
