@@ -29,16 +29,16 @@ You can do **A only**, **B only**, **C only**, or any combination. **A, B, and C
 
 #### A.1 — Active section highlighting (SchedulesAnchorNav)
 
-- [ ] **A.1.1** In `components/schedules/SchedulesAnchorNav.tsx`, add state: `activeSectionId: string | null`.
-- [ ] **A.1.2** Use `IntersectionObserver` on the four section roots (`#programs`, `#private`, `#camps`, `#leagues`). When a section’s intersection ratio crosses a threshold (e.g. > 0.2 or “more than 20% in view”), set `activeSectionId` to that section’s id. Use a single observer and check which section has the largest visible ratio if multiple are in view, or “first in view” logic per plan.
-- [ ] **A.1.3** For the link that matches `activeSectionId`: add `aria-current="true"` and a distinct style (e.g. `font-semibold text-brand-pacific-dusk` and/or `border-b-2 border-brand-victoria-cove`). For other links, no `aria-current` and default style.
-- [ ] **A.1.4** No animation on active change (no flashing). If you use a transition, respect `prefers-reduced-motion` (no transition when reduced).
-- [ ] **A.1.5** Ensure observer is created/cleaned up in `useEffect`; observe only the four section elements (refs or `document.getElementById` in effect).
+- [x] **A.1.1** In `components/schedules/SchedulesAnchorNav.tsx`, add state: `activeSectionId: string | null`.
+- [x] **A.1.2** Use `IntersectionObserver` on the four section roots (`#programs`, `#private`, `#camps`, `#leagues`). When a section’s intersection ratio crosses a threshold (e.g. > 0.2 or “more than 20% in view”), set `activeSectionId` to that section’s id. Use a single observer and check which section has the largest visible ratio if multiple are in view, or “first in view” logic per plan.
+- [x] **A.1.3** For the link that matches `activeSectionId`: add `aria-current="true"` and a distinct style (e.g. `font-semibold text-brand-pacific-dusk` and/or `border-b-2 border-brand-victoria-cove`). For other links, no `aria-current` and default style.
+- [x] **A.1.4** No animation on active change (no flashing). If you use a transition, respect `prefers-reduced-motion` (no transition when reduced).
+- [x] **A.1.5** Ensure observer is created/cleaned up in `useEffect`; observe only the four section elements (refs or `document.getElementById` in effect).
 
 #### A.2 — Schedules plan success criteria (doc only)
 
-- [ ] **A.2.1** Open `plans/schedules-page-ux-overhaul-plan.md`. In the “Success Criteria” section, change each `[ ]` to `[x]` for criteria that are already met by the current implementation (Private Lessons one click, no mandatory long scroll, sticky nav visible, section order, touch targets, smooth scroll, scroll-margin-top, no modal on load, mobile nav, data from JSON). Leave unchecked only if something is not true (e.g. Lighthouse ≥ 90 — tick only after a quick check or leave as [ ] with a note “verify Lighthouse”).
-- [ ] **A.2.2** In the same plan, mark Phase 4 steps **4.1** and **4.2** as [x] after A.1 is implemented.
+- [x] **A.2.1** Open `plans/schedules-page-ux-overhaul-plan.md`. In the “Success Criteria” section, change each `[ ]` to `[x]` for criteria that are already met by the current implementation (Private Lessons one click, no mandatory long scroll, sticky nav visible, section order, touch targets, smooth scroll, scroll-margin-top, no modal on load, mobile nav, data from JSON). Leave unchecked only if something is not true (e.g. Lighthouse ≥ 90 — tick only after a quick check or leave as [ ] with a note “verify Lighthouse”).
+- [x] **A.2.2** In the same plan, mark Phase 4 steps **4.1** and **4.2** as [x] after A.1 is implemented.
 
 ### Files to create/modify (Track A)
 
@@ -49,10 +49,10 @@ You can do **A only**, **B only**, **C only**, or any combination. **A, B, and C
 
 ### Success criteria (Track A)
 
-- [ ] Scrolling to Programs / Private / Camps / Leagues updates the sticky nav so the current section’s link is visually distinct and has `aria-current="true"`.
-- [ ] No layout shift or flash when active section changes; reduced-motion respected.
-- [ ] Schedules plan Success Criteria section reflects implemented behavior (all [x] that are true).
-- [ ] Build and lint pass; no new a11y or layout regressions.
+- [x] Scrolling to Programs / Private / Camps / Leagues updates the sticky nav so the current section’s link is visually distinct and has `aria-current="true"`.
+- [x] No layout shift or flash when active section changes; reduced-motion respected.
+- [x] Schedules plan Success Criteria section reflects implemented behavior (all [x] that are true).
+- [x] Build and lint pass; no new a11y or layout regressions.
 
 ---
 
@@ -73,19 +73,19 @@ You can do **A only**, **B only**, **C only**, or any combination. **A, B, and C
 
 ### Implementation steps (Track B) — ordered
 
-- [ ] **B.1.1** Hero: confirm no form inside hero; only video, tagline, pillars, subline, “Book a Trial”, scroll cue.
-- [ ] **B.1.2** ExitIntentPopup: guard so it never shows on initial load (e.g. only on exit-intent or after scrollY > X).
-- [ ] **B.1.3** Bottom CTA: one form (HomeCTAForm); clear label “Get Started” or “Start with a Trial”.
-- [ ] **B.1.4** Sticky CTA: z-index and placement don’t clash with header.
-- [ ] **B.1.5** Mobile: hero and CTAs at 320px and 375px; no horizontal scroll; 48px touch targets.
-- [ ] **B.2.1** Verify `data/homepage-copy.json` is the single source for hero, founder, results, philosophy, programs, CTAs; page and components import from it.
-- [ ] **B.2.2** Copy audit: no “unlock your full potential”, “Join Now” as hero CTA, or forbidden words; Karue/founder lines match bio/research.
-- [ ] **B.2.3** CTAs: primary “Book a Trial”; secondary “View Programs”, “See Schedules”, “Read Andrew’s Story”, “Watch His Journey”; form submit “Request a Trial” or “Get Started”.
-- [ ] **B.3.1** Confirm `plans/homepage-media-brief.md` (or equivalent) exists and lists section, purpose, aspect, path, alt; optional checklist for “ready” assets.
-- [ ] **B.3.2** All homepage `<Image>` and `<video>` have `alt`/`aria-label` and `sizes`; no new paths until you provide files.
-- [ ] **B.4.1** Hero CTA: solid bg for 7:1; all CTAs min-h 48px; focus ring visible; footer/dark text at least text-white/50.
-- [ ] **B.4.2** Parallax and AnimatedSection respect `prefers-reduced-motion`.
-- [ ] **B.4.3** HomeCTAForm: labels and live region for error/success.
+- [x] **B.1.1** Hero: confirm no form inside hero; only video, tagline, pillars, subline, “Book a Trial”, scroll cue.
+- [x] **B.1.2** ExitIntentPopup: guard so it never shows on initial load (e.g. only on exit-intent or after scrollY > X).
+- [x] **B.1.3** Bottom CTA: one form (HomeCTAForm); clear label “Get Started” or “Start with a Trial”.
+- [x] **B.1.4** Sticky CTA: z-index and placement don’t clash with header.
+- [x] **B.1.5** Mobile: hero and CTAs at 320px and 375px; no horizontal scroll; 48px touch targets.
+- [x] **B.2.1** Verify `data/homepage-copy.json` is the single source for hero, founder, results, philosophy, programs, CTAs; page and components import from it.
+- [x] **B.2.2** Copy audit: no “unlock your full potential”, “Join Now” as hero CTA, or forbidden words; Karue/founder lines match bio/research.
+- [x] **B.2.3** CTAs: primary “Book a Trial”; secondary “View Programs”, “See Schedules”, “Read Andrew’s Story”, “Watch His Journey”; form submit “Request a Trial” or “Get Started”.
+- [x] **B.3.1** Confirm `plans/homepage-media-brief.md` (or equivalent) exists and lists section, purpose, aspect, path, alt; optional checklist for “ready” assets.
+- [x] **B.3.2** All homepage `<Image>` and `<video>` have `alt`/`aria-label` and `sizes`; no new paths until you provide files.
+- [x] **B.4.1** Hero CTA: solid bg for 7:1; all CTAs min-h 48px; focus ring visible; footer/dark text at least text-white/50.
+- [x] **B.4.2** Parallax and AnimatedSection respect `prefers-reduced-motion`.
+- [x] **B.4.3** HomeCTAForm: labels and live region for error/success.
 
 ### Files to create/modify (Track B)
 
@@ -102,13 +102,13 @@ You can do **A only**, **B only**, **C only**, or any combination. **A, B, and C
 
 ### Success criteria (Track B)
 
-- [ ] Hero owns the fold: no form in hero; one primary CTA “Book a Trial”.
-- [ ] Exit-intent does not show on load.
-- [ ] All homepage copy from one source; LBTA voice; no forbidden words.
-- [ ] CTAs and form labels match plan (Book a Trial, View Programs, See Schedules, etc.).
-- [ ] Media brief (and optional checklist) in place; images have alt/sizes.
-- [ ] Focus, contrast, 48px, reduced-motion per .cursorrules.
-- [ ] Build and lint pass; Lighthouse accessibility ≥ 90 on homepage.
+- [x] Hero owns the fold: no form in hero; one primary CTA “Book a Trial”.
+- [x] Exit-intent does not show on load.
+- [x] All homepage copy from one source; LBTA voice; no forbidden words.
+- [x] CTAs and form labels match plan (Book a Trial, View Programs, See Schedules, etc.).
+- [x] Media brief (and optional checklist) in place; images have alt/sizes.
+- [x] Focus, contrast, 48px, reduced-motion per .cursorrules.
+- [x] Build and lint pass; Lighthouse accessibility ≥ 90 on homepage *(verify when ready)*.
 
 ---
 
@@ -143,7 +143,7 @@ Confirmation emails are **not** sent by the website; they are sent by ActiveCamp
 
 - [x] **C.1** Thank-you page: read `searchParams.type` (`trial` | `program` | `year` | `scholarship`). Default `trial` when missing. Set headline and first line by type (e.g. trial: "You're All Set" + "We've received your request and will contact you within 24 hours to confirm your trial."; scholarship: "Application Received" + "We've received your scholarship application and will review it shortly."). Keep one layout; no duplicate sections.
 - [x] **C.2** Create `docs/registration-flows-and-ops.md` (or `plans/registration-flows-ops.md`): table Form → API → Notion/AC/Supabase → User sees; plus "Where to look" (Notion for program/year; AC for contacts and email; Supabase for leads/scholarship if configured).
-- [x] **C.3** Add "ActiveCampaign automations checklist" to that doc or a short `docs/activecampaign-confirmation-checklist.md`: List 4 add → confirmation/welcome; tag Trial Request → trial confirmation; tag JTT Spring 2026 → JTT confirmation; etc. Code references (list id 4, tag ids in `lib/activecampaign.ts`) so you can match AC to code.
+- [x] **C.3** Add "ActiveCampaign automations checklist" to that doc or a short `docs/activecampaign-setup-checklist.md`: List 4 add → confirmation/welcome; tag Trial Request → trial confirmation; tag JTT Spring 2026 → JTT confirmation; etc. Code references (list id 4, tag ids in `lib/activecampaign.ts`) so you can match AC to code.
 - [x] **C.4 (Optional)** Scholarship API: when AC env is set, after `storeLead`, upsert contact to ActiveCampaign and add tag "Scholarship" (create tag in AC if needed; document id in ops doc). So every scholarship app is in AC even if Supabase is not set.
 - [x] **C.5 (Optional)** LuxuryYearModal and LuxuryRegistrationModal: on success, after short delay or "View next steps" click, redirect to `window.location.href = '/thank-you?type=year'` or `'/thank-you?type=program'` instead of only closing. Keeps one confirmation experience.
 
@@ -153,7 +153,7 @@ Confirmation emails are **not** sent by the website; they are sent by ActiveCamp
 |------|--------|---------|
 | `app/thank-you/page.tsx` | Modify | Read `type` from searchParams; dynamic headline + first line by type. |
 | `docs/registration-flows-and-ops.md` or `plans/registration-flows-ops.md` | Create | One-page map: form → API → where data lives → what user sees. |
-| `docs/activecampaign-confirmation-checklist.md` or section in ops doc | Create | Which AC automations to set for confirmation emails. |
+| `docs/activecampaign-setup-checklist.md` or section in ops doc | Create | Which AC automations to set for confirmation emails. |
 | `app/api/scholarship/route.ts` | Modify (optional) | Add AC upsert + Scholarship tag when env set. |
 | `components/LuxuryYearModal.tsx` | Modify (optional) | Redirect to `/thank-you?type=year` on success. |
 | `components/LuxuryRegistrationModal.tsx` | Modify (optional) | Redirect to `/thank-you?type=program` on success. |

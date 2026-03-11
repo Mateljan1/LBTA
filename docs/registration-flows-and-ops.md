@@ -35,6 +35,8 @@
 
 ## ActiveCampaign confirmation checklist
 
+**Step-by-step setup:** See **`docs/activecampaign-setup-checklist.md`** for a checklist you can follow in the AC UI.
+
 Confirmation emails are **not** sent by the website. They are sent by ActiveCampaign automations. Set these up in AC so users get a confirmation after each action.
 
 | Trigger | What to set in AC | Purpose |

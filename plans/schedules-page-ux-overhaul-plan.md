@@ -108,7 +108,7 @@ Transform `/schedules` from a long, linear scroll into a **navigable, hierarchy-
 - [x] **Smooth scroll** to sections; section heading not hidden under sticky bar (`scroll-margin-top`).
 - [x] **No modal** that opens on page load to filter or otherwise obstruct content.
 - [x] **Mobile:** Nav usable (horizontal scroll or dropdown); no horizontal overflow on page.
-- [ ] **Lighthouse** accessibility ≥ 90; no new violations. *(verify Lighthouse)*
+- [ ] **Lighthouse** accessibility ≥ 90; no new violations. *(verify when ready)*
 - [x] **Data and single source of truth:** No hardcoded prices; all data still from `data/*.json` and lib loaders.
 
 ---
