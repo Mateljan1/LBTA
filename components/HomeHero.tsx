@@ -28,7 +28,7 @@ export default function HomeHero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[70vh] md:min-h-screen flex flex-col justify-end overflow-hidden"
+      className="relative min-h-[70vh] md:min-h-screen overflow-hidden"
     >
       <video
         autoPlay
@@ -51,25 +51,28 @@ export default function HomeHero() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 text-left text-white px-6 md:px-12 lg:px-16 pb-24 md:pb-32 max-w-[600px]">
-        <p className="text-eyebrow text-white/70 mb-6 text-shadow-subtle">{hero.eyebrow}</p>
-        <h1 className="font-headline text-[clamp(2.5rem,8vw,5rem)] font-light leading-[1.05] tracking-[-0.02em] mb-6 text-shadow-hero">
-          Tennis, as it should
-          <br className="hidden sm:block" /> be taught.
-        </h1>
-        <p className="font-headline text-[clamp(1.25rem,3vw,1.75rem)] font-light text-white/90 text-shadow-subtle">
-          {hero.pillars}
-        </p>
-        <p className="font-sans text-[clamp(1rem,2.5vw,1.25rem)] font-light text-white/80 mt-4 mb-10 text-shadow-subtle max-w-2xl">
-          {hero.subline}
-        </p>
-        <div className="flex flex-col items-start gap-8">
-          <Link
-            href={hero.ctaPrimaryHref}
-            className="inline-flex items-center justify-center bg-white text-lbta-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 rounded-none hover:bg-white/90 transition-all duration-300 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-          >
-            {hero.ctaPrimary}
-          </Link>
+      {/* Content pinned bottom-left per Golden Hour design */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 px-6 md:px-12 lg:px-16 pb-24 md:pb-32 pt-8">
+        <div className="max-w-[600px] text-left text-white">
+          <p className="text-eyebrow text-white/70 mb-6 text-shadow-subtle">{hero.eyebrow}</p>
+          <h1 className="font-headline text-[clamp(2.5rem,8vw,5rem)] font-light leading-[1.05] tracking-[-0.02em] mb-6 text-shadow-hero">
+            Tennis, as it should
+            <br className="hidden sm:block" /> be taught.
+          </h1>
+          <p className="font-headline text-[clamp(1.25rem,3vw,1.75rem)] font-light text-white/90 text-shadow-subtle">
+            {hero.pillars}
+          </p>
+          <p className="font-sans text-[clamp(1rem,2.5vw,1.25rem)] font-light text-white/80 mt-4 mb-10 text-shadow-subtle max-w-2xl">
+            {hero.subline}
+          </p>
+          <div className="flex flex-col items-start gap-8">
+            <Link
+              href={hero.ctaPrimaryHref}
+              className="inline-flex items-center justify-center bg-white text-lbta-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 rounded-none hover:bg-white/90 transition-all duration-300 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            >
+              {hero.ctaPrimary}
+            </Link>
+          </div>
         </div>
       </div>
 
