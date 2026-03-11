@@ -60,7 +60,7 @@
       "perDay": 124,
       "description": "Structured tennis lessons, swimming, and team-based activities that create lasting memories.",
       "includes": ["Tennis instruction", "Supervised swimming", "Team activities", "Certified lifeguards"],
-      "coaches": ["Andrew Mateljan", "Michelle Bevins"],
+      "coaches": ["Andrew Mateljan", "Robert LeBuhn"],
       "featured": true,
       "safetyNote": "All participants must be able to swim independently."
     },
@@ -289,7 +289,7 @@
     { "coach": "Andrew Mateljan", "title": "Founder", "rate60": 250, "rate90": 350, "pack10": 2300, "pack20": 4200, "availability": "Limited" },
     { "coach": "Robert LeBuhn", "title": "Senior Coach", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" },
     { "coach": "Peter DeFrantz", "title": "Senior Coach", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" },
-    { "coach": "Michelle Bevins", "title": "Youth Director", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "On leave; may return Spring 2026" }
+    { "coach": "Allison Cronk", "title": "Coach", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" }
   ],
 
   "discounts": {

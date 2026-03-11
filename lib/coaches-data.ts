@@ -46,7 +46,7 @@ export function getLeadCoach(): Coach | undefined {
   return coachesList.find((c) => c.role === 'lead')
 }
 
-/** Program coaches (Michelle, Peter, Allison, etc.) in order. */
+/** Program coaches (Peter, Allison, etc.) in order. */
 export function getProgramCoaches(): Coach[] {
   return coachesList.filter((c) => c.role === 'program').sort((a, b) => a.order - b.order)
 }

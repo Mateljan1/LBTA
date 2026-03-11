@@ -20,7 +20,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
   const hasBioLink = coach.slug != null
   const cardContent = (
     <>
-      <div className="relative aspect-[3/4] overflow-hidden">
+      <div className="relative aspect-[3/4] overflow-hidden shrink-0">
         <Image
           src={coach.image}
           alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
@@ -38,29 +38,29 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
         </div>
       </div>
 
-      <div className="p-6">
-        <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.1em] mb-2">
+      <div className="p-6 md:p-7 flex flex-col min-h-0 flex-1">
+        <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.1em] mb-1.5">
           {coach.title}
         </p>
-        <h3 className="font-headline text-[22px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em] group-hover:text-brand-victoria-cove">
+        <h3 className="font-headline text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em] group-hover:text-brand-victoria-cove">
           {coach.name}
         </h3>
-        <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-4">
+        <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-3">
           {coach.specialization}
         </p>
         {coach.availability && (
-          <p className="font-sans text-[12px] text-brand-pacific-dusk/50 italic mb-4">
+          <p className="font-sans text-[12px] text-brand-pacific-dusk/50 italic mb-3">
             {coach.availability}
           </p>
         )}
-        <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.7] mb-4">
+        <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.7] mb-4 flex-1">
           {coach.bio}
         </p>
         <div className="flex flex-wrap gap-2">
           {coach.credentials.map((cred) => (
             <span
               key={cred}
-              className="font-sans text-[10px] text-brand-pacific-dusk/70 px-2.5 py-1 bg-brand-sandstone rounded-full"
+              className="font-sans text-[10px] text-brand-pacific-dusk/70 px-2.5 py-1 bg-brand-morning-light rounded-full border border-black/5"
             >
               {cred}
             </span>
@@ -78,7 +78,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
 
   if (variant === 'featured') {
     return (
-      <div className="grid lg:grid-cols-[minmax(0,0.38fr)_1fr] gap-8 md:gap-12 items-start bg-white rounded-lg overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+      <div className="grid lg:grid-cols-[minmax(0,0.38fr)_1fr] gap-8 md:gap-12 items-start bg-white rounded-lg overflow-hidden border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
         <div className="relative aspect-[3/4] w-full max-w-[360px] mx-auto lg:mx-0 lg:max-w-none">
           <Image
             src={coach.image}
@@ -95,7 +95,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
             {coach.title}
           </p>
           {hasBioLink ? (
-            <Link href={`/coaches/${coach.slug}`} className="block group">
+            <Link href={`/coaches/${coach.slug}`} className="block group rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
               <h3 className="font-headline text-[28px] md:text-[36px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.01em] group-hover:text-brand-victoria-cove transition-colors">
                 {coach.name}
               </h3>
@@ -129,7 +129,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
           {hasBioLink && (
             <Link
               href={`/coaches/${coach.slug}`}
-              className="inline-flex items-center gap-2 font-sans text-[11px] font-semibold text-brand-victoria-cove mt-6 uppercase tracking-wider min-h-[48px] py-2 px-0 rounded-[2px] focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2"
+              className="inline-flex items-center gap-2 font-sans text-[11px] font-semibold text-brand-victoria-cove mt-6 uppercase tracking-wider min-h-[48px] py-2 px-0 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
             >
               View full bio
               <ChevronRight />
@@ -142,14 +142,14 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
 
   if (hasBioLink) {
     return (
-      <Link href={`/coaches/${coach.slug}`} className="bg-white rounded-lg overflow-hidden group block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
+      <Link href={`/coaches/${coach.slug}`} className="h-full flex flex-col bg-white rounded-lg overflow-hidden border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 transition-shadow duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
         {cardContent}
       </Link>
     )
   }
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden group">
+    <div className="h-full flex flex-col bg-white rounded-lg overflow-hidden border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] group">
       {cardContent}
     </div>
   )
