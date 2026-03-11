@@ -28,7 +28,7 @@ export default function HomeHero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[70vh] md:min-h-screen overflow-hidden"
+      className="relative min-h-screen overflow-hidden"
     >
       <video
         autoPlay
