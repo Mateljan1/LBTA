@@ -79,8 +79,8 @@ Transform `/schedules` from a long, linear scroll into a **navigable, hierarchy-
 
 ### Phase 4 (Optional): Active Section Highlighting
 
-- [ ] **4.1** In `SchedulesAnchorNav`, use `IntersectionObserver` to detect which section is in view (e.g. when its root intersection ratio > 0.2). Set state for `activeSectionId`.
-- [ ] **4.2** Apply `aria-current="true"` and a distinct style (e.g. font-weight or underline) to the link whose section is active. Respect `prefers-reduced-motion` (no flashing).
+- [x] **4.1** In `SchedulesAnchorNav`, use `IntersectionObserver` to detect which section is in view (e.g. when its root intersection ratio > 0.2). Set state for `activeSectionId`.
+- [x] **4.2** Apply `aria-current="true"` and a distinct style (e.g. font-weight or underline) to the link whose section is active. Respect `prefers-reduced-motion` (no flashing).
 
 ---
 
@@ -100,16 +100,16 @@ Transform `/schedules` from a long, linear scroll into a **navigable, hierarchy-
 
 ## Success Criteria
 
-- [ ] **Private Lessons reachable in one click** from above the fold (via sticky nav link "Private Lessons").
-- [ ] **No mandatory long scroll** to reach any section; all four sections reachable via the sticky nav.
-- [ ] **Sticky nav visible** after user scrolls past hero (or always below hero); remains visible on scroll.
-- [ ] **Section order** reflects priority: Programs → Private Coaching → Camps → Leagues.
-- [ ] **Touch targets** ≥ 48px for nav links; **keyboard** navigable; **focus** visible.
-- [ ] **Smooth scroll** to sections; section heading not hidden under sticky bar (`scroll-margin-top`).
-- [ ] **No modal** that opens on page load to filter or otherwise obstruct content.
-- [ ] **Mobile:** Nav usable (horizontal scroll or dropdown); no horizontal overflow on page.
-- [ ] **Lighthouse** accessibility ≥ 90; no new violations.
-- [ ] **Data and single source of truth:** No hardcoded prices; all data still from `data/*.json` and lib loaders.
+- [x] **Private Lessons reachable in one click** from above the fold (via sticky nav link "Private Lessons").
+- [x] **No mandatory long scroll** to reach any section; all four sections reachable via the sticky nav.
+- [x] **Sticky nav visible** after user scrolls past hero (or always below hero); remains visible on scroll.
+- [x] **Section order** reflects priority: Programs → Private Coaching → Camps → Leagues.
+- [x] **Touch targets** ≥ 48px for nav links; **keyboard** navigable; **focus** visible.
+- [x] **Smooth scroll** to sections; section heading not hidden under sticky bar (`scroll-margin-top`).
+- [x] **No modal** that opens on page load to filter or otherwise obstruct content.
+- [x] **Mobile:** Nav usable (horizontal scroll or dropdown); no horizontal overflow on page.
+- [ ] **Lighthouse** accessibility ≥ 90; no new violations. *(verify Lighthouse)*
+- [x] **Data and single source of truth:** No hardcoded prices; all data still from `data/*.json` and lib loaders.
 
 ---
 
