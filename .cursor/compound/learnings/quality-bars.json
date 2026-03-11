@@ -139,6 +139,26 @@
     "heroFullHeadlineVisible": {
       "rule": "Hero with bottom-pinned headline and overflow-hidden must use min-h-screen (or min-height >= content block height) so the full headline is never clipped at the top.",
       "enforcement": "must"
+    },
+    "errorPageCtaA11y": {
+      "rule": "Error page (app/error.tsx) CTAs must have min-h-[48px] and visible focus ring (e.g. focus-visible:ring-2 ring-brand-victoria-cove ring-offset-2 ring-offset-white)",
+      "enforcement": "must"
+    },
+    "footerFocusRingSolid": {
+      "rule": "Footer (bg-brand-deep-water) interactive elements must use focus-visible:ring-white (solid), not ring-white/30, for WCAG AAA focus visibility",
+      "enforcement": "must"
+    },
+    "gradientHeroCtaFocusOffset": {
+      "rule": "CTAs on gradient/dark hero (e.g. contact hero) should use focus-visible:ring-offset-black/50 so focus ring offset is visible",
+      "enforcement": "should"
+    },
+    "heroHeadlineVisibleAllBrowsers": {
+      "rule": "Hero headline must be fully visible on load in major browsers (Chrome, Safari, Firefox); use extra top clearance (e.g. top-24 md:top-28, pt-16 md:pt-20) if headline clips in any browser",
+      "enforcement": "must"
+    },
+    "deepWaterBodyTextContrast": {
+      "rule": "All body and description text on bg-brand-deep-water (footer and any component in footer, e.g. NewsletterForm) must use text-white/70 or higher for WCAG 7:1",
+      "enforcement": "must"
     }
   }
 }

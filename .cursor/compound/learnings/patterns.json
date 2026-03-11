@@ -181,6 +181,42 @@
       "when": "Hero section has bottom-pinned content (absolute bottom-0) and overflow-hidden",
       "example": "Use min-h-screen so section is always full viewport height; otherwise on short viewports the content block extends above the section and gets clipped (e.g. first line of headline 'Tennis, as it should be taught' cut off).",
       "tags": ["hero", "layout", "ux", "overflow"]
+    },
+    {
+      "name": "hero-cross-browser-headline-clearance",
+      "when": "Hero with fixed header and bottom-pinned headline; headline must be fully visible on load in all major browsers",
+      "example": "Content area: top-24 md:top-28 (not just header height); pt-16 md:pt-20 on content block. Avoids Chrome/Safari/Firefox and zoom differences clipping the top of the headline.",
+      "tags": ["hero", "layout", "cross-browser", "a11y"]
+    },
+    {
+      "name": "plan-implementation-status-before-next",
+      "when": "Starting work from existing plans (e.g. schedules UX, brand guide, Canva)",
+      "example": "Review code against plan checklist; update plans/plan-implementation-status-*.md. Avoids re-implementing work already done.",
+      "tags": ["compound", "planning", "efficiency"]
+    },
+    {
+      "name": "scroll-spy-active-section-tall-sections",
+      "when": "Sticky in-page nav with IntersectionObserver to highlight current section; page sections are tall and rootMargin shrinks the effective viewport band",
+      "example": "Pick the section with the largest intersection ratio (e.g. ratio > 0), not a fixed threshold like 0.2. With rootMargin '-20% 0 -60% 0', ratios stay small; 'best ratio' still identifies the section most in view.",
+      "tags": ["IntersectionObserver", "scroll-spy", "a11y", "schedules"]
+    },
+    {
+      "name": "thank-you-type-whitelist",
+      "when": "Single confirmation page supports multiple types via query param (e.g. /thank-you?type=trial|program|year|scholarship)",
+      "example": "getThankYouType(raw): const type = Array.isArray(raw) ? raw[0] : raw; whitelist only allowed values; default to 'trial'. Use type only to key a COPY_BY_TYPE map (no user input in DOM or redirect URL).",
+      "tags": ["security", "nextjs", "searchParams", "confirmation"]
+    },
+    {
+      "name": "modal-success-focus-primary",
+      "when": "Modal shows a success state that replaces the form (e.g. registration received)",
+      "example": "useRef on primary CTA (e.g. 'View next steps'); useEffect(() => { if (isSuccess && isOpen) successPrimaryRef.current?.focus(); }, [isSuccess, isOpen]). Ensures keyboard/screen-reader users get focus in the new content.",
+      "tags": ["a11y", "focus", "modal"]
+    },
+    {
+      "name": "footer-area-deep-water-contrast",
+      "when": "Any component rendered inside the footer (same bg-brand-deep-water as main footer)",
+      "example": "Use text-white/70 or higher for body and description text (e.g. NewsletterForm description). Matches footer tagline and links; avoids text-white/50 which can fail 7:1 on deep-water.",
+      "tags": ["a11y", "contrast", "footer", "WCAG"]
     }
   ]
 }
