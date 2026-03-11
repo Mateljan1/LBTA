@@ -632,6 +632,10 @@ npx lighthouse http://localhost:3000 --view
 
 # Image optimization
 # All images must be WebP, ≤350KB, with srcset for responsive
+
+# Deploy (when user says "deploy" or compound:deploy)
+# 1) git add . && git commit -m "..." && git push   # Push to GitHub
+# 2) vercel --prod                                  # Vercel production (do not stop at preview)
 ```
 
 ---

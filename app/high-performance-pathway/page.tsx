@@ -105,7 +105,7 @@ export default function HighPerformancePathwayPage() {
           </p>
           <Link
             href="#apply"
-            className="inline-flex items-center justify-center bg-white text-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 hover:bg-white/90 transition-all duration-300"
+            className="inline-flex items-center justify-center min-h-[48px] bg-white text-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 hover:bg-white/90 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
           >
             Apply for Assessment
           </Link>
@@ -126,7 +126,7 @@ export default function HighPerformancePathwayPage() {
                 <p className="font-sans text-[14px] uppercase tracking-wider text-white/60 mb-1">
                   {item.label}
                 </p>
-                <p className="font-sans text-[13px] text-white/40">
+                <p className="font-sans text-[13px] text-white/50">
                   {item.detail}
                 </p>
               </div>
@@ -268,19 +268,19 @@ export default function HighPerformancePathwayPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book?program=high-performance-assessment"
-              className="inline-flex items-center justify-center bg-white text-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 hover:bg-white/90 transition-all duration-300"
+              className="inline-flex items-center justify-center min-h-[48px] bg-white text-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 hover:bg-white/90 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk"
             >
               Request Assessment
             </Link>
             <a
               href="tel:+19495340457"
-              className="inline-flex items-center justify-center border border-white/30 text-white font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 hover:bg-white/10 transition-all duration-300"
+              className="inline-flex items-center justify-center min-h-[48px] border border-white/30 text-white font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 hover:bg-white/10 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk"
             >
               Call (949) 534-0457
             </a>
           </div>
 
-          <p className="font-sans text-[13px] text-white/40 mt-8">
+          <p className="font-sans text-[13px] text-white/50 mt-8">
             Assessment required for enrollment · Acceptance not guaranteed
           </p>
         </div>

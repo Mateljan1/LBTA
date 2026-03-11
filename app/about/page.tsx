@@ -282,13 +282,13 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-black text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-gray-800 hover:-translate-y-0.5 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+              className="inline-flex items-center justify-center bg-black text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-gray-800 hover:-translate-y-0.5 transition-all min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               Book Trial Session
             </Link>
             <Link
               href="/coaches"
-              className="inline-flex items-center justify-center border border-white/40 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/10 transition-all min-h-[52px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-deep-water"
+              className="inline-flex items-center justify-center border border-white/40 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 px-8 rounded-[2px] hover:bg-white/10 transition-all min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               Meet Our Coaches
             </Link>

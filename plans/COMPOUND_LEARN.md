@@ -59,6 +59,7 @@
 | New code using lbta-slate for secondary text | FounderSection, CoachCard using `text-lbta-slate`; .cursorrules say new code should use brand-*. | Use `text-brand-pacific-dusk/70` (or appropriate opacity) for secondary text and pills. |
 | CTA focus ring too weak on dark | `focus:ring-white/30` on dark section; may fail focus-indicator contrast. | Use `focus:ring-white` or `focus:ring-white/60` so focus meets 3:1 (or rely on global focus-visible). |
 | Anchor sections without scroll-margin | Sticky in-page nav; sections with id=#leadership, #team, #book; scroll lands with heading under nav. | Add `scroll-mt-28` (or equivalent) to section roots that are anchor targets; consistent with SchedulesAnchorNav. |
+| Stopping at preview deploy when user said "deploy" | Compound deploy or user says "deploy" / "push and deploy" | Always: 1) git add/commit, 2) git push to GitHub, 3) vercel --prod. Deploy = GitHub + Vercel production; do not stop at vercel (preview only). |
 
 ---
 
@@ -81,6 +82,7 @@
 | Legacy file documentation | Orphan/A/B test files | Create a README next to legacy files explaining their origin, status, and cleanup timeline |
 | Env + smoke check documentation | After adding env vars or deploy steps | Add .env.example with comments; add a short README section (e.g. Environment variables, Post-deploy smoke check) so onboarding and deploys are repeatable. |
 | Run compound:learn after a plan | When a plan is completed or after review/validate | Update `plans/COMPOUND_LEARN.md` (log + any new corrections/patterns); keeps future work from repeating mistakes. See README "When to run compound:learn". |
+| Deploy = GitHub + Vercel production | Whenever user or compound workflow says "deploy" or "review then validate then deploy" | 1) Commit changes. 2) git push origin (current branch). 3) vercel --prod. Do not stop at preview deploy (vercel without --prod). This is in quality-bars and patterns so agents do not require repeating. |
 | Single schema source per page | When adding JSON-LD (FAQ, Organization, etc.) to a page | Render schema only on the server (e.g. in page or layout); do not inject a second script with the same id in a client component. Prevents duplicate id and wrong script removed on unmount. |
 | Webhook body validation | External webhook routes (e.g. ActiveCampaign) | Validate webhook request body with Zod (or existing schema); return 400 for malformed payloads instead of 500. |
 | Single source for trust/marketing stats | Any "500+ players", "15+ years", "5.0 rating" style copy | Keep in `data/site-stats.json`; components (e.g. ExitIntentPopup) import and display. Update numbers in one place so they stay accurate. |

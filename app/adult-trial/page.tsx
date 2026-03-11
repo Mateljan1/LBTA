@@ -75,7 +75,7 @@ export default function AdultTrialLanding() {
           <a
             href="tel:9495340457"
             aria-label="Call (949) 534-0457"
-            className="text-white font-medium hover:text-white/80 transition text-sm tracking-wide focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-transparent rounded-sm"
+            className="text-white font-medium hover:text-white/80 transition text-sm tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50 rounded-sm"
           >
             (949) 534-0457
           </a>
@@ -118,14 +118,14 @@ export default function AdultTrialLanding() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#trial"
-                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone rounded-[2px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
               >
                 Start Your Trial
               </a>
               <a
                 href="tel:9495340457"
                 aria-label="Call (949) 534-0457"
-                className="inline-flex items-center justify-center border border-white text-white px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-white/10 rounded-[2px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+                className="inline-flex items-center justify-center border border-white text-white px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-white/10 rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
               >
                 Call to Discuss
               </a>
@@ -400,13 +400,13 @@ export default function AdultTrialLanding() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/book"
-              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               Book Trial
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center bg-transparent text-white border border-white/50 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
+              className="inline-flex items-center justify-center bg-transparent text-white border border-white/50 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               Contact Us
             </Link>
@@ -421,16 +421,16 @@ export default function AdultTrialLanding() {
             Laguna Beach Tennis Academy • Official City of Laguna Beach Tennis Partner Since 2020
           </p>
           <p className="text-sm text-lbta-bone/60 mb-3">
-            <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-lbta-coral hover:text-lbta-coral-dark transition focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-pacific-dusk rounded-sm">(949) 534-0457</a>
+            <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-lbta-coral hover:text-lbta-coral-dark transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">(949) 534-0457</a>
             <span className="mx-3">•</span>
-            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral hover:text-lbta-coral-dark transition focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-pacific-dusk rounded-sm">
+            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral hover:text-lbta-coral-dark transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">
               info@lagunabeachtennisacademy.com
             </a>
           </p>
           <p className="text-xs text-lbta-bone/40">
-            <a href="/privacy" className="hover:text-lbta-coral transition focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-pacific-dusk rounded-sm">Privacy Policy</a>
+            <a href="/privacy" className="hover:text-lbta-coral transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">Privacy Policy</a>
             <span className="mx-2">•</span>
-            <a href="/terms" className="hover:text-lbta-coral transition focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-brand-pacific-dusk rounded-sm">Terms of Service</a>
+            <a href="/terms" className="hover:text-lbta-coral transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">Terms of Service</a>
           </p>
         </div>
       </footer>

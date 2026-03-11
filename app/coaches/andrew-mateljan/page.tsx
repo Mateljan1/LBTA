@@ -243,18 +243,18 @@ export default function AndrewMateljanPage() {
             Train with Andrew
           </h2>
           <div className="flex flex-col gap-4 mb-8 items-center">
-            <a href="mailto:andrew@tennisbeast.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+            <a href="mailto:andrew@tennisbeast.com" className="inline-flex items-center gap-3 min-h-[48px] text-white/80 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]">
               <Mail className="w-5 h-5" />
               <span>andrew@tennisbeast.com</span>
             </a>
-            <a href="tel:9492410847" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+            <a href="tel:9492410847" className="inline-flex items-center gap-3 min-h-[48px] text-white/80 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]">
               <Phone className="w-5 h-5" />
               <span>(949) 241-0847</span>
             </a>
           </div>
           <Link
             href="/book"
-            className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+            className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
           >
             Schedule Session
           </Link>

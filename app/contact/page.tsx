@@ -382,7 +382,7 @@ export default function ContactPage() {
           </p>
           <Link
             href="/book"
-            className="inline-block bg-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+            className="inline-block bg-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
           >
             Book a Trial →
           </Link>

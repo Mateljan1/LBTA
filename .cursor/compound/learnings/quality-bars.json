@@ -131,6 +131,10 @@
     "errorTextContrastWcagAaa": {
       "rule": "Verify error text contrast for WCAG AAA (7:1) when using lbta-red on light backgrounds; use WebAIM; add darker semantic token if needed",
       "enforcement": "should"
+    },
+    "deployIncludesGitPushAndVercelProd": {
+      "rule": "When user requests 'deploy' or compound:deploy, always push to GitHub and deploy to Vercel production (vercel --prod). Do not stop at preview deploy only.",
+      "enforcement": "must"
     }
   }
 }

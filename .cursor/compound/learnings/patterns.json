@@ -169,6 +169,12 @@
       "when": "Form error messages or required field indicators (e.g. asterisk)",
       "example": "Use text-lbta-red; error callout use bg-lbta-red/5 border-lbta-red/20; verify contrast for WCAG AAA with WebAIM if on light background",
       "tags": ["brand", "a11y", "forms"]
+    },
+    {
+      "name": "deploy-means-git-push-and-vercel-prod",
+      "when": "User or compound workflow says 'deploy' or 'review then validate then deploy'",
+      "example": "1) Commit changes. 2) git push to GitHub (origin). 3) Run vercel --prod (or ensure Vercel Git integration deploys from main). Do not stop at preview deploy or local build only.",
+      "tags": ["deploy", "compound", "workflow"]
     }
   ]
 }
