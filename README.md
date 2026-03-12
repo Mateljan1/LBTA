@@ -115,6 +115,8 @@ npm start
 
 Copy `.env.example` to `.env.local` and set values for the features you use. The app runs without any of these; forms and lead capture require ActiveCampaign (and optionally Supabase). See `.env.example` for comments and `lib/env.ts` for validation.
 
+**Full setup (ActiveCampaign + GoHighLevel):** See [docs/ac-ghl-connected-onepager.md](docs/ac-ghl-connected-onepager.md). Run `npm run check:env` to see which AC/GHL vars are set (values are never printed).
+
 - **Run/build:** No env vars required for static pages.
 - **Forms (book, contact, register, etc.):** `ACTIVECAMPAIGN_URL`, `ACTIVECAMPAIGN_API_KEY`.
 - **Lead store (optional):** `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — see "Lead store (Supabase)" below.
