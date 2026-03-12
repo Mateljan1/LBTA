@@ -43,26 +43,25 @@ export async function POST(request: NextRequest) {
     const { email } = validation.data
 
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
-      const result = await upsertContact({
-        email: email.trim(),
-        firstName: '',
-        lastName: '',
-      })
+      try {
+        const result = await upsertContact({
+          email: email.trim(),
+          firstName: '',
+          lastName: '',
+        })
 
-      if (!result.success || !result.data?.id) {
-        console.error('[newsletter] ActiveCampaign upsert failed')
-        return NextResponse.json(
-          { success: false, error: 'Subscription unavailable. Please try again later.' },
-          { status: 500 }
-        )
+        if (result.success && result.data?.id) {
+          const listResult = await addToList(result.data.id)
+          if (!listResult.success) {
+            console.error('[newsletter] ActiveCampaign addToList failed')
+          }
+          await addTag(result.data.id, CAMPAIGN_TAGS.website_registration)
+        } else {
+          console.error('[newsletter] ActiveCampaign upsert failed')
+        }
+      } catch (acError) {
+        console.error('[newsletter] ActiveCampaign error:', acError instanceof Error ? acError.message : acError)
       }
-
-      const listResult = await addToList(result.data.id)
-      if (!listResult.success) {
-        console.error('[newsletter] ActiveCampaign addToList failed')
-      }
-
-      await addTag(result.data.id, CAMPAIGN_TAGS.website_registration)
     }
 
     void sendToGHL({ email: email.trim() })
