@@ -1,8 +1,8 @@
-# GoHighLevel (GHL) Setup — SMS After Signup
+# GoHighLevel (GHL) / Lead Connector Setup — SMS After Signup
 
-**Purpose:** When GHL is configured, every form submission (trial, program, year, newsletter, scholarship, JTT) creates a contact in GoHighLevel and adds them to a workflow. Use that workflow to send an automated **SMS** so the client gets both an email (from ActiveCampaign) and a text.
+**Purpose:** When GHL is configured, every form submission (trial, program, year, newsletter, scholarship, JTT) creates a contact in GoHighLevel and adds them to a workflow via the **Lead Connector API** (v2). Use that workflow to send an automated **SMS** so the client gets both an email (from ActiveCampaign) and a text.
 
-**Code:** `lib/gohighlevel.ts`. No code changes needed for setup — only configure GHL and set env vars.
+**Code:** `lib/gohighlevel.ts` — uses `https://services.leadconnectorhq.com` by default with Version header `2021-07-28`. See [lead-connector-setup.md](./lead-connector-setup.md) for the full Lead Connector setup.
 
 ---
 
@@ -66,14 +66,16 @@ When the website sends a submission, it will:
 
 - [ ] GHL location has an API key and you have the **Location ID**.
 - [ ] Workflow created with an **SMS** step and **Workflow ID** copied.
-- [ ] `GHL_API_KEY`, `GHL_LOCATION_ID`, and `GHL_WORKFLOW_ID` set in Vercel (or .env.local).
+- [ ] `GHL_API_KEY`, `GHL_LOCATION_ID`, and `GHL_WORKFLOW_ID` set in Vercel (or .env.local). See [how-to-get-ghl-workflow-id.md](./how-to-get-ghl-workflow-id.md) to get the workflow ID.
+- [ ] After adding or changing env vars, **redeploy production** so the app uses them.
 - [ ] Test: submit a trial or newsletter form and confirm the contact appears in GHL and receives the workflow SMS (if phone is present).
 
 ---
 
 ## Reference
 
-- **API base:** `https://rest.gohighlevel.com/v1` (v1 REST).
+- **Lead Connector (recommended):** [lead-connector-setup.md](./lead-connector-setup.md) — API base `https://services.leadconnectorhq.com`, Version header `2021-07-28`.
 - **Create contact:** `POST /contacts/` (body: `locationId`, `email`, `firstName`, `lastName`, `phone`).
 - **Add to workflow:** `POST /contacts/:contactId/workflow/:workflowId`.
 - **Code:** `lib/gohighlevel.ts` — `sendToGHL()` is called from book, register-program, register-year, newsletter, scholarship, and jtt-registration APIs after ActiveCampaign success.
+- **Optional override:** Set `GHL_API_BASE=https://rest.gohighlevel.com/v1` in Vercel to use the legacy v1 REST API instead.

@@ -20,6 +20,8 @@ In **Vercel** → LBTA project → **Settings → Environment Variables**, set:
 
 After adding or changing variables, **redeploy** production (or trigger a new deploy).
 
+**Optional — add via script:** From the repo, run `node scripts/vercel-env-add.js` with `ACTIVECAMPAIGN_URL` and `ACTIVECAMPAIGN_API_KEY` (and optionally `GHL_WORKFLOW_ID`) in your environment; the script uses `VERCEL_TOKEN` from `.env.vercel` and the Vercel API. See the script header for usage.
+
 ---
 
 ## 2. ActiveCampaign — one automation
@@ -47,7 +49,16 @@ Copy the workflow **ID** into Vercel as `GHL_WORKFLOW_ID` (with `GHL_API_KEY` an
 
 ---
 
-## 4. Verification checklist
+## 4. Final verification
+
+- **Env and reachability:** Run `npm run connection-check` for env status. Run `npm run connection-check -- --ping` to verify AC and GHL are reachable (read-only; no test contacts created). If GHL returns workflow list, use one of those IDs as `GHL_WORKFLOW_ID` — see [how-to-get-ghl-workflow-id.md](./how-to-get-ghl-workflow-id.md).
+- **100% checklist:** Use [ac-ghl-100-percent-checklist.md](./ac-ghl-100-percent-checklist.md) for a single end-to-end checklist (Vercel env → AC automation → GHL workflow → verify).
+
+After adding or changing any env var in Vercel, **redeploy production** so the app uses the new values.
+
+---
+
+## 5. Verification checklist (manual test)
 
 | Test | ActiveCampaign | GoHighLevel (if set) |
 |------|----------------|----------------------|
@@ -62,9 +73,12 @@ Optional: repeat for JTT and Scholarship forms; same idea — correct AC list/ta
 
 | Doc | Use when |
 |-----|----------|
+| [ac-ghl-100-percent-checklist.md](./ac-ghl-100-percent-checklist.md) | Single checklist to get AC + GHL 100% set up and verified |
+| [lead-connector-setup.md](./lead-connector-setup.md) | Lead Connector (GHL API v2) setup and env vars |
+| [how-to-get-ghl-workflow-id.md](./how-to-get-ghl-workflow-id.md) | Creating the GHL workflow and copying its ID into Vercel |
 | [activecampaign-setup-checklist.md](./activecampaign-setup-checklist.md) | Building the “LBTA Confirmations” automation and client/internal emails |
 | [gohighlevel-setup-checklist.md](./gohighlevel-setup-checklist.md) | Creating the GHL workflow and getting API key + IDs |
 | [registration-flows-and-ops.md](./registration-flows-and-ops.md) | Seeing which form hits which API and where data goes |
 | [ac-ghl-connection-via-mcps.md](./ac-ghl-connection-via-mcps.md) | Using Vercel and GoHighLevel MCPs to audit env vars and test GHL |
 
-**Implementation plan (phased steps):** `plans/activecampaign-ghl-connect-plan.md`
+**Commands:** `npm run connection-check` (env); `npm run connection-check -- --ping` (env + AC/GHL reachability). **Plan:** `plans/ac-ghl-full-setup-verification-plan.md`

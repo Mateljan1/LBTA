@@ -16,6 +16,8 @@ If you use a different MCP config (e.g. global), ensure the Vercel server URL is
 
 **If the UI shows "Vercel connected" but the agent still gets 403:** The token may not be passed to this session. Try starting a **new chat** or **restarting Cursor**, then ask the agent to list Vercel projects or env vars again. If it still fails, add env vars manually in [Vercel Dashboard → Project → Settings → Environment Variables](https://vercel.com/dashboard).
 
+**CLI with token:** This project can use a Vercel API token from `.env.vercel` (file is gitignored). To run Vercel CLI with it: `export $(grep -v '^#' .env.vercel | xargs)` then `npx vercel whoami` or `npm run check:vercel`. The agent can use the same for list projects, env vars, and deploy.
+
 ---
 
 ## Connection status (from MCP checks)

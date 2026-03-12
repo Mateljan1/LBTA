@@ -10,6 +10,7 @@
     "test": "./node_modules/.bin/vitest run",
     "check:env": "node scripts/check-ac-ghl-env.js",
     "lead": "node scripts/lead.js",
+    "connection-check": "node scripts/connection-check.js",
     "check:vercel": "npx vercel whoami && npx vercel list --yes"
   },
   "dependencies": {

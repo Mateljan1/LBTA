@@ -1,13 +1,18 @@
 /**
- * GoHighLevel (GHL) integration for LBTA website.
- * Optional: when GHL_API_KEY, GHL_LOCATION_ID, and GHL_WORKFLOW_ID are set,
- * form submissions create a contact in GHL and add them to the SMS workflow.
+ * GoHighLevel (GHL) / Lead Connector integration for LBTA website.
+ * Uses the Lead Connector API (services.leadconnectorhq.com) by default for
+ * contact create and workflow enrollment. Optional: when GHL_API_KEY,
+ * GHL_LOCATION_ID, and GHL_WORKFLOW_ID are set, form submissions create a
+ * contact in GHL and add them to the SMS workflow.
  * Failures are logged only; they do not affect the API response.
  */
 
 import { getEnvVar, hasEnvVar } from './env'
 
-const GHL_BASE = 'https://rest.gohighlevel.com/v1'
+/** Lead Connector API v2 base (recommended). Override with GHL_API_BASE if needed (e.g. https://rest.gohighlevel.com/v1). */
+const GHL_BASE = process.env.GHL_API_BASE || 'https://services.leadconnectorhq.com'
+/** API version header required for Lead Connector v2. */
+const GHL_VERSION_HEADER = '2021-07-28'
 
 export type GHLContactPayload = {
   email: string
@@ -31,12 +36,17 @@ function isGHLConfigured(): boolean {
 async function createContact(payload: GHLContactPayload): Promise<string | null> {
   const locationId = getEnvVar('GHL_LOCATION_ID', true)
   const apiKey = getEnvVar('GHL_API_KEY', true)
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${apiKey}`,
+    'Content-Type': 'application/json',
+  }
+  if (GHL_BASE.includes('leadconnectorhq.com')) {
+    headers['Version'] = GHL_VERSION_HEADER
+  }
+
   const res = await fetch(`${GHL_BASE}/contacts/`, {
     method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({
       locationId,
       email: payload.email.trim(),
@@ -55,8 +65,8 @@ async function createContact(payload: GHLContactPayload): Promise<string | null>
     }
     return null
   }
-  const data = (await res.json()) as { contact?: { id?: string } }
-  const id = data?.contact?.id
+  const data = (await res.json()) as { contact?: { id?: string }; id?: string }
+  const id = data?.contact?.id ?? data?.id
   return typeof id === 'string' ? id : null
 }
 
@@ -66,15 +76,17 @@ async function createContact(payload: GHLContactPayload): Promise<string | null>
 async function addContactToWorkflow(contactId: string): Promise<boolean> {
   const apiKey = getEnvVar('GHL_API_KEY', true)
   const workflowId = getEnvVar('GHL_WORKFLOW_ID', true)
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${apiKey}`,
+    'Content-Type': 'application/json',
+  }
+  if (GHL_BASE.includes('leadconnectorhq.com')) {
+    headers['Version'] = GHL_VERSION_HEADER
+  }
+
   const res = await fetch(
     `${GHL_BASE}/contacts/${encodeURIComponent(contactId)}/workflow/${encodeURIComponent(workflowId)}`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-    }
+    { method: 'POST', headers }
   )
   if (!res.ok) {
     if (process.env.NODE_ENV === 'production') {
