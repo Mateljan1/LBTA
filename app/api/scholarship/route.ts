@@ -10,6 +10,7 @@ import {
   LBTA_LIST_ID,
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
+import { sendToGHL } from '@/lib/gohighlevel'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -50,17 +51,12 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     })
 
-    void storeLead({
-      source: 'scholarship',
-      email: validation.data.email,
-      name: validation.data.parentName ?? undefined,
-      phone: validation.data.phone ?? undefined,
-      payload: { studentName: validation.data.studentName },
-    })
+    const parentName = (validation.data.parentName ?? '').trim()
+    const spaceIdx = parentName.indexOf(' ')
+    const ghlFirstName = spaceIdx > 0 ? parentName.slice(0, spaceIdx) : parentName || undefined
+    const ghlLastName = spaceIdx > 0 ? parentName.slice(spaceIdx + 1) : undefined
 
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
-      const parentName = (validation.data.parentName ?? '').trim()
-      const spaceIdx = parentName.indexOf(' ')
       const firstName = spaceIdx > 0 ? parentName.slice(0, spaceIdx) : parentName
       const lastName = spaceIdx > 0 ? parentName.slice(spaceIdx + 1) : ''
       const acResult = await upsertContact({
@@ -74,6 +70,21 @@ export async function POST(request: NextRequest) {
         await addTag(acResult.data.id, CAMPAIGN_TAGS.scholarship)
       }
     }
+
+    void sendToGHL({
+      email: validation.data.email,
+      firstName: ghlFirstName,
+      lastName: ghlLastName,
+      phone: validation.data.phone ?? undefined,
+    })
+
+    void storeLead({
+      source: 'scholarship',
+      email: validation.data.email,
+      name: validation.data.parentName ?? undefined,
+      phone: validation.data.phone ?? undefined,
+      payload: { studentName: validation.data.studentName },
+    })
 
     return NextResponse.json({
       success: true,

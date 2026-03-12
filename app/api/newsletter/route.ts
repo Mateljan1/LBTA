@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { newsletterSchema, parseJsonBody, validateRequest } from '@/lib/validations'
+import { hasEnvVar } from '@/lib/env'
 import { upsertContact, addToList, addTag, CAMPAIGN_TAGS } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
+import { sendToGHL } from '@/lib/gohighlevel'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -40,26 +42,30 @@ export async function POST(request: NextRequest) {
 
     const { email } = validation.data
 
-    const result = await upsertContact({
-      email: email.trim(),
-      firstName: '',
-      lastName: '',
-    })
+    if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
+      const result = await upsertContact({
+        email: email.trim(),
+        firstName: '',
+        lastName: '',
+      })
 
-    if (!result.success || !result.data?.id) {
-      console.error('[newsletter] ActiveCampaign upsert failed')
-      return NextResponse.json(
-        { success: false, error: 'Subscription unavailable. Please try again later.' },
-        { status: 500 }
-      )
+      if (!result.success || !result.data?.id) {
+        console.error('[newsletter] ActiveCampaign upsert failed')
+        return NextResponse.json(
+          { success: false, error: 'Subscription unavailable. Please try again later.' },
+          { status: 500 }
+        )
+      }
+
+      const listResult = await addToList(result.data.id)
+      if (!listResult.success) {
+        console.error('[newsletter] ActiveCampaign addToList failed')
+      }
+
+      await addTag(result.data.id, CAMPAIGN_TAGS.website_registration)
     }
 
-    const listResult = await addToList(result.data.id)
-    if (!listResult.success) {
-      console.error('[newsletter] ActiveCampaign addToList failed')
-    }
-
-    await addTag(result.data.id, CAMPAIGN_TAGS.website_registration)
+    void sendToGHL({ email: email.trim() })
 
     void storeLead({ source: 'newsletter', email: email.trim() })
 

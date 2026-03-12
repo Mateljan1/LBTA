@@ -12,6 +12,7 @@ import {
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
+import { sendToGHL } from '@/lib/gohighlevel'
 
 // ============================================================
 // LBTA Booking/Trial Request API
@@ -134,6 +135,13 @@ export async function POST(request: NextRequest) {
         // Continue even if AC fails - we don't want to block the user
       }
     }
+
+    void sendToGHL({
+      email: body.email,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      phone: body.phone,
+    })
 
     void storeLead({
       source: 'book',

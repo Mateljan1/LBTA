@@ -118,6 +118,7 @@ Copy `.env.example` to `.env.local` and set values for the features you use. The
 - **Run/build:** No env vars required for static pages.
 - **Forms (book, contact, register, etc.):** `ACTIVECAMPAIGN_URL`, `ACTIVECAMPAIGN_API_KEY`.
 - **Lead store (optional):** `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — see "Lead store (Supabase)" below.
+- **SMS via GoHighLevel (optional):** `GHL_API_KEY`, `GHL_LOCATION_ID`, `GHL_WORKFLOW_ID` — when set, form submissions also add the contact to a GHL workflow (e.g. for SMS). See `docs/gohighlevel-setup-checklist.md`.
 - **Rate limiting (optional):** `KV_REST_API_URL`, `KV_REST_API_TOKEN` (Vercel KV).
 
 ## Deployment to Vercel

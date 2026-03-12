@@ -17,6 +17,10 @@ const ENV_VARS = {
   SUPABASE_URL: 'Supabase project URL (optional lead store)',
   SUPABASE_SERVICE_ROLE_KEY: 'Supabase service role key (optional lead store)',
   AC_WEBHOOK_SECRET: 'ActiveCampaign webhook shared secret for verification (optional; required in production)',
+  // Optional — when set, form submissions also sync to GoHighLevel for SMS workflow
+  GHL_API_KEY: 'GoHighLevel API key (optional; for SMS automation)',
+  GHL_LOCATION_ID: 'GoHighLevel location/sub-account ID (optional)',
+  GHL_WORKFLOW_ID: 'GoHighLevel workflow ID for LBTA website SMS (optional)',
 } as const
 
 type EnvVarName = keyof typeof ENV_VARS

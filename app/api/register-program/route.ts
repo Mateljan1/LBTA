@@ -12,6 +12,7 @@ import {
   LBTA_LIST_ID,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
+import { sendToGHL } from '@/lib/gohighlevel'
 
 // Initialize Notion client lazily
 let notionClient: Client | null = null
@@ -213,6 +214,13 @@ export async function POST(request: NextRequest) {
         // Continue even if AC fails
       }
     }
+
+    void sendToGHL({
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
+    })
 
     void storeLead({
       source: 'register-program',

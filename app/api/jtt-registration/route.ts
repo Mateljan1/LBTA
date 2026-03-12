@@ -12,6 +12,7 @@ import {
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
+import { sendToGHL } from '@/lib/gohighlevel'
 
 // Initialize Notion client lazily
 let notionClient: Client | null = null
@@ -207,6 +208,13 @@ export async function POST(request: NextRequest) {
         // Don't fail the whole request if AC fails
       }
     }
+
+    void sendToGHL({
+      email: formData.parentEmail,
+      firstName: formData.parentFirstName,
+      lastName: formData.parentLastName,
+      phone: formData.parentPhone,
+    })
 
     void storeLead({
       source: 'jtt-registration',

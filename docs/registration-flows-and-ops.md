@@ -6,21 +6,23 @@
 
 ## Flow overview
 
-| Form / entry point | API | Notion | ActiveCampaign | Supabase (leads) | User sees |
-|--------------------|-----|--------|---------------|------------------|-----------|
-| Trial / Book (modal, adult-trial, junior-trial, contact, HomeCTA, beginner) | `/api/book` | — | List 4 + tags (trial, program) | — | Redirect `/thank-you` (default trial copy) |
-| Program registration (LuxuryRegistrationModal) | `/api/register-program` | Yes | List 4 + class tag | — | Success in modal → redirect `/thank-you?type=program` |
-| Year / camps / JTT (LuxuryYearModal) | `/api/register-year` | Yes | List 4 + season/camp/JTT tags | — | Success in modal → redirect `/thank-you?type=year` |
-| Newsletter, Exit intent | `/api/newsletter` | — | List 4 | — | Inline success |
-| Scholarship | `/api/scholarship` | — | List 4 + Scholarship tag (if AC env set) | Yes (if env set) | Redirect `/thank-you?type=scholarship` |
-| Generic register | `/api/register` | — | — | Yes (if env set) | (No UI caller in codebase) |
+| Form / entry point | API | Notion | ActiveCampaign | GoHighLevel (SMS) | Supabase (leads) | User sees |
+|--------------------|-----|--------|---------------|-------------------|------------------|-----------|
+| Trial / Book (modal, adult-trial, junior-trial, contact, HomeCTA, beginner) | `/api/book` | — | List 4 + tags (trial, program) | Yes (if GHL env set) | — | Redirect `/thank-you` (default trial copy) |
+| Program registration (LuxuryRegistrationModal) | `/api/register-program` | Yes | List 4 + class tag | Yes (if GHL env set) | — | Success in modal → redirect `/thank-you?type=program` |
+| Year / camps / JTT (LuxuryYearModal) | `/api/register-year` | Yes | List 4 + season/camp/JTT tags | Yes (if GHL env set) | — | Success in modal → redirect `/thank-you?type=year` |
+| Newsletter, Exit intent | `/api/newsletter` | — | List 4 | Yes (if GHL env set) | — | Inline success |
+| Scholarship | `/api/scholarship` | — | List 4 + Scholarship tag (if AC env set) | Yes (if GHL env set) | Yes (if env set) | Redirect `/thank-you?type=scholarship` |
+| JTT registration | `/api/jtt-registration` | — | List 4 + JTT tag | Yes (if GHL env set) | — | Redirect / thank-you as configured |
+| Generic register | `/api/register` | — | — | — | Yes (if env set) | (No UI caller in codebase) |
 
 ---
 
 ## Where to look
 
 - **Notion** — Program and year-round registrations (camps, JTT, seasonal). Source of truth for “who signed up for what” for classes/camps.
-- **ActiveCampaign** — All contacts who get email. List 4 = LBTA master list. Tags segment by trial, program, JTT, scholarship, etc. Confirmation emails are sent by AC automations (not by the website).
+- **ActiveCampaign** — All contacts who get email. List 4 = LBTA master list. Tags segment by trial, program, JTT, scholarship, etc. Confirmation emails and **internal team notification emails** are sent by AC automations (see `docs/activecampaign-setup-checklist.md`).
+- **GoHighLevel** — When `GHL_API_KEY`, `GHL_LOCATION_ID`, and `GHL_WORKFLOW_ID` are set, form submissions create/find a contact and add them to a workflow. Use that workflow to send **SMS** to the client. See `docs/gohighlevel-setup-checklist.md`.
 - **Supabase** — Optional lead backup. When `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are set, form submissions are also stored in the `leads` table. Use for scholarship backup and lead history if not using AC for scholarship.
 
 ---
@@ -54,4 +56,5 @@ Confirmation emails are **not** sent by the website. They are sent by ActiveCamp
 
 - **ActiveCampaign:** `ACTIVECAMPAIGN_URL`, `ACTIVECAMPAIGN_API_KEY` — required for book, register-program, register-year, newsletter; optional for scholarship (when set, scholarship adds contact + Scholarship tag).
 - **Notion:** `NOTION_API_KEY`, `NOTION_DATABASE_ID` — required for register-program and register-year.
+- **GoHighLevel:** `GHL_API_KEY`, `GHL_LOCATION_ID`, `GHL_WORKFLOW_ID` — optional; when all three are set, form submissions also sync to GHL and the contact is added to the given workflow (e.g. for SMS). See `docs/gohighlevel-setup-checklist.md`.
 - **Supabase:** `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — optional; when set, leads (including scholarship) are stored in `leads` table.

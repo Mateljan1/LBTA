@@ -1,53 +1,82 @@
-# ActiveCampaign Setup Checklist — Confirmation Emails
+# ActiveCampaign Setup — One Automation (Client + Internal Email)
 
-**Purpose:** One-time setup in ActiveCampaign so contacts receive confirmation emails when they sign up, request a trial, register for JTT, or submit a scholarship application. The website adds contacts to List 4 and applies tags; **you** create the automations in AC that send the emails.
+**Purpose:** One automation in ActiveCampaign that (1) sends the right **client** confirmation email (trial / JTT / scholarship / welcome) and (2) sends an **internal** email to your team so you’re notified on every signup.
 
-**Reference:** Flow details and IDs are in `docs/registration-flows-and-ops.md` and `lib/activecampaign.ts`.
+**Reference:** List and tag IDs are in `lib/activecampaign.ts`. No code changes needed — only configure this in the AC UI.
 
 ---
 
-## IDs (from code)
+## IDs (from code — do not change)
 
 | Item | ID | Notes |
 |------|-----|--------|
 | **LBTA Master List** | **4** | All signups go here. |
-| **Tag: Trial Request** | **82** | Applied when someone books a trial. |
-| **Tag: JTT Spring 2026** | **107** | Applied when someone registers for JTT. |
-| **Tag: Scholarship** | **108** | Applied when someone submits a scholarship application (if AC env is set). |
+| **Tag: Trial Request** | **82** | Trial / book requests. |
+| **Tag: Website/Newsletter** | **33** | Newsletter, general website signup. |
+| **Tag: JTT Spring 2026** | **107** | JTT registrations. |
+| **Tag: Scholarship** | **108** | Scholarship applications. |
 
 ---
 
-## Checklist — Do in ActiveCampaign
+## One automation: “LBTA Confirmations”
 
-1. **List 4 — Welcome / confirmation**
-   - [ ] In AC: **Automations** → create (or edit) an automation.
-   - [ ] **Trigger:** Contact is added to list **ID 4** (LBTA master list).
-   - [ ] **Action:** Send email — welcome / “you’re on our list” / general confirmation.
-   - [ ] Save and turn on.
+Build **one** automation in ActiveCampaign that handles both client and internal email.
 
-2. **Trial request — Trial confirmation**
-   - [ ] In AC: **Automations** → create (or edit) an automation.
-   - [ ] **Trigger:** Contact receives tag **ID 82** (“Trial Request” / `trial_request`).
-   - [ ] **Action:** Send email — “We received your trial request; we’ll contact you within 24 hours” (or your wording).
-   - [ ] Save and turn on.
+### Triggers (any of these)
 
-3. **JTT Spring 2026 — JTT confirmation**
-   - [ ] In AC: **Automations** → create (or edit) an automation.
-   - [ ] **Trigger:** Contact receives tag **ID 107** (“JTT Spring 2026” / `jtt_spring_2026`).
-   - [ ] **Action:** Send email — JTT registration confirmation with next steps.
-   - [ ] Save and turn on.
+- Contact is **added to list ID 4**, or  
+- Contact **receives tag 82** (Trial), **107** (JTT), **108** (Scholarship), or **33** (Website/Newsletter).
 
-4. **Scholarship — Application received**
-   - [ ] In AC: Create tag **“Scholarship”** if it doesn’t exist; note its ID (code uses **108** — update `lib/activecampaign.ts` `CAMPAIGN_TAGS.scholarship` if your tag ID is different).
-   - [ ] **Automations** → create (or edit) an automation.
-   - [ ] **Trigger:** Contact receives tag **ID 108** (“Scholarship”).
-   - [ ] **Action:** Send email — “We received your scholarship application and will review it shortly.”
-   - [ ] Save and turn on.
+Add all of the above as triggers so the automation runs for every relevant signup.
+
+### Step 1 — Client email (conditional)
+
+Add a **conditional** action that sends the right email **to the contact**:
+
+- **If** contact has tag **82** → Send **Trial confirmation** email (“We received your trial request…”).
+- **Else if** contact has tag **107** → Send **JTT confirmation** email.
+- **Else if** contact has tag **108** → Send **Scholarship received** email (“We received your scholarship application…”).
+- **Else** → Send **Welcome / Newsletter** email (for list add or tag 33 only).
+
+Use AC’s “If/else” or “Condition” node to check contact tags, then send the matching email.
+
+### Step 2 — Internal notification (email to you)
+
+Right after the client email step, add a second action:
+
+- **Send email** to your internal address (e.g. `support@lagunabeachtennisacademy.com` or a dedicated leads inbox).
+- **Subject:** e.g. “New LBTA signup: {{contact.email}}”.
+- **Body:** Short summary — contact email, first name, last name, and which type (trial / JTT / scholarship / newsletter) so you can follow up. You can use AC merge tags like `%EMAIL%`, `%FIRSTNAME%`, `%LASTNAME%` and a note like “New trial request” or “New newsletter signup” based on the same tag conditions.
+
+This way you get one internal email per signup without a second automation.
+
+---
+
+## Checklist — In ActiveCampaign
+
+- [ ] Create one automation named **“LBTA Confirmations”**.
+- [ ] Add triggers: **List 4** (contact added) and **Tags 82, 107, 108, 33** (contact receives tag).
+- [ ] Add **Step 1:** Conditional send to **contact** (trial / JTT / scholarship / welcome by tag).
+- [ ] Add **Step 2:** Send email to **internal address** with signup summary.
+- [ ] Create the four client emails (trial, JTT, scholarship, welcome) if you haven’t already.
+- [ ] Save and turn the automation **on**.
 
 ---
 
 ## After setup
 
-- New trial requests, program/year signups, newsletter signups, and (if configured) scholarship applications will be in List 4 with the right tags.
-- Confirmation emails will send automatically once these automations are on.
-- To change copy or timing, edit the automation or email in AC; no code change needed.
+- Every form submission that adds a contact to List 4 or applies one of these tags will trigger the automation.
+- The **client** gets the right confirmation email; **you** get an internal email. No code or ID changes required.
+
+---
+
+## Optional: Four separate automations
+
+If you prefer one automation per trigger (easier to tweak individually), you can still use the same IDs:
+
+1. **List 4** → send welcome email to contact + internal summary to you.
+2. **Tag 82** → send trial confirmation to contact + internal.
+3. **Tag 107** → send JTT confirmation to contact + internal.
+4. **Tag 108** → send scholarship received to contact + internal.
+
+The single-automation approach above is simpler to maintain.

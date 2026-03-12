@@ -5,6 +5,7 @@ import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, registerYearSchema, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
 import { storeLead } from '@/lib/leads-store'
+import { sendToGHL } from '@/lib/gohighlevel'
 
 let notionClient: Client | null = null
 function getNotionClient(): Client {
@@ -411,6 +412,13 @@ export async function POST(request: NextRequest) {
       // Continue; response will include acSynced: false
     }
     }
+
+    void sendToGHL({
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
+    })
 
     void storeLead({
       source: 'register-year',
