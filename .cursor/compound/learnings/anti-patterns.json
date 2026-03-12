@@ -232,6 +232,27 @@
       "avoid": "if (!res.ok) return res.text().then(t => Promise.reject(new Error(res.status + ': ' + t))); then catch logs err.message (which contains body)",
       "instead": "Reject with status only: Promise.reject(new Error('Vercel API error: ' + res.status)); never include response body in error or log",
       "tags": ["security", "script", "vercel", "external-api"]
+    },
+    {
+      "id": "optional-integration-causes-500",
+      "description": "Form handler returns 500 when optional integration (GHL, storeLead) or rate limit fails after validation passed",
+      "avoid": "await sendToGHL(...) or void sendToGHL(...) without .catch(); rateLimit() unguarded so KV failure throws; parseJsonBody throws on non-JSON body",
+      "instead": "Wrap rateLimit in try/catch and allow on failure; parseJsonBody returns { ok: false, status: 400 } on any parse error; void integration().catch(e => console.error(...)); return 200 when validation passes",
+      "tags": ["api", "form", "newsletter", "500", "optional-integration"]
+    },
+    {
+      "id": "gray-in-brand-sections",
+      "description": "Using text-gray-* in sections that should use brand tokens (e.g. PartnershipSection)",
+      "avoid": "text-gray-500, text-gray-600, group-hover:text-gray-700 in components that are part of the main brand experience",
+      "instead": "Use text-brand-pacific-dusk/60, text-brand-pacific-dusk/80, group-hover:text-brand-pacific-dusk (and border-black/6 for borders) per design system",
+      "tags": ["brand", "design-system", "PartnershipSection"]
+    },
+    {
+      "id": "rate-limit-uncaught",
+      "description": "API route calls rateLimit() without try/catch so KV failure throws and returns 500",
+      "avoid": "const rateLimitResult = await rateLimit(...); if (!rateLimitResult.allowed) return 429; with no try/catch around rateLimit",
+      "instead": "Wrap rateLimit() in try/catch; on catch use fallback { allowed: true, remaining: maxRequests, resetTime: Date.now() + interval }; apply in all form routes (book, newsletter, register, etc.)",
+      "tags": ["api", "rate-limit", "500", "resilience"]
     }
   ]
 }

@@ -193,6 +193,7 @@ export default function Header() {
                 alt="Laguna Beach Tennis Academy"
                 width={120}
                 height={56}
+                sizes="(max-width: 768px) 100px, 120px"
                 className="h-10 md:h-12 w-auto group-hover:opacity-80 transition-opacity duration-300"
               />
               <span className="font-headline text-lg md:text-xl font-medium text-brand-pacific-dusk tracking-wide hidden sm:inline" aria-hidden="true">

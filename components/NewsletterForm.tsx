@@ -34,7 +34,7 @@ export default function NewsletterForm() {
       <div className="container-lbta py-20 md:py-24">
         <div className="max-w-2xl mx-auto text-center">
           <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent mx-auto mb-8" />
-          <span className="text-eyebrow text-brand-victoria-cove/80 mb-4 block">Stay Connected</span>
+          <span className="text-eyebrow text-white/80 mb-4 block">Stay Connected</span>
           <h3 className="font-headline text-[28px] md:text-[36px] font-light mb-4 text-white tracking-tight">
             Join the LBTA Community
           </h3>
@@ -54,12 +54,12 @@ export default function NewsletterForm() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 disabled={status === 'loading' || status === 'success'}
-                className="flex-1 px-5 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-l-md text-white placeholder-white/30 font-sans text-[15px] font-light focus:outline-none focus:border-brand-victoria-cove/50 focus:bg-white/8 transition-all duration-300 disabled:opacity-50"
+                className="flex-1 px-5 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-l-md text-white placeholder-white/50 font-sans text-[15px] font-light focus:outline-none focus:border-brand-victoria-cove/50 focus:bg-white/8 transition-all duration-300 disabled:opacity-50"
               />
               <button
                 type="submit"
                 disabled={status === 'loading' || status === 'success'}
-                className="px-6 py-4 bg-brand-sunset-cliff text-white font-sans text-[13px] font-semibold tracking-wider uppercase rounded-r-md hover:bg-brand-sunset-cliff/90 transition-all duration-300 disabled:opacity-70 flex items-center gap-2"
+                className="px-6 py-4 bg-white text-black font-sans text-[13px] font-semibold tracking-wider uppercase rounded-r-md hover:bg-white/90 transition-all duration-300 disabled:opacity-70 flex items-center gap-2"
               >
                 {status === 'loading' ? (
                   <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">

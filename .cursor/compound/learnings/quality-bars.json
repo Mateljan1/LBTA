@@ -171,6 +171,26 @@
     "leadPipelineSmokeTest": {
       "rule": "Lead pipeline has a smoke test (npm run smoke:lead) that verifies env and optional AC/GHL reachability without creating contacts; optional SMOKE_BASE_URL for live site check",
       "enforcement": "should"
+    },
+    "formHandlerValidPayload200": {
+      "rule": "When request body is valid (parse + Zod pass), form handler must return 200; optional integrations (AC, GHL, storeLead) and rate limit must not cause 500 — use try/catch on rateLimit, .catch() on fire-and-forget",
+      "enforcement": "must"
+    },
+    "nextImageSizesLogos": {
+      "rule": "next/image for logos and fixed-size images (Header, Footer, PartnershipSection) must include sizes attribute (e.g. sizes=\"120px\", sizes=\"180px\") per best practice",
+      "enforcement": "should"
+    },
+    "overviewFallbacksInData": {
+      "rule": "Program overview 'from' price fallbacks and camp 3-day week prices must live in data (pricing-supplemental.json programsOverviewFallbacks, year2026.json threeDayFullPrice/threeDayHalfPrice); lib only reads with code fallback as last resort",
+      "enforcement": "should"
+    },
+    "rateLimitTryCatchFormRoutes": {
+      "rule": "Every API route that uses rateLimit() must wrap it in try/catch and allow the request on failure (fallback allowed: true) so KV outage does not cause 500",
+      "enforcement": "must"
+    },
+    "footerAllText70DeepWater": {
+      "rule": "All text and icon color on bg-brand-deep-water (footer, NewsletterForm, etc.) must be text-white/70 or higher; placeholders at least placeholder-white/50",
+      "enforcement": "must"
     }
   }
 }

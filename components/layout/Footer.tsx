@@ -25,6 +25,7 @@ export default function Footer() {
                 alt="Laguna Beach Tennis Academy"
                 width={180}
                 height={54}
+                sizes="180px"
                 className="brightness-0 invert opacity-90"
               />
             </Link>
@@ -41,7 +42,7 @@ export default function Footer() {
                 href="https://instagram.com/lagunabeachtennisacademy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
                 aria-label="Follow us on Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -52,7 +53,7 @@ export default function Footer() {
                 href="https://facebook.com/lagunabeachtennisacademy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:bg-brand-victoria-cove/20 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
                 aria-label="Follow us on Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

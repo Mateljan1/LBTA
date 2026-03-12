@@ -2,7 +2,17 @@
  * Camps page data from year2026.json (single source of truth).
  * Adds season and week arrays for summer/swim-tennis using prices from data.
  */
-import year2026 from '@/data/year2026.json'
+import year2026Data from '@/data/year2026.json'
+
+const year2026 = year2026Data as {
+  year: number
+  campWeekDefaults?: { threeDayFullSummer: number; threeDayHalfSummer: number; threeDayFullSwimTennis: number }
+  camps: unknown[]
+}
+if (!year2026.campWeekDefaults) {
+  throw new Error('data/year2026.json must define campWeekDefaults (threeDayFullSummer, threeDayHalfSummer, threeDayFullSwimTennis)')
+}
+const CAMP_WEEK_DEFAULTS = year2026.campWeekDefaults
 
 export interface CampWeek {
   week: number
@@ -24,6 +34,8 @@ interface YearCamp {
   price: number
   perDay?: number
   halfDay?: number
+  threeDayFullPrice?: number
+  threeDayHalfPrice?: number
   description: string
   includes?: string[]
   coaches?: string[]
@@ -75,25 +87,28 @@ const SWIM_TENNIS_WEEK_DATES: { dates: string; label: string; days: number }[] =
 
 function buildSummerWeeks(camp: YearCamp): CampWeek[] {
   const price = camp.price
-  const halfDay = (camp as YearCamp & { halfDay?: number }).halfDay
+  const halfDay = camp.halfDay
+  const threeDayFull = camp.threeDayFullPrice ?? CAMP_WEEK_DEFAULTS.threeDayFullSummer
+  const threeDayHalf = camp.threeDayHalfPrice ?? CAMP_WEEK_DEFAULTS.threeDayHalfSummer
   return SUMMER_WEEK_DATES.map((w, i) => ({
     week: i + 1,
     dates: w.dates,
     label: w.label,
     days: w.days,
-    price: w.days === 3 ? 435 : price,
-    halfDay: w.days === 3 ? 255 : halfDay,
+    price: w.days === 3 ? threeDayFull : price,
+    halfDay: w.days === 3 ? threeDayHalf : halfDay,
   }))
 }
 
 function buildSwimTennisWeeks(camp: YearCamp): CampWeek[] {
   const price = camp.price
+  const threeDayFull = camp.threeDayFullPrice ?? CAMP_WEEK_DEFAULTS.threeDayFullSwimTennis
   return SWIM_TENNIS_WEEK_DATES.map((w, i) => ({
     week: i + 1,
     dates: w.dates,
     label: w.label,
     days: w.days,
-    price: w.days === 3 ? 375 : price,
+    price: w.days === 3 ? threeDayFull : price,
   }))
 }
 

@@ -8,7 +8,12 @@ import { sendToGHL } from '@/lib/gohighlevel'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
-  const rateLimitResult = await rateLimit(`newsletter:${ip}`, RATE_LIMITS.form)
+  let rateLimitResult: { allowed: boolean; remaining: number; resetTime: number }
+  try {
+    rateLimitResult = await rateLimit(`newsletter:${ip}`, RATE_LIMITS.form)
+  } catch {
+    rateLimitResult = { allowed: true, remaining: RATE_LIMITS.form.maxRequests, resetTime: Date.now() + RATE_LIMITS.form.interval }
+  }
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(
@@ -64,9 +69,16 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    void sendToGHL({ email: email.trim() })
-
-    void storeLead({ source: 'newsletter', email: email.trim() })
+    try {
+      void sendToGHL({ email: email.trim() }).catch((e: unknown) =>
+        console.error('[newsletter] GHL:', e instanceof Error ? e.message : 'Unknown error')
+      )
+      void storeLead({ source: 'newsletter', email: email.trim() }).catch((e: unknown) =>
+        console.error('[newsletter] storeLead:', e instanceof Error ? e.message : 'Unknown error')
+      )
+    } catch {
+      // Fire-and-forget may throw synchronously (e.g. getClient() with invalid Supabase env); do not fail the response
+    }
 
     return NextResponse.json({ success: true, message: 'Subscribed successfully' })
   } catch (err) {

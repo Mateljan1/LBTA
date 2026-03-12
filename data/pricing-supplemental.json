@@ -1,4 +1,17 @@
 {
+  "programsOverviewFallbacks": {
+    "default": 25,
+    "junior": 25,
+    "youth": 55,
+    "highPerformance": 58,
+    "adult": 31,
+    "fitness": 50,
+    "camps": 120,
+    "leagues": 25
+  },
+  "juniorTrial": {
+    "earlyBirdMinPrice": 120
+  },
   "comparisonTiers": [
     {
       "name": "Drop-In",

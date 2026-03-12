@@ -55,14 +55,14 @@ interface PartnershipSectionProps {
 
 export default function PartnershipSection({ className = '' }: PartnershipSectionProps) {
   return (
-    <section className={`section-spacing bg-white border-t border-gray-200 ${className}`}>
+    <section className={`section-spacing bg-white border-t border-black/6 ${className}`}>
       <div className="container-lbta">
         <AnimatedSection className="text-center mb-16">
-          <p className="text-overline mb-6">Our Network</p>
+          <p className="text-overline text-brand-pacific-dusk mb-6">Our Network</p>
           <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk">
             Partnership & Community
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
+          <p className="text-lg text-brand-pacific-dusk/80 max-w-2xl mx-auto mt-6">
             Building a comprehensive tennis ecosystem through strategic partnerships and community collaboration.
           </p>
         </AnimatedSection>
@@ -83,10 +83,11 @@ export default function PartnershipSection({ className = '' }: PartnershipSectio
                       alt={`${partner.name} - ${partner.description}`}
                       width={144}
                       height={80}
+                      sizes="144px"
                       className="max-h-20 max-w-full w-auto object-contain opacity-70 group-hover:opacity-100 transition-all duration-300"
                     />
                   </div>
-                  <p className="text-xs text-gray-500 mt-3 font-sans text-center group-hover:text-gray-700 transition-colors">
+                  <p className="text-xs text-brand-pacific-dusk/60 mt-3 font-sans text-center group-hover:text-brand-pacific-dusk transition-colors">
                     {partner.description}
                   </p>
                 </a>
@@ -96,7 +97,7 @@ export default function PartnershipSection({ className = '' }: PartnershipSectio
         </div>
 
         <AnimatedSection delay={0.8} className="text-center mt-16">
-          <p className="text-sm text-gray-500 font-sans">
+          <p className="text-sm text-brand-pacific-dusk/70 font-sans">
             Interested in partnership opportunities? <a href="/contact" className="text-brand-sunset-cliff hover:underline">Contact us</a>
           </p>
         </AnimatedSection>

@@ -232,9 +232,8 @@ export async function parseJsonBody(
   try {
     const data = await request.json()
     return { ok: true, data }
-  } catch (err) {
-    if (err instanceof SyntaxError) return { ok: false, status: 400 }
-    throw err
+  } catch {
+    return { ok: false, status: 400 }
   }
 }
 

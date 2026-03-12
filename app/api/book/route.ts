@@ -38,7 +38,12 @@ const PROGRAM_TAGS: Record<string, number> = {
 export async function POST(request: NextRequest) {
   // Rate limiting: 5 requests per minute per IP
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
-  const rateLimitResult = await rateLimit(`book:${ip}`, RATE_LIMITS.sensitive)
+  let rateLimitResult: { allowed: boolean; remaining: number; resetTime: number }
+  try {
+    rateLimitResult = await rateLimit(`book:${ip}`, RATE_LIMITS.sensitive)
+  } catch {
+    rateLimitResult = { allowed: true, remaining: RATE_LIMITS.sensitive.maxRequests, resetTime: Date.now() + RATE_LIMITS.sensitive.interval }
+  }
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(

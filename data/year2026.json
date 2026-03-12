@@ -1,7 +1,11 @@
 {
   "year": 2026,
   "lastUpdated": "2026-03-06",
-  
+  "campWeekDefaults": {
+    "threeDayFullSummer": 435,
+    "threeDayHalfSummer": 255,
+    "threeDayFullSwimTennis": 375
+  },
   "seasons": {
     "winter": {
       "name": "Winter 2026",
@@ -57,6 +61,7 @@
       "ages": "5-11",
       "location": "Alta Laguna Park",
       "price": 495,
+      "threeDayFullPrice": 375,
       "perDay": 124,
       "description": "Structured tennis lessons, swimming, and team-based activities that create lasting memories.",
       "includes": ["Tennis instruction", "Supervised swimming", "Team activities", "Certified lifeguards"],
@@ -100,6 +105,8 @@
       "ages": "5-17",
       "location": "Alta Laguna Park / Laguna Beach High School",
       "price": 495,
+      "threeDayFullPrice": 435,
+      "threeDayHalfPrice": 255,
       "halfDay": 295,
       "jrDevPrice": 325,
       "perDay": 99,

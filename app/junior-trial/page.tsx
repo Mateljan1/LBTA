@@ -7,8 +7,10 @@ import { getJuniorProgramDataFromWinter2026 } from '@/lib/junior-program-data'
 import { getSeasonCTA, getActiveSeason } from '@/lib/season-utils'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
+import pricingSupplementalData from '@/data/pricing-supplemental.json'
 
 const programData = getJuniorProgramDataFromWinter2026()
+const earlyBirdMinPrice = (pricingSupplementalData as { juniorTrial?: { earlyBirdMinPrice?: number } }).juniorTrial?.earlyBirdMinPrice ?? 120
 
 export default function JuniorTrialLanding() {
   const [step, setStep] = useState(1)
@@ -45,7 +47,7 @@ export default function JuniorTrialLanding() {
   const activeSeason = getActiveSeason()
   const isEarlyBird = seasonCta.showEarlyBird
   const earlyBirdDiscount = seasonCta.earlyBirdDiscount
-  const discount = isEarlyBird && price > 120 ? earlyBirdDiscount : 0
+  const discount = isEarlyBird && price > earlyBirdMinPrice ? earlyBirdDiscount : 0
   const finalPrice = price - discount
 
   // Reset dependent fields when parent field changes
@@ -331,7 +333,7 @@ export default function JuniorTrialLanding() {
                         {Object.entries(selectedProgramData.pricing)
                           .filter(([key]) => key !== 'billing')
                           .map(([freq, amount]: [string, any]) => {
-                            const freqDiscount = isEarlyBird && amount > 120 ? earlyBirdDiscount : 0
+                            const freqDiscount = isEarlyBird && amount > earlyBirdMinPrice ? earlyBirdDiscount : 0
                             const freqPrice = amount - freqDiscount
                             return (
                               <label

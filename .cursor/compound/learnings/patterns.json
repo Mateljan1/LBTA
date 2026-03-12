@@ -1,6 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-12",
+  "lastLearnRun": "2026-03-12 fix-everything-100/100",
   "patterns": [
     {
       "name": "single-source-dropdown-options",
@@ -271,6 +272,42 @@
       "when": "Script pings the same external API the app uses (e.g. GHL workflows)",
       "example": "Use same base URL (GHL_API_BASE or default Lead Connector) and same auth/version (Version: 2021-07-28 when leadconnectorhq.com) so pass/fail matches runtime behavior; avoid legacy-only URL in script while app uses v2.",
       "tags": ["ops", "GHL", "Lead-Connector", "consistency"]
+    },
+    {
+      "name": "form-handler-never-500-on-valid-payload",
+      "when": "Form API (newsletter, book, register) where validation can pass but optional integrations (AC, GHL, storeLead) or rate limit might fail",
+      "example": "Wrap rateLimit in try/catch, allow on failure; parseJsonBody returns 400 on any parse error (no throw); after validation pass: void sendToGHL(...).catch(log); void storeLead(...).catch(log); return 200. User always gets success when payload is valid.",
+      "tags": ["api", "validation", "optional-integration", "500"]
+    },
+    {
+      "name": "overview-and-camp-prices-in-data",
+      "when": "Overview cards need 'from' price fallbacks or camp week pricing has special cases (e.g. 3-day week)",
+      "example": "programsOverviewFallbacks in pricing-supplemental.json; year2026 camp entries with threeDayFullPrice, threeDayHalfPrice; lib/programs-data and lib/camps-data read from data and use code fallback only as last resort (?? 25 etc.).",
+      "tags": ["data-integrity", "single-source", "programs", "camps"]
+    },
+    {
+      "name": "next-image-sizes-for-logos",
+      "when": "Using next/image for logos or fixed-size images (Header, Footer, PartnershipSection)",
+      "example": "Add sizes attribute: Header logo sizes=\"(max-width: 768px) 100px, 120px\"; Footer logo sizes=\"180px\"; partner logos sizes=\"144px\". Meets best-practice and validation.",
+      "tags": ["performance", "next-image", "accessibility", "design-system"]
+    },
+    {
+      "name": "rate-limit-try-catch-all-form-routes",
+      "when": "Any API route (book, newsletter, register, etc.) uses rateLimit() from lib/rate-limit",
+      "example": "let rateLimitResult; try { rateLimitResult = await rateLimit(key, RATE_LIMITS.xxx); } catch { rateLimitResult = { allowed: true, remaining: RATE_LIMITS.xxx.maxRequests, resetTime: Date.now() + RATE_LIMITS.xxx.interval }; }. Prevents 500 when KV is down or unavailable.",
+      "tags": ["api", "rate-limit", "resilience", "500"]
+    },
+    {
+      "name": "footer-all-text-70-deep-water",
+      "when": "Any text or icon color on bg-brand-deep-water (footer, NewsletterForm, etc.)",
+      "example": "Use text-white/70 or text-white/80 for tagline, links, labels, social icons, and placeholders. No text-white/60 or placeholder-white/30; strict 'all text on deep-water ≥ 70%' for validation 100/100.",
+      "tags": ["a11y", "contrast", "footer", "WCAG", "design-system"]
+    },
+    {
+      "name": "section-overline-explicit-brand-color",
+      "when": "Section has an overline or eyebrow label (e.g. 'Our Network') in a brand-only section",
+      "example": "Add text-brand-pacific-dusk (or appropriate token) to the overline element so the section uses only brand tokens; avoids inherited/gray and satisfies design-system validation.",
+      "tags": ["design-system", "brand", "PartnershipSection", "typography"]
     }
   ]
 }

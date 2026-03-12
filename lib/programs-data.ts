@@ -6,6 +6,7 @@
 import winter2026Data from '@/data/winter2026.json'
 import springSummer2026Data from '@/data/spring-summer-2026.json'
 import privateRatesData from '@/data/private-rates.json'
+import pricingSupplementalData from '@/data/pricing-supplemental.json'
 
 export interface WinterProgram {
   id: string
@@ -96,9 +97,11 @@ const springSummer2026 = springSummer2026Data as unknown as {
 
 const privateRates = privateRatesData as PrivateRateRow[]
 
+const overviewFallbacks = (pricingSupplementalData as { programsOverviewFallbacks?: Record<string, number> }).programsOverviewFallbacks ?? {}
+const fallbackDefault = overviewFallbacks.default ?? 25
 /** Fallbacks for overview "from" price when category is not in winter2026 (Camps/Leagues are separate offerings). */
-const CAMPS_FROM_PRICE_FALLBACK = 120
-const LEAGUES_FROM_PRICE_FALLBACK = 25
+const CAMPS_FROM_PRICE_FALLBACK = overviewFallbacks.camps ?? fallbackDefault
+const LEAGUES_FROM_PRICE_FALLBACK = overviewFallbacks.leagues ?? fallbackDefault
 
 /** Minimum price from a program's pricing object. */
 function minPriceFromPricing(pricing: Record<string, number>): number {
@@ -206,11 +209,11 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
   const fitnessPrices = programs.filter(p => p.category === 'Fitness').flatMap(p => Object.values(p.pricing))
   const hpProgram = programs.find(p => p.id === 'high-performance')
 
-  const fromJunior = juniorPrices.length ? Math.min(...juniorPrices) : 25
-  const fromYouth = youthPrices.length ? Math.min(...youthPrices) : 55
-  const fromHP = hpProgram ? minPriceFromPricing(hpProgram.pricing) : 58
-  const fromAdult = adultPrices.length ? Math.min(...adultPrices) : 31
-  const fromFitness = fitnessPrices.length ? Math.min(...fitnessPrices) : 50
+  const fromJunior = juniorPrices.length ? Math.min(...juniorPrices) : (overviewFallbacks.junior ?? fallbackDefault)
+  const fromYouth = youthPrices.length ? Math.min(...youthPrices) : (overviewFallbacks.youth ?? fallbackDefault)
+  const fromHP = hpProgram ? minPriceFromPricing(hpProgram.pricing) : (overviewFallbacks.highPerformance ?? fallbackDefault)
+  const fromAdult = adultPrices.length ? Math.min(...adultPrices) : (overviewFallbacks.adult ?? fallbackDefault)
+  const fromFitness = fitnessPrices.length ? Math.min(...fitnessPrices) : (overviewFallbacks.fitness ?? fallbackDefault)
 
   return [
     { eyebrow: 'Ages 3–11', title: 'Junior Development', description: 'Where it begins. Build coordination, rhythm, and love for the game from Little Stars through Green Dot.', href: '/schedules', fromPrice: fromJunior, image: '/images/programs/juniors.webp' },
