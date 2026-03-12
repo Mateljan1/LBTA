@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-11",
+  "updated": "2026-03-12",
   "patterns": [
     {
       "name": "single-source-dropdown-options",
@@ -217,6 +217,60 @@
       "when": "Any component rendered inside the footer (same bg-brand-deep-water as main footer)",
       "example": "Use text-white/70 or higher for body and description text (e.g. NewsletterForm description). Matches footer tagline and links; avoids text-white/50 which can fail 7:1 on deep-water.",
       "tags": ["a11y", "contrast", "footer", "WCAG"]
+    },
+    {
+      "name": "plan-doc-checkbox-hygiene",
+      "when": "Updating implementation plans after work is done",
+      "example": "Tick [x] only for steps/criteria that are actually implemented; leave [ ] with a note (e.g. 'verify when ready') for items like Lighthouse that need a later check. Keeps plans as single source of truth for status.",
+      "tags": ["plans", "documentation"]
+    },
+    {
+      "name": "external-system-setup-checklist",
+      "when": "Integrating with an external system (e.g. ActiveCampaign) where code sends data but the user configures automations in the UI",
+      "example": "Create one actionable doc (e.g. docs/activecampaign-setup-checklist.md) with step-by-step 'In AC, do the following' and IDs from code (list id, tag ids). Cross-reference from the main ops doc so the user has one place to set up confirmations.",
+      "tags": ["documentation", "ActiveCampaign", "ops"]
+    },
+    {
+      "name": "optional-dual-write-after-primary",
+      "when": "Adding an optional second integration (e.g. GHL SMS) that runs after the primary integration (e.g. ActiveCampaign)",
+      "example": "Env-gate (hasEnvVar for all required vars); after primary success call void sendToGHL(payload); same payload as primary (already validated); on failure log only, never throw or change API response",
+      "tags": ["api", "integrations", "optional", "fail-safe"]
+    },
+    {
+      "name": "external-api-error-log-truncate",
+      "when": "Logging errors from third-party API calls (create contact, add to workflow, etc.)",
+      "example": "const text = await res.text(); const safeMsg = text.length > 100 ? text.slice(0, 100) + '…' : text; console.error('[GHL] Failed:', res.status, safeMsg); avoids PII or internal data in logs",
+      "tags": ["security", "logging", "third-party"]
+    },
+    {
+      "name": "env-checker-no-values",
+      "when": "Providing a script or CLI to verify env vars for an integration (AC, GHL, etc.)",
+      "example": "Script reads only process.env[key]; prints 'set' or 'missing' per key; never logs values. Exit 0 when required vars set, else 1. npm run check:env for local/CI.",
+      "tags": ["security", "ops", "env", "setup"]
+    },
+    {
+      "name": "ops-cli-entry-points",
+      "when": "A key ops flow (leads, deploy platform) has a check or status command",
+      "example": "Expose as named npm script: lead → scripts/lead.js (env + where leads go + doc link); check:vercel → npx vercel whoami && npx vercel list --yes. Never print secrets; point to docs when relevant.",
+      "tags": ["ops", "cli", "npm-scripts", "setup"]
+    },
+    {
+      "name": "vercel-env-add-via-api",
+      "when": "Adding sensitive env vars to Vercel programmatically (e.g. AC, GHL keys)",
+      "example": "Script reads VERCEL_TOKEN from gitignored .env.vercel; secret values from process.env at runtime; POST to Vercel API (e.g. /v10/projects/{id}/env); never commit or log secret values. scripts/vercel-env-add.js.",
+      "tags": ["security", "ops", "vercel", "env"]
+    },
+    {
+      "name": "lead-pipeline-smoke-test",
+      "when": "Lead pipeline (AC + optional GHL) is configured and you want to verify without creating test contacts",
+      "example": "Provide npm run smoke:lead that runs env check + optional read-only AC/GHL ping (connection-check --ping); optional SMOKE_BASE_URL to verify live site returns 200. scripts/smoke-lead.js.",
+      "tags": ["ops", "lead", "smoke-test", "setup"]
+    },
+    {
+      "name": "connection-check-same-base-as-app",
+      "when": "Script pings the same external API the app uses (e.g. GHL workflows)",
+      "example": "Use same base URL (GHL_API_BASE or default Lead Connector) and same auth/version (Version: 2021-07-28 when leadconnectorhq.com) so pass/fail matches runtime behavior; avoid legacy-only URL in script while app uses v2.",
+      "tags": ["ops", "GHL", "Lead-Connector", "consistency"]
     }
   ]
 }

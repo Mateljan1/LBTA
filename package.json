@@ -11,6 +11,7 @@
     "check:env": "node scripts/check-ac-ghl-env.js",
     "lead": "node scripts/lead.js",
     "connection-check": "node scripts/connection-check.js",
+    "smoke:lead": "node scripts/smoke-lead.js",
     "check:vercel": "npx vercel whoami && npx vercel list --yes"
   },
   "dependencies": {

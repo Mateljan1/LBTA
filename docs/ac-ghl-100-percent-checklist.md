@@ -41,8 +41,8 @@ Details: [gohighlevel-setup-checklist.md](./gohighlevel-setup-checklist.md) and 
 ## 4. Verification (no test contacts required for env check)
 
 - [ ] Run **`npm run connection-check`** — all required AC vars show “set”; GHL vars show “set” if you want SMS.
-- [ ] Run **`npm run connection-check -- --ping`** — AC and GHL report “OK” (read-only check). If GHL lists workflows, pick your workflow ID and ensure it’s in Vercel.
-- [ ] Optional: **`npm run lead`** — same env summary.
+- [ ] Run **`npm run smoke:lead`** — smoke test: runs connection-check --ping (env + AC/GHL reachability). Optionally set **`SMOKE_BASE_URL=https://lbta-website.vercel.app`** to also verify the live site is up.
+- [ ] Optional: **`npm run connection-check -- --ping`** or **`npm run lead`** — same env summary.
 
 ---
 
@@ -59,6 +59,7 @@ Details: [gohighlevel-setup-checklist.md](./gohighlevel-setup-checklist.md) and 
 | Goal | Doc or command |
 |------|----------------|
 | One-pager | [ac-ghl-connected-onepager.md](./ac-ghl-connected-onepager.md) |
+| Smoke test (env + ping) | `npm run smoke:lead` (optional: `SMOKE_BASE_URL=...`) |
 | Env + ping check | `npm run connection-check` / `npm run connection-check -- --ping` |
 | Get GHL workflow ID | [how-to-get-ghl-workflow-id.md](./how-to-get-ghl-workflow-id.md) |
 | Lead Connector (GHL v2) | [lead-connector-setup.md](./lead-connector-setup.md) |

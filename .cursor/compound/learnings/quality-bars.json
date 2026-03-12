@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-11",
+  "updated": "2026-03-12",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -159,6 +159,18 @@
     "deepWaterBodyTextContrast": {
       "rule": "All body and description text on bg-brand-deep-water (footer and any component in footer, e.g. NewsletterForm) must use text-white/70 or higher for WCAG 7:1",
       "enforcement": "must"
+    },
+    "externalApiErrorLogSafe": {
+      "rule": "When logging third-party API errors, do not log full response body; truncate (e.g. 100 chars) or log status only to avoid PII in logs",
+      "enforcement": "should"
+    },
+    "opsCliForKeyFlows": {
+      "rule": "Key ops flows (lead pipeline, deploy platform) have a CLI entry point (e.g. npm run lead, npm run check:vercel) so status can be checked from the terminal without reading code",
+      "enforcement": "should"
+    },
+    "leadPipelineSmokeTest": {
+      "rule": "Lead pipeline has a smoke test (npm run smoke:lead) that verifies env and optional AC/GHL reachability without creating contacts; optional SMOKE_BASE_URL for live site check",
+      "enforcement": "should"
     }
   }
 }

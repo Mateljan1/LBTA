@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-11",
+  "updated": "2026-03-12",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -218,6 +218,20 @@
       "avoid": "min-h-[70vh] (or similar) with absolute bottom-0 content and overflow-hidden; on short viewports content block is taller than section and top gets clipped",
       "instead": "Use min-h-screen so section is always full viewport height; full headline (e.g. 'Tennis, as it should be taught') stays visible",
       "tags": ["hero", "layout", "overflow", "ux"]
+    },
+    {
+      "id": "log-full-external-api-error-body",
+      "description": "Logging full response body when a third-party API returns an error",
+      "avoid": "console.error('[GHL] Create failed:', res.status, await res.text()); full body can contain PII or internal IDs",
+      "instead": "Truncate: const safeMsg = text.length > 100 ? text.slice(0, 100) + '…' : text; log res.status and safeMsg only",
+      "tags": ["security", "logging", "third-party", "PII"]
+    },
+    {
+      "id": "script-reject-with-full-response-body",
+      "description": "Script that calls external API (e.g. Vercel) puts full response body in thrown Error or log",
+      "avoid": "if (!res.ok) return res.text().then(t => Promise.reject(new Error(res.status + ': ' + t))); then catch logs err.message (which contains body)",
+      "instead": "Reject with status only: Promise.reject(new Error('Vercel API error: ' + res.status)); never include response body in error or log",
+      "tags": ["security", "script", "vercel", "external-api"]
     }
   ]
 }

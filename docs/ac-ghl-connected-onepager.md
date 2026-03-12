@@ -81,4 +81,4 @@ Optional: repeat for JTT and Scholarship forms; same idea — correct AC list/ta
 | [registration-flows-and-ops.md](./registration-flows-and-ops.md) | Seeing which form hits which API and where data goes |
 | [ac-ghl-connection-via-mcps.md](./ac-ghl-connection-via-mcps.md) | Using Vercel and GoHighLevel MCPs to audit env vars and test GHL |
 
-**Commands:** `npm run connection-check` (env); `npm run connection-check -- --ping` (env + AC/GHL reachability). **Plan:** `plans/ac-ghl-full-setup-verification-plan.md`
+**Commands:** `npm run smoke:lead` (smoke test: env + AC/GHL ping; optional `SMOKE_BASE_URL` to check site); `npm run connection-check` (env); `npm run connection-check -- --ping` (env + ping). **Plan:** `plans/ac-ghl-full-setup-verification-plan.md`

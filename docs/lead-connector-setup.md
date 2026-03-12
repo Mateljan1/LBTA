@@ -39,11 +39,30 @@ Then the code will use that base URL and will not send the Version header. Only 
 
 ---
 
+## Smoke test (no test contacts)
+
+Run locally or in CI to verify env and reachability (read-only; no contacts created):
+
+```bash
+npm run smoke:lead
+```
+
+This runs **connection-check --ping** (env + AC/GHL ping). To also verify the live site is up, set the base URL:
+
+```bash
+SMOKE_BASE_URL=https://lbta-website.vercel.app npm run smoke:lead
+```
+
+Exit 0 only if env is valid and AC ping succeeds (GHL ping failure does not fail the smoke).
+
+---
+
 ## Best-practice checklist
 
 - [ ] **GHL_API_KEY**, **GHL_LOCATION_ID**, and **GHL_WORKFLOW_ID** are set in Vercel (production and preview if you use it).
 - [ ] Workflow **"LBTA Website – SMS"** is **Published** in GHL, with trigger **Contact Created** (or Contact added to workflow) and action **Send SMS**.
 - [ ] After changing env vars, **redeploy** production so the app uses them.
+- [ ] **Smoke:** `npm run smoke:lead` (optionally with `SMOKE_BASE_URL`) passes.
 - [ ] Test: submit a trial or newsletter form with a phone number; confirm the contact appears in GHL and receives the workflow SMS.
 
 ---
