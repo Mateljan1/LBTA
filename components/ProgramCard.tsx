@@ -31,6 +31,8 @@ export interface Program {
   pricing: Pricing
   description: string
   coach?: string
+  /** e.g. "Friday Match Play: $65/mo or $25/session." or "Saturday session has separate pricing." */
+  pricingNote?: string
 }
 
 interface ProgramCardProps {
@@ -172,6 +174,9 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
                   </span>
                   <span className="font-sans text-[15px] text-lbta-slate">
                     {slot.time}
+                    {slot.note && (
+                      <span className="text-brand-pacific-dusk/60"> — {slot.note}</span>
+                    )}
                   </span>
                 </div>
               ))}
@@ -183,6 +188,11 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             <h4 className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-4">
               Investment
             </h4>
+            {program.pricingNote && (
+              <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mb-3">
+                {program.pricingNote}
+              </p>
+            )}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {program.pricing.monthly && (
                 <div className="bg-brand-sandstone rounded-lg p-4 text-center">

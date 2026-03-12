@@ -1,7 +1,29 @@
 'use client'
 
-import { Program } from '@/components/ProgramCard'
+import { useMemo, memo } from 'react'
+import type { Program } from '@/components/ProgramCard'
 import { trackFormStart } from '@/lib/form-analytics'
+
+function getPriceFromPricing(p: Program['pricing']): { amount: number; label: string; fromMultiple?: boolean } | null {
+  const monthly = p.monthly
+  const oneX = p['1x']
+  const twoX = p['2x']
+  const threeX = p['3x']
+  const seasonPrices = [oneX, twoX, threeX].filter((n): n is number => typeof n === 'number')
+  if (monthly != null && (seasonPrices.length === 0 || monthly <= Math.min(...seasonPrices))) {
+    return { amount: monthly, label: '/mo' }
+  }
+  if (seasonPrices.length >= 1) {
+    const min = Math.min(...seasonPrices)
+    return {
+      amount: min,
+      label: '/season',
+      fromMultiple: seasonPrices.length > 1 || (monthly != null && monthly !== min),
+    }
+  }
+  if (oneX != null) return { amount: oneX, label: '/season' }
+  return null
+}
 
 interface ProgramRowProps {
   program: Program
@@ -9,15 +31,14 @@ interface ProgramRowProps {
   isLast?: boolean
 }
 
-export default function ProgramRow({ program, onRegister, isLast }: ProgramRowProps) {
-  const getPrice = (): { amount: number; label: string } | null => {
-    if (program.pricing.monthly) return { amount: program.pricing.monthly, label: '/mo' }
-    if (program.pricing['1x']) return { amount: program.pricing['1x'], label: '/season' }
-    return null
-  }
-
-  const price = getPrice()
-  const coach = program.schedule[0]?.coach ?? program.coach
+function ProgramRowInner({ program, onRegister, isLast }: ProgramRowProps) {
+  const { monthly, '1x': oneX, '2x': twoX, '3x': threeX } = program.pricing
+  const price = useMemo(
+    () => getPriceFromPricing(program.pricing),
+    // Intentionally only primitives that affect "from" price; program.pricing ref would force recompute every render
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [monthly, oneX, twoX, threeX]
+  )
 
   const handleRegister = () => {
     trackFormStart(program.id, program.program, program.category, 'embedded')
@@ -36,21 +57,19 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
           <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
             Ages {program.ages} · {program.duration} · {program.location}
           </p>
-          {coach && (
-            <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
-              Coach: {coach}
-            </p>
-          )}
         </div>
 
         {/* Col 2: Schedule */}
-        <div className="w-[180px] flex-shrink-0">
+        <div className="w-[200px] flex-shrink-0">
           {program.schedule.map((slot, i) => (
             <p key={i} className="font-sans text-[13px] text-brand-pacific-dusk/80 leading-relaxed">
               <span className="inline-block w-[38px] font-medium text-brand-pacific-dusk">
                 {slot.day.slice(0, 3)}
               </span>
               {slot.time}
+              {slot.note && (
+                <span className="text-brand-pacific-dusk/60"> — {slot.note}</span>
+              )}
             </p>
           ))}
         </div>
@@ -60,7 +79,7 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
           <div className="text-right w-[120px]">
             {price && (
               <p className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-tight">
-                ${price.amount}
+                {price.fromMultiple ? 'From ' : ''}${price.amount}
                 <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
                   {price.label}
                 </span>
@@ -71,12 +90,17 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
                 Drop-in: ${program.pricing.drop_in}
               </p>
             )}
+            {program.pricingNote && (
+              <p className="font-sans text-[11px] text-brand-pacific-dusk/60 mt-1">
+                {program.pricingNote}
+              </p>
+            )}
           </div>
 
           <button
             onClick={handleRegister}
             aria-label={`Register for ${program.program}`}
-            className="inline-flex items-center gap-1.5 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
+            className="inline-flex items-center gap-1.5 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 min-h-[48px]"
           >
             Register
             <svg className="w-3.5 h-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -92,13 +116,8 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
           {program.program}
         </h3>
         <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-1">
-          Ages {program.ages} · {program.duration}
+          Ages {program.ages} · {program.duration} · {program.location}
         </p>
-        {coach && (
-          <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
-            Coach: {coach}
-          </p>
-        )}
 
         <div className="mt-4 space-y-0.5">
           {program.schedule.map((slot, i) => (
@@ -107,14 +126,17 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
                 {slot.day.slice(0, 3)}
               </span>
               {slot.time}
+              {slot.note && (
+                <span className="text-brand-pacific-dusk/60"> — {slot.note}</span>
+              )}
             </p>
           ))}
         </div>
 
-        <div className="mt-4 flex items-baseline gap-3">
+        <div className="mt-4 pt-4 border-t border-black/[0.06] flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
           {price && (
-            <span className="font-headline text-[18px] font-medium text-brand-pacific-dusk">
-              ${price.amount}
+            <span className="font-headline text-[20px] font-medium text-brand-pacific-dusk">
+              {price.fromMultiple ? 'From ' : ''}${price.amount}
               <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
                 {price.label}
               </span>
@@ -122,15 +144,20 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
           )}
           {program.pricing.drop_in != null && (
             <span className="font-sans text-[12px] text-brand-pacific-dusk/70">
-              · Drop-in ${program.pricing.drop_in}
+              Drop-in ${program.pricing.drop_in}
             </span>
+          )}
+          {program.pricingNote && (
+            <p className="font-sans text-[11px] text-brand-pacific-dusk/60 w-full mt-1">
+              {program.pricingNote}
+            </p>
           )}
         </div>
 
         <button
           onClick={handleRegister}
           aria-label={`Register for ${program.program}`}
-          className="mt-4 w-full inline-flex items-center justify-center gap-1.5 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase px-5 py-3 rounded-[2px] transition-all duration-300 ease-out active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
+          className="mt-4 w-full inline-flex items-center justify-center gap-1.5 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase px-5 py-3 rounded-[2px] transition-all duration-300 ease-out active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 min-h-[48px]"
         >
           Register
           <svg className="w-3.5 h-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,3 +168,5 @@ export default function ProgramRow({ program, onRegister, isLast }: ProgramRowPr
     </div>
   )
 }
+
+export default memo(ProgramRowInner)

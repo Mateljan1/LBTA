@@ -5,6 +5,7 @@
 
 import winter2026Data from '@/data/winter2026.json'
 import springSummer2026Data from '@/data/spring-summer-2026.json'
+import fall2026Data from '@/data/fall2026.json'
 import privateRatesData from '@/data/private-rates.json'
 import pricingSupplementalData from '@/data/pricing-supplemental.json'
 
@@ -18,6 +19,8 @@ export interface WinterProgram {
   schedule: Array<{ day: string; time: string; coach: string; note?: string; location?: string }>
   pricing: Record<string, number>
   description: string
+  pricingNote?: string
+  matchPlay?: { monthly?: number; drop_in?: number }
 }
 
 export interface ProgramsOverviewCard {
@@ -83,6 +86,12 @@ const winter2026 = winter2026Data as unknown as {
   programs: WinterProgram[]
 }
 
+const fall2026 = fall2026Data as unknown as {
+  season: string
+  dates: string
+  programs: WinterProgram[]
+}
+
 const springSummer2026 = springSummer2026Data as unknown as {
   season: string
   spring: { label: string; dates: string; weeks: number; skipDates: string[] }
@@ -121,19 +130,14 @@ export function getWinter2026Programs(): WinterProgram[] {
   return winter2026.programs
 }
 
+/** Get Fall 2026 programs (schedules page Fall tab). */
+export function getFall2026Programs(): WinterProgram[] {
+  return fall2026.programs
+}
+
 /** Get Spring & Summer 2026 data (programs, camps, discounts, season meta). Use for Spring/Summer tabs on schedules page. */
 export function getSpringSummer2026(): typeof springSummer2026 {
   return springSummer2026
-}
-
-/** Get Spring 2026 programs (same list as summer; pricing differs by season). */
-export function getSpringPrograms(): SpringSummerProgram[] {
-  return springSummer2026.programs
-}
-
-/** Get Summer 2026 programs (same list as spring; pricing differs by season). */
-export function getSummerPrograms(): SpringSummerProgram[] {
-  return springSummer2026.programs
 }
 
 /** Program shape used by ProgramCard / schedules page (flat pricing). */
@@ -148,6 +152,7 @@ export interface ProgramForDisplay {
   pricing: Record<string, number>
   description: string
   coach?: string
+  pricingNote?: string
 }
 
 /**
@@ -186,6 +191,7 @@ export function springSummerToProgram(
     schedule: p.schedule,
     pricing,
     description: p.description,
+    pricingNote: p.pricingNote,
   }
 }
 

@@ -30,9 +30,10 @@ export default function CampsSection({ camps, onRegister }: CampsSectionProps) {
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           SEASONAL & HOLIDAY
         </p>
-        <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
+        <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
           Holiday Camps
         </h2>
+        <div className="section-horizon mb-8 opacity-90" aria-hidden="true" />
         <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[600px] mb-10">
           Full-day and half-day options during school breaks. Ages 5–17.
         </p>

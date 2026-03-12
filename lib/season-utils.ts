@@ -3,6 +3,19 @@ import year2026Data from '@/data/year2026.json'
 export type SeasonKey = 'winter' | 'spring' | 'summer' | 'fall'
 export type ExtendedSeasonKey = SeasonKey | 'fall2025'
 
+/** Season shape for client/schedule UI (optional fields match JSON). */
+export type SeasonDataForDisplay = {
+  name: string
+  dates: string
+  weeks: number
+  registrationOpen?: string
+  earlyBirdDeadline?: string
+  earlyBirdDiscount?: number
+  status?: string
+  multiplier?: number
+  skipDates?: string[]
+}
+
 interface SeasonData {
   name: string
   dates: string

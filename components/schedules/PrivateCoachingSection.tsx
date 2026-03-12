@@ -52,9 +52,10 @@ export default function PrivateCoachingSection({
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           ONE-ON-ONE
         </p>
-        <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
+        <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
           Private Coaching
         </h2>
+        <div className="section-horizon mb-8 opacity-90" aria-hidden="true" />
         <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[600px] mb-10">
           One-on-one sessions tailored to your goals.
         </p>
@@ -168,9 +169,10 @@ export default function PrivateCoachingSection({
           <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
             DROP-IN & MONTHLY
           </p>
-          <h3 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mb-6">
+          <h3 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mb-2">
             Monthly Programs
           </h3>
+          <div className="section-horizon mb-6 opacity-90" aria-hidden="true" />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {monthlyList.map((prog) => (

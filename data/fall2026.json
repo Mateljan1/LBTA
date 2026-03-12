@@ -1,45 +1,14 @@
 {
-  "season": "Spring & Summer 2026",
-  "spring": {
-    "label": "Spring",
-    "dates": "April 6 – June 13, 2026",
-    "weeks": 10,
-    "skipDates": ["May 25"],
-    "registrationOpens": "March 2, 2026"
-  },
-  "summer": {
-    "label": "Summer",
-    "dates": "June 15 – August 29, 2026",
-    "weeks": 11,
-    "skipDates": ["June 19", "July 4"]
-  },
+  "season": "Fall 2026",
+  "dates": "August 31 – December 19, 2026",
+  "weeks": 16,
+  "skipDates": ["Sep 7", "Nov 11", "Nov 26", "Nov 27"],
+  "registrationOpens": "August 5, 2026",
   "discounts": [
-    { "label": "Sibling", "percent": 10, "description": "Additional siblings in same program" },
-    { "label": "Early Bird", "percent": 5, "description": "Registered 2+ weeks before session start" },
-    { "label": "Multi-Session", "percent": 5, "description": "Register Spring + Summer together" },
-    { "label": "Multi-Camp Week", "percent": 10, "description": "Booking 4+ weeks of camp" }
+    { "label": "Sibling", "percent": 10, "description": "10% off additional siblings in same program" },
+    { "label": "Early Bird", "percent": 5, "description": "5% off when registered 2+ weeks before session start" },
+    { "label": "Multi-Session", "percent": 5, "description": "5% off when registering Fall + Winter together" }
   ],
-  "camps": {
-    "springBreak": {
-      "label": "Spring Break Camp",
-      "dates": "March 30 – April 3, 2026",
-      "options": [
-        { "name": "Tennis & Games", "ages": "5-11", "location": "Alta Laguna", "pricePerWeek": 295 },
-        { "name": "Junior Development", "ages": "12-17", "location": "LBHS", "pricePerWeek": 325 }
-      ],
-      "coach": "Peter DeFrantz"
-    },
-    "summer": {
-      "label": "Summer Camps",
-      "dates": "June 15 – August 28, 2026",
-      "options": [
-        { "name": "Tennis & Games Full Day", "ages": "5-11", "hours": "9am-3pm", "pricePerWeek": 495 },
-        { "name": "Tennis & Games Half Day", "ages": "5-11", "pricePerWeek": 295 },
-        { "name": "Junior Development", "ages": "12-17", "location": "LBHS", "pricePerWeek": 325 }
-      ],
-      "coach": "Peter DeFrantz"
-    }
-  },
   "programs": [
     {
       "id": "little-stars",
@@ -53,10 +22,7 @@
         { "day": "Wednesday", "time": "3:30–4:15 PM", "coach": "Allison Cronk" },
         { "day": "Saturday", "time": "9:00–9:45 AM", "coach": "Allison Cronk" }
       ],
-      "pricing": {
-        "monthly": { "1x": 120, "2x": 200 },
-        "drop_in": 40
-      },
+      "pricing": { "monthly": 120, "2x": 200, "drop_in": 40 },
       "description": "Foam balls, mini courts, and movement games. The first step in the LBTA Player Journey."
     },
     {
@@ -71,11 +37,7 @@
         { "day": "Wednesday", "time": "4:15–5:15 PM", "coach": "Allison Cronk" },
         { "day": "Saturday", "time": "9:45–10:45 AM", "coach": "Allison Cronk" }
       ],
-      "pricing": {
-        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
-        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
-        "drop_in": 50
-      },
+      "pricing": { "1x": 672, "2x": 1344, "3x": 2016, "saturday1x": 608, "drop_in": 50 },
       "description": "Proper stroke development, footwork fundamentals, and rally building on a 36-foot court."
     },
     {
@@ -92,11 +54,7 @@
         { "day": "Thursday", "time": "3:30–4:30 PM", "coach": "Allison Cronk" },
         { "day": "Saturday", "time": "10:45–11:45 AM", "coach": "Allison Cronk" }
       ],
-      "pricing": {
-        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
-        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
-        "drop_in": 50
-      },
+      "pricing": { "1x": 672, "2x": 1344, "3x": 2016, "saturday1x": 608, "drop_in": 50 },
       "pricingNote": "Friday Match Play: $65/mo or $25/session.",
       "description": "Mid-court tennis where directional play, consistent rallies, and competitive instincts start to form."
     },
@@ -112,11 +70,7 @@
         { "day": "Thursday", "time": "4:30–5:30 PM", "coach": "Allison Cronk" },
         { "day": "Saturday", "time": "11:45 AM–12:45 PM", "coach": "Allison Cronk" }
       ],
-      "pricing": {
-        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
-        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
-        "drop_in": 50
-      },
+      "pricing": { "1x": 672, "2x": 1344, "3x": 2016, "saturday1x": 608, "drop_in": 50 },
       "matchPlay": { "monthly": 65, "drop_in": 25 },
       "pricingNote": "Friday Match Play: $65/mo or $25/session.",
       "description": "Full-court tennis with green balls — building consistency, tactical awareness, and the competitive mindset that carries forward."
@@ -131,10 +85,7 @@
       "schedule": [
         { "day": "Friday", "time": "4:30–5:30 PM", "coach": "Staff" }
       ],
-      "pricing": {
-        "monthly": 65,
-        "drop_in": 25
-      },
+      "pricing": { "monthly": 65, "drop_in": 25 },
       "description": "Weekly competitive match play for Red, Orange, and Green Dot players."
     },
     {
@@ -149,11 +100,7 @@
         { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" },
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" }
       ],
-      "pricing": {
-        "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
-        "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
-        "drop_in": 70
-      },
+      "pricing": { "1x": 1000, "2x": 2000, "3x": 2792, "drop_in": 70 },
       "description": "Competitive development for green ball players. Invitation-based. Same pricing as Youth Dev tiers."
     },
     {
@@ -168,12 +115,23 @@
         { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn" },
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Andrew Mateljan" }
       ],
-      "pricing": {
-        "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
-        "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
-        "drop_in": 70
-      },
+      "pricing": { "1x": 1000, "2x": 2000, "3x": 2792, "drop_in": 70 },
       "description": "Tier 1 (UTR 1.5-3) and Tier 2 (UTR 3-5). Three coaches split players by UTR level. UTR 5+ advance to HP."
+    },
+    {
+      "id": "high-performance",
+      "category": "Youth",
+      "program": "High Performance",
+      "ages": "12-17 (UTR 5+)",
+      "location": "Laguna Beach High School",
+      "duration": "2 hr",
+      "schedule": [
+        { "day": "Monday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "note": "Training" },
+        { "day": "Wednesday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "note": "Training" },
+        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn & Peter DeFrantz", "note": "Match Play" }
+      ],
+      "pricing": { "1x": 1000, "2x": 2000, "3x": 2792, "drop_in": 100 },
+      "description": "Tournament-caliber training. Ages 12–17, UTR 5+. 6 max."
     },
     {
       "id": "adult-beginner-1",
@@ -189,11 +147,7 @@
         { "day": "Thursday", "time": "10:00–11:00 AM", "coach": "Andrew Mateljan" },
         { "day": "Saturday", "time": "9:00–10:00 AM", "coach": "Robert LeBuhn" }
       ],
-      "pricing": {
-        "spring": { "1x": 420, "2x": 615, "saturday1x": 380 },
-        "summer": { "1x": 462, "2x": 676, "saturday1x": 418 },
-        "drop_in": 55
-      },
+      "pricing": { "1x": 672, "2x": 984, "saturday1x": 608, "drop_in": 55 },
       "description": "Brand new to tennis? Start here. Strokes, footwork, serving, and scoring from scratch."
     },
     {
@@ -207,12 +161,8 @@
         { "day": "Monday", "time": "6:30–7:30 PM", "coach": "Allison Cronk" },
         { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Allison Cronk" }
       ],
-      "pricing": {
-        "spring": { "1x": 420, "2x": 615 },
-        "summer": { "1x": 462, "2x": 676 },
-        "drop_in": 55
-      },
-      "description": "You can hit—now learn to play. Court positioning, doubles basics, and consistency for intermediate."
+      "pricing": { "1x": 672, "2x": 984, "drop_in": 55 },
+      "description": "Bridge program for players moving from beginner to intermediate. 6 max."
     },
     {
       "id": "adult-intermediate",
@@ -226,11 +176,7 @@
         { "day": "Thursday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan" },
         { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Robert LeBuhn", "note": "Separate pricing" }
       ],
-      "pricing": {
-        "spring": { "1x": 580, "2x": 1105, "3x": 1570 },
-        "summer": { "1x": 638, "2x": 1216, "3x": 1727 },
-        "drop_in": 70
-      },
+      "pricing": { "1x": 928, "2x": 1768, "3x": 2512, "drop_in": 70 },
       "pricingNote": "Saturday session has separate pricing.",
       "description": "Purposeful training for the developing player. Stroke reliability, tactical awareness, match-play confidence."
     },
@@ -245,31 +191,8 @@
         { "day": "Monday", "time": "12:00–2:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" },
         { "day": "Friday", "time": "12:00–2:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" }
       ],
-      "pricing": {
-        "spring": { "1x": 625, "2x": 1250 },
-        "summer": { "1x": 688, "2x": 1375 },
-        "drop_in": 90
-      },
+      "pricing": { "1x": 1000, "2x": 2000, "drop_in": 90 },
       "description": "2-hour sessions. Coaches Peter DeFrantz & Andrew Mateljan. 6 max."
-    },
-    {
-      "id": "high-performance",
-      "category": "Youth",
-      "program": "High Performance",
-      "ages": "12-17 (UTR 5+)",
-      "location": "Laguna Beach High School",
-      "duration": "2 hr",
-      "schedule": [
-        { "day": "Monday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "note": "Training" },
-        { "day": "Wednesday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "note": "Training" },
-        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn & Peter DeFrantz", "note": "Match Play" }
-      ],
-      "pricing": {
-        "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
-        "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
-        "drop_in": 100
-      },
-      "description": "Tournament-caliber training. Ages 12–17, UTR 5+. 6 max."
     },
     {
       "id": "liveball-intermediate",
@@ -283,10 +206,7 @@
         { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Staff", "location": "LB High School" },
         { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Staff", "location": "LB High School" }
       ],
-      "pricing": {
-        "monthly": 150,
-        "drop_in": 50
-      },
+      "pricing": { "monthly": 150, "drop_in": 50 },
       "description": "Coach-fed hitting with purpose. High-volume point play for extra reps and competitive energy."
     },
     {
@@ -297,13 +217,10 @@
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" }
+        { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Staff" }
       ],
-      "pricing": {
-        "monthly": 150,
-        "drop_in": 50
-      },
-      "description": "Ninety minutes of competitive-tempo, coach-fed point play for NTRP 3.5+ players."
+      "pricing": { "monthly": 150, "drop_in": 50 },
+      "description": "Fast-paced community play for advanced players. 8 max."
     },
     {
       "id": "cardio-tennis",
@@ -313,13 +230,10 @@
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Friday", "time": "9:00–10:30 AM", "coach": "Andrew Mateljan & Robert LeBuhn" }
+        { "day": "Friday", "time": "9:00–10:30 AM", "coach": "Staff" }
       ],
-      "pricing": {
-        "monthly": 150,
-        "drop_in": 50
-      },
-      "description": "Tennis as a workout. High-energy, fitness-focused hitting. All levels welcome."
+      "pricing": { "monthly": 150, "drop_in": 50 },
+      "description": "High-energy fitness workout combining tennis drills with cardio intervals. 6 max."
     }
   ]
 }

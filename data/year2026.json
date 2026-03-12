@@ -22,7 +22,7 @@
       "dates": "April 6 – June 13, 2026",
       "weeks": 10,
       "skipDates": ["May 25"],
-      "registrationOpen": "March 1, 2026",
+      "registrationOpen": "March 2, 2026",
       "earlyBirdDeadline": "March 20, 2026",
       "earlyBirdDiscount": 5,
       "status": "registration_open",
@@ -41,13 +41,14 @@
     },
     "fall": {
       "name": "Fall 2026",
-      "dates": "August 24 – December 19, 2026",
-      "weeks": 17,
-      "registrationOpen": "July 15, 2026",
-      "earlyBirdDeadline": "August 1, 2026",
-      "earlyBirdDiscount": 50,
+      "dates": "August 31 – December 19, 2026",
+      "weeks": 16,
+      "skipDates": ["Sep 7", "Nov 11", "Nov 26", "Nov 27"],
+      "registrationOpen": "August 5, 2026",
+      "earlyBirdDeadline": "August 19, 2026",
+      "earlyBirdDiscount": 5,
       "status": "coming_soon",
-      "multiplier": 1.308
+      "multiplier": 1.231
     }
   },
 
@@ -128,16 +129,17 @@
     },
     {
       "id": "thanksgiving",
-      "name": "Thanksgiving Camp",
-      "dates": "November 23–25",
+      "name": "Thanksgiving Break Camp",
+      "dates": "November 23–25 (Mon–Wed)",
       "days": 3,
-      "hours": "9:00 AM – 1:00 PM",
-      "ages": "5-14",
-      "location": "Laguna Beach High School",
-      "price": 325,
-      "perDay": 108,
-      "description": "Holiday tennis fun during Thanksgiving break",
-      "includes": ["Snacks provided", "Holiday activities", "Match play"]
+      "hours": "9:00 AM – 12:00 PM or 12:00 – 3:00 PM (Half-day options)",
+      "ages": "5-17",
+      "location": "Alta Laguna Park / Laguna Beach High School",
+      "price": 221,
+      "jrDevPrice": 244,
+      "perDay": 74,
+      "description": "Tennis & Games (5-11) half-day at Alta Laguna, or Junior Development (12-17) at LBHS. Sibling 10% off.",
+      "includes": ["Half-day options", "Age-appropriate curriculum", "Coach: Peter DeFrantz"]
     },
     {
       "id": "winter-break",
