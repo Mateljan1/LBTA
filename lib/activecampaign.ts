@@ -191,7 +191,12 @@ export async function upsertContact(contact: ContactData): Promise<ACResponse<{ 
 
     if (!response.ok) {
       const error = await response.text()
-      console.error('[AC] Contact creation failed:', error)
+      if (process.env.NODE_ENV === 'production') {
+        console.error('[AC] Contact creation failed:', response.status)
+      } else {
+        const safeMsg = error.length > 100 ? `${error.slice(0, 100)}…` : error
+        console.error('[AC] Contact creation failed:', response.status, safeMsg)
+      }
       return { success: false, error }
     }
 
@@ -228,7 +233,12 @@ export async function addToList(
 
     if (!response.ok) {
       const error = await response.text()
-      console.error('[AC] List subscription failed:', error)
+      if (process.env.NODE_ENV === 'production') {
+        console.error('[AC] List subscription failed:', response.status)
+      } else {
+        const safeMsg = error.length > 100 ? `${error.slice(0, 100)}…` : error
+        console.error('[AC] List subscription failed:', response.status, safeMsg)
+      }
       return { success: false, error }
     }
 
@@ -263,7 +273,12 @@ export async function addTag(
 
     if (!response.ok) {
       const error = await response.text()
-      console.error(`[AC] Tag ${tagId} application failed:`, error)
+      if (process.env.NODE_ENV === 'production') {
+        console.error(`[AC] Tag ${tagId} application failed:`, response.status)
+      } else {
+        const safeMsg = error.length > 100 ? `${error.slice(0, 100)}…` : error
+        console.error(`[AC] Tag ${tagId} application failed:`, response.status, safeMsg)
+      }
       return { success: false, error }
     }
 

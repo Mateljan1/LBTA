@@ -4,11 +4,25 @@
 
 ---
 
+## Connect Vercel MCP (one-time)
+
+This project includes `.cursor/mcp.json` pointing at Vercel’s official MCP (`https://mcp.vercel.com`). To connect:
+
+1. **Reload Cursor** (or reopen the project) so it picks up the MCP.
+2. In Cursor, when you see **“Needs login”** or a Vercel MCP auth prompt, **click it** and complete the browser sign-in to authorize Cursor for your Vercel account.
+3. After that, the agent can list projects, list/create env vars, and manage deployments for this project.
+
+If you use a different MCP config (e.g. global), ensure the Vercel server URL is `https://mcp.vercel.com` and that you’ve completed the OAuth login in Cursor.
+
+**If the UI shows "Vercel connected" but the agent still gets 403:** The token may not be passed to this session. Try starting a **new chat** or **restarting Cursor**, then ask the agent to list Vercel projects or env vars again. If it still fails, add env vars manually in [Vercel Dashboard → Project → Settings → Environment Variables](https://vercel.com/dashboard).
+
+---
+
 ## Connection status (from MCP checks)
 
 | System | MCP | Status | What you can do |
 |--------|-----|--------|------------------|
-| **Vercel** | `user-vercel` | 403 on list projects — token invalid or not authorized | Re-auth the Vercel integration or add a valid token so you can list projects and env vars, and optionally create env vars from Cursor. |
+| **Vercel** | `vercel` | Connect via “Needs login” in Cursor (OAuth to mcp.vercel.com). | Once connected: list projects, list/create env vars, deploy. |
 | **GoHighLevel** | `user-gohighlevel` | Connected | List pipelines, create/search contacts, send SMS from Cursor. Pipelines listed (e.g. “LBTA Lead to Member”, “New Leads Pipeline”) are **opportunity pipelines**. Website SMS uses an **Automation Workflow** — create that in GHL UI and set its ID as `GHL_WORKFLOW_ID` in Vercel. |
 | **ActiveCampaign** | — | No MCP | Use [activecampaign-setup-checklist.md](./activecampaign-setup-checklist.md) and AC UI. Add `ACTIVECAMPAIGN_URL` and `ACTIVECAMPAIGN_API_KEY` in Vercel. |
 

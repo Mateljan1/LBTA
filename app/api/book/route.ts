@@ -6,8 +6,6 @@ import {
   upsertContact,
   addToList,
   addTags,
-  getClassTagFromProgram,
-  getProgramCategory,
   LBTA_LIST_ID,
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
@@ -78,8 +76,6 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     })
 
-    // Determine program category
-    const category = getProgramCategory(body.program || '')
     const daysSelected = body.preferredDays.join(', ') || 'Flexible'
 
     // Process with ActiveCampaign
