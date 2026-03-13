@@ -110,7 +110,7 @@ export default function JuniorTrialLanding() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white">
       {/* Season Banner */}
       <div className="bg-lbta-coral text-white py-3 text-center text-sm font-medium tracking-wide">
         {isEarlyBird ? (
@@ -231,7 +231,7 @@ export default function JuniorTrialLanding() {
                           value={formData.parentName}
                           onChange={(e) => setFormData({...formData, parentName: e.target.value})}
                           className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
-                          placeholder="Jane Smith"
+                          placeholder="Your name"
                         />
                       </div>
 
@@ -246,7 +246,7 @@ export default function JuniorTrialLanding() {
                             value={formData.email}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
                             className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
-                            placeholder="jane@example.com"
+                            placeholder="Email"
                           />
                         </div>
 
@@ -260,7 +260,7 @@ export default function JuniorTrialLanding() {
                             value={formData.phone}
                             onChange={(e) => setFormData({...formData, phone: e.target.value})}
                             className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
-                            placeholder="(949) 123-4567"
+                            placeholder="Phone"
                           />
                         </div>
                       </div>
@@ -488,6 +488,6 @@ export default function JuniorTrialLanding() {
           </p>
         </div>
       </footer>
-    </div>
+    </main>
   )
 }

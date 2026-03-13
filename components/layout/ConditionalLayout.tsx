@@ -26,7 +26,7 @@ export default function ConditionalLayout({
     <>
       <SeasonBanner />
       <Header />
-      <main id="main-content" className="flex-grow">
+      <main id="main-content" tabIndex={-1} className="flex-grow">
         {children}
       </main>
       <Footer />

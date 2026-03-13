@@ -3,48 +3,48 @@
 import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
-// Partnership logos - Using placeholder text until PNGs are uploaded
+// Partnership logos in /public/logos/
 const partners = [
   {
     name: "Fit4Tennis",
     description: "Movement & Performance",
-    logo: "/logos/fit4tennis.png", // Upload PNG here
+    logo: "/logos/fit4tennis.png",
     url: "https://fit4tennis.com"
   },
   {
     name: "Racket Rescue",
     description: "Equipment Services",
-    logo: "/logos/racketrescue.png", // Upload PNG here
+    logo: "/logos/racketrescue.png",
     url: "https://racketrescue.com"
   },
   {
     name: "RacquetIQ",
     description: "Tennis Technology",
-    logo: "/logos/racquetiq.png", // Upload PNG here
+    logo: "/logos/racquetiq.png",
     url: "#"
   },
   {
     name: "GPTCA",
     description: "Professional Coaching",
-    logo: "/logos/gptca.png", // Upload PNG here
+    logo: "/logos/gptca.png",
     url: "#"
   },
   {
     name: "Toroline",
     description: "Court Equipment",
-    logo: "/logos/toroline.png", // Upload PNG here
+    logo: "/logos/toroline.png",
     url: "#"
   },
   {
     name: "Tennis Beast",
     description: "Tennis Apparel",
-    logo: "/logos/tennisbeast.png", // Upload PNG here
+    logo: "/logos/tennisbeast.png",
     url: "#"
   },
   {
     name: "Laguna Beach High School",
     description: "School Partner",
-    logo: "/logos/lbhs.png", // Upload PNG here
+    logo: "/logos/lbhs.png",
     url: "#"
   }
 ]
