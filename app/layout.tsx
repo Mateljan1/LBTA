@@ -79,6 +79,8 @@ export default function RootLayout({
         {/* Performance Optimizations - fonts self-hosted via next/font */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://connect.facebook.net" />
+        {/* Hero video poster = LCP; preload small poster so it paints immediately */}
+        <link rel="preload" as="image" href="/images/hero/hero-poster.webp" fetchPriority="high" />
 
         {/* Schema Markup */}
         <OrganizationSchema />

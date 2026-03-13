@@ -35,14 +35,16 @@ export default function HomeHero() {
         loop
         muted
         playsInline
+        preload="metadata"
         className="absolute inset-0 w-full h-full object-cover"
         style={{
           objectPosition: '50% 70%',
           transform: reduceMotion ? undefined : `translateY(${heroParallax}px) scale(1.1)`,
         }}
         aria-label="Laguna Beach Tennis Academy training video"
-        poster="/images/hero/laguna-horizon.webp"
+        poster="/images/hero/hero-poster.webp"
       >
+        {/* WebM first (better compression); MP4 for Safari. See docs/hero-video-optimization.md */}
         <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
         <source src="/videos/LBTA-Home-Hero.mp4" type="video/mp4" />
       </video>
