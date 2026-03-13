@@ -44,6 +44,7 @@ export default function HomeHero() {
         poster="/images/hero/laguna-horizon.webp"
       >
         <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
+        <source src="/videos/LBTA-Home-Hero.mp4" type="video/mp4" />
       </video>
       <div
         className="absolute inset-0"

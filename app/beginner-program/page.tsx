@@ -65,7 +65,7 @@ export default function BeginnerProgramLanding() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-white">
       {/* Early Bird Banner */}
       <div className="bg-lbta-coral text-white py-3 text-center text-sm font-medium tracking-wide">
         <span className="font-bold">${bp.discount} OFF</span> Spring enrollment — Enroll by {bp.discountDeadline}
@@ -592,6 +592,6 @@ export default function BeginnerProgramLanding() {
           </p>
         </div>
       </footer>
-    </div>
+    </main>
   )
 }

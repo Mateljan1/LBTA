@@ -7,6 +7,7 @@ import VideoTestimonials from '@/components/VideoTestimonials'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import PullQuote from '@/components/ui/PullQuote'
+import WhyChooseImage from '@/components/ui/WhyChooseImage'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
 import siteStats from '@/data/site-stats.json'
@@ -259,8 +260,9 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             <AnimatedSection delay={100}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
-                <Image
+                <WhyChooseImage
                   src={whyChoose?.image1 ?? '/images/why-choose/why-choose-1.webp'}
+                  fallbackSrc="/images/hero/laguna-horizon.webp"
                   alt={whyChoose?.image1Alt ?? 'LBTA coach and players on court'}
                   fill
                   className="object-cover image-zoom"
@@ -271,8 +273,9 @@ export default function Home() {
             </AnimatedSection>
             <AnimatedSection delay={200}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
-                <Image
+                <WhyChooseImage
                   src={whyChoose?.image2 ?? '/images/why-choose/why-choose-2.webp'}
+                  fallbackSrc="/images/community/community-1.webp"
                   alt={whyChoose?.image2Alt ?? 'Laguna Beach tennis facility and community'}
                   fill
                   className="object-cover image-zoom"

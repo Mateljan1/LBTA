@@ -12,7 +12,8 @@
     "lead": "node scripts/lead.js",
     "connection-check": "node scripts/connection-check.js",
     "smoke:lead": "node scripts/smoke-lead.js",
-    "check:vercel": "npx vercel whoami && npx vercel list --yes"
+    "check:vercel": "npx vercel whoami && npx vercel list --yes",
+    "lighthouse": "npx lighthouse http://localhost:3000 --output=html --output-path=./docs/lighthouse-report.html --only-categories=performance,accessibility,best-practices,seo --chrome-flags='--headless'"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",
