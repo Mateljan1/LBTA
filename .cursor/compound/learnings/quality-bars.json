@@ -191,6 +191,14 @@
     "footerAllText70DeepWater": {
       "rule": "All text and icon color on bg-brand-deep-water (footer, NewsletterForm, etc.) must be text-white/70 or higher; placeholders at least placeholder-white/50",
       "enforcement": "must"
+    },
+    "scheduleDataViaProgramsData": {
+      "rule": "Schedule program lists must be loaded via lib/programs-data getters (getWinter2026Programs, getSpringProgramsForDisplay, etc.); no component may import season JSON (winter2026, spring-summer-2026, fall2026) directly for program list",
+      "enforcement": "should"
+    },
+    "programPriceDisplayMonthlyPreferred": {
+      "rule": "When a program has both pricing.monthly and session tiers (1x/2x/3x), the displayed 'from' price must prefer monthly when monthly is the minimum or primary billing (e.g. Little Stars: $120/mo not From $200/season)",
+      "enforcement": "must"
     }
   }
 }

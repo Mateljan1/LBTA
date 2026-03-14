@@ -1,8 +1,14 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-12",
-  "lastLearnRun": "2026-03-12 fix-everything-100/100",
+  "updated": "2026-03-13",
+  "lastLearnRun": "2026-03-13 photos-videos-optimization",
   "patterns": [
+    {
+      "name": "hero-video-poster-lcp",
+      "when": "Hero uses autoplay video with poster for LCP",
+      "example": "Use a small dedicated poster file (e.g. hero-poster.webp < 200KB); preload it in layout; video poster= that path. Full hero image (laguna-horizon.webp) for destination/OG. Generate poster via script (e.g. scripts/generate-hero-poster.js) from full hero when hero image changes.",
+      "tags": ["performance", "LCP", "video"]
+    },
     {
       "name": "single-source-dropdown-options",
       "when": "Modal or page shows a list of programs/options also used elsewhere",
@@ -76,10 +82,22 @@
       "tags": ["a11y", "ux", "anchor-nav"]
     },
     {
+      "name": "skip-to-main-focusable-target",
+      "when": "Skip-to-main link (href=\"#main-content\") is present in layout; target must receive focus and provide main landmark",
+      "example": "Target element: <main id=\"main-content\" tabIndex={-1}> so focus moves into main when skip is activated; standalone landings (junior-trial, beginner-program) that bypass ConditionalLayout must add their own main#main-content with tabIndex={-1}",
+      "tags": ["a11y", "skip-link", "focus", "landmark"]
+    },
+    {
       "name": "next-image-logos",
       "when": "Displaying logos or partner images (not tracking pixel)",
       "example": "Next/Image with width, height, descriptive alt (ChatWidget logo, PartnershipSection)",
       "tags": ["performance", "a11y"]
+    },
+    {
+      "name": "client-image-fallback-missing-asset",
+      "when": "Section uses image paths that may not exist yet (e.g. Why Choose); section must never break with 404 or uncaught error",
+      "example": "Client component (WhyChooseImage): next/image with src + fallbackSrc; onError set state to fallback once (guard with failed flag). Document fallback in media brief; create folder + .gitkeep for future assets.",
+      "tags": ["ux", "resilience", "nextjs", "images"]
     },
     {
       "name": "zod-validate-api-body",
@@ -308,6 +326,24 @@
       "when": "Section has an overline or eyebrow label (e.g. 'Our Network') in a brand-only section",
       "example": "Add text-brand-pacific-dusk (or appropriate token) to the overline element so the section uses only brand tokens; avoids inherited/gray and satisfies design-system validation.",
       "tags": ["design-system", "brand", "PartnershipSection", "typography"]
+    },
+    {
+      "name": "schedule-data-single-entry",
+      "when": "Schedules page or any component needs seasonal program lists (winter, spring, summer, fall)",
+      "example": "Use getWinter2026Programs(), getSpringProgramsForDisplay(), getSummerProgramsForDisplay(), getFall2026Programs() from @/lib/programs-data; no component imports data/winter2026.json or other season JSON directly.",
+      "tags": ["data", "architecture", "schedules", "programs-data"]
+    },
+    {
+      "name": "program-price-display-monthly-primary",
+      "when": "Component shows a single 'from' price and program has both monthly and session (1x/2x/3x) pricing",
+      "example": "If monthly != null and (no session prices OR monthly <= min(sessionPrices)), display monthly first (e.g. $120/mo); otherwise show min session price with From when multiple tiers. ProgramRow getPrice().",
+      "tags": ["schedules", "pricing", "ProgramRow", "UX"]
+    },
+    {
+      "name": "program-data-shape-consistent-seasons",
+      "when": "Adding or editing program entries in season JSON (winter2026, spring-summer-2026, fall2026)",
+      "example": "Use same optional keys (matchPlay, pricingNote) where applicable; same program display name and ages (e.g. Adult Beginner 1 — True Beginner, NTRP 1.0-2.0) across seasons.",
+      "tags": ["data-integrity", "programs", "schedules"]
     }
   ]
 }

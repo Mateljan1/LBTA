@@ -96,6 +96,7 @@ export default function Footer() {
                   { name: 'Our Coaches', href: '/coaches' },
                   { name: 'Book a Trial', href: '/book' },
                   { name: 'Contact', href: '/contact' },
+                  { name: 'FAQ', href: '/faq' },
                   { name: 'Racquet Rescue', href: '/racquet-rescue' },
                 ].map((item) => (
                   <li key={item.name}>

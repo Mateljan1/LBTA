@@ -201,7 +201,7 @@ export default function Home() {
               <AnimatedSection key={pillar.title} delay={i * 150}>
                 <div className="group">
                   <div className="relative aspect-square overflow-hidden rounded-subtle mb-6">
-                    <Image src={images[i]} alt={`${pillar.title} — ${pillar.description}`} fill className="object-cover image-zoom" sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
+                    <Image src={images[i]} alt={`${pillar.title} — ${pillar.description}`} fill className="object-cover image-zoom" style={{ objectPosition: '50% 30%' }} sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
                   </div>
                   <h3 className="font-headline text-headline-sm font-light mb-3 group-hover:text-brand-pacific-dusk/70 transition-colors">{pillar.title}</h3>
                   <p className="text-body text-brand-pacific-dusk mb-2">{pillar.description}</p>
@@ -225,11 +225,12 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10 mb-12">
             {homepageCopy.programs.items.map((program, i) => {
               const images = ['/images/programs/juniors.webp', '/images/programs/adults.webp', '/images/programs/private-lessons.webp']
+              const programPositions: Record<number, string> = { 0: '50% 38%', 1: '50% 38%', 2: '50% 55%' }
               return (
                 <AnimatedSection key={program.title} delay={i * 150}>
                   <Link href={program.link} className="group block">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-subtle mb-5">
-                      <Image src={images[i]} alt={program.title} fill className="object-cover image-zoom" sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
+                      <Image src={images[i]} alt={program.title} fill className="object-cover image-zoom" style={{ objectPosition: programPositions[i] ?? '50% 50%' }} sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
                     </div>
                     <h3 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">{program.title}</h3>
                     <p className="text-body text-lbta-slate">{program.description}</p>
@@ -266,6 +267,7 @@ export default function Home() {
                   alt={whyChoose?.image1Alt ?? 'LBTA coach and players on court'}
                   fill
                   className="object-cover image-zoom"
+                  style={{ objectPosition: '50% 55%' }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   quality={90}
                 />
@@ -279,6 +281,7 @@ export default function Home() {
                   alt={whyChoose?.image2Alt ?? 'Laguna Beach tennis facility and community'}
                   fill
                   className="object-cover image-zoom"
+                  style={{ objectPosition: '50% 35%' }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   quality={90}
                 />

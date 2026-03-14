@@ -95,6 +95,15 @@ Container: max-w-7xl with generous padding
 Letter Spacing: 1.5px-3px for elegance
 ```
 
+## Quality gate
+
+Every PR must pass **build** and **lint**. Periodically run the full verification and record results in [docs/quality-gate.md](docs/quality-gate.md):
+
+- **Every PR:** `npm run build` and `npm run lint`
+- **Periodically:** Lighthouse (home, schedules, one program page), responsive check (320–1440px), forbidden-copy pass, a11y spot-check
+
+See [Site polish and upgrades plan](plans/site-polish-and-upgrades-plan.md) Track 1 for the full checklist.
+
 ## Installation
 
 ```bash
@@ -240,7 +249,7 @@ Pricing lives in `/data/*.json` files — never hardcode in components.
 - Font optimization via next/font
 - Component code splitting
 - Minimal JavaScript
-- Target: 95+ Lighthouse score
+- Target: Lighthouse ≥90 in all categories (see [docs/quality-gate.md](docs/quality-gate.md))
 
 ## Conversion Strategy
 

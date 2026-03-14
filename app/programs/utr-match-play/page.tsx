@@ -329,7 +329,7 @@ export default function UTRMatchPlayPage() {
               Book a Trial First
             </Link>
           </div>
-          <p className="text-[13px] font-sans font-light text-white/30 mt-6">
+          <p className="text-[13px] font-sans font-light text-white/50 mt-6">
             Presented by Laguna Beach Tennis Academy & Fit4Tennis
           </p>
         </div>

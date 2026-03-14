@@ -8,7 +8,16 @@ import { chatSchema, parseJsonBody, validateRequest } from '@/lib/validations'
  */
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
-  const rateLimitResult = await rateLimit(`chat:${ip}`, RATE_LIMITS.form)
+  let rateLimitResult: { allowed: boolean; resetTime: number }
+  try {
+    rateLimitResult = await rateLimit(`chat:${ip}`, RATE_LIMITS.form)
+  } catch (e) {
+    console.error('[chat] Rate limit error:', e instanceof Error ? e.message : 'Unknown')
+    return NextResponse.json(
+      { reply: "We're having trouble right now. Please call us at (949) 534-0457 or email info@lagunabeachtennisacademy.com." },
+      { status: 500 }
+    )
+  }
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(

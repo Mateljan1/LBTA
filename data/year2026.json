@@ -56,7 +56,7 @@
     {
       "id": "swim-tennis",
       "name": "Swim & Tennis Camp",
-      "dates": "June 16 – August 14",
+      "dates": "June 16 – August 14, 2026",
       "days": "Weekly (Mon–Thu)",
       "hours": "9:00 AM – 3:00 PM",
       "ages": "5-11",
@@ -73,7 +73,7 @@
     {
       "id": "ski-week",
       "name": "Ski Week Camp",
-      "dates": "February 16–20",
+      "dates": "February 16–20, 2026",
       "days": 5,
       "hours": "9:00 AM – 3:00 PM",
       "ages": "5-14",
@@ -117,7 +117,7 @@
     {
       "id": "back-to-school",
       "name": "Back-to-School Mini",
-      "dates": "August 17–19",
+      "dates": "August 17–19, 2026",
       "days": 3,
       "hours": "9:00 AM – 1:00 PM",
       "ages": "5-14",
@@ -130,7 +130,7 @@
     {
       "id": "thanksgiving",
       "name": "Thanksgiving Break Camp",
-      "dates": "November 23–25 (Mon–Wed)",
+      "dates": "November 23–25, 2026 (Mon–Wed)",
       "days": 3,
       "hours": "9:00 AM – 12:00 PM or 12:00 – 3:00 PM (Half-day options)",
       "ages": "5-17",
@@ -144,7 +144,7 @@
     {
       "id": "winter-break",
       "name": "Winter Break Camp",
-      "dates": "Dec 21–24 & Dec 28–31",
+      "dates": "December 21–24 & December 28–31, 2026",
       "days": "4 per session",
       "hours": "9:00 AM – 1:00 PM",
       "ages": "5-14",
@@ -160,7 +160,7 @@
     {
       "id": "spring-jtt",
       "name": "Spring JTT",
-      "dates": "January 12 – April 26",
+      "dates": "January 12 – April 26, 2026",
       "weeks": 15,
       "matchDay": "Sundays",
       "practiceIncluded": true,

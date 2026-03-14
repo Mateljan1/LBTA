@@ -14,7 +14,16 @@ import { sendToGHL } from '@/lib/gohighlevel'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
-  const rateLimitResult = await rateLimit(`scholarship:${ip}`, RATE_LIMITS.form)
+  let rateLimitResult: { allowed: boolean; resetTime: number }
+  try {
+    rateLimitResult = await rateLimit(`scholarship:${ip}`, RATE_LIMITS.form)
+  } catch (e) {
+    console.error('[scholarship] Rate limit error:', e instanceof Error ? e.message : 'Unknown')
+    return NextResponse.json(
+      { success: false, error: 'Error processing request. Please call (949) 534-0457 or try again later.' },
+      { status: 500 }
+    )
+  }
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(

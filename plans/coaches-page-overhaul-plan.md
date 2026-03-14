@@ -50,7 +50,7 @@ Make the LBTA coaches page more powerful, maintainable, and on-brand by introduc
 
 ### Phase 5: Polish and optional trust
 
-- [ ] **5.1** “View full bio”: Use a proper link with visible focus ring, optional arrow icon (aria-hidden), and `min-h-[48px]` / padding so the card CTA meets touch target. Ensure decorative icons have `aria-hidden="true"` per quality-bars.
+- [x] **5.1** “View full bio”: Use a proper link with visible focus ring, optional arrow icon (aria-hidden), and `min-h-[48px]` / padding so the card CTA meets touch target. Ensure decorative icons have `aria-hidden="true"` per quality-bars.
 - [x] **5.2** (Optional) Add a short trust line above or below “Meet the Team”, e.g. “100+ years of combined coaching experience” — value derived from coach data or from `data/site-stats.json` if you add a `coaches` key. Single source; no hardcoded number in component.
 - [x] **5.3** Any quote in FounderSection or CoachCard that is a blockquote use `PullQuote` or `.section-quote` per brand guide and COMPOUND_LEARN.
 

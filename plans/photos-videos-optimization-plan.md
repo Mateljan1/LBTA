@@ -95,10 +95,10 @@ No component code changes required; all paths already in use.
 
 ## Success Criteria
 
-- [ ] All 10 image slots updated (hero, 3 philosophy, 3 programs, 2 why-choose, 1 cta).
-- [ ] Homepage and key pages show new images; no broken images.
-- [ ] Build and lint pass.
-- [ ] Hero video remains; poster = new hero image after replace.
+- [x] All 10 image slots updated (hero, 3 philosophy, 3 programs, 2 why-choose, 1 cta).
+- [x] Homepage and key pages show new images; no broken images.
+- [x] Build and lint pass.
+- [x] Hero video remains; poster = small hero-poster.webp for LCP; full laguna-horizon.webp for destination/OG.
 
 ---
 

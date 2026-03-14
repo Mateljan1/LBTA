@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { FAQSchema } from '@/components/SEOSchemas'
 import FAQInteractive from './FAQInteractive'
+import faqData from '@/data/faq.json'
 
 export const metadata: Metadata = {
   title: 'FAQ - Honest Answers About Tennis Training | LBTA',
@@ -9,10 +10,11 @@ export const metadata: Metadata = {
 }
 
 export default function FAQPage() {
+  const faqs = faqData as Array<{ id: string; question: string; answer: string; category?: string; icon?: string }>
   return (
     <>
       <FAQSchema />
-      <FAQInteractive />
+      <FAQInteractive faqs={faqs} />
     </>
   )
 }

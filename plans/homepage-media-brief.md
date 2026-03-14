@@ -47,7 +47,7 @@ Use this brief to choose or shoot assets for each homepage section. Drop files i
 ## Formats and specs
 
 - **Images:** WebP preferred; max ~350KB where possible; provide `alt` text when you hand off (we’ll add to code).
-- **Video:** WebM/MP4 as per current hero; keep short and on-brand.
+- **Video:** WebM/MP4 as per current hero; keep short and on-brand. For hero encoding (high quality + fast LCP), see [Hero video optimization](../docs/hero-video-optimization.md).
 - No stock imagery if avoidable; real courts, players, and coach preferred.
 
 **Why Choose fallback:** If `why-choose-1.webp` or `why-choose-2.webp` are not yet in `public/images/why-choose/`, the site uses fallbacks so the section never breaks: image 1 falls back to `/images/hero/laguna-horizon.webp`, image 2 to `/images/community/community-1.webp`. Add the two WebP files when ready for full design.

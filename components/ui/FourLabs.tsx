@@ -197,10 +197,7 @@ function LabCard({ lab, index }: LabCardProps) {
           {/* Animated Progress Bar */}
           <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
             <motion.div
-              className="h-full rounded-full"
-              style={{
-                background: 'linear-gradient(90deg, #C87941 0%, #E09962 100%)'
-              }}
+              className="h-full rounded-full bg-brand-sunset-cliff"
               initial={{ width: 0 }}
               animate={isInView ? { width: `${lab.stat.percent}%` } : { width: 0 }}
               transition={{ 
@@ -223,8 +220,7 @@ export default function FourLabs() {
   return (
     <section 
       ref={sectionRef}
-      className="py-32 md:py-40 lg:py-48"
-      style={{ background: '#FAFAF9' }}
+      className="py-32 md:py-40 lg:py-48 bg-brand-morning-light"
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-12">
         {/* Header */}

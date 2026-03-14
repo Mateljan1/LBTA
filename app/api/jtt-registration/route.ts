@@ -37,9 +37,17 @@ function formatDivision(division: string): string {
 }
 
 export async function POST(request: NextRequest) {
-  // Rate limiting
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
-  const rateLimitResult = await rateLimit(`jtt:${ip}`, RATE_LIMITS.form)
+  let rateLimitResult: { allowed: boolean; resetTime: number }
+  try {
+    rateLimitResult = await rateLimit(`jtt:${ip}`, RATE_LIMITS.form)
+  } catch (e) {
+    console.error('[jtt-registration] Rate limit error:', e instanceof Error ? e.message : 'Unknown')
+    return NextResponse.json(
+      { success: false, error: 'Error processing registration. Please call (949) 534-0457 or try again later.' },
+      { status: 500 }
+    )
+  }
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(

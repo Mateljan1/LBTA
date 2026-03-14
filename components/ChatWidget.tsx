@@ -121,22 +121,12 @@ export default function ChatWidget() {
       {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
+        className={`fixed bottom-6 right-6 z-[9999] w-[60px] h-[60px] rounded-full border-0 shadow-lg flex items-center justify-center transition-all duration-300 ease-out ${
+          isOpen ? 'bg-gray-800' : 'bg-brand-sunset-cliff'
+        }`}
         style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          zIndex: 9999,
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
-          backgroundColor: isOpen ? '#1f2937' : '#E8956F',
-          border: 'none',
           boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
           cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'all 0.3s ease',
         }}
         onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
         onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
@@ -184,7 +174,7 @@ export default function ChatWidget() {
             height: '520px',
             maxWidth: 'calc(100vw - 48px)',
             maxHeight: 'calc(100vh - 140px)',
-            backgroundColor: '#FDFCFA',
+            backgroundColor: 'var(--color-brand-morning-light, #FAF8F4)',
             borderRadius: '12px',
             border: '1px solid rgba(26, 26, 26, 0.08)',
             boxShadow: '0 20px 40px -8px rgba(0,0,0,0.15)',
@@ -197,7 +187,7 @@ export default function ChatWidget() {
           {/* Header - Minimal, Aman-level */}
           <div
             style={{
-              backgroundColor: '#FDFCFA',
+              backgroundColor: 'var(--color-brand-morning-light, #FAF8F4)',
               padding: '20px 24px',
               borderBottom: '1px solid rgba(26, 26, 26, 0.08)',
               display: 'flex',
@@ -299,7 +289,7 @@ export default function ChatWidget() {
                     borderRadius: message.role === 'user' 
                       ? '18px 18px 4px 18px' 
                       : '18px 18px 18px 4px',
-                    backgroundColor: message.role === 'user' ? '#E8956F' : 'white',
+                    backgroundColor: message.role === 'user' ? 'var(--color-brand-sunset-cliff, #E8834A)' : 'white',
                     color: message.role === 'user' ? 'white' : '#1f2937',
                     boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
                     fontSize: '14px',
@@ -368,7 +358,7 @@ export default function ChatWidget() {
                   backgroundColor: '#f9fafb',
                   transition: 'border-color 0.2s',
                 }}
-                onFocus={(e) => (e.target.style.borderColor = '#E8956F')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--color-brand-sunset-cliff, #E8834A)')}
                 onBlur={(e) => (e.target.style.borderColor = '#e5e7eb')}
               />
               <button
@@ -381,7 +371,7 @@ export default function ChatWidget() {
                   height: '44px',
                   borderRadius: '50%',
                   border: 'none',
-                  backgroundColor: input.trim() && !isLoading ? '#E8956F' : '#e5e7eb',
+                  backgroundColor: input.trim() && !isLoading ? 'var(--color-brand-sunset-cliff, #E8834A)' : '#e5e7eb',
                   cursor: input.trim() && !isLoading ? 'pointer' : 'not-allowed',
                   display: 'flex',
                   alignItems: 'center',
@@ -407,7 +397,7 @@ export default function ChatWidget() {
           >
             <p style={{ fontSize: '11px', color: '#9ca3af', margin: 0 }}>
               Need immediate help? Call{' '}
-              <a href="tel:9495340457" aria-label="Call (949) 534-0457" style={{ color: '#E8956F', textDecoration: 'none', fontWeight: 600 }}>
+              <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-brand-sunset-cliff no-underline font-semibold">
                 (949) 534-0457
               </a>
             </p>

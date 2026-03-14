@@ -2,6 +2,8 @@
 
 Extracted from the Code Review Summary (12-agent parallel review). Use these for future implementation and review.
 
+**Recent:** 2026-03-12 — Schedule sync + compound review: see `2026-03-12-schedule-sync-compound-learn.md` and `plans/compound-review-2026-schedule-sync.md`. Corrections, patterns, anti-patterns, and quality bars updated in this folder and in `COMPOUND_LEARN.md`.
+
 ---
 
 ## CORRECTIONS (what was wrong → what to do instead)

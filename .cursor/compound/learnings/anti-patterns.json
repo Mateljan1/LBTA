@@ -253,6 +253,34 @@
       "avoid": "const rateLimitResult = await rateLimit(...); if (!rateLimitResult.allowed) return 429; with no try/catch around rateLimit",
       "instead": "Wrap rateLimit() in try/catch; on catch use fallback { allowed: true, remaining: maxRequests, resetTime: Date.now() + interval }; apply in all form routes (book, newsletter, register, etc.)",
       "tags": ["api", "rate-limit", "500", "resilience"]
+    },
+    {
+      "id": "direct-import-season-json-in-client",
+      "description": "Client component imports season data JSON when lib provides a getter",
+      "avoid": "import winter2026Data from '@/data/winter2026.json' in 'use client' component; using winter2026Data.programs",
+      "instead": "Import from @/lib/programs-data and use getWinter2026Programs() (or equivalent); single entry point; avoids duplicating JSON in client bundle",
+      "tags": ["architecture", "schedules", "programs-data", "performance"]
+    },
+    {
+      "id": "getPrice-ignore-monthly-with-season-prices",
+      "description": "Price display uses only session prices (1x/2x/3x) when program also has monthly",
+      "avoid": "seasonPrices = [oneX, twoX, threeX]; return min(seasonPrices) without checking if monthly is primary or lower (e.g. Little Stars shows From $200/season)",
+      "instead": "If monthly != null and (no session prices OR monthly <= min(sessionPrices)), return { amount: monthly, label: '/mo' }; else use session logic",
+      "tags": ["schedules", "ProgramRow", "pricing", "UX"]
+    },
+    {
+      "id": "dead-exports-in-data-lib",
+      "description": "Lib that re-exports or transforms data has exports that are never used",
+      "avoid": "getSpringPrograms() and getSummerPrograms() in programs-data when only *ForDisplay variants are used",
+      "instead": "Remove unused exports; grep for usages; keep single way to get 'programs for UI' per season",
+      "tags": ["simplicity", "programs-data", "YAGNI"]
+    },
+    {
+      "id": "program-copy-inconsistent-across-seasons",
+      "description": "Same program has different display name or ages in different season JSON files",
+      "avoid": "Winter: 'Adult Beginner 1', ages 'True Beginner'; Spring-Summer: 'Adult Beginner 1 — True Beginner', 'NTRP 1.0-2.0'",
+      "instead": "Use identical program name and ages string across winter, spring-summer, fall so UI and data consumers see consistent copy",
+      "tags": ["data-integrity", "programs", "schedules", "winter2026"]
     }
   ]
 }

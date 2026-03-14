@@ -221,7 +221,7 @@ export default function USTAAdultLeaguePage() {
             Reply with your league number (1–4) and NTRP level, or just say
             &ldquo;I&apos;m interested.&rdquo;
           </p>
-          <p className="text-[14px] font-sans font-light text-white/35 mb-8">
+          <p className="text-[14px] font-sans font-light text-white/50 mb-8">
             Free NTRP assessment available — 30 minutes on court with Andrew.
           </p>
           <div className="flex flex-wrap justify-center gap-4">

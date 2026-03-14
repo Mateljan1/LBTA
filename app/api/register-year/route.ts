@@ -174,7 +174,16 @@ function getApplicableTags(data: any): number[] {
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
-  const rateLimitResult = await rateLimit(`register-year:${ip}`, RATE_LIMITS.form)
+  let rateLimitResult: { allowed: boolean; resetTime: number }
+  try {
+    rateLimitResult = await rateLimit(`register-year:${ip}`, RATE_LIMITS.form)
+  } catch (e) {
+    console.error('[register-year] Rate limit error:', e instanceof Error ? e.message : 'Unknown')
+    return NextResponse.json(
+      { success: false, error: 'Error processing registration. Please call (949) 534-0457 or try again later.' },
+      { status: 500 }
+    )
+  }
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(
