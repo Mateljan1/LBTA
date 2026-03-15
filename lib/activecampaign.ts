@@ -290,24 +290,16 @@ export async function addTag(
 }
 
 /**
- * Add multiple tags to a contact
+ * Add multiple tags to a contact (in parallel)
  */
 export async function addTags(
   contactId: string | number,
   tagIds: number[]
 ): Promise<{ success: number; failed: number }> {
-  let success = 0
-  let failed = 0
-
-  for (const tagId of tagIds) {
-    const result = await addTag(contactId, tagId)
-    if (result.success) {
-      success++
-    } else {
-      failed++
-    }
-  }
-
+  if (tagIds.length === 0) return { success: 0, failed: 0 }
+  const results = await Promise.all(tagIds.map((tagId) => addTag(contactId, tagId)))
+  const success = results.filter((r) => r.success).length
+  const failed = results.length - success
   return { success, failed }
 }
 

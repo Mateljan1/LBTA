@@ -2,6 +2,7 @@ import { timingSafeEqual } from 'crypto'
 import { NextRequest, NextResponse } from 'next/server'
 import axios from 'axios'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
+import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, validateRequest, webhookPayloadSchema, type WebhookPayload } from '@/lib/validations'
 
 /** Minimal types for ActiveCampaign API responses (avoid `any`) */
@@ -174,14 +175,29 @@ function getClassTagFromLevel(level: string): number | null {
 }
 
 export async function POST(request: NextRequest) {
+  // In production, require webhook secret (401 if unset)
+  if (process.env.NODE_ENV === 'production' && !AC_WEBHOOK_SECRET) {
+    return NextResponse.json(
+      { success: false, error: 'Unauthorized' },
+      { status: 401 }
+    )
+  }
+
   const authError = verifyWebhookSecret(request)
   if (authError) return authError
 
-  if (process.env.NODE_ENV === 'production' && !AC_WEBHOOK_SECRET) {
-    return NextResponse.json(
-      { success: false, error: 'Webhook not configured' },
-      { status: 503 }
-    )
+  // Rate limit webhook requests (allow on failure to avoid blocking legitimate traffic)
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? request.headers.get('x-real-ip') ?? 'unknown'
+  try {
+    const rl = await rateLimit(`webhook:${ip}`, RATE_LIMITS.webhook)
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { success: false, error: 'Too many requests' },
+        { status: 429 }
+      )
+    }
+  } catch {
+    // Allow request if rate-limit check fails (e.g. KV unavailable)
   }
 
   try {
@@ -213,7 +229,9 @@ export async function POST(request: NextRequest) {
     }
     const data: WebhookPayload = validation.data
 
-    console.log('[activecampaign-webhook] Received', { hasContactId: !!(data.contact?.id || data.contact_id || data.id) })
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[activecampaign-webhook] Received', { hasContactId: !!(data.contact?.id || data.contact_id || data.id) })
+    }
 
     // ActiveCampaign sends different formats depending on webhook type.
     // Normalize to a positive integer to prevent path manipulation.
@@ -234,7 +252,9 @@ export async function POST(request: NextRequest) {
     }
     const contactId = contactIdNum
 
-    console.log('[activecampaign-webhook] Processing contact ID:', contactId)
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[activecampaign-webhook] Processing contact ID:', contactId)
+    }
 
     // Step 1: Get contact details and field values in parallel (2 GETs)
     const [contactResponse, fieldValuesResponse] = await Promise.all([
@@ -257,17 +277,17 @@ export async function POST(request: NextRequest) {
     const leadSource = leadSourceField?.value || 'unknown'
     
     if (leadSource === 'website') {
-      console.log('⏭️ Skipping webhook - website registration already processed by /api/register-program')
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('[activecampaign-webhook] Skipping - website registration already processed')
+      }
       return NextResponse.json({ 
         success: true, 
         message: 'Website registration - skipped duplicate processing' 
       })
     }
 
-    if (leadSource === 'website_embedded') {
-      console.log('✅ Embedded form submission detected - processing with full tagging')
-    } else {
-      console.log('✅ Facebook/external lead detected - proceeding with webhook processing')
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[activecampaign-webhook] Lead source:', leadSource === 'website_embedded' ? 'embedded' : 'external')
     }
 
     // Get contact's current tags and list memberships in parallel (2 GETs)
@@ -285,14 +305,15 @@ export async function POST(request: NextRequest) {
     const contactTags = tagsResponse.data.contactTags ?? []
     const currentTagIds = contactTags.map((ct) => parseInt(ct.tag, 10))
 
-    console.log(`📋 Current tags for contact: ${currentTagIds.join(', ')}`)
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[activecampaign-webhook] Current tag count:', currentTagIds.length)
+    }
 
     const listMemberships = listMembershipResponse.data.contactLists ?? []
     const isOnList4 = listMemberships.some((lm) => lm.list === '4' && lm.status === '1')
 
     // Add to List 4 if not already on it
     if (!isOnList4) {
-      console.log(`📝 Adding contact to List 4 (LBTA)...`)
       await axios.post(
         `${acUrl}/api/3/contactLists`,
         {
@@ -309,14 +330,10 @@ export async function POST(request: NextRequest) {
           }
         }
       )
-      console.log(`✅ Contact added to List 4`)
-    } else {
-      console.log(`✓ Contact already on List 4`)
     }
 
     // Step 3: Apply LBTA_Winter2026 tag (27) if not already applied
     if (!currentTagIds.includes(27)) {
-      console.log(`🏷️ Applying LBTA_Winter2026 tag (27)...`)
       await axios.post(
         `${acUrl}/api/3/contactTags`,
         {
@@ -332,7 +349,6 @@ export async function POST(request: NextRequest) {
           }
         }
       )
-      console.log(`✅ LBTA_Winter2026 tag applied`)
     }
 
     // Step 4: Determine the appropriate class tag
@@ -343,16 +359,12 @@ export async function POST(request: NextRequest) {
     if (programInterestField?.value) {
       const programValue = programInterestField.value.toLowerCase().replace(/[^a-z0-9_]/g, '_')
       classTagId = PROGRAM_VALUE_TO_TAG[programValue] || null
-      console.log(`📊 PROGRAM_INTEREST (field 3): ${programInterestField.value} → Tag ${classTagId}`)
     }
 
     // Method 2: Check TENNIS_LEVEL field (field 5) for adult level (if no program specified)
     const tennisLevelField = fieldValues.find((fv) => fv.field === '5')
-    if (!classTagId) {
-      if (tennisLevelField?.value) {
-        classTagId = getClassTagFromLevel(tennisLevelField.value)
-        console.log(`📊 TENNIS_LEVEL (field 5): ${tennisLevelField.value} → Tag ${classTagId}`)
-      }
+    if (!classTagId && tennisLevelField?.value) {
+      classTagId = getClassTagFromLevel(tennisLevelField.value)
     }
 
     // Method 3: Check PROGRAM field (field 7) for program interest text
@@ -360,7 +372,6 @@ export async function POST(request: NextRequest) {
       const programField = fieldValues.find((fv) => fv.field === '7')
       if (programField?.value) {
         classTagId = getClassTagFromInterest(programField.value)
-        console.log(`📊 PROGRAM (field 7): ${programField.value} → Tag ${classTagId}`)
       }
     }
 
@@ -368,13 +379,11 @@ export async function POST(request: NextRequest) {
     if (!classTagId) {
       for (const [sourceTagId, defaultClassTag] of Object.entries(SOURCE_TAG_TO_CLASS_TAG)) {
         if (currentTagIds.includes(parseInt(sourceTagId))) {
-          // For Adult Programming Lead (26), refine by TENNIS_LEVEL if available
           if (parseInt(sourceTagId) === 26 && tennisLevelField?.value) {
             classTagId = getClassTagFromLevel(tennisLevelField.value) || defaultClassTag
           } else {
             classTagId = defaultClassTag
           }
-          console.log(`📊 Source tag ${sourceTagId} → Class tag ${classTagId}`)
           break
         }
       }
@@ -382,7 +391,6 @@ export async function POST(request: NextRequest) {
 
     // Step 5: Apply class tag if determined and not already applied
     if (classTagId && !currentTagIds.includes(classTagId)) {
-      console.log(`🏷️ Applying class tag ${classTagId}...`)
       await axios.post(
         `${acUrl}/api/3/contactTags`,
         {
@@ -398,11 +406,6 @@ export async function POST(request: NextRequest) {
           }
         }
       )
-      console.log(`✅ Class tag ${classTagId} applied`)
-    } else if (classTagId) {
-      console.log(`✓ Class tag ${classTagId} already applied`)
-    } else {
-      console.log(`⚠️ No class tag determined for contact`)
     }
 
     return NextResponse.json({

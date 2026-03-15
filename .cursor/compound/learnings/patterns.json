@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-13",
-  "lastLearnRun": "2026-03-13 photos-videos-optimization",
+  "updated": "2026-03-14",
+  "lastLearnRun": "2026-03-14 compound-work-100-100",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -344,6 +344,24 @@
       "when": "Adding or editing program entries in season JSON (winter2026, spring-summer-2026, fall2026)",
       "example": "Use same optional keys (matchPlay, pricingNote) where applicable; same program display name and ages (e.g. Adult Beginner 1 — True Beginner, NTRP 1.0-2.0) across seasons.",
       "tags": ["data-integrity", "programs", "schedules"]
+    },
+    {
+      "name": "webhook-rate-limit",
+      "when": "External webhook route (e.g. ActiveCampaign POST)",
+      "example": "At start of POST: rateLimit('webhook:'+ip, RATE_LIMITS.webhook) with try/catch; allow on failure. Production: return 401 when secret env unset; log only non-PII in prod.",
+      "tags": ["security", "webhook", "rate-limit"]
+    },
+    {
+      "name": "single-component-re-export",
+      "when": "Consolidating duplicate component (e.g. root vs ui/)",
+      "example": "Keep canonical in components/ui/AnimatedSection.tsx; components/AnimatedSection.tsx: export { default } from '@/components/ui/AnimatedSection' so @/components/AnimatedSection and @/components/ui/AnimatedSection both resolve to same implementation.",
+      "tags": ["DRY", "component", "backward-compat"]
+    },
+    {
+      "name": "parallel-add-tags",
+      "when": "Applying multiple ActiveCampaign tags to one contact",
+      "example": "Promise.all(tagIds.map(id => addTag(contactId, id))); aggregate success/failed from results. Faster than sequential loop.",
+      "tags": ["performance", "activecampaign", "addTags"]
     }
   ]
 }

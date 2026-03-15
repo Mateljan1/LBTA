@@ -95,7 +95,7 @@ export default function MatchPlayPage() {
             </AnimatedSection>
 
             {/* Adult */}
-            <AnimatedSection delay={0.2}>
+            <AnimatedSection delay={200}>
               <div className="card-lbta p-10">
                 <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                   Adult League Play
@@ -142,7 +142,7 @@ export default function MatchPlayPage() {
             </AnimatedSection>
           </div>
 
-          <AnimatedSection delay={0.4} className="mt-12 text-center">
+          <AnimatedSection delay={400} className="mt-12 text-center">
             <div className="card-lbta p-8 max-w-md mx-auto">
               <h3 className="text-xl font-sans font-medium mb-4">Family Package</h3>
               <p className="text-gray-600 mb-4">Bring family members for discounted rates</p>

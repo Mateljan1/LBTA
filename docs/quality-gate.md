@@ -4,6 +4,8 @@
 
 **Target:** Lighthouse ≥90 (Performance, Accessibility, Best Practices, SEO); no horizontal scroll at required breakpoints; no forbidden copy in user-facing strings; build and lint pass.
 
+**CI:** Every PR runs the minimal quality gate (build + lint) via [.github/workflows/quality-gate.yml](../.github/workflows/quality-gate.yml). Branch protection can require this check to pass before merge.
+
 ---
 
 ## 1. Lighthouse
@@ -31,6 +33,8 @@ npx lighthouse http://localhost:3000 --view --output=html --output-path=./docs/l
 
 **Baseline (last run):** Home run 2026-03-13 (localhost). Performance and Best Practices below 90 (typical for dev; production often scores higher). Fix any score &lt; 90 if feasible (e.g. image `sizes`, LCP, minify). Full report from `npm run lighthouse`: `docs/lighthouse-report.html`. For JSON or multiple pages, use the manual commands above.
 
+**PhotoVideoGallery:** Uses static imports from `public/photos/` (13–27MB per image). High-res is intentional for gallery quality; see component comment and [deploy-checklist.md](./deploy-checklist.md) for pre-release checks. Optional: optimize to WebP &lt; 500KB if performance budget requires.
+
 ---
 
 ## 2. Responsive
@@ -52,7 +56,7 @@ Test at **320px**, **375px**, **768px**, **1024px**, **1440px** on:
 | 1024px     | —    | —         | —       | —   | _pending_  |
 | 1440px     | —    | —         | —       | —   | _pending_  |
 
-**Responsive check passed:** _Yes/No (date)_
+**Responsive check passed:** Manual check per [recurring-workflows.md](./recurring-workflows.md) (weekly or before release). Record above when done.
 
 ---
 
@@ -89,6 +93,8 @@ Optionally run Lighthouse Accessibility or axe.
 ```bash
 npm run build
 npm run lint
+# Or in one step:
+npm run quality-gate
 ```
 
 **Build:** **Pass** (2026-03-13)  
@@ -96,9 +102,21 @@ npm run lint
 
 ---
 
+## 6. Fact-check (recurring)
+
+Run periodically (e.g. weekly) to catch forbidden copy and keep facts aligned:
+
+```bash
+npm run fact-check
+```
+
+Fails if any forbidden words/phrases (maximize, boost, elite, world-class, mastery, "Sign up now!", etc.) appear in `app/`, `components/`, or `data/`. See `scripts/fact-check.js`. Optional: add to CI or run in [recurring workflow](./recurring-workflows.md).
+
+---
+
 ## Every PR / periodic
 
-- **Every PR:** `npm run build` and `npm run lint` must pass.
-- **Periodically:** Run Lighthouse (§1), responsive (§2), and forbidden-copy (§3) and update this doc.
+- **Every PR:** CI runs build + lint (see [.github/workflows/quality-gate.yml](../.github/workflows/quality-gate.yml)). Locally: `npm run quality-gate`.
+- **Periodically:** Run Lighthouse (§1), responsive (§2), forbidden-copy (§3), and `npm run fact-check` (§6); update this doc.
 
-See [Site polish and upgrades plan](../plans/site-polish-and-upgrades-plan.md) Track 1 for full checklist.
+See [Site polish and upgrades plan](../plans/site-polish-and-upgrades-plan.md) Track 1 and [recurring-workflows.md](./recurring-workflows.md) for full checklist and cadence.

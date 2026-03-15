@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import Link from 'next/link'
 import { ChevronDown, TrendingUp, DollarSign, Award, Users, Shield, AlertCircle, HelpCircle } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
@@ -30,11 +30,16 @@ function useReducedMotion(): boolean {
 }
 
 function getCategories(faqs: FAQItem[]): string[] {
-  const set = new Set<string>()
+  const seen = new Set<string>()
+  const order: string[] = []
   faqs.forEach((faq) => {
-    set.add(faq.category ?? 'General')
+    const cat = faq.category ?? 'General'
+    if (!seen.has(cat)) {
+      seen.add(cat)
+      order.push(cat)
+    }
   })
-  return Array.from(set)
+  return order
 }
 
 interface FAQInteractiveProps {
@@ -43,13 +48,50 @@ interface FAQInteractiveProps {
 
 export default function FAQInteractive({ faqs }: FAQInteractiveProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0)
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const reducedMotion = useReducedMotion()
   const categories = getCategories(faqs)
+  const safeCategoryIndex = categories.length > 0 ? Math.min(selectedCategoryIndex, categories.length - 1) : 0
+  const activeCategory = categories[safeCategoryIndex]
+  const categoryFaqs = activeCategory
+    ? faqs.filter((faq) => (faq.category ?? 'General') === activeCategory)
+    : []
+
+  useEffect(() => {
+    setOpenIndex(null)
+  }, [safeCategoryIndex])
+
+  useEffect(() => {
+    if (categories.length === 0) return
+    const el = tabRefs.current[safeCategoryIndex] ?? document.getElementById(`faq-tab-${safeCategoryIndex}`)
+    if (el && typeof (el as HTMLButtonElement).focus === 'function') (el as HTMLButtonElement).focus()
+  }, [safeCategoryIndex, categories.length])
+
+  const handleTabKeyDown = useCallback(
+    (e: React.KeyboardEvent, numTabs: number) => {
+      if (numTabs <= 0) return
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault()
+        setSelectedCategoryIndex((i) => (i <= 0 ? numTabs - 1 : i - 1))
+      } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault()
+        setSelectedCategoryIndex((i) => (i >= numTabs - 1 ? 0 : i + 1))
+      } else if (e.key === 'Home') {
+        e.preventDefault()
+        setSelectedCategoryIndex(0)
+      } else if (e.key === 'End') {
+        e.preventDefault()
+        setSelectedCategoryIndex(numTabs - 1)
+      }
+    },
+    []
+  )
 
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-brand-pacific-dusk text-white py-32">
+      <section className="relative bg-brand-pacific-dusk text-white py-24">
         <div className="container-narrow text-center">
           <AnimatedSection>
             <HelpCircle className="w-16 h-16 text-brand-sunset-cliff mx-auto mb-8" />
@@ -66,69 +108,106 @@ export default function FAQInteractive({ faqs }: FAQInteractiveProps) {
         </div>
       </section>
 
-      {/* FAQ Content */}
+      {/* FAQ Content — category tabs */}
       <section className="section-spacing bg-white">
         <div className="container-narrow">
-          {categories.map((category) => {
-            const categoryFaqs = faqs.filter((faq) => (faq.category ?? 'General') === category)
-            return (
-              <div key={category} className="mb-16">
-                <AnimatedSection>
-                  <h2 className="text-2xl font-sans font-medium text-brand-pacific-dusk mb-8 pb-4 border-b-2 border-brand-sunset-cliff">
-                    {category}
-                  </h2>
-                </AnimatedSection>
+          {categories.length === 0 ? (
+            <p className="text-center text-gray-600 font-sans">No FAQs available yet.</p>
+          ) : (
+          <>
+          <div
+            role="tablist"
+            aria-label="FAQ categories"
+            className="flex flex-wrap gap-2 border-b-2 border-brand-pacific-dusk/10 pb-6 mb-8"
+          >
+            {categories.map((category, i) => {
+              const isSelected = safeCategoryIndex === i
+              const tabId = `faq-tab-${i}`
+              return (
+                <button
+                  key={category}
+                  ref={(el) => { tabRefs.current[i] = el }}
+                  id={tabId}
+                  type="button"
+                  role="tab"
+                  aria-selected={isSelected}
+                  aria-controls={`faq-panel-${i}`}
+                  tabIndex={isSelected ? 0 : -1}
+                  onClick={() => setSelectedCategoryIndex(i)}
+                  onKeyDown={(e) => handleTabKeyDown(e, categories.length)}
+                  className={`
+                    min-h-[48px] px-6 py-3 rounded-subtle font-sans text-body font-medium
+                    transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2
+                    ${isSelected
+                      ? 'bg-brand-pacific-dusk text-white'
+                      : 'bg-gray-100 text-brand-pacific-dusk hover:bg-gray-200'
+                    }
+                  `}
+                >
+                  {category}
+                </button>
+              )
+            })}
+          </div>
 
-                <div className="space-y-4">
-                  {categoryFaqs.map((faq, index) => {
-                    const globalIndex = faqs.indexOf(faq)
-                    const IconComponent = (faq.icon && ICON_MAP[faq.icon]) ? ICON_MAP[faq.icon] : HelpCircle
-                    return (
-                      <AnimatedSection key={faq.id} delay={index * 0.05}>
-                        <div className="card-lbta overflow-hidden">
-                          <button
-                            type="button"
-                            onClick={() => setOpenIndex(openIndex === globalIndex ? null : globalIndex)}
-                            className="w-full flex items-start gap-4 p-8 text-left hover:bg-gray-50 transition-colors"
-                            aria-expanded={openIndex === globalIndex}
-                            aria-controls={`faq-panel-${faq.id}`}
-                          >
-                            <IconComponent className="w-6 h-6 text-brand-sunset-cliff flex-shrink-0 mt-1" />
-                            <div className="flex-1">
-                              <h3 id={`faq-question-${faq.id}`} className="text-lg font-sans font-medium text-brand-pacific-dusk pr-8">
-                                {faq.question}
-                              </h3>
-                            </div>
-                            <ChevronDown
-                              className={`w-6 h-6 text-gray-400 flex-shrink-0 ${reducedMotion ? '' : 'transition-transform duration-300'} ${
-                                openIndex === globalIndex ? 'rotate-180' : ''
-                              }`}
-                              aria-hidden
-                            />
-                          </button>
-
-                          {openIndex === globalIndex && (
-                            <div
-                              id={`faq-panel-${faq.id}`}
-                              role="region"
-                              aria-labelledby={`faq-question-${faq.id}`}
-                              className={`px-8 pb-8 ${reducedMotion ? '' : 'transition-all duration-300 ease-out'}`}
-                            >
-                              <div className="pl-10 pt-4 border-l-4 border-brand-sunset-cliff">
-                                <p className="text-gray-600 leading-relaxed">
-                                  {faq.answer}
-                                </p>
-                              </div>
-                            </div>
-                          )}
+          <div
+            id={`faq-panel-${safeCategoryIndex}`}
+            role="tabpanel"
+            aria-labelledby={`faq-tab-${safeCategoryIndex}`}
+          >
+            <AnimatedSection>
+              <h2 className="sr-only">{activeCategory}</h2>
+            </AnimatedSection>
+            <div className="space-y-4">
+              {categoryFaqs.map((faq, index) => {
+                const globalIndex = faqs.indexOf(faq)
+                const IconComponent = (faq.icon && ICON_MAP[faq.icon]) ? ICON_MAP[faq.icon] : HelpCircle
+                return (
+                  <AnimatedSection key={faq.id} delay={index * 0.05}>
+                    <div className="card-lbta overflow-hidden">
+                      <button
+                        type="button"
+                        onClick={() => setOpenIndex(openIndex === globalIndex ? null : globalIndex)}
+                        className="w-full flex items-start gap-4 p-8 text-left hover:bg-gray-50 transition-colors min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-inset"
+                        aria-expanded={openIndex === globalIndex}
+                        aria-controls={`faq-panel-${faq.id}`}
+                      >
+                        <IconComponent className="w-6 h-6 text-brand-sunset-cliff flex-shrink-0 mt-1" aria-hidden />
+                        <div className="flex-1">
+                          <h3 id={`faq-question-${faq.id}`} className="text-lg font-sans font-medium text-brand-pacific-dusk pr-8">
+                            {faq.question}
+                          </h3>
                         </div>
-                      </AnimatedSection>
-                    )
-                  })}
-                </div>
-              </div>
-            )
-          })}
+                        <ChevronDown
+                          className={`w-6 h-6 text-gray-400 flex-shrink-0 ${reducedMotion ? '' : 'transition-transform duration-300'} ${
+                            openIndex === globalIndex ? 'rotate-180' : ''
+                          }`}
+                          aria-hidden
+                        />
+                      </button>
+
+                      {openIndex === globalIndex && (
+                        <div
+                          id={`faq-panel-${faq.id}`}
+                          role="region"
+                          aria-labelledby={`faq-question-${faq.id}`}
+                          className={`px-8 pb-8 ${reducedMotion ? '' : 'transition-all duration-300 ease-out'}`}
+                        >
+                          <div className="pl-10 pt-4 border-l-4 border-brand-sunset-cliff">
+                            <p className="text-gray-600 leading-relaxed">
+                              {faq.answer}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </AnimatedSection>
+                )
+              })}
+            </div>
+          </div>
+          </>
+          )}
         </div>
       </section>
 

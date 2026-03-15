@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-12",
+  "updated": "2026-03-14",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -281,6 +281,20 @@
       "avoid": "Winter: 'Adult Beginner 1', ages 'True Beginner'; Spring-Summer: 'Adult Beginner 1 — True Beginner', 'NTRP 1.0-2.0'",
       "instead": "Use identical program name and ages string across winter, spring-summer, fall so UI and data consumers see consistent copy",
       "tags": ["data-integrity", "programs", "schedules", "winter2026"]
+    },
+    {
+      "id": "webhook-without-rate-limit",
+      "description": "Webhook endpoint without rate limiting",
+      "avoid": "POST handler for external webhooks (e.g. ActiveCampaign) with no rateLimit() call",
+      "instead": "rateLimit('webhook:'+ip, RATE_LIMITS.webhook) at start with try/catch; allow on failure. Return 401 in production when secret unset; no PII in prod logs",
+      "tags": ["security", "webhook", "rate-limit"]
+    },
+    {
+      "id": "duplicate-component-implementations",
+      "description": "Two implementations of same component (e.g. root vs ui/)",
+      "avoid": "components/AnimatedSection.tsx and components/ui/AnimatedSection.tsx both defining the component",
+      "instead": "One canonical (e.g. ui/); legacy path re-exports so existing imports resolve to same implementation",
+      "tags": ["DRY", "component", "simplicity"]
     }
   ]
 }

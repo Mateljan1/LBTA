@@ -1,49 +1,7 @@
 'use client'
 
-import { useEffect, useRef, ReactNode } from 'react'
-
-interface AnimatedSectionProps {
-  children: ReactNode
-  className?: string
-  delay?: number
-}
-
-export default function AnimatedSection({ 
-  children, 
-  className = '',
-  delay = 0 
-}: AnimatedSectionProps) {
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('animate-in')
-            }, delay)
-          }
-        })
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
-    )
-
-    const node = ref.current
-    if (node) observer.observe(node)
-
-    return () => {
-      if (node) observer.unobserve(node)
-    }
-  }, [delay])
-
-  return (
-    <div 
-      ref={ref} 
-      className={`opacity-0 translate-y-[30px] transition-all duration-[600ms] ease-out ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  )
-}
+/**
+ * Single source: components/ui/AnimatedSection (useReducedMotion, Framer Motion).
+ * Re-export so @/components/AnimatedSection and @/components/ui/AnimatedSection resolve to the same implementation.
+ */
+export { default } from '@/components/ui/AnimatedSection'

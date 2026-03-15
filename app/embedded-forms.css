@@ -48,7 +48,8 @@
   font-family: var(--font-dm-sans, 'DM Sans'), sans-serif !important;
   font-size: 15px !important;
   font-weight: 400 !important;
-  color: rgba(0, 0, 0, 0.7) !important;
+  color: var(--pacific-dusk, #1B3A5C) !important;
+  opacity: 0.85;
   margin: 0 0 24px 0 !important;
   line-height: 1.5 !important;
 }

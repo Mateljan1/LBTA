@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-12",
+  "updated": "2026-03-14",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -198,6 +198,10 @@
     },
     "programPriceDisplayMonthlyPreferred": {
       "rule": "When a program has both pricing.monthly and session tiers (1x/2x/3x), the displayed 'from' price must prefer monthly when monthly is the minimum or primary billing (e.g. Little Stars: $120/mo not From $200/season)",
+      "enforcement": "must"
+    },
+    "webhookRateLimit": {
+      "rule": "Webhook routes must call rateLimit (e.g. rateLimit('webhook:'+ip, RATE_LIMITS.webhook)) with try/catch; allow request on failure. Production must return 401 when webhook secret env is unset; no user-supplied or PII in production logs.",
       "enforcement": "must"
     }
   }

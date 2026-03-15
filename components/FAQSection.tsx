@@ -1,13 +1,20 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import Script from 'next/script'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import faqsData from '@/data/faq.json'
 
-const faqs = faqsData as Array<{ id: string; question: string; answer: string }>
+type FAQEntry = { id: string; question: string; answer: string; featured?: boolean }
+const faqs = faqsData as FAQEntry[]
 
-// Generate FAQ Schema
+const displayFaqs =
+  faqs.some((f) => f.featured === true)
+    ? faqs.filter((f) => f.featured === true)
+    : faqs.slice(0, 6)
+
+// Generate FAQ Schema (full list for SEO)
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -48,7 +55,7 @@ export default function FAQSection() {
 
         {/* FAQ List */}
         <div className="space-y-3">
-          {faqs.map((faq, index) => {
+          {displayFaqs.map((faq, index) => {
             const isOpen = openIndex === index
             const panelId = `faq-panel-${faq.id}`
             const buttonId = `faq-button-${faq.id}`
@@ -66,10 +73,11 @@ export default function FAQSection() {
                 `}
               >
                 <button
+                  type="button"
                   id={buttonId}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
-                  className="w-full px-6 py-5 text-left flex items-center justify-between gap-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-inset group"
+                  className="w-full min-h-[48px] px-6 py-5 text-left flex items-center justify-between gap-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-inset group"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
                   <span className={`
@@ -148,6 +156,24 @@ export default function FAQSection() {
               </div>
             )
           })}
+        </div>
+
+        <div className="text-center mt-8">
+          <Link
+            href="/faq"
+            className="inline-flex items-center gap-2 font-sans text-ui font-medium text-brand-victoria-cove hover:text-brand-victoria-cove/80 transition-colors group"
+          >
+            View all FAQs
+            <svg
+              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
 
         {/* CTA */}

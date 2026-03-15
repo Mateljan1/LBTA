@@ -3,24 +3,28 @@
     "id": "ages",
     "question": "What age groups do you offer tennis lessons for?",
     "answer": "We offer programs for all ages starting from 3 years old. Our Little Tennis Stars program (ages 3-4) introduces children to tennis through play-based activities. We have progressive programs through Red Ball (5-6), Orange Ball (7-8), Green Ball (9-10), Youth Development (11-14), High Performance (competitive juniors), and comprehensive adult programs for beginners through advanced players.",
+    "featured": true,
     "category": "Programs"
   },
   {
     "id": "equipment",
     "question": "Do I need to bring my own equipment?",
     "answer": "No equipment is required for your first trial lesson - we provide racquets appropriate for your age and skill level. For ongoing classes, we can recommend equipment based on your needs. Our Racquet Rescue service also offers professional stringing and equipment consultation.",
+    "featured": true,
     "category": "Getting Started"
   },
   {
     "id": "philosophy",
     "question": "What is your coaching philosophy?",
     "answer": "Our movement-first approach focuses on building proper footwork and body mechanics before technical stroke development. This foundation creates more consistent, powerful, and injury-resistant players. We believe that structure creates confidence — combining technical excellence with mental toughness and a supportive community.",
+    "featured": true,
     "category": "Coaching Philosophy"
   },
   {
     "id": "location",
     "question": "Where are your tennis courts located?",
     "answer": "Our primary location is Moulton Meadows Park at 1098 Balboa Ave, Laguna Beach, CA 92651. We also utilize Alta Laguna Park for our summer Swim & Tennis camps. Both locations offer beautiful ocean views and well-maintained courts.",
+    "featured": true,
     "category": "Getting Started"
   },
   {
@@ -39,6 +43,7 @@
     "id": "cancellation",
     "question": "What is your cancellation policy?",
     "answer": "Program refunds are available up to 48 hours before the session start date. For private lessons, we request 24-hour notice for cancellation or rescheduling. Group clinics: no refunds for missed sessions, but make-up sessions may be available. Weather-related cancellations are rescheduled at no charge. Full details are on our Terms page.",
+    "featured": true,
     "category": "Policies"
   },
   {
@@ -57,6 +62,7 @@
     "id": "get-started",
     "question": "How do I get started?",
     "answer": "The best way to start is by booking a trial lesson. This allows us to assess your current level and discuss your tennis goals. From there, we'll recommend the ideal program for you or your child. Click 'Book a Trial' to schedule your first session!",
+    "featured": true,
     "category": "Getting Started"
   },
   {

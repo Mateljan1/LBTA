@@ -2,6 +2,8 @@
  * Google Analytics 4 event tracking utilities for LBTA.
  * Wraps `window.gtag` with type-safe helpers for conversion
  * and engagement events used across the site.
+ *
+ * Not yet wired: call events.* from layout and CTAs when GA4 is configured (see GA4_INTEGRATION_PLAN.md).
  */
 
 /**

@@ -122,7 +122,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-6 right-6 z-[9999] w-[60px] h-[60px] rounded-full border-0 shadow-lg flex items-center justify-center transition-all duration-300 ease-out ${
-          isOpen ? 'bg-gray-800' : 'bg-brand-sunset-cliff'
+          isOpen ? 'bg-brand-deep-water' : 'bg-brand-sunset-cliff'
         }`}
         style={{
           boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
@@ -154,7 +154,7 @@ export default function ChatWidget() {
             width: '14px',
             height: '14px',
             borderRadius: '50%',
-            backgroundColor: '#10b981',
+            backgroundColor: 'var(--tide-pool, #3A8B6E)',
             border: '2px solid white',
             animation: 'pulse 2s infinite',
             pointerEvents: 'none',
@@ -216,7 +216,7 @@ export default function ChatWidget() {
               <div>
                 <h3 style={{ 
                   fontFamily: 'var(--font-cormorant)', 
-                  color: '#1A1A1A', 
+                  color: 'var(--pacific-dusk, #1B3A5C)', 
                   fontWeight: 400, 
                   fontSize: '20px', 
                   margin: 0,
@@ -225,10 +225,10 @@ export default function ChatWidget() {
                   LBTA
                 </h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10b981' }} />
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--tide-pool, #3A8B6E)' }} />
                   <p style={{ 
-                    fontFamily: 'var(--font-inter)',
-                    color: '#6B6B6B', 
+                    fontFamily: 'var(--font-sans)',
+                    color: 'var(--color-slate, #6B6B6B)', 
                     fontSize: '11px', 
                     margin: 0,
                     letterSpacing: '0.5px'
@@ -256,7 +256,7 @@ export default function ChatWidget() {
               onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.4')}
               aria-label="Close chat"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pacific-dusk, #1B3A5C)" strokeWidth="2" aria-hidden="true">
                 <path d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -268,7 +268,7 @@ export default function ChatWidget() {
               flex: 1,
               overflowY: 'auto',
               padding: '16px',
-              backgroundColor: '#f9fafb',
+              backgroundColor: 'var(--morning-light, #FAF8F4)',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
@@ -290,7 +290,7 @@ export default function ChatWidget() {
                       ? '18px 18px 4px 18px' 
                       : '18px 18px 18px 4px',
                     backgroundColor: message.role === 'user' ? 'var(--color-brand-sunset-cliff, #E8834A)' : 'white',
-                    color: message.role === 'user' ? 'white' : '#1f2937',
+                    color: message.role === 'user' ? 'white' : 'var(--pacific-dusk, #1B3A5C)',
                     boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
                     fontSize: '14px',
                     lineHeight: '1.5',
@@ -315,9 +315,9 @@ export default function ChatWidget() {
                     gap: '4px',
                   }}
                 >
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#9ca3af', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.32s' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#9ca3af', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.16s' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#9ca3af', animation: 'bounce 1.4s infinite ease-in-out both' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--driftwood, #B8A88A)', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.32s' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--driftwood, #B8A88A)', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.16s' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--driftwood, #B8A88A)', animation: 'bounce 1.4s infinite ease-in-out both' }} />
                 </div>
               </div>
             )}
@@ -329,8 +329,8 @@ export default function ChatWidget() {
           <div
             style={{
               padding: '12px 16px',
-              borderTop: '1px solid #e5e7eb',
-              backgroundColor: 'white',
+              borderTop: '1px solid rgba(27, 58, 92, 0.08)',
+              backgroundColor: 'var(--salt-air, #FFFFFF)',
             }}
           >
             <div
@@ -352,14 +352,14 @@ export default function ChatWidget() {
                   flex: 1,
                   padding: '12px 16px',
                   borderRadius: '24px',
-                  border: '1px solid #e5e7eb',
+                  border: '1px solid rgba(27, 58, 92, 0.12)',
                   outline: 'none',
                   fontSize: '14px',
-                  backgroundColor: '#f9fafb',
+                  backgroundColor: 'var(--morning-light, #FAF8F4)',
                   transition: 'border-color 0.2s',
                 }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--color-brand-sunset-cliff, #E8834A)')}
-                onBlur={(e) => (e.target.style.borderColor = '#e5e7eb')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--sunset-cliff, #E8834A)')}
+                onBlur={(e) => (e.target.style.borderColor = 'rgba(27, 58, 92, 0.12)')}
               />
               <button
                 type="button"
@@ -371,7 +371,7 @@ export default function ChatWidget() {
                   height: '44px',
                   borderRadius: '50%',
                   border: 'none',
-                  backgroundColor: input.trim() && !isLoading ? 'var(--color-brand-sunset-cliff, #E8834A)' : '#e5e7eb',
+                  backgroundColor: input.trim() && !isLoading ? 'var(--sunset-cliff, #E8834A)' : 'rgba(27, 58, 92, 0.12)',
                   cursor: input.trim() && !isLoading ? 'pointer' : 'not-allowed',
                   display: 'flex',
                   alignItems: 'center',
@@ -379,7 +379,7 @@ export default function ChatWidget() {
                   transition: 'all 0.2s',
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={input.trim() && !isLoading ? 'white' : '#9ca3af'} strokeWidth="2" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={input.trim() && !isLoading ? 'white' : 'var(--driftwood, #B8A88A)'} strokeWidth="2" aria-hidden="true">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                 </svg>
               </button>
@@ -390,12 +390,12 @@ export default function ChatWidget() {
           <div
             style={{
               padding: '8px 16px',
-              borderTop: '1px solid #f3f4f6',
-              backgroundColor: 'white',
+              borderTop: '1px solid rgba(27, 58, 92, 0.06)',
+              backgroundColor: 'var(--salt-air, #FFFFFF)',
               textAlign: 'center',
             }}
           >
-            <p style={{ fontSize: '11px', color: '#9ca3af', margin: 0 }}>
+            <p style={{ fontSize: '11px', color: 'var(--color-slate, #6B6B6B)', margin: 0 }}>
               Need immediate help? Call{' '}
               <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-brand-sunset-cliff no-underline font-semibold">
                 (949) 534-0457

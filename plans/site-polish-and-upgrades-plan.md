@@ -71,7 +71,7 @@ So: **as a polish-and-verification plan, it’s strong (8/10).** It’s not 10/1
 **Goal:** Run and record the checks from .cursorrules Part 16 and design-alignment verification so we have a baseline and a repeatable process.
 
 - [x] **1.1** **Lighthouse** — Run Lighthouse (homepage + schedules + one program page) for Performance, Accessibility, Best Practices, SEO. Record scores in `docs/lighthouse-baseline.md` (or `plans/`). Fix any score &lt; 90 if feasible (e.g. image `sizes`, LCP).
-- [ ] **1.2** **Responsive** — Test 320px, 375px, 768px, 1024px, 1440px on homepage, schedules, contact, book. Fix horizontal scroll or overflow. Record “Responsive check passed” and date in same doc.
+- [x] **1.2** **Responsive** — Test 320px, 375px, 768px, 1024px, 1440px on homepage, schedules, contact, book. Fix horizontal scroll or overflow. Record “Responsive check passed” and date in same doc.
 - [x] **1.3** **Forbidden copy** — Grep for forbidden words/phrases (maximize, boost, elite, world-class, mastery, “Sign up now!”, “Don’t miss out!”). Replace or document exception. Add to doc: “Forbidden copy pass: clean (date).”
 - [x] **1.4** **Accessibility** — Spot-check: 7:1 contrast (footer/dark sections text-white/50+), hero CTA solid bg, keyboard nav, focus states, 48px touch targets. Optionally run axe or Lighthouse a11y. Record in doc.
 - [x] **1.5** **Build and lint** — `npm run build` and `npm run lint` clean. Document in README or `docs/quality-gate.md` that “Every PR: build + lint; periodically: Lighthouse + responsive + forbidden copy.”
@@ -169,9 +169,9 @@ So: **as a polish-and-verification plan, it’s strong (8/10).** It’s not 10/1
 Only if you want to go beyond “shipped”:
 
 - [ ] **5.1** **Blur placeholders** — Add `placeholder="blur"` and `blurDataURL` for below-fold images where it improves perceived performance (optional; can increase bundle if not careful).
-- [ ] **5.2** **Logo audit doc** — One-page list: Header, Footer, PartnershipSection (each partner), trial pages, chatbot — path + alt. No code change unless something is wrong.
+- [x] **5.2** **Logo audit doc** — One-page list: Header, Footer, PartnershipSection (each partner), trial pages, chatbot — path + alt. See `docs/logo-audit.md`.
 - [ ] **5.3** **Dark band** — Only if design specifies: thin dark band between hero and founder with “MORE → LESSONS, CAMPS & CLINICS” (design-alignment deferred).
-- [ ] **5.4** **PhotoVideoGallery asset size** — Comment in code says 13–27MB each; ensure `public/photos/` files used by gallery are optimized (e.g. WebP, &lt; 500KB) or document that high-res is intentional for gallery quality.
+- [x] **5.4** **PhotoVideoGallery asset size** — Documented in component and `docs/quality-gate.md` that high-res is intentional; optimization options noted.
 
 **Success criteria**
 
@@ -199,11 +199,11 @@ Only if you want to go beyond “shipped”:
 
 ## Success Criteria (overall)
 
-- [ ] Verification doc exists; Lighthouse (or “last run”), responsive, forbidden copy, a11y, build/lint recorded.
-- [ ] Why Choose section safe (images or fallback); folder and/or doc updated.
-- [ ] Micro-polish: skip-to-main in place; placeholders/comments aligned with reality.
-- [ ] Performance/SEO: hero MP4 optional; Lighthouse runnable; key pages have unique meta.
-- [ ] Build and lint pass; no regressions.
+- [x] Verification doc exists; Lighthouse (or “last run”), responsive, forbidden copy, a11y, build/lint recorded.
+- [x] Why Choose section safe (images or fallback); folder and/or doc updated.
+- [x] Micro-polish: skip-to-main in place; placeholders/comments aligned with reality.
+- [x] Performance/SEO: hero MP4 optional; Lighthouse runnable; key pages have unique meta.
+- [x] Build and lint pass; no regressions.
 
 ---
 

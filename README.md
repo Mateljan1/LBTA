@@ -104,6 +104,16 @@ Every PR must pass **build** and **lint**. Periodically run the full verificatio
 
 See [Site polish and upgrades plan](plans/site-polish-and-upgrades-plan.md) Track 1 for the full checklist.
 
+**Quick gate:** `npm run quality-gate` (build + lint). Full gate includes Lighthouse and responsive; see [docs/quality-gate.md](docs/quality-gate.md).
+
+## Power stack & compound engineering
+
+For maximum leverage (MCPs, parallel review/validate/deploy agents, skills, scripts):
+
+- **Single reference:** [docs/power-stack.md](docs/power-stack.md) — MCPs (Vercel, ActiveCampaign, GHL, browser, Context7), compound-engineering commands and agents, skills to invoke, quality gate, learnings.
+- **Compound loop:** `/compound:plan` → `/compound:work` → `/compound:review` → `/compound:validate` → `/compound:deploy` → `/compound:learn`. See [.cursor/compound/README.md](.cursor/compound/README.md) and [plans/COMPOUND_LEARN.md](plans/COMPOUND_LEARN.md).
+- **When to run learn:** After completing a plan, after review/validate, or at end of a significant session.
+
 ## Installation
 
 ```bash

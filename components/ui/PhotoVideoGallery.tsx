@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Image, { StaticImageData } from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-// Static imports for build-time optimization (images are 13-27MB each)
+// Static imports for build-time optimization. Asset size: images are 13–27MB each (high-res intentional for gallery quality). See docs/quality-gate.md or asset brief for optimization options if needed.
 import courtSetting from '../../public/photos/LBCOURTSETTING.webp'
 import videoRoom from '../../public/photos/VideoAnalysisRoom.webp'
 import gymSetting from '../../public/photos/GymSetting.webp'

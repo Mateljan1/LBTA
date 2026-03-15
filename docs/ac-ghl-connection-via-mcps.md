@@ -1,6 +1,6 @@
 # Connecting AC + GHL — Using MCPs and Tools
 
-**Purpose:** Use Cursor’s Vercel and GoHighLevel MCPs (and docs) to audit and complete the connection. ActiveCampaign has no MCP — use the AC UI and checklists.
+**Purpose:** Use Cursor’s Vercel, ActiveCampaign, and GoHighLevel MCPs (and docs) to audit and complete the connection and automate workflows.
 
 ---
 
@@ -26,7 +26,7 @@ If you use a different MCP config (e.g. global), ensure the Vercel server URL is
 |--------|-----|--------|------------------|
 | **Vercel** | `vercel` | Connect via “Needs login” in Cursor (OAuth to mcp.vercel.com). | Once connected: list projects, list/create env vars, deploy. |
 | **GoHighLevel** | `user-gohighlevel` | Connected | List pipelines, create/search contacts, send SMS from Cursor. Pipelines listed (e.g. “LBTA Lead to Member”, “New Leads Pipeline”) are **opportunity pipelines**. Website SMS uses an **Automation Workflow** — create that in GHL UI and set its ID as `GHL_WORKFLOW_ID` in Vercel. |
-| **ActiveCampaign** | — | No MCP | Use [activecampaign-setup-checklist.md](./activecampaign-setup-checklist.md) and AC UI. Add `ACTIVECAMPAIGN_URL` and `ACTIVECAMPAIGN_API_KEY` in Vercel. |
+| **ActiveCampaign** | `activecampaign` | Configured in `.cursor/mcp.json` | Contacts, campaigns, automations, lists, deals from Cursor. See [activecampaign-mcp-setup.md](./activecampaign-mcp-setup.md). |
 
 ---
 
@@ -62,11 +62,12 @@ The **website** needs an **Automation Workflow** (trigger: contact added to work
 
 ---
 
-## 3. ActiveCampaign — no MCP
+## 3. ActiveCampaign MCP
 
-- Build the **“LBTA Confirmations”** automation in the AC UI using [activecampaign-setup-checklist.md](./activecampaign-setup-checklist.md).
-- Get **API URL** and **API key** from AC → Settings → Developer.
-- Add `ACTIVECAMPAIGN_URL` and `ACTIVECAMPAIGN_API_KEY` in Vercel (Dashboard or Vercel MCP once token works).
+- **MCP URL** (in `.cursor/mcp.json`): `https://tennisbeast.activehosted.com/api/agents/mcp/http`. Reload Cursor to load the server; complete any AC login prompt in the browser if shown.
+- **Site API:** Forms still use `ACTIVECAMPAIGN_URL` and `ACTIVECAMPAIGN_API_KEY` in Vercel (e.g. `https://tennisbeast.api-us1.com`). Get these from AC → Settings → Developer.
+- **Automations:** Build the **“LBTA Confirmations”** automation in the AC UI using [activecampaign-setup-checklist.md](./activecampaign-setup-checklist.md).
+- **From Cursor:** Use the `activecampaign` MCP tools to manage contacts, lists, tags, campaigns, and automations. See [activecampaign-mcp-setup.md](./activecampaign-mcp-setup.md) for compound-engineering workflows.
 
 ---
 
@@ -87,8 +88,10 @@ The **website** needs an **Automation Workflow** (trigger: contact added to work
 
 | Goal | Where |
 |------|--------|
+| Full power stack (MCPs, compound, skills, scripts) | [power-stack.md](./power-stack.md) |
 | One-pager for connecting | [ac-ghl-connected-onepager.md](./ac-ghl-connected-onepager.md) |
 | AC automation steps | [activecampaign-setup-checklist.md](./activecampaign-setup-checklist.md) |
+| AC MCP + compound workflows | [activecampaign-mcp-setup.md](./activecampaign-mcp-setup.md) |
 | GHL workflow + env | [gohighlevel-setup-checklist.md](./gohighlevel-setup-checklist.md) |
 | Form → API → systems | [registration-flows-and-ops.md](./registration-flows-and-ops.md) |
 | Phased implementation plan | `plans/activecampaign-ghl-connect-plan.md` |
