@@ -1,0 +1,47 @@
+# Lighthouse baseline: weekly (Monday 9am PT) or manual. Runs against production.
+# Output: HTML report + optional JSON; upload as artifact. Optional: open issue if any score < 90.
+name: Lighthouse scheduled
+
+on:
+  schedule:
+    # Monday 9:00 AM Pacific (17:00 UTC)
+    - cron: '0 17 * * 1'
+  workflow_dispatch:
+
+env:
+  LIGHTHOUSE_URL: https://lagunabeachtennisacademy.com
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Lighthouse (homepage)
+        run: |
+          npx lighthouse "$LIGHTHOUSE_URL" \
+            --output=html \
+            --output=json \
+            --output-path=./docs/lighthouse-report \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox" \
+            --quiet
+        continue-on-error: true
+
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report-${{ github.run_number }}
+          path: |
+            docs/lighthouse-report.html
+            docs/lighthouse-report.json
+          retention-days: 30
