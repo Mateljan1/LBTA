@@ -6,10 +6,15 @@
  * Notion database entry, ActiveCampaign contact creation,
  * list subscription, and class-specific tag application.
  *
- * Note: Pricing and program copy in prePopulateData are a secondary
- * display source; canonical program and pricing data lives in /data/*.json.
- * Keep modal copy aligned with /data when updating programs or prices.
+ * Pricing for the registration modal is loaded from data/pricing-supplemental.json
+ * (registrationModalPricing) so there is a single source of truth in /data.
  */
+
+import { registrationModalPricing } from '@/lib/pricing-supplemental'
+
+function getModalPricing(programId: string): string {
+  return registrationModalPricing[programId] ?? 'Contact for pricing'
+}
 
 /**
  * Shape of a single program's registration configuration.
@@ -53,7 +58,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Little Tennis Stars',
       location: 'Moulton Meadows',
       duration: '45 min',
-      pricing: '$260 (1x/week) - $520 (2x/week)',
+      pricing: getModalPricing('little-stars'),
       category: 'Junior',
       ageGroup: '3-5 years',
       billingCycle: 'quarterly'
@@ -69,7 +74,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Red Ball Tennis',
       location: 'Moulton Meadows',
       duration: '1 hr',
-      pricing: '$546 (1x/week) - $1,092 (2x/week)',
+      pricing: getModalPricing('red-ball'),
       category: 'Junior',
       ageGroup: '5-6 years',
       billingCycle: 'quarterly'
@@ -85,7 +90,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Orange Ball Tennis',
       location: 'Moulton Meadows',
       duration: '1 hr',
-      pricing: '$546/quarter',
+      pricing: getModalPricing('orange-ball'),
       category: 'Junior',
       ageGroup: '7-8 years',
       billingCycle: 'quarterly'
@@ -101,7 +106,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Orange Ball Match Play',
       location: 'Moulton Meadows',
       duration: '1 hr',
-      pricing: '$85/month',
+      pricing: getModalPricing('orange-ball-match-play'),
       category: 'Junior',
       ageGroup: '7-8 years',
       billingCycle: 'monthly'
@@ -117,7 +122,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Green Dot Tennis',
       location: 'Moulton Meadows',
       duration: '1 hr',
-      pricing: '$546/quarter',
+      pricing: getModalPricing('green-dot'),
       category: 'Junior',
       ageGroup: '9-11 years',
       billingCycle: 'quarterly'
@@ -133,7 +138,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Green Dot Match Play',
       location: 'Moulton Meadows',
       duration: '1 hr',
-      pricing: '$85/month',
+      pricing: getModalPricing('green-dot-match-play'),
       category: 'Junior',
       ageGroup: '9-11 years',
       billingCycle: 'monthly'
@@ -150,7 +155,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Youth Development',
       location: 'Alta Laguna Park',
       duration: '1.5 hr',
-      pricing: 'Contact for pricing',
+      pricing: getModalPricing('youth-development'),
       category: 'Youth',
       ageGroup: '11-15 years',
       billingCycle: 'quarterly'
@@ -166,7 +171,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'High Performance',
       location: 'Laguna Beach High School',
       duration: '2 hr',
-      pricing: 'Contact for pricing',
+      pricing: getModalPricing('high-performance'),
       category: 'Youth',
       ageGroup: '12-17 years (UTR 5-8)',
       billingCycle: 'quarterly'
@@ -183,7 +188,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Adult Beginner 1',
       location: 'Laguna Beach High School',
       duration: '1.5 hr',
-      pricing: 'Contact for pricing',
+      pricing: getModalPricing('adult-beginner-1'),
       category: 'Adult',
       billingCycle: 'quarterly'
     },
@@ -198,7 +203,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Adult Beginner 2 (Bridge)',
       location: 'Moulton Meadows',
       duration: '1.5 hr',
-      pricing: 'Contact for pricing',
+      pricing: getModalPricing('adult-beginner-2'),
       category: 'Adult',
       billingCycle: 'quarterly'
     },
@@ -213,7 +218,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Adult Intermediate',
       location: 'Laguna Beach High School',
       duration: '1.5 hr',
-      pricing: 'Contact for pricing',
+      pricing: getModalPricing('adult-intermediate'),
       category: 'Adult',
       billingCycle: 'quarterly'
     },
@@ -228,7 +233,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Adult Advanced',
       location: 'Laguna Beach High School',
       duration: '1.5 hr',
-      pricing: 'Contact for pricing',
+      pricing: getModalPricing('adult-advanced'),
       category: 'Adult',
       billingCycle: 'quarterly'
     },
@@ -244,7 +249,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Cardio Tennis',
       location: 'Laguna Beach High School',
       duration: '1 hr',
-      pricing: 'Contact for pricing',
+      pricing: getModalPricing('cardio-tennis'),
       category: 'Fitness',
       billingCycle: 'monthly'
     },
@@ -259,7 +264,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'LiveBall Intermediate',
       location: 'Moulton Meadows / LBHS',
       duration: '1 hr',
-      pricing: 'Contact for pricing',
+      pricing: getModalPricing('liveball-intermediate'),
       category: 'Fitness',
       billingCycle: 'monthly'
     },
@@ -274,7 +279,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'LiveBall Advanced',
       location: 'Laguna Beach High School',
       duration: '1.5 hr',
-      pricing: 'Contact for pricing',
+      pricing: getModalPricing('liveball-advanced'),
       category: 'Fitness',
       billingCycle: 'monthly'
     },
@@ -290,7 +295,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Swim & Tennis Camp',
       location: 'Alta Laguna Park',
       duration: '6 hours (9 AM - 3 PM)',
-      pricing: '$495/week',
+      pricing: getModalPricing('swim-tennis'),
       category: 'Camp',
       ageGroup: '5-11 years',
       billingCycle: 'quarterly'
@@ -306,7 +311,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Ski Week Camp',
       location: 'Laguna Beach High School',
       duration: '6 hours (9 AM - 3 PM)',
-      pricing: '$525/week',
+      pricing: getModalPricing('ski-week'),
       category: 'Camp',
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
@@ -322,7 +327,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Spring Break Camp',
       location: 'Laguna Beach High School',
       duration: '6 hours (9 AM - 3 PM)',
-      pricing: '$525/week',
+      pricing: getModalPricing('spring-break'),
       category: 'Camp',
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
@@ -338,7 +343,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Summer Camps',
       location: 'Laguna Beach High School',
       duration: '6 hours (9 AM - 3 PM)',
-      pricing: '$725/week (Full Day) | $425/week (Half Day)',
+      pricing: getModalPricing('summer-camp'),
       category: 'Camp',
       ageGroup: '5-17 years',
       billingCycle: 'quarterly'
@@ -354,7 +359,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Back-to-School Mini Camp',
       location: 'Laguna Beach High School',
       duration: '4 hours (9 AM - 1 PM)',
-      pricing: '$325/3 days',
+      pricing: getModalPricing('back-to-school'),
       category: 'Camp',
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
@@ -370,7 +375,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Thanksgiving Camp',
       location: 'Laguna Beach High School',
       duration: '4 hours (9 AM - 1 PM)',
-      pricing: '$325/3 days',
+      pricing: getModalPricing('thanksgiving'),
       category: 'Camp',
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
@@ -386,7 +391,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Winter Break Camp',
       location: 'Laguna Beach High School',
       duration: '4 hours (9 AM - 1 PM)',
-      pricing: '$425/session (4 days)',
+      pricing: getModalPricing('winter-break'),
       category: 'Camp',
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
@@ -403,7 +408,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Spring JTT',
       location: 'Various (Match locations vary)',
       duration: '15 weeks (Jan 12 - Apr 26)',
-      pricing: '$2,350 (10U) | $2,800 (12U-18U)',
+      pricing: getModalPricing('spring-jtt'),
       category: 'JTT',
       ageGroup: '10U, 12U, 14U, 18U',
       billingCycle: 'quarterly'
@@ -419,7 +424,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       programName: 'Fall JTT',
       location: 'Various (Match locations vary)',
       duration: '12 weeks (Sep 5 - Nov 22)',
-      pricing: '$2,350 (10U) | $2,800 (12U-18U)',
+      pricing: getModalPricing('fall-jtt'),
       category: 'JTT',
       ageGroup: '10U, 12U, 14U, 18U',
       billingCycle: 'quarterly'

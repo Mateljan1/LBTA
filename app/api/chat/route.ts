@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     console.error('[chat] Rate limit error:', e instanceof Error ? e.message : 'Unknown')
     return NextResponse.json(
-      { reply: "We're having trouble right now. Please call us at (949) 534-0457 or email info@lagunabeachtennisacademy.com." },
+      { success: false, error: "We're having trouble right now. Please call us at (949) 534-0457 or email info@lagunabeachtennisacademy.com." },
       { status: 500 }
     )
   }
@@ -22,10 +22,11 @@ export async function POST(request: NextRequest) {
   if (!rateLimitResult.allowed) {
     return NextResponse.json(
       {
-        reply: "We're getting a lot of messages right now. Please call us at (949) 534-0457 or email info@lagunabeachtennisacademy.com.",
+        success: false,
+        error: "We're getting a lot of messages right now. Please call us at (949) 534-0457 or email info@lagunabeachtennisacademy.com.",
       },
       {
-        status: 200,
+        status: 429,
         headers: {
           'X-RateLimit-Remaining': '0',
           'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
@@ -39,7 +40,8 @@ export async function POST(request: NextRequest) {
     if (!parsed.ok) {
       return NextResponse.json(
         {
-          reply: "Please send a short message and we'll get back to you. You can also call (949) 534-0457.",
+          success: false,
+          error: "Please send a short message and we'll get back to you. You can also call (949) 534-0457.",
         },
         { status: 400 }
       )
@@ -49,20 +51,23 @@ export async function POST(request: NextRequest) {
     if (!validation.success) {
       return NextResponse.json(
         {
-          reply: "Please send a short message and we'll get back to you. You can also call (949) 534-0457.",
+          success: false,
+          error: "Please send a short message and we'll get back to you. You can also call (949) 534-0457.",
         },
         { status: 400 }
       )
     }
 
     return NextResponse.json({
+      success: true,
       reply: "Thanks for reaching out. For the fastest response, call us at (949) 534-0457 or use the Contact form on this site. We'd love to hear from you.",
     })
   } catch (err) {
     console.error('[chat] Error:', err instanceof Error ? err.message : 'Unknown error')
     return NextResponse.json(
       {
-        reply: "We're having trouble processing your message. Please call (949) 534-0457 or email info@lagunabeachtennisacademy.com.",
+        success: false,
+        error: "We're having trouble processing your message. Please call (949) 534-0457 or email info@lagunabeachtennisacademy.com.",
       },
       { status: 500 }
     )

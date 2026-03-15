@@ -98,11 +98,13 @@ export const year2026SectionsSchema = z.object({
 })
 
 export type Year2026SectionsValidated = z.infer<typeof year2026SectionsSchema>
+/** Single source for year2026 shape; use this type instead of duplicating. */
+export type Year2026Sections = Year2026SectionsValidated
 
 /**
  * Parse year2026 slice; throws if invalid (for use in server component).
  */
-export function parseYear2026Sections(data: unknown): Year2026SectionsValidated {
+export function parseYear2026Sections(data: unknown): Year2026Sections {
   return year2026SectionsSchema.parse(data)
 }
 
@@ -142,15 +144,18 @@ const leaguesDataSchema = z.object({
     leagues: z.array(ustaLeagueSchema),
   }),
   utr: z.object({
+    seasonLabel: z.string().optional(),
     divisions: z.array(utrDivisionSchema),
   }),
 })
 
 export type LeaguesDataValidated = z.infer<typeof leaguesDataSchema>
+/** Single source for leagues shape; use this type instead of duplicating. */
+export type LeaguesData = LeaguesDataValidated
 
 /**
  * Parse leagues data (data/leagues-2026.json); throws if invalid.
  */
-export function parseLeagues(data: unknown): LeaguesDataValidated {
+export function parseLeagues(data: unknown): LeaguesData {
   return leaguesDataSchema.parse(data)
 }

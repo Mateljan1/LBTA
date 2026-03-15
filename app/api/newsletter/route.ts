@@ -6,6 +6,13 @@ import { upsertContact, addToList, addTag, CAMPAIGN_TAGS } from '@/lib/activecam
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
 
+export async function GET() {
+  return NextResponse.json(
+    { success: false, error: 'Method Not Allowed' },
+    { status: 405 }
+  )
+}
+
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
   let rateLimitResult: { allowed: boolean; remaining: number; resetTime: number }

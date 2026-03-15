@@ -13,6 +13,9 @@ import LeaguesSection from '@/components/schedules/LeaguesSection'
 import PrivateCoachingSection from '@/components/schedules/PrivateCoachingSection'
 import SchedulesAnchorNav from '@/components/schedules/SchedulesAnchorNav'
 import type { SeasonKey, SeasonDataForDisplay } from '@/lib/season-utils'
+import type { LeaguesData, Year2026Sections } from '@/lib/schedule-schemas'
+
+export type { LeaguesData, Year2026Sections }
 
 export interface SeasonCTA {
   headline: string
@@ -20,66 +23,6 @@ export interface SeasonCTA {
   showEarlyBird: boolean
   earlyBirdDeadline: string | null
   earlyBirdDiscount: number
-}
-
-/** Matches data/year2026.json shape passed from server; consumed by PrivateCoachingSection and CampsSection. */
-export interface Year2026Sections {
-  privateCoaching: Array<{ coach: string; title: string; rate60: number; rate90: number; pack10: number; pack20: number; availability: string }>
-  monthlyPrograms: Record<string, { label: string; subtitle: string; duration: string; price: number; dropIn: number }>
-  discounts: {
-    earlyBird: { amount: number; type: string; description: string }
-    sibling: { amount: number; type: string; description: string }
-    multiProgram: { amount: number; type: string; description: string }
-    annual: { amount: number; type: string; description: string }
-  }
-  scholarships: { available: boolean; awardedAnnually?: number; coverage?: string; email?: string }
-  camps: Array<{
-    id: string
-    name: string
-    dates: string
-    days: string | number
-    hours: string
-    ages: string
-    location: string
-    price: number
-    perDay?: number
-    halfDay?: number
-    description: string
-    includes?: string[]
-    featured?: boolean
-  }>
-}
-
-/** Matches data/leagues-2026.json; passed from server to LeaguesSection. */
-export interface LeaguesData {
-  usta: {
-    totalSeasonCost: number
-    ustaMembershipAnnual: number
-    leagues: Array<{
-      id: number
-      name: string
-      season: string
-      weeks: string
-      format: string
-      levels: string
-      pricing12: string
-      pricing14: string
-      weeklyApprox: string
-      deadline: string
-    }>
-    ntrpGuide?: Array<{ level: string; desc: string }>
-  }
-  utr: {
-    divisions: Array<{
-      name: string
-      level: string
-      format: string
-      price: string
-      time: string
-      venue: string
-    }>
-    ntrpToUtr?: Array<{ ntrp: string; men: string; women: string }>
-  }
 }
 
 interface SchedulesPageClientProps {

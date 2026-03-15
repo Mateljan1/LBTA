@@ -73,7 +73,7 @@ export default function ChatWidget() {
       })
 
       const data = await response.json().catch(() => ({}))
-      const reply = data?.reply || "I apologize, but I couldn't process that request. Please try again or call us at (949) 534-0457."
+      const reply = data?.reply ?? data?.error ?? "I apologize, but I couldn't process that request. Please try again or call us at (949) 534-0457."
 
       if (!response.ok) {
         setMessages(prev => [...prev, {
@@ -366,17 +366,12 @@ export default function ChatWidget() {
                 onClick={sendMessage}
                 disabled={!input.trim() || isLoading}
                 aria-label="Send message"
+                className="min-w-[48px] min-h-[48px] rounded-full border-0 flex items-center justify-center transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sunset-cliff,#E8834A)] focus-visible:ring-offset-2 disabled:cursor-not-allowed"
                 style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '50%',
-                  border: 'none',
+                  width: '48px',
+                  height: '48px',
                   backgroundColor: input.trim() && !isLoading ? 'var(--sunset-cliff, #E8834A)' : 'rgba(27, 58, 92, 0.12)',
                   cursor: input.trim() && !isLoading ? 'pointer' : 'not-allowed',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'all 0.2s',
                 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={input.trim() && !isLoading ? 'white' : 'var(--driftwood, #B8A88A)'} strokeWidth="2" aria-hidden="true">

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { getStickyCtaSchedules } from '@/lib/site-copy'
 
 interface StickyCTAProps {
   text: string
@@ -12,10 +13,10 @@ interface StickyCTAProps {
   urgencyText?: string
 }
 
-// Context-aware messages based on page
+// Context-aware messages based on page; copy from data when available
 const getContextualMessage = (pathname: string): { text: string; highlight?: string } => {
   if (pathname.includes('/schedules')) {
-    return { text: 'Spring & Summer 2026 Registration Open', highlight: 'View Programs' }
+    return { text: getStickyCtaSchedules(), highlight: 'View Programs' }
   }
   if (pathname.includes('/camps')) {
     return { text: 'Summer Camps Now Enrolling', highlight: 'Reserve Now' }

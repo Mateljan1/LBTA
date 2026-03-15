@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-14",
-  "lastLearnRun": "2026-03-14 compound-work-100-100",
+  "lastLearnRun": "2026-03-14 compound:learn (quality-bars, anti-patterns, corrections)",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -362,6 +362,18 @@
       "when": "Applying multiple ActiveCampaign tags to one contact",
       "example": "Promise.all(tagIds.map(id => addTag(contactId, id))); aggregate success/failed from results. Faster than sequential loop.",
       "tags": ["performance", "activecampaign", "addTags"]
+    },
+    {
+      "name": "modal-pricing-from-data",
+      "when": "Registration or program modal displays pricing (e.g. RegistrationModal, form-config prePopulateData)",
+      "example": "Load pricing from same /data sources (programs-data, camps-data, year2026) or a single shared config; avoid duplicate strings in lib/form-config.ts so single source of truth is respected.",
+      "tags": ["data-integrity", "single-source", "form-config", "pricing"]
+    },
+    {
+      "name": "single-type-from-zod",
+      "when": "Data passed server→client with runtime validation (e.g. schedules year2026, leagues)",
+      "example": "Export type from lib (e.g. LeaguesData = LeaguesDataValidated, Year2026Sections = Year2026SectionsValidated in schedule-schemas.ts); parse on server; client imports type; no 'as unknown as T' at boundary.",
+      "tags": ["architecture", "types", "zod", "server-client"]
     }
   ]
 }

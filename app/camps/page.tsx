@@ -10,8 +10,10 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import { getCampsFromYear2026, type CampWeek } from '@/lib/camps-data'
+import { getCampsHeading } from '@/lib/site-copy'
 
 const camps = getCampsFromYear2026()
+const campsHeading = getCampsHeading()
 
 // Type for camp data to match YearRegistrationModal expectations
 interface CampModalData {
@@ -143,7 +145,7 @@ export default function CampsPage() {
           <AnimatedSection delay={0}>
             <div className="text-center mb-12">
               <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
-                2026 Camp Schedule
+                {campsHeading}
               </p>
               <h2 className="font-headline text-[36px] md:text-[52px] font-semibold text-black mb-4">
                 Tennis Camps

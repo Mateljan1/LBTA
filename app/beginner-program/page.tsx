@@ -6,8 +6,10 @@ import Link from 'next/link'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 import pricingData from '@/data/pricing-supplemental.json'
+import { getBeginnerProgramCohort } from '@/lib/site-copy'
 
 const bp = pricingData.beginnerProgram
+const cohortLabel = getBeginnerProgramCohort()
 
 export default function BeginnerProgramLanding() {
   const [formData, setFormData] = useState({
@@ -365,7 +367,7 @@ export default function BeginnerProgramLanding() {
                 </div>
 
                 <h3 className="font-headline text-3xl text-lbta-bone mb-6">
-                  Spring 2026 Cohort
+                  {cohortLabel}
                 </h3>
                 <div className="space-y-6 text-lbta-bone/80 text-sm leading-relaxed">
                   {bp.schedules.map((sched, i) => (

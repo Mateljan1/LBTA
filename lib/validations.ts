@@ -129,8 +129,8 @@ export const chatSchema = z.object({
   message: z.string().min(1, 'Message is required').max(2000),
   history: z.array(z.object({
     role: z.enum(['user', 'assistant']),
-    content: z.string(),
-  })).optional().default([]),
+    content: z.string().max(2000),
+  })).max(50).optional().default([]),
 })
 
 export type ChatPayload = z.infer<typeof chatSchema>

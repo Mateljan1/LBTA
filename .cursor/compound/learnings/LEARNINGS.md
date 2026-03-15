@@ -2,7 +2,9 @@
 
 Extracted from the Code Review Summary (12-agent parallel review). Use these for future implementation and review.
 
-**Recent:** 2026-03-12 — Schedule sync + compound review: see `2026-03-12-schedule-sync-compound-learn.md` and `plans/compound-review-2026-schedule-sync.md`. Corrections, patterns, anti-patterns, and quality bars updated in this folder and in `COMPOUND_LEARN.md`.
+**Recent:** 2026-03-14 — Validation 89→100 + compound learn: see `2026-03-14-validation-100-learn.md`. Site copy centralization, LeaguesData/Year2026 single type, ChatWidget/Chatbot a11y (48px + focus ring), pricing-supplemental Zod, form-config vs registrationModalPricing test, API/docs notes, turbopack.root. **Learn run:** Quality bars (interactiveButton48pxFocusRing, singleTypeFromZodBoundary, apiDocsBodyAndResponse), anti-patterns (server-client-type-cast, next16-turbopack-under-experimental), corrections (turbopack config key).
+
+**Previous:** 2026-03-12 — Schedule sync + compound review: see `2026-03-12-schedule-sync-compound-learn.md` and `plans/compound-review-2026-schedule-sync.md`. Corrections, patterns, anti-patterns, and quality bars updated in this folder and in `COMPOUND_LEARN.md`.
 
 ---
 
@@ -60,8 +62,9 @@ Extracted from the Code Review Summary (12-agent parallel review). Use these for
 
 - **Data integrity:** No hardcoded program lists or prices; single source in data/ or lib.
 - **API:** 400 for invalid JSON/body; 500 for processing errors; webhook secret required in prod.
-- **A11y:** Focus restore on modal close; aria-label on icon-only buttons; useReducedMotion for motion.
+- **A11y:** Focus restore on modal close; aria-label on icon-only buttons; useReducedMotion for motion; **all interactive buttons** min 48px touch target + visible focus-visible ring (interactiveButton48pxFocusRing).
 - **Simplicity:** No unused state or refs; YAGNI for optional props. HorizonDivider always renders `<hr>`; no `as` prop.
+- **Server–client boundary:** Single type from Zod schema; no `as unknown as T` (singleTypeFromZodBoundary). API body/response shape documented where non-obvious (apiDocsBodyAndResponse).
 
 ---
 

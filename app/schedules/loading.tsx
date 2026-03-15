@@ -8,7 +8,7 @@ export default function SchedulesLoading() {
   return (
     <>
       <p className="sr-only" role="status" aria-live="polite">
-        Loading schedules
+        Loading…
       </p>
       <div aria-hidden="true">
         <section className="bg-brand-deep-water py-16 md:py-20 animate-pulse">

@@ -203,6 +203,22 @@
     "webhookRateLimit": {
       "rule": "Webhook routes must call rateLimit (e.g. rateLimit('webhook:'+ip, RATE_LIMITS.webhook)) with try/catch; allow request on failure. Production must return 401 when webhook secret env is unset; no user-supplied or PII in production logs.",
       "enforcement": "must"
+    },
+    "formConfigPricingFromData": {
+      "rule": "Registration modal pricing must be derived from /data (programs-data, camps-data, year2026) or a single shared config; no standalone duplicate price strings in lib/form-config.ts.",
+      "enforcement": "should"
+    },
+    "interactiveButton48pxFocusRing": {
+      "rule": "All interactive buttons (including chat quick-reply, Send, floating toggle) must have min-h-[48px] (or 48×48) and visible focus ring (focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2)",
+      "enforcement": "must"
+    },
+    "singleTypeFromZodBoundary": {
+      "rule": "Data passed server→client with runtime validation must use a single type from the Zod schema (export type T = z.infer<typeof schema>); client imports that type; no 'as unknown as T' at the boundary",
+      "enforcement": "should"
+    },
+    "apiDocsBodyAndResponse": {
+      "rule": "API routes that expect JSON body or return non-obvious response shape (e.g. chat reply vs message) must be documented in docs/api-notes.md",
+      "enforcement": "should"
     }
   }
 }

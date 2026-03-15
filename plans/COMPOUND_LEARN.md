@@ -72,6 +72,8 @@
 | Two implementations of same component (e.g. root vs ui/) | Duplication causes drift and review warnings. | Keep single canonical implementation (e.g. `components/ui/AnimatedSection.tsx`); root file re-exports: `export { default } from '@/components/ui/AnimatedSection'` so existing imports keep working. |
 | Raw hex in globals.css (e.g. .btn-primary:hover #27272a) | Bypasses design system; review flags. | Use CSS variables: e.g. `var(--deep-water)` or other brand token from :root. |
 | AnimatedSection delay prop in seconds on one page | Component expects delay in ms and divides by 1000 for Framer. | Pass delay in ms (e.g. 200, 400) so delay/1000 gives correct seconds. |
+| Registration modal pricing in lib/form-config.ts (prePopulateData.pricing) duplicated from /data | Second source of truth; drifts from programs/camps data. | Derive from programs-data, camps-data, or year2026 at runtime; or single shared config in /data; document sync requirement if keeping display-only. |
+| Chatbot quick-reply buttons using generic emoji (🎾 📅 💰 📞) | .cursorrules forbid generic emoji icons. | Use text labels only or non-generic icons (e.g. Lucide). |
 
 ---
 
@@ -80,6 +82,7 @@
 | Pattern | When to use | Example |
 |---------|-------------|---------|
 | Single source of truth for pricing | Any program/schedule/pricing display | Import from `data/winter2026.json`, `data/pricing-supplemental.json`, or `lib/*-data.ts` |
+| Modal pricing from data | Registration/program modal shows pricing (e.g. form-config prePopulateData) | Load from same /data sources (programs-data, camps-data, year2026) or single shared config; avoid duplicate strings in lib/form-config.ts. |
 | Supplemental pricing file | Campaign/landing page prices outside main schedules | `data/pricing-supplemental.json` with keys per page: `beginnerProgram`, `matchPlay`, `racquetRescue`, `promotions`, `leagues`, `schema` |
 | API route contract | All app/api routes | NextRequest, Zod validation, rate limiting, `{ success, message?, error? }` response |
 | Brand tokens only | All UI colors | `brand-tide-pool` (success), `brand-sunset-cliff` (warning), `brand-morning-light` (background), `brand-pacific-dusk` (primary) |
@@ -180,6 +183,7 @@
 | Production must return 401 when webhook secret env is unset (not 503) | Must |
 | No user-supplied or PII in production webhook logs | Must |
 | Consolidate duplicate component implementations; use re-export for backward compatibility | Should |
+| Form-config / registration modal pricing must not be sole source | Should — derive from /data at runtime or document sync requirement; run data-integrity validation periodically. |
 
 ---
 
@@ -224,6 +228,8 @@
 - Two implementations of same component (root and ui/) — consolidate, re-export from legacy path
 - Raw hex in globals.css (e.g. #27272a for button hover) — use var(--deep-water) or design token
 - Sequential addTags when multiple tags (use Promise.all)
+- Duplicate pricing in lib/form-config.ts (prePopulateData.pricing) — second source of truth; derive from /data or single shared config.
+- Generic emoji in UI (e.g. Chatbot quick-reply 🎾 📅 💰 📞) — use text or non-generic icons per .cursorrules.
 
 ---
 
@@ -236,7 +242,7 @@
 - **Deploy:** Vercel production build succeeds with 0 errors
 - **Lint:** Zero errors
 - **Page size:** No page file > 500 lines (composition pattern)
-- **Zero hardcoded prices** in any .tsx file (all from data/)
+- **Zero hardcoded prices** in any .tsx file (all from data/); registration modal pricing derived from /data or single shared config (form-config aligned)
 - **Zero raw color classes** (green-*, orange-*) in components or app
 - **Zero forbidden copy** in user-facing text
 
@@ -290,3 +296,4 @@
 | 2026-03-12 | `/compound:learn` after validate second run (100/100) | **Scope:** Second validation pass: functional 100, data 100, UI 92→100. **Fixes applied:** Book route rate limit try/catch; footer social icons text-white/70; campWeekDefaults + juniorTrial.earlyBirdMinPrice in data; PartnershipSection "Our Network" text-brand-pacific-dusk; NewsletterForm eyebrow text-white/80, placeholder placeholder-white/50. **Corrections:** (1) API route rateLimit() unguarded → wrap in try/catch with allow fallback. (2) Footer social/icons at 60% → text-white/70+. (3) Section overline no explicit color → text-brand-pacific-dusk. (4) NewsletterForm eyebrow/placeholder on deep-water → text-white/80 and placeholder-white/50. **Patterns:** rate-limit-try-catch-all-form-routes; footer-all-text-70-deep-water; section-overline-explicit-brand-color. **Anti-pattern:** rate-limit-uncaught. **Quality bars:** rateLimitTryCatchFormRoutes; footerAllText70DeepWater. |
 | 2026-03-14 | `/compound:learn` after compound:work 100/100 | **Scope:** Learn from compound:work that addressed all review warnings (78→100/100). **Work done:** Webhook rate limit + 401 in prod when AC_WEBHOOK_SECRET unset + prod logging trimmed (no user-supplied field values); addTags() parallel (Promise.all); AnimatedSection single source (root re-exports ui/); dead code removed (BackToTopButton); lib/analytics.ts documented as not yet wired; globals .btn-primary:hover → var(--deep-water); ChatWidget + embedded-forms brand tokens only; match-play AnimatedSection delay 0.2/0.4 → 200/400 ms. **Corrections:** Webhook without rate limiting → add rateLimit('webhook:'+ip, RATE_LIMITS.webhook) with try/catch; production without secret → return 401 (not 503); duplicate component implementations → one canonical (ui/), root re-exports for backward compatibility; addTags sequential → Promise.all; raw hex in globals (e.g. #27272a) → design token (var(--deep-water)); AnimatedSection delay prop in ms → pass ms (200, 400), component divides by 1000 for Framer. **Patterns:** webhook-rate-limit (webhook endpoints use rateLimit with webhook:ip key, try/catch allow on failure); single-component-re-export (one canonical implementation, re-export from legacy path so existing imports keep working); parallel-add-tags (when applying multiple AC tags use Promise.all). **Standards:** Webhook endpoints must have rate limiting; production must return 401 when webhook secret unset; no user-supplied or PII in production webhook logs. **Anti-patterns:** Webhook without rate limiting; two implementations of same component (consolidate, re-export); raw hex in globals.css (use CSS variables / design tokens). **Quality bar:** webhookRateLimit (webhook routes rate-limited with try/catch). |
 | 2026-03-14 | `/compound:full` finish power-up + site-polish plans | **Scope:** Complete remaining items from compound-engineering-power-up-plan and site-polish-and-upgrades-plan. **Power-up:** 1.2 Lighthouse scheduled workflow (`.github/workflows/lighthouse-scheduled.yml` — Monday 9am PT + workflow_dispatch; artifact HTML+JSON); 4.2 deploy checklist (`docs/deploy-checklist.md` — pre/deploy/post + compound:learn); 4.3 PR template (`.github/PULL_REQUEST_TEMPLATE.md`). **Site-polish Track 5:** 5.2 logo audit doc (`docs/logo-audit.md` — Header, Footer, PartnershipSection, trials, chatbot, JSON-LD); 5.4 PhotoVideoGallery asset note (component comment + `docs/quality-gate.md`). **Other:** power-stack quick links + deploy-checklist; both plans checkboxes updated. **Verification:** quality-gate and fact-check pass. **Note:** Lighthouse artifact paths use `.html` and `.json` (not `.report.html`); workflow uses production URL so no build needed. |
+| 2026-03-14 | `/compound:learn` after compound:validate | **Scope:** Extract learnings from compound:validate (Functional 95, API 92, Data Integrity 72, UI/Visual 92). **Blockers identified:** Hardcoded prices in lib/form-config.ts (prePopulateData.pricing) duplicate /data. **Warnings:** Chatbot generic emoji; GET /api/newsletter empty body; fixed date strings in components. **Learnings:** 2 corrections (form-config pricing duplicate → derive from data; Chatbot emoji → text or Lucide); 1 pattern (modal-pricing-from-data); 1 standard (form-config pricing from data or documented sync); 2 anti-patterns (form-config-duplicate-pricing, generic-emoji-in-ui); 1 quality bar (formConfigPricingFromData). Updated corrections.jsonl, anti-patterns.json, patterns.json, quality-bars.json, COMPOUND_LEARN.md. |

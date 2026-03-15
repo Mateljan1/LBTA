@@ -295,6 +295,34 @@
       "avoid": "components/AnimatedSection.tsx and components/ui/AnimatedSection.tsx both defining the component",
       "instead": "One canonical (e.g. ui/); legacy path re-exports so existing imports resolve to same implementation",
       "tags": ["DRY", "component", "simplicity"]
+    },
+    {
+      "id": "form-config-duplicate-pricing",
+      "description": "Registration modal pricing duplicated in lib/form-config.ts instead of from /data",
+      "avoid": "prePopulateData.pricing in FORM_CONFIGS with literal strings ($260, $546, $495/week, etc.) that duplicate data/winter2026.json, year2026.json",
+      "instead": "Derive modal pricing from programs-data, camps-data, or a single shared config in /data; or document sync requirement and run data-integrity validation periodically",
+      "tags": ["data-integrity", "single-source", "form-config", "pricing"]
+    },
+    {
+      "id": "generic-emoji-in-ui",
+      "description": "Generic emoji (🎾 📅 💰 📞) in buttons or links",
+      "avoid": "Chatbot quick-reply buttons or any UI using emoji as primary icon; .cursorrules forbid generic emoji icons",
+      "instead": "Use text labels only or non-generic icons (e.g. Lucide); keeps brand and a11y consistent",
+      "tags": ["brand", "cursorrules", "a11y", "Chatbot"]
+    },
+    {
+      "id": "server-client-type-cast",
+      "description": "Using 'as unknown as T' at server→client data boundary when type could come from schema",
+      "avoid": "parseYear2026Sections(data) as unknown as Year2026Sections with Year2026Sections defined only in client",
+      "instead": "Export type from lib (e.g. schedule-schemas.ts: export type Year2026Sections = Year2026SectionsValidated); client imports that type; no cast",
+      "tags": ["architecture", "types", "zod", "server-client"]
+    },
+    {
+      "id": "next16-turbopack-under-experimental",
+      "description": "Putting turbopack config under experimental in Next.js 16",
+      "avoid": "experimental: { turbo: { root: __dirname } } — Next 16 reports 'Unrecognized key turbo at experimental'",
+      "instead": "Top-level turbopack: { root: __dirname } in next.config.js (Next 15.3+ / 16)",
+      "tags": ["nextjs", "turbopack", "config"]
     }
   ]
 }

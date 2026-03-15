@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { X, MessageCircle } from 'lucide-react'
+import { X, MessageCircle, Calendar, LayoutGrid, DollarSign, Phone } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Chatbot() {
@@ -12,8 +12,9 @@ export default function Chatbot() {
     <>
       {/* Floating Chatbot Button */}
       <motion.button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-brand-sunset-cliff hover:bg-brand-pacific-dusk text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-brand-sunset-cliff hover:bg-brand-pacific-dusk text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2 focus-visible:ring-offset-white"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Open chat"
@@ -26,8 +27,9 @@ export default function Chatbot() {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
+              aria-hidden
             >
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6" aria-hidden />
             </motion.div>
           ) : (
             <motion.div
@@ -36,8 +38,9 @@ export default function Chatbot() {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: -90, opacity: 0 }}
               transition={{ duration: 0.2 }}
+              aria-hidden
             >
-              <MessageCircle className="w-6 h-6" />
+              <MessageCircle className="w-6 h-6" aria-hidden />
             </motion.div>
           )}
         </AnimatePresence>
@@ -93,17 +96,21 @@ export default function Chatbot() {
                     How can I help you today?
                   </p>
                   <div className="mt-4 space-y-2">
-                    <button className="w-full text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors">
-                      📅 Book a free trial
+                    <button type="button" className="w-full min-h-[48px] text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2">
+                      <Calendar className="w-3.5 h-3.5 flex-shrink-0 text-brand-pacific-dusk/70" aria-hidden />
+                      Book a free trial
                     </button>
-                    <button className="w-full text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors">
-                      🎾 View programs
+                    <button type="button" className="w-full min-h-[48px] text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2">
+                      <LayoutGrid className="w-3.5 h-3.5 flex-shrink-0 text-brand-pacific-dusk/70" aria-hidden />
+                      View programs
                     </button>
-                    <button className="w-full text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors">
-                      💰 See pricing
+                    <button type="button" className="w-full min-h-[48px] text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2">
+                      <DollarSign className="w-3.5 h-3.5 flex-shrink-0 text-brand-pacific-dusk/70" aria-hidden />
+                      See pricing
                     </button>
-                    <button className="w-full text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors">
-                      📞 Contact us
+                    <button type="button" className="w-full min-h-[48px] text-left text-xs bg-brand-sandstone/50 hover:bg-brand-sandstone rounded px-3 py-2 transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2">
+                      <Phone className="w-3.5 h-3.5 flex-shrink-0 text-brand-pacific-dusk/70" aria-hidden />
+                      Contact us
                     </button>
                   </div>
                 </div>
@@ -118,7 +125,7 @@ export default function Chatbot() {
                   placeholder="Type your message..."
                   className="flex-1 px-4 py-2 border border-brand-sandstone rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff text-sm"
                 />
-                <button className="bg-brand-sunset-cliff hover:bg-brand-pacific-dusk text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium">
+                <button type="button" className="min-h-[48px] bg-brand-sunset-cliff hover:bg-brand-pacific-dusk text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2">
                   Send
                 </button>
               </div>

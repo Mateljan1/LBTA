@@ -9,7 +9,7 @@ import { parseYear2026Sections, parsePrograms, parseLeagues } from '@/lib/schedu
 import year2026Data from '@/data/year2026.json'
 import leaguesData from '@/data/leagues-2026.json'
 import type { Program } from '@/components/ProgramCard'
-import SchedulesPageClient, { type Year2026Sections, type LeaguesData } from '@/components/schedules/SchedulesPageClient'
+import SchedulesPageClient from '@/components/schedules/SchedulesPageClient'
 
 export default function SchedulesPage() {
   const winter = parsePrograms(getWinter2026Programs())
@@ -25,8 +25,8 @@ export default function SchedulesPage() {
   const seasons = getAllSeasons()
   const initialSeason = getCurrentSeason()
   const seasonCta = getSeasonCTA()
-  const year2026 = parseYear2026Sections(year2026Data) as unknown as Year2026Sections
-  const leagues = parseLeagues(leaguesData) as unknown as LeaguesData
+  const year2026 = parseYear2026Sections(year2026Data)
+  const leagues = parseLeagues(leaguesData)
 
   return (
     <SchedulesPageClient

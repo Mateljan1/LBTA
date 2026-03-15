@@ -70,9 +70,11 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
             counts toward your Universal Tennis Rating. Five divisions from Color Ball
             juniors through advanced adults.
           </p>
-          <p className="font-sans text-[14px] font-medium text-brand-pacific-dusk/70 mb-10">
-            April 4 – June 13, 2026 · Grand Finals Night June 13
-          </p>
+          {utr.seasonLabel && (
+            <p className="font-sans text-[14px] font-medium text-brand-pacific-dusk/70 mb-10">
+              {utr.seasonLabel}
+            </p>
+          )}
 
           <div className="bg-white border border-black/[0.06] rounded-lg overflow-hidden">
             {utr.divisions.map((div, i) => (

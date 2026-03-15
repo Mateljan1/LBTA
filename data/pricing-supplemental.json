@@ -1,4 +1,35 @@
 {
+  "registrationModalPricing": {
+    "little-stars": "$260 (1x/week) - $520 (2x/week)",
+    "red-ball": "$546 (1x/week) - $1,092 (2x/week)",
+    "orange-ball": "$546/quarter",
+    "orange-ball-match-play": "$85/month",
+    "green-dot": "$546/quarter",
+    "green-dot-match-play": "$85/month",
+    "youth-development": "Contact for pricing",
+    "high-performance": "Contact for pricing",
+    "adult-beginner-1": "Contact for pricing",
+    "adult-beginner-2": "Contact for pricing",
+    "adult-intermediate": "Contact for pricing",
+    "adult-advanced": "Contact for pricing",
+    "cardio-tennis": "Contact for pricing",
+    "liveball-intermediate": "Contact for pricing",
+    "liveball-advanced": "Contact for pricing",
+    "swim-tennis": "$495/week",
+    "ski-week": "$525/week",
+    "spring-break": "$525/week",
+    "summer-camp": "$725/week (Full Day) | $425/week (Half Day)",
+    "back-to-school": "$325/3 days",
+    "thanksgiving": "$325/3 days",
+    "winter-break": "$425/session (4 days)",
+    "spring-jtt": "$2,350 (10U) | $2,800 (12U-18U)",
+    "fall-jtt": "$2,350 (10U) | $2,800 (12U-18U)"
+  },
+  "siteCopy": {
+    "stickyCtaSchedules": "Spring & Summer 2026 Registration Open",
+    "beginnerProgramCohort": "Spring 2026 Cohort",
+    "campsHeading": "2026 Camp Schedule"
+  },
   "programsOverviewFallbacks": {
     "default": 25,
     "junior": 25,
