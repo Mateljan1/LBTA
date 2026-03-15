@@ -31,6 +31,14 @@
 
 Do not stop at a preview deploy when the intent is production. Per project convention: **deploy = push + `vercel --prod`**.
 
+**If you need to add GitHub Actions workflows (one-time):** A normal `git push` can fail with "refusing to allow an OAuth App to create or update workflow ... without workflow scope". Use either:
+
+1. **Script:** Create a [Personal Access Token](https://github.com/settings/tokens) with scope **workflow** (+ **repo**). Run:  
+   `GITHUB_TOKEN=ghp_YourToken node scripts/add-workflows-via-api.js`  
+   Then `git pull origin main` to sync.
+
+2. **Manual:** In GitHub → repo → Add file → Create new file, create `.github/workflows/quality-gate.yml` and `.github/workflows/lighthouse-scheduled.yml` with the contents from your local `.github/workflows/` folder.
+
 ---
 
 ## Post-deploy
