@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-14",
-  "lastLearnRun": "2026-03-14 compound:learn (quality-bars, anti-patterns, corrections)",
+  "updated": "2026-03-16",
+  "lastLearnRun": "2026-03-16 compound:learn (Green Dot schedule review + fixes)",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -374,6 +374,24 @@
       "when": "Data passed server→client with runtime validation (e.g. schedules year2026, leagues)",
       "example": "Export type from lib (e.g. LeaguesData = LeaguesDataValidated, Year2026Sections = Year2026SectionsValidated in schedule-schemas.ts); parse on server; client imports type; no 'as unknown as T' at boundary.",
       "tags": ["architecture", "types", "zod", "server-client"]
+    },
+    {
+      "name": "schedule-slot-venue-consistent",
+      "when": "Adding or editing schedule slot note or location text in season JSON",
+      "example": "Use same venue wording as rest of file (e.g. 'LB High School' not 'LBHS'); Pattern Recognizer flags abbreviation vs full name inconsistency",
+      "tags": ["schedules", "data", "program", "consistency"]
+    },
+    {
+      "name": "form-config-location-matches-data",
+      "when": "Program has an entry in lib/form-config.ts (prePopulateData) and in data/*.json",
+      "example": "When updating program location in winter2026.json (e.g. Youth Development at LBHS), update form-config prePopulateData.location for that programId so forms and schedules show same location",
+      "tags": ["form-config", "data-integrity", "single-source", "schedules"]
+    },
+    {
+      "name": "program-description-lean",
+      "when": "Writing or editing program description in season JSON when location and schedule slot notes already carry venue info",
+      "example": "Description: 'Competitive development for green ball players. Invitation-based. Same pricing as Youth Dev tiers.' — omit repeating Moulton Meadows / Alta Laguna / Friday LBHS; let location and slot.note carry where/when",
+      "tags": ["programs", "description", "simplicity", "schedules", "data"]
     }
   ]
 }

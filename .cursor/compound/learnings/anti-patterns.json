@@ -1,6 +1,6 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-14",
+  "updated": "2026-03-16",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -323,6 +323,27 @@
       "avoid": "experimental: { turbo: { root: __dirname } } — Next 16 reports 'Unrecognized key turbo at experimental'",
       "instead": "Top-level turbopack: { root: __dirname } in next.config.js (Next 15.3+ / 16)",
       "tags": ["nextjs", "turbopack", "config"]
+    },
+    {
+      "id": "schedule-slot-venue-inconsistent",
+      "description": "Schedule slot note uses abbreviation or different wording than other slot-level venue text in the same file",
+      "avoid": "slot note: 'LBHS' while other programs use 'LB High School' in slot location/note",
+      "instead": "Use same venue wording everywhere in that file (e.g. 'LB High School' not 'LBHS') so Pattern Recognizer and UI stay consistent",
+      "tags": ["schedules", "data", "program", "consistency"]
+    },
+    {
+      "id": "form-config-location-out-of-sync",
+      "description": "lib/form-config.ts prePopulateData.location for a program does not match the program location in season JSON",
+      "avoid": "Youth Development location: 'Alta Laguna Park' in form-config while data/winter2026.json (and other seasons) use 'Laguna Beach High School'",
+      "instead": "Keep form-config location aligned with canonical program location from data/*.json; when editing season data, check and update form-config for that program",
+      "tags": ["form-config", "data-integrity", "single-source"]
+    },
+    {
+      "id": "program-description-date-coupled",
+      "description": "Program description in season JSON includes date-specific text that will age (e.g. starting April)",
+      "avoid": "description: '... starting April. Same pricing ...' in spring-summer-2026.json",
+      "instead": "Use location or season context only; avoid calendar dates unless intentionally time-bound and documented for update each season",
+      "tags": ["programs", "description", "data", "schedules"]
     }
   ]
 }

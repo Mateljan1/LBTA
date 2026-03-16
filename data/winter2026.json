@@ -97,12 +97,12 @@
       "category": "Youth",
       "program": "UTR Green Dot — Competitive",
       "ages": "9-11+",
-      "location": "Alta Laguna Park",
+      "location": "Moulton Meadows Park (Mon/Wed); Laguna Beach High School (Fri)",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" },
-        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" },
-        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" }
+        { "day": "Monday", "time": "5:30–7:30 PM", "coach": "Allison Cronk", "note": "Moulton Meadows until Alta Laguna resurface complete" },
+        { "day": "Wednesday", "time": "5:30–7:30 PM", "coach": "Allison Cronk", "note": "Moulton Meadows until Alta Laguna resurface complete" },
+        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Allison Cronk", "note": "LB High School" }
       ],
       "pricing": { "1x": 810, "2x": 1620, "3x": 2268, "drop_in": 70 },
       "description": "Competitive development for green ball players. Invitation-based. Same pricing as Youth Dev tiers."

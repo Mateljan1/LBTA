@@ -2,7 +2,9 @@
 
 Extracted from the Code Review Summary (12-agent parallel review). Use these for future implementation and review.
 
-**Recent:** 2026-03-14 — Validation 89→100 + compound learn: see `2026-03-14-validation-100-learn.md`. Site copy centralization, LeaguesData/Year2026 single type, ChatWidget/Chatbot a11y (48px + focus ring), pricing-supplemental Zod, form-config vs registrationModalPricing test, API/docs notes, turbopack.root. **Learn run:** Quality bars (interactiveButton48pxFocusRing, singleTypeFromZodBoundary, apiDocsBodyAndResponse), anti-patterns (server-client-type-cast, next16-turbopack-under-experimental), corrections (turbopack config key).
+**Recent:** 2026-03-16 — Green Dot schedule review + work-phase fixes: see `2026-03-16-green-dot-schedule-compound-learn.md`. Schedule slot venue consistency (LB High School not LBHS), form-config location aligned with season data (Youth Development → LBHS), program descriptions lean and date-free. **Learn run:** Corrections (slot note, form-config location, description repeat, date coupling), patterns (schedule-slot-venue-consistent, form-config-location-matches-data, program-description-lean), anti-patterns (schedule-slot-venue-inconsistent, form-config-location-out-of-sync, program-description-date-coupled), quality bars (formConfigLocationMatchesData, scheduleSlotVenueConsistent).
+
+**Previous:** 2026-03-14 — Validation 89→100 + compound learn: see `2026-03-14-validation-100-learn.md`. Site copy centralization, LeaguesData/Year2026 single type, ChatWidget/Chatbot a11y (48px + focus ring), pricing-supplemental Zod, form-config vs registrationModalPricing test, API/docs notes, turbopack.root.
 
 **Previous:** 2026-03-12 — Schedule sync + compound review: see `2026-03-12-schedule-sync-compound-learn.md` and `plans/compound-review-2026-schedule-sync.md`. Corrections, patterns, anti-patterns, and quality bars updated in this folder and in `COMPOUND_LEARN.md`.
 

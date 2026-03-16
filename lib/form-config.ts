@@ -153,7 +153,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     acFormId: '',
     prePopulateData: {
       programName: 'Youth Development',
-      location: 'Alta Laguna Park',
+      location: 'Laguna Beach High School',
       duration: '1.5 hr',
       pricing: getModalPricing('youth-development'),
       category: 'Youth',

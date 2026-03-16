@@ -145,16 +145,16 @@
       "location": "Alta Laguna Park",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" },
-        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" },
-        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" }
+        { "day": "Tuesday", "time": "4:30–6:30 PM", "coach": "Staff" },
+        { "day": "Thursday", "time": "4:30–6:30 PM", "coach": "Staff" },
+        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Staff" }
       ],
       "pricing": {
         "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
         "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
         "drop_in": 70
       },
-      "description": "Competitive development for green ball players. Invitation-based. Same pricing as Youth Dev tiers."
+      "description": "Competitive development for green ball players. Invitation-based. Alta Laguna Park. Same pricing as Youth Dev tiers."
     },
     {
       "id": "youth-development",
