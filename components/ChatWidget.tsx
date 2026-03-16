@@ -118,20 +118,39 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating Chat Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-[9999] w-[60px] h-[60px] rounded-full border-0 shadow-lg flex items-center justify-center transition-all duration-300 ease-out ${
-          isOpen ? 'bg-brand-deep-water' : 'bg-brand-sunset-cliff'
-        }`}
+      {/* Floating Chat Button — stacked above viewport bottom so BackToTop can sit above it */}
+      <div
+        className="group/chat relative flex flex-col items-end"
         style={{
-          boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-          cursor: 'pointer',
+          position: 'fixed',
+          bottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
+          right: '24px',
+          zIndex: 50,
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-        aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
+        {/* Hover label: "Chat with us" so users immediately recognize the control (best practice: Intercom/Drift-style affordance) */}
+        <span
+          className="pointer-events-none absolute right-full top-1/2 mr-3 hidden -translate-y-1/2 whitespace-nowrap rounded-md bg-brand-pacific-dusk px-3 py-2 text-xs font-medium text-white shadow-lg opacity-0 transition-opacity duration-200 group-hover/chat:opacity-100 md:block"
+          style={{ zIndex: 50 }}
+          aria-hidden
+        >
+          Chat with us
+        </span>
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className={`group flex h-[60px] w-[60px] min-h-[48px] min-w-[48px] flex-shrink-0 items-center justify-center rounded-full border-0 shadow-lg transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2 ${
+            isOpen ? 'bg-brand-deep-water' : 'bg-brand-sunset-cliff'
+          }`}
+          style={{
+            boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+            cursor: 'pointer',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+          aria-label={isOpen ? 'Close chat' : 'Open chat'}
+          title={isOpen ? 'Close chat' : 'Chat with us'}
+        >
         {isOpen ? (
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" aria-hidden="true">
             <path d="M6 18L18 6M6 6l12 12" />
@@ -141,16 +160,17 @@ export default function ChatWidget() {
             <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
         )}
-      </button>
+        </button>
+      </div>
 
-      {/* Notification Badge */}
+      {/* Notification Badge — above chat button */}
       {!isOpen && (
         <span
           style={{
             position: 'fixed',
-            bottom: '76px',
+            bottom: 'calc(24px + 60px + 4px + env(safe-area-inset-bottom, 0px))',
             right: '24px',
-            zIndex: 9999,
+            zIndex: 50,
             width: '14px',
             height: '14px',
             borderRadius: '50%',
@@ -167,9 +187,9 @@ export default function ChatWidget() {
         <div
           style={{
             position: 'fixed',
-            bottom: '100px',
+            bottom: 'calc(100px + env(safe-area-inset-bottom, 0px))',
             right: '24px',
-            zIndex: 9999,
+            zIndex: 50,
             width: '380px',
             height: '520px',
             maxWidth: 'calc(100vw - 48px)',
