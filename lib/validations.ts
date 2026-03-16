@@ -12,6 +12,13 @@ const phoneSchema = z.string().min(10, 'Phone number too short').max(20)
 const nameSchema = z.string().min(1, 'Name is required').max(100)
 
 /**
+ * Coach Hub login — password only (no PII in logs)
+ */
+export const coachHubAuthSchema = z.object({
+  password: z.string().min(1, 'Password is required'),
+})
+
+/**
  * Base contact schema used across multiple forms
  */
 export const contactSchema = z.object({
