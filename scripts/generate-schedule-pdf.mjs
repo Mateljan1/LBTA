@@ -17,8 +17,9 @@ const LOCATION_KEYS = ['Moulton', 'Alta', 'LBHS']
 const LOCATION_LABELS = { Moulton: 'Moulton Meadows Park', Alta: 'Alta Laguna Park', LBHS: 'Laguna Beach High School' }
 
 /**
- * Same logic as lib/calendar-schedule.ts normalizeSlotLocation + lib/programs-data.ts formatLocation
- * so PDF matches the website calendar by location.
+ * Location logic must match lib/calendar-schedule.ts (normalizeSlotLocation) and
+ * lib/programs-data.ts (formatLocation) so the PDF matches the website calendar at all locations.
+ * After changing program locations in data/*.json, run: npm run build:schedule-pdf
  */
 function formatLocation(programLocation) {
   const loc = String(programLocation || '')

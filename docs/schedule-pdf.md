@@ -23,6 +23,8 @@ npm run build:schedule-pdf
 
 This writes `public/schedule-2026.pdf`. Commit that file (or run the script in CI and commit the artifact), then deploy. The "Download PDF" link on the site will work.
 
+**Important:** After any change to program locations or schedule in `data/winter2026.json` (or if you switch the script to another season), run this command again so the PDF stays 100% accurate with the calendar.
+
 ### 2. Manual
 
 1. Open [Schedule by location](/schedules/calendar) on the site (or locally after `npm run dev`).
