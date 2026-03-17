@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 
+// Coach Hub (/coach-hub, /coach-hub/login) is intentionally excluded — noindex, coach-only.
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://lagunabeachtennisacademy.com'
   const currentDate = new Date()

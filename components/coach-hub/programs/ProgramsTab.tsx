@@ -63,6 +63,8 @@ export function ProgramsTab({
     }
     const stillValid = selectedSlot && schedule.some((s) => s.day === selectedSlot.day && s.time === selectedSlot.time && s.code === selectedSlot.code)
     if (!stillValid) setSelectedSlot({ day: schedule[0].day, time: schedule[0].time, code: schedule[0].code })
+    // Intentionally only run when program/schedule identity changes; selectedSlot is read but not in deps to avoid reset loops
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [SP?.id, schedule.length])
   const SD = selectedSlot && schedule.find((s) => s.day === selectedSlot.day && s.time === selectedSlot.time && s.code === selectedSlot.code) ? selectedSlot : (schedule[0] ? { day: schedule[0].day, time: schedule[0].time, code: schedule[0].code } : null)
 
