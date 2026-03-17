@@ -28,7 +28,7 @@ export interface HubDrill {
   [key: string]: unknown
 }
 
-export type HubPlanEntry = [stage: string, week: number, code: string, blockIds: string, theme: string, focus: string, kpi: string, ...drillIds: string[]]
+export type HubPlanEntry = (string | number)[]
 
 export interface HubProgram {
   id: string
