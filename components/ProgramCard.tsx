@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 
 interface Schedule {
   day: string
@@ -33,15 +34,24 @@ export interface Program {
   coach?: string
   /** e.g. "Friday Match Play: $65/mo or $25/session." or "Saturday session has separate pricing." */
   pricingNote?: string
+  /** When set, show an "Inquire" link (e.g. for UTR placement) pointing to contact. */
+  inquiryLabel?: string
 }
 
 interface ProgramCardProps {
   program: Program
   onRegister: (program: Program) => void
+  /** When provided with onToggle, only one card should be expanded at a time (parent controls). */
+  isExpanded?: boolean
+  /** Call when user expands/collapses; use with isExpanded for single-expand in lists. */
+  onToggle?: () => void
 }
 
-export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
+export default function ProgramCard({ program, onRegister, isExpanded: controlledExpanded, onToggle }: ProgramCardProps) {
+  const [internalExpanded, setInternalExpanded] = useState(false)
+  const isControlled = controlledExpanded !== undefined && onToggle !== undefined
+  const isExpanded = isControlled ? controlledExpanded : internalExpanded
+  const handleToggle = isControlled ? () => onToggle() : () => setInternalExpanded((prev) => !prev)
   const cardRef = useRef<HTMLDivElement>(null)
   
   const getBasePrice = () => {
@@ -62,17 +72,19 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
     return `${count}× weekly`
   }
   
-  // Auto-scroll to card when expanded
+  // Auto-scroll to card when expanded (cleanup prevents scroll after collapse/unmount)
   useEffect(() => {
-    if (isExpanded && cardRef.current) {
-      setTimeout(() => {
-        cardRef.current?.scrollIntoView({ 
-          behavior: 'smooth', 
+    if (!isExpanded) return
+    const t = setTimeout(() => {
+      if (cardRef.current) {
+        cardRef.current.scrollIntoView({
+          behavior: 'smooth',
           block: 'start',
           inline: 'nearest'
         })
-      }, 100)
-    }
+      }
+    }, 100)
+    return () => clearTimeout(t)
   }, [isExpanded])
   
   const basePrice = getBasePrice()
@@ -88,7 +100,7 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
     >
       {/* COLLAPSED VIEW - Always Visible */}
       <button
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={handleToggle}
         onTouchStart={() => {}}
         className="w-full p-6 md:p-7 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20 rounded-lg transition-all"
         aria-expanded={isExpanded}
@@ -147,9 +159,9 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
       
       {/* EXPANDED VIEW - Schedule + Pricing + Register */}
       {isExpanded && (
-        <div className="px-6 md:px-7 pb-6 md:pb-7 animate-fade-in-up">
+        <div className="px-6 md:px-7 pb-20 md:pb-7 animate-fade-in-up min-w-0">
           {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-lbta-stone to-transparent mb-6" />
+          <div className="h-px bg-gradient-to-r from-transparent via-black/6 to-transparent mb-6" />
           
           {/* Description */}
           <p className="font-sans text-[15px] text-brand-pacific-dusk/80 leading-[1.7] mb-8">
@@ -164,15 +176,15 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             <div className="space-y-0">
               {program.schedule.map((slot, index) => (
                 <div 
-                  key={index} 
-                  className={`flex justify-between items-center py-3 ${
-                    index !== program.schedule.length - 1 ? 'border-b border-lbta-stone' : ''
+                  key={`${slot.day}-${slot.time}-${index}`} 
+                  className={`flex justify-between items-center gap-3 py-3 min-w-0 ${
+                    index !== program.schedule.length - 1 ? 'border-b border-black/6' : ''
                   }`}
                 >
-                  <span className="font-sans text-[15px] text-brand-pacific-dusk font-medium">
+                  <span className="font-sans text-[15px] text-brand-pacific-dusk font-medium shrink-0">
                     {slot.day}
                   </span>
-                  <span className="font-sans text-[15px] text-lbta-slate">
+                  <span className="font-sans text-[15px] text-brand-pacific-dusk/80 break-words text-right min-w-0">
                     {slot.time}
                     {slot.note && (
                       <span className="text-brand-pacific-dusk/60"> — {slot.note}</span>
@@ -235,9 +247,9 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
                 </div>
               )}
               {program.pricing.drop_in && (
-                <div className="bg-white border border-lbta-stone rounded-lg p-4 text-center">
+                <div className="bg-brand-sandstone border border-black/6 rounded-lg p-4 text-center">
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">Drop-in</p>
-                  <p className="font-headline text-[20px] font-medium text-lbta-slate">
+                  <p className="font-headline text-[20px] font-medium text-brand-pacific-dusk">
                     ${program.pricing.drop_in}
                   </p>
                 </div>
@@ -252,31 +264,53 @@ export default function ProgramCard({ program, onRegister }: ProgramCardProps) {
             </p>
           </div>
           
-          {/* Register Button - Desktop */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              onRegister(program)
-            }}
-            className="hidden md:flex w-full items-center justify-center gap-2 bg-lbta-black hover:bg-brand-pacific-dusk/80 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
-          >
-            <span>Begin Registration</span>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </button>
+          {/* Register + optional Inquire - Desktop */}
+          <div className="hidden md:flex flex-wrap items-center gap-3 w-full">
+            {program.inquiryLabel && (
+              <Link
+                href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
+                onClick={(e) => e.stopPropagation()}
+                className="font-sans text-[13px] font-medium text-brand-pacific-dusk/80 hover:text-brand-pacific-dusk underline underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 min-h-[52px] inline-flex items-center"
+                aria-label={`${program.inquiryLabel} for ${program.program}`}
+              >
+                {program.inquiryLabel}
+              </Link>
+            )}
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                onRegister(program)
+              }}
+              className="flex-1 min-w-[200px] flex items-center justify-center gap-2 bg-lbta-black hover:bg-brand-pacific-dusk/80 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+            >
+              <span>Begin Registration</span>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+          </div>
         </div>
       )}
       
-      {/* Mobile Sticky Register Button (only when expanded) */}
+      {/* Mobile Sticky Register + optional Inquire (only when expanded) */}
       {isExpanded && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-sm border-t border-lbta-stone px-4 py-3">
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-sm border-t border-black/6 px-4 py-3 flex flex-wrap items-center gap-3">
+          {program.inquiryLabel && (
+            <Link
+              href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
+              onClick={(e) => e.stopPropagation()}
+              className="font-sans text-[13px] font-medium text-brand-pacific-dusk/80 hover:text-brand-pacific-dusk underline underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 min-h-[48px] inline-flex items-center"
+              aria-label={`${program.inquiryLabel} for ${program.program}`}
+            >
+              {program.inquiryLabel}
+            </Link>
+          )}
           <button
             onClick={(e) => {
               e.stopPropagation()
               onRegister(program)
             }}
-            className="w-full flex items-center justify-center gap-2 bg-lbta-black active:bg-brand-pacific-dusk/80 active:scale-[0.98] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+            className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-lbta-black active:bg-brand-pacific-dusk/80 active:scale-[0.98] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
             onTouchStart={() => {}}
           >
             <span>Begin Registration</span>

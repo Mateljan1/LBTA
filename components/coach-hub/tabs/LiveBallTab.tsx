@@ -1,6 +1,6 @@
 'use client'
 
-import type { CoachHubInitialData } from '@/components/coach-hub/CoachHubClient'
+import type { CoachHubInitialData } from '@/lib/coach-hub-types'
 
 type LiveBallItem = { id?: string; name: string; level?: string; scoring?: string; rotation?: string; theme?: string; cues?: string }
 

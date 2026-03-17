@@ -105,13 +105,15 @@
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Allison Cronk", "note": "LB High School" }
       ],
       "pricing": { "1x": 810, "2x": 1620, "3x": 2268, "drop_in": 70 },
-      "description": "Competitive development for green ball players. Invitation-based. Same pricing as Youth Dev tiers."
+      "description": "Competitive development for green ball players. Placement by coach invitation (level-based). Same pricing as Youth Dev tiers.",
+      "pricingNote": "Placement by invitation. Contact us to discuss if your player may be ready.",
+      "inquiryLabel": "Inquire about placement"
     },
     {
       "id": "youth-development",
       "category": "Youth",
       "program": "Youth Development",
-      "ages": "9-11+ (UTR 1.5-5)",
+      "ages": "11-18 (level-based; UTR 1.5-5)",
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
@@ -120,7 +122,9 @@
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Andrew Mateljan" }
       ],
       "pricing": { "1x": 810, "2x": 1620, "3x": 2268, "drop_in": 70 },
-      "description": "Tier 1 (UTR 1.5-3) and Tier 2 (UTR 3-5). Three coaches split players by UTR level. UTR 5+ advance to HP."
+      "description": "Placement by UTR level (1.5-5) required. Ages 11-18; younger players who already meet the UTR range may qualify with coach approval. Tier 1 (UTR 1.5-3) and Tier 2 (UTR 3-5). Three coaches split by level. UTR 5+ advance to High Performance.",
+      "pricingNote": "Under 11 but already at UTR 1.5+? Contact us to inquire about placement.",
+      "inquiryLabel": "Inquire about placement"
     },
     {
       "id": "high-performance",
@@ -135,7 +139,9 @@
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn & Peter DeFrantz", "note": "Match Play" }
       ],
       "pricing": { "1x": 810, "2x": 1620, "3x": 2268, "drop_in": 100 },
-      "description": "Tournament-caliber training. Ages 12–17, UTR 5+. 6 max."
+      "description": "Tournament-caliber training. UTR 5+ required. Ages 12–17. 6 max.",
+      "pricingNote": "UTR 5+ required. Under 12 or close to UTR 5? Contact us to discuss readiness.",
+      "inquiryLabel": "Inquire about placement"
     },
     {
       "id": "adult-beginner-1",

@@ -2,9 +2,11 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import Link from 'next/link'
-import type { Program } from '@/components/ProgramCard'
+import ProgramCard, { type Program } from '@/components/ProgramCard'
 import ProgramRow from './ProgramRow'
 import type { SeasonKey, SeasonDataForDisplay } from '@/lib/season-utils'
+
+type ViewMode = 'list' | 'cards'
 
 interface ProgramsSectionProps {
   programsBySeason: Record<SeasonKey, Program[]>
@@ -36,6 +38,8 @@ export default function ProgramsSection({
   onRegister,
 }: ProgramsSectionProps) {
   const [activeSeason, setActiveSeason] = useState<SeasonKey>(() => initialSeason)
+  const [viewMode, setViewMode] = useState<ViewMode>('list')
+  const [expandedProgramId, setExpandedProgramId] = useState<string | null>(null)
   const programs: Program[] = useMemo(
     () => programsBySeason[activeSeason] ?? programsBySeason.winter ?? [],
     [programsBySeason, activeSeason]
@@ -59,12 +63,17 @@ export default function ProgramsSection({
 
   const focusTab = useCallback((key: SeasonKey) => {
     setActiveSeason(key)
+    setExpandedProgramId(null)
     setTimeout(() => document.getElementById(`season-tab-${key}`)?.focus(), 0)
+  }, [])
+
+  const handleExpandChange = useCallback((programId: string) => {
+    setExpandedProgramId((prev) => (prev === programId ? null : programId))
   }, [])
 
   return (
     <section id="programs" className="scroll-mt-28 bg-white py-16 md:py-24">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 min-w-0">
         {/* Section heading */}
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           SEASONAL PROGRAMS
@@ -128,6 +137,30 @@ export default function ProgramsSection({
           </p>
         )}
 
+        {/* View: List | Cards (single-expand in card view) */}
+        <div className="flex flex-wrap items-center gap-2 mb-6" role="tablist" aria-label="View">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={viewMode === 'list'}
+            tabIndex={viewMode === 'list' ? 0 : -1}
+            onClick={() => { setViewMode('list'); setExpandedProgramId(null) }}
+            className={`font-sans text-[13px] font-medium tracking-[0.05em] px-4 py-2.5 rounded-[2px] min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 ${viewMode === 'list' ? 'bg-black text-white' : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'}`}
+          >
+            List
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={viewMode === 'cards'}
+            tabIndex={viewMode === 'cards' ? 0 : -1}
+            onClick={() => setViewMode('cards')}
+            className={`font-sans text-[13px] font-medium tracking-[0.05em] px-4 py-2.5 rounded-[2px] min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 ${viewMode === 'cards' ? 'bg-black text-white' : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'}`}
+          >
+            Cards
+          </button>
+        </div>
+
         {/* How registration works — clarity on days, drop-in, make-ups, cancellation */}
         <div className="mb-10 rounded-lg border border-black/[0.08] bg-brand-morning-light/60 px-4 py-4 md:px-5 md:py-4">
           <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-2">
@@ -156,16 +189,30 @@ export default function ProgramsSection({
               </h3>
               <div className="section-horizon mb-4 opacity-90" aria-hidden="true" />
 
-              <div className="bg-white border border-black/[0.06] rounded-lg overflow-hidden">
-                {catPrograms.map((program, i) => (
-                  <ProgramRow
-                    key={program.id}
-                    program={program}
-                    onRegister={onRegister}
-                    isLast={i === catPrograms.length - 1}
-                  />
-                ))}
-              </div>
+              {viewMode === 'list' ? (
+                <div className="bg-white border border-black/[0.06] rounded-lg overflow-hidden">
+                  {catPrograms.map((program, i) => (
+                    <ProgramRow
+                      key={program.id}
+                      program={program}
+                      onRegister={onRegister}
+                      isLast={i === catPrograms.length - 1}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {catPrograms.map((program) => (
+                    <ProgramCard
+                      key={program.id}
+                      program={program}
+                      onRegister={onRegister}
+                      isExpanded={expandedProgramId === program.id}
+                      onToggle={() => handleExpandChange(program.id)}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

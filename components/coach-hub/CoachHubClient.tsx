@@ -2,8 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
-import type { HubData } from '@/lib/coach-hub-types'
-import type { SeasonsMap, CoachSchedulesMap } from '@/lib/coach-hub-types'
+import type { CoachHubInitialData } from '@/lib/coach-hub-types'
 import { ProgramsTab } from '@/components/coach-hub/programs/ProgramsTab'
 import { PrivateTab } from '@/components/coach-hub/tabs/PrivateTab'
 import { LiveBallTab } from '@/components/coach-hub/tabs/LiveBallTab'
@@ -14,11 +13,7 @@ import { HandbookTab } from '@/components/coach-hub/tabs/HandbookTab'
 import { BinderOverlay } from '@/components/coach-hub/BinderOverlay'
 import { GuideOverlay } from '@/components/coach-hub/GuideOverlay'
 
-export type CoachHubInitialData = {
-  hubData: HubData
-  seasons: SeasonsMap
-  coachSchedules: CoachSchedulesMap
-}
+export type { CoachHubInitialData } from '@/lib/coach-hub-types'
 
 export type ActiveTabId =
   | 'programs'
@@ -52,17 +47,10 @@ export default function CoachHubClient({
   const [week, setWeek] = useState(1)
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null)
   const [selectedDay, setSelectedDay] = useState<string | null>(null)
-  const [config, setConfig] = useState<{
-    players: number
-    playerLevels: Record<string, string>
-    equipment: Set<string>
-  }>({ players: 4, playerLevels: {}, equipment: new Set(['Cones', 'Ball basket', 'Targets', 'TopSpinPro']) })
 
   const handlePrint = useCallback(() => {
     if (typeof window !== 'undefined') window.print()
   }, [])
-
-  const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   return (
     <div className="min-h-screen bg-brand-morning-light text-brand-pacific-dusk">
@@ -76,7 +64,7 @@ export default function CoachHubClient({
               aria-label="Coach"
               value={coach}
               onChange={(e) => setCoach(e.target.value)}
-              className="px-2 py-1.5 rounded border border-brand-sandstone/20 bg-white/5 text-brand-sandstone text-xs font-medium"
+              className="px-2 py-1.5 rounded border border-brand-sandstone/20 bg-white/5 text-brand-sandstone text-xs font-medium min-h-[48px]"
             >
               <option value="">Select coach</option>
               {Object.keys(initialData.coachSchedules).map((c) => (
@@ -87,7 +75,7 @@ export default function CoachHubClient({
               aria-label="Season"
               value={season}
               onChange={(e) => setSeason(e.target.value)}
-              className="px-2 py-1.5 rounded border border-brand-sandstone/20 bg-white/5 text-brand-sandstone text-xs font-medium"
+              className="px-2 py-1.5 rounded border border-brand-sandstone/20 bg-white/5 text-brand-sandstone text-xs font-medium min-h-[48px]"
             >
               {Object.keys(initialData.seasons).map((s) => (
                 <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>
@@ -96,27 +84,27 @@ export default function CoachHubClient({
             <button
               type="button"
               onClick={() => setBinderOpen(true)}
-              className="px-3 py-1.5 rounded border border-brand-sandstone/20 text-brand-sandstone text-xs font-semibold hover:bg-brand-sandstone/10 min-h-[36px]"
+              className="px-3 py-1.5 rounded border border-brand-sandstone/20 text-brand-sandstone text-xs font-semibold hover:bg-brand-sandstone/10 min-h-[48px]"
             >
               Week Binder
             </button>
             <button
               type="button"
               onClick={() => setGuideOpen(true)}
-              className="px-3 py-1.5 rounded border border-brand-sandstone/20 text-brand-sandstone text-xs font-semibold hover:bg-brand-sandstone/10 min-h-[36px]"
+              className="px-3 py-1.5 rounded border border-brand-sandstone/20 text-brand-sandstone text-xs font-semibold hover:bg-brand-sandstone/10 min-h-[48px]"
             >
               Guide
             </button>
             <button
               type="button"
               onClick={handlePrint}
-              className="px-3 py-1.5 rounded bg-brand-thousand-steps text-brand-pacific-dusk text-xs font-semibold hover:opacity-90 min-h-[36px]"
+              className="px-3 py-1.5 rounded bg-brand-thousand-steps text-brand-pacific-dusk text-xs font-semibold hover:opacity-90 min-h-[48px]"
             >
               Print
             </button>
             <Link
               href="/api/coach-hub/logout"
-              className="px-3 py-1.5 rounded border border-brand-sandstone/20 text-brand-sandstone text-xs font-semibold hover:bg-brand-sandstone/10 min-h-[36px] inline-flex items-center"
+              className="px-3 py-1.5 rounded border border-brand-sandstone/20 text-brand-sandstone text-xs font-semibold hover:bg-brand-sandstone/10 min-h-[48px] inline-flex items-center"
             >
               Sign out
             </Link>
@@ -125,11 +113,19 @@ export default function CoachHubClient({
       </header>
 
       <div className="max-w-[1320px] mx-auto px-4 py-4 md:px-6 md:py-6">
-        <div className="flex gap-1 border-b-2 border-black/10 mb-4 overflow-x-auto">
+        <div
+          className="flex gap-1 border-b-2 border-black/10 mb-4 overflow-x-auto"
+          role="tablist"
+          aria-label="Coach Hub sections"
+        >
           {TABS.map(({ id, label }) => (
             <button
               key={id}
               type="button"
+              role="tab"
+              aria-selected={activeTab === id}
+              aria-controls={`tabpanel-${id}`}
+              id={`tab-${id}`}
               onClick={() => setActiveTab(id)}
               className={`px-3 py-2 text-xs font-semibold whitespace-nowrap border-b-2 -mb-[2px] transition-colors min-h-[48px] ${
                 activeTab === id
@@ -142,7 +138,12 @@ export default function CoachHubClient({
           ))}
         </div>
 
-        <div className="pane">
+        <div
+          className="pane"
+          role="tabpanel"
+          id={`tabpanel-${activeTab}`}
+          aria-labelledby={`tab-${activeTab}`}
+        >
           {activeTab === 'programs' && (
             <ProgramsTab
               initialData={initialData}
@@ -152,8 +153,6 @@ export default function CoachHubClient({
               setSelectedDay={setSelectedDay}
               week={week}
               setWeek={setWeek}
-              config={config}
-              setConfig={setConfig}
               season={season}
               coach={coach}
             />

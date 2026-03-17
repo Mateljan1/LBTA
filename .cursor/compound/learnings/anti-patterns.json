@@ -1,6 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-16",
+  "updated": "2026-03-17",
+  "lastLearnRun": "2026-03-17 Coach Hub validation 100/100 compound:learn",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -344,6 +345,55 @@
       "avoid": "description: '... starting April. Same pricing ...' in spring-summer-2026.json",
       "instead": "Use location or season context only; avoid calendar dates unless intentionally time-bound and documented for update each season",
       "tags": ["programs", "description", "data", "schedules"]
+    },
+    {
+      "id": "protected-route-open-when-secret-unset",
+      "description": "Middleware protects a route (e.g. /coach-hub) with env secret but returns next() when secret unset",
+      "avoid": "if (!secret) return NextResponse.next(); so hub is reachable without auth",
+      "instead": "When path is protected and secret missing, redirect to /coach-hub/login or return 503; never allow access when unconfigured",
+      "tags": ["middleware", "security", "coach-hub", "protected-route"]
+    },
+    {
+      "id": "modal-overlay-no-focus-trap-escape",
+      "description": "Modal/overlay without focus trap and Escape-to-close",
+      "avoid": "Dialog with no onKeyDown(Escape); focus can leave; keyboard users cannot close",
+      "instead": "Add onKeyDown(Escape → onClose) and focus trap (e.g. focus first focusable on open)",
+      "tags": ["a11y", "modal", "overlay", "focus-trap"]
+    },
+    {
+      "id": "clear-cookie-missing-secure",
+      "description": "Clear-cookie header does not set Secure when session cookie was set with Secure in production",
+      "avoid": "buildCoachHubClearCookie() returns Max-Age=0 without Secure; some browsers may not clear over HTTPS",
+      "instead": "Include Secure in clear-cookie string when NODE_ENV === 'production', matching set-cookie",
+      "tags": ["cookie", "security", "logout"]
+    },
+    {
+      "id": "extraction-script-new-function",
+      "description": "Using new Function() to parse input in extraction scripts",
+      "avoid": "new Function('return (' + s + ')')(); if s ever comes from untrusted source, code injection",
+      "instead": "Use safe parser (e.g. bracket-counting) or document that script runs only against trusted HTML; avoid repurposing for untrusted input",
+      "tags": ["security", "script", "extraction", "code-injection"]
+    },
+    {
+      "id": "button-min-width-overflow",
+      "description": "CTA or submit button with min-width larger than smallest viewport causing horizontal scroll",
+      "avoid": "min-w-[300px] on a button inside a padded container at 320px viewport (e.g. apply-scholarship submit)",
+      "instead": "Use w-full with optional max-w-[300px], or min-w-0 in a flex container so button does not force overflow; audit at 320px",
+      "tags": ["mobile", "overflow", "button", "horizontal-scroll"]
+    },
+    {
+      "id": "form-input-font-below-16-mobile",
+      "description": "Form inputs with font-size below 16px on mobile (triggers iOS zoom on focus)",
+      "avoid": "text-[15px] or text-[14px] on input, select, textarea for user-facing forms (Contact, registration modals)",
+      "instead": "Use text-base or text-[16px] for inputs so iOS does not zoom on focus; labels and secondary text may stay smaller",
+      "tags": ["mobile", "forms", "iOS", "a11y", "zoom"]
+    },
+    {
+      "id": "protected-auth-api-without-runtime-verification",
+      "description": "Auth API that returns 400/401 but no way to verify at runtime when secret is set (e.g. dev has secret unset)",
+      "avoid": "Validation summary warns 'verify auth 400/401 in staging'; no script or doc to run the check",
+      "instead": "Add a small script (e.g. scripts/verify-coach-hub-auth.mjs) that fetch POST {} and POST { password: 'wrong' } and assert 400/401; run with dev server started with secret set; document in validation summary or README",
+      "tags": ["auth", "validation", "contract", "script"]
     }
   ]
 }

@@ -89,7 +89,7 @@ export default function AdultProgramsPage() {
                   </div>
                   <Link
                     href={item.href}
-                    className="font-sans text-ui font-medium text-brand-sunset-cliff hover:text-brand-sunset-cliff/80 transition-colors shrink-0"
+                    className="font-sans text-ui font-medium text-brand-sunset-cliff hover:text-brand-sunset-cliff/80 transition-colors shrink-0 min-h-[48px] inline-flex items-center"
                   >
                     {item.cta} →
                   </Link>

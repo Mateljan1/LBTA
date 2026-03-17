@@ -26,6 +26,9 @@ yarn-error.log*
 .env*.local
 .env.vercel
 
+# Cursor MCP config (may contain ActiveCampaign token)
+.cursor/mcp.json
+
 # vercel
 .vercel
 

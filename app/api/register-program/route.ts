@@ -10,6 +10,7 @@ import {
   getClassTagFromProgram,
   getProgramCategory,
   LBTA_LIST_ID,
+  getWebsiteSignupsListId,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
@@ -198,9 +199,12 @@ export async function POST(request: NextRequest) {
           const contactId = contactResult.data.id
           console.log('[AC] Contact created:', { contactId })
 
-          // Add to list to trigger automation
           await addToList(contactId, LBTA_LIST_ID)
-          console.log('[AC] Added to List 4:', { contactId })
+          const websiteSignupsListId = getWebsiteSignupsListId()
+          if (websiteSignupsListId !== null) {
+            await addToList(contactId, websiteSignupsListId)
+          }
+          console.log('[AC] Added to list(s):', { contactId })
 
           // Apply class-specific tag for program segmentation
           const classTagId = getClassTagFromProgram(data.program)

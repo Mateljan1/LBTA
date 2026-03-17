@@ -8,6 +8,7 @@ import {
   addToList,
   addTag,
   LBTA_LIST_ID,
+  getWebsiteSignupsListId,
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { sendToGHL } from '@/lib/gohighlevel'
@@ -76,6 +77,10 @@ export async function POST(request: NextRequest) {
       })
       if (acResult.success && acResult.data?.id) {
         await addToList(acResult.data.id, LBTA_LIST_ID)
+        const websiteSignupsListId = getWebsiteSignupsListId()
+        if (websiteSignupsListId !== null) {
+          await addToList(acResult.data.id, websiteSignupsListId)
+        }
         await addTag(acResult.data.id, CAMPAIGN_TAGS.scholarship)
       }
     }

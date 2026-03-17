@@ -1,6 +1,6 @@
 'use client'
 
-import type { CoachHubInitialData } from '@/components/coach-hub/CoachHubClient'
+import type { CoachHubInitialData } from '@/lib/coach-hub-types'
 
 type RosterPlayer = { rank: number; name: string; grade?: string; utr?: string; pos?: string }
 type LBHSTeam = { name?: string; season?: string; head_coach?: string; asst_coach?: string; courts?: number; location?: string; roster?: RosterPlayer[] }
@@ -27,7 +27,7 @@ export function LBHSTab({ initialData }: { initialData: CoachHubInitialData }) {
           </thead>
           <tbody>
             {roster.map((p) => (
-              <tr key={p.rank} className="border-b border-black/5">
+              <tr key={`${p.rank}-${p.name ?? ''}`} className="border-b border-black/5">
                 <td className="font-sans text-sm py-2 pr-4">{p.rank}</td>
                 <td className="font-sans text-sm py-2 pr-4">{p.name}</td>
                 <td className="font-sans text-sm py-2 pr-4">{p.grade ?? '—'}</td>

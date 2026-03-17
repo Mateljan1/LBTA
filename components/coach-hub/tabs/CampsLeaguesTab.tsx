@@ -1,6 +1,6 @@
 'use client'
 
-import type { CoachHubInitialData } from '@/components/coach-hub/CoachHubClient'
+import type { CoachHubInitialData } from '@/lib/coach-hub-types'
 
 type CampOption = { name: string; ages?: string; time?: string; price?: string }
 type Camp = { id?: string; name: string; dates?: string; location?: string; coach?: string; options?: CampOption[] }

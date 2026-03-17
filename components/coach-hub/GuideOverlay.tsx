@@ -1,19 +1,64 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+
 type GuideOverlayProps = {
   onClose: () => void
 }
 
 export function GuideOverlay({ onClose }: GuideOverlayProps) {
+  const dialogRef = useRef<HTMLDivElement>(null)
+
+  const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+
+  useEffect(() => {
+    const el = dialogRef.current
+    if (!el) return
+    const first = el.querySelector<HTMLElement>(FOCUSABLE)
+    first?.focus()
+  }, [])
+
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Escape') {
+      onClose()
+      return
+    }
+    const el = dialogRef.current
+    if (e.key !== 'Tab' || !el) return
+    const focusables = Array.from(el.querySelectorAll<HTMLElement>(FOCUSABLE)).filter((node) => !node.hasAttribute('disabled'))
+    if (focusables.length === 0) return
+    const current = document.activeElement
+    const idx = current instanceof HTMLElement ? focusables.indexOf(current) : -1
+    if (idx === -1) return
+    if (e.shiftKey) {
+      if (idx === 0) {
+        e.preventDefault()
+        focusables[focusables.length - 1]?.focus()
+      }
+    } else {
+      if (idx === focusables.length - 1) {
+        e.preventDefault()
+        focusables[0]?.focus()
+      }
+    }
+  }
+
   return (
-    <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Guide">
-      <div className="bg-brand-morning-light rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-auto p-6">
+    <div
+      className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Guide"
+      onKeyDown={handleKeyDown}
+    >
+      <div ref={dialogRef} className="bg-brand-morning-light rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-auto p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="font-headline text-brand-pacific-dusk text-xl">LBTA Coach Hub — Your Playbook</h2>
           <button
             type="button"
             onClick={onClose}
-            className="min-h-[48px] px-4 rounded border border-black/20 font-sans text-sm font-medium"
+            className="min-h-[48px] px-4 rounded border border-black/20 font-sans text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2"
+            aria-label="Close Guide"
           >
             Close
           </button>

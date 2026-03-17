@@ -154,10 +154,10 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     prePopulateData: {
       programName: 'Youth Development',
       location: 'Laguna Beach High School',
-      duration: '1.5 hr',
+      duration: '2 hr',
       pricing: getModalPricing('youth-development'),
       category: 'Youth',
-      ageGroup: '11-15 years',
+      ageGroup: '11-18 years',
       billingCycle: 'quarterly'
     },
     classTagId: 21 // class:youth_development
@@ -173,7 +173,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       duration: '2 hr',
       pricing: getModalPricing('high-performance'),
       category: 'Youth',
-      ageGroup: '12-17 years (UTR 5-8)',
+      ageGroup: '12-17 years (UTR 5+)',
       billingCycle: 'quarterly'
     },
     classTagId: 41 // class:high_performance

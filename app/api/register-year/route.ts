@@ -4,6 +4,7 @@ import axios from 'axios'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, registerYearSchema, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
+import { getWebsiteSignupsListId } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
 
@@ -386,7 +387,27 @@ export async function POST(request: NextRequest) {
         }
       )
 
-      console.log('[register-year] Added to list')
+      const websiteSignupsListId = getWebsiteSignupsListId()
+      if (websiteSignupsListId !== null) {
+        await axios.post(
+          `${acUrl}/api/3/contactLists`,
+          {
+            contactList: {
+              list: websiteSignupsListId,
+              contact: contactId,
+              status: 1
+            }
+          },
+          {
+            headers: {
+              'Api-Token': acKey,
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+      }
+
+      console.log('[register-year] Added to list(s)')
 
       // Apply all applicable tags
       const tags = getApplicableTags(data)

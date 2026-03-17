@@ -1,12 +1,22 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
-import type { CoachHubInitialData } from '@/components/coach-hub/CoachHubClient'
-import type { HubData, HubDrill, HubProgram } from '@/lib/coach-hub-types'
+import { useState, useCallback, useEffect, useMemo } from 'react'
+import type { CoachHubInitialData } from '@/lib/coach-hub-types'
+import type { HubData, HubDrill, HubProgram, ProgramScheduleSlot } from '@/lib/coach-hub-types'
 import { getWk, getAssessMode, getTm, getBlockLabels, getTodayDayName } from '@/lib/coach-hub-utils'
 
 const CATS: Record<string, string> = { junior: 'Junior', youth: 'Youth & HP', adult: 'Adult', fitness: 'Fitness' }
 const CC2: Record<string, string> = { junior: 'cj', youth: 'cy', adult: 'ca', fitness: 'cf' }
+
+const DEFAULT_CONFIG: {
+  players: number
+  playerLevels: Record<string, string>
+  equipment: Set<string>
+} = {
+  players: 4,
+  playerLevels: {},
+  equipment: new Set(['Cones', 'Ball basket', 'Targets', 'TopSpinPro']),
+}
 
 type ProgramsTabProps = {
   initialData: CoachHubInitialData
@@ -16,10 +26,19 @@ type ProgramsTabProps = {
   setSelectedDay: (day: string | null) => void
   week: number
   setWeek: (w: number) => void
-  config: { players: number; playerLevels: Record<string, string>; equipment: Set<string> }
-  setConfig: React.Dispatch<React.SetStateAction<{ players: number; playerLevels: Record<string, string>; equipment: Set<string> }>>
   season: string
   coach: string
+}
+
+function getEffectiveSlot(
+  selectedSlot: ProgramScheduleSlot | null,
+  schedule: ProgramScheduleSlot[]
+): ProgramScheduleSlot | null {
+  if (!selectedSlot || schedule.length === 0) return schedule[0] ?? null
+  const found = schedule.find(
+    (s) => s.day === selectedSlot.day && s.time === selectedSlot.time && s.code === selectedSlot.code
+  )
+  return found ? selectedSlot : (schedule[0] ?? null)
 }
 
 function findPlan(hubData: HubData, stage: string, week: number, code: string): (string | number)[] | null {
@@ -41,21 +60,20 @@ export function ProgramsTab({
   setSelectedDay,
   week,
   setWeek,
-  config,
-  setConfig,
   season,
   coach,
 }: ProgramsTabProps) {
   const { hubData, seasons, coachSchedules } = initialData
   const [expandedBlock, setExpandedBlock] = useState<number | null>(null)
-  const [selectedSlot, setSelectedSlot] = useState<{ day: string; time: string; code: string } | null>(null)
+  const [selectedSlot, setSelectedSlot] = useState<ProgramScheduleSlot | null>(null)
+  const [config, setConfig] = useState(DEFAULT_CONFIG)
 
   const currentWk = getWk(seasons, season)
-  const assess = getAssessMode(week, hubData.assessment_calendar as Record<string, { mode: string; coach_action: string }> | undefined)
+  const assess = getAssessMode(week, hubData.assessment_calendar)
   const todayName = getTodayDayName()
   const programs = (hubData.programs || []) as HubProgram[]
   const SP = programs.find((p) => p.id === selectedProgram) ?? null
-  const schedule = (SP?.schedule || []) as { day: string; time: string; code: string }[]
+  const schedule = (SP?.schedule || []) as ProgramScheduleSlot[]
   useEffect(() => {
     if (!SP || schedule.length === 0) {
       setSelectedSlot(null)
@@ -66,7 +84,7 @@ export function ProgramsTab({
     // Intentionally only run when program/schedule identity changes; selectedSlot is read but not in deps to avoid reset loops
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [SP?.id, schedule.length])
-  const SD = selectedSlot && schedule.find((s) => s.day === selectedSlot.day && s.time === selectedSlot.time && s.code === selectedSlot.code) ? selectedSlot : (schedule[0] ? { day: schedule[0].day, time: schedule[0].time, code: schedule[0].code } : null)
+  const SD = getEffectiveSlot(selectedSlot, schedule)
 
   const stage = SP?.stage ?? ''
   const plan = SD ? findPlan(hubData, stage, week, SD.code) : null
@@ -105,10 +123,16 @@ export function ProgramsTab({
 
   const todaySessions = coach ? (coachSchedules[coach]?.[todayName] as { time: string; prog: string; stage: string; loc: string }[] | undefined) ?? [] : []
 
+  const weekOptions = useMemo(
+    () => Array.from({ length: 12 }, (_, i) => ({ value: i + 1, label: `${i + 1} — ${getTheme(hubData, stage, i + 1)}` })),
+    [hubData, stage]
+  )
+  const playersMax = (hubData.stages as Record<string, { max?: number }>)?.[stage]?.max ?? 12
+
   return (
     <div className="space-y-4">
       {/* Today + Progress */}
-      <section className="rounded-xl bg-gradient-to-br from-[#1a3a2a] to-brand-pacific-dusk text-brand-sandstone p-4 flex flex-wrap items-center justify-between gap-2">
+      <section className="rounded-xl bg-gradient-to-br from-brand-deep-water to-brand-pacific-dusk text-brand-sandstone p-4 flex flex-wrap items-center justify-between gap-2">
         <h2 className="font-headline text-lg font-light">
           Today <em className="text-brand-thousand-steps">·</em> {todayName}
         </h2>
@@ -126,14 +150,14 @@ export function ProgramsTab({
                 }
                 document.getElementById('session-builder')?.scrollIntoView(scrollOpts)
               }}
-              className="text-[10px] px-2 py-1 rounded-full bg-brand-sandstone/10 text-brand-sandstone min-h-[36px]"
+              className="text-[10px] px-2 py-1 rounded-full bg-brand-sandstone/10 text-brand-sandstone min-h-[48px]"
             >
               <strong className="text-brand-thousand-steps">{s.time}</strong> {s.prog}
             </button>
           ))}
         </div>
         <div className="flex items-center gap-2">
-          <span className={`text-[8px] font-bold uppercase px-2 py-0.5 rounded ${assess.cls === 'assess-baseline' ? 'bg-[#E8F0F8] text-[#4A56A8]' : assess.cls === 'assess-pressure' ? 'bg-[#FFF8EC] text-[#B8860B]' : assess.cls === 'assess-testing' ? 'bg-[#FFF0F0] text-red-600' : 'bg-[#F0FFF4] text-[#2E6B5A]'}`}>
+          <span className={`text-[8px] font-bold uppercase px-2 py-0.5 rounded ${assess.cls === 'assess-baseline' ? 'bg-brand-sandstone/50 text-brand-pacific-dusk' : assess.cls === 'assess-pressure' ? 'bg-brand-sandstone/30 text-brand-thousand-steps' : assess.cls === 'assess-testing' ? 'bg-lbta-red/10 text-lbta-red' : 'bg-brand-tide-pool/20 text-brand-tide-pool'}`}>
             {assess.mode}
           </span>
         </div>
@@ -161,7 +185,7 @@ export function ProgramsTab({
                 selectedProgram === p.id ? 'border-brand-pacific-dusk shadow ring-2 ring-brand-pacific-dusk/20' : 'border-black/10 hover:border-brand-thousand-steps'
               }`}
             >
-              <span className={`text-[7px] font-bold uppercase px-1.5 py-0.5 rounded ${CC2[p.category as string] === 'cj' ? 'bg-[#FFF8EC] text-[#B8860B]' : 'bg-black/5 text-black/60'}`}>
+              <span className={`text-[7px] font-bold uppercase px-1.5 py-0.5 rounded ${CC2[p.category as string] === 'cj' ? 'bg-brand-sandstone/50 text-brand-thousand-steps' : 'bg-black/5 text-black/60'}`}>
                 {CATS[p.category as string] ?? p.category}
               </span>
               <h3 className="text-sm font-semibold text-brand-pacific-dusk mt-1">{p.name}</h3>
@@ -179,17 +203,21 @@ export function ProgramsTab({
           </div>
           <div className="p-4 grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-3 border-b border-black/10">
             <div>
-              <label className="block text-[7px] font-bold uppercase tracking-wider text-black/50 mb-1">Players on court</label>
+              <label htmlFor="players-on-court" className="block text-[7px] font-bold uppercase tracking-wider text-black/50 mb-1">Players on court</label>
               <input
+                id="players-on-court"
                 type="range"
                 min={1}
-                max={(hubData.stages as Record<string, { max?: number }>)?.[stage]?.max ?? 12}
+                max={playersMax}
                 value={config.players}
                 onChange={(e) => {
                   const v = +e.target.value
                   setConfig((c) => ({ ...c, players: v }))
                 }}
                 className="w-full accent-brand-thousand-steps"
+                aria-valuenow={config.players}
+                aria-valuemin={1}
+                aria-valuemax={playersMax}
               />
               <div className="text-center font-bold text-brand-pacific-dusk">{config.players}</div>
             </div>
@@ -200,8 +228,8 @@ export function ProgramsTab({
                 onChange={(e) => setWeek(+e.target.value)}
                 className="w-full px-2 py-1.5 border-2 border-black/10 rounded text-sm"
               >
-                {Array.from({ length: 12 }, (_, i) => (
-                  <option key={i} value={i + 1}>{i + 1} — {getTheme(hubData, stage, i + 1)}</option>
+                {weekOptions.map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
               </select>
             </div>
@@ -222,13 +250,13 @@ export function ProgramsTab({
             ))}
           </div>
           <div className="p-3 flex flex-wrap gap-1">
-            <span className="text-[7px] font-bold uppercase text-[#B8860B] w-full">Equipment</span>
+            <span className="text-[7px] font-bold uppercase text-brand-thousand-steps w-full">Equipment</span>
             {['Cones', 'Ball basket', 'Targets', 'TopSpinPro', 'Nets', 'Med balls'].map((eq) => (
               <button
                 key={eq}
                 type="button"
                 onClick={() => toggleEq(eq)}
-                className={`text-[9px] px-2 py-1 rounded-full border min-h-[36px] ${config.equipment.has(eq) ? 'bg-brand-pacific-dusk border-brand-pacific-dusk text-brand-thousand-steps' : 'border-black/15'}`}
+                className={`text-[9px] px-2 py-1 rounded-full border min-h-[48px] ${config.equipment.has(eq) ? 'bg-brand-pacific-dusk border-brand-pacific-dusk text-brand-thousand-steps' : 'border-black/15'}`}
               >
                 {eq}
               </button>
@@ -243,7 +271,7 @@ export function ProgramsTab({
           <p className="text-[8px] font-bold uppercase tracking-wider text-brand-thousand-steps mb-1">Session plan</p>
           <h3 className="font-headline text-xl font-light mb-1">{SP.name} · Week {week} · Code {SD.code}</h3>
           <p className="text-[10px] text-brand-sandstone/70 mb-4">
-            Theme: <strong>{String(plan[5])}</strong> · Focus: <strong>{String(plan[6])}</strong> · KPI: <strong className="text-red-300">{String(plan[7])}</strong>
+            Theme: <strong>{String(plan[5])}</strong> · Focus: <strong>{String(plan[6])}</strong> · KPI: <strong className="text-lbta-red">{String(plan[7])}</strong>
           </p>
           <div className="space-y-0 border-t border-brand-sandstone/20">
             {drillIds.map((did, bi) => {
@@ -301,7 +329,7 @@ export function ProgramsTab({
                           <p className="text-[10px]">{dr.scale}</p>
                         </div>
                       )}
-                      <button type="button" className="text-[8px] font-semibold px-2 py-1 rounded border border-brand-sandstone/30 hover:bg-white/10">Swap drill</button>
+                      <button type="button" className="text-[8px] font-semibold px-2 py-1 rounded border border-brand-sandstone/30 hover:bg-white/10 min-h-[48px]">Swap drill</button>
                     </div>
                   )}
                 </div>
@@ -309,7 +337,7 @@ export function ProgramsTab({
             })}
           </div>
           <div className="mt-4 pt-4 border-t border-brand-sandstone/20">
-            <div className="text-[8px] font-bold uppercase text-[#8B6914] mb-2">Home practice</div>
+            <div className="text-[8px] font-bold uppercase text-brand-thousand-steps mb-2">Home practice</div>
             <button
               type="button"
               onClick={copyHomePractice}

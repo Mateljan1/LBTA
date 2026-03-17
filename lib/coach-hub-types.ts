@@ -34,6 +34,8 @@ export interface HubProgram {
   id: string
   name: string
   stage?: string
+  /** Prefer category; cat kept for legacy JSON. */
+  category?: string
   cat?: string
   [key: string]: unknown
 }
@@ -60,6 +62,28 @@ export type CoachSchedule = Record<string, CoachDaySchedule>
 
 export type CoachSchedulesMap = Record<string, CoachSchedule>
 
+/** Assessment calendar entry (mode + coach_action per week). */
+export interface AssessmentCalendarEntry {
+  mode: string
+  coach_action: string
+}
+
+export type AssessmentCalendar = Record<string, AssessmentCalendarEntry>
+
+/** Program schedule slot (day, time, code). */
+export interface ProgramScheduleSlot {
+  day: string
+  time: string
+  code: string
+}
+
+/** Initial data passed from Coach Hub page to client (single contract). */
+export type CoachHubInitialData = {
+  hubData: HubData
+  seasons: SeasonsMap
+  coachSchedules: CoachSchedulesMap
+}
+
 /** Top-level hub data (D) from hub-data.json */
 export interface HubData {
   stages: Record<string, HubStage>
@@ -78,7 +102,7 @@ export interface HubData {
   drill_idx?: Record<string, unknown>
   block_pools?: Record<string, unknown>
   stage_levels?: Record<string, unknown>
-  assessment_calendar?: Record<string, unknown>
+  assessment_calendar?: AssessmentCalendar
   advancement?: Record<string, unknown>
   stations?: unknown[]
   parent_comms?: Record<string, unknown>
@@ -90,4 +114,15 @@ export interface HubData {
   camp_ops?: Record<string, unknown>
   lbhs_team?: Record<string, unknown>
   [key: string]: unknown
+}
+
+/** Auth POST response. */
+export interface CoachHubAuthResponse {
+  success: boolean
+  error?: string
+}
+
+/** Logout POST response. */
+export interface CoachHubLogoutResponse {
+  success: boolean
 }

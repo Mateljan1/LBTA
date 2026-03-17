@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { MapPin, Phone, Mail, CheckCircle, Loader2 } from 'lucide-react'
@@ -18,6 +18,13 @@ export default function ContactPage() {
   })
   const [errors, setErrors] = useState<{[key: string]: string}>({})
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current)
+    }
+  }, [])
 
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const validatePhone = (phone: string) => /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phone)
@@ -56,9 +63,11 @@ export default function ContactPage() {
       
       if (response.ok) {
         setStatus('success')
-        setTimeout(() => {
+        if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current)
+        successTimeoutRef.current = setTimeout(() => {
           setFormData({ name: '', email: '', phone: '', interestedIn: '', message: '' })
           setStatus('idle')
+          successTimeoutRef.current = null
         }, 5000)
       } else {
         setStatus('error')
@@ -166,7 +175,7 @@ export default function ContactPage() {
               </p>
               <button
                 onClick={() => setStatus('idle')}
-                className="text-black hover:underline font-sans font-semibold text-[15px]"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 text-black hover:underline font-sans font-semibold text-[15px] rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
               >
                 Send Another Message
               </button>
@@ -198,7 +207,7 @@ export default function ContactPage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
+                      className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-base focus:outline-none focus:ring-2 focus:ring-black transition-all ${
                         errors.name ? 'ring-2 ring-red-500' : ''
                       }`}
                       placeholder="Full name"
@@ -225,7 +234,7 @@ export default function ContactPage() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
+                      className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-base focus:outline-none focus:ring-2 focus:ring-black transition-all ${
                         errors.email ? 'ring-2 ring-red-500' : ''
                       }`}
                       placeholder="your@email.com"
@@ -252,7 +261,7 @@ export default function ContactPage() {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all ${
+                      className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-base focus:outline-none focus:ring-2 focus:ring-black transition-all ${
                         errors.phone ? 'ring-2 ring-red-500' : ''
                       }`}
                       placeholder="(949) 555-1234"
@@ -277,12 +286,12 @@ export default function ContactPage() {
                       id="interested"
                       value={formData.interestedIn}
                       onChange={(e) => setFormData({...formData, interestedIn: e.target.value})}
-                      className="w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all cursor-pointer"
+                      className="w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-base focus:outline-none focus:ring-2 focus:ring-black transition-all cursor-pointer"
                       aria-label="Select program interest"
                     >
                       <option value="">Select a program...</option>
                       <option value="Junior Programs">Junior Programs (Ages 3-11)</option>
-                      <option value="Youth Development">Youth Development (Ages 11-15)</option>
+                      <option value="Youth Development">Youth Development (Ages 11-18)</option>
                       <option value="Adult Programs">Adult Programs</option>
                       <option value="Fitness Programs">Fitness Programs</option>
                       <option value="Summer Camps">Summer Camps</option>
@@ -304,7 +313,7 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
                       rows={4}
-                      className="w-full px-6 py-4 rounded-2xl bg-brand-morning-light text-black/85 font-sans text-[15px] focus:outline-none focus:ring-2 focus:ring-black transition-all resize-none"
+                      className="w-full px-6 py-4 rounded-2xl bg-brand-morning-light text-black/85 font-sans text-base focus:outline-none focus:ring-2 focus:ring-black transition-all resize-none"
                       placeholder="Tell us about your tennis goals and any questions you have..."
                       aria-label="Your message to us"
                     />

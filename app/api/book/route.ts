@@ -7,6 +7,7 @@ import {
   addToList,
   addTags,
   LBTA_LIST_ID,
+  getWebsiteSignupsListId,
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
@@ -107,9 +108,12 @@ export async function POST(request: NextRequest) {
           const contactId = contactResult.data.id
           console.log('[AC] Contact created:', { contactId })
 
-          // Add to list (triggers welcome/confirmation automation)
           await addToList(contactId, LBTA_LIST_ID)
-          console.log('[AC] Added to List 4:', { contactId })
+          const websiteSignupsListId = getWebsiteSignupsListId()
+          if (websiteSignupsListId !== null) {
+            await addToList(contactId, websiteSignupsListId)
+          }
+          console.log('[AC] Added to list(s):', { contactId })
 
           // Build tag list
           const tagsToApply: number[] = [

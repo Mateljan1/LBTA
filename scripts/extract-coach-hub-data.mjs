@@ -3,6 +3,10 @@
  * One-time extraction from LBTA_Coach_Hub.html into data/coach-hub/*.json
  * Usage: node scripts/extract-coach-hub-data.mjs [path-to-HTML]
  * Default HTML path: ~/Downloads/LBTA_Coach_Hub.html
+ *
+ * SECURITY: This script must only be run against trusted HTML (e.g. exported
+ * LBTA_Coach_Hub.html). It uses new Function() to parse schedule blocks; do not
+ * repurpose for untrusted input (code injection risk).
  */
 
 import fs from 'fs'
@@ -97,6 +101,7 @@ const robertStr = extractScheduleBlock(lines, 1323)
 
 function parseSchedule(s) {
   if (!s) return null
+  // Trusted HTML only: new Function parses schedule block; do not use with untrusted input
   try {
     const fn = new Function('return (' + s + ')')
     return fn()

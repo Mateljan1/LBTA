@@ -12,8 +12,20 @@ import { getEnvVar } from './env'
 const AC_URL = () => getEnvVar('ACTIVECAMPAIGN_URL')
 const AC_API_KEY = () => getEnvVar('ACTIVECAMPAIGN_API_KEY')
 
-/** LBTA Master List ID */
+/** LBTA Master List ID — all contacts (website + sync) go here for segmentation. */
 export const LBTA_LIST_ID = 4
+
+/**
+ * Optional: list used ONLY by website form submissions. When set, the single AC automation
+ * should trigger only on "Contact added to this list" so synced/tagged contacts never get confirmation emails.
+ * Create list in AC (e.g. "LBTA Website Signups"), then set ACTIVECAMPAIGN_WEBSITE_SIGNUPS_LIST_ID in Vercel.
+ */
+export function getWebsiteSignupsListId(): number | null {
+  const id = process.env.ACTIVECAMPAIGN_WEBSITE_SIGNUPS_LIST_ID
+  if (!id) return null
+  const n = parseInt(id, 10)
+  return Number.isNaN(n) || n <= 0 ? null : n
+}
 
 // ============================================================
 // Tag Definitions - Single Source of Truth

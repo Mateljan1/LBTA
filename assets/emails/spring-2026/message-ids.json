@@ -1,0 +1,70 @@
+{
+  "prospects": [
+    {
+      "name": "LBTA P1 Welcome",
+      "id": "198"
+    },
+    {
+      "name": "LBTA P2 How We Teach",
+      "id": "199"
+    },
+    {
+      "name": "LBTA P3 Right Age",
+      "id": "200"
+    },
+    {
+      "name": "LBTA P4 Inside a Session",
+      "id": "201"
+    },
+    {
+      "name": "LBTA P5 Why Tennis",
+      "id": "202"
+    },
+    {
+      "name": "LBTA P6 Meet Coaches",
+      "id": "203"
+    },
+    {
+      "name": "LBTA P7 Spring Started",
+      "id": "204"
+    },
+    {
+      "name": "LBTA P8 For Adults",
+      "id": "205"
+    }
+  ],
+  "returning": [
+    {
+      "name": "LBTA R1 Traffic Light",
+      "id": "206"
+    },
+    {
+      "name": "LBTA R2 First 4 Shots",
+      "id": "207"
+    },
+    {
+      "name": "LBTA R3 70 Percent Rule",
+      "id": "208"
+    },
+    {
+      "name": "LBTA R4 Earn the Line",
+      "id": "209"
+    },
+    {
+      "name": "LBTA R5 Attack Space",
+      "id": "210"
+    },
+    {
+      "name": "LBTA R6 Defense Height",
+      "id": "211"
+    },
+    {
+      "name": "LBTA R7 Summer Plan",
+      "id": "212"
+    },
+    {
+      "name": "LBTA R8 One Cue Word",
+      "id": "213"
+    }
+  ]
+}

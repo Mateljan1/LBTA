@@ -5,8 +5,6 @@
 
 export const COACH_HUB_COOKIE_NAME = 'lbta_coach_hub'
 
-const COOKIE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000 // 7 days
-
 function base64UrlDecode(str: string): string {
   const base64 = str.replace(/-/g, '+').replace(/_/g, '/')
   return atob(base64)
@@ -64,18 +62,23 @@ export async function verifyCoachHubCookie(
   )
   const computedHex = bufferToHex(sigBuffer)
 
-  if (sigHex.length !== computedHex.length) return false
-  // Constant-time compare (Edge has no Buffer/crypto.timingSafeEqual)
+  // Constant-time compare: run loop over max length then check length so timing does not leak length (Edge has no Buffer/crypto.timingSafeEqual).
+  const maxLen = Math.max(sigHex.length, computedHex.length)
   let diff = 0
-  for (let i = 0; i < sigHex.length; i++) {
-    diff |= sigHex.charCodeAt(i) ^ computedHex.charCodeAt(i)
+  for (let i = 0; i < maxLen; i++) {
+    const a = i < sigHex.length ? sigHex.charCodeAt(i) : 0
+    const b = i < computedHex.length ? computedHex.charCodeAt(i) : 0
+    diff |= a ^ b
   }
-  return diff === 0
+  return diff === 0 && sigHex.length === computedHex.length
 }
+
+/** Cookie duration: 7 days, in seconds (for Set-Cookie Max-Age). Single source for auth and auth-server. */
+const COOKIE_MAX_AGE_SECONDS = 7 * 24 * 60 * 60
 
 /**
  * Max age for the cookie (seconds) for Set-Cookie.
  */
 export function getCoachHubCookieMaxAge(): number {
-  return Math.floor(COOKIE_MAX_AGE_MS / 1000)
+  return COOKIE_MAX_AGE_SECONDS
 }

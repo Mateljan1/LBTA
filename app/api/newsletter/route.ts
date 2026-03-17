@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { newsletterSchema, parseJsonBody, validateRequest } from '@/lib/validations'
 import { hasEnvVar } from '@/lib/env'
-import { upsertContact, addToList, addTag, CAMPAIGN_TAGS } from '@/lib/activecampaign'
+import { upsertContact, addToList, addTag, getWebsiteSignupsListId, CAMPAIGN_TAGS } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
 
@@ -66,6 +66,10 @@ export async function POST(request: NextRequest) {
           const listResult = await addToList(result.data.id)
           if (!listResult.success) {
             console.error('[newsletter] ActiveCampaign addToList failed')
+          }
+          const websiteSignupsListId = getWebsiteSignupsListId()
+          if (websiteSignupsListId !== null) {
+            await addToList(result.data.id, websiteSignupsListId)
           }
           await addTag(result.data.id, CAMPAIGN_TAGS.website_registration)
         } else {

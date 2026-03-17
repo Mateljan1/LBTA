@@ -1,10 +1,12 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import type { SeasonKey } from '@/lib/season-utils'
 import {
   DAY_ORDER,
   LOCATION_KEYS,
+  buildWeekGridForLocation,
+  formatGridRowTime,
   type ScheduleByLocationByDay,
 } from '@/lib/calendar-schedule'
 
@@ -20,6 +22,16 @@ const LOCATION_LABELS: Record<string, string> = {
   Moulton: 'Moulton Meadows Park',
   Alta: 'Alta Laguna Park',
   LBHS: 'Laguna Beach High School',
+}
+
+const DAY_SHORT: Record<string, string> = {
+  Monday: 'Mon',
+  Tuesday: 'Tue',
+  Wednesday: 'Wed',
+  Thursday: 'Thu',
+  Friday: 'Fri',
+  Saturday: 'Sat',
+  Sunday: 'Sun',
 }
 
 export type CalendarSeasonData = {
@@ -48,6 +60,7 @@ export default function ScheduleCalendarView({
 }: ScheduleCalendarViewProps) {
   const [season, setSeason] = useState<SeasonKey>(initialSeason)
   const [locationFilter, setLocationFilter] = useState<string>('')
+  const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar')
 
   const { scheduleByLocationByDay, seasonLabel, seasonDates } =
     calendarBySeason[season] ?? calendarBySeason.winter
@@ -60,10 +73,40 @@ export default function ScheduleCalendarView({
     [onSeasonChange]
   )
 
-  const locationsToShow =
-    locationFilter && LOCATION_KEYS.includes(locationFilter)
-      ? [locationFilter]
-      : LOCATION_KEYS.filter((loc) => scheduleByLocationByDay[loc])
+  const locationsToShow = useMemo(
+    () =>
+      locationFilter && LOCATION_KEYS.includes(locationFilter)
+        ? [locationFilter]
+        : LOCATION_KEYS.filter((loc) => scheduleByLocationByDay[loc]),
+    [locationFilter, scheduleByLocationByDay]
+  )
+
+  const gridsByLocation = useMemo(() => {
+    const out: Record<string, ReturnType<typeof buildWeekGridForLocation>> = {}
+    for (const loc of locationsToShow) {
+      const byDay = scheduleByLocationByDay[loc]
+      if (byDay) out[loc] = buildWeekGridForLocation(byDay)
+    }
+    return out
+  }, [locationsToShow, scheduleByLocationByDay])
+
+  const getUsedRowRange = useCallback(
+    (grid: ReturnType<typeof buildWeekGridForLocation>) => {
+      let minR = grid.length
+      let maxR = -1
+      grid.forEach((row, r) => {
+        const hasContent = row.some(
+          (c) => c !== null && c !== 'covered'
+        )
+        if (hasContent) {
+          minR = Math.min(minR, r)
+          maxR = Math.max(maxR, r)
+        }
+      })
+      return maxR >= minR ? { min: minR, max: maxR } : null
+    },
+    []
+  )
 
   const handlePrint = useCallback(() => {
     window.print()
@@ -76,10 +119,10 @@ export default function ScheduleCalendarView({
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-2">
           Schedule by location
         </p>
-        <h1 className="font-headline text-[28px] md:text-[40px] font-medium text-brand-pacific-dusk leading-tight mb-1">
+        <h1 className="font-headline text-[28px] md:text-[40px] font-medium text-brand-pacific-dusk leading-tight mb-2">
           {seasonLabel} Schedule
         </h1>
-        <p className="font-sans text-[15px] text-brand-pacific-dusk/70 mb-6">
+        <p className="font-sans text-[15px] md:text-[16px] text-brand-pacific-dusk/80 mb-8 md:mb-10">
           {seasonDates}
         </p>
 
@@ -103,7 +146,7 @@ export default function ScheduleCalendarView({
                     font-sans text-[13px] font-medium tracking-[0.05em] px-5 py-3 rounded-[2px]
                     transition-all duration-200 min-h-[48px]
                     focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2
-                    ${season === key ? 'bg-black text-white' : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk'}
+                    ${season === key ? 'bg-black text-white' : 'bg-brand-sandstone/80 text-brand-pacific-dusk/80 hover:text-brand-pacific-dusk'}
                   `}
                 >
                   {SEASON_LABELS[key]}
@@ -111,25 +154,47 @@ export default function ScheduleCalendarView({
               ))}
             </div>
 
-            {/* Location filter */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              <span className="font-sans text-[13px] text-brand-pacific-dusk/70 self-center mr-2">
-                Location:
-              </span>
-              {['', ...LOCATION_KEYS].map((loc) => (
+            {/* Location + View filters */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mb-8">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-sans text-[12px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.08em]">
+                  Location
+                </span>
+                {['', ...LOCATION_KEYS].map((loc) => (
+                  <button
+                    key={loc || 'all'}
+                    type="button"
+                    onClick={() => setLocationFilter(loc)}
+                    className={`
+                      font-sans text-[13px] font-medium px-4 py-2.5 rounded-[2px] min-h-[48px] transition-colors duration-200
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2
+                      ${locationFilter === loc ? 'bg-brand-pacific-dusk text-white' : 'bg-white border border-black/10 text-brand-pacific-dusk hover:border-black/15'}
+                    `}
+                  >
+                    {loc || 'All'}
+                  </button>
+                ))}
+              </div>
+              <div className="h-6 w-px bg-black/10 hidden sm:block" aria-hidden />
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-sans text-[12px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.08em]">
+                  View
+                </span>
                 <button
-                  key={loc || 'all'}
                   type="button"
-                  onClick={() => setLocationFilter(loc)}
-                  className={`
-                    font-sans text-[13px] font-medium px-4 py-2 rounded-[2px] min-h-[48px]
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2
-                    ${locationFilter === loc ? 'bg-brand-pacific-dusk text-white' : 'bg-white border border-black/10 text-brand-pacific-dusk hover:border-black/20'}
-                  `}
+                  onClick={() => setViewMode('calendar')}
+                  className={`font-sans text-[13px] font-medium px-4 py-2.5 rounded-[2px] min-h-[48px] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 ${viewMode === 'calendar' ? 'bg-black text-white' : 'bg-white border border-black/10 text-brand-pacific-dusk hover:border-black/15'}`}
                 >
-                  {loc || 'All'}
+                  Calendar
                 </button>
-              ))}
+                <button
+                  type="button"
+                  onClick={() => setViewMode('list')}
+                  className={`font-sans text-[13px] font-medium px-4 py-2.5 rounded-[2px] min-h-[48px] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 ${viewMode === 'list' ? 'bg-black text-white' : 'bg-white border border-black/10 text-brand-pacific-dusk hover:border-black/15'}`}
+                >
+                  List
+                </button>
+              </div>
             </div>
           </>
         )}
@@ -154,54 +219,141 @@ export default function ScheduleCalendarView({
           </div>
         )}
 
-        {/* By location → by day */}
-        <div className="space-y-10">
-          {locationsToShow.map((loc) => {
-            const byDay = scheduleByLocationByDay[loc]
-            if (!byDay) return null
-            const locationName = LOCATION_LABELS[loc] ?? loc
-            return (
-              <section key={loc} className="break-inside-avoid">
-                <div className="inline-block font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-white bg-brand-pacific-dusk px-4 py-2 rounded-[2px] mb-4">
-                  {locationName}
-                </div>
-                <div className="space-y-6">
-                  {DAY_ORDER.map((day) => {
-                    const slots = byDay[day]
-                    if (!slots?.length) return null
-                    return (
-                      <div key={day}>
-                        <h3 className="font-headline text-[18px] md:text-[20px] font-medium text-brand-pacific-dusk mb-2">
-                          {day}
-                        </h3>
-                        <ul className="space-y-2 list-none">
-                          {slots.map((slot, i) => (
-                            <li
-                              key={`${slot.programId}-${slot.time}-${i}`}
-                              className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-sans text-[14px] text-brand-pacific-dusk/90 py-1.5 border-b border-black/[0.06] last:border-0"
+        {/* Calendar grid view or list view */}
+        {viewMode === 'calendar' ? (
+          <div className="space-y-12 md:space-y-16 overflow-x-auto">
+            {locationsToShow.map((loc) => {
+              const grid = gridsByLocation[loc]
+              if (!grid) return null
+              const range = getUsedRowRange(grid)
+              const rowsToShow = range
+                ? grid.slice(range.min, range.max + 1)
+                : []
+              const locationName = LOCATION_LABELS[loc] ?? loc
+              return (
+                <section key={loc} className="break-inside-avoid">
+                  <h2 className="font-headline text-[18px] md:text-[20px] font-medium text-brand-pacific-dusk mb-5">
+                    {locationName}
+                  </h2>
+                  <div className="border border-black/[0.08] rounded-[2px] overflow-hidden bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)]">
+                    <table className="w-full border-collapse font-sans min-w-[640px]" role="grid" aria-label={`Weekly schedule for ${locationName}`}>
+                      <thead>
+                        <tr className="bg-brand-sandstone/50">
+                          <th scope="col" className="text-left font-sans text-[11px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-[0.12em] py-4 pl-4 pr-3 w-[80px] border-b border-r border-black/[0.08]">
+                            Time
+                          </th>
+                          {DAY_ORDER.map((day) => (
+                            <th
+                              key={day}
+                              scope="col"
+                              className="text-center font-sans text-[11px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-[0.12em] py-4 px-2 border-b border-black/[0.08] last:border-r-0"
                             >
-                              <span className="font-medium text-brand-pacific-dusk">
-                                {slot.time}
-                              </span>
-                              <span>
-                                {slot.programName}
-                                {slot.ages ? ` (${slot.ages})` : ''}
-                              </span>
-                              <span className="text-brand-pacific-dusk/60 text-[13px]">
-                                {slot.duration}
-                                {slot.coach ? ` · ${slot.coach}` : ''}
-                              </span>
-                            </li>
+                              {DAY_SHORT[day]}
+                            </th>
                           ))}
-                        </ul>
-                      </div>
-                    )
-                  })}
-                </div>
-              </section>
-            )
-          })}
-        </div>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {rowsToShow.map((row, i) => {
+                          const rowIndex = range!.min + i
+                          return (
+                          <tr key={rowIndex} className="border-b border-black/[0.05] last:border-b-0 transition-colors duration-150 hover:bg-black/[0.01]">
+                            <td className="py-2 pl-4 pr-3 text-brand-pacific-dusk/70 text-[12px] font-medium align-top border-r border-black/[0.08] whitespace-nowrap">
+                              {formatGridRowTime(rowIndex)}
+                            </td>
+                            {DAY_ORDER.map((_, dayIndex) => {
+                              const cell = row[dayIndex]
+                              if (cell === 'covered') return null
+                              if (cell === null) {
+                                return (
+                                  <td
+                                    key={dayIndex}
+                                    className="py-2 px-2 align-top border-black/[0.05] min-h-[44px]"
+                                  />
+                                )
+                              }
+                              const { slot, rowSpan } = cell
+                              return (
+                                <td
+                                  key={dayIndex}
+                                  rowSpan={rowSpan}
+                                  className="p-2 align-top border-l border-black/[0.05] first:border-l-0"
+                                >
+                                  <div className="h-full min-h-[40px] bg-[var(--cove-mist)] border-l-[3px] border-brand-victoria-cove rounded-[2px] px-3 py-2.5 text-brand-pacific-dusk transition-shadow duration-200 hover:shadow-[0_1px_3px_rgba(46,139,139,0.08)]">
+                                    <div className="font-sans font-medium text-[14px] leading-snug text-brand-pacific-dusk">
+                                      {slot.programName}
+                                      {slot.ages ? (
+                                        <span className="text-brand-pacific-dusk/80 font-normal"> ({slot.ages})</span>
+                                      ) : null}
+                                    </div>
+                                    <div className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-1 leading-snug">
+                                      {slot.time} · {slot.duration}
+                                      {slot.coach ? ` · ${slot.coach}` : ''}
+                                    </div>
+                                  </div>
+                                </td>
+                              )
+                            })}
+                          </tr>
+                          )
+                        }
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="space-y-10">
+            {locationsToShow.map((loc) => {
+              const byDay = scheduleByLocationByDay[loc]
+              if (!byDay) return null
+              const locationName = LOCATION_LABELS[loc] ?? loc
+              return (
+                <section key={loc} className="break-inside-avoid">
+                  <h2 className="font-headline text-[18px] md:text-[20px] font-medium text-brand-pacific-dusk mb-5">
+                    {locationName}
+                  </h2>
+                  <div className="space-y-6">
+                    {DAY_ORDER.map((day) => {
+                      const slots = byDay[day]
+                      if (!slots?.length) return null
+                      return (
+                        <div key={day}>
+                          <h3 className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-[0.12em] mb-3">
+                            {day}
+                          </h3>
+                          <ul className="space-y-2 list-none">
+                            {slots.map((slot, i) => (
+                              <li
+                                key={`${slot.programId}-${slot.time}-${i}`}
+                                className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-sans text-[14px] text-brand-pacific-dusk/90 py-1.5 border-b border-black/[0.06] last:border-0"
+                              >
+                                <span className="font-medium text-brand-pacific-dusk">
+                                  {slot.time}
+                                </span>
+                                <span>
+                                  {slot.programName}
+                                  {slot.ages ? ` (${slot.ages})` : ''}
+                                </span>
+                                <span className="text-brand-pacific-dusk/60 text-[13px]">
+                                  {slot.duration}
+                                  {slot.coach ? ` · ${slot.coach}` : ''}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </section>
+              )
+            })}
+          </div>
+        )}
 
         {printable && !showFilters && (
           <div className="mt-8 no-print flex flex-wrap items-center gap-3">

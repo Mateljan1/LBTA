@@ -22,7 +22,9 @@ export function middleware(request: NextRequest) {
 
   const secret = process.env.COACH_HUB_SECRET
   if (!secret) {
-    return NextResponse.next()
+    // Coach Hub must not be reachable when unconfigured; redirect to login so user sees auth form
+    const login = new URL(COACH_HUB_LOGIN, request.url)
+    return NextResponse.redirect(login)
   }
 
   const cookieValue = request.cookies.get(COACH_HUB_COOKIE_NAME)?.value

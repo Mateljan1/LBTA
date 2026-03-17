@@ -9,6 +9,7 @@ import {
   addToList,
   addTag,
   LBTA_LIST_ID,
+  getWebsiteSignupsListId,
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
@@ -197,9 +198,12 @@ export async function POST(request: NextRequest) {
           const contactId = contactResult.data.id
           console.log('[JTT] Contact created/updated:', { contactId })
 
-          // Add to LBTA master list (required for automations)
           await addToList(contactId, LBTA_LIST_ID)
-          console.log('[JTT] Added to List 4')
+          const websiteSignupsListId = getWebsiteSignupsListId()
+          if (websiteSignupsListId !== null) {
+            await addToList(contactId, websiteSignupsListId)
+          }
+          console.log('[JTT] Added to list(s)')
 
           // Apply JTT Spring 2026 tag to trigger confirmation email automation
           const tagResult = await addTag(contactId, CAMPAIGN_TAGS.jtt_spring_2026)

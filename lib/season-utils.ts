@@ -46,6 +46,17 @@ interface SeasonCTA {
 
 const SEASON_ORDER: SeasonKey[] = ['winter', 'spring', 'summer', 'fall']
 
+/** Season keys in display order (for tabs, filters). */
+export const SEASON_KEYS: SeasonKey[] = [...SEASON_ORDER]
+
+/** Short labels for calendar/schedule UI. */
+export const SEASON_LABELS: Record<SeasonKey, string> = {
+  winter: 'Winter',
+  spring: 'Spring',
+  summer: 'Summer',
+  fall: 'Fall',
+}
+
 function parseSeasonEndDate(dates: string): Date {
   const parts = dates.split('–')
   if (parts.length < 2) return new Date(dates.trim())

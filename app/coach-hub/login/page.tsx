@@ -3,10 +3,26 @@
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
+/** Allow only relative paths under /coach-hub to prevent open redirect and path traversal (OWASP A01). */
+function safeRedirectTarget(raw: string | null): string {
+  if (!raw || typeof raw !== 'string') return '/coach-hub'
+  const path = raw.trim()
+  if (path === '' || path.startsWith('//')) return '/coach-hub'
+  try {
+    const u = new URL(path, 'http://localhost')
+    if (u.origin !== 'http://localhost' || u.protocol !== 'http:') return '/coach-hub'
+    const resolved = u.pathname
+    if (!resolved.startsWith('/coach-hub') || resolved.includes('..')) return '/coach-hub'
+    return resolved
+  } catch {
+    return '/coach-hub'
+  }
+}
+
 export default function CoachHubLoginPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const next = searchParams.get('next') ?? '/coach-hub'
+  const next = safeRedirectTarget(searchParams.get('next'))
 
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)

@@ -35,6 +35,7 @@ export const programSchema = z.object({
   description: z.string(),
   coach: z.string().optional(),
   pricingNote: z.string().optional(),
+  inquiryLabel: z.string().optional(),
 }).passthrough()
 
 export const programsArraySchema = z.array(programSchema)

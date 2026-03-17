@@ -134,3 +134,101 @@ export function getSeasonDates(season: SeasonKey): string {
   const s = seasons[season]
   return s?.dates ?? ''
 }
+
+/** Grid config for week calendar: 30-min slots from 7 AM to 9 PM. */
+export const GRID_START_MINUTES = 7 * 60
+export const GRID_END_MINUTES = 21 * 60
+export const GRID_SLOT_MINUTES = 30
+
+/**
+ * Parse a time range string like "3:30–4:15 PM" or "11:45 AM–12:45 PM" to minutes from midnight.
+ * Supports "3:30–5:00 PM" (start inherits PM from end). Invalid ranges (start >= end) return null.
+ */
+export function parseTimeRangeToMinutes(timeStr: string): { start: number; end: number } | null {
+  const range = timeStr.trim().split(/[–\-]\s*/)
+  if (range.length < 2) return null
+  const startStr = range[0].trim()
+  const endStr = range[1].trim()
+  let start = parseTimeToMinutes(startStr)
+  let end = parseTimeToMinutes(endStr)
+  if (end == null) return null
+  if (start == null) {
+    const ampmMatch = endStr.match(/\s*(AM|PM)$/i)
+    if (ampmMatch) start = parseTimeToMinutes(startStr + ' ' + ampmMatch[1])
+  }
+  if (start == null || end == null) return null
+  if (end <= start) return null
+  return { start, end }
+}
+
+function parseTimeToMinutes(s: string): number | null {
+  const match = s.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i)
+  if (!match) return null
+  let h = parseInt(match[1], 10)
+  const m = match[2] ? parseInt(match[2], 10) : 0
+  const ampm = match[3].toUpperCase()
+  if (ampm === 'PM' && h !== 12) h += 12
+  if (ampm === 'AM' && h === 12) h = 0
+  return h * 60 + m
+}
+
+export interface GridCellSlot {
+  slot: CalendarSlot
+  rowSpan: number
+}
+
+export type GridCell = GridCellSlot | 'covered' | null
+
+/**
+ * For a given location's by-day schedule, build a week grid: dayIndex 0..6 (Mon..Sun), rowIndex 0..N (30-min slots).
+ * Cell is null (empty), 'covered' (part of a rowSpan from above), or { slot, rowSpan }.
+ * Overlapping slots: first slot wins; later slots for the same cell are skipped (no UI indication).
+ */
+export function buildWeekGridForLocation(
+  byDay: Record<string, CalendarSlot[]>
+): GridCell[][] {
+  const totalRows = (GRID_END_MINUTES - GRID_START_MINUTES) / GRID_SLOT_MINUTES
+  const dayIndexByDay: Record<string, number> = {}
+  DAY_ORDER.forEach((d, i) => { dayIndexByDay[d] = i })
+
+  const grid: GridCell[][] = []
+  for (let r = 0; r < totalRows; r++) {
+    grid[r] = []
+    for (let d = 0; d < 7; d++) grid[r][d] = null
+  }
+
+  for (const day of DAY_ORDER) {
+    const slots = byDay[day]
+    if (!slots?.length) continue
+    const dayIdx = dayIndexByDay[day]
+    for (const slot of slots) {
+      const parsed = parseTimeRangeToMinutes(slot.time)
+      if (!parsed) continue
+      const rowIndex = Math.floor((parsed.start - GRID_START_MINUTES) / GRID_SLOT_MINUTES)
+      const durationSlots = Math.min(
+        totalRows - rowIndex,
+        Math.max(1, Math.ceil((parsed.end - parsed.start) / GRID_SLOT_MINUTES))
+      )
+      if (rowIndex < 0 || rowIndex >= totalRows) continue
+      if (grid[rowIndex][dayIdx] !== null && grid[rowIndex][dayIdx] !== 'covered') continue
+      grid[rowIndex][dayIdx] = { slot, rowSpan: durationSlots }
+      for (let s = 1; s < durationSlots; s++) {
+        const r = rowIndex + s
+        if (r < totalRows) grid[r][dayIdx] = 'covered'
+      }
+    }
+  }
+
+  return grid
+}
+
+/** Format grid row time (e.g. 8:00 AM) for display. */
+export function formatGridRowTime(rowIndex: number): string {
+  const minutes = GRID_START_MINUTES + rowIndex * GRID_SLOT_MINUTES
+  const h = Math.floor(minutes / 60)
+  const m = minutes % 60
+  if (h === 0) return `12:${m.toString().padStart(2, '0')} AM`
+  if (h < 12) return `${h}:${m.toString().padStart(2, '0')} AM`
+  if (h === 12) return `12:${m.toString().padStart(2, '0')} PM`
+  return `${h - 12}:${m.toString().padStart(2, '0')} PM`
+}

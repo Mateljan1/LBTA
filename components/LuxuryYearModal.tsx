@@ -252,7 +252,9 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
         payload.jttId = jttData.id
       }
 
-      console.log('📤 Submitting registration:', payload)
+      if (process.env.NODE_ENV === 'development') {
+        console.log('📤 Submitting registration:', payload)
+      }
 
       const response = await fetch('/api/register-year', {
         method: 'POST',
@@ -261,7 +263,9 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
       })
 
       const result = await response.json()
-      console.log('📥 Registration response:', result)
+      if (process.env.NODE_ENV === 'development') {
+        console.log('📥 Registration response:', result)
+      }
 
       if (response.ok && result.success) {
         setIsSuccess(true)
@@ -464,7 +468,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           required
                           value={formData.firstName}
                           onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="First"
                         />
                       </div>
@@ -478,7 +482,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           required
                           value={formData.lastName}
                           onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="Last"
                         />
                       </div>
@@ -495,7 +499,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                         placeholder="you@example.com"
                       />
                     </div>
@@ -511,7 +515,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                         placeholder="(949) 555-0123"
                       />
                     </div>
@@ -527,7 +531,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           type="text"
                           value={formData.playerName}
                           onChange={(e) => setFormData({...formData, playerName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="Player's name"
                         />
                       </div>
@@ -540,7 +544,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           type="number"
                           value={formData.playerAge}
                           onChange={(e) => setFormData({...formData, playerAge: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="Age"
                           min="3"
                           max="99"

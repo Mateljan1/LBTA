@@ -3,7 +3,7 @@
  * Mirrors HTML getWk(), getAssessMode(), getTm().
  */
 
-import type { SeasonsMap } from './coach-hub-types'
+import type { SeasonsMap, AssessmentCalendar } from './coach-hub-types'
 
 const BLOCK_LABELS = ['Warm-up', 'Tech', 'Tact', 'Live', 'Conditioning', 'Wrap'] as const
 
@@ -38,7 +38,7 @@ export function getWk(seasons: SeasonsMap, seasonKey: string): number {
 
 export function getAssessMode(
   week: number,
-  assessmentCalendar: Record<string, { mode: string; coach_action: string }> | undefined
+  assessmentCalendar: AssessmentCalendar | undefined
 ): { mode: string; cls: string; action: string } {
   if (!assessmentCalendar) {
     return { mode: 'Continuous KPI', cls: 'assess-continuous', action: 'Track KPIs within drills.' }

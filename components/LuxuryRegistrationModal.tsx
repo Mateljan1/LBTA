@@ -42,10 +42,10 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
     notes: ''
   })
 
-  // Focus primary button when success state is shown (a11y)
+  // Focus primary button when success state is shown (a11y); run after focus trap so focus lands on CTA
   useEffect(() => {
     if (isSuccess && program) {
-      successPrimaryRef.current?.focus()
+      queueMicrotask(() => successPrimaryRef.current?.focus())
     }
   }, [isSuccess, program])
 
@@ -89,7 +89,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
     return () => window.removeEventListener('keydown', handleEscape)
   }, [onClose])
 
-  // Focus trap
+  // Focus trap (re-run when step or success changes so refs stay valid)
   useEffect(() => {
     if (!program) return
     const modal = modalRef.current
@@ -100,25 +100,30 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
     const firstElement = focusableElements[0]
     const lastElement = focusableElements[focusableElements.length - 1]
 
-    firstElement?.focus()
+    if (!isSuccess) firstElement?.focus()
 
     const handleTab = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return
+      const list = modal.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      const first = list[0]
+      const last = list[list.length - 1]
       if (e.shiftKey) {
-        if (document.activeElement === firstElement) {
+        if (document.activeElement === first) {
           e.preventDefault()
-          lastElement?.focus()
+          last?.focus()
         }
       } else {
-        if (document.activeElement === lastElement) {
+        if (document.activeElement === last) {
           e.preventDefault()
-          firstElement?.focus()
+          first?.focus()
         }
       }
     }
     modal.addEventListener('keydown', handleTab)
     return () => modal.removeEventListener('keydown', handleTab)
-  }, [program])
+  }, [program, step, isSuccess])
 
   if (!program) return null
 
@@ -275,7 +280,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                       <button
                         key={option.value}
                         onClick={() => setSelectedPlan(option.value)}
-                        className={`w-full p-5 rounded-[2px] text-left transition-all duration-200 ${
+                        className={`w-full min-h-[48px] p-5 rounded-[2px] text-left transition-all duration-200 ${
                           selectedPlan === option.value
                             ? 'bg-lbta-black text-white'
                             : 'bg-brand-sandstone hover:bg-lbta-stone text-brand-pacific-dusk'
@@ -356,7 +361,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           required
                           value={formData.firstName}
                           onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="First"
                         />
                       </div>
@@ -370,7 +375,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           required
                           value={formData.lastName}
                           onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="Last"
                         />
                       </div>
@@ -387,7 +392,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                         placeholder="you@example.com"
                       />
                     </div>
@@ -403,7 +408,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                         placeholder="(949) 555-0123"
                       />
                     </div>
@@ -419,7 +424,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           type="text"
                           value={formData.studentName}
                           onChange={(e) => setFormData({...formData, studentName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="Player's name"
                         />
                       </div>
@@ -432,7 +437,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           type="number"
                           value={formData.studentAge}
                           onChange={(e) => setFormData({...formData, studentAge: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
                           placeholder="Age"
                           min="3"
                           max="99"

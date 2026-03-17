@@ -1,6 +1,6 @@
 'use client'
 
-import type { CoachHubInitialData } from '@/components/coach-hub/CoachHubClient'
+import type { CoachHubInitialData } from '@/lib/coach-hub-types'
 
 export function PrivateTab({ initialData }: { initialData: CoachHubInitialData }) {
   const { hubData } = initialData

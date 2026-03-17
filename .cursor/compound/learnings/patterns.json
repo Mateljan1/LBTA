@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-16",
-  "lastLearnRun": "2026-03-16 compound:learn (Green Dot schedule review + fixes)",
+  "updated": "2026-03-17",
+  "lastLearnRun": "2026-03-17 Coach Hub validation 100/100 (auth verification script, modal Tab wrap)",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -80,6 +80,12 @@
       "when": "In-page anchor nav with sticky bar; sections have id for #hash links",
       "example": "Add scroll-mt-28 to section roots (CoachesHero, CoachingTeamSection, CoachesCTA) so scroll-to-section does not hide heading under nav",
       "tags": ["a11y", "ux", "anchor-nav"]
+    },
+    {
+      "name": "schedule-by-location-single-source",
+      "when": "Building a calendar or schedule view by location (e.g. Moulton, Alta, LBHS) for print/PDF or filters",
+      "example": "lib/calendar-schedule.ts: getScheduleByLocationByDay(season) uses only getWinter2026Programs, getSpringProgramsForDisplay, etc. from programs-data; normalizeSlotLocation uses slot.location when present else formatLocation(programLocation). No hardcoded program names or prices; view renders same data as schedules page.",
+      "tags": ["data-integrity", "single-source", "schedules", "calendar"]
     },
     {
       "name": "skip-to-main-focusable-target",
@@ -392,6 +398,60 @@
       "when": "Writing or editing program description in season JSON when location and schedule slot notes already carry venue info",
       "example": "Description: 'Competitive development for green ball players. Invitation-based. Same pricing as Youth Dev tiers.' — omit repeating Moulton Meadows / Alta Laguna / Friday LBHS; let location and slot.note carry where/when",
       "tags": ["programs", "description", "simplicity", "schedules", "data"]
+    },
+    {
+      "name": "placement-inquiry-unified",
+      "when": "Program is level-based, invitation-based, or coach-approved (e.g. Youth Development, UTR Green Dot Competitive, High Performance)",
+      "example": "Use (1) description stating level/age and that exceptions may qualify with coach approval; (2) optional pricingNote for edge case (e.g. under age, different level); (3) optional inquiryLabel and link to /contact?program=...&inquiry=placement. Apply consistently so 'with coaches approval they can join' is unified across programs.",
+      "tags": ["programs", "schedules", "placement", "inquiry", "data", "UX"]
+    },
+    {
+      "name": "login-redirect-param-validate",
+      "when": "Login page uses ?next= for redirect after auth",
+      "example": "Validate to same-origin path only: safeRedirectTarget(next) — allow only relative paths under app prefix (e.g. /coach-hub), reject //, full URLs, and non-path input. Prevents open redirect (OWASP A01).",
+      "tags": ["security", "login", "redirect", "coach-hub"]
+    },
+    {
+      "name": "password-max-length-schema",
+      "when": "Auth schema for password (e.g. coach hub, any single shared secret)",
+      "example": "z.string().min(1, 'Password is required').max(512, 'Invalid password'); generic message avoids length leakage; caps DoS from huge buffer/timingSafeEqual.",
+      "tags": ["security", "validation", "auth", "zod"]
+    },
+    {
+      "name": "modal-overlay-focus-trap-escape",
+      "when": "Implementing dialogs or overlays (BinderOverlay, GuideOverlay, any modal)",
+      "example": "Add onKeyDown(e => e.key === 'Escape' && onClose()); focus first focusable on open (useEffect or ref); optionally aria-describedby. Ensures keyboard users can close and focus does not leave.",
+      "tags": ["a11y", "modal", "overlay", "focus-trap"]
+    },
+    {
+      "name": "tab-list-aria",
+      "when": "Tab strip (buttons that switch panes)",
+      "example": "Container role=\"tablist\"; each tab role=\"tab\" aria-selected={activeTab === id}; pane role=\"tabpanel\" id and aria-labelledby pointing to tab. Screen readers then announce tabs correctly.",
+      "tags": ["a11y", "tabs", "ARIA"]
+    },
+    {
+      "name": "range-input-label",
+      "when": "Range input (e.g. players on court slider)",
+      "example": "Give input id=\"players-on-court\"; label htmlFor=\"players-on-court\"; optionally aria-valuenow, aria-valuemin, aria-valuemax for current value.",
+      "tags": ["a11y", "form", "range", "label"]
+    },
+    {
+      "name": "mobile-audit-baseline",
+      "when": "Implementing or auditing mobile experience (plan Phase 1 or before shipping mobile changes)",
+      "example": "Audit at 320px, 375px, 768px: no horizontal scroll; primary actions min-h-[48px] min-w-[48px]; form inputs 16px+ (text-base or text-[16px]) to avoid iOS zoom; scroll-mt on anchor sections; modals max-h-[90vh] with internal overflow-y-auto. See plans/mobile-audit-phase1-checklist.md.",
+      "tags": ["mobile", "a11y", "audit", "touch-targets", "viewport"]
+    },
+    {
+      "name": "auth-contract-verification-script",
+      "when": "Protected route has an auth API (e.g. password login) that returns 400 for invalid body and 401 for wrong secret",
+      "example": "Add scripts/verify-*-auth.mjs that fetch POST {} → expect 400, POST { password: 'wrong' } → expect 401. Run with dev server: COACH_HUB_SECRET=secret ./node_modules/.bin/next dev; then node scripts/verify-coach-hub-auth.mjs. Document in validation summary or README so validation can reach 100/100 without manual curl.",
+      "tags": ["auth", "validation", "contract", "script", "coach-hub"]
+    },
+    {
+      "name": "modal-focus-trap-tab-wrap",
+      "when": "Modal or overlay already has initial focus and Escape-to-close; WCAG expects focus to stay inside dialog",
+      "example": "In onKeyDown: if Tab and focus on last focusable, preventDefault and focus first; if Shift+Tab and focus on first, preventDefault and focus last. Query focusables from dialog ref (button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])); filter disabled.",
+      "tags": ["a11y", "modal", "focus-trap", "tab-wrap"]
     }
   ]
 }

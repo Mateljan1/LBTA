@@ -12,10 +12,11 @@ const phoneSchema = z.string().min(10, 'Phone number too short').max(20)
 const nameSchema = z.string().min(1, 'Name is required').max(100)
 
 /**
- * Coach Hub login — password only (no PII in logs)
+ * Coach Hub login — password only (no PII in logs).
+ * Max length limits buffer size for timing-safe compare and mitigates DoS.
  */
 export const coachHubAuthSchema = z.object({
-  password: z.string().min(1, 'Password is required'),
+  password: z.string().min(1, 'Password is required').max(512, 'Invalid password'),
 })
 
 /**
@@ -37,7 +38,7 @@ export const programRegistrationSchema = contactSchema.extend({
   location: z.string().max(200).optional(),
   studentName: z.string().max(200).optional(),
   studentAge: z.union([z.string(), z.number()]).optional(),
-  preferredDays: z.array(z.string()).optional().default([]),
+  preferredDays: z.array(z.string().max(50)).max(31).optional().default([]),
   timeSlot: z.string().max(100).optional(),
   totalPrice: z.union([z.string(), z.number()]).optional(),
   experience: z.string().max(200).optional(),
@@ -111,7 +112,7 @@ export type JTTRegistration = z.infer<typeof jttRegistrationSchema>
 export const bookingSchema = contactSchema.extend({
   program: z.string().max(200).optional(),
   location: z.string().max(200).optional(),
-  preferredDays: z.array(z.string()).optional().default([]),
+  preferredDays: z.array(z.string().max(50)).max(31).optional().default([]),
   experience: z.string().max(200).optional(),
   goals: z.string().max(1000).optional(),
 })
@@ -155,7 +156,7 @@ export const registerYearSchema = z.object({
   program: z.string().min(1, 'Program is required').max(200),
   studentName: z.string().max(200).optional(),
   playerName: z.string().max(200).optional(),
-  preferredDays: z.array(z.string()).optional().default([]),
+  preferredDays: z.array(z.string().max(50)).max(31).optional().default([]),
   location: z.string().max(200).optional(),
   timeSlot: z.string().max(100).optional(),
   totalPrice: z.union([z.string(), z.number()]).optional(),

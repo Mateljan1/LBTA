@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { CheckCircle, Send, Loader2 } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
@@ -80,6 +79,7 @@ export default function ApplyScholarshipPage() {
             </h1>
             <a
               href="#application"
+              aria-label="Go to scholarship application form"
               className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
             >
               Apply
@@ -407,7 +407,7 @@ export default function ApplyScholarshipPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting || submitSuccess}
-                  className="btn-primary min-w-[300px] disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-primary w-full max-w-[300px] mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>

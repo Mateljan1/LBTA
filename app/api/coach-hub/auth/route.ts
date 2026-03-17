@@ -18,6 +18,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') ?? 'anonymous'
   let rateLimitResult: { allowed: boolean; remaining: number; resetTime: number }
+  // On KV/rate-limit failure we allow the request (fail-open) to avoid locking out users when KV is unavailable. Consider monitoring KV health.
   try {
     rateLimitResult = await rateLimit(
       `coach-hub-auth:${ip}`,
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
 
   if (!rateLimitResult.allowed) {
     return NextResponse.json(
-      { success: false, error: 'Too many attempts. Try again later.' },
+      { success: false, error: 'Too many requests. Please try again later.' },
       {
         status: 429,
         headers: {

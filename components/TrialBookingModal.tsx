@@ -204,7 +204,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-brand-sandstone hover:bg-lbta-stone flex items-center justify-center transition-colors z-10"
+              className="absolute top-5 right-5 min-w-[48px] min-h-[48px] w-10 h-10 rounded-full bg-brand-sandstone hover:bg-lbta-stone flex items-center justify-center transition-colors z-10"
               aria-label="Close"
             >
               <svg className="w-5 h-5 text-lbta-slate" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -257,7 +257,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                           required
                           value={formData.firstName}
                           onChange={(e) => updateField('firstName', e.target.value)}
-                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                           placeholder="First"
                         />
                       </div>
@@ -271,7 +271,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                           required
                           value={formData.lastName}
                           onChange={(e) => updateField('lastName', e.target.value)}
-                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                           placeholder="Last"
                         />
                       </div>
@@ -288,7 +288,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         required
                         value={formData.email}
                         onChange={(e) => updateField('email', e.target.value)}
-                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                         placeholder="you@example.com"
                       />
                     </div>
@@ -304,7 +304,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         required
                         value={formData.phone}
                         onChange={(e) => updateField('phone', e.target.value)}
-                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                         placeholder="(949) 555-0123"
                       />
                     </div>
@@ -319,7 +319,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         required
                         value={formData.program}
                         onChange={(e) => updateField('program', e.target.value)}
-                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                       >
                         <option value="">Select a program...</option>
                         {programs.map(p => (
@@ -341,7 +341,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                           type="number"
                           value={formData.playerAge}
                           onChange={(e) => updateField('playerAge', e.target.value)}
-                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[15px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
                           placeholder="Age"
                           min="3"
                           max="18"
@@ -359,7 +359,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         value={formData.goals}
                         onChange={(e) => updateField('goals', e.target.value)}
                         rows={3}
-                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-[14px] text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20 resize-none"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20 resize-none"
                         placeholder="Tell us what you'd like to achieve..."
                       />
                     </div>
@@ -372,7 +372,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         <button
                           type="button"
                           onClick={() => setErrorMessage(null)}
-                          className="text-lbta-red hover:opacity-80 transition-opacity flex-shrink-0"
+                          className="min-w-[48px] min-h-[48px] inline-flex items-center justify-center -m-2 text-lbta-red hover:opacity-80 transition-opacity flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                           aria-label="Dismiss error"
                         >
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">

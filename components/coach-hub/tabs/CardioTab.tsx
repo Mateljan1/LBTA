@@ -1,6 +1,6 @@
 'use client'
 
-import type { CoachHubInitialData } from '@/components/coach-hub/CoachHubClient'
+import type { CoachHubInitialData } from '@/lib/coach-hub-types'
 
 type CardioItem = { id?: string; name: string; level?: string; work?: number; rest?: number; rounds?: number; task?: string; cues?: string }
 
@@ -15,7 +15,7 @@ export function CardioTab({ initialData }: { initialData: CoachHubInitialData })
             <h4 className="font-sans text-sm font-semibold text-brand-pacific-dusk">{c.name}</h4>
             {c.level && <p className="font-sans text-xs text-brand-victoria-cove mt-1">{c.level}</p>}
             <p className="font-sans text-xs text-brand-pacific-dusk/80 mt-2">
-              <span className="font-semibold">Format:</span> {c.work}s/{c.rest}s × {c.rounds}
+              <span className="font-semibold">Format:</span> {c.work ?? 0}s/{c.rest ?? 0}s × {c.rounds ?? 0}
             </p>
             {c.task && <p className="font-sans text-xs text-brand-pacific-dusk/80 mt-1"><span className="font-semibold">Task:</span> {c.task}</p>}
             {c.cues && <p className="font-sans text-xs text-black/60 mt-2 whitespace-pre-line"><span className="font-semibold">Cues:</span> {c.cues}</p>}
