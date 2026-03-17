@@ -5,6 +5,7 @@ import Link from 'next/link'
 import ProgramCard, { type Program } from '@/components/ProgramCard'
 import ProgramRow from './ProgramRow'
 import type { SeasonKey, SeasonDataForDisplay } from '@/lib/season-utils'
+import { SEASON_KEYS, SEASON_LABELS } from '@/lib/season-utils'
 
 type ViewMode = 'list' | 'cards'
 
@@ -13,14 +14,6 @@ interface ProgramsSectionProps {
   seasons: Record<SeasonKey, SeasonDataForDisplay>
   initialSeason: SeasonKey
   onRegister: (program: Program) => void
-}
-
-const SEASON_KEYS: SeasonKey[] = ['winter', 'spring', 'summer', 'fall']
-const SEASON_LABELS: Record<SeasonKey, string> = {
-  winter: 'Winter',
-  spring: 'Spring',
-  summer: 'Summer',
-  fall: 'Fall',
 }
 
 const CATEGORY_ORDER = ['Junior', 'Youth', 'Adult', 'Fitness']
@@ -72,7 +65,7 @@ export default function ProgramsSection({
   }, [])
 
   return (
-    <section id="programs" className="scroll-mt-28 bg-white py-16 md:py-24">
+    <section id="programs" className="scroll-mt-32 bg-white py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 min-w-0">
         {/* Section heading */}
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">

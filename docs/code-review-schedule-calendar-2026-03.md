@@ -94,7 +94,18 @@
 - [ ] Needs fixes before merge (see critical issues)
 - [ ] Needs discussion
 
-**Rationale:** No critical or blocking issues. Security and performance are solid; architecture matches single source of truth and project conventions. Warnings are focused on a11y (tab pattern, table role, focus ring), data robustness (time parsing, overlaps, rowSpan cap), and small cleanups (duplicate block, `range!`, fallback). These can be addressed in a follow-up PR or incrementally.
+**Rationale:** No critical or blocking issues.
+
+---
+
+## Follow-up (March 2026 — compound:work)
+
+All listed warnings and selected suggestions were addressed:
+
+- **Simplicity:** Single Print/Download block with conditional class; `getUsedRowRange` is a plain function.
+- **Accessibility:** Season tabs have arrow-key + Home/End, `aria-controls="season-schedule-panel"`, content wrapped in `role="tabpanel"`; table no longer uses `role="grid"`; time column is `<th scope="row">`; Location/View filters have `aria-pressed`; PDF/Print use Victoria Cove focus ring.
+- **Data/TS:** `parseTimeRangeToMinutes` rejects `start >= end`; supports "3:30–5:00 PM" (start inherits AM/PM); `durationSlots` capped to remaining rows; overlapping slots documented (first wins); `range!` replaced with explicit empty-state branch; fallback when season missing uses first available season.
+- **Pattern:** `SEASON_KEYS` and `SEASON_LABELS` moved to `lib/season-utils.ts`; `ScheduleCalendarView` and `ProgramsSection` import from there. Security and performance are solid; architecture matches single source of truth and project conventions. Warnings are focused on a11y (tab pattern, table role, focus ring), data robustness (time parsing, overlaps, rowSpan cap), and small cleanups (duplicate block, `range!`, fallback). These can be addressed in a follow-up PR or incrementally.
 
 ---
 

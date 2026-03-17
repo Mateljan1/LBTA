@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo } from 'react'
 import type { SeasonKey } from '@/lib/season-utils'
+import { SEASON_KEYS, SEASON_LABELS } from '@/lib/season-utils'
 import {
   DAY_ORDER,
   LOCATION_KEYS,
@@ -10,12 +11,21 @@ import {
   type ScheduleByLocationByDay,
 } from '@/lib/calendar-schedule'
 
-const SEASON_KEYS: SeasonKey[] = ['winter', 'spring', 'summer', 'fall']
-const SEASON_LABELS: Record<SeasonKey, string> = {
-  winter: 'Winter',
-  spring: 'Spring',
-  summer: 'Summer',
-  fall: 'Fall',
+const EMPTY_SCHEDULE: ScheduleByLocationByDay = {}
+
+function getUsedRowRange(
+  grid: ReturnType<typeof buildWeekGridForLocation>
+): { min: number; max: number } | null {
+  let minR = grid.length
+  let maxR = -1
+  grid.forEach((row, r) => {
+    const hasContent = row.some((c) => c !== null && c !== 'covered')
+    if (hasContent) {
+      minR = Math.min(minR, r)
+      maxR = Math.max(maxR, r)
+    }
+  })
+  return maxR >= minR ? { min: minR, max: maxR } : null
 }
 
 const LOCATION_LABELS: Record<string, string> = {
@@ -62,8 +72,14 @@ export default function ScheduleCalendarView({
   const [locationFilter, setLocationFilter] = useState<string>('')
   const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar')
 
-  const { scheduleByLocationByDay, seasonLabel, seasonDates } =
-    calendarBySeason[season] ?? calendarBySeason.winter
+  const fallbackSeason =
+    SEASON_KEYS.find((k) => calendarBySeason[k]) ?? initialSeason
+  const seasonData =
+    calendarBySeason[season] ?? calendarBySeason[fallbackSeason]
+  const scheduleByLocationByDay =
+    seasonData?.scheduleByLocationByDay ?? EMPTY_SCHEDULE
+  const seasonLabel = seasonData?.seasonLabel ?? ''
+  const seasonDates = seasonData?.seasonDates ?? ''
 
   const handleSeason = useCallback(
     (key: SeasonKey) => {
@@ -71,6 +87,33 @@ export default function ScheduleCalendarView({
       onSeasonChange?.(key)
     },
     [onSeasonChange]
+  )
+
+  const handleSeasonKeyDown = useCallback(
+    (e: React.KeyboardEvent, numTabs: number) => {
+      if (numTabs <= 0) return
+      let nextKey: SeasonKey | null = null
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault()
+        const i = SEASON_KEYS.indexOf(season)
+        nextKey = SEASON_KEYS[i <= 0 ? numTabs - 1 : i - 1]
+      } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault()
+        const i = SEASON_KEYS.indexOf(season)
+        nextKey = SEASON_KEYS[i >= numTabs - 1 ? 0 : i + 1]
+      } else if (e.key === 'Home') {
+        e.preventDefault()
+        nextKey = SEASON_KEYS[0]
+      } else if (e.key === 'End') {
+        e.preventDefault()
+        nextKey = SEASON_KEYS[numTabs - 1]
+      }
+      if (nextKey != null) {
+        setSeason(nextKey)
+        onSeasonChange?.(nextKey)
+      }
+    },
+    [season, onSeasonChange]
   )
 
   const locationsToShow = useMemo(
@@ -89,24 +132,6 @@ export default function ScheduleCalendarView({
     }
     return out
   }, [locationsToShow, scheduleByLocationByDay])
-
-  const getUsedRowRange = useCallback(
-    (grid: ReturnType<typeof buildWeekGridForLocation>) => {
-      let minR = grid.length
-      let maxR = -1
-      grid.forEach((row, r) => {
-        const hasContent = row.some(
-          (c) => c !== null && c !== 'covered'
-        )
-        if (hasContent) {
-          minR = Math.min(minR, r)
-          maxR = Math.max(maxR, r)
-        }
-      })
-      return maxR >= minR ? { min: minR, max: maxR } : null
-    },
-    []
-  )
 
   const handlePrint = useCallback(() => {
     window.print()
@@ -137,11 +162,14 @@ export default function ScheduleCalendarView({
               {SEASON_KEYS.map((key) => (
                 <button
                   key={key}
+                  id={`season-tab-${key}`}
                   type="button"
                   role="tab"
                   aria-selected={season === key}
+                  aria-controls="season-schedule-panel"
                   tabIndex={season === key ? 0 : -1}
                   onClick={() => handleSeason(key)}
+                  onKeyDown={(e) => handleSeasonKeyDown(e, SEASON_KEYS.length)}
                   className={`
                     font-sans text-[13px] font-medium tracking-[0.05em] px-5 py-3 rounded-[2px]
                     transition-all duration-200 min-h-[48px]
@@ -164,6 +192,7 @@ export default function ScheduleCalendarView({
                   <button
                     key={loc || 'all'}
                     type="button"
+                    aria-pressed={locationFilter === loc}
                     onClick={() => setLocationFilter(loc)}
                     className={`
                       font-sans text-[13px] font-medium px-4 py-2.5 rounded-[2px] min-h-[48px] transition-colors duration-200
@@ -182,6 +211,7 @@ export default function ScheduleCalendarView({
                 </span>
                 <button
                   type="button"
+                  aria-pressed={viewMode === 'calendar'}
                   onClick={() => setViewMode('calendar')}
                   className={`font-sans text-[13px] font-medium px-4 py-2.5 rounded-[2px] min-h-[48px] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 ${viewMode === 'calendar' ? 'bg-black text-white' : 'bg-white border border-black/10 text-brand-pacific-dusk hover:border-black/15'}`}
                 >
@@ -189,6 +219,7 @@ export default function ScheduleCalendarView({
                 </button>
                 <button
                   type="button"
+                  aria-pressed={viewMode === 'list'}
                   onClick={() => setViewMode('list')}
                   className={`font-sans text-[13px] font-medium px-4 py-2.5 rounded-[2px] min-h-[48px] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 ${viewMode === 'list' ? 'bg-black text-white' : 'bg-white border border-black/10 text-brand-pacific-dusk hover:border-black/15'}`}
                 >
@@ -199,27 +230,35 @@ export default function ScheduleCalendarView({
           </>
         )}
 
-        {printable && showFilters && (
-          <div className="mb-6 no-print flex flex-wrap items-center gap-3">
+        {printable && (
+          <div
+            className={`no-print flex flex-wrap items-center gap-3 ${showFilters ? 'mb-6' : 'mt-8'}`}
+          >
             <a
               href="/schedule-2026.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
             >
               Download PDF
             </a>
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center justify-center bg-transparent text-black border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:border-black focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center bg-transparent text-black border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:border-black focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
             >
               Print / Save as PDF
             </button>
           </div>
         )}
 
-        {/* Calendar grid view or list view */}
+        {/* Calendar grid view or list view — tabpanel for season tabs a11y */}
+        <div
+          id="season-schedule-panel"
+          role="tabpanel"
+          aria-labelledby={`season-tab-${season}`}
+          className={showFilters ? '' : 'mt-0'}
+        >
         {viewMode === 'calendar' ? (
           <div className="space-y-12 md:space-y-16 overflow-x-auto">
             {locationsToShow.map((loc) => {
@@ -236,7 +275,7 @@ export default function ScheduleCalendarView({
                     {locationName}
                   </h2>
                   <div className="border border-black/[0.08] rounded-[2px] overflow-hidden bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)]">
-                    <table className="w-full border-collapse font-sans min-w-[640px]" role="grid" aria-label={`Weekly schedule for ${locationName}`}>
+                    <table className="w-full border-collapse font-sans min-w-[640px]" aria-label={`Weekly schedule for ${locationName}`}>
                       <thead>
                         <tr className="bg-brand-sandstone/50">
                           <th scope="col" className="text-left font-sans text-[11px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-[0.12em] py-4 pl-4 pr-3 w-[80px] border-b border-r border-black/[0.08]">
@@ -254,13 +293,20 @@ export default function ScheduleCalendarView({
                         </tr>
                       </thead>
                       <tbody>
-                        {rowsToShow.map((row, i) => {
-                          const rowIndex = range!.min + i
+                        {!range ? (
+                          <tr>
+                            <td colSpan={8} className="py-8 text-center font-sans text-[14px] text-brand-pacific-dusk/70">
+                              No sessions this week
+                            </td>
+                          </tr>
+                        ) : (
+                        rowsToShow.map((row, i) => {
+                          const rowIndex = range.min + i
                           return (
                           <tr key={rowIndex} className="border-b border-black/[0.05] last:border-b-0 transition-colors duration-150 hover:bg-black/[0.01]">
-                            <td className="py-2 pl-4 pr-3 text-brand-pacific-dusk/70 text-[12px] font-medium align-top border-r border-black/[0.08] whitespace-nowrap">
+                            <th scope="row" className="py-2 pl-4 pr-3 text-brand-pacific-dusk/70 text-[12px] font-medium align-top border-r border-black/[0.08] whitespace-nowrap text-left font-sans">
                               {formatGridRowTime(rowIndex)}
-                            </td>
+                            </th>
                             {DAY_ORDER.map((_, dayIndex) => {
                               const cell = row[dayIndex]
                               if (cell === 'covered') return null
@@ -296,7 +342,7 @@ export default function ScheduleCalendarView({
                             })}
                           </tr>
                           )
-                        }
+                        })
                         )}
                       </tbody>
                     </table>
@@ -354,26 +400,7 @@ export default function ScheduleCalendarView({
             })}
           </div>
         )}
-
-        {printable && !showFilters && (
-          <div className="mt-8 no-print flex flex-wrap items-center gap-3">
-            <a
-              href="/schedule-2026.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
-            >
-              Download PDF
-            </a>
-            <button
-              type="button"
-              onClick={handlePrint}
-              className="inline-flex items-center justify-center bg-transparent text-black border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:border-black focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
-            >
-              Print / Save as PDF
-            </button>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   )
