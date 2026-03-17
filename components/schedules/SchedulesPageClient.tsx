@@ -75,9 +75,9 @@ export default function SchedulesPageClient({
         <div className="max-w-[1200px] mx-auto">
           <Link
             href="/schedules/calendar"
-            className="font-sans text-[13px] text-brand-victoria-cove hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded inline-flex items-center min-h-[44px]"
+            className="inline-flex items-center gap-2 min-h-[48px] px-4 py-2 rounded-[2px] border border-black/10 bg-brand-sandstone/50 font-sans text-[14px] font-medium text-brand-pacific-dusk hover:border-brand-victoria-cove hover:bg-brand-sandstone focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
           >
-            View schedule by location (print or save as PDF)
+            Calendar view · Print or save as PDF
           </Link>
         </div>
       </div>

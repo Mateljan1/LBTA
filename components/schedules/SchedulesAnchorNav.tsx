@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 const SECTIONS = [
@@ -7,9 +8,10 @@ const SECTIONS = [
   { id: 'private', label: 'Private Lessons' },
   { id: 'camps', label: 'Camps' },
   { id: 'leagues', label: 'Leagues' },
+  { id: 'calendar', label: 'Calendar / PDF', href: '/schedules/calendar' },
 ] as const
 
-const SECTION_IDS = SECTIONS.map((s) => s.id)
+const SECTION_IDS = SECTIONS.filter((s) => !('href' in s && s.href)).map((s) => s.id)
 
 function scrollToSection(id: string) {
   const el = document.getElementById(id)
@@ -75,8 +77,23 @@ export default function SchedulesAnchorNav() {
     >
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
         <ul className="flex gap-1 overflow-x-auto py-0 no-scrollbar scroll-smooth md:gap-2 md:overflow-visible">
-          {SECTIONS.map(({ id, label }) => {
-            const isActive = activeSectionId === id
+          {SECTIONS.map((section) => {
+            const { id, label } = section
+            const href = 'href' in section ? section.href : undefined
+            const isCalendar = Boolean(href)
+            const isActive = !isCalendar && activeSectionId === id
+            if (isCalendar && href) {
+              return (
+                <li key={id}>
+                  <Link
+                    href={href}
+                    className="inline-flex items-center min-h-[48px] px-4 md:px-5 py-3 font-sans text-[13px] md:text-[14px] font-medium whitespace-nowrap text-brand-victoria-cove hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[2px]"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              )
+            }
             return (
               <li key={id}>
                 <a
