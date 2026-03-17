@@ -16,21 +16,36 @@ const DAY_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satu
 const LOCATION_KEYS = ['Moulton', 'Alta', 'LBHS']
 const LOCATION_LABELS = { Moulton: 'Moulton Meadows Park', Alta: 'Alta Laguna Park', LBHS: 'Laguna Beach High School' }
 
+/**
+ * Same logic as lib/calendar-schedule.ts normalizeSlotLocation + lib/programs-data.ts formatLocation
+ * so PDF matches the website calendar by location.
+ */
+function formatLocation(programLocation) {
+  const loc = String(programLocation || '')
+  if (loc.includes('Moulton')) return 'Moulton'
+  if (loc.includes('Alta')) return 'Alta'
+  if (loc.includes('LBHS') || loc.includes('High School')) return 'LBHS'
+  return loc
+}
+
 function normalizeLoc(slot, programLocation) {
-  const loc = (slot.location || '').toLowerCase()
-  const prog = (programLocation || '').toLowerCase()
-  if (loc) {
-    if (loc.includes('moulton')) return 'Moulton'
-    if (loc.includes('alta')) return 'Alta'
-    if (loc.includes('lbhs') || loc.includes('high school') || loc.includes('lb high')) return 'LBHS'
+  // 1. Use slot.location when present (e.g. LiveBall has per-slot location)
+  const slotLoc = (slot.location || '').trim()
+  if (slotLoc) {
+    const s = slotLoc.toLowerCase()
+    if (s.includes('moulton')) return 'Moulton'
+    if (s.includes('alta')) return 'Alta'
+    if (s.includes('lbhs') || s.includes('high school') || s.includes('lb high')) return 'LBHS'
   }
-  if (prog.includes('mon/wed') && (slot.day === 'Monday' || slot.day === 'Wednesday')) return 'Moulton'
-  if (prog.includes('fri') && slot.day === 'Friday' && (prog.includes('lbhs') || prog.includes('high school'))) return 'LBHS'
-  if (prog.includes('moulton') && prog.includes('saturday') && slot.day === 'Saturday' && (prog.includes('lbhs') || prog.includes('high school'))) return 'LBHS'
-  if (prog.includes('moulton')) return 'Moulton'
-  if (prog.includes('alta')) return 'Alta'
-  if (prog.includes('lbhs') || prog.includes('laguna beach high')) return 'LBHS'
-  return 'Moulton'
+  const prog = String(programLocation || '').toLowerCase()
+  const day = slot.day
+  // 2. Day-specific rules (match calendar-schedule.ts order)
+  if (prog.includes('saturday at lbhs') && day === 'Saturday') return 'LBHS'
+  if (prog.includes('sat') && day === 'Saturday' && (prog.includes('lbhs') || prog.includes('high school'))) return 'LBHS'
+  if (prog.includes('mon/wed') && (day === 'Monday' || day === 'Wednesday')) return 'Moulton'
+  if (prog.includes('fri') && day === 'Friday' && (prog.includes('lbhs') || prog.includes('high school'))) return 'LBHS'
+  // 3. Fallback: first matching venue in program location (same as formatLocation)
+  return formatLocation(programLocation)
 }
 
 function buildScheduleByLocation(data) {
