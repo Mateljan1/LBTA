@@ -7,9 +7,9 @@ type GuideOverlayProps = {
 export function GuideOverlay({ onClose }: GuideOverlayProps) {
   return (
     <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Guide">
-      <div className="bg-brand-morning-light rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-auto p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="font-headline text-brand-pacific-dusk text-xl">Guide — Track E</h2>
+      <div className="bg-brand-morning-light rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-auto p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="font-headline text-brand-pacific-dusk text-xl">LBTA Coach Hub — Your Playbook</h2>
           <button
             type="button"
             onClick={onClose}
@@ -18,7 +18,41 @@ export function GuideOverlay({ onClose }: GuideOverlayProps) {
             Close
           </button>
         </div>
-        <p className="font-sans text-sm text-brand-pacific-dusk/70">Guide content will be implemented in Track E.</p>
+        <p className="font-sans text-sm text-brand-pacific-dusk/70 mb-6">
+          Everything you need to deliver a great session — curriculum, drills, camp operations, LBHS team plans, and more. Open it, run it, log it.
+        </p>
+        <section className="mb-6">
+          <h3 className="font-sans text-sm font-semibold text-brand-pacific-dusk mb-2">Quick Start</h3>
+          <ol className="list-decimal list-inside space-y-1 font-sans text-sm text-brand-pacific-dusk/80">
+            <li>Select your name from the coach dropdown.</li>
+            <li>Check the season and week (auto-detected).</li>
+            <li>Click your program in the Programs tab.</li>
+            <li>Select the day (Mon/Wed/Sat). Session plan loads with 6 drill blocks.</li>
+            <li>Expand any drill block for setup, steps, cues, scaling.</li>
+            <li>After class, use Post-Session Capture and copy home practice.</li>
+          </ol>
+        </section>
+        <section className="mb-6">
+          <h3 className="font-sans text-sm font-semibold text-brand-pacific-dusk mb-2">Week Binder</h3>
+          <p className="font-sans text-sm text-brand-pacific-dusk/80">
+            The Week Binder button generates every session for the selected coach for the week. Print it and bring it to the courts.
+          </p>
+        </section>
+        <section className="mb-6">
+          <h3 className="font-sans text-sm font-semibold text-brand-pacific-dusk mb-2">Assessment badges</h3>
+          <p className="font-sans text-sm text-brand-pacific-dusk/80">
+            Week 1: Baseline Intake. Weeks 2–9: Continuous KPI. Weeks 10–11: Pressure / Match Play. Week 12: Testing + Report.
+          </p>
+        </section>
+        <section className="mb-6 p-4 rounded-lg border-2 border-brand-thousand-steps bg-brand-sandstone/30">
+          <h3 className="font-sans text-sm font-semibold text-brand-pacific-dusk mb-2">Rules that never bend</h3>
+          <ul className="font-sans text-sm text-brand-pacific-dusk/80 space-y-1">
+            <li>· No advancement without 3 recorded KPIs. Data decides.</li>
+            <li>· Fun-first mandate. Engagement over perfection.</li>
+            <li>· Every kid active every minute. Station rotation at 5+ players.</li>
+            <li>· Advancement flags and equipment issues → Robert.</li>
+          </ul>
+        </section>
       </div>
     </div>
   )
