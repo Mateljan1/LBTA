@@ -15,7 +15,9 @@
     "check:vercel": "npx vercel whoami && npx vercel list --yes",
     "lighthouse": "npx lighthouse http://localhost:3000 --output=html --output-path=./docs/lighthouse-report.html --only-categories=performance,accessibility,best-practices,seo --chrome-flags='--headless'",
     "quality-gate": "npm run build && npm run lint",
-    "fact-check": "node scripts/fact-check.js"
+    "fact-check": "node scripts/fact-check.js",
+    "create:spring-campaign": "node scripts/create-ac-campaign.js assets/emails/lbta-spring-2026.html",
+    "build:schedule-pdf": "node scripts/generate-schedule-pdf.mjs"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",

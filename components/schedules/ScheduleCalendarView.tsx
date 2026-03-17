@@ -135,11 +135,19 @@ export default function ScheduleCalendarView({
         )}
 
         {printable && showFilters && (
-          <div className="mb-6 no-print">
+          <div className="mb-6 no-print flex flex-wrap items-center gap-3">
+            <a
+              href="/schedule-2026.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+            >
+              Download PDF
+            </a>
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center bg-transparent text-black border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:border-black focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
             >
               Print / Save as PDF
             </button>
@@ -196,11 +204,19 @@ export default function ScheduleCalendarView({
         </div>
 
         {printable && !showFilters && (
-          <div className="mt-8 no-print">
+          <div className="mt-8 no-print flex flex-wrap items-center gap-3">
+            <a
+              href="/schedule-2026.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+            >
+              Download PDF
+            </a>
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center bg-transparent text-black border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:border-black focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
             >
               Print / Save as PDF
             </button>
