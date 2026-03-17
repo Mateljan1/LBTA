@@ -36,12 +36,13 @@
    **Issue:** `setTimeout` for `scrollIntoView` had no cleanup; could run after collapse or unmount.  
    **Fix applied:** Store timeout id and return `() => clearTimeout(t)` from the effect.
 
-### ⚠️ Not fixed (product/design)
+### ✅ Fixed (2026-03-15) — single-expand / card view
 
 3. **Multiple expanded ProgramCards → multiple fixed bars**  
    **Location:** `components/ProgramCard.tsx` (mobile sticky bar)  
    **Issue:** If the page lists several ProgramCards and more than one can be expanded, multiple `fixed bottom-0` bars stack; "Begin Registration" may open the wrong program.  
-   **Recommendation:** Lift “expanded card id” to parent so only one card is expanded at a time, or render a single shared sticky bar keyed by the expanded program. Defer to product/UX.
+   **Fix applied:** ProgramCard controlled expand (`isExpanded` + `onToggle`). ProgramsSection List | Cards view; in Cards view only one card expands (single sticky bar). `#programs` uses `scroll-mt-32`.  
+   **Recommendation (was):** Lift “expanded card id” to parent so only one card is expanded at a time, or render a single shared sticky bar keyed by the expanded program. Defer to product/UX.
 
 ---
 
