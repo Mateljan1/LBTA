@@ -71,6 +71,17 @@ export default function SchedulesPageClient({
 
       <SchedulesAnchorNav />
 
+      <div className="bg-white px-4 md:px-6 pb-2">
+        <div className="max-w-[1200px] mx-auto">
+          <Link
+            href="/schedules/calendar"
+            className="font-sans text-[13px] text-brand-victoria-cove hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded inline-flex items-center min-h-[44px]"
+          >
+            View schedule by location (print or save as PDF)
+          </Link>
+        </div>
+      </div>
+
       <ProgramsSection
         programsBySeason={programsBySeason}
         seasons={seasons}

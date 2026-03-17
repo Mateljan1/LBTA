@@ -1053,3 +1053,29 @@
   filter: contrast(1.15) brightness(0.90) saturate(1.1);
   mix-blend-mode: darken;
 }
+
+/* Schedule calendar: print only the calendar content (by location view) */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .schedule-calendar-print,
+  .schedule-calendar-print * {
+    visibility: visible;
+  }
+  .schedule-calendar-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    background: white;
+  }
+  .schedule-calendar-print .max-w-\[1200px\] {
+    max-width: 100%;
+    padding: 1rem;
+  }
+}

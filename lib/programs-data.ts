@@ -118,7 +118,8 @@ function minPriceFromPricing(pricing: Record<string, number>): number {
   return values.length ? Math.min(...values) : 0
 }
 
-function formatLocation(loc: string): string {
+/** Normalize location string to Moulton / Alta / LBHS (used by schedules and calendar). */
+export function formatLocation(loc: string): string {
   if (loc.includes('Moulton')) return 'Moulton'
   if (loc.includes('Alta')) return 'Alta'
   if (loc.includes('LBHS') || loc.includes('High School')) return 'LBHS'
@@ -223,8 +224,8 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
 
   return [
     { eyebrow: 'Ages 3–11', title: 'Junior Development', description: 'Where it begins. Build coordination, rhythm, and love for the game from Little Stars through Green Dot.', href: '/schedules', fromPrice: fromJunior, image: '/images/programs/juniors.webp' },
-    { eyebrow: 'Ages 11–18', title: 'Youth Development', description: 'Full-court training for growing competitors. Technical precision, tactical awareness, and structured match play.', href: '/schedules', fromPrice: fromYouth, image: '/images/programs/youth-dev-1.webp' },
-    { eyebrow: 'UTR 5–8, College Bound', title: 'High Performance', description: 'Invitation-only training for advanced juniors preparing for tournaments and collegiate play.', href: '/schedules', fromPrice: fromHP, image: '/images/programs/high-performance.webp' },
+    { eyebrow: 'Ages 11–18', title: 'Youth Development', description: 'Level-based placement (UTR 1.5-5). Full-court training for growing competitors.', href: '/schedules', fromPrice: fromYouth, image: '/images/programs/youth-dev-1.webp' },
+    { eyebrow: 'UTR 5–8, College Bound', title: 'High Performance', description: 'UTR 5+ required. Selective training for advanced juniors preparing for tournaments and collegiate play.', href: '/schedules', fromPrice: fromHP, image: '/images/programs/high-performance.webp' },
     { eyebrow: 'Beginner – Advanced', title: 'Adult Programs', description: 'Progression with purpose. From fundamentals to competitive match-play at every level.', href: '/schedules', fromPrice: fromAdult, image: '/images/programs/adults.webp' },
     { eyebrow: 'Seasonal & Holiday', title: 'Camps', description: 'Swim & tennis, holiday breaks, and intensive sessions for juniors and youth.', href: '/camps', fromPrice: CAMPS_FROM_PRICE_FALLBACK, image: '/images/programs/juniors.webp' },
     { eyebrow: 'Cardio / LiveBall', title: 'Fitness & Community', description: 'High-energy sessions combining fitness, competition, and community. All levels welcome.', href: '/fitness', fromPrice: fromFitness, image: '/images/programs/fitness.webp' },

@@ -181,6 +181,12 @@ const nextConfig = {
         destination: '/schedules',
         permanent: true,
       },
+      // Old static Winter schedule — outdated; website data is current. Send to calendar.
+      {
+        source: '/LBTA_Winter2026_Schedule.html',
+        destination: '/schedules/calendar?season=winter',
+        permanent: true,
+      },
       // JTT removal — redirect to programs/leagues
       {
         source: '/jtt',
