@@ -1,0 +1,10 @@
+[
+  { "name": "Homepage load", "type": "functional", "target": "/" },
+  { "name": "Schedules page", "type": "functional", "target": "/schedules" },
+  { "name": "Schedule calendar", "type": "functional", "target": "/schedules/calendar" },
+  { "name": "Programs junior", "type": "functional", "target": "/programs/junior" },
+  { "name": "Contact page", "type": "functional", "target": "/contact" },
+  { "name": "Book page", "type": "functional", "target": "/book" },
+  { "name": "Book trial API", "type": "api", "target": "POST /api/book" },
+  { "name": "Newsletter API", "type": "api", "target": "POST /api/newsletter" }
+]
