@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-17",
-  "lastLearnRun": "2026-03-17 Coach Hub validation 100/100 (auth verification script, modal Tab wrap)",
+  "updated": "2026-03-18",
+  "lastLearnRun": "2026-03-18 Review+Validate (next15-page-searchparams-async, thank-you-all-links-focus-ring)",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -452,6 +452,30 @@
       "when": "Modal or overlay already has initial focus and Escape-to-close; WCAG expects focus to stay inside dialog",
       "example": "In onKeyDown: if Tab and focus on last focusable, preventDefault and focus first; if Shift+Tab and focus on first, preventDefault and focus last. Query focusables from dialog ref (button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])); filter disabled.",
       "tags": ["a11y", "modal", "focus-trap", "tab-wrap"]
+    },
+    {
+      "name": "single-expand-cards-in-list",
+      "when": "Page shows multiple expandable cards (e.g. ProgramCard) and expanded state shows a fixed/sticky bar",
+      "example": "Parent state: expandedProgramId: string | null. Each card gets isExpanded={expandedProgramId === program.id}, onToggle={() => setExpandedProgramId(prev => prev === program.id ? null : program.id)}. Only one card expanded at a time → one sticky bar.",
+      "tags": ["ux", "react", "modal", "sticky-bar", "ProgramCard"]
+    },
+    {
+      "name": "success-timeout-ref-cleanup",
+      "when": "Component (page or modal) uses setTimeout then setState (e.g. clear form after 5s success)",
+      "example": "Store timeout id in useRef; useEffect cleanup: return () => { if (ref.current) clearTimeout(ref.current); }. Prevents setState after unmount.",
+      "tags": ["react", "memory", "timeout", "cleanup"]
+    },
+    {
+      "name": "next15-page-searchparams-async",
+      "when": "Next 15+ App Router page needs searchParams (or params)",
+      "example": "export default async function Page({ searchParams }: { searchParams?: Promise<{ type?: string | string[] }> }) { const params = await searchParams; const type = getType(params?.type); ... }",
+      "tags": ["nextjs", "app-router", "searchParams", "Next 15", "Next 16"]
+    },
+    {
+      "name": "thank-you-all-links-focus-ring",
+      "when": "Thank-you or confirmation page with tel, mailto, Return home, or app download links",
+      "example": "Every <a> and <Link> gets focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm; on dark sections use focus:ring-white focus:ring-offset-black. Step/card accents use brand tokens (brand-victoria-cove), not raw blue.",
+      "tags": ["a11y", "thank-you", "focus", "brand"]
     }
   ]
 }

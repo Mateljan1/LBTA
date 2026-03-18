@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { bookingSchema, parseJsonBody, validateRequest } from '@/lib/validations'
+import { bookingSchema, privateLessonBookingSchema, parseJsonBody, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
 import {
   upsertContact,
@@ -67,99 +67,130 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-    const validation = validateRequest(bookingSchema, parsed.data)
+    const raw = parsed.data as Record<string, unknown>
+    // Only bookingType === 'private' uses private-lesson schema; missing or any other value → trial path
+    const isPrivateLesson = raw.bookingType === 'private'
+
+    const validation = isPrivateLesson
+      ? validateRequest(privateLessonBookingSchema, parsed.data)
+      : validateRequest(bookingSchema, parsed.data)
     if (!validation.success) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('[Booking] Validation failed:', validation.error)
+      }
       return NextResponse.json(
-        { success: false, error: validation.error },
+        { success: false, error: 'Invalid request. Please check your input.' },
         { status: 400 }
       )
     }
 
     const body = validation.data
 
-    console.log('[Trial] Request received:', {
-      program: body.program,
-      timestamp: new Date().toISOString(),
-    })
+    if (isPrivateLesson) {
+      const privateBody = body as import('@/lib/validations').PrivateLessonBookingRequest
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('[Private] Request received:', { coach: privateBody.coach, option: privateBody.option, timestamp: new Date().toISOString() })
+      }
 
-    const daysSelected = body.preferredDays.join(', ') || 'Flexible'
+      if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
+        try {
+          const contactResult = await upsertContact({
+            email: privateBody.email,
+            firstName: privateBody.firstName,
+            lastName: privateBody.lastName,
+            phone: privateBody.phone,
+            fieldValues: [
+              { field: '7', value: `Private: ${privateBody.coach} — ${privateBody.option}` },
+              { field: '15', value: 'website' },
+              { field: '16', value: 'private-lesson' },
+              { field: '23', value: privateBody.message ?? '' },
+            ],
+          })
+          if (contactResult.success && contactResult.data) {
+            const contactId = contactResult.data.id
+            const websiteSignupsListId = getWebsiteSignupsListId()
+            await Promise.all([
+              addToList(contactId, LBTA_LIST_ID),
+              websiteSignupsListId !== null ? addToList(contactId, websiteSignupsListId) : Promise.resolve(),
+            ])
+            await addTags(contactId, [CAMPAIGN_TAGS.website_registration, PROGRAM_TAGS['private-lessons']])
+          }
+        } catch (acError) {
+          console.error('[AC] Error:', acError)
+        }
+      }
 
-    // Process with ActiveCampaign
+      void sendToGHL({
+        email: privateBody.email,
+        firstName: privateBody.firstName,
+        lastName: privateBody.lastName,
+        phone: privateBody.phone,
+      })
+      void storeLead({
+        source: 'book',
+        email: privateBody.email,
+        name: `${privateBody.firstName ?? ''} ${privateBody.lastName ?? ''}`.trim() || undefined,
+        phone: privateBody.phone ?? undefined,
+        payload: { bookingType: 'private', coach: privateBody.coach, option: privateBody.option },
+      })
+
+      return NextResponse.json({
+        success: true,
+        message: "We received your request. We'll reach out within 24 hours to get you booked in.",
+      })
+    }
+
+    const trialBody = body as import('@/lib/validations').BookingRequest
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('[Trial] Request received:', { program: trialBody.program, timestamp: new Date().toISOString() })
+    }
+    const daysSelected = (trialBody.preferredDays ?? []).join(', ') || 'Flexible'
+
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
       try {
-        // Create/update contact
         const contactResult = await upsertContact({
-          email: body.email,
-          firstName: body.firstName,
-          lastName: body.lastName,
-          phone: body.phone,
+          email: trialBody.email,
+          firstName: trialBody.firstName,
+          lastName: trialBody.lastName,
+          phone: trialBody.phone,
           fieldValues: [
-            { field: '7', value: body.program || 'Trial Request' }, // PROGRAM
-            { field: '8', value: body.location || 'Not specified' }, // LOCATION
-            { field: '9', value: daysSelected }, // DAYS_SELECTED
-            { field: '15', value: 'website' }, // LEAD_SOURCE
-            { field: '16', value: 'trial' }, // REGISTRATION_TYPE
-            { field: '22', value: body.experience || 'Not specified' }, // EXPERIENCE_LEVEL
-            { field: '23', value: body.goals || '' }, // GOALS
+            { field: '7', value: trialBody.program || 'Trial Request' },
+            { field: '8', value: trialBody.location || 'Not specified' },
+            { field: '9', value: daysSelected },
+            { field: '15', value: 'website' },
+            { field: '16', value: 'trial' },
+            { field: '22', value: trialBody.experience || 'Not specified' },
+            { field: '23', value: trialBody.goals || '' },
           ],
         })
-
         if (contactResult.success && contactResult.data) {
           const contactId = contactResult.data.id
-          console.log('[AC] Contact created:', { contactId })
-
-          await addToList(contactId, LBTA_LIST_ID)
           const websiteSignupsListId = getWebsiteSignupsListId()
-          if (websiteSignupsListId !== null) {
-            await addToList(contactId, websiteSignupsListId)
-          }
-          console.log('[AC] Added to list(s):', { contactId })
-
-          // Build tag list
-          const tagsToApply: number[] = [
-            CAMPAIGN_TAGS.website_registration,
-            CAMPAIGN_TAGS.trial_request,
-          ]
-
-          // Add program-specific tag if available
-          if (body.program && PROGRAM_TAGS[body.program]) {
-            tagsToApply.push(PROGRAM_TAGS[body.program])
-          }
-
-          // Apply all tags
-          const tagResult = await addTags(contactId, tagsToApply)
-          console.log('[AC] Tags applied:', {
-            contactId,
-            tags: tagsToApply,
-            success: tagResult.success,
-            failed: tagResult.failed,
-          })
+          await Promise.all([
+            addToList(contactId, LBTA_LIST_ID),
+            websiteSignupsListId !== null ? addToList(contactId, websiteSignupsListId) : Promise.resolve(),
+          ])
+          const tagsToApply: number[] = [CAMPAIGN_TAGS.website_registration, CAMPAIGN_TAGS.trial_request]
+          if (trialBody.program && PROGRAM_TAGS[trialBody.program]) tagsToApply.push(PROGRAM_TAGS[trialBody.program])
+          await addTags(contactId, tagsToApply)
         }
       } catch (acError) {
         console.error('[AC] Error:', acError)
-        // Continue even if AC fails - we don't want to block the user
       }
     }
 
-    void sendToGHL({
-      email: body.email,
-      firstName: body.firstName,
-      lastName: body.lastName,
-      phone: body.phone,
-    })
-
+    void sendToGHL({ email: trialBody.email, firstName: trialBody.firstName, lastName: trialBody.lastName, phone: trialBody.phone })
     void storeLead({
       source: 'book',
-      email: body.email,
-      name: `${body.firstName ?? ''} ${body.lastName ?? ''}`.trim() || undefined,
-      phone: body.phone ?? undefined,
-      payload: { program: body.program, location: body.location },
+      email: trialBody.email,
+      name: `${trialBody.firstName ?? ''} ${trialBody.lastName ?? ''}`.trim() || undefined,
+      phone: trialBody.phone ?? undefined,
+      payload: { program: trialBody.program, location: trialBody.location },
     })
 
     return NextResponse.json({
       success: true,
-      message:
-        "Trial request received! You'll receive a confirmation email shortly, and our team will contact you within 24 hours.",
+      message: "Trial request received! You'll receive a confirmation email shortly, and our team will contact you within 24 hours.",
     })
   } catch (error) {
     console.error('[Booking] Error:', error)

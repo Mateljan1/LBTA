@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-17",
-  "lastLearnRun": "2026-03-17 Coach Hub validation 100/100 compound:learn",
+  "updated": "2026-03-18",
+  "lastLearnRun": "2026-03-18 Review+Validate book/thank-you (API validation error, modal success focus, thank-you focus ring + brand)",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -394,6 +394,34 @@
       "avoid": "Validation summary warns 'verify auth 400/401 in staging'; no script or doc to run the check",
       "instead": "Add a small script (e.g. scripts/verify-coach-hub-auth.mjs) that fetch POST {} and POST { password: 'wrong' } and assert 400/401; run with dev server started with secret set; document in validation summary or README",
       "tags": ["auth", "validation", "contract", "script"]
+    },
+    {
+      "id": "multiple-expandable-cards-without-single-expand",
+      "description": "List of expandable cards (e.g. ProgramCard) each with a fixed/sticky bar when expanded, but no single-expand",
+      "avoid": "Each card manages its own isExpanded state; multiple cards can be expanded → multiple fixed bottom bars stack; wrong program may open on Register",
+      "instead": "Lift expanded id to parent: expandedProgramId; pass isExpanded and onToggle to each card so only one can be expanded; single sticky bar in DOM. See pattern single-expand-cards-in-list.",
+      "tags": ["ux", "react", "ProgramCard", "sticky-bar", "mobile"]
+    },
+    {
+      "id": "api-400-raw-validation-error",
+      "description": "Form/booking API returns raw Zod validation.error in 400 response",
+      "avoid": "NextResponse.json({ success: false, error: validation.error }, { status: 400 }) — exposes field names and internal messages to client",
+      "instead": "Log validation.error server-side; return generic message (e.g. 'Invalid request. Please check your input.') or sanitized field errors only",
+      "tags": ["api", "security", "validation", "book", "400"]
+    },
+    {
+      "id": "thank-you-links-no-focus-ring",
+      "description": "Thank-you or confirmation page with tel, mailto, Return, or app store links but no visible focus ring",
+      "avoid": "Links without focus:ring-* so keyboard users have no visible focus indicator",
+      "instead": "Add focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm (or ring-white on dark) to every focusable link",
+      "tags": ["a11y", "thank-you", "focus", "WCAG"]
+    },
+    {
+      "id": "confirmation-page-raw-blue",
+      "description": "Thank-you or confirmation page step/card styling with raw blue (blue-600, blue-100)",
+      "avoid": "text-blue-600, bg-blue-100 in step numbers or cards; bypasses brand palette",
+      "instead": "Use brand tokens (e.g. text-brand-victoria-cove, bg-brand-victoria-cove/10) for steps and accents",
+      "tags": ["brand", "thank-you", "design-system", "cursorrules"]
     }
   ]
 }

@@ -38,12 +38,22 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const modalRef = useRef<HTMLDivElement>(null)
   const previousFocusRef = useRef<HTMLElement | null>(null)
+  const successRedirectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     if (!errorMessage) return
     const timer = setTimeout(() => setErrorMessage(null), 8000)
     return () => clearTimeout(timer)
   }, [errorMessage])
+
+  useEffect(() => {
+    return () => {
+      if (successRedirectTimeoutRef.current) {
+        clearTimeout(successRedirectTimeoutRef.current)
+        successRedirectTimeoutRef.current = null
+      }
+    }
+  }, [])
 
   // Lock body scroll
   useEffect(() => {
@@ -58,6 +68,10 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
   }, [isOpen])
 
   const handleClose = useCallback(() => {
+    if (successRedirectTimeoutRef.current) {
+      clearTimeout(successRedirectTimeoutRef.current)
+      successRedirectTimeoutRef.current = null
+    }
     previousFocusRef.current?.focus()
     previousFocusRef.current = null
     setIsSuccess(false)
@@ -154,14 +168,20 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
         }),
       })
 
-      if (response.ok) {
+      const raw = await response.json().catch(() => ({}))
+      const data = typeof raw === 'object' && raw !== null && 'success' in raw ? raw as { success?: boolean; error?: string } : { success: false, error: undefined }
+
+      if (response.ok && data.success) {
+        setErrorMessage(null)
         setIsSuccess(true)
-        setTimeout(() => {
+        if (successRedirectTimeoutRef.current) clearTimeout(successRedirectTimeoutRef.current)
+        successRedirectTimeoutRef.current = setTimeout(() => {
+          successRedirectTimeoutRef.current = null
           handleClose()
           window.location.href = '/thank-you'
         }, 2500)
       } else {
-        setErrorMessage('Something went wrong. Please call (949) 534-0457.')
+        setErrorMessage(data.error ?? 'Something went wrong. Please call (949) 534-0457.')
       }
     } catch (error) {
       console.error('Error:', error)

@@ -9,12 +9,16 @@ export const metadata = {
   description: 'Your request has been received. We will contact you within 24 hours.',
 }
 
-type ThankYouType = 'trial' | 'program' | 'year' | 'scholarship'
+type ThankYouType = 'trial' | 'private' | 'program' | 'year' | 'scholarship'
 
 const COPY_BY_TYPE: Record<ThankYouType, { headline: string; firstLine: string }> = {
   trial: {
     headline: "You're All Set",
     firstLine: "We've received your request and will contact you within 24 hours to confirm your trial.",
+  },
+  private: {
+    headline: 'Request Received',
+    firstLine: "We've received your private lesson request and will reach out within 24 hours to get you booked in.",
   },
   program: {
     headline: 'Registration Received',
@@ -32,16 +36,17 @@ const COPY_BY_TYPE: Record<ThankYouType, { headline: string; firstLine: string }
 
 function getThankYouType(raw: string | string[] | undefined): ThankYouType {
   const type = Array.isArray(raw) ? raw[0] : raw
-  if (type === 'program' || type === 'year' || type === 'scholarship') return type
+  if (type === 'private' || type === 'program' || type === 'year' || type === 'scholarship') return type
   return 'trial'
 }
 
-export default function ThankYouPage({
+export default async function ThankYouPage({
   searchParams,
 }: {
-  searchParams?: { type?: string | string[] }
+  searchParams?: Promise<{ type?: string | string[] }>
 }) {
-  const type = getThankYouType(searchParams?.type)
+  const params = await searchParams
+  const type = getThankYouType(params?.type)
   const { headline, firstLine } = COPY_BY_TYPE[type]
 
   return (
@@ -116,8 +121,8 @@ export default function ThankYouPage({
                   <div className="hidden md:flex items-center justify-center w-4 h-4 rounded-full bg-black absolute left-1/2 -translate-x-1/2" />
                   <div className="md:w-1/2 md:pl-12">
                     <div className="bg-brand-morning-light p-6 md:p-8 rounded-lg">
-                      <div className="inline-flex items-center gap-2 text-blue-600 font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
-                        <span className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">2</span>
+                      <div className="inline-flex items-center gap-2 text-brand-victoria-cove font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
+                        <span className="w-6 h-6 rounded-full bg-brand-victoria-cove/10 flex items-center justify-center text-brand-victoria-cove">2</span>
                         Before Your Trial
                       </div>
                       <h3 className="font-headline text-[22px] font-semibold text-black mb-2">
@@ -243,9 +248,9 @@ export default function ThankYouPage({
                     href="https://apps.apple.com/us/app/lbta/id6746348933" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-lg hover:bg-white/90 transition-colors"
+                    className="inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-lg hover:bg-white/90 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
                   >
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                     </svg>
                     <div className="text-left">
@@ -257,9 +262,9 @@ export default function ThankYouPage({
                     href="https://play.google.com/store/apps/details?id=com.playbypoint.appx&pli=1" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-lg hover:bg-white/90 transition-colors"
+                    className="inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-lg hover:bg-white/90 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
                   >
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                     </svg>
                     <div className="text-left">
@@ -288,7 +293,7 @@ export default function ThankYouPage({
               <a 
                 href="tel:9495340457"
                 aria-label="Call (949) 534-0457"
-                className="inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors"
+                className="inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm"
               >
                 <Phone className="w-4 h-4" aria-hidden="true" />
                 <span className="font-sans text-[15px]">(949) 534-0457</span>
@@ -296,7 +301,7 @@ export default function ThankYouPage({
               <span className="hidden sm:block text-black/20">|</span>
               <a 
                 href="mailto:support@lagunabeachtennisacademy.com" 
-                className="inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors"
+                className="inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm"
               >
                 <Mail className="w-4 h-4" />
                 <span className="font-sans text-[15px]">support@lagunabeachtennisacademy.com</span>
@@ -314,7 +319,7 @@ export default function ThankYouPage({
         <div className="max-w-3xl mx-auto px-6 text-center">
           <Link
             href="/"
-            className="min-h-[48px] inline-flex items-center justify-center gap-2 py-3 font-sans text-[14px] text-black/60 hover:text-black transition-colors"
+            className="min-h-[48px] inline-flex items-center justify-center gap-2 py-3 font-sans text-[14px] text-black/60 hover:text-black transition-colors focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 rounded-sm"
           >
             <ArrowRight className="w-4 h-4 rotate-180" />
             Return to Homepage

@@ -2,7 +2,7 @@
 
 **Source:** Code Review V2 (94→98/100) + Validation V2 (95→98/100) — March 6, 2026  
 **Workspace:** LBTA_WEBSITE_DRAFT_3:5:26  
-**Latest:** Coach Hub validation 100/100 compound:learn — 2026-03-17 (auth verification script, modal Tab wrap; see `.cursor/compound/learnings/` corrections.jsonl, patterns.json, anti-patterns.json, quality-bars.json)
+**Latest:** Review+Validate book/thank-you compound:learn — 2026-03-18 (API validation error generic, modal success focus, thank-you focus ring + brand tokens, Next 15+ searchParams async; see `.cursor/compound/learnings/` and `docs/compound-review-and-validate-2026-03-18.md`)
 
 ---
 
@@ -79,6 +79,10 @@
 | Modal/overlay (BinderOverlay, GuideOverlay) without focus trap and Escape-to-close | Keyboard users cannot close; focus can leave dialog. | Add onKeyDown(Escape → onClose) and focus trap (e.g. focus first focusable on open). |
 | Clear-cookie header does not set Secure when session cookie was set with Secure in production | Some browsers may not clear cookie over HTTPS. | Include Secure in clear-cookie string when NODE_ENV === 'production', matching buildCoachHubSetCookie. |
 | Auth API 400/401 only verifiable when COACH_HUB_SECRET set; validation showed warning until runtime check | Functional validator could not run 400/401 without secret. | Add a verification script (e.g. scripts/verify-coach-hub-auth.mjs) that runs against dev server with secret set; assert POST {} → 400, POST { password: 'wrong' } → 401; document in validation summary or README. |
+| Form API 400 returns raw validation.error (Zod field names/messages) to client | Exposes internal structure; security/review flag. | Return generic message to client; log validation.error server-side only. Optionally return sanitized field errors for inline form errors. |
+| Modal success view (e.g. 'Request Received') does not move focus to first focusable | Focus lands on body; poor a11y. | When setting isSuccess(true), focus first focusable in success view (e.g. close button) in useEffect or after state update. |
+| Thank-you/confirmation page focusable links (tel, mailto, Return, app store) without visible focus ring | Keyboard users get no focus indicator. | Add focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm (or ring-white on dark) to every focusable link. |
+| Thank-you/confirmation step styling with raw blue (blue-600, blue-100) | Bypasses brand palette. | Use brand tokens (e.g. text-brand-victoria-cove, bg-brand-victoria-cove/10) for step numbers and accents. |
 
 ---
 
@@ -86,6 +90,8 @@
 
 | Pattern | When to use | Example |
 |---------|-------------|---------|
+| Next 15+ page searchParams async | Next 15+ App Router page that reads searchParams (or params) | `export default async function Page({ searchParams }: { searchParams?: Promise<{ type?: string \| string[] }> }) { const params = await searchParams; ... }` |
+| Thank-you all links focus ring | Thank-you or confirmation page with tel, mailto, Return, app links | Every focusable link: focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2; step accents use brand tokens, not raw blue. |
 | Single source of truth for pricing | Any program/schedule/pricing display | Import from `data/winter2026.json`, `data/pricing-supplemental.json`, or `lib/*-data.ts` |
 | Modal pricing from data | Registration/program modal shows pricing (e.g. form-config prePopulateData) | Load from same /data sources (programs-data, camps-data, year2026) or single shared config; avoid duplicate strings in lib/form-config.ts. |
 | Supplemental pricing file | Campaign/landing page prices outside main schedules | `data/pricing-supplemental.json` with keys per page: `beginnerProgram`, `matchPlay`, `racquetRescue`, `promotions`, `leagues`, `schema` |

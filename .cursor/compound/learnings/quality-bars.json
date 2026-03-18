@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-17",
-  "lastLearnRun": "2026-03-17 Coach Hub validation 100/100 compound:learn",
+  "updated": "2026-03-18",
+  "lastLearnRun": "2026-03-18 Review+Validate book/thank-you (apiValidationErrorGeneric, modalSuccessViewFocus, thankYouPageFocusRing, pageSearchParamsAsyncNext15)",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -252,6 +252,22 @@
     "authContractVerificationScript": {
       "rule": "When a protected route has an auth API (400 invalid body, 401 wrong password), provide a runnable verification script and document how to run it (e.g. dev server with secret set, then node scripts/verify-*-auth.mjs) so validation can reach 100/100",
       "enforcement": "should"
+    },
+    "apiValidationErrorGeneric": {
+      "rule": "Form/booking API 400 must not return raw validation.error (Zod field names/messages) to client; log server-side and return generic or sanitized message",
+      "enforcement": "must"
+    },
+    "modalSuccessViewFocus": {
+      "rule": "When a modal switches to a success view (e.g. 'Request Received'), move focus to the first focusable in that view (e.g. close button) so focus does not land on body",
+      "enforcement": "must"
+    },
+    "thankYouPageFocusRing": {
+      "rule": "Thank-you and confirmation pages must have visible focus ring on all focusable links (tel, mailto, Return home, app store); use brand-victoria-cove or ring-white on dark",
+      "enforcement": "must"
+    },
+    "pageSearchParamsAsyncNext15": {
+      "rule": "In Next 15+, page.tsx that use searchParams (or params) must treat them as Promise: async component, await searchParams, then use resolved params",
+      "enforcement": "must"
     }
   }
 }

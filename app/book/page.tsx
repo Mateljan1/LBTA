@@ -1,18 +1,28 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { CheckCircle, Phone, Mail, Shield } from 'lucide-react'
 import TrialBookingModal from '@/components/TrialBookingModal'
+import PrivateLessonModal from '@/components/PrivateLessonModal'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 
-export default function BookPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+function BookPageContent() {
+  const searchParams = useSearchParams()
+  const isPrivate = useMemo(() => searchParams?.get('type') === 'private', [searchParams])
+  const [trialModalOpen, setTrialModalOpen] = useState(!isPrivate)
+  const [privateModalOpen, setPrivateModalOpen] = useState(isPrivate)
 
-  // Auto-open modal when page loads
   useEffect(() => {
-    setIsModalOpen(true)
-  }, [])
+    if (isPrivate) {
+      setTrialModalOpen(false)
+      setPrivateModalOpen(true)
+    } else {
+      setPrivateModalOpen(false)
+      setTrialModalOpen(true)
+    }
+  }, [isPrivate])
 
   return (
     <>
@@ -20,10 +30,12 @@ export default function BookPage() {
       <DarkSection className="min-h-[50vh] md:min-h-[60vh] flex items-center justify-center py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="font-headline text-[32px] md:text-[56px] font-semibold leading-[1.1] text-brand-sandstone mb-4">
-            Book Your Free Trial
+            {isPrivate ? 'Book a Private Lesson' : 'Book Your Free Trial'}
           </h1>
           <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/90 max-w-[90%] mx-auto">
-            One conversation. Honest guidance. A path built around you.
+            {isPrivate
+              ? 'Choose your coach and session type. We\'ll reach out within 24 hours to get you on court.'
+              : 'One conversation. Honest guidance. A path built around you.'}
           </p>
         </div>
       </DarkSection>
@@ -37,14 +49,14 @@ export default function BookPage() {
               Ready to Start?
             </h2>
             <p className="font-sans text-[15px] text-black/70 mb-6">
-              Book your free trial lesson or speak with us directly.
+              {isPrivate ? 'Request a private lesson or speak with us directly.' : 'Book your free trial lesson or speak with us directly.'}
             </p>
             
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => (isPrivate ? setPrivateModalOpen(true) : setTrialModalOpen(true))}
               className="w-full bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[15px] py-4 rounded-[2px] transition-all duration-200 mb-4 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
             >
-              Book Free Trial
+              {isPrivate ? 'Request Private Lesson' : 'Book Free Trial'}
             </button>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-black/10">
@@ -64,7 +76,7 @@ export default function BookPage() {
                   href="mailto:support@lagunabeachtennisacademy.com" 
                   className="flex items-center gap-2 text-black font-sans font-semibold text-[14px] hover:text-black/70 transition-colors"
                 >
-                  <Mail className="w-4 h-4" />
+                  <Mail className="w-4 h-4" aria-hidden="true" />
                   Email
                 </a>
               </div>
@@ -129,11 +141,32 @@ export default function BookPage() {
         </div>
       </section>
 
-      {/* Trial Booking Modal */}
-      <TrialBookingModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <TrialBookingModal isOpen={trialModalOpen} onClose={() => setTrialModalOpen(false)} />
+      <PrivateLessonModal isOpen={privateModalOpen} onClose={() => setPrivateModalOpen(false)} />
     </>
+  )
+}
+
+export default function BookPage() {
+  return (
+    <Suspense
+      fallback={
+        <>
+          <DarkSection className="min-h-[50vh] md:min-h-[60vh] flex items-center justify-center py-20 md:py-28">
+            <div className="max-w-4xl mx-auto px-4 text-center">
+              <h1 className="font-headline text-[32px] md:text-[56px] font-semibold leading-[1.1] text-brand-sandstone mb-4">
+                Book
+              </h1>
+              <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/90 max-w-[90%] mx-auto">
+                Loading...
+              </p>
+            </div>
+          </DarkSection>
+          <HorizonDivider />
+        </>
+      }
+    >
+      <BookPageContent />
+    </Suspense>
   )
 }
