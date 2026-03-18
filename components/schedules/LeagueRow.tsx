@@ -4,8 +4,11 @@ interface LeagueRowProps {
   name: string
   season?: string
   weeks?: string
-  format: string
+  /** Not displayed; kept for USTA data shape. */
+  format?: string
   levels?: string
+  /** Optional note (e.g. Color Ball: serving options may be modified for red ball). */
+  note?: string
   price: string
   dropIn?: number
   time?: string
@@ -20,8 +23,9 @@ export default function LeagueRow({
   name,
   season,
   weeks,
-  format,
+  format: _format,
   levels,
+  note,
   price,
   dropIn,
   time,
@@ -59,12 +63,14 @@ export default function LeagueRow({
 
         {/* Col 2: Details */}
         <div className="w-[180px] flex-shrink-0 space-y-0.5">
-          <p className="font-sans text-[13px] text-brand-pacific-dusk/80 leading-relaxed">
-            Format: {format}
-          </p>
           {levels && (
             <p className="font-sans text-[13px] text-brand-pacific-dusk/80 leading-relaxed">
               Levels: {levels}
+            </p>
+          )}
+          {note && (
+            <p className="font-sans text-[13px] text-brand-pacific-dusk/80 leading-relaxed italic">
+              {note}
             </p>
           )}
           {deadline && (
@@ -122,9 +128,11 @@ export default function LeagueRow({
         )}
 
         <div className="mt-4 space-y-0.5">
-          <p className="font-sans text-[13px] text-brand-pacific-dusk/80">Format: {format}</p>
           {levels && (
             <p className="font-sans text-[13px] text-brand-pacific-dusk/80">Levels: {levels}</p>
+          )}
+          {note && (
+            <p className="font-sans text-[13px] text-brand-pacific-dusk/80 italic">{note}</p>
           )}
           {deadline && (
             <p className="font-sans text-[12px] font-medium text-brand-sunset-cliff mt-1">

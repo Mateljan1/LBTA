@@ -16,8 +16,9 @@ const outPath = process.argv[2]
   : path.join(process.env.HOME || '', 'Desktop', 'LBTA_Master_Flyer.pdf')
 
 const DAY_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-const LOCATION_KEYS = ['Moulton', 'Alta', 'LBHS']
-const LOCATION_LABELS = { Moulton: 'Moulton Meadows Park', Alta: 'Alta Laguna Park', LBHS: 'Laguna Beach High School' }
+const LOCATION_KEYS = ['Alta', 'LBHS', 'Moulton']
+const LOCATION_LABELS = { Alta: 'Alta Laguna Park', LBHS: 'Laguna Beach High School', Moulton: 'Moulton Meadows Park' }
+const LOCATION_DISPLAY = { Moulton: 'Moulton Meadows Park', Alta: 'Alta Laguna Park', LBHS: 'Laguna Beach High School' }
 
 function formatLocation(programLocation) {
   const loc = String(programLocation || '')
@@ -66,7 +67,12 @@ function buildScheduleByLocation(programs) {
 function parseTimeToMinutes(timeStr) {
   const range = String(timeStr || '').trim().split(/[–\-]\s*/)
   const startStr = range[0]?.trim() || ''
-  const match = startStr.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i)
+  const endStr = range[1]?.trim() || ''
+  let match = startStr.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i)
+  if (!match && endStr) {
+    const ampmMatch = endStr.match(/\s*(AM|PM)$/i)
+    if (ampmMatch) match = (startStr + ' ' + ampmMatch[1]).match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i)
+  }
   if (!match) return 9999
   let h = parseInt(match[1], 10)
   const m = match[2] ? parseInt(match[2], 10) : 0
@@ -148,7 +154,7 @@ function buildFlyerHtml(options) {
                   `<tr><td class="time-cell">${escapeHtml(time)}</td>${DAY_ORDER.map((day) => {
                     const slots = byDay[day] || []
                     const slot = slots.find((s) => s.time === time)
-                    const name = slot ? (slot.programName.length > 22 ? slot.programName.slice(0, 20) + '…' : slot.programName) : ''
+                    const name = slot ? (slot.programName.length > 38 ? slot.programName.slice(0, 36) + '…' : slot.programName) : ''
                     const cellClass = slot ? scheduleCellClass(slot.programName) : ''
                     return `<td class="${cellClass}">${escapeHtml(name)}</td>`
                   }).join('')}</tr>`
@@ -186,21 +192,21 @@ function buildFlyerHtml(options) {
 
   const juniorTable = `
     <table class="data-tbl">
-      <thead><tr><th>Program</th><th>1x/wk</th><th>2x/wk</th><th>Drop-in</th></tr></thead>
+      <thead><tr><th>Program</th><th>Location</th><th>1x/wk</th><th>2x/wk</th><th>Drop-in</th></tr></thead>
       <tbody>
-        ${juniorRows.map((r) => `<tr><td>${escapeHtml(r.name)} · ${escapeHtml(r.duration)}</td><td>${r.price_1x}</td><td>${r.price_2x ?? '—'}</td><td>${r.dropIn}</td></tr>`).join('')}
+        ${juniorRows.map((r) => `<tr><td>${escapeHtml(r.name)} · ${escapeHtml(r.duration)}</td><td>${escapeHtml(r.location || '')}</td><td>${r.price_1x}</td><td>${r.price_2x ?? '—'}</td><td>${r.dropIn}</td></tr>`).join('')}
       </tbody>
     </table>`
 
   const adultTable = `
     <table class="data-tbl">
-      <thead><tr><th>Program</th><th>1x/wk</th><th>2x/wk</th><th>Drop-in</th></tr></thead>
+      <thead><tr><th>Program</th><th>Location</th><th>1x/wk</th><th>2x/wk</th><th>Drop-in</th></tr></thead>
       <tbody>
-        ${adultRows.map((r) => `<tr><td>${escapeHtml(r.name)} · ${escapeHtml(r.duration)}</td><td>${r.price_1x}</td><td>${r.price_2x ?? '—'}</td><td>${r.dropIn}</td></tr>`).join('')}
+        ${adultRows.map((r) => `<tr><td>${escapeHtml(r.name)} · ${escapeHtml(r.duration)}</td><td>${escapeHtml(r.location || '')}</td><td>${r.price_1x}</td><td>${r.price_2x ?? '—'}</td><td>${r.dropIn}</td></tr>`).join('')}
       </tbody>
     </table>`
 
-  const campsList = camps.map((c) => `<li><strong>${escapeHtml(c.label)}</strong> ${escapeHtml(c.dates)} · Ages ${escapeHtml(c.ages)} · ${escapeHtml(c.price)}</li>`).join('')
+  const campsList = camps.map((c) => `<li><strong>${escapeHtml(c.label)}</strong> ${escapeHtml(c.dates)} · Ages ${escapeHtml(c.ages)} · ${escapeHtml(c.price)}${c.location ? ` · ${escapeHtml(c.location)}` : ''}</li>`).join('')
 
   const logoStripHtml = (logoLbtaUrl || logoCityUrl)
     ? `<div class="logo-strip">${logoLbtaUrl ? `<img src="${logoLbtaUrl}" alt="Laguna Beach Tennis Academy" class="logo-lbta" />` : ''}${logoCityUrl ? `<img src="${logoCityUrl}" alt="City of Laguna Beach" class="logo-city" />` : ''}</div>`
@@ -215,9 +221,9 @@ function buildFlyerHtml(options) {
     * { box-sizing: border-box; }
     body { font-family: 'DM Sans', system-ui, sans-serif; color: #1B3A5C; margin: 0; padding: 24px; font-size: 11px; line-height: 1.35; background: #FAF8F4; }
     .flyer { max-width: 100%; }
-    .logo-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 24px; padding: 16px 24px; background: #0F2237; margin: -24px -24px 0 -24px; }
-    .logo-lbta { height: 40px; width: auto; object-fit: contain; }
-    .logo-city { height: 48px; width: auto; object-fit: contain; filter: brightness(0) invert(1); }
+    .logo-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px; padding: 20px 24px; background: #0F2237; margin: -24px -24px 0 -24px; min-height: 72px; }
+    .logo-lbta { height: 40px; width: auto; object-fit: contain; flex-shrink: 0; }
+    .logo-city { height: 48px; width: auto; object-fit: contain; flex-shrink: 0; filter: brightness(0) invert(1); }
     h1 { font-family: Cormorant, Georgia, serif; font-size: 22px; font-weight: 600; text-align: center; color: #0F2237; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 8px; }
     .sub { text-align: center; color: #1B3A5C; margin: 0 0 12px; }
     .cta-line { text-align: center; font-weight: 700; color: #0F2237; margin: 0 0 20px; font-size: 14px; }
@@ -241,10 +247,11 @@ function buildFlyerHtml(options) {
     .courts-list li { margin: 4px 0; }
     .courts-section { background: rgba(245,240,229,0.5); padding: 12px; margin: 12px 0; }
     .schedule-loc { margin: 16px 0; break-inside: avoid; }
-    .schedule-tbl { width: 100%; border-collapse: collapse; font-size: 9px; }
-    .schedule-tbl th, .schedule-tbl td { padding: 4px 6px; border-bottom: 1px solid rgba(27,58,92,0.08); }
-    .schedule-tbl th { font-weight: 600; }
-    .schedule-tbl .time-cell { font-weight: 500; color: #0F2237; }
+    .schedule-tbl { width: 100%; border-collapse: collapse; font-size: 10px; border: 1px solid rgba(27,58,92,0.2); }
+    .schedule-tbl th, .schedule-tbl td { padding: 6px 8px; border-bottom: 1px solid rgba(27,58,92,0.15); border-left: 1px solid rgba(27,58,92,0.1); }
+    .schedule-tbl thead tr { background: rgba(245,240,229,0.6); border-bottom: 2px solid rgba(27,58,92,0.25); }
+    .schedule-tbl th { font-weight: 700; color: #0F2237; }
+    .schedule-tbl .time-cell { font-weight: 700; color: #0F2237; background: rgba(245,240,229,0.35); border-right: 1px solid rgba(27,58,92,0.12); }
     .schedule-tbl .cell-red { background: rgba(240,78,35,0.15); }
     .schedule-tbl .cell-orange { background: rgba(232,131,74,0.2); }
     .schedule-tbl .cell-green { background: rgba(58,139,110,0.15); }
@@ -376,7 +383,8 @@ async function main() {
     .map((p) => {
       const raw = p.pricing?.spring || p.pricing || {}
       const { price_1x, price_2x, dropIn } = formatPrice(raw)
-      return { name: p.program, duration: p.duration, price_1x, price_2x, dropIn }
+      const locKey = formatLocation(p.location)
+      return { name: p.program, duration: p.duration, price_1x, price_2x, dropIn, location: LOCATION_DISPLAY[locKey] || p.location || '' }
     })
   const adultCategories = ['Adult', 'Fitness']
   const adultRows = programs
@@ -384,18 +392,20 @@ async function main() {
     .map((p) => {
       const raw = p.pricing?.spring || p.pricing || {}
       const { price_1x, price_2x, dropIn } = formatPrice(raw)
-      return { name: p.program, duration: p.duration, price_1x, price_2x, dropIn }
+      const locKey = formatLocation(p.location)
+      return { name: p.program, duration: p.duration, price_1x, price_2x, dropIn, location: LOCATION_DISPLAY[locKey] || p.location || '' }
     })
 
   const thanksgiving = (year2026.camps || []).find((c) => c.id === 'thanksgiving')
   const swimTennis = (year2026.camps || []).find((c) => c.id === 'swim-tennis')
+  const summerCamp = (year2026.camps || []).find((c) => c.id === 'summer')
   const camps = [
-    { label: 'Swim & Tennis', dates: swimTennis?.dates ?? 'Jun 16–Aug 14', ages: swimTennis?.ages ?? '5-11', price: `$${swimTennis?.price ?? 495}/wk` },
-    { label: 'Spring Break', dates: springSummer.camps?.springBreak?.dates ?? '', ages: '5-14', price: '$295/wk' },
-    { label: 'Summer', dates: springSummer.camps?.summer?.dates ?? '', ages: '5-17', price: '$495/wk' },
+    { label: 'Swim & Tennis', dates: swimTennis?.dates ?? 'Jun 16–Aug 14', ages: swimTennis?.ages ?? '5-11', price: `$${swimTennis?.price ?? 495}/wk`, location: swimTennis?.location ?? 'Alta Laguna Park' },
+    { label: 'Spring Break', dates: springSummer.camps?.springBreak?.dates ?? '', ages: '5-14', price: '$295/wk', location: 'Alta Laguna Park' },
+    { label: 'Summer', dates: springSummer.camps?.summer?.dates ?? '', ages: '5-17', price: '$495/wk', location: summerCamp?.location ?? 'Alta Laguna Park / Laguna Beach High School' },
   ]
   if (thanksgiving) {
-    camps.push({ label: 'Thanksgiving', dates: thanksgiving.dates, ages: thanksgiving.ages, price: `$${thanksgiving.price ?? 221}/wk` })
+    camps.push({ label: 'Thanksgiving', dates: thanksgiving.dates, ages: thanksgiving.ages, price: `$${thanksgiving.price ?? 221}/wk`, location: thanksgiving.location ?? 'Alta Laguna Park / Laguna Beach High School' })
   }
 
   const discountLine = '$50 off early bird · 10% second child · 5% multi-program · 10% full year'

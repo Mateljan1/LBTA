@@ -133,6 +133,7 @@ const utrDivisionSchema = z.object({
   name: z.string(),
   level: z.string(),
   format: z.string(),
+  note: z.string().optional(),
   price: z.string(),
   drop_in: z.number().optional(),
   time: z.string(),

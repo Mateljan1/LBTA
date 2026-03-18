@@ -1,9 +1,15 @@
 import CourtFlyer from '@/components/print/CourtFlyer'
 import { getFlyerCoaches } from '@/lib/flyer-data'
-import { getPrivateRates, getSpringProgramsForDisplay } from '@/lib/programs-data'
+import { getPrivateRates, getSpringProgramsForDisplay, formatLocation } from '@/lib/programs-data'
 import { getScheduleByLocationByDay, getSeasonDates, getSeasonLabel } from '@/lib/calendar-schedule'
 import { getSpringSummer2026 } from '@/lib/programs-data'
 import year2026Data from '@/data/year2026.json'
+
+const LOCATION_DISPLAY: Record<string, string> = {
+  Moulton: 'Moulton Meadows Park',
+  Alta: 'Alta Laguna Park',
+  LBHS: 'Laguna Beach High School',
+}
 
 export default function CourtFlyerPage() {
   const coaches = getFlyerCoaches()
@@ -33,12 +39,14 @@ export default function CourtFlyerPage() {
     .filter((p) => juniorCategories.includes(p.category))
     .map((p) => {
       const { price_1x, price_2x, dropIn } = formatPrice(p.pricing)
+      const locKey = formatLocation(p.location)
       return {
         name: p.program,
         duration: p.duration,
         price_1x,
         price_2x,
         dropIn,
+        location: LOCATION_DISPLAY[locKey] ?? p.location,
       }
     })
 
@@ -47,12 +55,14 @@ export default function CourtFlyerPage() {
     .filter((p) => adultCategories.includes(p.category))
     .map((p) => {
       const { price_1x, price_2x, dropIn } = formatPrice(p.pricing)
+      const locKey = formatLocation(p.location)
       return {
         name: p.program,
         duration: p.duration,
         price_1x,
         price_2x,
         dropIn,
+        location: LOCATION_DISPLAY[locKey] ?? p.location,
       }
     })
 
@@ -65,28 +75,33 @@ export default function CourtFlyerPage() {
       price?: number
       halfDay?: number
       fullDayPrice?: number
+      location?: string
     }>
   }
   const thanksgivingCamp = year2026.camps?.find((c) => c.id === 'thanksgiving')
   const swimTennis = year2026.camps?.find((c) => c.id === 'swim-tennis')
-  const camps: Array<{ label: string; dates: string; ages: string; price: string }> = [
+  const summerCamp = year2026.camps?.find((c) => c.id === 'summer')
+  const camps: Array<{ label: string; dates: string; ages: string; price: string; location: string }> = [
     {
       label: 'Swim & Tennis',
       dates: swimTennis?.dates ?? 'Jun 16–Aug 14',
       ages: swimTennis?.ages ?? '5-11',
       price: `$${swimTennis?.price ?? 495}/wk`,
+      location: swimTennis?.location ?? 'Alta Laguna Park',
     },
     {
       label: 'Spring Break',
       dates: springSummer.camps.springBreak.dates,
       ages: '5-14',
       price: '$295/wk',
+      location: 'Alta Laguna Park',
     },
     {
       label: 'Summer',
       dates: springSummer.camps.summer.dates,
       ages: '5-17',
       price: '$495/wk',
+      location: summerCamp?.location ?? 'Alta Laguna Park / Laguna Beach High School',
     },
     ...(thanksgivingCamp
       ? [
@@ -95,6 +110,7 @@ export default function CourtFlyerPage() {
             dates: thanksgivingCamp.dates,
             ages: thanksgivingCamp.ages,
             price: `$${thanksgivingCamp.price ?? 221}/wk`,
+            location: (thanksgivingCamp as { location?: string }).location ?? 'Alta Laguna Park / Laguna Beach High School',
           },
         ]
       : []),

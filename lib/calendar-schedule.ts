@@ -24,7 +24,8 @@ export const DAY_ORDER: string[] = [
   'Sunday',
 ]
 
-export const LOCATION_KEYS: string[] = ['Moulton', 'Alta', 'LBHS']
+/** Canonical location keys; order is alphabetical by full name (Alta Laguna Park, Laguna Beach High School, Moulton Meadows Park). */
+export const LOCATION_KEYS: string[] = ['Alta', 'LBHS', 'Moulton']
 
 export interface CalendarSlot {
   programId: string

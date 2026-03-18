@@ -34,6 +34,7 @@ interface PricingRow {
   price_1x: string
   price_2x: string | null
   dropIn: string
+  location: string
 }
 
 interface CampItem {
@@ -41,6 +42,7 @@ interface CampItem {
   dates: string
   ages: string
   price: string
+  location: string
 }
 
 interface CourtFlyerProps {
@@ -69,17 +71,18 @@ export default function CourtFlyer({
   discountLine,
 }: CourtFlyerProps) {
   const locationLabels: Record<string, string> = {
-    Moulton: 'Moulton Meadows Park',
-    LBHS: 'Laguna Beach High School',
     Alta: 'Alta Laguna Park',
+    LBHS: 'Laguna Beach High School',
+    Moulton: 'Moulton Meadows Park',
   }
+  const locationOrder = ['Alta', 'LBHS', 'Moulton'] as const
 
   return (
     <div className="court-flyer-print bg-brand-morning-light text-brand-pacific-dusk font-sans min-h-screen">
-      {/* Logo strip — fence-friendly: white logos on dark navy */}
-      <div className="flex flex-wrap items-center justify-center gap-6 py-4 px-6 bg-brand-deep-water">
-        <Image src="/logos/LBTAwhttext.png" alt="Laguna Beach Tennis Academy" width={180} height={44} className="h-10 w-auto object-contain" />
-        <Image src="/logos/city-laguna-beach.png" alt="City of Laguna Beach" width={120} height={48} className="h-12 w-auto object-contain brightness-0 invert" />
+      {/* Logo strip — fence-friendly: white logos on dark navy; both visible */}
+      <div className="flex flex-wrap items-center justify-center gap-8 py-5 px-6 bg-brand-deep-water min-h-[72px]">
+        <Image src="/logos/LBTAwhttext.png" alt="Laguna Beach Tennis Academy" width={180} height={44} className="h-10 w-auto object-contain flex-shrink-0" priority />
+        <Image src="/logos/city-laguna-beach.png" alt="City of Laguna Beach" width={120} height={48} className="h-12 w-auto object-contain flex-shrink-0 brightness-0 invert" />
       </div>
 
       {/* Header */}
@@ -178,7 +181,7 @@ export default function CourtFlyer({
           <a href={FLYER_CONTACT.siteUrl} className="text-brand-victoria-cove underline">{FLYER_CONTACT.siteUrl.replace('https://', '')}</a>
           {' · Movement. Craft. Community.'}
         </p>
-        {(['Moulton', 'LBHS', 'Alta'] as const).map((loc) => {
+        {locationOrder.map((loc) => {
           const byDay = scheduleByLocation[loc]
           if (!byDay) return null
           const days = Object.keys(byDay).sort((a, b) => {
@@ -191,12 +194,12 @@ export default function CourtFlyer({
                 {locationLabels[loc] ?? loc} — {loc === 'Moulton' ? 'Court 2' : 'Courts 1 & 2'}
               </h3>
               <div className="overflow-x-auto">
-                <table className="w-full text-xs border-collapse">
+                <table className="w-full text-sm border-collapse border border-brand-pacific-dusk/20">
                   <thead>
-                    <tr className="border-b border-brand-pacific-dusk/20">
-                      <th className="text-left py-1 pr-2 w-24">Time</th>
+                    <tr className="border-b-2 border-brand-pacific-dusk/30 bg-brand-sandstone/50">
+                      <th className="text-left py-2 pr-3 pl-2 w-28 font-semibold text-brand-deep-water">Time</th>
                       {days.map((d) => (
-                        <th key={d} className="text-left py-1 px-1 font-medium">{d.slice(0, 3)}</th>
+                        <th key={d} className="text-left py-2 px-2 font-semibold text-brand-deep-water border-l border-brand-pacific-dusk/15">{d.slice(0, 3)}</th>
                       ))}
                     </tr>
                   </thead>
@@ -209,19 +212,19 @@ export default function CourtFlyer({
                           const key = s.time
                           if (!timeSlots.has(key)) timeSlots.set(key, {})
                           const row = timeSlots.get(key)!
-                          const display = s.programName.length > 22 ? s.programName.slice(0, 20) + '…' : s.programName
+                          const display = s.programName.length > 36 ? s.programName.slice(0, 34) + '…' : s.programName
                           row[day] = { display, programName: s.programName }
                         })
                       })
                       const sortedTimes = sortTimeStrings(Array.from(timeSlots.keys()))
                       return sortedTimes.map((time) => (
-                        <tr key={time} className="border-b border-brand-pacific-dusk/10">
-                          <td className="py-1 pr-2 whitespace-nowrap font-medium text-brand-deep-water">{time}</td>
+                        <tr key={time} className="border-b border-brand-pacific-dusk/15 hover:bg-brand-sandstone/20">
+                          <td className="py-2 pr-3 pl-2 whitespace-nowrap font-semibold text-brand-deep-water bg-brand-sandstone/30 border-r border-brand-pacific-dusk/10">{time}</td>
                           {days.map((day) => {
                             const cell = timeSlots.get(time)?.[day]
                             const bgClass = cell ? scheduleCellBgClass(cell.programName) : ''
                             return (
-                              <td key={day} className={`py-1 px-1 ${bgClass}`}>{cell?.display ?? ''}</td>
+                              <td key={day} className={`py-2 px-2 border-l border-brand-pacific-dusk/10 align-top ${bgClass}`}>{cell?.display ?? ''}</td>
                             )
                           })}
                         </tr>
@@ -242,6 +245,7 @@ export default function CourtFlyer({
           {camps.map((c) => (
             <li key={c.label}>
               <strong>{c.label}</strong> {c.dates} · Ages {c.ages} · {c.price}
+              {c.location ? <span className="text-brand-pacific-dusk/90"> · {c.location}</span> : null}
             </li>
           ))}
         </ul>
@@ -255,6 +259,7 @@ export default function CourtFlyer({
           <thead>
             <tr className="border-b border-brand-pacific-dusk/20">
               <th className="text-left py-1 pr-2">Program</th>
+              <th className="text-left py-1 px-2 w-24">Location</th>
               <th className="text-right py-1 px-2">1x/wk</th>
               <th className="text-right py-1 px-2">2x/wk</th>
               <th className="text-right py-1 px-2">Drop-in</th>
@@ -264,6 +269,7 @@ export default function CourtFlyer({
             {juniorPricing.map((r) => (
               <tr key={r.name} className="border-b border-brand-pacific-dusk/10">
                 <td className="py-1 pr-2">{r.name} · {r.duration}</td>
+                <td className="py-1 px-2 text-brand-pacific-dusk/90">{r.location}</td>
                 <td className="text-right px-2">{r.price_1x}</td>
                 <td className="text-right px-2">{r.price_2x ?? '—'}</td>
                 <td className="text-right px-2">{r.dropIn}</td>
@@ -276,6 +282,7 @@ export default function CourtFlyer({
           <thead>
             <tr className="border-b border-brand-pacific-dusk/20">
               <th className="text-left py-1 pr-2">Program</th>
+              <th className="text-left py-1 px-2 w-24">Location</th>
               <th className="text-right py-1 px-2">1x/wk</th>
               <th className="text-right py-1 px-2">2x/wk</th>
               <th className="text-right py-1 px-2">Drop-in</th>
@@ -285,6 +292,7 @@ export default function CourtFlyer({
             {adultPricing.map((r) => (
               <tr key={r.name} className="border-b border-brand-pacific-dusk/10">
                 <td className="py-1 pr-2">{r.name} · {r.duration}</td>
+                <td className="py-1 px-2 text-brand-pacific-dusk/90">{r.location}</td>
                 <td className="text-right px-2">{r.price_1x}</td>
                 <td className="text-right px-2">{r.price_2x ?? '—'}</td>
                 <td className="text-right px-2">{r.dropIn}</td>

@@ -77,12 +77,13 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
           )}
 
           <div className="bg-white border border-black/[0.06] rounded-lg overflow-hidden">
-            {utr.divisions.map((div, i) => (
+            {utr.divisions.map((div) => (
               <LeagueRow
                 key={div.name}
                 name={div.name}
                 format={div.format}
                 levels={div.level}
+                note={div.note}
                 price={div.price}
                 dropIn={div.drop_in}
                 time={div.time}
