@@ -4,6 +4,10 @@ Review of the codebase against the three plans to see what’s already done.
 
 ---
 
+**Plans audit (2026-03-15):** Plans under `plans/` were scanned. Completed plans now have **Status: COMPLETE** or phase-level checkboxes; incomplete ones have a **Status** line. See `remaining-fixes-and-vylo-removal-plan.md` (complete), `FINAL_CLEANUP_PLAN.md` (Phases 1–2 done), `mobile-experience-improvement-plan.md` (Phases 1–4 done).
+
+---
+
 ## 1. Schedules Page UX Overhaul (`plans/schedules-page-ux-overhaul-plan.md`)
 
 **Status: DONE** (core); **optional Phase 4 not implemented**

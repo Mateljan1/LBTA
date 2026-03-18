@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { getCoachSlugByName } from '@/lib/coach-slug'
 
 interface Coach {
   coach: string
@@ -86,38 +87,53 @@ export default function PrivateCoachingSection({
                 <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3">
                   Availability
                 </th>
+                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                  Book
+                </th>
               </tr>
             </thead>
             <tbody>
-              {coaches.map((c, i) => (
-                <tr
-                  key={c.coach}
-                  className={i < coaches.length - 1 ? 'border-b border-black/[0.06]' : ''}
-                >
-                  <td className="font-headline text-[16px] font-medium text-brand-pacific-dusk px-6 py-4">
-                    {c.coach}
-                  </td>
-                  <td className="font-sans text-[14px] text-brand-pacific-dusk/60 px-4 py-4">
-                    {c.title}
-                  </td>
-                  <td className="font-sans text-[14px] text-brand-pacific-dusk px-4 py-4 text-right">
-                    ${c.rate60}
-                  </td>
-                  <td className="font-sans text-[14px] text-brand-pacific-dusk px-4 py-4 text-right">
-                    ${c.rate90}
-                  </td>
-                  <td className="font-sans text-[14px] text-brand-pacific-dusk px-4 py-4 text-right">
-                    ${c.pack10.toLocaleString()}
-                  </td>
-                  <td className="font-sans text-[14px] text-brand-pacific-dusk px-4 py-4 text-right">
-                    ${c.pack20.toLocaleString()}
-                  </td>
-                  <td className="font-sans text-[13px] text-brand-pacific-dusk/70 px-4 py-4">
-                    {c.availability}
-                  </td>
-
-                </tr>
-              ))}
+              {coaches.map((c, i) => {
+                const slug = getCoachSlugByName(c.coach)
+                const bookHref = slug ? `/book?type=private&coach=${slug}` : '/book?type=private'
+                return (
+                  <tr
+                    key={c.coach}
+                    className={i < coaches.length - 1 ? 'border-b border-black/[0.06]' : ''}
+                  >
+                    <td className="font-headline text-[16px] font-medium text-brand-pacific-dusk px-6 py-4">
+                      {c.coach}
+                    </td>
+                    <td className="font-sans text-[14px] text-brand-pacific-dusk/60 px-4 py-4">
+                      {c.title}
+                    </td>
+                    <td className="font-sans text-[14px] text-brand-pacific-dusk px-4 py-4 text-right">
+                      ${c.rate60}
+                    </td>
+                    <td className="font-sans text-[14px] text-brand-pacific-dusk px-4 py-4 text-right">
+                      ${c.rate90}
+                    </td>
+                    <td className="font-sans text-[14px] text-brand-pacific-dusk px-4 py-4 text-right">
+                      ${c.pack10.toLocaleString()}
+                    </td>
+                    <td className="font-sans text-[14px] text-brand-pacific-dusk px-4 py-4 text-right">
+                      ${c.pack20.toLocaleString()}
+                    </td>
+                    <td className="font-sans text-[13px] text-brand-pacific-dusk/70 px-4 py-4">
+                      {c.availability}
+                    </td>
+                    <td className="px-4 py-4 text-right">
+                      <Link
+                        href={bookHref}
+                        className="inline-flex items-center justify-center bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[44px] px-4 py-2 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                        aria-label={`Book a private lesson with ${c.coach}`}
+                      >
+                        Book
+                      </Link>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
@@ -153,12 +169,25 @@ export default function PrivateCoachingSection({
                   <p className="font-sans text-[15px] text-brand-pacific-dusk font-medium">${c.pack20.toLocaleString()}</p>
                 </div>
               </div>
+              {(() => {
+                const slug = getCoachSlugByName(c.coach)
+                const bookHref = slug ? `/book?type=private&coach=${slug}` : '/book?type=private'
+                return (
+                  <Link
+                    href={bookHref}
+                    className="mt-4 w-full inline-flex items-center justify-center bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[48px] px-5 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                    aria-label={`Book a private lesson with ${c.coach}`}
+                  >
+                    Book with {c.coach.split(' ')[0]}
+                  </Link>
+                )
+              })()}
             </div>
           ))}
         </div>
 
         <Link
-          href="/book"
+          href="/book?type=private"
           className="inline-flex items-center justify-center bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
         >
           Book a Private Lesson

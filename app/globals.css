@@ -1055,6 +1055,7 @@
 }
 
 /* Schedule calendar: print only the calendar content (by location view) */
+/* Court flyer: print only the flyer content (no site chrome) */
 @media print {
   .no-print {
     display: none !important;
@@ -1077,5 +1078,27 @@
   .schedule-calendar-print .max-w-\[1200px\] {
     max-width: 100%;
     padding: 1rem;
+  }
+  /* Court flyer: full-width print, 11×17 friendly */
+  .court-flyer-print,
+  .court-flyer-print * {
+    visibility: visible;
+  }
+  .court-flyer-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: auto;
+    padding: 0;
+    background: white;
+    color: #1B3A5C;
+  }
+  .court-flyer-print section {
+    break-inside: avoid;
+  }
+  @page {
+    size: 11in 17in;
+    margin: 0.5in;
   }
 }

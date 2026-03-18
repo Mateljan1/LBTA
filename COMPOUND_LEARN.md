@@ -135,6 +135,23 @@ Use this document when doing future compound work, plan verification, or 10/10 a
 
 ---
 
+## Mobile review fixes + single-expand (2026-03-15)
+
+- **Optional warnings addressed:** Contact 5s timeout ref + cleanup; LuxuryYearModal console.log guarded; TrialBookingModal/LuxuryRegistrationModal 48px (close, error dismiss, plan buttons); LuxuryRegistrationModal focus trap deps + success queueMicrotask; ProgramCard min-w-[140px], pb-20, stable schedule keys; getWebsiteSignupsListId n>0; apply-scholarship unused Link removed + hero Apply aria-label; validations preferredDays .max(31)/.max(50); ScheduleCalendarView locationsToShow useMemo + syntax fix.
+- **Single-expand / card view:** ProgramCard supports controlled expand (`isExpanded` + `onToggle`). ProgramsSection has List | Cards view; in Cards view only one card expands at a time (one mobile sticky bar). Section `#programs` uses `scroll-mt-32` so controls sit below fixed header.
+- **Full learnings:** `.cursor/compound/learnings/2026-03-15-mobile-review-single-expand-compound-learn.md`.
+
+---
+
+## Compound workflow power-up (2026-03-18)
+
+- **Power-up implemented:** Full workflow (Plan, Work, Review, Validate, Deploy, Compound) with scope guard, acceptance checklist, Scope Compliance agent, structured outputs, validation manifest, deploy runbook, triggers, project memory. Skill updated in place; repo has docs/validation-manifest.json, docs/compound-handoff-and-gates.md, docs/deploy-runbook.md.
+- **Pattern — Commit only task scope:** When many files are modified, stage and commit only those for the current task; leave other WIP unstaged. Keeps history and deploy focused.
+- **Pattern — Validation manifest:** Keep compound:validate targets in `docs/validation-manifest.json` (array of `{ name, type, target }`); single source, version-controlled.
+- **Full learnings:** `.cursor/compound/learnings/2026-03-18-compound-power-up-learn.md`.
+
+---
+
 ## SUCCESS CRITERIA (plan checklist)
 
 - [ ] Zero hex in active app/ and components/ (excl. PERS_)

@@ -1,5 +1,7 @@
 # Schedule Calendar by Location — Implementation Plan
 
+**Status:** Phases 1–3 done (data + UI). Remaining: print styles (4.1), optional PDF API (4.2), redirect/legacy HTML (5.1), and success-criteria verification.
+
 ## Overview
 
 Add a **calendar view of the schedule by location** so players can see and **download** a visual schedule (by location, by class, by season: Winter, Spring, Summer, Fall). All content is driven from existing `/data/*.json` and `lib/programs-data.ts` (single source of truth). No hardcoded schedule or prices.

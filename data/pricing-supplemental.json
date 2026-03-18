@@ -1,11 +1,9 @@
 {
   "registrationModalPricing": {
-    "little-stars": "$260 (1x/week) - $520 (2x/week)",
+    "little-stars": "$120/mo (1x) · $200/mo (2x)",
     "red-ball": "$546 (1x/week) - $1,092 (2x/week)",
     "orange-ball": "$546/quarter",
-    "orange-ball-match-play": "$85/month",
     "green-dot": "$546/quarter",
-    "green-dot-match-play": "$85/month",
     "youth-development": "Contact for pricing",
     "high-performance": "Contact for pricing",
     "adult-beginner-1": "Contact for pricing",
@@ -17,13 +15,13 @@
     "liveball-advanced": "Contact for pricing",
     "swim-tennis": "$495/week",
     "ski-week": "$525/week",
-    "spring-break": "$525/week",
-    "summer-camp": "$725/week (Full Day) | $425/week (Half Day)",
+    "spring-break": "$295/week (Tennis & Games) · $325/week (Jr Dev)",
+    "summer-camp": "$495/week (Full Day) · $295/week (Half Day) · $325/week (Jr Dev)",
     "back-to-school": "$325/3 days",
-    "thanksgiving": "$325/3 days",
+    "thanksgiving": "$221–244/3 days",
     "winter-break": "$425/session (4 days)",
-    "spring-jtt": "$2,350 (10U) | $2,800 (12U-18U)",
-    "fall-jtt": "$2,350 (10U) | $2,800 (12U-18U)"
+    "spring-jtt": "$2,800",
+    "fall-jtt": "$2,800"
   },
   "siteCopy": {
     "stickyCtaSchedules": "Spring & Summer 2026 Registration Open",
@@ -78,7 +76,7 @@
     },
     {
       "name": "Committed",
-      "price": "$1,292",
+      "price": "$1,092",
       "period": "per quarter",
       "description": "Maximum results",
       "features": [
@@ -88,7 +86,7 @@
         "Video analysis included",
         "Private coach access",
         "Competition preparation",
-        "$50/session value"
+        "$84/session value"
       ],
       "cta": "Go All In",
       "href": "/book",
@@ -97,9 +95,9 @@
   ],
   "promotions": {
     "earlyBird": {
-      "discount": 50,
-      "label": "Save $50",
-      "description": "Save $50 on full-quarter enrollment"
+      "discount": 5,
+      "label": "Save 5%",
+      "description": "5% off when registered 2+ weeks before session start"
     }
   },
   "leagues": {
@@ -110,8 +108,8 @@
     "priceRange": "$120-$250",
     "courses": {
       "juniorDevelopment": 120,
-      "youthDevelopment": 756,
-      "highPerformance": 1437,
+      "youthDevelopment": 810,
+      "highPerformance": 810,
       "adultPrograms": 546
     }
   },
@@ -150,32 +148,6 @@
         "discountedPrice": 747
       }
     ]
-  },
-  "matchPlay": {
-    "junior": {
-      "label": "Junior Competitive Play",
-      "ages": "8-18, All Skill Levels",
-      "time": "Fridays 4:00-5:30 PM",
-      "format": "Round Robin Doubles",
-      "dropIn": 25,
-      "monthlySessions": 4,
-      "monthlyPrice": 85,
-      "monthlySavings": 15
-    },
-    "adult": {
-      "label": "Adult League Play",
-      "level": "NTRP 2.5-4.5+",
-      "time": "Fridays 6:00-8:00 PM",
-      "format": "Round Robin Doubles",
-      "dropIn": 35,
-      "monthlySessions": 4,
-      "monthlyPrice": 120,
-      "monthlySavings": 20
-    },
-    "family": {
-      "dropIn": 60,
-      "monthlyPrice": 200
-    }
   },
   "ustaAdultLeague": {
     "totalSeasonCost": 5500,

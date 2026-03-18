@@ -1,5 +1,7 @@
 # Canva → Project Asset Selection — Implementation Plan
 
+**Status:** Process/doc plan. No code deliverables; use when selecting assets from Canva exports (export to disk → agent selects best and places in project).
+
 ## Overview
 
 Get the best visuals from your Canva uploads into the LBTA project folder by defining a clear export path from Canva, then using image viewing and WHAT-WE-NEED criteria to select and place the right assets. This plan does **not** assume direct API access to Canva (none exists in this workspace); it designs a repeatable workflow you can run whenever you export from Canva.

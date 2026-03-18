@@ -68,6 +68,7 @@
         "level": "Red / Orange / Green — Juniors",
         "format": "Pod Round Robin",
         "price": "$349",
+        "drop_in": 55,
         "time": "1:30–4:00 PM",
         "venue": "Alta Laguna Park"
       },
@@ -76,6 +77,7 @@
         "level": "Intermediate (~NTRP 2.5–3.5)",
         "format": "8-Game Pro Sets",
         "price": "$399",
+        "drop_in": 65,
         "time": "4:00–6:30 PM",
         "venue": "Alta Laguna Park"
       },
@@ -84,6 +86,7 @@
         "level": "Intermediate+ (~NTRP 3.0–4.0)",
         "format": "Best of 3, 10-pt tiebreak",
         "price": "$499",
+        "drop_in": 65,
         "time": "1:30–4:00 PM",
         "venue": "Laguna Beach HS"
       },
@@ -92,6 +95,7 @@
         "level": "Advanced (~NTRP 4.0–5.0)",
         "format": "Best of 3, 10-pt tiebreak",
         "price": "$499",
+        "drop_in": 65,
         "time": "4:00–6:30 PM",
         "venue": "Laguna Beach HS"
       },
@@ -100,6 +104,7 @@
         "level": "All levels",
         "format": "8-Game Pro Sets",
         "price": "$549",
+        "drop_in": 65,
         "time": "6:30–9:00 PM",
         "venue": "Laguna Beach HS"
       }

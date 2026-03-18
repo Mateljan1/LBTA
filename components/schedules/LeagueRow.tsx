@@ -7,6 +7,7 @@ interface LeagueRowProps {
   format: string
   levels?: string
   price: string
+  dropIn?: number
   time?: string
   venue?: string
   deadline?: string
@@ -22,6 +23,7 @@ export default function LeagueRow({
   format,
   levels,
   price,
+  dropIn,
   time,
   venue,
   deadline,
@@ -78,6 +80,11 @@ export default function LeagueRow({
             <p className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-tight">
               {price}
             </p>
+            {dropIn != null && (
+              <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
+                Drop-in ${dropIn}
+              </p>
+            )}
             {weeklyApprox && (
               <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
                 ~{weeklyApprox}/week
@@ -126,13 +133,18 @@ export default function LeagueRow({
           )}
         </div>
 
-        <div className="mt-4 flex items-baseline gap-3">
+        <div className="mt-4 flex flex-col gap-0.5">
           <span className="font-headline text-[18px] font-medium text-brand-pacific-dusk">
             {price}
           </span>
+          {dropIn != null && (
+            <span className="font-sans text-[12px] text-brand-pacific-dusk/70">
+              Drop-in ${dropIn}
+            </span>
+          )}
           {weeklyApprox && (
             <span className="font-sans text-[12px] text-brand-pacific-dusk/70">
-              · ~{weeklyApprox}/week
+              ~{weeklyApprox}/week
             </span>
           )}
         </div>

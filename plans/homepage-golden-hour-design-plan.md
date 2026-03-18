@@ -1,5 +1,7 @@
 # Homepage Golden Hour Design — Implementation Plan
 
+**Status:** Not started. Design/visual polish only; implement when prioritizing the Golden Hour look. All steps are optional enhancements.
+
 **Scope:** Adopt the design concept from `LBTA_Golden_Hour_Example.html` on the existing homepage. Keep all current content (homepage-copy.json, sections, CTAs); change visual language and layout feel only.
 
 **Reference:** `/Users/andrew-mac-studio/Desktop/LBTA_UTR_circuit/circuit_polished_ready/LBTA_Golden_Hour_Example.html`

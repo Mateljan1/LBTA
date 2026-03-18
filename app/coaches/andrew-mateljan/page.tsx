@@ -253,7 +253,7 @@ export default function AndrewMateljanPage() {
             </a>
           </div>
           <Link
-            href="/book"
+            href="/book?type=private&coach=andrew-mateljan"
             className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
           >
             Schedule Session

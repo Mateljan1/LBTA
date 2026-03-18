@@ -71,9 +71,19 @@ export function ProgramsTab({
   const currentWk = getWk(seasons, season)
   const assess = getAssessMode(week, hubData.assessment_calendar)
   const todayName = getTodayDayName()
-  const programs = (hubData.programs || []) as HubProgram[]
-  const SP = programs.find((p) => p.id === selectedProgram) ?? null
+  const allPrograms = (hubData.programs || []) as HubProgram[]
+  // Only show programs that have at least one schedule slot (group programs with session plans; private lessons are in Private tab)
+  const programs = allPrograms.filter((p) => ((p.schedule as unknown[])?.length ?? 0) > 0)
+  const SP = allPrograms.find((p) => p.id === selectedProgram) ?? null
   const schedule = (SP?.schedule || []) as ProgramScheduleSlot[]
+
+  // If selected program has no schedule (e.g. private lesson), switch to first group program so session plan can show
+  useEffect(() => {
+    if (programs.length > 0 && selectedProgram && !programs.some((p) => p.id === selectedProgram)) {
+      setSelectedProgram(programs[0].id)
+    }
+  }, [programs, selectedProgram, setSelectedProgram])
+
   useEffect(() => {
     if (!SP || schedule.length === 0) {
       setSelectedSlot(null)
@@ -195,8 +205,14 @@ export function ProgramsTab({
         </div>
       </section>
 
-      {/* Session builder */}
-      {SP && (
+      {/* Session builder — only for programs with schedule (group programs) */}
+      {SP && schedule.length === 0 && (
+        <section className="rounded-xl bg-brand-sandstone/30 border border-black/10 text-brand-pacific-dusk p-4">
+          <p className="text-sm font-medium">Session plans are for group programs.</p>
+          <p className="text-xs text-black/60 mt-1">Select a program from the grid above to see the practice plan.</p>
+        </section>
+      )}
+      {SP && schedule.length > 0 && (
         <section id="session-builder" className="border-2 border-brand-thousand-steps rounded-xl overflow-hidden">
           <div className="bg-gradient-to-br from-brand-pacific-dusk to-brand-deep-water text-brand-sandstone px-4 py-3 flex items-center justify-between">
             <h2 className="font-headline text-lg font-light">Session builder</h2>
@@ -265,7 +281,13 @@ export function ProgramsTab({
         </section>
       )}
 
-      {/* Session plan */}
+      {/* Session plan — show when we have program + slot but no plan row (edge case) */}
+      {SP && SD && !plan && (
+        <section className="rounded-xl overflow-hidden bg-brand-sandstone/30 border border-black/10 text-brand-pacific-dusk p-4">
+          <p className="text-sm font-medium">No session plan for this slot.</p>
+          <p className="text-xs text-black/60 mt-1">Try another week (1–12) or a different day/slot above.</p>
+        </section>
+      )}
       {SP && SD && plan && (
         <section className="rounded-xl overflow-hidden bg-gradient-to-br from-brand-pacific-dusk to-brand-deep-water text-brand-sandstone p-4">
           <p className="text-[8px] font-bold uppercase tracking-wider text-brand-thousand-steps mb-1">Session plan</p>

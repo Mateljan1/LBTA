@@ -1,5 +1,6 @@
 # LBTA Final Cleanup — Implementation Plan
 
+**Status:** Phase 1–2 complete (verified 2026-03-15). Phases 3–7 remain (docs sync, orphan cleanup, error tokens, data verification, optional tests).  
 **Compound Engineering Phase: PLAN**  
 **Date:** March 6, 2026  
 **Starting Score:** Code Review 94/100, Validation 95/100  
@@ -20,36 +21,36 @@ The site is production-ready (build passes, 42 routes, 53 tests) but has accumul
 
 ## Implementation Steps
 
-### Phase 1: Brand Token Cleanup (lbta-burnt → brand-sunset-cliff)
+### Phase 1: Brand Token Cleanup (lbta-burnt → brand-sunset-cliff) ✅ DONE
 
 **66 occurrences across 10 files. Simple find-and-replace.**
 
-- [ ] **1.1** `app/apply-scholarship/page.tsx` — Replace all `lbta-burnt` with `brand-sunset-cliff` (22 occurrences)
-- [ ] **1.2** `app/coaches/andrew-mateljan/page.tsx` — Replace (12 occurrences)
-- [ ] **1.3** `app/match-play/page.tsx` — Replace (9 occurrences)
-- [ ] **1.4** `components/ui/Chatbot.tsx` — Replace (5 occurrences)
-- [ ] **1.5** `app/faq/FAQInteractive.tsx` — Replace (5 occurrences)
-- [ ] **1.6** `app/pathway-planner/page.tsx` — Replace (4 occurrences)
-- [ ] **1.7** `components/ui/FourLabs.tsx` — Replace (3 occurrences)
-- [ ] **1.8** `components/ui/BackToTop.tsx` — Replace (1 occurrence)
-- [ ] **1.9** `components/ui/TestimonialQuote.tsx` — Replace (1 occurrence)
-- [ ] **1.10** `components/ui/PartnershipSection.tsx` — Replace (1 occurrence)
-- [ ] **1.11** `tailwind.config.ts` — Remove `burnt` from `lbta` colors (or keep as deprecated alias with comment)
+- [x] **1.1** `app/apply-scholarship/page.tsx` — Replace all `lbta-burnt` with `brand-sunset-cliff` (22 occurrences)
+- [x] **1.2** `app/coaches/andrew-mateljan/page.tsx` — Replace (12 occurrences)
+- [x] **1.3** `app/match-play/page.tsx` — Replace (9 occurrences)
+- [x] **1.4** `components/ui/Chatbot.tsx` — Replace (5 occurrences)
+- [x] **1.5** `app/faq/FAQInteractive.tsx` — Replace (5 occurrences)
+- [x] **1.6** `app/pathway-planner/page.tsx` — Replace (4 occurrences)
+- [x] **1.7** `components/ui/FourLabs.tsx` — Replace (3 occurrences)
+- [x] **1.8** `components/ui/BackToTop.tsx` — Replace (1 occurrence)
+- [x] **1.9** `components/ui/TestimonialQuote.tsx` — Replace (1 occurrence)
+- [x] **1.10** `components/ui/PartnershipSection.tsx` — Replace (1 occurrence)
+- [x] **1.11** `tailwind.config.ts` — Remove `burnt` from `lbta` colors (or keep as deprecated alias with comment)
 
 **Parallel: all 10 files can be done simultaneously.**
 
 ---
 
-### Phase 2: Elite-Pathway Route Rename
+### Phase 2: Elite-Pathway Route Rename ✅ DONE
 
 **Route URL uses forbidden word "elite"; copy already says "High Performance Pathway".**
 
-- [ ] **2.1** Create `app/high-performance-pathway/page.tsx` by moving content from `app/elite-pathway/page.tsx`
-- [ ] **2.2** Delete `app/elite-pathway/page.tsx`
-- [ ] **2.3** Add redirect in `next.config.js`: `/elite-pathway` → `/high-performance-pathway` (permanent)
-- [ ] **2.4** Search and update any internal links to `/elite-pathway` across all .tsx files
-- [ ] **2.5** Update `app/sitemap.ts` if elite-pathway is listed
-- [ ] **2.6** Update `README.md` route table
+- [x] **2.1** Create `app/high-performance-pathway/page.tsx` by moving content from `app/elite-pathway/page.tsx`
+- [x] **2.2** Delete `app/elite-pathway/page.tsx`
+- [x] **2.3** Add redirect in `next.config.js`: `/elite-pathway` → `/high-performance-pathway` (permanent)
+- [x] **2.4** Search and update any internal links to `/elite-pathway` across all .tsx files
+- [x] **2.5** Update `app/sitemap.ts` if elite-pathway is listed
+- [x] **2.6** Update `README.md` route table
 
 ---
 

@@ -8,9 +8,12 @@ import { getSeasonCTA, getActiveSeason } from '@/lib/season-utils'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 import pricingSupplementalData from '@/data/pricing-supplemental.json'
+import year2026Data from '@/data/year2026.json'
 
 const programData = getJuniorProgramDataFromWinter2026()
 const earlyBirdMinPrice = (pricingSupplementalData as { juniorTrial?: { earlyBirdMinPrice?: number } }).juniorTrial?.earlyBirdMinPrice ?? 120
+const earlyBirdConfig = (year2026Data as { discounts?: { earlyBird?: { amount: number; type: string } } }).discounts?.earlyBird ?? { amount: 5, type: 'percent' }
+const earlyBirdDiscountLabel = earlyBirdConfig.type === 'percent' ? `${earlyBirdConfig.amount}%` : `$${earlyBirdConfig.amount}`
 
 export default function JuniorTrialLanding() {
   const [step, setStep] = useState(1)
@@ -46,9 +49,10 @@ export default function JuniorTrialLanding() {
   const seasonCta = getSeasonCTA()
   const activeSeason = getActiveSeason()
   const isEarlyBird = seasonCta.showEarlyBird
-  const earlyBirdDiscount = seasonCta.earlyBirdDiscount
-  const discount = isEarlyBird && price > earlyBirdMinPrice ? earlyBirdDiscount : 0
-  const finalPrice = price - discount
+  const discountDollars = isEarlyBird && price > earlyBirdMinPrice
+    ? (earlyBirdConfig.type === 'percent' ? Math.round(price * earlyBirdConfig.amount / 100) : earlyBirdConfig.amount)
+    : 0
+  const finalPrice = price - discountDollars
 
   // Reset dependent fields when parent field changes
   useEffect(() => {
@@ -89,7 +93,7 @@ export default function JuniorTrialLanding() {
         body: JSON.stringify({
           ...formData,
           finalPrice,
-          discount,
+          discount: discountDollars,
           program: `Junior Trial: ${formData.program}`,
           source: 'junior-trial-landing',
         }),
@@ -114,7 +118,7 @@ export default function JuniorTrialLanding() {
       {/* Season Banner */}
       <div className="bg-lbta-coral text-white py-3 text-center text-sm font-medium tracking-wide">
         {isEarlyBird ? (
-          <><span className="font-bold">${earlyBirdDiscount} OFF</span> {activeSeason.name} registration — Sign up by {new Date(seasonCta.earlyBirdDeadline!).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</>
+          <><span className="font-bold">Save {earlyBirdDiscountLabel}</span> {activeSeason.name} registration — Sign up by {new Date(seasonCta.earlyBirdDeadline!).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</>
         ) : (
           <>Registration open for {activeSeason.name} — Secure your spot today</>
         )}
@@ -179,7 +183,7 @@ export default function JuniorTrialLanding() {
               href="#register"
               className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone"
             >
-              {isEarlyBird ? `Register Now & Save $${earlyBirdDiscount}` : 'Register Now'}
+              {isEarlyBird ? `Register Now & Save ${earlyBirdDiscountLabel}` : 'Register Now'}
             </a>
           </div>
         </div>
@@ -209,7 +213,7 @@ export default function JuniorTrialLanding() {
                   </h2>
                   <p className="text-lbta-coral font-medium">
                     {isEarlyBird
-                      ? `$${earlyBirdDiscount} discount ends ${new Date(seasonCta.earlyBirdDeadline!).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} • ${activeSeason.weeks}-week session`
+                      ? `Save ${earlyBirdDiscountLabel} — ends ${new Date(seasonCta.earlyBirdDeadline!).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} • ${activeSeason.weeks}-week session`
                       : `${activeSeason.weeks}-week session • Registration open`}
                   </p>
                 </div>
@@ -333,7 +337,9 @@ export default function JuniorTrialLanding() {
                         {Object.entries(selectedProgramData.pricing)
                           .filter(([key]) => key !== 'billing')
                           .map(([freq, amount]: [string, any]) => {
-                            const freqDiscount = isEarlyBird && amount > earlyBirdMinPrice ? earlyBirdDiscount : 0
+                            const freqDiscount = isEarlyBird && amount > earlyBirdMinPrice
+                              ? (earlyBirdConfig.type === 'percent' ? Math.round(amount * earlyBirdConfig.amount / 100) : earlyBirdConfig.amount)
+                              : 0
                             const freqPrice = amount - freqDiscount
                             return (
                               <label
@@ -379,7 +385,7 @@ export default function JuniorTrialLanding() {
                         <p><span className="font-medium">Frequency:</span> {formData.frequency === '1x' ? '1x per week' : '2x per week'}</p>
                         <p className="text-lg font-medium text-lbta-coral pt-2">
                           Price: ${finalPrice} {selectedProgramData?.pricing.billing}
-                          {discount > 0 && <span className="text-sm"> (Save ${earlyBirdDiscount})</span>}
+                          {discountDollars > 0 && <span className="text-sm"> (Save {earlyBirdDiscountLabel})</span>}
                         </p>
                       </div>
                     </div>
@@ -409,7 +415,7 @@ export default function JuniorTrialLanding() {
                     disabled={isSubmitting || !formData.schedule}
                     className="w-full bg-lbta-coral text-white font-bold py-5 px-6 text-lg tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Processing...' : isEarlyBird ? `Claim My $${earlyBirdDiscount} Discount →` : 'Start My Trial →'}
+                    {isSubmitting ? 'Processing...' : isEarlyBird ? `Claim My ${earlyBirdDiscountLabel} Discount →` : 'Start My Trial →'}
                   </button>
 
                   <p className="text-xs text-center text-gray-500">

@@ -16,9 +16,10 @@ export default function ConditionalLayout({
   const isBeginnerLanding = pathname?.startsWith('/beginner-program')
   const isJuniorLanding = pathname?.startsWith('/junior-trial')
   const isCoachHub = pathname?.startsWith('/coach-hub')
+  const isPrint = pathname?.startsWith('/print')
 
   // Standalone landing pages render without LBTA header/footer
-  if (isBeginnerLanding || isJuniorLanding || isCoachHub) {
+  if (isBeginnerLanding || isJuniorLanding || isCoachHub || isPrint) {
     return <>{children}</>
   }
 

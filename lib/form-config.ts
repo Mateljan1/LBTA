@@ -98,22 +98,6 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     classTagId: 39 // class:orange_ball
   },
 
-  'orange-ball-match-play': {
-    programId: 'orange-ball-match-play',
-    formEmbedCode: '', // Using native form
-    acFormId: '',
-    prePopulateData: {
-      programName: 'Orange Ball Match Play',
-      location: 'Moulton Meadows',
-      duration: '1 hr',
-      pricing: getModalPricing('orange-ball-match-play'),
-      category: 'Junior',
-      ageGroup: '7-8 years',
-      billingCycle: 'monthly'
-    },
-    classTagId: 39 // class:orange_ball (match play uses same tag)
-  },
-
   'green-dot': {
     programId: 'green-dot',
     formEmbedCode: '', // Using native form
@@ -128,22 +112,6 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       billingCycle: 'quarterly'
     },
     classTagId: 40 // class:green_dot
-  },
-
-  'green-dot-match-play': {
-    programId: 'green-dot-match-play',
-    formEmbedCode: '', // Using native form
-    acFormId: '',
-    prePopulateData: {
-      programName: 'Green Dot Match Play',
-      location: 'Moulton Meadows',
-      duration: '1 hr',
-      pricing: getModalPricing('green-dot-match-play'),
-      category: 'Junior',
-      ageGroup: '9-11 years',
-      billingCycle: 'monthly'
-    },
-    classTagId: 40 // class:green_dot (match play uses same tag)
   },
 
   // ===== YOUTH PROGRAMS =====

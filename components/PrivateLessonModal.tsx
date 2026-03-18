@@ -33,9 +33,11 @@ interface FormData {
 interface PrivateLessonModalProps {
   isOpen: boolean
   onClose: () => void
+  /** Pre-select this coach when modal opens (e.g. from /book?type=private&coach=andrew-mateljan). */
+  defaultCoach?: string
 }
 
-export default function PrivateLessonModal({ isOpen, onClose }: PrivateLessonModalProps) {
+export default function PrivateLessonModal({ isOpen, onClose, defaultCoach }: PrivateLessonModalProps) {
   const [formData, setFormData] = useState<FormData>({
     coach: '',
     option: '',
@@ -72,6 +74,13 @@ export default function PrivateLessonModal({ isOpen, onClose }: PrivateLessonMod
     else document.body.style.overflow = ''
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
+
+  // Pre-select coach when opened with defaultCoach (e.g. from coach bio or schedules).
+  useEffect(() => {
+    if (isOpen && defaultCoach) {
+      setFormData((prev) => ({ ...prev, coach: defaultCoach }))
+    }
+  }, [isOpen, defaultCoach])
 
   const handleClose = useCallback(() => {
     if (successRedirectTimeoutRef.current) {

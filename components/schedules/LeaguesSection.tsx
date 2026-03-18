@@ -84,6 +84,7 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
                 format={div.format}
                 levels={div.level}
                 price={div.price}
+                dropIn={div.drop_in}
                 time={div.time}
                 venue={div.venue}
                 onAction={handleInquiry}

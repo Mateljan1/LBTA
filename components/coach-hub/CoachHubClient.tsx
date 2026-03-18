@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import Link from 'next/link'
 import type { CoachHubInitialData } from '@/lib/coach-hub-types'
 import { ProgramsTab } from '@/components/coach-hub/programs/ProgramsTab'
@@ -34,18 +34,32 @@ const TABS: { id: ActiveTabId; label: string }[] = [
   { id: 'handbook', label: 'Handbook' },
 ]
 
+/** First program that has schedule slots and a matching plan row (so session plan shows on load). */
+function getFirstProgramIdWithPlans(initialData: CoachHubInitialData): string | null {
+  const programs = (initialData.hubData?.programs || []) as { id?: string; stage?: string; schedule?: unknown[] }[]
+  const plans = (initialData.hubData?.plans || []) as (string | number)[][]
+  const p = programs.find(
+    (prog) =>
+      (prog.schedule?.length ?? 0) > 0 &&
+      prog.stage &&
+      plans.some((pl) => pl[0] === prog.stage)
+  )
+  return p?.id ?? null
+}
+
 export default function CoachHubClient({
   initialData,
 }: {
   initialData: CoachHubInitialData
 }) {
+  const firstProgramId = useMemo(() => getFirstProgramIdWithPlans(initialData), [initialData])
   const [activeTab, setActiveTab] = useState<ActiveTabId>('programs')
   const [binderOpen, setBinderOpen] = useState(false)
   const [guideOpen, setGuideOpen] = useState(false)
   const [coach, setCoach] = useState<string>('')
   const [season, setSeason] = useState<string>('winter')
   const [week, setWeek] = useState(1)
-  const [selectedProgram, setSelectedProgram] = useState<string | null>(null)
+  const [selectedProgram, setSelectedProgram] = useState<string | null>(firstProgramId)
   const [selectedDay, setSelectedDay] = useState<string | null>(null)
 
   const handlePrint = useCallback(() => {

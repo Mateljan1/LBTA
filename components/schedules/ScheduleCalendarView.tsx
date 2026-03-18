@@ -34,6 +34,9 @@ const LOCATION_LABELS: Record<string, string> = {
   LBHS: 'Laguna Beach High School',
 }
 
+/** Shown when Alta has no sessions (e.g. resurfacing). Empty string = no note. */
+const ALTA_EMPTY_NOTE = 'Courts closed for resurfacing March 16–27.'
+
 const DAY_SHORT: Record<string, string> = {
   Monday: 'Mon',
   Tuesday: 'Tue',
@@ -128,7 +131,7 @@ export default function ScheduleCalendarView({
     const out: Record<string, ReturnType<typeof buildWeekGridForLocation>> = {}
     for (const loc of locationsToShow) {
       const byDay = scheduleByLocationByDay[loc]
-      if (byDay) out[loc] = buildWeekGridForLocation(byDay)
+      out[loc] = buildWeekGridForLocation(byDay ?? {})
     }
     return out
   }, [locationsToShow, scheduleByLocationByDay])
@@ -296,7 +299,10 @@ export default function ScheduleCalendarView({
                         {!range ? (
                           <tr>
                             <td colSpan={8} className="py-8 text-center font-sans text-[14px] text-brand-pacific-dusk/70">
-                              No sessions this week
+                              <span className="block">No sessions this week</span>
+                              {loc === 'Alta' && ALTA_EMPTY_NOTE ? (
+                                <span className="block mt-2 text-[13px] text-brand-pacific-dusk/60">{ALTA_EMPTY_NOTE}</span>
+                              ) : null}
                             </td>
                           </tr>
                         ) : (
@@ -354,16 +360,22 @@ export default function ScheduleCalendarView({
         ) : (
           <div className="space-y-10">
             {locationsToShow.map((loc) => {
-              const byDay = scheduleByLocationByDay[loc]
-              if (!byDay) return null
+              const byDay = scheduleByLocationByDay[loc] ?? {}
               const locationName = LOCATION_LABELS[loc] ?? loc
+              const hasAnySlots = DAY_ORDER.some((day) => (byDay[day]?.length ?? 0) > 0)
               return (
                 <section key={loc} className="break-inside-avoid">
                   <h2 className="font-headline text-[18px] md:text-[20px] font-medium text-brand-pacific-dusk mb-5">
                     {locationName}
                   </h2>
                   <div className="space-y-6">
-                    {DAY_ORDER.map((day) => {
+                    {!hasAnySlots ? (
+                      <p className="font-sans text-[14px] text-brand-pacific-dusk/70 py-4">
+                        No sessions at this location for this season.
+                        {loc === 'Alta' && ALTA_EMPTY_NOTE ? ` ${ALTA_EMPTY_NOTE}` : ''}
+                      </p>
+                    ) : (
+                    DAY_ORDER.map((day) => {
                       const slots = byDay[day]
                       if (!slots?.length) return null
                       return (
@@ -393,7 +405,8 @@ export default function ScheduleCalendarView({
                           </ul>
                         </div>
                       )
-                    })}
+                    })
+                    )}
                   </div>
                 </section>
               )

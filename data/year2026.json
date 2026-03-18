@@ -64,10 +64,10 @@
       "price": 495,
       "threeDayFullPrice": 375,
       "perDay": 124,
-      "description": "Structured tennis lessons, swimming, and team-based activities that create lasting memories.",
+      "description": "The pool at Alta Laguna is closed for construction and remodeling in summer 2026. We are offering our full-day Tennis & Games camp instead — same great location, tennis instruction, field games, and activities. See Summer Camps (Tennis & Games) for dates and enrollment.",
       "includes": ["Tennis instruction", "Supervised swimming", "Team activities", "Certified lifeguards"],
       "coaches": ["Andrew Mateljan", "Robert LeBuhn"],
-      "featured": true,
+      "featured": false,
       "safetyNote": "All participants must be able to swim independently."
     },
     {
@@ -92,9 +92,11 @@
       "ages": "5-14",
       "location": "Alta Laguna Park / Laguna Beach High School",
       "price": 295,
+      "fullDayPrice": 495,
       "jrDevPrice": 325,
+      "jrDevFullDayPrice": 495,
       "perDay": 59,
-      "description": "Tennis & Games (5-11) or Junior Development (12-17) during spring break",
+      "description": "Tennis & Games (5-11) or Junior Development (12-17) during spring break. Half-day or full-day options.",
       "includes": ["Skills clinics", "Match play", "Age-appropriate curriculum"]
     },
     {
@@ -209,11 +211,11 @@
       "label": "Youth Development",
       "subtitle": "Competitive Training Track",
       "ages": "11-18",
-      "duration": "1.5 hr",
+      "duration": "2 hr",
       "winterPrices": {
-        "1x": 756,
-        "2x": 1437,
-        "3x": 2160
+        "1x": 810,
+        "2x": 1620,
+        "3x": 2268
       },
       "dropIn": 70,
       "popular": "2x"
@@ -284,13 +286,6 @@
       "duration": "1.5 hr",
       "price": 150,
       "dropIn": 50
-    },
-    "matchPlay": {
-      "label": "Friday Match Play",
-      "subtitle": "Organized Competition",
-      "duration": "1-2 hr",
-      "price": 85,
-      "dropIn": 25
     }
   },
 
@@ -302,7 +297,7 @@
   ],
 
   "discounts": {
-    "earlyBird": { "amount": 50, "type": "fixed", "description": "Register before early bird deadline" },
+    "earlyBird": { "amount": 5, "type": "percent", "description": "5% off when registered 2+ weeks before session start" },
     "sibling": { "amount": 10, "type": "percent", "description": "10% off second child" },
     "multiProgram": { "amount": 5, "type": "percent", "description": "5% off 2+ programs" },
     "annual": { "amount": 10, "type": "percent", "description": "10% off full year payment" }

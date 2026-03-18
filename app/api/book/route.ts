@@ -126,6 +126,7 @@ export async function POST(request: NextRequest) {
         lastName: privateBody.lastName,
         phone: privateBody.phone,
       })
+      // Leads and signup intent stored in Supabase (leads table) and ActiveCampaign (contact + lists + tags) for redundancy.
       void storeLead({
         source: 'book',
         email: privateBody.email,

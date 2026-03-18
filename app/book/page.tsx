@@ -7,10 +7,13 @@ import TrialBookingModal from '@/components/TrialBookingModal'
 import PrivateLessonModal from '@/components/PrivateLessonModal'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
+import { getCoachNameBySlug } from '@/lib/coach-slug'
 
 function BookPageContent() {
   const searchParams = useSearchParams()
   const isPrivate = useMemo(() => searchParams?.get('type') === 'private', [searchParams])
+  const coachSlug = searchParams?.get('coach') ?? undefined
+  const defaultCoach = useMemo(() => getCoachNameBySlug(coachSlug), [coachSlug])
   const [trialModalOpen, setTrialModalOpen] = useState(!isPrivate)
   const [privateModalOpen, setPrivateModalOpen] = useState(isPrivate)
 
@@ -142,7 +145,7 @@ function BookPageContent() {
       </section>
 
       <TrialBookingModal isOpen={trialModalOpen} onClose={() => setTrialModalOpen(false)} />
-      <PrivateLessonModal isOpen={privateModalOpen} onClose={() => setPrivateModalOpen(false)} />
+      <PrivateLessonModal isOpen={privateModalOpen} onClose={() => setPrivateModalOpen(false)} defaultCoach={defaultCoach} />
     </>
   )
 }

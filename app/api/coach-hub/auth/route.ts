@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
 
   let secret: string
   try {
-    secret = getEnvVar('COACH_HUB_SECRET', false)
+    secret = getEnvVar('COACH_HUB_SECRET', false).trim()
   } catch {
     secret = ''
   }
@@ -75,9 +75,10 @@ export async function POST(request: NextRequest) {
   }
 
   const { password } = validation.data
+  const passwordTrimmed = password.trim()
 
   const secretBuf = Buffer.from(secret, 'utf8')
-  const passwordBuf = Buffer.from(password, 'utf8')
+  const passwordBuf = Buffer.from(passwordTrimmed, 'utf8')
   if (secretBuf.length !== passwordBuf.length) {
     return NextResponse.json(
       { success: false, error: 'Invalid password' },

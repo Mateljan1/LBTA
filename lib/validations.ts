@@ -120,6 +120,19 @@ export const bookingSchema = contactSchema.extend({
 export type BookingRequest = z.infer<typeof bookingSchema>
 
 /**
+ * Private lesson booking schema
+ * Used by: /api/book when bookingType === 'private'
+ */
+export const privateLessonBookingSchema = contactSchema.extend({
+  bookingType: z.literal('private'),
+  coach: z.string().min(1, 'Please select a coach').max(200),
+  option: z.enum(['60', '90', '10-pack', '20-pack']),
+  message: z.string().max(500).optional(),
+})
+
+export type PrivateLessonBookingRequest = z.infer<typeof privateLessonBookingSchema>
+
+/**
  * Newsletter signup schema
  * Used by: /api/newsletter
  */

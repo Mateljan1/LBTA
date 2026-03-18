@@ -10,3 +10,22 @@
 - **Site copy** — The `siteCopy` object (e.g. `stickyCtaSchedules`, `beginnerProgramCohort`, `campsHeading`) is exposed via `lib/site-copy.ts` getters. StickyCTA, beginner-program, and camps pages use these getters instead of importing the JSON directly.
 
 The file also contains other keys (e.g. `beginnerProgram`, `matchPlay`, `leagues`, `schema`) used by specific pages. The `leagues` key in this file is **copy for league landing/marketing**; schedule/league **program data** comes from `data/leagues-2026.json` (see schedules page).
+
+**Cohesion rule:** Values in `pricing-supplemental.json` (registration modal strings, comparison tiers, matchPlay, schema, promotions) must match the canonical program/camp/league data. When you change prices or dates in season or camp files, update this file so copy and modals stay in sync.
+
+---
+
+## Pricing & scheduling — canonical sources
+
+| What | Source of truth | Used by |
+|------|-----------------|--------|
+| Winter program pricing & schedule | `data/winter2026.json` | Schedules page (Winter), ProgramRow, programs-data |
+| Spring/Summer program pricing & schedule | `data/spring-summer-2026.json` | Schedules page (Spring/Summer), programs-data |
+| Fall program pricing & schedule | `data/fall2026.json` | Schedules page (Fall) |
+| Camps (dates, prices, options) | `data/year2026.json` (camps) + `data/spring-summer-2026.json` (camps) | Schedules Camps tab, camps page, camps-data |
+| Leagues (USTA/UTR) | `data/leagues-2026.json` | Schedules Leagues tab, league pages |
+| Private coaching rates | `data/private-rates.json` | Schedules Private section, programs-data |
+| Early bird & discounts | `data/year2026.json` (discounts) + per-season in `winter2026.json` etc. | Schedules, junior-trial (year2026.discounts.earlyBird for type + amount) |
+| Registration modal display strings | `data/pricing-supplemental.json` (registrationModalPricing) | form-config, modal prefill |
+
+Do not hardcode prices in components or pages; derive from the data files above or from `pricing-supplemental` where it is the designated copy source.

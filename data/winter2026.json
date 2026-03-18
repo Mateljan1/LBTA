@@ -58,8 +58,6 @@
         { "day": "Saturday", "time": "10:45–11:45 AM", "coach": "Allison Cronk" }
       ],
       "pricing": { "1x": 546, "2x": 1092, "3x": 1635, "saturday1x": 497, "drop_in": 50 },
-      "matchPlay": { "monthly": 65, "drop_in": 25 },
-      "pricingNote": "Friday Match Play: $65/mo or $25/session.",
       "description": "Mid-court tennis where directional play, consistent rallies, and competitive instincts start to form."
     },
     {
@@ -75,22 +73,7 @@
         { "day": "Saturday", "time": "11:45 AM–12:45 PM", "coach": "Allison Cronk" }
       ],
       "pricing": { "1x": 546, "2x": 1092, "3x": 1635, "saturday1x": 497, "drop_in": 50 },
-      "matchPlay": { "monthly": 65, "drop_in": 25 },
-      "pricingNote": "Friday Match Play: $65/mo or $25/session.",
       "description": "Full-court tennis with green balls — building consistency, tactical awareness, and the competitive mindset that carries forward."
-    },
-    {
-      "id": "friday-match-play",
-      "category": "Junior",
-      "program": "Friday Match Play",
-      "ages": "7-11",
-      "location": "Moulton Meadows Park",
-      "duration": "60 min",
-      "schedule": [
-        { "day": "Friday", "time": "4:30–5:30 PM", "coach": "Staff" }
-      ],
-      "pricing": { "monthly": 65, "drop_in": 25 },
-      "description": "Weekly competitive match play for Red, Orange, and Green Dot players."
     },
     {
       "id": "utr-green-dot",

@@ -1,5 +1,7 @@
 # Simplified AC + GHL SMS — One System, Client Email + Internal Email + Text
 
+**Status:** Not complete. Requires: AC doc updates (one automation + internal email), `lib/gohighlevel.ts`, dual-write in API routes, GHL workflow setup, and `GHL_*` env in Vercel when ready.
+
 **Purpose:** (1) Simplify ActiveCampaign into one clear setup that sends **automated email to the client** and **automated email to you internally**; (2) add GoHighLevel so contacts also get a **text message**. Everything stays seamless and nothing breaks.
 
 ---

@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-16",
-  "lastLearnRun": "2026-03-16 Work+Deploy+Compound (form-success-response-ok-and-data-success, modal-timeout-ref-cleanup)",
+  "updated": "2026-03-18",
+  "lastLearnRun": "2026-03-18 Drop-in + private booking (league-drop-in-in-data-and-ui, contextual-private-booking-coach-slug)",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -488,6 +488,18 @@
       "when": "Modal uses setTimeout/setInterval (e.g. success redirect or auto-close)",
       "example": "Store id in useRef; clear in handleClose and in useEffect cleanup (return () => { if (ref.current) { clearTimeout(ref.current); ref.current = null; } }); so timer is always cleared on unmount or close.",
       "tags": ["modals", "cleanup", "memory"]
+    },
+    {
+      "name": "league-drop-in-in-data-and-ui",
+      "when": "League/division has both season price and per-session drop-in",
+      "example": "Add optional drop_in (number) to division in data; extend schema (e.g. utrDivisionSchema) with drop_in: z.number().optional(); row component accepts optional dropIn prop and renders e.g. 'Drop-in $X' under main price (desktop and mobile). Single source in data.",
+      "tags": ["schedules", "leagues", "data-integrity", "drop-in"]
+    },
+    {
+      "name": "contextual-private-booking-coach-slug",
+      "when": "User can start private lesson request from coach-specific context (bio, schedules table)",
+      "example": "Use URL /book?type=private&coach=<slug>; book page reads coach param, resolves slug→display name (e.g. lib/coach-slug from data/coaches.json), passes defaultCoach to private modal; modal accepts optional defaultCoach and on open sets form coach to that value.",
+      "tags": ["book", "private", "coach", "modal", "schedules"]
     }
   ]
 }

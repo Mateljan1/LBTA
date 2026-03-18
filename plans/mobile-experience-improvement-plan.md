@@ -1,5 +1,7 @@
 # Mobile Experience Improvement — Implementation Plan
 
+**Status:** Phases 1–4 complete (2026-03-17). **Remaining:** Phase 5 (global layout verification: Header drawer, StickyCTA/BackToTop/ChatWidget stacking, Footer at 320px) and Phase 6 (re-run audit, lint/build, optional compound:validate, add mobile checklist to COMPOUND_LEARN).
+
 ## Overview
 
 Improve the LBTA site’s mobile experience so key flows (schedules, contact, programs, navigation) are fast, readable, and easy to use on 320px–768px viewports, with no horizontal scroll, reliable 48px touch targets, and clear hierarchy—aligned with existing .cursorrules breakpoints and WCAG 2.1 AAA.
@@ -144,6 +146,6 @@ Improve the LBTA site’s mobile experience so key flows (schedules, contact, pr
 
 ## Next Steps
 
-1. **Execute Phase 1** (audit) and fill the checklist.
-2. **Fix by phase** (2 → 5), then **Phase 6** (validation + docs).
-3. Optionally run **/compound:review** on changed files and **/compound:validate** for UI/Functional; **/compound:learn** to capture any new mobile patterns or corrections.
+1. **Phase 5:** Verify Header mobile drawer (overflow, focus trap, 48px targets), StickyCTA/BackToTop/ChatWidget stacking and safe-area, Footer at 320px (no horizontal scroll).
+2. **Phase 6:** Re-run audit at 320/375/768px; run `npm run lint` and `npm run build`; optionally `/compound:validate`; add mobile checklist to COMPOUND_LEARN.md or quality-bars.
+3. Optionally run **/compound:review** on any changed files and **/compound:learn** to capture new mobile patterns.

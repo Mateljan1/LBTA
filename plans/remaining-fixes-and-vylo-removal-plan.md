@@ -1,5 +1,6 @@
 # LBTA Remaining Fixes + VYLO Removal — Implementation Plan
 
+**Status: COMPLETE** (verified 2026-03-15)  
 **Compound Engineering Phase: PLAN**  
 **Date**: March 6, 2026  
 **Source**: COMPOUND_LEARN.md, user request (remove VYLO; fix all remaining issues)
@@ -32,39 +33,39 @@ Remove the discontinued VYLO product from the codebase and fix all remaining iss
 
 ### Phase 1: VYLO Removal
 
-- [ ] **1.1** Delete `app/vylo/` directory (page.tsx, layout.tsx, useVYLOAnimations.ts, vylo.css).
-- [ ] **1.2** Delete `app/vylo-apply/` directory (page.tsx, layout.tsx).
-- [ ] **1.3** Delete `app/api/vylo-apply/` directory (route.ts).
-- [ ] **1.4** In `next.config.js`: (a) Change `/pro-training` and `/pro-training/` redirect destination from `/vylo` to `/programs/high-performance`. (b) Change "Hide VYLO" redirects so `/vylo` and `/vylo/` redirect to `/programs/high-performance` (permanent: true). (c) Add redirects for `/vylo-apply` and `/vylo-apply/` to `/programs/high-performance`.
-- [ ] **1.5** In `components/layout/ConditionalLayout.tsx`: Remove `isVYLO` and any layout branch that depends on it (use pathname only for beginner/junior landings if needed).
-- [ ] **1.6** In `app/coaches/andrew-mateljan/page.tsx`: Remove the "Fit4Tennis & VYLO" section block (or replace with Fit4Tennis-only copy and remove VYLO CTA/link).
-- [ ] **1.7** In `components/ui/PartnershipSection.tsx`: Remove the VYLO entry from the partners array.
-- [ ] **1.8** In `app/pathway-planner/page.tsx`: Change recommendation text that mentions "consider VYLO" to something else (e.g. high-performance program or /programs/high-performance).
-- [ ] **1.9** In `tailwind.config.ts`: Remove `vylo` color entry under `extend.colors` (or leave for legacy if andrew page keeps styling; prefer remove and restyle andrew section).
-- [ ] **1.10** Grep for any remaining `vylo`/`VYLO` in `app/`, `components/`, `next.config.js` and fix (docs/archive and README/GA4/VYLO_LANDING_PAGE_SETUP.md can stay as historical or be updated in a follow-up).
+- [x] **1.1** Delete `app/vylo/` directory (page.tsx, layout.tsx, useVYLOAnimations.ts, vylo.css).
+- [x] **1.2** Delete `app/vylo-apply/` directory (page.tsx, layout.tsx).
+- [x] **1.3** Delete `app/api/vylo-apply/` directory (route.ts).
+- [x] **1.4** In `next.config.js`: (a) Change `/pro-training` and `/pro-training/` redirect destination from `/vylo` to `/programs/high-performance`. (b) Change "Hide VYLO" redirects so `/vylo` and `/vylo/` redirect to `/programs/high-performance` (permanent: true). (c) Add redirects for `/vylo-apply` and `/vylo-apply/` to `/programs/high-performance`.
+- [x] **1.5** In `components/layout/ConditionalLayout.tsx`: Remove `isVYLO` and any layout branch that depends on it (use pathname only for beginner/junior landings if needed).
+- [x] **1.6** In `app/coaches/andrew-mateljan/page.tsx`: Remove the "Fit4Tennis & VYLO" section block (or replace with Fit4Tennis-only copy and remove VYLO CTA/link).
+- [x] **1.7** In `components/ui/PartnershipSection.tsx`: Remove the VYLO entry from the partners array.
+- [x] **1.8** In `app/pathway-planner/page.tsx`: Change recommendation text that mentions "consider VYLO" to something else (e.g. high-performance program or /programs/high-performance).
+- [x] **1.9** In `tailwind.config.ts`: Remove `vylo` color entry under `extend.colors` (or leave for legacy if andrew page keeps styling; prefer remove and restyle andrew section).
+- [x] **1.10** Grep for any remaining `vylo`/`VYLO` in `app/`, `components/`, `next.config.js` and fix (docs/archive and README/GA4/VYLO_LANDING_PAGE_SETUP.md can stay as historical or be updated in a follow-up).
 
 ### Phase 2: Accessibility Fixes
 
-- [ ] **2.1** **HomeCTAForm**: Add `<label>` for each input (visible or `sr-only`) with `htmlFor` and matching input `id` (e.g. `id="home-cta-name"`). Add a live region for submit errors: e.g. `<div role="alert" aria-live="assertive" className="sr-only or visible text-red-600">` and set state on submit failure; announce error to screen readers.
-- [ ] **2.2** **HomeHero**: On the scroll-to-content button, add `min-h-[48px] min-w-[48px]` and ensure padding so the touch target is at least 48×48px (WCAG 2.1).
+- [x] **2.1** **HomeCTAForm**: Add `<label>` for each input (visible or `sr-only`) with `htmlFor` and matching input `id` (e.g. `id="home-cta-name"`). Add a live region for submit errors: e.g. `<div role="alert" aria-live="assertive" className="sr-only or visible text-red-600">` and set state on submit failure; announce error to screen readers.
+- [x] **2.2** **HomeHero**: On the scroll-to-content button, add `min-h-[48px] min-w-[48px]` and ensure padding so the touch target is at least 48×48px (WCAG 2.1).
 
 ### Phase 3: Performance / Images
 
-- [ ] **3.1** **Coaches page**: Remove `priority` from the founder portrait Image (andrew-portrait.webp); keep `priority` only on the hero Image (schedules-hero.webp).
-- [ ] **3.2** **not-found.tsx**: Add `sizes="100vw"` to the hero `<Image>` (fill + priority).
-- [ ] **3.3** **racquet-rescue/page.tsx**: Add `sizes="100vw"` to the hero `<Image>` (fill + priority).
-- [ ] **3.4** **junior-trial**: If a WebP version of `junior-program-hero.jpg` exists (e.g. in public), switch `src` to it and keep `sizes="100vw"`. If not, add a short comment that hero should be WebP when asset is available, or leave as-is and document in COMPOUND_LEARN.
+- [x] **3.1** **Coaches page**: Remove `priority` from the founder portrait Image (andrew-portrait.webp); keep `priority` only on the hero Image (schedules-hero.webp).
+- [x] **3.2** **not-found.tsx**: Add `sizes="100vw"` to the hero `<Image>` (fill + priority).
+- [x] **3.3** **racquet-rescue/page.tsx**: Add `sizes="100vw"` to the hero `<Image>` (fill + priority).
+- [x] **3.4** **junior-trial**: If a WebP version of `junior-program-hero.jpg` exists (e.g. in public), switch `src` to it and keep `sizes="100vw"`. If not, add a short comment that hero should be WebP when asset is available, or leave as-is and document in COMPOUND_LEARN.
 
 ### Phase 4: Documentation
 
-- [ ] **4.1** **.cursorrules Part 13**: Update file structure: remove `jtt/page.tsx`; change `programs/adult/page.tsx` description to full pathway (not "Redirects to /schedules"); remove any vylo references from the app tree; add `programs/leagues` or clarify as needed to match current routes.
+- [x] **4.1** **.cursorrules Part 13**: Update file structure: remove `jtt/page.tsx`; change `programs/adult/page.tsx` description to full pathway (not "Redirects to /schedules"); remove any vylo references from the app tree; add `programs/leagues` or clarify as needed to match current routes.
 
 ### Phase 5: Verification
 
-- [ ] **5.1** Run `npm run build` and fix any broken imports or references.
-- [ ] **5.2** Run `npm run lint`.
-- [ ] **5.3** Grep for `vylo`/`VYLO` in app/, components/, next.config.js and ensure no remaining references (except optional tailwind token if kept).
-- [ ] **5.4** Spot-check: homepage (form labels, scroll button), coaches (one priority), not-found and racquet-rescue (hero loads), /vylo and /vylo-apply redirect to /programs/high-performance.
+- [x] **5.1** Run `npm run build` and fix any broken imports or references.
+- [x] **5.2** Run `npm run lint`.
+- [x] **5.3** Grep for `vylo`/`VYLO` in app/, components/, next.config.js and ensure no remaining references (except optional tailwind token if kept).
+- [x] **5.4** Spot-check: homepage (form labels, scroll button), coaches (one priority), not-found and racquet-rescue (hero loads), /vylo and /vylo-apply redirect to /programs/high-performance.
 
 ---
 
@@ -93,15 +94,15 @@ Remove the discontinued VYLO product from the codebase and fix all remaining iss
 
 ## Success Criteria
 
-- [ ] No `/vylo` or `/vylo-apply` routes; both redirect to `/programs/high-performance`.
-- [ ] No VYLO references in layout, coaches Andrew page, partnership section, pathway-planner.
-- [ ] HomeCTAForm has proper labels and live region for submit errors.
-- [ ] HomeHero scroll button has ≥48×48px touch target.
-- [ ] Coaches page has exactly one `priority` image (hero only).
-- [ ] not-found and racquet-rescue hero Images have `sizes="100vw"`.
-- [ ] junior-trial hero WebP if available; otherwise documented.
-- [ ] .cursorrules Part 13 matches current app structure (no jtt, adult as pathway, no vylo).
-- [ ] `npm run build` and `npm run lint` pass.
+- [x] No `/vylo` or `/vylo-apply` routes; both redirect to `/programs/high-performance`.
+- [x] No VYLO references in layout, coaches Andrew page, partnership section, pathway-planner.
+- [x] HomeCTAForm has proper labels and live region for submit errors.
+- [x] HomeHero scroll button has ≥48×48px touch target.
+- [x] Coaches page has exactly one `priority` image (hero only).
+- [x] not-found and racquet-rescue hero Images have `sizes="100vw"`.
+- [x] junior-trial hero WebP if available; otherwise documented.
+- [x] .cursorrules Part 13 matches current app structure (no jtt, adult as pathway, no vylo).
+- [x] `npm run build` and `npm run lint` pass.
 
 ---
 
