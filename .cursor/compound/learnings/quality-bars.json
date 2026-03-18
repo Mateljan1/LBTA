@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-18",
-  "lastLearnRun": "2026-03-18 Review+Validate book/thank-you (apiValidationErrorGeneric, modalSuccessViewFocus, thankYouPageFocusRing, pageSearchParamsAsyncNext15)",
+  "lastLearnRun": "2026-03-16 Work+Deploy+Compound book/thank-you (all review/validate items; Vercel prod; modalTimeoutCleanup, res.ok+data.success)",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",

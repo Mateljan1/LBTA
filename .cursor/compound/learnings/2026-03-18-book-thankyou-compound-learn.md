@@ -48,7 +48,10 @@
 
 ---
 
-## Still to do (from review)
+## Completed (work + deploy + compound)
 
-- **High:** Book API — return generic 400 message instead of validation.error; log error server-side.
-- **High:** PrivateLessonModal — on success, focus first focusable in success view (e.g. close button).
+- **High:** Book API — generic 400 message; validation error logged server-side only. ✅
+- **High:** PrivateLessonModal — on success, focus first focusable (close button); clear error on success; typed res.json(). ✅
+- **Optional:** TrialBookingModal — res.ok && data.success; typed res.json(); successRedirectTimeoutRef cleanup (modalTimeoutCleanup). ✅
+- **Optional:** Book page — initial modal state from searchParams; inline Suspense fallback. ✅
+- **Deploy:** 2026-03-16 — Vercel production deploy successful (commit d12583b).

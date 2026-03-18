@@ -2,7 +2,7 @@
 
 **Source:** Code Review V2 (94→98/100) + Validation V2 (95→98/100) — March 6, 2026  
 **Workspace:** LBTA_WEBSITE_DRAFT_3:5:26  
-**Latest:** Review+Validate book/thank-you compound:learn — 2026-03-18 (API validation error generic, modal success focus, thank-you focus ring + brand tokens, Next 15+ searchParams async; see `.cursor/compound/learnings/` and `docs/compound-review-and-validate-2026-03-18.md`)
+**Latest:** Book/thank-you — work + commit + deploy + compound 2026-03-16 (all review/validate items; Vercel prod deploy; see `.cursor/compound/learnings/2026-03-18-book-thankyou-compound-learn.md` and `docs/compound-review-and-validate-2026-03-18.md`)
 
 ---
 

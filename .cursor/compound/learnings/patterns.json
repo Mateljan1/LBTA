@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-18",
-  "lastLearnRun": "2026-03-18 Review+Validate (next15-page-searchparams-async, thank-you-all-links-focus-ring)",
+  "updated": "2026-03-16",
+  "lastLearnRun": "2026-03-16 Work+Deploy+Compound (form-success-response-ok-and-data-success, modal-timeout-ref-cleanup)",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -476,6 +476,18 @@
       "when": "Thank-you or confirmation page with tel, mailto, Return home, or app download links",
       "example": "Every <a> and <Link> gets focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm; on dark sections use focus:ring-white focus:ring-offset-black. Step/card accents use brand tokens (brand-victoria-cove), not raw blue.",
       "tags": ["a11y", "thank-you", "focus", "brand"]
+    },
+    {
+      "name": "form-success-response-ok-and-data-success",
+      "when": "Client submits to API and treats response as success",
+      "example": "const raw = await response.json().catch(() => ({})); const data = typeof raw === 'object' && raw !== null && 'success' in raw ? raw as { success?: boolean; error?: string } : { success: false }; if (response.ok && data.success) { ... } else { setError(data.error ?? fallback); }",
+      "tags": ["api", "forms", "modals", "fetch"]
+    },
+    {
+      "name": "modal-timeout-ref-cleanup",
+      "when": "Modal uses setTimeout/setInterval (e.g. success redirect or auto-close)",
+      "example": "Store id in useRef; clear in handleClose and in useEffect cleanup (return () => { if (ref.current) { clearTimeout(ref.current); ref.current = null; } }); so timer is always cleared on unmount or close.",
+      "tags": ["modals", "cleanup", "memory"]
     }
   ]
 }
