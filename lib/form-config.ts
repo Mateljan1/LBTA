@@ -36,7 +36,7 @@ export interface FormConfig {
     pricing: string
     category: string
     ageGroup?: string
-    billingCycle: 'quarterly' | 'monthly'
+    billingCycle: 'quarterly' | 'monthly' | 'season'
   }
   /** ActiveCampaign tag ID applied by the API route for this program. */
   classTagId: number
