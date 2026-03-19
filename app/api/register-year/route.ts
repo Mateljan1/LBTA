@@ -71,23 +71,23 @@ function determineCategory(programName: string, registrationType: RegistrationTy
 }
 
 // Helper function to check if Early Bird discount applies
-// Early bird = registered 2+ weeks before session start (5% off per rec doc)
 function isEarlyBird(season?: string): boolean {
   const now = new Date()
 
-  // Season-specific early bird deadlines (2 weeks before session start)
+  // Season-specific early bird deadlines
   const earlyBirdDeadlines: Record<string, Date> = {
-    'spring': new Date('2026-03-23T23:59:59'),   // Spring starts Apr 6
-    'summer': new Date('2026-06-01T23:59:59'),    // Summer starts Jun 15
-    'fall': new Date('2026-08-15T23:59:59'),      // Fall TBD
+    'winter': new Date('2025-12-20T23:59:59'),
+    'spring': new Date('2026-03-20T23:59:59'),
+    'summer': new Date('2026-05-20T23:59:59'),
+    'fall': new Date('2026-08-01T23:59:59'),
   }
 
   if (season && earlyBirdDeadlines[season.toLowerCase()]) {
     return now < earlyBirdDeadlines[season.toLowerCase()]
   }
 
-  // Default to spring deadline (current season)
-  return now < new Date('2026-03-23T23:59:59')
+  // Default to winter deadline
+  return now < new Date('2025-12-20T23:59:59')
 }
 
 // ============================================================

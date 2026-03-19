@@ -65,23 +65,6 @@ export interface PrivateRateRow {
   note?: string
 }
 
-/** UTR band breakdown for Youth Development (court flyer, print PDF). Lives on program in spring-summer JSON. */
-export interface YouthDevelopmentUtrTier {
-  label: string
-  utrRange: string
-  /** What this band emphasizes vs the other (kept factual; edit in data file). */
-  focus: string
-}
-
-export interface YouthDevelopmentUtrPlacementBands {
-  intro: string
-  tiers: YouthDevelopmentUtrTier[]
-  /** How coaches split the session (shared times, one venue). */
-  structure: string
-  /** Path to High Performance. */
-  advancement: string
-}
-
 /** Spring/Summer program: pricing may be monthly or season-specific (spring/summer). */
 export interface SpringSummerProgram {
   id: string
@@ -95,8 +78,6 @@ export interface SpringSummerProgram {
   description: string
   pricingNote?: string
   matchPlay?: { monthly?: number; drop_in?: number }
-  /** Optional: Youth Development only — court flyer UTR tier callout. */
-  utrPlacementBands?: YouthDevelopmentUtrPlacementBands
 }
 
 const winter2026 = winter2026Data as unknown as {
