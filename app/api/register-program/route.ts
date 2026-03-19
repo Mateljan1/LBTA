@@ -6,11 +6,12 @@ import { getEnvVar, hasEnvVar } from '@/lib/env'
 import {
   upsertContact,
   addToList,
-  addTag,
+  addTags,
   getClassTagFromProgram,
   getProgramCategory,
   LBTA_LIST_ID,
   getWebsiteSignupsListId,
+  CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
@@ -206,20 +207,12 @@ export async function POST(request: NextRequest) {
           }
           console.log('[AC] Added to list(s):', { contactId })
 
-          // Apply class-specific tag for program segmentation
+          // Apply website_registration + class-specific tag
+          const tagsToApply: number[] = [CAMPAIGN_TAGS.website_registration]
           const classTagId = getClassTagFromProgram(data.program)
-          if (classTagId) {
-            const tagResult = await addTag(contactId, classTagId)
-            if (tagResult.success) {
-              console.log('[AC] Class tag applied:', {
-                contactId,
-                tagId: classTagId,
-                program: data.program,
-              })
-            }
-          } else {
-            console.log('[AC] No class tag mapping for program:', data.program)
-          }
+          if (classTagId) tagsToApply.push(classTagId)
+          const tagResult = await addTags(contactId, tagsToApply)
+          console.log('[AC] Tags applied:', { contactId, tags: tagsToApply, result: tagResult })
         }
       } catch (acError) {
         console.error('[AC] Error:', acError)

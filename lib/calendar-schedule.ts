@@ -145,6 +145,54 @@ export const GRID_SLOT_MINUTES = 30
  * Parse a time range string like "3:30–4:15 PM" or "11:45 AM–12:45 PM" to minutes from midnight.
  * Supports "3:30–5:00 PM" (start inherits PM from end). Invalid ranges (start >= end) return null.
  */
+/** Format minutes-from-midnight as "9:00 AM" / "12:30 PM" for merged grid labels. */
+export function formatMinutesAsTimeLabel(mins: number): string {
+  const h24 = Math.floor(mins / 60)
+  const m = mins % 60
+  const ampm = h24 >= 12 ? 'PM' : 'AM'
+  const h12 = h24 % 12 || 12
+  return `${h12}:${m.toString().padStart(2, '0')} ${ampm}`
+}
+
+/** Format an interval as "9:00 AM–10:30 AM" (full labels on both ends). */
+export function formatMinutesRangeLabel(start: number, end: number): string {
+  return `${formatMinutesAsTimeLabel(start)}–${formatMinutesAsTimeLabel(end)}`
+}
+
+/**
+ * Merge calendar slots that overlap in time on the same day into one synthetic slot
+ * (multi-line programName, union time range) so the week grid can show concurrent courts.
+ */
+export function mergeOverlappingCalendarSlots(slots: CalendarSlot[]): CalendarSlot[] {
+  type Item = { slot: CalendarSlot; start: number; end: number }
+  const items: Item[] = []
+  for (const slot of slots) {
+    const p = parseTimeRangeToMinutes(slot.time)
+    if (p) items.push({ slot, start: p.start, end: p.end })
+  }
+  items.sort((a, b) => a.start - b.start || b.end - a.end)
+
+  const merged: CalendarSlot[] = []
+  let i = 0
+  while (i < items.length) {
+    let { start, end } = items[i]
+    const names: string[] = [items[i].slot.programName]
+    const base = items[i].slot
+    i += 1
+    while (i < items.length && items[i].start < end) {
+      end = Math.max(end, items[i].end)
+      names.push(items[i].slot.programName)
+      i += 1
+    }
+    merged.push({
+      ...base,
+      programName: names.join('\n'),
+      time: formatMinutesRangeLabel(start, end),
+    })
+  }
+  return merged
+}
+
 export function parseTimeRangeToMinutes(timeStr: string): { start: number; end: number } | null {
   const range = timeStr.trim().split(/[–\-]\s*/)
   if (range.length < 2) return null
@@ -183,7 +231,7 @@ export type GridCell = GridCellSlot | 'covered' | null
 /**
  * For a given location's by-day schedule, build a week grid: dayIndex 0..6 (Mon..Sun), rowIndex 0..N (30-min slots).
  * Cell is null (empty), 'covered' (part of a rowSpan from above), or { slot, rowSpan }.
- * Overlapping slots: first slot wins; later slots for the same cell are skipped (no UI indication).
+ * Overlapping slots: merged into one cell with multi-line programName and a union time range.
  */
 export function buildWeekGridForLocation(
   byDay: Record<string, CalendarSlot[]>
@@ -201,8 +249,9 @@ export function buildWeekGridForLocation(
   for (const day of DAY_ORDER) {
     const slots = byDay[day]
     if (!slots?.length) continue
+    const mergedSlots = mergeOverlappingCalendarSlots(slots)
     const dayIdx = dayIndexByDay[day]
-    for (const slot of slots) {
+    for (const slot of mergedSlots) {
       const parsed = parseTimeRangeToMinutes(slot.time)
       if (!parsed) continue
       const rowIndex = Math.floor((parsed.start - GRID_START_MINUTES) / GRID_SLOT_MINUTES)

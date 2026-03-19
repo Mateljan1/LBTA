@@ -318,9 +318,11 @@ export default function ScheduleCalendarView({
                                   className="p-2 align-top border-l border-black/[0.05] first:border-l-0"
                                 >
                                   <div className="h-full min-h-[48px] bg-[var(--cove-mist)] border-l-[3px] border-brand-victoria-cove rounded-[2px] px-3 py-2.5 text-brand-pacific-dusk transition-shadow duration-200 hover:shadow-[0_1px_3px_rgba(46,139,139,0.08)]">
-                                    <div className="font-sans font-medium text-[14px] leading-snug text-brand-pacific-dusk">
+                                    <div
+                                      className={`font-sans font-medium text-[14px] leading-snug text-brand-pacific-dusk${slot.programName.includes('\n') ? ' whitespace-pre-line' : ''}`}
+                                    >
                                       {slot.programName}
-                                      {slot.ages ? (
+                                      {!slot.programName.includes('\n') && slot.ages ? (
                                         <span className="text-brand-pacific-dusk/80 font-normal"> ({slot.ages})</span>
                                       ) : null}
                                     </div>

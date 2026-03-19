@@ -10,7 +10,11 @@ import {
 import type { PrivateRateRow } from '@/lib/programs-data'
 import type { CourtFlyerPricingRow } from '@/lib/flyer-pricing'
 import { FLYER_CONTACT, FLYER_COURTS, FLYER_USTA_NOTE, FLYER_ACADEMY_ADDRESS } from '@/lib/flyer-config'
-import { COURT_FLYER_MAX_WIDTH_CLASS } from '@/lib/court-flyer-print'
+import {
+  COURT_FLYER_CITY_SEAL_INNER_PX,
+  COURT_FLYER_LOGO_ROW_PX,
+  COURT_FLYER_MAX_WIDTH_CLASS,
+} from '@/lib/court-flyer-print'
 
 /** Color-code schedule cells by program type — strong tints for quick scanning and print clarity. */
 function scheduleCellBgClass(programName: string): string {
@@ -44,7 +48,8 @@ interface CourtFlyerProps {
   seasonDates: string
   weeks: number
   juniorPricing: CourtFlyerPricingRow[]
-  adultPricing: CourtFlyerPricingRow[]
+  adultProgrammingPricing: CourtFlyerPricingRow[]
+  monthlyAdultPricing: CourtFlyerPricingRow[]
   camps: CampItem[]
   discountLine: string
 }
@@ -57,7 +62,8 @@ export default function CourtFlyer({
   seasonDates,
   weeks,
   juniorPricing,
-  adultPricing,
+  adultProgrammingPricing,
+  monthlyAdultPricing,
   camps,
   discountLine,
 }: CourtFlyerProps) {
@@ -73,35 +79,43 @@ export default function CourtFlyer({
       className={`court-flyer-print bg-brand-morning-light text-brand-pacific-dusk font-sans min-h-0 w-full ${COURT_FLYER_MAX_WIDTH_CLASS} mx-auto px-4 sm:px-6 [print-color-adjust:exact]`}
     >
       {/*
-        No min-h-screen: avoids a tall empty canvas on PDF/print (Ledger + fixed format = huge blank band).
-        Wordmark: match Header ratio (w-auto, object-contain) — do not lock mismatched width×height.
+        LBTA wordmark: use LBTAblktext.png + invert on dark strip (LBTAwhttext.png is not in repo; missing asset showed as broken tiny icon).
       */}
-      <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10 py-5 px-6 bg-brand-deep-water">
-        <div className="flex items-center justify-center">
+      <div className="flyer-logo-strip flex flex-wrap sm:flex-nowrap items-center justify-center gap-6 sm:gap-10 py-3.5 px-4 sm:px-6 bg-brand-deep-water overflow-visible">
+        {/* Slotted row: LBTA gets real width on ~10″ print column (avoid a low max-width that shrank the wordmark in print). */}
+        <div
+          className="flyer-logo-slot-lbta flex min-h-0 w-full min-w-0 flex-1 basis-[200px] items-center justify-center sm:max-w-[min(460px,72%)]"
+          style={{ minHeight: COURT_FLYER_LOGO_ROW_PX }}
+        >
           <Image
-            src="/logos/LBTAwhttext.png"
+            src="/logos/LBTAblktext.png"
             alt="Laguna Beach Tennis Academy"
-            width={280}
-            height={72}
-            sizes="(max-width: 640px) 240px, 280px"
+            width={460}
+            height={96}
+            sizes="(max-width: 640px) 85vw, 460px"
             quality={95}
-            className="h-11 sm:h-[52px] w-auto max-w-[min(85vw,300px)] object-contain object-center flex-shrink-0"
+            style={{ height: COURT_FLYER_LOGO_ROW_PX, width: 'auto', maxWidth: 'min(460px, 100%)' }}
+            className="flyer-lbta-wordmark object-contain object-center brightness-0 invert opacity-[0.95] [print-color-adjust:exact]"
             priority
           />
         </div>
-        <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-full ring-1 ring-white/15 bg-brand-deep-water">
+        <div
+          className="flyer-city-seal-wrap flex shrink-0 items-center justify-center overflow-hidden rounded-full ring-1 ring-white/15 bg-brand-deep-water"
+          style={{ width: COURT_FLYER_LOGO_ROW_PX, height: COURT_FLYER_LOGO_ROW_PX }}
+        >
           <Image
             src="/logos/city-laguna-beach.png"
             alt="City of Laguna Beach"
-            width={52}
-            height={52}
-            className="h-[52px] w-[52px] object-contain object-center"
+            width={COURT_FLYER_CITY_SEAL_INNER_PX}
+            height={COURT_FLYER_CITY_SEAL_INNER_PX}
+            style={{ width: COURT_FLYER_CITY_SEAL_INNER_PX, height: COURT_FLYER_CITY_SEAL_INNER_PX }}
+            className="flyer-city-seal object-contain object-center"
           />
         </div>
       </div>
 
       {/* Header — single hero line, supporting copy, CTA (no clip: padding + wrap) */}
-      <header className="py-8 px-6 sm:px-8 border-b border-brand-pacific-dusk/12">
+      <header className="py-6 px-6 sm:px-8 border-b border-brand-pacific-dusk/12">
         <h1 className="font-headline text-2xl md:text-3xl font-semibold text-brand-deep-water tracking-tight uppercase text-center max-w-2xl mx-auto px-1">
           Certified City of Laguna Beach Coaching Team
         </h1>
@@ -110,22 +124,40 @@ export default function CourtFlyer({
           Only LBTA coaches are authorized to teach at City of Laguna Beach tennis courts.
         </p>
         <p className="text-center font-bold mt-4 text-brand-deep-water text-base tracking-wide">FREE TRIAL — Try Any Group Class</p>
+        <div className="flyer-register-box mt-4 max-w-xl mx-auto rounded-sm border border-brand-pacific-dusk/15 bg-brand-sandstone/50 px-4 py-3 text-center">
+          <p className="text-sm font-semibold text-brand-deep-water">Register for group classes</p>
+          <p className="text-xs mt-1 text-brand-pacific-dusk/90 leading-snug">
+            City of Laguna Beach Recreation Division — complete registration online before your first session.
+          </p>
+          <a
+            href={FLYER_CONTACT.registerUrl}
+            className="flyer-register-btn inline-flex items-center justify-center mt-2.5 min-h-[44px] px-5 py-2 rounded-[2px] bg-black text-white text-[11px] font-sans font-medium tracking-[0.12em] uppercase no-underline hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            City registration — Rec1 catalog
+          </a>
+          <p className="text-[10px] mt-2 text-brand-pacific-dusk/70 break-all sm:break-normal">
+            <span className="sr-only">Registration URL: </span>
+            secure.rec1.com · City of Laguna Beach
+          </p>
+        </div>
       </header>
 
       {/* Coaches */}
-      <section className="py-8 px-6">
+      <section className="py-6 px-6">
         <h2 className="font-headline text-xl font-semibold text-brand-deep-water">Your Certified Coaching Team</h2>
-        <div className="section-horizon mt-2 mb-5 opacity-70" aria-hidden="true" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="section-horizon mt-2 mb-4 opacity-70" aria-hidden="true" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {coaches.map((c) => (
             <div key={c.slug} className="break-inside-avoid flex flex-col items-center">
-              <div className="relative w-full max-w-[160px] mx-auto overflow-hidden rounded-sm bg-brand-sandstone" style={{ aspectRatio: '3/4' }}>
+              <div className="flyer-coach-photo relative w-full max-w-[140px] mx-auto overflow-hidden rounded-sm bg-brand-sandstone" style={{ aspectRatio: '3/4' }}>
                 <Image
                   src={c.imagePath}
                   alt={c.name}
                   fill
                   className="object-cover object-top"
-                  sizes="160px"
+                  sizes="140px"
                 />
               </div>
               <p className="font-headline font-semibold text-brand-deep-water mt-2">{c.name}</p>
@@ -137,7 +169,7 @@ export default function CourtFlyer({
       </section>
 
       {/* Private lessons table */}
-      <section className="py-6 px-6">
+      <section className="py-5 px-6">
         <h2 className="font-headline text-lg font-semibold text-brand-deep-water">Private Lessons</h2>
         <div className="section-horizon mt-2 mb-3 opacity-70" aria-hidden="true" />
         <div className="overflow-x-auto">
@@ -167,18 +199,23 @@ export default function CourtFlyer({
       </section>
 
       {/* CTA block — Brand Guide accent: gradient left border, clear hierarchy */}
-      <section className="section-quote py-6 px-6 bg-brand-sunset-cliff/10 my-0">
-        <p className="font-headline font-semibold text-brand-deep-water text-lg mb-3">What to do</p>
+      <section className="section-quote py-5 px-6 bg-brand-sunset-cliff/10 my-0">
+        <p className="font-headline font-semibold text-brand-deep-water text-base mb-2">What to do</p>
         <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
           <span><strong className="text-brand-deep-water">FREE TRIAL</strong> {FLYER_CONTACT.phoneTrial}</span>
           <span><strong className="text-brand-deep-water">REGISTER</strong> {FLYER_CONTACT.phoneRegister}</span>
           <span><strong className="text-brand-deep-water">EMAIL</strong> {FLYER_CONTACT.email}</span>
         </div>
+        <p className="text-sm mt-4 text-brand-deep-water font-medium">
+          <a href={FLYER_CONTACT.registerUrl} className="text-brand-victoria-cove underline underline-offset-2 font-semibold" target="_blank" rel="noopener noreferrer">
+            Register online — City Recreation (Rec1)
+          </a>
+        </p>
         <p className="text-sm mt-3 text-brand-pacific-dusk/90">{FLYER_ACADEMY_ADDRESS}</p>
       </section>
 
       {/* Reserved courts */}
-      <section className="py-6 px-6 bg-brand-sandstone/40">
+      <section className="py-5 px-6 bg-brand-sandstone/40">
         <h2 className="font-headline text-lg font-semibold text-brand-deep-water">LBTA Reserved Courts</h2>
         <div className="section-horizon mt-2 mb-3 opacity-70" aria-hidden="true" />
         <ul className="text-sm space-y-1">
@@ -192,22 +229,25 @@ export default function CourtFlyer({
       </section>
 
       {/* Schedule by location */}
-      <section className="py-8 px-6">
-        <h2 className="font-headline text-lg font-semibold text-brand-deep-water">
-          Schedules, Pricing & Registration · {seasonLabel} · {seasonDates}
-        </h2>
-        <div className="section-horizon mt-2 mb-4 opacity-70" aria-hidden="true" />
-        <p className="text-sm mb-4">
-          <a href={FLYER_CONTACT.siteUrl} className="text-brand-victoria-cove underline">{FLYER_CONTACT.siteUrl.replace('https://', '')}</a>
-          {' · Movement. Craft. Community.'}
-        </p>
-        <p className="text-[11px] text-brand-pacific-dusk/90 mb-4 flex flex-wrap items-center gap-x-3 gap-y-1.5" aria-label="Schedule color legend">
-          <span className="font-semibold text-brand-deep-water">Legend:</span>
-          <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-lbta-red/30 border border-brand-pacific-dusk/20" aria-hidden /> Junior (Red/Orange/Green)</span>
-          <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-victoria-cove/30 border border-brand-pacific-dusk/20" aria-hidden /> Youth · LiveBall</span>
-          <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-pacific-dusk/22 border border-brand-pacific-dusk/20" aria-hidden /> Adult</span>
-          <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-sunset-cliff/28 border border-brand-pacific-dusk/20" aria-hidden /> Cardio</span>
-        </p>
+      <section className="py-6 px-6">
+        <div className="flyer-schedule-intro break-inside-avoid">
+          <h2 className="font-headline text-lg font-semibold text-brand-deep-water">
+            Schedules, Pricing & Registration · {seasonLabel} · {seasonDates}
+          </h2>
+          <div className="section-horizon mt-2 mb-3 opacity-70" aria-hidden="true" />
+          <p className="text-sm mb-3">
+            <a href={FLYER_CONTACT.siteUrl} className="text-brand-victoria-cove underline">{FLYER_CONTACT.siteUrl.replace('https://', '')}</a>
+            {' · Movement. Craft. Community.'}
+          </p>
+          <p className="text-[11px] text-brand-pacific-dusk/90 mb-3 flex flex-wrap items-center gap-x-2 gap-y-1" aria-label="Schedule color legend">
+            <span className="font-semibold text-brand-deep-water">Legend:</span>
+            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-lbta-red/30 border border-brand-pacific-dusk/20" aria-hidden /> Junior (Red/Orange/Green)</span>
+            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-victoria-cove/30 border border-brand-pacific-dusk/20" aria-hidden /> Youth development</span>
+            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-victoria-cove/28 border border-brand-pacific-dusk/20" aria-hidden /> LiveBall</span>
+            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-pacific-dusk/22 border border-brand-pacific-dusk/20" aria-hidden /> Adult programming</span>
+            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-sunset-cliff/28 border border-brand-pacific-dusk/20" aria-hidden /> Cardio</span>
+          </p>
+        </div>
         {locationOrder.map((loc) => {
           const byDay = scheduleByLocation[loc]
           if (!byDay) return null
@@ -216,7 +256,7 @@ export default function CourtFlyer({
           const range = getUsedRowRange(grid)
           const rowsToShow = range ? grid.slice(range.min, range.max + 1) : []
           return (
-            <div key={loc} className="mb-6 break-inside-avoid">
+            <div key={loc} className="flyer-schedule-loc mb-4 break-inside-avoid">
               <h3 className="font-headline font-semibold text-brand-deep-water text-sm uppercase mb-1">
                 {locationLabels[loc] ?? loc} — {courtLabel}
               </h3>
@@ -225,9 +265,9 @@ export default function CourtFlyer({
                 <table className="w-full text-sm border-collapse border border-brand-pacific-dusk/20" aria-label={`Weekly schedule for ${locationLabels[loc] ?? loc}`}>
                   <thead>
                     <tr className="border-b-2 border-brand-pacific-dusk/30 bg-brand-sandstone/50">
-                      <th scope="col" className="text-left py-2.5 pr-3 pl-3 w-24 font-semibold text-brand-deep-water">Time</th>
+                      <th scope="col" className="text-left py-2 pr-2 pl-2 w-[4.5rem] font-semibold text-brand-deep-water text-xs">Time</th>
                       {DAY_ORDER.map((d) => (
-                        <th key={d} scope="col" className="text-center py-2.5 px-2 font-semibold text-brand-deep-water border-l border-brand-pacific-dusk/15">{d.slice(0, 3)}</th>
+                        <th key={d} scope="col" className="text-center py-2 px-1 font-semibold text-brand-deep-water border-l border-brand-pacific-dusk/15 text-xs">{d.slice(0, 3)}</th>
                       ))}
                     </tr>
                   </thead>
@@ -241,25 +281,34 @@ export default function CourtFlyer({
                         const rowIndex = range.min + i
                         return (
                           <tr key={rowIndex} className="border-b border-brand-pacific-dusk/12">
-                            <th scope="row" className="py-2 pl-3 pr-2 whitespace-nowrap text-left text-[12px] font-semibold text-brand-deep-water bg-brand-sandstone/30 border-r border-brand-pacific-dusk/10">
+                            <th scope="row" className="py-1.5 pl-2 pr-1.5 whitespace-nowrap text-left text-[11px] font-semibold text-brand-deep-water bg-brand-sandstone/30 border-r border-brand-pacific-dusk/10">
                               {formatGridRowTime(rowIndex)}
                             </th>
                             {DAY_ORDER.map((_, dayIndex) => {
                               const cell = row[dayIndex]
                               if (cell === 'covered') return null
                               if (cell === null) {
-                                return <td key={dayIndex} className="py-2 px-2 border-l border-brand-pacific-dusk/10 align-top min-h-[32px]" />
+                                return <td key={dayIndex} className="py-1.5 px-1 border-l border-brand-pacific-dusk/10 align-top min-h-[28px]" />
                               }
                               const { slot, rowSpan } = cell
-                              const display = slot.programName.length > 32 ? slot.programName.slice(0, 30) + '…' : slot.programName
+                              const display =
+                                slot.programName.includes('\n')
+                                  ? slot.programName
+                                  : slot.programName.length > 32
+                                    ? slot.programName.slice(0, 30) + '…'
+                                    : slot.programName
                               const bgClass = scheduleCellBgClass(slot.programName)
                               return (
                                 <td
                                   key={dayIndex}
                                   rowSpan={rowSpan}
-                                  className={`py-2 pl-3 pr-2 border-l border-brand-pacific-dusk/10 align-top ${bgClass}`}
+                                  className={`py-1.5 pl-2 pr-1.5 border-l border-brand-pacific-dusk/10 align-top ${bgClass}`}
                                 >
-                                  <span className="font-medium text-brand-deep-water leading-snug">{display}</span>
+                                  <span
+                                    className={`font-medium text-brand-deep-water leading-snug${slot.programName.includes('\n') ? ' whitespace-pre-line' : ''}`}
+                                  >
+                                    {display}
+                                  </span>
                                 </td>
                               )
                             })}
@@ -276,7 +325,7 @@ export default function CourtFlyer({
       </section>
 
       {/* Camps */}
-      <section className="py-6 px-6 bg-brand-sandstone/30">
+      <section className="py-5 px-6 bg-brand-sandstone/30">
         <h2 className="font-headline text-lg font-semibold text-brand-deep-water">Camps</h2>
         <div className="section-horizon mt-2 mb-3 opacity-70" aria-hidden="true" />
         <ul className="text-sm space-y-2">
@@ -290,10 +339,10 @@ export default function CourtFlyer({
       </section>
 
       {/* Program pricing */}
-      <section className="py-8 px-6">
+      <section className="py-6 px-6">
         <h2 className="font-headline text-lg font-semibold text-brand-deep-water">Program Pricing</h2>
-        <div className="section-horizon mt-2 mb-4 opacity-70" aria-hidden="true" />
-        <h3 className="text-sm font-semibold text-brand-deep-water mt-4 mb-2">Junior & Competitive</h3>
+        <div className="section-horizon mt-2 mb-3 opacity-70" aria-hidden="true" />
+        <h3 className="text-sm font-semibold text-brand-deep-water mt-3 mb-1.5">Junior & Competitive</h3>
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="border-b-2 border-brand-pacific-dusk/25 bg-brand-sandstone/40">
@@ -316,7 +365,8 @@ export default function CourtFlyer({
             ))}
           </tbody>
         </table>
-        <h3 className="text-sm font-semibold text-brand-deep-water mt-4 mb-2">Adult & Fitness</h3>
+        <h3 className="text-sm font-semibold text-brand-deep-water mt-3 mb-1.5">Adult programming</h3>
+        <p className="text-xs text-brand-pacific-dusk/85 mb-1.5">Session-based group classes (per season).</p>
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="border-b-2 border-brand-pacific-dusk/25 bg-brand-sandstone/40">
@@ -328,7 +378,31 @@ export default function CourtFlyer({
             </tr>
           </thead>
           <tbody>
-            {adultPricing.map((r) => (
+            {adultProgrammingPricing.map((r) => (
+              <tr key={r.name} className="border-b border-brand-pacific-dusk/10">
+                <td className="py-2 pr-2">{r.name} · {r.duration}</td>
+                <td className="py-2 px-2 text-brand-pacific-dusk/90">{r.location}</td>
+                <td className="text-right px-2">{r.price_1x}</td>
+                <td className="text-right px-2">{r.price_2x ?? '—'}</td>
+                <td className="text-right px-2">{r.dropIn}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <h3 className="text-sm font-semibold text-brand-deep-water mt-4 mb-1.5">Monthly classes for adults</h3>
+        <p className="text-xs text-brand-pacific-dusk/85 mb-1.5">Per-month membership; columns show once- or twice-weekly options.</p>
+        <table className="w-full text-sm border-collapse" aria-label="Monthly adult class pricing">
+          <thead>
+            <tr className="border-b-2 border-brand-pacific-dusk/25 bg-brand-sandstone/40">
+              <th className="text-left py-2 pr-2 font-semibold text-brand-deep-water">Program</th>
+              <th className="text-left py-2 px-2 w-24 font-semibold text-brand-deep-water">Location</th>
+              <th className="text-right py-2 px-2 font-semibold text-brand-deep-water">1x/wk</th>
+              <th className="text-right py-2 px-2 font-semibold text-brand-deep-water">2x/wk</th>
+              <th className="text-right py-2 px-2 font-semibold text-brand-deep-water">Drop-in</th>
+            </tr>
+          </thead>
+          <tbody>
+            {monthlyAdultPricing.map((r) => (
               <tr key={r.name} className="border-b border-brand-pacific-dusk/10">
                 <td className="py-2 pr-2">{r.name} · {r.duration}</td>
                 <td className="py-2 px-2 text-brand-pacific-dusk/90">{r.location}</td>
@@ -343,20 +417,25 @@ export default function CourtFlyer({
       </section>
 
       {/* Footer — wordmark repeats brand mark (PDF/print often crops top; footer carries identity) */}
-      <footer className="py-8 px-6 border-t border-brand-pacific-dusk/20 bg-brand-deep-water text-white/90 text-center text-sm">
-        <div className="flex justify-center pb-4 mb-4 border-b border-white/10">
+      <footer className="py-5 px-6 border-t border-brand-pacific-dusk/20 bg-brand-deep-water text-white/90 text-center text-sm">
+        <div className="flex justify-center pb-3 mb-3 border-b border-white/10">
           <Image
-            src="/logos/LBTAwhttext.png"
+            src="/logos/LBTAblktext.png"
             alt=""
             width={220}
             height={56}
             sizes="220px"
             quality={95}
-            className="h-9 sm:h-10 w-auto max-w-[220px] object-contain object-center opacity-95"
+            className="h-10 w-auto max-w-[220px] object-contain object-center brightness-0 invert opacity-95 [print-color-adjust:exact]"
             aria-hidden
           />
         </div>
         <p><strong className="text-white">REGISTER</strong> {FLYER_CONTACT.phoneRegister}</p>
+        <p className="mt-2">
+          <a href={FLYER_CONTACT.registerUrl} className="text-brand-victoria-cove underline underline-offset-2 text-sm" target="_blank" rel="noopener noreferrer">
+            City online registration
+          </a>
+        </p>
         <p className="mt-1"><strong className="text-white">FREE TRIAL & QUESTIONS</strong> {FLYER_CONTACT.phoneTrial}</p>
         <p className="mt-1">{FLYER_CONTACT.email}</p>
         <p className="mt-1">{FLYER_ACADEMY_ADDRESS}</p>

@@ -6,7 +6,7 @@ import { hasEnvVar } from '@/lib/env'
 import {
   upsertContact,
   addToList,
-  addTag,
+  addTags,
   LBTA_LIST_ID,
   getWebsiteSignupsListId,
   CAMPAIGN_TAGS,
@@ -74,6 +74,10 @@ export async function POST(request: NextRequest) {
         firstName: firstName || 'Parent',
         lastName: lastName || '',
         phone: validation.data.phone ?? undefined,
+        fieldValues: [
+          { field: '7', value: 'Scholarship Application' },
+          { field: '11', value: 'website' },
+        ],
       })
       if (acResult.success && acResult.data?.id) {
         await addToList(acResult.data.id, LBTA_LIST_ID)
@@ -81,7 +85,7 @@ export async function POST(request: NextRequest) {
         if (websiteSignupsListId !== null) {
           await addToList(acResult.data.id, websiteSignupsListId)
         }
-        await addTag(acResult.data.id, CAMPAIGN_TAGS.scholarship)
+        await addTags(acResult.data.id, [CAMPAIGN_TAGS.website_registration, CAMPAIGN_TAGS.scholarship])
       }
     }
 

@@ -367,37 +367,21 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     classTagId: 66 // camp:winter_break
   },
 
-  // ===== JTT (Junior Team Tennis) =====
-  'spring-jtt': {
-    programId: 'spring-jtt',
+  // ===== UTR Circuit (replaces JTT) =====
+  'utr-circuit': {
+    programId: 'utr-circuit',
     formEmbedCode: '',
     acFormId: '',
     prePopulateData: {
-      programName: 'Spring JTT',
-      location: 'Various (Match locations vary)',
-      duration: '15 weeks (Jan 12 - Apr 26)',
-      pricing: getModalPricing('spring-jtt'),
-      category: 'JTT',
-      ageGroup: '10U, 12U, 14U, 18U',
-      billingCycle: 'quarterly'
+      programName: 'UTR Circuit Season 1',
+      location: 'Alta Laguna Park & LBHS',
+      duration: '8 Saturdays (Apr 11 - May 30)',
+      pricing: getModalPricing('utr-circuit'),
+      category: 'UTR Circuit',
+      ageGroup: 'All Ages (level-based divisions)',
+      billingCycle: 'season'
     },
-    classTagId: 70 // jtt:spring
-  },
-
-  'fall-jtt': {
-    programId: 'fall-jtt',
-    formEmbedCode: '',
-    acFormId: '',
-    prePopulateData: {
-      programName: 'Fall JTT',
-      location: 'Various (Match locations vary)',
-      duration: '12 weeks (Sep 5 - Nov 22)',
-      pricing: getModalPricing('fall-jtt'),
-      category: 'JTT',
-      ageGroup: '10U, 12U, 14U, 18U',
-      billingCycle: 'quarterly'
-    },
-    classTagId: 71 // jtt:fall
+    classTagId: 242 // program:utr-circuit
   },
 }
 

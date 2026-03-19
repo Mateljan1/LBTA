@@ -351,25 +351,25 @@ export default function CampsPage() {
       </section>
 
       <HorizonDivider />
-      {/* JTT PROMO */}
+      {/* UTR CIRCUIT PROMO */}
       <DarkSection className="py-16 md:py-24">
         <div className="max-w-[1000px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center">
               <p className="font-sans text-[11px] uppercase tracking-[2px] text-brand-sandstone/80 mb-4">
-                USTA League Play
+                UTR Circuit · Season 1
               </p>
               <h2 className="font-headline text-[32px] md:text-[44px] font-semibold text-brand-sandstone mb-4">
-                Junior Team Tennis
+                Saturday Matchplay Series
               </h2>
               <p className="font-sans text-[16px] md:text-[18px] text-white/85 max-w-2xl mx-auto mb-8">
-                Competitive team-based tennis for juniors. 15 weeks of structured training with weekend matches against academies across Southern California.
+                8 Saturdays of UTR-rated competitive play. Five divisions from Color Ball through UTR 7.0. Every match counts toward your Universal Tennis Rating.
               </p>
-              <Link 
-                href="/schedules"
+              <Link
+                href="/programs/utr-match-play"
                 className="inline-block bg-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               >
-                View Schedule →
+                Register Now →
               </Link>
             </div>
           </AnimatedSection>

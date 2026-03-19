@@ -10,10 +10,10 @@
     "activeStudents": "100+"
   },
   "discounts": {
-    "earlyBird": "$50 off early bird",
+    "earlyBird": "$50 off early bird — register by March 28, 2026",
     "secondChild": "10% second child",
     "multiProgram": "5% multi-program",
     "fullYear": "10% full year",
-    "discountLine": "$50 off early bird · 10% second child · 5% multi-program · 10% full year"
+    "discountLine": "$50 off early bird — register by March 28, 2026 · 10% second child · 5% multi-program · 10% full year"
   }
 }

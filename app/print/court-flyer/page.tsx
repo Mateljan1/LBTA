@@ -4,6 +4,7 @@ import { getPrivateRates } from '@/lib/programs-data'
 import { getScheduleByLocationByDay, getSeasonDates, getSeasonLabel } from '@/lib/calendar-schedule'
 import { getSpringSummer2026 } from '@/lib/programs-data'
 import { getCourtFlyerProgramPricingRows } from '@/lib/flyer-pricing'
+import { COURT_FLYER_DISCOUNT_LINE } from '@/lib/flyer-config'
 import year2026Data from '@/data/year2026.json'
 import siteStats from '@/data/site-stats.json'
 
@@ -16,7 +17,8 @@ export default function CourtFlyerPage() {
   const springSummer = getSpringSummer2026()
   const weeks = springSummer.spring.weeks ?? 10
 
-  const { juniorPricing, adultPricing } = getCourtFlyerProgramPricingRows('spring')
+  const { juniorPricing, adultProgrammingPricing, monthlyAdultPricing } =
+    getCourtFlyerProgramPricingRows('spring')
 
   const year2026 = year2026Data as {
     camps?: Array<{
@@ -69,8 +71,9 @@ export default function CourtFlyerPage() {
       : []),
   ]
 
-  const discountLine = (siteStats as { discounts?: { discountLine?: string } }).discounts?.discountLine ??
-    '$50 off early bird · 10% second child · 5% multi-program · 10% full year'
+  const discountLine =
+    (siteStats as { discounts?: { discountLine?: string } }).discounts?.discountLine ??
+    COURT_FLYER_DISCOUNT_LINE
 
   const privateRatesOrder = ['Andrew Mateljan', 'Robert LeBuhn', 'Peter DeFrantz', 'Allison Cronk']
   let orderedPrivateRates = privateRatesOrder.map((name) => privateRates.find((r) => r.coach === name)).filter(Boolean)
@@ -85,7 +88,8 @@ export default function CourtFlyerPage() {
       seasonDates={seasonDates}
       weeks={weeks}
       juniorPricing={juniorPricing}
-      adultPricing={adultPricing}
+      adultProgrammingPricing={adultProgrammingPricing}
+      monthlyAdultPricing={monthlyAdultPricing}
       camps={camps}
       discountLine={discountLine}
     />

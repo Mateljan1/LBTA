@@ -74,8 +74,8 @@
         { "day": "Saturday", "time": "9:45–10:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
-        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
+        "spring": { "1x": 546, "2x": 1092, "3x": 1635, "saturday1x": 497 },
+        "summer": { "1x": 601, "2x": 1201, "3x": 1799, "saturday1x": 547 },
         "drop_in": 50
       },
       "description": "Proper stroke development, footwork fundamentals, and rally building on a 36-foot court."
@@ -95,8 +95,8 @@
         { "day": "Saturday", "time": "10:45–11:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
-        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
+        "spring": { "1x": 546, "2x": 1092, "3x": 1635, "saturday1x": 497 },
+        "summer": { "1x": 601, "2x": 1201, "3x": 1799, "saturday1x": 547 },
         "drop_in": 50
       },
       "description": "Mid-court tennis where directional play, consistent rallies, and competitive instincts start to form."
@@ -114,8 +114,8 @@
         { "day": "Saturday", "time": "11:45 AM–12:45 PM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
-        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
+        "spring": { "1x": 546, "2x": 1092, "3x": 1635, "saturday1x": 497 },
+        "summer": { "1x": 601, "2x": 1201, "3x": 1799, "saturday1x": 547 },
         "drop_in": 50
       },
       "description": "Full-court tennis with green balls — building consistency, tactical awareness, and the competitive mindset that carries forward."
@@ -125,19 +125,19 @@
       "category": "Youth",
       "program": "UTR Green Dot — Competitive",
       "ages": "9-11+",
-      "location": "Alta Laguna Park",
+      "location": "Moulton Meadows Park (Mon/Wed); Laguna Beach High School (Fri)",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Tuesday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
-        { "day": "Thursday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
-        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" }
+        { "day": "Monday", "time": "5:30–7:30 PM", "coach": "Staff", "location": "Moulton Meadows Park", "note": "Until Alta Laguna resurface complete" },
+        { "day": "Wednesday", "time": "5:30–7:30 PM", "coach": "Staff", "location": "Moulton Meadows Park", "note": "Until Alta Laguna resurface complete" },
+        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
-        "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
+        "spring": { "1x": 810, "2x": 1620, "3x": 2268 },
+        "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
         "drop_in": 70
       },
-      "description": "Competitive development for green ball players. Placement by coach invitation (level-based). Alta Laguna Park. Same pricing as Youth Dev tiers.",
+      "description": "Competitive development for green ball players. Placement by coach invitation (level-based). Mon/Wed at Moulton until Alta Laguna resurface is complete; Fri at LBHS. Same pricing as Youth Dev tiers.",
       "pricingNote": "Placement by invitation. Contact us to discuss if your player may be ready.",
       "inquiryLabel": "Inquire about placement"
     },
@@ -154,8 +154,8 @@
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
-        "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
+        "spring": { "1x": 810, "2x": 1620, "3x": 2268 },
+        "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
         "drop_in": 70
       },
       "description": "Placement by UTR level (1.5-5) required. Ages 11-18; younger players who already meet the UTR range may qualify with coach approval. Tier 1 (UTR 1.5–3.0) and Tier 2 (UTR 3.0–5.0). Three coaches split by level. UTR 5+ advance to High Performance.",
@@ -177,8 +177,8 @@
         { "day": "Saturday", "time": "9:00–10:00 AM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 420, "2x": 615, "saturday1x": 380 },
-        "summer": { "1x": 462, "2x": 676, "saturday1x": 418 },
+        "spring": { "1x": 546, "2x": 797, "saturday1x": 497 },
+        "summer": { "1x": 601, "2x": 877, "saturday1x": 547 },
         "drop_in": 55
       },
       "description": "Brand new to tennis? Start here. Strokes, footwork, serving, and scoring from scratch."
@@ -195,8 +195,8 @@
         { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" }
       ],
       "pricing": {
-        "spring": { "1x": 420, "2x": 615 },
-        "summer": { "1x": 462, "2x": 676 },
+        "spring": { "1x": 546, "2x": 797 },
+        "summer": { "1x": 601, "2x": 877 },
         "drop_in": 55
       },
       "description": "You can hit—now learn to play. Court positioning, doubles basics, and consistency for intermediate."
@@ -214,8 +214,8 @@
         { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School", "note": "Separate pricing" }
       ],
       "pricing": {
-        "spring": { "1x": 580, "2x": 1105, "3x": 1570 },
-        "summer": { "1x": 638, "2x": 1216, "3x": 1727 },
+        "spring": { "1x": 756, "2x": 1437, "3x": 2042 },
+        "summer": { "1x": 832, "2x": 1581, "3x": 2246 },
         "drop_in": 70
       },
       "pricingNote": "Saturday session has separate pricing.",
@@ -233,8 +233,8 @@
         { "day": "Friday", "time": "12:00–2:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 625, "2x": 1250 },
-        "summer": { "1x": 688, "2x": 1375 },
+        "spring": { "1x": 810, "2x": 1620 },
+        "summer": { "1x": 891, "2x": 1782 },
         "drop_in": 90
       },
       "description": "2-hour sessions. Coaches Peter DeFrantz & Andrew Mateljan. 6 max."
@@ -252,8 +252,8 @@
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn & Peter DeFrantz", "location": "Laguna Beach High School", "note": "Match Play" }
       ],
       "pricing": {
-        "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
-        "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
+        "spring": { "1x": 810, "2x": 1620, "3x": 2268 },
+        "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
         "drop_in": 100
       },
       "description": "Tournament-caliber training. UTR 5+ required. Ages 12–17. 6 max.",
@@ -282,7 +282,7 @@
       "id": "liveball-advanced",
       "category": "Fitness",
       "program": "LiveBall (Adv.)",
-      "ages": "NTRP 4.0+",
+      "ages": "NTRP 3.5+",
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
@@ -292,7 +292,7 @@
         "monthly": 150,
         "drop_in": 50
       },
-      "description": "Ninety minutes of competitive-tempo, coach-fed point play for NTRP 4.0+ players."
+      "description": "Ninety minutes of competitive-tempo, coach-fed point play for NTRP 3.5+ players."
     },
     {
       "id": "cardio-tennis",

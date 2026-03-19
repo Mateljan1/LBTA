@@ -52,12 +52,12 @@ function programToPricingRow(p: ProgramForDisplay): CourtFlyerPricingRow {
 }
 
 const JUNIOR_CATEGORIES = ['Junior', 'Youth']
-const ADULT_CATEGORIES = ['Adult', 'Fitness']
 
-/** Junior/Youth and Adult/Fitness rows for court flyer (spring or summer season). */
+/** Junior/Youth, session-based adult programs, and monthly adult (Fitness) rows for court flyer. */
 export function getCourtFlyerProgramPricingRows(season: 'spring' | 'summer'): {
   juniorPricing: CourtFlyerPricingRow[]
-  adultPricing: CourtFlyerPricingRow[]
+  adultProgrammingPricing: CourtFlyerPricingRow[]
+  monthlyAdultPricing: CourtFlyerPricingRow[]
 } {
   const programs =
     season === 'spring' ? getSpringProgramsForDisplay() : getSummerProgramsForDisplay()
@@ -65,8 +65,11 @@ export function getCourtFlyerProgramPricingRows(season: 'spring' | 'summer'): {
     juniorPricing: programs
       .filter((p) => JUNIOR_CATEGORIES.includes(p.category))
       .map(programToPricingRow),
-    adultPricing: programs
-      .filter((p) => ADULT_CATEGORIES.includes(p.category))
+    adultProgrammingPricing: programs
+      .filter((p) => p.category === 'Adult')
+      .map(programToPricingRow),
+    monthlyAdultPricing: programs
+      .filter((p) => p.category === 'Fitness')
       .map(programToPricingRow),
   }
 }
