@@ -216,7 +216,7 @@ export default function ContactPage() {
                       aria-invalid={!!errors.name}
                     />
                     {errors.name && (
-                      <p className="text-red-600 text-[13px] mt-2">{errors.name}</p>
+                      <p className="text-lbta-red text-[13px] mt-2">{errors.name}</p>
                     )}
                   </div>
                   
@@ -243,7 +243,7 @@ export default function ContactPage() {
                       aria-invalid={!!errors.email}
                     />
                     {errors.email && (
-                      <p className="text-red-600 text-[13px] mt-2">{errors.email}</p>
+                      <p className="text-lbta-red text-[13px] mt-2">{errors.email}</p>
                     )}
                   </div>
                   
@@ -270,7 +270,7 @@ export default function ContactPage() {
                       aria-invalid={!!errors.phone}
                     />
                     {errors.phone && (
-                      <p className="text-red-600 text-[13px] mt-2">{errors.phone}</p>
+                      <p className="text-lbta-red text-[13px] mt-2">{errors.phone}</p>
                     )}
                   </div>
                   
@@ -341,7 +341,7 @@ export default function ContactPage() {
                   </button>
                   
                   {status === 'error' && (
-                    <p className="text-red-600 text-[14px] text-center">
+                    <p className="text-lbta-red text-[14px] text-center">
                       Error sending message. Please call (949) 534-0457
                     </p>
                   )}

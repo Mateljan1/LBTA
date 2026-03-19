@@ -81,6 +81,7 @@ export default function CourtFlyerPage() {
   const thanksgivingCamp = year2026.camps?.find((c) => c.id === 'thanksgiving')
   const swimTennis = year2026.camps?.find((c) => c.id === 'swim-tennis')
   const summerCamp = year2026.camps?.find((c) => c.id === 'summer')
+  const springBreakCamp = year2026.camps?.find((c) => c.id === 'spring-break')
   const camps: Array<{ label: string; dates: string; ages: string; price: string; location: string }> = [
     {
       label: 'Swim & Tennis',
@@ -92,15 +93,15 @@ export default function CourtFlyerPage() {
     {
       label: 'Spring Break',
       dates: springSummer.camps.springBreak.dates,
-      ages: '5-14',
-      price: '$295/wk',
-      location: 'Alta Laguna Park',
+      ages: springBreakCamp?.ages ?? '5-14',
+      price: `$${springBreakCamp?.price ?? 295}/wk`,
+      location: springBreakCamp?.location ?? 'Alta Laguna Park',
     },
     {
       label: 'Summer',
       dates: springSummer.camps.summer.dates,
-      ages: '5-17',
-      price: '$495/wk',
+      ages: summerCamp?.ages ?? '5-17',
+      price: `$${summerCamp?.price ?? 495}/wk`,
       location: summerCamp?.location ?? 'Alta Laguna Park / Laguna Beach High School',
     },
     ...(thanksgivingCamp

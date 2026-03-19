@@ -125,7 +125,7 @@ export default function PrivateCoachingSection({
                     <td className="px-4 py-4 text-right">
                       <Link
                         href={bookHref}
-                        className="inline-flex items-center justify-center bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[44px] px-4 py-2 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                        className="inline-flex items-center justify-center bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[48px] px-4 py-2 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                         aria-label={`Book a private lesson with ${c.coach}`}
                       >
                         Book

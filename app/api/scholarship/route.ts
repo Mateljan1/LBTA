@@ -20,10 +20,7 @@ export async function POST(request: NextRequest) {
     rateLimitResult = await rateLimit(`scholarship:${ip}`, RATE_LIMITS.form)
   } catch (e) {
     console.error('[scholarship] Rate limit error:', e instanceof Error ? e.message : 'Unknown')
-    return NextResponse.json(
-      { success: false, error: 'Error processing request. Please call (949) 534-0457 or try again later.' },
-      { status: 500 }
-    )
+    rateLimitResult = { allowed: true, resetTime: Date.now() + RATE_LIMITS.form.interval }
   }
 
   if (!rateLimitResult.allowed) {
@@ -50,8 +47,11 @@ export async function POST(request: NextRequest) {
     const validation = validateRequest(scholarshipSchema, parsed.data)
 
     if (!validation.success) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('[scholarship] Validation failed:', validation.error)
+      }
       return NextResponse.json(
-        { success: false, error: validation.error },
+        { success: false, error: 'Invalid request. Please check your input.' },
         { status: 400 }
       )
     }

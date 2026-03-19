@@ -261,7 +261,7 @@ export default function PrivateLessonModal({ isOpen, onClose, defaultCoach }: Pr
                   <div className="space-y-5">
                     <div>
                       <label htmlFor="private-coach" className="block font-sans text-[12px] font-semibold text-brand-pacific-dusk mb-2">
-                        Coach <span className="text-red-600">*</span>
+                        Coach <span className="text-lbta-red">*</span>
                       </label>
                       <select
                         id="private-coach"
@@ -282,7 +282,7 @@ export default function PrivateLessonModal({ isOpen, onClose, defaultCoach }: Pr
                     {selectedCoach && (
                       <div>
                         <label className="block font-sans text-[12px] font-semibold text-brand-pacific-dusk mb-2">
-                          Session type <span className="text-red-600">*</span>
+                          Session type <span className="text-lbta-red">*</span>
                         </label>
                         <div className="grid grid-cols-2 gap-2">
                           {(['60', '90', '10-pack', '20-pack'] as const).map((opt) => (
@@ -312,7 +312,7 @@ export default function PrivateLessonModal({ isOpen, onClose, defaultCoach }: Pr
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="private-firstName" className="block font-sans text-[12px] font-semibold text-brand-pacific-dusk mb-2">
-                          First name <span className="text-red-600">*</span>
+                          First name <span className="text-lbta-red">*</span>
                         </label>
                         <input
                           id="private-firstName"
@@ -326,7 +326,7 @@ export default function PrivateLessonModal({ isOpen, onClose, defaultCoach }: Pr
                       </div>
                       <div>
                         <label htmlFor="private-lastName" className="block font-sans text-[12px] font-semibold text-brand-pacific-dusk mb-2">
-                          Last name <span className="text-red-600">*</span>
+                          Last name <span className="text-lbta-red">*</span>
                         </label>
                         <input
                           id="private-lastName"
@@ -342,7 +342,7 @@ export default function PrivateLessonModal({ isOpen, onClose, defaultCoach }: Pr
 
                     <div>
                       <label htmlFor="private-email" className="block font-sans text-[12px] font-semibold text-brand-pacific-dusk mb-2">
-                        Email <span className="text-red-600">*</span>
+                        Email <span className="text-lbta-red">*</span>
                       </label>
                       <input
                         id="private-email"
@@ -357,7 +357,7 @@ export default function PrivateLessonModal({ isOpen, onClose, defaultCoach }: Pr
 
                     <div>
                       <label htmlFor="private-phone" className="block font-sans text-[12px] font-semibold text-brand-pacific-dusk mb-2">
-                        Phone <span className="text-red-600">*</span>
+                        Phone <span className="text-lbta-red">*</span>
                       </label>
                       <input
                         id="private-phone"
@@ -387,8 +387,8 @@ export default function PrivateLessonModal({ isOpen, onClose, defaultCoach }: Pr
                   </div>
 
                   {errorMessage && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 mt-6">
-                      <p className="font-sans text-[14px] text-red-700">{errorMessage}</p>
+                    <div className="bg-lbta-red/5 border border-lbta-red/20 rounded-lg p-4 mt-6">
+                      <p className="font-sans text-[14px] text-lbta-red">{errorMessage}</p>
                     </div>
                   )}
 

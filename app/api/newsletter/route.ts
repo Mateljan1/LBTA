@@ -46,8 +46,11 @@ export async function POST(request: NextRequest) {
     const validation = validateRequest(newsletterSchema, parsed.data)
 
     if (!validation.success) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('[newsletter] Validation failed:', validation.error)
+      }
       return NextResponse.json(
-        { success: false, error: validation.error },
+        { success: false, error: 'Invalid request. Please check your input.' },
         { status: 400 }
       )
     }

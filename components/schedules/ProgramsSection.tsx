@@ -138,7 +138,7 @@ export default function ProgramsSection({
             aria-selected={viewMode === 'list'}
             tabIndex={viewMode === 'list' ? 0 : -1}
             onClick={() => { setViewMode('list'); setExpandedProgramId(null) }}
-            className={`font-sans text-[13px] font-medium tracking-[0.05em] px-4 py-2.5 rounded-[2px] min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 ${viewMode === 'list' ? 'bg-black text-white' : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'}`}
+            className={`font-sans text-[13px] font-medium tracking-[0.05em] px-4 py-2.5 rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 ${viewMode === 'list' ? 'bg-black text-white' : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'}`}
           >
             List
           </button>
@@ -148,7 +148,7 @@ export default function ProgramsSection({
             aria-selected={viewMode === 'cards'}
             tabIndex={viewMode === 'cards' ? 0 : -1}
             onClick={() => setViewMode('cards')}
-            className={`font-sans text-[13px] font-medium tracking-[0.05em] px-4 py-2.5 rounded-[2px] min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 ${viewMode === 'cards' ? 'bg-black text-white' : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'}`}
+            className={`font-sans text-[13px] font-medium tracking-[0.05em] px-4 py-2.5 rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 ${viewMode === 'cards' ? 'bg-black text-white' : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'}`}
           >
             Cards
           </button>

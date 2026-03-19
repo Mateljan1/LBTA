@@ -222,8 +222,11 @@ export async function POST(request: NextRequest) {
     }
     const validation = validateRequest(webhookPayloadSchema, parsed.data)
     if (!validation.success) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('[activecampaign-webhook] Validation failed:', validation.error)
+      }
       return NextResponse.json(
-        { success: false, error: validation.error },
+        { success: false, error: 'Invalid webhook payload' },
         { status: 400 }
       )
     }

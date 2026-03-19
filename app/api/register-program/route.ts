@@ -38,10 +38,7 @@ export async function POST(request: NextRequest) {
     rateLimitResult = await rateLimit(`register-program:${ip}`, RATE_LIMITS.form)
   } catch (e) {
     console.error('[register-program] Rate limit error:', e instanceof Error ? e.message : 'Unknown')
-    return NextResponse.json(
-      { success: false, error: 'Error processing registration. Please call (949) 534-0457 or try again later.' },
-      { status: 500 }
-    )
+    rateLimitResult = { allowed: true, resetTime: Date.now() + RATE_LIMITS.form.interval }
   }
 
   if (!rateLimitResult.allowed) {
@@ -67,8 +64,11 @@ export async function POST(request: NextRequest) {
     }
     const validation = validateRequest(programRegistrationSchema, parsed.data)
     if (!validation.success) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('[register-program] Validation failed:', validation.error)
+      }
       return NextResponse.json(
-        { success: false, error: validation.error },
+        { success: false, error: 'Invalid request. Please check your input.' },
         { status: 400 }
       )
     }
