@@ -16,20 +16,24 @@ import {
   COURT_FLYER_MAX_WIDTH_CLASS,
 } from '@/lib/court-flyer-print'
 
-/** Color-code schedule cells by program type — strong tints for quick scanning and print clarity. */
+/** Color-code schedule cells — higher contrast for print; neutral frame when multiple programs share the block. */
 function scheduleCellBgClass(programName: string): string {
+  if (programName.includes('\n')) {
+    return 'bg-white shadow-[inset_0_0_0_1px_rgba(27,58,92,0.22)]'
+  }
   const n = (programName || '').toLowerCase()
   if (n.includes('little') || n.includes('stars')) return 'bg-brand-sandstone'
-  if (n.includes('red ball')) return 'bg-lbta-red/30'
-  if (n.includes('orange ball')) return 'bg-brand-sunset-cliff/35'
-  if (n.includes('green dot') || n.includes('utr green')) return 'bg-brand-tide-pool/35'
-  if (n.includes('yellow') || n.includes('yellow ball')) return 'bg-brand-thousand-steps/30'
-  if (n.includes('youth') || n.includes('development')) return 'bg-brand-victoria-cove/30'
-  if (n.includes('high performance')) return 'bg-brand-pacific-dusk/25'
-  if (n.includes('liveball')) return 'bg-brand-victoria-cove/28'
-  if (n.includes('cardio')) return 'bg-brand-sunset-cliff/28'
-  if (n.includes('adult') || n.includes('intermediate') || n.includes('advanced') || n.includes('beginner')) return 'bg-brand-pacific-dusk/22'
-  return 'bg-brand-sandstone/60'
+  if (n.includes('red ball')) return 'bg-lbta-red/45'
+  if (n.includes('orange ball')) return 'bg-brand-sunset-cliff/45'
+  if (n.includes('green dot') || n.includes('utr green')) return 'bg-brand-tide-pool/40'
+  if (n.includes('yellow') || n.includes('yellow ball')) return 'bg-brand-thousand-steps/40'
+  if (n.includes('youth') || n.includes('development')) return 'bg-brand-victoria-cove/40'
+  if (n.includes('high performance')) return 'bg-brand-pacific-dusk/18'
+  if (n.includes('liveball')) return 'bg-brand-victoria-cove/38'
+  if (n.includes('cardio')) return 'bg-brand-sunset-cliff/38'
+  if (n.includes('adult') || n.includes('intermediate') || n.includes('advanced') || n.includes('beginner'))
+    return 'bg-brand-pacific-dusk/12'
+  return 'bg-brand-sandstone/70'
 }
 
 interface CampItem {
@@ -239,13 +243,14 @@ export default function CourtFlyer({
             <a href={FLYER_CONTACT.siteUrl} className="text-brand-victoria-cove underline">{FLYER_CONTACT.siteUrl.replace('https://', '')}</a>
             {' · Movement. Craft. Community.'}
           </p>
-          <p className="text-[11px] text-brand-pacific-dusk/90 mb-3 flex flex-wrap items-center gap-x-2 gap-y-1" aria-label="Schedule color legend">
+          <p className="text-[11px] text-brand-deep-water mb-3 flex flex-wrap items-center gap-x-3 gap-y-2 font-medium" aria-label="Schedule color legend">
             <span className="font-semibold text-brand-deep-water">Legend:</span>
-            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-lbta-red/30 border border-brand-pacific-dusk/20" aria-hidden /> Junior (Red/Orange/Green)</span>
-            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-victoria-cove/30 border border-brand-pacific-dusk/20" aria-hidden /> Youth development</span>
-            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-victoria-cove/28 border border-brand-pacific-dusk/20" aria-hidden /> LiveBall</span>
-            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-pacific-dusk/22 border border-brand-pacific-dusk/20" aria-hidden /> Adult programming</span>
-            <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-sunset-cliff/28 border border-brand-pacific-dusk/20" aria-hidden /> Cardio</span>
+            <span className="inline-flex items-center gap-2"><span className="inline-block w-4 h-4 rounded-[2px] bg-lbta-red/45 border-2 border-brand-pacific-dusk/35 shrink-0" aria-hidden /> Junior (Red/Orange/Green)</span>
+            <span className="inline-flex items-center gap-2"><span className="inline-block w-4 h-4 rounded-[2px] bg-brand-victoria-cove/40 border-2 border-brand-pacific-dusk/35 shrink-0" aria-hidden /> Youth development</span>
+            <span className="inline-flex items-center gap-2"><span className="inline-block w-4 h-4 rounded-[2px] bg-brand-victoria-cove/38 border-2 border-brand-pacific-dusk/35 shrink-0" aria-hidden /> LiveBall</span>
+            <span className="inline-flex items-center gap-2"><span className="inline-block w-4 h-4 rounded-[2px] bg-brand-pacific-dusk/14 border-2 border-brand-pacific-dusk/35 shrink-0" aria-hidden /> Adult programming</span>
+            <span className="inline-flex items-center gap-2"><span className="inline-block w-4 h-4 rounded-[2px] bg-brand-sunset-cliff/38 border-2 border-brand-pacific-dusk/35 shrink-0" aria-hidden /> Cardio</span>
+            <span className="inline-flex items-center gap-2 w-full sm:w-auto sm:ml-1 text-[10px] text-brand-pacific-dusk font-normal"><span className="inline-block w-4 h-4 rounded-[2px] bg-white border-2 border-brand-pacific-dusk/35 shrink-0 shadow-[inset_0_0_0_1px_rgba(27,58,92,0.12)]" aria-hidden /> Boxed = concurrent sessions (times listed in cell)</span>
           </p>
         </div>
         {locationOrder.map((loc) => {
@@ -291,24 +296,33 @@ export default function CourtFlyer({
                                 return <td key={dayIndex} className="py-1.5 px-1 border-l border-brand-pacific-dusk/10 align-top min-h-[28px]" />
                               }
                               const { slot, rowSpan } = cell
-                              const display =
-                                slot.programName.includes('\n')
-                                  ? slot.programName
-                                  : slot.programName.length > 32
-                                    ? slot.programName.slice(0, 30) + '…'
-                                    : slot.programName
+                              const multiline = slot.programName.includes('\n')
+                              const display = multiline
+                                ? slot.programName
+                                : slot.programName.length > 36
+                                  ? slot.programName.slice(0, 34) + '…'
+                                  : slot.programName
                               const bgClass = scheduleCellBgClass(slot.programName)
                               return (
                                 <td
                                   key={dayIndex}
                                   rowSpan={rowSpan}
-                                  className={`py-1.5 pl-2 pr-1.5 border-l border-brand-pacific-dusk/10 align-top ${bgClass}`}
+                                  className={`py-2 pl-2 pr-2 border-l border-brand-pacific-dusk/15 align-top ${bgClass}`}
                                 >
                                   <span
-                                    className={`font-medium text-brand-deep-water leading-snug${slot.programName.includes('\n') ? ' whitespace-pre-line' : ''}`}
+                                    className={`block text-[11px] font-semibold text-brand-deep-water leading-snug${multiline ? ' whitespace-pre-line' : ''}`}
                                   >
                                     {display}
                                   </span>
+                                  {!multiline ? (
+                                    <span className="block text-[10px] font-medium text-brand-pacific-dusk mt-1 tabular-nums">
+                                      {slot.time}
+                                    </span>
+                                  ) : (
+                                    <span className="block text-[9px] text-brand-pacific-dusk/90 mt-1.5 leading-tight">
+                                      Adjacent courts · block {slot.time}
+                                    </span>
+                                  )}
                                 </td>
                               )
                             })}

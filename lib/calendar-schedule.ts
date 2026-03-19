@@ -141,10 +141,6 @@ export const GRID_START_MINUTES = 7 * 60
 export const GRID_END_MINUTES = 21 * 60
 export const GRID_SLOT_MINUTES = 30
 
-/**
- * Parse a time range string like "3:30–4:15 PM" or "11:45 AM–12:45 PM" to minutes from midnight.
- * Supports "3:30–5:00 PM" (start inherits PM from end). Invalid ranges (start >= end) return null.
- */
 /** Format minutes-from-midnight as "9:00 AM" / "12:30 PM" for merged grid labels. */
 export function formatMinutesAsTimeLabel(mins: number): string {
   const h24 = Math.floor(mins / 60)
@@ -160,8 +156,8 @@ export function formatMinutesRangeLabel(start: number, end: number): string {
 }
 
 /**
- * Merge calendar slots that overlap in time on the same day into one synthetic slot
- * (multi-line programName, union time range) so the week grid can show concurrent courts.
+ * Merge overlapping same-day slots into one grid cell. Multi-program groups use one line each:
+ * `9:00–9:45 AM — Little Tennis Stars` (sorted by start) so times stay visible on congested days.
  */
 export function mergeOverlappingCalendarSlots(slots: CalendarSlot[]): CalendarSlot[] {
   type Item = { slot: CalendarSlot; start: number; end: number }
@@ -175,24 +171,37 @@ export function mergeOverlappingCalendarSlots(slots: CalendarSlot[]): CalendarSl
   const merged: CalendarSlot[] = []
   let i = 0
   while (i < items.length) {
-    let { start, end } = items[i]
-    const names: string[] = [items[i].slot.programName]
-    const base = items[i].slot
+    const group: Item[] = []
+    let start = items[i].start
+    let end = items[i].end
+    group.push(items[i])
     i += 1
     while (i < items.length && items[i].start < end) {
       end = Math.max(end, items[i].end)
-      names.push(items[i].slot.programName)
+      group.push(items[i])
       i += 1
     }
+
+    if (group.length === 1) {
+      merged.push(group[0].slot)
+      continue
+    }
+
+    group.sort((a, b) => a.start - b.start || a.end - b.end || a.slot.programName.localeCompare(b.slot.programName))
+    const lines = group.map((g) => `${g.slot.time} — ${g.slot.programName}`)
     merged.push({
-      ...base,
-      programName: names.join('\n'),
+      ...group[0].slot,
+      programName: lines.join('\n'),
       time: formatMinutesRangeLabel(start, end),
     })
   }
   return merged
 }
 
+/**
+ * Parse a time range string like "3:30–4:15 PM" or "11:45 AM–12:45 PM" to minutes from midnight.
+ * Supports "3:30–5:00 PM" (start inherits PM from end). Invalid ranges (start >= end) return null.
+ */
 export function parseTimeRangeToMinutes(timeStr: string): { start: number; end: number } | null {
   const range = timeStr.trim().split(/[–\-]\s*/)
   if (range.length < 2) return null

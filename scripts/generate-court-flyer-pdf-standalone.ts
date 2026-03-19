@@ -63,6 +63,7 @@ function toFileUrl(filePath: string): string {
 
 /** Align with components/print/CourtFlyer.tsx scheduleCellBgClass (print-safe CSS). */
 function scheduleCellCssClass(programName: string): string {
+  if (programName.includes('\n')) return 'cell-concurrent'
   const n = (programName || '').toLowerCase()
   if (n.includes('little') || n.includes('stars')) return 'cell-junior'
   if (n.includes('red ball')) return 'cell-red'
@@ -85,7 +86,8 @@ function buildScheduleLegendHtml(): string {
   html += `<span class="legend-item"><span class="swatch swatch-youth" aria-hidden="true"></span> Youth development</span> `
   html += `<span class="legend-item"><span class="swatch swatch-liveball" aria-hidden="true"></span> LiveBall</span> `
   html += `<span class="legend-item"><span class="swatch swatch-adult" aria-hidden="true"></span> Adult programming</span> `
-  html += `<span class="legend-item"><span class="swatch swatch-cardio" aria-hidden="true"></span> Cardio</span></p>`
+  html += `<span class="legend-item"><span class="swatch swatch-cardio" aria-hidden="true"></span> Cardio</span> `
+  html += `<span class="legend-item"><span class="swatch swatch-concurrent" aria-hidden="true"></span> Boxed = concurrent (times in cell)</span></p>`
   return html
 }
 
@@ -120,12 +122,18 @@ function buildScheduleTablesHtml(scheduleByLocation: ScheduleByLocationByDay): s
             const multiline = slot.programName.includes('\n')
             const display = multiline
               ? slot.programName
-              : slot.programName.length > 32
-                ? slot.programName.slice(0, 30) + '…'
+              : slot.programName.length > 36
+                ? slot.programName.slice(0, 34) + '…'
                 : slot.programName
             const cls = scheduleCellCssClass(slot.programName)
             const multiClass = multiline ? ' cell-multiline' : ''
-            cells += `<td class="${cls}${multiClass}" rowspan="${rowSpan}">${escapeHtml(display)}</td>`
+            let inner = `<span class="sched-slot-title">${escapeHtml(display)}</span>`
+            if (!multiline) {
+              inner += `<div class="sched-slot-time">${escapeHtml(slot.time)}</div>`
+            } else {
+              inner += `<div class="sched-concurrent-note">Adjacent courts · block ${escapeHtml(slot.time)}</div>`
+            }
+            cells += `<td class="${cls}${multiClass}" rowspan="${rowSpan}">${inner}</td>`
           }
           return `<tr><th scope="row" class="time-cell">${timeLabel}</th>${cells}</tr>`
         })
@@ -321,12 +329,13 @@ function buildFlyerHtml(options: {
     .schedule-legend { font-size: 10px; color: #1B3A5C; margin: 0 0 12px; line-height: 1.5; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
     .schedule-legend .legend-title { font-weight: 700; color: #0F2237; }
     .schedule-legend .legend-item { display: inline-flex; align-items: center; gap: 4px; }
-    .schedule-legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; border: 1px solid rgba(27,58,92,0.2); flex-shrink: 0; }
-    .swatch-red { background: rgba(240,78,35,0.15); }
-    .swatch-youth { background: rgba(46,139,139,0.12); }
-    .swatch-liveball { background: rgba(46,139,139,0.28); }
-    .swatch-adult { background: rgba(27,58,92,0.06); }
-    .swatch-cardio { background: rgba(232,131,74,0.28); }
+    .schedule-legend .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; border: 2px solid rgba(27,58,92,0.35); flex-shrink: 0; }
+    .swatch-red { background: rgba(240,78,35,0.45); }
+    .swatch-youth { background: rgba(46,139,139,0.4); }
+    .swatch-liveball { background: rgba(46,139,139,0.38); }
+    .swatch-adult { background: rgba(27,58,92,0.14); }
+    .swatch-cardio { background: rgba(232,131,74,0.38); }
+    .swatch-concurrent { background: #fff; box-shadow: inset 0 0 0 1px rgba(27,58,92,0.15); }
     .schedule-loc { margin: 8px 0; break-inside: auto; }
     .schedule-tbl { width: 100%; border-collapse: collapse; font-size: 11px; border: 1px solid rgba(27,58,92,0.2); }
     .schedule-tbl th, .schedule-tbl td { padding: 4px 5px; border-bottom: 1px solid rgba(27,58,92,0.15); border-left: 1px solid rgba(27,58,92,0.1); vertical-align: top; }
@@ -336,17 +345,21 @@ function buildFlyerHtml(options: {
     .schedule-tbl .time-cell { font-weight: 700; color: #0F2237; background: rgba(245,240,229,0.35); border-right: 1px solid rgba(27,58,92,0.12); text-align: left; white-space: nowrap; font-size: 11px; }
     .schedule-tbl .sched-empty { min-height: 28px; }
     .schedule-tbl .empty-schedule { text-align: center; padding: 12px; color: rgba(27,58,92,0.65); }
-    .schedule-tbl .cell-red { background: rgba(240,78,35,0.15); }
-    .schedule-tbl .cell-orange { background: rgba(232,131,74,0.2); }
-    .schedule-tbl .cell-green { background: rgba(58,139,110,0.15); }
-    .schedule-tbl .cell-yellow { background: rgba(196,150,60,0.15); }
-    .schedule-tbl .cell-junior { background: rgba(245,240,229,0.6); }
-    .schedule-tbl .cell-youth { background: rgba(46,139,139,0.12); }
-    .schedule-tbl .cell-liveball { background: rgba(46,139,139,0.12); }
-    .schedule-tbl .cell-cardio { background: rgba(232,131,74,0.28); }
-    .schedule-tbl .cell-hp { background: rgba(27,58,92,0.08); color: #0F2237; }
-    .schedule-tbl .cell-adult { background: rgba(27,58,92,0.06); }
-    .schedule-tbl .cell-other { background: rgba(245,240,229,0.4); }
+    .schedule-tbl .sched-slot-title { font-weight: 600; color: #0F2237; font-size: 10px; line-height: 1.35; display: block; }
+    .schedule-tbl .sched-slot-time { font-size: 9px; font-weight: 600; color: #1B3A5C; margin-top: 3px; }
+    .schedule-tbl .sched-concurrent-note { font-size: 8px; color: rgba(27,58,92,0.88); margin-top: 4px; line-height: 1.3; }
+    .schedule-tbl .cell-red { background: rgba(240,78,35,0.45); }
+    .schedule-tbl .cell-orange { background: rgba(232,131,74,0.45); }
+    .schedule-tbl .cell-green { background: rgba(58,139,110,0.4); }
+    .schedule-tbl .cell-yellow { background: rgba(196,150,60,0.4); }
+    .schedule-tbl .cell-junior { background: rgba(245,240,229,0.75); }
+    .schedule-tbl .cell-youth { background: rgba(46,139,139,0.4); }
+    .schedule-tbl .cell-liveball { background: rgba(46,139,139,0.38); }
+    .schedule-tbl .cell-cardio { background: rgba(232,131,74,0.38); }
+    .schedule-tbl .cell-hp { background: rgba(27,58,92,0.18); color: #0F2237; }
+    .schedule-tbl .cell-adult { background: rgba(27,58,92,0.12); }
+    .schedule-tbl .cell-other { background: rgba(245,240,229,0.55); }
+    .schedule-tbl .cell-concurrent { background: #fff !important; box-shadow: inset 0 0 0 1px rgba(27,58,92,0.22); }
     .schedule-tbl td.cell-multiline { white-space: pre-line; }
     .camps-ul { font-size: 12px; margin: 8px 0; padding-left: 20px; }
     .camps-ul li { margin: 4px 0; }

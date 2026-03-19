@@ -311,24 +311,40 @@ export default function ScheduleCalendarView({
                                 )
                               }
                               const { slot, rowSpan } = cell
+                              const concurrent = slot.programName.includes('\n')
                               return (
                                 <td
                                   key={dayIndex}
                                   rowSpan={rowSpan}
                                   className="p-2 align-top border-l border-black/[0.05] first:border-l-0"
                                 >
-                                  <div className="h-full min-h-[48px] bg-[var(--cove-mist)] border-l-[3px] border-brand-victoria-cove rounded-[2px] px-3 py-2.5 text-brand-pacific-dusk transition-shadow duration-200 hover:shadow-[0_1px_3px_rgba(46,139,139,0.08)]">
+                                  <div
+                                    className={`h-full min-h-[48px] rounded-[2px] px-3 py-2.5 text-brand-pacific-dusk transition-shadow duration-200 border-l-[3px] ${
+                                      concurrent
+                                        ? 'bg-white border-brand-pacific-dusk shadow-[inset_0_0_0_1px_rgba(27,58,92,0.1)]'
+                                        : 'bg-[var(--cove-mist)] border-brand-victoria-cove hover:shadow-[0_1px_3px_rgba(46,139,139,0.08)]'
+                                    }`}
+                                  >
                                     <div
-                                      className={`font-sans font-medium text-[14px] leading-snug text-brand-pacific-dusk${slot.programName.includes('\n') ? ' whitespace-pre-line' : ''}`}
+                                      className={`font-sans font-medium text-[14px] leading-snug text-brand-pacific-dusk${concurrent ? ' whitespace-pre-line' : ''}`}
                                     >
                                       {slot.programName}
-                                      {!slot.programName.includes('\n') && slot.ages ? (
+                                      {!concurrent && slot.ages ? (
                                         <span className="text-brand-pacific-dusk/80 font-normal"> ({slot.ages})</span>
                                       ) : null}
                                     </div>
-                                    <div className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-1 leading-snug">
-                                      {slot.time} · {slot.duration}
-                                      {slot.coach ? ` · ${slot.coach}` : ''}
+                                    <div className="font-sans text-[12px] text-brand-pacific-dusk/75 mt-1 leading-snug">
+                                      {concurrent ? (
+                                        <>
+                                          <span className="font-medium text-brand-pacific-dusk">Concurrent courts.</span>{' '}
+                                          Block {slot.time}. Each line is one session with its time.
+                                        </>
+                                      ) : (
+                                        <>
+                                          {slot.time} · {slot.duration}
+                                          {slot.coach ? ` · ${slot.coach}` : ''}
+                                        </>
+                                      )}
                                     </div>
                                   </div>
                                 </td>
