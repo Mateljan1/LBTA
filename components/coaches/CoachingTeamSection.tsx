@@ -1,9 +1,9 @@
-import { getCoaches } from '@/lib/coaches-data'
+import { getTeamCoaches } from '@/lib/coaches-data'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import CoachCard from './CoachCard'
 
 export default function CoachingTeamSection() {
-  const teamCoaches = getCoaches()
+  const teamCoaches = getTeamCoaches()
 
   return (
     <section className="bg-brand-sandstone py-20 md:py-28 scroll-mt-28" id="team">

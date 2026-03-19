@@ -19,7 +19,7 @@ export default function FounderSection() {
           {/* Image column only — no quote or text on the photo; ~42% / 58% on large screens */}
           <div className="lg:col-start-1 lg:row-start-1 min-w-0 relative z-0">
             <AnimatedSection>
-            <div className={`relative aspect-[3/4] w-full max-w-[420px] mx-auto lg:mx-0 overflow-hidden rounded-lg ${founder.image.includes('andrew-headshot') ? '[filter:brightness(1.22)_contrast(1.06)]' : ''}`}>
+            <div className={`relative aspect-[3/4] w-full max-w-[420px] mx-auto lg:mx-0 overflow-hidden rounded-lg ${founder.image.includes('andrew-mateljan') ? '[filter:brightness(1.22)_contrast(1.06)]' : ''}`}>
               <Image
                 src={coachImageSrc(founder.image)}
                 alt={`${founder.name}, Founder & Head Coach at Laguna Beach Tennis Academy`}

@@ -11,7 +11,7 @@ const SITE_URL =
     : 'https://lagunabeachtennisacademy.com'
 
 /** Bump when coach headshots are updated so browsers and CDN fetch new images. */
-export const COACH_IMAGE_VERSION = 4
+export const COACH_IMAGE_VERSION = 5
 
 /** Coach image URL with cache-bust query param. Use for all coach headshot src. */
 export function coachImageSrc(path: string): string {
@@ -57,6 +57,11 @@ export function getLeadCoach(): Coach | undefined {
 /** Program coaches (Peter, Allison, etc.) in order. */
 export function getProgramCoaches(): Coach[] {
   return coachesList.filter((c) => c.role === 'program').sort((a, b) => a.order - b.order)
+}
+
+/** All coaches except the founder (for team grid below founder block). Robert, Peter, Allison in order. */
+export function getTeamCoaches(): Coach[] {
+  return getCoaches().filter((c) => c.role !== 'founder')
 }
 
 /** Single coach by slug; returns undefined if slug is null or not found. */

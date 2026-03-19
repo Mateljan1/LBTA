@@ -102,14 +102,14 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
     const shortBio = truncateBio(coach.bio ?? '')
     return (
       <div className="h-full flex flex-col bg-white rounded-lg overflow-hidden border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 transition-shadow duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] motion-safe:hover:-translate-y-0.5">
-        <div className="relative w-full aspect-[4/5] max-h-[240px] md:max-h-[200px] overflow-hidden shrink-0">
+        <div className="relative w-full aspect-[4/5] overflow-hidden shrink-0 rounded-t-lg">
           <Image
             src={coachImageSrc(coach.image)}
             alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
             fill
-            className="object-cover"
+            className="object-cover object-center"
             style={{ objectPosition: coach.imagePosition }}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 320px"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 340px"
             quality={90}
           />
         </div>
