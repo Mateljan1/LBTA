@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     url: 'https://lagunabeachtennisacademy.com/adult-trial',
     images: [
       {
-        url: '/images/hero/laguna-horizon.webp',
+        url: '/legacy-working-assets/hero/adult-trial-hero/adult-trial-hero.webp',
         width: 1920,
         height: 1080,
-        alt: 'Laguna Beach Tennis Academy',
+        alt: 'Adult tennis trial at Laguna Beach Tennis Academy',
       },
     ],
   },

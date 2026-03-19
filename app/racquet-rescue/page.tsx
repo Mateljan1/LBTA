@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Racquet Rescue | LBTA',
     description: 'Professional racquet stringing and customization services',
     type: 'website',
-    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
+    images: [{ url: '/legacy-working-assets/hero/laguna-horizon/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Racquet Rescue at LBTA' }],
   },
 }
 
@@ -25,7 +25,7 @@ export default function RacquetRescuePage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero/laguna-horizon.webp"
+            src="/legacy-working-assets/hero/laguna-horizon/laguna-horizon.webp"
             alt="Laguna Beach tennis courts overlooking the ocean"
             fill
             className="object-cover brightness-[0.4]"

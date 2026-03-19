@@ -2,7 +2,7 @@
 
 **Source:** Code Review V2 (94→98/100) + Validation V2 (95→98/100) — March 6, 2026  
 **Workspace:** LBTA_WEBSITE_DRAFT_3:5:26  
-**Latest:** Coaches headshots + page value — 2026-03-18 (cache-bust via COACH_IMAGE_VERSION/coachImageSrc; prefer named coach assets; section-horizon under key headings; section-quote only, no redundant border). See `.cursor/compound/learnings/2026-03-18-coaches-headshots-and-value-compound-learn.md`.
+**Latest:** Visual Elevation Phase 3 & 4 — 2026-03-19 (layout primitives MasonryGrid/ZigzagSection/SplitSection; plan-aware review; video play aria-label; next/image quality=90 for section/hero). See `.cursor/compound/learnings/2026-03-19-visual-elevation-phase-3-4-compound-learn.md`. Phases 5–9 (conversion strip, facility block, quote-over-image): [documented solution](../docs/solutions/implementation-patterns/visual-elevation-conversion-strip-facility-quote-pattern.md). Earlier: Coaches headshots + page value — 2026-03-18.
 
 ---
 

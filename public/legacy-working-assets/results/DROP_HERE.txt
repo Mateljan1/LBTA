@@ -1,0 +1,11 @@
+RESULTS / PRO — Proof and credibility
+======================================
+Layout: Full-bleed strip (16:9) or card (3:2). Export: 1200×675 or 800×533. Max 300KB.
+
+Filename              Used on
+--------              -------
+karue-training.webp   Home Results section + Success Stories
+results-player-2.webp Success Stories / results strip
+results-player-3.webp Success Stories / results strip
+
+Project path: public/images/results/

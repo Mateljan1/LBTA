@@ -148,7 +148,7 @@ export default function JuniorTrialLanding() {
       <section className="relative h-[85vh] min-h-[700px] flex items-center">
         <div className="absolute inset-0">
           <Image
-            src="/images/programs/juniors.webp"
+            src="/legacy-working-assets/hero/junior-trial-hero/junior-trial-hero.webp"
             alt="Junior tennis players training at Laguna Beach Tennis Academy"
             fill
             priority

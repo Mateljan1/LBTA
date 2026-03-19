@@ -27,6 +27,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const modalRef = useRef<HTMLDivElement>(null)
   const successPrimaryRef = useRef<HTMLButtonElement>(null)
 
@@ -55,6 +56,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
       setStep(1)
       setSelectedPlan(null)
       setIsSuccess(false)
+      setErrorMessage(null)
       setFormData({
         firstName: '',
         lastName: '',
@@ -151,6 +153,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setErrorMessage(null)
 
     try {
       const response = await fetch('/api/register-program', {
@@ -168,9 +171,13 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
       if (response.ok) {
         setIsSuccess(true)
+      } else {
+        const data = await response.json().catch(() => null)
+        setErrorMessage(data?.error || 'Registration failed. Please try again or call (949) 534-0457.')
       }
     } catch (error) {
       console.error('Registration error:', error)
+      setErrorMessage('Connection error. Please check your internet and try again, or call (949) 534-0457.')
     } finally {
       setIsSubmitting(false)
     }
@@ -487,6 +494,13 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                       {isSubmitting ? 'Submitting...' : 'Complete Registration'}
                     </button>
                   </div>
+
+                  {/* Error Message */}
+                  {errorMessage && (
+                    <p role="alert" className="font-sans text-[13px] text-lbta-red text-center mt-4">
+                      {errorMessage}
+                    </p>
+                  )}
 
                   {/* Trust Note */}
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/50 text-center mt-6">

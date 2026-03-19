@@ -1,0 +1,9 @@
+CTA — Footer / closing section
+===============================
+Layout: Full-width band. Export: 1920×640 or 1920×1080. Max 300KB.
+
+Filename            Used on
+--------            -------
+cta-background.webp  Homepage footer CTA ("Book your free trial" / closing)
+
+Project path: public/images/cta/

@@ -14,6 +14,7 @@ import {
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
+import { notifyTrialRequest, notifyPrivateLesson } from '@/lib/email'
 
 // ============================================================
 // LBTA Booking/Trial Request API
@@ -135,6 +136,14 @@ export async function POST(request: NextRequest) {
         phone: privateBody.phone ?? undefined,
         payload: { bookingType: 'private', coach: privateBody.coach, option: privateBody.option },
       })
+      void notifyPrivateLesson({
+        firstName: privateBody.firstName,
+        lastName: privateBody.lastName,
+        email: privateBody.email,
+        phone: privateBody.phone,
+        coach: privateBody.coach,
+        option: privateBody.option,
+      })
 
       return NextResponse.json({
         success: true,
@@ -188,10 +197,20 @@ export async function POST(request: NextRequest) {
       phone: trialBody.phone ?? undefined,
       payload: { program: trialBody.program, location: trialBody.location },
     })
+    void notifyTrialRequest({
+      firstName: trialBody.firstName,
+      lastName: trialBody.lastName,
+      email: trialBody.email,
+      phone: trialBody.phone,
+      program: trialBody.program,
+      location: trialBody.location,
+      experience: trialBody.experience,
+      preferredDays: trialBody.preferredDays,
+    })
 
     return NextResponse.json({
       success: true,
-      message: "Trial request received! You'll receive a confirmation email shortly, and our team will contact you within 24 hours.",
+      message: "Trial request received! Our team will contact you within 24 hours.",
     })
   } catch (error) {
     console.error('[Booking] Error:', error)

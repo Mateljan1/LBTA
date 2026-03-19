@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { CheckCircle, Phone, Calendar, Clock, Mail, Users, ArrowRight, Download } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
@@ -7,6 +8,11 @@ export const dynamic = 'force-dynamic'
 export const metadata = {
   title: 'Thank You | Laguna Beach Tennis Academy',
   description: 'Your request has been received. We will contact you within 24 hours.',
+  openGraph: {
+    title: 'Thank You | Laguna Beach Tennis Academy',
+    description: 'Your request has been received. We will contact you within 24 hours.',
+    images: [{ url: '/legacy-working-assets/conversion/thank-you-image/thank-you-image.webp', width: 1920, height: 1080, alt: 'Thank you from LBTA' }],
+  },
 }
 
 type ThankYouType = 'trial' | 'private' | 'program' | 'year' | 'scholarship'
@@ -53,13 +59,18 @@ export default async function ThankYouPage({
     <>
       {/* Hero - Success Confirmation */}
       <section className="relative bg-black text-white py-24 md:py-32 min-h-[450px] flex items-center overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
+        <div className="absolute inset-0">
+          <Image
+            src="/legacy-working-assets/conversion/thank-you-image/thank-you-image.webp"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         </div>
-        
         <div className="container-narrow text-center relative z-10">
           <AnimatedSection>
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-tide-pool/20 mb-8">

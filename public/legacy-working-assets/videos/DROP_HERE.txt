@@ -1,0 +1,11 @@
+VIDEOS — Home hero + optional
+==============================
+Hero: 1920×1080 px, 15–30 sec, MP4. We add WebM + poster in project.
+
+Filename            Used on
+--------            -------
+LBTA-Home-Hero.mp4   Homepage hero (full-bleed, autoplay)
+
+Optional later: short clip for Book page "What to Expect" or Thank-you (5–15 sec).
+
+Project path: public/videos/

@@ -1,0 +1,10 @@
+WHY CHOOSE — Two images side by side
+=====================================
+Layout: Two 4:3 cards. Export: 800×600 px. Max 200KB each.
+
+Filename          Used on
+--------          -------
+why-choose-1.webp Home Why Choose LEFT — coach on court with players
+why-choose-2.webp Home Why Choose RIGHT — facility / community wide shot
+
+Project path: public/images/why-choose/

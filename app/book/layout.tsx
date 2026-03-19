@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/hero/laguna-horizon.webp',
+        url: '/legacy-working-assets/conversion/book-hero/book-hero.webp',
         width: 1920,
         height: 1080,
-        alt: 'Laguna Beach Tennis Academy',
+        alt: 'Book your trial at Laguna Beach Tennis Academy',
       },
     ],
   },

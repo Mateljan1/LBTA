@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'High Performance Pathway | Laguna Beach Tennis Academy',
     description: 'Where serious players become champions. ATP/WTA methodology for tournament and college preparation.',
+    type: 'website',
+    images: [{ url: '/legacy-working-assets/programs/high-performance/high-performance.webp', width: 1920, height: 1080, alt: 'High performance pathway at LBTA' }],
   },
 }
 
@@ -85,7 +87,7 @@ export default function HighPerformancePathwayPage() {
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/programs/high-performance.webp"
+            src="/legacy-working-assets/programs/high-performance/high-performance.webp"
             alt="High performance tennis training at LBTA"
             fill
             priority

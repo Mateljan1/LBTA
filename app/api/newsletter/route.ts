@@ -5,6 +5,7 @@ import { hasEnvVar } from '@/lib/env'
 import { upsertContact, addToList, addTag, getWebsiteSignupsListId, CAMPAIGN_TAGS } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
+import { notifyNewsletter } from '@/lib/email'
 
 export async function GET() {
   return NextResponse.json(
@@ -90,6 +91,7 @@ export async function POST(request: NextRequest) {
       void storeLead({ source: 'newsletter', email: email.trim() }).catch((e: unknown) =>
         console.error('[newsletter] storeLead:', e instanceof Error ? e.message : 'Unknown error')
       )
+      void notifyNewsletter(email.trim())
     } catch {
       // Fire-and-forget may throw synchronously (e.g. getClient() with invalid Supabase env); do not fail the response
     }

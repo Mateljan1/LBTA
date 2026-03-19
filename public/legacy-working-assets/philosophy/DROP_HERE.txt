@@ -1,0 +1,11 @@
+PHILOSOPHY PILLARS — 1:1 square
+================================
+Layout: Three squares (Movement, Craft, Community). Export: 800×800 px. Max 200KB.
+
+Filename          Used on
+--------          -------
+movement.webp     Home Philosophy + Philosophy page — Movement
+discipline.webp   Home Philosophy + Philosophy page — Craft
+belonging.webp    Home Philosophy + Philosophy page — Community
+
+Project path: public/images/philosophy/

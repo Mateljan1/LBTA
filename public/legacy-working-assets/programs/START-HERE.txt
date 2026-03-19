@@ -1,0 +1,8 @@
+PROGRAM CARDS — Homepage and section cards
+==========================================
+
+Each folder = one card image (the photo on a program block).
+
+Open the folder → read WHAT-WE-NEED.txt → add your photo with that filename.
+
+Export size for all: 800 × 600 (4:3).

@@ -1,0 +1,6 @@
+WHY CHOOSE — Two images for homepage block
+==========================================
+
+Each folder = one image. Open folder → WHAT-WE-NEED.txt → add photo with that filename.
+
+Export size: 800 × 600 (4:3).

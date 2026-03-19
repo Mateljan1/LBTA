@@ -1,0 +1,13 @@
+FACILITY — Courts, gym, video room
+===================================
+Layout: Full-bleed or half. Export: 1920×1080 (hero) or 1200×900 (4:3). Max 350KB / 250KB.
+
+Filename              Used on
+--------              -------
+courts-moulton.webp   Facility / About
+courts-lbhs.webp      Facility / About
+sunset-courts.webp    Courts at golden hour
+gym.webp              Performance center
+video-room.webp       Video analysis room
+
+Project path: public/images/facility/ (optional; gallery uses photos/)

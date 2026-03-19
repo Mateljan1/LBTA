@@ -3,7 +3,7 @@ import { getFlyerCoaches } from '@/lib/flyer-data'
 import { getPrivateRates } from '@/lib/programs-data'
 import { getScheduleByLocationByDay, getSeasonDates, getSeasonLabel } from '@/lib/calendar-schedule'
 import { getSpringSummer2026 } from '@/lib/programs-data'
-import { getCourtFlyerProgramPricingRows } from '@/lib/flyer-pricing'
+import { getCourtFlyerProgramPricingRows, getYouthDevelopmentUtrPlacementForFlyer } from '@/lib/flyer-pricing'
 import { COURT_FLYER_DISCOUNT_LINE } from '@/lib/flyer-config'
 import year2026Data from '@/data/year2026.json'
 import siteStats from '@/data/site-stats.json'
@@ -19,6 +19,7 @@ export default function CourtFlyerPage() {
 
   const { juniorPricing, adultProgrammingPricing, monthlyAdultPricing } =
     getCourtFlyerProgramPricingRows('spring')
+  const youthDevelopmentUtrDetail = getYouthDevelopmentUtrPlacementForFlyer()
 
   const year2026 = year2026Data as {
     camps?: Array<{
@@ -92,6 +93,7 @@ export default function CourtFlyerPage() {
       monthlyAdultPricing={monthlyAdultPricing}
       camps={camps}
       discountLine={discountLine}
+      youthDevelopmentUtrDetail={youthDevelopmentUtrDetail}
     />
   )
 }

@@ -1,0 +1,8 @@
+PHOTO WE NEED (optional)
+------------------------
+Book "What to Expect" — step 1: e.g. arrival, welcome, or first contact. Small image beside the first step of "What to Expect" on the Book page.
+
+EXPORT SIZE: 400 × 300 or 600 × 400
+SAVE YOUR FILE AS: book-expect-1.webp (or .jpg)
+
+WHERE IT GOES: /book — "What to Expect" section (3 small images)

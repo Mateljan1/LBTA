@@ -97,7 +97,7 @@ export default function BeginnerProgramLanding() {
       <section className="relative h-[85vh] min-h-[700px] flex items-center">
         <div className="absolute inset-0">
           <Image
-            src="/photos/adult-trial-hero.webp"
+            src="/legacy-working-assets/hero/adult-trial-hero/adult-trial-hero.webp"
             alt="Adult tennis development at LBTA"
             fill
             priority

@@ -1,0 +1,16 @@
+COMMUNITY GRID — 1:1 square
+============================
+Layout: Grid of 6 (or up to 12). Export: 800×800 px. Max 120KB each.
+
+Filename            Used on
+--------            -------
+community-1.webp    Home community grid
+community-2.webp    Home community grid
+community-3.webp    Home, Success Stories, Camps hero fallback
+community-4.webp    Home community grid
+community-5.webp    Home community grid
+community-6.webp    Home community grid
+community-7.webp    Fitness page
+community-8 … 12    Optional: expand grid, Success Stories
+
+Project path: public/images/community/

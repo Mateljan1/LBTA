@@ -14,6 +14,7 @@ import {
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
+import { notifyRegistration } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -113,6 +114,15 @@ export async function POST(request: NextRequest) {
       name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
       phone: data.phone ?? undefined,
       payload: { program: data.program, season: data.season },
+    })
+    void notifyRegistration({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      program: data.program ?? 'Not specified',
+      season: data.season,
+      experience: data.experience,
     })
 
     return NextResponse.json({

@@ -1,0 +1,18 @@
+PROGRAM CARDS — 4:3 section images
+==================================
+Layout: Card (e.g. 33vw). Export: 800×600 px. Max 200KB.
+
+Filename                    Used on
+--------                    -------
+juniors.webp                 Home Programs (Junior card), Junior trial hero
+adults.webp                  Home Programs (Adult card)
+private-lessons.webp         Home Programs (Private card)
+private-specialty.webp       About, Contact sections
+high-performance.webp       HP card + High Performance page
+fitness.webp                 Fitness card
+youth-dev-1.webp             Youth development card
+leagues.webp                 Leagues card / USTA–UTR
+match-play.webp              Match Play section
+cardio-tennis.webp           Cardio Tennis card
+
+Project path: public/images/programs/

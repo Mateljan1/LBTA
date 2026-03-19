@@ -1,0 +1,9 @@
+FOUNDER PORTRAIT — Home + coaches
+==================================
+Layout: Large portrait (4:5). Export: 800×1000 px. Max 250KB.
+
+Filename            Used on
+--------            -------
+andrew-portrait.webp Home founder block (alternative to andrew-headshot)
+
+Project path: public/images/founder/ or public/images/coaches/

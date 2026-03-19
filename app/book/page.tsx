@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo, Suspense } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { CheckCircle, Phone, Mail, Shield } from 'lucide-react'
 import TrialBookingModal from '@/components/TrialBookingModal'
@@ -31,8 +32,20 @@ function BookPageContent() {
   return (
     <>
       {/* HERO SECTION */}
-      <DarkSection className="min-h-[50vh] md:min-h-[60vh] flex items-center justify-center py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+      <section className="relative min-h-[50vh] md:min-h-[60vh] flex items-center justify-center py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/legacy-working-assets/conversion/book-hero/book-hero.webp"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        </div>
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <h1 className="font-headline text-[32px] md:text-[56px] font-semibold leading-[1.1] text-brand-sandstone mb-4">
             {isPrivate ? 'Book a Private Lesson' : 'Book Your Free Trial'}
           </h1>
@@ -67,7 +80,7 @@ function BookPageContent() {
             )}
           </p>
         </div>
-      </DarkSection>
+      </section>
 
       <HorizonDivider />
       {/* CONTACT OPTIONS */}
@@ -114,6 +127,33 @@ function BookPageContent() {
         </div>
       </section>
 
+      <HorizonDivider />
+      {/* CONVERSION STRIP — book-expect-1, 2, 3 */}
+      <section className="bg-brand-sandstone py-10 md:py-14" aria-labelledby="expect-strip-heading">
+        <h2 id="expect-strip-heading" className="sr-only">What to expect when you book</h2>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+            {[
+              { src: '/legacy-working-assets/conversion/book-expect-1/book-expect-1.webp', alt: 'Personalized conversation about your goals' },
+              { src: '/legacy-working-assets/conversion/book-expect-2/book-expect-2.webp', alt: 'Free assessment with your coach' },
+              { src: '/legacy-working-assets/conversion/book-expect-3/book-expect-3.webp', alt: 'Clear path forward and next steps' },
+            ].map((img, i) => (
+              <div key={i} className="relative aspect-[16/10] overflow-hidden rounded-subtle">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                  quality={90}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <HorizonDivider />
       {/* WHAT TO EXPECT */}
       <section className="bg-white py-12 md:py-16">
         <div className="max-w-[900px] mx-auto px-4 md:px-6">

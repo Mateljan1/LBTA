@@ -18,6 +18,7 @@ import {
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
+import { notifyRegistration } from '@/lib/email'
 
 let notionClient: Client | null = null
 function getNotionClient(): Client {
@@ -344,6 +345,21 @@ export async function POST(request: NextRequest) {
         program: data.program,
         season: data.season,
       },
+    })
+    void notifyRegistration({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      program: data.program,
+      registrationType: data.registrationType,
+      division: data.division,
+      season: data.season,
+      location: data.location,
+      studentName: data.studentName ?? data.playerName,
+      studentAge: data.studentAge ?? data.playerAge,
+      experience: data.experience,
+      notes: data.notes,
     })
 
     // 3. Return success with confirmation message based on type

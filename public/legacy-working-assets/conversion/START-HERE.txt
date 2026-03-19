@@ -1,0 +1,8 @@
+CONVERSION FLOW — Trial, Book, Thank-you
+=======================================
+
+Each folder = one image we need for when people book a trial or submit a form.
+
+Open the folder → read WHAT-WE-NEED.txt → add your photo with that filename.
+
+These matter most: book-hero, adult-trial-why-image, thank-you-image. The rest are optional.

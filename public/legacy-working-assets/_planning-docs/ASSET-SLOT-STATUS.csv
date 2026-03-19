@@ -1,0 +1,47 @@
+section,slot,slot_folder,expected_filename,export_size,priority,where_it_goes,status,uploaded_file
+camps,camp-action-1,camps/camp-action-1,camp-action-1.webp,800 × 600 (or 4:3),normal,Camps page — gallery grid,seeded,camp-action-1.webp
+camps,camp-action-2,camps/camp-action-2,camp-action-2.webp,800 × 600 (or 4:3),normal,Camps page — gallery grid,seeded,camp-action-2.webp
+camps,camp-action-3,camps/camp-action-3,camp-action-3.webp,800 × 600 (or 4:3),normal,Camps page — gallery grid,seeded,camp-action-3.webp
+camps,camp-action-4,camps/camp-action-4,camp-action-4.webp,800 × 600 (or 4:3),normal,Camps page — gallery grid,seeded,camp-action-4.webp
+camps,green-ball,camps/green-ball,green-ball.webp,800 × 600 (or 4:3),normal,Camps page — Green dot / full court,seeded,green-ball.webp
+camps,orange-ball,camps/orange-ball,orange-ball.webp,800 × 600 (or 4:3),normal,Camps page — Orange ball program,seeded,orange-ball.webp
+camps,red-ball,camps/red-ball,red-ball.webp,800 × 600 (or 4:3),normal,Camps page — Red ball / Little Tennis section,seeded,red-ball.webp
+conversion,adult-trial-why-image,conversion/adult-trial-why-image,adult-trial-why-image.webp,800 × 600 (4:3) or 1200 × 675 (16:9),High,"/adult-trial page — ""Why This Works"" section (right now no image there)",seeded,adult-trial-why-image.webp
+conversion,book-expect-1,conversion/book-expect-1,book-expect-1.webp,400 × 300 or 600 × 400,normal,"/book — ""What to Expect"" section (3 small images)",seeded,book-expect-1.webp
+conversion,book-expect-2,conversion/book-expect-2,book-expect-2.webp,400 × 300 or 600 × 400,normal,"/book — ""What to Expect"" section",seeded,book-expect-2.webp
+conversion,book-expect-3,conversion/book-expect-3,book-expect-3.webp,400 × 300 or 600 × 400,normal,"/book — ""What to Expect"" section",seeded,book-expect-3.webp
+conversion,book-hero,conversion/book-hero,book-hero.webp,"1920 × 1080 (16:9, landscape)",High — fills a big gap,/book page — big hero at top (right now there is no image),seeded,book-hero.webp
+conversion,junior-trial-strip-1,conversion/junior-trial-strip-1,junior-trial-strip-1.webp,800 × 600 (4:3),normal,/junior-trial — optional strip above form,seeded,junior-trial-strip-1.webp
+conversion,junior-trial-strip-2,conversion/junior-trial-strip-2,junior-trial-strip-2.webp,800 × 600 (4:3),normal,/junior-trial — optional strip above form,seeded,junior-trial-strip-2.webp
+conversion,thank-you-image,conversion/thank-you-image,thank-you-image.webp,1200 × 675 (16:9) or 800 × 600 (4:3),"Medium — page works without it, but this makes it feel complete",/thank-you page — below the headline,seeded,thank-you-image.webp
+founder,andrew-portrait,founder/andrew-portrait,andrew-portrait.webp,800 × 1000 (4:5 portrait),normal,"Homepage founder block, founder section",seeded,andrew-portrait.webp
+hero,adult-group-hero,hero/adult-group-hero,adult-group-hero.webp,1920 × 1080 (16:9),normal,Beginner program / adult section hero,seeded,adult-group-hero.webp
+hero,adult-trial-hero,hero/adult-trial-hero,adult-trial-hero.webp,1920 × 1080 (16:9),normal,Adult trial page — top hero,seeded,adult-trial-hero.webp
+hero,book-hero,hero/book-hero,book-hero.webp,1920 × 1080 (16:9),High,/book page — hero (currently no image),seeded,book-hero.webp
+hero,camps-hero,hero/camps-hero,camps-hero.webp,1920 × 1080 (16:9),normal,Camps page — top hero,seeded,camps-hero.webp
+hero,fitness-hero,hero/fitness-hero,fitness-hero.webp,1920 × 1080 (16:9),normal,Fitness page — top hero,seeded,fitness-hero.webp
+hero,hero-poster,hero/hero-poster,hero-poster.webp,1920 × 1080 (16:9),normal,Homepage — poster image for hero video,seeded,hero-poster.webp
+hero,junior-trial-hero,hero/junior-trial-hero,junior-trial-hero.webp,1920 × 1080 (16:9),normal,Junior trial page — top hero (we can also use juniors.webp here),seeded,junior-trial-hero.webp
+hero,laguna-horizon,hero/laguna-horizon,laguna-horizon.webp,1920 × 1080 (16:9),normal,"Destination, Schedules CTA, hero fallbacks",seeded,laguna-horizon.webp
+hero,leagues-hero,hero/leagues-hero,leagues-hero.webp,1920 × 1080 (16:9),normal,Leagues / USTA / UTR page — top hero,seeded,leagues-hero.webp
+hero,match-play-hero,hero/match-play-hero,match-play-hero.webp,1920 × 1080 (16:9),normal,Match Play page — top hero,seeded,match-play-hero.webp
+hero,philosophy-hero,hero/philosophy-hero,philosophy-hero.webp,1920 × 1080 (16:9),normal,Philosophy page — top hero,seeded,philosophy-hero.webp
+hero,success-stories-hero,hero/success-stories-hero,success-stories-hero.webp,1920 × 1080 (16:9),normal,Success Stories page — top hero,seeded,success-stories-hero.webp
+philosophy,belonging,philosophy/belonging,belonging.webp,800 × 800 (square),normal,Homepage + Philosophy page — Community pillar,seeded,belonging.webp
+philosophy,discipline,philosophy/discipline,discipline.webp,800 × 800 (square),normal,Homepage + Philosophy page — Craft pillar,seeded,discipline.webp
+philosophy,movement,philosophy/movement,movement.webp,800 × 800 (square),normal,Homepage + Philosophy page — Movement pillar,seeded,movement.webp
+programs,adults,programs/adults,adults.webp,800 × 600 (4:3),normal,Homepage Programs — Adult card,seeded,adults.webp
+programs,cardio-tennis,programs/cardio-tennis,cardio-tennis.webp,800 × 600 (4:3),normal,Homepage Programs — Cardio Tennis card,seeded,cardio-tennis.webp
+programs,fitness,programs/fitness,fitness.webp,800 × 600 (4:3),normal,Homepage Programs — Fitness card,seeded,fitness.webp
+programs,high-performance,programs/high-performance,high-performance.webp,800 × 600 (4:3),normal,Home Programs — HP card + High Performance page,seeded,high-performance.webp
+programs,juniors,programs/juniors,juniors.webp,800 × 600 (4:3),normal,Homepage Programs — Junior card,seeded,juniors.webp
+programs,leagues,programs/leagues,leagues.webp,800 × 600 (4:3),normal,Home Programs — Leagues card / USTA–UTR,seeded,leagues.webp
+programs,match-play,programs/match-play,match-play.webp,800 × 600 (4:3),normal,Home Programs — Match Play section,seeded,match-play.webp
+programs,private-lessons,programs/private-lessons,private-lessons.webp,800 × 600 (4:3),normal,Homepage Programs — Private lessons card,seeded,private-lessons.webp
+programs,private-specialty,programs/private-specialty,private-specialty.webp,800 × 600 (4:3),normal,"Home Programs card, About, Contact",seeded,private-specialty.webp
+programs,youth-dev-1,programs/youth-dev-1,youth-dev-1.webp,800 × 600 (4:3),normal,Homepage Programs — Youth development card,seeded,youth-dev-1.webp
+results,karue-training,results/karue-training,karue-training.webp,3:2 or 16:9 (e.g. 1200×800 or 1920×1080),normal,Homepage Results + Success Stories,seeded,karue-training.webp
+results,results-player-2,results/results-player-2,results-player-2.webp,3:2 or 16:9,normal,Success Stories / results strip,seeded,results-player-2.webp
+results,results-player-3,results/results-player-3,results-player-3.webp,3:2 or 16:9,normal,Success Stories / results strip,seeded,results-player-3.webp
+why-choose,why-choose-1,why-choose/why-choose-1,why-choose-1.webp,800 × 600 (4:3),normal,Homepage — Why Choose left block,seeded,why-choose-1.webp
+why-choose,why-choose-2,why-choose/why-choose-2,why-choose-2.webp,800 × 600 (4:3),normal,Homepage — Why Choose right block,seeded,why-choose-2.webp

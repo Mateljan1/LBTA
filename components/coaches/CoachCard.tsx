@@ -113,12 +113,12 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
             quality={90}
           />
         </div>
-        <div className="p-5 md:p-6 flex flex-col min-h-0 flex-1">
+        <div className="p-5 md:p-6 flex flex-col flex-1 min-h-0">
           <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.1em] mb-1.5">
             {coach.title}
           </p>
           {hasBioLink ? (
-            <Link href={`/coaches/${coach.slug}`} className="block group rounded-[2px] min-h-[48px] inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
+            <Link href={`/coaches/${coach.slug}`} className="group inline-flex items-center rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
               <h3 className="font-headline text-[20px] md:text-[22px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em] group-hover:text-brand-victoria-cove transition-colors">
                 {coach.name}
               </h3>
@@ -128,13 +128,13 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
               {coach.name}
             </h3>
           )}
-          <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-3 line-clamp-1">
+          <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-3 line-clamp-2">
             {coach.specialization}
           </p>
-          <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.6] mb-3">
+          <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.6] mb-3 flex-shrink-0">
             {shortBio}
           </p>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5 flex-shrink-0">
             {coach.credentials.slice(0, 4).map((cred, i) => (
               <span
                 key={`${cred}-${i}`}
@@ -144,7 +144,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
               </span>
             ))}
           </div>
-          <div className="flex flex-wrap items-center gap-3 mt-4">
+          <div className="flex flex-wrap items-center gap-3 mt-auto pt-4">
             {hasBioLink && (
               <Link
                 href={`/coaches/${coach.slug}`}

@@ -1,0 +1,8 @@
+PHOTO WE NEED (optional)
+------------------------
+Book "What to Expect" — step 3: e.g. path forward, next steps, or coach conversation.
+
+EXPORT SIZE: 400 × 300 or 600 × 400
+SAVE YOUR FILE AS: book-expect-3.webp (or .jpg)
+
+WHERE IT GOES: /book — "What to Expect" section

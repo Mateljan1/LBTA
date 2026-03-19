@@ -156,17 +156,28 @@ export default function AboutPage() {
       {/* OUR JOURNEY - Timeline */}
       <TimelineSection />
 
-      {/* PHILOSOPHY SECTION - Quote */}
-      <section className="bg-white py-20 md:py-28">
-        <div className="max-w-[900px] mx-auto px-6 md:px-16 text-center">
-          <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-8">
+      {/* PHILOSOPHY — Pull quote over image (editorial moment) */}
+      <section className="relative py-24 md:py-32 overflow-hidden" aria-labelledby="philosophy-quote-heading">
+        <div className="absolute inset-0">
+          <Image
+            src="/legacy-working-assets/founder/andrew-portrait/andrew-portrait.webp"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            quality={90}
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/75" />
+        </div>
+        <div className="relative z-10 max-w-[900px] mx-auto px-6 md:px-16 text-center">
+          <p className="font-sans text-[11px] font-semibold text-white/80 uppercase tracking-[0.15em] mb-8">
             Our Philosophy
           </p>
-          <blockquote className="font-headline text-[28px] md:text-[40px] font-medium text-brand-pacific-dusk leading-[1.3] tracking-[-0.02em] mb-8">
+          <blockquote id="philosophy-quote-heading" className="font-headline text-[28px] md:text-[40px] font-medium text-white leading-[1.3] tracking-[-0.02em] mb-8">
             &ldquo;Structure creates confidence. Confidence creates results. 
             That&apos;s how champions are built.&rdquo;
           </blockquote>
-          <p className="font-sans text-[14px] text-lbta-slate">
+          <p className="font-sans text-[14px] text-white/80">
             — Andrew Mateljan, Founder
           </p>
         </div>
@@ -205,6 +216,54 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <HorizonDivider />
+      {/* FACILITY — Featured + strip (one large + 2 smaller) */}
+      <section id="facility" className="bg-brand-morning-light py-20 md:py-28" aria-labelledby="facility-heading">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-16">
+          <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
+            Our Courts
+          </p>
+          <h2 id="facility-heading" className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-10 tracking-[-0.02em]">
+            Where We Train
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="md:col-span-2 relative aspect-[16/10] md:aspect-[2/1] overflow-hidden rounded-subtle">
+              <Image
+                src="/legacy-working-assets/facility/sunset-courts/sunset-courts.webp"
+                alt="Laguna Beach tennis courts at sunset"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 66vw"
+                quality={90}
+              />
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-6">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
+                <Image
+                  src="/legacy-working-assets/facility/courts-lbhs/courts-lbhs.webp"
+                  alt="Laguna Beach High School tennis courts"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  quality={90}
+                />
+              </div>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
+                <Image
+                  src="/legacy-working-assets/facility/courts-moulton/courts-moulton.webp"
+                  alt="Moulton Meadows Park tennis courts"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  quality={90}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <HorizonDivider />
       {/* LOCATION SECTION */}
       <section className="bg-white py-20 md:py-28">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">

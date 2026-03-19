@@ -1,0 +1,15 @@
+CAMPS — Red / orange / green + action
+======================================
+Layout: Card or grid. Export: 800×600 (4:3). Max 200KB.
+
+Filename            Used on
+--------            -------
+red-ball.webp       Camps — Red ball / Little Tennis
+orange-ball.webp    Camps — Orange ball program
+green-ball.webp     Camps — Green dot / full court
+camp-action-1.webp  Camps gallery grid
+camp-action-2.webp  Camps gallery grid
+camp-action-3.webp  Camps gallery grid
+camp-action-4.webp  Camps gallery grid
+
+Project path: public/images/camps/

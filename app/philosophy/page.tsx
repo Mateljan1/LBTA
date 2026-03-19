@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 import { Brain, Compass, Lightbulb, Target, Users, Zap } from 'lucide-react'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     title: 'Our Philosophy — Movement. Craft. Community. | LBTA',
     description: 'The LBTA coaching philosophy: movement-first technique, structured development, and a community built on respect and accountability.',
     type: 'website',
-    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
+    images: [{ url: '/legacy-working-assets/hero/philosophy-hero/philosophy-hero.webp', width: 1920, height: 1080, alt: 'LBTA coaching philosophy' }],
   },
 }
 
@@ -75,13 +76,26 @@ export default function PhilosophyPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-gradient-to-b from-sand-50 to-white pt-40 pb-20">
-        <div className="container-narrow text-center">
+      <section className="relative min-h-[50vh] flex items-center justify-center pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/legacy-working-assets/hero/philosophy-hero/philosophy-hero.webp"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+            quality={90}
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-brand-deep-water/40" />
+        </div>
+        <div className="container-narrow text-center relative z-10 text-white">
           <AnimatedSection>
-            <h1 className="text-display-lg heading-display mb-6">
+            <h1 className="text-display-lg heading-display mb-6 text-brand-sandstone">
               Our Philosophy
             </h1>
-            <p className="body-lg text-lbta-slate max-w-2xl mx-auto">
+            <p className="body-lg text-white/90 max-w-2xl mx-auto">
               Excellence is cultivated, not commanded. 
               It emerges through patient dedication, mindful practice, and unwavering commitment.
             </p>
@@ -91,7 +105,7 @@ export default function PhilosophyPage() {
 
       <HorizonDivider />
 
-      {/* Core Beliefs */}
+      {/* Core Beliefs — Bento: one featured + five smaller */}
       <section className="section-spacing bg-white">
         <div className="container-luxury">
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
@@ -105,21 +119,38 @@ export default function PhilosophyPage() {
             </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 auto-rows-fr">
             {principles.map((principle, index) => {
               const Icon = principle.icon
+              const isFeatured = index === 0
               return (
-                <AnimatedSection key={principle.title} delay={index * 0.1}>
-                  <div className="card-luxury p-8 md:p-10 h-full">
-                    <div className="flex items-start space-x-4 mb-6">
+                <AnimatedSection
+                  key={principle.title}
+                  delay={index * 0.1}
+                  className={isFeatured ? 'md:col-span-2 md:row-span-2' : ''}
+                >
+                  <div className="card-luxury p-8 md:p-10 h-full flex flex-col">
+                    {isFeatured && (
+                      <div className="relative aspect-[16/10] md:aspect-[2/1] overflow-hidden rounded-lg mb-6 -mx-2 md:-mx-4 mt-2">
+                        <Image
+                          src="/legacy-working-assets/philosophy/belonging/belonging.webp"
+                          alt="Community and belonging at LBTA"
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 66vw"
+                          quality={90}
+                        />
+                      </div>
+                    )}
+                    <div className="flex items-start space-x-4 mb-4">
                       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center">
                         <Icon className="h-6 w-6 text-sage-700" />
                       </div>
-                    <h3 className="subhead-sm text-brand-pacific-dusk mt-1">
-                      {principle.title}
-                    </h3>
+                      <h3 className="subhead-sm text-brand-pacific-dusk mt-1">
+                        {principle.title}
+                      </h3>
                     </div>
-                    <p className="text-clay-700 leading-relaxed">
+                    <p className="text-clay-700 leading-relaxed flex-1">
                       {principle.description}
                     </p>
                   </div>

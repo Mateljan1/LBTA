@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import leagues2026 from '@/data/leagues-2026.json'
 import pricingData from '@/data/pricing-supplemental.json'
@@ -11,6 +12,13 @@ export const metadata: Metadata = {
   title: 'USTA Adult League Play | Laguna Beach Tennis Academy',
   description:
     'Join an LBTA team for USTA Spring & Summer 2026 league play. 4 leagues, weekly matches across Orange County, coached practice with Andrew Mateljan.',
+  openGraph: {
+    title: 'USTA Adult League Play | Laguna Beach Tennis Academy',
+    description:
+      'Join an LBTA team for USTA Spring & Summer 2026 league play. 4 leagues, weekly matches across Orange County, coached practice with Andrew Mateljan.',
+    type: 'website',
+    images: [{ url: '/legacy-working-assets/hero/leagues-hero/leagues-hero.webp', width: 1920, height: 1080, alt: 'USTA leagues at LBTA' }],
+  },
 }
 
 const leagues = leagues2026.usta.leagues
@@ -28,8 +36,19 @@ export default function USTAAdultLeaguePage() {
       />
       {/* Hero */}
       <section className="relative bg-brand-deep-water text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-deep-water via-brand-pacific-dusk/80 to-brand-deep-water" />
-        <div className="relative container-lbta section-lg">
+        <div className="absolute inset-0">
+          <Image
+            src="/legacy-working-assets/hero/leagues-hero/leagues-hero.webp"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        </div>
+        <div className="relative container-lbta section-lg z-10">
           <Link
             href="/programs/leagues"
             className="inline-flex items-center gap-2 text-[12px] font-sans font-medium text-brand-victoria-cove/70 tracking-wider uppercase mb-8 hover:text-brand-victoria-cove transition-colors"

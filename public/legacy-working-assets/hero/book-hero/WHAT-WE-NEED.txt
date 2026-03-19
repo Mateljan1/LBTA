@@ -1,0 +1,10 @@
+PHOTO WE NEED
+-------------
+Book page hero — inviting courts, golden hour. Empty or 1–2 distant figures. First thing someone sees when they go to Book a trial. (Same as conversion/book-hero — you can put the file in either place.)
+
+EXPORT SIZE: 1920 × 1080 (16:9)
+SAVE YOUR FILE AS: book-hero.webp (or .jpg)
+
+WHERE IT GOES: /book page — hero (currently no image)
+
+PRIORITY: High

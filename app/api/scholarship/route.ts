@@ -12,6 +12,7 @@ import {
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { sendToGHL } from '@/lib/gohighlevel'
+import { notifyScholarship } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -102,6 +103,12 @@ export async function POST(request: NextRequest) {
       name: validation.data.parentName ?? undefined,
       phone: validation.data.phone ?? undefined,
       payload: { studentName: validation.data.studentName },
+    })
+    void notifyScholarship({
+      parentName: validation.data.parentName,
+      email: validation.data.email,
+      phone: validation.data.phone,
+      studentName: validation.data.studentName,
     })
 
     return NextResponse.json({

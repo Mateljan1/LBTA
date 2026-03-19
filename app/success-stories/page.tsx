@@ -18,7 +18,7 @@ const successStories = [
     name: 'Karue Sell',
     title: 'ATP Tour Player',
     achievement: '#858 → #258 ATP Ranking',
-    image: '/images/results/karue-training.webp',
+    image: '/legacy-working-assets/results/results-player-3/results-player-3.webp',
     quote: "Andrew's movement-first approach transformed my game. The structured training and accountability pushed me to levels I didn't know I could reach.",
     story: "When Karue first came to LBTA, he was ranked #858 on the ATP tour. Through dedicated training focused on movement efficiency and mental toughness, he climbed to #258 - a 600+ position improvement that opened doors to main draw Grand Slam qualifiers.",
     videoId: 'karue-journey',
@@ -29,7 +29,7 @@ const successStories = [
     name: 'D1 College Placements',
     title: '20+ Student Athletes',
     achievement: 'Full Scholarships Earned',
-    image: '/images/community/community-3.webp',
+    image: '/legacy-working-assets/community/community-3.webp',
     quote: "LBTA prepared me not just for college tennis, but for the discipline required to balance athletics and academics at the D1 level.",
     story: "Over the past 5 years, more than 20 LBTA students have earned Division 1 tennis scholarships. Our college prep program focuses on tournament strategy, mental resilience, and the recruiting process.",
     featured: true,
@@ -39,7 +39,7 @@ const successStories = [
     name: 'David Richardson',
     title: 'Adult Beginner Program',
     achievement: '4.0 USTA Rating in 18 Months',
-    image: '/images/community/community-1.webp',
+    image: '/legacy-working-assets/testimonials/testimonial-adult-1.webp',
     quote: "At 45, I thought it was too late to learn tennis properly. The team proved me wrong. I went from never holding a racquet to competing in USTA leagues.",
     story: "David joined our Adult Beginner program with zero tennis experience. Through consistent twice-weekly sessions and our progressive curriculum, he developed strong fundamentals and now competes in local USTA 4.0 leagues.",
     featured: false,
@@ -49,7 +49,7 @@ const successStories = [
     name: 'Emma Chen',
     title: 'Junior Development',
     achievement: 'Sectional Champion, Age 12',
-    image: '/images/community/community-5.webp',
+    image: '/legacy-working-assets/testimonials/testimonial-junior-1.webp',
     quote: "Coach Andrew taught me that tennis is about more than winning - it's about how you handle challenges. That mindset helped me become a champion.",
     story: "Emma started at LBTA in our Orange Ball program at age 7. Through our junior pathway, she developed into a sectional champion, earning rankings that will support her college tennis aspirations.",
     featured: false,
@@ -124,18 +124,31 @@ export default function SuccessStoriesPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-white py-12 md:py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="relative min-h-[55vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/legacy-working-assets/hero/success-stories-hero/success-stories-hero.webp"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+            quality={90}
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto">
-              <p className="font-sans text-[11px] text-brand-sunset-cliff uppercase tracking-[2px] mb-4">
+            <div className="text-center max-w-3xl mx-auto text-white">
+              <p className="font-sans text-[11px] text-white/80 uppercase tracking-[2px] mb-4">
                 Player Achievements
               </p>
-              <h1 className="font-headline text-[40px] md:text-[56px] font-semibold text-black mb-6 leading-[1.1]">
+              <h1 className="font-headline text-[40px] md:text-[56px] font-semibold text-brand-sandstone mb-6 leading-[1.1]">
                 Success Stories
               </h1>
-              <p className="font-sans text-[17px] md:text-[18px] text-black/70 leading-relaxed">
-                From ATP tour players to adult beginners, see how LBTA's movement-first approach 
+              <p className="font-sans text-[17px] md:text-[18px] text-white/90 leading-relaxed">
+                From ATP tour players to adult beginners, see how LBTA's movement-first approach
                 transforms players at every level.
               </p>
             </div>
@@ -207,7 +220,9 @@ export default function SuccessStoriesPage() {
                     />
                     {story.videoId && (
                       <button
+                        type="button"
                         onClick={() => setActiveVideo(story.videoId)}
+                        aria-label={`Play video about ${story.name}`}
                         className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
                       >
                         <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -258,17 +273,21 @@ export default function SuccessStoriesPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {successStories.filter(s => !s.featured).map((story, index) => (
-              <AnimatedSection key={story.id} delay={index * 100}>
-                <div className="bg-brand-morning-light rounded-lg overflow-hidden">
-                  <div className="relative aspect-[16/9]">
+              <AnimatedSection
+                key={story.id}
+                delay={index * 100}
+                className={index === 0 ? 'md:col-span-2' : 'md:col-span-1'}
+              >
+                <div className="bg-brand-morning-light rounded-lg overflow-hidden h-full flex flex-col">
+                  <div className={`relative overflow-hidden flex-shrink-0 ${index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
                     <Image
                       src={story.image}
                       alt={story.name}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      sizes={index === 0 ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
                     />
                   </div>
                   <div className="p-6 md:p-8">

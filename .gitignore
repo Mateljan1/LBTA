@@ -41,4 +41,9 @@ public/videos/vylo-hero.mp4
 public/vylo-hero.MP4
 public/**/*.mp4
 public/**/*.MP4
+# Allow legacy-working-assets videos (e.g. hero)
+!public/legacy-working-assets/**/*.mp4
+!public/legacy-working-assets/**/*.MP4
+# Canva API secrets (inside legacy assets)
+public/legacy-working-assets/canva-api/.secrets/
 node_modules/

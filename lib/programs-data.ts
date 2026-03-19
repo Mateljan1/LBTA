@@ -65,6 +65,21 @@ export interface PrivateRateRow {
   note?: string
 }
 
+/** One UTR tier in Youth Development placement (from youth-development.utrPlacementBands.tiers). */
+export interface YouthDevelopmentUtrTier {
+  label: string
+  utrRange: string
+  focus: string
+}
+
+/** Youth Development UTR placement bands (from data/spring-summer-2026.json youth-development.utrPlacementBands). */
+export interface YouthDevelopmentUtrPlacementBands {
+  intro: string
+  tiers: YouthDevelopmentUtrTier[]
+  structure: string
+  advancement: string
+}
+
 /** Spring/Summer program: pricing may be monthly or season-specific (spring/summer). */
 export interface SpringSummerProgram {
   id: string
@@ -78,6 +93,8 @@ export interface SpringSummerProgram {
   description: string
   pricingNote?: string
   matchPlay?: { monthly?: number; drop_in?: number }
+  /** Youth Development only: UTR band breakdown for flyer/schedules. */
+  utrPlacementBands?: YouthDevelopmentUtrPlacementBands
 }
 
 const winter2026 = winter2026Data as unknown as {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import pricingSupplemental from '@/data/pricing-supplemental.json'
 import HorizonDivider from '@/components/ui/HorizonDivider'
@@ -9,6 +10,13 @@ export const metadata: Metadata = {
   title: 'USTA Leagues & UTR Match Play | Laguna Beach Tennis Academy',
   description:
     'USTA Adult League team play and the UTR Match Play Series — weekly rostered matches vs. rated Saturday matchplay by level.',
+  openGraph: {
+    title: 'USTA Leagues & UTR Match Play | Laguna Beach Tennis Academy',
+    description:
+      'USTA Adult League team play and the UTR Match Play Series — weekly rostered matches vs. rated Saturday matchplay by level.',
+    type: 'website',
+    images: [{ url: '/legacy-working-assets/hero/leagues-hero/leagues-hero.webp', width: 1920, height: 1080, alt: 'LBTA leagues' }],
+  },
 }
 
 const leagues = [
@@ -37,8 +45,19 @@ export default function LeaguesPage() {
     <div>
       {/* Hero */}
       <section className="relative bg-brand-deep-water text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-deep-water via-brand-pacific-dusk/80 to-brand-deep-water" />
-        <div className="relative container-lbta section-lg text-center">
+        <div className="absolute inset-0">
+          <Image
+            src="/legacy-working-assets/hero/leagues-hero/leagues-hero.webp"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        </div>
+        <div className="relative container-lbta section-lg text-center z-10">
           <span className="text-eyebrow text-brand-victoria-cove/80 mb-6 block">
             Competitive Play
           </span>

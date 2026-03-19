@@ -1,11 +1,9 @@
-import { getLeadCoach, getProgramCoaches, type Coach } from '@/lib/coaches-data'
+import { getCoaches } from '@/lib/coaches-data'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import CoachCard from './CoachCard'
 
 export default function CoachingTeamSection() {
-  const leadCoach = getLeadCoach()
-  const programCoaches = getProgramCoaches()
-  const teamCoaches: Coach[] = [leadCoach, ...programCoaches].filter((c): c is Coach => c != null)
+  const teamCoaches = getCoaches()
 
   return (
     <section className="bg-brand-sandstone py-20 md:py-28 scroll-mt-28" id="team">

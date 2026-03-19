@@ -12,6 +12,7 @@ const nextConfig = {
       // next/image rejects paths not listed here → 400 INVALID_IMAGE_OPTIMIZE_REQUEST in prod
       { pathname: '/logos/**' },
       { pathname: '/photos/**' }, // adult-trial, beginner-program heroes
+      { pathname: '/legacy-working-assets/**' }, // Phase 3 & 4: camps, philosophy, success-stories, homepage sections
     ],
     remotePatterns: [
       {

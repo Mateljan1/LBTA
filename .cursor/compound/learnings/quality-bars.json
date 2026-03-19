@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-18",
-  "lastLearnRun": "2026-03-18 Drop-in + private booking (contextualBookingCoachPreSelect)",
+  "updated": "2026-03-19",
+  "lastLearnRun": "2026-03-19 Visual Elevation Phase 3 & 4 + next/image quality",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -271,6 +271,10 @@
     },
     "contextualBookingCoachPreSelect": {
       "rule": "When linking to private lesson booking from a coach context (coach bio, schedules 'Book with [Coach]'), use /book?type=private&coach=<slug>, resolve slug to display name on book page, and pass defaultCoach to the private lesson modal so the form pre-selects that coach",
+      "enforcement": "should"
+    },
+    "nextImageQualitySectionHero": {
+      "rule": "Section primitives and hero/bento Images using next/image should set quality={90} for consistency with project bar",
       "enforcement": "should"
     }
   }

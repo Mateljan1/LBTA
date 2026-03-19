@@ -9,6 +9,7 @@ import LuxuryYearModal from '@/components/LuxuryYearModal'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
+import { ZigzagSection } from '@/components/sections'
 import { getCampsFromYear2026, type CampWeek } from '@/lib/camps-data'
 import { getCampsHeading } from '@/lib/site-copy'
 
@@ -87,8 +88,8 @@ export default function CampsPage() {
       <section className="relative min-h-[65vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/community/community-3.webp"
-            alt="Young boy celebrating on the tennis court at Laguna Beach Tennis Academy camp"
+            src="/legacy-working-assets/hero/camps-hero/camps-hero.webp"
+            alt="Young players at Laguna Beach Tennis Academy camp"
             fill
             className="object-cover object-center"
             sizes="100vw"
@@ -288,6 +289,73 @@ export default function CampsPage() {
           </div>
         </div>
       </section>
+
+      <HorizonDivider />
+      {/* CAMP STORY ZIGZAG */}
+      <ZigzagSection
+        className="bg-white py-16 md:py-24"
+        title={
+          <AnimatedSection className="text-center mb-12">
+            <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">Camp Life</p>
+            <h2 className="font-headline text-[32px] md:text-[44px] font-semibold text-black mb-4">
+              From First Rallies to Match Play
+            </h2>
+            <p className="font-sans text-[16px] md:text-[18px] text-black/70 max-w-2xl mx-auto">
+              High-energy development in a supportive environment. See what happens on court.
+            </p>
+          </AnimatedSection>
+        }
+        blocks={[
+          {
+            imageSrc: '/legacy-working-assets/camps/camp-action-1/camp-action-1.webp',
+            imageAlt: 'Young players in camp action at LBTA',
+            content: (
+              <AnimatedSection delay={0}>
+                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-3">Movement First</h3>
+                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
+                  Every camp session builds from footwork and court coverage. Players learn to move efficiently before we add technical layers.
+                </p>
+              </AnimatedSection>
+            ),
+          },
+          {
+            imageSrc: '/legacy-working-assets/camps/camp-action-2/camp-action-2.webp',
+            imageAlt: 'Campers in drills at Laguna Beach Tennis Academy',
+            content: (
+              <AnimatedSection delay={0}>
+                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-3">Progressive Development</h3>
+                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
+                  Red, orange, and green ball progressions keep each age group challenged. Coaches adapt to the level in the room.
+                </p>
+              </AnimatedSection>
+            ),
+          },
+          {
+            imageSrc: '/legacy-working-assets/camps/camp-action-3/camp-action-3.webp',
+            imageAlt: 'Camp action and rally play',
+            content: (
+              <AnimatedSection delay={0}>
+                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-3">Rally and Compete</h3>
+                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
+                  Live-ball rallies and point play are part of every day. Players build confidence through repetition and friendly competition.
+                </p>
+              </AnimatedSection>
+            ),
+          },
+          {
+            imageSrc: '/legacy-working-assets/camps/camp-action-4/camp-action-4.webp',
+            imageAlt: 'LBTA camp community and fun',
+            content: (
+              <AnimatedSection delay={0}>
+                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-3">Community on Court</h3>
+                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
+                  Camps are as much about making friends and belonging as they are about tennis. Movement. Craft. Community.
+                </p>
+              </AnimatedSection>
+            ),
+          },
+        ]}
+      />
 
       <HorizonDivider />
       {/* OUR FOUNDATION */}

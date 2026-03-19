@@ -15,6 +15,7 @@ import {
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
+import { notifyRegistration } from '@/lib/email'
 
 // Initialize Notion client lazily
 let notionClient: Client | null = null
@@ -26,9 +27,11 @@ function getNotionClient(): Client {
 }
 
 // Helper function to check if Early Bird discount applies
+// Early bird = registered 2+ weeks before session start
 function isEarlyBird(): boolean {
   const now = new Date()
-  const earlyBirdDeadline = new Date('2025-12-20T23:59:59')
+  // Spring 2026: session starts Apr 6, early bird cutoff = Mar 23
+  const earlyBirdDeadline = new Date('2026-03-23T23:59:59')
   return now < earlyBirdDeadline
 }
 
@@ -233,6 +236,18 @@ export async function POST(request: NextRequest) {
       name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
       phone: data.phone ?? undefined,
       payload: { program: data.program, location: data.location },
+    })
+    void notifyRegistration({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      program: data.program,
+      location: data.location,
+      studentName: data.studentName,
+      studentAge: data.studentAge,
+      experience: data.experience,
+      notes: data.notes,
     })
 
     return NextResponse.json({

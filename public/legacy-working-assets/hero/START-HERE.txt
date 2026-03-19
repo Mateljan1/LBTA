@@ -1,0 +1,8 @@
+HERO IMAGES — Full-bleed page tops
+==================================
+
+Each folder = one hero image (the big picture at the top of a page).
+
+Open the folder → read WHAT-WE-NEED.txt → add your photo with that filename.
+
+Export size for all: 1920 × 1080 (16:9 landscape).

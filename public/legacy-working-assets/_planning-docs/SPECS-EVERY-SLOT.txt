@@ -1,0 +1,76 @@
+LBTA WEBSITE ASSETS — EVERY SLOT, SIZE, LAYOUT, WHERE USED
+==========================================================
+Use this as the master list. Export from Canva at these exact dimensions.
+
+--- HERO (16:9 — 1920×1080 px, max 350KB) ---
+philosophy-hero.webp          → Philosophy page hero
+success-stories-hero.webp     → Success Stories page hero
+book-hero.webp                → Book page hero (CONVERSION — currently no image)
+adult-trial-hero.webp         → Adult trial hero (in photos/ or hero/)
+adult-group-hero.webp         → Beginner program / adult section hero
+leagues-hero.webp             → Leagues / USTA / UTR page hero
+camps-hero.webp              → Camps page hero
+junior-trial-hero.webp        → Junior trial hero (or use juniors.webp)
+match-play-hero.webp          → Match Play page hero
+fitness-hero.webp             → Fitness page hero
+laguna-horizon.webp           → Destination, fallbacks, Schedules CTA
+hero-poster.webp              → Home hero video poster
+
+--- PROGRAM CARDS (4:3 — 800×600 px, max 200KB) ---
+juniors.webp                  → Home Programs card, Junior trial hero (current)
+adults.webp                   → Home Programs card
+private-lessons.webp          → Home Programs card
+private-specialty.webp        → About, Contact sections
+high-performance.webp         → HP card + page
+fitness.webp                  → Fitness card
+youth-dev-1.webp              → Youth development card
+leagues.webp                  → Leagues card
+match-play.webp               → Match Play section
+cardio-tennis.webp            → Cardio Tennis card
+
+--- PHILOSOPHY (1:1 — 800×800 px, max 200KB) ---
+movement.webp                 → Home + Philosophy — Movement pillar
+discipline.webp               → Home + Philosophy — Craft pillar
+belonging.webp                → Home + Philosophy — Community pillar
+
+--- WHY CHOOSE (4:3 — 800×600 px, max 200KB) ---
+why-choose-1.webp             → Home Why Choose left (coach on court)
+why-choose-2.webp             → Home Why Choose right (facility / community)
+
+--- RESULTS / PRO (3:2 or 16:9, max 300KB) ---
+karue-training.webp           → Home Results + Success Stories
+results-player-2.webp        → Success Stories / results strip
+results-player-3.webp        → Success Stories / results strip
+
+--- COMMUNITY (1:1 — 800×800 px, max 120KB) ---
+community-1.webp … community-12.webp  → Home community grid, success stories, fitness
+
+--- COACHES (portrait 600×800 or 800×1000; action 1200×800) ---
+andrew-headshot.webp          → Home founder, Coaches listing
+andrew-portrait.webp          → Home founder (alternative), founder/
+andrew-action.webp            → Coach bio / About
+robert-lebuhn, peter-defrantz, allison-cronk (+ -action) → Coaches
+
+--- FOUNDER ---
+andrew-portrait.webp          → 800×1000 (4:5), founder/
+
+--- CAMPS (4:3 — 800×600) ---
+red-ball.webp, orange-ball.webp, green-ball.webp
+camp-action-1.webp … camp-action-4.webp
+
+--- CONVERSION (trial / book / thank-you) ---
+book-hero.webp                → 1920×1080 — Book page hero
+adult-trial-why-image.webp    → 800×600 — Adult trial "Why This Works"
+thank-you-image.webp          → 1200×675 or 800×600 — Thank-you page (optional)
+junior-trial-strip-1,2.webp   → 800×600 — Junior trial above form (optional)
+book-expect-1,2,3.webp        → 400×300 or 600×400 — Book "What to Expect" (optional)
+
+--- GALLERY / PHOTOS (16:9 or 4:3, max 350KB) ---
+LBCOURTSETTING, VideoAnalysisRoom, GymSetting, OncourtTraining, court-setting.webp
+→ public/photos/ — PhotoVideoGallery (About)
+
+--- VIDEOS ---
+LBTA-Home-Hero.mp4            → 1920×1080, 15–30 sec — Home hero (we add WebM + poster)
+
+--- CTA ---
+cta-background.webp           → 1920×640 or 1920×1080 — Home footer CTA

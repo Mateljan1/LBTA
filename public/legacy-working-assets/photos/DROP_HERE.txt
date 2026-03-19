@@ -1,0 +1,14 @@
+GALLERY / PHOTOS — About page PhotoVideoGallery
+=================================================
+Layout: Carousel or grid. Export: 1920×1080 or 1200×900. Max 350KB each.
+
+Filename                Used on
+--------                -------
+LBCOURTSETTING.webp     PhotoVideoGallery — championship courts
+VideoAnalysisRoom.webp  PhotoVideoGallery — video room
+GymSetting.webp         PhotoVideoGallery — gym
+OncourtTraining.webp    PhotoVideoGallery — on-court training
+court-setting.webp      PhotoVideoGallery (no space in filename)
+adult-trial-hero.webp   Adult trial hero (also used here)
+
+Project path: public/photos/

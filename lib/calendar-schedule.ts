@@ -27,6 +27,39 @@ export const DAY_ORDER: string[] = [
 /** Canonical location keys; order is alphabetical by full name (Alta Laguna Park, Laguna Beach High School, Moulton Meadows Park). */
 export const LOCATION_KEYS: string[] = ['Alta', 'LBHS', 'Moulton']
 
+/** One row inside a merged “concurrent courts” grid cell (overlapping sessions). */
+export interface ConcurrentSessionRow {
+  time: string
+  programName: string
+  category: string
+  programId: string
+  /** From program JSON `ages`: NTRP/UTR band, junior ages, or “All levels”. */
+  ages: string
+}
+
+/**
+ * Scannable line for schedules — NTRP/UTR/age so players pick the right class.
+ * Program JSON stores this on `ages` even when the value is a level band (not only literal ages).
+ */
+export function playerGuidanceFromAges(ages: string | undefined | null): string | null {
+  const raw = ages?.trim()
+  if (!raw) return null
+  const lower = raw.toLowerCase()
+  if (
+    lower.includes('ntrp') ||
+    lower.includes('utr') ||
+    lower.includes('all levels') ||
+    lower.includes('level-based')
+  ) {
+    return raw
+  }
+  // Compact junior age bands only: "3-4", "5-6", "9-11+"
+  if (/^\d{1,2}-\d{1,2}\+?$/.test(raw)) {
+    return `Ages ${raw.replace(/-/g, '–')}`
+  }
+  return raw
+}
+
 export interface CalendarSlot {
   programId: string
   programName: string
@@ -35,6 +68,79 @@ export interface CalendarSlot {
   time: string
   duration: string
   coach?: string
+  /** Present when this cell was merged from overlapping sessions; drives two-column / tinted rows. */
+  concurrentSessions?: ConcurrentSessionRow[]
+}
+
+/** Split concurrent rows for Saturday-style layout (Juniors | Adults/LiveBall) vs Friday youth. */
+export function partitionConcurrentSessions(rows: ConcurrentSessionRow[]): {
+  juniors: ConcurrentSessionRow[]
+  adultsColumn: ConcurrentSessionRow[]
+  youthColumn: ConcurrentSessionRow[]
+} {
+  const juniors = rows.filter((r) => r.category === 'Junior')
+  const adultsColumn = rows.filter((r) => r.category === 'Adult' || r.category === 'Fitness')
+  const youthColumn = rows.filter((r) => r.category === 'Youth')
+  return { juniors, adultsColumn, youthColumn }
+}
+
+export type ConcurrentRowKind =
+  | 'hp'
+  | 'utr_green'
+  | 'youth_dev'
+  | 'liveball'
+  | 'adult'
+  | 'j_stars'
+  | 'j_red'
+  | 'j_orange'
+  | 'j_green'
+  | 'youth'
+  | 'default'
+
+export function concurrentRowKind(programName: string, category: string): ConcurrentRowKind {
+  const n = programName.toLowerCase()
+  if (n.includes('high performance')) return 'hp'
+  if (n.includes('utr green')) return 'utr_green'
+  if (n.includes('youth development')) return 'youth_dev'
+  if (n.includes('liveball')) return 'liveball'
+  if (category === 'Fitness') return 'liveball'
+  if (category === 'Adult') return 'adult'
+  if (n.includes('little') || n.includes('stars')) return 'j_stars'
+  if (n.includes('red ball')) return 'j_red'
+  if (n.includes('orange ball')) return 'j_orange'
+  if (n.includes('green dot')) return 'j_green'
+  if (category === 'Junior') return 'j_red'
+  if (category === 'Youth') return 'youth'
+  return 'default'
+}
+
+const CONCURRENT_ROW_TW: Record<ConcurrentRowKind, string> = {
+  hp: 'border-l-[3px] border-brand-pacific-dusk pl-2 py-1 rounded-r-sm bg-brand-pacific-dusk/[0.14]',
+  utr_green: 'border-l-[3px] border-brand-tide-pool pl-2 py-1 rounded-r-sm bg-brand-tide-pool/18',
+  youth_dev: 'border-l-[3px] border-brand-victoria-cove pl-2 py-1 rounded-r-sm bg-brand-victoria-cove/18',
+  liveball: 'border-l-[3px] border-brand-victoria-cove pl-2 py-1 rounded-r-sm bg-brand-victoria-cove/20',
+  adult: 'border-l-[3px] border-brand-pacific-dusk pl-2 py-1 rounded-r-sm bg-brand-pacific-dusk/14',
+  j_stars: 'border-l-[3px] border-lbta-red pl-2 py-1 rounded-r-sm bg-lbta-red/14',
+  j_red: 'border-l-[3px] border-lbta-red pl-2 py-1 rounded-r-sm bg-lbta-red/18',
+  j_orange: 'border-l-[3px] border-brand-sunset-cliff pl-2 py-1 rounded-r-sm bg-brand-sunset-cliff/22',
+  j_green: 'border-l-[3px] border-brand-tide-pool pl-2 py-1 rounded-r-sm bg-brand-tide-pool/18',
+  youth: 'border-l-[3px] border-brand-victoria-cove pl-2 py-1 rounded-r-sm bg-brand-victoria-cove/14',
+  default: 'border-l-[3px] border-brand-pacific-dusk/45 pl-2 py-1 rounded-r-sm bg-brand-sandstone/80',
+}
+
+export function concurrentSessionRowTw(programName: string, category: string): string {
+  return CONCURRENT_ROW_TW[concurrentRowKind(programName, category)]
+}
+
+/** Stable sort for columns in concurrent cells (by session start time). */
+export function sortConcurrentSessionsByStart(rows: ConcurrentSessionRow[]): ConcurrentSessionRow[] {
+  return [...rows].sort((a, b) => {
+    const pa = parseTimeRangeToMinutes(a.time)
+    const pb = parseTimeRangeToMinutes(b.time)
+    const sa = pa?.start ?? 99999
+    const sb = pb?.start ?? 99999
+    return sa - sb || a.programName.localeCompare(b.programName)
+  })
 }
 
 type ScheduleSlot = { day: string; time: string; coach?: string; location?: string }
@@ -188,11 +294,19 @@ export function mergeOverlappingCalendarSlots(slots: CalendarSlot[]): CalendarSl
     }
 
     group.sort((a, b) => a.start - b.start || a.end - b.end || a.slot.programName.localeCompare(b.slot.programName))
-    const lines = group.map((g) => `${g.slot.time} — ${g.slot.programName}`)
+    const concurrentSessions: ConcurrentSessionRow[] = group.map((g) => ({
+      time: g.slot.time,
+      programName: g.slot.programName,
+      category: g.slot.category,
+      programId: g.slot.programId,
+      ages: g.slot.ages ?? '',
+    }))
+    const lines = concurrentSessions.map((r) => `${r.time} — ${r.programName}`)
     merged.push({
       ...group[0].slot,
       programName: lines.join('\n'),
       time: formatMinutesRangeLabel(start, end),
+      concurrentSessions,
     })
   }
   return merged

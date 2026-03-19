@@ -1,0 +1,31 @@
+CONVERSION FLOW ASSETS — Trial, Book, Thank-you
+===============================================
+Drop here, then we map to project: public/images/hero, public/photos, or public/images/ (as below).
+
+book-hero.webp
+  Size: 1920×1080 px (16:9)
+  Used on: Book page (/book) — hero (currently no image; dark only)
+  Layout: Full-bleed hero. Inviting courts at golden hour.
+  Max file size: 350KB (we compress to WebP)
+
+adult-trial-why-image.webp
+  Size: 800×600 px (4:3) or 1200×675 (16:9)
+  Used on: Adult trial page — "Why This Works" section (right column)
+  Layout: Inline image beside copy. Adult group or coach with adults.
+  Max file size: 200KB
+
+thank-you-image.webp (optional)
+  Size: 1200×675 (16:9) or 800×600 (4:3)
+  Used on: Thank-you page — below headline ("See you on court")
+  Layout: One warm image to reinforce commitment.
+  Max file size: 250KB
+
+junior-trial-strip-1.webp, junior-trial-strip-2.webp (optional)
+  Size: 800×600 (4:3) each
+  Used on: Junior trial — optional strip above form (camp / coach with juniors)
+  Max file size: 200KB each
+
+book-expect-1.webp, book-expect-2.webp, book-expect-3.webp (optional)
+  Size: 400×300 or 600×400 each
+  Used on: Book page — "What to Expect" (3 steps: call, assessment, path)
+  Max file size: 150KB each

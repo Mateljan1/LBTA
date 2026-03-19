@@ -1,0 +1,8 @@
+PHOTO WE NEED (optional)
+------------------------
+Junior trial strip image #1 — juniors in a lesson or rally. Coach optional. One of 2 images that can sit above the form on the junior trial page.
+
+EXPORT SIZE: 800 × 600 (4:3)
+SAVE YOUR FILE AS: junior-trial-strip-1.webp (or .jpg)
+
+WHERE IT GOES: /junior-trial — optional strip above form

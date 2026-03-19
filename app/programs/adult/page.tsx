@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   title: 'Adult Programs | Laguna Beach Tennis Academy',
   description:
     'Adult tennis progression at LBTA: beginner to advanced. Group classes, private coaching, USTA League, UTR Match Play, and connection to schedule and booking.',
+  openGraph: {
+    title: 'Adult Programs | Laguna Beach Tennis Academy',
+    description:
+      'Adult tennis progression at LBTA: beginner to advanced. Group classes, private coaching, USTA League, UTR Match Play.',
+    type: 'website',
+    images: [{ url: '/legacy-working-assets/programs/adults/adults.webp', width: 1920, height: 1080, alt: 'Adult programs at LBTA' }],
+  },
 }
 
 const progression = [

@@ -7,8 +7,10 @@
 import {
   formatLocation,
   getSpringProgramsForDisplay,
+  getSpringSummer2026,
   getSummerProgramsForDisplay,
   type ProgramForDisplay,
+  type YouthDevelopmentUtrPlacementBands,
 } from '@/lib/programs-data'
 import { FLYER_LOCATION_DISPLAY } from '@/lib/flyer-config'
 
@@ -19,6 +21,21 @@ export interface CourtFlyerPricingRow {
   price_2x: string | null
   dropIn: string
   location: string
+}
+
+/** Youth Development UTR tiers for flyer — from `data/spring-summer-2026.json` + optional `pricingNote`. */
+export type CourtFlyerYouthUtrDetail = YouthDevelopmentUtrPlacementBands & {
+  pricingNote?: string
+}
+
+/** Court flyer + PDF: structured UTR band breakdown for Youth Development (single source: program JSON). */
+export function getYouthDevelopmentUtrPlacementForFlyer(): CourtFlyerYouthUtrDetail | null {
+  const p = getSpringSummer2026().programs.find((x) => x.id === 'youth-development')
+  if (!p?.utrPlacementBands) return null
+  return {
+    ...p.utrPlacementBands,
+    pricingNote: p.pricingNote,
+  }
 }
 
 /** Format one program row for flyer tables (1x/wk, 2x/wk, drop-in). */

@@ -10,8 +10,20 @@ export default function FitnessPage() {
   return (
     <>
       {/* HERO */}
-      <DarkSection className="min-h-[65vh] md:min-h-[75vh] flex items-center justify-center py-24 md:py-32">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+      <section className="relative min-h-[65vh] md:min-h-[75vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/legacy-working-assets/hero/fitness-hero/fitness-hero.webp"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        </div>
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <h1 className="font-headline text-[36px] md:text-[60px] font-semibold leading-[1.05] text-brand-sandstone mb-6">
             Fitness & Community at LBTA
           </h1>
@@ -20,12 +32,12 @@ export default function FitnessPage() {
           </p>
           <Link 
             href="/book"
-            className="inline-block bg-black text-white font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+            className="inline-block bg-white text-black font-sans font-semibold text-[15px] md:text-[16px] py-4 px-10 rounded-[2px] transition-all duration-200 min-h-[48px] hover:bg-brand-sandstone hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
           >
             Join a Session →
           </Link>
         </div>
-      </DarkSection>
+      </section>
 
       <HorizonDivider />
       {/* CARDIO TENNIS */}

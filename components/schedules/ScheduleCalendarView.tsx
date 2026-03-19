@@ -9,8 +9,18 @@ import {
   buildWeekGridForLocation,
   formatGridRowTime,
   getUsedRowRange,
+  playerGuidanceFromAges,
+  type CalendarSlot,
   type ScheduleByLocationByDay,
 } from '@/lib/calendar-schedule'
+import { ConcurrentScheduleCellBody } from '@/components/schedules/ConcurrentScheduleCellBody'
+
+function isConcurrentScheduleCell(slot: Pick<CalendarSlot, 'programName' | 'concurrentSessions'>): boolean {
+  return (
+    (slot.concurrentSessions != null && slot.concurrentSessions.length > 1) ||
+    slot.programName.includes('\n')
+  )
+}
 
 const EMPTY_SCHEDULE: ScheduleByLocationByDay = {}
 
@@ -311,7 +321,12 @@ export default function ScheduleCalendarView({
                                 )
                               }
                               const { slot, rowSpan } = cell
-                              const concurrent = slot.programName.includes('\n')
+                              const concurrent = isConcurrentScheduleCell(slot)
+                              const structured =
+                                concurrent &&
+                                slot.concurrentSessions &&
+                                slot.concurrentSessions.length > 1
+                              const levelLine = playerGuidanceFromAges(slot.ages)
                               return (
                                 <td
                                   key={dayIndex}
@@ -325,27 +340,37 @@ export default function ScheduleCalendarView({
                                         : 'bg-[var(--cove-mist)] border-brand-victoria-cove hover:shadow-[0_1px_3px_rgba(46,139,139,0.08)]'
                                     }`}
                                   >
-                                    <div
-                                      className={`font-sans font-medium text-[14px] leading-snug text-brand-pacific-dusk${concurrent ? ' whitespace-pre-line' : ''}`}
-                                    >
-                                      {slot.programName}
-                                      {!concurrent && slot.ages ? (
-                                        <span className="text-brand-pacific-dusk/80 font-normal"> ({slot.ages})</span>
-                                      ) : null}
-                                    </div>
-                                    <div className="font-sans text-[12px] text-brand-pacific-dusk/75 mt-1 leading-snug">
-                                      {concurrent ? (
-                                        <>
-                                          <span className="font-medium text-brand-pacific-dusk">Concurrent courts.</span>{' '}
-                                          Block {slot.time}. Each line is one session with its time.
-                                        </>
-                                      ) : (
-                                        <>
-                                          {slot.time} · {slot.duration}
-                                          {slot.coach ? ` · ${slot.coach}` : ''}
-                                        </>
-                                      )}
-                                    </div>
+                                    {structured ? (
+                                      <ConcurrentScheduleCellBody
+                                        sessions={slot.concurrentSessions!}
+                                        blockTime={slot.time}
+                                        variant="calendar"
+                                      />
+                                    ) : (
+                                      <>
+                                        <div
+                                          className={`font-sans font-medium text-[14px] leading-snug text-brand-pacific-dusk${concurrent ? ' whitespace-pre-line' : ''}`}
+                                        >
+                                          {slot.programName}
+                                          {!concurrent && levelLine ? (
+                                            <span className="text-brand-pacific-dusk/80 font-normal"> ({levelLine})</span>
+                                          ) : null}
+                                        </div>
+                                        <div className="font-sans text-[12px] text-brand-pacific-dusk/75 mt-1 leading-snug">
+                                          {concurrent ? (
+                                            <>
+                                              <span className="font-medium text-brand-pacific-dusk">Neighboring courts.</span>{' '}
+                                              {slot.time}. Each line lists time, class, and level (NTRP, UTR, or ages).
+                                            </>
+                                          ) : (
+                                            <>
+                                              {slot.time} · {slot.duration}
+                                              {slot.coach ? ` · ${slot.coach}` : ''}
+                                            </>
+                                          )}
+                                        </div>
+                                      </>
+                                    )}
                                   </div>
                                 </td>
                               )
@@ -388,7 +413,9 @@ export default function ScheduleCalendarView({
                             {day}
                           </h3>
                           <ul className="space-y-2 list-none">
-                            {slots.map((slot, i) => (
+                            {slots.map((slot, i) => {
+                              const listLevel = playerGuidanceFromAges(slot.ages)
+                              return (
                               <li
                                 key={`${slot.programId}-${slot.time}-${i}`}
                                 className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-sans text-[14px] text-brand-pacific-dusk/90 py-1.5 border-b border-black/[0.06] last:border-0"
@@ -398,14 +425,15 @@ export default function ScheduleCalendarView({
                                 </span>
                                 <span>
                                   {slot.programName}
-                                  {slot.ages ? ` (${slot.ages})` : ''}
+                                  {listLevel ? ` (${listLevel})` : ''}
                                 </span>
                                 <span className="text-brand-pacific-dusk/60 text-[13px]">
                                   {slot.duration}
                                   {slot.coach ? ` · ${slot.coach}` : ''}
                                 </span>
                               </li>
-                            ))}
+                              )
+                            })}
                           </ul>
                         </div>
                       )

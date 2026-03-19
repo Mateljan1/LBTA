@@ -8,6 +8,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import PullQuote from '@/components/ui/PullQuote'
 import WhyChooseImage from '@/components/ui/WhyChooseImage'
+import { MasonryGrid } from '@/components/sections'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
 import { coachImageSrc } from '@/lib/coaches-data'
@@ -198,21 +199,36 @@ export default function Home() {
             <span className="text-eyebrow mb-4 block">{homepageCopy.philosophy.eyebrow}</span>
             <h2 className="font-headline text-headline font-light">{homepageCopy.philosophy.headline}</h2>
           </AnimatedSection>
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 auto-rows-fr">
             {homepageCopy.philosophy.pillars.map((pillar, i) => {
               const images = ['/images/philosophy/movement.webp', '/images/philosophy/discipline.webp', '/images/philosophy/belonging.webp']
+              const isFeatured = i === 0
               return (
-              <AnimatedSection key={pillar.title} delay={i * 150}>
-                <div className="group">
-                  <div className="relative aspect-square overflow-hidden rounded-subtle mb-6">
-                    <Image src={images[i]} alt={`${pillar.title} — ${pillar.description}`} fill className="object-cover image-zoom" style={{ objectPosition: '50% 30%' }} sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
+                <AnimatedSection
+                  key={pillar.title}
+                  delay={i * 150}
+                  className={isFeatured ? 'md:row-span-2' : ''}
+                >
+                  <div className="group h-full flex flex-col">
+                    <div className={`relative overflow-hidden rounded-subtle mb-4 flex-shrink-0 ${isFeatured ? 'aspect-[4/3] md:aspect-auto md:min-h-[280px]' : 'aspect-[4/3]'}`}>
+                      <Image
+                        src={images[i]}
+                        alt={`${pillar.title} — ${pillar.description}`}
+                        fill
+                        className="object-cover image-zoom"
+                        style={{ objectPosition: '50% 30%' }}
+                        sizes={isFeatured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 50vw'}
+                        quality={90}
+                      />
+                    </div>
+                    <div className="flex flex-col flex-1">
+                      <h3 className="font-headline text-headline-sm font-light mb-3 group-hover:text-brand-pacific-dusk/70 transition-colors">{pillar.title}</h3>
+                      <p className="text-body text-brand-pacific-dusk mb-2">{pillar.description}</p>
+                      <p className="text-body-sm text-lbta-slate">{pillar.detail}</p>
+                    </div>
                   </div>
-                  <h3 className="font-headline text-headline-sm font-light mb-3 group-hover:text-brand-pacific-dusk/70 transition-colors">{pillar.title}</h3>
-                  <p className="text-body text-brand-pacific-dusk mb-2">{pillar.description}</p>
-                  <p className="text-body-sm text-lbta-slate">{pillar.detail}</p>
-                </div>
-              </AnimatedSection>
-            );
+                </AnimatedSection>
+              )
             })}
           </div>
         </div>
@@ -228,7 +244,7 @@ export default function Home() {
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10 mb-12">
             {homepageCopy.programs.items.map((program, i) => {
-              const images = ['/images/programs/juniors.webp', '/images/programs/adults.webp', '/images/programs/private-lessons.webp']
+              const images = ['/legacy-working-assets/programs/juniors/juniors.webp', '/legacy-working-assets/programs/adults/adults.webp', '/legacy-working-assets/programs/private-lessons/private-lessons.webp']
               const programPositions: Record<number, string> = { 0: '50% 38%', 1: '50% 38%', 2: '50% 55%' }
               return (
                 <AnimatedSection key={program.title} delay={i * 150}>
@@ -262,31 +278,31 @@ export default function Home() {
               {whyChoose?.subline ?? ''}
             </p>
           </AnimatedSection>
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            <AnimatedSection delay={100}>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
+          <div className="grid md:grid-cols-5 gap-6 lg:gap-8">
+            <AnimatedSection delay={100} className="md:col-span-3">
+              <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-subtle">
                 <WhyChooseImage
-                  src={whyChoose?.image1 ?? '/images/why-choose/why-choose-1.webp'}
+                  src={whyChoose?.image1 ?? '/legacy-working-assets/why-choose/why-choose-1/why-choose-1.webp'}
                   fallbackSrc="/images/hero/laguna-horizon.webp"
                   alt={whyChoose?.image1Alt ?? 'LBTA coach and players on court'}
                   fill
                   className="object-cover image-zoom"
                   style={{ objectPosition: '50% 55%' }}
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, 60vw"
                   quality={90}
                 />
               </div>
             </AnimatedSection>
-            <AnimatedSection delay={200}>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
+            <AnimatedSection delay={200} className="md:col-span-2 flex flex-col gap-6">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-subtle flex-1 min-h-[200px]">
                 <WhyChooseImage
-                  src={whyChoose?.image2 ?? '/images/why-choose/why-choose-2.webp'}
-                  fallbackSrc="/images/community/community-1.webp"
+                  src={whyChoose?.image2 ?? '/legacy-working-assets/why-choose/why-choose-2/why-choose-2.webp'}
+                  fallbackSrc="/legacy-working-assets/community/community-1.webp"
                   alt={whyChoose?.image2Alt ?? 'Laguna Beach tennis facility and community'}
                   fill
                   className="object-cover image-zoom"
                   style={{ objectPosition: '50% 35%' }}
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, 40vw"
                   quality={90}
                 />
               </div>
@@ -312,28 +328,21 @@ export default function Home() {
       <HorizonDivider animate />
       <section id="community" className="bg-white section-lg">
         <div className="container-lbta">
-          <AnimatedSection className="text-center mb-12">
-            <span className="text-eyebrow mb-4 block">{homepageCopy.community.eyebrow}</span>
-            <h2 className="font-headline text-headline font-light mb-4">{homepageCopy.community.headline}</h2>
-            <p className="text-subhead max-w-2xl mx-auto font-light">{homepageCopy.community.subline}</p>
-          </AnimatedSection>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {[1, 2, 3, 4, 5, 6].map((num, i) => (
-              <AnimatedSection key={num} delay={i * 100}>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
-                  <Image
-                    src={`/images/community/community-${num}.webp`}
-                    alt={`LBTA community member ${num}`}
-                    fill
-                    className="object-cover image-zoom"
-                    style={{ objectPosition: '50% 55%' }}
-                    sizes="(max-width: 768px) 50vw, 33vw"
-                    quality={90}
-                  />
-                </div>
+          <MasonryGrid
+            header={
+              <AnimatedSection className="text-center mb-12">
+                <span className="text-eyebrow mb-4 block">{homepageCopy.community.eyebrow}</span>
+                <h2 className="font-headline text-headline font-light mb-4">{homepageCopy.community.headline}</h2>
+                <p className="text-subhead max-w-2xl mx-auto font-light">{homepageCopy.community.subline}</p>
               </AnimatedSection>
-            ))}
-          </div>
+            }
+            items={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num, i) => ({
+              src: `/legacy-working-assets/community/community-${num}.webp`,
+              alt: `LBTA community and players ${num}`,
+              span: i === 0 || i === 5 ? 'large' : (i === 2 || i === 7 ? 'medium' : 'small'),
+            }))}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          />
         </div>
       </section>
 

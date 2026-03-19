@@ -10,16 +10,26 @@ export const FLYER_CONTACT = {
   /** City of Laguna Beach Recreation — online catalog (Tennis programs filter). */
   registerUrl:
     'https://secure.rec1.com/CA/city-of-laguna-beach/catalog/index/aad62bdd38b6f9ef18d0b329cea980a0?filter=c2VhcmNoPSZjYXRlZ29yeSU1QjIwMjgzJTVEPTE=',
+  /**
+   * City website — classes & registration hub (court flyer QR points here).
+   * Rec1 catalog link above remains the direct program catalog.
+   */
+  cityClassesRegistrationUrl:
+    'https://www.lagunabeachcity.net/government/departments/community-services/recreation/classes-registration',
   siteUrl: 'https://lagunabeachtennisacademy.com',
 } as const
+
+/** Print flyer QR asset (City registration); must match `cityClassesRegistrationUrl`. */
+export const FLYER_CITY_REGISTRATION_QR_PATH = '/images/print/city-registration-qr.png' as const
 
 export const FLYER_COURTS = [
   { name: 'Moulton Meadows Park', courts: 'Court 2', address: 'Balboa Ave & Capistrano Ave' },
   { name: 'Alta Laguna Park', courts: 'Courts 1 & 2', address: '3300 Alta Laguna Dr' },
-  { name: 'Laguna Beach High School', courts: 'Courts 5 & 6', address: '670 Park Ave' },
+  { name: 'Laguna Beach High School', courts: 'Weekdays: Courts 1 & 2 · Weekends: Courts 5 & 6', address: '670 Park Ave' },
 ] as const
 
-export const FLYER_USTA_NOTE = 'Sat 1-3PM: Courts 1-3 USTA League'
+/** USTA League court use; listed under LBTA Reserved Courts on the flyer. */
+export const FLYER_USTA_NOTE = 'USTA League matches use Courts 1-3. Sat 1-3PM: Courts 1-3 reserved for USTA League.'
 
 /** Academy address for flyer and print. */
 export const FLYER_ACADEMY_ADDRESS = '1098 Balboa Ave, Laguna Beach, CA 92651'

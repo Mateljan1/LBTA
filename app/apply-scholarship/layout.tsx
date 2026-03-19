@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/hero/laguna-horizon.webp',
+        url: '/legacy-working-assets/hero/success-stories-hero/success-stories-hero.webp',
         width: 1920,
         height: 1080,
-        alt: 'Laguna Beach Tennis Academy',
+        alt: 'LBTA scholarship',
       },
     ],
   },

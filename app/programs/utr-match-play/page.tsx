@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import leagues2026 from '@/data/leagues-2026.json'
 import { LeagueEventSchema } from '@/app/schema'
@@ -8,6 +9,13 @@ export const metadata: Metadata = {
   title: 'UTR Match Play Series | Laguna Beach Tennis Academy',
   description:
     'LBTA UTR Match Play Series — Season 1. 8 Saturdays of rated matchplay in Laguna Beach. 5 divisions from Color Ball juniors to advanced adults. April–June 2026.',
+  openGraph: {
+    title: 'UTR Match Play Series | Laguna Beach Tennis Academy',
+    description:
+      'LBTA UTR Match Play Series — Season 1. 8 Saturdays of rated matchplay in Laguna Beach. 5 divisions from Color Ball juniors to advanced adults.',
+    type: 'website',
+    images: [{ url: '/legacy-working-assets/hero/match-play-hero/match-play-hero.webp', width: 1920, height: 1080, alt: 'UTR match play at LBTA' }],
+  },
 }
 
 const divisions = leagues2026.utr.divisions
@@ -25,8 +33,19 @@ export default function UTRMatchPlayPage() {
       />
       {/* Hero */}
       <section className="relative bg-brand-deep-water text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-deep-water via-brand-pacific-dusk/70 to-brand-sunset-cliff/10" />
-        <div className="relative container-lbta section-lg">
+        <div className="absolute inset-0">
+          <Image
+            src="/legacy-working-assets/hero/match-play-hero/match-play-hero.webp"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        </div>
+        <div className="relative container-lbta section-lg z-10">
           <Link
             href="/programs/leagues"
             className="inline-flex items-center gap-2 text-[12px] font-sans font-medium text-brand-victoria-cove/70 tracking-wider uppercase mb-8 hover:text-brand-victoria-cove transition-colors"

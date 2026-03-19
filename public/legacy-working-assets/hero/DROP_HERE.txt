@@ -1,0 +1,20 @@
+HERO IMAGES — Full-bleed page heroes
+====================================
+Layout: 16:9, full width. Export: 1920×1080 px. Max 350KB (we convert to WebP).
+
+Filename                    Used on
+--------                    -------
+philosophy-hero.webp         Philosophy page hero
+success-stories-hero.webp    Success Stories page hero
+book-hero.webp               Book page hero (conversion — add this)
+adult-trial-hero.webp        Adult trial hero (or in photos/)
+adult-group-hero.webp        Beginner program / adult section
+leagues-hero.webp            Leagues / USTA / UTR page
+camps-hero.webp              Camps page
+junior-trial-hero.webp       Junior trial hero
+match-play-hero.webp         Match Play page
+fitness-hero.webp            Fitness page
+laguna-horizon.webp          Destination, Schedules CTA, fallbacks
+hero-poster.webp             Home hero video poster (first frame)
+
+Project path: public/images/hero/

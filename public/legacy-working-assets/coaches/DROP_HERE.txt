@@ -1,0 +1,16 @@
+COACHES — Portraits + action
+=============================
+Portrait: 600×800 (3:4) or 800×1000 (4:5). Action: 1200×800 (3:2). Max 250KB.
+
+Filename            Used on
+--------            -------
+andrew-headshot     Home founder block, Coaches listing
+andrew-action.webp  Coach bio / About
+robert-lebuhn       Coaches listing + bio page
+robert-action.webp  Coach bio
+peter-defrantz      Coaches listing + bio page
+peter-action.webp   Coach bio
+allison-cronk       Coaches listing + bio page
+allison-action.webp Coach bio
+
+Project path: public/images/coaches/

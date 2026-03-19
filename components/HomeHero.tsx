@@ -44,9 +44,10 @@ export default function HomeHero() {
         aria-label="Laguna Beach Tennis Academy training video"
         poster="/images/hero/hero-poster.webp"
       >
-        {/* WebM first (better compression); MP4 for Safari. See docs/hero-video-optimization.md */}
+        {/* WebM first (better compression); MP4 for Safari. Fallback to legacy if public/videos/ has no MP4. */}
         <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
         <source src="/videos/LBTA-Home-Hero.mp4" type="video/mp4" />
+        <source src="/legacy-working-assets/videos/LBTA-Home-Hero/LBTA-Home-Hero.mp4" type="video/mp4" />
       </video>
       <div
         className="absolute inset-0"

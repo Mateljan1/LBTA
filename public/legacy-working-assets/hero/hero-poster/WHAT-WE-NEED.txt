@@ -1,0 +1,8 @@
+PHOTO WE NEED
+-------------
+Home hero video poster — the first frame or a still that shows before the hero video plays. Same vibe as home hero video (training, play, energetic).
+
+EXPORT SIZE: 1920 × 1080 (16:9)
+SAVE YOUR FILE AS: hero-poster.webp (or .jpg)
+
+WHERE IT GOES: Homepage — poster image for hero video

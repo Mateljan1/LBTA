@@ -1,0 +1,8 @@
+CAMPS — One folder = one photo
+==============================
+
+Open any folder below. Inside is WHAT-WE-NEED.txt — it says exactly what photo to add and what to name it.
+
+When you have the photo: put it in that folder and name it as shown (e.g. red-ball.webp or red-ball.jpg).
+
+We'll copy everything into the project later. You can add photos in any order.

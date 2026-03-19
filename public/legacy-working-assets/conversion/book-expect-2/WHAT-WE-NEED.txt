@@ -1,0 +1,8 @@
+PHOTO WE NEED (optional)
+------------------------
+Book "What to Expect" — step 2: e.g. assessment, warm-up, or on-court moment.
+
+EXPORT SIZE: 400 × 300 or 600 × 400
+SAVE YOUR FILE AS: book-expect-2.webp (or .jpg)
+
+WHERE IT GOES: /book — "What to Expect" section

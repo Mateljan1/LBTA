@@ -1,0 +1,11 @@
+TESTIMONIALS — Quote + photo (optional)
+========================================
+Layout: Small circle or square beside quote. Export: 400×400 or 600×600. Max 120KB.
+
+Filename                  Used on
+--------                  -------
+testimonial-parent-1.webp  Quote + photo block (parent)
+testimonial-adult-1.webp   Quote + photo block (adult player)
+testimonial-junior-1.webp  Quote + photo block (junior/family)
+
+Project path: public/images/ (or keep in results/)

@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-19",
-  "lastLearnRun": "2026-03-19 Header/logo: next/image localPatterns (/logos, /photos); opaque header over hero (WCAG)",
+  "lastLearnRun": "2026-03-19 Visual Elevation Phase 3 & 4: layout primitives, plan-aware review",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -524,6 +524,18 @@
       "when": "Fixed site header with dark body text (e.g. brand-pacific-dusk) sits over full-bleed photo/video hero",
       "example": "Use solid bg-brand-morning-light (no /90 opacity) plus border-b border-brand-pacific-dusk/[0.08]; avoid backdrop-blur + translucent fill that lets dark pixels blend under nav links (WCAG contrast).",
       "tags": ["a11y", "header", "WCAG", "contrast", "HomeHero"]
+    },
+    {
+      "name": "layout-primitives-sections",
+      "when": "Adding new vibe sections (masonry, zigzag, bento, asymmetric)",
+      "example": "Use components/sections: MasonryGrid for community/galleries (varied spans), ZigzagSection for alternating image/text, SplitSection for 50/50. Reference /legacy-working-assets/; ensure path in next.config images.localPatterns.",
+      "tags": ["layout", "components", "legacy-assets", "visual-elevation"]
+    },
+    {
+      "name": "plan-aware-review",
+      "when": "Running compound review after plan-driven implementation",
+      "example": "Pass to each review agent: plan summary (objective, out of scope, acceptance checklist, files to create/modify) plus code/diff. Enables scope compliance and acceptance-driven validation.",
+      "tags": ["compound", "review", "plan", "scope"]
     }
   ]
 }
