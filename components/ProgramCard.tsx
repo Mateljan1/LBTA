@@ -141,7 +141,7 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
             
             {/* Expand Icon */}
             <div className={`w-8 h-8 rounded-full border border-lbta-stone flex items-center justify-center transition-all duration-300 ${
-              isExpanded ? 'bg-lbta-black border-lbta-black' : 'bg-white hover:border-lbta-stone'
+              isExpanded ? 'bg-black border-black' : 'bg-white hover:border-lbta-stone'
             }`}>
               <svg 
                 className={`w-4 h-4 transition-all duration-300 ${isExpanded ? 'text-white rotate-180' : 'text-lbta-slate'}`}
@@ -281,7 +281,7 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
                 e.stopPropagation()
                 onRegister(program)
               }}
-              className="flex-1 min-w-[200px] flex items-center justify-center gap-2 bg-lbta-black hover:bg-brand-pacific-dusk/80 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              className="flex-1 min-w-[200px] flex items-center justify-center gap-2 bg-black hover:bg-gray-800 text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
             >
               <span>Begin Registration</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -310,7 +310,7 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
               e.stopPropagation()
               onRegister(program)
             }}
-            className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-lbta-black active:bg-brand-pacific-dusk/80 active:scale-[0.98] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+            className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-black active:bg-gray-800 active:scale-[0.98] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
             onTouchStart={() => {}}
           >
             <span>Begin Registration</span>

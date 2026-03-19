@@ -93,7 +93,7 @@ export default function TimelineSection() {
               >
                 {/* Year marker */}
                 <div className="relative mb-8">
-                  <div className="w-4 h-4 rounded-full bg-lbta-black mx-auto" />
+                  <div className="w-4 h-4 rounded-full bg-black mx-auto" />
                 </div>
                 
                 {/* Content */}
@@ -131,7 +131,7 @@ export default function TimelineSection() {
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 {/* Dot marker */}
-                <div className="absolute left-0 top-1 w-[14px] h-[14px] rounded-full bg-lbta-black" />
+                <div className="absolute left-0 top-1 w-[14px] h-[14px] rounded-full bg-black" />
                 
                 <span className="font-headline text-[28px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
                   {milestone.year}

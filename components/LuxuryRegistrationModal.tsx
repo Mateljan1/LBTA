@@ -210,8 +210,8 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
           >
             {/* Progress Bar */}
             <div className="flex h-1">
-              <div className={`flex-1 transition-colors duration-300 ${step >= 1 ? 'bg-lbta-black' : 'bg-lbta-stone'}`} />
-              <div className={`flex-1 transition-colors duration-300 ${step >= 2 ? 'bg-lbta-black' : 'bg-lbta-stone'}`} />
+              <div className={`flex-1 transition-colors duration-300 ${step >= 1 ? 'bg-black' : 'bg-lbta-stone'}`} />
+              <div className={`flex-1 transition-colors duration-300 ${step >= 2 ? 'bg-black' : 'bg-lbta-stone'}`} />
             </div>
             
             {/* Close Button — 48×48px touch target per a11y */}
@@ -282,7 +282,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         onClick={() => setSelectedPlan(option.value)}
                         className={`w-full min-h-[48px] p-5 rounded-[2px] text-left transition-all duration-200 ${
                           selectedPlan === option.value
-                            ? 'bg-lbta-black text-white'
+                            ? 'bg-black text-white'
                             : 'bg-brand-sandstone hover:bg-lbta-stone text-brand-pacific-dusk'
                         }`}
                       >
@@ -322,7 +322,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     disabled={!selectedPlan}
                     className={`w-full py-4 rounded-[2px] min-h-[48px] font-sans text-[14px] font-medium tracking-[0.02em] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
                       selectedPlan
-                        ? 'bg-lbta-black text-white hover:bg-brand-pacific-dusk/80'
+                        ? 'bg-black text-white hover:bg-gray-800'
                         : 'bg-lbta-stone text-brand-pacific-dusk/50 cursor-not-allowed'
                     }`}
                   >
@@ -361,7 +361,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           required
                           value={formData.firstName}
                           onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                           placeholder="First"
                         />
                       </div>
@@ -375,7 +375,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           required
                           value={formData.lastName}
                           onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                           placeholder="Last"
                         />
                       </div>
@@ -392,7 +392,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                         placeholder="you@example.com"
                       />
                     </div>
@@ -408,7 +408,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                         placeholder="(949) 555-0123"
                       />
                     </div>
@@ -424,7 +424,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           type="text"
                           value={formData.studentName}
                           onChange={(e) => setFormData({...formData, studentName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                           placeholder="Player's name"
                         />
                       </div>
@@ -437,7 +437,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           type="number"
                           value={formData.studentAge}
                           onChange={(e) => setFormData({...formData, studentAge: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                           placeholder="Age"
                           min="3"
                           max="99"
@@ -459,7 +459,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                             onClick={() => setFormData({...formData, experience: level})}
                             className={`flex-1 py-3 min-h-[48px] rounded-lg font-sans text-[13px] font-medium capitalize transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/30 ${
                               formData.experience === level
-                                ? 'bg-lbta-black text-white'
+                                ? 'bg-black text-white'
                                 : 'bg-brand-sandstone text-lbta-slate hover:bg-lbta-stone'
                             }`}
                           >
@@ -482,7 +482,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="flex-1 py-4 rounded-[2px] min-h-[48px] bg-lbta-black text-white font-sans text-[14px] font-medium tracking-[0.02em] hover:bg-brand-pacific-dusk/80 disabled:bg-lbta-stone transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                      className="flex-1 py-4 rounded-[2px] min-h-[48px] bg-black text-white font-sans text-[14px] font-medium tracking-[0.02em] hover:bg-gray-800 disabled:bg-lbta-stone transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                     >
                       {isSubmitting ? 'Submitting...' : 'Complete Registration'}
                     </button>

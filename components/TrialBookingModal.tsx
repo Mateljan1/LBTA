@@ -277,7 +277,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                           required
                           value={formData.firstName}
                           onChange={(e) => updateField('firstName', e.target.value)}
-                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-black/20"
                           placeholder="First"
                         />
                       </div>
@@ -291,7 +291,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                           required
                           value={formData.lastName}
                           onChange={(e) => updateField('lastName', e.target.value)}
-                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-black/20"
                           placeholder="Last"
                         />
                       </div>
@@ -308,7 +308,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         required
                         value={formData.email}
                         onChange={(e) => updateField('email', e.target.value)}
-                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-black/20"
                         placeholder="you@example.com"
                       />
                     </div>
@@ -324,7 +324,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         required
                         value={formData.phone}
                         onChange={(e) => updateField('phone', e.target.value)}
-                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-black/20"
                         placeholder="(949) 555-0123"
                       />
                     </div>
@@ -339,7 +339,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         required
                         value={formData.program}
                         onChange={(e) => updateField('program', e.target.value)}
-                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-black/20"
                       >
                         <option value="">Select a program...</option>
                         {programs.map(p => (
@@ -361,7 +361,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                           type="number"
                           value={formData.playerAge}
                           onChange={(e) => updateField('playerAge', e.target.value)}
-                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20"
+                          className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-black/20"
                           placeholder="Age"
                           min="3"
                           max="18"
@@ -379,7 +379,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                         value={formData.goals}
                         onChange={(e) => updateField('goals', e.target.value)}
                         rows={3}
-                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-lbta-black/20 resize-none"
+                        className="w-full px-4 py-3 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-black/20 resize-none"
                         placeholder="Tell us what you'd like to achieve..."
                       />
                     </div>
@@ -410,7 +410,7 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
                     className={`w-full py-4 rounded-[2px] min-h-[48px] font-sans text-[14px] font-medium tracking-[0.02em] mt-8 transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
                       isSubmitting
                         ? 'bg-lbta-stone text-brand-pacific-dusk/50 cursor-not-allowed'
-                        : 'bg-lbta-black text-white hover:bg-brand-pacific-dusk/80'
+                        : 'bg-black text-white hover:bg-gray-800'
                     }`}
                   >
                     {isSubmitting ? 'Submitting...' : 'Request Free Trial'}

@@ -17,7 +17,7 @@ Use this document when doing future compound work, plan verification, or 10/10 a
 | Two `priority` images on one page (e.g. coaches) | Use `priority` only on the hero image; remove from secondary images to avoid competing LCP. |
 | Hero `<Image fill priority>` without `sizes` | Always set `sizes` (e.g. `sizes="100vw"`) on fill/priority images for predictable LCP. |
 | Junior-trial hero as JPG | Prefer WebP and update `src` for LCP/bandwidth per .cursorrules. |
-| Hardcoded hex in modals | Use Brand Kit tokens only: `bg-lbta-black`, `bg-brand-sandstone`, `text-lbta-slate`, `border-lbta-stone`, `brand-tide-pool`, etc. |
+| Hardcoded hex in modals | Use Brand Kit + neutral utilities: `bg-black` / `hover:bg-gray-800`, `bg-brand-sandstone`, `text-lbta-slate` (legacy) or `text-brand-pacific-dusk`, `border-lbta-stone`, `brand-tide-pool`, etc. |
 | League pricing duplicated in usta-adult-league and utr-match-play | Single source: `data/leagues-2026.json`; both pages import from it. |
 | Programs adult as redirect to /schedules | Implement full adult pathway page (progression, leagues, schedule/book CTAs); no redirect. |
 

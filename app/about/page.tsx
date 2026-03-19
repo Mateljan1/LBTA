@@ -223,19 +223,19 @@ export default function AboutPage() {
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-1 h-1 rounded-full bg-lbta-black mt-2.5 flex-shrink-0" />
+                  <div className="w-1 h-1 rounded-full bg-black mt-2.5 flex-shrink-0" />
                   <p className="font-sans text-[15px] text-brand-pacific-dusk/80">
                     Professional-grade hard courts with excellent lighting
                   </p>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-1 h-1 rounded-full bg-lbta-black mt-2.5 flex-shrink-0" />
+                  <div className="w-1 h-1 rounded-full bg-black mt-2.5 flex-shrink-0" />
                   <p className="font-sans text-[15px] text-brand-pacific-dusk/80">
                     Year-round ideal weather conditions
                   </p>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-1 h-1 rounded-full bg-lbta-black mt-2.5 flex-shrink-0" />
+                  <div className="w-1 h-1 rounded-full bg-black mt-2.5 flex-shrink-0" />
                   <p className="font-sans text-[15px] text-brand-pacific-dusk/80">
                     Convenient location with ample parking
                   </p>

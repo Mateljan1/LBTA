@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 // ============================================================
 // LUXURY YEAR-ROUND REGISTRATION MODAL
-// For Camps, JTT, and Seasonal Programs
+// For Camps, UTR Circuit, and Seasonal Programs
 // Aman / Four Seasons / Apple-level design standards
 // Refined neutrals, typography-driven, minimal color
 // ============================================================
@@ -29,7 +29,7 @@ interface CampData {
   coaches?: string[]
 }
 
-interface JTTData {
+interface UTRCircuitData {
   id: string
   name: string
   dates: string
@@ -39,11 +39,14 @@ interface JTTData {
   includes: string[]
 }
 
+/** @deprecated Use UTRCircuitData instead */
+type JTTData = UTRCircuitData
+
 interface LuxuryYearModalProps {
   isOpen: boolean
   onClose: () => void
-  type: 'camp' | 'jtt' | 'seasonal' | 'inquiry'
-  data: CampData | JTTData | null
+  type: 'camp' | 'utr-circuit' | 'jtt' | 'seasonal' | 'inquiry'
+  data: CampData | UTRCircuitData | null
   season?: string
 }
 
@@ -173,12 +176,12 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
         description: campData.description
       }
     } else {
-      const jttData = data as JTTData
+      const utrData = data as UTRCircuitData
       return {
-        name: jttData.name,
-        dates: jttData.dates,
-        details: `${jttData.weeks} weeks · ${jttData.matchDay}`,
-        description: `Junior Team Tennis competitive league`
+        name: utrData.name,
+        dates: utrData.dates,
+        details: `${utrData.weeks} weeks · ${utrData.matchDay}`,
+        description: `UTR Circuit — rated matchplay series`
       }
     }
   }
@@ -199,8 +202,8 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
       }
       return options
     } else {
-      const jttData = data as JTTData
-      return jttData.divisions.map(div => ({
+      const utrData = data as UTRCircuitData
+      return utrData.divisions.map(div => ({
         label: div.age,
         value: div.age,
         price: div.price
@@ -245,11 +248,10 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
         payload.location = campData.location
       }
 
-      if (type === 'jtt') {
-        const jttData = data as JTTData
-        payload.jttSeason = jttData.name
+      if (type === 'utr-circuit' || type === 'jtt') {
+        const utrData = data as UTRCircuitData
+        payload.registrationType = 'utr-circuit'
         payload.division = selectedOption  // The division they selected
-        payload.jttId = jttData.id
       }
 
       if (process.env.NODE_ENV === 'development') {
@@ -315,8 +317,8 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
           >
             {/* Progress Bar */}
             <div className="flex h-1">
-              <div className={`flex-1 transition-colors duration-300 ${step >= 1 ? 'bg-lbta-black' : 'bg-lbta-stone'}`} />
-              <div className={`flex-1 transition-colors duration-300 ${step >= 2 ? 'bg-lbta-black' : 'bg-lbta-stone'}`} />
+              <div className={`flex-1 transition-colors duration-300 ${step >= 1 ? 'bg-black' : 'bg-lbta-stone'}`} />
+              <div className={`flex-1 transition-colors duration-300 ${step >= 2 ? 'bg-black' : 'bg-lbta-stone'}`} />
             </div>
             
             {/* Close Button */}
@@ -370,7 +372,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                 // Step 1: Option Selection
                 <div className="p-8 md:p-10">
                   <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
-                    {type === 'camp' ? 'Camp Registration' : 'JTT Registration'}
+                    {type === 'camp' ? 'Camp Registration' : 'UTR Circuit Registration'}
                   </p>
                   <h2 id="modal-title" className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
                     {programInfo.name}
@@ -393,7 +395,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                         }}
                         className={`w-full p-5 rounded-[2px] text-left transition-all duration-200 ${
                           selectedOption === option.value
-                            ? 'bg-lbta-black text-white'
+                            ? 'bg-black text-white'
                             : 'bg-brand-sandstone hover:bg-lbta-stone text-brand-pacific-dusk'
                         }`}
                       >
@@ -429,7 +431,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                     disabled={!selectedOption}
                     className={`w-full py-4 rounded-[2px] min-h-[48px] font-sans text-[14px] font-medium tracking-[0.02em] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
                       selectedOption
-                        ? 'bg-lbta-black text-white hover:bg-brand-pacific-dusk/80'
+                        ? 'bg-black text-white hover:bg-gray-800'
                         : 'bg-lbta-stone text-brand-pacific-dusk/50 cursor-not-allowed'
                     }`}
                   >
@@ -468,7 +470,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           required
                           value={formData.firstName}
                           onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                           placeholder="First"
                         />
                       </div>
@@ -482,7 +484,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           required
                           value={formData.lastName}
                           onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                           placeholder="Last"
                         />
                       </div>
@@ -499,7 +501,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                         placeholder="you@example.com"
                       />
                     </div>
@@ -515,7 +517,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                         placeholder="(949) 555-0123"
                       />
                     </div>
@@ -531,7 +533,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           type="text"
                           value={formData.playerName}
                           onChange={(e) => setFormData({...formData, playerName: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                           placeholder="Player's name"
                         />
                       </div>
@@ -544,7 +546,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                           type="number"
                           value={formData.playerAge}
                           onChange={(e) => setFormData({...formData, playerAge: e.target.value})}
-                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-lbta-black/10 transition-all"
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
                           placeholder="Age"
                           min="3"
                           max="99"
@@ -566,7 +568,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                             onClick={() => setFormData({...formData, experience: level})}
                             className={`flex-1 py-3 min-h-[48px] rounded-lg font-sans text-[13px] font-medium capitalize transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/30 ${
                               formData.experience === level
-                                ? 'bg-lbta-black text-white'
+                                ? 'bg-black text-white'
                                 : 'bg-brand-sandstone text-lbta-slate hover:bg-lbta-stone'
                             }`}
                           >
@@ -607,7 +609,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="flex-1 py-4 rounded-[2px] min-h-[48px] bg-lbta-black text-white font-sans text-[14px] font-medium tracking-[0.02em] hover:bg-brand-pacific-dusk/80 disabled:bg-lbta-stone transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                      className="flex-1 py-4 rounded-[2px] min-h-[48px] bg-black text-white font-sans text-[14px] font-medium tracking-[0.02em] hover:bg-gray-800 disabled:bg-lbta-stone transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                     >
                       {isSubmitting ? 'Submitting...' : 'Complete Registration'}
                     </button>

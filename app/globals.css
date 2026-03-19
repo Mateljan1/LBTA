@@ -316,7 +316,7 @@
   /* Primary — black (luxury CTA per .cursorrules) */
   .btn-primary {
     @apply btn;
-    background: var(--lbta-black, #0a0a0a);
+    background: var(--color-black, #0a0a0a);
     color: var(--salt-air);
   }
 
