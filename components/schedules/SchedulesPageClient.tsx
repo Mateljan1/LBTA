@@ -48,13 +48,13 @@ export default function SchedulesPageClient({
     <>
       <section className="bg-brand-deep-water py-16 md:py-20">
         <div className="max-w-[1200px] mx-auto px-4 md:px-6 text-center">
-          <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/50 uppercase tracking-[0.2em] mb-4">
+          <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/60 uppercase tracking-[0.2em] mb-4">
             {seasonCta.headline}
           </p>
           <h1 className="font-headline text-[40px] md:text-[64px] font-medium text-white leading-[1.05] mb-3">
             Schedule & Pricing
           </h1>
-          <p className="font-sans text-[14px] md:text-[15px] text-white/60 tracking-[0.12em] mb-6">
+          <p className="font-sans text-[14px] md:text-[15px] text-white/70 tracking-[0.12em] mb-6">
             Movement · Craft · Community
           </p>
           <p className="font-sans text-[16px] md:text-[18px] text-white/70 max-w-[600px] mx-auto">
@@ -79,6 +79,22 @@ export default function SchedulesPageClient({
           >
             Calendar view · Print or save as PDF
           </Link>
+          <p className="mt-4 font-sans text-[13px] md:text-[14px] text-brand-pacific-dusk/80 leading-relaxed max-w-2xl">
+            New to LBTA?{' '}
+            <Link
+              href="/programs"
+              className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/30 hover:decoration-brand-victoria-cove focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-sm"
+            >
+              Browse programs
+            </Link>
+            {' · '}
+            <Link
+              href="/book"
+              className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/30 hover:decoration-brand-victoria-cove focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-sm"
+            >
+              Book a trial
+            </Link>
+          </p>
         </div>
       </div>
 

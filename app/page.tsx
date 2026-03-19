@@ -20,7 +20,7 @@ const localBusinessSchema = {
   name: 'Laguna Beach Tennis Academy',
   alternateName: 'LBTA',
   description:
-    'Premier tennis academy in Laguna Beach offering junior programs, adult lessons, high-performance training, and fitness classes. Movement-first coaching philosophy.',
+    'Tennis academy in Laguna Beach offering junior programs, adult lessons, high-performance training, and fitness classes. Movement-first coaching philosophy.',
   url: 'https://lagunabeachtennisacademy.com',
   telephone: '+1-949-534-0457',
   email: 'support@lagunabeachtennisacademy.com',
@@ -50,12 +50,15 @@ const localBusinessSchema = {
 }
 
 export const metadata = {
-  title: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
+  title: {
+    absolute: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
+  },
   description:
-    'Movement. Craft. Community. Premier tennis academy in Laguna Beach — junior programs, adult training, high-performance. Free trial.',
+    'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway. Book a trial.',
   openGraph: {
     title: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
-    description: 'Movement. Craft. Community. Premier tennis in Laguna Beach. Free trial.',
+    description:
+      'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway. Book a trial.',
     type: 'website',
     images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy courts' }],
   },

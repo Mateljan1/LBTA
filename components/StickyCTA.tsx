@@ -19,12 +19,12 @@ const getContextualMessage = (pathname: string): { text: string; highlight?: str
     return { text: getStickyCtaSchedules(), highlight: 'View Programs' }
   }
   if (pathname.includes('/camps')) {
-    return { text: 'Summer Camps Now Enrolling', highlight: 'Reserve Now' }
+    return { text: 'Summer camps · Dates and details', highlight: 'View camps' }
   }
   if (pathname.includes('/fitness')) {
-    return { text: 'Fit4Tennis · First Session Free', highlight: 'Get Started' }
+    return { text: 'Fit4Tennis · First session complimentary', highlight: 'Get started' }
   }
-  return { text: 'Registration Open · View Programs' }
+  return { text: 'Programs and schedules · View options' }
 }
 
 export default function StickyCTA({ 
@@ -50,7 +50,7 @@ export default function StickyCTA({
   
   if (!isVisible) return null
   
-  const buttonClasses = "flex-1 bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[15px] py-3.5 rounded-[2px] transition-all duration-200 shadow-md text-center min-h-[48px] active:scale-[0.98] flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+  const buttonClasses = "flex-1 bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[15px] py-3.5 rounded-[2px] transition-all duration-200 shadow-md text-center min-h-[48px] active:scale-[0.98] flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
   
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 px-4 py-3 pb-[calc(12px+env(safe-area-inset-bottom))] shadow-lg animate-slide-up">

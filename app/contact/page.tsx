@@ -328,7 +328,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="w-full md:w-auto md:px-12 bg-black hover:bg-lbta-black hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-[2px] transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-50 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                    className="w-full md:w-auto md:px-12 bg-black hover:bg-gray-800 hover:-translate-y-0.5 text-white font-sans font-semibold text-[16px] py-4 rounded-[2px] transition-all duration-200 shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-50 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                   >
                     {status === 'sending' ? (
                       <>

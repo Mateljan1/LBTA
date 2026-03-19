@@ -42,8 +42,13 @@ export const CLASS_TAGS = {
   orange_ball: 146,
   green_dot: 147,
 
+  // Junior Programs (competitive track)
+  green_dot_competitive: 239, // program:green-dot-competitive (created 2026-03-19)
+
   // Youth Programs
-  youth_development: 148,
+  youth_development: 148,     // legacy — use youth_dev_tier1/tier2 for new registrations
+  youth_dev_tier1: 240,       // program:youth-dev-tier1 (UTR 1.5-3.0, created 2026-03-19)
+  youth_dev_tier2: 241,       // program:youth-dev-tier2 (UTR 3.0-5.0, created 2026-03-19)
   high_performance: 149,
 
   // Adult Programs
@@ -74,7 +79,9 @@ export const CAMPAIGN_TAGS = {
   website_registration: 180,  // source:website-form
   trial_request: 208,         // interest:trial-class
   not_sure: 216,              // interest:general
-  jtt_program: 197,           // program:jtt (generic — use JTT_TAGS for divisions)
+  utr_circuit: 242,           // program:utr-circuit (created 2026-03-19, replaces jtt_program)
+  /** @deprecated Use utr_circuit (242) instead. Tag 197 still exists in AC as program:jtt */
+  jtt_program: 197,           // program:jtt — DEPRECATED, kept for backward compat
   spring26_returning: 167,    // campaign:spring26-returning
   spring26_prospect: 168,     // campaign:spring26-prospect
   scholarship: 237,            // flag:scholarship (created 2026-03-18)
@@ -140,7 +147,8 @@ export const STATUS_TAGS = {
 } as const
 
 /**
- * Season Tags — verified against AC API 2026-03-18
+ * Season Tags — verified against AC API 2026-03-18.
+ * register-year maps `summer`/`fall` to summer_2025 / fall_2025 until dedicated 2026 season list tags exist in AC.
  */
 export const SEASON_TAGS = {
   spring_2026: 227,      // season:spring-2026
@@ -152,7 +160,20 @@ export const SEASON_TAGS = {
 } as const
 
 /**
- * JTT Division Tags — verified against AC API 2026-03-18
+ * UTR Circuit Division Tags — created 2026-03-19
+ * Five skill-based divisions (replaces JTT)
+ */
+export const UTR_DIVISION_TAGS = {
+  color_ball: 243,       // utr-division:color-ball (Red/Orange/Green juniors)
+  utr_2_4: 244,          // utr-division:2.0-4.0 (Intermediate)
+  utr_3_5: 245,          // utr-division:3.0-5.0 (Intermediate+)
+  utr_5_7: 246,          // utr-division:5.0-7.0 (Advanced)
+  doubles_rr: 247,       // utr-division:doubles-rr (Doubles Round Robin)
+} as const
+
+/**
+ * @deprecated JTT is discontinued. Use UTR_DIVISION_TAGS instead.
+ * Kept for backward compatibility with existing tagged contacts.
  */
 export const JTT_TAGS = {
   '10u_orange': 160,     // jtt:10u-orange
@@ -178,9 +199,15 @@ export function getClassTagFromProgram(programName: string): number | null {
   }
   if (program.includes('red ball')) return CLASS_TAGS.red_ball
   if (program.includes('orange ball')) return CLASS_TAGS.orange_ball
+  // Green Dot — check competitive first (more specific)
+  if (program.includes('green dot') && program.includes('competitive')) {
+    return CLASS_TAGS.green_dot_competitive
+  }
   if (program.includes('green dot')) return CLASS_TAGS.green_dot
 
-  // Youth Programs
+  // Youth Programs — check tier-specific first
+  if (program.includes('youth') && program.includes('tier 2')) return CLASS_TAGS.youth_dev_tier2
+  if (program.includes('youth') && program.includes('tier 1')) return CLASS_TAGS.youth_dev_tier1
   if (program.includes('youth development') || program.includes('youth program')) {
     return CLASS_TAGS.youth_development
   }
@@ -234,6 +261,30 @@ export function getClassTagFromLevel(level: string): number | null {
   }
 
   return levelMap[normalizedLevel] || null
+}
+
+/**
+ * Map UTR Circuit division slug to tag ID
+ */
+export function getUtrDivisionTag(division: string): number | null {
+  const d = division.toLowerCase().replace(/\s+/g, '-')
+  const divisionMap: Record<string, number> = {
+    'color-ball': UTR_DIVISION_TAGS.color_ball,
+    'color_ball': UTR_DIVISION_TAGS.color_ball,
+    'utr-2-4': UTR_DIVISION_TAGS.utr_2_4,
+    'utr-2.0-4.0': UTR_DIVISION_TAGS.utr_2_4,
+    'utr_2_4': UTR_DIVISION_TAGS.utr_2_4,
+    'utr-3-5': UTR_DIVISION_TAGS.utr_3_5,
+    'utr-3.0-5.0': UTR_DIVISION_TAGS.utr_3_5,
+    'utr_3_5': UTR_DIVISION_TAGS.utr_3_5,
+    'utr-5-7': UTR_DIVISION_TAGS.utr_5_7,
+    'utr-5.0-7.0': UTR_DIVISION_TAGS.utr_5_7,
+    'utr_5_7': UTR_DIVISION_TAGS.utr_5_7,
+    'doubles-rr': UTR_DIVISION_TAGS.doubles_rr,
+    'doubles-round-robin': UTR_DIVISION_TAGS.doubles_rr,
+    'doubles_rr': UTR_DIVISION_TAGS.doubles_rr,
+  }
+  return divisionMap[d] ?? null
 }
 
 // ============================================================

@@ -8,10 +8,13 @@ import {
   addToList,
   addTags,
   getClassTagFromProgram,
+  getUtrDivisionTag,
   LBTA_LIST_ID,
   getWebsiteSignupsListId,
   CAMPAIGN_TAGS,
   CLASS_TAGS,
+  INTEREST_TAGS,
+  SEASON_TAGS as AC_SEASON_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
@@ -35,12 +38,12 @@ function getNotionClient(): Client {
 // ============================================================
 
 // Registration types
-type RegistrationType = 'seasonal' | 'camp' | 'jtt' | 'swim-tennis' | 'private' | 'inquiry'
+type RegistrationType = 'seasonal' | 'camp' | 'utr-circuit' | 'jtt' | 'swim-tennis' | 'private' | 'inquiry'
 
 // Helper function to determine program category
 function determineCategory(programName: string, registrationType: RegistrationType): string {
   if (registrationType === 'camp' || registrationType === 'swim-tennis') return 'Camp'
-  if (registrationType === 'jtt') return 'JTT'
+  if (registrationType === 'utr-circuit' || registrationType === 'jtt') return 'UTR Circuit'
   if (registrationType === 'private') return 'Private'
   
   const program = programName.toLowerCase()
@@ -90,11 +93,12 @@ function isEarlyBird(season?: string): boolean {
 // ============================================================
 // ActiveCampaign Tag Mapping
 // ============================================================
-// Season Tags (verified IDs from AC — SEASON_TAGS module has full list)
-const SEASON_TAGS: Record<string, number> = {
-  'winter': CAMPAIGN_TAGS.winter_2026,  // 228
-  'spring': CAMPAIGN_TAGS.spring_2026,  // 227
-  // TODO: Add summer/fall season tags when created in AC
+// Season list tags — winter/spring use 2026 campaign tags; summer/fall use AC season tags until dedicated 2026 list tags exist (see lib/activecampaign SEASON_TAGS).
+const REGISTRATION_SEASON_TAGS: Record<string, number> = {
+  winter: CAMPAIGN_TAGS.winter_2026,
+  spring: CAMPAIGN_TAGS.spring_2026,
+  summer: AC_SEASON_TAGS.summer_2025,
+  fall: AC_SEASON_TAGS.fall_2025,
 }
 
 // Get all applicable tags for a registration
@@ -105,13 +109,19 @@ function getApplicableTags(
   const tags: number[] = [CAMPAIGN_TAGS.website_registration] // 180
 
   // Add season tag if applicable
-  if (data.season && SEASON_TAGS[data.season.toLowerCase()]) {
-    tags.push(SEASON_TAGS[data.season.toLowerCase()])
+  if (data.season && REGISTRATION_SEASON_TAGS[data.season.toLowerCase()]) {
+    tags.push(REGISTRATION_SEASON_TAGS[data.season.toLowerCase()])
   }
 
-  // Add JTT tag
-  if (registrationType === 'jtt') {
-    tags.push(CAMPAIGN_TAGS.jtt_program) // 197
+  // Add UTR Circuit tag (also handle legacy 'jtt' type)
+  if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
+    tags.push(CAMPAIGN_TAGS.utr_circuit)     // 242
+    tags.push(INTEREST_TAGS.utr_circuit)     // 215
+    // Add UTR division tag if specified
+    if (data.program) {
+      const divisionTag = getUtrDivisionTag(data.program)
+      if (divisionTag) tags.push(divisionTag)
+    }
   }
 
   // Add class tag using the consolidated mapping
@@ -238,9 +248,8 @@ export async function POST(request: NextRequest) {
         notionProperties['Age'] = { number: parseInt(String(data.playerAge ?? data.studentAge ?? ''), 10) || null }
       }
 
-      if (registrationType === 'jtt') {
-        notionProperties['JTT Season'] = { rich_text: [{ text: { content: data.jttSeason || '' } }] }
-        notionProperties['Division'] = { rich_text: [{ text: { content: data.division || '' } }] }
+      if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
+        notionProperties['Division'] = { rich_text: [{ text: { content: data.division || data.program || '' } }] }
         notionProperties['Tuition'] = { number: parseInt(String(data.price ?? ''), 10) || 0 }
         notionProperties['Age'] = { number: parseInt(String(data.playerAge ?? data.studentAge ?? ''), 10) || null }
       }
@@ -279,9 +288,9 @@ export async function POST(request: NextRequest) {
           { field: '12', value: registrationType },                     // registration_type
         ]
 
-        // Add JTT-specific fields
-        if (registrationType === 'jtt') {
-          fieldValues.push({ field: '15', value: data.division || '' }) // JTT_DIVISION
+        // Add UTR Circuit / legacy JTT division field
+        if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
+          fieldValues.push({ field: '15', value: data.division || data.program || '' })
         }
 
         const contactResult = await upsertContact({
@@ -342,8 +351,8 @@ export async function POST(request: NextRequest) {
     
     if (registrationType === 'camp' || registrationType === 'swim-tennis') {
       confirmationMessage = `Camp registration received! You'll receive a confirmation email with camp details and payment information shortly.`
-    } else if (registrationType === 'jtt') {
-      confirmationMessage = `JTT registration received! Our team will contact you with team placement information and next steps.`
+    } else if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
+      confirmationMessage = `UTR Circuit registration received! Our team will contact you with division placement and next steps.`
     } else if (registrationType === 'inquiry') {
       confirmationMessage = `Thank you for your inquiry! Our team will reach out within 24 hours to discuss your options.`
     }

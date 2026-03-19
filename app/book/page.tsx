@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, Suspense } from 'react'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { CheckCircle, Phone, Mail, Shield } from 'lucide-react'
 import TrialBookingModal from '@/components/TrialBookingModal'
@@ -39,6 +40,31 @@ function BookPageContent() {
             {isPrivate
               ? 'Choose your coach and session type. We\'ll reach out within 24 hours to get you on court.'
               : 'One conversation. Honest guidance. A path built around you.'}
+          </p>
+          <p className="mt-6 font-sans text-[14px] md:text-[15px] text-white/75 max-w-lg mx-auto leading-relaxed">
+            {isPrivate ? (
+              <>
+                The private-lesson form is open below.{' '}
+                <Link
+                  href="/book"
+                  className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                >
+                  Switch to a complimentary trial
+                </Link>
+                .
+              </>
+            ) : (
+              <>
+                Your trial request form opens below.{' '}
+                <Link
+                  href="/book?type=private"
+                  className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                >
+                  Book a private lesson instead
+                </Link>
+                .
+              </>
+            )}
           </p>
         </div>
       </DarkSection>

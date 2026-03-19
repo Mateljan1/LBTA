@@ -57,7 +57,7 @@ export default function FitnessPage() {
               </p>
               <Link 
                 href="/schedules#fitness"
-                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                className="inline-block bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
               >
                 View Schedule →
               </Link>
@@ -83,7 +83,7 @@ export default function FitnessPage() {
               </p>
               <Link 
                 href="/schedules#fitness"
-                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                className="inline-block bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
               >
                 View Schedule →
               </Link>
@@ -131,7 +131,7 @@ export default function FitnessPage() {
                       </span>
                       <Link
                         href="/book"
-                        className="bg-black hover:bg-lbta-black text-white px-5 py-2 rounded-[2px] font-sans font-semibold text-[13px] md:text-[14px] transition-all duration-200 whitespace-nowrap min-h-[48px] flex items-center focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                        className="bg-black hover:bg-gray-800 text-white px-5 py-2 rounded-[2px] font-sans font-semibold text-[13px] md:text-[14px] transition-all duration-200 whitespace-nowrap min-h-[48px] flex items-center focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                       >
                         Book →
                       </Link>

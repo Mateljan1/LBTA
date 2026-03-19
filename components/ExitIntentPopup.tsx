@@ -1,10 +1,32 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { usePathname } from 'next/navigation'
 import { X, Check } from 'lucide-react'
 import siteStats from '@/data/site-stats.json'
 
+/** Exit-intent only on program/booking funnel pages — not philosophy, legal, thank-you, or internal tools. */
+function isExitIntentPath(pathname: string | null): boolean {
+  if (!pathname) return false
+  if (pathname === '/') return true
+  return (
+    pathname.startsWith('/programs') ||
+    pathname.startsWith('/schedules') ||
+    pathname.startsWith('/camps') ||
+    pathname.startsWith('/book') ||
+    pathname.startsWith('/fitness') ||
+    pathname.startsWith('/coaches') ||
+    pathname.startsWith('/junior-trial') ||
+    pathname.startsWith('/adult-trial') ||
+    pathname.startsWith('/beginner-program') ||
+    pathname.startsWith('/match-play') ||
+    pathname.startsWith('/high-performance-pathway') ||
+    pathname.startsWith('/racquet-rescue')
+  )
+}
+
 export default function ExitIntentPopup() {
+  const pathname = usePathname()
   const [isVisible, setIsVisible] = useState(false)
   const [hasShown, setHasShown] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -17,6 +39,8 @@ export default function ExitIntentPopup() {
   const SCROLL_THRESHOLD_PX = 200 // Never show on initial load: only after user has scrolled past this
 
   useEffect(() => {
+    if (!isExitIntentPath(pathname)) return
+
     // Check if already shown in this session
     const shown = sessionStorage.getItem('exitPopupShown')
     if (shown) {
@@ -64,7 +88,7 @@ export default function ExitIntentPopup() {
       document.removeEventListener('mouseleave', handleMouseLeave)
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [hasShown])
+  }, [hasShown, pathname])
 
   // Clear success timeout on unmount to avoid setState after unmount
   useEffect(() => {
@@ -152,7 +176,7 @@ export default function ExitIntentPopup() {
     }
   }, [isVisible, close])
 
-  if (!isVisible) return null
+  if (!isExitIntentPath(pathname) || !isVisible) return null
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">

@@ -35,7 +35,7 @@ export default function SchedulesCTA({ ctaHeadline, ctaSubline }: SchedulesCTAPr
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <Link
             href="/book"
-            className="bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all shadow-md hover:shadow-lg min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+            className="bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[16px] py-4 px-10 rounded-[2px] transition-all shadow-md hover:shadow-lg min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
           >
             Book Trial
           </Link>

@@ -119,7 +119,7 @@ export default function CampsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="#camps"
-                className="inline-block bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
+                className="inline-block bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
               >
                 View Camps
               </Link>
@@ -269,7 +269,7 @@ export default function CampsPage() {
                         
                         <button
                           onClick={() => handleRegisterClick(camp)}
-                          className="block w-full text-center bg-black hover:bg-lbta-black text-white font-sans font-semibold text-[13px] py-3 rounded-[2px] transition-all duration-300 uppercase tracking-[1px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                          className="block w-full text-center bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[13px] py-3 rounded-[2px] transition-all duration-300 uppercase tracking-[1px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                         >
                           Register Now
                         </button>

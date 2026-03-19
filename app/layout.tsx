@@ -27,11 +27,17 @@ const dmSans = DM_Sans({
   adjustFontFallback: true,
 })
 
+/** Default SEO + OG aligned with homepage voice (Movement · Craft · Community). Child routes use title template unless they set `title.absolute`. */
 export const metadata: Metadata = {
   metadataBase: new URL('https://lagunabeachtennisacademy.com'),
-  title: 'Championship Tennis Training in Laguna Beach | Laguna Beach Tennis Academy',
-  description: 'ATP/WTA coaching for ages 3-18 and adults. 20+ D1 college placements. Official City of Laguna Beach tennis partner since 2020. Free trial available.',
-  keywords: 'tennis lessons Laguna Beach, ATP coaching, junior tennis academy, college tennis recruitment, D1 placement, private tennis lessons, USTA tennis',
+  title: {
+    default: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
+    template: '%s | Laguna Beach Tennis Academy',
+  },
+  description:
+    'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, and high-performance pathway. Official City of Laguna Beach partner. Book a trial.',
+  keywords:
+    'tennis lessons Laguna Beach, junior tennis programs, adult tennis, Laguna Beach Tennis Academy, private lessons, USTA, tennis camps',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -39,10 +45,18 @@ export const metadata: Metadata = {
     title: 'LBTA',
   },
   openGraph: {
-    title: 'Laguna Beach Tennis Academy | Excellence Built Here',
-    description: 'ATP/WTA coaching for ages 3 to professional. Small by design.',
+    title: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
+    description:
+      'Movement. Craft. Community. Tennis in Laguna Beach — programs for juniors and adults. Book a trial.',
     type: 'website',
     images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy courts' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
+    description:
+      'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway.',
+    images: ['/images/hero/laguna-horizon.webp'],
   },
   icons: {
     icon: '/icons/icon-192x192.png',
@@ -90,7 +104,7 @@ export default function RootLayout({
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-sunset-cliff focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
         >
           Skip to main content
         </a>
