@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-18",
-  "lastLearnRun": "2026-03-18 Coaches headshots + page value (cache-bust, named assets, section-horizon, copy)",
+  "updated": "2026-03-19",
+  "lastLearnRun": "2026-03-19 Header/logo: next/image localPatterns (/logos, /photos); opaque header over hero (WCAG)",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -512,6 +512,18 @@
       "when": "Brand Guide: key section headings (hero, section eyebrows) need horizon accent",
       "example": "Add <div className=\"section-horizon ... opacity-90\" aria-hidden=\"true\" /> under headline or eyebrow (e.g. CoachesHero, FounderSection, CoachingTeamSection); do not add extra border classes.",
       "tags": ["brand-guide", "section-horizon", "accessibility"]
+    },
+    {
+      "name": "next-image-local-patterns-complete",
+      "when": "Next.js 15+ with images.localPatterns (explicit allowlist for local src)",
+      "example": "In next.config.js include every prefix used by <Image src=\"/...\">: { pathname: '/images/**' }, { pathname: '/logos/**' }, { pathname: '/photos/**' }. After adding paths, smoke: curl -sI \"https://site/_next/image?url=%2Flogos%2F...&w=256&q=75\" → 200 not 400.",
+      "tags": ["nextjs", "next/image", "vercel", "config"]
+    },
+    {
+      "name": "fixed-header-opaque-on-light-text",
+      "when": "Fixed site header with dark body text (e.g. brand-pacific-dusk) sits over full-bleed photo/video hero",
+      "example": "Use solid bg-brand-morning-light (no /90 opacity) plus border-b border-brand-pacific-dusk/[0.08]; avoid backdrop-blur + translucent fill that lets dark pixels blend under nav links (WCAG contrast).",
+      "tags": ["a11y", "header", "WCAG", "contrast", "HomeHero"]
     }
   ]
 }

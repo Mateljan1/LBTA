@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-18",
-  "lastLearnRun": "2026-03-18 Coaches headshots + page value (cache-bust, named assets, section-horizon, section-quote)",
+  "updated": "2026-03-19",
+  "lastLearnRun": "2026-03-19 Header/logo localPatterns + opaque header (WCAG)",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -429,6 +429,20 @@
       "avoid": "blockquote with section-quote and border-l-2 border-brand-victoria-cove/40; Brand Guide defines section-quote with gradient left edge",
       "instead": "Use section-quote only; do not add border-l or border-brand-* on the same element",
       "tags": ["brand-guide", "section-quote", "coaches", "bio"]
+    },
+    {
+      "id": "next-image-localpatterns-incomplete",
+      "description": "next.config images.localPatterns omits a prefix used by next/image (Next 15+)",
+      "avoid": "Only { pathname: '/images/**' } while Header/Footer/trials use /logos/*.png or /photos/*.webp → production _next/image returns 400 INVALID_IMAGE_OPTIMIZE_REQUEST; browser shows broken image + alt text",
+      "instead": "Grep for Image src=\"/…\"; add each top-level folder to localPatterns (/logos/**, /photos/**, etc.)",
+      "tags": ["nextjs", "next/image", "vercel", "regression"]
+    },
+    {
+      "id": "translucent-header-over-dark-hero",
+      "description": "Fixed header uses semi-transparent light background over dark full-viewport hero",
+      "avoid": "bg-brand-morning-light/90 + backdrop-blur over HomeHero video; composited bar reads dark while nav stays text-brand-pacific-dusk",
+      "instead": "Opaque bg-brand-morning-light; optional subtle border-b; or dedicated inverse header theme with light text",
+      "tags": ["a11y", "header", "contrast", "WCAG", "homepage"]
     }
   ]
 }

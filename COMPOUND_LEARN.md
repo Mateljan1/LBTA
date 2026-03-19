@@ -152,6 +152,26 @@ Use this document when doing future compound work, plan verification, or 10/10 a
 
 ---
 
+## Header + `next/image` localPatterns (2026-03-19)
+
+- **Symptom:** Logo broken in header (`next/image`); nav links hard to read on homepage over video hero.
+- **Root causes:** (1) Next.js 16 `images.localPatterns` allowlist omitted `/logos/**` (and trial pages need `/photos/**`) → optimizer returned **400 INVALID_IMAGE_OPTIMIZE_REQUEST** while raw `/logos/...` could still 200. (2) Semi-transparent `bg-brand-morning-light/90` over dark hero composited to a dark bar while links stayed `text-brand-pacific-dusk` → contrast failure.
+- **Fixes:** Add `{ pathname: '/logos/**' }` and `{ pathname: '/photos/**' }` in `next.config.js`; use **opaque** `bg-brand-morning-light` + subtle `border-b` on fixed header.
+- **Smoke after deploy:** `GET /`, `GET /_next/image?url=%2Flogos%2FLBTAblktext.png&w=256&q=75`, and photo URL with valid `w` (e.g. 384) → all **200**.
+- **Doc:** `docs/solutions/ui-bugs/header-nav-low-contrast-over-hero.md`; compound artifacts in `plans/compound-*-header-logo-a11y-2026-03.md`.
+- **Full learnings:** `.cursor/compound/learnings/2026-03-19-header-logo-localpatterns-compound-learn.md`.
+
+**Add to CORRECTIONS table (summary):**
+
+| `images.localPatterns` only `/images/**` | Add `/logos/**`, `/photos/**` (and any new `public/` prefix used by `next/image`) |
+| Translucent fixed header over dark full-bleed media | Opaque light bar **or** switch to light-on-dark nav tokens for that layout mode |
+
+**Add to PATTERNS table (summary):**
+
+| **next/image localPatterns audit** | Before shipping new static image paths | Grep `Image` + `src="/`; ensure each prefix is in `next.config.js` `images.localPatterns` |
+
+---
+
 ## SUCCESS CRITERIA (plan checklist)
 
 - [ ] Zero hex in active app/ and components/ (excl. PERS_)
