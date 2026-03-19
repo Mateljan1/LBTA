@@ -1,10 +1,11 @@
-import { getLeadCoach, getProgramCoaches } from '@/lib/coaches-data'
+import { getLeadCoach, getProgramCoaches, type Coach } from '@/lib/coaches-data'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import CoachCard from './CoachCard'
 
 export default function CoachingTeamSection() {
   const leadCoach = getLeadCoach()
   const programCoaches = getProgramCoaches()
+  const teamCoaches: Coach[] = [leadCoach, ...programCoaches].filter((c): c is Coach => c != null)
 
   return (
     <section className="bg-brand-sandstone py-20 md:py-28 scroll-mt-28" id="team">
@@ -22,16 +23,10 @@ export default function CoachingTeamSection() {
           </p>
         </AnimatedSection>
 
-        {leadCoach && (
-          <AnimatedSection delay={100} className="mb-12 md:mb-16">
-            <CoachCard coach={leadCoach} variant="featured" />
-          </AnimatedSection>
-        )}
-
-        <div className="grid sm:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-stretch">
-          {programCoaches.map((coach, index) => (
-            <AnimatedSection key={coach.slug ?? `order-${coach.order}`} delay={150 + index * 50} className="h-full">
-              <CoachCard coach={coach} variant="grid" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
+          {teamCoaches.map((coach, index) => (
+            <AnimatedSection key={coach.slug ?? `order-${coach.order}-${index}`} delay={100 + index * 50} className="h-full">
+              <CoachCard coach={coach} variant="compact" />
             </AnimatedSection>
           ))}
         </div>

@@ -4,8 +4,17 @@ import { coachImageSrc, type Coach } from '@/lib/coaches-data'
 
 interface CoachCardProps {
   coach: Coach
-  /** 'featured' = large image + long bio (Robert); 'grid' = standard card */
-  variant?: 'featured' | 'grid'
+  /** 'featured' = large image + long bio; 'grid' = standard card; 'compact' = team section (small image, truncated bio) */
+  variant?: 'featured' | 'grid' | 'compact'
+}
+
+/** Truncate bio to first sentence or ~120 chars at word boundary for compact card. */
+function truncateBio(bio: string, maxLen = 120): string {
+  const match = bio.match(/^[^.!?]*[.!?]/)
+  if (match?.[0]) return match[0].trim()
+  if (bio.length <= maxLen) return bio
+  const at = bio.slice(0, maxLen).lastIndexOf(' ')
+  return (at > 0 ? bio.slice(0, at) : bio.slice(0, maxLen)) + '…'
 }
 
 function ChevronRight({ className }: { className?: string }) {
@@ -88,6 +97,74 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
       </div>
     </>
   )
+
+  if (variant === 'compact') {
+    const shortBio = truncateBio(coach.bio ?? '')
+    return (
+      <div className="h-full flex flex-col bg-white rounded-lg overflow-hidden border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 transition-shadow duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] motion-safe:hover:-translate-y-0.5">
+        <div className="relative w-full aspect-[4/5] max-h-[240px] md:max-h-[200px] overflow-hidden shrink-0">
+          <Image
+            src={coachImageSrc(coach.image)}
+            alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
+            fill
+            className="object-cover"
+            style={{ objectPosition: coach.imagePosition }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 320px"
+            quality={90}
+          />
+        </div>
+        <div className="p-5 md:p-6 flex flex-col min-h-0 flex-1">
+          <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.1em] mb-1.5">
+            {coach.title}
+          </p>
+          {hasBioLink ? (
+            <Link href={`/coaches/${coach.slug}`} className="block group rounded-[2px] min-h-[48px] inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
+              <h3 className="font-headline text-[20px] md:text-[22px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em] group-hover:text-brand-victoria-cove transition-colors">
+                {coach.name}
+              </h3>
+            </Link>
+          ) : (
+            <h3 className="font-headline text-[20px] md:text-[22px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em]">
+              {coach.name}
+            </h3>
+          )}
+          <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-3 line-clamp-1">
+            {coach.specialization}
+          </p>
+          <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.6] mb-3">
+            {shortBio}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {coach.credentials.slice(0, 4).map((cred, i) => (
+              <span
+                key={`${cred}-${i}`}
+                className="font-sans text-[10px] text-brand-pacific-dusk/70 px-2 py-0.5 bg-brand-morning-light rounded-full border border-black/5"
+              >
+                {cred}
+              </span>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-3 mt-4">
+            {hasBioLink && (
+              <Link
+                href={`/coaches/${coach.slug}`}
+                className="inline-flex items-center gap-2 font-sans text-[11px] font-semibold text-brand-victoria-cove uppercase tracking-wider min-h-[48px] py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-[2px]"
+              >
+                View full bio
+                <ChevronRight />
+              </Link>
+            )}
+            <Link
+              href={bookHref}
+              className="inline-flex items-center justify-center font-sans text-[11px] font-semibold bg-black text-white uppercase tracking-wider min-h-[48px] px-5 py-2 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:bg-gray-800 transition-colors"
+            >
+              Book with {firstName}
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (variant === 'featured') {
     return (
