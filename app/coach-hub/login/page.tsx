@@ -77,7 +77,7 @@ export default function CoachHubLoginPage() {
             disabled={submitting}
           />
           {error && (
-            <p className="font-sans text-sm text-red-600" role="alert">
+            <p className="font-sans text-sm text-lbta-red" role="alert">
               {error}
             </p>
           )}

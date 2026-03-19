@@ -233,3 +233,19 @@ export function formatGridRowTime(rowIndex: number): string {
   if (h === 12) return `12:${m.toString().padStart(2, '0')} PM`
   return `${h - 12}:${m.toString().padStart(2, '0')} PM`
 }
+
+/** Return the range of grid rows that have content (for trimming empty top/bottom). */
+export function getUsedRowRange(
+  grid: GridCell[][]
+): { min: number; max: number } | null {
+  let minR = grid.length
+  let maxR = -1
+  grid.forEach((row, r) => {
+    const hasContent = row.some((c) => c !== null && c !== 'covered')
+    if (hasContent) {
+      minR = Math.min(minR, r)
+      maxR = Math.max(maxR, r)
+    }
+  })
+  return maxR >= minR ? { min: minR, max: maxR } : null
+}

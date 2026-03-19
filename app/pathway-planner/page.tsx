@@ -121,7 +121,7 @@ function PathwayPlannerInteractive() {
             <h1 className="text-display-lg heading-display mb-6">
               Find Your Development Path
             </h1>
-            <p className="text-xl font-sans font-light text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl font-sans font-light text-lbta-slate max-w-2xl mx-auto leading-relaxed">
               Four questions. Your personalized tennis roadmap.
             </p>
           </AnimatedSection>
@@ -226,45 +226,45 @@ function PathwayPlannerInteractive() {
 
               <div className="space-y-8">
                 <div className="card-lbta p-8">
-                  <h3 className="text-sm font-sans tracking-wide uppercase text-gray-500 mb-2">Start Here</h3>
+                  <h3 className="text-sm font-sans tracking-wide uppercase text-lbta-slate mb-2">Start Here</h3>
                   <p className="text-2xl font-headline font-light text-brand-pacific-dusk mb-3">
                     {results.program}
                   </p>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-lbta-slate mb-4">
                     {results.recommendation}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-lbta-slate">
                     Recommended coach: {results.coach}
                   </p>
                 </div>
 
                 <div className="card-lbta p-8">
-                  <h3 className="text-sm font-sans tracking-wide uppercase text-gray-500 mb-2">Timeline</h3>
+                  <h3 className="text-sm font-sans tracking-wide uppercase text-lbta-slate mb-2">Timeline</h3>
                   <p className="text-2xl font-headline font-light text-brand-pacific-dusk mb-3">
                     {results.timeline}
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-lbta-slate">
                     Progression: {results.program} → {results.nextProgram}
                   </p>
                 </div>
 
                 <div className="card-lbta p-8">
-                  <h3 className="text-sm font-sans tracking-wide uppercase text-gray-500 mb-2">Investment</h3>
+                  <h3 className="text-sm font-sans tracking-wide uppercase text-lbta-slate mb-2">Investment</h3>
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <p className="text-sm text-gray-500 mb-1">Monthly</p>
+                      <p className="text-sm text-lbta-slate mb-1">Monthly</p>
                       <p className="text-xl font-headline font-light text-brand-pacific-dusk">
                         {results.monthlyInvestment}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 mb-1">Annual</p>
+                      <p className="text-sm text-lbta-slate mb-1">Annual</p>
                       <p className="text-xl font-headline font-light text-brand-pacific-dusk">
                         {results.annualInvestment}
                       </p>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-500 mt-4">
+                  <p className="text-sm text-lbta-slate mt-4">
                     Based on {formData.commitment === '1x' ? '1' : formData.commitment === '2x' ? '2' : formData.commitment === '3-4x' ? '3-4' : '5+'} sessions per week
                   </p>
                 </div>
@@ -274,7 +274,7 @@ function PathwayPlannerInteractive() {
                 <Link href="/book" className="btn-primary">
                   SCHEDULE TRIAL
                 </Link>
-                <p className="text-sm text-gray-500 mt-4">
+                <p className="text-sm text-lbta-slate mt-4">
                   Book complimentary assessment to validate your plan
                 </p>
               </div>
@@ -291,7 +291,7 @@ function PathwayPlannerInteractive() {
               <h2 className="text-3xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Not Sure Where to Start?
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-lbta-slate mb-8">
                 Complete the planner above or schedule a complimentary consultation
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

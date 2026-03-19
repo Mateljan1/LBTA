@@ -1079,7 +1079,15 @@
     max-width: 100%;
     padding: 1rem;
   }
-  /* Court flyer: full-width print, 11×17 friendly, arm's-length readability */
+
+  /* Court flyer route shell — strip screen padding; page is the flyer only */
+  .court-flyer-page-shell {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #fff !important;
+  }
+
+  /* Court flyer: fence-distance + PDF parity (column ≈ 11″ − margins; see lib/court-flyer-print.ts) */
   .court-flyer-print,
   .court-flyer-print * {
     visibility: visible;
@@ -1089,23 +1097,61 @@
     left: 0;
     top: 0;
     width: 100%;
+    max-width: 10.2in;
     min-height: auto;
+    margin: 0 auto;
     padding: 0;
-    background: white;
-    color: #1B3A5C;
-    font-size: 14px;
+    background: #fff;
+    color: #1b3a5c;
+    font-size: 15px;
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .court-flyer-print .bg-brand-deep-water,
+  .court-flyer-print [class*='bg-brand-'],
+  .court-flyer-print [class*='bg-lbta-'] {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .court-flyer-print h1 {
+    font-size: 1.65rem;
+    line-height: 1.2;
+  }
+  .court-flyer-print h2 {
+    font-size: 1.2rem;
+  }
+  .court-flyer-print h3 {
+    font-size: 0.95rem;
   }
   .court-flyer-print table {
-    font-size: 12px;
+    font-size: 13px;
+  }
+  .court-flyer-print table th,
+  .court-flyer-print table td {
+    padding: 0.4rem 0.5rem;
   }
   .court-flyer-print .text-xs {
-    font-size: 10px;
+    font-size: 11px;
   }
-  .court-flyer-print section {
+  .court-flyer-print .text-sm {
+    font-size: 0.95rem;
+  }
+  /* Allow long schedule/pricing to paginate; avoid only small cards (Tailwind break-inside-avoid) */
+  .court-flyer-print > section {
+    break-inside: auto;
+    orphans: 3;
+    widows: 3;
+  }
+  .court-flyer-print > footer {
     break-inside: avoid;
   }
+
+  /*
+   * Content-sized page: no fixed 17″ blank slab; margin matches Playwright PDF scripts.
+   */
   @page {
-    size: 11in 17in;
-    margin: 0.5in;
+    size: auto;
+    margin: 0.4in;
   }
 }

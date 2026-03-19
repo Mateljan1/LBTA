@@ -37,63 +37,130 @@ export function getWebsiteSignupsListId(): number | null {
  */
 export const CLASS_TAGS = {
   // Junior Programs (Moulton Meadows)
-  little_tennis_stars: 49,
-  red_ball: 38,
-  orange_ball: 39,
-  green_dot: 40,
+  little_tennis_stars: 144,
+  red_ball: 145,
+  orange_ball: 146,
+  green_dot: 147,
 
   // Youth Programs
-  youth_development: 21,
-  high_performance: 41,
+  youth_development: 148,
+  high_performance: 149,
 
   // Adult Programs
-  adult_beginner: 17,
-  adult_beginner_bridge: 42,
-  adult_intermediate: 16,
-  adult_advanced: 15,
+  adult_beginner: 150,
+  adult_beginner_bridge: 195,
+  adult_intermediate: 151,
+  adult_advanced: 152,
 
   // Fitness Programs
-  cardio: 14,
-  live_ball_advanced: 18,
-  live_ball_intermediate: 19,
-  live_ball_dropin: 20,
+  cardio: 155,
+  live_ball_advanced: 154,
+  live_ball_intermediate: 153,
+  live_ball_dropin: 238,  // program:liveball-dropin (created 2026-03-18)
 
   // Seasonal
-  summer_camp: 13,
+  summer_camp: 156,
 
   // Special
-  private_lessons: 48,
+  private_lessons: 157,
 } as const
 
 /**
  * Seasonal/Campaign Tags
  */
 export const CAMPAIGN_TAGS = {
-  winter_2026: 27,
-  website_registration: 33,
-  trial_request: 82,
-  not_sure: 81,
-  jtt_spring_2026: 107,  // JTT Spring 2026 registrations (triggers email automation)
-  scholarship: 108,      // Scholarship applications; create "Scholarship" tag in AC and set ID here if different
+  winter_2026: 228,           // season:winter-2026
+  spring_2026: 227,           // season:spring-2026
+  website_registration: 180,  // source:website-form
+  trial_request: 208,         // interest:trial-class
+  not_sure: 216,              // interest:general
+  jtt_program: 197,           // program:jtt (generic — use JTT_TAGS for divisions)
+  spring26_returning: 167,    // campaign:spring26-returning
+  spring26_prospect: 168,     // campaign:spring26-prospect
+  scholarship: 237,            // flag:scholarship (created 2026-03-18)
 } as const
 
 /**
- * Lead Source Tags
+ * Lead Source Tags — verified against AC API 2026-03-18
  */
 export const SOURCE_TAGS = {
-  youth_development_lead: 24,
-  high_performance_lead: 25,
-  adult_programming_lead: 26,
+  facebook: 178,         // source:facebook
+  google: 179,           // source:google
+  website_form: 180,     // source:website-form
+  referral: 181,         // source:referral
+  walk_in: 182,          // source:walk-in
+  phone_call: 183,       // source:phone-call
+  boys_and_girls_club: 185, // source:boys-and-girls-club
+  city_rec: 186,         // source:city-rec
+  unknown: 187,          // source:unknown
+  usta_tournament: 188,  // source:usta-tournament
 } as const
 
 /**
- * Map source tags to default class tags
+ * Type/Role Tags — verified against AC API 2026-03-18
  */
-export const SOURCE_TO_CLASS_TAG: Record<number, number> = {
-  [SOURCE_TAGS.youth_development_lead]: CLASS_TAGS.youth_development,
-  [SOURCE_TAGS.high_performance_lead]: CLASS_TAGS.high_performance,
-  [SOURCE_TAGS.adult_programming_lead]: CLASS_TAGS.adult_beginner,
-}
+export const TYPE_TAGS = {
+  adult: 189,            // type:adult
+  junior: 190,           // type:junior
+  parent: 191,           // role:parent
+  adult_player: 192,     // role:adult-player
+  student: 193,          // role:student
+} as const
+
+/**
+ * Interest Tags — verified against AC API 2026-03-18
+ */
+export const INTEREST_TAGS = {
+  jtt: 206,              // interest:jtt
+  private_lessons: 207,  // interest:private-lessons
+  trial_class: 208,      // interest:trial-class
+  summer_camp: 209,      // interest:summer-camp
+  holiday_camp: 210,     // interest:holiday-camp
+  liveball: 211,         // interest:liveball
+  adult_program: 212,    // interest:adult-program
+  junior_program: 213,   // interest:junior-program
+  usta_league: 214,      // interest:usta-league
+  utr_circuit: 215,      // interest:utr-circuit
+  general: 216,          // interest:general
+} as const
+
+/**
+ * Status Tags — verified against AC API 2026-03-18
+ */
+export const STATUS_TAGS = {
+  new_lead: 169,         // status:new-lead
+  contacted: 170,        // status:contacted
+  trial_booked: 171,     // status:trial-booked
+  trial_completed: 172,  // status:trial-completed
+  enrolled: 173,         // status:enrolled
+  active_returning: 174, // status:active-returning
+  inactive: 175,         // status:inactive
+  not_responsive: 176,   // status:not-responsive
+  lost: 177,             // status:lost
+} as const
+
+/**
+ * Season Tags — verified against AC API 2026-03-18
+ */
+export const SEASON_TAGS = {
+  spring_2026: 227,      // season:spring-2026
+  winter_2026: 228,      // season:winter-2026
+  fall_2025: 229,        // season:fall-2025
+  summer_2025: 230,      // season:summer-2025
+  spring_2025: 231,      // season:spring-2025
+  pre_2025: 232,         // season:pre-2025
+} as const
+
+/**
+ * JTT Division Tags — verified against AC API 2026-03-18
+ */
+export const JTT_TAGS = {
+  '10u_orange': 160,     // jtt:10u-orange
+  '10u_green': 161,      // jtt:10u-green
+  '12u': 162,            // jtt:12u
+  '14u': 163,            // jtt:14u
+  '18u': 164,            // jtt:18u
+} as const
 
 // ============================================================
 // Tag Mapping Functions

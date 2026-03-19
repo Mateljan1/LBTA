@@ -5,6 +5,7 @@ import Script from 'next/script'
 import { coachImageSrc } from '@/lib/coaches-data'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import PullQuote from '@/components/ui/PullQuote'
+import siteStats from '@/data/site-stats.json'
 
 export const metadata: Metadata = {
   title: 'High Performance Pathway | Tennis Training | LBTA',
@@ -194,7 +195,7 @@ export default function HighPerformancePathwayPage() {
                 Andrew Mateljan
               </h2>
               <p className="font-sans text-[14px] uppercase tracking-wider text-brand-sunset-cliff mb-6">
-                ATP/WTA Tour Coach · 25+ Years Experience
+                ATP/WTA Tour Coach · {siteStats.trustStats.yearsExperience} Years Experience
               </p>
               <div className="space-y-4 text-[15px] text-lbta-slate leading-relaxed">
                 <p>

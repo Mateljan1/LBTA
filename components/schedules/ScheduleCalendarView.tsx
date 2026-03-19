@@ -8,25 +8,11 @@ import {
   LOCATION_KEYS,
   buildWeekGridForLocation,
   formatGridRowTime,
+  getUsedRowRange,
   type ScheduleByLocationByDay,
 } from '@/lib/calendar-schedule'
 
 const EMPTY_SCHEDULE: ScheduleByLocationByDay = {}
-
-function getUsedRowRange(
-  grid: ReturnType<typeof buildWeekGridForLocation>
-): { min: number; max: number } | null {
-  let minR = grid.length
-  let maxR = -1
-  grid.forEach((row, r) => {
-    const hasContent = row.some((c) => c !== null && c !== 'covered')
-    if (hasContent) {
-      minR = Math.min(minR, r)
-      maxR = Math.max(maxR, r)
-    }
-  })
-  return maxR >= minR ? { min: minR, max: maxR } : null
-}
 
 const LOCATION_LABELS: Record<string, string> = {
   Moulton: 'Moulton Meadows Park',

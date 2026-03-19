@@ -1,15 +1,11 @@
 import CourtFlyer from '@/components/print/CourtFlyer'
 import { getFlyerCoaches } from '@/lib/flyer-data'
-import { getPrivateRates, getSpringProgramsForDisplay, formatLocation } from '@/lib/programs-data'
+import { getPrivateRates } from '@/lib/programs-data'
 import { getScheduleByLocationByDay, getSeasonDates, getSeasonLabel } from '@/lib/calendar-schedule'
 import { getSpringSummer2026 } from '@/lib/programs-data'
+import { getCourtFlyerProgramPricingRows } from '@/lib/flyer-pricing'
 import year2026Data from '@/data/year2026.json'
-
-const LOCATION_DISPLAY: Record<string, string> = {
-  Moulton: 'Moulton Meadows Park',
-  Alta: 'Alta Laguna Park',
-  LBHS: 'Laguna Beach High School',
-}
+import siteStats from '@/data/site-stats.json'
 
 export default function CourtFlyerPage() {
   const coaches = getFlyerCoaches()
@@ -20,51 +16,7 @@ export default function CourtFlyerPage() {
   const springSummer = getSpringSummer2026()
   const weeks = springSummer.spring.weeks ?? 10
 
-  const springPrograms = getSpringProgramsForDisplay()
-
-  const formatPrice = (p: Record<string, unknown>): { price_1x: string; price_2x: string | null; dropIn: string } => {
-    const monthly = typeof p.monthly === 'number' ? p.monthly : null
-    const dropIn = typeof p.drop_in === 'number' ? p.drop_in : null
-    const p1x = typeof p['1x'] === 'number' ? p['1x'] : monthly
-    const p2x = typeof p['2x'] === 'number' ? p['2x'] : null
-    return {
-      price_1x: p1x != null ? (monthly != null ? `$${p1x}/mo` : `$${p1x}`) : '—',
-      price_2x: p2x != null ? `$${p2x}` : null,
-      dropIn: dropIn != null ? `$${dropIn}` : 'N/A',
-    }
-  }
-
-  const juniorCategories = ['Junior', 'Youth']
-  const juniorPricing = springPrograms
-    .filter((p) => juniorCategories.includes(p.category))
-    .map((p) => {
-      const { price_1x, price_2x, dropIn } = formatPrice(p.pricing)
-      const locKey = formatLocation(p.location)
-      return {
-        name: p.program,
-        duration: p.duration,
-        price_1x,
-        price_2x,
-        dropIn,
-        location: LOCATION_DISPLAY[locKey] ?? p.location,
-      }
-    })
-
-  const adultCategories = ['Adult', 'Fitness']
-  const adultPricing = springPrograms
-    .filter((p) => adultCategories.includes(p.category))
-    .map((p) => {
-      const { price_1x, price_2x, dropIn } = formatPrice(p.pricing)
-      const locKey = formatLocation(p.location)
-      return {
-        name: p.program,
-        duration: p.duration,
-        price_1x,
-        price_2x,
-        dropIn,
-        location: LOCATION_DISPLAY[locKey] ?? p.location,
-      }
-    })
+  const { juniorPricing, adultPricing } = getCourtFlyerProgramPricingRows('spring')
 
   const year2026 = year2026Data as {
     camps?: Array<{
@@ -117,7 +69,7 @@ export default function CourtFlyerPage() {
       : []),
   ]
 
-  const discountLine =
+  const discountLine = (siteStats as { discounts?: { discountLine?: string } }).discounts?.discountLine ??
     '$50 off early bird · 10% second child · 5% multi-program · 10% full year'
 
   const privateRatesOrder = ['Andrew Mateljan', 'Robert LeBuhn', 'Peter DeFrantz', 'Allison Cronk']

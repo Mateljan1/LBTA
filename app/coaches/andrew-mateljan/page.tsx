@@ -83,7 +83,7 @@ export default function AndrewMateljanPage() {
                 <h1 className="text-display-lg heading-display mb-2">
                   Andrew Mateljan
                 </h1>
-                <p className="text-xl font-sans font-light text-gray-600 leading-relaxed">
+                <p className="text-xl font-sans font-light text-lbta-slate leading-relaxed">
                   ATP/WTA Coach. Founder. Building championship-level players for 25 years.
                 </p>
               </AnimatedSection>
@@ -102,7 +102,7 @@ export default function AndrewMateljanPage() {
               <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Playing Career
               </h2>
-              <ul className="space-y-3 text-gray-600">
+              <ul className="space-y-3 text-lbta-slate">
                 <li className="flex items-start gap-3">
                   <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>Ranked #3 Southern California, #12 Nationally</span>
@@ -126,7 +126,7 @@ export default function AndrewMateljanPage() {
               <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
                 Coaching Journey
               </h2>
-              <ul className="space-y-3 text-gray-600">
+              <ul className="space-y-3 text-lbta-slate">
                 <li className="flex items-start gap-3">
                   <span className="text-brand-sunset-cliff mt-1">•</span>
                   <span>Started coaching at age 19</span>
@@ -188,7 +188,7 @@ export default function AndrewMateljanPage() {
             <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk mb-6">
               Five Pillars
             </h2>
-            <p className="text-lg text-gray-600 font-sans max-w-3xl mx-auto">
+            <p className="text-lg text-lbta-slate font-sans max-w-3xl mx-auto">
               A systematic approach to player development refined over 25 years of coaching at every level
             </p>
           </AnimatedSection>
@@ -204,7 +204,7 @@ export default function AndrewMateljanPage() {
                     <h3 className="text-2xl font-sans font-medium text-brand-pacific-dusk mb-4">
                       {pillar.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-lbta-slate leading-relaxed">
                       {pillar.description}
                     </p>
                   </div>
@@ -223,10 +223,10 @@ export default function AndrewMateljanPage() {
           <AnimatedSection>
             <div className="card-lbta p-8 max-w-2xl">
               <h3 className="text-2xl font-sans font-medium mb-4">Fit4Tennis</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
+              <p className="text-lbta-slate leading-relaxed mb-6">
                 Global tennis fitness platform with 100,000+ followers across Instagram, YouTube, and TikTok. Andrew shares professional-grade training methods, movement drills, and strength conditioning protocols used by ATP/WTA players.
               </p>
-              <ul className="space-y-2 text-sm text-gray-600">
+              <ul className="space-y-2 text-sm text-lbta-slate">
                 <li>• Pro workout series featuring Max McKennon (ATP #458)</li>
                 <li>• Evidence-based strength, mobility, and conditioning</li>
                 <li>• Movement-first philosophy applied globally</li>

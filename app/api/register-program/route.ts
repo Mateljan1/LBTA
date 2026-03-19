@@ -191,7 +191,7 @@ export async function POST(request: NextRequest) {
             { field: '8', value: data.location || 'Not specified' }, // LOCATION
             { field: '9', value: daysSelected }, // DAYS_SELECTED
             { field: '10', value: tuitionAmount }, // TUITION
-            { field: '15', value: 'website' }, // LEAD_SOURCE (for webhook filtering)
+            { field: '11', value: 'website' }, // LEAD_SOURCE (for webhook filtering)
           ],
         })
 

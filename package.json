@@ -17,13 +17,13 @@
     "quality-gate": "npm run build && npm run lint",
     "fact-check": "node scripts/fact-check.js",
     "create:spring-campaign": "node scripts/create-ac-campaign.js assets/emails/lbta-spring-2026.html",
-    "build:schedule-pdf": "node scripts/generate-schedule-pdf.mjs"
+    "build:schedule-pdf": "node scripts/generate-schedule-pdf.mjs",
+    "build:court-flyer-pdf-standalone": "./node_modules/.bin/tsx scripts/generate-court-flyer-pdf-standalone.ts"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",
     "@supabase/supabase-js": "^2.98.0",
     "@vercel/kv": "^3.0.0",
-    "axios": "^1.7.9",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.462.0",
     "next": "^16.1.1",
@@ -46,6 +46,7 @@
     "postcss": "^8",
     "sharp": "^0.34.5",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.19.4",
     "typescript": "^5",
     "vitest": "^2.1.6"
   }

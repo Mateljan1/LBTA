@@ -1,40 +1,31 @@
 import Image from 'next/image'
 import type { FlyerCoach } from '@/lib/flyer-data'
-import type { ScheduleByLocationByDay } from '@/lib/calendar-schedule'
-import { parseTimeRangeToMinutes } from '@/lib/calendar-schedule'
+import {
+  type ScheduleByLocationByDay,
+  buildWeekGridForLocation,
+  formatGridRowTime,
+  getUsedRowRange,
+  DAY_ORDER,
+} from '@/lib/calendar-schedule'
 import type { PrivateRateRow } from '@/lib/programs-data'
+import type { CourtFlyerPricingRow } from '@/lib/flyer-pricing'
 import { FLYER_CONTACT, FLYER_COURTS, FLYER_USTA_NOTE, FLYER_ACADEMY_ADDRESS } from '@/lib/flyer-config'
+import { COURT_FLYER_MAX_WIDTH_CLASS } from '@/lib/court-flyer-print'
 
-function sortTimeStrings(times: string[]): string[] {
-  return [...times].sort((a, b) => {
-    const pa = parseTimeRangeToMinutes(a)
-    const pb = parseTimeRangeToMinutes(b)
-    if (!pa || !pb) return a.localeCompare(b)
-    return pa.start - pb.start
-  })
-}
-
-/** Color-code schedule cells by program type for fence readability. */
+/** Color-code schedule cells by program type — strong tints for quick scanning and print clarity. */
 function scheduleCellBgClass(programName: string): string {
   const n = (programName || '').toLowerCase()
-  if (n.includes('little') || n.includes('stars')) return 'bg-brand-sandstone/60'
-  if (n.includes('red ball')) return 'bg-lbta-red/15'
-  if (n.includes('orange ball')) return 'bg-brand-sunset-cliff/20'
-  if (n.includes('green dot') || n.includes('utr green')) return 'bg-brand-tide-pool/15'
-  if (n.includes('yellow') || n.includes('yellow ball')) return 'bg-brand-thousand-steps/15'
-  if (n.includes('youth') || n.includes('development')) return 'bg-brand-victoria-cove/12'
-  if (n.includes('high performance')) return 'bg-brand-pacific-dusk/8'
-  if (n.includes('adult') || n.includes('liveball') || n.includes('cardio') || n.includes('intermediate') || n.includes('advanced') || n.includes('beginner')) return 'bg-brand-pacific-dusk/6'
-  return 'bg-brand-sandstone/40'
-}
-
-interface PricingRow {
-  name: string
-  duration: string
-  price_1x: string
-  price_2x: string | null
-  dropIn: string
-  location: string
+  if (n.includes('little') || n.includes('stars')) return 'bg-brand-sandstone'
+  if (n.includes('red ball')) return 'bg-lbta-red/30'
+  if (n.includes('orange ball')) return 'bg-brand-sunset-cliff/35'
+  if (n.includes('green dot') || n.includes('utr green')) return 'bg-brand-tide-pool/35'
+  if (n.includes('yellow') || n.includes('yellow ball')) return 'bg-brand-thousand-steps/30'
+  if (n.includes('youth') || n.includes('development')) return 'bg-brand-victoria-cove/30'
+  if (n.includes('high performance')) return 'bg-brand-pacific-dusk/25'
+  if (n.includes('liveball')) return 'bg-brand-victoria-cove/28'
+  if (n.includes('cardio')) return 'bg-brand-sunset-cliff/28'
+  if (n.includes('adult') || n.includes('intermediate') || n.includes('advanced') || n.includes('beginner')) return 'bg-brand-pacific-dusk/22'
+  return 'bg-brand-sandstone/60'
 }
 
 interface CampItem {
@@ -52,8 +43,8 @@ interface CourtFlyerProps {
   seasonLabel: string
   seasonDates: string
   weeks: number
-  juniorPricing: PricingRow[]
-  adultPricing: PricingRow[]
+  juniorPricing: CourtFlyerPricingRow[]
+  adultPricing: CourtFlyerPricingRow[]
   camps: CampItem[]
   discountLine: string
 }
@@ -78,14 +69,34 @@ export default function CourtFlyer({
   const locationOrder = ['Alta', 'LBHS', 'Moulton'] as const
 
   return (
-    <div className="court-flyer-print bg-brand-morning-light text-brand-pacific-dusk font-sans min-h-screen">
-      {/* Logo strip — equal height, vertically centered; City seal in circle to mask checkerboard */}
-      <div className="flex flex-wrap items-center justify-center gap-10 py-6 px-6 bg-brand-deep-water min-h-[80px]">
-        <div className="flex items-center justify-center h-[52px]">
-          <Image src="/logos/LBTAwhttext.png" alt="Laguna Beach Tennis Academy" width={212} height={52} className="h-[52px] w-auto object-contain object-center flex-shrink-0" priority />
+    <div
+      className={`court-flyer-print bg-brand-morning-light text-brand-pacific-dusk font-sans min-h-0 w-full ${COURT_FLYER_MAX_WIDTH_CLASS} mx-auto px-4 sm:px-6 [print-color-adjust:exact]`}
+    >
+      {/*
+        No min-h-screen: avoids a tall empty canvas on PDF/print (Ledger + fixed format = huge blank band).
+        Wordmark: match Header ratio (w-auto, object-contain) — do not lock mismatched width×height.
+      */}
+      <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10 py-5 px-6 bg-brand-deep-water">
+        <div className="flex items-center justify-center">
+          <Image
+            src="/logos/LBTAwhttext.png"
+            alt="Laguna Beach Tennis Academy"
+            width={280}
+            height={72}
+            sizes="(max-width: 640px) 240px, 280px"
+            quality={95}
+            className="h-11 sm:h-[52px] w-auto max-w-[min(85vw,300px)] object-contain object-center flex-shrink-0"
+            priority
+          />
         </div>
-        <div className="flex items-center justify-center h-[52px] w-[52px] rounded-full bg-brand-deep-water overflow-hidden flex-shrink-0">
-          <Image src="/logos/city-laguna-beach.png" alt="City of Laguna Beach" width={52} height={52} className="h-[52px] w-[52px] object-contain object-center" />
+        <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-full ring-1 ring-white/15 bg-brand-deep-water">
+          <Image
+            src="/logos/city-laguna-beach.png"
+            alt="City of Laguna Beach"
+            width={52}
+            height={52}
+            className="h-[52px] w-[52px] object-contain object-center"
+          />
         </div>
       </div>
 
@@ -190,59 +201,72 @@ export default function CourtFlyer({
           <a href={FLYER_CONTACT.siteUrl} className="text-brand-victoria-cove underline">{FLYER_CONTACT.siteUrl.replace('https://', '')}</a>
           {' · Movement. Craft. Community.'}
         </p>
+        <p className="text-[11px] text-brand-pacific-dusk/90 mb-4 flex flex-wrap items-center gap-x-3 gap-y-1.5" aria-label="Schedule color legend">
+          <span className="font-semibold text-brand-deep-water">Legend:</span>
+          <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-lbta-red/30 border border-brand-pacific-dusk/20" aria-hidden /> Junior (Red/Orange/Green)</span>
+          <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-victoria-cove/30 border border-brand-pacific-dusk/20" aria-hidden /> Youth · LiveBall</span>
+          <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-pacific-dusk/22 border border-brand-pacific-dusk/20" aria-hidden /> Adult</span>
+          <span className="inline-flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-sm bg-brand-sunset-cliff/28 border border-brand-pacific-dusk/20" aria-hidden /> Cardio</span>
+        </p>
         {locationOrder.map((loc) => {
           const byDay = scheduleByLocation[loc]
           if (!byDay) return null
-          const days = Object.keys(byDay).sort((a, b) => {
-            const order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-            return order.indexOf(a) - order.indexOf(b)
-          })
           const courtLabel = loc === 'Moulton' ? 'Court 2' : loc === 'LBHS' ? 'Courts 5 & 6' : 'Courts 1 & 2'
+          const grid = buildWeekGridForLocation(byDay)
+          const range = getUsedRowRange(grid)
+          const rowsToShow = range ? grid.slice(range.min, range.max + 1) : []
           return (
             <div key={loc} className="mb-6 break-inside-avoid">
               <h3 className="font-headline font-semibold text-brand-deep-water text-sm uppercase mb-1">
                 {locationLabels[loc] ?? loc} — {courtLabel}
               </h3>
-              {loc === 'LBHS' ? (
-                <p className="text-xs text-brand-pacific-dusk/90 mb-2">Group classes · weekend adult at this location</p>
-              ) : null}
+              <p className="text-xs text-brand-pacific-dusk/90 mb-2">Group classes at this location</p>
               <div className="overflow-x-auto">
-                <table className="w-full text-sm border-collapse border border-brand-pacific-dusk/20">
+                <table className="w-full text-sm border-collapse border border-brand-pacific-dusk/20" aria-label={`Weekly schedule for ${locationLabels[loc] ?? loc}`}>
                   <thead>
                     <tr className="border-b-2 border-brand-pacific-dusk/30 bg-brand-sandstone/50">
-                      <th className="text-left py-2 pr-3 pl-2 w-28 font-semibold text-brand-deep-water">Time</th>
-                      {days.map((d) => (
-                        <th key={d} className="text-left py-2 px-2 font-semibold text-brand-deep-water border-l border-brand-pacific-dusk/15">{d.slice(0, 3)}</th>
+                      <th scope="col" className="text-left py-2.5 pr-3 pl-3 w-24 font-semibold text-brand-deep-water">Time</th>
+                      {DAY_ORDER.map((d) => (
+                        <th key={d} scope="col" className="text-center py-2.5 px-2 font-semibold text-brand-deep-water border-l border-brand-pacific-dusk/15">{d.slice(0, 3)}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
-                    {(() => {
-                      const timeSlots = new Map<string, Record<string, { display: string; programName: string }>>()
-                      days.forEach((day) => {
-                        const slots = byDay[day] ?? []
-                        slots.forEach((s) => {
-                          const key = s.time
-                          if (!timeSlots.has(key)) timeSlots.set(key, {})
-                          const row = timeSlots.get(key)!
-                          const display = s.programName.length > 36 ? s.programName.slice(0, 34) + '…' : s.programName
-                          row[day] = { display, programName: s.programName }
-                        })
+                    {!range ? (
+                      <tr>
+                        <td colSpan={8} className="py-4 text-center text-brand-pacific-dusk/70">No sessions this week</td>
+                      </tr>
+                    ) : (
+                      rowsToShow.map((row, i) => {
+                        const rowIndex = range.min + i
+                        return (
+                          <tr key={rowIndex} className="border-b border-brand-pacific-dusk/12">
+                            <th scope="row" className="py-2 pl-3 pr-2 whitespace-nowrap text-left text-[12px] font-semibold text-brand-deep-water bg-brand-sandstone/30 border-r border-brand-pacific-dusk/10">
+                              {formatGridRowTime(rowIndex)}
+                            </th>
+                            {DAY_ORDER.map((_, dayIndex) => {
+                              const cell = row[dayIndex]
+                              if (cell === 'covered') return null
+                              if (cell === null) {
+                                return <td key={dayIndex} className="py-2 px-2 border-l border-brand-pacific-dusk/10 align-top min-h-[32px]" />
+                              }
+                              const { slot, rowSpan } = cell
+                              const display = slot.programName.length > 32 ? slot.programName.slice(0, 30) + '…' : slot.programName
+                              const bgClass = scheduleCellBgClass(slot.programName)
+                              return (
+                                <td
+                                  key={dayIndex}
+                                  rowSpan={rowSpan}
+                                  className={`py-2 pl-3 pr-2 border-l border-brand-pacific-dusk/10 align-top ${bgClass}`}
+                                >
+                                  <span className="font-medium text-brand-deep-water leading-snug">{display}</span>
+                                </td>
+                              )
+                            })}
+                          </tr>
+                        )
                       })
-                      const sortedTimes = sortTimeStrings(Array.from(timeSlots.keys()))
-                      return sortedTimes.map((time) => (
-                        <tr key={time} className="border-b border-brand-pacific-dusk/15 hover:bg-brand-sandstone/20">
-                          <td className="py-2 pr-3 pl-2 whitespace-nowrap font-semibold text-brand-deep-water bg-brand-sandstone/30 border-r border-brand-pacific-dusk/10">{time}</td>
-                          {days.map((day) => {
-                            const cell = timeSlots.get(time)?.[day]
-                            const bgClass = cell ? scheduleCellBgClass(cell.programName) : ''
-                            return (
-                              <td key={day} className={`py-2 px-2 border-l border-brand-pacific-dusk/10 align-top ${bgClass}`}>{cell?.display ?? ''}</td>
-                            )
-                          })}
-                        </tr>
-                      ))
-                    })()}
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -318,8 +342,20 @@ export default function CourtFlyer({
         <p className="text-xs mt-3 text-brand-pacific-dusk/80">{discountLine}</p>
       </section>
 
-      {/* Footer */}
+      {/* Footer — wordmark repeats brand mark (PDF/print often crops top; footer carries identity) */}
       <footer className="py-8 px-6 border-t border-brand-pacific-dusk/20 bg-brand-deep-water text-white/90 text-center text-sm">
+        <div className="flex justify-center pb-4 mb-4 border-b border-white/10">
+          <Image
+            src="/logos/LBTAwhttext.png"
+            alt=""
+            width={220}
+            height={56}
+            sizes="220px"
+            quality={95}
+            className="h-9 sm:h-10 w-auto max-w-[220px] object-contain object-center opacity-95"
+            aria-hidden
+          />
+        </div>
         <p><strong className="text-white">REGISTER</strong> {FLYER_CONTACT.phoneRegister}</p>
         <p className="mt-1"><strong className="text-white">FREE TRIAL & QUESTIONS</strong> {FLYER_CONTACT.phoneTrial}</p>
         <p className="mt-1">{FLYER_CONTACT.email}</p>

@@ -507,7 +507,7 @@ export default function BeginnerProgramLanding() {
                         {isSubmitting ? 'Submitting...' : `Enroll Now — Save $${bp.discount}`}
                       </button>
 
-                      <p className="text-xs text-center text-gray-500">
+                      <p className="text-xs text-center text-lbta-slate">
                         By submitting, you agree to receive communications from LBTA. No spam, unsubscribe anytime.
                       </p>
                     </form>

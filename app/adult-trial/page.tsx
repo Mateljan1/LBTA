@@ -347,7 +347,7 @@ export default function AdultTrialLanding() {
                         {isSubmitting ? 'Submitting...' : 'Request Trial Session'}
                       </button>
 
-                      <p className="text-xs text-center text-gray-500">
+                      <p className="text-xs text-center text-lbta-slate">
                         By submitting, you agree to receive communications from LBTA. No spam, unsubscribe anytime.
                       </p>
                     </form>

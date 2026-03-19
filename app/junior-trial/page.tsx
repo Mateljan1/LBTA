@@ -364,9 +364,9 @@ export default function JuniorTrialLanding() {
                                 <span className="float-right">
                                   <span className="text-2xl font-headline text-brand-pacific-dusk">${freqPrice}</span>
                                   {freqDiscount > 0 && (
-                                    <span className="text-sm text-gray-400 line-through ml-2">${amount}</span>
+                                    <span className="text-sm text-lbta-slate/60 line-through ml-2">${amount}</span>
                                   )}
-                                  <span className="text-sm text-gray-500 ml-2">{selectedProgramData?.pricing?.billing}</span>
+                                  <span className="text-sm text-lbta-slate ml-2">{selectedProgramData?.pricing?.billing}</span>
                                 </span>
                               </label>
                             )
@@ -379,7 +379,7 @@ export default function JuniorTrialLanding() {
                   {formData.schedule && (
                     <div className="bg-lbta-bone p-6 border-l-4 border-lbta-coral">
                       <h4 className="font-medium text-lbta-primary mb-4">Your Selection:</h4>
-                      <div className="space-y-2 text-sm text-gray-700">
+                      <div className="space-y-2 text-sm text-brand-pacific-dusk/80">
                         <p><span className="font-medium">Program:</span> {formData.program}</p>
                         <p><span className="font-medium">Schedule:</span> {formData.schedule}</p>
                         <p><span className="font-medium">Frequency:</span> {formData.frequency === '1x' ? '1x per week' : '2x per week'}</p>
@@ -392,13 +392,13 @@ export default function JuniorTrialLanding() {
                   )}
 
                   {errorMessage && (
-                    <div className="bg-red-50 border border-red-200 rounded-[2px] p-4">
+                    <div className="bg-lbta-red/5 border border-lbta-red/20 rounded-[2px] p-4">
                       <div className="flex items-start justify-between gap-3">
-                        <p className="font-sans text-[14px] text-red-800">{errorMessage}</p>
+                        <p className="font-sans text-[14px] text-lbta-red">{errorMessage}</p>
                         <button
                           type="button"
                           onClick={() => setErrorMessage(null)}
-                          className="text-red-400 hover:text-red-600 transition-colors flex-shrink-0"
+                          className="text-lbta-red/60 hover:text-lbta-red transition-colors flex-shrink-0"
                           aria-label="Dismiss error"
                         >
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -418,7 +418,7 @@ export default function JuniorTrialLanding() {
                     {isSubmitting ? 'Processing...' : isEarlyBird ? `Claim My ${earlyBirdDiscountLabel} Discount →` : 'Start My Trial →'}
                   </button>
 
-                  <p className="text-xs text-center text-gray-500">
+                  <p className="text-xs text-center text-lbta-slate">
                     By submitting, you agree to receive communications from LBTA. No spam, unsubscribe anytime.
                   </p>
                 </form>

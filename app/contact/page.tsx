@@ -208,7 +208,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                       className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-base focus:outline-none focus:ring-2 focus:ring-black transition-all ${
-                        errors.name ? 'ring-2 ring-red-500' : ''
+                        errors.name ? 'ring-2 ring-lbta-red' : ''
                       }`}
                       placeholder="Full name"
                       aria-label="Your full name"
@@ -235,7 +235,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                       className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-base focus:outline-none focus:ring-2 focus:ring-black transition-all ${
-                        errors.email ? 'ring-2 ring-red-500' : ''
+                        errors.email ? 'ring-2 ring-lbta-red' : ''
                       }`}
                       placeholder="your@email.com"
                       aria-label="Your email address"
@@ -262,7 +262,7 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
                       className={`w-full px-6 py-4 rounded-full bg-brand-morning-light text-black/85 font-sans text-base focus:outline-none focus:ring-2 focus:ring-black transition-all ${
-                        errors.phone ? 'ring-2 ring-red-500' : ''
+                        errors.phone ? 'ring-2 ring-lbta-red' : ''
                       }`}
                       placeholder="(949) 555-1234"
                       aria-label="Your phone number"

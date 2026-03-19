@@ -21,7 +21,7 @@ export default function Error({
         <h1 className="text-4xl font-headline font-bold text-brand-pacific-dusk mb-4">
           Something went wrong
         </h1>
-        <p className="text-gray-600 mb-8">
+        <p className="text-lbta-slate mb-8">
           We apologize for the inconvenience. An unexpected error has occurred.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -39,7 +39,7 @@ export default function Error({
           </Link>
         </div>
         {error.digest && (
-          <p className="mt-8 text-xs text-gray-400">
+          <p className="mt-8 text-xs text-lbta-slate/60">
             Error ID: {error.digest}
           </p>
         )}

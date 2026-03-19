@@ -427,7 +427,7 @@ export default function ApplyScholarshipPage() {
                   )}
                 </button>
 
-                <p className="text-xs text-center text-gray-500 mt-4 leading-relaxed">
+                <p className="text-xs text-center text-lbta-slate mt-4 leading-relaxed">
                   By submitting this application, you agree to provide accurate information for scholarship review.  
                   We'll contact you within 5-7 business days regarding your application status.
                 </p>
@@ -452,7 +452,7 @@ export default function ApplyScholarshipPage() {
               <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 We Review
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-lbta-slate leading-relaxed">
                 Scholarship committee reviews your application
               </p>
             </div>
@@ -462,7 +462,7 @@ export default function ApplyScholarshipPage() {
               <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 Interview
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-lbta-slate leading-relaxed">
                 Brief conversation with family and student
               </p>
             </div>
@@ -472,7 +472,7 @@ export default function ApplyScholarshipPage() {
               <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 Decision
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-lbta-slate leading-relaxed">
                 Notification within 7-10 business days
               </p>
             </div>
@@ -482,7 +482,7 @@ export default function ApplyScholarshipPage() {
               <h3 className="text-base font-sans font-medium text-brand-pacific-dusk mb-2">
                 You Begin
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-lbta-slate leading-relaxed">
                 Start your tennis journey with LBTA
               </p>
             </div>
@@ -497,7 +497,7 @@ export default function ApplyScholarshipPage() {
             <h2 className="text-3xl font-headline font-light text-brand-pacific-dusk mb-6">
               Questions About Scholarships?
             </h2>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-lbta-slate mb-8">
               Our scholarship coordinator is here to help answer questions about eligibility and the application process.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">

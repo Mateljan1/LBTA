@@ -81,7 +81,7 @@ export default function PhilosophyPage() {
             <h1 className="text-display-lg heading-display mb-6">
               Our Philosophy
             </h1>
-            <p className="body-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="body-lg text-lbta-slate max-w-2xl mx-auto">
               Excellence is cultivated, not commanded. 
               It emerges through patient dedication, mindful practice, and unwavering commitment.
             </p>

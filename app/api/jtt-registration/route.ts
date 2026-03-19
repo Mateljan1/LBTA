@@ -185,12 +185,12 @@ export async function POST(request: NextRequest) {
           lastName: formData.parentLastName,
           phone: formData.parentPhone,
           fieldValues: [
-            { field: '1', value: playerName },  // Player Name
-            { field: '2', value: String(formData.playerAge) },  // Player Age
-            { field: '3', value: formatDivision(formData.division) },  // Division/Program
-            { field: '4', value: formData.paymentPreference },  // Payment Preference
+            { field: '16', value: playerName },  // Player First Name
+            { field: '4', value: String(formData.playerAge) },  // Child Age
+            { field: '15', value: formatDivision(formData.division) },  // JTT Division
+            { field: '21', value: formData.paymentPreference },  // Payment Preference
             { field: '7', value: `JTT Spring 2026 - ${formatDivision(formData.division)}` },  // PROGRAM field
-            { field: '15', value: 'website_jtt' },  // Lead source
+            { field: '11', value: 'website_jtt' },  // Lead Source
           ],
         })
 
@@ -206,9 +206,9 @@ export async function POST(request: NextRequest) {
           console.log('[JTT] Added to list(s)')
 
           // Apply JTT Spring 2026 tag to trigger confirmation email automation
-          const tagResult = await addTag(contactId, CAMPAIGN_TAGS.jtt_spring_2026)
+          const tagResult = await addTag(contactId, CAMPAIGN_TAGS.jtt_program)
           if (tagResult.success) {
-            console.log('[JTT] JTT Spring 2026 tag (107) applied - email automation triggered')
+            console.log('[JTT] JTT tag (197) applied - email automation triggered')
             acSuccess = true
           }
 

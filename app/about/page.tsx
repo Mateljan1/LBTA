@@ -7,6 +7,7 @@ import TimelineSection from '@/components/TimelineSection'
 import StickyCTA from '@/components/StickyCTA'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
+import siteStats from '@/data/site-stats.json'
 
 // Note: Metadata is defined in about/layout.tsx for client components
 
@@ -134,15 +135,15 @@ export default function AboutPage() {
               <div className="mt-10 pt-8 border-t border-lbta-stone">
                 <div className="grid grid-cols-3 gap-6">
                   <div>
-                    <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">20+</span>
+                    <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">{siteStats.trustStats.d1Placements}</span>
                     <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">D1 Placements</p>
                   </div>
                   <div>
-                    <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">5</span>
+                    <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">{siteStats.trustStats.coachCount}</span>
                     <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">Expert Coaches</p>
                   </div>
                   <div>
-                    <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">100+</span>
+                    <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">{siteStats.trustStats.activeStudents}</span>
                     <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">Active Students</p>
                   </div>
                 </div>

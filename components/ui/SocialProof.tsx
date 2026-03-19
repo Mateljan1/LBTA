@@ -18,7 +18,7 @@ export default function SocialProof() {
                 <p className="text-sm font-sans font-medium text-brand-pacific-dusk mb-1">
                   {badge.text}
                 </p>
-                <p className="text-xs text-gray-500 font-sans">
+                <p className="text-xs text-lbta-slate font-sans">
                   {badge.year}
                 </p>
               </div>

@@ -129,7 +129,7 @@ export default function Chatbot() {
                   Send
                 </button>
               </div>
-              <p className="text-xs text-gray-500 mt-2 text-center">
+              <p className="text-xs text-lbta-slate mt-2 text-center">
                 Powered by LBTA AI
               </p>
             </div>

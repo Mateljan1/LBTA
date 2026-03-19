@@ -112,7 +112,7 @@ export default function FAQInteractive({ faqs }: FAQInteractiveProps) {
       <section className="section-spacing bg-white">
         <div className="container-narrow">
           {categories.length === 0 ? (
-            <p className="text-center text-gray-600 font-sans">No FAQs available yet.</p>
+            <p className="text-center text-lbta-slate font-sans">No FAQs available yet.</p>
           ) : (
           <>
           <div
@@ -179,7 +179,7 @@ export default function FAQInteractive({ faqs }: FAQInteractiveProps) {
                           </h3>
                         </div>
                         <ChevronDown
-                          className={`w-6 h-6 text-gray-400 flex-shrink-0 ${reducedMotion ? '' : 'transition-transform duration-300'} ${
+                          className={`w-6 h-6 text-lbta-slate/60 flex-shrink-0 ${reducedMotion ? '' : 'transition-transform duration-300'} ${
                             openIndex === globalIndex ? 'rotate-180' : ''
                           }`}
                           aria-hidden
@@ -194,7 +194,7 @@ export default function FAQInteractive({ faqs }: FAQInteractiveProps) {
                           className={`px-8 pb-8 ${reducedMotion ? '' : 'transition-all duration-300 ease-out'}`}
                         >
                           <div className="pl-10 pt-4 border-l-4 border-brand-sunset-cliff">
-                            <p className="text-gray-600 leading-relaxed">
+                            <p className="text-lbta-slate leading-relaxed">
                               {faq.answer}
                             </p>
                           </div>
@@ -218,7 +218,7 @@ export default function FAQInteractive({ faqs }: FAQInteractiveProps) {
             <h2 className="text-4xl font-headline font-light text-brand-pacific-dusk mb-8">
               Still Have Questions?
             </h2>
-            <p className="text-lg text-gray-600 mb-10 font-sans leading-relaxed">
+            <p className="text-lg text-lbta-slate mb-10 font-sans leading-relaxed">
               Schedule a complimentary trial. Experience our approach firsthand.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Client } from '@notionhq/client'
-import axios from 'axios'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, registerYearSchema, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
-import { getWebsiteSignupsListId } from '@/lib/activecampaign'
+import {
+  upsertContact,
+  addToList,
+  addTags,
+  getClassTagFromProgram,
+  LBTA_LIST_ID,
+  getWebsiteSignupsListId,
+  CAMPAIGN_TAGS,
+  CLASS_TAGS,
+} from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
 
@@ -82,95 +90,44 @@ function isEarlyBird(season?: string): boolean {
 // ============================================================
 // ActiveCampaign Tag Mapping
 // ============================================================
-// Season Tags (for email automations)
+// Season Tags (verified IDs from AC — SEASON_TAGS module has full list)
 const SEASON_TAGS: Record<string, number> = {
-  'winter': 27,      // LBTA_Winter2026
-  'spring': 50,      // LBTA_Spring2026
-  'summer': 51,      // LBTA_Summer2026
-  'fall': 52,        // LBTA_Fall2026
+  'winter': CAMPAIGN_TAGS.winter_2026,  // 228
+  'spring': CAMPAIGN_TAGS.spring_2026,  // 227
+  // TODO: Add summer/fall season tags when created in AC
 }
-
-// Camp Tags
-const CAMP_TAGS: Record<string, number> = {
-  'swim-tennis': 60,      // camp:swim_tennis
-  'ski-week': 61,         // camp:ski_week
-  'spring-break': 62,     // camp:spring_break
-  'summer': 63,           // camp:summer
-  'back-to-school': 64,   // camp:back_to_school
-  'thanksgiving': 65,     // camp:thanksgiving
-  'winter-break': 66,     // camp:winter_break
-}
-
-// JTT Tags
-const JTT_TAGS: Record<string, number> = {
-  'spring-jtt': 70,       // jtt:spring
-  'fall-jtt': 71,         // jtt:fall
-  '10u': 72,              // jtt:10u
-  '12u': 73,              // jtt:12u
-  '14u': 74,              // jtt:14u
-  '18u': 75,              // jtt:18u
-}
-
-// Class-specific tags (existing)
-const CLASS_TAGS: Record<string, number> = {
-  'little-stars': 49,
-  'red-ball': 38,
-  'orange-ball': 39,
-  'green-dot': 40,
-  'youth-development': 21,
-  'high-performance': 41,
-  'adult-beginner': 17,
-  'adult-beginner-bridge': 42,
-  'adult-intermediate': 16,
-  'adult-advanced': 15,
-  'cardio': 14,
-  'liveball-intermediate': 19,
-  'liveball-advanced': 18,
-}
-
-// Registration source tag
-const WEBSITE_REGISTRATION_TAG = 33  // Winter 2026 - Website Registration
 
 // Get all applicable tags for a registration
-function getApplicableTags(data: any): number[] {
-  const tags: number[] = [WEBSITE_REGISTRATION_TAG]  // Always add website registration tag
-  
-  const registrationType = data.registrationType as RegistrationType
-  
+function getApplicableTags(
+  data: { season?: string; program?: string; registrationType?: string },
+  registrationType: RegistrationType
+): number[] {
+  const tags: number[] = [CAMPAIGN_TAGS.website_registration] // 180
+
   // Add season tag if applicable
   if (data.season && SEASON_TAGS[data.season.toLowerCase()]) {
     tags.push(SEASON_TAGS[data.season.toLowerCase()])
   }
-  
-  // Add camp tag
-  if (registrationType === 'camp' || registrationType === 'swim-tennis') {
-    const campId = data.campId || data.programId
-    if (campId && CAMP_TAGS[campId]) {
-      tags.push(CAMP_TAGS[campId])
-    }
-  }
-  
-  // Add JTT tags
+
+  // Add JTT tag
   if (registrationType === 'jtt') {
-    const jttId = data.jttId || data.programId
-    if (jttId && JTT_TAGS[jttId]) {
-      tags.push(JTT_TAGS[jttId])
-    }
-    // Add division tag
-    if (data.division && JTT_TAGS[data.division.toLowerCase()]) {
-      tags.push(JTT_TAGS[data.division.toLowerCase()])
+    tags.push(CAMPAIGN_TAGS.jtt_program) // 197
+  }
+
+  // Add class tag using the consolidated mapping
+  if (data.program) {
+    const classTag = getClassTagFromProgram(data.program)
+    if (classTag) {
+      tags.push(classTag)
     }
   }
-  
-  // Add class tag for seasonal programs
-  if (registrationType === 'seasonal') {
-    const programId = data.programId?.toLowerCase().replace(/\s+/g, '-')
-    if (programId && CLASS_TAGS[programId]) {
-      tags.push(CLASS_TAGS[programId])
-    }
+
+  // Add summer camp tag for camp registrations
+  if (registrationType === 'camp' || registrationType === 'swim-tennis') {
+    tags.push(CLASS_TAGS.summer_camp) // 156
   }
-  
-  return Array.from(new Set(tags))  // Remove duplicates
+
+  return Array.from(new Set(tags))
 }
 
 export async function POST(request: NextRequest) {
@@ -230,7 +187,8 @@ export async function POST(request: NextRequest) {
     // 1. Save to Notion
     if (hasEnvVar('NOTION_API_KEY') && hasEnvVar('NOTION_DATABASE_ID')) {
     try {
-      const notionProperties: any = {
+      // Notion SDK property types are deeply nested; using `any` for dynamic property construction
+      const notionProperties: Record<string, any> = { // eslint-disable-line
         'Parent Name': {
           title: [{ text: { content: `${data.firstName} ${data.lastName}` } }]
         },
@@ -303,144 +261,61 @@ export async function POST(request: NextRequest) {
     // 2. Add to ActiveCampaign with proper tagging
     let acSynced = false
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
-    try {
-      // Format display values
-      const daysSelected = (data.preferredDays || []).join(', ') || 'N/A'
-      const tuitionAmount = data.totalPrice || data.price || 'Contact for pricing'
-      
-      // Build custom field values based on registration type
-      const fieldValues = [
-        { field: '7', value: data.program || 'Not specified' },        // PROGRAM
-        { field: '8', value: data.location || 'Not specified' },       // LOCATION
-        { field: '9', value: daysSelected },                           // DAYS_SELECTED
-        { field: '10', value: String(tuitionAmount) },                 // TUITION
-        { field: '15', value: 'website' },                             // LEAD_SOURCE
-        { field: '16', value: registrationType },                      // REGISTRATION_TYPE
-        { field: '17', value: data.season || 'N/A' },                  // SEASON
-      ]
+      try {
+        const daysSelected = (data.preferredDays || []).join(', ') || 'N/A'
+        const tuitionAmount = data.totalPrice || data.price || 'Contact for pricing'
 
-      // Add camp-specific fields
-      if (registrationType === 'camp' || registrationType === 'swim-tennis') {
-        fieldValues.push({ field: '18', value: data.campDates || '' })  // CAMP_DATES
-        fieldValues.push({ field: '19', value: data.campWeek || '' })   // CAMP_WEEK
-      }
+        // Build program display value (include season if present)
+        const programDisplay = data.season
+          ? `${data.program || 'Not specified'} - ${data.season}`
+          : data.program || 'Not specified'
 
-      // Add JTT-specific fields
-      if (registrationType === 'jtt') {
-        fieldValues.push({ field: '20', value: data.jttSeason || '' })  // JTT_SEASON
-        fieldValues.push({ field: '21', value: data.division || '' })   // JTT_DIVISION
-      }
+        const fieldValues = [
+          { field: '7', value: programDisplay },                        // PROGRAM
+          { field: '8', value: data.location || 'Not specified' },      // LOCATION
+          { field: '9', value: daysSelected },                          // DAYS_SELECTED
+          { field: '10', value: String(tuitionAmount) },                // TUITION
+          { field: '11', value: 'website' },                            // LEAD_SOURCE
+          { field: '12', value: registrationType },                     // registration_type
+        ]
 
-      const acUrl = getEnvVar('ACTIVECAMPAIGN_URL')
-      const acKey = getEnvVar('ACTIVECAMPAIGN_API_KEY')
-
-      // Create/update contact
-      const contactResponse = await axios.post(
-        `${acUrl}/api/3/contacts`,
-        {
-          contact: {
-            email: data.email,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            phone: data.phone,
-            fieldValues
-          }
-        },
-        {
-          headers: {
-            'Api-Token': acKey,
-            'Content-Type': 'application/json'
-          }
+        // Add JTT-specific fields
+        if (registrationType === 'jtt') {
+          fieldValues.push({ field: '15', value: data.division || '' }) // JTT_DIVISION
         }
-      )
 
-      const rawContactId = contactResponse.data?.contact?.id
-      const contactId =
-        typeof rawContactId === 'number' && Number.isInteger(rawContactId) && rawContactId > 0
-          ? rawContactId
-          : null
-      if (contactId == null) {
-        console.error('[register-year] ActiveCampaign did not return a valid contact id:', rawContactId)
-        return NextResponse.json(
-          { success: false, error: 'Registration received. We could not complete all steps; we will contact you shortly.', acSynced: false },
-          { status: 503 }
-        )
-      }
-      acSynced = true
-      console.log('[register-year] AC contact created')
+        const contactResult = await upsertContact({
+          email: data.email,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+          fieldValues,
+        })
 
-      // Add to list (triggers automation)
-      await axios.post(
-        `${acUrl}/api/3/contactLists`,
-        {
-          contactList: {
-            list: 4,  // Laguna Beach Tennis Academy list
-            contact: contactId,
-            status: 1  // Active subscriber
-          }
-        },
-        {
-          headers: {
-            'Api-Token': acKey,
-            'Content-Type': 'application/json'
-          }
+        if (contactResult.success && contactResult.data) {
+          const contactId = contactResult.data.id
+          acSynced = true
+          console.log('[register-year] AC contact created:', { contactId })
+
+          // Add to lists
+          const websiteSignupsListId = getWebsiteSignupsListId()
+          await Promise.all([
+            addToList(contactId, LBTA_LIST_ID),
+            websiteSignupsListId !== null ? addToList(contactId, websiteSignupsListId) : Promise.resolve(),
+          ])
+          console.log('[register-year] Added to list(s)')
+
+          // Apply all applicable tags
+          const tags = getApplicableTags(data, registrationType)
+          const tagResult = await addTags(contactId, tags)
+          console.log('[register-year] Tags applied:', tagResult)
+        } else {
+          console.error('[register-year] AC contact upsert failed')
         }
-      )
-
-      const websiteSignupsListId = getWebsiteSignupsListId()
-      if (websiteSignupsListId !== null) {
-        await axios.post(
-          `${acUrl}/api/3/contactLists`,
-          {
-            contactList: {
-              list: websiteSignupsListId,
-              contact: contactId,
-              status: 1
-            }
-          },
-          {
-            headers: {
-              'Api-Token': acKey,
-              'Content-Type': 'application/json'
-            }
-          }
-        )
+      } catch (acError) {
+        console.error('[register-year] ActiveCampaign error:', acError)
+        acSynced = false
       }
-
-      console.log('[register-year] Added to list(s)')
-
-      // Apply all applicable tags
-      const tags = getApplicableTags(data)
-
-      for (const tagId of tags) {
-        try {
-          await axios.post(
-            `${acUrl}/api/3/contactTags`,
-            {
-              contactTag: {
-                contact: contactId,
-                tag: tagId.toString()
-              }
-            },
-            {
-              headers: {
-                'Api-Token': acKey,
-                'Content-Type': 'application/json'
-              }
-            }
-          )
-        } catch (tagError: unknown) {
-          const err = tagError as { response?: { data?: unknown }; message?: string }
-          console.error('[register-year] Failed to apply tag:', err.response?.data ?? err.message)
-        }
-      }
-
-    } catch (acError: unknown) {
-      const err = acError as { response?: { data?: unknown }; message?: string }
-      console.error('[register-year] ActiveCampaign error:', err.response?.data ?? err.message)
-      acSynced = false
-      // Continue; response will include acSynced: false
-    }
     }
 
     void sendToGHL({

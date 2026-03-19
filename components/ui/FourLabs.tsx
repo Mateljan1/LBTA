@@ -167,7 +167,7 @@ function LabCard({ lab, index }: LabCardProps) {
         </h3>
         
         {/* Description */}
-        <p className="text-base leading-[1.7] text-gray-600 mb-12">
+        <p className="text-base leading-[1.7] text-lbta-slate mb-12">
           {lab.description}
         </p>
         
@@ -185,12 +185,12 @@ function LabCard({ lab, index }: LabCardProps) {
           </motion.div>
           
           {/* Stat Label */}
-          <div className="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-gray-500 mb-1">
+          <div className="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-lbta-slate mb-1">
             {lab.stat.label}
           </div>
           
           {/* Stat Context */}
-          <div className="text-xs text-gray-400 mb-4">
+          <div className="text-xs text-lbta-slate/60 mb-4">
             {lab.stat.context}
           </div>
           
@@ -233,7 +233,7 @@ export default function FourLabs() {
           <h2 className="text-4xl md:text-5xl font-headline font-light tracking-tight text-brand-pacific-dusk mb-6">
             Built on Four Labs
           </h2>
-          <p className="text-lg leading-relaxed text-gray-600 max-w-[700px] mx-auto">
+          <p className="text-lg leading-relaxed text-lbta-slate max-w-[700px] mx-auto">
             Every training day pulls from four connected systems. No lab operates in isolation.
           </p>
         </motion.div>
@@ -257,7 +257,7 @@ export default function FourLabs() {
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          <div className="flex items-center gap-4 text-gray-400">
+          <div className="flex items-center gap-4 text-lbta-slate/60">
             <div className="w-16 h-px bg-gray-300" />
             <span className="text-xs font-sans tracking-[0.15em] uppercase">
               Connected Systems

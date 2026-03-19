@@ -1,23 +1,21 @@
 import { timingSafeEqual } from 'crypto'
 import { NextRequest, NextResponse } from 'next/server'
-import axios from 'axios'
-import { getEnvVar, hasEnvVar } from '@/lib/env'
+import { hasEnvVar } from '@/lib/env'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, validateRequest, webhookPayloadSchema, type WebhookPayload } from '@/lib/validations'
-
-/** Minimal types for ActiveCampaign API responses (avoid `any`) */
-interface AcContactResponse {
-  contact?: { id?: string; [key: string]: unknown }
-}
-interface AcFieldValuesResponse {
-  fieldValues?: Array<{ field: string; value?: string; [key: string]: unknown }>
-}
-interface AcContactTagsResponse {
-  contactTags?: Array<{ tag: string; [key: string]: unknown }>
-}
-interface AcContactListsResponse {
-  contactLists?: Array<{ list: string; status: string; [key: string]: unknown }>
-}
+import {
+  addToList,
+  addTag,
+  getContact,
+  isOnList,
+  getClassTagFromProgram,
+  getClassTagFromLevel,
+  LBTA_LIST_ID,
+  CAMPAIGN_TAGS,
+  CLASS_TAGS,
+  INTEREST_TAGS,
+  TYPE_TAGS,
+} from '@/lib/activecampaign'
 
 // ============================================================
 // ActiveCampaign Webhook Handler - LBTA Auto-Tagging System
@@ -27,8 +25,8 @@ interface AcContactListsResponse {
 // - Contact is updated
 //
 // It automatically:
-// 1. Adds the contact to List 4 (LBTA master list)
-// 2. Applies the LBTA_Winter2026 tag (27) to trigger confirmation email
+// 1. Adds the contact to LBTA master list (list 4)
+// 2. Applies the season tag (e.g. winter_2026 = 228) to trigger confirmation email
 // 3. Applies the appropriate class-specific tag based on their level/interest
 //
 // SECURITY MODEL:
@@ -69,109 +67,30 @@ function verifyWebhookSecret(request: NextRequest): NextResponse | null {
   }
 }
 
-// Tag mapping based on TENNIS_LEVEL custom field values (from Facebook Lead Ads)
-const LEVEL_TO_TAG: { [key: string]: number } = {
-  // Facebook Lead Ad level options
-  'complete_beginner': 17,      // class:adult_beginner
-  'some_experience': 16,        // class:adult_intermediate
-  'intermediate_advanced': 15,  // class:adult_advanced
-  'beginner': 17,               // class:adult_beginner
-  'intermediate': 16,           // class:adult_intermediate
-  'advanced': 15,               // class:adult_advanced
+// PROGRAM_INTEREST dropdown field values (field 3) → CLASS_TAGS keys
+// These match the exact values added to the AC dropdown options
+const PROGRAM_VALUE_TO_TAG: Record<string, number> = {
+  'little_tennis_stars': CLASS_TAGS.little_tennis_stars,
+  'red_ball': CLASS_TAGS.red_ball,
+  'orange_ball': CLASS_TAGS.orange_ball,
+  'green_dot': CLASS_TAGS.green_dot,
+  'youth_development': CLASS_TAGS.youth_development,
+  'high_performance': CLASS_TAGS.high_performance,
+  'adult_beginner_1': CLASS_TAGS.adult_beginner,
+  'adult_beginner_2': CLASS_TAGS.adult_beginner_bridge,
+  'adult_intermediate': CLASS_TAGS.adult_intermediate,
+  'adult_advanced': CLASS_TAGS.adult_advanced,
+  'liveball_intermediate': CLASS_TAGS.live_ball_intermediate,
+  'liveball_advanced': CLASS_TAGS.live_ball_advanced,
+  'cardio_tennis': CLASS_TAGS.cardio,
+  'private_lessons': CLASS_TAGS.private_lessons,
 }
 
-// Tag mapping based on PROGRAM_INTEREST dropdown field values (field 3)
-// These match the exact values we added to the dropdown options
-const PROGRAM_VALUE_TO_TAG: { [key: string]: number } = {
-  // Junior Programs
-  'little_tennis_stars': 37,   // class:little_stars
-  'red_ball': 38,              // class:red_ball
-  'orange_ball': 39,           // class:orange_ball
-  'green_dot': 40,             // class:green_dot
-
-  // Youth Programs
-  'youth_development': 21,     // class:youth_development
-  'high_performance': 41,      // class:high_performance
-
-  // Adult Programs
-  'adult_beginner_1': 17,      // class:adult_beginner
-  'adult_beginner_2': 47,      // class:adult_beginner_2
-  'adult_intermediate': 16,    // class:adult_intermediate
-  'adult_advanced': 15,        // class:adult_advanced
-
-  // Fitness Programs
-  'liveball_intermediate': 19, // class:live_ball_intermediate
-  'liveball_advanced': 18,     // class:live_ball_advanced
-  'cardio_tennis': 14,         // class:cardio
-
-  // Special
-  'private_lessons': 48,       // class:private_lessons
-}
-
-// Tag mapping based on program/interest field text (fallback for text fields)
-const INTEREST_TO_TAG: { [key: string]: number } = {
-  // Junior Programs
-  'little stars': 37,
-  'little tennis stars': 37,
-  'red ball': 38,
-  'orange ball': 39,
-  'green dot': 40,
-
-  // Youth Programs
-  'youth development': 21,
-  'youth program': 21,
-  'high performance': 41,
-
-  // Adult Programs
-  'bridge': 47,
-  'beginner 2': 47,
-  'adult beginner': 17,
-  'adult intermediate': 16,
-  'adult advanced': 15,
-
-  // Fitness Programs
-  'cardio': 14,
-  'cardio tennis': 14,
-  'liveball advanced': 18,
-  'live ball advanced': 18,
-  'liveball intermediate': 19,
-  'live ball intermediate': 19,
-  'liveball': 19,  // Default to intermediate
-  'live ball': 19,
-
-  // Seasonal
-  'summer camp': 13,
-  'camp': 13,
-
-  // Special
-  'private': 48,
-  'private lessons': 48,
-}
-
-// Lead source tags that indicate program interest
-const SOURCE_TAG_TO_CLASS_TAG: { [key: number]: number } = {
-  24: 21,  // Youth Development Lead → class:youth_development
-  25: 41,  // High Performance Lead → class:high_performance
-  26: 17,  // Adult Programming Lead → class:adult_beginner (will be refined by TENNIS_LEVEL)
-}
-
-// Helper function to determine class tag from program interest text
-function getClassTagFromInterest(interestText: string): number | null {
-  const text = interestText.toLowerCase()
-
-  for (const [keyword, tagId] of Object.entries(INTEREST_TO_TAG)) {
-    if (text.includes(keyword)) {
-      return tagId
-    }
-  }
-
-  return null
-}
-
-// Helper function to get class tag from tennis level
-function getClassTagFromLevel(level: string): number | null {
-  const normalizedLevel = level.toLowerCase().replace(/[^a-z_]/g, '_')
-  return LEVEL_TO_TAG[normalizedLevel] || null
+// Lead source/interest/type tags → default class tag (fallback when no field-level match)
+const SOURCE_TAG_TO_CLASS_TAG: Record<number, number> = {
+  [INTEREST_TAGS.junior_program]: CLASS_TAGS.youth_development,   // 213 → 148
+  [TYPE_TAGS.junior]: CLASS_TAGS.high_performance,                // 190 → 149
+  [INTEREST_TAGS.adult_program]: CLASS_TAGS.adult_beginner,       // 212 → 150 (refined by TENNIS_LEVEL)
 }
 
 export async function POST(request: NextRequest) {
@@ -208,9 +127,6 @@ export async function POST(request: NextRequest) {
         { status: 503 }
       )
     }
-
-    const acUrl = getEnvVar('ACTIVECAMPAIGN_URL')
-    const acApiKey = getEnvVar('ACTIVECAMPAIGN_API_KEY')
 
     // Parse and validate webhook payload from ActiveCampaign
     const parsed = await parseJsonBody(request)
@@ -259,99 +175,47 @@ export async function POST(request: NextRequest) {
       console.log('[activecampaign-webhook] Processing contact ID:', contactId)
     }
 
-    // Step 1: Get contact details and field values in parallel (2 GETs)
-    const [contactResponse, fieldValuesResponse] = await Promise.all([
-      axios.get<AcContactResponse>(
-        `${acUrl}/api/3/contacts/${contactId}`,
-        { headers: { 'Api-Token': acApiKey } }
-      ),
-      axios.get<AcFieldValuesResponse>(
-        `${acUrl}/api/3/contacts/${contactId}/fieldValues`,
-        { headers: { 'Api-Token': acApiKey } }
-      ),
-    ])
+    // Step 1: Get contact details, field values, and tags via consolidated module
+    const contactResult = await getContact(contactId)
+    if (!contactResult.success || !contactResult.data) {
+      console.error('[activecampaign-webhook] Failed to fetch contact:', contactId)
+      return NextResponse.json(
+        { success: false, error: 'Could not fetch contact' },
+        { status: 502 }
+      )
+    }
 
-    const contact = contactResponse.data.contact
-    const fieldValues = fieldValuesResponse.data.fieldValues ?? []
+    const { fieldValues, tags: currentTagIds } = contactResult.data
 
     // CRITICAL: Check lead source and handle appropriately
-    // Field 15 = LEAD_SOURCE
-    const leadSourceField = fieldValues.find((fv) => fv.field === '15')
+    // Field 11 = LEAD_SOURCE (updated from old field 15)
+    const leadSourceField = fieldValues.find((fv) => fv.field === '11')
     const leadSource = leadSourceField?.value || 'unknown'
-    
-    if (leadSource === 'website') {
+
+    if (leadSource === 'website' || leadSource === 'website_jtt') {
       if (process.env.NODE_ENV !== 'production') {
         console.log('[activecampaign-webhook] Skipping - website registration already processed')
       }
-      return NextResponse.json({ 
-        success: true, 
-        message: 'Website registration - skipped duplicate processing' 
+      return NextResponse.json({
+        success: true,
+        message: 'Website registration - skipped duplicate processing',
       })
     }
 
     if (process.env.NODE_ENV !== 'production') {
-      console.log('[activecampaign-webhook] Lead source:', leadSource === 'website_embedded' ? 'embedded' : 'external')
+      console.log('[activecampaign-webhook] Lead source:', leadSource, '| Tags:', currentTagIds.length)
     }
 
-    // Get contact's current tags and list memberships in parallel (2 GETs)
-    const [tagsResponse, listMembershipResponse] = await Promise.all([
-      axios.get<AcContactTagsResponse>(
-        `${acUrl}/api/3/contacts/${contactId}/contactTags`,
-        { headers: { 'Api-Token': acApiKey } }
-      ),
-      axios.get<AcContactListsResponse>(
-        `${acUrl}/api/3/contacts/${contactId}/contactLists`,
-        { headers: { 'Api-Token': acApiKey } }
-      ),
-    ])
-
-    const contactTags = tagsResponse.data.contactTags ?? []
-    const currentTagIds = contactTags.map((ct) => parseInt(ct.tag, 10))
-
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('[activecampaign-webhook] Current tag count:', currentTagIds.length)
+    // Step 2: Add to LBTA master list if not already on it
+    const alreadyOnList = await isOnList(contactId, LBTA_LIST_ID)
+    if (!alreadyOnList) {
+      await addToList(contactId, LBTA_LIST_ID)
     }
 
-    const listMemberships = listMembershipResponse.data.contactLists ?? []
-    const isOnList4 = listMemberships.some((lm) => lm.list === '4' && lm.status === '1')
-
-    // Add to List 4 if not already on it
-    if (!isOnList4) {
-      await axios.post(
-        `${acUrl}/api/3/contactLists`,
-        {
-          contactList: {
-            list: 4,
-            contact: contactId,
-            status: 1
-          }
-        },
-        {
-          headers: {
-            'Api-Token': acApiKey,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-    }
-
-    // Step 3: Apply LBTA_Winter2026 tag (27) if not already applied
-    if (!currentTagIds.includes(27)) {
-      await axios.post(
-        `${acUrl}/api/3/contactTags`,
-        {
-          contactTag: {
-            contact: contactId,
-            tag: 27
-          }
-        },
-        {
-          headers: {
-            'Api-Token': acApiKey,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
+    // Step 3: Apply season tag if not already applied
+    const seasonTagId = CAMPAIGN_TAGS.winter_2026  // 228
+    if (!currentTagIds.includes(seasonTagId)) {
+      await addTag(contactId, seasonTagId)
     }
 
     // Step 4: Determine the appropriate class tag
@@ -374,15 +238,17 @@ export async function POST(request: NextRequest) {
     if (!classTagId) {
       const programField = fieldValues.find((fv) => fv.field === '7')
       if (programField?.value) {
-        classTagId = getClassTagFromInterest(programField.value)
+        classTagId = getClassTagFromProgram(programField.value)
       }
     }
 
-    // Method 4: Check existing source tags (Youth Dev Lead, High Perf Lead, Adult Lead)
+    // Method 4: Check existing source/interest tags for default class mapping
     if (!classTagId) {
       for (const [sourceTagId, defaultClassTag] of Object.entries(SOURCE_TAG_TO_CLASS_TAG)) {
-        if (currentTagIds.includes(parseInt(sourceTagId))) {
-          if (parseInt(sourceTagId) === 26 && tennisLevelField?.value) {
+        const srcId = parseInt(sourceTagId)
+        if (currentTagIds.includes(srcId)) {
+          // For adult program interest, refine by tennis level if available
+          if (srcId === INTEREST_TAGS.adult_program && tennisLevelField?.value) {
             classTagId = getClassTagFromLevel(tennisLevelField.value) || defaultClassTag
           } else {
             classTagId = defaultClassTag
@@ -394,21 +260,7 @@ export async function POST(request: NextRequest) {
 
     // Step 5: Apply class tag if determined and not already applied
     if (classTagId && !currentTagIds.includes(classTagId)) {
-      await axios.post(
-        `${acUrl}/api/3/contactTags`,
-        {
-          contactTag: {
-            contact: contactId,
-            tag: classTagId
-          }
-        },
-        {
-          headers: {
-            'Api-Token': acApiKey,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
+      await addTag(contactId, classTagId)
     }
 
     return NextResponse.json({
@@ -418,7 +270,7 @@ export async function POST(request: NextRequest) {
 
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error)
-    console.error('❌ Webhook error:', message)
+    console.error('[activecampaign-webhook] Error:', message)
     return NextResponse.json(
       { success: false, error: 'Webhook processing failed' },
       { status: 500 }

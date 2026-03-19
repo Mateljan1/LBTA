@@ -21,3 +21,10 @@ export const FLYER_USTA_NOTE = 'Sat 1-3PM: Courts 1-3 USTA League'
 
 /** Academy address for flyer and print. */
 export const FLYER_ACADEMY_ADDRESS = '1098 Balboa Ave, Laguna Beach, CA 92651'
+
+/** Short location keys → full venue names (court flyer + PDF). */
+export const FLYER_LOCATION_DISPLAY: Record<string, string> = {
+  Moulton: 'Moulton Meadows Park',
+  Alta: 'Alta Laguna Park',
+  LBHS: 'Laguna Beach High School',
+}

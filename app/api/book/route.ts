@@ -6,9 +6,11 @@ import {
   upsertContact,
   addToList,
   addTags,
+  getClassTagFromProgram,
   LBTA_LIST_ID,
   getWebsiteSignupsListId,
   CAMPAIGN_TAGS,
+  CLASS_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
@@ -20,20 +22,20 @@ import { sendToGHL } from '@/lib/gohighlevel'
 // Integrates with ActiveCampaign for contact management and email automation
 // ============================================================
 
-// Tag IDs for program categories (using CLASS_TAGS from activecampaign module)
+// Kebab-case program slug → AC tag ID (from canonical CLASS_TAGS)
 const PROGRAM_TAGS: Record<string, number> = {
-  'little-tennis-stars': 49,
-  'red-ball': 38,
-  'orange-ball': 39,
-  'green-dot': 40,
-  'youth-development': 21,
-  'high-performance': 41,
-  'adult-beginner': 17,
-  'adult-intermediate': 16,
-  'adult-advanced': 15,
-  'cardio-tennis': 14,
-  'private-lessons': 80,
-  'not-sure': 81,
+  'little-tennis-stars': CLASS_TAGS.little_tennis_stars,
+  'red-ball': CLASS_TAGS.red_ball,
+  'orange-ball': CLASS_TAGS.orange_ball,
+  'green-dot': CLASS_TAGS.green_dot,
+  'youth-development': CLASS_TAGS.youth_development,
+  'high-performance': CLASS_TAGS.high_performance,
+  'adult-beginner': CLASS_TAGS.adult_beginner,
+  'adult-intermediate': CLASS_TAGS.adult_intermediate,
+  'adult-advanced': CLASS_TAGS.adult_advanced,
+  'cardio-tennis': CLASS_TAGS.cardio,
+  'private-lessons': CLASS_TAGS.private_lessons,
+  'not-sure': CAMPAIGN_TAGS.not_sure,
 }
 
 export async function POST(request: NextRequest) {
@@ -101,9 +103,8 @@ export async function POST(request: NextRequest) {
             phone: privateBody.phone,
             fieldValues: [
               { field: '7', value: `Private: ${privateBody.coach} — ${privateBody.option}` },
-              { field: '15', value: 'website' },
-              { field: '16', value: 'private-lesson' },
-              { field: '23', value: privateBody.message ?? '' },
+              { field: '11', value: 'website' },
+              { field: '12', value: 'private-lesson' },
             ],
           })
           if (contactResult.success && contactResult.data) {
@@ -158,10 +159,9 @@ export async function POST(request: NextRequest) {
             { field: '7', value: trialBody.program || 'Trial Request' },
             { field: '8', value: trialBody.location || 'Not specified' },
             { field: '9', value: daysSelected },
-            { field: '15', value: 'website' },
-            { field: '16', value: 'trial' },
-            { field: '22', value: trialBody.experience || 'Not specified' },
-            { field: '23', value: trialBody.goals || '' },
+            { field: '11', value: 'website' },
+            { field: '12', value: 'trial' },
+            { field: '5', value: trialBody.experience || 'Not specified' },
           ],
         })
         if (contactResult.success && contactResult.data) {
