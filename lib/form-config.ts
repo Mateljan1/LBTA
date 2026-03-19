@@ -7,12 +7,17 @@
  * list subscription, and class-specific tag application.
  *
  * Pricing for the registration modal is loaded from data/pricing-supplemental.json
- * (registrationModalPricing) so there is a single source of truth in /data.
+ * (registrationModalPricing) except `utr-circuit`, which is derived from
+ * data/leagues-2026.json via lib/utr-circuit-modal-pricing.ts.
  */
 
 import { registrationModalPricing } from '@/lib/pricing-supplemental'
+import { getUtrCircuitModalPricingSummary } from '@/lib/utr-circuit-modal-pricing'
 
 function getModalPricing(programId: string): string {
+  if (programId === 'utr-circuit') {
+    return getUtrCircuitModalPricingSummary()
+  }
   return registrationModalPricing[programId] ?? 'Contact for pricing'
 }
 
@@ -63,7 +68,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '3-5 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 49 // class:little_tennis_stars
+    classTagId: 144 // CLASS_TAGS.little_tennis_stars
   },
 
   'red-ball': {
@@ -79,7 +84,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '5-6 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 38 // class:red_ball
+    classTagId: 145 // CLASS_TAGS.red_ball
   },
 
   'orange-ball': {
@@ -95,7 +100,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '7-8 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 39 // class:orange_ball
+    classTagId: 146 // CLASS_TAGS.orange_ball
   },
 
   'green-dot': {
@@ -111,7 +116,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '9-11 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 40 // class:green_dot
+    classTagId: 147 // CLASS_TAGS.green_dot
   },
 
   // ===== YOUTH PROGRAMS =====
@@ -128,7 +133,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '11-18 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 21 // class:youth_development
+    classTagId: 148 // CLASS_TAGS.youth_development
   },
 
   'high-performance': {
@@ -141,10 +146,10 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       duration: '2 hr',
       pricing: getModalPricing('high-performance'),
       category: 'Youth',
-      ageGroup: '12-17 years (UTR 5+)',
+      ageGroup: '12+ years (UTR 5+)',
       billingCycle: 'quarterly'
     },
-    classTagId: 41 // class:high_performance
+    classTagId: 149 // CLASS_TAGS.high_performance
   },
 
   // ===== ADULT PROGRAMS (LBHS & Moulton Meadows) =====
@@ -160,7 +165,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       category: 'Adult',
       billingCycle: 'quarterly'
     },
-    classTagId: 17 // class:adult_beginner
+    classTagId: 150 // CLASS_TAGS.adult_beginner
   },
 
   'adult-beginner-2': {
@@ -175,7 +180,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       category: 'Adult',
       billingCycle: 'quarterly'
     },
-    classTagId: 42 // class:adult_beginner_bridge
+    classTagId: 195 // CLASS_TAGS.adult_beginner_bridge
   },
 
   'adult-intermediate': {
@@ -190,7 +195,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       category: 'Adult',
       billingCycle: 'quarterly'
     },
-    classTagId: 16 // class:adult_intermediate
+    classTagId: 151 // CLASS_TAGS.adult_intermediate
   },
 
   'adult-advanced': {
@@ -205,7 +210,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       category: 'Adult',
       billingCycle: 'quarterly'
     },
-    classTagId: 15 // class:adult_advanced
+    classTagId: 152 // CLASS_TAGS.adult_advanced
   },
 
   // ===== FITNESS PROGRAMS =====
@@ -221,7 +226,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       category: 'Fitness',
       billingCycle: 'monthly'
     },
-    classTagId: 14 // class:cardio
+    classTagId: 155 // CLASS_TAGS.cardio
   },
 
   'liveball-intermediate': {
@@ -236,7 +241,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       category: 'Fitness',
       billingCycle: 'monthly'
     },
-    classTagId: 19 // class:live_ball_intermediate
+    classTagId: 153 // CLASS_TAGS.live_ball_intermediate
   },
 
   'liveball-advanced': {
@@ -251,7 +256,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       category: 'Fitness',
       billingCycle: 'monthly'
     },
-    classTagId: 18 // class:live_ball_advanced
+    classTagId: 154 // CLASS_TAGS.live_ball_advanced
   },
 
   // ===== CAMPS =====
@@ -268,7 +273,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '5-11 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 60 // camp:swim_tennis
+    classTagId: 156 // CLASS_TAGS.summer_camp (general camp tag)
   },
 
   'ski-week': {
@@ -284,7 +289,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 61 // camp:ski_week
+    classTagId: 156 // CLASS_TAGS.summer_camp (general camp tag)
   },
 
   'spring-break': {
@@ -300,7 +305,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 62 // camp:spring_break
+    classTagId: 156 // CLASS_TAGS.summer_camp (general camp tag)
   },
 
   'summer-camp': {
@@ -316,7 +321,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '5-17 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 63 // camp:summer
+    classTagId: 156 // CLASS_TAGS.summer_camp
   },
 
   'back-to-school': {
@@ -332,7 +337,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 64 // camp:back_to_school
+    classTagId: 156 // CLASS_TAGS.summer_camp (general camp tag)
   },
 
   'thanksgiving': {
@@ -348,7 +353,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 65 // camp:thanksgiving
+    classTagId: 156 // CLASS_TAGS.summer_camp (general camp tag)
   },
 
   'winter-break': {
@@ -364,7 +369,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
       ageGroup: '5-14 years',
       billingCycle: 'quarterly'
     },
-    classTagId: 66 // camp:winter_break
+    classTagId: 156 // CLASS_TAGS.summer_camp (general camp tag)
   },
 
   // ===== UTR Circuit (replaces JTT) =====
