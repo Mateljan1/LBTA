@@ -39,7 +39,7 @@ export default function USTAAdultLeaguePage() {
         <div className="absolute inset-0">
           <Image
             src="/legacy-working-assets/hero/leagues-hero/leagues-hero.webp"
-            alt=""
+            alt="USTA Adult League at LBTA"
             fill
             className="object-cover object-center"
             sizes="100vw"

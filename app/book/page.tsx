@@ -36,7 +36,7 @@ function BookPageContent() {
         <div className="absolute inset-0">
           <Image
             src="/legacy-working-assets/conversion/book-hero/book-hero.webp"
-            alt=""
+            alt="Book your trial or private lesson at LBTA"
             fill
             className="object-cover object-center"
             sizes="100vw"

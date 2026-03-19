@@ -46,14 +46,39 @@ function getThankYouType(raw: string | string[] | undefined): ThankYouType {
   return 'trial'
 }
 
+/** Whether the "Before Your Trial" step should appear for this type */
+function showTrialPrepStep(type: ThankYouType): boolean {
+  return type === 'trial'
+}
+
+/** Build a dynamic first-line when program/location info is available */
+function buildFirstLine(type: ThankYouType, program?: string, location?: string): string {
+  const base = COPY_BY_TYPE[type].firstLine
+  if (!program) return base
+
+  // For program/year registrations, personalize with program name + location
+  if (type === 'program' || type === 'year') {
+    const locationSuffix = location ? ` at ${location}` : ''
+    return `We've received your registration for ${program}${locationSuffix}. Our team will confirm your spot within 24 hours.`
+  }
+  return base
+}
+
 export default async function ThankYouPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ type?: string | string[] }>
+  searchParams?: Promise<{ type?: string | string[]; program?: string | string[]; location?: string | string[] }>
 }) {
   const params = await searchParams
   const type = getThankYouType(params?.type)
-  const { headline, firstLine } = COPY_BY_TYPE[type]
+  const { headline } = COPY_BY_TYPE[type]
+
+  const programName = Array.isArray(params?.program) ? params.program[0] : params?.program
+  const locationName = Array.isArray(params?.location) ? params.location[0] : params?.location
+  const firstLine = buildFirstLine(type, programName, locationName)
+
+  const isTrial = showTrialPrepStep(type)
+  const isRegistration = type === 'program' || type === 'year'
 
   return (
     <>
@@ -62,7 +87,7 @@ export default async function ThankYouPage({
         <div className="absolute inset-0">
           <Image
             src="/legacy-working-assets/conversion/thank-you-image/thank-you-image.webp"
-            alt=""
+            alt="Thank you from LBTA"
             fill
             className="object-cover object-center"
             sizes="100vw"
@@ -82,6 +107,21 @@ export default async function ThankYouPage({
             <p className="font-sans text-[18px] md:text-[20px] text-white/80 max-w-lg mx-auto">
               {firstLine}
             </p>
+
+            {/* Show program badge when program info is available */}
+            {programName && (
+              <div className="mt-8 inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3 border border-white/10">
+                <span className="font-sans text-[13px] text-white/60 uppercase tracking-wider">Program</span>
+                <span className="font-sans text-[15px] text-white font-semibold">{programName}</span>
+                {locationName && (
+                  <>
+                    <span className="text-white/30">|</span>
+                    <span className="font-sans text-[13px] text-white/60 uppercase tracking-wider">Location</span>
+                    <span className="font-sans text-[15px] text-white font-semibold">{locationName}</span>
+                  </>
+                )}
+              </div>
+            )}
           </AnimatedSection>
         </div>
       </section>
@@ -101,9 +141,9 @@ export default async function ThankYouPage({
           <div className="relative">
             {/* Timeline Line */}
             <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-black/10 hidden md:block" />
-            
+
             <div className="space-y-8 md:space-y-0">
-              {/* Step 1 */}
+              {/* Step 1 - Always shown */}
               <AnimatedSection delay={100}>
                 <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 relative">
                   <div className="md:w-1/2 md:text-right md:pr-12">
@@ -113,10 +153,12 @@ export default async function ThankYouPage({
                         Within 24 Hours
                       </div>
                       <h3 className="font-headline text-[22px] font-semibold text-black mb-2">
-                        We'll Reach Out
+                        {isRegistration ? "We'll Confirm Your Spot" : "We'll Reach Out"}
                       </h3>
                       <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                        Our team will call or email to confirm your preferred time slot and answer any questions.
+                        {isRegistration
+                          ? 'Our team will call or email to confirm your registration, preferred days, and answer any questions.'
+                          : 'Our team will call or email to confirm your preferred time slot and answer any questions.'}
                       </p>
                     </div>
                   </div>
@@ -125,7 +167,7 @@ export default async function ThankYouPage({
                 </div>
               </AnimatedSection>
 
-              {/* Step 2 */}
+              {/* Step 2 - "Before Your Trial" only for trial type; "Payment & Schedule" for registrations */}
               <AnimatedSection delay={200}>
                 <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 relative">
                   <div className="md:w-1/2 md:pr-12" />
@@ -134,13 +176,15 @@ export default async function ThankYouPage({
                     <div className="bg-brand-morning-light p-6 md:p-8 rounded-lg">
                       <div className="inline-flex items-center gap-2 text-brand-victoria-cove font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
                         <span className="w-6 h-6 rounded-full bg-brand-victoria-cove/10 flex items-center justify-center text-brand-victoria-cove">2</span>
-                        Before Your Trial
+                        {isTrial ? 'Before Your Trial' : 'Getting Started'}
                       </div>
                       <h3 className="font-headline text-[22px] font-semibold text-black mb-2">
-                        What to Bring
+                        {isTrial ? 'What to Bring' : 'Payment & Logistics'}
                       </h3>
                       <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                        Tennis racquet (loaners available), athletic shoes, water bottle, and comfortable clothing. We provide the balls.
+                        {isTrial
+                          ? 'Tennis racquet (loaners available), athletic shoes, water bottle, and comfortable clothing. We provide the balls.'
+                          : "Once confirmed, we'll send payment details and class logistics including schedules, court locations, and what to bring."}
                       </p>
                     </div>
                   </div>
@@ -160,7 +204,11 @@ export default async function ThankYouPage({
                         What to Expect
                       </h3>
                       <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                        A 45-60 minute session with our coaches. We'll assess your level, introduce our movement-first philosophy, and create your personalized plan.
+                        {isTrial
+                          ? "A 45-60 minute session with our coaches. We'll assess your level, introduce our movement-first philosophy, and create your personalized plan."
+                          : isRegistration
+                            ? "Arrive 10 minutes early to meet your coach and group. Our movement-first approach means every session builds skill, confidence, and community."
+                            : "A 45-60 minute session with our coaches. We'll assess your level, introduce our movement-first philosophy, and create your personalized plan."}
                       </p>
                     </div>
                   </div>
@@ -172,6 +220,22 @@ export default async function ThankYouPage({
           </div>
         </div>
       </section>
+
+      {/* Confirmation email notice - only for registrations */}
+      {isRegistration && (
+        <section className="py-8 bg-brand-morning-light border-t border-black/5">
+          <div className="max-w-3xl mx-auto px-6 text-center">
+            <AnimatedSection>
+              <div className="inline-flex items-center gap-3 bg-white rounded-lg px-6 py-4 border border-black/5">
+                <Mail className="w-5 h-5 text-brand-tide-pool flex-shrink-0" />
+                <p className="font-sans text-[14px] text-black/70">
+                  A confirmation email with your program details has been sent to your inbox.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
 
       {/* Quick Links */}
       <section className="py-16 md:py-20 bg-brand-morning-light">
@@ -255,9 +319,9 @@ export default async function ThankYouPage({
                   Book sessions, track progress, and manage your schedule on the go.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                  <a 
-                    href="https://apps.apple.com/us/app/lbta/id6746348933" 
-                    target="_blank" 
+                  <a
+                    href="https://apps.apple.com/us/app/lbta/id6746348933"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-lg hover:bg-white/90 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
                   >
@@ -269,9 +333,9 @@ export default async function ThankYouPage({
                       <div className="text-[14px] font-semibold">App Store</div>
                     </div>
                   </a>
-                  <a 
-                    href="https://play.google.com/store/apps/details?id=com.playbypoint.appx&pli=1" 
-                    target="_blank" 
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.playbypoint.appx&pli=1"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-lg hover:bg-white/90 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
                   >
@@ -301,7 +365,7 @@ export default async function ThankYouPage({
               Need immediate assistance?
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6">
-              <a 
+              <a
                 href="tel:9495340457"
                 aria-label="Call (949) 534-0457"
                 className="inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm"
@@ -310,8 +374,8 @@ export default async function ThankYouPage({
                 <span className="font-sans text-[15px]">(949) 534-0457</span>
               </a>
               <span className="hidden sm:block text-black/20">|</span>
-              <a 
-                href="mailto:support@lagunabeachtennisacademy.com" 
+              <a
+                href="mailto:support@lagunabeachtennisacademy.com"
                 className="inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm"
               >
                 <Mail className="w-4 h-4" />

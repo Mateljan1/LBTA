@@ -128,7 +128,7 @@ export default function SuccessStoriesPage() {
         <div className="absolute inset-0">
           <Image
             src="/legacy-working-assets/hero/success-stories-hero/success-stories-hero.webp"
-            alt=""
+            alt="LBTA success stories"
             fill
             className="object-cover object-center"
             sizes="100vw"

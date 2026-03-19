@@ -17,6 +17,7 @@
     "quality-gate": "npm run build && npm run lint",
     "ship:gate": "bash scripts/ship-gate.sh",
     "fact-check": "node scripts/fact-check.js",
+    "verify:images": "node scripts/verify-image-paths.mjs",
     "create:spring-campaign": "node scripts/create-ac-campaign.js assets/emails/lbta-spring-2026.html",
     "build:schedule-pdf": "node scripts/generate-schedule-pdf.mjs",
     "build:court-flyer-pdf-standalone": "./node_modules/.bin/tsx scripts/generate-court-flyer-pdf-standalone.ts"

@@ -125,13 +125,14 @@ export default function RootLayout({
           `}
         </Script>
         <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element -- Facebook 1x1 tracking pixel; noscript fallback requires img */}
+          {/* eslint-disable-next-line @next/next/no-img-element -- Facebook 1x1 tracking pixel; noscript fallback requires img. Empty alt + aria-hidden: decorative tracking only. */}
           <img
             height="1"
             width="1"
             style={{ display: 'none' }}
             src="https://www.facebook.com/tr?id=1560970271593544&ev=PageView&noscript=1"
             alt=""
+            aria-hidden="true"
           />
         </noscript>
 

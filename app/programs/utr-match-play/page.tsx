@@ -36,7 +36,7 @@ export default function UTRMatchPlayPage() {
         <div className="absolute inset-0">
           <Image
             src="/legacy-working-assets/hero/match-play-hero/match-play-hero.webp"
-            alt=""
+            alt="UTR Match Play at LBTA"
             fill
             className="object-cover object-center"
             sizes="100vw"

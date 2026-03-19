@@ -21,7 +21,7 @@ export default function Programs() {
       <section className="relative min-h-[55vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden bg-brand-deep-water">
         <div className="absolute inset-0">
           <Image
-            src="/images/programs/hero.webp"
+            src="/legacy-working-assets/hero/hero-poster/hero-poster.webp"
             alt="Laguna Beach Tennis Academy players training at sunset on coastal courts"
             fill
             className="object-cover opacity-55"

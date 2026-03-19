@@ -14,7 +14,7 @@ export default function FitnessPage() {
         <div className="absolute inset-0">
           <Image
             src="/legacy-working-assets/hero/fitness-hero/fitness-hero.webp"
-            alt=""
+            alt="Fitness and community at LBTA"
             fill
             className="object-cover object-center"
             sizes="100vw"
@@ -46,7 +46,7 @@ export default function FitnessPage() {
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div className="relative aspect-[3/2] overflow-hidden rounded">
               <Image
-                src="/images/community/community-7.webp"
+                src="/legacy-working-assets/community/community-7.webp"
                 alt="Adult players rallying together during Cardio Tennis session at LBTA"
                 fill
                 className="object-cover"

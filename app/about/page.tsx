@@ -97,7 +97,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
-                  src="/images/programs/private-specialty.webp"
+                  src="/legacy-working-assets/programs/private-specialty/private-specialty.webp"
                   alt="LBTA tennis coaching session"
                   fill
                   className="object-cover"
@@ -161,7 +161,7 @@ export default function AboutPage() {
         <div className="absolute inset-0">
           <Image
             src="/legacy-working-assets/founder/andrew-portrait/andrew-portrait.webp"
-            alt=""
+            alt="Andrew Mateljan"
             fill
             className="object-cover"
             sizes="100vw"
@@ -233,6 +233,7 @@ export default function AboutPage() {
                 alt="Laguna Beach tennis courts at sunset"
                 fill
                 className="object-cover"
+                style={{ objectPosition: '50% 50%' }}
                 sizes="(max-width: 768px) 100vw, 66vw"
                 quality={90}
               />
@@ -244,6 +245,7 @@ export default function AboutPage() {
                   alt="Laguna Beach High School tennis courts"
                   fill
                   className="object-cover"
+                  style={{ objectPosition: '50% 50%' }}
                   sizes="(max-width: 768px) 50vw, 33vw"
                   quality={90}
                 />
@@ -254,6 +256,7 @@ export default function AboutPage() {
                   alt="Moulton Meadows Park tennis courts"
                   fill
                   className="object-cover"
+                  style={{ objectPosition: '50% 50%' }}
                   sizes="(max-width: 768px) 50vw, 33vw"
                   quality={90}
                 />
@@ -319,6 +322,7 @@ export default function AboutPage() {
                   alt="Laguna Beach coastline"
                   fill
                   className="object-cover"
+                  style={{ objectPosition: '50% 60%' }}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   quality={90}
                 />

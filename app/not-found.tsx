@@ -12,7 +12,7 @@ export default function NotFound() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0">
           <Image
-            src="/images/community/community-3.webp"
+            src="/legacy-working-assets/community/community-3.webp"
             alt="Tennis court at Laguna Beach"
             fill
             className="object-cover"

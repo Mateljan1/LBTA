@@ -83,12 +83,12 @@ export default function Home() {
               <div className="bracket relative max-w-[480px] mx-auto lg:mx-0">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-subtle">
                   <Image
-                    src={coachImageSrc('/images/coaches/andrew-headshot.png')}
+                    src={coachImageSrc('/legacy-working-assets/coaches/headshots-standardized/cropped-portrait-800x1000/andrew-mateljan-headshot.png')}
                     alt="Andrew Mateljan, Founder & Head Coach"
                     fill
                     priority
                     className="object-cover"
-                    style={{ objectPosition: '50% 40%' }}
+                    style={{ objectPosition: '50% 50%' }}
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     quality={90}
                   />
@@ -157,7 +157,7 @@ export default function Home() {
       <section id="results" className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/results/karue-training.webp"
+            src="/legacy-working-assets/results/karue-training/karue-training.webp"
             alt="ATP player in training session at LBTA"
             fill
             className="object-cover"
@@ -201,7 +201,11 @@ export default function Home() {
           </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 auto-rows-fr">
             {homepageCopy.philosophy.pillars.map((pillar, i) => {
-              const images = ['/images/philosophy/movement.webp', '/images/philosophy/discipline.webp', '/images/philosophy/belonging.webp']
+              const images = [
+                '/legacy-working-assets/philosophy/movement/movement.webp',
+                '/legacy-working-assets/philosophy/discipline/discipline.webp',
+                '/legacy-working-assets/philosophy/belonging/belonging.webp',
+              ]
               const isFeatured = i === 0
               return (
                 <AnimatedSection
@@ -216,7 +220,7 @@ export default function Home() {
                         alt={`${pillar.title} — ${pillar.description}`}
                         fill
                         className="object-cover image-zoom"
-                        style={{ objectPosition: '50% 30%' }}
+                        style={{ objectPosition: '50% 50%' }}
                         sizes={isFeatured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 50vw'}
                         quality={90}
                       />
@@ -314,7 +318,7 @@ export default function Home() {
       <HorizonDivider animate />
       <section id="destination" className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/hero/laguna-horizon.webp" alt="Laguna Beach tennis courts with ocean view" fill className="object-cover" sizes="100vw" quality={90} />
+          <Image src="/images/hero/laguna-horizon.webp" alt="Laguna Beach tennis courts with ocean view" fill className="object-cover" style={{ objectPosition: '50% 60%' }} sizes="100vw" quality={90} />
           <div className="absolute inset-0 bg-brand-deep-water/80" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">

@@ -80,7 +80,7 @@ export default function PhilosophyPage() {
         <div className="absolute inset-0">
           <Image
             src="/legacy-working-assets/hero/philosophy-hero/philosophy-hero.webp"
-            alt=""
+            alt="LBTA coaching philosophy"
             fill
             className="object-cover object-center"
             sizes="100vw"

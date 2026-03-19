@@ -351,10 +351,11 @@ export default function ContactPage() {
               {/* Visual Accent - Desktop (2 columns) */}
               <div className="hidden md:block md:col-span-2 relative aspect-[3/2] overflow-hidden rounded-2xl shadow-soft">
                 <Image
-                  src="/images/programs/private-specialty.webp"
+                  src="/legacy-working-assets/programs/private-specialty/private-specialty.webp"
                   alt="LBTA private coaching session"
                   fill
                   className="object-cover"
+                  style={{ objectPosition: '50% 55%' }}
                   sizes="40vw"
                 />
               </div>
@@ -362,10 +363,11 @@ export default function ContactPage() {
               {/* Visual Accent - Mobile (below form) */}
               <div className="md:hidden mt-8 relative aspect-[4/3] overflow-hidden rounded-2xl shadow-soft">
                 <Image
-                  src="/images/programs/private-specialty.webp"
+                  src="/legacy-working-assets/programs/private-specialty/private-specialty.webp"
                   alt="LBTA coaching session"
                   fill
                   className="object-cover"
+                  style={{ objectPosition: '50% 55%' }}
                   sizes="100vw"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">

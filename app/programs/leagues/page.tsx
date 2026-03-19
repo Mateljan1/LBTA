@@ -48,7 +48,7 @@ export default function LeaguesPage() {
         <div className="absolute inset-0">
           <Image
             src="/legacy-working-assets/hero/leagues-hero/leagues-hero.webp"
-            alt=""
+            alt="Leagues and match play at LBTA"
             fill
             className="object-cover object-center"
             sizes="100vw"
