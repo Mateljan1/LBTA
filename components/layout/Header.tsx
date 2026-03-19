@@ -176,13 +176,14 @@ export default function Header() {
     }
   }, [programsOpen])
 
+  // Opaque bar: translucent bg over HomeHero video let dark pixels show through → pacific-dusk nav text failed contrast (WCAG).
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-brand-pacific-dusk/[0.08] ${
           scrolled
-            ? 'bg-brand-morning-light/98 backdrop-blur-xl shadow-lg shadow-brand-pacific-dusk/5 py-3 md:py-3'
-            : 'bg-brand-morning-light/90 backdrop-blur-md py-4 md:py-5'
+            ? 'bg-brand-morning-light shadow-lg shadow-brand-pacific-dusk/5 py-3 md:py-3'
+            : 'bg-brand-morning-light py-4 md:py-5'
         }`}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">

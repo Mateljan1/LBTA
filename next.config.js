@@ -9,6 +9,9 @@ const nextConfig = {
     minimumCacheTTL: 31536000,
     localPatterns: [
       { pathname: '/images/**' },
+      // next/image rejects paths not listed here → 400 INVALID_IMAGE_OPTIMIZE_REQUEST in prod
+      { pathname: '/logos/**' },
+      { pathname: '/photos/**' }, // adult-trial, beginner-program heroes
     ],
     remotePatterns: [
       {
