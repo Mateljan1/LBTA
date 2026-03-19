@@ -7,7 +7,7 @@ const SECTIONS = [
   { id: 'programs', label: 'Programs' },
   { id: 'private', label: 'Private Lessons' },
   { id: 'camps', label: 'Camps' },
-  { id: 'leagues', label: 'Leagues' },
+  { id: 'leagues', label: 'Leagues & Match Play' },
   { id: 'calendar', label: 'Calendar / PDF', href: '/schedules/calendar' },
 ] as const
 

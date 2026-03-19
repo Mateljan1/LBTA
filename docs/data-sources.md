@@ -20,12 +20,12 @@ The file also contains other keys (e.g. `beginnerProgram`, `matchPlay`, `leagues
 | What | Source of truth | Used by |
 |------|-----------------|--------|
 | Winter program pricing & schedule | `data/winter2026.json` | Schedules page (Winter), ProgramRow, programs-data |
-| Spring/Summer program pricing & schedule | `data/spring-summer-2026.json` | Schedules page (Spring/Summer), programs-data |
+| Spring/Summer program pricing & schedule | `data/spring-summer-2026.json` | Schedules page (Spring/Summer), programs-data; court flyer Youth Development UTR tier copy via `programs[].utrPlacementBands` on `youth-development` |
 | Fall program pricing & schedule | `data/fall2026.json` | Schedules page (Fall) |
 | Camps (dates, prices, options) | `data/year2026.json` (camps) + `data/spring-summer-2026.json` (camps) | Schedules Camps tab, camps page, camps-data |
 | Leagues (USTA/UTR) | `data/leagues-2026.json` | Schedules Leagues tab, league pages |
 | Private coaching rates | `data/private-rates.json` | Schedules Private section, programs-data |
 | Early bird & discounts | `data/year2026.json` (discounts) + per-season in `winter2026.json` etc. | Schedules, junior-trial (year2026.discounts.earlyBird for type + amount) |
-| Registration modal display strings | `data/pricing-supplemental.json` (registrationModalPricing); **UTR Circuit** from `data/leagues-2026.json` | form-config, modal prefill |
+| Registration modal display strings | `data/pricing-supplemental.json` (registrationModalPricing); **UTR Match Play Series** (`utr-circuit`) from `data/leagues-2026.json` → `utr.divisions` | form-config, modal prefill |
 
 Do not hardcode prices in components or pages; derive from the data files above or from `pricing-supplemental` where it is the designated copy source.

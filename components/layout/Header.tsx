@@ -29,9 +29,9 @@ const programsDropdown = [
     desc: 'Cardio Tennis, LiveBall, weekly community sessions',
   },
   {
-    name: 'Leagues & Circuit',
+    name: 'Leagues & Match Play',
     href: '/programs/leagues',
-    desc: 'USTA Adult League, UTR Match Play Series',
+    desc: 'USTA Adult League teams, UTR Match Play Series',
   },
 ]
 

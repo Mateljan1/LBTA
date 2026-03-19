@@ -17,7 +17,7 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
   return (
     <section id="leagues" className="scroll-mt-28 bg-white py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
-        <h2 className="sr-only">Leagues & Competitive Play</h2>
+        <h2 className="sr-only">USTA leagues and UTR Match Play Series</h2>
 
         {/* USTA Leagues */}
         <div id="usta-leagues" className="mb-16 md:mb-20">
@@ -56,10 +56,10 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
           </p>
         </div>
 
-        {/* UTR Circuit */}
+        {/* UTR Match Play Series (not a USTA league — rated Saturday matchplay) */}
         <div id="utr-circuit">
           <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
-            UTR CIRCUIT · SEASON 1
+            UTR MATCH PLAY SERIES · SEASON 1
           </p>
           <h3 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
             Saturday Matchplay Series

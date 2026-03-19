@@ -160,7 +160,7 @@ export const SEASON_TAGS = {
 } as const
 
 /**
- * UTR Circuit Division Tags — created 2026-03-19
+ * UTR Match Play Series division tags (internal key utr_circuit) — created 2026-03-19
  * Five skill-based divisions (replaces JTT)
  */
 export const UTR_DIVISION_TAGS = {
@@ -264,7 +264,7 @@ export function getClassTagFromLevel(level: string): number | null {
 }
 
 /**
- * Map UTR Circuit division slug to tag ID
+ * Map UTR Match Play Series division slug to tag ID
  */
 export function getUtrDivisionTag(division: string): number | null {
   const d = division.toLowerCase().replace(/\s+/g, '-')

@@ -6,9 +6,9 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 const leaguePricing = pricingSupplemental.leagues
 
 export const metadata: Metadata = {
-  title: 'Leagues & Circuit | Laguna Beach Tennis Academy',
+  title: 'USTA Leagues & UTR Match Play | Laguna Beach Tennis Academy',
   description:
-    'Compete in USTA Adult League Play or the UTR Match Play Series. Weekly matches, coached practice, and a pathway to meaningful competition.',
+    'USTA Adult League team play and the UTR Match Play Series — weekly rostered matches vs. rated Saturday matchplay by level.',
 }
 
 const leagues = [
@@ -43,11 +43,11 @@ export default function LeaguesPage() {
             Competitive Play
           </span>
           <h1 className="font-headline text-display-xl text-white mb-6 max-w-3xl mx-auto">
-            Leagues & Circuit
+            USTA Leagues &amp; UTR Match Play
           </h1>
           <p className="text-[1.1rem] font-sans font-light text-white/60 max-w-xl mx-auto leading-relaxed">
-            From organized USTA team play to weekly UTR-rated matchplay — find
-            your level of competition in Laguna Beach.
+            USTA Adult League is team-based league play. The UTR Match Play Series is Saturday
+            rated matchplay by division — a series, not a rostered league.
           </p>
         </div>
       </section>
@@ -103,7 +103,7 @@ export default function LeaguesPage() {
       <section className="bg-brand-sandstone">
         <div className="container-lbta section-sm text-center">
           <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-4">
-            Not sure which league is right for you?
+            Not sure which path fits you?
           </h3>
           <p className="text-body text-brand-pacific-dusk/60 max-w-lg mx-auto mb-8">
             Text or call Andrew for a free NTRP assessment — 30 minutes on

@@ -65,6 +65,23 @@ export interface PrivateRateRow {
   note?: string
 }
 
+/** UTR band breakdown for Youth Development (court flyer, print PDF). Lives on program in spring-summer JSON. */
+export interface YouthDevelopmentUtrTier {
+  label: string
+  utrRange: string
+  /** What this band emphasizes vs the other (kept factual; edit in data file). */
+  focus: string
+}
+
+export interface YouthDevelopmentUtrPlacementBands {
+  intro: string
+  tiers: YouthDevelopmentUtrTier[]
+  /** How coaches split the session (shared times, one venue). */
+  structure: string
+  /** Path to High Performance. */
+  advancement: string
+}
+
 /** Spring/Summer program: pricing may be monthly or season-specific (spring/summer). */
 export interface SpringSummerProgram {
   id: string
@@ -78,6 +95,8 @@ export interface SpringSummerProgram {
   description: string
   pricingNote?: string
   matchPlay?: { monthly?: number; drop_in?: number }
+  /** Optional: Youth Development only — court flyer UTR tier callout. */
+  utrPlacementBands?: YouthDevelopmentUtrPlacementBands
 }
 
 const winter2026 = winter2026Data as unknown as {
@@ -229,7 +248,7 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
     { eyebrow: 'Beginner – Advanced', title: 'Adult Programs', description: 'Progression with purpose. From fundamentals to competitive match-play at every level.', href: '/schedules', fromPrice: fromAdult, image: '/images/programs/adults.webp' },
     { eyebrow: 'Seasonal & Holiday', title: 'Camps', description: 'Swim & tennis, holiday breaks, and intensive sessions for juniors and youth.', href: '/camps', fromPrice: CAMPS_FROM_PRICE_FALLBACK, image: '/images/programs/juniors.webp' },
     { eyebrow: 'Cardio / LiveBall', title: 'Fitness & Community', description: 'High-energy sessions combining fitness, competition, and community. All levels welcome.', href: '/fitness', fromPrice: fromFitness, image: '/images/programs/fitness.webp' },
-    { eyebrow: 'USTA & UTR', title: 'Leagues & Circuit', description: 'USTA Adult League, UTR Match Play Series, and competitive circuit opportunities.', href: '/programs/leagues', fromPrice: LEAGUES_FROM_PRICE_FALLBACK, image: '/images/programs/schedules-hero.webp' },
+    { eyebrow: 'USTA & UTR', title: 'Leagues & Match Play', description: 'USTA Adult League teams and the UTR Match Play Series — league play vs. rated Saturday matchplay.', href: '/programs/leagues', fromPrice: LEAGUES_FROM_PRICE_FALLBACK, image: '/images/programs/schedules-hero.webp' },
   ]
 }
 

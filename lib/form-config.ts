@@ -372,17 +372,17 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     classTagId: 156 // CLASS_TAGS.summer_camp (general camp tag)
   },
 
-  // ===== UTR Circuit (replaces JTT) =====
+  // ===== UTR Match Play Series (registrationType utr-circuit; replaces JTT) =====
   'utr-circuit': {
     programId: 'utr-circuit',
     formEmbedCode: '',
     acFormId: '',
     prePopulateData: {
-      programName: 'UTR Circuit Season 1',
+      programName: 'UTR Match Play Series — Season 1',
       location: 'Alta Laguna Park & LBHS',
       duration: '8 Saturdays (Apr 11 - May 30)',
       pricing: getModalPricing('utr-circuit'),
-      category: 'UTR Circuit',
+      category: 'Match Play Series',
       ageGroup: 'All Ages (level-based divisions)',
       billingCycle: 'season'
     },

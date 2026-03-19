@@ -7,7 +7,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 export const metadata: Metadata = {
   title: 'UTR Match Play Series | Laguna Beach Tennis Academy',
   description:
-    'LBTA UTR Circuit — Season 1. 8 Saturdays of rated matchplay in Laguna Beach. 5 divisions from Color Ball juniors to advanced adults. April–June 2026.',
+    'LBTA UTR Match Play Series — Season 1. 8 Saturdays of rated matchplay in Laguna Beach. 5 divisions from Color Ball juniors to advanced adults. April–June 2026.',
 }
 
 const divisions = leagues2026.utr.divisions
@@ -31,7 +31,7 @@ export default function UTRMatchPlayPage() {
             href="/programs/leagues"
             className="inline-flex items-center gap-2 text-[12px] font-sans font-medium text-brand-victoria-cove/70 tracking-wider uppercase mb-8 hover:text-brand-victoria-cove transition-colors"
           >
-            <span>&larr;</span> Leagues & Circuit
+            <span>&larr;</span> Leagues &amp; Match Play
           </Link>
           <span className="text-eyebrow text-brand-sunset-cliff/80 mb-4 block">
             Season 1 — April 4 to June 13, 2026
@@ -320,7 +320,7 @@ export default function UTRMatchPlayPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="mailto:info@lagunabeachtennisacademy.com?subject=UTR%20Circuit%20Registration"
+              href="mailto:info@lagunabeachtennisacademy.com?subject=UTR%20Match%20Play%20Series%20Registration"
               className="btn-primary"
             >
               Register Now

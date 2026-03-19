@@ -21,7 +21,7 @@ const milestones = [
   {
     year: '2024',
     title: 'Expanded Programs',
-    description: 'Junior and adult pathways expanded; UTR and league play integrated'
+    description: 'Junior and adult pathways expanded; USTA leagues and UTR Match Play integrated'
   },
   {
     year: '2025',

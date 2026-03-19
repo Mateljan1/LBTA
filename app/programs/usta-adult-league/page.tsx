@@ -34,7 +34,7 @@ export default function USTAAdultLeaguePage() {
             href="/programs/leagues"
             className="inline-flex items-center gap-2 text-[12px] font-sans font-medium text-brand-victoria-cove/70 tracking-wider uppercase mb-8 hover:text-brand-victoria-cove transition-colors"
           >
-            <span>&larr;</span> Leagues & Circuit
+            <span>&larr;</span> Leagues &amp; Match Play
           </Link>
           <span className="text-eyebrow text-brand-victoria-cove/80 mb-4 block">
             Spring & Summer 2026 — Orange County

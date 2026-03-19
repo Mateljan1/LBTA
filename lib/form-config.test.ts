@@ -8,7 +8,7 @@ import { getUtrCircuitModalPricingSummary } from './utr-circuit-modal-pricing'
 /**
  * Data integrity: every form-config program ID must have a registrationModalPricing
  * entry in data/pricing-supplemental.json so the modal shows correct pricing.
- * Exception: utr-circuit — pricing is derived from data/leagues-2026.json (utr.divisions).
+ * Exception: utr-circuit (UTR Match Play Series) — pricing is derived from data/leagues-2026.json (utr.divisions).
  */
 describe('form-config vs registrationModalPricing', () => {
   it('every configured program ID has a registrationModalPricing key or leagues-derived pricing', () => {

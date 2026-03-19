@@ -123,11 +123,11 @@ export default function CampsPage() {
               >
                 View Camps
               </Link>
-              <Link 
-                href="/schedules"
+              <Link
+                href="/programs/utr-match-play"
                 className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
               >
-                Junior Team Tennis →
+                UTR Match Play →
               </Link>
             </div>
           </AnimatedSection>
@@ -351,13 +351,13 @@ export default function CampsPage() {
       </section>
 
       <HorizonDivider />
-      {/* UTR CIRCUIT PROMO */}
+      {/* UTR MATCH PLAY SERIES PROMO */}
       <DarkSection className="py-16 md:py-24">
         <div className="max-w-[1000px] mx-auto px-4 md:px-12">
           <AnimatedSection delay={0}>
             <div className="text-center">
               <p className="font-sans text-[11px] uppercase tracking-[2px] text-brand-sandstone/80 mb-4">
-                UTR Circuit · Season 1
+                UTR Match Play Series · Season 1
               </p>
               <h2 className="font-headline text-[32px] md:text-[44px] font-semibold text-brand-sandstone mb-4">
                 Saturday Matchplay Series

@@ -73,7 +73,7 @@ export default function Footer() {
                     { name: 'All Programs', href: '/programs' },
                     { name: 'Camps', href: '/camps' },
                     { name: 'Fitness', href: '/fitness' },
-                    { name: 'Leagues & Circuit', href: '/programs/leagues' },
+                    { name: 'Leagues & Match Play', href: '/programs/leagues' },
                     { name: 'Schedule & Pricing', href: '/schedules' },
                   ].map((item) => (
                     <li key={item.name}>

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 // ============================================================
 // LUXURY YEAR-ROUND REGISTRATION MODAL
-// For Camps, UTR Circuit, and Seasonal Programs
+// For Camps, UTR Match Play Series, and Seasonal Programs
 // Aman / Four Seasons / Apple-level design standards
 // Refined neutrals, typography-driven, minimal color
 // ============================================================
@@ -38,9 +38,6 @@ interface UTRCircuitData {
   divisions: { age: string; price: number }[]
   includes: string[]
 }
-
-/** @deprecated Use UTRCircuitData instead */
-type JTTData = UTRCircuitData
 
 interface LuxuryYearModalProps {
   isOpen: boolean
@@ -181,7 +178,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
         name: utrData.name,
         dates: utrData.dates,
         details: `${utrData.weeks} weeks · ${utrData.matchDay}`,
-        description: `UTR Circuit — rated matchplay series`
+        description: `UTR Match Play Series — rated Saturday matchplay`
       }
     }
   }
@@ -372,7 +369,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                 // Step 1: Option Selection
                 <div className="p-8 md:p-10">
                   <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
-                    {type === 'camp' ? 'Camp Registration' : 'UTR Circuit Registration'}
+                    {type === 'camp' ? 'Camp Registration' : 'UTR Match Play Series Registration'}
                   </p>
                   <h2 id="modal-title" className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
                     {programInfo.name}

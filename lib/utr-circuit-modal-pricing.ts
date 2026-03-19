@@ -1,7 +1,7 @@
 /**
- * UTR Circuit registration modal pricing is derived from data/leagues-2026.json
- * (utr.divisions[].price) so it stays aligned with Schedules / leagues pages.
- * Do not duplicate a flat dollar amount in pricing-supplemental.json for this program.
+ * UTR Match Play Series registration modal pricing is derived from data/leagues-2026.json
+ * (utr.divisions[].price) so it stays aligned with Schedules and /programs/utr-match-play.
+ * Not a USTA league — division prices from the `utr` block in leagues JSON.
  */
 
 import rawLeagues from '@/data/leagues-2026.json'

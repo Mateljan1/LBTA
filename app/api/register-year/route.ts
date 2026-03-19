@@ -43,7 +43,7 @@ type RegistrationType = 'seasonal' | 'camp' | 'utr-circuit' | 'jtt' | 'swim-tenn
 // Helper function to determine program category
 function determineCategory(programName: string, registrationType: RegistrationType): string {
   if (registrationType === 'camp' || registrationType === 'swim-tennis') return 'Camp'
-  if (registrationType === 'utr-circuit' || registrationType === 'jtt') return 'UTR Circuit'
+  if (registrationType === 'utr-circuit' || registrationType === 'jtt') return 'Match Play Series'
   if (registrationType === 'private') return 'Private'
   
   const program = programName.toLowerCase()
@@ -71,23 +71,23 @@ function determineCategory(programName: string, registrationType: RegistrationTy
 }
 
 // Helper function to check if Early Bird discount applies
+// Early bird = registered 2+ weeks before session start (5% off per rec doc)
 function isEarlyBird(season?: string): boolean {
   const now = new Date()
-  
-  // Season-specific early bird deadlines
+
+  // Season-specific early bird deadlines (2 weeks before session start)
   const earlyBirdDeadlines: Record<string, Date> = {
-    'winter': new Date('2025-12-20T23:59:59'),
-    'spring': new Date('2026-03-20T23:59:59'),
-    'summer': new Date('2026-05-20T23:59:59'),
-    'fall': new Date('2026-08-01T23:59:59'),
+    'spring': new Date('2026-03-23T23:59:59'),   // Spring starts Apr 6
+    'summer': new Date('2026-06-01T23:59:59'),    // Summer starts Jun 15
+    'fall': new Date('2026-08-15T23:59:59'),      // Fall TBD
   }
-  
+
   if (season && earlyBirdDeadlines[season.toLowerCase()]) {
     return now < earlyBirdDeadlines[season.toLowerCase()]
   }
-  
-  // Default to winter deadline
-  return now < new Date('2025-12-20T23:59:59')
+
+  // Default to spring deadline (current season)
+  return now < new Date('2026-03-23T23:59:59')
 }
 
 // ============================================================
@@ -113,7 +113,7 @@ function getApplicableTags(
     tags.push(REGISTRATION_SEASON_TAGS[data.season.toLowerCase()])
   }
 
-  // Add UTR Circuit tag (also handle legacy 'jtt' type)
+  // Add UTR Match Play / program tag utr_circuit (also handle legacy 'jtt' type)
   if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
     tags.push(CAMPAIGN_TAGS.utr_circuit)     // 242
     tags.push(INTEREST_TAGS.utr_circuit)     // 215
@@ -288,7 +288,7 @@ export async function POST(request: NextRequest) {
           { field: '12', value: registrationType },                     // registration_type
         ]
 
-        // Add UTR Circuit / legacy JTT division field
+        // Add Match Play Series / legacy JTT division field
         if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
           fieldValues.push({ field: '15', value: data.division || data.program || '' })
         }
@@ -352,7 +352,7 @@ export async function POST(request: NextRequest) {
     if (registrationType === 'camp' || registrationType === 'swim-tennis') {
       confirmationMessage = `Camp registration received! You'll receive a confirmation email with camp details and payment information shortly.`
     } else if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
-      confirmationMessage = `UTR Circuit registration received! Our team will contact you with division placement and next steps.`
+      confirmationMessage = `UTR Match Play Series registration received. Our team will contact you with division placement and next steps.`
     } else if (registrationType === 'inquiry') {
       confirmationMessage = `Thank you for your inquiry! Our team will reach out within 24 hours to discuss your options.`
     }

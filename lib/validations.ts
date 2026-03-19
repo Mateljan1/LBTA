@@ -157,7 +157,7 @@ export const chatSchema = z.object({
 export type ChatPayload = z.infer<typeof chatSchema>
 
 /**
- * Year-round registration schema (seasonal, camp, UTR Circuit, etc.)
+ * Year-round registration schema (seasonal, camp, UTR Match Play Series / utr-circuit, etc.)
  * Used by: /api/register-year
  */
 export const registerYearSchema = z.object({

@@ -102,12 +102,12 @@ export default function AdultProgramsPage() {
 
       <HorizonDivider />
 
-      {/* Leagues & UTR */}
+      {/* Leagues & UTR Match Play */}
       <section className="bg-brand-morning-light">
         <div className="container-lbta section">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">
-              Leagues & Circuit
+              Leagues &amp; Match Play
             </h2>
             <p className="text-body text-brand-pacific-dusk/60 mb-8 leading-relaxed">
               Ready for competition? LBTA runs USTA Adult League teams and the UTR Match Play Series. Both connect you to rated play and a clear path forward.
