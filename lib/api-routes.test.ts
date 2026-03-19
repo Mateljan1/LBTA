@@ -265,6 +265,12 @@ describe('registerYearSchema (/api/register-year)', () => {
     ).toBe(true)
   })
 
+  it('accepts utr-circuit registrationType', () => {
+    expect(
+      registerYearSchema.safeParse({ ...valid, registrationType: 'utr-circuit' }).success
+    ).toBe(true)
+  })
+
   it('rejects missing program', () => {
     expect(registerYearSchema.safeParse({ ...valid, program: '' }).success).toBe(false)
   })

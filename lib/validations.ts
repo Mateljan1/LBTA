@@ -157,11 +157,11 @@ export const chatSchema = z.object({
 export type ChatPayload = z.infer<typeof chatSchema>
 
 /**
- * Year-round registration schema (seasonal, camp, JTT, etc.)
+ * Year-round registration schema (seasonal, camp, UTR Circuit, etc.)
  * Used by: /api/register-year
  */
 export const registerYearSchema = z.object({
-  registrationType: z.enum(['seasonal', 'camp', 'jtt', 'swim-tennis', 'private', 'inquiry']).optional().default('seasonal'),
+  registrationType: z.enum(['seasonal', 'camp', 'utr-circuit', 'jtt', 'swim-tennis', 'private', 'inquiry']).optional().default('seasonal'),
   firstName: nameSchema,
   lastName: nameSchema,
   email: emailSchema,
@@ -184,8 +184,6 @@ export const registerYearSchema = z.object({
   campName: z.string().max(200).optional(),
   campDates: z.string().max(200).optional(),
   campWeek: z.string().max(100).optional(),
-  jttId: z.string().max(100).optional(),
-  jttSeason: z.string().max(100).optional(),
   division: z.string().max(100).optional(),
 }).passthrough()
 

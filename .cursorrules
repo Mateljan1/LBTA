@@ -557,6 +557,17 @@ lib/
 4. **Implementation**: Write clean, modular code.
 5. **Review**: Self-review against the hallucination prevention checklist.
 
+### Ship / done (mandatory — agent + human)
+When the user says **done**, **shipped**, **deploy**, or **production is good**, treat the task as **incomplete** until **all** of the following are true:
+
+1. **Tracked code committed** — No unstaged/staged diff on tracked files (`git diff` / `git diff --cached` empty). Do not leave fixes (e.g. `lib/validations.ts`, `lib/form-config.ts`) local-only.
+2. **Verify locally** — `npm run ship:gate` (build + lint + tests + fails if tracked files are dirty). Use `npm run quality-gate` if tests are intentionally skipped (still commit first).
+3. **Push** — `git push origin main` when work belongs on production branch (or the branch Vercel watches).
+4. **Deploy proof** — Repo alone does not prove Vercel deployed. After push: confirm in **Vercel dashboard** that the latest **Production** deployment’s commit SHA matches `git rev-parse HEAD`, **or** run `vercel --prod` per project rules, **or** smoke the live site for the change.
+5. **Say explicitly** — Report: clean tree ✓, commit SHA, pushed ✓/✗, and “Vercel prod SHA verified” ✓/needs human dashboard.
+
+Untracked files (e.g. local assets) do not fail `ship:gate`; only **uncommitted tracked changes** do.
+
 ### Code Review
 When reviewing existing code:
 1. Check for **SOLID** violations.
@@ -626,6 +637,9 @@ When implementing technical features, use Context7 for current best practices:
 npm run dev          # Start dev server (port 3000)
 npm run build        # Production build
 npm run lint         # ESLint check
+
+# Ship (done = committed + verified + pushed + deploy confirmed)
+npm run ship:gate
 
 # Testing
 npx lighthouse http://localhost:3000 --view
