@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
+import { coachImageSrc } from '@/lib/coaches-data'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import PullQuote from '@/components/ui/PullQuote'
 
@@ -179,7 +180,7 @@ export default function HighPerformancePathwayPage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
-                src="/images/coaches/andrew-headshot.png"
+                src={coachImageSrc('/images/coaches/andrew-headshot.png')}
                 alt="Andrew Mateljan - ATP/WTA Tour Coach"
                 fill
                 className="object-cover"

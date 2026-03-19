@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-18",
-  "lastLearnRun": "2026-03-18 Review+Validate book/thank-you (API validation error, modal success focus, thank-you focus ring + brand)",
+  "lastLearnRun": "2026-03-18 Coaches headshots + page value (cache-bust, named assets, section-horizon, section-quote)",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -422,6 +422,13 @@
       "avoid": "text-blue-600, bg-blue-100 in step numbers or cards; bypasses brand palette",
       "instead": "Use brand tokens (e.g. text-brand-victoria-cove, bg-brand-victoria-cove/10) for steps and accents",
       "tags": ["brand", "thank-you", "design-system", "cursorrules"]
+    },
+    {
+      "id": "section-quote-redundant-border",
+      "description": "Pull quote using both .section-quote and an extra border (e.g. border-l-2 border-brand-victoria-cove/40)",
+      "avoid": "blockquote with section-quote and border-l-2 border-brand-victoria-cove/40; Brand Guide defines section-quote with gradient left edge",
+      "instead": "Use section-quote only; do not add border-l or border-brand-* on the same element",
+      "tags": ["brand-guide", "section-quote", "coaches", "bio"]
     }
   ]
 }

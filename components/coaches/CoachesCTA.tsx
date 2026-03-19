@@ -9,7 +9,7 @@ export default function CoachesCTA() {
           Train With Us
         </h2>
         <p className="font-sans text-[16px] text-white/85 mb-10 leading-[1.7] max-w-[500px] mx-auto">
-          Experience coaching that develops more than your game. Book a trial session to meet our team.
+          Coaching that builds your game and your confidence. Book a trial to meet the right coach for you.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link

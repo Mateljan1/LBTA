@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-18",
-  "lastLearnRun": "2026-03-18 Drop-in + private booking (league-drop-in-in-data-and-ui, contextual-private-booking-coach-slug)",
+  "lastLearnRun": "2026-03-18 Coaches headshots + page value (cache-bust, named assets, section-horizon, copy)",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -500,6 +500,18 @@
       "when": "User can start private lesson request from coach-specific context (bio, schedules table)",
       "example": "Use URL /book?type=private&coach=<slug>; book page reads coach param, resolves slug→display name (e.g. lib/coach-slug from data/coaches.json), passes defaultCoach to private modal; modal accepts optional defaultCoach and on open sets form coach to that value.",
       "tags": ["book", "private", "coach", "modal", "schedules"]
+    },
+    {
+      "name": "coach-headshot-cache-bust",
+      "when": "Coach headshots live at static paths and are replaced; CDN/browser may serve old image",
+      "example": "Export COACH_IMAGE_VERSION and coachImageSrc(path) in lib/coaches-data.ts; use coachImageSrc() for all coach image src (cards, founder, bio pages, OG); bump COACH_IMAGE_VERSION when replacing assets.",
+      "tags": ["coach", "images", "cache-bust", "deploy"]
+    },
+    {
+      "name": "section-horizon-key-headings",
+      "when": "Brand Guide: key section headings (hero, section eyebrows) need horizon accent",
+      "example": "Add <div className=\"section-horizon ... opacity-90\" aria-hidden=\"true\" /> under headline or eyebrow (e.g. CoachesHero, FounderSection, CoachingTeamSection); do not add extra border classes.",
+      "tags": ["brand-guide", "section-horizon", "accessibility"]
     }
   ]
 }

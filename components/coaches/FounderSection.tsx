@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getFounder } from '@/lib/coaches-data'
+import { coachImageSrc, getFounder } from '@/lib/coaches-data'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import PullQuote from '@/components/ui/PullQuote'
 
@@ -21,7 +21,7 @@ export default function FounderSection() {
             <AnimatedSection>
             <div className={`relative aspect-[3/4] w-full max-w-[420px] mx-auto lg:mx-0 overflow-hidden rounded-lg ${founder.image.includes('andrew-headshot') ? '[filter:brightness(1.22)_contrast(1.06)]' : ''}`}>
               <Image
-                src={founder.image}
+                src={coachImageSrc(founder.image)}
                 alt={`${founder.name}, Founder & Head Coach at Laguna Beach Tennis Academy`}
                 fill
                 className="object-cover"
@@ -35,9 +35,10 @@ export default function FounderSection() {
 
           <div className="lg:col-start-2 lg:row-start-1 lg:pt-2 w-full min-w-0 text-left relative z-10">
             <AnimatedSection delay={100}>
-              <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
+              <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-2">
                 Founder & Director
               </p>
+              <div className="section-horizon mb-4 opacity-90 w-16" aria-hidden="true" />
               {founder.slug ? (
                 <Link href={`/coaches/${founder.slug}`} className="block group">
                   <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.02em] group-hover:text-brand-victoria-cove transition-colors">

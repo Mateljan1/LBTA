@@ -18,6 +18,7 @@ const outPath = process.argv[2]
 const DAY_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 const LOCATION_KEYS = ['Alta', 'LBHS', 'Moulton']
 const LOCATION_LABELS = { Alta: 'Alta Laguna Park', LBHS: 'Laguna Beach High School', Moulton: 'Moulton Meadows Park' }
+const LOCATION_COURTS = { Moulton: 'Court 2', LBHS: 'Courts 5 & 6', Alta: 'Courts 1 & 2' }
 const LOCATION_DISPLAY = { Moulton: 'Moulton Meadows Park', Alta: 'Alta Laguna Park', LBHS: 'Laguna Beach High School' }
 
 function formatLocation(programLocation) {
@@ -137,14 +138,17 @@ function buildFlyerHtml(options) {
     const byDay = scheduleByLocation[loc]
     if (!byDay) continue
     const locationName = LOCATION_LABELS[loc] || loc
+    const courtLabel = LOCATION_COURTS[loc] || 'Courts 1 & 2'
     const times = new Set()
     for (const day of DAY_ORDER) {
       (byDay[day] || []).forEach((s) => times.add(s.time))
     }
     const sortedTimes = Array.from(times).sort((a, b) => parseTimeToMinutes(a) - parseTimeToMinutes(b))
+    const lbhsSubtitle = loc === 'LBHS' ? '<p class="sub" style="font-size:11px; margin:0 0 8px; text-align:left;">Group classes · weekend adult at this location</p>' : ''
     scheduleHtml += `
       <div class="schedule-loc">
-        <h3>${escapeHtml(locationName)} — ${loc === 'Moulton' ? 'Court 2' : 'Courts 1 & 2'}</h3>
+        <h3>${escapeHtml(locationName)} — ${escapeHtml(courtLabel)}</h3>
+        ${lbhsSubtitle}
         <table class="schedule-tbl">
           <thead><tr><th>Time</th>${DAY_ORDER.map((d) => `<th>${d.slice(0, 3)}</th>`).join('')}</tr></thead>
           <tbody>
@@ -209,7 +213,7 @@ function buildFlyerHtml(options) {
   const campsList = camps.map((c) => `<li><strong>${escapeHtml(c.label)}</strong> ${escapeHtml(c.dates)} · Ages ${escapeHtml(c.ages)} · ${escapeHtml(c.price)}${c.location ? ` · ${escapeHtml(c.location)}` : ''}</li>`).join('')
 
   const logoStripHtml = (logoLbtaUrl || logoCityUrl)
-    ? `<div class="logo-strip">${logoLbtaUrl ? `<img src="${logoLbtaUrl}" alt="Laguna Beach Tennis Academy" class="logo-lbta" />` : ''}${logoCityUrl ? `<img src="${logoCityUrl}" alt="City of Laguna Beach" class="logo-city" />` : ''}</div>`
+    ? `<div class="logo-strip">${logoLbtaUrl ? `<img src="${logoLbtaUrl}" alt="Laguna Beach Tennis Academy" class="logo-lbta" />` : ''}${logoCityUrl ? `<span class="logo-city-wrap"><img src="${logoCityUrl}" alt="City of Laguna Beach" class="logo-city" /></span>` : ''}</div>`
     : ''
 
   return `<!DOCTYPE html>
@@ -219,35 +223,39 @@ function buildFlyerHtml(options) {
   <title>LBTA Court Flyer — ${escapeHtml(seasonLabel)}</title>
   <style>
     * { box-sizing: border-box; }
-    body { font-family: 'DM Sans', system-ui, sans-serif; color: #1B3A5C; margin: 0; padding: 24px; font-size: 11px; line-height: 1.35; background: #FAF8F4; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; color: #1B3A5C; margin: 0; padding: 24px; font-size: 14px; line-height: 1.35; background: #FAF8F4; }
     .flyer { max-width: 100%; }
-    .logo-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px; padding: 20px 24px; background: #0F2237; margin: -24px -24px 0 -24px; min-height: 72px; }
-    .logo-lbta { height: 40px; width: auto; object-fit: contain; flex-shrink: 0; }
-    .logo-city { height: 48px; width: auto; object-fit: contain; flex-shrink: 0; filter: brightness(0) invert(1); }
-    h1 { font-family: Cormorant, Georgia, serif; font-size: 22px; font-weight: 600; text-align: center; color: #0F2237; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 8px; }
-    .sub { text-align: center; color: #1B3A5C; margin: 0 0 12px; }
-    .cta-line { text-align: center; font-weight: 700; color: #0F2237; margin: 0 0 20px; font-size: 14px; }
-    h2 { font-family: Cormorant, Georgia, serif; font-size: 16px; font-weight: 600; color: #0F2237; margin: 16px 0 8px; }
-    h3 { font-family: Cormorant, Georgia, serif; font-size: 12px; font-weight: 600; color: #0F2237; text-transform: uppercase; margin: 12px 0 6px; }
-    .coaches-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 12px 0; }
+    .logo-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; padding: 24px; background: #0F2237; margin: -24px -24px 0 -24px; min-height: 80px; }
+    .logo-lbta { height: 52px; width: auto; object-fit: contain; flex-shrink: 0; display: block; }
+    .logo-city-wrap { height: 52px; width: 52px; border-radius: 50%; background: #0F2237; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .logo-city { height: 52px; width: 52px; object-fit: contain; object-position: center; display: block; }
+    h1 { font-family: Cormorant, Georgia, serif; font-size: 22px; font-weight: 600; text-align: center; color: #0F2237; text-transform: uppercase; letter-spacing: 0.02em; margin: 0; max-width: 32em; margin-left: auto; margin-right: auto; padding: 0 8px; }
+    .section-horizon { width: 100%; max-width: 120px; height: 3px; border: none; border-radius: 2px; background: linear-gradient(90deg, #2E8B8B, #E8834A); margin: 12px auto 0; opacity: 0.8; }
+    .sub { text-align: center; color: #1B3A5C; margin: 16px 0 0; }
+    .cta-line { text-align: center; font-weight: 700; color: #0F2237; margin: 16px 0 0; font-size: 14px; letter-spacing: 0.02em; }
+    h2 { font-family: Cormorant, Georgia, serif; font-size: 16px; font-weight: 600; color: #0F2237; margin: 24px 0 0; }
+    h2 + .section-horizon { margin: 8px 0 12px; }
+    h3 { font-family: Cormorant, Georgia, serif; font-size: 12px; font-weight: 600; color: #0F2237; text-transform: uppercase; margin: 16px 0 6px; }
+    .coaches-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 16px 0; }
     .coach-card { break-inside: avoid; display: flex; flex-direction: column; align-items: center; }
     .coach-img-wrap { width: 140px; height: 187px; flex-shrink: 0; overflow: hidden; border-radius: 2px; background: #F5F0E5; }
     .coach-img { width: 140px; height: 187px; object-fit: cover; object-position: center top; display: block; border-radius: 2px; }
     .coach-name { font-family: Cormorant, Georgia, serif; font-weight: 600; color: #0F2237; margin: 6px 0 2px; }
     .coach-title { font-size: 10px; font-weight: 500; color: #1B3A5C; margin: 0; }
     .coach-bio { font-size: 9px; color: #1B3A5C; margin: 4px 0 0; line-height: 1.3; opacity: 0.95; }
-    .data-tbl { width: 100%; border-collapse: collapse; font-size: 10px; margin: 8px 0; }
-    .data-tbl th, .data-tbl td { padding: 6px 8px; text-align: left; border-bottom: 1px solid rgba(27,58,92,0.12); }
+    .data-tbl { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }
+    .data-tbl th, .data-tbl td { padding: 8px 10px; text-align: left; border-bottom: 1px solid rgba(27,58,92,0.12); }
+    .data-tbl thead tr { border-bottom: 2px solid rgba(27,58,92,0.25); background: rgba(245,240,229,0.4); }
     .data-tbl th { font-weight: 600; color: #0F2237; }
     .data-tbl td:nth-child(n+2) { text-align: right; }
-    .cta-block { background: rgba(232,131,74,0.12); border-top: 2px solid rgba(27,58,92,0.12); border-bottom: 2px solid rgba(27,58,92,0.12); padding: 16px 12px; margin: 12px 0; text-align: center; font-size: 11px; }
-    .cta-block .what { font-family: Cormorant, Georgia, serif; font-weight: 600; color: #0F2237; font-size: 14px; margin-bottom: 8px; }
-    .cta-block .address { font-size: 10px; color: #1B3A5C; margin-top: 8px; opacity: 0.9; }
-    .courts-list { font-size: 10px; margin: 8px 0; }
+    .cta-block { background: rgba(232,131,74,0.08); padding: 20px 20px 20px 36px; margin: 16px 0; font-size: 14px; background-image: linear-gradient(180deg, #2E8B8B, #E8834A); background-size: 4px 100%; background-repeat: no-repeat; background-position: left; }
+    .cta-block .what { font-family: Cormorant, Georgia, serif; font-weight: 600; color: #0F2237; font-size: 16px; margin-bottom: 10px; }
+    .cta-block .address { font-size: 12px; color: #1B3A5C; margin-top: 10px; opacity: 0.9; }
+    .courts-list { font-size: 12px; margin: 8px 0; }
     .courts-list li { margin: 4px 0; }
     .courts-section { background: rgba(245,240,229,0.5); padding: 12px; margin: 12px 0; }
     .schedule-loc { margin: 16px 0; break-inside: avoid; }
-    .schedule-tbl { width: 100%; border-collapse: collapse; font-size: 10px; border: 1px solid rgba(27,58,92,0.2); }
+    .schedule-tbl { width: 100%; border-collapse: collapse; font-size: 12px; border: 1px solid rgba(27,58,92,0.2); }
     .schedule-tbl th, .schedule-tbl td { padding: 6px 8px; border-bottom: 1px solid rgba(27,58,92,0.15); border-left: 1px solid rgba(27,58,92,0.1); }
     .schedule-tbl thead tr { background: rgba(245,240,229,0.6); border-bottom: 2px solid rgba(27,58,92,0.25); }
     .schedule-tbl th { font-weight: 700; color: #0F2237; }
@@ -261,25 +269,29 @@ function buildFlyerHtml(options) {
     .schedule-tbl .cell-hp { background: rgba(27,58,92,0.08); color: #0F2237; }
     .schedule-tbl .cell-adult { background: rgba(27,58,92,0.06); }
     .schedule-tbl .cell-other { background: rgba(245,240,229,0.4); }
-    .camps-ul { font-size: 10px; margin: 8px 0; padding-left: 20px; }
+    .camps-ul { font-size: 12px; margin: 8px 0; padding-left: 20px; }
     .camps-ul li { margin: 4px 0; }
-    .discount-line { font-size: 9px; color: #1B3A5C; opacity: 0.9; margin-top: 8px; }
-    footer { margin-top: 24px; padding: 20px 16px; border-top: 2px solid rgba(27,58,92,0.15); background: #0F2237; color: rgba(255,255,255,0.9); text-align: center; font-size: 10px; }
+    .discount-line { font-size: 10px; color: #1B3A5C; opacity: 0.9; margin-top: 8px; }
+    footer { margin-top: 24px; padding: 28px 24px; border-top: 1px solid rgba(27,58,92,0.2); background: #0F2237; color: rgba(255,255,255,0.9); text-align: center; font-size: 12px; }
     footer .tagline { font-family: Cormorant, Georgia, serif; font-weight: 600; color: #fff; margin: 8px 0; }
-    footer .partner { font-size: 9px; text-transform: uppercase; margin: 8px 0 4px; opacity: 0.85; }
+    footer .section-horizon { margin-top: 8px; margin-bottom: 4px; opacity: 0.9; }
+    footer .partner { font-size: 10px; text-transform: uppercase; margin: 8px 0 4px; opacity: 0.85; }
     footer a { color: #2E8B8B; }
   </style>
 </head>
 <body class="flyer">
   ${logoStripHtml}
   <h1>Certified City of Laguna Beach Coaching Team</h1>
+  <div class="section-horizon"></div>
   <p class="sub">Only LBTA coaches are authorized to teach at City of Laguna Beach tennis courts.</p>
   <p class="cta-line">FREE TRIAL — Try Any Group Class</p>
 
   <h2>Your Certified Coaching Team</h2>
+  <div class="section-horizon"></div>
   <div class="coaches-grid">${coachHtml}</div>
 
   <h2>Private Lessons</h2>
+  <div class="section-horizon"></div>
   ${privateTable}
 
   <div class="cta-block">
@@ -289,23 +301,27 @@ function buildFlyerHtml(options) {
   </div>
 
   <h2>LBTA Reserved Courts</h2>
+  <div class="section-horizon"></div>
   <div class="courts-section">
   <ul class="courts-list">
     <li><strong>Moulton Meadows Park</strong> Court 2 · Balboa Ave &amp; Capistrano Ave</li>
     <li><strong>Alta Laguna Park</strong> Courts 1 &amp; 2 · 3300 Alta Laguna Dr</li>
-    <li><strong>Laguna Beach High School</strong> Courts 1 &amp; 2 · 670 Park Ave</li>
+    <li><strong>Laguna Beach High School</strong> Courts 5 &amp; 6 · 670 Park Ave</li>
   </ul>
-  <p class="sub" style="font-size:9px; margin-top:4px;">Sat 1-3PM: Courts 1-3 USTA League</p>
+  <p class="sub" style="font-size:10px; margin-top:4px;">Sat 1-3PM: Courts 1-3 USTA League</p>
   </div>
 
   <h2>Schedules, Pricing &amp; Registration · ${escapeHtml(seasonLabel)} · ${escapeHtml(seasonDates)}</h2>
-  <p class="sub">lagunabeachtennisacademy.com · Movement. Craft. Community.</p>
+  <div class="section-horizon"></div>
+  <p class="sub" style="text-align:left; margin:0 0 16px;">lagunabeachtennisacademy.com · Movement. Craft. Community.</p>
   ${scheduleHtml}
 
   <h2>Camps</h2>
+  <div class="section-horizon"></div>
   <ul class="camps-ul">${campsList}</ul>
 
   <h2>Program Pricing</h2>
+  <div class="section-horizon"></div>
   <h3>Junior &amp; Competitive</h3>
   ${juniorTable}
   <h3>Adult &amp; Fitness</h3>
@@ -319,6 +335,7 @@ function buildFlyerHtml(options) {
     <p>${escapeHtml(FLYER_ACADEMY_ADDRESS)}</p>
     <p><a href="https://lagunabeachtennisacademy.com">lagunabeachtennisacademy.com</a></p>
     <p class="tagline">Movement. Craft. Community.</p>
+    <div class="section-horizon"></div>
     <p class="partner">Official City Partner</p>
     <p><strong>Laguna Beach Tennis Academy</strong></p>
     <p>${escapeHtml(seasonLabel)} · ${escapeHtml(seasonDates)} · ${weeks} Weeks</p>

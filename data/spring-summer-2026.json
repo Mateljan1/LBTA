@@ -51,9 +51,9 @@
       "location": "Moulton Meadows Park + Saturday at LBHS",
       "duration": "45 min",
       "schedule": [
-        { "day": "Monday", "time": "3:30–4:15 PM", "coach": "Allison Cronk" },
-        { "day": "Wednesday", "time": "3:30–4:15 PM", "coach": "Allison Cronk" },
-        { "day": "Saturday", "time": "9:00–9:45 AM", "coach": "Allison Cronk" }
+        { "day": "Monday", "time": "3:30–4:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Wednesday", "time": "3:30–4:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Saturday", "time": "9:00–9:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "monthly": { "1x": 120, "2x": 200 },
@@ -69,9 +69,9 @@
       "location": "Moulton Meadows Park + Saturday at LBHS",
       "duration": "60 min",
       "schedule": [
-        { "day": "Monday", "time": "4:15–5:15 PM", "coach": "Allison Cronk" },
-        { "day": "Wednesday", "time": "4:15–5:15 PM", "coach": "Allison Cronk" },
-        { "day": "Saturday", "time": "9:45–10:45 AM", "coach": "Allison Cronk" }
+        { "day": "Monday", "time": "4:15–5:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Wednesday", "time": "4:15–5:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Saturday", "time": "9:45–10:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
@@ -88,11 +88,11 @@
       "location": "Moulton Meadows Park + Saturday at LBHS",
       "duration": "60 min",
       "schedule": [
-        { "day": "Monday", "time": "5:15–6:15 PM", "coach": "Allison Cronk" },
-        { "day": "Wednesday", "time": "5:15–6:15 PM", "coach": "Allison Cronk" },
-        { "day": "Tuesday", "time": "3:30–4:30 PM", "coach": "Allison Cronk" },
-        { "day": "Thursday", "time": "3:30–4:30 PM", "coach": "Allison Cronk" },
-        { "day": "Saturday", "time": "10:45–11:45 AM", "coach": "Allison Cronk" }
+        { "day": "Monday", "time": "5:15–6:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Wednesday", "time": "5:15–6:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Tuesday", "time": "3:30–4:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Thursday", "time": "3:30–4:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Saturday", "time": "10:45–11:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
@@ -109,9 +109,9 @@
       "location": "Moulton Meadows Park + Saturday at LBHS",
       "duration": "60 min",
       "schedule": [
-        { "day": "Tuesday", "time": "4:30–5:30 PM", "coach": "Allison Cronk" },
-        { "day": "Thursday", "time": "4:30–5:30 PM", "coach": "Allison Cronk" },
-        { "day": "Saturday", "time": "11:45 AM–12:45 PM", "coach": "Allison Cronk" }
+        { "day": "Tuesday", "time": "4:30–5:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Thursday", "time": "4:30–5:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Saturday", "time": "11:45 AM–12:45 PM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
@@ -128,9 +128,9 @@
       "location": "Alta Laguna Park",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Tuesday", "time": "4:30–6:30 PM", "coach": "Staff" },
-        { "day": "Thursday", "time": "4:30–6:30 PM", "coach": "Staff" },
-        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Staff" }
+        { "day": "Tuesday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
+        { "day": "Thursday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
+        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" }
       ],
       "pricing": {
         "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
@@ -149,9 +149,9 @@
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" },
-        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn" },
-        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Andrew Mateljan" }
+        { "day": "Monday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School" },
+        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School" },
+        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
@@ -170,11 +170,11 @@
       "location": "Laguna Beach High School",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Monday", "time": "6:30–7:30 PM", "coach": "Peter DeFrantz" },
-        { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Peter DeFrantz" },
-        { "day": "Tuesday", "time": "10:00–11:00 AM", "coach": "Andrew Mateljan" },
-        { "day": "Thursday", "time": "10:00–11:00 AM", "coach": "Andrew Mateljan" },
-        { "day": "Saturday", "time": "9:00–10:00 AM", "coach": "Robert LeBuhn" }
+        { "day": "Monday", "time": "6:30–7:30 PM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School" },
+        { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School" },
+        { "day": "Tuesday", "time": "10:00–11:00 AM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" },
+        { "day": "Thursday", "time": "10:00–11:00 AM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" },
+        { "day": "Saturday", "time": "9:00–10:00 AM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 615, "saturday1x": 380 },
@@ -191,8 +191,8 @@
       "location": "Moulton Meadows Park",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Monday", "time": "6:30–7:30 PM", "coach": "Allison Cronk" },
-        { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Allison Cronk" }
+        { "day": "Monday", "time": "6:30–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" }
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 615 },
@@ -209,9 +209,9 @@
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Tuesday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan" },
-        { "day": "Thursday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan" },
-        { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Robert LeBuhn", "note": "Separate pricing" }
+        { "day": "Tuesday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" },
+        { "day": "Thursday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" },
+        { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School", "note": "Separate pricing" }
       ],
       "pricing": {
         "spring": { "1x": 580, "2x": 1105, "3x": 1570 },
@@ -229,8 +229,8 @@
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "12:00–2:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" },
-        { "day": "Friday", "time": "12:00–2:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" }
+        { "day": "Monday", "time": "12:00–2:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School" },
+        { "day": "Friday", "time": "12:00–2:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "spring": { "1x": 625, "2x": 1250 },
@@ -247,9 +247,9 @@
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "note": "Training" },
-        { "day": "Wednesday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "note": "Training" },
-        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn & Peter DeFrantz", "note": "Match Play" }
+        { "day": "Monday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "location": "Laguna Beach High School", "note": "Training" },
+        { "day": "Wednesday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "location": "Laguna Beach High School", "note": "Training" },
+        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn & Peter DeFrantz", "location": "Laguna Beach High School", "note": "Match Play" }
       ],
       "pricing": {
         "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
@@ -269,8 +269,8 @@
       "duration": "1-1.5 hr",
       "schedule": [
         { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Staff", "location": "Moulton Meadows Park" },
-        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Staff", "location": "LB High School" },
-        { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Staff", "location": "LB High School" }
+        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Staff", "location": "Laguna Beach High School" },
+        { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Staff", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "monthly": 150,
@@ -286,7 +286,7 @@
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" }
+        { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "monthly": 150,
@@ -302,7 +302,7 @@
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
-        { "day": "Friday", "time": "9:00–10:30 AM", "coach": "Andrew Mateljan & Robert LeBuhn" }
+        { "day": "Friday", "time": "9:00–10:30 AM", "coach": "Andrew Mateljan & Robert LeBuhn", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "monthly": 150,

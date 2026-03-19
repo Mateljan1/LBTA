@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Mail, Phone } from 'lucide-react'
+import { coachImageSrc } from '@/lib/coaches-data'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Allison Cronk — LBTA Coach | Laguna Beach Tennis Academy',
     description: 'Collegiate player. Educator. Coach. 5+ years coaching across five academies. NCAA & NAIA tennis. B.A. History, Education minor.',
     type: 'website',
-    images: [{ url: '/images/coaches/allison-cronk.png', width: 800, height: 1000, alt: 'Allison Cronk' }],
+    images: [{ url: coachImageSrc('/images/coaches/allison-cronk.png'), width: 800, height: 1000, alt: 'Allison Cronk' }],
   },
 }
 
@@ -38,7 +39,7 @@ export default function AllisonCronkPage() {
           <div className="grid md:grid-cols-[200px_1fr] gap-10 items-start">
             <AnimatedSection className="relative aspect-[200/260] overflow-hidden rounded-xl border border-black/5">
               <Image
-                src="/images/coaches/allison-cronk.png"
+                src={coachImageSrc('/images/coaches/allison-cronk.png')}
                 alt="Allison Cronk, LBTA Coach at Laguna Beach Tennis Academy"
                 fill
                 className="object-cover object-top"

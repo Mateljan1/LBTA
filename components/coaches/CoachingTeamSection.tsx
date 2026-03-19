@@ -16,8 +16,9 @@ export default function CoachingTeamSection() {
           <h2 className="font-headline text-[28px] md:text-[40px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
             Meet the Team
           </h2>
-          <p className="font-sans text-[15px] text-brand-pacific-dusk/70 mt-2 max-w-[520px] leading-relaxed">
-            Decades of combined experience across juniors, college, and professional play.
+          <div className="section-horizon mt-3 mb-2 opacity-90" aria-hidden="true" />
+          <p className="font-sans text-[15px] text-brand-pacific-dusk/70 max-w-[520px] leading-relaxed">
+            Decades of combined experience. One philosophy: movement first, then craft—and a community that stays.
           </p>
         </AnimatedSection>
 

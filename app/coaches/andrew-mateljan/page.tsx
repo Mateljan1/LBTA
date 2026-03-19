@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Mail, Phone } from 'lucide-react'
+import { coachImageSrc } from '@/lib/coaches-data'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Andrew Mateljan — Founder & Head Coach | Laguna Beach Tennis Academy',
     description: '25 years of tennis coaching experience. Former top-ranked junior, ATP/WTA tour coach, and founder of LBTA. Currently coaching ATP #262 Karue Sell.',
     type: 'website',
-    images: [{ url: '/images/coaches/andrew-headshot.png', width: 800, height: 1000, alt: 'Andrew Mateljan, Founder & Head Coach' }],
+    images: [{ url: coachImageSrc('/images/coaches/andrew-headshot.png'), width: 800, height: 1000, alt: 'Andrew Mateljan, Founder & Head Coach' }],
   },
 }
 
@@ -67,7 +68,7 @@ export default function AndrewMateljanPage() {
           <div className="grid md:grid-cols-[minmax(240px,320px)_1fr] gap-10 md:gap-14 items-start">
             <AnimatedSection className="relative aspect-[3/4] overflow-hidden rounded-xl border border-black/5 shrink-0 max-w-[320px] [filter:brightness(1.12)_contrast(1.05)]">
               <Image
-                src="/images/coaches/andrew-headshot.png"
+                src={coachImageSrc('/images/coaches/andrew-headshot.png')}
                 alt="Andrew Mateljan, Founder & Head Coach at Laguna Beach Tennis Academy"
                 fill
                 className="object-cover"

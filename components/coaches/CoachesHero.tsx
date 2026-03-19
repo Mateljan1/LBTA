@@ -49,11 +49,12 @@ export default function CoachesHero() {
         <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/80 uppercase tracking-[0.2em] mb-4">
           Our Team
         </p>
-        <h1 className="font-headline text-[42px] md:text-[72px] font-medium text-white leading-[1.05] mb-6 tracking-[-0.02em]">
+        <h1 className="font-headline text-[42px] md:text-[72px] font-medium text-white leading-[1.05] mb-4 tracking-[-0.02em]">
           The Coaches
         </h1>
+        <div className="section-horizon mb-6 opacity-90" aria-hidden="true" />
         <p className="font-sans text-[16px] md:text-[18px] text-white/90 max-w-[600px] leading-[1.75]">
-          ATP/WTA-trained coaches who understand that tennis teaches more than technique. Movement. Craft. Community.
+          Tour-level and certified coaches who teach more than technique. Movement. Craft. Community.
         </p>
       </div>
     </section>

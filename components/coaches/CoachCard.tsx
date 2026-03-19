@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import type { Coach } from '@/lib/coaches-data'
+import { coachImageSrc, type Coach } from '@/lib/coaches-data'
 
 interface CoachCardProps {
   coach: Coach
@@ -24,7 +24,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
     <>
       <div className="relative aspect-[3/4] overflow-hidden shrink-0">
         <Image
-          src={coach.image}
+          src={coachImageSrc(coach.image)}
           alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -94,7 +94,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
       <div className="grid lg:grid-cols-[minmax(0,0.38fr)_1fr] gap-8 md:gap-12 items-start bg-white rounded-lg overflow-hidden border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
         <div className="relative aspect-[3/4] w-full max-w-[360px] mx-auto lg:mx-0 lg:max-w-none">
           <Image
-            src={coach.image}
+            src={coachImageSrc(coach.image)}
             alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
             fill
             className="object-cover"

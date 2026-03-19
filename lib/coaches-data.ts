@@ -10,6 +10,14 @@ const SITE_URL =
     ? process.env.NEXT_PUBLIC_SITE_URL
     : 'https://lagunabeachtennisacademy.com'
 
+/** Bump when coach headshots are updated so browsers and CDN fetch new images. */
+export const COACH_IMAGE_VERSION = 4
+
+/** Coach image URL with cache-bust query param. Use for all coach headshot src. */
+export function coachImageSrc(path: string): string {
+  return `${path}?v=${COACH_IMAGE_VERSION}`
+}
+
 export type CoachRole = 'founder' | 'lead' | 'program'
 
 export interface Coach {
@@ -80,7 +88,7 @@ export function getCoachesForSchema(): {
         coach.image && coach.image.trim()
           ? coach.image.startsWith('http')
             ? coach.image
-            : `${SITE_URL}${coach.image}`
+            : `${SITE_URL}${coachImageSrc(coach.image)}`
           : ''
       return {
         '@type': 'Person',

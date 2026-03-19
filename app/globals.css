@@ -1079,7 +1079,7 @@
     max-width: 100%;
     padding: 1rem;
   }
-  /* Court flyer: full-width print, 11×17 friendly */
+  /* Court flyer: full-width print, 11×17 friendly, arm's-length readability */
   .court-flyer-print,
   .court-flyer-print * {
     visibility: visible;
@@ -1093,6 +1093,13 @@
     padding: 0;
     background: white;
     color: #1B3A5C;
+    font-size: 14px;
+  }
+  .court-flyer-print table {
+    font-size: 12px;
+  }
+  .court-flyer-print .text-xs {
+    font-size: 10px;
   }
   .court-flyer-print section {
     break-inside: avoid;

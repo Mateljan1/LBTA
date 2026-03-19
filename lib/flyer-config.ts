@@ -14,7 +14,7 @@ export const FLYER_CONTACT = {
 export const FLYER_COURTS = [
   { name: 'Moulton Meadows Park', courts: 'Court 2', address: 'Balboa Ave & Capistrano Ave' },
   { name: 'Alta Laguna Park', courts: 'Courts 1 & 2', address: '3300 Alta Laguna Dr' },
-  { name: 'Laguna Beach High School', courts: 'Courts 1 & 2', address: '670 Park Ave' },
+  { name: 'Laguna Beach High School', courts: 'Courts 5 & 6', address: '670 Park Ave' },
 ] as const
 
 export const FLYER_USTA_NOTE = 'Sat 1-3PM: Courts 1-3 USTA League'

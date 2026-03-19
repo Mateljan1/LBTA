@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Mail, Phone } from 'lucide-react'
+import { coachImageSrc } from '@/lib/coaches-data'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Robert W. LeBuhn — Director of Tennis Operations | Laguna Beach Tennis Academy',
     description: 'USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Director of Tennis Operations at LBTA.',
     type: 'website',
-    images: [{ url: '/images/coaches/robert-lebuhn.png', width: 800, height: 1000, alt: 'Robert W. LeBuhn' }],
+    images: [{ url: coachImageSrc('/images/coaches/robert-lebuhn.png'), width: 800, height: 1000, alt: 'Robert W. LeBuhn' }],
   },
 }
 
@@ -45,7 +46,7 @@ export default function RobertLeBuhnPage() {
           <div className="grid md:grid-cols-[200px_1fr] gap-10 items-start">
             <AnimatedSection className="relative aspect-[200/260] overflow-hidden rounded-xl border border-black/5">
               <Image
-                src="/images/coaches/robert-lebuhn.png"
+                src={coachImageSrc('/images/coaches/robert-lebuhn.png')}
                 alt="Robert W. LeBuhn, Director of Tennis Operations at Laguna Beach Tennis Academy"
                 fill
                 className="object-cover object-top"
@@ -97,7 +98,7 @@ export default function RobertLeBuhnPage() {
               At Laguna Beach Tennis Academy, Robert leads day-to-day operations, staff coordination, scheduling, parent communications, lead management, partnership development, and revenue growth — while remaining an active coaching presence on the court. He reports directly to Founder and Academy Director Andrew Mateljan.
             </p>
           </AnimatedSection>
-          <div className="section-quote py-5 pl-6 border-l-2 border-brand-victoria-cove/40">
+          <div className="section-quote py-5 pl-6">
             <p className="font-headline text-xl italic text-brand-pacific-dusk leading-snug">
               His background in transforming programs, building team culture, and managing complex tennis operations makes him a natural fit for LBTA&apos;s mission: Movement. Discipline. Belonging.
             </p>

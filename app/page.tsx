@@ -10,6 +10,7 @@ import PullQuote from '@/components/ui/PullQuote'
 import WhyChooseImage from '@/components/ui/WhyChooseImage'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
+import { coachImageSrc } from '@/lib/coaches-data'
 import siteStats from '@/data/site-stats.json'
 import homepageCopy from '@/data/homepage-copy.json'
 
@@ -78,7 +79,7 @@ export default function Home() {
               <div className="bracket relative max-w-[480px] mx-auto lg:mx-0">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-subtle">
                   <Image
-                    src="/images/coaches/andrew-headshot.png"
+                    src={coachImageSrc('/images/coaches/andrew-headshot.png')}
                     alt="Andrew Mateljan, Founder & Head Coach"
                     fill
                     priority

@@ -25,3 +25,26 @@ The **court flyer** is a print-ready, data-driven flyer for posting at City of L
 - **Contact & courts:** `lib/flyer-config.ts`
 
 When you update any of these, refresh the flyer page and re-export to PDF to keep the posted flyer in sync.
+
+### Coach photos
+
+Coach headshots appear in the “Your Certified Coaching Team” section. For a uniform grid and no cropped faces:
+
+- **Aspect ratio:** 3:4 (portrait). The flyer uses a 3:4 crop with `object-fit: cover` and `object-position: top`, so correct aspect keeps faces visible.
+- **Recommended dimensions:** At least 300×400px (or 420×560px for higher quality). All four images should match dimensions so the grid is even.
+- **Format:** PNG or WebP. Files: `coach-andrew.png`, `coach-robert.png`, `coach-allison.png`, `coach-peter.png` in `public/images/print/`.
+
+To check that coach images meet the 3:4 aspect and exist, run:
+
+```bash
+node scripts/check-print-assets.mjs
+```
+
+### Logo strip (flyer header)
+
+The flyer header shows two logos side by side on a dark navy strip (`#0F2237`): **LBTA** and the **City of Laguna Beach** seal.
+
+- **LBTA:** `public/logos/LBTAwhttext.png` (white wordmark for dark background). Used at 52px height; width auto.
+- **City of Laguna Beach seal:** `public/logos/city-laguna-beach.png`. Used at 52×52px inside a circular wrapper so both logos have equal visual weight.
+
+**City seal asset:** Use a PNG with **true transparency** (no checkerboard or baked-in transparency grid). If the image has a checkerboard or grey background baked in, it will be visible on the flyer; the circular wrapper only masks the edges. For best results, export or obtain the official seal with an alpha channel and no background.
