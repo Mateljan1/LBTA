@@ -536,6 +536,24 @@
       "when": "Running compound review after plan-driven implementation",
       "example": "Pass to each review agent: plan summary (objective, out of scope, acceptance checklist, files to create/modify) plus code/diff. Enables scope compliance and acceptance-driven validation.",
       "tags": ["compound", "review", "plan", "scope"]
+    },
+    {
+      "name": "chat-suggested-actions",
+      "when": "Chat widget or assistant UI needs to help users discover capabilities",
+      "example": "After welcome message, render navigation-only action buttons (Book a Trial, View Programs, Contact Us) that link to pages. Use brand tokens, min-h-[48px], focus-visible:ring. Only show actions the backend can fulfill or that navigate to pages.",
+      "tags": ["chat", "discovery", "capability-discovery", "agent-native"]
+    },
+    {
+      "name": "api-contracts-documentation",
+      "when": "Building agent tools or maintaining API consistency between frontend and agents",
+      "example": "Create docs/api-contracts.md with request shapes (TypeScript types), response formats, validation notes, and links to lib/validations.ts schemas. Document all user-facing endpoints (book, register-program, register-year, newsletter, scholarship, chat, coach-hub). Keep in sync when adding/changing endpoints.",
+      "tags": ["api", "documentation", "agent-native", "action-parity"]
+    },
+    {
+      "name": "help-page-with-quick-links",
+      "when": "Users need to discover site capabilities or get help",
+      "example": "Create /help page with: quick links (Programs & Pricing, Book a Trial, Meet Our Coaches, Contact Us), FAQ link, contact info (phone, email, address). Link from chat footer as 'What can you do?'. Server Component, brand tokens, focus rings on all links.",
+      "tags": ["help", "discovery", "capability-discovery", "agent-native"]
     }
   ]
 }

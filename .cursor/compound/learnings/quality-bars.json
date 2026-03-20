@@ -276,6 +276,18 @@
     "nextImageQualitySectionHero": {
       "rule": "Section primitives and hero/bento Images using next/image should set quality={90} for consistency with project bar",
       "enforcement": "should"
+    },
+    "chatWidgetCloseButtonA11y": {
+      "rule": "ChatWidget close button must have min-h-[48px] min-w-[48px] and focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2 for WCAG touch target and keyboard focus",
+      "enforcement": "must"
+    },
+    "chatWidgetSendMessageOptimized": {
+      "rule": "ChatWidget sendMessage useCallback should not include messages in dependency array; use functional setState to build history array from updated state",
+      "enforcement": "should"
+    },
+    "brandTokensOnly": {
+      "rule": "New code must use brand-* tokens (brand-pacific-dusk, brand-sandstone, etc.) instead of legacy lbta-* tokens (lbta-primary, lbta-secondary, lbta-bone) per .cursorrules Part 7",
+      "enforcement": "must"
     }
   }
 }

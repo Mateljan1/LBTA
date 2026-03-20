@@ -443,6 +443,34 @@
       "avoid": "bg-brand-morning-light/90 + backdrop-blur over HomeHero video; composited bar reads dark while nav stays text-brand-pacific-dusk",
       "instead": "Opaque bg-brand-morning-light; optional subtle border-b; or dedicated inverse header theme with light text",
       "tags": ["a11y", "header", "contrast", "WCAG", "homepage"]
+    },
+    {
+      "id": "chat-widget-close-button-no-a11y",
+      "description": "ChatWidget close button without min-h-[48px] and focus-visible:ring",
+      "avoid": "32px × 32px close button with inline styles, no focus ring, opacity transitions only",
+      "instead": "min-h-[48px] min-w-[48px] with Tailwind classes, focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2",
+      "tags": ["a11y", "ChatWidget", "close-button", "focus-ring", "touch-target"]
+    },
+    {
+      "id": "usecallback-messages-dependency",
+      "description": "useCallback includes messages array in dependency array causing unnecessary re-renders",
+      "avoid": "const sendMessage = useCallback(async () => { ... }, [input, isLoading, messages])",
+      "instead": "Use functional setState (prev => [...prev, ...]) and build history array from updated state inside callback; remove messages from deps",
+      "tags": ["performance", "ChatWidget", "useCallback", "dependencies"]
+    },
+    {
+      "id": "legacy-tokens-in-new-code",
+      "description": "Using legacy lbta-* tokens (lbta-primary, lbta-secondary, lbta-bone) instead of brand-* tokens",
+      "avoid": "text-lbta-primary, text-lbta-secondary, bg-lbta-bone in new components or pages",
+      "instead": "Use brand-pacific-dusk, brand-pacific-dusk/70, brand-sandstone, brand-morning-light per .cursorrules Part 7",
+      "tags": ["brand-tokens", "lbta-primary", "lbta-secondary", "lbta-bone", "brand-pacific-dusk"]
+    },
+    {
+      "id": "focus-ring-instead-of-focus-visible",
+      "description": "Using focus:ring instead of focus-visible:ring on interactive elements",
+      "avoid": "focus:ring-2 focus:ring-brand-victoria-cove (applies on mouse click)",
+      "instead": "focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 (only on keyboard focus)",
+      "tags": ["a11y", "focus-ring", "focus-visible", "keyboard"]
     }
   ]
 }
