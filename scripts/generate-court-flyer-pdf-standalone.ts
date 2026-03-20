@@ -1,5 +1,7 @@
 /**
  * Generate LBTA Master Court Flyer PDF from repo data (no dev server).
+ * Displays Spring session only. Schedule and pricing from data/spring-summer-2026.json (spring),
+ * camps from data/year2026.json, courts/contact/discount from lib/flyer-config.
  * Uses the same schedule grid and pricing helpers as /print/court-flyer.
  *
  * Run from project root: npm run build:court-flyer-pdf-standalone
@@ -18,6 +20,7 @@ import {
   FLYER_CONTACT,
   FLYER_COURTS,
   FLYER_LOCATION_DISPLAY,
+  FLYER_OTHER_LOCATIONS_NOTE,
   FLYER_USTA_NOTE,
 } from '../lib/flyer-config'
 import {
@@ -48,9 +51,9 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
 
-const outPath = process.argv[2]
-  ? path.resolve(process.cwd(), process.argv[2])
-  : path.join(process.env.HOME || process.env.USERPROFILE || '', 'Desktop', 'LBTA_Master_Flyer.pdf')
+/** If provided, write a single master PDF to this path; otherwise write 4 PDFs (master + 3 location-specific) to Desktop. */
+const singleOutputPath = process.argv[2] ? path.resolve(process.cwd(), process.argv[2]) : null
+const desktopDir = path.join(process.env.HOME || process.env.USERPROFILE || '', 'Desktop')
 
 const LOCATION_ORDER = ['Alta', 'LBHS', 'Moulton'] as const
 /** Schedule section headers: same as FLYER_COURTS so flyer matches website + reserved courts list. */
@@ -185,14 +188,18 @@ function buildScheduleLegendHtml(): string {
   html += `<span class="legend-item"><span class="swatch swatch-liveball" aria-hidden="true"></span> LiveBall</span> `
   html += `<span class="legend-item"><span class="swatch swatch-adult" aria-hidden="true"></span> Adult programming</span> `
   html += `<span class="legend-item"><span class="swatch swatch-cardio" aria-hidden="true"></span> Cardio</span> `
-  html += `<span class="legend-item"><span class="swatch swatch-concurrent" aria-hidden="true"></span> Boxed = same time block (time, class, NTRP/UTR or ages)</span></p>`
+  html += `<span class="legend-item"><span class="swatch swatch-concurrent" aria-hidden="true"></span> One box = one class (time, name, level or ages in cell)</span></p>`
   return html
 }
 
-/** Same 30-min grid + rowSpan as CourtFlyer (lib/calendar-schedule). */
-function buildScheduleTablesHtml(scheduleByLocation: ScheduleByLocationByDay): string {
+/** Same 30-min grid + rowSpan as CourtFlyer (lib/calendar-schedule). If singleLocation is set, only that venue's table is included. */
+function buildScheduleTablesHtml(
+  scheduleByLocation: ScheduleByLocationByDay,
+  singleLocation?: string
+): string {
   let html = ''
-  for (const loc of LOCATION_ORDER) {
+  const locations = singleLocation ? [singleLocation] : [...LOCATION_ORDER]
+  for (const loc of locations) {
     const byDay = scheduleByLocation[loc]
     if (!byDay) continue
 
@@ -311,6 +318,8 @@ function buildFlyerHtml(options: {
   cityQrFileUrl: string
   /** Youth Development UTR tier callout (from spring-summer program JSON) */
   youthUtrHtml: string
+  /** On location-specific flyers: note to check City/academy site for other locations */
+  otherLocationsNote?: string
 }): string {
   const {
     coaches,
@@ -328,6 +337,7 @@ function buildFlyerHtml(options: {
     logoCityUrl,
     cityQrFileUrl,
     youthUtrHtml,
+    otherLocationsNote,
   } = options
 
   const cityQrBlock =
@@ -426,32 +436,32 @@ function buildFlyerHtml(options: {
   <link href="${fontUrl}" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; }
-    body { font-family: 'DM Sans', system-ui, sans-serif; color: #1B3A5C; margin: 0 auto; padding: 20px 28px; max-width: 16.4in; font-size: 20px; line-height: 1.4; background: #FAF8F4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; color: #1B3A5C; margin: 0 auto; padding: 12px 20px; max-width: 16.4in; font-size: 17px; line-height: 1.35; background: #FAF8F4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .flyer { max-width: 100%; }
-    .logo-strip { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 28px 40px; padding: 14px 32px; background: #0F2237; margin: -20px -28px 0 -28px; min-height: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .logo-strip { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 24px 32px; padding: 10px 24px; background: #0F2237; margin: -12px -20px 0 -20px; min-height: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .logo-strip-tagline { margin: 0; font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.98; max-width: 20em; text-align: center; line-height: 1.25; flex-shrink: 0; }
     .logo-lbta { height: ${COURT_FLYER_LOGO_ROW_PX}px; width: auto; max-width: 300px; min-width: 180px; object-fit: contain; object-position: center; display: block; filter: brightness(0) invert(1); opacity: 0.95; -webkit-print-color-adjust: exact; print-color-adjust: exact; flex-shrink: 0; }
     .logo-city-wrap { height: 72px; width: 72px; flex-shrink: 0; border-radius: 50%; background: #0F2237; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 1px rgba(255,255,255,0.12); }
     .logo-city { height: 58px; width: 58px; object-fit: contain; object-position: center; display: block; }
-    .flyer-hero { text-align: center; padding: 20px 16px 0; margin-bottom: 4px; }
-    .flyer-hero-title { font-family: 'DM Sans', system-ui, sans-serif; font-size: 36px; font-weight: 800; color: #0F2237; letter-spacing: 0.03em; margin: 0; line-height: 1.15; text-transform: uppercase; }
-    .flyer-hero-sub { font-family: Cormorant, Georgia, serif; font-size: 20px; font-weight: 600; color: #1B3A5C; margin: 12px 0 0; letter-spacing: 0.02em; text-transform: uppercase; }
-    .section-horizon { width: 100%; max-width: 160px; height: 4px; border: none; border-radius: 2px; background: linear-gradient(90deg, #2E8B8B, #E8834A); margin: 16px auto 0; opacity: 0.85; }
-    .sub { text-align: center; color: #1B3A5C; margin: 10px 0 0; font-size: 18px; }
-    .schedule-sub { text-align: left; font-size: 15px; margin: 0 0 8px; }
-    .cta-line { text-align: center; font-weight: 700; color: #0F2237; margin: 10px 0 0; font-size: 18px; letter-spacing: 0.02em; }
-    h2 { font-family: Cormorant, Georgia, serif; font-size: 24px; font-weight: 600; color: #0F2237; margin: 18px 0 0; }
-    h2 + .section-horizon { margin: 8px 0 10px; }
-    h3 { font-family: Cormorant, Georgia, serif; font-size: 16px; font-weight: 600; color: #0F2237; text-transform: uppercase; margin: 10px 0 6px; }
-    .coaches-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 14px 0; }
+    .flyer-hero { text-align: center; padding: 10px 12px 0; margin-bottom: 0; }
+    .flyer-hero-title { font-family: 'DM Sans', system-ui, sans-serif; font-size: 30px; font-weight: 800; color: #0F2237; letter-spacing: 0.03em; margin: 0; line-height: 1.15; text-transform: uppercase; }
+    .flyer-hero-sub { font-family: Cormorant, Georgia, serif; font-size: 17px; font-weight: 600; color: #1B3A5C; margin: 8px 0 0; letter-spacing: 0.02em; text-transform: uppercase; }
+    .section-horizon { width: 100%; max-width: 140px; height: 3px; border: none; border-radius: 2px; background: linear-gradient(90deg, #2E8B8B, #E8834A); margin: 10px auto 0; opacity: 0.85; }
+    .sub { text-align: center; color: #1B3A5C; margin: 6px 0 0; font-size: 16px; }
+    .schedule-sub { text-align: left; font-size: 13px; margin: 0 0 4px; }
+    .cta-line { text-align: center; font-weight: 700; color: #0F2237; margin: 6px 0 0; font-size: 16px; letter-spacing: 0.02em; }
+    h2 { font-family: Cormorant, Georgia, serif; font-size: 20px; font-weight: 600; color: #0F2237; margin: 12px 0 0; }
+    h2 + .section-horizon { margin: 4px 0 6px; }
+    h3 { font-family: Cormorant, Georgia, serif; font-size: 14px; font-weight: 600; color: #0F2237; text-transform: uppercase; margin: 8px 0 4px; }
+    .coaches-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 8px 0; }
     .coach-card { break-inside: avoid; display: flex; flex-direction: column; align-items: center; }
-    .coach-img-wrap { width: 130px; height: 172px; flex-shrink: 0; overflow: hidden; border-radius: 2px; background: #F5F0E5; }
-    .coach-img { width: 130px; height: 172px; object-fit: cover; object-position: center top; display: block; border-radius: 2px; }
-    .coach-name { font-family: Cormorant, Georgia, serif; font-weight: 600; color: #0F2237; margin: 8px 0 4px; font-size: 18px; }
-    .coach-title { font-size: 13px; font-weight: 500; color: #1B3A5C; margin: 0; }
-    .coach-bio { font-size: 13px; color: #1B3A5C; margin: 6px 0 0; line-height: 1.35; opacity: 0.95; }
-    .data-tbl { width: 100%; border-collapse: collapse; font-size: 16px; margin: 10px 0; }
-    .data-tbl th, .data-tbl td { padding: 8px 10px; text-align: left; border-bottom: 1px solid rgba(27,58,92,0.12); }
+    .coach-img-wrap { width: 100px; height: 132px; flex-shrink: 0; overflow: hidden; border-radius: 2px; background: #F5F0E5; }
+    .coach-img { width: 100px; height: 132px; object-fit: cover; object-position: center top; display: block; border-radius: 2px; }
+    .coach-name { font-family: Cormorant, Georgia, serif; font-weight: 600; color: #0F2237; margin: 5px 0 2px; font-size: 15px; }
+    .coach-title { font-size: 11px; font-weight: 500; color: #1B3A5C; margin: 0; }
+    .coach-bio { font-size: 11px; color: #1B3A5C; margin: 3px 0 0; line-height: 1.3; opacity: 0.95; }
+    .data-tbl { width: 100%; border-collapse: collapse; font-size: 14px; margin: 6px 0; }
+    .data-tbl th, .data-tbl td { padding: 5px 8px; text-align: left; border-bottom: 1px solid rgba(27,58,92,0.12); }
     .data-tbl thead tr { border-bottom: 2px solid rgba(27,58,92,0.25); background: rgba(245,240,229,0.4); }
     .data-tbl th { font-weight: 600; color: #0F2237; }
     .data-tbl td:nth-child(n+2) { text-align: right; }
@@ -463,15 +473,15 @@ function buildFlyerHtml(options: {
     .data-tbl.private-rates-tbl .private-row-1 { background: rgba(245,240,229,0.6); }
     .data-tbl.private-rates-tbl .private-row-2 { background: rgba(46,139,139,0.06); }
     .data-tbl.private-rates-tbl .private-row-3 { background: rgba(245,240,229,0.5); }
-    .cta-block { border-left: 5px solid #2E8B8B; background: rgba(232,131,74,0.08); padding: 16px 20px; margin: 14px 0; font-size: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .cta-block .what { font-family: Cormorant, Georgia, serif; font-weight: 600; color: #0F2237; font-size: 20px; margin-bottom: 10px; }
-    .cta-block .address { font-size: 17px; color: #1B3A5C; margin-top: 14px; opacity: 0.9; }
-    .courts-list { font-size: 18px; margin: 12px 0; }
-    .courts-list li { margin: 8px 0; }
-    .courts-section { background: rgba(245,240,229,0.5); padding: 16px; margin: 12px 0; }
-    .schedule-intro { break-inside: avoid; page-break-inside: avoid; }
-    .pricing-sub { font-size: 15px; color: #1B3A5C; margin: 0 0 10px; line-height: 1.35; opacity: 0.92; }
-    .schedule-legend { font-size: 14px; color: #1B3A5C; margin: 0 0 16px; line-height: 1.5; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+    .cta-block { border-left: 4px solid #2E8B8B; background: rgba(232,131,74,0.08); padding: 8px 12px; margin: 8px 0; font-size: 14px; line-height: 1.4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cta-block .what { font-family: Cormorant, Georgia, serif; font-weight: 600; color: #0F2237; font-size: 14px; margin-bottom: 4px; }
+    .cta-block .address { font-size: 13px; color: #1B3A5C; margin-top: 6px; opacity: 0.9; }
+    .courts-list { font-size: 15px; margin: 6px 0; }
+    .courts-list li { margin: 4px 0; }
+    .courts-section { background: rgba(245,240,229,0.5); padding: 10px 12px; margin: 8px 0; }
+    .schedule-intro { break-inside: avoid; page-break-inside: avoid; margin-bottom: 6px; }
+    .pricing-sub { font-size: 13px; color: #1B3A5C; margin: 0 0 6px; line-height: 1.3; opacity: 0.92; }
+    .schedule-legend { font-size: 12px; color: #1B3A5C; margin: 0 0 8px; line-height: 1.4; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
     .schedule-legend .legend-title { font-weight: 700; color: #0F2237; }
     .schedule-legend .legend-item { display: inline-flex; align-items: center; gap: 6px; }
     .schedule-legend .swatch { display: inline-block; width: 16px; height: 16px; border-radius: 2px; border: 2px solid rgba(27,58,92,0.35); flex-shrink: 0; }
@@ -481,18 +491,19 @@ function buildFlyerHtml(options: {
     .swatch-adult { background: rgba(27,58,92,0.14); }
     .swatch-cardio { background: rgba(232,131,74,0.38); }
     .swatch-concurrent { background: #fff; box-shadow: inset 0 0 0 1px rgba(27,58,92,0.15); }
-    .schedule-loc { margin: 12px 0; break-inside: auto; }
-    .schedule-tbl { width: 100%; border-collapse: collapse; font-size: 15px; border: 1px solid rgba(27,58,92,0.2); }
-    .schedule-tbl th, .schedule-tbl td { padding: 8px 10px; border-bottom: 1px solid rgba(27,58,92,0.15); border-left: 1px solid rgba(27,58,92,0.1); vertical-align: top; }
-    .schedule-tbl thead tr { background: rgba(245,240,229,0.6); border-bottom: 2px solid rgba(27,58,92,0.25); }
-    .schedule-tbl th { font-weight: 700; color: #0F2237; }
-    .schedule-tbl .col-time { width: 5.5em; }
-    .schedule-tbl .time-cell { font-weight: 700; color: #0F2237; background: rgba(245,240,229,0.35); border-right: 1px solid rgba(27,58,92,0.12); text-align: left; white-space: nowrap; font-size: 15px; }
-    .schedule-tbl .sched-empty { min-height: 38px; }
-    .schedule-tbl .empty-schedule { text-align: center; padding: 18px; color: rgba(27,58,92,0.65); }
-    .schedule-tbl .sched-slot-title { font-weight: 600; color: #0F2237; font-size: 14px; line-height: 1.35; display: block; }
-    .schedule-tbl .sched-slot-guide { font-size: 12px; font-weight: 600; color: rgba(27,58,92,0.92); margin-top: 4px; line-height: 1.3; }
-    .schedule-tbl .sched-slot-time { font-size: 13px; font-weight: 600; color: #1B3A5C; margin-top: 5px; }
+    .other-locations-note { font-size: 13px; color: #1B3A5C; margin: 8px 0 10px; line-height: 1.4; font-style: italic; }
+    .schedule-loc { margin: 6px 0; break-inside: auto; }
+    .schedule-tbl { width: 100%; border-collapse: collapse; font-size: 12px; border: 1px solid rgba(27,58,92,0.2); }
+    .schedule-tbl th, .schedule-tbl td { padding: 4px 6px; border-bottom: 1px solid rgba(27,58,92,0.12); border-left: 1px solid rgba(27,58,92,0.08); vertical-align: top; }
+    .schedule-tbl thead tr { background: rgba(245,240,229,0.6); border-bottom: 2px solid rgba(27,58,92,0.2); }
+    .schedule-tbl th { font-weight: 700; color: #0F2237; font-size: 11px; }
+    .schedule-tbl .col-time { width: 4.5em; }
+    .schedule-tbl .time-cell { font-weight: 700; color: #0F2237; background: rgba(245,240,229,0.35); border-right: 1px solid rgba(27,58,92,0.1); text-align: left; white-space: nowrap; font-size: 11px; }
+    .schedule-tbl .sched-empty { min-height: 24px; }
+    .schedule-tbl .empty-schedule { text-align: center; padding: 10px; color: rgba(27,58,92,0.65); font-size: 12px; }
+    .schedule-tbl .sched-slot-title { font-weight: 600; color: #0F2237; font-size: 11px; line-height: 1.25; display: block; }
+    .schedule-tbl .sched-slot-guide { font-size: 10px; font-weight: 600; color: rgba(27,58,92,0.92); margin-top: 2px; line-height: 1.25; }
+    .schedule-tbl .sched-slot-time { font-size: 10px; font-weight: 600; color: #1B3A5C; margin-top: 2px; }
     .schedule-tbl .sched-concurrent-note { font-size: 11px; color: rgba(27,58,92,0.88); margin-top: 6px; line-height: 1.3; }
     .schedule-tbl .cell-red { background: rgba(240,78,35,0.45); }
     .schedule-tbl .cell-orange { background: rgba(232,131,74,0.45); }
@@ -511,13 +522,13 @@ function buildFlyerHtml(options: {
     .schedule-tbl .conc-two { display: flex; gap: 5px; align-items: flex-start; }
     .schedule-tbl .conc-col { flex: 1; min-width: 0; }
     .schedule-tbl .conc-vsep { width: 1px; background: rgba(27,58,92,0.18); flex-shrink: 0; align-self: stretch; min-height: 28px; }
-    .schedule-tbl .conc-hdr { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #0F2237; margin: 0 0 5px 0; line-height: 1.2; }
-    .schedule-tbl .cell-concurrent .conc-hdr { padding-left: 12px; }
-    .schedule-tbl .conc-note { font-size: 11px; color: rgba(27,58,92,0.88); margin-top: 6px; line-height: 1.35; }
-    .schedule-tbl .conc-time { font-size: 11px; font-weight: 700; color: #0F2237; }
-    .schedule-tbl .conc-pname { font-size: 13px; font-weight: 600; color: #0F2237; line-height: 1.25; margin-top: 3px; }
-    .schedule-tbl .conc-guide { font-size: 10px; font-weight: 600; color: rgba(27,58,92,0.9); margin-top: 4px; line-height: 1.3; }
-    .schedule-tbl .conc-item { margin-bottom: 4px; padding: 3px 8px 3px 6px; border-radius: 0 2px 2px 0; border-left: 4px solid rgba(27,58,92,0.4); background: rgba(245,240,229,0.75); }
+    .schedule-tbl .conc-hdr { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0F2237; margin: 0 0 3px 0; line-height: 1.15; }
+    .schedule-tbl .cell-concurrent .conc-hdr { padding-left: 8px; }
+    .schedule-tbl .conc-note { font-size: 9px; color: rgba(27,58,92,0.88); margin-top: 3px; line-height: 1.3; }
+    .schedule-tbl .conc-time { font-size: 9px; font-weight: 700; color: #0F2237; }
+    .schedule-tbl .conc-pname { font-size: 11px; font-weight: 600; color: #0F2237; line-height: 1.2; margin-top: 2px; }
+    .schedule-tbl .conc-guide { font-size: 9px; font-weight: 600; color: rgba(27,58,92,0.9); margin-top: 2px; line-height: 1.25; }
+    .schedule-tbl .conc-item { margin-bottom: 2px; padding: 2px 6px 2px 4px; border-radius: 0 2px 2px 0; border-left: 3px solid rgba(27,58,92,0.4); background: rgba(245,240,229,0.75); }
     .schedule-tbl .conc-item:last-child { margin-bottom: 0; }
     .schedule-tbl .conc-hp { border-left-color: #1B3A5C; background: rgba(27,58,92,0.14); }
     .schedule-tbl .conc-utr-green { border-left-color: #2D7A5E; background: rgba(58,139,110,0.22); }
@@ -529,10 +540,10 @@ function buildFlyerHtml(options: {
     .schedule-tbl .conc-j-green { border-left-color: #3A8B6E; background: rgba(58,139,110,0.14); }
     .schedule-tbl .conc-youth { border-left-color: #2E8B8B; background: rgba(46,139,139,0.12); }
     .schedule-tbl .conc-default { border-left-color: rgba(27,58,92,0.45); background: rgba(245,240,229,0.85); }
-    .camps-ul { font-size: 18px; margin: 12px 0; padding-left: 26px; }
-    .camps-ul li { margin: 8px 0; }
-    .discount-line { font-size: 15px; color: #1B3A5C; opacity: 0.9; margin-top: 12px; }
-    .youth-utr-box { break-inside: avoid; page-break-inside: avoid; border: 1px solid rgba(27,58,92,0.15); border-radius: 2px; background: rgba(245,240,229,0.45); padding: 14px 16px; margin: 12px 0 14px; font-size: 14px; line-height: 1.4; color: #1B3A5C; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .camps-ul { font-size: 14px; margin: 6px 0; padding-left: 20px; }
+    .camps-ul li { margin: 3px 0; }
+    .discount-line { font-size: 13px; color: #1B3A5C; opacity: 0.9; margin-top: 6px; }
+    .youth-utr-box { break-inside: avoid; page-break-inside: avoid; border: 1px solid rgba(27,58,92,0.15); border-radius: 2px; background: rgba(245,240,229,0.45); padding: 8px 10px; margin: 6px 0 8px; font-size: 12px; line-height: 1.35; color: #1B3A5C; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .youth-utr-title { font-weight: 700; color: #0F2237; font-size: 15px; margin: 0 0 8px; font-family: Cormorant, Georgia, serif; }
     .youth-utr-intro { margin: 0 0 6px; }
     .youth-utr-tiers { list-style: none; padding: 0; margin: 0 0 6px; }
@@ -542,10 +553,10 @@ function buildFlyerHtml(options: {
     .tier-focus { margin-top: 4px; padding-left: 0; font-size: 13px; opacity: 0.95; }
     .youth-utr-p { margin: 8px 0 0; }
     .youth-utr-note { margin: 10px 0 0; font-size: 13px; opacity: 0.88; }
-    footer { margin-top: 18px; padding: 18px 20px; border-top: 1px solid rgba(27,58,92,0.2); background: #0F2237; color: rgba(255,255,255,0.9); text-align: center; font-size: 15px; }
-    footer .footer-logo { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    footer { margin-top: 10px; padding: 10px 14px; border-top: 1px solid rgba(27,58,92,0.2); background: #0F2237; color: rgba(255,255,255,0.9); text-align: center; font-size: 12px; }
+    footer .footer-logo { padding-bottom: 6px; margin-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); }
     footer .footer-logo-img { height: 40px; width: auto; max-width: 220px; object-fit: contain; display: inline-block; vertical-align: middle; opacity: 0.95; filter: brightness(0) invert(1); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .city-register { max-width: 42em; margin: 24px auto 0; padding: 22px 24px; border: 2px solid rgba(15,34,55,0.2); border-radius: 4px; background: #fff; box-shadow: 0 2px 8px rgba(15,34,55,0.06); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .city-register { max-width: 40em; margin: 12px auto 0; padding: 12px 16px; border: 2px solid rgba(15,34,55,0.2); border-radius: 4px; background: #fff; box-shadow: 0 2px 6px rgba(15,34,55,0.05); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .city-register-row { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 28px; }
     .city-register-qr-link { display: inline-block; flex-shrink: 0; padding: 10px; background: #fff; border: 2px solid rgba(27,58,92,0.2); border-radius: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .city-register-qr { width: 128px; height: 128px; display: block; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -592,10 +603,8 @@ function buildFlyerHtml(options: {
   ${privateTable}
 
   <div class="cta-block">
-    <p class="what">What to do</p>
-    <strong>LBTA</strong> — FREE TRIAL &amp; QUESTIONS (949) 534-0457 &nbsp;|&nbsp; <strong>City of Laguna Beach</strong> — REGISTER (949) 497-3311 &nbsp;|&nbsp; <strong>EMAIL</strong> support@lagunabeachtennisacademy.com
-    <p class="cta-city-link"><a href="${escapeHtml(FLYER_CONTACT.registerUrl)}">Register online — City Recreation (Rec1)</a></p>
-    <p class="address">${escapeHtml(FLYER_ACADEMY_ADDRESS)}</p>
+    <p class="what">Contact &amp; register</p>
+    <strong>LBTA</strong> (949) 534-0457 &nbsp;·&nbsp; <strong>City</strong> (949) 497-3311 &nbsp;·&nbsp; <a href="${escapeHtml(FLYER_CONTACT.registerUrl)}">Register online</a> &nbsp;·&nbsp; ${escapeHtml(FLYER_ACADEMY_ADDRESS)}
   </div>
 
   <h2>LBTA Reserved Courts</h2>
@@ -603,8 +612,8 @@ function buildFlyerHtml(options: {
   <div class="courts-section">
   <ul class="courts-list">
     ${FLYER_COURTS.map((c) => `<li><strong>${escapeHtml(c.name)}</strong> ${escapeHtml(c.courts)} · ${escapeHtml(c.address)}</li>`).join('\n    ')}
+    <li><strong>USTA League</strong> ${escapeHtml(FLYER_USTA_NOTE)}</li>
   </ul>
-  <p class="sub" style="font-size:15px; margin-top:10px;">${escapeHtml(FLYER_USTA_NOTE)}</p>
   </div>
 
   <div class="schedule-intro">
@@ -612,6 +621,7 @@ function buildFlyerHtml(options: {
   <div class="section-horizon"></div>
   <p class="sub" style="text-align:left; margin:0 0 16px;">lagunabeachtennisacademy.com · Movement. Craft. Community.</p>
   ${buildScheduleLegendHtml()}
+  ${otherLocationsNote ? `<p class="other-locations-note">${escapeHtml(otherLocationsNote)}</p>` : ''}
   </div>
   ${scheduleTablesHtml}
 
@@ -757,71 +767,79 @@ async function main(): Promise<void> {
 
   const youthUtrHtml = buildYouthDevelopmentUtrHtml(getYouthDevelopmentUtrPlacementForFlyer())
 
-  const html = buildFlyerHtml({
-    coaches,
-    privateRates,
-    scheduleTablesHtml,
-    seasonLabel,
-    seasonDates,
-    weeks,
-    juniorRows,
-    adultProgrammingRows,
-    monthlyAdultRows,
-    camps,
-    discountLine,
-    logoLbtaUrl,
-    logoCityUrl,
-    cityQrFileUrl,
-    youthUtrHtml,
-  })
+  const buildOneHtml = (scheduleTablesHtml: string, otherLocationsNote?: string) =>
+    buildFlyerHtml({
+      coaches,
+      privateRates,
+      scheduleTablesHtml,
+      seasonLabel,
+      seasonDates,
+      weeks,
+      juniorRows,
+      adultProgrammingRows,
+      monthlyAdultRows,
+      camps,
+      discountLine,
+      logoLbtaUrl,
+      logoCityUrl,
+      cityQrFileUrl,
+      youthUtrHtml,
+      otherLocationsNote,
+    })
 
-  const tmpHtml = path.join(root, '.court-flyer-temp.html')
-  fs.writeFileSync(tmpHtml, html, 'utf8')
-
-  // Landscape: 17in × 11in (full width)
-  const LANDSCAPE_VIEWPORT_WIDTH_PX = 1632 // 17in at 96dpi
-  const LANDSCAPE_PAGE_HEIGHT_PX = 1008   // 11in minus margins
-  const margin = { top: '0.3in', right: '0.3in', bottom: '0.3in', left: '0.3in' }
-
-  try {
-    const { chromium } = await import('playwright')
-    const browser = await chromium.launch()
-    const page = await browser.newPage()
-    await page.setViewportSize({ width: LANDSCAPE_VIEWPORT_WIDTH_PX, height: 3000 })
-    await page.goto(toFileUrl(tmpHtml), { waitUntil: 'load', timeout: 12000 })
-    const heightPx = await page.evaluate(() => Math.ceil(document.body.scrollHeight))
-
-    const MIN_SCALE_FOR_4FT_READABILITY = 0.88
-    if (heightPx > LANDSCAPE_PAGE_HEIGHT_PX) {
-      const scale = LANDSCAPE_PAGE_HEIGHT_PX / heightPx
-      if (scale >= MIN_SCALE_FOR_4FT_READABILITY) {
-        const middleWidthPx = Math.round(LANDSCAPE_VIEWPORT_WIDTH_PX * scale)
-        const outerStyle = `width:${LANDSCAPE_VIEWPORT_WIDTH_PX}px;height:${LANDSCAPE_PAGE_HEIGHT_PX}px;overflow:hidden;position:relative;margin:0 auto;`
-        const middleStyle = `width:${middleWidthPx}px;height:${LANDSCAPE_PAGE_HEIGHT_PX}px;overflow:hidden;position:relative;margin:0 auto;`
-        const innerStyle = `position:absolute;top:0;left:0;width:${LANDSCAPE_VIEWPORT_WIDTH_PX}px;height:${heightPx}px;transform-origin:top left;transform:scale(${scale});box-sizing:border-box;padding:20px 28px;`
-        const wrapperOpen = `<body class="flyer" style="padding:0;margin:0"><div class="one-page-outer" style="${outerStyle}"><div class="one-page-middle" style="${middleStyle}"><div class="one-page-inner" style="${innerStyle}">`
-        const wrapperClose = '</div></div></div></body>'
-        const onePageHtml = html.replace('<body class="flyer">', wrapperOpen).replace('</body>', wrapperClose)
-        fs.writeFileSync(tmpHtml, onePageHtml, 'utf8')
-        await page.goto(toFileUrl(tmpHtml), { waitUntil: 'load', timeout: 12000 })
+  const writePdfToPath = async (html: string, outPath: string): Promise<void> => {
+    const tmpHtml = path.join(root, `.court-flyer-temp-${Date.now()}-${Math.random().toString(36).slice(2)}.html`)
+    fs.writeFileSync(tmpHtml, html, 'utf8')
+    const LANDSCAPE_VIEWPORT_WIDTH_PX = 1632
+    const LANDSCAPE_PAGE_HEIGHT_PX = 1008
+    const margin = { top: '0.3in', right: '0.3in', bottom: '0.3in', left: '0.3in' }
+    try {
+      const { chromium } = await import('playwright')
+      const browser = await chromium.launch()
+      const page = await browser.newPage()
+      await page.setViewportSize({ width: LANDSCAPE_VIEWPORT_WIDTH_PX, height: 3000 })
+      await page.goto(toFileUrl(tmpHtml), { waitUntil: 'load', timeout: 12000 })
+      const heightPx = await page.evaluate(() => Math.ceil(document.body.scrollHeight))
+      const MIN_SCALE_FOR_4FT_READABILITY = 0.82
+      if (heightPx > LANDSCAPE_PAGE_HEIGHT_PX) {
+        const scale = LANDSCAPE_PAGE_HEIGHT_PX / heightPx
+        if (scale >= MIN_SCALE_FOR_4FT_READABILITY) {
+          const middleWidthPx = Math.round(LANDSCAPE_VIEWPORT_WIDTH_PX * scale)
+          const outerStyle = `width:${LANDSCAPE_VIEWPORT_WIDTH_PX}px;height:${LANDSCAPE_PAGE_HEIGHT_PX}px;overflow:hidden;position:relative;margin:0 auto;`
+          const middleStyle = `width:${middleWidthPx}px;height:${LANDSCAPE_PAGE_HEIGHT_PX}px;overflow:hidden;position:relative;margin:0 auto;`
+          const innerStyle = `position:absolute;top:0;left:0;width:${LANDSCAPE_VIEWPORT_WIDTH_PX}px;height:${heightPx}px;transform-origin:top left;transform:scale(${scale});box-sizing:border-box;padding:20px 28px;`
+          const wrapperOpen = `<body class="flyer" style="padding:0;margin:0"><div class="one-page-outer" style="${outerStyle}"><div class="one-page-middle" style="${middleStyle}"><div class="one-page-inner" style="${innerStyle}">`
+          const wrapperClose = '</div></div></div></body>'
+          const onePageHtml = html.replace('<body class="flyer">', wrapperOpen).replace('</body>', wrapperClose)
+          fs.writeFileSync(tmpHtml, onePageHtml, 'utf8')
+          await page.goto(toFileUrl(tmpHtml), { waitUntil: 'load', timeout: 12000 })
+        }
+      }
+      await page.pdf({ path: outPath, width: '17in', height: '11in', margin, printBackground: true, preferCSSPageSize: false })
+      await browser.close()
+      console.log('Wrote', outPath)
+    } finally {
+      try {
+        fs.unlinkSync(tmpHtml)
+      } catch {
+        /* ignore */
       }
     }
+  }
 
-    await page.pdf({
-      path: outPath,
-      width: '17in',
-      height: '11in',
-      margin,
-      printBackground: true,
-      preferCSSPageSize: false,
-    })
-    await browser.close()
-    console.log('Wrote', outPath)
-  } finally {
-    try {
-      fs.unlinkSync(tmpHtml)
-    } catch {
-      /* ignore */
+  if (singleOutputPath) {
+    const html = buildOneHtml(buildScheduleTablesHtml(scheduleByLocation))
+    await writePdfToPath(html, singleOutputPath)
+  } else {
+    await writePdfToPath(
+      buildOneHtml(buildScheduleTablesHtml(scheduleByLocation)),
+      path.join(desktopDir, 'LBTA_Master_Flyer.pdf')
+    )
+    for (const loc of LOCATION_ORDER) {
+      await writePdfToPath(
+        buildOneHtml(buildScheduleTablesHtml(scheduleByLocation, loc), FLYER_OTHER_LOCATIONS_NOTE),
+        path.join(desktopDir, `LBTA_Flyer_${loc}.pdf`)
+      )
     }
   }
 }

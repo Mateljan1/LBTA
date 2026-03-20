@@ -255,7 +255,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                     <button
                       ref={successPrimaryRef}
-                      onClick={() => { window.location.href = '/thank-you?type=program' }}
+                      onClick={() => { window.location.href = `/thank-you?type=program&program=${encodeURIComponent(program.program)}&location=${encodeURIComponent(program.location)}` }}
                       className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-8 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                     >
                       View next steps

@@ -18,7 +18,8 @@ import {
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
-import { notifyRegistration } from '@/lib/email'
+import { notifyRegistration, sendConfirmationEmail } from '@/lib/email'
+import { FORM_CONFIGS } from '@/lib/form-config'
 
 let notionClient: Client | null = null
 function getNotionClient(): Client {
@@ -361,6 +362,36 @@ export async function POST(request: NextRequest) {
       experience: data.experience,
       notes: data.notes,
     })
+
+    // Send branded confirmation email TO the registrant (fire-and-forget).
+    // Try programId first, then match by program display name.
+    const configById = data.programId
+      ? FORM_CONFIGS[data.programId]
+      : undefined
+    const matchedConfig = configById ?? Object.values(FORM_CONFIGS).find(
+      c => c.prePopulateData.programName === data.program
+    )
+    if (matchedConfig) {
+      const pre = matchedConfig.prePopulateData
+      void sendConfirmationEmail({
+        email: data.email,
+        firstName: data.firstName,
+        programName: pre.programName,
+        location: pre.location,
+        duration: pre.duration,
+        ageGroup: pre.ageGroup,
+        category: pre.category,
+      })
+    } else {
+      void sendConfirmationEmail({
+        email: data.email,
+        firstName: data.firstName,
+        programName: data.program,
+        location: data.location ?? 'TBD',
+        duration: 'TBD',
+        category: category,
+      })
+    }
 
     // 3. Return success with confirmation message based on type
     let confirmationMessage = 'Registration received! Our team will confirm within 24 hours.'

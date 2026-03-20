@@ -42,7 +42,7 @@ export default function ChatWidget() {
       setMessages([{
         id: 'welcome',
         role: 'assistant',
-        content: "Hi! 👋 I'm the LBTA Assistant. I can help you with:\n\n• Program information & pricing\n• Class schedules\n• Trial lesson booking\n• Coach credentials\n• Location & facilities\n\nHow can I help you today?",
+        content: "Hi! I'm the LBTA Assistant. I can help answer questions or point you to the right place.\n\nFor immediate assistance, call us at (949) 534-0457 or use the contact form.\n\nHow can I help you today?",
         timestamp: new Date()
       }])
     }
@@ -58,53 +58,58 @@ export default function ChatWidget() {
       timestamp: new Date()
     }
 
-    setMessages(prev => [...prev, userMessage])
-    setInput('')
-    setIsLoading(true)
-
-    try {
-      const response = await fetch('/api/chat', {
+    setMessages(prev => {
+      const updated = [...prev, userMessage]
+      
+      // Use updated array for API call
+      fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           message: userMessage.content,
-          history: messages.map(m => ({ role: m.role, content: m.content }))
+          history: updated.map(m => ({ role: m.role, content: m.content }))
         }),
-      })
+      }).then(async (response) => {
+        const data = await response.json().catch(() => ({}))
+        const reply = data?.reply ?? data?.error ?? "I apologize, but I couldn't process that request. Please try again or call us at (949) 534-0457."
 
-      const data = await response.json().catch(() => ({}))
-      const reply = data?.reply ?? data?.error ?? "I apologize, but I couldn't process that request. Please try again or call us at (949) 534-0457."
+        if (!response.ok) {
+          setMessages(prevMsgs => [...prevMsgs, {
+            id: `assistant-${Date.now()}`,
+            role: 'assistant',
+            content: reply,
+            timestamp: new Date()
+          }])
+          setIsLoading(false)
+          return
+        }
 
-      if (!response.ok) {
-        setMessages(prev => [...prev, {
+        const assistantMessage: Message = {
           id: `assistant-${Date.now()}`,
           role: 'assistant',
           content: reply,
           timestamp: new Date()
+        }
+
+        setMessages(prevMsgs => [...prevMsgs, assistantMessage])
+        setIsLoading(false)
+      }).catch((error) => {
+        console.error('Chat error:', error)
+        setMessages(prevMsgs => [...prevMsgs, {
+          id: `error-${Date.now()}`,
+          role: 'assistant',
+          content: "I'm having trouble connecting right now. Please call us directly at (949) 534-0457 or email info@lagunabeachtennisacademy.com",
+          timestamp: new Date()
         }])
-        return
-      }
-
-      const assistantMessage: Message = {
-        id: `assistant-${Date.now()}`,
-        role: 'assistant',
-        content: reply,
-        timestamp: new Date()
-      }
-
-      setMessages(prev => [...prev, assistantMessage])
-    } catch (error) {
-      console.error('Chat error:', error)
-      setMessages(prev => [...prev, {
-        id: `error-${Date.now()}`,
-        role: 'assistant',
-        content: "I'm having trouble connecting right now. Please call us directly at (949) 534-0457 or email info@lagunabeachtennisacademy.com",
-        timestamp: new Date()
-      }])
-    } finally {
-      setIsLoading(false)
-    }
-  }, [input, isLoading, messages])
+        setIsLoading(false)
+      })
+      
+      return updated
+    })
+    
+    setInput('')
+    setIsLoading(true)
+  }, [input, isLoading])
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -260,20 +265,7 @@ export default function ChatWidget() {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                width: '32px',
-                height: '32px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                opacity: 0.4,
-                transition: 'opacity 0.2s'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.4')}
+              className="min-h-[48px] min-w-[48px] flex items-center justify-center bg-transparent border-none cursor-pointer opacity-40 hover:opacity-100 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2"
               aria-label="Close chat"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pacific-dusk, #1B3A5C)" strokeWidth="2" aria-hidden="true">
@@ -295,30 +287,57 @@ export default function ChatWidget() {
             }}
           >
             {messages.map((message) => (
-              <div
-                key={message.id}
-                style={{
-                  display: 'flex',
-                  justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start',
-                }}
-              >
+              <div key={message.id}>
                 <div
                   style={{
-                    maxWidth: '85%',
-                    padding: '12px 16px',
-                    borderRadius: message.role === 'user' 
-                      ? '18px 18px 4px 18px' 
-                      : '18px 18px 18px 4px',
-                    backgroundColor: message.role === 'user' ? 'var(--color-brand-sunset-cliff, #E8834A)' : 'white',
-                    color: message.role === 'user' ? 'white' : 'var(--pacific-dusk, #1B3A5C)',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-                    fontSize: '14px',
-                    lineHeight: '1.5',
-                    whiteSpace: 'pre-wrap',
+                    display: 'flex',
+                    justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start',
                   }}
                 >
-                  {message.content}
+                  <div
+                    style={{
+                      maxWidth: '85%',
+                      padding: '12px 16px',
+                      borderRadius: message.role === 'user' 
+                        ? '18px 18px 4px 18px' 
+                        : '18px 18px 18px 4px',
+                      backgroundColor: message.role === 'user' ? 'var(--color-brand-sunset-cliff, #E8834A)' : 'white',
+                      color: message.role === 'user' ? 'white' : 'var(--pacific-dusk, #1B3A5C)',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                      fontSize: '14px',
+                      lineHeight: '1.5',
+                      whiteSpace: 'pre-wrap',
+                    }}
+                  >
+                    {message.content}
+                  </div>
                 </div>
+                {/* Suggested actions after welcome message */}
+                {message.id === 'welcome' && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px', maxWidth: '85%' }}>
+                    <a
+                      href="/book"
+                      className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 text-xs font-sans font-medium text-brand-pacific-dusk bg-white border border-black/10 rounded-lg hover:bg-brand-sandstone/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      Book a Trial
+                    </a>
+                    <a
+                      href="/schedules"
+                      className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 text-xs font-sans font-medium text-brand-pacific-dusk bg-white border border-black/10 rounded-lg hover:bg-brand-sandstone/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      View Programs & Pricing
+                    </a>
+                    <a
+                      href="/contact"
+                      className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 text-xs font-sans font-medium text-brand-pacific-dusk bg-white border border-black/10 rounded-lg hover:bg-brand-sandstone/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      Contact Us
+                    </a>
+                  </div>
+                )}
               </div>
             ))}
 
@@ -411,8 +430,12 @@ export default function ChatWidget() {
             }}
           >
             <p style={{ fontSize: '11px', color: 'var(--color-slate, #6B6B6B)', margin: 0 }}>
+              <a href="/help" className="text-brand-sunset-cliff no-underline font-semibold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2 rounded-sm">
+                What can you do?
+              </a>
+              {' • '}
               Need immediate help? Call{' '}
-              <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-brand-sunset-cliff no-underline font-semibold">
+              <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-brand-sunset-cliff no-underline font-semibold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2 rounded-sm">
                 (949) 534-0457
               </a>
             </p>

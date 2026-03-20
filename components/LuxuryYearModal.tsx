@@ -352,7 +352,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                     <button
                       ref={successPrimaryRef}
-                      onClick={() => { window.location.href = '/thank-you?type=year' }}
+                      onClick={() => { window.location.href = `/thank-you?type=year&program=${encodeURIComponent(programInfo.name)}` }}
                       className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-8 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                     >
                       View next steps

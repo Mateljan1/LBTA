@@ -19,6 +19,7 @@ import {
   FLYER_COURTS,
   FLYER_USTA_NOTE,
   FLYER_ACADEMY_ADDRESS,
+  FLYER_OTHER_LOCATIONS_NOTE,
 } from '@/lib/flyer-config'
 import {
   COURT_FLYER_LOGO_ROW_PX,
@@ -75,6 +76,10 @@ interface CourtFlyerProps {
   discountLine: string
   /** Youth Development UTR tiers — from `data/spring-summer-2026.json` (youth-development.utrPlacementBands). */
   youthDevelopmentUtrDetail?: CourtFlyerYouthUtrDetail | null
+  /** When set, only this location's schedule is shown; use with otherLocationsNote. */
+  locationFilter?: 'Moulton' | 'LBHS' | 'Alta'
+  /** Shown when locationFilter is set: where to find classes at other locations. */
+  otherLocationsNote?: string
 }
 
 export default function CourtFlyer({
@@ -90,13 +95,15 @@ export default function CourtFlyer({
   camps,
   discountLine,
   youthDevelopmentUtrDetail,
+  locationFilter,
+  otherLocationsNote,
 }: CourtFlyerProps) {
   const locationLabels: Record<string, string> = {
     Alta: 'Alta Laguna Park',
     LBHS: 'Laguna Beach High School',
     Moulton: 'Moulton Meadows Park',
   }
-  const locationOrder = ['Alta', 'LBHS', 'Moulton'] as const
+  const locationOrder = locationFilter ? [locationFilter] : (['Alta', 'LBHS', 'Moulton'] as const)
 
   return (
     <div
@@ -282,8 +289,8 @@ export default function CourtFlyer({
               <strong>{court.name}</strong> {court.courts} · {court.address}
             </li>
           ))}
+          <li><strong>USTA League</strong> {FLYER_USTA_NOTE}</li>
         </ul>
-        <p className="text-sm mt-2 text-brand-pacific-dusk/80">{FLYER_USTA_NOTE}</p>
       </section>
 
       {/* Schedule by location */}
@@ -304,8 +311,11 @@ export default function CourtFlyer({
             <span className="inline-flex items-center gap-2"><span className="inline-block w-4 h-4 rounded-[2px] bg-brand-victoria-cove/38 border-2 border-brand-pacific-dusk/35 shrink-0" aria-hidden /> LiveBall</span>
             <span className="inline-flex items-center gap-2"><span className="inline-block w-4 h-4 rounded-[2px] bg-brand-pacific-dusk/14 border-2 border-brand-pacific-dusk/35 shrink-0" aria-hidden /> Adult programming</span>
             <span className="inline-flex items-center gap-2"><span className="inline-block w-4 h-4 rounded-[2px] bg-brand-sunset-cliff/38 border-2 border-brand-pacific-dusk/35 shrink-0" aria-hidden /> Cardio</span>
-            <span className="inline-flex items-center gap-2 w-full sm:w-auto sm:ml-1 text-[10px] text-brand-pacific-dusk font-normal"><span className="inline-block w-4 h-4 rounded-[2px] bg-white border-2 border-brand-pacific-dusk/35 shrink-0 shadow-[inset_0_0_0_1px_rgba(27,58,92,0.12)]" aria-hidden /> Boxed = same time block (time, class name, NTRP/UTR or ages in cell)</span>
+            <span className="inline-flex items-center gap-2 w-full sm:w-auto sm:ml-1 text-[10px] text-brand-pacific-dusk font-normal"><span className="inline-block w-4 h-4 rounded-[2px] bg-white border-2 border-brand-pacific-dusk/35 shrink-0 shadow-[inset_0_0_0_1px_rgba(27,58,92,0.12)]" aria-hidden /> One box = one class (time, name, level or ages in cell)</span>
           </p>
+          {otherLocationsNote ? (
+            <p className="text-xs text-brand-pacific-dusk/90 italic mb-2">{otherLocationsNote}</p>
+          ) : null}
         </div>
         {locationOrder.map((loc) => {
           const byDay = scheduleByLocation[loc]

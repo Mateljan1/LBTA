@@ -47,3 +47,7 @@ export const FLYER_LOCATION_DISPLAY: Record<string, string> = {
   Alta: 'Alta Laguna Park',
   LBHS: 'Laguna Beach High School',
 }
+
+/** Shown on location-specific flyers: where to find classes at other venues. */
+export const FLYER_OTHER_LOCATIONS_NOTE =
+  'For classes at other locations, check the City of Laguna Beach website or lagunabeachtennisacademy.com.'

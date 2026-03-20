@@ -75,7 +75,7 @@ export default function FounderSection() {
             </AnimatedSection>
 
             <AnimatedSection delay={300}>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 mb-8">
                 {founder.credentials.map((cred) => (
                   <span
                     key={cred}
@@ -84,6 +84,22 @@ export default function FounderSection() {
                     {cred}
                   </span>
                 ))}
+              </div>
+              <div className="flex flex-wrap items-center gap-4">
+                {founder.slug && (
+                  <Link
+                    href={`/coaches/${founder.slug}`}
+                    className="inline-flex items-center gap-2 font-sans text-[11px] font-semibold text-brand-victoria-cove uppercase tracking-wider min-h-[48px] py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-[2px]"
+                  >
+                    View full bio
+                  </Link>
+                )}
+                <Link
+                  href={founder.slug ? `/book?type=private&coach=${founder.slug}` : '/book'}
+                  className="inline-flex items-center justify-center font-sans text-[11px] font-semibold bg-black text-white uppercase tracking-wider min-h-[48px] px-6 py-2 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:bg-gray-800 transition-colors"
+                >
+                  Book with {founder.name.split(' ')[0] ?? 'Andrew'}
+                </Link>
               </div>
             </AnimatedSection>
           </div>

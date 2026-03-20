@@ -1,14 +1,31 @@
+/**
+ * Court flyer print view. Spring session only.
+ * Data: spring-summer-2026.json (schedule, pricing, label/dates), year2026.json (camps), flyer-config (courts, contact, discount line).
+ */
 import CourtFlyer from '@/components/print/CourtFlyer'
 import { getFlyerCoaches } from '@/lib/flyer-data'
 import { getPrivateRates } from '@/lib/programs-data'
 import { getScheduleByLocationByDay, getSeasonDates, getSeasonLabel } from '@/lib/calendar-schedule'
 import { getSpringSummer2026 } from '@/lib/programs-data'
 import { getCourtFlyerProgramPricingRows, getYouthDevelopmentUtrPlacementForFlyer } from '@/lib/flyer-pricing'
-import { COURT_FLYER_DISCOUNT_LINE } from '@/lib/flyer-config'
+import { COURT_FLYER_DISCOUNT_LINE, FLYER_OTHER_LOCATIONS_NOTE } from '@/lib/flyer-config'
 import year2026Data from '@/data/year2026.json'
-import siteStats from '@/data/site-stats.json'
 
-export default function CourtFlyerPage() {
+const FLYER_LOCATION_KEYS = ['Moulton', 'LBHS', 'Alta'] as const
+type FlyerLocationKey = (typeof FLYER_LOCATION_KEYS)[number]
+
+function isFlyerLocation(s: string | undefined): s is FlyerLocationKey {
+  return s === 'Moulton' || s === 'LBHS' || s === 'Alta'
+}
+
+export default async function CourtFlyerPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ location?: string }>
+}) {
+  const params = await searchParams
+  const locationFilter = isFlyerLocation(params.location) ? params.location : undefined
+  const otherLocationsNote = locationFilter ? FLYER_OTHER_LOCATIONS_NOTE : undefined
   const coaches = getFlyerCoaches()
   const privateRates = getPrivateRates()
   const scheduleByLocation = getScheduleByLocationByDay('spring')
@@ -72,9 +89,7 @@ export default function CourtFlyerPage() {
       : []),
   ]
 
-  const discountLine =
-    (siteStats as { discounts?: { discountLine?: string } }).discounts?.discountLine ??
-    COURT_FLYER_DISCOUNT_LINE
+  const discountLine = COURT_FLYER_DISCOUNT_LINE
 
   const privateRatesOrder = ['Andrew Mateljan', 'Robert LeBuhn', 'Peter DeFrantz', 'Allison Cronk']
   let orderedPrivateRates = privateRatesOrder.map((name) => privateRates.find((r) => r.coach === name)).filter(Boolean)
@@ -94,6 +109,8 @@ export default function CourtFlyerPage() {
       camps={camps}
       discountLine={discountLine}
       youthDevelopmentUtrDetail={youthDevelopmentUtrDetail}
+      locationFilter={locationFilter}
+      otherLocationsNote={otherLocationsNote}
     />
   )
 }

@@ -14,7 +14,8 @@ import {
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
-import { notifyRegistration } from '@/lib/email'
+import { notifyRegistration, sendConfirmationEmail } from '@/lib/email'
+import { FORM_CONFIGS } from '@/lib/form-config'
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -124,6 +125,34 @@ export async function POST(request: NextRequest) {
       season: data.season,
       experience: data.experience,
     })
+
+    // Send branded confirmation email TO the registrant (fire-and-forget)
+    if (data.program) {
+      const matchedConfig = Object.values(FORM_CONFIGS).find(
+        c => c.prePopulateData.programName === data.program
+      )
+      if (matchedConfig) {
+        const pre = matchedConfig.prePopulateData
+        void sendConfirmationEmail({
+          email: data.email,
+          firstName: data.firstName,
+          programName: pre.programName,
+          location: pre.location,
+          duration: pre.duration,
+          ageGroup: pre.ageGroup,
+          category: pre.category,
+        })
+      } else {
+        void sendConfirmationEmail({
+          email: data.email,
+          firstName: data.firstName,
+          programName: data.program,
+          location: 'TBD',
+          duration: 'TBD',
+          category: 'Adult',
+        })
+      }
+    }
 
     return NextResponse.json({
       success: true,

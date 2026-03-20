@@ -74,13 +74,13 @@ export default function RacquetRescuePage() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-24 md:py-32 bg-lbta-bone">
+      <section className="py-24 md:py-32 bg-brand-sandstone">
         <div className="container-lbta">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl mb-6">
               Why Choose Racquet Rescue
             </h2>
-            <p className="font-body text-lg md:text-xl text-lbta-secondary leading-relaxed">
+            <p className="font-body text-lg md:text-xl text-brand-pacific-dusk/70 leading-relaxed">
               Professional stringing services trusted by competitive players and recreational enthusiasts alike.
             </p>
           </div>
@@ -90,7 +90,7 @@ export default function RacquetRescuePage() {
             <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-luxury hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
               <div className="text-brand-sunset-cliff mb-4"><svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
               <h3 className="font-headline text-2xl mb-4">Same-Day Service</h3>
-              <p className="font-body text-lbta-secondary leading-relaxed">
+              <p className="font-body text-brand-pacific-dusk/70 leading-relaxed">
                 Drop off before noon, pick up the same day. We understand the urgency of tournament preparation.
               </p>
             </div>
@@ -99,7 +99,7 @@ export default function RacquetRescuePage() {
             <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-luxury hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
               <div className="text-brand-sunset-cliff mb-4"><svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div>
               <h3 className="font-headline text-2xl mb-4">Expert Precision</h3>
-              <p className="font-body text-lbta-secondary leading-relaxed">
+              <p className="font-body text-brand-pacific-dusk/70 leading-relaxed">
                 Certified stringers with 25+ years experience. Every racquet strung to exact specifications.
               </p>
             </div>
@@ -108,7 +108,7 @@ export default function RacquetRescuePage() {
             <div className="bg-white p-8 border border-black/6 transition-all duration-1200 ease-luxury hover:border-black/10 hover:-translate-y-1 shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]">
               <div className="text-brand-sunset-cliff mb-4"><svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg></div>
               <h3 className="font-headline text-2xl mb-4">Premium Strings</h3>
-              <p className="font-body text-lbta-secondary leading-relaxed">
+              <p className="font-body text-brand-pacific-dusk/70 leading-relaxed">
                 Full selection of professional-grade strings from Luxilon, Babolat, Wilson, and more.
               </p>
             </div>
@@ -123,22 +123,22 @@ export default function RacquetRescuePage() {
             <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl mb-6">
               Services & Pricing
             </h2>
-            <p className="font-body text-lg md:text-xl text-lbta-secondary leading-relaxed">
+            <p className="font-body text-lg md:text-xl text-brand-pacific-dusk/70 leading-relaxed">
               Professional stringing services with transparent pricing. String cost not included.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Standard Stringing */}
-            <div className="bg-lbta-bone p-10 border border-black/6">
+            <div className="bg-brand-sandstone p-10 border border-black/6">
               <div className="mb-6">
                 <h3 className="font-headline text-3xl mb-2">{rr.services.standard.label}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-headline text-5xl text-brand-sunset-cliff">${rr.services.standard.price}</span>
-                  <span className="font-body text-lbta-secondary">{rr.services.standard.unit}</span>
+                  <span className="font-body text-brand-pacific-dusk/70">{rr.services.standard.unit}</span>
                 </div>
               </div>
-              <ul className="space-y-3 font-body text-lbta-secondary">
+              <ul className="space-y-3 font-body text-brand-pacific-dusk/70">
                 <li className="flex items-start gap-3">
                   <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Professional stringing to your specifications</span>
@@ -170,7 +170,7 @@ export default function RacquetRescuePage() {
                   <span className="font-body text-lbta-secondary">{rr.services.sameDay.unit}</span>
                 </div>
               </div>
-              <ul className="space-y-3 font-body text-lbta-secondary">
+              <ul className="space-y-3 font-body text-brand-pacific-dusk/70">
                 <li className="flex items-start gap-3">
                   <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Drop off before noon, pick up same day</span>
@@ -199,7 +199,7 @@ export default function RacquetRescuePage() {
                   <span className="font-body text-lbta-secondary">{rr.services.customization.unit}</span>
                 </div>
               </div>
-              <ul className="space-y-3 font-body text-lbta-secondary">
+              <ul className="space-y-3 font-body text-brand-pacific-dusk/70">
                 <li className="flex items-start gap-3">
                   <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Weight and balance adjustments</span>
@@ -228,7 +228,7 @@ export default function RacquetRescuePage() {
                   <span className="font-body text-lbta-secondary">{rr.services.grip.unit}</span>
                 </div>
               </div>
-              <ul className="space-y-3 font-body text-lbta-secondary">
+              <ul className="space-y-3 font-body text-brand-pacific-dusk/70">
                 <li className="flex items-start gap-3">
                   <span className="text-brand-sunset-cliff mt-1">✓</span>
                   <span>Premium replacement grips</span>
@@ -251,17 +251,17 @@ export default function RacquetRescuePage() {
 
           {/* String Brands */}
           <div className="mt-16 max-w-4xl mx-auto">
-            <div className="bg-lbta-bone p-8 border border-black/6">
+            <div className="bg-brand-sandstone p-8 border border-black/6">
               <h3 className="font-headline text-2xl mb-6 text-center">Premium String Selection</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center font-body text-lbta-secondary">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center font-body text-brand-pacific-dusk/70">
                 {Object.values(rr.strings).map((s) => (
                   <div key={s.brand}>
-                    <p className="font-semibold text-lbta-primary mb-1">{s.brand}</p>
+                    <p className="font-semibold text-brand-pacific-dusk mb-1">{s.brand}</p>
                     <p className="text-sm">{s.range}</p>
                   </div>
                 ))}
               </div>
-              <p className="text-center text-sm text-lbta-secondary mt-6">
+              <p className="text-center text-sm text-brand-pacific-dusk/70 mt-6">
                 String prices vary by model. We'll help you choose the perfect string for your game.
               </p>
             </div>
@@ -270,129 +270,40 @@ export default function RacquetRescuePage() {
       </section>
 
       {/* Booking Section */}
-      <section id="booking" className="py-24 md:py-32 bg-lbta-bone">
+      <section id="booking" className="py-24 md:py-32 bg-brand-sandstone">
         <div className="container-lbta">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl mb-6">
               Book Your Service
             </h2>
-            <p className="font-body text-lg md:text-xl text-lbta-secondary leading-relaxed">
+            <p className="font-body text-lg md:text-xl text-brand-pacific-dusk/70 leading-relaxed">
               Fill out the form below and we'll confirm your appointment within 24 hours.
             </p>
           </div>
 
           <div className="max-w-2xl mx-auto bg-white p-8 md:p-12 border border-black/6">
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="firstName" className="block font-sans text-sm font-medium text-lbta-primary mb-2 tracking-wide">
-                    FIRST NAME *
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    required
-                    className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="lastName" className="block font-sans text-sm font-medium text-lbta-primary mb-2 tracking-wide">
-                    LAST NAME *
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    required
-                    className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block font-sans text-sm font-medium text-lbta-primary mb-2 tracking-wide">
-                  EMAIL *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block font-sans text-sm font-medium text-lbta-primary mb-2 tracking-wide">
-                  PHONE *
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required
-                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="service" className="block font-sans text-sm font-medium text-lbta-primary mb-2 tracking-wide">
-                  SERVICE TYPE *
-                </label>
-                <select
-                  id="service"
-                  name="service"
-                  required
-                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
-                >
-                  <option value="">Select a service</option>
-                  <option value="standard">{rr.services.standard.label} (${rr.services.standard.price})</option>
-                  <option value="same-day">{rr.services.sameDay.label} (${rr.services.sameDay.price})</option>
-                  <option value="customization">{rr.services.customization.label} ({rr.services.customization.priceLabel})</option>
-                  <option value="grip">{rr.services.grip.label} (${rr.services.grip.price})</option>
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="racquets" className="block font-sans text-sm font-medium text-lbta-primary mb-2 tracking-wide">
-                  NUMBER OF RACQUETS
-                </label>
-                <input
-                  type="number"
-                  id="racquets"
-                  name="racquets"
-                  min="1"
-                  max="10"
-                  defaultValue="1"
-                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="notes" className="block font-sans text-sm font-medium text-lbta-primary mb-2 tracking-wide">
-                  ADDITIONAL NOTES
-                </label>
-                <textarea
-                  id="notes"
-                  name="notes"
-                  rows={4}
-                  placeholder="String preferences, tension, special requests..."
-                  className="w-full px-4 py-3 border border-black/20 focus:border-brand-sunset-cliff focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff/20 transition-all resize-none"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
-              >
-                Submit Request
-              </button>
-
-              <p className="text-center text-sm text-lbta-secondary">
-                We'll confirm your appointment within 24 hours
+            <div className="space-y-6 text-center">
+              <p className="font-body text-lg text-brand-pacific-dusk/70 leading-relaxed">
+                To book racquet stringing services, please contact us directly. We'll confirm your appointment within 24 hours.
               </p>
-            </form>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <Link
+                  href="/contact?service=racquet-rescue"
+                  className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                >
+                  Contact Us
+                </Link>
+                <a
+                  href="tel:9495340457"
+                  className="inline-flex items-center justify-center bg-transparent text-brand-pacific-dusk border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-black hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                >
+                  Call (949) 534-0457
+                </a>
+              </div>
+              <p className="text-center text-sm text-brand-pacific-dusk/70 pt-4">
+                Same-day service available when you drop off before noon
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -404,9 +315,9 @@ export default function RacquetRescuePage() {
             {/* Location */}
             <div>
               <h3 className="font-headline text-3xl mb-6">Location</h3>
-              <div className="space-y-4 font-body text-lbta-secondary">
+              <div className="space-y-4 font-body text-brand-pacific-dusk/70">
                 <p className="text-lg">
-                  <strong className="text-lbta-primary">Laguna Beach Tennis Academy</strong><br />
+                  <strong className="text-brand-pacific-dusk">Laguna Beach Tennis Academy</strong><br />
                   1098 Balboa Ave<br />
                   Laguna Beach, CA 92651
                 </p>
@@ -425,21 +336,21 @@ export default function RacquetRescuePage() {
             {/* Hours */}
             <div>
               <h3 className="font-headline text-3xl mb-6">Service Hours</h3>
-              <div className="space-y-3 font-body text-lbta-secondary">
+              <div className="space-y-3 font-body text-brand-pacific-dusk/70">
                 <div className="flex justify-between py-2 border-b border-black/10">
                   <span>Monday - Friday</span>
-                  <span className="font-semibold text-lbta-primary">9:00 AM - 6:00 PM</span>
+                  <span className="font-semibold text-brand-pacific-dusk">9:00 AM - 6:00 PM</span>
                 </div>
                 <div className="flex justify-between py-2 border-b border-black/10">
                   <span>Saturday</span>
-                  <span className="font-semibold text-lbta-primary">10:00 AM - 4:00 PM</span>
+                  <span className="font-semibold text-brand-pacific-dusk">10:00 AM - 4:00 PM</span>
                 </div>
                 <div className="flex justify-between py-2 border-b border-black/10">
                   <span>Sunday</span>
-                  <span className="font-semibold text-lbta-primary">Closed</span>
+                  <span className="font-semibold text-brand-pacific-dusk">Closed</span>
                 </div>
               </div>
-              <p className="mt-6 text-sm text-lbta-secondary">
+              <p className="mt-6 text-sm text-brand-pacific-dusk/70">
                 Same-day service: Drop off before noon for same-day pickup
               </p>
             </div>
@@ -454,19 +365,19 @@ export default function RacquetRescuePage() {
             <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl mb-6">
               Ready to Rescue Your Racquet?
             </h2>
-            <p className="font-body text-lg md:text-xl text-lbta-secondary mb-8 leading-relaxed">
+            <p className="font-body text-lg md:text-xl text-brand-pacific-dusk/70 mb-8 leading-relaxed">
               Professional stringing services for players who demand excellence. Book your service today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="#booking"
-                className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Book Service
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-transparent text-lbta-primary border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:border-black hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center bg-transparent text-brand-pacific-dusk border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-800 ease-luxury hover:border-black hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Contact Us
               </Link>
