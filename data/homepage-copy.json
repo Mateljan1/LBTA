@@ -60,11 +60,11 @@
   },
   "whyChoose": {
     "headline": "Why Choose Laguna Beach Tennis Academy",
-    "subline": "Movement-first coaching, clear pathways from first swings to college and beyond, and a community built on respect and accountability.",
+    "subline": "Coaching that starts with movement, adds clear structure, and grows beside people who take the work seriously.",
     "image1": "/images/why-choose/why-choose-1.webp",
     "image2": "/images/why-choose/why-choose-2.webp",
-    "image1Alt": "LBTA coach and players on court",
-    "image2Alt": "Laguna Beach tennis facility and community"
+    "image1Alt": "Coaches and adult players during an outdoor session at LBTA",
+    "image2Alt": "Sunset practice across outdoor courts in Laguna Beach"
   },
   "destination": {
     "headline": "Train where focus meets horizon.",
@@ -73,7 +73,59 @@
   "community": {
     "eyebrow": "Our Community",
     "headline": "Players who train our way.",
-    "subline": "From junior pathways to professional courts, each player shares the same standard."
+    "subline": "Juniors and adults, daytime and under the lights — one standard on every court.",
+    "gallery": [
+      {
+        "src": "/images/community/community-1.webp",
+        "alt": "Junior players and a coach in a group lesson on court",
+        "span": "large"
+      },
+      {
+        "src": "/images/community/community-2.webp",
+        "alt": "Young players practicing together in an evening session",
+        "span": "small"
+      },
+      {
+        "src": "/images/community/community-3.webp",
+        "alt": "Adult player smiling between points on the court",
+        "span": "medium"
+      },
+      {
+        "src": "/images/community/community-4.webp",
+        "alt": "Adult player in an evening practice session",
+        "span": "small"
+      },
+      {
+        "src": "/images/community/community-5.webp",
+        "alt": "Kids and coach celebrating during a drill",
+        "span": "small"
+      },
+      {
+        "src": "/images/community/community-6.webp",
+        "alt": "Two men playing a point during match-style practice",
+        "span": "large"
+      },
+      {
+        "src": "/images/community/community-7.webp",
+        "alt": "Woman preparing to receive during a lesson",
+        "span": "small"
+      },
+      {
+        "src": "/images/community/community-8.webp",
+        "alt": "Night practice under lights on outdoor courts",
+        "span": "medium"
+      },
+      {
+        "src": "/images/community/community-9.webp",
+        "alt": "Young player moving to the ball during practice",
+        "span": "small"
+      },
+      {
+        "src": "/images/community/community-10.webp",
+        "alt": "Women preparing for doubles on court",
+        "span": "small"
+      }
+    ]
   },
   "cta": {
     "eyebrow": "Get Started",

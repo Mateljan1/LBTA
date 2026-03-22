@@ -9,6 +9,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import PullQuote from '@/components/ui/PullQuote'
 import WhyChooseImage from '@/components/ui/WhyChooseImage'
 import { MasonryGrid } from '@/components/sections'
+import type { MasonryImageItem } from '@/components/sections/MasonryGrid'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
 import { coachImageSrc } from '@/lib/coaches-data'
@@ -67,8 +68,12 @@ export const metadata = {
 
 type WhyChooseCopy = { headline: string; subline: string; image1: string; image2: string; image1Alt: string; image2Alt: string }
 
+type CommunityGalleryItem = { src: string; alt: string; span?: 'small' | 'medium' | 'large' }
+type CommunitySection = (typeof homepageCopy)['community'] & { gallery: CommunityGalleryItem[] }
+
 export default function Home() {
   const whyChoose = (homepageCopy as { whyChoose?: WhyChooseCopy }).whyChoose
+  const communitySection = homepageCopy.community as CommunitySection
   return (
     <>
       <Script id="local-business-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
@@ -83,12 +88,12 @@ export default function Home() {
               <div className="bracket relative max-w-[480px] mx-auto lg:mx-0">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-subtle">
                   <Image
-                    src={coachImageSrc('/legacy-working-assets/coaches/headshots-standardized/cropped-portrait-800x1000/andrew-mateljan-headshot.png')}
-                    alt="Andrew Mateljan, Founder & Head Coach"
+                    src={coachImageSrc('/images/founder/andrew-mateljan-on-court.webp')}
+                    alt="Andrew Mateljan, Founder and Head Coach, coaching on court in Laguna Beach"
                     fill
                     priority
                     className="object-cover"
-                    style={{ objectPosition: '50% 50%' }}
+                    style={{ objectPosition: '58% 42%' }}
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     quality={90}
                   />
@@ -157,11 +162,11 @@ export default function Home() {
       <section id="results" className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/results/karue-training/karue-training.webp"
-            alt="ATP player in training session at LBTA"
+            src="/images/results/karue-sell-andrew-mateljan-coaching.webp"
+            alt="Karue Sell in a two-handed backhand swing with Coach Andrew Mateljan on court at LBTA"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 35%' }}
+            style={{ objectPosition: '48% 42%' }}
             sizes="100vw"
             quality={90}
           />
@@ -202,10 +207,11 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 auto-rows-fr">
             {homepageCopy.philosophy.pillars.map((pillar, i) => {
               const images = [
-                '/legacy-working-assets/philosophy/movement/movement.webp',
-                '/legacy-working-assets/philosophy/discipline/discipline.webp',
-                '/legacy-working-assets/philosophy/belonging/belonging.webp',
+                '/images/philosophy/movement.webp',
+                '/images/philosophy/discipline.webp',
+                '/images/homepage/philosophy-community.webp',
               ]
+              const pillarImagePositions = ['52% 46%', '50% 50%', '50% 44%'] as const
               const isFeatured = i === 0
               return (
                 <AnimatedSection
@@ -220,7 +226,7 @@ export default function Home() {
                         alt={`${pillar.title} — ${pillar.description}`}
                         fill
                         className="object-cover image-zoom"
-                        style={{ objectPosition: '50% 50%' }}
+                        style={{ objectPosition: pillarImagePositions[i] }}
                         sizes={isFeatured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 50vw'}
                         quality={90}
                       />
@@ -248,8 +254,8 @@ export default function Home() {
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10 mb-12">
             {homepageCopy.programs.items.map((program, i) => {
-              const images = ['/legacy-working-assets/programs/juniors/juniors.webp', '/legacy-working-assets/programs/adults/adults.webp', '/legacy-working-assets/programs/private-lessons/private-lessons.webp']
-              const programPositions: Record<number, string> = { 0: '50% 38%', 1: '50% 38%', 2: '50% 55%' }
+              const images = ['/images/programs/juniors.webp', '/images/programs/adults.webp', '/images/programs/private-lessons.webp']
+              const programPositions: Record<number, string> = { 0: '50% 45%', 1: '50% 38%', 2: '50% 48%' }
               return (
                 <AnimatedSection key={program.title} delay={i * 150}>
                   <Link href={program.link} className="group block">
@@ -286,12 +292,12 @@ export default function Home() {
             <AnimatedSection delay={100} className="md:col-span-3">
               <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-subtle">
                 <WhyChooseImage
-                  src={whyChoose?.image1 ?? '/legacy-working-assets/why-choose/why-choose-1/why-choose-1.webp'}
+                  src={whyChoose?.image1 ?? '/images/why-choose/why-choose-1.webp'}
                   fallbackSrc="/images/hero/laguna-horizon.webp"
                   alt={whyChoose?.image1Alt ?? 'LBTA coach and players on court'}
                   fill
                   className="object-cover image-zoom"
-                  style={{ objectPosition: '50% 55%' }}
+                  style={{ objectPosition: '50% 48%' }}
                   sizes="(max-width: 768px) 100vw, 60vw"
                   quality={90}
                 />
@@ -300,12 +306,12 @@ export default function Home() {
             <AnimatedSection delay={200} className="md:col-span-2 flex flex-col gap-6">
               <div className="relative aspect-[4/3] overflow-hidden rounded-subtle flex-1 min-h-[200px]">
                 <WhyChooseImage
-                  src={whyChoose?.image2 ?? '/legacy-working-assets/why-choose/why-choose-2/why-choose-2.webp'}
-                  fallbackSrc="/legacy-working-assets/community/community-1.webp"
+                  src={whyChoose?.image2 ?? '/images/why-choose/why-choose-2.webp'}
+                  fallbackSrc="/images/community/community-1.webp"
                   alt={whyChoose?.image2Alt ?? 'Laguna Beach tennis facility and community'}
                   fill
                   className="object-cover image-zoom"
-                  style={{ objectPosition: '50% 35%' }}
+                  style={{ objectPosition: '50% 42%' }}
                   sizes="(max-width: 768px) 100vw, 40vw"
                   quality={90}
                 />
@@ -318,7 +324,7 @@ export default function Home() {
       <HorizonDivider animate />
       <section id="destination" className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/hero/laguna-horizon.webp" alt="Laguna Beach tennis courts with ocean view" fill className="object-cover" style={{ objectPosition: '50% 60%' }} sizes="100vw" quality={90} />
+          <Image src="/images/hero/laguna-horizon.webp" alt="Laguna Beach tennis courts at sunset with palm trees" fill className="object-cover" style={{ objectPosition: '50% 55%' }} sizes="100vw" quality={90} />
           <div className="absolute inset-0 bg-brand-deep-water/80" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">
@@ -340,11 +346,13 @@ export default function Home() {
                 <p className="text-subhead max-w-2xl mx-auto font-light">{homepageCopy.community.subline}</p>
               </AnimatedSection>
             }
-            items={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num, i) => ({
-              src: `/legacy-working-assets/community/community-${num}.webp`,
-              alt: `LBTA community and players ${num}`,
-              span: i === 0 || i === 5 ? 'large' : (i === 2 || i === 7 ? 'medium' : 'small'),
-            }))}
+            items={communitySection.gallery.map(
+              (item): MasonryImageItem => ({
+                src: item.src,
+                alt: item.alt,
+                span: item.span as MasonryImageItem['span'],
+              })
+            )}
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         </div>

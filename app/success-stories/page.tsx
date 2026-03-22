@@ -18,7 +18,7 @@ const successStories = [
     name: 'Karue Sell',
     title: 'ATP Tour Player',
     achievement: '#858 → #258 ATP Ranking',
-    image: '/legacy-working-assets/results/results-player-3/results-player-3.webp',
+    image: '/images/results/karue-sell-andrew-mateljan-coaching.webp',
     quote: "Andrew's movement-first approach transformed my game. The structured training and accountability pushed me to levels I didn't know I could reach.",
     story: "When Karue first came to LBTA, he was ranked #858 on the ATP tour. Through dedicated training focused on movement efficiency and mental toughness, he climbed to #258 - a 600+ position improvement that opened doors to main draw Grand Slam qualifiers.",
     videoId: 'karue-journey',
