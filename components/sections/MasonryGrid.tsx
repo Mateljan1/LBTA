@@ -8,6 +8,8 @@ export interface MasonryImageItem {
   alt: string
   /** Optional span for CSS grid: default varies by position to create staggered look */
   span?: 'small' | 'medium' | 'large'
+  /** Optional focal point for object-fit cover (e.g. wide photos in varied grid cells) */
+  objectPosition?: string
 }
 
 export interface MasonryGridProps {
@@ -64,7 +66,7 @@ export default function MasonryGrid({
                 alt={item.alt}
                 fill
                 className="object-cover image-zoom"
-                style={{ objectPosition: '50% 40%' }}
+                style={{ objectPosition: item.objectPosition ?? '50% 42%' }}
                 sizes={isLarge ? '(max-width: 640px) 100vw, 50vw' : sizes}
                 quality={quality}
               />

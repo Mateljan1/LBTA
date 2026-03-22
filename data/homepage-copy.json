@@ -77,53 +77,63 @@
     "gallery": [
       {
         "src": "/images/community/community-1.webp",
-        "alt": "Junior players and a coach in a group lesson on court",
-        "span": "large"
+        "alt": "Junior players in a drill on a blue court at LBHS",
+        "span": "large",
+        "objectPosition": "50% 44%"
       },
       {
         "src": "/images/community/community-2.webp",
-        "alt": "Young players practicing together in an evening session",
-        "span": "small"
+        "alt": "Coach Andrew Mateljan in motion during an on-court session",
+        "span": "small",
+        "objectPosition": "50% 35%"
       },
       {
         "src": "/images/community/community-3.webp",
-        "alt": "Adult player smiling between points on the court",
-        "span": "medium"
+        "alt": "Adult player in an evening practice session at Laguna Beach High School",
+        "span": "medium",
+        "objectPosition": "50% 45%"
       },
       {
         "src": "/images/community/community-4.webp",
-        "alt": "Adult player in an evening practice session",
-        "span": "small"
+        "alt": "Coach Michelle with junior players during a lesson",
+        "span": "small",
+        "objectPosition": "50% 42%"
       },
       {
         "src": "/images/community/community-5.webp",
-        "alt": "Kids and coach celebrating during a drill",
-        "span": "small"
+        "alt": "Night practice — forehand swing under court lights",
+        "span": "small",
+        "objectPosition": "50% 40%"
       },
       {
         "src": "/images/community/community-6.webp",
-        "alt": "Two men playing a point during match-style practice",
-        "span": "large"
+        "alt": "Coach Andrew with a junior player on court at Moulton Meadows",
+        "span": "large",
+        "objectPosition": "48% 44%"
       },
       {
         "src": "/images/community/community-7.webp",
-        "alt": "Woman preparing to receive during a lesson",
-        "span": "small"
+        "alt": "Adult doubles at night on outdoor courts",
+        "span": "small",
+        "objectPosition": "50% 42%"
       },
       {
         "src": "/images/community/community-8.webp",
-        "alt": "Night practice under lights on outdoor courts",
-        "span": "medium"
+        "alt": "LBTA outdoor courts lit for evening play",
+        "span": "medium",
+        "objectPosition": "50% 48%"
       },
       {
         "src": "/images/community/community-9.webp",
-        "alt": "Young player moving to the ball during practice",
-        "span": "small"
+        "alt": "Group warm-up during a team practice",
+        "span": "small",
+        "objectPosition": "50% 44%"
       },
       {
         "src": "/images/community/community-10.webp",
-        "alt": "Women preparing for doubles on court",
-        "span": "small"
+        "alt": "Players shaking hands after match play at Alta Laguna",
+        "span": "small",
+        "objectPosition": "50% 48%"
       }
     ]
   },
