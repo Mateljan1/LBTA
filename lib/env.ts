@@ -19,6 +19,8 @@ const ENV_VARS = {
   AC_WEBHOOK_SECRET: 'ActiveCampaign webhook shared secret for verification (optional; required in production)',
   /** Coach Hub: shared secret for cookie signing; optional in dev (hub disabled when unset) */
   COACH_HUB_SECRET: 'Coach Hub password / cookie signing secret (optional in dev)',
+  /** Optional — agent tools / X-Agent-Secret header validation when set */
+  AGENT_SECRET: 'Agent API shared secret (optional; disabled when unset)',
   // Optional — when set, form submissions also sync to GoHighLevel for SMS workflow
   GHL_API_KEY: 'GoHighLevel API key (optional; for SMS automation)',
   GHL_LOCATION_ID: 'GoHighLevel location/sub-account ID (optional)',
