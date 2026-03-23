@@ -12,8 +12,8 @@ Source bundle: `website photos/LBTA_Website_Ready_2026-03-22/`. Files are copied
 | `player-success/lbta-2026-high-performance-karue-sell-backhand-andrew-observing.webp` | `results/karue-sell-andrew-mateljan-coaching.webp` (homepage **Player Success** band) |
 | `philosophy-pillars/01–03-*.webp` | `philosophy/movement.webp`, `philosophy/discipline.webp`, `homepage/philosophy-community.webp` (homepage: camps + timeline + doubles liveball from `05-camps`, `08-about`, `07-leagues-match-play`) |
 | `program-cards/01–03-*.webp` | `programs/juniors.webp`, `adults.webp`, `private-lessons.webp` (homepage: camps gallery + leagues hero + contact coaching) |
-| `why-choose-lbta/01–02-*.webp` | `why-choose/why-choose-1.webp`, `why-choose-2.webp` (homepage: contact sunset hero + Moulton Meadows) |
-| `08-about/our-courts/02-moulton-meadows.webp` | `destination/moulton-meadows.webp` (homepage destination band) |
+| `why-choose-lbta/01–02-*.webp` | Optional legacy; homepage **Why Choose** now uses **`facility/hero-ocean-view-tennis-courts-sunset.webp`** + **`facility/detail-sunlit-blue-tennis-courts.webp`** (coastal pack; story + surface clarity) |
+| Coastal facility pack (`plans/LBTA_website_pics/.../LBTA-Coastal-Courts-1920x1080/webp/`) | `facility/overview-coastal-tennis-facility-ocean.webp` (homepage **destination** band), `facility/hero-ocean-view-…`, `facility/detail-sunlit-blue-tennis-courts.webp`, `facility/coaching-private-tennis-lesson-drill.webp` (contact, coaches, schedules as wired) |
 | `cta/lbta-2023-tennis-practice-courts-sunset.webp` | `cta/cta-background.webp` |
 | `community-gallery/01–10-*.webp` | `community/community-1.webp` … `community-10.webp` |
 

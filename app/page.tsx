@@ -330,7 +330,7 @@ export default function Home() {
             <AnimatedSection delay={100} className="md:col-span-3">
               <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-subtle">
                 <WhyChooseImage
-                  src={whyChoose?.image1 ?? '/images/why-choose/why-choose-1.webp'}
+                  src={whyChoose?.image1 ?? '/images/facility/hero-ocean-view-tennis-courts-sunset.webp'}
                   fallbackSrc="/images/hero/laguna-horizon.webp"
                   alt={whyChoose?.image1Alt ?? 'LBTA coach and players on court'}
                   fill
@@ -344,7 +344,7 @@ export default function Home() {
             <AnimatedSection delay={200} className="md:col-span-2 flex flex-col gap-6">
               <div className="relative aspect-[4/3] overflow-hidden rounded-subtle flex-1 min-h-[200px]">
                 <WhyChooseImage
-                  src={whyChoose?.image2 ?? '/images/why-choose/why-choose-2.webp'}
+                  src={whyChoose?.image2 ?? '/images/facility/detail-sunlit-blue-tennis-courts.webp'}
                   fallbackSrc="/images/community/community-1.webp"
                   alt={whyChoose?.image2Alt ?? 'Laguna Beach tennis facility and community'}
                   fill

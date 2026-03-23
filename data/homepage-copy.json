@@ -95,12 +95,12 @@
   "whyChoose": {
     "headline": "Why Choose Laguna Beach Tennis Academy",
     "subline": "Coaching that starts with movement, adds clear structure, and grows beside people who take the work seriously.",
-    "image1": "/images/why-choose/why-choose-1.webp",
-    "image2": "/images/why-choose/why-choose-2.webp",
-    "image1Alt": "Sunset light across outdoor tennis courts in Laguna Beach",
-    "image2Alt": "Moulton Meadows tennis courts surrounded by coastal hills",
+    "image1": "/images/facility/hero-ocean-view-tennis-courts-sunset.webp",
+    "image2": "/images/facility/detail-sunlit-blue-tennis-courts.webp",
+    "image1Alt": "Coastal tennis courts at sunset with the Pacific horizon beyond Laguna Beach",
+    "image2Alt": "Sunlit blue hard courts — clarity of line and surface for focused training",
     "image1ObjectPosition": "50% 48%",
-    "image2ObjectPosition": "50% 46%"
+    "image2ObjectPosition": "50% 50%"
   },
   "destination": {
     "headline": "Train where focus meets horizon.",
@@ -146,7 +146,7 @@
       },
       {
         "src": "/images/community/community-6.webp",
-        "alt": "Coach Andrew with a junior player on court at Moulton Meadows",
+        "alt": "Coach Andrew with a junior player on court in Laguna Beach",
         "span": "large",
         "objectPosition": "48% 44%"
       },
