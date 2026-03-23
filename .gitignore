@@ -46,4 +46,9 @@ public/**/*.MP4
 !public/legacy-working-assets/**/*.MP4
 # Canva API secrets (inside legacy assets)
 public/legacy-working-assets/canva-api/.secrets/
+
+# Local photo working copies (ship from public/images/ only)
+/website photos/
+/docs/Photos/
+
 node_modules/
