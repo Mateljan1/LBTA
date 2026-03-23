@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export type PlayerSuccessSlide = {
@@ -22,13 +22,17 @@ export type PlayerSuccessCarouselProps = {
   slides: PlayerSuccessSlide[]
 }
 
+const CROSSFADE_SEC = 0.7
+const EASE_LUXURY: [number, number, number, number] = [0.22, 0.61, 0.36, 1]
+
 export default function PlayerSuccessCarousel({
   eyebrow,
   headline,
   intervalMs,
   slides,
 }: PlayerSuccessCarouselProps) {
-  const reduceMotion = useReducedMotion()
+  const reduceMotionPref = useReducedMotion()
+  const reduceMotion = reduceMotionPref === true
   const [activeIndex, setActiveIndex] = useState(0)
   const [paused, setPaused] = useState(false)
 
@@ -82,22 +86,35 @@ export default function PlayerSuccessCarousel({
       onMouseLeave={() => setPaused(false)}
     >
       <div className="absolute inset-0">
-        {/* One full-viewport image at a time — avoids loading N × 100vw optimized images on every homepage view */}
-        <div className="absolute inset-0 z-10">
-          <Image
-            src={active.image}
-            alt={active.imageAlt}
-            fill
-            className="object-cover brightness-[1.02] saturate-[1.02]"
-            style={{
-              objectPosition: active.objectPosition ?? '50% 20%',
-            }}
-            sizes="100vw"
-            quality={100}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+        {/* Crossfade (mode="sync"): at most two slides mounted during transition — not N on first paint */}
+        <AnimatePresence mode="sync" initial={false}>
+          <motion.div
+            key={safeIndex}
+            className="absolute inset-0 z-10"
+            initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : { duration: CROSSFADE_SEC, ease: EASE_LUXURY }
+            }
+          >
+            <Image
+              src={active.image}
+              alt={active.imageAlt}
+              fill
+              className="object-cover brightness-[1.02] saturate-[1.02]"
+              style={{
+                objectPosition: active.objectPosition ?? '50% 20%',
+              }}
+              sizes="100vw"
+              quality={100}
+              loading="lazy"
+              decoding="async"
+            />
+          </motion.div>
+        </AnimatePresence>
         {/* Left-weighted scrim: strong behind copy; fades out toward the right so players stay visible */}
         <div
           className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.88] from-0% via-black/35 via-[42%] to-transparent to-[68%] pointer-events-none"
