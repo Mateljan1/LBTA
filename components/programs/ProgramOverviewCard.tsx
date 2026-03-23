@@ -34,13 +34,19 @@ export default function ProgramOverviewCard({ program, index, featured = false }
         <div className={`flex flex-col ${featured ? 'md:flex-row' : ''}`}>
           {/* Image */}
           {program.image && (
-            <div className={`relative shrink-0 overflow-hidden ${featured ? 'md:w-[45%] aspect-[4/3] md:aspect-auto' : 'aspect-[16/10]'} bg-brand-sandstone`}>
+            <div
+              className={`relative shrink-0 overflow-hidden bg-brand-sandstone ${
+                featured ? 'w-full md:w-[45%] aspect-[4/3]' : 'aspect-[4/3]'
+              }`}
+            >
               <Image
                 src={program.image}
                 alt={`${program.title} at Laguna Beach Tennis Academy`}
                 fill
                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                style={{ objectPosition: program.objectPosition ?? '50% 42%' }}
                 sizes={featured ? '(max-width: 767px) 100vw, 45vw' : '(max-width: 1023px) 50vw, 33vw'}
+                quality={90}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden />
             </div>
@@ -53,7 +59,7 @@ export default function ProgramOverviewCard({ program, index, featured = false }
             <h2 className="font-headline text-[22px] md:text-[28px] font-medium text-brand-pacific-dusk mb-2 group-hover:text-brand-deep-water transition-colors">
               {program.title}
             </h2>
-            <p className="font-sans text-body-sm text-brand-pacific-dusk/75 leading-relaxed line-clamp-2 mb-4">
+            <p className="font-sans text-body-sm text-brand-pacific-dusk/75 leading-relaxed line-clamp-3 mb-4">
               {program.description}
             </p>
             <div className="mt-auto flex flex-wrap items-baseline gap-x-4 gap-y-1">
