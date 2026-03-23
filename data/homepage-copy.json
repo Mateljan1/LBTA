@@ -68,25 +68,25 @@
         "title": "Junior Programs",
         "description": "From red ball to college prep.",
         "link": "/programs/junior",
-        "image": "/images/programs/juniors.webp",
-        "imageAlt": "Young player practicing a tennis swing on an outdoor court",
-        "objectPosition": "50% 44%"
+        "image": "/images/programs/youth-dev-2.webp",
+        "imageAlt": "Youth players in a development clinic on an outdoor court",
+        "objectPosition": "50% 40%"
       },
       {
         "title": "Adult Programs",
         "description": "Focused development for any level.",
         "link": "/programs/adult",
-        "image": "/images/programs/adults.webp",
-        "imageAlt": "Two adult players in a live rally on an outdoor tennis court",
+        "image": "/images/programs/adult-intermediate.webp",
+        "imageAlt": "Adult players in a rally during an intermediate clinic",
         "objectPosition": "50% 44%"
       },
       {
         "title": "Private Coaching",
         "description": "Personal sessions built around your goals.",
         "link": "/book",
-        "image": "/images/programs/private-lessons.webp",
-        "imageAlt": "Coach Andrew Mateljan coaching a private lesson beside a ball cart",
-        "objectPosition": "50% 46%"
+        "image": "/images/community/community-4.webp",
+        "imageAlt": "Coach Michelle Mateljan with junior players during a lesson",
+        "objectPosition": "50% 42%"
       }
     ],
     "ctaSecondary": "View All Programs",
