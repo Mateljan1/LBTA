@@ -106,7 +106,7 @@ const REGISTRATION_SEASON_TAGS: Record<string, number> = {
 
 // Get all applicable tags for a registration
 function getApplicableTags(
-  data: { season?: string; program?: string; registrationType?: string },
+  data: { season?: string; program?: string; registrationType?: string; division?: string },
   registrationType: RegistrationType
 ): number[] {
   const tags: number[] = [CAMPAIGN_TAGS.website_registration] // 180
@@ -120,9 +120,9 @@ function getApplicableTags(
   if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
     tags.push(CAMPAIGN_TAGS.utr_circuit)     // 242
     tags.push(INTEREST_TAGS.utr_circuit)     // 215
-    // Add UTR division tag if specified
-    if (data.program) {
-      const divisionTag = getUtrDivisionTag(data.program)
+    const divisionForTag = data.division || data.program || ''
+    if (divisionForTag) {
+      const divisionTag = getUtrDivisionTag(divisionForTag)
       if (divisionTag) tags.push(divisionTag)
     }
   }

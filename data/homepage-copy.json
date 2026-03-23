@@ -28,9 +28,9 @@
         "subline": "Karue Sell, ATP #262 — from the #800s to a career high earned through structured work on tour.",
         "ctaLabel": "Watch His Journey",
         "ctaHref": "/success-stories#karue-sell",
-        "image": "/images/results/karue-sell-andrew-mateljan-coaching.webp",
-        "imageAlt": "Karue Sell training on court with Coach Andrew Mateljan",
-        "objectPosition": "50% 48%",
+        "image": "/images/results/karue-home-carousel-2026.webp",
+        "imageAlt": "Karue Sell on an outdoor court in athletic wear, mid-stroke",
+        "objectPosition": "50% 45%",
         "imageFit": "cover"
       },
       {
@@ -46,18 +46,18 @@
         "subline": "Henry Mateljan — age 9, 4.6 UTR; Little Mo recognition on his junior journey.",
         "ctaLabel": "Read Henry's story",
         "ctaHref": "/success-stories#henry-mateljan",
-        "image": "/images/success-stories/henry-mateljan-little-mo.webp",
-        "imageAlt": "Junior player at a tournament tennis court",
-        "objectPosition": "50% 50%",
+        "image": "/images/success-stories/henry-home-carousel-maroon-2026.webp",
+        "imageAlt": "Henry Mateljan on a blue court in a maroon shirt, full length",
+        "objectPosition": "50% 48%",
         "imageFit": "contain"
       },
       {
         "subline": "Olov — 4.0 to 5.0 USTA; strong results in 5.0 play and national-level events.",
         "ctaLabel": "Read Olov's story",
         "ctaHref": "/success-stories#olov",
-        "image": "/images/results/olov-usta-national.webp",
-        "imageAlt": "Olov competing at a USTA national-level tennis event",
-        "objectPosition": "50% 50%",
+        "image": "/images/results/olov-home-carousel-2026.webp",
+        "imageAlt": "Olov mid-swing on an outdoor hard court, full length",
+        "objectPosition": "50% 48%",
         "imageFit": "contain"
       }
     ]

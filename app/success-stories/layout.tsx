@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'Success Stories & Testimonials | Laguna Beach Tennis Academy',
     description: 'Player stories from LBTA. From junior development to ATP tour, see how our coaching philosophy creates lasting results.',
     type: 'website',
-    images: [{ url: '/images/results/karue-sell-andrew-mateljan-coaching.webp', width: 1200, height: 675, alt: 'LBTA success stories' }],
+    images: [{ url: '/images/results/karue-home-carousel-2026.webp', width: 682, height: 1024, alt: 'LBTA success stories' }],
   },
 }
 

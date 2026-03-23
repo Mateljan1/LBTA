@@ -6,7 +6,7 @@
       "displayName": "Karue Sell",
       "roles": {
         "successStoryCard": "/images/success-stories/karue-sell.webp",
-        "homeResultsCarousel": "/images/results/karue-sell-andrew-mateljan-coaching.webp"
+        "homeResultsCarousel": "/images/results/karue-home-carousel-2026.webp"
       }
     },
     {
@@ -21,6 +21,7 @@
       "displayName": "Henry Mateljan",
       "roles": {
         "successStoryCard": "/images/success-stories/henry-mateljan-little-mo.webp",
+        "homeResultsCarousel": "/images/success-stories/henry-home-carousel-maroon-2026.webp",
         "alternatePortrait": "/images/success-stories/henry-mateljan.webp"
       }
     },
@@ -29,7 +30,7 @@
       "displayName": "Olov",
       "roles": {
         "successStoryCard": "/images/success-stories/olov-usta.webp",
-        "homeResultsCarousel": "/images/results/olov-usta-national.webp"
+        "homeResultsCarousel": "/images/results/olov-home-carousel-2026.webp"
       }
     }
   ]

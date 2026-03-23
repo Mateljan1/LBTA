@@ -42,7 +42,7 @@ const successStories = [
     name: 'Henry Mateljan',
     title: 'Junior Competitor',
     achievement: 'Age 9 · 4.6 UTR · Little Mo',
-    image: '/images/success-stories/henry-mateljan-little-mo.webp',
+    image: '/images/success-stories/henry-home-carousel-maroon-2026.webp',
     quote:
       'Little Mo was a special week—sharing that with Coach Andrew is something I will always remember.',
     story:
@@ -67,7 +67,7 @@ const successStories = [
 const successStoryImagePosition: Record<string, string> = {
   'karue-sell': '52% 42%',
   'ryan-seggerman': '50% 40%',
-  'henry-mateljan': '50% 28%',
+  'henry-mateljan': '50% 42%',
   olov: '50% 45%',
 }
 
@@ -142,8 +142,8 @@ export default function SuccessStoriesPage() {
       <section className="relative min-h-[55vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/results/karue-sell-andrew-mateljan-coaching.webp"
-            alt="On-court coaching at Laguna Beach Tennis Academy"
+            src="/images/results/karue-home-carousel-2026.webp"
+            alt="On-court play at Laguna Beach Tennis Academy"
             fill
             className="object-cover object-center max-md:brightness-[0.88]"
             style={{ objectPosition: '50% 45%' }}
