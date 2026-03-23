@@ -2,7 +2,9 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Mail, Phone } from 'lucide-react'
-import { coachImageSrc } from '@/lib/coaches-data'
+import { coachImageSrc, getCoachBySlug } from '@/lib/coaches-data'
+
+const coach = getCoachBySlug('peter-defrantz')!
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
     title: 'Peter DeFrantz — LBTA Coach | Laguna Beach Tennis Academy',
     description: 'USPTA & PTR certified professional. 8+ years coaching. College tennis at Mt. San Jacinto — #1 in SoCal. All ages and levels.',
     type: 'website',
-    images: [{ url: coachImageSrc('/images/coaches/peter-defrantz.webp'), width: 800, height: 1000, alt: 'Peter DeFrantz' }],
+    images: [{ url: coachImageSrc(coach.image), width: 800, height: 1000, alt: 'Peter DeFrantz' }],
   },
 }
 
@@ -46,10 +48,11 @@ export default function PeterDeFrantzPage() {
           <div className="grid md:grid-cols-[200px_1fr] gap-10 items-start">
             <AnimatedSection className="relative aspect-[200/260] overflow-hidden rounded-xl border border-black/5">
               <Image
-                src={coachImageSrc('/images/coaches/peter-defrantz.webp')}
+                src={coachImageSrc(coach.image)}
                 alt="Peter DeFrantz, LBTA Coach at Laguna Beach Tennis Academy"
                 fill
-                className="object-cover object-top"
+                className="object-cover"
+                style={{ objectPosition: coach.imagePosition }}
                 sizes="200px"
                 quality={90}
               />
