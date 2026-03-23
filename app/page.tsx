@@ -209,30 +209,25 @@ export default function Home() {
             <span className="text-eyebrow mb-4 block">{homepageCopy.philosophy.eyebrow}</span>
             <h2 className="font-headline text-headline font-light">{homepageCopy.philosophy.headline}</h2>
           </AnimatedSection>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 auto-rows-fr">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {homepageCopy.philosophy.pillars.map((pillar, i) => {
               const images = [
                 '/images/philosophy/movement.webp',
                 '/images/philosophy/discipline.webp',
                 '/images/homepage/philosophy-community.webp',
               ]
-              const pillarImagePositions = ['48% 44%', '52% 46%', '50% 42%'] as const
-              const isFeatured = i === 0
+              const pillarImagePositions = ['50% 44%', '50% 42%', '50% 44%'] as const
               return (
-                <AnimatedSection
-                  key={pillar.title}
-                  delay={i * 150}
-                  className={isFeatured ? 'md:row-span-2' : ''}
-                >
+                <AnimatedSection key={pillar.title} delay={i * 150}>
                   <div className="group h-full flex flex-col">
-                    <div className={`relative overflow-hidden rounded-subtle mb-4 flex-shrink-0 ${isFeatured ? 'aspect-[4/3] md:aspect-auto md:min-h-[280px]' : 'aspect-[4/3]'}`}>
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-subtle mb-4 flex-shrink-0">
                       <Image
                         src={images[i]}
                         alt={`${pillar.title} — ${pillar.description}`}
                         fill
                         className="object-cover image-zoom"
                         style={{ objectPosition: pillarImagePositions[i] }}
-                        sizes={isFeatured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 50vw'}
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         quality={90}
                       />
                     </div>
