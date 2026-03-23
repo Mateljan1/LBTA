@@ -30,6 +30,10 @@
     /* Golden hour hero overlay — deep water → warm mid → deep water */
     --golden-hour-overlay: linear-gradient(180deg, rgba(15,34,55,0.1) 0%, rgba(196,168,124,0.08) 40%, rgba(15,34,55,0.6) 80%, #0F2237 100%);
 
+    /* Fixed mobile chrome — set by StickyCTA / ProgramCard (see lib/report-mobile-bottom-height.ts) */
+    --lbta-sticky-cta-h: 0px;
+    --lbta-program-bar-h: 0px;
+
     /* Transparent variants */
     --cove-mist: rgba(46, 139, 139, 0.08);
     --cliff-glow: rgba(232, 131, 74, 0.06);

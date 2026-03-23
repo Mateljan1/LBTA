@@ -32,7 +32,8 @@ export default function BackToTop() {
       className="fixed right-6 z-40 w-12 h-12 min-w-[48px] min-h-[48px] bg-brand-pacific-dusk text-white rounded-full shadow-lg hover:bg-brand-sunset-cliff transition-all duration-300 flex items-center justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
       aria-label="Back to top"
       style={{
-        bottom: 'calc(100px + env(safe-area-inset-bottom, 0px))',
+        bottom:
+          'calc(100px + var(--lbta-sticky-cta-h, 0px) + var(--lbta-program-bar-h, 0px) + env(safe-area-inset-bottom, 0px))',
         opacity: show ? 1 : 0,
         transform: show ? 'translateY(0)' : 'translateY(10px)',
         pointerEvents: show ? 'auto' : 'none',

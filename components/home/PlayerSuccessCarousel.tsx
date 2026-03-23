@@ -122,9 +122,10 @@ export default function PlayerSuccessCarousel({
         />
       </div>
 
+      {/* Dot nav: max-md:mr clears chat FAB */}
       {count > 1 && (
         <div
-          className="absolute right-4 top-1/2 z-30 -translate-y-1/2 flex flex-col gap-2 md:right-8"
+          className="absolute right-4 top-1/2 z-30 -translate-y-1/2 flex flex-col gap-2 md:right-8 max-md:mr-[72px]"
           role="navigation"
           aria-label="Player story slides"
         >

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { useReportMobileBottomHeight } from '@/lib/report-mobile-bottom-height'
 
 interface Schedule {
   day: string
@@ -53,6 +54,8 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
   const isExpanded = isControlled ? controlledExpanded : internalExpanded
   const handleToggle = isControlled ? () => onToggle() : () => setInternalExpanded((prev) => !prev)
   const cardRef = useRef<HTMLDivElement>(null)
+  const mobileActionsRef = useRef<HTMLDivElement>(null)
+  useReportMobileBottomHeight(mobileActionsRef, isExpanded, '--lbta-program-bar-h')
   
   const getBasePrice = () => {
     if (program.pricing.monthly) return program.pricing.monthly
@@ -294,7 +297,10 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
       
       {/* Mobile Sticky Register + optional Inquire (only when expanded) */}
       {isExpanded && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-sm border-t border-black/6 px-4 py-3 flex flex-wrap items-center gap-3">
+        <div
+          ref={mobileActionsRef}
+          className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-sm border-t border-black/6 px-4 py-3 flex flex-wrap items-center gap-3 pb-[calc(12px+env(safe-area-inset-bottom))]"
+        >
           {program.inquiryLabel && (
             <Link
               href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
@@ -311,7 +317,6 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
               onRegister(program)
             }}
             className="flex-1 min-w-[140px] flex items-center justify-center gap-2 bg-black active:bg-gray-800 active:scale-[0.98] text-white font-sans text-[14px] font-medium tracking-[0.02em] py-4 rounded-[2px] transition-all duration-200 min-h-[52px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
-            onTouchStart={() => {}}
           >
             <span>Begin Registration</span>
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

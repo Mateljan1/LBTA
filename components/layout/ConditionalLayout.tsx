@@ -28,7 +28,11 @@ export default function ConditionalLayout({
     <>
       <SeasonBanner />
       <Header />
-      <main id="main-content" tabIndex={-1} className="flex-grow">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-grow max-md:pb-[calc(var(--lbta-sticky-cta-h,0px)+var(--lbta-program-bar-h,0px))]"
+      >
         {children}
       </main>
       <Footer />

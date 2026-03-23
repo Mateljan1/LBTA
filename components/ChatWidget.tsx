@@ -126,14 +126,18 @@ export default function ChatWidget() {
   // Don't render until mounted (prevents hydration issues)
   if (!mounted) return null
 
+  /** Offset above fixed mobile bars (sticky CTA, program actions) — set via CSS vars on :root */
+  const mobileChrome =
+    'var(--lbta-sticky-cta-h, 0px) + var(--lbta-program-bar-h, 0px)'
+
   return (
     <>
-      {/* Floating Chat Button — stacked above viewport bottom so BackToTop can sit above it */}
+      {/* Floating Chat Button — clears sticky CTA / program bar + safe area */}
       <div
         className="group/chat relative flex flex-col items-end"
         style={{
           position: 'fixed',
-          bottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
+          bottom: `calc(24px + ${mobileChrome} + env(safe-area-inset-bottom, 0px))`,
           right: '24px',
           zIndex: 50,
         }}
@@ -178,7 +182,7 @@ export default function ChatWidget() {
         <span
           style={{
             position: 'fixed',
-            bottom: 'calc(24px + 60px + 4px + env(safe-area-inset-bottom, 0px))',
+            bottom: `calc(24px + 60px + 4px + ${mobileChrome} + env(safe-area-inset-bottom, 0px))`,
             right: '24px',
             zIndex: 50,
             width: '14px',
@@ -197,13 +201,14 @@ export default function ChatWidget() {
         <div
           style={{
             position: 'fixed',
-            bottom: 'calc(100px + env(safe-area-inset-bottom, 0px))',
+            bottom: `calc(100px + ${mobileChrome} + env(safe-area-inset-bottom, 0px))`,
             right: '24px',
             zIndex: 50,
             width: '380px',
             height: '520px',
             maxWidth: 'calc(100vw - 48px)',
-            maxHeight: 'calc(100vh - 140px)',
+            maxHeight:
+              'calc(100vh - 140px - var(--lbta-sticky-cta-h, 0px) - var(--lbta-program-bar-h, 0px))',
             backgroundColor: 'var(--color-brand-morning-light, #FAF8F4)',
             borderRadius: '12px',
             border: '1px solid rgba(26, 26, 26, 0.08)',

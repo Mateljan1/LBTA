@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { getStickyCtaSchedules } from '@/lib/site-copy'
+import { useReportMobileBottomHeight } from '@/lib/report-mobile-bottom-height'
 
 interface StickyCTAProps {
   text: string
@@ -35,6 +36,7 @@ export default function StickyCTA({
   urgencyText
 }: StickyCTAProps) {
   const [isVisible, setIsVisible] = useState(false)
+  const barRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const contextMessage = getContextualMessage(pathname)
   const displayUrgency = urgencyText || contextMessage.text
@@ -47,13 +49,18 @@ export default function StickyCTA({
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [showAfterScroll])
+
+  useReportMobileBottomHeight(barRef, isVisible, '--lbta-sticky-cta-h')
   
   if (!isVisible) return null
   
   const buttonClasses = "flex-1 bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[15px] py-3.5 rounded-[2px] transition-all duration-200 shadow-md text-center min-h-[48px] active:scale-[0.98] flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
   
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 px-4 py-3 pb-[calc(12px+env(safe-area-inset-bottom))] shadow-lg animate-slide-up">
+    <div
+      ref={barRef}
+      className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 px-4 py-3 pb-[calc(12px+env(safe-area-inset-bottom))] shadow-lg animate-slide-up"
+    >
       {displayUrgency && (
         <div className="flex items-center justify-center gap-2 mb-2.5">
           <span className="font-sans text-[12px] text-black/60">{displayUrgency}</span>
@@ -72,11 +79,7 @@ export default function StickyCTA({
             </svg>
           </button>
         ) : href ? (
-          <Link
-            href={href}
-            className={buttonClasses}
-            onTouchStart={() => {}}
-          >
+          <Link href={href} className={buttonClasses}>
             {text}
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
