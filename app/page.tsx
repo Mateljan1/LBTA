@@ -129,11 +129,11 @@ export default function Home() {
                 <div className="relative aspect-[3/4] overflow-hidden rounded-subtle">
                   <Image
                     src={coachImageSrc('/images/founder/andrew-mateljan-on-court.webp')}
-                    alt="Andrew Mateljan, Founder and Head Coach, coaching on court in Laguna Beach"
+                    alt="Andrew Mateljan, Founder and Head Coach, reaching for a low ball on court in Laguna Beach"
                     fill
                     priority
                     className="object-cover"
-                    style={{ objectPosition: '58% 42%' }}
+                    style={{ objectPosition: '50% 40%' }}
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     quality={90}
                   />

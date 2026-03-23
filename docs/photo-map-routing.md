@@ -8,7 +8,7 @@ Source bundle: `website photos/LBTA_Website_Ready_2026-03-22/`. Files are copied
 |-------|--------|
 | `hero/lbta-2023-tennis-courts-sunset-palm-trees.webp` | `hero/laguna-horizon.webp`, `hero/hero-poster.webp` |
 | `destination/lbta-2023-night-tennis-practice-palm-trees.webp` | `destination/destination-night-palms.webp` |
-| `founder/lbta-2023-smiling-tennis-coach-holding-tennis-balls.webp` | `founder/andrew-mateljan-on-court.webp` |
+| `founder/lbta-2023-smiling-tennis-coach-holding-tennis-balls.webp` | `founder/andrew-mateljan-on-court.webp` (homepage founder: also sourced from `17-extras-rotation/lbta-2023-tennis-player-retrieving-low-ball.webp`) |
 | `player-success/lbta-2026-high-performance-karue-sell-backhand-andrew-observing.webp` | `results/karue-sell-andrew-mateljan-coaching.webp` (homepage **Player Success** band) |
 | `philosophy-pillars/01–03-*.webp` | `philosophy/movement.webp`, `philosophy/discipline.webp`, `homepage/philosophy-community.webp` (homepage: camps + timeline + doubles liveball from `05-camps`, `08-about`, `07-leagues-match-play`) |
 | `program-cards/01–03-*.webp` | `programs/juniors.webp`, `adults.webp`, `private-lessons.webp` (homepage: camps gallery + leagues hero + contact coaching) |
