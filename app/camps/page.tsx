@@ -85,34 +85,34 @@ export default function CampsPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-[65vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[65vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden bg-brand-deep-water">
         <div className="absolute inset-0">
           <Image
-            src="/images/camps/camps-hero.webp"
-            alt="Young players at Laguna Beach Tennis Academy camp"
+            src="/images/camps/camp-action-4.webp"
+            alt="Junior campers and coaches on court during LBTA holiday and summer tennis camps"
             fill
-            className="object-cover object-center"
+            className="object-cover max-md:brightness-[0.9]"
+            style={{ objectPosition: '50% 42%' }}
             sizes="100vw"
             priority
             quality={90}
           />
-          <div className="absolute inset-0 bg-brand-deep-water/90" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-brand-deep-water/30" />
+          <div className="absolute inset-0 hero-scrim-branded" aria-hidden="true" />
         </div>
-        
+
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-24">
           <AnimatedSection delay={0}>
-            <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/80 mb-4">
+            <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white mb-4 text-shadow-hero-readable">
               Holiday & Summer Programs
             </p>
           </AnimatedSection>
           <AnimatedSection delay={100}>
-            <h1 className="font-headline text-[40px] md:text-[64px] font-bold leading-[1.05] mb-6 text-shadow">
+            <h1 className="font-headline text-[40px] md:text-[64px] font-bold leading-[1.05] mb-6 text-shadow-hero-readable">
               Tennis Camps
             </h1>
           </AnimatedSection>
           <AnimatedSection delay={200}>
-            <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white/95 mb-10 max-w-[85%] mx-auto">
+            <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white mb-10 max-w-[85%] mx-auto text-shadow-hero-readable max-md:text-white/95 md:text-white/90">
               From holiday break camps to full summer programs — high-energy development with our movement-first philosophy.
             </p>
           </AnimatedSection>
