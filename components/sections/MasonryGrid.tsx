@@ -66,7 +66,7 @@ export default function MasonryGrid({
                 alt={item.alt}
                 fill
                 className="object-cover image-zoom"
-                style={{ objectPosition: item.objectPosition ?? '50% 42%' }}
+                style={{ objectPosition: item.objectPosition ?? '50% 36%' }}
                 sizes={isLarge ? '(max-width: 640px) 100vw, 50vw' : sizes}
                 quality={quality}
               />

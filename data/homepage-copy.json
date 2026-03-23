@@ -30,7 +30,7 @@
         "ctaHref": "/success-stories#karue-sell",
         "image": "/images/success-stories/karue-sell.webp",
         "imageAlt": "Karue Sell competing on a tennis court",
-        "objectPosition": "48% 10%"
+        "objectPosition": "50% 14%"
       },
       {
         "subline": "Ryan Seggerman — career-high ATP singles #72; movement work at LBTA between tour stops.",
@@ -46,7 +46,7 @@
         "ctaHref": "/success-stories#henry-mateljan",
         "image": "/images/success-stories/henry-mateljan-little-mo.webp",
         "imageAlt": "Junior player at a tournament tennis court",
-        "objectPosition": "50% 15%"
+        "objectPosition": "50% 22%"
       },
       {
         "subline": "Olov — 4.0 to 5.0 USTA; strong results in 5.0 play and national-level events.",
@@ -68,7 +68,7 @@
         "detail": "Technical precision through biomechanics and footwork fundamentals.",
         "image": "/images/philosophy/movement.webp",
         "imageAlt": "Junior player in an athletic stance during a drill on an outdoor court",
-        "objectPosition": "50% 44%"
+        "objectPosition": "50% 38%"
       },
       {
         "title": "Craft",
@@ -76,7 +76,7 @@
         "detail": "Consistent practice routines create lasting mental toughness.",
         "image": "/images/philosophy/discipline.webp",
         "imageAlt": "High-performance junior players training together on court",
-        "objectPosition": "50% 42%"
+        "objectPosition": "50% 38%"
       },
       {
         "title": "Community",
@@ -84,7 +84,7 @@
         "detail": "Players support each other through wins, losses, and growth.",
         "image": "/images/homepage/philosophy-community.webp",
         "imageAlt": "Coach-led doubles and liveball group play on a blue court",
-        "objectPosition": "50% 44%"
+        "objectPosition": "50% 40%"
       }
     ]
   },
@@ -99,7 +99,7 @@
         "link": "/programs/junior",
         "image": "/images/programs/youth-dev-2.webp",
         "imageAlt": "Youth players in a development clinic on an outdoor court",
-        "objectPosition": "50% 40%"
+        "objectPosition": "50% 35%"
       },
       {
         "title": "Adult Programs",
@@ -107,15 +107,15 @@
         "link": "/programs/adult",
         "image": "/images/programs/adult-intermediate.webp",
         "imageAlt": "Adult players in a rally during an intermediate clinic",
-        "objectPosition": "50% 44%"
+        "objectPosition": "50% 42%"
       },
       {
         "title": "Private Coaching",
         "description": "Personal sessions built around your goals.",
         "link": "/book",
-        "image": "/images/community/community-4.webp",
-        "imageAlt": "Coach Michelle Mateljan with junior players during a lesson",
-        "objectPosition": "50% 42%"
+        "image": "/images/programs/private-lessons-hp.webp",
+        "imageAlt": "Focused on-court coaching during a private lesson",
+        "objectPosition": "50% 40%"
       }
     ],
     "ctaSecondary": "View All Programs",
@@ -128,15 +128,15 @@
     "image2": "/images/facility/detail-sunlit-blue-tennis-courts.webp",
     "image1Alt": "Coastal tennis courts at sunset with the Pacific horizon beyond Laguna Beach",
     "image2Alt": "Sunlit blue hard courts — clarity of line and surface for focused training",
-    "image1ObjectPosition": "50% 48%",
-    "image2ObjectPosition": "50% 50%"
+    "image1ObjectPosition": "50% 46%",
+    "image2ObjectPosition": "50% 48%"
   },
   "destination": {
     "headline": "Train where focus meets horizon.",
     "subline": "Laguna Beach — where performance meets perspective.",
     "backgroundImage": "/images/facility/overview-coastal-tennis-facility-ocean.webp",
     "backgroundAlt": "Elevated view of blue hard courts at golden hour with the Pacific horizon beyond",
-    "objectPosition": "50% 48%"
+    "objectPosition": "50% 45%"
   },
   "community": {
     "eyebrow": "Our Community",

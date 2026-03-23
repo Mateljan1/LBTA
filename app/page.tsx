@@ -222,7 +222,7 @@ export default function Home() {
                         alt={pillar.imageAlt}
                         fill
                         className="object-cover image-zoom"
-                        style={{ objectPosition: pillar.objectPosition ?? '50% 44%' }}
+                        style={{ objectPosition: pillar.objectPosition ?? '50% 38%' }}
                         sizes="(max-width: 768px) 100vw, 33vw"
                         quality={90}
                       />
@@ -252,20 +252,25 @@ export default function Home() {
             {(homepageCopy.programs.items as ProgramItem[]).map((program, index) => {
               return (
                 <AnimatedSection key={program.title} delay={index * 150}>
-                  <Link href={program.link} className="group block">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-subtle mb-5">
+                  <Link
+                    href={program.link}
+                    className="group block overflow-hidden rounded-subtle border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02),0_4px_8px_rgba(0,0,0,0.02)] transition-all duration-500 hover:border-black/10 hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]"
+                  >
+                    <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={program.image}
                         alt={program.imageAlt}
                         fill
                         className="object-cover image-zoom"
-                        style={{ objectPosition: program.objectPosition ?? '50% 44%' }}
+                        style={{ objectPosition: program.objectPosition ?? '50% 40%' }}
                         sizes="(max-width: 768px) 100vw, 33vw"
                         quality={90}
                       />
                     </div>
-                    <h3 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">{program.title}</h3>
-                    <p className="text-body text-lbta-slate">{program.description}</p>
+                    <div className="px-5 pb-6 pt-5">
+                      <h3 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">{program.title}</h3>
+                      <p className="text-body text-lbta-slate">{program.description}</p>
+                    </div>
                   </Link>
                 </AnimatedSection>
               )
@@ -330,12 +335,12 @@ export default function Home() {
             src={destination.backgroundImage}
             alt={destination.backgroundAlt}
             fill
-            className="object-cover"
-            style={{ objectPosition: destination.objectPosition ?? '50% 52%' }}
+            className="object-cover brightness-[1.05]"
+            style={{ objectPosition: destination.objectPosition ?? '50% 45%' }}
             sizes="100vw"
             quality={90}
           />
-          <div className="absolute inset-0 bg-brand-deep-water/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-deep-water/55 via-brand-deep-water/68 to-brand-deep-water/78" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">
           <AnimatedSection>
@@ -384,7 +389,7 @@ export default function Home() {
             sizes="100vw"
             quality={90}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/90 via-black/50 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/85 via-black/45 to-black/25" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-lg mx-auto py-20">
           <AnimatedSection>
