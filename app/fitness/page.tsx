@@ -16,7 +16,8 @@ export default function FitnessPage() {
             src="/images/fitness/fitness-hero.webp"
             alt="Fitness and community at LBTA"
             fill
-            className="object-cover object-center"
+            className="object-cover"
+            style={{ objectPosition: '50% 45%' }}
             sizes="100vw"
             priority
           />

@@ -164,6 +164,7 @@ export default function AboutPage() {
             alt="Andrew Mateljan smiling on an outdoor tennis court"
             fill
             className="object-cover"
+            style={{ objectPosition: '50% 42%' }}
             sizes="100vw"
             quality={90}
           />

@@ -82,7 +82,8 @@ export default function PhilosophyPage() {
             src="/legacy-working-assets/hero/philosophy-hero/philosophy-hero.webp"
             alt="LBTA coaching philosophy"
             fill
-            className="object-cover object-center"
+            className="object-cover"
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
             quality={90}
@@ -137,6 +138,7 @@ export default function PhilosophyPage() {
                           alt="Community and belonging at LBTA"
                           fill
                           className="object-cover"
+                          style={{ objectPosition: '50% 48%' }}
                           sizes="(max-width: 768px) 100vw, 66vw"
                           quality={90}
                         />

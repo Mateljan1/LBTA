@@ -16,6 +16,7 @@ export default function NotFound() {
             alt="Tennis court at Laguna Beach"
             fill
             className="object-cover"
+            style={{ objectPosition: '50% 48%' }}
             priority
             sizes="100vw"
           />

@@ -133,7 +133,10 @@ export default function Home() {
                     fill
                     priority
                     className="object-cover"
-                    style={{ objectPosition: '50% 40%' }}
+                    style={{
+                      objectPosition:
+                        (homepageCopy.founder as { imageObjectPosition?: string }).imageObjectPosition ?? '48% 44%',
+                    }}
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     quality={90}
                   />
@@ -408,7 +411,15 @@ export default function Home() {
 
       <section id="cta" className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/cta/cta-background.webp" alt="Laguna Beach tennis courts at sunset" fill className="object-cover" sizes="100vw" quality={90} />
+          <Image
+            src="/images/cta/cta-background.webp"
+            alt="Laguna Beach tennis courts at sunset"
+            fill
+            className="object-cover"
+            style={{ objectPosition: '50% 55%' }}
+            sizes="100vw"
+            quality={90}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/90 via-black/50 to-black/30" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-lg mx-auto py-20">

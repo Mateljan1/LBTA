@@ -50,7 +50,8 @@ export default function LeaguesPage() {
             src="/images/leagues/leagues-hero.webp"
             alt="Leagues and match play at LBTA"
             fill
-            className="object-cover object-center"
+            className="object-cover"
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
           />

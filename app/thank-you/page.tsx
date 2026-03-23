@@ -89,7 +89,8 @@ export default async function ThankYouPage({
             src="/legacy-working-assets/conversion/thank-you-image/thank-you-image.webp"
             alt="Thank you from LBTA"
             fill
-            className="object-cover object-center"
+            className="object-cover"
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
           />

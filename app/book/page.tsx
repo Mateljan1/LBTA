@@ -38,7 +38,8 @@ function BookPageContent() {
             src="/images/book/book-hero.webp"
             alt="Book your trial or private lesson at LBTA"
             fill
-            className="object-cover object-center"
+            className="object-cover"
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
           />
@@ -134,9 +135,21 @@ function BookPageContent() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
             {[
-              { src: '/images/book/book-expect-1.webp', alt: 'Junior trial — coach and player on court at LBTA' },
-              { src: '/images/book/book-expect-2.webp', alt: 'Adult trial — player in a focused on-court session' },
-              { src: '/images/book/book-expect-3.webp', alt: 'Private lesson — one-on-one coaching at LBTA' },
+              {
+                src: '/images/book/book-expect-1.webp',
+                alt: 'Junior trial — coach and player on court at LBTA',
+                objectPosition: '50% 46%',
+              },
+              {
+                src: '/images/book/book-expect-2.webp',
+                alt: 'Adult trial — player in a focused on-court session',
+                objectPosition: '50% 44%',
+              },
+              {
+                src: '/images/book/book-expect-3.webp',
+                alt: 'Private lesson — one-on-one coaching at LBTA',
+                objectPosition: '50% 48%',
+              },
             ].map((img, i) => (
               <div key={i} className="relative aspect-[16/10] overflow-hidden rounded-subtle">
                 <Image
@@ -144,6 +157,7 @@ function BookPageContent() {
                   alt={img.alt}
                   fill
                   className="object-cover"
+                  style={{ objectPosition: img.objectPosition }}
                   sizes="(max-width: 640px) 100vw, 33vw"
                   quality={90}
                 />

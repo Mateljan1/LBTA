@@ -41,7 +41,8 @@ export default function USTAAdultLeaguePage() {
             src="/legacy-working-assets/hero/leagues-hero/leagues-hero.webp"
             alt="USTA Adult League at LBTA"
             fill
-            className="object-cover object-center"
+            className="object-cover"
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
           />

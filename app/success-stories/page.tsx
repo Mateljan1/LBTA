@@ -68,6 +68,15 @@ const successStories = [
   },
 ]
 
+/** Per-story focal points for `object-cover` cards (tune without changing assets). */
+const successStoryImagePosition: Record<string, string> = {
+  'karue-sell': '52% 42%',
+  'ryan-seggerman': '50% 40%',
+  'college-placements': '50% 48%',
+  'adult-transformation': '50% 44%',
+  'junior-development': '50% 38%',
+}
+
 const testimonials = [
   {
     name: 'Sarah M.',
@@ -228,6 +237,7 @@ export default function SuccessStoriesPage() {
                       alt={story.name}
                       fill
                       className="object-cover"
+                      style={{ objectPosition: successStoryImagePosition[story.id] ?? '50% 45%' }}
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     {story.videoId && (
@@ -299,6 +309,7 @@ export default function SuccessStoriesPage() {
                       alt={story.name}
                       fill
                       className="object-cover"
+                      style={{ objectPosition: successStoryImagePosition[story.id] ?? '50% 45%' }}
                       sizes={index === 0 ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
                     />
                   </div>

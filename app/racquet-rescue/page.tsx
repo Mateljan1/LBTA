@@ -29,6 +29,7 @@ export default function RacquetRescuePage() {
             alt="Laguna Beach tennis courts overlooking the ocean"
             fill
             className="object-cover brightness-[0.4]"
+            style={{ objectPosition: '50% 42%' }}
             priority
             sizes="100vw"
           />

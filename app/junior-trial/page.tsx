@@ -155,6 +155,7 @@ export default function JuniorTrialLanding() {
             quality={90}
             sizes="100vw"
             className="object-cover"
+            style={{ objectPosition: '50% 48%' }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
         </div>

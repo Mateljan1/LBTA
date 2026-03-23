@@ -38,7 +38,8 @@ export default function UTRMatchPlayPage() {
             src="/legacy-working-assets/hero/match-play-hero/match-play-hero.webp"
             alt="UTR Match Play at LBTA"
             fill
-            className="object-cover object-center"
+            className="object-cover"
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
           />

@@ -92,6 +92,7 @@ export default function HighPerformancePathwayPage() {
             fill
             priority
             className="object-cover"
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
@@ -187,6 +188,7 @@ export default function HighPerformancePathwayPage() {
                 alt="Andrew Mateljan - ATP/WTA Tour Coach"
                 fill
                 className="object-cover"
+                style={{ objectPosition: '50% 42%' }}
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
