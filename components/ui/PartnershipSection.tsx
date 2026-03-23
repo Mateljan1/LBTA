@@ -84,6 +84,7 @@ export default function PartnershipSection({ className = '' }: PartnershipSectio
                       width={144}
                       height={80}
                       sizes="144px"
+                      quality={100}
                       className="max-h-20 max-w-full w-auto object-contain opacity-70 group-hover:opacity-100 transition-all duration-300"
                     />
                   </div>

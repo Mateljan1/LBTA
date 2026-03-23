@@ -2,8 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    formats: ['image/avif', 'image/webp'],
-    qualities: [75, 90],
+    // WebP-only: masters are already WebP; avoids AVIF re-encode that can look softer than source.
+    // Raise quality props (95–100) for editorial photos — see lib/image-quality.ts.
+    formats: ['image/webp'],
+    qualities: [75, 80, 85, 90, 95, 100],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,

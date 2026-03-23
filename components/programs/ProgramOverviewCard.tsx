@@ -46,7 +46,7 @@ export default function ProgramOverviewCard({ program, index, featured = false }
                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                 style={{ objectPosition: program.objectPosition ?? '50% 42%' }}
                 sizes={featured ? '(max-width: 767px) 100vw, 45vw' : '(max-width: 1023px) 50vw, 33vw'}
-                quality={90}
+                quality={95}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden />
             </div>

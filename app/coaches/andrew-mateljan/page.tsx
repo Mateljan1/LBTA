@@ -74,7 +74,7 @@ export default function AndrewMateljanPage() {
                 className="object-cover"
                 style={{ objectPosition: '50% 40%' }}
                 sizes="(max-width: 768px) 240px, 320px"
-                quality={90}
+                quality={95}
               />
             </AnimatedSection>
             <div>

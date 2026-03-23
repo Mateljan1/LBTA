@@ -57,7 +57,7 @@ export default function SchedulesPageClient({
             style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
-            quality={90}
+            quality={95}
           />
           <div className="absolute inset-0 hero-scrim-branded" aria-hidden="true" />
         </div>

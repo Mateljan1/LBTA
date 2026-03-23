@@ -149,7 +149,7 @@ export default function SuccessStoriesPage() {
             style={{ objectPosition: '50% 45%' }}
             sizes="100vw"
             priority
-            quality={90}
+            quality={95}
           />
           <div className="absolute inset-0 hero-scrim-branded" aria-hidden="true" />
         </div>

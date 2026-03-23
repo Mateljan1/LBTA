@@ -50,7 +50,7 @@ export default function SplitSection({
           className={imageClassName}
           sizes={imageSizes}
           priority={imagePriority}
-          quality={90}
+          quality={95}
           style={{ objectPosition: '50% 50%' }}
         />
         {imageOverlay}

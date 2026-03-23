@@ -18,7 +18,7 @@ export default function SchedulesCTA({ ctaHeadline, ctaSubline }: SchedulesCTAPr
           style={{ objectPosition: '50% 52%' }}
           sizes="100vw"
           loading="lazy"
-          quality={90}
+          quality={95}
         />
         <div className="absolute inset-0 bg-black/30" />
       </div>

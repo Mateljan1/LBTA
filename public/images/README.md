@@ -7,7 +7,7 @@
 | Rule | Why |
 |------|-----|
 | **WebP first** for photos | Smaller payloads; use PNG only for logos, print, or rare exceptions. |
-| **Target ≤ ~350 KB** for large heroes when possible | Re-encode from masters in `plans/` if a file is huge. |
+| **Target ≤ ~350 KB** for large heroes when possible | Re-encode from masters in `plans/` if a file is huge; code uses `quality={95}` (standard) or `100` (full-bleed heroes). |
 | **Semantic folders** | Put files where the name matches *purpose*, not shoot date—see table below. |
 | **No new references to `legacy-working-assets/`** for user-facing photos | Migrate into `/images/` when you replace an asset (see `docs/photo-map-routing.md`). |
 | **After adding or renaming files** | Run `npm run verify:images` and update `docs/photo-map-routing.md` if the mapping changed. |

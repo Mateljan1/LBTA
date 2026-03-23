@@ -54,7 +54,7 @@ export default function PeterDeFrantzPage() {
                 className="object-cover"
                 style={{ objectPosition: coach.imagePosition }}
                 sizes="200px"
-                quality={90}
+                quality={95}
               />
             </AnimatedSection>
             <div>

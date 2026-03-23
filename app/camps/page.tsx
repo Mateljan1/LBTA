@@ -95,7 +95,7 @@ export default function CampsPage() {
             style={{ objectPosition: '50% 42%' }}
             sizes="100vw"
             priority
-            quality={90}
+            quality={95}
           />
           <div className="absolute inset-0 hero-scrim-branded" aria-hidden="true" />
         </div>

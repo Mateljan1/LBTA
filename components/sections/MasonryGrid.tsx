@@ -20,7 +20,7 @@ export interface MasonryGridProps {
   header?: ReactNode
   /** Image sizes attribute for next/image */
   sizes?: string
-  /** Quality for next/image (default 90) */
+  /** Quality for next/image (default 95) */
   quality?: number
 }
 
@@ -34,7 +34,7 @@ export default function MasonryGrid({
   className = '',
   header,
   sizes = '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw',
-  quality = 90,
+  quality = 95,
 }: MasonryGridProps) {
   return (
     <div className={className}>

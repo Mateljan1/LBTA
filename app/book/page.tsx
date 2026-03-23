@@ -159,7 +159,7 @@ function BookPageContent() {
                   className="object-cover"
                   style={{ objectPosition: img.objectPosition }}
                   sizes="(max-width: 640px) 100vw, 33vw"
-                  quality={90}
+                  quality={95}
                 />
               </div>
             ))}

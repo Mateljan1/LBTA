@@ -732,7 +732,8 @@
   }
 
   .image-zoom:hover {
-    transform: scale(1.04);
+    /* Subtle scale keeps edges sharper than 1.04 on large photos */
+    transform: scale(1.02);
   }
 
   .link-animated {

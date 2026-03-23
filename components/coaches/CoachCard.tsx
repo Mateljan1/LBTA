@@ -39,7 +39,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           style={{ objectPosition: coach.imagePosition }}
           sizes={variant === 'featured' ? '(max-width: 1024px) 100vw, 40vw' : '(max-width: 768px) 100vw, 50vw'}
-          quality={90}
+          quality={95}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
@@ -111,7 +111,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
             className="object-cover"
             style={{ objectPosition: coach.imagePosition }}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 340px"
-            quality={90}
+            quality={95}
           />
         </div>
         <div className="flex flex-col flex-1 min-h-0 p-5 md:p-6 rounded-b-lg">
@@ -185,7 +185,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
             className="object-cover"
             style={{ objectPosition: coach.imagePosition }}
             sizes="(max-width: 1024px) 100vw, 360px"
-            quality={90}
+            quality={95}
           />
         </div>
         <div className="p-8 md:p-10 lg:py-12 flex flex-col justify-center min-h-0 text-left">

@@ -133,7 +133,7 @@ export default function Home() {
                         (homepageCopy.founder as { imageObjectPosition?: string }).imageObjectPosition ?? '48% 44%',
                     }}
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    quality={90}
+                    quality={100}
                   />
                 </div>
               </div>
@@ -224,7 +224,7 @@ export default function Home() {
                         className="object-cover image-zoom"
                         style={{ objectPosition: pillar.objectPosition ?? '50% 38%' }}
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        quality={90}
+                        quality={95}
                       />
                     </div>
                     <div className="flex flex-col flex-1">
@@ -264,7 +264,7 @@ export default function Home() {
                         className="object-cover image-zoom"
                         style={{ objectPosition: program.objectPosition ?? '50% 40%' }}
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        quality={90}
+                        quality={95}
                       />
                     </div>
                     <div className="px-5 pb-6 pt-5">
@@ -306,7 +306,7 @@ export default function Home() {
                   className="object-cover image-zoom"
                   style={{ objectPosition: whyChoose?.image1ObjectPosition ?? '50% 45%' }}
                   sizes="(max-width: 768px) 100vw, 60vw"
-                  quality={90}
+                  quality={100}
                 />
               </div>
             </AnimatedSection>
@@ -320,7 +320,7 @@ export default function Home() {
                   className="object-cover image-zoom"
                   style={{ objectPosition: whyChoose?.image2ObjectPosition ?? '50% 52%' }}
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  quality={90}
+                  quality={100}
                 />
               </div>
             </AnimatedSection>
@@ -335,10 +335,10 @@ export default function Home() {
             src={destination.backgroundImage}
             alt={destination.backgroundAlt}
             fill
-            className="object-cover brightness-[1.05]"
+            className="object-cover brightness-[1.02]"
             style={{ objectPosition: destination.objectPosition ?? '50% 45%' }}
             sizes="100vw"
-            quality={90}
+            quality={100}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-brand-deep-water/55 via-brand-deep-water/68 to-brand-deep-water/78" />
         </div>
@@ -387,7 +387,7 @@ export default function Home() {
             className="object-cover"
             style={{ objectPosition: '50% 55%' }}
             sizes="100vw"
-            quality={90}
+            quality={100}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/85 via-black/45 to-black/25" />
         </div>

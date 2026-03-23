@@ -84,13 +84,13 @@ export default function PlayerSuccessCarousel({
               src={slide.image}
               alt={slide.imageAlt}
               fill
-              className="object-cover brightness-[1.06] saturate-[1.04]"
+              className="object-cover brightness-[1.02] saturate-[1.02]"
               style={{
                 /* Per-slide objectPosition in homepage-copy: top vs bottom depends on how the subject sits in the file */
                 objectPosition: slide.objectPosition ?? '50% 20%',
               }}
               sizes="100vw"
-              quality={90}
+              quality={100}
               priority={i === 0}
             />
           </div>
