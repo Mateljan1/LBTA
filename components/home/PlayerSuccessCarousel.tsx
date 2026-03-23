@@ -84,10 +84,10 @@ export default function PlayerSuccessCarousel({
               src={slide.image}
               alt={slide.imageAlt}
               fill
-              className="object-cover"
+              className="object-cover brightness-[1.06] saturate-[1.04]"
               style={{
-                /* Top-weighted: wide hero bands + object-cover crop from center by default; bias up so faces stay in frame */
-                objectPosition: slide.objectPosition ?? '50% 12%',
+                /* Per-slide objectPosition in homepage-copy: top vs bottom depends on how the subject sits in the file */
+                objectPosition: slide.objectPosition ?? '50% 20%',
               }}
               sizes="100vw"
               quality={90}
@@ -95,7 +95,11 @@ export default function PlayerSuccessCarousel({
             />
           </div>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-deep-water/95 via-black/70 to-transparent z-[15]" aria-hidden />
+        {/* Left-weighted scrim: strong behind copy; fades out toward the right so players stay visible */}
+        <div
+          className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.88] from-0% via-black/35 via-[42%] to-transparent to-[68%] pointer-events-none"
+          aria-hidden
+        />
       </div>
 
       {count > 1 && (
