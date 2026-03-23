@@ -104,12 +104,29 @@ async function getCampaign(campaignId) {
   return data.campaign
 }
 
-async function createCampaign(body) {
-  const data = await acJson('/api/3/campaigns', {
+/**
+ * Create a campaign with list(s) and message via legacy admin API.
+ * v3 POST /api/3/campaigns returns 405; POST /api/3/campaign only accepts name+type.
+ * @see https://www.activecampaign.com/api/example.php?call=campaign_create
+ */
+async function createCampaignLegacy(fields) {
+  const body = new URLSearchParams()
+  for (const [k, v] of Object.entries(fields)) {
+    body.append(k, String(v))
+  }
+  const url = `${AC_API_URL.replace(/\/$/, '')}/admin/api.php?api_action=campaign_create&api_output=json`
+  const res = await acFetch(url, {
     method: 'POST',
-    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString(),
   })
-  return data.campaign
+  const text = await res.text()
+  if (!res.ok) throw new Error(`Legacy campaign_create failed: ${res.status}: ${text}`)
+  const data = text ? JSON.parse(text) : {}
+  if (Number(data.result_code) !== 1) {
+    throw new Error(`Legacy campaign_create: ${data.result_message || JSON.stringify(data)}`)
+  }
+  return { id: String(data.id), result: data }
 }
 
 async function editCampaign(campaignId, body) {
@@ -347,16 +364,19 @@ const TOOLS = [
   },
   {
     name: 'ac_create_campaign',
-    description: 'Create a campaign. Pass campaign object: name, type (single/recurring), status (0=draft,1=scheduled,etc), listIds array, optional messageId. For full control pass campaign as JSON string.',
+    description:
+      'Create a campaign via legacy campaign_create (v3 JSON create cannot attach list+message). Requires listIds + messageId, or pass campaign as JSON of form fields (p[listId], m[messageId]=percent). messagePercent defaults to 100.',
     inputSchema: {
       type: 'object',
       properties: {
         name: { type: 'string' },
         type: { type: 'string', description: 'single or recurring' },
-        status: { type: 'number', description: '0=draft, 1=scheduled, 2=sending, 3=paused, 4=stopped, 5=completed' },
+        status: { type: 'number', description: '0=draft, 1=scheduled' },
         listIds: { type: 'array', items: { type: 'number' }, description: 'List IDs to send to' },
-        messageId: { type: 'number', description: 'Message ID to use as email content' },
-        campaign: { type: 'string', description: 'Full campaign JSON string for advanced use' },
+        messageId: { type: 'number', description: 'Message ID (template) from ac_create_message' },
+        messagePercent: { type: 'number', description: 'Split %; use 100 for normal sends' },
+        sdate: { type: 'string', description: 'Placeholder schedule datetime (required by API even for drafts)' },
+        campaign: { type: 'string', description: 'Advanced: JSON string of legacy form fields' },
       },
       required: ['name'],
     },
@@ -397,7 +417,8 @@ const TOOLS = [
   },
   {
     name: 'ac_create_message',
-    description: 'Create an email message (template). Pass name, subject, fromname, fromemail, reply2, htmlcontent, optional textcontent. type usually "template".',
+    description:
+      'Create an email message (template). Use `html` for body (required for preview); `htmlcontent` is ignored by AC. Pass name, subject, fromname, fromemail, reply2, optional textcontent.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -406,23 +427,25 @@ const TOOLS = [
         fromname: { type: 'string' },
         fromemail: { type: 'string' },
         reply2: { type: 'string' },
-        htmlcontent: { type: 'string' },
+        html: { type: 'string', description: 'Email HTML body (this field persists; use this)' },
+        htmlcontent: { type: 'string', description: 'Deprecated alias; mapped to html if html omitted' },
         textcontent: { type: 'string' },
         type: { type: 'string', description: 'template (default)' },
         message: { type: 'string', description: 'Full message JSON string' },
       },
-      required: ['name', 'subject', 'fromname', 'fromemail', 'htmlcontent'],
+      required: ['name', 'subject', 'fromname', 'fromemail'],
     },
   },
   {
     name: 'ac_update_message',
-    description: 'Update an email message by ID. Pass messageId and fields to update or message JSON string.',
+    description: 'Update an email message by ID. Use `html` for body (not htmlcontent).',
     inputSchema: {
       type: 'object',
       properties: {
         messageId: { type: 'string' },
         subject: { type: 'string' },
-        htmlcontent: { type: 'string' },
+        html: { type: 'string' },
+        htmlcontent: { type: 'string', description: 'Deprecated alias for html' },
         message: { type: 'string', description: 'Full message update JSON' },
       },
       required: ['messageId'],
@@ -539,31 +562,33 @@ async function handleToolCall(name, args) {
     return JSON.stringify(await getCampaign(a.campaignId), null, 2)
   }
   if (name === 'ac_create_campaign') {
-    let body
     if (a.campaign) {
-      body = typeof a.campaign === 'string' ? JSON.parse(a.campaign) : a.campaign
-    } else {
-      const listIds = a.listIds || []
-      const campaign = {
-        name: a.name,
-        type: a.type || 'single',
-        status: a.status ?? 0,
-        public: 1,
-        tracklinks: 'all',
-        trackreads: '1',
-        segmentid: 0,
-        bounceid: -1,
-        realcid: 0,
-        waitid: 0,
-        m_dealid: 0,
-        m_groupid: 0,
-        m_link: 0,
-      }
-      listIds.forEach((id) => { campaign[`p[${id}]`] = id })
-      if (a.messageId) campaign[`m[${a.messageId}]`] = a.messageId
-      body = { campaign }
+      const parsed = typeof a.campaign === 'string' ? JSON.parse(a.campaign) : a.campaign
+      const flat = parsed.campaign && typeof parsed.campaign === 'object' ? parsed.campaign : parsed
+      return JSON.stringify(await createCampaignLegacy(flat), null, 2)
     }
-    return JSON.stringify(await createCampaign(body), null, 2)
+    const listIds = a.listIds || []
+    if (!listIds.length) return 'Error: listIds is required (or pass campaign as form-field object via campaign)'
+    if (a.messageId == null) return 'Error: messageId is required'
+    const messagePercent = a.messagePercent ?? 100
+    const fields = {
+      type: a.type || 'single',
+      segmentid: a.segmentid ?? 0,
+      name: a.name,
+      sdate: a.sdate || '2030-01-01 09:00:00',
+      status: a.status ?? 0,
+      public: a.public ?? 1,
+      tracklinks: a.tracklinks || 'all',
+      trackreads: a.trackreads ?? 1,
+      trackreplies: a.trackreplies ?? 0,
+      htmlunsub: a.htmlunsub ?? 1,
+      textunsub: a.textunsub ?? 1,
+    }
+    listIds.forEach((id) => {
+      fields[`p[${id}]`] = id
+    })
+    fields[`m[${a.messageId}]`] = messagePercent
+    return JSON.stringify(await createCampaignLegacy(fields), null, 2)
   }
   if (name === 'ac_edit_campaign') {
     let body
@@ -597,15 +622,19 @@ async function handleToolCall(name, args) {
       fromname: a.fromname,
       fromemail: a.fromemail,
       reply2: a.reply2 || a.fromemail,
-      htmlcontent: a.htmlcontent,
+      html: a.html ?? a.htmlcontent,
       textcontent: a.textcontent || '',
+    }
+    if (!message.html && !a.message) {
+      return 'Error: html is required (ActiveCampaign ignores htmlcontent for persistence)'
     }
     return JSON.stringify(await createMessage(message), null, 2)
   }
   if (name === 'ac_update_message') {
     const message = a.message ? (typeof a.message === 'string' ? JSON.parse(a.message) : a.message) : {}
     if (a.subject != null) message.subject = a.subject
-    if (a.htmlcontent != null) message.htmlcontent = a.htmlcontent
+    const htmlBody = a.html ?? a.htmlcontent
+    if (htmlBody != null) message.html = htmlBody
     return JSON.stringify(await updateMessage(a.messageId, message), null, 2)
   }
 

@@ -21,6 +21,8 @@ import argparse
 import requests
 from pathlib import Path
 
+from ac_legacy_message import legacy_message_edit
+
 
 def load_template(template_path):
     """Load HTML email template from file."""
@@ -71,8 +73,9 @@ def create_campaign(api_key, api_url, name, subject, html_content, list_name, se
             "fromname": "Laguna Beach Tennis Academy",
             "fromemail": "support@lagunabeachtennisacademy.com",
             "reply2": "support@lagunabeachtennisacademy.com",
-            "htmlcontent": html_content,
-            "textcontent": "",  # Auto-generated from HTML
+            # v3 persists body only on `html`; `htmlcontent` stores nothing in the UI.
+            "html": html_content,
+            "textcontent": "",
         }
     }
     
@@ -83,42 +86,52 @@ def create_campaign(api_key, api_url, name, subject, html_content, list_name, se
     )
     message_response.raise_for_status()
     message_id = message_response.json()['message']['id']
-    
-    # Create campaign
-    campaign_data = {
-        "campaign": {
-            "type": "single",
-            "name": name,
-            "sdate": None,  # Send date (None = draft)
-            "status": 1 if send_now else 0,  # 0=draft, 1=scheduled, 2=sending, 3=paused, 4=stopped, 5=completed
-            "public": 1,
-            "tracklinks": "all",
-            "trackreads": "1",
-            "trackreadsanalytics": "1",
-            "segmentid": 0,
-            "bounceid": -1,
-            "realcid": 0,
-            "waitid": 0,
-            "m_dealid": 0,
-            "m_groupid": 0,
-            "m_link": 0,
-            "p[{list_id}]": list_id,
-            "m[{message_id}]": message_id,
-        }
+
+    legacy_message_edit(
+        api_key,
+        api_url,
+        message_id,
+        html_content,
+        subject,
+        list_id,
+    )
+
+    # Create campaign via legacy admin API (v3 POST /api/3/campaigns returns 405;
+    # v3 POST /api/3/campaign only accepts name+type and cannot attach list/message).
+    # See: https://www.activecampaign.com/api/example.php?call=campaign_create
+    legacy_url = f"{api_url.rstrip('/')}/admin/api.php?api_action=campaign_create&api_output=json"
+    # m[message_id] value is split-test percentage (100 = full list for normal sends).
+    post_fields = {
+        "type": "single",
+        "segmentid": 0,
+        "name": name,
+        "sdate": "2030-01-01 09:00:00",
+        "status": 1 if send_now else 0,
+        "public": 1,
+        "tracklinks": "all",
+        "trackreads": 1,
+        "trackreplies": 0,
+        "htmlunsub": 1,
+        "textunsub": 1,
+        f"p[{list_id}]": list_id,
+        f"m[{message_id}]": 100,
     }
-    
     campaign_response = requests.post(
-        f"{api_url}/api/3/campaigns",
-        headers={"Api-Token": api_key, "Content-Type": "application/json"},
-        json=campaign_data
+        legacy_url,
+        headers={"Api-Token": api_key, "Content-Type": "application/x-www-form-urlencoded"},
+        data=post_fields,
     )
     campaign_response.raise_for_status()
-    
     result = campaign_response.json()
-    campaign_id = result['campaign']['id']
+    if int(result.get("result_code", 0)) != 1:
+        raise RuntimeError(
+            f"campaign_create failed: {result.get('result_message', result)}"
+        )
+    campaign_id = result["id"]
     
     print(f"✅ Campaign created successfully!")
     print(f"   Campaign ID: {campaign_id}")
+    print(f"   Message ID: {message_id}")
     print(f"   Name: {name}")
     print(f"   Subject: {subject}")
     print(f"   List: {list_name} (ID: {list_id})")

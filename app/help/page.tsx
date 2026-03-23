@@ -77,6 +77,19 @@ export default function HelpPage() {
 
           <HorizonDivider className="my-16" />
 
+          {/* Chat Widget Info */}
+          <div className="mb-16 bg-white border border-black/6 rounded-lg p-8">
+            <h2 className="font-headline text-3xl md:text-4xl text-brand-pacific-dusk mb-4">
+              About the Chat Assistant
+            </h2>
+            <p className="font-body text-lg text-brand-pacific-dusk/70 mb-4">
+              Our chat widget is a quick assistant that can help answer basic questions and direct you to the right resources. For detailed information about programs, schedules, and pricing, please use the links above or call us directly.
+            </p>
+            <p className="font-body text-sm text-brand-pacific-dusk/60">
+              <strong>Note:</strong> The chat assistant does not use AI reasoning or provide live coach chat. For personalized coaching advice or complex questions, please call us at (949) 534-0457 or visit our facility.
+            </p>
+          </div>
+
           {/* FAQ Link */}
           <div className="mb-16">
             <h2 className="font-headline text-3xl md:text-4xl text-brand-pacific-dusk mb-6">

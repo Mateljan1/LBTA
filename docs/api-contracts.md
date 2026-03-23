@@ -267,7 +267,7 @@ For action parity (agent-native architecture), each endpoint above should have a
 3. Respects the same rate limits
 4. Returns the same response format
 
-**Status:** No agent tools currently exist. See `docs/AGENT-NATIVE-ARCHITECTURE-AUDIT.md` for recommendations.
+**Status:** Agent-callable scripts live under `scripts/agent-tools/` (book, register-program, register-year, newsletter, scholarship, chat, register). They POST with the same bodies as the site and send `X-Agent-Secret` when `AGENT_SECRET` is set. See `scripts/agent-tools/README.md` and [`docs/solutions/architecture/agent-tools-action-parity-implementation.md`](./solutions/architecture/agent-tools-action-parity-implementation.md).
 
 ---
 

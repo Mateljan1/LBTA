@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
       'USTA Adult League team play and the UTR Match Play Series — weekly rostered matches vs. rated Saturday matchplay by level.',
     type: 'website',
-    images: [{ url: '/legacy-working-assets/hero/leagues-hero/leagues-hero.webp', width: 1920, height: 1080, alt: 'LBTA leagues' }],
+    images: [{ url: '/images/leagues/leagues-hero.webp', width: 1920, height: 1080, alt: 'LBTA leagues' }],
   },
 }
 
@@ -47,7 +47,7 @@ export default function LeaguesPage() {
       <section className="relative bg-brand-deep-water text-white overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/hero/leagues-hero/leagues-hero.webp"
+            src="/images/leagues/leagues-hero.webp"
             alt="Leagues and match play at LBTA"
             fill
             className="object-cover object-center"

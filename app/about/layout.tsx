@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description:
       'Founded by Andrew Mateljan — movement-first tennis in Laguna Beach. Official City of Laguna Beach partner since 2020.',
     type: 'website',
-    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
+    images: [{ url: '/images/about/about-hero.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
   },
 }
 

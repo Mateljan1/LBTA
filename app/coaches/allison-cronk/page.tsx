@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Allison Cronk — LBTA Coach | Laguna Beach Tennis Academy',
     description: 'Collegiate player. Educator. Coach. 5+ years coaching across five academies. NCAA & NAIA tennis. B.A. History, Education minor.',
     type: 'website',
-    images: [{ url: coachImageSrc('/images/coaches/allison-cronk.png'), width: 800, height: 1000, alt: 'Allison Cronk' }],
+    images: [{ url: coachImageSrc('/images/coaches/allison-cronk.webp'), width: 800, height: 1000, alt: 'Allison Cronk' }],
   },
 }
 
@@ -39,7 +39,7 @@ export default function AllisonCronkPage() {
           <div className="grid md:grid-cols-[200px_1fr] gap-10 items-start">
             <AnimatedSection className="relative aspect-[200/260] overflow-hidden rounded-xl border border-black/5">
               <Image
-                src={coachImageSrc('/images/coaches/allison-cronk.png')}
+                src={coachImageSrc('/images/coaches/allison-cronk.webp')}
                 alt="Allison Cronk, LBTA Coach at Laguna Beach Tennis Academy"
                 fill
                 className="object-cover object-top"

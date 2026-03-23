@@ -35,7 +35,7 @@ function BookPageContent() {
       <section className="relative min-h-[50vh] md:min-h-[60vh] flex items-center justify-center py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/conversion/book-hero/book-hero.webp"
+            src="/images/book/book-hero.webp"
             alt="Book your trial or private lesson at LBTA"
             fill
             className="object-cover object-center"
@@ -134,9 +134,9 @@ function BookPageContent() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
             {[
-              { src: '/legacy-working-assets/conversion/book-expect-1/book-expect-1.webp', alt: 'Personalized conversation about your goals' },
-              { src: '/legacy-working-assets/conversion/book-expect-2/book-expect-2.webp', alt: 'Free assessment with your coach' },
-              { src: '/legacy-working-assets/conversion/book-expect-3/book-expect-3.webp', alt: 'Clear path forward and next steps' },
+              { src: '/images/book/book-expect-1.webp', alt: 'Junior trial — coach and player on court at LBTA' },
+              { src: '/images/book/book-expect-2.webp', alt: 'Adult trial — player in a focused on-court session' },
+              { src: '/images/book/book-expect-3.webp', alt: 'Private lesson — one-on-one coaching at LBTA' },
             ].map((img, i) => (
               <div key={i} className="relative aspect-[16/10] overflow-hidden rounded-subtle">
                 <Image

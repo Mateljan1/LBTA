@@ -9,8 +9,8 @@
       "quote": "Structure creates confidence.",
       "quoteExtended": "Structure creates confidence, and confidence creates champions.",
       "credentials": ["Former Top Junior", "ATP/WTA Tour Coach", "20+ D1 Placements", "100K+ Fit4Tennis Users"],
-      "image": "/legacy-working-assets/coaches/headshots-standardized/cropped-portrait-800x1000/andrew-mateljan-headshot.png",
-      "imagePosition": "50% 50%",
+      "image": "/images/coaches/andrew-mateljan.webp",
+      "imagePosition": "50% 42%",
       "role": "founder",
       "order": 1,
       "schemaDescription": "ATP/WTA Tour Coach with 20+ years experience. Former #3 SoCal and #12 nationally ranked junior."
@@ -30,6 +30,20 @@
       "schemaDescription": "USPTR-certified professional with 25+ years developing players from junior foundations to collegiate competition. NCAA D1 at Lafayette College."
     },
     {
+      "slug": "michelle-mateljan",
+      "name": "Michelle Mateljan",
+      "title": "Coach",
+      "specialization": "Juniors & Adult Development",
+      "bio": "Michelle brings steady energy and clear communication to every session — from fundamentals to competitive drills. Players know her for consistent support on court and genuine investment in progress.",
+      "quote": "Every rally is a chance to grow.",
+      "credentials": ["Junior & Adult Pathways", "On-Court Development", "LBTA Team"],
+      "image": "/images/coaches/michelle-mateljan.webp",
+      "imagePosition": "50% 35%",
+      "role": "program",
+      "order": 3,
+      "schemaDescription": "LBTA coach focused on junior and adult development with a clear, encouraging on-court presence."
+    },
+    {
       "slug": "peter-defrantz",
       "name": "Peter DeFrantz",
       "title": "Senior Coach",
@@ -37,8 +51,8 @@
       "bio": "Dual USPTA and PTR certified professional with eight years of coaching experience in Southern California. Competed at Mt. San Jacinto College, ranked number one in Southern California and number two in California. Progressive teaching approach focused on clear communication, player development, and building confidence through structured fundamentals and fitness.",
       "quote": "Build the player, not just the game.",
       "credentials": ["USPTA & PTR Certified", "8+ Years Coaching", "#1 SoCal College Tennis"],
-      "image": "/legacy-working-assets/coaches/headshots-standardized/cropped-portrait-800x1000/peter-defrantz-headshot.png",
-      "imagePosition": "50% 50%",
+      "image": "/images/coaches/peter-defrantz.webp",
+      "imagePosition": "50% 45%",
       "role": "program",
       "order": 4,
       "schemaDescription": "Dual USPTA and PTR certified professional with 8+ years coaching in Southern California. Ranked #1 in SoCal college tennis."
@@ -51,8 +65,8 @@
       "bio": "Allison played varsity tennis at Mira Costa High School, then competed at Westcliff University (NAIA) and Shepherd University (NCAA) — Dean's List every semester at both. She has coached at five academies across Orange County and the South Bay. Beginners, juniors, adults, competitors. She adapts to whoever is on the other side of the net.",
       "quote": "She doesn't just teach the game. She teaches the person playing it.",
       "credentials": ["NCAA & NAIA Collegiate Tennis", "B.A. History, Education Minor", "5+ Years Coaching", "CPR / AED Certified"],
-      "image": "/legacy-working-assets/coaches/headshots-standardized/cropped-portrait-800x1000/allison-cronk-headshot.png",
-      "imagePosition": "50% 50%",
+      "image": "/images/coaches/allison-cronk.webp",
+      "imagePosition": "50% 40%",
       "role": "program",
       "order": 5,
       "schemaDescription": "Collegiate player and educator. 5+ years coaching across five academies. NCAA and NAIA tennis. B.A. History, Education minor."

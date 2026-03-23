@@ -84,8 +84,8 @@ export default function ContactPage() {
       <section className="relative min-h-[65vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/hero/laguna-horizon.webp"
-            alt="Laguna Beach tennis courts at golden hour"
+            src="/images/contact/contact-hero.webp"
+            alt="Sunset practice on outdoor tennis courts in Laguna Beach"
             fill
             className="object-cover"
             style={{ objectPosition: '50% 60%' }}
@@ -351,8 +351,8 @@ export default function ContactPage() {
               {/* Visual Accent - Desktop (2 columns) */}
               <div className="hidden md:block md:col-span-2 relative aspect-[3/2] overflow-hidden rounded-2xl shadow-soft">
                 <Image
-                  src="/legacy-working-assets/programs/private-specialty/private-specialty.webp"
-                  alt="LBTA private coaching session"
+                  src="/images/contact/coaching-1.webp"
+                  alt="Coach with ball cart during a session at LBTA"
                   fill
                   className="object-cover"
                   style={{ objectPosition: '50% 55%' }}
@@ -363,8 +363,8 @@ export default function ContactPage() {
               {/* Visual Accent - Mobile (below form) */}
               <div className="md:hidden mt-8 relative aspect-[4/3] overflow-hidden rounded-2xl shadow-soft">
                 <Image
-                  src="/legacy-working-assets/programs/private-specialty/private-specialty.webp"
-                  alt="LBTA coaching session"
+                  src="/images/contact/coaching-2.webp"
+                  alt="Private lesson — coach and athlete with ball cart at LBTA"
                   fill
                   className="object-cover"
                   style={{ objectPosition: '50% 55%' }}

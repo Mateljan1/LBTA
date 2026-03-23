@@ -18,7 +18,7 @@ const successStories = [
     name: 'Karue Sell',
     title: 'ATP Tour Player',
     achievement: '#858 → #258 ATP Ranking',
-    image: '/images/results/karue-sell-andrew-mateljan-coaching.webp',
+    image: '/images/success-stories/karue-sell.webp',
     quote: "Andrew's movement-first approach transformed my game. The structured training and accountability pushed me to levels I didn't know I could reach.",
     story: "When Karue first came to LBTA, he was ranked #858 on the ATP tour. Through dedicated training focused on movement efficiency and mental toughness, he climbed to #258 - a 600+ position improvement that opened doors to main draw Grand Slam qualifiers.",
     videoId: 'karue-journey',
@@ -127,8 +127,8 @@ export default function SuccessStoriesPage() {
       <section className="relative min-h-[55vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/hero/success-stories-hero/success-stories-hero.webp"
-            alt="LBTA success stories"
+            src="/images/schedules/schedules-hero.webp"
+            alt="Group practice on court at Laguna Beach Tennis Academy"
             fill
             className="object-cover object-center"
             sizes="100vw"

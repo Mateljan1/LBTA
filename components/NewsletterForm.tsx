@@ -54,7 +54,7 @@ export default function NewsletterForm() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 disabled={status === 'loading' || status === 'success'}
-                className="flex-1 px-5 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-l-md text-white placeholder-white/50 font-sans text-[15px] font-light focus:outline-none focus:border-brand-victoria-cove/50 focus:bg-white/8 transition-all duration-300 disabled:opacity-50"
+                className="flex-1 px-5 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-l-md text-white placeholder-white/50 font-sans text-base font-light focus:outline-none focus:border-brand-victoria-cove/50 focus:bg-white/8 transition-all duration-300 disabled:opacity-50"
               />
               <button
                 type="submit"

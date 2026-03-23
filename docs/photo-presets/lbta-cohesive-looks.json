@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LBTA cohesive photo presets",
+  "version": "1.0.0",
+  "brand": "Laguna Beach Tennis Academy",
+  "intent": "Editorial, warm California light; restrained saturation; luxury restraint (no HDR / neon courts).",
+  "units": {
+    "lightroom_temperature": "Kelvin offset from 'As Shot' where noted, or absolute when stated",
+    "lightroom_sliders": "Adobe Lightroom Classic / Camera Raw 2012+ process (-100 to +100 unless noted)"
+  },
+  "presets": [
+    {
+      "id": "lbta-daylight-court",
+      "name": "LBTA — Daylight Court",
+      "useWhen": "Outdoor daytime, sun on court, blue/green courts, coaching and action shots.",
+      "lightroom": {
+        "processVersion": "11.0",
+        "whiteBalance": "As Shot",
+        "temperature": "+180",
+        "tint": "+4",
+        "tone": {
+          "exposure": "+0.15",
+          "contrast": "+12",
+          "highlights": "-32",
+          "shadows": "+22",
+          "whites": "-8",
+          "blacks": "-6"
+        },
+        "presence": {
+          "texture": "+6",
+          "clarity": "+10",
+          "dehaze": "+3"
+        },
+        "color": {
+          "vibrance": "+4",
+          "saturation": "-6"
+        },
+        "notes": "If skin looks orange, reduce Temperature by 50–100K. If court goes neon blue, reduce Saturation another -4 to -8."
+      },
+      "canvaApproximate": {
+        "brightness": "slight up (5–10%)",
+        "contrast": "medium up (10–15%)",
+        "saturation": "down (8–12%)",
+        "warmth": "slight warm (5–10%)",
+        "shadows": "lift (10–15%)",
+        "highlights": "recover (10–20%)"
+      }
+    },
+    {
+      "id": "lbta-golden-hour",
+      "name": "LBTA — Golden Hour",
+      "useWhen": "Late afternoon, long shadows, sunset sky, hero and destination imagery.",
+      "lightroom": {
+        "whiteBalance": "As Shot",
+        "temperature": "+320",
+        "tint": "+6",
+        "tone": {
+          "exposure": "+0.08",
+          "contrast": "+10",
+          "highlights": "-40",
+          "shadows": "+28",
+          "whites": "-12",
+          "blacks": "-4"
+        },
+        "presence": {
+          "texture": "+4",
+          "clarity": "+8",
+          "dehaze": "+2"
+        },
+        "color": {
+          "vibrance": "+2",
+          "saturation": "-8"
+        },
+        "notes": "Avoid pushing orange into faces; if sky blows out, lower Highlights further (-10)."
+      },
+      "canvaApproximate": {
+        "brightness": "neutral to +5%",
+        "contrast": "medium (8–12%)",
+        "saturation": "down (10–14%)",
+        "warmth": "warm (12–18%)",
+        "shadows": "lift (15–20%)",
+        "highlights": "recover (15–25%)"
+      }
+    },
+    {
+      "id": "lbta-night-lights",
+      "name": "LBTA — Night Under Lights",
+      "useWhen": "Evening sessions, stadium/court lights, dark fence, visible ball/clothing detail.",
+      "lightroom": {
+        "whiteBalance": "As Shot",
+        "temperature": "+40",
+        "tint": "+2",
+        "tone": {
+          "exposure": "+0.35",
+          "contrast": "+8",
+          "highlights": "-25",
+          "shadows": "+35",
+          "whites": "-15",
+          "blacks": "-8"
+        },
+        "presence": {
+          "texture": "+4",
+          "clarity": "+6",
+          "dehaze": "+4"
+        },
+        "color": {
+          "vibrance": "-2",
+          "saturation": "-5"
+        },
+        "notes": "Add noise reduction (Luminance 15–25, Detail 40) if ISO high. Avoid +Clarity above ~15 or skin looks crunchy."
+      },
+      "canvaApproximate": {
+        "brightness": "up (10–18%)",
+        "contrast": "low–medium (6–10%)",
+        "saturation": "down slightly (4–8%)",
+        "warmth": "neutral to slight warm (0–6%)",
+        "shadows": "lift strongly (20–30%)",
+        "highlights": "soften (10–18%)"
+      }
+    }
+  ],
+  "export": {
+    "format": "WebP",
+    "qualitySuggested": "82-90",
+    "maxFileSizeKb": {
+      "fullBleedHero": 350,
+      "card": 200,
+      "mosaicSmall": 120
+    }
+  }
+}

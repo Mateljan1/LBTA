@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/hero/laguna-horizon.webp',
+        url: '/images/schedules/schedules-hero.webp',
         width: 1920,
         height: 1080,
         alt: 'Laguna Beach Tennis Academy',

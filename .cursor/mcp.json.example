@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "vercel": {
+      "url": "https://mcp.vercel.com",
+      "headers": {
+        "Authorization": "Bearer YOUR_VERCEL_TOKEN"
+      }
+    },
+    "activecampaign": {
+      "command": "node",
+      "args": [".cursor/scripts/ac-mcp-server.mjs"],
+      "env": {
+        "AC_API_URL": "https://YOUR_ACCOUNT.api-us1.com",
+        "AC_API_TOKEN": "YOUR_ACTIVECAMPAIGN_API_KEY"
+      }
+    }
+  }
+}

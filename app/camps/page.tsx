@@ -88,7 +88,7 @@ export default function CampsPage() {
       <section className="relative min-h-[65vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/hero/camps-hero/camps-hero.webp"
+            src="/images/camps/camps-hero.webp"
             alt="Young players at Laguna Beach Tennis Academy camp"
             fill
             className="object-cover object-center"
@@ -307,7 +307,7 @@ export default function CampsPage() {
         }
         blocks={[
           {
-            imageSrc: '/legacy-working-assets/camps/camp-action-1/camp-action-1.webp',
+            imageSrc: '/images/camps/camp-action-1.webp',
             imageAlt: 'Young players in camp action at LBTA',
             content: (
               <AnimatedSection delay={0}>
@@ -319,7 +319,7 @@ export default function CampsPage() {
             ),
           },
           {
-            imageSrc: '/legacy-working-assets/camps/camp-action-2/camp-action-2.webp',
+            imageSrc: '/images/camps/camp-action-2.webp',
             imageAlt: 'Campers in drills at Laguna Beach Tennis Academy',
             content: (
               <AnimatedSection delay={0}>
@@ -331,7 +331,7 @@ export default function CampsPage() {
             ),
           },
           {
-            imageSrc: '/legacy-working-assets/camps/camp-action-3/camp-action-3.webp',
+            imageSrc: '/images/camps/camp-action-3.webp',
             imageAlt: 'Camp action and rally play',
             content: (
               <AnimatedSection delay={0}>
@@ -343,7 +343,7 @@ export default function CampsPage() {
             ),
           },
           {
-            imageSrc: '/legacy-working-assets/camps/camp-action-4/camp-action-4.webp',
+            imageSrc: '/images/camps/camp-action-4.webp',
             imageAlt: 'LBTA camp community and fun',
             content: (
               <AnimatedSection delay={0}>

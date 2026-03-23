@@ -168,7 +168,7 @@ export default function Home() {
         <div className="absolute inset-0">
           <Image
             src="/images/results/karue-sell-andrew-mateljan-coaching.webp"
-            alt="Karue Sell in a two-handed backhand swing with Coach Andrew Mateljan on court at LBTA"
+            alt="Karue Sell in a two-handed backhand with Coach Andrew Mateljan observing on court at LBTA"
             fill
             className="object-cover"
             style={{ objectPosition: '48% 42%' }}
@@ -329,7 +329,15 @@ export default function Home() {
       <HorizonDivider animate />
       <section id="destination" className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/hero/laguna-horizon.webp" alt="Laguna Beach tennis courts at sunset with palm trees" fill className="object-cover" style={{ objectPosition: '50% 52%' }} sizes="100vw" quality={90} />
+          <Image
+            src="/images/destination/destination-night-palms.webp"
+            alt="Laguna Beach tennis courts at night with palm trees and court lights"
+            fill
+            className="object-cover"
+            style={{ objectPosition: '50% 52%' }}
+            sizes="100vw"
+            quality={90}
+          />
           <div className="absolute inset-0 bg-brand-deep-water/80" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">

@@ -12,6 +12,7 @@
 |------------|--------------|-----|
 | **vercel** | `https://mcp.vercel.com` | List projects, env vars, deploy. OAuth in Cursor when prompted. |
 | **activecampaign** | `https://tennisbeast.activehosted.com/api/agents/mcp/http` | Contacts, lists, tags, campaigns, automations. See [activecampaign-mcp-setup.md](./activecampaign-mcp-setup.md). |
+| **postmark** | Transactional email service | Automatic notification and confirmation emails from form submissions. See [POSTMARK-SETUP-VERIFICATION.md](./POSTMARK-SETUP-VERIFICATION.md). |
 
 Reload Cursor after editing `.cursor/mcp.json`.
 
@@ -167,6 +168,7 @@ Run `/compound:learn` after completing a plan, after review/validate, or at end 
 | Capture mistakes and patterns | `/compound:learn`; update COMPOUND_LEARN.md. |
 | Check AC contacts/automations | ActiveCampaign MCP; see [activecampaign-mcp-setup.md](./activecampaign-mcp-setup.md). |
 | Check Vercel env / deploy | Vercel MCP or `npm run check:vercel`. |
+| Verify Postmark email delivery | Postmark dashboard; see [POSTMARK-SETUP-VERIFICATION.md](./POSTMARK-SETUP-VERIFICATION.md). |
 | Up-to-date Next/Tailwind/Motion docs | Context7 MCP. |
 | Browser-level UI check | cursor-ide-browser MCP (snapshot, click, type). |
 | Baseline quality (Lighthouse, responsive, copy) | [quality-gate.md](./quality-gate.md) + `npm run quality-gate` + Lighthouse. |
@@ -194,7 +196,8 @@ Run `/compound:learn` after completing a plan, after review/validate, or at end 
 | [quality-gate.md](./quality-gate.md) | Lighthouse, responsive, forbidden copy, a11y, build/lint. |
 | [activecampaign-mcp-setup.md](./activecampaign-mcp-setup.md) | AC MCP URL, compound workflows with AC. |
 | [ac-ghl-connection-via-mcps.md](./ac-ghl-connection-via-mcps.md) | Vercel, AC, GHL connection status and MCPs. |
-| [registration-flows-and-ops.md](./registration-flows-and-ops.md) | Form → API → AC/GHL flows. |
+| [POSTMARK-SETUP-VERIFICATION.md](./POSTMARK-SETUP-VERIFICATION.md) | Postmark email integration setup and verification. |
+| [registration-flows-and-ops.md](./registration-flows-and-ops.md) | Form → API → AC/GHL/Postmark flows. |
 | [compound-capability-audit.md](./compound-capability-audit.md) | Can we run it all? Single vs. multiple agents. |
 | [recurring-workflows.md](./recurring-workflows.md) | When to run what: PR, deploy, weekly, monthly. |
 | [deploy-checklist.md](./deploy-checklist.md) | Pre-deploy, deploy, post-deploy (quality-gate, vercel --prod, smoke, compound:learn). |

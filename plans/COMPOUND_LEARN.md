@@ -2,7 +2,7 @@
 
 **Source:** Code Review V2 (94→98/100) + Validation V2 (95→98/100) — March 6, 2026  
 **Workspace:** LBTA_WEBSITE_DRAFT_3:5:26  
-**Latest:** Agent-native architecture audit — 2026-03-19 (full-site 8-principle audit: action parity, tools as primitives, context injection, shared workspace, CRUD completeness, UI integration, capability discovery, prompt-native features). [Audit report: AGENT-NATIVE-ARCHITECTURE-AUDIT.md](../docs/AGENT-NATIVE-ARCHITECTURE-AUDIT.md). [Solution doc: agent-native-architecture-audit.md](../docs/solutions/architecture/agent-native-architecture-audit.md). Earlier: Photos & layouts audit — 2026-03-19 (site-wide image 404s → legacy paths, hero alts, objectPosition, philosophy pillars, Facebook pixel a11y). [Documented solution: site-wide image 404s and layout consistency](../docs/solutions/ui-bugs/site-wide-image-404s-layout-consistency.md). Optional CI: `node scripts/verify-image-paths.mjs`. Visual Elevation Phase 3 & 4 (MasonryGrid/ZigzagSection/SplitSection; next/image quality=90). Phases 5–9: [visual-elevation-conversion-strip-facility-quote-pattern](../docs/solutions/implementation-patterns/visual-elevation-conversion-strip-facility-quote-pattern.md). Coaches headshots — 2026-03-18.
+**Latest:** ActiveCampaign test email fix (2026-03-20): v3 POST /campaigns/{id}/test returns 405 → use legacy campaign_send with campaignid + messageid. Agent-native architecture — Phases 6 → 3 → 2 implemented (2026-03-20): `scripts/agent-tools/` action parity, `lib/chat-copy.ts` prompt-native stub copy, `lib/agent-auth.ts` + `AGENT_SECRET`, context injection on `/api/chat` (`pathname` + `history`). [Solution doc: agent-tools-action-parity-implementation.md](../docs/solutions/architecture/agent-tools-action-parity-implementation.md). **Next:** re-score `AGENT-NATIVE-ARCHITECTURE-AUDIT.md`, then roadmap Phases 1 / 4 / 5. Earlier: full-site 8-principle audit — 2026-03-19. [Audit report](../docs/AGENT-NATIVE-ARCHITECTURE-AUDIT.md). [Audit solution doc](../docs/solutions/architecture/agent-native-architecture-audit.md). Earlier: Photos & layouts audit — 2026-03-19 (site-wide image 404s → legacy paths, hero alts, objectPosition, philosophy pillars, Facebook pixel a11y). [Documented solution: site-wide image 404s and layout consistency](../docs/solutions/ui-bugs/site-wide-image-404s-layout-consistency.md). Optional CI: `node scripts/verify-image-paths.mjs`. Visual Elevation Phase 3 & 4 (MasonryGrid/ZigzagSection/SplitSection; next/image quality=90). Phases 5–9: [visual-elevation-conversion-strip-facility-quote-pattern](../docs/solutions/implementation-patterns/visual-elevation-conversion-strip-facility-quote-pattern.md). Coaches headshots — 2026-03-18.
 
 ---
 
@@ -83,6 +83,7 @@
 | Modal success view (e.g. 'Request Received') does not move focus to first focusable | Focus lands on body; poor a11y. | When setting isSuccess(true), focus first focusable in success view (e.g. close button) in useEffect or after state update. |
 | Thank-you/confirmation page focusable links (tel, mailto, Return, app store) without visible focus ring | Keyboard users get no focus indicator. | Add focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm (or ring-white on dark) to every focusable link. |
 | Thank-you/confirmation step styling with raw blue (blue-600, blue-100) | Bypasses brand palette. | Use brand tokens (e.g. text-brand-victoria-cove, bg-brand-victoria-cove/10) for step numbers and accents. |
+| Using POST /api/3/campaigns/{id}/test for ActiveCampaign test emails | v3 endpoint returns 405 on many accounts. | Use legacy GET /admin/api.php?api_action=campaign_send with campaignid, messageid (from campaignMessages), action=test. See send_test.py and docs/ACTIVECAMPAIGN_EMAIL_DESIGNER_LIMITATION.md. |
 
 ---
 
@@ -123,6 +124,7 @@
 | Webhook rate limit | External webhook routes (e.g. ActiveCampaign) | Call `rateLimit('webhook:'+ip, RATE_LIMITS.webhook)` at start of POST; wrap in try/catch and allow on failure. Return 401 in production when secret env unset; trim production logs (no user-supplied field values). |
 | Single component re-export | When consolidating duplicate component (root vs ui/) | One canonical file (e.g. ui/AnimatedSection.tsx); legacy path re-exports: `export { default } from '@/components/ui/AnimatedSection'` so all imports resolve to same implementation. |
 | Parallel addTags | Applying multiple ActiveCampaign tags to one contact | Use `Promise.all(tagIds.map(id => addTag(contactId, id)))` instead of sequential loop; faster and same failure semantics. |
+| ActiveCampaign legacy API fallback | AC v3 API returns 405 for campaign operations (e.g. send test) | Use legacy GET /admin/api.php?api_action=campaign_send; resolve messageid from campaignMessages. See send_test.py and docs/ACTIVECAMPAIGN_EMAIL_DESIGNER_LIMITATION.md. |
 
 ---
 

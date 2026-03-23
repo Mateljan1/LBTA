@@ -20,13 +20,16 @@ Do these steps **in order**. After each step, check **Settings → Tools & MCP**
 
 ## Step 2: Vercel
 
-- **vercel** uses `url: https://mcp.vercel.com` (no token in file).
-- It uses **OAuth** in the browser.
+- **vercel** uses `url: https://mcp.vercel.com`.
+- **Preferred (this repo):** Bearer auth in **`.cursor/mcp.json`** (gitignored) — copy **`.cursor/mcp.json.example`** to **`.cursor/mcp.json`**, then set:
+  - `vercel.headers.Authorization` to `Bearer <your Vercel token>` (create at Vercel → Account Settings → **Tokens**).
+- **Alternative:** OAuth in the browser (if you omit `headers` and only use the URL).
 
 **Do this:**
 
-1. In the list, find **vercel**. If it says **“Needs login”** or shows an error, click it and complete the **browser sign-in** for Vercel.
-2. After logging in, **vercel** should show as connected (no red error).
+1. Ensure **`.cursor/mcp.json`** exists (from the example) with your **Vercel token** in `Authorization`, **or** complete browser sign-in if you use OAuth-only config.
+2. In **Settings → Tools & MCP**, find **vercel**. It should show as connected (no red error). If you still see **403**, confirm the token is valid and not expired.
+3. **Quit Cursor fully (Cmd+Q)** and reopen so MCP reloads the file.
 
 ---
 

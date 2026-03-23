@@ -21,7 +21,7 @@ export default function CoachingTeamSection() {
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 items-stretch max-w-[1200px] mx-auto">
           {teamCoaches.map((coach, index) => (
             <AnimatedSection key={coach.slug ?? `order-${coach.order}-${index}`} delay={100 + index * 50} className="h-full">
               <CoachCard coach={coach} variant="compact" />

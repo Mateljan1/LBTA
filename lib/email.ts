@@ -74,6 +74,7 @@ function escapeHtml(str: string): string {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 }
 
 function field(label: string, value: string | undefined | null): string {
@@ -89,7 +90,7 @@ function buildNotificationHtml(options: {
   const rows = options.fields.map(f => field(f.label, f.value)).filter(Boolean).join('')
   return `<!DOCTYPE html>
 <html>
-<head><meta charset="utf-8"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif;background:#d5d1ca;">
   <div style="max-width:600px;margin:20px auto;background:#FAF8F4;border-radius:4px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
     <div style="height:3px;background:linear-gradient(90deg,#2E8B8B,#E8834A 35%,#C4963C 50%,#E8834A 65%,#2E8B8B);"></div>

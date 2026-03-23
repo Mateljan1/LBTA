@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Program } from '@/components/ProgramCard'
 import LuxuryRegistrationModal from '@/components/LuxuryRegistrationModal'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
@@ -46,18 +47,31 @@ export default function SchedulesPageClient({
 
   return (
     <>
-      <section className="bg-brand-deep-water py-16 md:py-20">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6 text-center">
-          <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/60 uppercase tracking-[0.2em] mb-4">
+      <section className="relative min-h-[38vh] md:min-h-[44vh] flex items-center overflow-hidden bg-brand-deep-water">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/schedules/schedules-hero.webp"
+            alt="Group tennis practice on court at Laguna Beach Tennis Academy"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+            quality={90}
+          />
+          <div className="absolute inset-0 bg-brand-deep-water/82" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/25" aria-hidden="true" />
+        </div>
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 md:px-6 py-16 md:py-20 text-center">
+          <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/75 uppercase tracking-[0.2em] mb-4">
             {seasonCta.headline}
           </p>
-          <h1 className="font-headline text-[40px] md:text-[64px] font-medium text-white leading-[1.05] mb-3">
+          <h1 className="font-headline text-[40px] md:text-[64px] font-medium text-white leading-[1.05] mb-3 text-shadow-hero">
             Schedule & Pricing
           </h1>
-          <p className="font-sans text-[14px] md:text-[15px] text-white/70 tracking-[0.12em] mb-6">
+          <p className="font-sans text-[14px] md:text-[15px] text-white/80 tracking-[0.12em] mb-6">
             Movement · Craft · Community
           </p>
-          <p className="font-sans text-[16px] md:text-[18px] text-white/70 max-w-[600px] mx-auto">
+          <p className="font-sans text-[16px] md:text-[18px] text-white/85 max-w-[600px] mx-auto leading-relaxed">
             Programs, camps, leagues, and private coaching. Everything we offer, in one place.
           </p>
         </div>

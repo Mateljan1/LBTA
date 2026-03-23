@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
+import { CHAT_COPY } from '@/lib/chat-copy'
 
 interface Message {
   id: string
@@ -42,7 +43,7 @@ export default function ChatWidget() {
       setMessages([{
         id: 'welcome',
         role: 'assistant',
-        content: "Hi! I'm the LBTA Assistant. I can help answer questions or point you to the right place.\n\nFor immediate assistance, call us at (949) 534-0457 or use the contact form.\n\nHow can I help you today?",
+        content: CHAT_COPY.welcome,
         timestamp: new Date()
       }])
     }
@@ -61,13 +62,17 @@ export default function ChatWidget() {
     setMessages(prev => {
       const updated = [...prev, userMessage]
       
+      // Phase 3: Send pathname for context injection
+      const pathname = typeof window !== 'undefined' ? window.location.pathname : undefined
+      
       // Use updated array for API call
       fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           message: userMessage.content,
-          history: updated.map(m => ({ role: m.role, content: m.content }))
+          history: updated.map(m => ({ role: m.role, content: m.content })),
+          pathname, // Phase 3: Context injection
         }),
       }).then(async (response) => {
         const data = await response.json().catch(() => ({}))
@@ -98,7 +103,7 @@ export default function ChatWidget() {
         setMessages(prevMsgs => [...prevMsgs, {
           id: `error-${Date.now()}`,
           role: 'assistant',
-          content: "I'm having trouble connecting right now. Please call us directly at (949) 534-0457 or email info@lagunabeachtennisacademy.com",
+          content: CHAT_COPY.errors.network,
           timestamp: new Date()
         }])
         setIsLoading(false)

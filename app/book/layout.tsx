@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/legacy-working-assets/conversion/book-hero/book-hero.webp',
+        url: '/images/book/book-hero.webp',
         width: 1920,
         height: 1080,
         alt: 'Book your trial at Laguna Beach Tennis Academy',

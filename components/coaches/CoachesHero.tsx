@@ -30,7 +30,7 @@ export default function CoachesHero() {
     >
       <div className="absolute inset-0">
         <Image
-          src="/images/programs/schedules-hero.webp"
+          src="/images/coaches/coaches-hero.webp"
           alt="Laguna Beach Tennis Academy coaches and players training together"
           fill
           priority

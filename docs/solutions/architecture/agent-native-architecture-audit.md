@@ -14,6 +14,8 @@ status: audit-complete
 date: 2025-03-19
 related_files:
   - docs/AGENT-NATIVE-ARCHITECTURE-AUDIT.md
+  - docs/AGENT-NATIVE-ARCHITECTURE-ROADMAP.md
+  - docs/solutions/architecture/agent-tools-action-parity-implementation.md
   - lib/validations.ts
   - lib/form-config.ts
   - app/api/chat/route.ts
@@ -37,6 +39,8 @@ The user requested a full-site check via `/agent-native-audit` (“full entire s
 **How it runs:** A parent agent launches **8 parallel explore subagents**, one per principle. Each subagent gets a principle-specific prompt to audit the repo and return findings and a score. The parent compiles those outputs into a single report.
 
 **Report location:** `docs/AGENT-NATIVE-ARCHITECTURE-AUDIT.md`
+
+**Follow-up implementation (post-audit):** Phases 6 → 3 → 2 (agent tools, prompt-native chat copy, context injection) are documented in [`agent-tools-action-parity-implementation.md`](./agent-tools-action-parity-implementation.md).
 
 **Report contents:**
 

@@ -658,7 +658,7 @@ npx lighthouse http://localhost:3000 --view
 
 For full corrections, patterns, quality bars, and anti-patterns (e.g. webhook ID validation, timing-safe secret, footer contrast, hero CTA on dark), see **plans/COMPOUND_LEARN.md** and **.cursor/compound/learnings/** (quality-bars.json, patterns.json, anti-patterns.json). Run `/compound:learn` after completing a plan or after review/validate (see README).
 
-**Agent-native architecture:** For agent-native principle scores, recommendations, and how to run the audit, see **docs/AGENT-NATIVE-ARCHITECTURE-AUDIT.md** and **docs/solutions/architecture/agent-native-architecture-audit.md**.
+**Agent-native architecture:** For agent-native principle scores, recommendations, and how to run the audit, see **docs/AGENT-NATIVE-ARCHITECTURE-AUDIT.md** and **docs/solutions/architecture/agent-native-architecture-audit.md**. Implementation of Phases 6→3→2 (agent tools, context injection, prompt-native copy) documented in **docs/solutions/architecture/agent-tools-action-parity-implementation.md**.
 
 ---
 

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     description: 'Spring break and summer tennis camps in Laguna Beach for ages 5-17. Full-day and half-day options with professional coaching.',
     url: 'https://lagunabeachtennisacademy.com/camps',
     siteName: 'Laguna Beach Tennis Academy',
-    images: [{ url: '/legacy-working-assets/hero/camps-hero/camps-hero.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy tennis camps' }],
+    images: [{ url: '/images/camps/camps-hero.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy tennis camps' }],
     locale: 'en_US',
     type: 'website',
   },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Tennis Camps | Spring Break & Summer | Laguna Beach Tennis Academy',
     description: 'Spring break and summer tennis camps in Laguna Beach for ages 5-17. Full-day and half-day options with professional coaching.',
-    images: ['/legacy-working-assets/hero/camps-hero/camps-hero.webp'],
+    images: ['/images/camps/camps-hero.webp'],
   },
 }
 

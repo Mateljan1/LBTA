@@ -86,7 +86,7 @@ async function createMessage(dir, { file, name, subject, preview }) {
         fromname: FROM.fromname,
         fromemail: FROM.fromemail,
         reply2: FROM.reply2,
-        htmlcontent: htmlContent,
+        html: htmlContent,
         textcontent: '',
         // Preview text: AC API may support it; some UIs use automation step
         ...(preview && { previewtext: preview }),

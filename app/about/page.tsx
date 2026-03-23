@@ -59,8 +59,8 @@ export default function AboutPage() {
       <section className="relative min-h-[60vh] md:min-h-[75vh] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/hero/laguna-horizon.webp"
-            alt="Laguna Beach tennis courts with ocean horizon"
+            src="/images/about/about-hero.webp"
+            alt="Outdoor tennis courts at night at Laguna Beach Tennis Academy"
             fill
             priority
             className="object-cover"
@@ -97,8 +97,8 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
-                  src="/legacy-working-assets/programs/private-specialty/private-specialty.webp"
-                  alt="LBTA tennis coaching session"
+                  src="/images/about/our-story.webp"
+                  alt="Coach Andrew instructing a junior player during a private lesson on a blue court"
                   fill
                   className="object-cover"
                   style={{ objectPosition: '50% 55%' }}
@@ -160,8 +160,8 @@ export default function AboutPage() {
       <section className="relative py-24 md:py-32 overflow-hidden" aria-labelledby="philosophy-quote-heading">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/founder/andrew-portrait/andrew-portrait.webp"
-            alt="Andrew Mateljan"
+            src="/images/about/founder-quote.webp"
+            alt="Andrew Mateljan smiling on an outdoor tennis court"
             fill
             className="object-cover"
             sizes="100vw"
@@ -229,8 +229,8 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <div className="md:col-span-2 relative aspect-[16/10] md:aspect-[2/1] overflow-hidden rounded-subtle">
               <Image
-                src="/legacy-working-assets/facility/sunset-courts/sunset-courts.webp"
-                alt="Laguna Beach tennis courts at sunset"
+                src="/images/about/court-moulton.webp"
+                alt="Tennis court with cones and balls at sunset"
                 fill
                 className="object-cover"
                 style={{ objectPosition: '50% 50%' }}
@@ -241,8 +241,8 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-6">
               <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
                 <Image
-                  src="/legacy-working-assets/facility/courts-lbhs/courts-lbhs.webp"
-                  alt="Laguna Beach High School tennis courts"
+                  src="/images/about/court-lbhs.webp"
+                  alt="Laguna Beach High School tennis courts under lights"
                   fill
                   className="object-cover"
                   style={{ objectPosition: '50% 50%' }}
@@ -252,8 +252,8 @@ export default function AboutPage() {
               </div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
                 <Image
-                  src="/legacy-working-assets/facility/courts-moulton/courts-moulton.webp"
-                  alt="Moulton Meadows Park tennis courts"
+                  src="/images/about/court-alta-laguna.webp"
+                  alt="Alta Laguna tennis courts with shadows across the playing surface"
                   fill
                   className="object-cover"
                   style={{ objectPosition: '50% 50%' }}
@@ -318,8 +318,8 @@ export default function AboutPage() {
             <div className="relative order-1 lg:order-2">
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
-                  src="/images/hero/laguna-horizon.webp"
-                  alt="Laguna Beach coastline"
+                  src="/images/about/andrew-family.webp"
+                  alt="Andrew Mateljan with family — Laguna Beach Tennis Academy community"
                   fill
                   className="object-cover"
                   style={{ objectPosition: '50% 60%' }}

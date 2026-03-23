@@ -76,7 +76,7 @@ async function createMessage(campaign, index) {
         fromname: 'Laguna Beach Tennis Academy',
         fromemail: 'support@lagunabeachtennisacademy.com',
         reply2: 'support@lagunabeachtennisacademy.com',
-        htmlcontent: htmlContent,
+        html: htmlContent,
         textcontent: '',
       },
     }),

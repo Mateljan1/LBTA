@@ -13,7 +13,7 @@ export default function FitnessPage() {
       <section className="relative min-h-[65vh] md:min-h-[75vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/hero/fitness-hero/fitness-hero.webp"
+            src="/images/fitness/fitness-hero.webp"
             alt="Fitness and community at LBTA"
             fill
             className="object-cover object-center"
@@ -46,8 +46,8 @@ export default function FitnessPage() {
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div className="relative aspect-[3/2] overflow-hidden rounded">
               <Image
-                src="/legacy-working-assets/community/community-7.webp"
-                alt="Adult players rallying together during Cardio Tennis session at LBTA"
+                src="/images/fitness/cardio-tennis.webp"
+                alt="Adult players in formation during a Cardio Tennis session at LBTA"
                 fill
                 className="object-cover"
                 style={{ objectPosition: '50% 50%' }}
@@ -103,8 +103,8 @@ export default function FitnessPage() {
             
             <div className="relative aspect-[3/2] overflow-hidden rounded md:order-2">
               <Image
-                src="/images/philosophy/belonging.webp"
-                alt="Players engaging in fast-paced LiveBall training under afternoon sun"
+                src="/images/fitness/liveball.webp"
+                alt="Intermediate LiveBall group in ready position under court lights at LBTA"
                 fill
                 className="object-cover"
                 style={{ objectPosition: '50% 50%' }}

@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-19",
-  "lastLearnRun": "2026-03-19 Visual Elevation Phase 3 & 4: layout primitives, plan-aware review",
+  "updated": "2026-03-20",
+  "lastLearnRun": "2026-03-20 ActiveCampaign test email fix: legacy campaign_send",
   "patterns": [
     {
       "name": "hero-video-poster-lcp",
@@ -554,6 +554,12 @@
       "when": "Users need to discover site capabilities or get help",
       "example": "Create /help page with: quick links (Programs & Pricing, Book a Trial, Meet Our Coaches, Contact Us), FAQ link, contact info (phone, email, address). Link from chat footer as 'What can you do?'. Server Component, brand tokens, focus rings on all links.",
       "tags": ["help", "discovery", "capability-discovery", "agent-native"]
+    },
+    {
+      "name": "activecampaign-legacy-api-fallback",
+      "when": "ActiveCampaign v3 API returns 405 or fails for campaign operations (e.g. send test)",
+      "example": "Use legacy admin API: GET {base}/admin/api.php?api_action=campaign_send&campaignid=...&messageid=...&action=test&email=...&type=mime. Resolve messageid from GET /api/3/campaigns/{id}/campaignMessages. See send_test.py and docs/ACTIVECAMPAIGN_EMAIL_DESIGNER_LIMITATION.md.",
+      "tags": ["ActiveCampaign", "api", "legacy", "test-email", "campaign_send"]
     }
   ]
 }

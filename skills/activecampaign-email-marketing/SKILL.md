@@ -51,7 +51,7 @@ Create professional email campaigns for LBTA that drive registrations while main
 Set environment variable:
 ```bash
 export ACTIVECAMPAIGN_API_KEY="your-api-key"
-export ACTIVECAMPAIGN_URL="https://lbta.api-us1.com"
+export ACTIVECAMPAIGN_URL="https://tennisbeast.api-us1.com"
 ```
 
 ### Create Campaign

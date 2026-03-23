@@ -2,7 +2,9 @@
 
 Extracted from the Code Review Summary (12-agent parallel review). Use these for future implementation and review.
 
-**Recent:** 2026-03-17 — Mobile Phase 1 audit compound:learn: see `2026-03-17-mobile-audit-compound-learn.md`. Audit baseline for mobile (320/375/768px): horizontal scroll, 48px touch targets, 16px+ form inputs, scroll-anchor, modals. **Learn run:** Corrections (button min-width overflow, form input 16px on mobile), pattern (mobile-audit-baseline), quality bars (mobileChecklist, formInput16pxMobile), anti-patterns (button-min-width-overflow, form-input-font-below-16-mobile). Deliverable: `plans/mobile-audit-phase1-checklist.md`.
+**Recent:** 2026-03-20 — ActiveCampaign test email fix: see `2026-03-20-activecampaign-test-email-compound-learn.md`. v3 POST /campaigns/{id}/test returns 405 → use legacy campaign_send with campaignid + messageid. Correction + pattern added.
+
+**Previous:** 2026-03-17 — Mobile Phase 1 audit compound:learn: see `2026-03-17-mobile-audit-compound-learn.md`. Audit baseline for mobile (320/375/768px): horizontal scroll, 48px touch targets, 16px+ form inputs, scroll-anchor, modals. **Learn run:** Corrections (button min-width overflow, form input 16px on mobile), pattern (mobile-audit-baseline), quality bars (mobileChecklist, formInput16pxMobile), anti-patterns (button-min-width-overflow, form-input-font-below-16-mobile). Deliverable: `plans/mobile-audit-phase1-checklist.md`.
 
 **Previous:** 2026-03-16 — Green Dot schedule review + work-phase fixes: see `2026-03-16-green-dot-schedule-compound-learn.md`. Schedule slot venue consistency (LB High School not LBHS), form-config location aligned with season data (Youth Development → LBHS), program descriptions lean and date-free.
 

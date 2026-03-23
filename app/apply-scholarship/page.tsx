@@ -108,7 +108,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.studentName}
                     onChange={(e) => handleChange('studentName', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="First and Last Name"
                   />
                 </div>
@@ -122,7 +122,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.studentAge}
                     onChange={(e) => handleChange('studentAge', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="Student age"
                   />
                 </div>
@@ -136,7 +136,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.studentGrade}
                     onChange={(e) => handleChange('studentGrade', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="e.g., 9th Grade"
                   />
                 </div>
@@ -153,7 +153,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.studentGPA}
                     onChange={(e) => handleChange('studentGPA', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="e.g., 3.8"
                   />
                 </div>
@@ -175,7 +175,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.parentName}
                     onChange={(e) => handleChange('parentName', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="Full Name"
                   />
                 </div>
@@ -189,7 +189,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.email}
                     onChange={(e) => handleChange('email', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -203,7 +203,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.phone}
                     onChange={(e) => handleChange('phone', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="(949) 123-4567"
                   />
                 </div>
@@ -217,7 +217,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.address}
                     onChange={(e) => handleChange('address', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="City, State, ZIP"
                   />
                 </div>
@@ -238,7 +238,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.householdIncome}
                     onChange={(e) => handleChange('householdIncome', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                   >
                     <option value="">Select range</option>
                     <option value="under-25k">Under $25,000</option>
@@ -258,7 +258,7 @@ export default function ApplyScholarshipPage() {
                     min="1"
                     value={formData.householdSize}
                     onChange={(e) => handleChange('householdSize', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="Number of people in household"
                   />
                 </div>
@@ -279,7 +279,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.currentLevel}
                     onChange={(e) => handleChange('currentLevel', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                   >
                     <option value="">Select level</option>
                     <option value="beginner">Beginner (0-6 months)</option>
@@ -299,7 +299,7 @@ export default function ApplyScholarshipPage() {
                     min="0"
                     value={formData.yearsPlaying}
                     onChange={(e) => handleChange('yearsPlaying', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="Years of experience"
                   />
                 </div>
@@ -312,7 +312,7 @@ export default function ApplyScholarshipPage() {
                     type="text"
                     value={formData.currentProgram}
                     onChange={(e) => handleChange('currentProgram', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="e.g., Youth Development 1x/week"
                   />
                 </div>
@@ -326,7 +326,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.desiredProgram}
                     onChange={(e) => handleChange('desiredProgram', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                     placeholder="e.g., High Performance 2x/week"
                   />
                 </div>
@@ -339,7 +339,7 @@ export default function ApplyScholarshipPage() {
                     required
                     value={formData.sessionsPerWeek}
                     onChange={(e) => handleChange('sessionsPerWeek', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
                   >
                     <option value="">Select frequency</option>
                     <option value="2">2 sessions per week</option>
@@ -367,7 +367,7 @@ export default function ApplyScholarshipPage() {
                     value={formData.goals}
                     onChange={(e) => handleChange('goals', e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all resize-none"
                     placeholder="e.g., earn college scholarship, compete in USTA tournaments, develop discipline and character through tennis..."
                   />
                 </div>
@@ -381,7 +381,7 @@ export default function ApplyScholarshipPage() {
                     value={formData.whyScholarship}
                     onChange={(e) => handleChange('whyScholarship', e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all resize-none"
                     placeholder="Share your story. Help us understand your family's commitment to tennis and how this scholarship would impact your development."
                   />
                 </div>
@@ -394,7 +394,7 @@ export default function ApplyScholarshipPage() {
                     value={formData.additionalInfo}
                     onChange={(e) => handleChange('additionalInfo', e.target.value)}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all resize-none"
                     placeholder="Any additional information you'd like to share..."
                   />
                 </div>

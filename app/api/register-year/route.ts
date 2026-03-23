@@ -3,6 +3,7 @@ import { Client } from '@notionhq/client'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, registerYearSchema, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
+import { validateAgentSecret } from '@/lib/agent-auth'
 import {
   upsertContact,
   addToList,
@@ -143,6 +144,15 @@ function getApplicableTags(
 }
 
 export async function POST(request: NextRequest) {
+  // Agent auth: validate X-Agent-Secret header if present (for agent tool calls)
+  const agentSecret = request.headers.get('X-Agent-Secret')
+  if (agentSecret && !validateAgentSecret(request)) {
+    return NextResponse.json(
+      { success: false, error: 'Invalid agent secret' },
+      { status: 401 }
+    )
+  }
+
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
   let rateLimitResult: { allowed: boolean; resetTime: number }
   try {
