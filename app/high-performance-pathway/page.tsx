@@ -42,7 +42,7 @@ const highPerformanceSchema = {
 }
 
 const achievements = [
-  { stat: '#858 → #258', label: 'ATP Ranking Improvement', detail: 'Karue Sell' },
+  { stat: '#858 → #262', label: 'ATP Ranking Improvement', detail: 'Karue Sell' },
   { stat: '20+', label: 'D1 College Placements', detail: 'Since 2021' },
   { stat: 'Strong', label: 'College Placement Track Record', detail: 'For committed players' },
 ]

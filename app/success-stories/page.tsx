@@ -17,10 +17,11 @@ const successStories = [
     id: 'karue-sell',
     name: 'Karue Sell',
     title: 'ATP Tour Player',
-    achievement: '#858 → #258 ATP Ranking',
+    achievement: '#858 → #262 ATP Ranking',
     image: '/images/success-stories/karue-sell.webp',
     quote: "Andrew's movement-first approach transformed my game. The structured training and accountability pushed me to levels I didn't know I could reach.",
-    story: "When Karue first came to LBTA, he was ranked #858 on the ATP tour. Through dedicated training focused on movement efficiency and mental toughness, he climbed to #258 - a 600+ position improvement that opened doors to main draw Grand Slam qualifiers.",
+    story:
+      'Karue trained at LBTA with Coach Andrew while rebuilding his professional game. From a ranking in the #800s on the ATP tour, he climbed to a career high of #262 — a jump that reflects sustained work on movement efficiency, patterns, and mental toughness under pressure.',
     videoId: 'karue-journey',
     featured: true,
   },
@@ -33,38 +34,32 @@ const successStories = [
     quote:
       "When I'm home, LBTA is where I sharpen movement patterns before heading back on the road. The work here matches how I prepare on tour.",
     story:
-      'Ryan Seggerman has trained at LBTA with Coach Andrew among his professional preparation. His career includes a career-high ATP singles ranking of #72, doubles success on tour, and Masters-level experience.',
+      'Ryan Seggerman has trained at LBTA with Coach Andrew as part of his professional preparation. His career includes a career-high ATP singles ranking of #72, doubles success on tour, and Masters-level experience.',
     featured: true,
   },
   {
-    id: 'college-placements',
-    name: 'D1 College Placements',
-    title: '20+ Student Athletes',
-    achievement: 'Full Scholarships Earned',
-    image: '/legacy-working-assets/community/community-3.webp',
-    quote: "LBTA prepared me not just for college tennis, but for the discipline required to balance athletics and academics at the D1 level.",
-    story: "Over the past 5 years, more than 20 LBTA students have earned Division 1 tennis scholarships. Our college prep program focuses on tournament strategy, mental resilience, and the recruiting process.",
+    id: 'henry-mateljan',
+    name: 'Henry Mateljan',
+    title: 'Junior Competitor',
+    achievement: 'Age 9 · 4.6 UTR · Little Mo',
+    image: '/images/success-stories/henry-mateljan-little-mo.webp',
+    quote:
+      'Little Mo was a special week—sharing that with Coach Andrew is something I will always remember.',
+    story:
+      'Henry is nine years old with a 4.6 UTR. He trains at LBTA with Coach Andrew and was recognized at the Little Mo tournament, supported by the Maureen Connolly Brinker Tennis Foundation—an important milestone in his junior competitive journey.',
     featured: true,
   },
   {
-    id: 'adult-transformation',
-    name: 'David Richardson',
-    title: 'Adult Beginner Program',
-    achievement: '4.0 USTA Rating in 18 Months',
-    image: '/legacy-working-assets/testimonials/testimonial-adult-1.webp',
-    quote: "At 45, I thought it was too late to learn tennis properly. The team proved me wrong. I went from never holding a racquet to competing in USTA leagues.",
-    story: "David joined our Adult Beginner program with zero tennis experience. Through consistent twice-weekly sessions and our progressive curriculum, he developed strong fundamentals and now competes in local USTA 4.0 leagues.",
-    featured: false,
-  },
-  {
-    id: 'junior-development',
-    name: 'Emma Chen',
-    title: 'Junior Development',
-    achievement: 'Sectional Champion, Age 12',
-    image: '/legacy-working-assets/testimonials/testimonial-junior-1.webp',
-    quote: "Coach Andrew taught me that tennis is about more than winning - it's about how you handle challenges. That mindset helped me become a champion.",
-    story: "Emma started at LBTA in our Orange Ball program at age 7. Through our junior pathway, she developed into a sectional champion, earning rankings that will support her college tennis aspirations.",
-    featured: false,
+    id: 'olov',
+    name: 'Olov',
+    title: 'USTA National Competition',
+    achievement: '4.0 → 5.0 · National events',
+    image: '/images/success-stories/olov-usta.webp',
+    quote:
+      'The step up to 5.0 came from training that matches how I compete—structure in practice, clarity in matches.',
+    story:
+      'Olov moved from a 4.0 to a 5.0 USTA competitor with strong results in 5.0 tournaments. He continues to represent his age division at national-level events.',
+    featured: true,
   },
 ]
 
@@ -72,9 +67,8 @@ const successStories = [
 const successStoryImagePosition: Record<string, string> = {
   'karue-sell': '52% 42%',
   'ryan-seggerman': '50% 40%',
-  'college-placements': '50% 48%',
-  'adult-transformation': '50% 44%',
-  'junior-development': '50% 38%',
+  'henry-mateljan': '50% 28%',
+  olov: '50% 45%',
 }
 
 const testimonials = [
@@ -169,8 +163,8 @@ export default function SuccessStoriesPage() {
                 Success Stories
               </h1>
               <p className="font-sans text-[17px] md:text-[18px] text-white leading-relaxed text-shadow-hero-readable max-md:text-white/95 md:text-white/90">
-                From ATP tour players to adult beginners, see how LBTA's movement-first approach
-                transforms players at every level.
+                From ATP tour players to juniors on the national stage — movement-first coaching with
+                clear structure and accountability.
               </p>
             </div>
           </AnimatedSection>
@@ -286,53 +280,58 @@ export default function SuccessStoriesPage() {
         </div>
       </section>
 
-      {/* More Stories Grid */}
-      <section className="bg-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection>
-            <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-black mb-12 text-center">
-              More Player Journeys
-            </h2>
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {successStories.filter(s => !s.featured).map((story, index) => (
-              <AnimatedSection
-                key={story.id}
-                delay={index * 100}
-                className={index === 0 ? 'md:col-span-2' : 'md:col-span-1'}
-              >
-                <div className="bg-brand-morning-light rounded-lg overflow-hidden h-full flex flex-col">
-                  <div className={`relative overflow-hidden flex-shrink-0 ${index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
-                    <Image
-                      src={story.image}
-                      alt={story.name}
-                      fill
-                      className="object-cover"
-                      style={{ objectPosition: successStoryImagePosition[story.id] ?? '50% 45%' }}
-                      sizes={index === 0 ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
-                    />
-                  </div>
-                  <div className="p-6 md:p-8">
-                    <span className="inline-block text-brand-sunset-cliff font-sans text-[12px] font-medium uppercase tracking-[1.5px] mb-2">
-                      {story.title}
-                    </span>
-                    <h3 className="font-headline text-[24px] font-semibold text-black mb-2">
-                      {story.name}
-                    </h3>
-                    <p className="font-sans text-[15px] text-black/60 mb-4">
-                      {story.achievement}
-                    </p>
-                    <p className="font-headline text-[15px] text-black/80 italic">
-                      "{story.quote}"
-                    </p>
-                  </div>
-                </div>
+      {successStories.some((s) => !s.featured) && (
+        <>
+          <section className="bg-white py-16 md:py-24">
+            <div className="max-w-7xl mx-auto px-6">
+              <AnimatedSection>
+                <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-black mb-12 text-center">
+                  More Player Journeys
+                </h2>
               </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+
+              <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+                {successStories
+                  .filter((s) => !s.featured)
+                  .map((story, index) => (
+                    <AnimatedSection
+                      key={story.id}
+                      delay={index * 100}
+                      className={index === 0 ? 'md:col-span-2' : 'md:col-span-1'}
+                    >
+                      <div className="bg-brand-morning-light rounded-lg overflow-hidden h-full flex flex-col">
+                        <div
+                          className={`relative overflow-hidden flex-shrink-0 ${index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}
+                        >
+                          <Image
+                            src={story.image}
+                            alt={story.name}
+                            fill
+                            className="object-cover"
+                            style={{ objectPosition: successStoryImagePosition[story.id] ?? '50% 45%' }}
+                            sizes={
+                              index === 0 ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'
+                            }
+                          />
+                        </div>
+                        <div className="p-6 md:p-8">
+                          <span className="inline-block text-brand-sunset-cliff font-sans text-[12px] font-medium uppercase tracking-[1.5px] mb-2">
+                            {story.title}
+                          </span>
+                          <h3 className="font-headline text-[24px] font-semibold text-black mb-2">
+                            {story.name}
+                          </h3>
+                          <p className="font-sans text-[15px] text-black/60 mb-4">{story.achievement}</p>
+                          <p className="font-headline text-[15px] text-black/80 italic">"{story.quote}"</p>
+                        </div>
+                      </div>
+                    </AnimatedSection>
+                  ))}
+              </div>
+            </div>
+          </section>
+        </>
+      )}
 
       <HorizonDivider />
 

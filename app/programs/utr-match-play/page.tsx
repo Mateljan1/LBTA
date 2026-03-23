@@ -205,7 +205,7 @@ export default function UTRMatchPlayPage() {
                 ceremony, grand raffle.
               </p>
               <p>
-                <strong className="font-medium text-brand-pacific-dusk">8:00 PM</strong> — Exhibition: Season Champion plays doubles with Karu&eacute; Sell (ATP #258, UCLA All-American).
+                <strong className="font-medium text-brand-pacific-dusk">8:00 PM</strong> — Exhibition: Season Champion plays doubles with Karu&eacute; Sell (ATP #262, UCLA All-American).
               </p>
             </div>
 
