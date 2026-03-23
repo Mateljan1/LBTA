@@ -25,6 +25,18 @@ const successStories = [
     featured: true,
   },
   {
+    id: 'ryan-seggerman',
+    name: 'Ryan Seggerman',
+    title: 'ATP Tour Player',
+    achievement: 'Career-high ATP singles #72',
+    image: '/images/success-stories/ryan-seggerman.webp',
+    quote:
+      "When I'm home, LBTA is where I sharpen movement patterns before heading back on the road. The work here matches how I prepare on tour.",
+    story:
+      'Ryan Seggerman has trained at LBTA with Coach Andrew among his professional preparation. His career includes a career-high ATP singles ranking of #72, doubles success on tour, and Masters-level experience.',
+    featured: true,
+  },
+  {
     id: 'college-placements',
     name: 'D1 College Placements',
     title: '20+ Student Athletes',

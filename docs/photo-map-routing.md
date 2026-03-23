@@ -29,7 +29,7 @@ Source bundle: `website photos/LBTA_Website_Ready_2026-03-22/`. Files are copied
 | Book trial | `10-book-trial/cards` | `book/book-hero.webp`, `book-expect-1.webp` … `3.webp` |
 | About | `08-about` | `about/about-hero.webp`, `our-story.webp`, `court-*.webp`, `founder-quote.webp`, `andrew-family.webp` |
 | Contact | `09-contact` | `contact/contact-hero.webp`, `contact/coaching-1.webp`, `coaching-2.webp` |
-| Success stories | `13-success-stories` | `success-stories/*.webp` |
+| Success stories | `13-success-stories` | `success-stories/*.webp` (e.g. `karue-sell.webp`, `ryan-seggerman.webp` from pack) |
 
 ## Coach data
 
