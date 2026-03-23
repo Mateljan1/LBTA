@@ -30,14 +30,14 @@ export default function CoachesHero() {
     >
       <div className="absolute inset-0">
         <Image
-          src="/images/coaches/coaches-hero.webp"
-          alt="Laguna Beach Tennis Academy coaches and players training together"
+          src="/legacy-working-assets/hero/hero-poster/hero-poster.webp"
+          alt="Sunset over Laguna Beach tennis courts — coastal training at LBTA"
           fill
           priority
-          className="object-cover [filter:brightness(1.08)]"
+          className="object-cover [filter:brightness(1.06)]"
           quality={90}
           style={{
-            objectPosition: '50% 40%',
+            objectPosition: '50% 62%',
             transform: reduceMotion ? undefined : `translateY(${heroParallax}px)`,
           }}
           sizes="100vw"
