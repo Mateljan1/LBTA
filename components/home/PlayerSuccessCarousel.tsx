@@ -57,6 +57,16 @@ export default function PlayerSuccessCarousel({
     return () => window.clearInterval(id)
   }, [reduceMotion, count, intervalMs, next, paused])
 
+  // Prefetch the next slide’s asset (original URL) so rotation feels instant without loading every slide at once.
+  useEffect(() => {
+    if (count <= 1) return
+    const nextIdx = (safeIndex + 1) % count
+    const href = slides[nextIdx]?.image
+    if (!href) return
+    const img = new window.Image()
+    img.src = href
+  }, [count, safeIndex, slides])
+
   if (count === 0 || !active) {
     return null
   }
@@ -72,29 +82,22 @@ export default function PlayerSuccessCarousel({
       onMouseLeave={() => setPaused(false)}
     >
       <div className="absolute inset-0">
-        {slides.map((slide, i) => (
-          <div
-            key={`${slide.image}-${i}`}
-            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-              i === safeIndex ? 'z-10 opacity-100' : 'z-0 opacity-0 pointer-events-none'
-            }`}
-            aria-hidden={i !== safeIndex}
-          >
-            <Image
-              src={slide.image}
-              alt={slide.imageAlt}
-              fill
-              className="object-cover brightness-[1.02] saturate-[1.02]"
-              style={{
-                /* Per-slide objectPosition in homepage-copy: top vs bottom depends on how the subject sits in the file */
-                objectPosition: slide.objectPosition ?? '50% 20%',
-              }}
-              sizes="100vw"
-              quality={100}
-              priority={i === 0}
-            />
-          </div>
-        ))}
+        {/* One full-viewport image at a time — avoids loading N × 100vw optimized images on every homepage view */}
+        <div className="absolute inset-0 z-10">
+          <Image
+            src={active.image}
+            alt={active.imageAlt}
+            fill
+            className="object-cover brightness-[1.02] saturate-[1.02]"
+            style={{
+              objectPosition: active.objectPosition ?? '50% 20%',
+            }}
+            sizes="100vw"
+            quality={100}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
         {/* Left-weighted scrim: strong behind copy; fades out toward the right so players stay visible */}
         <div
           className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.88] from-0% via-black/35 via-[42%] to-transparent to-[68%] pointer-events-none"
