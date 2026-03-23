@@ -31,6 +31,7 @@
 | `book/`, `camps/`, `schedules/`, `leagues/`, `fitness/`, `about/`, `contact/` | Section-specific heroes and cards. |
 | `why-choose/` | Optional legacy; homepage may point at `facility/` instead—check `data/homepage-copy.json`. |
 | `print/` | Print/PDF-specific assets. |
+| `players/` | Optional per-player subfolders when multiple crops ship; see [`players/README.md`](./players/README.md). |
 
 ## Masters and workfiles (not here)
 
@@ -38,6 +39,7 @@
 - **Dated export bundles:** `website photos/` (local, gitignored) — see [`docs/website-photo-bundles.md`](../docs/website-photo-bundles.md).
 - **Full workflow:** `plans/photo-asset-library-and-routing-plan.md`.
 
-## Player photos (convention — future)
+## Player photos
 
-Canonical layout will be `players/{slug}/…` with optional `data/player-media.json` (see plan). Until that migration ships, **success stories** paths stay under `success-stories/` as today.
+- **Index:** [`data/player-media.json`](../data/player-media.json) lists roles (success story card, home carousel, etc.) and paths.
+- **Per-player folders:** [`players/`](./players/README.md) — use when you add multiple crops; until then paths stay under `success-stories/` and `results/` as today.

@@ -9,7 +9,9 @@
 | **Dated shoot bundles** | Local `website photos/` (ignored); see [`website-photo-bundles.md`](./website-photo-bundles.md) | No — batch imports; map into `public/images/` per tables below. |
 | **Legacy (sunset)** | `public/legacy-working-assets/` | Yes, but **do not add new** user-facing images here; migrate to `/images/` when possible. |
 
-Full roadmap (players folders, optional `player-media.json`): [`plans/photo-asset-library-and-routing-plan.md`](../plans/photo-asset-library-and-routing-plan.md).
+**Player image index (paths by slug/role):** [`data/player-media.json`](../data/player-media.json).
+
+Full roadmap (players folders, migration phases): [`plans/photo-asset-library-and-routing-plan.md`](../plans/photo-asset-library-and-routing-plan.md).
 
 ---
 

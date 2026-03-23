@@ -1,0 +1,36 @@
+{
+  "description": "Index of player-related image paths. Homepage and success stories still read from homepage-copy.json and app/success-stories/page.tsx; keep those in sync when editing this file.",
+  "players": [
+    {
+      "slug": "karue-sell",
+      "displayName": "Karue Sell",
+      "roles": {
+        "successStoryCard": "/images/success-stories/karue-sell.webp",
+        "homeResultsCarousel": "/images/results/karue-sell-andrew-mateljan-coaching.webp"
+      }
+    },
+    {
+      "slug": "ryan-seggerman",
+      "displayName": "Ryan Seggerman",
+      "roles": {
+        "successStoryCard": "/images/success-stories/ryan-seggerman.webp"
+      }
+    },
+    {
+      "slug": "henry-mateljan",
+      "displayName": "Henry Mateljan",
+      "roles": {
+        "successStoryCard": "/images/success-stories/henry-mateljan-little-mo.webp",
+        "alternatePortrait": "/images/success-stories/henry-mateljan.webp"
+      }
+    },
+    {
+      "slug": "olov",
+      "displayName": "Olov",
+      "roles": {
+        "successStoryCard": "/images/success-stories/olov-usta.webp",
+        "homeResultsCarousel": "/images/results/olov-usta-national.webp"
+      }
+    }
+  ]
+}
