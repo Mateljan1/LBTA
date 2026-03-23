@@ -1,5 +1,18 @@
 # Photo map routing (2026-03-22)
 
+## Directory model (best practice)
+
+| Layer | Location | Served by Next? |
+|-------|----------|------------------|
+| **Production** | [`public/images/`](../public/images/README.md) | **Yes** — only these paths in `src="/images/..."`. |
+| **Working exports / masters** | [`plans/LBTA_website_pics/`](../plans/LBTA_website_pics/README.md) | No — encode and QA here, then copy winners into `public/images/`. |
+| **Dated shoot bundles** | Local `website photos/` (ignored); see [`website-photo-bundles.md`](./website-photo-bundles.md) | No — batch imports; map into `public/images/` per tables below. |
+| **Legacy (sunset)** | `public/legacy-working-assets/` | Yes, but **do not add new** user-facing images here; migrate to `/images/` when possible. |
+
+Full roadmap (players folders, optional `player-media.json`): [`plans/photo-asset-library-and-routing-plan.md`](../plans/photo-asset-library-and-routing-plan.md).
+
+---
+
 Source bundle: `website photos/LBTA_Website_Ready_2026-03-22/`. Files are copied into `public/images/` under semantic paths used by the app. Regenerate from the same bundle if you replace assets.
 
 ## Homepage (`01-homepage/`)
