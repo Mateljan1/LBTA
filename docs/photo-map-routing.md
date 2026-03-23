@@ -9,7 +9,7 @@ Source bundle: `website photos/LBTA_Website_Ready_2026-03-22/`. Files are copied
 | `hero/lbta-2023-tennis-courts-sunset-palm-trees.webp` | `hero/laguna-horizon.webp`, `hero/hero-poster.webp` |
 | `destination/lbta-2023-night-tennis-practice-palm-trees.webp` | `destination/destination-night-palms.webp` |
 | `founder/lbta-2023-smiling-tennis-coach-holding-tennis-balls.webp` | `founder/andrew-mateljan-on-court.webp` |
-| `player-success/lbta-2026-high-performance-karue-sell-backhand-andrew-observing.webp` | `results/karue-sell-andrew-mateljan-coaching.webp` (legacy; homepage **Player Success** uses `results/olov-usta-national.webp` from `13-success-stories/`) |
+| `player-success/lbta-2026-high-performance-karue-sell-backhand-andrew-observing.webp` | `results/karue-sell-andrew-mateljan-coaching.webp` (homepage **Player Success** band) |
 | `philosophy-pillars/01–03-*.webp` | `philosophy/movement.webp`, `philosophy/discipline.webp`, `homepage/philosophy-community.webp` (homepage: camps + timeline + doubles liveball from `05-camps`, `08-about`, `07-leagues-match-play`) |
 | `program-cards/01–03-*.webp` | `programs/juniors.webp`, `adults.webp`, `private-lessons.webp` (homepage: camps gallery + leagues hero + contact coaching) |
 | `why-choose-lbta/01–02-*.webp` | `why-choose/why-choose-1.webp`, `why-choose-2.webp` (homepage: contact sunset hero + Moulton Meadows) |
