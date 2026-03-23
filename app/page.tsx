@@ -66,7 +66,40 @@ export const metadata = {
   },
 }
 
-type WhyChooseCopy = { headline: string; subline: string; image1: string; image2: string; image1Alt: string; image2Alt: string }
+type WhyChooseCopy = {
+  headline: string
+  subline: string
+  image1: string
+  image2: string
+  image1Alt: string
+  image2Alt: string
+  image1ObjectPosition?: string
+  image2ObjectPosition?: string
+}
+
+type PhilosophyPillar = (typeof homepageCopy)['philosophy']['pillars'][number] & {
+  image: string
+  imageAlt: string
+  objectPosition?: string
+}
+
+type ProgramItem = (typeof homepageCopy)['programs']['items'][number] & {
+  image: string
+  imageAlt: string
+  objectPosition?: string
+}
+
+type ResultsCopy = (typeof homepageCopy)['results'] & {
+  backgroundImage: string
+  backgroundAlt: string
+  objectPosition?: string
+}
+
+type DestinationCopy = (typeof homepageCopy)['destination'] & {
+  backgroundImage: string
+  backgroundAlt: string
+  objectPosition?: string
+}
 
 type CommunityGalleryItem = {
   src: string
@@ -79,6 +112,8 @@ type CommunitySection = (typeof homepageCopy)['community'] & { gallery: Communit
 export default function Home() {
   const whyChoose = (homepageCopy as { whyChoose?: WhyChooseCopy }).whyChoose
   const communitySection = homepageCopy.community as CommunitySection
+  const results = homepageCopy.results as ResultsCopy
+  const destination = homepageCopy.destination as DestinationCopy
   return (
     <>
       <Script id="local-business-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
@@ -167,11 +202,11 @@ export default function Home() {
       <section id="results" className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/results/karue-sell-andrew-mateljan-coaching.webp"
-            alt="Karue Sell in a two-handed backhand with Coach Andrew Mateljan observing on court at LBTA"
+            src={results.backgroundImage}
+            alt={results.backgroundAlt}
             fill
             className="object-cover"
-            style={{ objectPosition: '48% 42%' }}
+            style={{ objectPosition: results.objectPosition ?? '50% 42%' }}
             sizes="100vw"
             quality={90}
           />
@@ -180,19 +215,19 @@ export default function Home() {
         <div className="relative z-10 container-lbta">
           <div className="max-w-xl">
             <AnimatedSection>
-              <span className="text-eyebrow text-white/90 mb-4 block">{homepageCopy.results.eyebrow}</span>
+              <span className="text-eyebrow text-white/90 mb-4 block">{results.eyebrow}</span>
             </AnimatedSection>
             <AnimatedSection delay={100}>
               <h2 className="font-headline text-[clamp(2.5rem,6vw,4rem)] font-light text-white leading-[1.15] tracking-[-0.02em] mb-6">
-                {homepageCopy.results.headline}
+                {results.headline}
               </h2>
             </AnimatedSection>
             <AnimatedSection delay={200}>
-              <p className="text-body-lg text-white/80 mb-8">{homepageCopy.results.subline}</p>
+              <p className="text-body-lg text-white/80 mb-8">{results.subline}</p>
             </AnimatedSection>
             <AnimatedSection delay={300}>
-              <Link href={homepageCopy.results.ctaSecondaryHref} className="btn-ghost text-white/80 hover:text-white inline-flex items-center min-h-[48px]">
-                <span>{homepageCopy.results.ctaSecondary}</span>
+              <Link href={results.ctaSecondaryHref} className="btn-ghost text-white/80 hover:text-white inline-flex items-center min-h-[48px]">
+                <span>{results.ctaSecondary}</span>
                 <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -210,23 +245,17 @@ export default function Home() {
             <h2 className="font-headline text-headline font-light">{homepageCopy.philosophy.headline}</h2>
           </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-            {homepageCopy.philosophy.pillars.map((pillar, i) => {
-              const images = [
-                '/images/philosophy/movement.webp',
-                '/images/philosophy/discipline.webp',
-                '/images/homepage/philosophy-community.webp',
-              ]
-              const pillarImagePositions = ['50% 44%', '50% 42%', '50% 44%'] as const
+            {(homepageCopy.philosophy.pillars as PhilosophyPillar[]).map((pillar, i) => {
               return (
                 <AnimatedSection key={pillar.title} delay={i * 150}>
                   <div className="group h-full flex flex-col">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-subtle mb-4 flex-shrink-0">
                       <Image
-                        src={images[i]}
-                        alt={`${pillar.title} — ${pillar.description}`}
+                        src={pillar.image}
+                        alt={pillar.imageAlt}
                         fill
                         className="object-cover image-zoom"
-                        style={{ objectPosition: pillarImagePositions[i] }}
+                        style={{ objectPosition: pillar.objectPosition ?? '50% 44%' }}
                         sizes="(max-width: 768px) 100vw, 33vw"
                         quality={90}
                       />
@@ -253,14 +282,20 @@ export default function Home() {
             <p className="text-subhead max-w-2xl mx-auto font-light">{homepageCopy.programs.subline}</p>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10 mb-12">
-            {homepageCopy.programs.items.map((program, i) => {
-              const images = ['/images/programs/juniors.webp', '/images/programs/adults.webp', '/images/programs/private-lessons.webp']
-              const programPositions: Record<number, string> = { 0: '48% 44%', 1: '50% 44%', 2: '50% 48%' }
+            {(homepageCopy.programs.items as ProgramItem[]).map((program, index) => {
               return (
-                <AnimatedSection key={program.title} delay={i * 150}>
+                <AnimatedSection key={program.title} delay={index * 150}>
                   <Link href={program.link} className="group block">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-subtle mb-5">
-                      <Image src={images[i]} alt={program.title} fill className="object-cover image-zoom" style={{ objectPosition: programPositions[i] ?? '50% 50%' }} sizes="(max-width: 768px) 100vw, 33vw" quality={90} />
+                      <Image
+                        src={program.image}
+                        alt={program.imageAlt}
+                        fill
+                        className="object-cover image-zoom"
+                        style={{ objectPosition: program.objectPosition ?? '50% 44%' }}
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        quality={90}
+                      />
                     </div>
                     <h3 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">{program.title}</h3>
                     <p className="text-body text-lbta-slate">{program.description}</p>
@@ -297,7 +332,7 @@ export default function Home() {
                   alt={whyChoose?.image1Alt ?? 'LBTA coach and players on court'}
                   fill
                   className="object-cover image-zoom"
-                  style={{ objectPosition: '50% 45%' }}
+                  style={{ objectPosition: whyChoose?.image1ObjectPosition ?? '50% 45%' }}
                   sizes="(max-width: 768px) 100vw, 60vw"
                   quality={90}
                 />
@@ -311,7 +346,7 @@ export default function Home() {
                   alt={whyChoose?.image2Alt ?? 'Laguna Beach tennis facility and community'}
                   fill
                   className="object-cover image-zoom"
-                  style={{ objectPosition: '50% 52%' }}
+                  style={{ objectPosition: whyChoose?.image2ObjectPosition ?? '50% 52%' }}
                   sizes="(max-width: 768px) 100vw, 40vw"
                   quality={90}
                 />
@@ -325,11 +360,11 @@ export default function Home() {
       <section id="destination" className="relative min-h-[50vh] lg:min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/destination/destination-night-palms.webp"
-            alt="Laguna Beach tennis courts at night with palm trees and court lights"
+            src={destination.backgroundImage}
+            alt={destination.backgroundAlt}
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 52%' }}
+            style={{ objectPosition: destination.objectPosition ?? '50% 52%' }}
             sizes="100vw"
             quality={90}
           />
@@ -337,8 +372,8 @@ export default function Home() {
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-3xl mx-auto">
           <AnimatedSection>
-            <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] font-light leading-[1.2] mb-4 text-shadow-hero">{homepageCopy.destination.headline}</h2>
-            <p className="text-body-lg text-white/80 text-shadow-subtle font-light">{homepageCopy.destination.subline}</p>
+            <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] font-light leading-[1.2] mb-4 text-shadow-hero">{destination.headline}</h2>
+            <p className="text-body-lg text-white/80 text-shadow-subtle font-light">{destination.subline}</p>
           </AnimatedSection>
         </div>
       </section>

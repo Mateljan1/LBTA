@@ -21,9 +21,12 @@
   "results": {
     "eyebrow": "Player Success",
     "headline": "Guided by structure, repetition, and trust.",
-    "subline": "Karue Sell, ATP #262 — on-court training with Coach Andrew Mateljan.",
-    "ctaSecondary": "Watch His Journey",
-    "ctaSecondaryHref": "/success-stories"
+    "subline": "Olov — club development through USTA national competition.",
+    "ctaSecondary": "See Player Stories",
+    "ctaSecondaryHref": "/success-stories",
+    "backgroundImage": "/images/results/olov-usta-national.webp",
+    "backgroundAlt": "Adult competitor at a USTA national championship event",
+    "objectPosition": "50% 42%"
   },
   "philosophy": {
     "eyebrow": "Our Philosophy",
@@ -32,17 +35,26 @@
       {
         "title": "Movement",
         "description": "The foundation of repeatable success.",
-        "detail": "Technical precision through biomechanics and footwork fundamentals."
+        "detail": "Technical precision through biomechanics and footwork fundamentals.",
+        "image": "/images/philosophy/movement.webp",
+        "imageAlt": "Junior player in an athletic stance during a drill on an outdoor court",
+        "objectPosition": "50% 44%"
       },
       {
         "title": "Craft",
         "description": "Structure that builds confidence.",
-        "detail": "Consistent practice routines create lasting mental toughness."
+        "detail": "Consistent practice routines create lasting mental toughness.",
+        "image": "/images/philosophy/discipline.webp",
+        "imageAlt": "High-performance junior players training together on court",
+        "objectPosition": "50% 42%"
       },
       {
         "title": "Community",
         "description": "A community built on respect.",
-        "detail": "Players support each other through wins, losses, and growth."
+        "detail": "Players support each other through wins, losses, and growth.",
+        "image": "/images/homepage/philosophy-community.webp",
+        "imageAlt": "Coach-led doubles and liveball group play on a blue court",
+        "objectPosition": "50% 44%"
       }
     ]
   },
@@ -51,9 +63,30 @@
     "headline": "Pathways for Every Player",
     "subline": "From first serves to tournament play, we have a program for you.",
     "items": [
-      { "title": "Junior Programs", "description": "From red ball to college prep.", "link": "/programs/junior" },
-      { "title": "Adult Programs", "description": "Focused development for any level.", "link": "/programs/adult" },
-      { "title": "Private Coaching", "description": "Personal sessions built around your goals.", "link": "/book" }
+      {
+        "title": "Junior Programs",
+        "description": "From red ball to college prep.",
+        "link": "/programs/junior",
+        "image": "/images/programs/juniors.webp",
+        "imageAlt": "Young player practicing a tennis swing on an outdoor court",
+        "objectPosition": "50% 44%"
+      },
+      {
+        "title": "Adult Programs",
+        "description": "Focused development for any level.",
+        "link": "/programs/adult",
+        "image": "/images/programs/adults.webp",
+        "imageAlt": "Two adult players in a live rally on an outdoor tennis court",
+        "objectPosition": "50% 44%"
+      },
+      {
+        "title": "Private Coaching",
+        "description": "Personal sessions built around your goals.",
+        "link": "/book",
+        "image": "/images/programs/private-lessons.webp",
+        "imageAlt": "Coach Andrew Mateljan coaching a private lesson beside a ball cart",
+        "objectPosition": "50% 46%"
+      }
     ],
     "ctaSecondary": "View All Programs",
     "ctaSecondaryHref": "/programs"
@@ -63,12 +96,17 @@
     "subline": "Coaching that starts with movement, adds clear structure, and grows beside people who take the work seriously.",
     "image1": "/images/why-choose/why-choose-1.webp",
     "image2": "/images/why-choose/why-choose-2.webp",
-    "image1Alt": "Coaches and adult players during an outdoor session at LBTA",
-    "image2Alt": "Sunset practice across outdoor courts in Laguna Beach"
+    "image1Alt": "Sunset light across outdoor tennis courts in Laguna Beach",
+    "image2Alt": "Moulton Meadows tennis courts surrounded by coastal hills",
+    "image1ObjectPosition": "50% 48%",
+    "image2ObjectPosition": "50% 46%"
   },
   "destination": {
     "headline": "Train where focus meets horizon.",
-    "subline": "Laguna Beach — where performance meets perspective."
+    "subline": "Laguna Beach — where performance meets perspective.",
+    "backgroundImage": "/images/destination/moulton-meadows.webp",
+    "backgroundAlt": "Outdoor tennis courts at Moulton Meadows Park in Laguna Beach",
+    "objectPosition": "50% 48%"
   },
   "community": {
     "eyebrow": "Our Community",
@@ -77,21 +115,21 @@
     "gallery": [
       {
         "src": "/images/community/community-1.webp",
-        "alt": "Junior players in a drill on a blue court at LBHS",
+        "alt": "Friday women's USTA league team photo on court",
         "span": "large",
-        "objectPosition": "50% 44%"
+        "objectPosition": "50% 42%"
       },
       {
         "src": "/images/community/community-2.webp",
-        "alt": "Coach Andrew Mateljan in motion during an on-court session",
+        "alt": "Player serving on a blue court during match play",
         "span": "small",
-        "objectPosition": "50% 35%"
+        "objectPosition": "50% 40%"
       },
       {
         "src": "/images/community/community-3.webp",
-        "alt": "Adult player in an evening practice session at Laguna Beach High School",
+        "alt": "Two adult players in a competitive rally on an outdoor court",
         "span": "medium",
-        "objectPosition": "50% 45%"
+        "objectPosition": "50% 44%"
       },
       {
         "src": "/images/community/community-4.webp",
