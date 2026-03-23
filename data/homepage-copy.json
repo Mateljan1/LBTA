@@ -47,6 +47,14 @@
         "image": "/images/success-stories/henry-mateljan-little-mo.webp",
         "imageAlt": "Junior player at a tournament tennis court",
         "objectPosition": "50% 28%"
+      },
+      {
+        "subline": "Olov — 4.0 to 5.0 USTA; strong results in 5.0 play and national-level events.",
+        "ctaLabel": "Read Olov's story",
+        "ctaHref": "/success-stories#olov",
+        "image": "/images/success-stories/olov-usta.webp",
+        "imageAlt": "Competitive adult player on court at a USTA event",
+        "objectPosition": "50% 45%"
       }
     ]
   },
