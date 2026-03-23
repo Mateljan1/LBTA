@@ -86,9 +86,9 @@
         "title": "Community",
         "description": "A community built on respect.",
         "detail": "Players support each other through wins, losses, and growth.",
-        "image": "/images/homepage/philosophy-community.webp",
-        "imageAlt": "Coach-led doubles and liveball group play on a blue court",
-        "objectPosition": "50% 40%"
+        "image": "/images/homepage/philosophy-community-group-2026.webp",
+        "imageAlt": "Seven LBTA players in a lineup on an outdoor court — community built on respect",
+        "objectPosition": "50% 45%"
       }
     ]
   },
@@ -148,9 +148,15 @@
     "subline": "Juniors and adults, daytime and under the lights — one standard on every court.",
     "gallery": [
       {
+        "src": "/images/homepage/philosophy-community-group-2026.webp",
+        "alt": "Seven LBTA players in a lineup on an outdoor court — community and belonging",
+        "span": "large",
+        "objectPosition": "50% 45%"
+      },
+      {
         "src": "/images/community/community-1.webp",
         "alt": "Friday women's USTA league team photo on court",
-        "span": "large",
+        "span": "medium",
         "objectPosition": "50% 42%"
       },
       {
