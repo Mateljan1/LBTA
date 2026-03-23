@@ -1,476 +1,807 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-19",
-  "lastLearnRun": "2026-03-19 Header/logo localPatterns + opaque header (WCAG)",
+  "updated": "2026-03-23",
+  "lastLearnRun": "2026-03-23 Photo carousel, facility imagery, player success patterns",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
       "description": "AnimatedSection or any Framer Motion entrance without useReducedMotion()",
       "avoid": "motion.div with initial/whileInView and no reduceMotion check; globals.css only affects CSS, not JS-driven motion",
       "instead": "useReducedMotion(); when true render plain div (or motion with duration: 0); when false use motion props",
-      "tags": ["a11y", "motion", "framer-motion"]
+      "tags": [
+        "a11y",
+        "motion",
+        "framer-motion"
+      ]
     },
     {
       "id": "hardcoded-section-copy-with-data",
       "description": "Section with hardcoded paragraphs when same content exists in data",
       "avoid": "FounderSection with three fixed <p> while founder.bio holds the text",
       "instead": "Drive from data: founder.bio.split(/(?<=.)\\s+/).filter(Boolean).map(...) or bioParagraphs in JSON",
-      "tags": ["single-source", "data-integrity"]
+      "tags": [
+        "single-source",
+        "data-integrity"
+      ]
     },
     {
       "id": "full-client-page-when-server-possible",
       "description": "Entire page is client when only some parts need interactivity",
       "avoid": "'use client' on page so schema and all sections run on client",
       "instead": "Server Component page: render JSON-LD on server; single client wrapper (e.g. PageClient) for nav, hero, StickyCTA",
-      "tags": ["performance", "architecture", "nextjs"]
+      "tags": [
+        "performance",
+        "architecture",
+        "nextjs"
+      ]
     },
     {
       "id": "list-key-unstable",
       "description": "List key by name when slug or order is available",
       "avoid": "key={coach.name} when coach.slug or coach.order exist; names can duplicate or slug null",
       "instead": "key={coach.slug ?? `order-${coach.order}`} for stable unique keys",
-      "tags": ["react", "lists", "keys"]
+      "tags": [
+        "react",
+        "lists",
+        "keys"
+      ]
     },
     {
       "id": "schema-builder-no-guards",
       "description": "JSON-LD builder using optional fields without guard or fallback",
       "avoid": "coach.image.startsWith('http') without check; description: coach.schemaDescription with no fallback; hardcoded SITE_URL",
       "instead": "Guard image; description: coach.schemaDescription ?? coach.bio ?? ''; SITE_URL from process.env.NEXT_PUBLIC_SITE_URL with fallback",
-      "tags": ["data-integrity", "schema", "env"]
+      "tags": [
+        "data-integrity",
+        "schema",
+        "env"
+      ]
     },
     {
       "id": "anchor-section-no-scroll-margin",
       "description": "Anchor targets (#hash) without scroll-margin when sticky nav is present",
       "avoid": "Section id=\"team\" with no scroll-mt; scroll lands with heading under sticky nav",
       "instead": "Add scroll-mt-28 (or match nav height) to section roots that are anchor targets",
-      "tags": ["a11y", "ux", "anchor-nav"]
+      "tags": [
+        "a11y",
+        "ux",
+        "anchor-nav"
+      ]
     },
     {
       "id": "cta-focus-weak-on-dark",
       "description": "Focus ring too weak on dark background (e.g. ring-white/30)",
       "avoid": "focus:ring-white/30 on DarkSection CTAs; may fail focus-indicator contrast",
       "instead": "focus:ring-white or focus:ring-white/60; or rely on global focus-visible",
-      "tags": ["a11y", "contrast", "focus"]
+      "tags": [
+        "a11y",
+        "contrast",
+        "focus"
+      ]
     },
     {
       "id": "new-code-lbta-slate",
       "description": "New components using text-lbta-slate instead of brand tokens",
       "avoid": "text-lbta-slate in new CoachCard, FounderSection; .cursorrules say new code use brand-*",
       "instead": "text-brand-pacific-dusk/70 (or appropriate opacity) for secondary text",
-      "tags": ["brand", "cursorrules"]
+      "tags": [
+        "brand",
+        "cursorrules"
+      ]
     },
     {
       "id": "hardcoded-prices",
       "description": "Hardcoding prices or tier amounts in components",
       "avoid": "PricingComparison tiers with $50, $546 in TSX; LeaguesSection $48/year in copy",
       "instead": "Source from /data/*.json or lib/programs-data; component only renders",
-      "tags": ["data-integrity", "single-source"]
+      "tags": [
+        "data-integrity",
+        "single-source"
+      ]
     },
     {
       "id": "duplicate-program-lists",
       "description": "Same list of programs/options defined in multiple places",
       "avoid": "TrialBookingModal programs array and app/book/page.tsx programs constant",
       "instead": "Single source (data file or lib helper); both modal and page import",
-      "tags": ["DRY", "single-source"]
+      "tags": [
+        "DRY",
+        "single-source"
+      ]
     },
     {
       "id": "webhook-200-on-error",
       "description": "Returning 200 with success: false on webhook processing failure",
       "avoid": "catch block returns NextResponse.json({ success: false }) with no status",
       "instead": "NextResponse.json(..., { status: 500 }) for server/processing errors",
-      "tags": ["api", "http-status"]
+      "tags": [
+        "api",
+        "http-status"
+      ]
     },
     {
       "id": "modal-no-focus-restore",
       "description": "Closing a modal without restoring focus to the trigger",
       "avoid": "handleClose only calls onClose(); user tab lands nowhere predictable",
       "instead": "Save document.activeElement (or trigger ref) on open; focus() in close",
-      "tags": ["a11y", "focus-management"]
+      "tags": [
+        "a11y",
+        "focus-management"
+      ]
     },
     {
       "id": "icon-button-no-label",
       "description": "Icon-only button with no accessible name",
       "avoid": "<button><SendIcon /></button>",
       "instead": "aria-label=\"Send message\" or visible text",
-      "tags": ["a11y", "aria"]
+      "tags": [
+        "a11y",
+        "aria"
+      ]
     },
     {
       "id": "ui-calls-missing-api",
       "description": "UI component that POSTs to an API route that does not exist",
       "avoid": "ChatWidget POST /api/chat with no app/api/chat/route.ts",
       "instead": "Implement the route with validation and rate limit, or disable the UI",
-      "tags": ["product", "api"]
+      "tags": [
+        "product",
+        "api"
+      ]
     },
     {
       "id": "webhook-secret-optional",
       "description": "Making webhook verification skip when secret env is unset",
       "avoid": "if (!secret) return null; // skip verification",
       "instead": "In production, require secret and reject request when unset",
-      "tags": ["security", "webhook"]
+      "tags": [
+        "security",
+        "webhook"
+      ]
     },
     {
       "id": "unused-state-and-refs",
       "description": "Keeping state or refs that are set but never read",
       "avoid": "isMobile, setIsMobile + resize effect; containerRef with no .current read",
       "instead": "Remove before merge (YAGNI)",
-      "tags": ["simplicity", "cleanup"]
+      "tags": [
+        "simplicity",
+        "cleanup"
+      ]
     },
     {
       "id": "inline-request-json-when-parseJsonBody-exists",
       "description": "API route reimplements JSON parse with request.json() try/catch when parseJsonBody exists",
       "avoid": "try { body = await request.json() } catch { return 400 } in one route while others use parseJsonBody",
       "instead": "Use parseJsonBody(request) from lib/validations for every JSON route; return parsed.response when !parsed.ok",
-      "tags": ["api", "DRY"]
+      "tags": [
+        "api",
+        "DRY"
+      ]
     },
     {
       "id": "modal-timeout-not-cleared-on-unmount",
       "description": "Modal that uses setTimeout/setInterval does not clear it on unmount",
       "avoid": "setTimeout id stored but cleanup never runs clearTimeout; setState may run after unmount",
       "instead": "Store id in ref; useEffect cleanup: return () => { if (ref.current) clearTimeout(ref.current); }",
-      "tags": ["memory", "modal", "react"]
+      "tags": [
+        "memory",
+        "modal",
+        "react"
+      ]
     },
     {
       "id": "modal-auto-close-without-focus-restore",
       "description": "Modal that auto-closes (e.g. success timeout) does not restore focus",
       "avoid": "Only manual close restores focus; timeout callback only setVisible(false)",
       "instead": "In timeout callback: previousActiveRef.current?.focus(); then setVisible(false)",
-      "tags": ["a11y", "focus", "modal"]
+      "tags": [
+        "a11y",
+        "focus",
+        "modal"
+      ]
     },
     {
       "id": "primary-cta-orange",
       "description": "Using Sunset Cliff (orange) as primary CTA fill on page heroes",
       "avoid": "bg-brand-sunset-cliff for main hero or primary section CTA",
       "instead": "Black/white or .btn-primary per .cursorrules; Sunset Cliff for hover/accent only",
-      "tags": ["brand", "cursorrules"]
+      "tags": [
+        "brand",
+        "cursorrules"
+      ]
     },
     {
       "id": "footer-low-contrast",
       "description": "Footer or dark-section text at low opacity failing WCAG 7:1",
       "avoid": "text-white/40 or text-white/25 on bg-brand-deep-water for body or tagline",
       "instead": "Use text-white/50 or higher (or verify 7:1 with WebAIM); secondary text at least /50",
-      "tags": ["a11y", "contrast", "footer"]
+      "tags": [
+        "a11y",
+        "contrast",
+        "footer"
+      ]
     },
     {
       "id": "hero-button-no-bg",
       "description": "Primary hero button with only text color on dark background",
       "avoid": "text-black or text-white with no background on dark gradient (e.g. from-black/75)",
       "instead": "Use solid background (bg-white text-black or bg-black text-white) so contrast meets WCAG",
-      "tags": ["a11y", "contrast", "hero", "CTA"]
+      "tags": [
+        "a11y",
+        "contrast",
+        "hero",
+        "CTA"
+      ]
     },
     {
       "id": "webhook-unvalidated-id",
       "description": "Using payload ID in webhook URLs or request bodies without validating",
       "avoid": "contactId = data.contact?.id; then `${baseUrl}/contacts/${contactId}` without type/length check",
       "instead": "Normalize to positive integer; return 400 if invalid; use only the validated number in URLs and bodies",
-      "tags": ["security", "webhook", "injection"]
+      "tags": [
+        "security",
+        "webhook",
+        "injection"
+      ]
     },
     {
       "id": "webhook-secret-non-timing-safe",
       "description": "Comparing webhook secret with == or === (timing side-channel)",
       "avoid": "if (headerSecret === AC_WEBHOOK_SECRET) return null",
       "instead": "Buffer.from both; ensure same length; crypto.timingSafeEqual(expected, provided); reject on mismatch or length diff",
-      "tags": ["security", "webhook", "timing-safe"]
+      "tags": [
+        "security",
+        "webhook",
+        "timing-safe"
+      ]
     },
     {
       "id": "parallax-without-reduced-motion",
       "description": "Parallax or scroll-driven animation without checking prefers-reduced-motion",
       "avoid": "useEffect scroll listener that updates transform/parallax state on every scroll with no reduceMotion check",
       "instead": "Gate with matchMedia('(prefers-reduced-motion: reduce)'); when true disable parallax or use static fallback (same as HomeHero)",
-      "tags": ["a11y", "motion", "parallax"]
+      "tags": [
+        "a11y",
+        "motion",
+        "parallax"
+      ]
     },
     {
       "id": "inline-blockquote-instead-of-section-quote",
       "description": "Blockquote with solid left border instead of Brand Guide pull-quote style",
       "avoid": "border-l-2 border-brand-pacific-dusk/30 or similar on blockquote",
-      "instead": "Use <PullQuote> or class section-quote for gradient left edge (Victoria Cove → Sunset Cliff); single source for quote styling",
-      "tags": ["brand-guide", "pull-quote", "section-quote"]
+      "instead": "Use <PullQuote> or class section-quote for gradient left edge (Victoria Cove \u2192 Sunset Cliff); single source for quote styling",
+      "tags": [
+        "brand-guide",
+        "pull-quote",
+        "section-quote"
+      ]
     },
     {
       "id": "decorative-svg-without-aria-hidden",
       "description": "Decorative SVG (arrow, icon) inside link or button without aria-hidden",
       "avoid": "<Link><svg>...</svg> Text</Link> with no aria-hidden on svg",
       "instead": "Add aria-hidden=\"true\" to the svg so screen readers don't announce the icon",
-      "tags": ["a11y", "svg", "aria-hidden"]
+      "tags": [
+        "a11y",
+        "svg",
+        "aria-hidden"
+      ]
     },
     {
       "id": "undefined-tailwind-color",
       "description": "Using Tailwind color class not defined in tailwind.config (e.g. lbta-tan)",
       "avoid": "bg-lbta-tan or text-lbta-tan when lbta.tan is not in config",
       "instead": "Use only defined tokens: lbta-beige or brand-sandstone for warm backgrounds; grep config before adding custom color classes",
-      "tags": ["tailwind", "brand", "config"]
+      "tags": [
+        "tailwind",
+        "brand",
+        "config"
+      ]
     },
     {
       "id": "error-text-raw-red",
       "description": "Form error or required text using raw Tailwind red (text-red-400, text-red-500, text-red-800)",
       "avoid": "text-red-400, text-red-800 for error message; text-red-500 for required asterisk; bg-red-50 border-red-200 for error box",
       "instead": "Use text-lbta-red for error and required; error callout use bg-lbta-red/5 border-lbta-red/20; dismiss button text-lbta-red hover:opacity-80",
-      "tags": ["brand", "forms", "error-state"]
+      "tags": [
+        "brand",
+        "forms",
+        "error-state"
+      ]
     },
     {
       "id": "horizon-divider-as-prop",
       "description": "HorizonDivider with optional as prop (e.g. as=\"hr\" or as=\"div\")",
       "avoid": "Passing as prop to HorizonDivider; component was simplified to always render <hr>",
       "instead": "Use HorizonDivider with variant and className only; no as prop (YAGNI)",
-      "tags": ["simplicity", "YAGNI", "HorizonDivider"]
+      "tags": [
+        "simplicity",
+        "YAGNI",
+        "HorizonDivider"
+      ]
     },
     {
       "id": "hero-short-min-height-with-bottom-content",
       "description": "Hero with short min-height and bottom-aligned content clips headline at top",
       "avoid": "min-h-[70vh] (or similar) with absolute bottom-0 content and overflow-hidden; on short viewports content block is taller than section and top gets clipped",
       "instead": "Use min-h-screen so section is always full viewport height; full headline (e.g. 'Tennis, as it should be taught') stays visible",
-      "tags": ["hero", "layout", "overflow", "ux"]
+      "tags": [
+        "hero",
+        "layout",
+        "overflow",
+        "ux"
+      ]
     },
     {
       "id": "log-full-external-api-error-body",
       "description": "Logging full response body when a third-party API returns an error",
       "avoid": "console.error('[GHL] Create failed:', res.status, await res.text()); full body can contain PII or internal IDs",
-      "instead": "Truncate: const safeMsg = text.length > 100 ? text.slice(0, 100) + '…' : text; log res.status and safeMsg only",
-      "tags": ["security", "logging", "third-party", "PII"]
+      "instead": "Truncate: const safeMsg = text.length > 100 ? text.slice(0, 100) + '\u2026' : text; log res.status and safeMsg only",
+      "tags": [
+        "security",
+        "logging",
+        "third-party",
+        "PII"
+      ]
     },
     {
       "id": "script-reject-with-full-response-body",
       "description": "Script that calls external API (e.g. Vercel) puts full response body in thrown Error or log",
       "avoid": "if (!res.ok) return res.text().then(t => Promise.reject(new Error(res.status + ': ' + t))); then catch logs err.message (which contains body)",
       "instead": "Reject with status only: Promise.reject(new Error('Vercel API error: ' + res.status)); never include response body in error or log",
-      "tags": ["security", "script", "vercel", "external-api"]
+      "tags": [
+        "security",
+        "script",
+        "vercel",
+        "external-api"
+      ]
     },
     {
       "id": "optional-integration-causes-500",
       "description": "Form handler returns 500 when optional integration (GHL, storeLead) or rate limit fails after validation passed",
       "avoid": "await sendToGHL(...) or void sendToGHL(...) without .catch(); rateLimit() unguarded so KV failure throws; parseJsonBody throws on non-JSON body",
       "instead": "Wrap rateLimit in try/catch and allow on failure; parseJsonBody returns { ok: false, status: 400 } on any parse error; void integration().catch(e => console.error(...)); return 200 when validation passes",
-      "tags": ["api", "form", "newsletter", "500", "optional-integration"]
+      "tags": [
+        "api",
+        "form",
+        "newsletter",
+        "500",
+        "optional-integration"
+      ]
     },
     {
       "id": "gray-in-brand-sections",
       "description": "Using text-gray-* in sections that should use brand tokens (e.g. PartnershipSection)",
       "avoid": "text-gray-500, text-gray-600, group-hover:text-gray-700 in components that are part of the main brand experience",
       "instead": "Use text-brand-pacific-dusk/60, text-brand-pacific-dusk/80, group-hover:text-brand-pacific-dusk (and border-black/6 for borders) per design system",
-      "tags": ["brand", "design-system", "PartnershipSection"]
+      "tags": [
+        "brand",
+        "design-system",
+        "PartnershipSection"
+      ]
     },
     {
       "id": "rate-limit-uncaught",
       "description": "API route calls rateLimit() without try/catch so KV failure throws and returns 500",
       "avoid": "const rateLimitResult = await rateLimit(...); if (!rateLimitResult.allowed) return 429; with no try/catch around rateLimit",
       "instead": "Wrap rateLimit() in try/catch; on catch use fallback { allowed: true, remaining: maxRequests, resetTime: Date.now() + interval }; apply in all form routes (book, newsletter, register, etc.)",
-      "tags": ["api", "rate-limit", "500", "resilience"]
+      "tags": [
+        "api",
+        "rate-limit",
+        "500",
+        "resilience"
+      ]
     },
     {
       "id": "direct-import-season-json-in-client",
       "description": "Client component imports season data JSON when lib provides a getter",
       "avoid": "import winter2026Data from '@/data/winter2026.json' in 'use client' component; using winter2026Data.programs",
       "instead": "Import from @/lib/programs-data and use getWinter2026Programs() (or equivalent); single entry point; avoids duplicating JSON in client bundle",
-      "tags": ["architecture", "schedules", "programs-data", "performance"]
+      "tags": [
+        "architecture",
+        "schedules",
+        "programs-data",
+        "performance"
+      ]
     },
     {
       "id": "getPrice-ignore-monthly-with-season-prices",
       "description": "Price display uses only session prices (1x/2x/3x) when program also has monthly",
       "avoid": "seasonPrices = [oneX, twoX, threeX]; return min(seasonPrices) without checking if monthly is primary or lower (e.g. Little Stars shows From $200/season)",
       "instead": "If monthly != null and (no session prices OR monthly <= min(sessionPrices)), return { amount: monthly, label: '/mo' }; else use session logic",
-      "tags": ["schedules", "ProgramRow", "pricing", "UX"]
+      "tags": [
+        "schedules",
+        "ProgramRow",
+        "pricing",
+        "UX"
+      ]
     },
     {
       "id": "dead-exports-in-data-lib",
       "description": "Lib that re-exports or transforms data has exports that are never used",
       "avoid": "getSpringPrograms() and getSummerPrograms() in programs-data when only *ForDisplay variants are used",
       "instead": "Remove unused exports; grep for usages; keep single way to get 'programs for UI' per season",
-      "tags": ["simplicity", "programs-data", "YAGNI"]
+      "tags": [
+        "simplicity",
+        "programs-data",
+        "YAGNI"
+      ]
     },
     {
       "id": "program-copy-inconsistent-across-seasons",
       "description": "Same program has different display name or ages in different season JSON files",
-      "avoid": "Winter: 'Adult Beginner 1', ages 'True Beginner'; Spring-Summer: 'Adult Beginner 1 — True Beginner', 'NTRP 1.0-2.0'",
+      "avoid": "Winter: 'Adult Beginner 1', ages 'True Beginner'; Spring-Summer: 'Adult Beginner 1 \u2014 True Beginner', 'NTRP 1.0-2.0'",
       "instead": "Use identical program name and ages string across winter, spring-summer, fall so UI and data consumers see consistent copy",
-      "tags": ["data-integrity", "programs", "schedules", "winter2026"]
+      "tags": [
+        "data-integrity",
+        "programs",
+        "schedules",
+        "winter2026"
+      ]
     },
     {
       "id": "webhook-without-rate-limit",
       "description": "Webhook endpoint without rate limiting",
       "avoid": "POST handler for external webhooks (e.g. ActiveCampaign) with no rateLimit() call",
       "instead": "rateLimit('webhook:'+ip, RATE_LIMITS.webhook) at start with try/catch; allow on failure. Return 401 in production when secret unset; no PII in prod logs",
-      "tags": ["security", "webhook", "rate-limit"]
+      "tags": [
+        "security",
+        "webhook",
+        "rate-limit"
+      ]
     },
     {
       "id": "duplicate-component-implementations",
       "description": "Two implementations of same component (e.g. root vs ui/)",
       "avoid": "components/AnimatedSection.tsx and components/ui/AnimatedSection.tsx both defining the component",
       "instead": "One canonical (e.g. ui/); legacy path re-exports so existing imports resolve to same implementation",
-      "tags": ["DRY", "component", "simplicity"]
+      "tags": [
+        "DRY",
+        "component",
+        "simplicity"
+      ]
     },
     {
       "id": "form-config-duplicate-pricing",
       "description": "Registration modal pricing duplicated in lib/form-config.ts instead of from /data",
       "avoid": "prePopulateData.pricing in FORM_CONFIGS with literal strings ($260, $546, $495/week, etc.) that duplicate data/winter2026.json, year2026.json",
       "instead": "Derive modal pricing from programs-data, camps-data, or a single shared config in /data; or document sync requirement and run data-integrity validation periodically",
-      "tags": ["data-integrity", "single-source", "form-config", "pricing"]
+      "tags": [
+        "data-integrity",
+        "single-source",
+        "form-config",
+        "pricing"
+      ]
     },
     {
       "id": "generic-emoji-in-ui",
-      "description": "Generic emoji (🎾 📅 💰 📞) in buttons or links",
+      "description": "Generic emoji (\ud83c\udfbe \ud83d\udcc5 \ud83d\udcb0 \ud83d\udcde) in buttons or links",
       "avoid": "Chatbot quick-reply buttons or any UI using emoji as primary icon; .cursorrules forbid generic emoji icons",
       "instead": "Use text labels only or non-generic icons (e.g. Lucide); keeps brand and a11y consistent",
-      "tags": ["brand", "cursorrules", "a11y", "Chatbot"]
+      "tags": [
+        "brand",
+        "cursorrules",
+        "a11y",
+        "Chatbot"
+      ]
     },
     {
       "id": "server-client-type-cast",
-      "description": "Using 'as unknown as T' at server→client data boundary when type could come from schema",
+      "description": "Using 'as unknown as T' at server\u2192client data boundary when type could come from schema",
       "avoid": "parseYear2026Sections(data) as unknown as Year2026Sections with Year2026Sections defined only in client",
       "instead": "Export type from lib (e.g. schedule-schemas.ts: export type Year2026Sections = Year2026SectionsValidated); client imports that type; no cast",
-      "tags": ["architecture", "types", "zod", "server-client"]
+      "tags": [
+        "architecture",
+        "types",
+        "zod",
+        "server-client"
+      ]
     },
     {
       "id": "next16-turbopack-under-experimental",
       "description": "Putting turbopack config under experimental in Next.js 16",
-      "avoid": "experimental: { turbo: { root: __dirname } } — Next 16 reports 'Unrecognized key turbo at experimental'",
+      "avoid": "experimental: { turbo: { root: __dirname } } \u2014 Next 16 reports 'Unrecognized key turbo at experimental'",
       "instead": "Top-level turbopack: { root: __dirname } in next.config.js (Next 15.3+ / 16)",
-      "tags": ["nextjs", "turbopack", "config"]
+      "tags": [
+        "nextjs",
+        "turbopack",
+        "config"
+      ]
     },
     {
       "id": "schedule-slot-venue-inconsistent",
       "description": "Schedule slot note uses abbreviation or different wording than other slot-level venue text in the same file",
       "avoid": "slot note: 'LBHS' while other programs use 'LB High School' in slot location/note",
       "instead": "Use same venue wording everywhere in that file (e.g. 'LB High School' not 'LBHS') so Pattern Recognizer and UI stay consistent",
-      "tags": ["schedules", "data", "program", "consistency"]
+      "tags": [
+        "schedules",
+        "data",
+        "program",
+        "consistency"
+      ]
     },
     {
       "id": "form-config-location-out-of-sync",
       "description": "lib/form-config.ts prePopulateData.location for a program does not match the program location in season JSON",
       "avoid": "Youth Development location: 'Alta Laguna Park' in form-config while data/winter2026.json (and other seasons) use 'Laguna Beach High School'",
       "instead": "Keep form-config location aligned with canonical program location from data/*.json; when editing season data, check and update form-config for that program",
-      "tags": ["form-config", "data-integrity", "single-source"]
+      "tags": [
+        "form-config",
+        "data-integrity",
+        "single-source"
+      ]
     },
     {
       "id": "program-description-date-coupled",
       "description": "Program description in season JSON includes date-specific text that will age (e.g. starting April)",
       "avoid": "description: '... starting April. Same pricing ...' in spring-summer-2026.json",
       "instead": "Use location or season context only; avoid calendar dates unless intentionally time-bound and documented for update each season",
-      "tags": ["programs", "description", "data", "schedules"]
+      "tags": [
+        "programs",
+        "description",
+        "data",
+        "schedules"
+      ]
     },
     {
       "id": "protected-route-open-when-secret-unset",
       "description": "Middleware protects a route (e.g. /coach-hub) with env secret but returns next() when secret unset",
       "avoid": "if (!secret) return NextResponse.next(); so hub is reachable without auth",
       "instead": "When path is protected and secret missing, redirect to /coach-hub/login or return 503; never allow access when unconfigured",
-      "tags": ["middleware", "security", "coach-hub", "protected-route"]
+      "tags": [
+        "middleware",
+        "security",
+        "coach-hub",
+        "protected-route"
+      ]
     },
     {
       "id": "modal-overlay-no-focus-trap-escape",
       "description": "Modal/overlay without focus trap and Escape-to-close",
       "avoid": "Dialog with no onKeyDown(Escape); focus can leave; keyboard users cannot close",
-      "instead": "Add onKeyDown(Escape → onClose) and focus trap (e.g. focus first focusable on open)",
-      "tags": ["a11y", "modal", "overlay", "focus-trap"]
+      "instead": "Add onKeyDown(Escape \u2192 onClose) and focus trap (e.g. focus first focusable on open)",
+      "tags": [
+        "a11y",
+        "modal",
+        "overlay",
+        "focus-trap"
+      ]
     },
     {
       "id": "clear-cookie-missing-secure",
       "description": "Clear-cookie header does not set Secure when session cookie was set with Secure in production",
       "avoid": "buildCoachHubClearCookie() returns Max-Age=0 without Secure; some browsers may not clear over HTTPS",
       "instead": "Include Secure in clear-cookie string when NODE_ENV === 'production', matching set-cookie",
-      "tags": ["cookie", "security", "logout"]
+      "tags": [
+        "cookie",
+        "security",
+        "logout"
+      ]
     },
     {
       "id": "extraction-script-new-function",
       "description": "Using new Function() to parse input in extraction scripts",
       "avoid": "new Function('return (' + s + ')')(); if s ever comes from untrusted source, code injection",
       "instead": "Use safe parser (e.g. bracket-counting) or document that script runs only against trusted HTML; avoid repurposing for untrusted input",
-      "tags": ["security", "script", "extraction", "code-injection"]
+      "tags": [
+        "security",
+        "script",
+        "extraction",
+        "code-injection"
+      ]
     },
     {
       "id": "button-min-width-overflow",
       "description": "CTA or submit button with min-width larger than smallest viewport causing horizontal scroll",
       "avoid": "min-w-[300px] on a button inside a padded container at 320px viewport (e.g. apply-scholarship submit)",
       "instead": "Use w-full with optional max-w-[300px], or min-w-0 in a flex container so button does not force overflow; audit at 320px",
-      "tags": ["mobile", "overflow", "button", "horizontal-scroll"]
+      "tags": [
+        "mobile",
+        "overflow",
+        "button",
+        "horizontal-scroll"
+      ]
     },
     {
       "id": "form-input-font-below-16-mobile",
       "description": "Form inputs with font-size below 16px on mobile (triggers iOS zoom on focus)",
       "avoid": "text-[15px] or text-[14px] on input, select, textarea for user-facing forms (Contact, registration modals)",
       "instead": "Use text-base or text-[16px] for inputs so iOS does not zoom on focus; labels and secondary text may stay smaller",
-      "tags": ["mobile", "forms", "iOS", "a11y", "zoom"]
+      "tags": [
+        "mobile",
+        "forms",
+        "iOS",
+        "a11y",
+        "zoom"
+      ]
     },
     {
       "id": "protected-auth-api-without-runtime-verification",
       "description": "Auth API that returns 400/401 but no way to verify at runtime when secret is set (e.g. dev has secret unset)",
       "avoid": "Validation summary warns 'verify auth 400/401 in staging'; no script or doc to run the check",
       "instead": "Add a small script (e.g. scripts/verify-coach-hub-auth.mjs) that fetch POST {} and POST { password: 'wrong' } and assert 400/401; run with dev server started with secret set; document in validation summary or README",
-      "tags": ["auth", "validation", "contract", "script"]
+      "tags": [
+        "auth",
+        "validation",
+        "contract",
+        "script"
+      ]
     },
     {
       "id": "multiple-expandable-cards-without-single-expand",
       "description": "List of expandable cards (e.g. ProgramCard) each with a fixed/sticky bar when expanded, but no single-expand",
-      "avoid": "Each card manages its own isExpanded state; multiple cards can be expanded → multiple fixed bottom bars stack; wrong program may open on Register",
+      "avoid": "Each card manages its own isExpanded state; multiple cards can be expanded \u2192 multiple fixed bottom bars stack; wrong program may open on Register",
       "instead": "Lift expanded id to parent: expandedProgramId; pass isExpanded and onToggle to each card so only one can be expanded; single sticky bar in DOM. See pattern single-expand-cards-in-list.",
-      "tags": ["ux", "react", "ProgramCard", "sticky-bar", "mobile"]
+      "tags": [
+        "ux",
+        "react",
+        "ProgramCard",
+        "sticky-bar",
+        "mobile"
+      ]
     },
     {
       "id": "api-400-raw-validation-error",
       "description": "Form/booking API returns raw Zod validation.error in 400 response",
-      "avoid": "NextResponse.json({ success: false, error: validation.error }, { status: 400 }) — exposes field names and internal messages to client",
+      "avoid": "NextResponse.json({ success: false, error: validation.error }, { status: 400 }) \u2014 exposes field names and internal messages to client",
       "instead": "Log validation.error server-side; return generic message (e.g. 'Invalid request. Please check your input.') or sanitized field errors only",
-      "tags": ["api", "security", "validation", "book", "400"]
+      "tags": [
+        "api",
+        "security",
+        "validation",
+        "book",
+        "400"
+      ]
     },
     {
       "id": "thank-you-links-no-focus-ring",
       "description": "Thank-you or confirmation page with tel, mailto, Return, or app store links but no visible focus ring",
       "avoid": "Links without focus:ring-* so keyboard users have no visible focus indicator",
       "instead": "Add focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm (or ring-white on dark) to every focusable link",
-      "tags": ["a11y", "thank-you", "focus", "WCAG"]
+      "tags": [
+        "a11y",
+        "thank-you",
+        "focus",
+        "WCAG"
+      ]
     },
     {
       "id": "confirmation-page-raw-blue",
       "description": "Thank-you or confirmation page step/card styling with raw blue (blue-600, blue-100)",
       "avoid": "text-blue-600, bg-blue-100 in step numbers or cards; bypasses brand palette",
       "instead": "Use brand tokens (e.g. text-brand-victoria-cove, bg-brand-victoria-cove/10) for steps and accents",
-      "tags": ["brand", "thank-you", "design-system", "cursorrules"]
+      "tags": [
+        "brand",
+        "thank-you",
+        "design-system",
+        "cursorrules"
+      ]
     },
     {
       "id": "section-quote-redundant-border",
       "description": "Pull quote using both .section-quote and an extra border (e.g. border-l-2 border-brand-victoria-cove/40)",
       "avoid": "blockquote with section-quote and border-l-2 border-brand-victoria-cove/40; Brand Guide defines section-quote with gradient left edge",
       "instead": "Use section-quote only; do not add border-l or border-brand-* on the same element",
-      "tags": ["brand-guide", "section-quote", "coaches", "bio"]
+      "tags": [
+        "brand-guide",
+        "section-quote",
+        "coaches",
+        "bio"
+      ]
     },
     {
       "id": "next-image-localpatterns-incomplete",
       "description": "next.config images.localPatterns omits a prefix used by next/image (Next 15+)",
-      "avoid": "Only { pathname: '/images/**' } while Header/Footer/trials use /logos/*.png or /photos/*.webp → production _next/image returns 400 INVALID_IMAGE_OPTIMIZE_REQUEST; browser shows broken image + alt text",
-      "instead": "Grep for Image src=\"/…\"; add each top-level folder to localPatterns (/logos/**, /photos/**, etc.)",
-      "tags": ["nextjs", "next/image", "vercel", "regression"]
+      "avoid": "Only { pathname: '/images/**' } while Header/Footer/trials use /logos/*.png or /photos/*.webp \u2192 production _next/image returns 400 INVALID_IMAGE_OPTIMIZE_REQUEST; browser shows broken image + alt text",
+      "instead": "Grep for Image src=\"/\u2026\"; add each top-level folder to localPatterns (/logos/**, /photos/**, etc.)",
+      "tags": [
+        "nextjs",
+        "next/image",
+        "vercel",
+        "regression"
+      ]
     },
     {
       "id": "translucent-header-over-dark-hero",
       "description": "Fixed header uses semi-transparent light background over dark full-viewport hero",
       "avoid": "bg-brand-morning-light/90 + backdrop-blur over HomeHero video; composited bar reads dark while nav stays text-brand-pacific-dusk",
       "instead": "Opaque bg-brand-morning-light; optional subtle border-b; or dedicated inverse header theme with light text",
-      "tags": ["a11y", "header", "contrast", "WCAG", "homepage"]
+      "tags": [
+        "a11y",
+        "header",
+        "contrast",
+        "WCAG",
+        "homepage"
+      ]
     },
     {
       "id": "chat-widget-close-button-no-a11y",
       "description": "ChatWidget close button without min-h-[48px] and focus-visible:ring",
-      "avoid": "32px × 32px close button with inline styles, no focus ring, opacity transitions only",
+      "avoid": "32px \u00d7 32px close button with inline styles, no focus ring, opacity transitions only",
       "instead": "min-h-[48px] min-w-[48px] with Tailwind classes, focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2",
-      "tags": ["a11y", "ChatWidget", "close-button", "focus-ring", "touch-target"]
+      "tags": [
+        "a11y",
+        "ChatWidget",
+        "close-button",
+        "focus-ring",
+        "touch-target"
+      ]
     },
     {
       "id": "usecallback-messages-dependency",
       "description": "useCallback includes messages array in dependency array causing unnecessary re-renders",
       "avoid": "const sendMessage = useCallback(async () => { ... }, [input, isLoading, messages])",
       "instead": "Use functional setState (prev => [...prev, ...]) and build history array from updated state inside callback; remove messages from deps",
-      "tags": ["performance", "ChatWidget", "useCallback", "dependencies"]
+      "tags": [
+        "performance",
+        "ChatWidget",
+        "useCallback",
+        "dependencies"
+      ]
     },
     {
       "id": "legacy-tokens-in-new-code",
       "description": "Using legacy lbta-* tokens (lbta-primary, lbta-secondary, lbta-bone) instead of brand-* tokens",
       "avoid": "text-lbta-primary, text-lbta-secondary, bg-lbta-bone in new components or pages",
       "instead": "Use brand-pacific-dusk, brand-pacific-dusk/70, brand-sandstone, brand-morning-light per .cursorrules Part 7",
-      "tags": ["brand-tokens", "lbta-primary", "lbta-secondary", "lbta-bone", "brand-pacific-dusk"]
+      "tags": [
+        "brand-tokens",
+        "lbta-primary",
+        "lbta-secondary",
+        "lbta-bone",
+        "brand-pacific-dusk"
+      ]
     },
     {
       "id": "focus-ring-instead-of-focus-visible",
       "description": "Using focus:ring instead of focus-visible:ring on interactive elements",
       "avoid": "focus:ring-2 focus:ring-brand-victoria-cove (applies on mouse click)",
       "instead": "focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 (only on keyboard focus)",
-      "tags": ["a11y", "focus-ring", "focus-visible", "keyboard"]
+      "tags": [
+        "a11y",
+        "focus-ring",
+        "focus-visible",
+        "keyboard"
+      ]
+    },
+    {
+      "id": "scattered-player-photos",
+      "description": "Player photos spread across multiple directories without canonical path",
+      "avoid": "Same player photo duplicated in /images/success-stories/, /images/results/, /images/homepage/ with different filenames or crops",
+      "instead": "One canonical file per player photo (e.g. /images/success-stories/{slug}.webp); all surfaces reference the same path; plan migration to /images/players/{slug}/ for multi-photo support",
+      "tags": [
+        "images",
+        "player",
+        "canonical-path",
+        "duplication"
+      ]
+    },
+    {
+      "id": "object-cover-no-position-on-people",
+      "description": "Using object-cover on photos with people without specifying objectPosition",
+      "avoid": "object-cover with default center position on player/coach photos; heads get cropped in wide containers",
+      "instead": "Always set objectPosition (e.g. 50% 10% for top-weighted player shots, 50% 44% for mid-body shots); store in data JSON per image for tuning",
+      "tags": [
+        "images",
+        "object-position",
+        "crop",
+        "a11y",
+        "faces"
+      ]
+    },
+    {
+      "id": "legacy-assets-in-new-features",
+      "description": "New feature or page referencing /legacy-working-assets/ paths",
+      "avoid": "Adding src=\"/legacy-working-assets/...\" in new components; deepens dependency on sunset directory",
+      "instead": "Copy/migrate asset to /images/ (WebP preferred); update reference; document in docs/photo-map-routing.md. Legacy has 30+ remaining references to migrate.",
+      "tags": [
+        "images",
+        "legacy",
+        "migration",
+        "photo-routing"
+      ]
     }
   ]
 }
