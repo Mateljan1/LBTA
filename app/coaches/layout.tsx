@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'Our Coaches | Laguna Beach Tennis Academy',
     description: 'Meet the coaching team at LBTA. ATP/WTA certified professionals with decades of experience developing players from junior foundations to professional tour.',
     type: 'website',
-    images: [{ url: '/legacy-working-assets/hero/adult-group-hero/adult-group-hero.webp', width: 1920, height: 1080, alt: 'LBTA coaches' }],
+    images: [{ url: '/images/contact/contact-hero.webp', width: 1958, height: 1317, alt: 'Laguna Beach Tennis Academy courts and coaching' }],
   },
 }
 

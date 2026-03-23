@@ -799,8 +799,40 @@
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
   }
 
+  /** Stronger stack on small screens so white hero type stays readable over busy photos */
+  .text-shadow-hero-readable {
+    text-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.9),
+      0 6px 28px rgba(0, 0, 0, 0.55);
+  }
+  @media (min-width: 768px) {
+    .text-shadow-hero-readable {
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    }
+  }
+
   .text-shadow-subtle {
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /** Bottom-weighted scrim for dark-section heroes (mobile-first contrast) */
+  .hero-scrim-branded {
+    background: linear-gradient(
+      to top,
+      rgba(10, 22, 38, 0.94) 0%,
+      rgba(0, 0, 0, 0.58) 38%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  }
+  @media (min-width: 768px) {
+    .hero-scrim-branded {
+      background: linear-gradient(
+        to top,
+        rgba(15, 34, 55, 0.78) 0%,
+        rgba(0, 0, 0, 0.3) 52%,
+        transparent 100%
+      );
+    }
   }
 }
 

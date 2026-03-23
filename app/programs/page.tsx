@@ -10,6 +10,9 @@ import ProgramOverviewCard from '@/components/programs/ProgramOverviewCard'
 export const metadata: Metadata = {
   title: 'Programs | Laguna Beach Tennis Academy',
   description: 'Choose your path — junior development, youth, high performance, adult programs, camps, fitness, and leagues. Every program built around movement, craft, and community.',
+  openGraph: {
+    images: [{ url: '/images/programs/hero.webp', width: 1200, height: 900, alt: 'LBTA tennis programs' }],
+  },
 }
 
 export default function Programs() {
@@ -21,23 +24,25 @@ export default function Programs() {
       <section className="relative min-h-[55vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden bg-brand-deep-water">
         <div className="absolute inset-0">
           <Image
-            src="/images/schedules/schedules-hero.webp"
-            alt="Outdoor tennis courts and programs at Laguna Beach Tennis Academy"
+            src="/images/programs/hero.webp"
+            alt="Tennis programs and training at Laguna Beach Tennis Academy"
             fill
-            className="object-cover opacity-[0.62]"
-            style={{ objectPosition: '50% 44%' }}
+            className="object-cover max-md:brightness-[0.9]"
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
             quality={90}
           />
-          <div className="absolute inset-0 bg-brand-deep-water/42" />
+          <div className="absolute inset-0 hero-scrim-branded" aria-hidden="true" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
-          <span className="text-eyebrow text-brand-victoria-cove/90 mb-4 block">Choose Your Path</span>
-          <h1 className="font-headline text-display-xl text-white mb-5">
+          <span className="text-eyebrow text-brand-victoria-cove mb-4 block text-shadow-hero-readable max-md:text-brand-victoria-cove">
+            Choose Your Path
+          </span>
+          <h1 className="font-headline text-display-xl text-white mb-5 text-shadow-hero-readable">
             Programs for Every Player.
           </h1>
-          <p className="font-sans text-body-lg font-light text-white/90 max-w-2xl mx-auto">
+          <p className="font-sans text-body-lg font-light text-white max-w-2xl mx-auto text-shadow-hero-readable max-md:text-white/95 md:text-white/90">
             From first rally to college and beyond — movement, craft, community.
           </p>
         </div>

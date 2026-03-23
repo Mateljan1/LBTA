@@ -127,27 +127,27 @@ export default function SuccessStoriesPage() {
       <section className="relative min-h-[55vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/schedules/schedules-hero.webp"
-            alt="Group practice on court at Laguna Beach Tennis Academy"
+            src="/images/results/karue-sell-andrew-mateljan-coaching.webp"
+            alt="On-court coaching at Laguna Beach Tennis Academy"
             fill
-            className="object-cover object-center"
+            className="object-cover object-center max-md:brightness-[0.88]"
+            style={{ objectPosition: '50% 45%' }}
             sizes="100vw"
             priority
             quality={90}
           />
-          <div className="absolute inset-0 bg-brand-deep-water/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 hero-scrim-branded" aria-hidden="true" />
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <AnimatedSection>
             <div className="text-center max-w-3xl mx-auto text-white">
-              <p className="font-sans text-[11px] text-white/80 uppercase tracking-[2px] mb-4">
+              <p className="font-sans text-[11px] text-white uppercase tracking-[2px] mb-4 text-shadow-hero-readable">
                 Player Achievements
               </p>
-              <h1 className="font-headline text-[40px] md:text-[56px] font-semibold text-brand-sandstone mb-6 leading-[1.1]">
+              <h1 className="font-headline text-[40px] md:text-[56px] font-semibold text-brand-sandstone mb-6 leading-[1.1] text-shadow-hero-readable">
                 Success Stories
               </h1>
-              <p className="font-sans text-[17px] md:text-[18px] text-white/90 leading-relaxed">
+              <p className="font-sans text-[17px] md:text-[18px] text-white leading-relaxed text-shadow-hero-readable max-md:text-white/95 md:text-white/90">
                 From ATP tour players to adult beginners, see how LBTA's movement-first approach
                 transforms players at every level.
               </p>
