@@ -140,6 +140,12 @@ const utrDivisionSchema = z.object({
   venue: z.string(),
 })
 
+const ntrpToUtrRowSchema = z.object({
+  ntrp: z.string(),
+  men: z.string(),
+  women: z.string(),
+})
+
 const leaguesDataSchema = z.object({
   usta: z.object({
     totalSeasonCost: z.number(),
@@ -149,6 +155,7 @@ const leaguesDataSchema = z.object({
   utr: z.object({
     seasonLabel: z.string().optional(),
     divisions: z.array(utrDivisionSchema),
+    ntrpToUtr: z.array(ntrpToUtrRowSchema),
   }),
 })
 

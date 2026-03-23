@@ -4,6 +4,7 @@ import { getAllConfiguredPrograms, getPrepopulateData } from './form-config'
 import { registrationModalPricing } from './pricing-supplemental'
 import { parseLeagues } from './schedule-schemas'
 import { getUtrCircuitModalPricingSummary } from './utr-circuit-modal-pricing'
+import { getUtrCircuitFormDuration } from './utr-match-play'
 
 /**
  * Data integrity: every form-config program ID must have a registrationModalPricing
@@ -31,5 +32,10 @@ describe('form-config vs registrationModalPricing', () => {
     expect(summary).toContain(`$${min.toLocaleString('en-US')}`)
     expect(summary).toContain(`$${max.toLocaleString('en-US')}`)
     expect(getPrepopulateData('utr-circuit')?.pricing).toBe(summary)
+  })
+
+  it('utr-circuit modal duration matches leagues JSON season (no hardcoded wrong dates)', () => {
+    expect(getPrepopulateData('utr-circuit')?.duration).toBe(getUtrCircuitFormDuration())
+    expect(getUtrCircuitFormDuration()).toContain('2026')
   })
 })

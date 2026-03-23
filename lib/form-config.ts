@@ -13,6 +13,7 @@
 
 import { registrationModalPricing } from '@/lib/pricing-supplemental'
 import { getUtrCircuitModalPricingSummary } from '@/lib/utr-circuit-modal-pricing'
+import { getUtrCircuitFormDuration } from '@/lib/utr-match-play'
 
 function getModalPricing(programId: string): string {
   if (programId === 'utr-circuit') {
@@ -380,7 +381,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     prePopulateData: {
       programName: 'UTR Match Play Series — Season 1',
       location: 'Alta Laguna Park & LBHS',
-      duration: '8 Saturdays (Apr 11 - May 30)',
+      duration: getUtrCircuitFormDuration(),
       pricing: getModalPricing('utr-circuit'),
       category: 'Match Play Series',
       ageGroup: 'All Ages (level-based divisions)',

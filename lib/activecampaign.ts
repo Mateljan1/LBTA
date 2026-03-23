@@ -267,7 +267,10 @@ export function getClassTagFromLevel(level: string): number | null {
  * Map UTR Match Play Series division slug to tag ID
  */
 export function getUtrDivisionTag(division: string): number | null {
-  const d = division.toLowerCase().replace(/\s+/g, '-')
+  const d = division
+    .toLowerCase()
+    .replace(/[\u2013\u2014\u2212]/g, '-') // en dash, em dash, minus → ASCII hyphen
+    .replace(/\s+/g, '-')
   const divisionMap: Record<string, number> = {
     'color-ball': UTR_DIVISION_TAGS.color_ball,
     'color_ball': UTR_DIVISION_TAGS.color_ball,
