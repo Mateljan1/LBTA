@@ -65,7 +65,7 @@ export default function PlayerSuccessCarousel({
     <section
       id="results"
       role="region"
-      className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center overflow-hidden"
+      className="relative min-h-[65vh] lg:min-h-[76vh] flex items-center overflow-hidden"
       aria-roledescription="carousel"
       aria-label={`${eyebrow}: rotating player stories`}
       onMouseEnter={() => setPaused(true)}
@@ -85,7 +85,10 @@ export default function PlayerSuccessCarousel({
               alt={slide.imageAlt}
               fill
               className="object-cover"
-              style={{ objectPosition: slide.objectPosition ?? '50% 42%' }}
+              style={{
+                /* Top-weighted: wide hero bands + object-cover crop from center by default; bias up so faces stay in frame */
+                objectPosition: slide.objectPosition ?? '50% 12%',
+              }}
               sizes="100vw"
               quality={90}
               priority={i === 0}
