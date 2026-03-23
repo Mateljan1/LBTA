@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/schedules/schedules-hero.webp',
-        width: 2400,
-        height: 1800,
-        alt: 'Laguna Beach Tennis Academy',
+        url: '/images/facility/detail-sunlit-blue-tennis-courts.webp',
+        width: 1920,
+        height: 1080,
+        alt: 'Sunlit tennis courts at Laguna Beach Tennis Academy',
       },
     ],
   },

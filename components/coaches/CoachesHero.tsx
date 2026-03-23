@@ -30,8 +30,8 @@ export default function CoachesHero() {
     >
       <div className="absolute inset-0">
         <Image
-          src="/images/contact/contact-hero.webp"
-          alt="Laguna Beach Tennis Academy — outdoor courts and coastal training environment"
+          src="/images/facility/hero-ocean-view-tennis-courts-sunset.webp"
+          alt="Coastal tennis courts at sunset — Laguna Beach training environment"
           fill
           priority
           className="object-cover max-md:brightness-[0.92] md:[filter:brightness(1.04)]"

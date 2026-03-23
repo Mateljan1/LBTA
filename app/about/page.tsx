@@ -230,11 +230,11 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <div className="md:col-span-2 relative aspect-[16/10] md:aspect-[2/1] overflow-hidden rounded-subtle">
               <Image
-                src="/images/about/court-moulton.webp"
-                alt="Tennis court with cones and balls at sunset"
+                src="/images/facility/overview-coastal-tennis-facility-ocean.webp"
+                alt="Coastal tennis facility at sunset — blue courts and ocean horizon"
                 fill
                 className="object-cover"
-                style={{ objectPosition: '50% 50%' }}
+                style={{ objectPosition: '50% 48%' }}
                 sizes="(max-width: 768px) 100vw, 66vw"
                 quality={90}
               />

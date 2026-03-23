@@ -50,11 +50,11 @@ export default function SchedulesPageClient({
       <section className="relative min-h-[42vh] md:min-h-[44vh] flex items-center overflow-hidden bg-brand-deep-water">
         <div className="absolute inset-0">
           <Image
-            src="/images/schedules/schedules-hero.webp"
-            alt="Group tennis practice on court at Laguna Beach Tennis Academy"
+            src="/images/facility/detail-sunlit-blue-tennis-courts.webp"
+            alt="Sunlit blue hard courts at Laguna Beach Tennis Academy"
             fill
             className="object-cover object-center max-md:brightness-[0.9]"
-            style={{ objectPosition: '50% 42%' }}
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
             quality={90}

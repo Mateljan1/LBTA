@@ -84,11 +84,11 @@ export default function ContactPage() {
       <section className="relative min-h-[65vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/contact/contact-hero.webp"
-            alt="Sunset practice on outdoor tennis courts in Laguna Beach"
+            src="/images/facility/coaching-private-tennis-lesson-drill.webp"
+            alt="On-court coaching and drills at Laguna Beach Tennis Academy"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 60%' }}
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
           />

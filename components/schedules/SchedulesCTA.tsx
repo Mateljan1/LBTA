@@ -11,10 +11,11 @@ export default function SchedulesCTA({ ctaHeadline, ctaSubline }: SchedulesCTAPr
     <section className="relative min-h-[400px] md:min-h-[500px] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="/images/hero/laguna-horizon.webp"
-          alt="Laguna Beach sunset"
+          src="/images/facility/hero-ocean-view-tennis-courts-sunset.webp"
+          alt="Coastal tennis courts at sunset — Laguna Beach"
           fill
           className="object-cover"
+          style={{ objectPosition: '50% 52%' }}
           sizes="100vw"
           loading="lazy"
           quality={90}

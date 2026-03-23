@@ -101,8 +101,9 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
   if (variant === 'compact') {
     const shortBio = truncateBio(coach.bio ?? '')
     return (
-      <div className="h-full w-full flex flex-col bg-white rounded-lg overflow-hidden border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 transition-shadow duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] motion-safe:hover:-translate-y-0.5">
-        <div className="relative w-full aspect-[4/5] overflow-hidden shrink-0 bg-brand-morning-light ring-1 ring-inset ring-black/[0.04]">
+      <div className="h-full w-full flex flex-col bg-white rounded-lg border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 transition-shadow duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] motion-safe:hover:-translate-y-0.5">
+        {/* Portrait frame: same aspect for every coach; object-cover unifies full-body and headshot sources */}
+        <div className="relative w-full aspect-[4/5] overflow-hidden shrink-0 rounded-t-lg bg-brand-morning-light ring-1 ring-inset ring-black/[0.04]">
           <Image
             src={coachImageSrc(coach.image)}
             alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
@@ -113,7 +114,7 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
             quality={90}
           />
         </div>
-        <div className="flex flex-col flex-1 min-h-0 p-5 md:p-6">
+        <div className="flex flex-col flex-1 min-h-0 p-5 md:p-6 rounded-b-lg">
           <div className="shrink-0">
             <p className="font-sans text-[10px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.12em] mb-1.5 line-clamp-2 leading-tight min-h-[2.25rem]">
               {coach.title}
@@ -129,15 +130,18 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
                 {coach.name}
               </h3>
             )}
-            <p className="font-sans text-[12px] leading-snug text-brand-pacific-dusk/75 mb-3 min-h-[3.25rem] line-clamp-3">
+            <p className="font-sans text-[12px] leading-snug text-brand-pacific-dusk/75 mb-4 min-h-[3.25rem] line-clamp-3">
               {coach.specialization}
             </p>
           </div>
-          <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.55] mb-4 line-clamp-4 min-h-[5.5rem]">
-            {shortBio}
-          </p>
-          <div className="mt-auto border-t border-black/[0.06] pt-4 flex flex-col gap-3">
-            <div className="min-h-[4.5rem] flex flex-wrap content-start gap-1.5">
+          {/* Grows so credential + CTA rows align across the row */}
+          <div className="flex-1 flex flex-col min-h-[7.5rem]">
+            <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.55] line-clamp-4">
+              {shortBio}
+            </p>
+          </div>
+          <div className="mt-auto shrink-0 border-t border-black/[0.06] pt-4 flex flex-col gap-3">
+            <div className="min-h-[5.25rem] flex flex-wrap content-start gap-1.5">
               {coach.credentials.map((cred, i) => (
                 <span
                   key={`${cred}-${i}`}
