@@ -21,16 +21,16 @@ export default function Programs() {
       <section className="relative min-h-[55vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden bg-brand-deep-water">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/hero/hero-poster/hero-poster.webp"
-            alt="Laguna Beach Tennis Academy players training at sunset on coastal courts"
+            src="/images/schedules/schedules-hero.webp"
+            alt="Outdoor tennis courts and programs at Laguna Beach Tennis Academy"
             fill
-            className="object-cover opacity-55"
-            style={{ objectPosition: '50% 70%' }}
+            className="object-cover opacity-[0.62]"
+            style={{ objectPosition: '50% 44%' }}
             sizes="100vw"
             priority
             quality={90}
           />
-          <div className="absolute inset-0 bg-brand-deep-water/50" />
+          <div className="absolute inset-0 bg-brand-deep-water/42" />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
           <span className="text-eyebrow text-brand-victoria-cove/90 mb-4 block">Choose Your Path</span>
