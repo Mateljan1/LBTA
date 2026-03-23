@@ -12,7 +12,7 @@ import { MasonryGrid } from '@/components/sections'
 import type { MasonryImageItem } from '@/components/sections/MasonryGrid'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
-import PlayerSuccessCarousel from '@/components/home/PlayerSuccessCarousel'
+import PlayerSuccessCarousel, { type PlayerSuccessSlide } from '@/components/home/PlayerSuccessCarousel'
 import { coachImageSrc } from '@/lib/coaches-data'
 import siteStats from '@/data/site-stats.json'
 import homepageCopy from '@/data/homepage-copy.json'
@@ -201,7 +201,7 @@ export default function Home() {
         eyebrow={results.eyebrow}
         headline={results.headline}
         intervalMs={results.intervalMs}
-        slides={results.slides}
+        slides={results.slides as PlayerSuccessSlide[]}
       />
 
       <HorizonDivider animate />

@@ -13,6 +13,8 @@ export type PlayerSuccessSlide = {
   image: string
   imageAlt: string
   objectPosition?: string
+  /** `contain` = full image visible (letterbox on wide band) — use for tall portraits / squares that `cover` would amputate */
+  imageFit?: 'cover' | 'contain'
 }
 
 export type PlayerSuccessCarouselProps = {
@@ -90,7 +92,7 @@ export default function PlayerSuccessCarousel({
         <AnimatePresence mode="sync" initial={false}>
           <motion.div
             key={safeIndex}
-            className="absolute inset-0 z-10"
+            className={`absolute inset-0 z-10 ${(active.imageFit ?? 'cover') === 'contain' ? 'bg-brand-deep-water' : ''}`}
             initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
@@ -104,14 +106,16 @@ export default function PlayerSuccessCarousel({
               src={active.image}
               alt={active.imageAlt}
               fill
-              className="object-cover brightness-[1.02] saturate-[1.02]"
+              className={`${
+                (active.imageFit ?? 'cover') === 'contain' ? 'object-contain' : 'object-cover'
+              } brightness-[1.02] saturate-[1.02]`}
               style={{
-                objectPosition: active.objectPosition ?? '50% 20%',
+                objectPosition: active.objectPosition ?? '50% 50%',
               }}
               sizes="100vw"
               quality={100}
-              loading="lazy"
               decoding="async"
+              priority={safeIndex === 0}
             />
           </motion.div>
         </AnimatePresence>
