@@ -22,12 +22,33 @@
   "results": {
     "eyebrow": "Player Success",
     "headline": "Guided by structure, repetition, and trust.",
-    "subline": "Karue Sell, ATP #262 — on-court training with Coach Andrew Mateljan.",
-    "ctaSecondary": "Watch His Journey",
-    "ctaSecondaryHref": "/success-stories",
-    "backgroundImage": "/images/results/karue-sell-andrew-mateljan-coaching.webp",
-    "backgroundAlt": "Karue Sell in a two-handed backhand with Coach Andrew Mateljan observing on court at LBTA",
-    "objectPosition": "48% 42%"
+    "intervalMs": 8500,
+    "slides": [
+      {
+        "subline": "Karue Sell, ATP #262 — from the #800s to a career high earned through structured work on tour.",
+        "ctaLabel": "Watch His Journey",
+        "ctaHref": "/success-stories#karue-sell",
+        "image": "/images/success-stories/karue-sell.webp",
+        "imageAlt": "Karue Sell competing on a tennis court",
+        "objectPosition": "52% 42%"
+      },
+      {
+        "subline": "Ryan Seggerman — career-high ATP singles #72; movement work at LBTA between tour stops.",
+        "ctaLabel": "Read Ryan's story",
+        "ctaHref": "/success-stories#ryan-seggerman",
+        "image": "/images/success-stories/ryan-seggerman.webp",
+        "imageAlt": "Ryan Seggerman on a blue hard court",
+        "objectPosition": "50% 40%"
+      },
+      {
+        "subline": "Henry Mateljan — age 9, 4.6 UTR; Little Mo recognition on his junior journey.",
+        "ctaLabel": "Read Henry's story",
+        "ctaHref": "/success-stories#henry-mateljan",
+        "image": "/images/success-stories/henry-mateljan-little-mo.webp",
+        "imageAlt": "Junior player at a tournament tennis court",
+        "objectPosition": "50% 28%"
+      }
+    ]
   },
   "philosophy": {
     "eyebrow": "Our Philosophy",

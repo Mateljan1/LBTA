@@ -219,9 +219,12 @@ export default function SuccessStoriesPage() {
           <div className="space-y-16 md:space-y-24">
             {successStories.filter(s => s.featured).map((story, index) => (
               <AnimatedSection key={story.id} delay={index * 100}>
-                <div className={`grid md:grid-cols-2 gap-8 md:gap-16 items-center ${
-                  index % 2 === 1 ? 'md:flex-row-reverse' : ''
-                }`}>
+                <div
+                  id={story.id}
+                  className={`scroll-mt-24 md:scroll-mt-32 grid md:grid-cols-2 gap-8 md:gap-16 items-center ${
+                    index % 2 === 1 ? 'md:flex-row-reverse' : ''
+                  }`}
+                >
                   {/* Image */}
                   <div className={`relative aspect-[4/3] rounded-lg overflow-hidden ${
                     index % 2 === 1 ? 'md:order-2' : ''

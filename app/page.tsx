@@ -12,6 +12,7 @@ import { MasonryGrid } from '@/components/sections'
 import type { MasonryImageItem } from '@/components/sections/MasonryGrid'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
+import PlayerSuccessCarousel from '@/components/home/PlayerSuccessCarousel'
 import { coachImageSrc } from '@/lib/coaches-data'
 import siteStats from '@/data/site-stats.json'
 import homepageCopy from '@/data/homepage-copy.json'
@@ -89,12 +90,6 @@ type ProgramItem = (typeof homepageCopy)['programs']['items'][number] & {
   objectPosition?: string
 }
 
-type ResultsCopy = (typeof homepageCopy)['results'] & {
-  backgroundImage: string
-  backgroundAlt: string
-  objectPosition?: string
-}
-
 type DestinationCopy = (typeof homepageCopy)['destination'] & {
   backgroundImage: string
   backgroundAlt: string
@@ -112,7 +107,7 @@ type CommunitySection = (typeof homepageCopy)['community'] & { gallery: Communit
 export default function Home() {
   const whyChoose = (homepageCopy as { whyChoose?: WhyChooseCopy }).whyChoose
   const communitySection = homepageCopy.community as CommunitySection
-  const results = homepageCopy.results as ResultsCopy
+  const results = homepageCopy.results
   const destination = homepageCopy.destination as DestinationCopy
   return (
     <>
@@ -202,43 +197,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="results" className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={results.backgroundImage}
-            alt={results.backgroundAlt}
-            fill
-            className="object-cover"
-            style={{ objectPosition: results.objectPosition ?? '50% 42%' }}
-            sizes="100vw"
-            quality={90}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-deep-water/95 via-black/70 to-transparent" />
-        </div>
-        <div className="relative z-10 container-lbta">
-          <div className="max-w-xl">
-            <AnimatedSection>
-              <span className="text-eyebrow text-white/90 mb-4 block">{results.eyebrow}</span>
-            </AnimatedSection>
-            <AnimatedSection delay={100}>
-              <h2 className="font-headline text-[clamp(2.5rem,6vw,4rem)] font-light text-white leading-[1.15] tracking-[-0.02em] mb-6">
-                {results.headline}
-              </h2>
-            </AnimatedSection>
-            <AnimatedSection delay={200}>
-              <p className="text-body-lg text-white/80 mb-8">{results.subline}</p>
-            </AnimatedSection>
-            <AnimatedSection delay={300}>
-              <Link href={results.ctaSecondaryHref} className="btn-ghost text-white/80 hover:text-white inline-flex items-center min-h-[48px]">
-                <span>{results.ctaSecondary}</span>
-                <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
+      <PlayerSuccessCarousel
+        eyebrow={results.eyebrow}
+        headline={results.headline}
+        intervalMs={results.intervalMs}
+        slides={results.slides}
+      />
 
       <HorizonDivider animate />
       <section id="philosophy" className="bg-brand-morning-light section-lg">
