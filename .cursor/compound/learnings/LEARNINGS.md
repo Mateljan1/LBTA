@@ -2,7 +2,9 @@
 
 Extracted from the Code Review Summary (12-agent parallel review). Use these for future implementation and review.
 
-**Recent:** 2026-03-20 — ActiveCampaign test email fix: see `2026-03-20-activecampaign-test-email-compound-learn.md`. v3 POST /campaigns/{id}/test returns 405 → use legacy campaign_send with campaignid + messageid. Correction + pattern added.
+**Recent:** 2026-03-23 — Homepage hero video: confirm `public/videos/LBTA-Home-Hero.webm` + poster `hero-poster.webp`; MP4 was referenced at `/videos/LBTA-Home-Hero.mp4` but missing — **HomeHero** updated to drop dead `<source>`; Safari/legacy uses `legacy-working-assets/.../LBTA-Home-Hero.mp4` only. Player Success carousel: four slide images verified on disk (`homepage-copy.json` `results.slides`). See `2026-03-23-photo-carousel-facility-imagery-compound-learn.md` (verification section).
+
+**Previous:** 2026-03-20 — ActiveCampaign test email fix: see `2026-03-20-activecampaign-test-email-compound-learn.md`. v3 POST /campaigns/{id}/test returns 405 → use legacy campaign_send with campaignid + messageid. Correction + pattern added.
 
 **Previous:** 2026-03-17 — Mobile Phase 1 audit compound:learn: see `2026-03-17-mobile-audit-compound-learn.md`. Audit baseline for mobile (320/375/768px): horizontal scroll, 48px touch targets, 16px+ form inputs, scroll-anchor, modals. **Learn run:** Corrections (button min-width overflow, form input 16px on mobile), pattern (mobile-audit-baseline), quality bars (mobileChecklist, formInput16pxMobile), anti-patterns (button-min-width-overflow, form-input-font-below-16-mobile). Deliverable: `plans/mobile-audit-phase1-checklist.md`.
 

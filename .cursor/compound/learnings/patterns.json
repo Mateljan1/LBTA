@@ -1,565 +1,1036 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-20",
-  "lastLearnRun": "2026-03-20 ActiveCampaign test email fix: legacy campaign_send",
+  "updated": "2026-03-23",
+  "lastLearnRun": "2026-03-23 Photo carousel, facility imagery, player success patterns",
   "patterns": [
+    {
+      "name": "video-source-paths-must-exist",
+      "when": "Homepage or hero uses multiple HTML5 video source elements",
+      "example": "List only URLs that exist under public/; if MP4 lives only under legacy-working-assets, omit a broken /videos/foo.mp4 source — browsers do not always fall through cleanly. Verify with ls public/videos and Network tab 200s.",
+      "tags": ["video", "assets", "homepage"]
+    },
     {
       "name": "hero-video-poster-lcp",
       "when": "Hero uses autoplay video with poster for LCP",
       "example": "Use a small dedicated poster file (e.g. hero-poster.webp < 200KB); preload it in layout; video poster= that path. Full hero image (laguna-horizon.webp) for destination/OG. Generate poster via script (e.g. scripts/generate-hero-poster.js) from full hero when hero image changes.",
-      "tags": ["performance", "LCP", "video"]
+      "tags": [
+        "performance",
+        "LCP",
+        "video"
+      ]
     },
     {
       "name": "single-source-dropdown-options",
       "when": "Modal or page shows a list of programs/options also used elsewhere",
       "example": "Trial program list: one data file or lib helper; TrialBookingModal and book page both import",
-      "tags": ["data", "DRY"]
+      "tags": [
+        "data",
+        "DRY"
+      ]
     },
     {
       "name": "prices-in-data-only",
       "when": "Component displays pricing (tiers, sessions, membership)",
       "example": "PricingComparison, LeaguesSection read from /data/*.json or lib/programs-data",
-      "tags": ["data-integrity"]
+      "tags": [
+        "data-integrity"
+      ]
     },
     {
       "name": "modal-focus-restore",
       "when": "Any modal/dialog that traps focus",
       "example": "On open save document.activeElement; on close call previousFocus?.focus() in close handler and effect cleanup",
-      "tags": ["a11y", "focus"]
+      "tags": [
+        "a11y",
+        "focus"
+      ]
     },
     {
       "name": "icon-button-aria-label",
       "when": "Button has only an icon, no visible text",
       "example": "aria-label=\"Send message\" or \"Close\"",
-      "tags": ["a11y"]
+      "tags": [
+        "a11y"
+      ]
     },
     {
       "name": "webhook-error-500",
       "when": "API route processes webhooks",
       "example": "On catch: NextResponse.json({ success: false, error: '...' }, { status: 500 })",
-      "tags": ["api"]
+      "tags": [
+        "api"
+      ]
     },
     {
       "name": "reduced-motion-section",
       "when": "Section uses Framer Motion whileInView or entrance animation",
       "example": "useReducedMotion(); when true render plain element with no motion props (DarkSection)",
-      "tags": ["a11y", "motion"]
+      "tags": [
+        "a11y",
+        "motion"
+      ]
     },
     {
       "name": "animated-section-use-reduced-motion",
       "when": "Shared component (e.g. AnimatedSection) uses Framer Motion initial/whileInView",
       "example": "useReducedMotion(); if (reduceMotion) return <div className={...}>{children}</div>; else return motion.div with animation props. CSS reduced-motion does not gate JS motion.",
-      "tags": ["a11y", "motion", "framer-motion"]
+      "tags": [
+        "a11y",
+        "motion",
+        "framer-motion"
+      ]
     },
     {
       "name": "server-component-json-ld-client-island",
       "when": "Page needs JSON-LD in initial HTML and interactive sections (nav, hero, StickyCTA)",
       "example": "Server page: getCoachesForSchema(); <script type=\"application/ld+json\" dangerouslySetInnerHTML={...} />; <CoachesPageClient />. Client wrapper contains only interactive parts.",
-      "tags": ["nextjs", "performance", "seo"]
+      "tags": [
+        "nextjs",
+        "performance",
+        "seo"
+      ]
     },
     {
       "name": "section-copy-from-data",
       "when": "Section displays narrative/paragraphs that exist in a data field",
       "example": "founder.bio.split(/(?<=.)\\s+/).filter(Boolean).map((p, i) => <p key={i}>{p.trim()}</p>); or bioParagraphs array in JSON",
-      "tags": ["single-source", "data-integrity"]
+      "tags": [
+        "single-source",
+        "data-integrity"
+      ]
     },
     {
       "name": "schema-builder-defensive-env",
       "when": "Building JSON-LD (Person, ItemList) from app data",
       "example": "Guard image (only add when present); description: schemaDescription ?? bio ?? ''; base URL from process.env.NEXT_PUBLIC_SITE_URL ?? 'https://...'",
-      "tags": ["schema", "data-integrity", "env"]
+      "tags": [
+        "schema",
+        "data-integrity",
+        "env"
+      ]
     },
     {
       "name": "stable-list-keys",
       "when": "Mapping over items that have slug or order",
       "example": "key={coach.slug ?? `order-${coach.order}`} so keys are stable and unique",
-      "tags": ["react", "lists"]
+      "tags": [
+        "react",
+        "lists"
+      ]
     },
     {
       "name": "anchor-section-scroll-margin",
       "when": "In-page anchor nav with sticky bar; sections have id for #hash links",
       "example": "Add scroll-mt-28 to section roots (CoachesHero, CoachingTeamSection, CoachesCTA) so scroll-to-section does not hide heading under nav",
-      "tags": ["a11y", "ux", "anchor-nav"]
+      "tags": [
+        "a11y",
+        "ux",
+        "anchor-nav"
+      ]
     },
     {
       "name": "schedule-by-location-single-source",
       "when": "Building a calendar or schedule view by location (e.g. Moulton, Alta, LBHS) for print/PDF or filters",
       "example": "lib/calendar-schedule.ts: getScheduleByLocationByDay(season) uses only getWinter2026Programs, getSpringProgramsForDisplay, etc. from programs-data; normalizeSlotLocation uses slot.location when present else formatLocation(programLocation). No hardcoded program names or prices; view renders same data as schedules page.",
-      "tags": ["data-integrity", "single-source", "schedules", "calendar"]
+      "tags": [
+        "data-integrity",
+        "single-source",
+        "schedules",
+        "calendar"
+      ]
     },
     {
       "name": "skip-to-main-focusable-target",
       "when": "Skip-to-main link (href=\"#main-content\") is present in layout; target must receive focus and provide main landmark",
       "example": "Target element: <main id=\"main-content\" tabIndex={-1}> so focus moves into main when skip is activated; standalone landings (junior-trial, beginner-program) that bypass ConditionalLayout must add their own main#main-content with tabIndex={-1}",
-      "tags": ["a11y", "skip-link", "focus", "landmark"]
+      "tags": [
+        "a11y",
+        "skip-link",
+        "focus",
+        "landmark"
+      ]
     },
     {
       "name": "next-image-logos",
       "when": "Displaying logos or partner images (not tracking pixel)",
       "example": "Next/Image with width, height, descriptive alt (ChatWidget logo, PartnershipSection)",
-      "tags": ["performance", "a11y"]
+      "tags": [
+        "performance",
+        "a11y"
+      ]
     },
     {
       "name": "client-image-fallback-missing-asset",
       "when": "Section uses image paths that may not exist yet (e.g. Why Choose); section must never break with 404 or uncaught error",
       "example": "Client component (WhyChooseImage): next/image with src + fallbackSrc; onError set state to fallback once (guard with failed flag). Document fallback in media brief; create folder + .gitkeep for future assets.",
-      "tags": ["ux", "resilience", "nextjs", "images"]
+      "tags": [
+        "ux",
+        "resilience",
+        "nextjs",
+        "images"
+      ]
     },
     {
       "name": "zod-validate-api-body",
       "when": "API route accepts JSON body",
       "example": "validateRequest(schema, body); return 400 on parse/validation failure",
-      "tags": ["api", "validation"]
+      "tags": [
+        "api",
+        "validation"
+      ]
     },
     {
       "name": "stub-api-friendly-reply",
       "when": "Implementing a placeholder API (e.g. chat) without backend/LLM",
       "example": "POST validates with Zod, rate-limits, returns 200 with friendly reply directing user to contact/phone; 500 on error with same fallback message",
-      "tags": ["api", "product", "ux"]
+      "tags": [
+        "api",
+        "product",
+        "ux"
+      ]
     },
     {
       "name": "parseJsonBody-then-validateRequest",
       "when": "API route accepts JSON body",
       "example": "const parsed = await parseJsonBody(request); if (!parsed.ok) return parsed.response; validateRequest(schema, parsed.data); same for all 9 JSON routes including webhook",
-      "tags": ["api", "validation", "DRY"]
+      "tags": [
+        "api",
+        "validation",
+        "DRY"
+      ]
     },
     {
       "name": "modal-timeout-cleanup",
       "when": "Modal uses setTimeout or setInterval (e.g. success message then close)",
       "example": "Store timeout id in ref; useEffect cleanup: return () => { if (ref.current) clearTimeout(ref.current); }; clear ref in close() too",
-      "tags": ["react", "memory", "modal"]
+      "tags": [
+        "react",
+        "memory",
+        "modal"
+      ]
     },
     {
       "name": "restore-focus-on-auto-close",
       "when": "Dialog can close by user action or by timeout",
       "example": "In timeout callback: previousActiveRef.current?.focus(); then setVisible(false). Same focus restore as manual close",
-      "tags": ["a11y", "focus", "modal"]
+      "tags": [
+        "a11y",
+        "focus",
+        "modal"
+      ]
     },
     {
       "name": "trust-stats-from-site-stats",
       "when": "Component shows players trained, years experience, rating, review count",
       "example": "Import siteStats from @/data/site-stats.json; use trustStats (playersCount, yearsExperience, rating, reviewCount); no hardcoded numbers",
-      "tags": ["data-integrity", "single-source"]
+      "tags": [
+        "data-integrity",
+        "single-source"
+      ]
     },
     {
       "name": "webhook-id-validate-then-use",
       "when": "Webhook payload contains an ID used in URLs or request bodies (e.g. contactId)",
       "example": "Normalize: id = typeof raw === 'number' ? raw : parseInt(String(raw), 10); if (!Number.isInteger(id) || id < 1) return 400; use only id in URLs and bodies",
-      "tags": ["security", "webhook", "validation"]
+      "tags": [
+        "security",
+        "webhook",
+        "validation"
+      ]
     },
     {
       "name": "webhook-secret-timing-safe",
       "when": "Verifying webhook authenticity with a shared secret",
       "example": "Buffer.from(secret, 'utf8'); same length check; crypto.timingSafeEqual(expected, provided); reject on catch or mismatch",
-      "tags": ["security", "webhook"]
+      "tags": [
+        "security",
+        "webhook"
+      ]
     },
     {
       "name": "hero-cta-on-dark-solid-bg",
       "when": "Primary CTA button sits on a dark hero or gradient background",
       "example": "Use bg-white text-black (or bg-black text-white) with focus ring; avoid text-only (e.g. text-black) on dark gradient for contrast",
-      "tags": ["a11y", "contrast", "CTA"]
+      "tags": [
+        "a11y",
+        "contrast",
+        "CTA"
+      ]
     },
     {
       "name": "in-page-anchor-nav",
       "when": "Long single page with multiple sections (e.g. schedules, pricing) where users need to jump",
       "example": "Sticky nav with anchor links; section id + scroll-mt-* on targets; aria-label; min-h-[48px]; scrollIntoView with behavior gated by prefers-reduced-motion (SchedulesAnchorNav)",
-      "tags": ["a11y", "ux", "navigation"]
+      "tags": [
+        "a11y",
+        "ux",
+        "navigation"
+      ]
     },
     {
       "name": "scroll-into-view-reduced-motion",
       "when": "Using scrollIntoView with behavior: 'smooth' in JS",
       "example": "prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches; behavior: prefersReducedMotion ? 'auto' : 'smooth'",
-      "tags": ["a11y", "motion"]
+      "tags": [
+        "a11y",
+        "motion"
+      ]
     },
     {
       "name": "pull-quote-section-quote",
       "when": "Any blockquote or section quote that should match Brand Guide",
       "example": "Use <PullQuote> or apply class section-quote (gradient left border); avoid inline border-l-2 so one source drives quote styling",
-      "tags": ["brand-guide", "pull-quote", "section-quote"]
+      "tags": [
+        "brand-guide",
+        "pull-quote",
+        "section-quote"
+      ]
     },
     {
       "name": "parallax-reduced-motion-gate",
       "when": "Page or component has parallax or scroll-driven motion",
       "example": "matchMedia('(prefers-reduced-motion: reduce)'); when true disable parallax or use static fallback (HomeHero, About hero)",
-      "tags": ["a11y", "motion", "parallax"]
+      "tags": [
+        "a11y",
+        "motion",
+        "parallax"
+      ]
     },
     {
       "name": "decorative-svg-aria-hidden",
       "when": "SVG is purely decorative (arrow, chevron, icon in link/button)",
       "example": "Add aria-hidden=\"true\" to the <svg> so assistive tech skips it",
-      "tags": ["a11y", "svg", "aria-hidden"]
+      "tags": [
+        "a11y",
+        "svg",
+        "aria-hidden"
+      ]
     },
     {
       "name": "error-required-text-lbta-red",
       "when": "Form error messages or required field indicators (e.g. asterisk)",
       "example": "Use text-lbta-red; error callout use bg-lbta-red/5 border-lbta-red/20; verify contrast for WCAG AAA with WebAIM if on light background",
-      "tags": ["brand", "a11y", "forms"]
+      "tags": [
+        "brand",
+        "a11y",
+        "forms"
+      ]
     },
     {
       "name": "deploy-means-git-push-and-vercel-prod",
       "when": "User or compound workflow says 'deploy' or 'review then validate then deploy'",
       "example": "1) Commit changes. 2) git push to GitHub (origin). 3) Run vercel --prod (or ensure Vercel Git integration deploys from main). Do not stop at preview deploy or local build only.",
-      "tags": ["deploy", "compound", "workflow"]
+      "tags": [
+        "deploy",
+        "compound",
+        "workflow"
+      ]
     },
     {
       "name": "hero-bottom-content-no-clip",
       "when": "Hero section has bottom-pinned content (absolute bottom-0) and overflow-hidden",
       "example": "Use min-h-screen so section is always full viewport height; otherwise on short viewports the content block extends above the section and gets clipped (e.g. first line of headline 'Tennis, as it should be taught' cut off).",
-      "tags": ["hero", "layout", "ux", "overflow"]
+      "tags": [
+        "hero",
+        "layout",
+        "ux",
+        "overflow"
+      ]
     },
     {
       "name": "hero-cross-browser-headline-clearance",
       "when": "Hero with fixed header and bottom-pinned headline; headline must be fully visible on load in all major browsers",
       "example": "Content area: top-24 md:top-28 (not just header height); pt-16 md:pt-20 on content block. Avoids Chrome/Safari/Firefox and zoom differences clipping the top of the headline.",
-      "tags": ["hero", "layout", "cross-browser", "a11y"]
+      "tags": [
+        "hero",
+        "layout",
+        "cross-browser",
+        "a11y"
+      ]
     },
     {
       "name": "plan-implementation-status-before-next",
       "when": "Starting work from existing plans (e.g. schedules UX, brand guide, Canva)",
       "example": "Review code against plan checklist; update plans/plan-implementation-status-*.md. Avoids re-implementing work already done.",
-      "tags": ["compound", "planning", "efficiency"]
+      "tags": [
+        "compound",
+        "planning",
+        "efficiency"
+      ]
     },
     {
       "name": "scroll-spy-active-section-tall-sections",
       "when": "Sticky in-page nav with IntersectionObserver to highlight current section; page sections are tall and rootMargin shrinks the effective viewport band",
       "example": "Pick the section with the largest intersection ratio (e.g. ratio > 0), not a fixed threshold like 0.2. With rootMargin '-20% 0 -60% 0', ratios stay small; 'best ratio' still identifies the section most in view.",
-      "tags": ["IntersectionObserver", "scroll-spy", "a11y", "schedules"]
+      "tags": [
+        "IntersectionObserver",
+        "scroll-spy",
+        "a11y",
+        "schedules"
+      ]
     },
     {
       "name": "thank-you-type-whitelist",
       "when": "Single confirmation page supports multiple types via query param (e.g. /thank-you?type=trial|program|year|scholarship)",
       "example": "getThankYouType(raw): const type = Array.isArray(raw) ? raw[0] : raw; whitelist only allowed values; default to 'trial'. Use type only to key a COPY_BY_TYPE map (no user input in DOM or redirect URL).",
-      "tags": ["security", "nextjs", "searchParams", "confirmation"]
+      "tags": [
+        "security",
+        "nextjs",
+        "searchParams",
+        "confirmation"
+      ]
     },
     {
       "name": "modal-success-focus-primary",
       "when": "Modal shows a success state that replaces the form (e.g. registration received)",
       "example": "useRef on primary CTA (e.g. 'View next steps'); useEffect(() => { if (isSuccess && isOpen) successPrimaryRef.current?.focus(); }, [isSuccess, isOpen]). Ensures keyboard/screen-reader users get focus in the new content.",
-      "tags": ["a11y", "focus", "modal"]
+      "tags": [
+        "a11y",
+        "focus",
+        "modal"
+      ]
     },
     {
       "name": "footer-area-deep-water-contrast",
       "when": "Any component rendered inside the footer (same bg-brand-deep-water as main footer)",
       "example": "Use text-white/70 or higher for body and description text (e.g. NewsletterForm description). Matches footer tagline and links; avoids text-white/50 which can fail 7:1 on deep-water.",
-      "tags": ["a11y", "contrast", "footer", "WCAG"]
+      "tags": [
+        "a11y",
+        "contrast",
+        "footer",
+        "WCAG"
+      ]
     },
     {
       "name": "plan-doc-checkbox-hygiene",
       "when": "Updating implementation plans after work is done",
       "example": "Tick [x] only for steps/criteria that are actually implemented; leave [ ] with a note (e.g. 'verify when ready') for items like Lighthouse that need a later check. Keeps plans as single source of truth for status.",
-      "tags": ["plans", "documentation"]
+      "tags": [
+        "plans",
+        "documentation"
+      ]
     },
     {
       "name": "external-system-setup-checklist",
       "when": "Integrating with an external system (e.g. ActiveCampaign) where code sends data but the user configures automations in the UI",
       "example": "Create one actionable doc (e.g. docs/activecampaign-setup-checklist.md) with step-by-step 'In AC, do the following' and IDs from code (list id, tag ids). Cross-reference from the main ops doc so the user has one place to set up confirmations.",
-      "tags": ["documentation", "ActiveCampaign", "ops"]
+      "tags": [
+        "documentation",
+        "ActiveCampaign",
+        "ops"
+      ]
     },
     {
       "name": "optional-dual-write-after-primary",
       "when": "Adding an optional second integration (e.g. GHL SMS) that runs after the primary integration (e.g. ActiveCampaign)",
       "example": "Env-gate (hasEnvVar for all required vars); after primary success call void sendToGHL(payload); same payload as primary (already validated); on failure log only, never throw or change API response",
-      "tags": ["api", "integrations", "optional", "fail-safe"]
+      "tags": [
+        "api",
+        "integrations",
+        "optional",
+        "fail-safe"
+      ]
     },
     {
       "name": "external-api-error-log-truncate",
       "when": "Logging errors from third-party API calls (create contact, add to workflow, etc.)",
-      "example": "const text = await res.text(); const safeMsg = text.length > 100 ? text.slice(0, 100) + '…' : text; console.error('[GHL] Failed:', res.status, safeMsg); avoids PII or internal data in logs",
-      "tags": ["security", "logging", "third-party"]
+      "example": "const text = await res.text(); const safeMsg = text.length > 100 ? text.slice(0, 100) + '\u2026' : text; console.error('[GHL] Failed:', res.status, safeMsg); avoids PII or internal data in logs",
+      "tags": [
+        "security",
+        "logging",
+        "third-party"
+      ]
     },
     {
       "name": "env-checker-no-values",
       "when": "Providing a script or CLI to verify env vars for an integration (AC, GHL, etc.)",
       "example": "Script reads only process.env[key]; prints 'set' or 'missing' per key; never logs values. Exit 0 when required vars set, else 1. npm run check:env for local/CI.",
-      "tags": ["security", "ops", "env", "setup"]
+      "tags": [
+        "security",
+        "ops",
+        "env",
+        "setup"
+      ]
     },
     {
       "name": "ops-cli-entry-points",
       "when": "A key ops flow (leads, deploy platform) has a check or status command",
-      "example": "Expose as named npm script: lead → scripts/lead.js (env + where leads go + doc link); check:vercel → npx vercel whoami && npx vercel list --yes. Never print secrets; point to docs when relevant.",
-      "tags": ["ops", "cli", "npm-scripts", "setup"]
+      "example": "Expose as named npm script: lead \u2192 scripts/lead.js (env + where leads go + doc link); check:vercel \u2192 npx vercel whoami && npx vercel list --yes. Never print secrets; point to docs when relevant.",
+      "tags": [
+        "ops",
+        "cli",
+        "npm-scripts",
+        "setup"
+      ]
     },
     {
       "name": "vercel-env-add-via-api",
       "when": "Adding sensitive env vars to Vercel programmatically (e.g. AC, GHL keys)",
       "example": "Script reads VERCEL_TOKEN from gitignored .env.vercel; secret values from process.env at runtime; POST to Vercel API (e.g. /v10/projects/{id}/env); never commit or log secret values. scripts/vercel-env-add.js.",
-      "tags": ["security", "ops", "vercel", "env"]
+      "tags": [
+        "security",
+        "ops",
+        "vercel",
+        "env"
+      ]
     },
     {
       "name": "lead-pipeline-smoke-test",
       "when": "Lead pipeline (AC + optional GHL) is configured and you want to verify without creating test contacts",
       "example": "Provide npm run smoke:lead that runs env check + optional read-only AC/GHL ping (connection-check --ping); optional SMOKE_BASE_URL to verify live site returns 200. scripts/smoke-lead.js.",
-      "tags": ["ops", "lead", "smoke-test", "setup"]
+      "tags": [
+        "ops",
+        "lead",
+        "smoke-test",
+        "setup"
+      ]
     },
     {
       "name": "connection-check-same-base-as-app",
       "when": "Script pings the same external API the app uses (e.g. GHL workflows)",
       "example": "Use same base URL (GHL_API_BASE or default Lead Connector) and same auth/version (Version: 2021-07-28 when leadconnectorhq.com) so pass/fail matches runtime behavior; avoid legacy-only URL in script while app uses v2.",
-      "tags": ["ops", "GHL", "Lead-Connector", "consistency"]
+      "tags": [
+        "ops",
+        "GHL",
+        "Lead-Connector",
+        "consistency"
+      ]
     },
     {
       "name": "form-handler-never-500-on-valid-payload",
       "when": "Form API (newsletter, book, register) where validation can pass but optional integrations (AC, GHL, storeLead) or rate limit might fail",
       "example": "Wrap rateLimit in try/catch, allow on failure; parseJsonBody returns 400 on any parse error (no throw); after validation pass: void sendToGHL(...).catch(log); void storeLead(...).catch(log); return 200. User always gets success when payload is valid.",
-      "tags": ["api", "validation", "optional-integration", "500"]
+      "tags": [
+        "api",
+        "validation",
+        "optional-integration",
+        "500"
+      ]
     },
     {
       "name": "overview-and-camp-prices-in-data",
       "when": "Overview cards need 'from' price fallbacks or camp week pricing has special cases (e.g. 3-day week)",
       "example": "programsOverviewFallbacks in pricing-supplemental.json; year2026 camp entries with threeDayFullPrice, threeDayHalfPrice; lib/programs-data and lib/camps-data read from data and use code fallback only as last resort (?? 25 etc.).",
-      "tags": ["data-integrity", "single-source", "programs", "camps"]
+      "tags": [
+        "data-integrity",
+        "single-source",
+        "programs",
+        "camps"
+      ]
     },
     {
       "name": "next-image-sizes-for-logos",
       "when": "Using next/image for logos or fixed-size images (Header, Footer, PartnershipSection)",
       "example": "Add sizes attribute: Header logo sizes=\"(max-width: 768px) 100px, 120px\"; Footer logo sizes=\"180px\"; partner logos sizes=\"144px\". Meets best-practice and validation.",
-      "tags": ["performance", "next-image", "accessibility", "design-system"]
+      "tags": [
+        "performance",
+        "next-image",
+        "accessibility",
+        "design-system"
+      ]
     },
     {
       "name": "rate-limit-try-catch-all-form-routes",
       "when": "Any API route (book, newsletter, register, etc.) uses rateLimit() from lib/rate-limit",
       "example": "let rateLimitResult; try { rateLimitResult = await rateLimit(key, RATE_LIMITS.xxx); } catch { rateLimitResult = { allowed: true, remaining: RATE_LIMITS.xxx.maxRequests, resetTime: Date.now() + RATE_LIMITS.xxx.interval }; }. Prevents 500 when KV is down or unavailable.",
-      "tags": ["api", "rate-limit", "resilience", "500"]
+      "tags": [
+        "api",
+        "rate-limit",
+        "resilience",
+        "500"
+      ]
     },
     {
       "name": "footer-all-text-70-deep-water",
       "when": "Any text or icon color on bg-brand-deep-water (footer, NewsletterForm, etc.)",
-      "example": "Use text-white/70 or text-white/80 for tagline, links, labels, social icons, and placeholders. No text-white/60 or placeholder-white/30; strict 'all text on deep-water ≥ 70%' for validation 100/100.",
-      "tags": ["a11y", "contrast", "footer", "WCAG", "design-system"]
+      "example": "Use text-white/70 or text-white/80 for tagline, links, labels, social icons, and placeholders. No text-white/60 or placeholder-white/30; strict 'all text on deep-water \u2265 70%' for validation 100/100.",
+      "tags": [
+        "a11y",
+        "contrast",
+        "footer",
+        "WCAG",
+        "design-system"
+      ]
     },
     {
       "name": "section-overline-explicit-brand-color",
       "when": "Section has an overline or eyebrow label (e.g. 'Our Network') in a brand-only section",
       "example": "Add text-brand-pacific-dusk (or appropriate token) to the overline element so the section uses only brand tokens; avoids inherited/gray and satisfies design-system validation.",
-      "tags": ["design-system", "brand", "PartnershipSection", "typography"]
+      "tags": [
+        "design-system",
+        "brand",
+        "PartnershipSection",
+        "typography"
+      ]
     },
     {
       "name": "schedule-data-single-entry",
       "when": "Schedules page or any component needs seasonal program lists (winter, spring, summer, fall)",
       "example": "Use getWinter2026Programs(), getSpringProgramsForDisplay(), getSummerProgramsForDisplay(), getFall2026Programs() from @/lib/programs-data; no component imports data/winter2026.json or other season JSON directly.",
-      "tags": ["data", "architecture", "schedules", "programs-data"]
+      "tags": [
+        "data",
+        "architecture",
+        "schedules",
+        "programs-data"
+      ]
     },
     {
       "name": "program-price-display-monthly-primary",
       "when": "Component shows a single 'from' price and program has both monthly and session (1x/2x/3x) pricing",
       "example": "If monthly != null and (no session prices OR monthly <= min(sessionPrices)), display monthly first (e.g. $120/mo); otherwise show min session price with From when multiple tiers. ProgramRow getPrice().",
-      "tags": ["schedules", "pricing", "ProgramRow", "UX"]
+      "tags": [
+        "schedules",
+        "pricing",
+        "ProgramRow",
+        "UX"
+      ]
     },
     {
       "name": "program-data-shape-consistent-seasons",
       "when": "Adding or editing program entries in season JSON (winter2026, spring-summer-2026, fall2026)",
-      "example": "Use same optional keys (matchPlay, pricingNote) where applicable; same program display name and ages (e.g. Adult Beginner 1 — True Beginner, NTRP 1.0-2.0) across seasons.",
-      "tags": ["data-integrity", "programs", "schedules"]
+      "example": "Use same optional keys (matchPlay, pricingNote) where applicable; same program display name and ages (e.g. Adult Beginner 1 \u2014 True Beginner, NTRP 1.0-2.0) across seasons.",
+      "tags": [
+        "data-integrity",
+        "programs",
+        "schedules"
+      ]
     },
     {
       "name": "webhook-rate-limit",
       "when": "External webhook route (e.g. ActiveCampaign POST)",
       "example": "At start of POST: rateLimit('webhook:'+ip, RATE_LIMITS.webhook) with try/catch; allow on failure. Production: return 401 when secret env unset; log only non-PII in prod.",
-      "tags": ["security", "webhook", "rate-limit"]
+      "tags": [
+        "security",
+        "webhook",
+        "rate-limit"
+      ]
     },
     {
       "name": "single-component-re-export",
       "when": "Consolidating duplicate component (e.g. root vs ui/)",
       "example": "Keep canonical in components/ui/AnimatedSection.tsx; components/AnimatedSection.tsx: export { default } from '@/components/ui/AnimatedSection' so @/components/AnimatedSection and @/components/ui/AnimatedSection both resolve to same implementation.",
-      "tags": ["DRY", "component", "backward-compat"]
+      "tags": [
+        "DRY",
+        "component",
+        "backward-compat"
+      ]
     },
     {
       "name": "parallel-add-tags",
       "when": "Applying multiple ActiveCampaign tags to one contact",
       "example": "Promise.all(tagIds.map(id => addTag(contactId, id))); aggregate success/failed from results. Faster than sequential loop.",
-      "tags": ["performance", "activecampaign", "addTags"]
+      "tags": [
+        "performance",
+        "activecampaign",
+        "addTags"
+      ]
     },
     {
       "name": "modal-pricing-from-data",
       "when": "Registration or program modal displays pricing (e.g. RegistrationModal, form-config prePopulateData)",
       "example": "Load pricing from same /data sources (programs-data, camps-data, year2026) or a single shared config; avoid duplicate strings in lib/form-config.ts so single source of truth is respected.",
-      "tags": ["data-integrity", "single-source", "form-config", "pricing"]
+      "tags": [
+        "data-integrity",
+        "single-source",
+        "form-config",
+        "pricing"
+      ]
     },
     {
       "name": "single-type-from-zod",
-      "when": "Data passed server→client with runtime validation (e.g. schedules year2026, leagues)",
+      "when": "Data passed server\u2192client with runtime validation (e.g. schedules year2026, leagues)",
       "example": "Export type from lib (e.g. LeaguesData = LeaguesDataValidated, Year2026Sections = Year2026SectionsValidated in schedule-schemas.ts); parse on server; client imports type; no 'as unknown as T' at boundary.",
-      "tags": ["architecture", "types", "zod", "server-client"]
+      "tags": [
+        "architecture",
+        "types",
+        "zod",
+        "server-client"
+      ]
     },
     {
       "name": "schedule-slot-venue-consistent",
       "when": "Adding or editing schedule slot note or location text in season JSON",
       "example": "Use same venue wording as rest of file (e.g. 'LB High School' not 'LBHS'); Pattern Recognizer flags abbreviation vs full name inconsistency",
-      "tags": ["schedules", "data", "program", "consistency"]
+      "tags": [
+        "schedules",
+        "data",
+        "program",
+        "consistency"
+      ]
     },
     {
       "name": "form-config-location-matches-data",
       "when": "Program has an entry in lib/form-config.ts (prePopulateData) and in data/*.json",
       "example": "When updating program location in winter2026.json (e.g. Youth Development at LBHS), update form-config prePopulateData.location for that programId so forms and schedules show same location",
-      "tags": ["form-config", "data-integrity", "single-source", "schedules"]
+      "tags": [
+        "form-config",
+        "data-integrity",
+        "single-source",
+        "schedules"
+      ]
     },
     {
       "name": "program-description-lean",
       "when": "Writing or editing program description in season JSON when location and schedule slot notes already carry venue info",
-      "example": "Description: 'Competitive development for green ball players. Invitation-based. Same pricing as Youth Dev tiers.' — omit repeating Moulton Meadows / Alta Laguna / Friday LBHS; let location and slot.note carry where/when",
-      "tags": ["programs", "description", "simplicity", "schedules", "data"]
+      "example": "Description: 'Competitive development for green ball players. Invitation-based. Same pricing as Youth Dev tiers.' \u2014 omit repeating Moulton Meadows / Alta Laguna / Friday LBHS; let location and slot.note carry where/when",
+      "tags": [
+        "programs",
+        "description",
+        "simplicity",
+        "schedules",
+        "data"
+      ]
     },
     {
       "name": "placement-inquiry-unified",
       "when": "Program is level-based, invitation-based, or coach-approved (e.g. Youth Development, UTR Green Dot Competitive, High Performance)",
       "example": "Use (1) description stating level/age and that exceptions may qualify with coach approval; (2) optional pricingNote for edge case (e.g. under age, different level); (3) optional inquiryLabel and link to /contact?program=...&inquiry=placement. Apply consistently so 'with coaches approval they can join' is unified across programs.",
-      "tags": ["programs", "schedules", "placement", "inquiry", "data", "UX"]
+      "tags": [
+        "programs",
+        "schedules",
+        "placement",
+        "inquiry",
+        "data",
+        "UX"
+      ]
     },
     {
       "name": "login-redirect-param-validate",
       "when": "Login page uses ?next= for redirect after auth",
-      "example": "Validate to same-origin path only: safeRedirectTarget(next) — allow only relative paths under app prefix (e.g. /coach-hub), reject //, full URLs, and non-path input. Prevents open redirect (OWASP A01).",
-      "tags": ["security", "login", "redirect", "coach-hub"]
+      "example": "Validate to same-origin path only: safeRedirectTarget(next) \u2014 allow only relative paths under app prefix (e.g. /coach-hub), reject //, full URLs, and non-path input. Prevents open redirect (OWASP A01).",
+      "tags": [
+        "security",
+        "login",
+        "redirect",
+        "coach-hub"
+      ]
     },
     {
       "name": "password-max-length-schema",
       "when": "Auth schema for password (e.g. coach hub, any single shared secret)",
       "example": "z.string().min(1, 'Password is required').max(512, 'Invalid password'); generic message avoids length leakage; caps DoS from huge buffer/timingSafeEqual.",
-      "tags": ["security", "validation", "auth", "zod"]
+      "tags": [
+        "security",
+        "validation",
+        "auth",
+        "zod"
+      ]
     },
     {
       "name": "modal-overlay-focus-trap-escape",
       "when": "Implementing dialogs or overlays (BinderOverlay, GuideOverlay, any modal)",
       "example": "Add onKeyDown(e => e.key === 'Escape' && onClose()); focus first focusable on open (useEffect or ref); optionally aria-describedby. Ensures keyboard users can close and focus does not leave.",
-      "tags": ["a11y", "modal", "overlay", "focus-trap"]
+      "tags": [
+        "a11y",
+        "modal",
+        "overlay",
+        "focus-trap"
+      ]
     },
     {
       "name": "tab-list-aria",
       "when": "Tab strip (buttons that switch panes)",
       "example": "Container role=\"tablist\"; each tab role=\"tab\" aria-selected={activeTab === id}; pane role=\"tabpanel\" id and aria-labelledby pointing to tab. Screen readers then announce tabs correctly.",
-      "tags": ["a11y", "tabs", "ARIA"]
+      "tags": [
+        "a11y",
+        "tabs",
+        "ARIA"
+      ]
     },
     {
       "name": "range-input-label",
       "when": "Range input (e.g. players on court slider)",
       "example": "Give input id=\"players-on-court\"; label htmlFor=\"players-on-court\"; optionally aria-valuenow, aria-valuemin, aria-valuemax for current value.",
-      "tags": ["a11y", "form", "range", "label"]
+      "tags": [
+        "a11y",
+        "form",
+        "range",
+        "label"
+      ]
     },
     {
       "name": "mobile-audit-baseline",
       "when": "Implementing or auditing mobile experience (plan Phase 1 or before shipping mobile changes)",
       "example": "Audit at 320px, 375px, 768px: no horizontal scroll; primary actions min-h-[48px] min-w-[48px]; form inputs 16px+ (text-base or text-[16px]) to avoid iOS zoom; scroll-mt on anchor sections; modals max-h-[90vh] with internal overflow-y-auto. See plans/mobile-audit-phase1-checklist.md.",
-      "tags": ["mobile", "a11y", "audit", "touch-targets", "viewport"]
+      "tags": [
+        "mobile",
+        "a11y",
+        "audit",
+        "touch-targets",
+        "viewport"
+      ]
     },
     {
       "name": "auth-contract-verification-script",
       "when": "Protected route has an auth API (e.g. password login) that returns 400 for invalid body and 401 for wrong secret",
-      "example": "Add scripts/verify-*-auth.mjs that fetch POST {} → expect 400, POST { password: 'wrong' } → expect 401. Run with dev server: COACH_HUB_SECRET=secret ./node_modules/.bin/next dev; then node scripts/verify-coach-hub-auth.mjs. Document in validation summary or README so validation can reach 100/100 without manual curl.",
-      "tags": ["auth", "validation", "contract", "script", "coach-hub"]
+      "example": "Add scripts/verify-*-auth.mjs that fetch POST {} \u2192 expect 400, POST { password: 'wrong' } \u2192 expect 401. Run with dev server: COACH_HUB_SECRET=secret ./node_modules/.bin/next dev; then node scripts/verify-coach-hub-auth.mjs. Document in validation summary or README so validation can reach 100/100 without manual curl.",
+      "tags": [
+        "auth",
+        "validation",
+        "contract",
+        "script",
+        "coach-hub"
+      ]
     },
     {
       "name": "modal-focus-trap-tab-wrap",
       "when": "Modal or overlay already has initial focus and Escape-to-close; WCAG expects focus to stay inside dialog",
       "example": "In onKeyDown: if Tab and focus on last focusable, preventDefault and focus first; if Shift+Tab and focus on first, preventDefault and focus last. Query focusables from dialog ref (button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])); filter disabled.",
-      "tags": ["a11y", "modal", "focus-trap", "tab-wrap"]
+      "tags": [
+        "a11y",
+        "modal",
+        "focus-trap",
+        "tab-wrap"
+      ]
     },
     {
       "name": "single-expand-cards-in-list",
       "when": "Page shows multiple expandable cards (e.g. ProgramCard) and expanded state shows a fixed/sticky bar",
-      "example": "Parent state: expandedProgramId: string | null. Each card gets isExpanded={expandedProgramId === program.id}, onToggle={() => setExpandedProgramId(prev => prev === program.id ? null : program.id)}. Only one card expanded at a time → one sticky bar.",
-      "tags": ["ux", "react", "modal", "sticky-bar", "ProgramCard"]
+      "example": "Parent state: expandedProgramId: string | null. Each card gets isExpanded={expandedProgramId === program.id}, onToggle={() => setExpandedProgramId(prev => prev === program.id ? null : program.id)}. Only one card expanded at a time \u2192 one sticky bar.",
+      "tags": [
+        "ux",
+        "react",
+        "modal",
+        "sticky-bar",
+        "ProgramCard"
+      ]
     },
     {
       "name": "success-timeout-ref-cleanup",
       "when": "Component (page or modal) uses setTimeout then setState (e.g. clear form after 5s success)",
       "example": "Store timeout id in useRef; useEffect cleanup: return () => { if (ref.current) clearTimeout(ref.current); }. Prevents setState after unmount.",
-      "tags": ["react", "memory", "timeout", "cleanup"]
+      "tags": [
+        "react",
+        "memory",
+        "timeout",
+        "cleanup"
+      ]
     },
     {
       "name": "next15-page-searchparams-async",
       "when": "Next 15+ App Router page needs searchParams (or params)",
       "example": "export default async function Page({ searchParams }: { searchParams?: Promise<{ type?: string | string[] }> }) { const params = await searchParams; const type = getType(params?.type); ... }",
-      "tags": ["nextjs", "app-router", "searchParams", "Next 15", "Next 16"]
+      "tags": [
+        "nextjs",
+        "app-router",
+        "searchParams",
+        "Next 15",
+        "Next 16"
+      ]
     },
     {
       "name": "thank-you-all-links-focus-ring",
       "when": "Thank-you or confirmation page with tel, mailto, Return home, or app download links",
       "example": "Every <a> and <Link> gets focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 rounded-sm; on dark sections use focus:ring-white focus:ring-offset-black. Step/card accents use brand tokens (brand-victoria-cove), not raw blue.",
-      "tags": ["a11y", "thank-you", "focus", "brand"]
+      "tags": [
+        "a11y",
+        "thank-you",
+        "focus",
+        "brand"
+      ]
     },
     {
       "name": "form-success-response-ok-and-data-success",
       "when": "Client submits to API and treats response as success",
       "example": "const raw = await response.json().catch(() => ({})); const data = typeof raw === 'object' && raw !== null && 'success' in raw ? raw as { success?: boolean; error?: string } : { success: false }; if (response.ok && data.success) { ... } else { setError(data.error ?? fallback); }",
-      "tags": ["api", "forms", "modals", "fetch"]
+      "tags": [
+        "api",
+        "forms",
+        "modals",
+        "fetch"
+      ]
     },
     {
       "name": "modal-timeout-ref-cleanup",
       "when": "Modal uses setTimeout/setInterval (e.g. success redirect or auto-close)",
       "example": "Store id in useRef; clear in handleClose and in useEffect cleanup (return () => { if (ref.current) { clearTimeout(ref.current); ref.current = null; } }); so timer is always cleared on unmount or close.",
-      "tags": ["modals", "cleanup", "memory"]
+      "tags": [
+        "modals",
+        "cleanup",
+        "memory"
+      ]
     },
     {
       "name": "league-drop-in-in-data-and-ui",
       "when": "League/division has both season price and per-session drop-in",
       "example": "Add optional drop_in (number) to division in data; extend schema (e.g. utrDivisionSchema) with drop_in: z.number().optional(); row component accepts optional dropIn prop and renders e.g. 'Drop-in $X' under main price (desktop and mobile). Single source in data.",
-      "tags": ["schedules", "leagues", "data-integrity", "drop-in"]
+      "tags": [
+        "schedules",
+        "leagues",
+        "data-integrity",
+        "drop-in"
+      ]
     },
     {
       "name": "contextual-private-booking-coach-slug",
       "when": "User can start private lesson request from coach-specific context (bio, schedules table)",
-      "example": "Use URL /book?type=private&coach=<slug>; book page reads coach param, resolves slug→display name (e.g. lib/coach-slug from data/coaches.json), passes defaultCoach to private modal; modal accepts optional defaultCoach and on open sets form coach to that value.",
-      "tags": ["book", "private", "coach", "modal", "schedules"]
+      "example": "Use URL /book?type=private&coach=<slug>; book page reads coach param, resolves slug\u2192display name (e.g. lib/coach-slug from data/coaches.json), passes defaultCoach to private modal; modal accepts optional defaultCoach and on open sets form coach to that value.",
+      "tags": [
+        "book",
+        "private",
+        "coach",
+        "modal",
+        "schedules"
+      ]
     },
     {
       "name": "coach-headshot-cache-bust",
       "when": "Coach headshots live at static paths and are replaced; CDN/browser may serve old image",
       "example": "Export COACH_IMAGE_VERSION and coachImageSrc(path) in lib/coaches-data.ts; use coachImageSrc() for all coach image src (cards, founder, bio pages, OG); bump COACH_IMAGE_VERSION when replacing assets.",
-      "tags": ["coach", "images", "cache-bust", "deploy"]
+      "tags": [
+        "coach",
+        "images",
+        "cache-bust",
+        "deploy"
+      ]
     },
     {
       "name": "section-horizon-key-headings",
       "when": "Brand Guide: key section headings (hero, section eyebrows) need horizon accent",
       "example": "Add <div className=\"section-horizon ... opacity-90\" aria-hidden=\"true\" /> under headline or eyebrow (e.g. CoachesHero, FounderSection, CoachingTeamSection); do not add extra border classes.",
-      "tags": ["brand-guide", "section-horizon", "accessibility"]
+      "tags": [
+        "brand-guide",
+        "section-horizon",
+        "accessibility"
+      ]
     },
     {
       "name": "next-image-local-patterns-complete",
       "when": "Next.js 15+ with images.localPatterns (explicit allowlist for local src)",
-      "example": "In next.config.js include every prefix used by <Image src=\"/...\">: { pathname: '/images/**' }, { pathname: '/logos/**' }, { pathname: '/photos/**' }. After adding paths, smoke: curl -sI \"https://site/_next/image?url=%2Flogos%2F...&w=256&q=75\" → 200 not 400.",
-      "tags": ["nextjs", "next/image", "vercel", "config"]
+      "example": "In next.config.js include every prefix used by <Image src=\"/...\">: { pathname: '/images/**' }, { pathname: '/logos/**' }, { pathname: '/photos/**' }. After adding paths, smoke: curl -sI \"https://site/_next/image?url=%2Flogos%2F...&w=256&q=75\" \u2192 200 not 400.",
+      "tags": [
+        "nextjs",
+        "next/image",
+        "vercel",
+        "config"
+      ]
     },
     {
       "name": "fixed-header-opaque-on-light-text",
       "when": "Fixed site header with dark body text (e.g. brand-pacific-dusk) sits over full-bleed photo/video hero",
       "example": "Use solid bg-brand-morning-light (no /90 opacity) plus border-b border-brand-pacific-dusk/[0.08]; avoid backdrop-blur + translucent fill that lets dark pixels blend under nav links (WCAG contrast).",
-      "tags": ["a11y", "header", "WCAG", "contrast", "HomeHero"]
+      "tags": [
+        "a11y",
+        "header",
+        "WCAG",
+        "contrast",
+        "HomeHero"
+      ]
     },
     {
       "name": "layout-primitives-sections",
       "when": "Adding new vibe sections (masonry, zigzag, bento, asymmetric)",
       "example": "Use components/sections: MasonryGrid for community/galleries (varied spans), ZigzagSection for alternating image/text, SplitSection for 50/50. Reference /legacy-working-assets/; ensure path in next.config images.localPatterns.",
-      "tags": ["layout", "components", "legacy-assets", "visual-elevation"]
+      "tags": [
+        "layout",
+        "components",
+        "legacy-assets",
+        "visual-elevation"
+      ]
     },
     {
       "name": "plan-aware-review",
       "when": "Running compound review after plan-driven implementation",
       "example": "Pass to each review agent: plan summary (objective, out of scope, acceptance checklist, files to create/modify) plus code/diff. Enables scope compliance and acceptance-driven validation.",
-      "tags": ["compound", "review", "plan", "scope"]
+      "tags": [
+        "compound",
+        "review",
+        "plan",
+        "scope"
+      ]
     },
     {
       "name": "chat-suggested-actions",
       "when": "Chat widget or assistant UI needs to help users discover capabilities",
       "example": "After welcome message, render navigation-only action buttons (Book a Trial, View Programs, Contact Us) that link to pages. Use brand tokens, min-h-[48px], focus-visible:ring. Only show actions the backend can fulfill or that navigate to pages.",
-      "tags": ["chat", "discovery", "capability-discovery", "agent-native"]
+      "tags": [
+        "chat",
+        "discovery",
+        "capability-discovery",
+        "agent-native"
+      ]
     },
     {
       "name": "api-contracts-documentation",
       "when": "Building agent tools or maintaining API consistency between frontend and agents",
       "example": "Create docs/api-contracts.md with request shapes (TypeScript types), response formats, validation notes, and links to lib/validations.ts schemas. Document all user-facing endpoints (book, register-program, register-year, newsletter, scholarship, chat, coach-hub). Keep in sync when adding/changing endpoints.",
-      "tags": ["api", "documentation", "agent-native", "action-parity"]
+      "tags": [
+        "api",
+        "documentation",
+        "agent-native",
+        "action-parity"
+      ]
     },
     {
       "name": "help-page-with-quick-links",
       "when": "Users need to discover site capabilities or get help",
       "example": "Create /help page with: quick links (Programs & Pricing, Book a Trial, Meet Our Coaches, Contact Us), FAQ link, contact info (phone, email, address). Link from chat footer as 'What can you do?'. Server Component, brand tokens, focus rings on all links.",
-      "tags": ["help", "discovery", "capability-discovery", "agent-native"]
+      "tags": [
+        "help",
+        "discovery",
+        "capability-discovery",
+        "agent-native"
+      ]
     },
     {
       "name": "activecampaign-legacy-api-fallback",
       "when": "ActiveCampaign v3 API returns 405 or fails for campaign operations (e.g. send test)",
       "example": "Use legacy admin API: GET {base}/admin/api.php?api_action=campaign_send&campaignid=...&messageid=...&action=test&email=...&type=mime. Resolve messageid from GET /api/3/campaigns/{id}/campaignMessages. See send_test.py and docs/ACTIVECAMPAIGN_EMAIL_DESIGNER_LIMITATION.md.",
-      "tags": ["ActiveCampaign", "api", "legacy", "test-email", "campaign_send"]
+      "tags": [
+        "ActiveCampaign",
+        "api",
+        "legacy",
+        "test-email",
+        "campaign_send"
+      ]
+    },
+    {
+      "name": "data-driven-carousel-slides",
+      "when": "Building an auto-rotating hero carousel (e.g. Player Success) with multiple slides",
+      "example": "Define slides as typed array in data JSON (e.g. homepage-copy.json results.slides[]) with image, imageAlt, objectPosition, subline, ctaLabel, ctaHref. Component receives typed props (PlayerSuccessSlide[]), uses useEffect interval with pause-on-hover, useReducedMotion for a11y, aria-roledescription=carousel, and dot navigation with aria-current. See PlayerSuccessCarousel.tsx.",
+      "tags": [
+        "carousel",
+        "data-driven",
+        "a11y",
+        "homepage",
+        "player-success"
+      ]
+    },
+    {
+      "name": "object-position-top-weighted-hero",
+      "when": "Full-bleed hero image with object-cover that crops heads/faces",
+      "example": "Use objectPosition: '50% 10%' to '50% 15%' (top-weighted) for player photos so faces stay in frame. Store per-slide in data JSON so each image can have its own crop. Default to '50% 12%' when not specified. Pair with taller min-h (e.g. min-h-[65vh] lg:min-h-[76vh]) to reduce vertical crop pressure.",
+      "tags": [
+        "images",
+        "object-position",
+        "hero",
+        "crop",
+        "faces"
+      ]
+    },
+    {
+      "name": "facility-image-intent-mapping",
+      "when": "Assigning coastal/facility photos to specific page sections",
+      "example": "Map by visual intent: hero-ocean-view-tennis-courts-sunset.webp for full-bleed hero/OG; overview-coastal-tennis-facility-ocean.webp for destination/scale; detail-sunlit-blue-tennis-courts.webp for detail/schedules strip; coaching-private-tennis-lesson-drill.webp for private lesson narrative. Store in data JSON and document in docs/photo-map-routing.md.",
+      "tags": [
+        "facility",
+        "images",
+        "coastal",
+        "photo-routing",
+        "brand"
+      ]
+    },
+    {
+      "name": "player-photo-canonical-path",
+      "when": "Referencing player/success-story photos across multiple surfaces",
+      "example": "Store canonical player photos under public/images/success-stories/{slug}.webp (current) or public/images/players/{slug}/ (planned multi-photo). Reference the same canonical path from homepage carousel data, success-stories page, and OG metadata. Avoid duplicating files across directories.",
+      "tags": [
+        "images",
+        "player",
+        "canonical-path",
+        "single-source",
+        "success-stories"
+      ]
     }
   ]
 }
