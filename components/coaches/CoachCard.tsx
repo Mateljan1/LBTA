@@ -8,13 +8,13 @@ interface CoachCardProps {
   variant?: 'featured' | 'grid' | 'compact'
 }
 
-/** Truncate bio to first sentence or ~120 chars at word boundary for compact card. */
-function truncateBio(bio: string, maxLen = 120): string {
+/** Truncate bio for compact cards — word boundary, fits ~4 lines with line-clamp-4. */
+function truncateBio(bio: string, maxLen = 200): string {
   const match = bio.match(/^[^.!?]*[.!?]/)
-  if (match?.[0]) return match[0].trim()
+  if (match?.[0] && match[0].length <= maxLen + 40) return match[0].trim()
   if (bio.length <= maxLen) return bio
   const at = bio.slice(0, maxLen).lastIndexOf(' ')
-  return (at > 0 ? bio.slice(0, at) : bio.slice(0, maxLen)) + '…'
+  return `${at > 0 ? bio.slice(0, at) : bio.slice(0, maxLen)}…`
 }
 
 function ChevronRight({ className }: { className?: string }) {
@@ -101,65 +101,69 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
   if (variant === 'compact') {
     const shortBio = truncateBio(coach.bio ?? '')
     return (
-      <div className="h-full flex flex-col bg-white rounded-lg overflow-hidden border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 transition-shadow duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] motion-safe:hover:-translate-y-0.5">
-        <div className="relative w-full aspect-[4/5] overflow-hidden shrink-0 rounded-t-lg">
+      <div className="h-full w-full flex flex-col bg-white rounded-lg overflow-hidden border border-black/6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 transition-shadow duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] motion-safe:hover:-translate-y-0.5">
+        <div className="relative w-full aspect-[4/5] overflow-hidden shrink-0 bg-brand-morning-light ring-1 ring-inset ring-black/[0.04]">
           <Image
             src={coachImageSrc(coach.image)}
             alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
             fill
-            className="object-cover object-center"
+            className="object-cover"
             style={{ objectPosition: coach.imagePosition }}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 340px"
             quality={90}
           />
         </div>
-        <div className="p-5 md:p-6 flex flex-col flex-1 min-h-0">
-          <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.1em] mb-1.5">
-            {coach.title}
-          </p>
-          {hasBioLink ? (
-            <Link href={`/coaches/${coach.slug}`} className="group inline-flex items-center rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
-              <h3 className="font-headline text-[20px] md:text-[22px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em] group-hover:text-brand-victoria-cove transition-colors">
+        <div className="flex flex-col flex-1 min-h-0 p-5 md:p-6">
+          <div className="shrink-0">
+            <p className="font-sans text-[10px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.12em] mb-1.5 line-clamp-2 leading-tight min-h-[2.25rem]">
+              {coach.title}
+            </p>
+            {hasBioLink ? (
+              <Link href={`/coaches/${coach.slug}`} className="group/link inline-block rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
+                <h3 className="font-headline text-[19px] md:text-[21px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.01em] group-hover/link:text-brand-victoria-cove transition-colors">
+                  {coach.name}
+                </h3>
+              </Link>
+            ) : (
+              <h3 className="font-headline text-[19px] md:text-[21px] font-medium text-brand-pacific-dusk mb-2 tracking-[-0.01em]">
                 {coach.name}
               </h3>
-            </Link>
-          ) : (
-            <h3 className="font-headline text-[20px] md:text-[22px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em]">
-              {coach.name}
-            </h3>
-          )}
-          <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-3 line-clamp-2">
-            {coach.specialization}
-          </p>
-          <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.6] mb-3 flex-shrink-0">
+            )}
+            <p className="font-sans text-[12px] leading-snug text-brand-pacific-dusk/75 mb-3 min-h-[3.25rem] line-clamp-3">
+              {coach.specialization}
+            </p>
+          </div>
+          <p className="font-sans text-[14px] text-brand-pacific-dusk/80 leading-[1.55] mb-4 line-clamp-4 min-h-[5.5rem]">
             {shortBio}
           </p>
-          <div className="flex flex-wrap gap-1.5 flex-shrink-0">
-            {coach.credentials.slice(0, 4).map((cred, i) => (
-              <span
-                key={`${cred}-${i}`}
-                className="font-sans text-[10px] text-brand-pacific-dusk/70 px-2 py-0.5 bg-brand-morning-light rounded-full border border-black/5"
-              >
-                {cred}
-              </span>
-            ))}
-          </div>
-          <div className="flex flex-wrap items-center gap-3 mt-auto pt-4">
-            {hasBioLink && (
+          <div className="mt-auto border-t border-black/[0.06] pt-4 flex flex-col gap-3">
+            <div className="min-h-[4.5rem] flex flex-wrap content-start gap-1.5">
+              {coach.credentials.map((cred, i) => (
+                <span
+                  key={`${cred}-${i}`}
+                  className="font-sans text-[10px] text-brand-pacific-dusk/75 px-2 py-1 bg-brand-morning-light rounded-full border border-black/[0.06] leading-tight max-w-full"
+                >
+                  {cred}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-col gap-2 w-full">
+              {hasBioLink && (
+                <Link
+                  href={`/coaches/${coach.slug}`}
+                  className="inline-flex items-center justify-center gap-2 font-sans text-[11px] font-semibold text-brand-victoria-cove uppercase tracking-wider min-h-[48px] py-2.5 rounded-[2px] border border-brand-victoria-cove/25 bg-white hover:bg-brand-morning-light transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                >
+                  View full bio
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              )}
               <Link
-                href={`/coaches/${coach.slug}`}
-                className="inline-flex items-center gap-2 font-sans text-[11px] font-semibold text-brand-victoria-cove uppercase tracking-wider min-h-[48px] py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-[2px]"
+                href={bookHref}
+                className="inline-flex items-center justify-center w-full font-sans text-[11px] font-semibold bg-black text-white uppercase tracking-wider min-h-[48px] px-5 py-2.5 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:bg-gray-800 transition-colors"
               >
-                View full bio
-                <ChevronRight />
+                Book with {firstName}
               </Link>
-            )}
-            <Link
-              href={bookHref}
-              className="inline-flex items-center justify-center font-sans text-[11px] font-semibold bg-black text-white uppercase tracking-wider min-h-[48px] px-5 py-2 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:bg-gray-800 transition-colors"
-            >
-              Book with {firstName}
-            </Link>
+            </div>
           </div>
         </div>
       </div>
