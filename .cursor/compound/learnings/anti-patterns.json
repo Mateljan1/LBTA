@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-23",
-  "lastLearnRun": "2026-03-23 Photo carousel, facility imagery, player success patterns",
+  "lastLearnRun": "2026-03-23 UTR Match Play standalone page, form-config duration, AC division tags, mailto vs modal",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -802,6 +802,34 @@
         "migration",
         "photo-routing"
       ]
+    },
+    {
+      "id": "form-config-duration-hardcoded",
+      "description": "form-config prePopulateData.duration hardcoded when season dates exist in JSON",
+      "avoid": "duration: '8 Saturdays (Apr 11 - May 30)' in form-config while leagues-2026.json has different seasonLabel",
+      "instead": "Derive via helper (getUtrCircuitFormDuration) that reads from JSON; add test asserting duration matches season",
+      "tags": ["form-config", "data-integrity", "single-source"]
+    },
+    {
+      "id": "ac-division-tag-use-program",
+      "description": "Using data.program for UTR division tag lookup when data.division exists",
+      "avoid": "getUtrDivisionTag(data.program) when payload has division: 'Color Ball' and program: 'UTR Match Play Series — Season 1'",
+      "instead": "Use data.division || data.program for getUtrDivisionTag; register-year receives division from modal",
+      "tags": ["activecampaign", "register-year", "utr", "tags"]
+    },
+    {
+      "id": "slug-lookup-unicode-dash",
+      "description": "Slug/lookup key from label with en-dash (U+2013) fails ASCII-hyphen map",
+      "avoid": "Division 'UTR 2.0–4.0' → toLowerCase().replace(/\\s+/g, '-') yields 'utr-2.0–4.0' which does not match 'utr-2.0-4.0'",
+      "instead": "Normalize unicode dashes: .replace(/[\\u2013\\u2014\\u2212]/g, '-') before slug lookup",
+      "tags": ["activecampaign", "slug", "unicode", "utr"]
+    },
+    {
+      "id": "mailto-primary-when-modal-exists",
+      "description": "Program landing using mailto as primary CTA when LuxuryYearModal and API route exist",
+      "avoid": "Primary button opens mailto; modal and register-year API unused; no AC tags, no CRM flow",
+      "instead": "Wire LuxuryYearModal as primary CTA; keep mailto as secondary for edge questions",
+      "tags": ["conversion", "modal", "registration", "cta"]
     }
   ]
 }

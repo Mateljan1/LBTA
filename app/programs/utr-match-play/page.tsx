@@ -307,98 +307,111 @@ export default function UTRMatchPlayPage() {
 
       {/* Season Points & Grand Finals */}
       <section className="container-lbta section">
-        <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          <div className="rounded-2xl border border-brand-pacific-dusk/8 bg-white p-8 md:p-10 shadow-[0_4px_24px_rgba(27,58,92,0.04)]">
-            <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-2">Season points</h3>
-            <div className="section-horizon mb-6" aria-hidden="true" />
-            <p className="text-[15px] font-sans font-light text-brand-pacific-dusk/55 mb-6 leading-relaxed">
-              Two leaderboard tracks: UTR (national, skill-based) and Season Points (local, effort-based —
-              points only go up).
-            </p>
-            <div className="space-y-3">
-              {[
-                { label: 'Show up and compete', pts: '+10' },
-                { label: 'Win a match', pts: '+15' },
-                { label: 'Upset (UTR diff ≥ 0.5)', pts: '+25' },
-                { label: 'Complete all weekly matches', pts: '+10' },
-                { label: '3-week attendance streak', pts: '+20' },
-                { label: 'UTR improves from prior week', pts: '+10' },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center justify-between py-2.5 border-b border-brand-pacific-dusk/8 last:border-0"
-                >
-                  <span className="text-[14px] font-sans font-light text-brand-pacific-dusk/60">
-                    {item.label}
-                  </span>
-                  <span className="text-[14px] font-sans font-medium text-brand-sunset-cliff tabular-nums">
-                    {item.pts}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-10">
-            <div>
-              <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-2">Grand Finals</h3>
+        <div className="max-w-5xl mx-auto space-y-16">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <div className="rounded-2xl border border-brand-pacific-dusk/8 bg-white p-8 md:p-10 shadow-[0_4px_24px_rgba(27,58,92,0.04)]">
+              <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-2">Season points</h3>
               <div className="section-horizon mb-6" aria-hidden="true" />
-              <p className="text-eyebrow text-brand-sunset-cliff mb-4">June 13, 2026</p>
-              <div className="space-y-4 text-[15px] font-sans font-light text-brand-pacific-dusk/55 leading-relaxed">
-                <p>
-                  <strong className="font-medium text-brand-pacific-dusk">4:00 PM</strong> — Division finals
-                  across all five divisions.
-                </p>
-                <p>
-                  <strong className="font-medium text-brand-pacific-dusk">6:00 PM</strong> — Food trucks,
-                  social hour, Season 2 registration opens.
-                </p>
-                <p>
-                  <strong className="font-medium text-brand-pacific-dusk">7:00 PM</strong> — Awards ceremony,
-                  grand raffle.
-                </p>
-                <p>
-                  <strong className="font-medium text-brand-pacific-dusk">8:00 PM</strong> — Exhibition:
-                  Season Champion plays doubles with Karu&eacute; Sell (ATP #262, UCLA All-American).
-                </p>
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-8 items-center">
-              <div className="relative aspect-[4/5] w-full max-w-md mx-auto sm:mx-0 overflow-hidden rounded-xl border border-brand-pacific-dusk/10 bg-brand-sandstone shadow-[0_12px_48px_rgba(27,58,92,0.1)] ring-1 ring-black/[0.03]">
-                <Image
-                  src="/images/programs/karue-sell-exhibition.webp"
-                  alt="Karue Sell hitting a forehand — exhibition guest for Grand Finals night"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 640px) 100vw, 400px"
-                />
-              </div>
-              <div>
-                <h4 className="font-headline text-headline-sm text-brand-pacific-dusk mb-3">Guest athlete</h4>
-                <p className="text-[15px] font-sans font-light text-brand-pacific-dusk/55 leading-relaxed">
-                  Karu&eacute; Sell joins the evening as a featured exhibition player—bringing tour-level
-                  intensity to the Season 1 finale after your division finals and awards.
-                </p>
-              </div>
-            </div>
-
-            <div className="rounded-xl bg-brand-sandstone p-6 md:p-8 border border-brand-pacific-dusk/6">
-              <h4 className="text-eyebrow text-brand-victoria-cove mb-4">Season tiers</h4>
-              <div className="space-y-2.5">
+              <p className="text-[15px] font-sans font-light text-brand-pacific-dusk/55 mb-6 leading-relaxed">
+                Two leaderboard tracks: UTR (national, skill-based) and Season Points (local, effort-based —
+                points only go up).
+              </p>
+              <div className="space-y-3">
                 {[
-                  { tier: 'Legend', req: 'Grand Finals Top 3' },
-                  { tier: 'Champion', req: '450+ points' },
-                  { tier: 'Advanced', req: '250–449 points' },
-                  { tier: 'Contender', req: '100–249 points' },
-                  { tier: 'Challenger', req: '0–99 points' },
-                ].map((t) => (
-                  <div key={t.tier} className="flex items-center justify-between text-[13px] font-sans">
-                    <span className="font-medium text-brand-pacific-dusk">{t.tier}</span>
-                    <span className="font-light text-brand-pacific-dusk/50">{t.req}</span>
+                  { label: 'Show up and compete', pts: '+10' },
+                  { label: 'Win a match', pts: '+15' },
+                  { label: 'Upset (UTR diff ≥ 0.5)', pts: '+25' },
+                  { label: 'Complete all weekly matches', pts: '+10' },
+                  { label: '3-week attendance streak', pts: '+20' },
+                  { label: 'UTR improves from prior week', pts: '+10' },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-center justify-between py-2.5 border-b border-brand-pacific-dusk/8 last:border-0"
+                  >
+                    <span className="text-[14px] font-sans font-light text-brand-pacific-dusk/60">
+                      {item.label}
+                    </span>
+                    <span className="text-[14px] font-sans font-medium text-brand-sunset-cliff tabular-nums">
+                      {item.pts}
+                    </span>
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="space-y-10">
+              <div>
+                <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-2">Grand Finals</h3>
+                <div className="section-horizon mb-6" aria-hidden="true" />
+                <p className="text-eyebrow text-brand-sunset-cliff mb-4">June 13, 2026</p>
+                <div className="space-y-4 text-[15px] font-sans font-light text-brand-pacific-dusk/55 leading-relaxed">
+                  <p>
+                    <strong className="font-medium text-brand-pacific-dusk">4:00 PM</strong> — Division finals
+                    across all five divisions.
+                  </p>
+                  <p>
+                    <strong className="font-medium text-brand-pacific-dusk">6:00 PM</strong> — Food trucks,
+                    social hour, Season 2 registration opens.
+                  </p>
+                  <p>
+                    <strong className="font-medium text-brand-pacific-dusk">7:00 PM</strong> — Awards ceremony,
+                    grand raffle.
+                  </p>
+                  <p>
+                    <strong className="font-medium text-brand-pacific-dusk">8:00 PM</strong> — Exhibition:
+                    Season Champion plays doubles with Karu&eacute; Sell (ATP #262, UCLA All-American).
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-xl bg-brand-sandstone p-6 md:p-8 border border-brand-pacific-dusk/6">
+                <h4 className="text-eyebrow text-brand-victoria-cove mb-4">Season tiers</h4>
+                <div className="space-y-2.5">
+                  {[
+                    { tier: 'Legend', req: 'Grand Finals Top 3' },
+                    { tier: 'Champion', req: '450+ points' },
+                    { tier: 'Advanced', req: '250–449 points' },
+                    { tier: 'Contender', req: '100–249 points' },
+                    { tier: 'Challenger', req: '0–99 points' },
+                  ].map((t) => (
+                    <div key={t.tier} className="flex items-center justify-between text-[13px] font-sans">
+                      <span className="font-medium text-brand-pacific-dusk">{t.tier}</span>
+                      <span className="font-light text-brand-pacific-dusk/50">{t.req}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Guest athlete — full-width feature */}
+          <div className="grid md:grid-cols-[1.25fr_1fr] gap-12 md:gap-16 items-center">
+            <div className="relative aspect-[3/4] w-full max-w-[min(100%,560px)] mx-auto md:max-w-none md:mx-0 overflow-hidden rounded-2xl border border-brand-pacific-dusk/8 bg-brand-sandstone shadow-[0_24px_80px_rgba(27,58,92,0.14)] ring-1 ring-black/[0.04]">
+              <Image
+                src="/images/programs/karue-sell-exhibition.webp"
+                alt="Karue Sell hitting a forehand — exhibition guest for Grand Finals night"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 767px) min(100vw - 48px, 560px), 58vw"
+                quality={95}
+              />
+            </div>
+            <div className="space-y-5 text-center md:text-left">
+              <span className="text-eyebrow text-brand-sunset-cliff tracking-[0.15em]" aria-hidden="true">
+                Guest athlete
+              </span>
+              <h4 className="font-headline text-[clamp(2rem,5vw,3rem)] text-brand-pacific-dusk leading-tight">
+                Karu&eacute; Sell
+              </h4>
+              <p className="text-[16px] md:text-[18px] font-sans font-light text-brand-pacific-dusk/60 leading-relaxed">
+                ATP #262 and UCLA All-American. Karu&eacute; joins the Season 1 finale as a featured
+                exhibition player—bringing tour-level intensity to the court after your division finals
+                and awards.
+              </p>
+              <p className="text-[15px] font-sans font-medium text-brand-victoria-cove">
+                Exhibition doubles · June 13, 8:00 PM
+              </p>
             </div>
           </div>
         </div>

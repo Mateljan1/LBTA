@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-23",
-  "lastLearnRun": "2026-03-23 Photo carousel, facility imagery, player success patterns",
+  "lastLearnRun": "2026-03-23 UTR Match Play standalone page, form-config duration from JSON, AC division tags",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -1031,6 +1031,18 @@
         "single-source",
         "success-stories"
       ]
+    },
+    {
+      "name": "program-landing-single-source-from-json",
+      "when": "Program page (e.g. UTR Match Play) needs season copy, divisions, modal payload, form prefill",
+      "example": "Create lib facade (e.g. utr-match-play.ts) over leagues-2026.json; export getUtrSeasonLabel, getUtrDivisionsForPage, getUtrCircuitModalData, getUtrCircuitFormDuration; page, LuxuryYearModal data, form-config all import. Single source of truth.",
+      "tags": ["single-source", "data-integrity", "form-config", "modal", "utr"]
+    },
+    {
+      "name": "form-prefill-duration-from-data",
+      "when": "form-config prePopulateData.duration for program with season dates in JSON",
+      "example": "Derive via helper (e.g. getUtrCircuitFormDuration()) that reads seasonLabel from leagues JSON; add test asserting duration contains year and matches JSON. Avoids date drift.",
+      "tags": ["form-config", "data-integrity", "single-source"]
     }
   ]
 }

@@ -288,6 +288,10 @@
     "brandTokensOnly": {
       "rule": "New code must use brand-* tokens (brand-pacific-dusk, brand-sandstone, etc.) instead of legacy lbta-* tokens (lbta-primary, lbta-secondary, lbta-bone) per .cursorrules Part 7",
       "enforcement": "must"
+    },
+    "formConfigDurationFromData": {
+      "rule": "form-config prePopulateData.duration for programs with season dates in JSON (e.g. utr-circuit, camps) must be derived from that JSON via a helper; add test asserting duration matches season",
+      "enforcement": "should"
     }
   }
 }

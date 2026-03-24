@@ -309,12 +309,30 @@ function buildConfirmationHtml(params: ConfirmationEmailParams): string {
   }
 
   // Category-aware "What Happens Next" section
+  const isTrial = category === 'Trial'
+  const isPrivate = category === 'Private'
+  const isScholarship = category === 'Scholarship'
   const isJuniorOrYouth = category === 'Junior' || category === 'Youth'
   const isCamp = category === 'Camp'
   const isMatchPlay = category === 'Match Play Series'
 
   let whatHappensNext = ''
-  if (isCamp) {
+  if (isTrial) {
+    whatHappensNext = `
+      <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">1. Our team will call or email within 24 hours to schedule your trial session.</td></tr>
+      <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">2. Your first session is free — just show up and play.</td></tr>
+      <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">3. Bring a racquet (loaners available), water, and athletic shoes.</td></tr>`
+  } else if (isPrivate) {
+    whatHappensNext = `
+      <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">1. Your requested coach will reach out within 24 hours to schedule your lesson.</td></tr>
+      <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">2. Lesson times and court location will be confirmed directly with your coach.</td></tr>
+      <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">3. Bring a racquet, water, and athletic shoes to your session.</td></tr>`
+  } else if (isScholarship) {
+    whatHappensNext = `
+      <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">1. Our team will review your application within 5 business days.</td></tr>
+      <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">2. We will reach out by email or phone to discuss next steps and available support.</td></tr>
+      <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">3. All applications are handled with complete confidentiality.</td></tr>`
+  } else if (isCamp) {
     whatHappensNext = `
       <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">1. Our team will confirm your camp dates and send a detailed packing list.</td></tr>
       <tr><td style="padding:4px 0 4px 12px;color:#333;font-size:14px;font-family:'DM Sans',Arial,sans-serif;">2. Payment information will be sent separately.</td></tr>
@@ -354,7 +372,7 @@ a{color:#2E8B8B;text-decoration:none;}
 <body style="margin:0;padding:0;background-color:#d5d1ca;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#d5d1ca;">
 <tr><td align="center">
-<div style="display:none;font-size:1px;color:#d5d1ca;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">Your ${escapeHtml(programName)} registration is confirmed &mdash; here are your program details and next steps.</div>
+<div style="display:none;font-size:1px;color:#d5d1ca;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">Your ${escapeHtml(programName)} ${isTrial || isPrivate ? 'request' : isScholarship ? 'application' : 'registration'} is confirmed &mdash; here are your details and next steps.</div>
 <table role="presentation" class="wrap" width="660" cellpadding="0" cellspacing="0" style="max-width:660px;width:100%;background-color:#FAF8F4;">
 <tr><td style="height:3px;background:linear-gradient(90deg,#2E8B8B,#E8834A 35%,#C4963C 50%,#E8834A 65%,#2E8B8B);font-size:0;">&nbsp;</td></tr>
 <tr><td style="padding:20px 40px 12px;">
@@ -373,8 +391,8 @@ a{color:#2E8B8B;text-decoration:none;}
 </td></tr>
 <tr><td><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0F2237;">
 <tr><td class="mp" style="padding:40px 56px 32px;text-align:center;">
-  <p style="margin:0 0 14px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,240,229,0.4);">REGISTRATION CONFIRMED</p>
-  <h1 class="ht" style="margin:0 0 10px;font-family:'Cormorant',Georgia,serif;font-weight:300;font-size:38px;line-height:1.12;color:#F5F0E5;">Your Spot in <em style='font-style:italic;font-weight:400;color:#E8834A;'>${escapeHtml(programName)}</em> Is Reserved.</h1>
+  <p style="margin:0 0 14px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,240,229,0.4);">${isTrial ? 'TRIAL REQUEST CONFIRMED' : isPrivate ? 'LESSON REQUEST CONFIRMED' : isScholarship ? 'APPLICATION RECEIVED' : 'REGISTRATION CONFIRMED'}</p>
+  <h1 class="ht" style="margin:0 0 10px;font-family:'Cormorant',Georgia,serif;font-weight:300;font-size:38px;line-height:1.12;color:#F5F0E5;">${isTrial ? `Your <em style='font-style:italic;font-weight:400;color:#E8834A;'>${escapeHtml(programName)}</em> Request Is Confirmed.` : isPrivate ? `Your <em style='font-style:italic;font-weight:400;color:#E8834A;'>${escapeHtml(programName)}</em> Request Is Confirmed.` : isScholarship ? `Your Application Has Been Received.` : `Your Spot in <em style='font-style:italic;font-weight:400;color:#E8834A;'>${escapeHtml(programName)}</em> Is Reserved.`}</h1>
 </td></tr></table></td></tr>
 <tr><td class="mp" style="padding:36px 56px 0;"><p style="margin:0 0 20px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:15.5px;font-weight:400;line-height:1.85;color:rgba(27,58,92,0.68);">Hey ${escapeHtml(firstName)},</p><p style="margin:0 0 20px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:15.5px;font-weight:400;line-height:1.85;color:rgba(27,58,92,0.68);">Thank you for registering for <strong style="color:#1B3A5C;">${escapeHtml(programName)}</strong>. We&rsquo;re excited to have you join us at Laguna Beach Tennis Academy.</p></td></tr>
 <tr><td class="mp" style="padding:24px 56px 0;">
@@ -430,5 +448,83 @@ export async function sendConfirmationEmail(params: ConfirmationEmailParams): Pr
     subject: `LBTA — Your ${params.programName} Registration Is Confirmed`,
     tag: 'registration-confirmation',
     htmlBody: buildConfirmationHtml(params),
+  })
+}
+
+/**
+ * Send a branded confirmation email to a trial class requestor.
+ * Fire-and-forget — failures are logged but never affect the API response.
+ */
+export async function sendTrialConfirmationEmail(params: {
+  email: string
+  firstName: string
+  program?: string
+  location?: string
+}): Promise<void> {
+  const { email, firstName, program, location } = params
+  const programDisplay = program || 'a trial class'
+  const locationDisplay = location || 'one of our Laguna Beach courts'
+
+  void sendEmail({
+    to: email,
+    subject: `LBTA — Your Trial Class Request Is Confirmed`,
+    tag: 'trial-confirmation',
+    htmlBody: buildConfirmationHtml({
+      email,
+      firstName,
+      programName: `Trial Class${program ? ` — ${program}` : ''}`,
+      location: locationDisplay,
+      duration: 'TBD (our team will confirm)',
+      category: 'Trial',
+    }),
+  })
+}
+
+/**
+ * Send a branded confirmation email to a private lesson requestor.
+ * Fire-and-forget.
+ */
+export async function sendPrivateLessonConfirmationEmail(params: {
+  email: string
+  firstName: string
+  coach: string
+  option: string
+}): Promise<void> {
+  void sendEmail({
+    to: params.email,
+    subject: `LBTA — Your Private Lesson Request with ${params.coach}`,
+    tag: 'private-lesson-confirmation',
+    htmlBody: buildConfirmationHtml({
+      email: params.email,
+      firstName: params.firstName,
+      programName: `Private Lessons — ${params.coach}`,
+      location: 'TBD (coach will confirm)',
+      duration: params.option,
+      category: 'Private',
+    }),
+  })
+}
+
+/**
+ * Send a branded confirmation email to a scholarship applicant.
+ * Fire-and-forget.
+ */
+export async function sendScholarshipConfirmationEmail(params: {
+  email: string
+  firstName: string
+  studentName?: string
+}): Promise<void> {
+  void sendEmail({
+    to: params.email,
+    subject: `LBTA — We Received Your Scholarship Application`,
+    tag: 'scholarship-confirmation',
+    htmlBody: buildConfirmationHtml({
+      email: params.email,
+      firstName: params.firstName,
+      programName: `Scholarship Application${params.studentName ? ` for ${params.studentName}` : ''}`,
+      location: 'Laguna Beach Tennis Academy',
+      duration: 'Application under review',
+      category: 'Scholarship',
+    }),
   })
 }

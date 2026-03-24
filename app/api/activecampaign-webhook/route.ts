@@ -15,6 +15,7 @@ import {
   CLASS_TAGS,
   INTEREST_TAGS,
   TYPE_TAGS,
+  getCurrentSeasonTagId,
 } from '@/lib/activecampaign'
 
 // ============================================================
@@ -213,7 +214,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Step 3: Apply season tag if not already applied
-    const seasonTagId = CAMPAIGN_TAGS.winter_2026  // 228
+    const seasonTagId = getCurrentSeasonTagId()
     if (!currentTagIds.includes(seasonTagId)) {
       await addTag(contactId, seasonTagId)
     }

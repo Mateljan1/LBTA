@@ -15,7 +15,12 @@ import {
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
-import { notifyTrialRequest, notifyPrivateLesson } from '@/lib/email'
+import {
+  notifyTrialRequest,
+  notifyPrivateLesson,
+  sendTrialConfirmationEmail,
+  sendPrivateLessonConfirmationEmail,
+} from '@/lib/email'
 
 // ============================================================
 // LBTA Booking/Trial Request API

@@ -172,6 +172,24 @@ export const UTR_DIVISION_TAGS = {
 } as const
 
 /**
+ * Return the AC season tag ID for the current date.
+ * Uses the same season boundary logic as the rest of the site.
+ * Falls back to spring_2026 if no match (safe default for 2026).
+ */
+export function getCurrentSeasonTagId(): number {
+  const now = new Date()
+  const month = now.getMonth() // 0-indexed
+
+  // Jan-Mar → winter (tag 228), Apr-Jun → spring (227),
+  // Jul-Sep → summer (230 = summer_2025 until 2026 tag exists),
+  // Oct-Dec → fall (229 = fall_2025 until 2026 tag exists)
+  if (month <= 2) return SEASON_TAGS.winter_2026   // 228
+  if (month <= 5) return SEASON_TAGS.spring_2026   // 227
+  if (month <= 8) return SEASON_TAGS.summer_2025   // 230 (placeholder until summer_2026 created)
+  return SEASON_TAGS.fall_2025                      // 229 (placeholder until fall_2026 created)
+}
+
+/**
  * @deprecated JTT is discontinued. Use UTR_DIVISION_TAGS instead.
  * Kept for backward compatibility with existing tagged contacts.
  */

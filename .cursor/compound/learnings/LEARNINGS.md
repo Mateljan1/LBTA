@@ -2,7 +2,9 @@
 
 Extracted from the Code Review Summary (12-agent parallel review). Use these for future implementation and review.
 
-**Recent:** 2026-03-23 — Homepage hero video: confirm `public/videos/LBTA-Home-Hero.webm` + poster `hero-poster.webp`; MP4 was referenced at `/videos/LBTA-Home-Hero.mp4` but missing — **HomeHero** updated to drop dead `<source>`; Safari/legacy uses `legacy-working-assets/.../LBTA-Home-Hero.mp4` only. Player Success carousel: four slide images verified on disk (`homepage-copy.json` `results.slides`). See `2026-03-23-photo-carousel-facility-imagery-compound-learn.md` (verification section).
+**Recent:** 2026-03-23 — UTR Match Play standalone page: lib/utr-match-play.ts as single source for season, divisions, modal payload from leagues-2026.json; LuxuryYearModal wired as primary CTA; form-config duration derived via getUtrCircuitFormDuration(); AC division tags use data.division; getUtrDivisionTag normalizes en-dash; leagues schema extended with ntrpToUtr. See `2026-03-23-utr-match-play-compound-learn.md`.
+
+**Previous:** 2026-03-23 — Homepage hero video + Player Success carousel verification (see `2026-03-23-photo-carousel-facility-imagery-compound-learn.md`).
 
 **Previous:** 2026-03-20 — ActiveCampaign test email fix: see `2026-03-20-activecampaign-test-email-compound-learn.md`. v3 POST /campaigns/{id}/test returns 405 → use legacy campaign_send with campaignid + messageid. Correction + pattern added.
 
