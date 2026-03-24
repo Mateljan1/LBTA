@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { LeagueEventSchema } from '@/app/schema'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import UTRMatchPlayRegister from './UTRMatchPlayRegister'
+import UTRMatchPlayDivisions from './UTRMatchPlayDivisions'
 import {
   getNtrpToUtrReference,
   getUtrDivisionsForPage,
@@ -241,54 +242,12 @@ export default function UTRMatchPlayPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">Five divisions</h2>
             <div className="section-horizon mb-6" aria-hidden="true" />
-            <p className="text-body text-brand-pacific-dusk/60 mb-12 max-w-2xl">
+            <p className="text-body text-brand-pacific-dusk/60 mb-10 max-w-2xl">
               Find your level. Season registration includes the full series; drop-in is available where
               listed for flexibility.
             </p>
 
-            <div className="grid gap-5">
-              {divisions.map((d, index) => (
-                <div
-                  key={d.name}
-                  className={[
-                    'bg-white rounded-lg border border-brand-pacific-dusk/6 p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-4 md:gap-8',
-                    'transition-all duration-300 hover:border-brand-pacific-dusk/12 hover:shadow-[0_8px_32px_rgba(27,58,92,0.07)] hover:-translate-y-0.5',
-                    index % 2 === 1 ? 'md:ml-4 lg:ml-8' : '',
-                  ].join(' ')}
-                >
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-headline text-headline text-brand-pacific-dusk mb-1">{d.name}</h3>
-                    <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/50">{d.level}</p>
-                    {d.note ? (
-                      <p className="text-[13px] font-sans font-light text-brand-pacific-dusk/45 mt-2">{d.note}</p>
-                    ) : null}
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-[13px] font-sans text-brand-pacific-dusk/60 md:text-right">
-                    <div>
-                      <span className="text-eyebrow-sm text-brand-pacific-dusk/30 block mb-0.5">Venue</span>
-                      <span className="font-light">{d.venue}</span>
-                    </div>
-                    <div>
-                      <span className="text-eyebrow-sm text-brand-pacific-dusk/30 block mb-0.5">Format</span>
-                      <span className="font-light">{d.format}</span>
-                    </div>
-                    <div>
-                      <span className="text-eyebrow-sm text-brand-pacific-dusk/30 block mb-0.5">Time</span>
-                      <span className="font-light">{d.time}</span>
-                    </div>
-                    <div>
-                      <span className="text-eyebrow-sm text-brand-pacific-dusk/30 block mb-0.5">Season</span>
-                      <span className="font-medium text-brand-pacific-dusk">{d.price}</span>
-                      {d.dropIn != null ? (
-                        <span className="block text-[12px] font-light text-brand-pacific-dusk/50 mt-1">
-                          Drop-in ${d.dropIn}
-                        </span>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <UTRMatchPlayDivisions divisions={divisions} />
           </div>
         </div>
       </section>
