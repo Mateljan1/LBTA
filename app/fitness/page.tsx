@@ -88,18 +88,26 @@ export default function FitnessPage() {
                 LiveBall
               </h2>
               <p className="font-sans text-[16px] md:text-[17px] leading-relaxed text-black/85">
-                LiveBall is competition in motion — no downtime, just fast-paced rallies that 
-                test focus and fitness.
+                Coach-fed doubles with Champions and Challengers—constant action, no serving, and a
+                90-minute session built in six focused blocks. Intermediate and advanced groups by level.
               </p>
               <p className="font-sans text-[15px] md:text-[16px] text-black/70">
-                <strong>Format:</strong> Continuous doubles · Level-based groups · 90-150 minutes
+                <strong>Format:</strong> Doubles · Coach-fed points · 90 minutes
               </p>
-              <Link 
-                href="/schedules#fitness"
-                className="inline-block bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-[2px] transition-all duration-200 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
-              >
-                View Schedule →
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+                <Link
+                  href="/liveball"
+                  className="inline-block bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[14px] md:text-[15px] py-3 px-8 rounded-[2px] transition-all duration-200 min-h-[48px] text-center focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                >
+                  How LiveBall works
+                </Link>
+                <Link
+                  href="/schedules#fitness"
+                  className="inline-block font-sans font-semibold text-[14px] md:text-[15px] text-brand-pacific-dusk py-3 min-h-[48px] flex items-center underline underline-offset-4 decoration-black/25 hover:decoration-brand-victoria-cove focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove/40 rounded-sm px-1"
+                >
+                  View schedule
+                </Link>
+              </div>
             </div>
             
             <div className="relative aspect-[3/2] overflow-hidden rounded md:order-2">

@@ -190,14 +190,14 @@
       "program": "LiveBall (Int.)",
       "ages": "NTRP 2.0-3.5",
       "location": "Moulton Meadows Park / LBHS",
-      "duration": "1-1.5 hr",
+      "duration": "90 min",
       "schedule": [
         { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Staff", "location": "Moulton Meadows Park" },
         { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Staff", "location": "LB High School" },
         { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Staff", "location": "LB High School" }
       ],
       "pricing": { "monthly": 150, "drop_in": 50 },
-      "description": "Coach-fed hitting with purpose. High-volume point play for extra reps and competitive energy."
+      "description": "Coach-fed doubles with Champions/Challengers rotations; six 15-minute blocks in each 90-minute session. 8 max."
     },
     {
       "id": "liveball-advanced",
@@ -205,12 +205,12 @@
       "program": "LiveBall (Adv.)",
       "ages": "NTRP 3.5+",
       "location": "Laguna Beach High School",
-      "duration": "1.5 hr",
+      "duration": "90 min",
       "schedule": [
         { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Staff" }
       ],
       "pricing": { "monthly": 150, "drop_in": 50 },
-      "description": "Fast-paced community play for advanced players. 8 max."
+      "description": "Coach-fed doubles at a faster pace; same 90-minute structure as Intermediate LiveBall. 8 max."
     },
     {
       "id": "cardio-tennis",

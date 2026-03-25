@@ -1,0 +1,57 @@
+{
+  "lastReviewed": "2026-03-25",
+  "outcomeLine": "Sharpen doubles patterns under pressure—then walk off the court knowing you earned every rep.",
+  "sessionObjective": "LiveBall is a high-intensity, coach-fed doubles session. The coach feeds every ball so there is no serving—just continuous action that sharpens positioning, patterns, and finishing while keeping your heart rate up.",
+  "howItWorks": [
+    "Doubles only. Two players hold the Champions side (king of the court); two Challengers try to take their spot.",
+    "The coach stands on the Champions side with a full basket and feeds every point—serves are not used in this format.",
+    "Challengers need three points before Champions earn two to win the exchange; when Challengers win, they become the new Champions.",
+    "Rotations stay quick so everyone cycles in and out—expect a fast pace and minimal standing around."
+  ],
+  "firstBall": {
+    "title": "First ball on each point",
+    "intro": "The first feed to a new challenging pair has extra structure so the point starts clean:",
+    "bullets": [
+      "The Challenger at the baseline hits toward a target the coach calls—forehand or backhand crosscourt, inside-out forehand, or an “open” ball where you choose.",
+      "The Champions’ net player does not poach that first ball unless the feed is an open ball.",
+      "Miss the first ball and your team rotates out; a clean winner can move you straight to the Champion side. Your coach reviews house rules at the start of each session."
+    ]
+  },
+  "sessionStructure": {
+    "title": "Inside a 90-minute session",
+    "subtitle": "Six 15-minute blocks—movement prep, then pattern work, then open decision-making.",
+    "blocks": [
+      { "label": "Block 1", "title": "Dynamic warm-up", "detail": "Footwork, split-steps, cooperative groundstrokes and short volley warm-up." },
+      { "label": "Block 2", "title": "Forehand crosscourt", "detail": "Deuce-side patterns and spacing; first-ball targets as announced." },
+      { "label": "Block 3", "title": "Backhand crosscourt", "detail": "Ad-side consistency and net teamwork." },
+      { "label": "Block 4", "title": "Forehand inside-out", "detail": "Turn defense into offense from the ad court." },
+      { "label": "Block 5", "title": "Forehand open ball", "detail": "Choose line or cross; net player may poach when the feed allows." },
+      { "label": "Block 6", "title": "Backhand open ball", "detail": "Shot selection and finishing—highest intensity of the hour." }
+    ]
+  },
+  "testimonial": {
+    "quote": "I joined for cardio, but the biggest shift has been doubles tactics—where to stand, when to help at net, and how to close points together. My partner and I finally move as one unit.",
+    "author": "Member, adult LiveBall",
+    "role": "Intermediate group · Laguna Beach",
+    "replaceBeforePublish": "Swap this placeholder with a member-approved quote when available."
+  },
+  "culture": {
+    "communication": "Call the ball, switch when you cross, and keep talking with your partner—LiveBall is doubles-first.",
+    "safety": "Hydrate when you need to; step off if something feels off. We keep the basket full and the time between points short."
+  },
+  "levels": [
+    {
+      "id": "intermediate",
+      "name": "LiveBall (Intermediate)",
+      "ntrpor": "NTRP 2.0–3.5",
+      "summary": "Rhythm, shape, and court awareness. Coaches may moderate feed pace so you can own the pattern before adding pace."
+    },
+    {
+      "id": "advanced",
+      "name": "LiveBall (Advanced)",
+      "ntrpor": "NTRP 3.5+",
+      "summary": "Faster feeds, tighter margins, and more aggressive decision-making in the open-ball blocks—still the same rotation format and coach-fed structure."
+    }
+  ],
+  "pricingNote": "Pricing and weekly times are listed on the schedule with the rest of Fitness programming."
+}

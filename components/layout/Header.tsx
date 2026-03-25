@@ -29,6 +29,11 @@ const programsDropdown = [
     desc: 'Cardio Tennis, LiveBall, weekly community sessions',
   },
   {
+    name: 'LiveBall',
+    href: '/liveball',
+    desc: 'Coach-fed doubles — how sessions work',
+  },
+  {
     name: 'Leagues & Match Play',
     href: '/programs/leagues',
     desc: 'USTA Adult League teams, UTR Match Play Series',

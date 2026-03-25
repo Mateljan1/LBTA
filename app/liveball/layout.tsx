@@ -1,0 +1,18 @@
+import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
+
+export const metadata: Metadata = {
+  title: 'LiveBall — Coach-Fed Doubles | Laguna Beach Tennis Academy',
+  description:
+    'How LBTA runs LiveBall: coach-fed doubles, Champions and Challengers, first-ball rules, and a 90-minute session built in six blocks. Movement, craft, community.',
+  openGraph: {
+    title: 'LiveBall — Coach-Fed Doubles | LBTA',
+    description:
+      'Coach-fed doubles with constant action—learn how rotations, scoring, and session blocks work before you book.',
+    images: [{ url: '/images/liveball/hero-doubles.webp', width: 1600, height: 1067, alt: 'LiveBall doubles at LBTA' }],
+  },
+}
+
+export default function LiveBallLayout({ children }: { children: ReactNode }) {
+  return children
+}

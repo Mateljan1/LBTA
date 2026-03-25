@@ -9,6 +9,9 @@ import { useReportMobileBottomHeight } from '@/lib/report-mobile-bottom-height'
 interface StickyCTAProps {
   text: string
   href?: string
+  /** Second action (e.g. Schedule) — when set with secondaryHref, shows dual CTAs on mobile. */
+  secondaryText?: string
+  secondaryHref?: string
   onClick?: () => void
   showAfterScroll?: number
   urgencyText?: string
@@ -25,12 +28,17 @@ const getContextualMessage = (pathname: string): { text: string; highlight?: str
   if (pathname.includes('/fitness')) {
     return { text: 'Fit4Tennis · First session complimentary', highlight: 'Get started' }
   }
+  if (pathname.includes('/liveball')) {
+    return { text: 'LiveBall · Coach-fed doubles', highlight: 'Book' }
+  }
   return { text: 'Programs and schedules · View options' }
 }
 
 export default function StickyCTA({ 
   text, 
   href, 
+  secondaryText,
+  secondaryHref,
   onClick, 
   showAfterScroll = 400,
   urgencyText
@@ -55,6 +63,8 @@ export default function StickyCTA({
   if (!isVisible) return null
   
   const buttonClasses = "flex-1 bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[15px] py-3.5 rounded-[2px] transition-all duration-200 shadow-md text-center min-h-[48px] active:scale-[0.98] flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+  const secondaryButtonClasses =
+    'flex-1 bg-white border border-black/20 hover:border-black/35 text-black font-sans font-semibold text-[14px] py-3.5 rounded-[2px] transition-all duration-200 text-center min-h-[48px] active:scale-[0.98] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2'
   
   return (
     <div
@@ -78,6 +88,15 @@ export default function StickyCTA({
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
+        ) : href && secondaryHref && secondaryText ? (
+          <>
+            <Link href={href} className={buttonClasses}>
+              {text}
+            </Link>
+            <Link href={secondaryHref} className={secondaryButtonClasses}>
+              {secondaryText}
+            </Link>
+          </>
         ) : href ? (
           <Link href={href} className={buttonClasses}>
             {text}
@@ -86,17 +105,18 @@ export default function StickyCTA({
             </svg>
           </Link>
         ) : null}
-        
-        {/* Secondary CTA - Call */}
-        <a
-          href="tel:+19495340457"
-          className="flex items-center justify-center w-14 h-14 bg-brand-morning-light rounded-full border border-black/10 active:scale-95 transition-transform focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
-          aria-label="Call (949) 534-0457"
-        >
-          <svg className="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-        </a>
+
+        {!secondaryHref && (
+          <a
+            href="tel:+19495340457"
+            className="flex items-center justify-center w-14 h-14 shrink-0 bg-brand-morning-light rounded-full border border-black/10 active:scale-95 transition-transform focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+            aria-label="Call (949) 534-0457"
+          >
+            <svg className="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </a>
+        )}
       </div>
     </div>
   )

@@ -22,6 +22,7 @@ import {
   sendTrialConfirmationEmail,
   sendPrivateLessonConfirmationEmail,
 } from '@/lib/email'
+import { writeNotionLead } from '@/lib/notion-leads'
 
 // ============================================================
 // LBTA Booking/Trial Request API
@@ -138,6 +139,14 @@ export async function POST(request: NextRequest) {
         }
       }
 
+      waitUntil(writeNotionLead({
+        parentName: `${privateBody.firstName} ${privateBody.lastName}`,
+        email: privateBody.email,
+        phone: privateBody.phone,
+        program: `Private Lessons — ${privateBody.coach}`,
+        category: 'Private Lesson',
+        notes: `Option: ${privateBody.option}`,
+      }))
       waitUntil(sendToGHL({
         email: privateBody.email,
         firstName: privateBody.firstName,
@@ -212,6 +221,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    waitUntil(writeNotionLead({
+      parentName: `${trialBody.firstName} ${trialBody.lastName}`,
+      email: trialBody.email,
+      phone: trialBody.phone,
+      program: trialBody.program || 'Trial Request',
+      category: 'Trial',
+      location: trialBody.location,
+      notes: trialBody.experience ? `Experience: ${trialBody.experience}` : undefined,
+    }))
     waitUntil(sendToGHL({ email: trialBody.email, firstName: trialBody.firstName, lastName: trialBody.lastName, phone: trialBody.phone, tags: ['Trial Request', trialBody.program ?? 'Not Specified'] }))
     waitUntil(storeLead({
       source: 'book',

@@ -8,6 +8,7 @@ import { upsertContact, addToList, addTag, getWebsiteSignupsListId, CAMPAIGN_TAG
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
 import { notifyNewsletter } from '@/lib/email'
+import { writeNotionLead } from '@/lib/notion-leads'
 
 export async function GET() {
   return NextResponse.json(
@@ -95,6 +96,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    waitUntil(writeNotionLead({
+      parentName: email.trim(),
+      email: email.trim(),
+      program: 'Newsletter Signup',
+      category: 'Newsletter',
+    }))
     waitUntil(sendToGHL({ email: email.trim(), tags: ['Newsletter'] }))
     waitUntil(storeLead({ source: 'newsletter', email: email.trim() }))
     waitUntil(notifyNewsletter(email.trim()))

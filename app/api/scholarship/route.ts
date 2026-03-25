@@ -15,6 +15,7 @@ import {
 } from '@/lib/activecampaign'
 import { sendToGHL } from '@/lib/gohighlevel'
 import { notifyScholarship, sendScholarshipConfirmationEmail } from '@/lib/email'
+import { writeNotionLead } from '@/lib/notion-leads'
 
 export async function POST(request: NextRequest) {
   // Agent auth: validate X-Agent-Secret header if present (for agent tool calls)
@@ -101,6 +102,14 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    waitUntil(writeNotionLead({
+      parentName: parentName || 'Not provided',
+      playerName: validation.data.studentName,
+      email: validation.data.email,
+      phone: validation.data.phone ?? undefined,
+      program: 'Scholarship Application',
+      category: 'Scholarship',
+    }))
     waitUntil(sendToGHL({
       email: validation.data.email,
       firstName: ghlFirstName,

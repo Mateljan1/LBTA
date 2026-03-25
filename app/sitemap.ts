@@ -108,6 +108,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/liveball`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.72,
+    },
+    {
       url: `${baseUrl}/match-play`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
