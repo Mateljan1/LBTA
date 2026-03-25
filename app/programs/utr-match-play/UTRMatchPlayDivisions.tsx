@@ -16,18 +16,14 @@ export default function UTRMatchPlayDivisions({ divisions }: UTRMatchPlayDivisio
   return (
     <>
       <div className="grid gap-4 md:gap-5">
-        {divisions.map((d, index) => (
+        {divisions.map((d) => (
           <div
             key={d.name}
-            className={[
-              'bg-white rounded-xl border border-brand-pacific-dusk/8 p-5 md:p-6',
-              'transition-all duration-300 hover:border-brand-pacific-dusk/15 hover:shadow-[0_8px_32px_rgba(27,58,92,0.08)] hover:-translate-y-0.5',
-              index % 2 === 1 ? 'md:ml-6 lg:ml-10' : '',
-            ].join(' ')}
+            className="bg-white rounded-xl border border-brand-pacific-dusk/8 p-5 md:p-6 transition-all duration-300 hover:border-brand-pacific-dusk/15 hover:shadow-[0_8px_32px_rgba(27,58,92,0.08)] hover:-translate-y-0.5"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center sm:flex-wrap gap-4 sm:gap-6 md:gap-8">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-[minmax(200px,240px)_1fr_auto] md:gap-8 md:items-center">
               {/* Left: Title + level + note */}
-              <div className="min-w-0 flex-shrink-0 sm:basis-[200px] sm:flex-[0_0_200px] md:basis-[220px] md:flex-[0_0_220px]">
+              <div className="min-w-0">
                 <h3 className="font-headline text-[1.25rem] md:text-[1.375rem] text-brand-pacific-dusk leading-snug">
                   {d.name}
                 </h3>
@@ -41,8 +37,8 @@ export default function UTRMatchPlayDivisions({ divisions }: UTRMatchPlayDivisio
                 ) : null}
               </div>
 
-              {/* Center: Metadata grid — readable labels, fills space */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 sm:gap-x-8 sm:gap-y-1 text-[14px] font-sans flex-1 min-w-0 sm:min-w-[280px]">
+              {/* Center: Metadata grid — readable labels */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 sm:gap-x-6 sm:gap-y-1 text-[14px] font-sans min-w-0">
                 <div>
                   <span className="block text-[11px] font-medium uppercase tracking-[0.12em] text-brand-pacific-dusk/55 mb-0.5">
                     Venue
@@ -75,12 +71,12 @@ export default function UTRMatchPlayDivisions({ divisions }: UTRMatchPlayDivisio
               </div>
 
               {/* Right: CTA */}
-              <div className="flex-shrink-0 sm:self-center">
+              <div className="flex-shrink-0 md:justify-self-end">
                 <button
                   type="button"
                   onClick={() => setModalOpen(true)}
                   aria-label={`Register for ${d.name}`}
-                  className="inline-flex items-center justify-center gap-2 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[44px] px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 w-full sm:w-auto"
+                  className="inline-flex items-center justify-center gap-2 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 w-full md:w-auto"
                 >
                   Register
                   <svg
