@@ -21,6 +21,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'mapbbmrjgpusegjvbkod.supabase.co',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
     ],
   },
   compiler: {

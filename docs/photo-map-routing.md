@@ -13,6 +13,8 @@
 
 Full roadmap (players folders, migration phases): [`plans/photo-asset-library-and-routing-plan.md`](../plans/photo-asset-library-and-routing-plan.md).
 
+**LBTA_pics_2 (2026-03):** Masters live in `plans/LBTA_website_pics/LBTA_pics_2/`. Encode with `node scripts/encode-lbta-pics2.mjs` → WebP under `public/images/results/`, `success-stories/`, `programs/`, `philosophy/`, `community/` with filenames like `karue-fh-hero.webp`, `henry-lbta-pics2.webp`, `lbta-pics2-masonry-01.webp`. Wired in `data/homepage-copy.json`, `data/player-media.json`, and success stories pages.
+
 ---
 
 Source bundle: `website photos/LBTA_Website_Ready_2026-03-22/`. Files are copied into `public/images/` under semantic paths used by the app. Regenerate from the same bundle if you replace assets.
@@ -25,12 +27,12 @@ Source bundle: `website photos/LBTA_Website_Ready_2026-03-22/`. Files are copied
 | `destination/lbta-2023-night-tennis-practice-palm-trees.webp` | `destination/destination-night-palms.webp` |
 | `founder/lbta-2023-smiling-tennis-coach-holding-tennis-balls.webp` | `founder/andrew-mateljan-on-court.webp` (homepage founder: also sourced from `17-extras-rotation/lbta-2023-tennis-player-retrieving-low-ball.webp`) |
 | `player-success/lbta-2026-high-performance-karue-sell-backhand-andrew-observing.webp` | `results/karue-sell-andrew-mateljan-coaching.webp` (homepage **Player Success** band) |
-| `philosophy-pillars/01–03-*.webp` | `philosophy/movement.webp`, `philosophy/discipline.webp`, `homepage/philosophy-community.webp` (homepage: camps + timeline + doubles liveball from `05-camps`, `08-about`, `07-leagues-match-play`) |
-| `program-cards/01–03-*.webp` | Legacy filenames; homepage **Pathways** row uses `programs/youth-dev-2.webp`, `adult-intermediate.webp`, `community/community-4.webp` (Michelle + juniors for private) — see `data/homepage-copy.json` |
+| `philosophy-pillars/01–03-*.webp` | Movement/Craft: `philosophy/movement-clinic-lbta-pics2.webp`, `philosophy/craft-hp-class-lbta-pics2.webp`; Community hero: `homepage/philosophy-community-group-2026.webp` — see `data/homepage-copy.json` |
+| `program-cards/01–03-*.webp` | Legacy filenames; homepage **Pathways** row uses `programs/junior-development-lbta-pics2.webp`, `adult-lbta-pics2.webp`, `programs/private-michelle-lbta-pics2.webp` — see `data/homepage-copy.json` |
 | `why-choose-lbta/01–02-*.webp` | Optional legacy; homepage **Why Choose** now uses **`facility/hero-ocean-view-tennis-courts-sunset.webp`** + **`facility/detail-sunlit-blue-tennis-courts.webp`** (coastal pack; story + surface clarity) |
 | Coastal facility pack (`plans/LBTA_website_pics/.../LBTA-Coastal-Courts-1920x1080/webp/`) | `facility/overview-coastal-tennis-facility-ocean.webp` (homepage **destination** band), `facility/hero-ocean-view-…`, `facility/detail-sunlit-blue-tennis-courts.webp`, `facility/coaching-private-tennis-lesson-drill.webp` (contact, coaches, schedules as wired) |
 | `cta/lbta-2023-tennis-practice-courts-sunset.webp` | `cta/cta-background.webp` |
-| `community-gallery/01–10-*.webp` | `community/community-1.webp` … `community-10.webp` |
+| `community-gallery/01–10-*.webp` | Legacy `community/community-1.webp` … `community-10.webp`; homepage masonry also uses `community/lbta-pics2-*.webp` from `LBTA_pics_2` |
 
 ## Other sections
 

@@ -8,8 +8,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import PullQuote from '@/components/ui/PullQuote'
 import WhyChooseImage from '@/components/ui/WhyChooseImage'
-import { MasonryGrid } from '@/components/sections'
-import type { MasonryImageItem } from '@/components/sections/MasonryGrid'
+import HomeCommunityGallery from '@/components/home/HomeCommunityGallery'
 import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
 import PlayerSuccessCarousel, { type PlayerSuccessSlide } from '@/components/home/PlayerSuccessCarousel'
@@ -96,17 +95,8 @@ type DestinationCopy = (typeof homepageCopy)['destination'] & {
   objectPosition?: string
 }
 
-type CommunityGalleryItem = {
-  src: string
-  alt: string
-  span?: 'small' | 'medium' | 'large'
-  objectPosition?: string
-}
-type CommunitySection = (typeof homepageCopy)['community'] & { gallery: CommunityGalleryItem[] }
-
 export default function Home() {
   const whyChoose = (homepageCopy as { whyChoose?: WhyChooseCopy }).whyChoose
-  const communitySection = homepageCopy.community as CommunitySection
   const results = homepageCopy.results
   const destination = homepageCopy.destination as DestinationCopy
   return (
@@ -351,28 +341,7 @@ export default function Home() {
       </section>
 
       <HorizonDivider animate />
-      <section id="community" className="bg-white section-lg">
-        <div className="container-lbta">
-          <MasonryGrid
-            header={
-              <AnimatedSection className="text-center mb-12">
-                <span className="text-eyebrow mb-4 block">{homepageCopy.community.eyebrow}</span>
-                <h2 className="font-headline text-headline font-light mb-4">{homepageCopy.community.headline}</h2>
-                <p className="text-subhead max-w-2xl mx-auto font-light">{homepageCopy.community.subline}</p>
-              </AnimatedSection>
-            }
-            items={communitySection.gallery.map(
-              (item): MasonryImageItem => ({
-                src: item.src,
-                alt: item.alt,
-                span: item.span as MasonryImageItem['span'],
-                objectPosition: item.objectPosition,
-              })
-            )}
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          />
-        </div>
-      </section>
+      <HomeCommunityGallery />
 
       <VideoTestimonials />
 

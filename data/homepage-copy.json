@@ -28,9 +28,9 @@
         "subline": "Karue Sell, ATP #262 — from the #800s to a career high earned through structured work on tour.",
         "ctaLabel": "Watch His Journey",
         "ctaHref": "/success-stories#karue-sell",
-        "image": "/images/results/karue-home-carousel-2026.webp",
-        "imageAlt": "Karue Sell on an outdoor court in athletic wear, mid-stroke",
-        "objectPosition": "50% 45%",
+        "image": "/images/results/karue-fh-hero.webp",
+        "imageAlt": "Karue Sell hitting a forehand on an outdoor court at LBTA",
+        "objectPosition": "50% 48%",
         "imageFit": "cover"
       },
       {
@@ -46,19 +46,19 @@
         "subline": "Henry Mateljan — age 9, 4.6 UTR; Little Mo recognition on his junior journey.",
         "ctaLabel": "Read Henry's story",
         "ctaHref": "/success-stories#henry-mateljan",
-        "image": "/images/success-stories/henry-home-carousel-maroon-2026.webp",
-        "imageAlt": "Henry Mateljan on a blue court in a maroon shirt, full length",
-        "objectPosition": "50% 48%",
+        "image": "/images/success-stories/henry-lbta-pics2.webp",
+        "imageAlt": "Henry Mateljan on court during junior play at LBTA",
+        "objectPosition": "50% 45%",
         "imageFit": "contain"
       },
       {
         "subline": "Olov — 4.0 to 5.0 USTA; strong results in 5.0 play and national-level events.",
         "ctaLabel": "Read Olov's story",
         "ctaHref": "/success-stories#olov",
-        "image": "/images/results/olov-home-carousel-2026.webp",
-        "imageAlt": "Olov mid-swing on an outdoor hard court, full length",
+        "image": "/images/results/olov-hero-lbta-pics2.webp",
+        "imageAlt": "Olov mid-swing on an outdoor hard court at LBTA",
         "objectPosition": "50% 48%",
-        "imageFit": "contain"
+        "imageFit": "cover"
       }
     ]
   },
@@ -70,17 +70,17 @@
         "title": "Movement",
         "description": "The foundation of repeatable success.",
         "detail": "Technical precision through biomechanics and footwork fundamentals.",
-        "image": "/images/philosophy/movement.webp",
-        "imageAlt": "Junior player in an athletic stance during a drill on an outdoor court",
-        "objectPosition": "50% 38%"
+        "image": "/images/philosophy/movement-clinic-lbta-pics2.webp",
+        "imageAlt": "Intermediate clinic — players in structured drills on a blue court",
+        "objectPosition": "50% 40%"
       },
       {
         "title": "Craft",
         "description": "Structure that builds confidence.",
         "detail": "Consistent practice routines create lasting mental toughness.",
-        "image": "/images/philosophy/discipline.webp",
-        "imageAlt": "High-performance junior players training together on court",
-        "objectPosition": "50% 38%"
+        "image": "/images/philosophy/craft-hp-class-lbta-pics2.webp",
+        "imageAlt": "High-performance class — focused training on court at LBTA",
+        "objectPosition": "50% 40%"
       },
       {
         "title": "Community",
@@ -101,25 +101,25 @@
         "title": "Junior Programs",
         "description": "From red ball to college prep.",
         "link": "/programs/junior",
-        "image": "/images/programs/youth-dev-2.webp",
-        "imageAlt": "Youth players in a development clinic on an outdoor court",
-        "objectPosition": "50% 35%"
+        "image": "/images/programs/junior-development-lbta-pics2.webp",
+        "imageAlt": "Junior development — young player training on an outdoor court at LBTA",
+        "objectPosition": "50% 38%"
       },
       {
         "title": "Adult Programs",
         "description": "Focused development for any level.",
         "link": "/programs/adult",
-        "image": "/images/programs/adult-intermediate.webp",
-        "imageAlt": "Adult players in a rally during an intermediate clinic",
+        "image": "/images/programs/adult-lbta-pics2.webp",
+        "imageAlt": "Adult players in an advanced clinic on an outdoor court",
         "objectPosition": "50% 42%"
       },
       {
         "title": "Private Coaching",
         "description": "Personal sessions built around your goals.",
         "link": "/book",
-        "image": "/images/community/community-4.webp",
-        "imageAlt": "Coach Michelle Mateljan with junior players during a lesson",
-        "objectPosition": "50% 40%"
+        "image": "/images/programs/private-michelle-lbta-pics2.webp",
+        "imageAlt": "Coach Michelle Mateljan coaching a private lesson on court at LBTA",
+        "objectPosition": "50% 42%"
       }
     ],
     "ctaSecondary": "View All Programs",
@@ -154,64 +154,64 @@
         "objectPosition": "50% 45%"
       },
       {
-        "src": "/images/community/community-1.webp",
-        "alt": "Friday women's USTA league team photo on court",
+        "src": "/images/community/lbta-pics2-masonry-01.webp",
+        "alt": "LBTA community — players gathered on an outdoor court",
         "span": "medium",
+        "objectPosition": "50% 45%"
+      },
+      {
+        "src": "/images/community/lbta-pics2-masonry-02.webp",
+        "alt": "Community play — athletes on a blue court at LBTA",
+        "span": "small",
         "objectPosition": "50% 42%"
       },
       {
-        "src": "/images/community/community-2.webp",
-        "alt": "Saturday UTR match play — player serving on a blue court at LBTA",
-        "span": "small",
-        "objectPosition": "50% 40%"
-      },
-      {
-        "src": "/images/community/community-3.webp",
-        "alt": "Two adult players in a competitive rally on an outdoor court",
+        "src": "/images/community/lbta-pics2-liveball-advanced.webp",
+        "alt": "Advanced live ball — competitive drills on court",
         "span": "medium",
         "objectPosition": "50% 44%"
       },
       {
-        "src": "/images/community/community-4.webp",
-        "alt": "Coach Michelle with junior players during a lesson",
+        "src": "/images/community/lbta-pics2-liveball-intermediate.webp",
+        "alt": "Intermediate live ball — structured match-style play",
         "span": "small",
         "objectPosition": "50% 42%"
       },
       {
-        "src": "/images/community/community-5.webp",
-        "alt": "Night practice — forehand swing under court lights",
+        "src": "/images/community/lbta-pics2-michelle-vibes.webp",
+        "alt": "Coach Michelle Mateljan with players during a session",
         "span": "small",
         "objectPosition": "50% 40%"
       },
       {
-        "src": "/images/community/community-6.webp",
-        "alt": "Coach Andrew with a junior player on court in Laguna Beach",
+        "src": "/images/community/lbta-pics2-group-fitness-moulton.webp",
+        "alt": "Group fitness at Moulton Meadows — outdoor training",
         "span": "large",
-        "objectPosition": "48% 44%"
-      },
-      {
-        "src": "/images/community/community-7.webp",
-        "alt": "Adult doubles at night on outdoor courts",
-        "span": "small",
         "objectPosition": "50% 42%"
       },
       {
-        "src": "/images/community/community-8.webp",
-        "alt": "LBTA outdoor courts lit for evening play",
-        "span": "medium",
-        "objectPosition": "50% 48%"
+        "src": "/images/community/lbta-pics2-lbhs-location.webp",
+        "alt": "Laguna Beach High School courts — LBTA training location",
+        "span": "small",
+        "objectPosition": "50% 45%"
       },
       {
-        "src": "/images/community/community-9.webp",
-        "alt": "Group warm-up during a team practice",
-        "span": "small",
+        "src": "/images/community/lbta-pics2-group-fitness-moulton-2.webp",
+        "alt": "Group session — players on court at Moulton Meadows",
+        "span": "medium",
         "objectPosition": "50% 44%"
       },
       {
-        "src": "/images/community/community-10.webp",
-        "alt": "Players shaking hands after match play at Alta Laguna",
+        "src": "/images/community/lbta-pics2-location-3.webp",
+        "alt": "Outdoor courts — practice and match play at LBTA",
         "span": "small",
         "objectPosition": "50% 48%"
+      },
+      {
+        "src": "/images/community/lbta-pics2-adult-advanced-2.webp",
+        "alt": "Adult advanced players in a clinic on an outdoor court",
+        "span": "small",
+        "objectPosition": "50% 42%"
       }
     ]
   },

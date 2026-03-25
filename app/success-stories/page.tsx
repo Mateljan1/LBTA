@@ -18,7 +18,7 @@ const successStories = [
     name: 'Karue Sell',
     title: 'ATP Tour Player',
     achievement: '#858 → #262 ATP Ranking',
-    image: '/images/success-stories/karue-sell.webp',
+    image: '/images/results/karue-fh-hero.webp',
     quote: "Andrew's movement-first approach transformed my game. The structured training and accountability pushed me to levels I didn't know I could reach.",
     story:
       'Karue trained at LBTA with Coach Andrew while rebuilding his professional game. From a ranking in the #800s on the ATP tour, he climbed to a career high of #262 — a jump that reflects sustained work on movement efficiency, patterns, and mental toughness under pressure.',
@@ -42,7 +42,7 @@ const successStories = [
     name: 'Henry Mateljan',
     title: 'Junior Competitor',
     achievement: 'Age 9 · 4.6 UTR · Little Mo',
-    image: '/images/success-stories/henry-home-carousel-maroon-2026.webp',
+    image: '/images/success-stories/henry-lbta-pics2.webp',
     quote:
       'Little Mo was a special week—sharing that with Coach Andrew is something I will always remember.',
     story:
@@ -54,7 +54,7 @@ const successStories = [
     name: 'Olov',
     title: 'USTA National Competition',
     achievement: '4.0 → 5.0 · National events',
-    image: '/images/success-stories/olov-usta.webp',
+    image: '/images/results/olov-hero-lbta-pics2.webp',
     quote:
       'The step up to 5.0 came from training that matches how I compete—structure in practice, clarity in matches.',
     story:
@@ -65,7 +65,7 @@ const successStories = [
 
 /** Per-story focal points for `object-cover` cards (tune without changing assets). */
 const successStoryImagePosition: Record<string, string> = {
-  'karue-sell': '52% 42%',
+  'karue-sell': '50% 48%',
   'ryan-seggerman': '50% 40%',
   'henry-mateljan': '50% 42%',
   olov: '50% 45%',
@@ -142,7 +142,7 @@ export default function SuccessStoriesPage() {
       <section className="relative min-h-[55vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/results/karue-home-carousel-2026.webp"
+            src="/images/results/karue-fh-hero.webp"
             alt="On-court play at Laguna Beach Tennis Academy"
             fill
             className="object-cover object-center max-md:brightness-[0.88]"
