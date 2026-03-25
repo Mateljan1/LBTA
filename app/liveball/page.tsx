@@ -5,9 +5,11 @@ import DarkSection from '@/components/ui/DarkSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import StickyCTA from '@/components/StickyCTA'
 import { getLiveBallContent } from '@/lib/liveball-content'
+import { getLiveBallSeasonSnapshot } from '@/lib/programs-data'
 
 export default function LiveBallPage() {
   const content = getLiveBallContent()
+  const liveBallSeason = getLiveBallSeasonSnapshot()
 
   return (
     <>
@@ -142,6 +144,103 @@ export default function LiveBallPage() {
         </div>
       </section>
 
+      <section
+        className="bg-brand-morning-light py-16 md:py-24 border-t border-black/[0.06]"
+        aria-labelledby="liveball-schedule-heading"
+      >
+        <div className="max-w-[1100px] mx-auto px-4 md:px-8">
+          <div className="max-w-2xl mb-10 md:mb-14">
+            <h2 id="liveball-schedule-heading" className="font-headline text-headline-sm text-brand-pacific-dusk mb-3">
+              Weekly times &amp; pricing
+            </h2>
+            <p className="font-sans text-[17px] text-black/80 leading-relaxed">
+              LiveBall runs on a <span className="font-medium text-brand-pacific-dusk">monthly membership</span> with{' '}
+              <span className="font-medium text-brand-pacific-dusk">drop-in</span> options—no quarterly session dates to track. Weekly
+              court times and fees below are the same labels you see on{' '}
+              <Link
+                href="/schedules#fitness"
+                className="text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/35 hover:decoration-brand-victoria-cove focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove/40 rounded-sm"
+              >
+                Schedule &amp; Pricing → Fitness &amp; Community
+              </Link>{' '}
+              (Cardio Tennis and the rest of Fitness live there too).
+            </p>
+          </div>
+
+          <div className="space-y-10 md:space-y-12">
+            {liveBallSeason.programs.map((prog) => (
+              <article
+                key={prog.id}
+                className="bg-white border border-black/[0.06] rounded-sm shadow-[0_1px_2px_rgba(0,0,0,0.04)] overflow-hidden"
+              >
+                <div className="p-6 md:p-8 border-b border-black/[0.06] bg-brand-morning-light/80">
+                  <h3 className="font-headline text-[1.35rem] md:text-[1.5rem] text-brand-pacific-dusk mb-2">
+                    {prog.program}
+                  </h3>
+                  <p className="font-sans text-[15px] md:text-[16px] text-black/80 leading-relaxed">
+                    <span className="font-medium text-brand-pacific-dusk">Ages</span> {prog.ages}
+                    <span className="text-black/40 mx-2" aria-hidden="true">
+                      ·
+                    </span>
+                    {prog.duration}
+                    <span className="text-black/40 mx-2" aria-hidden="true">
+                      ·
+                    </span>
+                    {prog.location}
+                  </p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[520px] border-collapse font-sans text-[15px] leading-snug">
+                    <caption className="sr-only">
+                      Weekly times for {prog.program}: {prog.ages}
+                    </caption>
+                    <thead>
+                      <tr className="border-b border-black/[0.08] bg-white text-left text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/70">
+                        <th scope="col" className="py-3 px-4 md:px-6 font-medium">
+                          Day
+                        </th>
+                        <th scope="col" className="py-3 px-4 md:px-6 font-medium">
+                          Time
+                        </th>
+                        <th scope="col" className="py-3 px-4 md:px-6 font-medium">
+                          Location
+                        </th>
+                        <th scope="col" className="py-3 px-4 md:px-6 font-medium">
+                          Coach
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {prog.schedule.map((row, idx) => (
+                        <tr key={`${prog.id}-${row.day}-${idx}`} className="border-b border-black/[0.05] last:border-0">
+                          <td className="py-3.5 px-4 md:px-6 text-black/90">{row.day}</td>
+                          <td className="py-3.5 px-4 md:px-6 text-black/90 whitespace-nowrap">{row.time}</td>
+                          <td className="py-3.5 px-4 md:px-6 text-black/80">
+                            {row.location?.trim() ? row.location : prog.location}
+                          </td>
+                          <td className="py-3.5 px-4 md:px-6 text-black/80">{row.coach ?? '—'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="p-6 md:px-8 md:pb-8 md:pt-6 space-y-3">
+                  <p className="font-sans text-[15px] md:text-[16px] text-black/90">
+                    <span className="font-medium text-brand-pacific-dusk">Monthly membership:</span>{' '}
+                    {prog.monthlyLabel}
+                    <span className="text-black/40 mx-2" aria-hidden="true">
+                      ·
+                    </span>
+                    <span className="font-medium text-brand-pacific-dusk">Drop-in:</span> {prog.dropInLabel}
+                  </p>
+                  <p className="font-sans text-[14px] md:text-[15px] leading-relaxed text-black/65">{prog.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-brand-morning-light py-16 md:py-20 border-t border-black/[0.06]">
         <div className="max-w-[1100px] mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-10 md:gap-14 items-center">
           <div className="relative aspect-[4/3] overflow-hidden rounded-sm shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
@@ -155,21 +254,6 @@ export default function LiveBallPage() {
             />
           </div>
           <div className="space-y-8">
-            <div>
-              <h2 className="font-headline text-headline-sm text-brand-pacific-dusk mb-3">Levels we offer</h2>
-              <div className="space-y-6">
-                {content.levels.map((lvl) => (
-                  <div key={lvl.id} className="border-l-[3px] border-brand-victoria-cove pl-5 py-1">
-                    <p className="font-sans text-[12px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/60 mb-1">
-                      {lvl.ntrpor}
-                    </p>
-                    <h3 className="font-headline text-[1.25rem] text-brand-pacific-dusk mb-2">{lvl.name}</h3>
-                    <p className="font-sans text-[16px] leading-relaxed text-black/80">{lvl.summary}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="font-sans text-[15px] text-black/60 mt-6">{content.pricingNote}</p>
-            </div>
             <div className="bg-white/80 border border-black/[0.06] rounded-sm p-6 space-y-4">
               <h3 className="font-headline text-lg text-brand-pacific-dusk">On court</h3>
               <p className="font-sans text-[15px] leading-relaxed text-black/80">{content.culture.communication}</p>

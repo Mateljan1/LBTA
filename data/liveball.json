@@ -38,20 +38,5 @@
   "culture": {
     "communication": "Call the ball, switch when you cross, and keep talking with your partner—LiveBall is doubles-first.",
     "safety": "Hydrate when you need to; step off if something feels off. We keep the basket full and the time between points short."
-  },
-  "levels": [
-    {
-      "id": "intermediate",
-      "name": "LiveBall (Intermediate)",
-      "ntrpor": "NTRP 2.0–3.5",
-      "summary": "Rhythm, shape, and court awareness. Coaches may moderate feed pace so you can own the pattern before adding pace."
-    },
-    {
-      "id": "advanced",
-      "name": "LiveBall (Advanced)",
-      "ntrpor": "NTRP 3.5+",
-      "summary": "Faster feeds, tighter margins, and more aggressive decision-making in the open-ball blocks—still the same rotation format and coach-fed structure."
-    }
-  ],
-  "pricingNote": "Pricing and weekly times are listed on the schedule with the rest of Fitness programming."
+  }
 }

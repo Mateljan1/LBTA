@@ -8,6 +8,7 @@ import springSummer2026Data from '@/data/spring-summer-2026.json'
 import fall2026Data from '@/data/fall2026.json'
 import privateRatesData from '@/data/private-rates.json'
 import pricingSupplementalData from '@/data/pricing-supplemental.json'
+import { getCurrentSeason, type SeasonKey } from '@/lib/season-utils'
 
 export interface WinterProgram {
   id: string
@@ -413,6 +414,130 @@ export function getFitnessClasses(): Array<{ name: string; day: string; time: st
       price: priceStr || (p.pricing.drop_in != null ? `$${p.pricing.drop_in}` : ''),
     }))
   })
+}
+
+const LIVE_BALL_IDS: string[] = ['liveball-intermediate', 'liveball-advanced']
+
+function isLiveBallProgramId(id: string): boolean {
+  return LIVE_BALL_IDS.includes(id)
+}
+
+/** Schedule row shape (Winter uses required coach; Spring/Summer display may omit). */
+export type LiveBallScheduleRow = {
+  day: string
+  time: string
+  coach?: string
+  note?: string
+  location?: string
+}
+
+/** LiveBall rows for /liveball — same program ids and fields as the schedules page for the active season. */
+export interface LiveBallProgramForPage {
+  id: string
+  program: string
+  ages: string
+  duration: string
+  location: string
+  schedule: LiveBallScheduleRow[]
+  monthlyLabel: string
+  dropInLabel: string
+  description: string
+}
+
+export interface LiveBallSeasonSnapshot {
+  seasonKey: SeasonKey
+  seasonTitle: string
+  seasonDates: string
+  programs: LiveBallProgramForPage[]
+}
+
+function formatMonthlyDropIn(pricing: Record<string, number>): { monthly: string; dropIn: string } {
+  const m = pricing.monthly
+  const d = pricing.drop_in
+  return {
+    monthly: m != null ? `$${m}/mo` : '—',
+    dropIn: d != null ? `$${d}` : '—',
+  }
+}
+
+function winterProgramToLiveBallRow(p: WinterProgram): LiveBallProgramForPage {
+  const { monthly, dropIn } = formatMonthlyDropIn(p.pricing)
+  return {
+    id: p.id,
+    program: p.program,
+    ages: p.ages,
+    duration: p.duration,
+    location: p.location,
+    schedule: p.schedule,
+    monthlyLabel: monthly,
+    dropInLabel: dropIn,
+    description: p.description,
+  }
+}
+
+function programForDisplayToLiveBallRow(p: ProgramForDisplay): LiveBallProgramForPage {
+  const { monthly, dropIn } = formatMonthlyDropIn(p.pricing)
+  return {
+    id: p.id,
+    program: p.program,
+    ages: p.ages,
+    duration: p.duration,
+    location: p.location,
+    schedule: p.schedule,
+    monthlyLabel: monthly,
+    dropInLabel: dropIn,
+    description: p.description,
+  }
+}
+
+/**
+ * LiveBall Intermediate + Advanced for the **current** season tab (Winter / Spring / Summer / Fall),
+ * matching data/winter2026.json, data/spring-summer-2026.json, or data/fall2026.json.
+ */
+export function getLiveBallSeasonSnapshot(): LiveBallSeasonSnapshot {
+  const key = getCurrentSeason()
+  const order = (a: { id: string }, b: { id: string }) =>
+    LIVE_BALL_IDS.indexOf(a.id) - LIVE_BALL_IDS.indexOf(b.id)
+
+  if (key === 'winter') {
+    const programs = winter2026.programs.filter(p => isLiveBallProgramId(p.id)).sort(order)
+    return {
+      seasonKey: key,
+      seasonTitle: winter2026.season,
+      seasonDates: winter2026.dates,
+      programs: programs.map(winterProgramToLiveBallRow),
+    }
+  }
+
+  if (key === 'fall') {
+    const programs = fall2026.programs.filter(p => isLiveBallProgramId(p.id)).sort(order)
+    return {
+      seasonKey: key,
+      seasonTitle: fall2026.season,
+      seasonDates: fall2026.dates,
+      programs: programs.map(winterProgramToLiveBallRow),
+    }
+  }
+
+  if (key === 'spring') {
+    const meta = springSummer2026.spring
+    const programs = getSpringProgramsForDisplay().filter(p => isLiveBallProgramId(p.id)).sort(order)
+    return {
+      seasonKey: key,
+      seasonTitle: `${meta.label} 2026`,
+      seasonDates: meta.dates,
+      programs: programs.map(programForDisplayToLiveBallRow),
+    }
+  }
+
+  const meta = springSummer2026.summer
+  const programs = getSummerProgramsForDisplay().filter(p => isLiveBallProgramId(p.id)).sort(order)
+  return {
+    seasonKey: 'summer',
+    seasonTitle: `${meta.label} 2026`,
+    seasonDates: meta.dates,
+    programs: programs.map(programForDisplayToLiveBallRow),
+  }
 }
 
 /** Trial program options for booking modal and book page (single source). Values match API/PROGRAM_TAGS. */

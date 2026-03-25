@@ -173,7 +173,11 @@ export default function ProgramsSection({
         {/* Grouped programs */}
         <div className="space-y-12">
           {grouped.map(({ category, programs: catPrograms }) => (
-            <div key={category}>
+            <div
+              key={category}
+              id={category === 'Fitness' ? 'fitness' : undefined}
+              className={category === 'Fitness' ? 'scroll-mt-28 md:scroll-mt-32' : undefined}
+            >
               <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-2">
                 {CATEGORY_EYEBROWS[category] || category.toUpperCase()}
               </p>

@@ -6,13 +6,6 @@ export interface LiveBallBlock {
   detail: string
 }
 
-export interface LiveBallLevel {
-  id: string
-  name: string
-  ntrpor: string
-  summary: string
-}
-
 export interface LiveBallTestimonial {
   quote: string
   author: string
@@ -33,8 +26,6 @@ export interface LiveBallContent {
   }
   testimonial: LiveBallTestimonial
   culture: { communication: string; safety: string }
-  levels: LiveBallLevel[]
-  pricingNote: string
 }
 
 export function getLiveBallContent(): LiveBallContent {
