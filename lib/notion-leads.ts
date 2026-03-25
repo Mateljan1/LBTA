@@ -91,8 +91,9 @@ export async function writeNotionLead(params: NotionLeadParams): Promise<void> {
 
     await notion.pages.create({
       parent: { database_id: getEnvVar('NOTION_DATABASE_ID') },
-      properties: properties as CreatePageParameters['properties'],
-    })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      properties: properties as Record<string, any>,
+    } as CreatePageParameters)
   } catch (err) {
     console.error('[Notion] Error writing lead:', err instanceof Error ? err.message : err)
   }
