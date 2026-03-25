@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { waitUntil } from '@vercel/functions'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { bookingSchema, privateLessonBookingSchema, parseJsonBody, validateRequest } from '@/lib/validations'
 import { getEnvVar, hasEnvVar } from '@/lib/env'
@@ -137,28 +138,35 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      void sendToGHL({
+      waitUntil(sendToGHL({
         email: privateBody.email,
         firstName: privateBody.firstName,
         lastName: privateBody.lastName,
         phone: privateBody.phone,
-      })
-      // Leads and signup intent stored in Supabase (leads table) and ActiveCampaign (contact + lists + tags) for redundancy.
-      void storeLead({
+        tags: ['Private Lesson', privateBody.coach],
+      }))
+      waitUntil(storeLead({
         source: 'book',
         email: privateBody.email,
         name: `${privateBody.firstName ?? ''} ${privateBody.lastName ?? ''}`.trim() || undefined,
         phone: privateBody.phone ?? undefined,
         payload: { bookingType: 'private', coach: privateBody.coach, option: privateBody.option },
-      })
-      void notifyPrivateLesson({
+      }))
+      waitUntil(notifyPrivateLesson({
         firstName: privateBody.firstName,
         lastName: privateBody.lastName,
         email: privateBody.email,
         phone: privateBody.phone,
         coach: privateBody.coach,
         option: privateBody.option,
-      })
+      }))
+      // Send branded confirmation email TO the requestor
+      waitUntil(sendPrivateLessonConfirmationEmail({
+        email: privateBody.email,
+        firstName: privateBody.firstName,
+        coach: privateBody.coach,
+        option: privateBody.option,
+      }))
 
       return NextResponse.json({
         success: true,
@@ -204,15 +212,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    void sendToGHL({ email: trialBody.email, firstName: trialBody.firstName, lastName: trialBody.lastName, phone: trialBody.phone })
-    void storeLead({
+    waitUntil(sendToGHL({ email: trialBody.email, firstName: trialBody.firstName, lastName: trialBody.lastName, phone: trialBody.phone, tags: ['Trial Request', trialBody.program ?? 'Not Specified'] }))
+    waitUntil(storeLead({
       source: 'book',
       email: trialBody.email,
       name: `${trialBody.firstName ?? ''} ${trialBody.lastName ?? ''}`.trim() || undefined,
       phone: trialBody.phone ?? undefined,
       payload: { program: trialBody.program, location: trialBody.location },
-    })
-    void notifyTrialRequest({
+    }))
+    waitUntil(notifyTrialRequest({
       firstName: trialBody.firstName,
       lastName: trialBody.lastName,
       email: trialBody.email,
@@ -221,7 +229,14 @@ export async function POST(request: NextRequest) {
       location: trialBody.location,
       experience: trialBody.experience,
       preferredDays: trialBody.preferredDays,
-    })
+    }))
+    // Send branded confirmation email TO the trial requestor
+    waitUntil(sendTrialConfirmationEmail({
+      email: trialBody.email,
+      firstName: trialBody.firstName,
+      program: trialBody.program,
+      location: trialBody.location,
+    }))
 
     return NextResponse.json({
       success: true,

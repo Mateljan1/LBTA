@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { waitUntil } from '@vercel/functions'
 import { Client } from '@notionhq/client'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, registerYearSchema, validateRequest } from '@/lib/validations'
@@ -339,14 +340,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    void sendToGHL({
+    waitUntil(sendToGHL({
       email: data.email,
       firstName: data.firstName,
       lastName: data.lastName,
       phone: data.phone,
-    })
+      tags: ['Website Registration', data.program, data.registrationType ?? 'seasonal'],
+    }))
 
-    void storeLead({
+    waitUntil(storeLead({
       source: 'register-year',
       email: data.email,
       name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
@@ -356,8 +358,8 @@ export async function POST(request: NextRequest) {
         program: data.program,
         season: data.season,
       },
-    })
-    void notifyRegistration({
+    }))
+    waitUntil(notifyRegistration({
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -371,9 +373,9 @@ export async function POST(request: NextRequest) {
       studentAge: data.studentAge ?? data.playerAge,
       experience: data.experience,
       notes: data.notes,
-    })
+    }))
 
-    // Send branded confirmation email TO the registrant (fire-and-forget).
+    // Send branded confirmation email TO the registrant.
     // Try programId first, then match by program display name.
     const configById = data.programId
       ? FORM_CONFIGS[data.programId]
@@ -383,7 +385,7 @@ export async function POST(request: NextRequest) {
     )
     if (matchedConfig) {
       const pre = matchedConfig.prePopulateData
-      void sendConfirmationEmail({
+      waitUntil(sendConfirmationEmail({
         email: data.email,
         firstName: data.firstName,
         programName: pre.programName,
@@ -391,16 +393,16 @@ export async function POST(request: NextRequest) {
         duration: pre.duration,
         ageGroup: pre.ageGroup,
         category: pre.category,
-      })
+      }))
     } else {
-      void sendConfirmationEmail({
+      waitUntil(sendConfirmationEmail({
         email: data.email,
         firstName: data.firstName,
         programName: data.program,
         location: data.location ?? 'TBD',
         duration: 'TBD',
         category: category,
-      })
+      }))
     }
 
     // 3. Return success with confirmation message based on type

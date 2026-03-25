@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { waitUntil } from '@vercel/functions'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, registerSchema, validateRequest } from '@/lib/validations'
 import { hasEnvVar } from '@/lib/env'
@@ -112,21 +113,22 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    void sendToGHL({
+    waitUntil(sendToGHL({
       email: data.email,
       firstName: data.firstName,
       lastName: data.lastName,
       phone: data.phone,
-    })
+      tags: ['Website Registration', data.program ?? 'General Inquiry'],
+    }))
 
-    void storeLead({
+    waitUntil(storeLead({
       source: 'register',
       email: data.email,
       name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
       phone: data.phone ?? undefined,
       payload: { program: data.program, season: data.season },
-    })
-    void notifyRegistration({
+    }))
+    waitUntil(notifyRegistration({
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -134,34 +136,34 @@ export async function POST(request: NextRequest) {
       program: data.program ?? 'Not specified',
       season: data.season,
       experience: data.experience,
-    })
+    }))
 
-    // Send branded confirmation email TO the registrant (fire-and-forget)
-    if (data.program) {
-      const matchedConfig = Object.values(FORM_CONFIGS).find(
-        c => c.prePopulateData.programName === data.program
-      )
-      if (matchedConfig) {
-        const pre = matchedConfig.prePopulateData
-        void sendConfirmationEmail({
-          email: data.email,
-          firstName: data.firstName,
-          programName: pre.programName,
-          location: pre.location,
-          duration: pre.duration,
-          ageGroup: pre.ageGroup,
-          category: pre.category,
-        })
-      } else {
-        void sendConfirmationEmail({
-          email: data.email,
-          firstName: data.firstName,
-          programName: data.program,
-          location: 'TBD',
-          duration: 'TBD',
-          category: 'Adult',
-        })
-      }
+    // Send branded confirmation email TO the registrant
+    const matchedConfig = data.program
+      ? Object.values(FORM_CONFIGS).find(
+          c => c.prePopulateData.programName === data.program
+        )
+      : undefined
+    if (matchedConfig) {
+      const pre = matchedConfig.prePopulateData
+      waitUntil(sendConfirmationEmail({
+        email: data.email,
+        firstName: data.firstName,
+        programName: pre.programName,
+        location: pre.location,
+        duration: pre.duration,
+        ageGroup: pre.ageGroup,
+        category: pre.category,
+      }))
+    } else {
+      waitUntil(sendConfirmationEmail({
+        email: data.email,
+        firstName: data.firstName,
+        programName: data.program ?? 'Tennis Program',
+        location: 'TBD',
+        duration: 'TBD',
+        category: 'Adult',
+      }))
     }
 
     return NextResponse.json({

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { waitUntil } from '@vercel/functions'
 import { Client } from '@notionhq/client'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, programRegistrationSchema, validateRequest } from '@/lib/validations'
@@ -234,21 +235,22 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    void sendToGHL({
+    waitUntil(sendToGHL({
       email: data.email,
       firstName: data.firstName,
       lastName: data.lastName,
       phone: data.phone,
-    })
+      tags: ['Website Registration', data.program],
+    }))
 
-    void storeLead({
+    waitUntil(storeLead({
       source: 'register-program',
       email: data.email,
       name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
       phone: data.phone ?? undefined,
       payload: { program: data.program, location: data.location },
-    })
-    void notifyRegistration({
+    }))
+    waitUntil(notifyRegistration({
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -259,16 +261,16 @@ export async function POST(request: NextRequest) {
       studentAge: data.studentAge,
       experience: data.experience,
       notes: data.notes,
-    })
+    }))
 
-    // Send branded confirmation email TO the registrant (fire-and-forget).
+    // Send branded confirmation email TO the registrant.
     // Look up form config by matching program display name to get precise metadata.
     const matchedConfig = Object.values(FORM_CONFIGS).find(
       c => c.prePopulateData.programName === data.program
     )
     if (matchedConfig) {
       const pre = matchedConfig.prePopulateData
-      void sendConfirmationEmail({
+      waitUntil(sendConfirmationEmail({
         email: data.email,
         firstName: data.firstName,
         programName: pre.programName,
@@ -276,17 +278,17 @@ export async function POST(request: NextRequest) {
         duration: pre.duration,
         ageGroup: pre.ageGroup,
         category: pre.category,
-      })
+      }))
     } else {
       // Fallback: send with whatever data the form submitted
-      void sendConfirmationEmail({
+      waitUntil(sendConfirmationEmail({
         email: data.email,
         firstName: data.firstName,
         programName: data.program,
         location: data.location ?? 'TBD',
         duration: 'TBD',
         category: category,
-      })
+      }))
     }
 
     return NextResponse.json({

@@ -19,6 +19,10 @@ export type GHLContactPayload = {
   firstName?: string
   lastName?: string
   phone?: string
+  /** Free-text tags for GHL segmentation (e.g. "Website Registration", "Trial Request") */
+  tags?: string[]
+  /** Custom field values — keys must match GHL custom field keys */
+  customFields?: Array<{ key: string; field_value: string }>
 }
 
 function isGHLConfigured(): boolean {
@@ -53,6 +57,8 @@ async function createContact(payload: GHLContactPayload): Promise<string | null>
       firstName: (payload.firstName ?? '').trim() || undefined,
       lastName: (payload.lastName ?? '').trim() || undefined,
       phone: (payload.phone ?? '').trim() || undefined,
+      tags: payload.tags,
+      customFields: payload.customFields,
     }),
   })
   if (!res.ok) {

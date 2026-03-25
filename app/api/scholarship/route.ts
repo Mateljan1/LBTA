@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { waitUntil } from '@vercel/functions'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, scholarshipSchema, validateRequest } from '@/lib/validations'
 import { storeLead } from '@/lib/leads-store'
@@ -13,7 +14,7 @@ import {
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { sendToGHL } from '@/lib/gohighlevel'
-import { notifyScholarship } from '@/lib/email'
+import { notifyScholarship, sendScholarshipConfirmationEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   // Agent auth: validate X-Agent-Secret header if present (for agent tool calls)
@@ -100,26 +101,36 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    void sendToGHL({
+    waitUntil(sendToGHL({
       email: validation.data.email,
       firstName: ghlFirstName,
       lastName: ghlLastName,
       phone: validation.data.phone ?? undefined,
-    })
+      tags: ['Scholarship Application'],
+    }))
 
-    void storeLead({
+    waitUntil(storeLead({
       source: 'scholarship',
       email: validation.data.email,
       name: validation.data.parentName ?? undefined,
       phone: validation.data.phone ?? undefined,
       payload: { studentName: validation.data.studentName },
-    })
-    void notifyScholarship({
+    }))
+    waitUntil(notifyScholarship({
       parentName: validation.data.parentName,
       email: validation.data.email,
       phone: validation.data.phone,
       studentName: validation.data.studentName,
-    })
+    }))
+    // Send confirmation email TO the applicant
+    const scholarshipFirstName = spaceIdx > 0
+      ? parentName.slice(0, spaceIdx)
+      : parentName || 'there'
+    waitUntil(sendScholarshipConfirmationEmail({
+      email: validation.data.email,
+      firstName: scholarshipFirstName,
+      studentName: validation.data.studentName,
+    }))
 
     return NextResponse.json({
       success: true,

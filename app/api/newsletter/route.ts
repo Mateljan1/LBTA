@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { waitUntil } from '@vercel/functions'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { newsletterSchema, parseJsonBody, validateRequest } from '@/lib/validations'
 import { hasEnvVar } from '@/lib/env'
@@ -94,17 +95,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    try {
-      void sendToGHL({ email: email.trim() }).catch((e: unknown) =>
-        console.error('[newsletter] GHL:', e instanceof Error ? e.message : 'Unknown error')
-      )
-      void storeLead({ source: 'newsletter', email: email.trim() }).catch((e: unknown) =>
-        console.error('[newsletter] storeLead:', e instanceof Error ? e.message : 'Unknown error')
-      )
-      void notifyNewsletter(email.trim())
-    } catch {
-      // Fire-and-forget may throw synchronously (e.g. getClient() with invalid Supabase env); do not fail the response
-    }
+    waitUntil(sendToGHL({ email: email.trim(), tags: ['Newsletter'] }))
+    waitUntil(storeLead({ source: 'newsletter', email: email.trim() }))
+    waitUntil(notifyNewsletter(email.trim()))
 
     return NextResponse.json({ success: true, message: 'Subscribed successfully' })
   } catch (err) {

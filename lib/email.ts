@@ -124,7 +124,9 @@ function buildNotificationHtml(options: {
 }
 
 // ============================================================
-// Public notification functions (fire-and-forget)
+// Public notification functions
+// These return Promises so callers can await them or pass to waitUntil().
+// Failures are logged but never throw — safe for background use.
 // ============================================================
 
 export type NotifyTrialParams = {
@@ -139,7 +141,7 @@ export type NotifyTrialParams = {
 }
 
 export async function notifyTrialRequest(data: NotifyTrialParams): Promise<void> {
-  void sendEmail({
+  await sendEmail({
     to: NOTIFY_TO,
     subject: `New Trial Request — ${data.firstName} ${data.lastName}`,
     tag: 'trial-request',
@@ -169,7 +171,7 @@ export type NotifyPrivateLessonParams = {
 }
 
 export async function notifyPrivateLesson(data: NotifyPrivateLessonParams): Promise<void> {
-  void sendEmail({
+  await sendEmail({
     to: NOTIFY_TO,
     subject: `Private Lesson Request — ${data.firstName} ${data.lastName} → ${data.coach}`,
     tag: 'private-lesson',
@@ -211,7 +213,7 @@ export async function notifyRegistration(data: NotifyRegistrationParams): Promis
       ? 'Camp Registration'
       : 'Program Registration'
 
-  void sendEmail({
+  await sendEmail({
     to: NOTIFY_TO,
     subject: `New ${heading} — ${data.firstName} ${data.lastName} — ${data.program}`,
     tag: 'registration',
@@ -244,7 +246,7 @@ export type NotifyScholarshipParams = {
 }
 
 export async function notifyScholarship(data: NotifyScholarshipParams): Promise<void> {
-  void sendEmail({
+  await sendEmail({
     to: NOTIFY_TO,
     subject: `Scholarship Application — ${data.parentName || data.email}`,
     tag: 'scholarship',
@@ -262,7 +264,7 @@ export async function notifyScholarship(data: NotifyScholarshipParams): Promise<
 }
 
 export async function notifyNewsletter(email: string): Promise<void> {
-  void sendEmail({
+  await sendEmail({
     to: NOTIFY_TO,
     subject: `Newsletter Signup — ${email}`,
     tag: 'newsletter',
@@ -394,11 +396,11 @@ a{color:#2E8B8B;text-decoration:none;}
   <p style="margin:0 0 14px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,240,229,0.4);">${isTrial ? 'TRIAL REQUEST CONFIRMED' : isPrivate ? 'LESSON REQUEST CONFIRMED' : isScholarship ? 'APPLICATION RECEIVED' : 'REGISTRATION CONFIRMED'}</p>
   <h1 class="ht" style="margin:0 0 10px;font-family:'Cormorant',Georgia,serif;font-weight:300;font-size:38px;line-height:1.12;color:#F5F0E5;">${isTrial ? `Your <em style='font-style:italic;font-weight:400;color:#E8834A;'>${escapeHtml(programName)}</em> Request Is Confirmed.` : isPrivate ? `Your <em style='font-style:italic;font-weight:400;color:#E8834A;'>${escapeHtml(programName)}</em> Request Is Confirmed.` : isScholarship ? `Your Application Has Been Received.` : `Your Spot in <em style='font-style:italic;font-weight:400;color:#E8834A;'>${escapeHtml(programName)}</em> Is Reserved.`}</h1>
 </td></tr></table></td></tr>
-<tr><td class="mp" style="padding:36px 56px 0;"><p style="margin:0 0 20px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:15.5px;font-weight:400;line-height:1.85;color:rgba(27,58,92,0.68);">Hey ${escapeHtml(firstName)},</p><p style="margin:0 0 20px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:15.5px;font-weight:400;line-height:1.85;color:rgba(27,58,92,0.68);">Thank you for registering for <strong style="color:#1B3A5C;">${escapeHtml(programName)}</strong>. We&rsquo;re excited to have you join us at Laguna Beach Tennis Academy.</p></td></tr>
+<tr><td class="mp" style="padding:36px 56px 0;"><p style="margin:0 0 20px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:15.5px;font-weight:400;line-height:1.85;color:rgba(27,58,92,0.68);">Hey ${escapeHtml(firstName)},</p><p style="margin:0 0 20px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:15.5px;font-weight:400;line-height:1.85;color:rgba(27,58,92,0.68);">${isScholarship ? `Thank you for submitting your scholarship application. We take every application seriously and will review yours promptly.` : isTrial ? `Thank you for requesting a trial class. We&rsquo;re excited to welcome you to Laguna Beach Tennis Academy.` : isPrivate ? `Thank you for your private lesson request. We&rsquo;re looking forward to getting you on the court.` : `Thank you for registering for <strong style="color:#1B3A5C;">${escapeHtml(programName)}</strong>. We&rsquo;re excited to have you join us at Laguna Beach Tennis Academy.`}</p></td></tr>
 <tr><td class="mp" style="padding:24px 56px 0;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0F2237;border-radius:10px;">
 <tr><td style="padding:28px 32px;">
-  <p style="margin:0 0 16px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#E8834A;">PROGRAM DETAILS</p>
+  <p style="margin:0 0 16px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#E8834A;">${isScholarship ? 'APPLICATION DETAILS' : isTrial ? 'TRIAL DETAILS' : isPrivate ? 'LESSON DETAILS' : 'PROGRAM DETAILS'}</p>
   <table style="width:100%;border-collapse:collapse;">
     <tr><td style="padding:6px 0;color:rgba(245,240,229,0.5);font-size:13px;font-family:'DM Sans',Helvetica,Arial,sans-serif;width:90px;vertical-align:top;">Program</td><td style="padding:6px 0;color:#F5F0E5;font-size:14px;font-weight:600;font-family:'DM Sans',Helvetica,Arial,sans-serif;">${escapeHtml(programName)}</td></tr>
     <tr><td style="padding:6px 0;color:rgba(245,240,229,0.5);font-size:13px;font-family:'DM Sans',Helvetica,Arial,sans-serif;vertical-align:top;">Location</td><td style="padding:6px 0;color:#F5F0E5;font-size:14px;font-weight:600;font-family:'DM Sans',Helvetica,Arial,sans-serif;">${escapeHtml(location)}</td></tr>
@@ -440,10 +442,10 @@ a{color:#2E8B8B;text-decoration:none;}
 
 /**
  * Send a branded, program-specific confirmation email TO the registrant.
- * Fire-and-forget — failures are logged but never affect the API response.
+ * Returns a Promise — callers should pass to waitUntil() for reliable delivery.
  */
 export async function sendConfirmationEmail(params: ConfirmationEmailParams): Promise<void> {
-  void sendEmail({
+  await sendEmail({
     to: params.email,
     subject: `LBTA — Your ${params.programName} Registration Is Confirmed`,
     tag: 'registration-confirmation',
@@ -453,7 +455,7 @@ export async function sendConfirmationEmail(params: ConfirmationEmailParams): Pr
 
 /**
  * Send a branded confirmation email to a trial class requestor.
- * Fire-and-forget — failures are logged but never affect the API response.
+ * Returns a Promise — callers should pass to waitUntil() for reliable delivery.
  */
 export async function sendTrialConfirmationEmail(params: {
   email: string
@@ -465,7 +467,7 @@ export async function sendTrialConfirmationEmail(params: {
   const programDisplay = program || 'a trial class'
   const locationDisplay = location || 'one of our Laguna Beach courts'
 
-  void sendEmail({
+  await sendEmail({
     to: email,
     subject: `LBTA — Your Trial Class Request Is Confirmed`,
     tag: 'trial-confirmation',
@@ -482,7 +484,7 @@ export async function sendTrialConfirmationEmail(params: {
 
 /**
  * Send a branded confirmation email to a private lesson requestor.
- * Fire-and-forget.
+ * Returns a Promise — callers should pass to waitUntil() for reliable delivery.
  */
 export async function sendPrivateLessonConfirmationEmail(params: {
   email: string
@@ -490,7 +492,7 @@ export async function sendPrivateLessonConfirmationEmail(params: {
   coach: string
   option: string
 }): Promise<void> {
-  void sendEmail({
+  await sendEmail({
     to: params.email,
     subject: `LBTA — Your Private Lesson Request with ${params.coach}`,
     tag: 'private-lesson-confirmation',
@@ -507,14 +509,14 @@ export async function sendPrivateLessonConfirmationEmail(params: {
 
 /**
  * Send a branded confirmation email to a scholarship applicant.
- * Fire-and-forget.
+ * Returns a Promise — callers should pass to waitUntil() for reliable delivery.
  */
 export async function sendScholarshipConfirmationEmail(params: {
   email: string
   firstName: string
   studentName?: string
 }): Promise<void> {
-  void sendEmail({
+  await sendEmail({
     to: params.email,
     subject: `LBTA — We Received Your Scholarship Application`,
     tag: 'scholarship-confirmation',
