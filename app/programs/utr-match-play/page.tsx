@@ -99,10 +99,16 @@ export default function UTRMatchPlayPage() {
               Book a Trial First
             </Link>
             <a
-              href="#divisions"
-              className="inline-flex items-center justify-center min-h-[48px] px-2 text-sm font-sans font-medium text-brand-victoria-cove/90 underline underline-offset-4 decoration-brand-victoria-cove/40 hover:text-white hover:decoration-white/90 transition-colors sm:ml-2"
+              href="#utr-and-color-ball"
+              className="inline-flex items-center justify-center min-h-[48px] px-2 text-sm font-sans font-medium text-brand-victoria-cove/90 underline underline-offset-4 decoration-brand-victoria-cove/40 hover:text-white hover:decoration-white/90 transition-colors"
             >
-              View divisions &amp; pricing
+              How UTR &amp; Color Ball work
+            </a>
+            <a
+              href="#divisions"
+              className="inline-flex items-center justify-center min-h-[48px] px-2 text-sm font-sans font-medium text-white/70 underline underline-offset-4 decoration-white/30 hover:text-white hover:decoration-white/80 transition-colors sm:ml-1"
+            >
+              Divisions &amp; pricing
             </a>
           </div>
 
@@ -144,6 +150,72 @@ export default function UTRMatchPlayPage() {
 
       <HorizonDivider animate />
 
+      {/* UTR Sports + Color Ball — parent-friendly context */}
+      <section
+        id="utr-and-color-ball"
+        className="container-lbta section-sm bg-white border-b border-brand-pacific-dusk/5 scroll-mt-28"
+      >
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-headline text-display-sm md:text-[clamp(1.75rem,4vw,2.25rem)] text-brand-pacific-dusk mb-4 text-center md:text-left">
+            What UTR is—and how Color Ball fits
+          </h2>
+          <div className="section-horizon mx-auto md:mx-0 mb-8" aria-hidden="true" />
+          <div className="space-y-5 text-[15px] md:text-[16px] font-sans font-light text-brand-pacific-dusk/65 leading-relaxed">
+            <p>
+              <strong className="font-medium text-brand-pacific-dusk">UTR Sports (Universal Tennis)</strong>{' '}
+              is the platform where match results are recorded and turned into ratings. For yellow-ball
+              singles and doubles, your profile shows a{' '}
+              <strong className="font-medium text-brand-pacific-dusk">numeric UTR Rating</strong> that
+              updates as you compete.
+            </p>
+            <p>
+              <strong className="font-medium text-brand-pacific-dusk">Color Ball players</strong>—red,
+              orange, and green ball—use a separate system called{' '}
+              <strong className="font-medium text-brand-pacific-dusk">Color Ball Rating (CBR)</strong>: stage
+              levels (for example R1–R2, O1–O2, G1–G3) that match scaled courts and equipment. CBR is built
+              for development; it is not the same display as an adult numeric UTR, and that is by design.
+            </p>
+            <p>
+              Scaled tennis is serious, structured play. Our{' '}
+              <strong className="font-medium text-brand-pacific-dusk">Color Ball division</strong> sits in
+              the same Saturday series: real matchplay, same-day score submission to UTR Sports, and a clear
+              place for juniors who are not on full yellow ball yet.
+            </p>
+          </div>
+          <div className="mt-10 grid sm:grid-cols-3 gap-6 pt-8 border-t border-brand-pacific-dusk/10">
+            {[
+              {
+                label: 'Red ball',
+                desc: 'Smaller space, softer ball—rally and point-start fundamentals.',
+              },
+              {
+                label: 'Orange ball',
+                desc: 'Mid-size courts—transitional footwork and longer exchanges.',
+              },
+              {
+                label: 'Green ball',
+                desc: 'Full singles width—bridge toward yellow ball when ready.',
+              },
+            ].map((row) => (
+              <div key={row.label}>
+                <p className="text-eyebrow text-brand-victoria-cove mb-2 tracking-[0.12em]">{row.label}</p>
+                <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/60 leading-relaxed">
+                  {row.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 text-[14px] font-sans font-light text-brand-pacific-dusk/55 leading-relaxed">
+            Unsure which division fits? Note it when you register—we confirm placement before the first
+            Saturday. You can also{' '}
+            <Link href="/book" className="text-brand-victoria-cove underline underline-offset-4 font-medium">
+              book a trial
+            </Link>{' '}
+            and talk it through with our staff.
+          </p>
+        </div>
+      </section>
+
       {/* Who it’s for — asymmetric stagger */}
       <section className="container-lbta section bg-brand-morning-light">
         <div className="max-w-6xl mx-auto">
@@ -158,8 +230,8 @@ export default function UTRMatchPlayPage() {
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
-                title: 'Junior pathway',
-                body: 'Color Ball through competitive junior bands—development-focused matchplay with clear formats.',
+                title: 'Junior pathway — Color Ball on up',
+                body: 'Red, orange, and green ball players have a dedicated Color Ball division: development-first matchplay with formats that fit scaled tennis. You are part of the same Saturday series—not an afterthought.',
               },
               {
                 title: 'Club & improving adults',
@@ -242,9 +314,19 @@ export default function UTRMatchPlayPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">Five divisions</h2>
             <div className="section-horizon mb-6" aria-hidden="true" />
-            <p className="text-body text-brand-pacific-dusk/60 mb-10 max-w-2xl">
+            <p className="text-body text-brand-pacific-dusk/60 mb-4 max-w-2xl">
               Find your level. Season registration includes the full series; drop-in is available where
               listed for flexibility.
+            </p>
+            <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/50 mb-10 max-w-2xl">
+              New to UTR or raising a Color Ball player?{' '}
+              <a
+                href="#utr-and-color-ball"
+                className="text-brand-victoria-cove font-medium underline underline-offset-4 decoration-brand-victoria-cove/40 hover:text-brand-pacific-dusk"
+              >
+                Read how Color Ball fits the UTR platform
+              </a>
+              .
             </p>
 
             <UTRMatchPlayDivisions divisions={divisions} />
@@ -474,6 +556,14 @@ export default function UTRMatchPlayPage() {
                 {
                   q: 'Do I need a UTR account?',
                   a: 'Yes. We submit results to Universal Tennis; you will need an active profile for rated play.',
+                },
+                {
+                  q: 'What is Color Ball Rating—and is it different from a “UTR number”?',
+                  a: 'Color Ball players use UTR Sports’ Color Ball Rating (CBR): stage levels for red, orange, and green ball that match scaled courts. It is separate from the numeric UTR Rating used for yellow-ball singles and doubles. Both are legitimate; CBR reflects where your child is in development.',
+                },
+                {
+                  q: 'My child only plays red or orange ball. Is this series for them?',
+                  a: 'Yes. Our Color Ball division is built for red, orange, and green ball juniors: structured Saturday matchplay with formats suited to scaled tennis, in the same series and community as the rest of the program.',
                 },
                 {
                   q: 'What if I am between two divisions?',
