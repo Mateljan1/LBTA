@@ -285,9 +285,9 @@
       "location": "Moulton Meadows Park / LBHS",
       "duration": "1-1.5 hr",
       "schedule": [
-        { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Staff", "location": "Moulton Meadows Park" },
-        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Staff", "location": "Laguna Beach High School" },
-        { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Staff", "location": "Laguna Beach High School" }
+        { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
+        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School" },
+        { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "monthly": 150,
