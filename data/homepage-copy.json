@@ -95,31 +95,75 @@
   "programs": {
     "eyebrow": "Our Programs",
     "headline": "Pathways for Every Player",
-    "subline": "From first serves to tournament play, we have a program for you.",
-    "items": [
+    "subline": "Choose a category, then open the pathway that fits. Everything below links to its own page.",
+    "groups": [
       {
-        "title": "Junior Programs",
-        "description": "From red ball to college prep.",
-        "link": "/programs/junior",
-        "image": "/images/programs/junior-development-lbta-pics2.webp",
-        "imageAlt": "Junior development — young player training on an outdoor court at LBTA",
-        "objectPosition": "50% 38%"
+        "id": "programs-coaching",
+        "label": "Coaching & programs",
+        "items": [
+          {
+            "title": "Junior Programs",
+            "description": "Red, orange, and green ball through college prep.",
+            "link": "/programs/junior",
+            "image": "/images/programs/junior-development-lbta-pics2.webp",
+            "imageAlt": "Junior development — young player training on an outdoor court at LBTA",
+            "objectPosition": "50% 38%"
+          },
+          {
+            "title": "Adult Programs",
+            "description": "Focused development for any level.",
+            "link": "/programs/adult",
+            "image": "/images/programs/adult-lbta-pics2.webp",
+            "imageAlt": "Adult players in an advanced clinic on an outdoor court",
+            "objectPosition": "50% 42%"
+          },
+          {
+            "title": "Private Coaching",
+            "description": "Personal sessions built around your goals.",
+            "link": "/book",
+            "image": "/images/programs/private-michelle-lbta-pics2.webp",
+            "imageAlt": "Coach Michelle Mateljan coaching a private lesson on court at LBTA",
+            "objectPosition": "50% 42%"
+          },
+          {
+            "title": "Camps",
+            "description": "Seasonal camps and intensive blocks for juniors.",
+            "link": "/camps",
+            "image": "/images/camps/camps-hero.webp",
+            "imageAlt": "Junior camp players on court at Laguna Beach Tennis Academy",
+            "objectPosition": "50% 42%"
+          }
+        ]
       },
       {
-        "title": "Adult Programs",
-        "description": "Focused development for any level.",
-        "link": "/programs/adult",
-        "image": "/images/programs/adult-lbta-pics2.webp",
-        "imageAlt": "Adult players in an advanced clinic on an outdoor court",
-        "objectPosition": "50% 42%"
-      },
-      {
-        "title": "Private Coaching",
-        "description": "Personal sessions built around your goals.",
-        "link": "/book",
-        "image": "/images/programs/private-michelle-lbta-pics2.webp",
-        "imageAlt": "Coach Michelle Mateljan coaching a private lesson on court at LBTA",
-        "objectPosition": "50% 42%"
+        "id": "programs-play",
+        "label": "Match play, leagues & classes",
+        "items": [
+          {
+            "title": "LiveBall",
+            "description": "High-energy group class—movement, patterns, and doubles play in rotating formats.",
+            "link": "/liveball",
+            "image": "/images/liveball/hero-doubles.webp",
+            "imageAlt": "Coach and players during a LiveBall doubles session at LBTA",
+            "objectPosition": "50% 42%"
+          },
+          {
+            "title": "UTR Match Play",
+            "description": "Rated Saturday series—divisions by level, season points, and Grand Finals.",
+            "link": "/programs/utr-match-play",
+            "image": "/legacy-working-assets/hero/match-play-hero/match-play-hero.webp",
+            "imageAlt": "Competitive match play on the courts at Laguna Beach Tennis Academy",
+            "objectPosition": "50% 42%"
+          },
+          {
+            "title": "Leagues & team play",
+            "description": "USTA leagues, team formats, and organized competition in Laguna Beach.",
+            "link": "/programs/leagues",
+            "image": "/images/leagues/leagues-hero.webp",
+            "imageAlt": "League and team tennis on outdoor courts at LBTA",
+            "objectPosition": "50% 45%"
+          }
+        ]
       }
     ],
     "ctaSecondary": "View All Programs",

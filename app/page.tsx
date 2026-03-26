@@ -83,7 +83,7 @@ type PhilosophyPillar = (typeof homepageCopy)['philosophy']['pillars'][number] &
   objectPosition?: string
 }
 
-type ProgramItem = (typeof homepageCopy)['programs']['items'][number] & {
+type ProgramItem = (typeof homepageCopy)['programs']['groups'][number]['items'][number] & {
   image: string
   imageAlt: string
   objectPosition?: string
@@ -233,38 +233,82 @@ export default function Home() {
       <HorizonDivider animate />
       <section id="programs" className="bg-white section-lg">
         <div className="container-lbta">
-          <AnimatedSection className="text-center mb-16">
+          <AnimatedSection className="text-center mb-10 md:mb-12">
             <span className="text-eyebrow mb-4 block">{homepageCopy.programs.eyebrow}</span>
             <h2 className="font-headline text-headline font-light mb-4">{homepageCopy.programs.headline}</h2>
             <p className="text-subhead max-w-2xl mx-auto font-light">{homepageCopy.programs.subline}</p>
+            <nav
+              className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3"
+              aria-label="Jump to program category"
+            >
+              {(homepageCopy.programs.groups as { id: string; label: string }[]).map((g) => (
+                <a
+                  key={g.id}
+                  href={`#${g.id}`}
+                  className="text-[13px] font-sans font-medium uppercase tracking-[0.14em] text-brand-victoria-cove underline-offset-4 decoration-brand-victoria-cove/40 hover:text-brand-pacific-dusk hover:decoration-brand-pacific-dusk/60 underline transition-colors"
+                >
+                  {g.label}
+                </a>
+              ))}
+            </nav>
           </AnimatedSection>
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-10 mb-12">
-            {(homepageCopy.programs.items as ProgramItem[]).map((program, index) => {
-              return (
-                <AnimatedSection key={program.title} delay={index * 150}>
-                  <Link
-                    href={program.link}
-                    className="group block overflow-hidden rounded-subtle border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02),0_4px_8px_rgba(0,0,0,0.02)] transition-all duration-500 hover:border-black/10 hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]"
-                  >
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
-                        src={program.image}
-                        alt={program.imageAlt}
-                        fill
-                        className="object-cover image-zoom"
-                        style={{ objectPosition: program.objectPosition ?? '50% 40%' }}
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        quality={95}
-                      />
+          <div className="space-y-14 md:space-y-16 mb-12">
+            {(homepageCopy.programs.groups as { id: string; label: string; items: ProgramItem[] }[]).map(
+              (group, groupIndex) => {
+                const firstGroupLen = (homepageCopy.programs.groups as { items: ProgramItem[] }[])[0]
+                  .items.length
+                const baseIndex = groupIndex === 0 ? 0 : firstGroupLen
+                const orphan4 = group.items.length === 4
+                return (
+                  <div key={group.id}>
+                    <h3
+                      id={group.id}
+                      className="font-headline text-[clamp(1.25rem,2.5vw,1.5rem)] text-brand-pacific-dusk mb-6 md:mb-8 scroll-mt-28 text-center md:text-left max-w-5xl mx-auto"
+                    >
+                      {group.label}
+                    </h3>
+                    <div
+                      className={[
+                        'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10 max-w-5xl mx-auto',
+                        orphan4 ? 'xl:[&>div:nth-child(4)]:col-start-2' : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
+                    >
+                      {group.items.map((program, index) => {
+                        const cardIndex = baseIndex + index
+                        return (
+                          <AnimatedSection key={program.title} delay={cardIndex * 150}>
+                            <Link
+                              href={program.link}
+                              className="group block h-full overflow-hidden rounded-subtle border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02),0_4px_8px_rgba(0,0,0,0.02)] transition-all duration-500 hover:border-black/10 hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]"
+                            >
+                              <div className="relative aspect-[4/3] overflow-hidden">
+                                <Image
+                                  src={program.image}
+                                  alt={program.imageAlt}
+                                  fill
+                                  className="object-cover image-zoom"
+                                  style={{ objectPosition: program.objectPosition ?? '50% 40%' }}
+                                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                  quality={95}
+                                />
+                              </div>
+                              <div className="px-5 pb-6 pt-5">
+                                <h4 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">
+                                  {program.title}
+                                </h4>
+                                <p className="text-body text-lbta-slate">{program.description}</p>
+                              </div>
+                            </Link>
+                          </AnimatedSection>
+                        )
+                      })}
                     </div>
-                    <div className="px-5 pb-6 pt-5">
-                      <h3 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">{program.title}</h3>
-                      <p className="text-body text-lbta-slate">{program.description}</p>
-                    </div>
-                  </Link>
-                </AnimatedSection>
-              )
-            })}
+                  </div>
+                )
+              },
+            )}
           </div>
           <AnimatedSection className="text-center">
             <Link href={homepageCopy.programs.ctaSecondaryHref} className="btn-horizon">
