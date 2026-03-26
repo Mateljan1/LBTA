@@ -94,10 +94,10 @@ export default function UTRMatchPlayPage() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 md:gap-6 mb-12">
             <UTRMatchPlayRegister variant="hero" />
             <Link
-              href="/book"
+              href="#divisions"
               className="inline-flex items-center justify-center bg-transparent text-white border border-white/30 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white/50 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
-              Book a Trial First
+              Drop-in pricing
             </Link>
             <a
               href="#utr-and-color-ball"
@@ -208,11 +208,15 @@ export default function UTRMatchPlayPage() {
           </div>
           <p className="mt-8 text-[14px] font-sans font-light text-brand-pacific-dusk/55 leading-relaxed">
             Unsure which division fits? Note it when you register—we confirm placement before the first
-            Saturday. You can also{' '}
-            <Link href="/book" className="text-brand-victoria-cove underline underline-offset-4 font-medium">
-              book a trial
+            Saturday. We do not offer separate trial sessions for this series; you can join a Saturday with a{' '}
+            <a href="#divisions" className="text-brand-victoria-cove underline underline-offset-4 font-medium">
+              drop-in
+            </a>{' '}
+            where listed (subject to space), or{' '}
+            <Link href="/contact" className="text-brand-victoria-cove underline underline-offset-4 font-medium">
+              contact us
             </Link>{' '}
-            and talk it through with our staff.
+            with questions.
           </p>
         </div>
       </section>
@@ -572,7 +576,7 @@ export default function UTRMatchPlayPage() {
                 },
                 {
                   q: 'Can I try one session before committing?',
-                  a: 'Drop-in pricing is listed by division where available, subject to space.',
+                  a: 'We do not offer standalone trial sessions for UTR Match Play. Drop-in pricing is listed by division where available—that is how to join a Saturday before committing to the full season, subject to space.',
                 },
               ].map((item) => (
                 <div
@@ -602,10 +606,10 @@ export default function UTRMatchPlayPage() {
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <UTRMatchPlayRegister variant="footer" />
             <Link
-              href="/book"
+              href="#divisions"
               className="inline-flex items-center justify-center bg-transparent text-white border border-white/30 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white/50 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
-              Book a Trial First
+              Drop-in pricing
             </Link>
           </div>
           <p className="text-[13px] font-sans font-light text-white/55 mb-4">
