@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Image from 'next/image'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
 import { getUtrCircuitModalData } from '@/lib/utr-match-play'
 import type { UtrDivisionCard } from '@/lib/utr-match-play'
@@ -21,7 +22,26 @@ export default function UTRMatchPlayDivisions({ divisions }: UTRMatchPlayDivisio
             key={d.name}
             className="bg-white rounded-xl border border-brand-pacific-dusk/8 p-5 md:p-6 transition-all duration-300 hover:border-brand-pacific-dusk/15 hover:shadow-[0_8px_32px_rgba(27,58,92,0.08)] hover:-translate-y-0.5"
           >
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-[minmax(200px,240px)_1fr_auto] md:gap-8 md:items-center">
+            <div
+              className={
+                d.image
+                  ? 'grid grid-cols-1 gap-6 md:grid-cols-[minmax(160px,200px)_1fr] md:gap-8 md:items-start'
+                  : 'grid grid-cols-1 gap-6'
+              }
+            >
+              {d.image ? (
+                <div className="relative aspect-[4/3] w-full max-h-[220px] md:max-h-none shrink-0 overflow-hidden rounded-lg border border-brand-pacific-dusk/8 bg-brand-sandstone">
+                  <Image
+                    src={d.image}
+                    alt={d.imageAlt ?? `${d.name} division`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 767px) 100vw, 200px"
+                    quality={90}
+                  />
+                </div>
+              ) : null}
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-[minmax(200px,240px)_1fr_auto] md:gap-8 md:items-center min-w-0">
               {/* Left: Title + level + note */}
               <div className="min-w-0">
                 <h3 className="font-headline text-[1.25rem] md:text-[1.375rem] text-brand-pacific-dusk leading-snug">
@@ -95,6 +115,7 @@ export default function UTRMatchPlayDivisions({ divisions }: UTRMatchPlayDivisio
                   </svg>
                 </button>
               </div>
+            </div>
             </div>
           </div>
         ))}

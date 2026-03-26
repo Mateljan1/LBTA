@@ -24,10 +24,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/legacy-working-assets/hero/match-play-hero/match-play-hero.webp',
+        url: '/images/programs/utr-match-play/utr-match-play-hero.webp',
         width: 1920,
         height: 1080,
-        alt: 'UTR match play at LBTA',
+        alt: 'Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy',
       },
     ],
   },
@@ -57,11 +57,11 @@ export default function UTRMatchPlayPage() {
       <section className="relative bg-brand-deep-water text-white min-h-[min(100vh,920px)] flex flex-col justify-end">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/hero/match-play-hero/match-play-hero.webp"
-            alt="Saturday match play on the courts at Laguna Beach Tennis Academy"
+            src="/images/programs/utr-match-play/utr-match-play-hero.webp"
+            alt="Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 42%' }}
+            style={{ objectPosition: '50% 45%' }}
             sizes="100vw"
             priority
           />

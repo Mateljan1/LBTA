@@ -29,14 +29,14 @@ function leagues(): LeaguesData {
   return cached
 }
 
-/** Season label from JSON, e.g. "April 4 – June 13, 2026 · Grand Finals Night June 13" */
+/** Season label from JSON, e.g. "April 11 – June 13, 2026 · Grand Finals Night June 13" */
 export function getUtrSeasonLabel(): string {
   return leagues().utr.seasonLabel ?? 'Season dates — see lagunabeachtennisacademy.com'
 }
 
 /** Structured dates for schema / meta (aligned with page). */
 export function getUtrSeasonIsoRange(): { startDate: string; endDate: string } {
-  return { startDate: '2026-04-04', endDate: '2026-06-13' }
+  return { startDate: '2026-04-11', endDate: '2026-06-13' }
 }
 
 /** Human duration for form prefill — must match JSON season. */
@@ -55,6 +55,8 @@ export interface UtrDivisionCard {
   dropIn?: number
   time: string
   venue: string
+  image?: string
+  imageAlt?: string
 }
 
 export function getUtrDivisionsForPage(): UtrDivisionCard[] {
@@ -67,6 +69,8 @@ export function getUtrDivisionsForPage(): UtrDivisionCard[] {
     dropIn: d.drop_in,
     time: d.time,
     venue: d.venue,
+    image: d.image,
+    imageAlt: d.imageAlt,
   }))
 }
 

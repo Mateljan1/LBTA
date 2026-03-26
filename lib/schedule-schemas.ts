@@ -138,6 +138,8 @@ const utrDivisionSchema = z.object({
   drop_in: z.number().optional(),
   time: z.string(),
   venue: z.string(),
+  image: z.string().optional(),
+  imageAlt: z.string().optional(),
 })
 
 const ntrpToUtrRowSchema = z.object({
