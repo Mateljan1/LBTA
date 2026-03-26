@@ -22,12 +22,24 @@
   "camps": {
     "springBreak": {
       "label": "Spring Break Camp",
-      "dates": "March 30 – April 3, 2026",
+      "dates": "March 30 – April 2, 2026 (Mon–Thu)",
       "options": [
-        { "name": "Tennis & Games Full Day", "ages": "5-11", "location": "Alta Laguna", "pricePerWeek": 495, "hours": "9am-3pm" },
-        { "name": "Tennis & Games Half Day", "ages": "5-11", "location": "Alta Laguna", "pricePerWeek": 295 },
-        { "name": "Junior Development Full Day", "ages": "12-17", "location": "LBHS", "pricePerWeek": 495, "hours": "9am-4pm" },
-        { "name": "Junior Development Half Day", "ages": "12-17", "location": "LBHS", "pricePerWeek": 325 }
+        {
+          "name": "Tennis & Games",
+          "ages": "5–11",
+          "location": "Alta Laguna Park",
+          "pricePerWeek": 325,
+          "perDay": 85,
+          "hours": "Morning 9am–12pm · Afternoon 12–3pm"
+        },
+        {
+          "name": "Junior Development",
+          "ages": "12–17",
+          "location": "Laguna Beach High School",
+          "pricePerWeek": 325,
+          "perDay": 85,
+          "hours": "Morning 9am–12pm · Afternoon 1–4pm"
+        }
       ],
       "coach": "Peter DeFrantz"
     },

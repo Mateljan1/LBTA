@@ -68,8 +68,7 @@ export default function UTRMatchPlayPage() {
             src="/images/programs/utr-match-play/utr-match-play-hero.webp"
             alt="Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy"
             fill
-            className="object-cover"
-            style={{ objectPosition: '50% 38%' }}
+            className="object-cover object-[50%_20%] sm:object-[50%_22%] lg:object-[50%_18%]"
             sizes="100vw"
             priority
           />

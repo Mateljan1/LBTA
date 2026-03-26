@@ -1,5 +1,7 @@
 'use client'
 
+import { campMainPriceSuffix, campPerDaySecondaryLine } from '@/lib/camp-pricing-display'
+
 interface Camp {
   id: string
   name: string
@@ -59,11 +61,13 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
           <div className="text-right w-[120px]">
             <p className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-tight">
               ${camp.price}
-              <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">/week</span>
+              <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
+                /{campMainPriceSuffix(camp.id)}
+              </span>
             </p>
             {camp.perDay != null && (
               <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
-                ${camp.perDay}/day
+                {campPerDaySecondaryLine(camp.id, camp.perDay)}
               </p>
             )}
           </div>
@@ -98,14 +102,17 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
           <p className="font-sans text-[13px] text-brand-pacific-dusk/80">{camp.hours}</p>
         </div>
 
-        <div className="mt-4 flex items-baseline gap-3">
+        <div className="mt-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
           <span className="font-headline text-[18px] font-medium text-brand-pacific-dusk">
             ${camp.price}
-            <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">/week</span>
+            <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
+              /{campMainPriceSuffix(camp.id)}
+            </span>
           </span>
           {camp.perDay != null && (
             <span className="font-sans text-[12px] text-brand-pacific-dusk/70">
-              · ${camp.perDay}/day
+              {camp.id === 'spring-break' ? '' : '· '}
+              {campPerDaySecondaryLine(camp.id, camp.perDay)}
             </span>
           )}
         </div>

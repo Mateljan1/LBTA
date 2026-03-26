@@ -35,7 +35,7 @@ export default function CampsSection({ camps, onRegister }: CampsSectionProps) {
         </h2>
         <div className="section-horizon mb-8 opacity-90" aria-hidden="true" />
         <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[600px] mb-10">
-          Full-day and half-day options during school breaks. Ages 5–17.
+          Morning and afternoon sessions during school breaks. Ages 5–17.
         </p>
 
         <div className="bg-white border border-black/[0.06] rounded-lg overflow-hidden">

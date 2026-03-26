@@ -11,6 +11,7 @@ import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import { ZigzagSection } from '@/components/sections'
 import { getCampsFromYear2026, type CampWeek } from '@/lib/camps-data'
+import { campMainPriceSuffix, campPerDaySecondaryLine } from '@/lib/camp-pricing-display'
 import { getCampsHeading } from '@/lib/site-copy'
 
 const camps = getCampsFromYear2026()
@@ -152,22 +153,27 @@ export default function CampsPage() {
                 Tennis Camps
               </h2>
               <p className="font-sans text-[16px] md:text-[18px] text-black/70 max-w-2xl mx-auto">
-                Holiday break camps and summer programs for ages 5-17. High-energy development with our movement-first philosophy.
+                Holiday break camps and summer programs for ages 5–17. High-energy development with our movement-first philosophy.
               </p>
             </div>
           </AnimatedSection>
 
           {/* Season Filter */}
           <AnimatedSection delay={100}>
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <div
+              className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 max-w-3xl mx-auto"
+              role="group"
+              aria-label="Filter camps by season"
+            >
               {['all', 'winter', 'spring', 'summer', 'fall'].map((season) => (
                 <button
                   key={season}
+                  type="button"
                   onClick={() => setSelectedSeason(season)}
-                  className={`px-6 py-2.5 rounded-[2px] font-sans text-[13px] font-medium uppercase tracking-[1px] transition-all duration-300 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
+                  className={`px-5 sm:px-6 py-2.5 rounded-[2px] font-sans text-[12px] sm:text-[13px] font-medium uppercase tracking-[1px] transition-all duration-300 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
                     selectedSeason === season
                       ? 'bg-black text-white'
-                      : 'bg-gray-100 text-black/70 hover:bg-gray-200'
+                      : 'bg-white text-black/70 border border-black/[0.08] hover:bg-black/[0.04]'
                   }`}
                 >
                   {season === 'all' ? 'All Camps' : season}
@@ -176,73 +182,102 @@ export default function CampsPage() {
             </div>
           </AnimatedSection>
 
-          {/* Camp Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+          {/* Camp Cards — two columns max: aligned grid, equal-height rows */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
             {filteredCamps.map((camp, index) => (
-              <AnimatedSection key={camp.id} delay={150 + index * 50}>
-                <div className={`bg-white rounded-lg overflow-hidden border-l-4 ${camp.featured ? 'border-l-brand-sunset-cliff ring-2 ring-black/10' : 'border-l-brand-victoria-cove/40 border border-black/10'}`}>
+              <AnimatedSection
+                key={camp.id}
+                delay={150 + index * 50}
+                className="h-full min-h-0"
+              >
+                <article
+                  className={`flex flex-col h-full min-h-0 rounded-lg overflow-hidden border-l-4 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ${
+                    camp.featured
+                      ? 'border-l-brand-sunset-cliff ring-2 ring-black/10'
+                      : 'border-l-brand-victoria-cove/40 border border-black/10'
+                  }`}
+                >
                   {camp.featured && (
-                    <div className="bg-black text-white text-center py-2 font-sans text-[11px] uppercase tracking-[2px] font-semibold">
+                    <div className="bg-black text-white text-center py-2 font-sans text-[11px] uppercase tracking-[2px] font-semibold shrink-0">
                       Featured Camp
                     </div>
                   )}
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="font-headline text-[22px] font-semibold text-black mb-1">
+                  <div className="flex flex-col flex-1 min-h-0 p-5 sm:p-6">
+                    <div className="flex items-start justify-between gap-3 mb-4">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-headline text-[21px] sm:text-[22px] font-semibold text-black mb-1 leading-snug">
                           {camp.name}
                         </h3>
                         <p className="font-sans text-[13px] text-black/60 uppercase tracking-wide">
                           Ages {camp.ages}
                         </p>
                       </div>
-                      <span className="bg-black/5 px-3 py-1 rounded-full font-sans text-[12px] text-black/60 capitalize">
+                      <span className="shrink-0 bg-black/[0.06] px-3 py-1.5 rounded-full font-sans text-[11px] sm:text-[12px] text-black/65 capitalize border border-black/[0.06]">
                         {camp.season}
                       </span>
                     </div>
-                    
+
                     <p className="font-sans text-[14px] text-black/70 mb-4 leading-relaxed">
                       {camp.description}
                     </p>
-                    
-                    <div className="space-y-2 mb-4 font-sans text-[13px] text-black/70">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-black/50 font-semibold text-[11px] uppercase tracking-wide w-16">Time</span>
-                        <span>{camp.hours}</span>
+
+                    <dl className="space-y-2.5 mb-4 font-sans text-[13px] text-black/80">
+                      <div className="grid grid-cols-1 sm:grid-cols-[5.75rem_minmax(0,1fr)] gap-x-3 gap-y-1 sm:items-start">
+                        <dt className="text-black/45 font-semibold text-[10px] uppercase tracking-[0.12em] pt-0.5">
+                          Time
+                        </dt>
+                        <dd className="min-w-0 leading-relaxed">{camp.hours}</dd>
                       </div>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-black/50 font-semibold text-[11px] uppercase tracking-wide w-16">Location</span>
-                        <span>{camp.location}</span>
+                      <div className="grid grid-cols-1 sm:grid-cols-[5.75rem_minmax(0,1fr)] gap-x-3 gap-y-1 sm:items-start">
+                        <dt className="text-black/45 font-semibold text-[10px] uppercase tracking-[0.12em] pt-0.5">
+                          Location
+                        </dt>
+                        <dd className="min-w-0 leading-relaxed">{camp.location}</dd>
                       </div>
-                    </div>
-                    
+                    </dl>
+
                     {/* Week Selection for Multi-Week Camps */}
                     {camp.weeks && camp.weeks.length > 0 ? (
-                      <div className="border-t border-black/10 pt-4">
-                        <p className="font-sans text-[12px] text-black/50 uppercase tracking-wide mb-3">
-                          Select a Week ({camp.weeks.length} available)
+                      <div className="border-t border-black/10 pt-4 mt-auto flex flex-col flex-1 min-h-0">
+                        <p className="font-sans text-[11px] text-black/50 uppercase tracking-[0.14em] mb-3">
+                          Select a week · {camp.weeks.length} available
                         </p>
-                        <div className="max-h-[200px] overflow-y-auto space-y-2 mb-4 pr-1">
+                        <div className="max-h-[220px] overflow-y-auto overscroll-contain space-y-2 pr-1 min-h-0 -mr-1">
                           {camp.weeks.map((week) => (
                             <button
                               key={week.week}
+                              type="button"
                               onClick={() => handleRegisterClick({ ...camp, selectedWeek: week })}
-                              className="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors group text-left"
+                              className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 sm:pl-3 sm:pr-3 bg-brand-morning-light/80 hover:bg-brand-morning-light border border-black/[0.06] rounded-[2px] transition-colors group text-left"
                             >
-                              <div>
-                                <p className="font-sans text-[14px] font-medium text-black group-hover:text-black">
+                              <div className="min-w-0 flex-1">
+                                <p className="font-sans text-[14px] font-medium text-black">
                                   {week.label}: {week.dates}
                                 </p>
-                                <p className="font-sans text-[11px] text-black/50">
-                                  {week.days} days{'halfDay' in week && week.halfDay && ` · Half-day: $${week.halfDay}`}
+                                <p className="font-sans text-[11px] text-black/50 mt-0.5">
+                                  {week.days} days
+                                  {'halfDay' in week && week.halfDay
+                                    ? ` · Half-day: $${week.halfDay}`
+                                    : null}
                                 </p>
                               </div>
-                              <div className="flex items-center gap-2">
-                                <span className="font-sans text-[14px] font-semibold text-black">
+                              <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 sm:pl-2 border-t border-black/[0.06] sm:border-t-0 pt-2 sm:pt-0">
+                                <span className="font-sans text-[15px] font-semibold text-black tabular-nums">
                                   ${week.price}
                                 </span>
-                                <svg className="w-4 h-4 text-black/40 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                <svg
+                                  className="w-4 h-4 text-black/35 group-hover:text-black transition-colors shrink-0"
+                                  aria-hidden="true"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M9 5l7 7-7 7"
+                                  />
                                 </svg>
                               </div>
                             </button>
@@ -250,40 +285,50 @@ export default function CampsPage() {
                         </div>
                       </div>
                     ) : (
-                      <div className="border-t border-black/10 pt-4">
-                        <div className="space-y-2 mb-4 font-sans text-[13px] text-black/70">
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-black/50 font-semibold text-[11px] uppercase tracking-wide w-16">Dates</span>
-                            <span>{camp.dates}</span>
+                      <div className="border-t border-black/10 pt-4 mt-auto">
+                        <dl className="space-y-2.5 mb-4 font-sans text-[13px] text-black/80">
+                          <div className="grid grid-cols-1 sm:grid-cols-[5.75rem_minmax(0,1fr)] gap-x-3 gap-y-1 sm:items-start">
+                            <dt className="text-black/45 font-semibold text-[10px] uppercase tracking-[0.12em] pt-0.5">
+                              Dates
+                            </dt>
+                            <dd className="min-w-0 leading-relaxed">{camp.dates}</dd>
                           </div>
-                        </div>
+                        </dl>
                         <div className="mb-4">
-                          <p className="font-sans text-[12px] text-black/50 uppercase tracking-wide">Price</p>
-                          <p className="font-headline text-[28px] font-semibold text-black">
+                          <p className="font-sans text-[11px] text-black/50 uppercase tracking-[0.14em] mb-1">
+                            Price
+                          </p>
+                          <p className="font-headline text-[26px] sm:text-[28px] font-semibold text-black tabular-nums">
                             ${camp.price}
+                            <span className="font-sans text-[13px] font-medium text-black/55 ml-1">
+                              / {campMainPriceSuffix(camp.id)}
+                            </span>
                           </p>
-                          <p className="font-sans text-[12px] text-black/50">
-                            ${camp.perDay}/day
-                            {camp.halfDay && ` · Half-day: $${camp.halfDay}`}
-                          </p>
+                          {camp.perDay != null && (
+                            <p className="font-sans text-[12px] text-black/50 mt-1">
+                              {campPerDaySecondaryLine(camp.id, camp.perDay)}
+                              {camp.halfDay != null ? ` · Half-day: $${camp.halfDay}` : null}
+                            </p>
+                          )}
                         </div>
-                        
+
                         <button
+                          type="button"
                           onClick={() => handleRegisterClick(camp)}
-                          className="block w-full text-center bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[13px] py-3 rounded-[2px] transition-all duration-300 uppercase tracking-[1px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                          className="w-full text-center bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[13px] py-3 rounded-[2px] transition-all duration-300 uppercase tracking-[1px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                         >
                           Register Now
                         </button>
                       </div>
                     )}
-                    
+
                     {camp.safetyNote && (
-                      <p className="font-sans text-[11px] text-black/50 mt-3 italic">
+                      <p className="font-sans text-[11px] text-black/50 mt-4 italic border-t border-black/[0.06] pt-3">
                         * {camp.safetyNote}
                       </p>
                     )}
                   </div>
-                </div>
+                </article>
               </AnimatedSection>
             ))}
           </div>

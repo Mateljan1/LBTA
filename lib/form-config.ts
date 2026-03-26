@@ -299,11 +299,11 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     acFormId: '',
     prePopulateData: {
       programName: 'Spring Break Camp',
-      location: 'Laguna Beach High School',
-      duration: '6 hours (9 AM - 3 PM)',
+      location: 'Alta Laguna Park & Laguna Beach High School',
+      duration: 'Morning & afternoon half-day sessions (times vary by track)',
       pricing: getModalPricing('spring-break'),
       category: 'Camp',
-      ageGroup: '5-14 years',
+      ageGroup: '5-17 years',
       billingCycle: 'quarterly'
     },
     classTagId: 156 // CLASS_TAGS.summer_camp (general camp tag)

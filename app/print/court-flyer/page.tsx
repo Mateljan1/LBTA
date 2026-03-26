@@ -66,7 +66,7 @@ export default async function CourtFlyerPage({
       label: 'Spring Break',
       dates: springSummer.camps.springBreak.dates,
       ages: springBreakCamp?.ages ?? '5-14',
-      price: `$${springBreakCamp?.price ?? 295}/wk`,
+      price: `$${springBreakCamp?.price ?? 325}/wk`,
       location: springBreakCamp?.location ?? 'Alta Laguna Park',
     },
     {

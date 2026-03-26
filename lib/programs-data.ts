@@ -118,7 +118,19 @@ const springSummer2026 = springSummer2026Data as unknown as {
   summer: { label: string; dates: string; weeks: number; skipDates: string[] }
   discounts: Array<{ label: string; percent: number; description: string }>
   camps: {
-    springBreak: { label: string; dates: string; options: Array<{ name: string; ages: string; location?: string; pricePerWeek: number }>; coach: string }
+    springBreak: {
+      label: string
+      dates: string
+      options: Array<{
+        name: string
+        ages: string
+        location?: string
+        pricePerWeek: number
+        perDay?: number
+        hours?: string
+      }>
+      coach: string
+    }
     summer: { label: string; dates: string; options: Array<{ name: string; ages: string; hours?: string; location?: string; pricePerWeek: number }>; coach: string }
   }
   programs: SpringSummerProgram[]

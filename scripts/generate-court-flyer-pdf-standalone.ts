@@ -733,7 +733,7 @@ async function main(): Promise<void> {
       label: 'Spring Break',
       dates: springSummer.camps?.springBreak?.dates ?? springBreakCamp?.dates ?? '',
       ages: springBreakCamp?.ages ?? '5-14',
-      price: `$${springBreakCamp?.price ?? 295}/wk`,
+      price: `$${springBreakCamp?.price ?? 325}/wk`,
       location: springBreakCamp?.location ?? 'Alta Laguna Park',
     },
     {

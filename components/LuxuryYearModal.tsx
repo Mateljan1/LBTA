@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { campModalDropInLabel, campModalSessionLabel } from '@/lib/camp-pricing-display'
 
 // ============================================================
 // LUXURY YEAR-ROUND REGISTRATION MODAL
@@ -189,10 +190,18 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
       const campData = data as CampData
       const options = []
       if (campData.price) {
-        options.push({ label: 'Full Week', value: 'full', price: campData.price })
+        options.push({
+          label: campModalSessionLabel(campData.id),
+          value: 'full',
+          price: campData.price,
+        })
       }
-      if (campData.perDay) {
-        options.push({ label: 'Per Day', value: 'day', price: campData.perDay })
+      if (campData.perDay != null) {
+        options.push({
+          label: campModalDropInLabel(campData.id),
+          value: 'day',
+          price: campData.perDay,
+        })
       }
       if (campData.halfDay) {
         options.push({ label: 'Half Day', value: 'half', price: campData.halfDay })
