@@ -53,10 +53,14 @@ async function liveballHeroCard(srcName, outRel) {
   await writeWebp(pipeline, out, srcName)
 }
 
+/** Community masonry tiles — 1200×1200 for large `span` cells + retina `sizes` (~25–50vw). */
 async function tileSquare(srcName, outRel, quality = 78) {
   const inp = path.join(SRC, srcName)
   const out = path.join(ROOT, outRel)
-  const pipeline = sharp(inp).rotate().resize(800, 800, { fit: 'cover', position: 'centre' }).webp({ quality, effort: 4 })
+  const pipeline = sharp(inp)
+    .rotate()
+    .resize(1200, 1200, { fit: 'cover', position: 'centre' })
+    .webp({ quality, effort: 4 })
   await writeWebp(pipeline, out, srcName)
 }
 
@@ -73,7 +77,7 @@ async function main() {
   await card43('Intermediate clinis.jpg', 'public/images/philosophy/movement-clinic-lbta-pics2.webp')
   await card43('HP_class.jpg', 'public/images/philosophy/craft-hp-class-lbta-pics2.webp')
 
-  await tileSquare('Community_1.jpg', 'public/images/community/lbta-pics2-masonry-01.webp', 68)
+  await tileSquare('Community_1.jpg', 'public/images/community/lbta-pics2-masonry-01.webp', 70)
   await tileSquare('community_2.jpg', 'public/images/community/lbta-pics2-masonry-02.webp')
   await tileSquare('Advanced_liveball.jpg', 'public/images/community/lbta-pics2-liveball-advanced.webp')
   await tileSquare('Liveball_Intermediate.jpg', 'public/images/community/lbta-pics2-liveball-intermediate.webp')

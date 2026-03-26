@@ -107,13 +107,13 @@ Several homepage sections request **large display widths** (`100vw`, `50vw`, `33
 
 ### Phase 4: Community masonry
 
-- [ ] **4.1** Re-encode masonry tiles at **1200×1200** (or 1000×1000 minimum) for cells that use `large` span; verify `HomeCommunityGallery` + `MasonryGrid` `sizes` still appropriate.
-- [ ] **4.2** If bundle size spikes, split **hero large** vs **small** tile exports (larger only for `span: large` paths — requires JSON path split or naming convention).
+- [x] **4.1** Re-encode masonry tiles at **1200×1200** (or 1000×1000 minimum) for cells that use `large` span; verify `HomeCommunityGallery` + `MasonryGrid` `sizes` still appropriate. **Done:** `tileSquare` → **1200×1200** in `scripts/encode-lbta-pics2.mjs`; all `lbta-pics2-*.webp` regenerated; `sizes` unchanged (still valid).
+- [x] **4.2** If bundle size spikes, split **hero large** vs **small** tile exports — **Not needed:** largest tile ~**193KB** (`masonry-01` at q70); typical **50–150KB**.
 
 ### Phase 5: Validation
 
-- [ ] **5.1** `npm run verify:images`, `npm run build`, spot ESLint on touched TSX.
-- [ ] **5.2** Lighthouse or manual: LCP element still hero/video; no CLS regression.
+- [x] **5.1** `npm run verify:images`, `npm run build`, spot ESLint on touched TSX.
+- [ ] **5.2** Lighthouse or manual: LCP element still hero/video; no CLS regression. *(Quick check recommended on deploy.)*
 
 ## Files to Create/Modify
 

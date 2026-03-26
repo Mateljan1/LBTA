@@ -53,11 +53,11 @@ The **Our Community** section uses a staggered grid of 11 tiles. Cells vary: **s
 
 | Tile type | Size to give | Aspect | Max KB | Use for |
 |-----------|--------------|--------|--------|---------|
-| **Small** (single cell) | **800×800** | 1:1 square | **120** | Works in any cell |
-| **Medium** (two cells wide) | **1200×600** or **800×800** | 2:1 or 1:1 | **120** | Wide shots or square |
-| **Large** (big feature tile) | **1200×1200** or **1200×600** | 1:1 or 2:1 | **150** | Strong hero shots in grid |
+| **All masonry tiles** (deployed `lbta-pics2-*`) | **1200×1200** | 1:1 square | **~200** | Covers small + large cells; sharp on retina |
+| **Medium** (two cells wide) | **1200×600** or **1200×1200** | 2:1 or 1:1 | **200** | Wide shots or square |
+| **Large** (big feature tile) | **1200×1200** | 1:1 | **200** | Strong hero shots in grid |
 
-**Rule of thumb:** Give **800×800** for any community tile and we’ll use it. Square fits every cell. Keep **≤120KB** after WebP.
+**Rule of thumb:** Export **square 1200×1200** masters (we crop `cover` in `encode-lbta-pics2.mjs`). Target **≤200KB** WebP per tile after encode; dense scenes may land ~190KB.
 
 ---
 
@@ -66,8 +66,8 @@ The **Our Community** section uses a staggered grid of 11 tiles. Cells vary: **s
 | Section | Size to give | Aspect | Max KB |
 |---------|--------------|--------|--------|
 | **Founder** (Andrew portrait) | **800×1067** | 3:4 portrait | 250 |
-| **Philosophy** (Movement, Craft, Community) | **800×600** | 4:3 | 150 |
-| **Programs** (Junior, Adult, Private cards) | **800×600** | 4:3 | 200 |
+| **Philosophy** (Movement, Craft from `LBTA_pics_2`) | **1600×1200** | 4:3 | 350 |
+| **Programs** (Junior, Adult, Private — `*-lbta-pics2`) | **1600×1200** | 4:3 | 350 |
 | **Why Choose** (left, larger) | **1200×750** | 16:10 | 200 |
 | **Why Choose** (right, smaller) | **800×600** | 4:3 | 200 |
 
@@ -174,8 +174,8 @@ The **Our Community** section uses a staggered grid of 11 tiles. Cells vary: **s
 | Need | Give |
 |------|------|
 | **Full-bleed / hero** | **1920×1080** (16:9), ≤350KB |
-| **Community grid** | **800×800** (square), ≤120KB |
-| **Cards (4:3)** | **800×600**, ≤200KB |
+| **Community grid** | **1200×1200** (square), ≤200KB |
+| **Cards (4:3)** | **1600×1200**, ≤350KB |
 | **Portrait** | **800×1067** (3:4), ≤250KB |
 | **Wide card** | **1200×600** (2:1), ≤200KB |
 
