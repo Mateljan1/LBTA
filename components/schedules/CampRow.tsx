@@ -1,26 +1,11 @@
 'use client'
 
 import { campMainPriceSuffix, campPerDaySecondaryLine } from '@/lib/camp-pricing-display'
-
-interface Camp {
-  id: string
-  name: string
-  dates: string
-  days: string | number
-  hours: string
-  ages: string
-  location: string
-  price: number
-  perDay?: number
-  halfDay?: number
-  description: string
-  includes?: string[]
-  featured?: boolean
-}
+import type { CampWithWeeks } from '@/lib/camps-data'
 
 interface CampRowProps {
-  camp: Camp
-  onRegister: (camp: Camp) => void
+  camp: CampWithWeeks
+  onRegister: (camp: CampWithWeeks) => void
   isLast?: boolean
 }
 

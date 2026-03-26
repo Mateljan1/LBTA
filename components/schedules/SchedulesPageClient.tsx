@@ -5,6 +5,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Program } from '@/components/ProgramCard'
 import LuxuryRegistrationModal from '@/components/LuxuryRegistrationModal'
+import LuxuryYearModal from '@/components/LuxuryYearModal'
+import { getCampsFromYear2026 } from '@/lib/camps-data'
+import { buildCampModalRegistration } from '@/lib/camp-modal-data'
+import type { CampRegistrationData } from '@/lib/camp-modal-data'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
@@ -35,6 +39,8 @@ interface SchedulesPageClientProps {
   leagues: LeaguesData
 }
 
+const scheduleCamps = getCampsFromYear2026()
+
 export default function SchedulesPageClient({
   programsBySeason,
   seasons,
@@ -44,6 +50,8 @@ export default function SchedulesPageClient({
   leagues,
 }: SchedulesPageClientProps) {
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null)
+  const [selectedCamp, setSelectedCamp] = useState<CampRegistrationData | null>(null)
+  const [isCampModalOpen, setIsCampModalOpen] = useState(false)
 
   return (
     <>
@@ -131,8 +139,11 @@ export default function SchedulesPageClient({
       <HorizonDivider />
 
       <CampsSection
-        camps={year2026.camps}
-        onRegister={() => { window.location.href = '/contact' }}
+        camps={scheduleCamps}
+        onRegister={(camp) => {
+          setSelectedCamp(buildCampModalRegistration(camp))
+          setIsCampModalOpen(true)
+        }}
       />
 
       <HorizonDivider />
@@ -175,6 +186,17 @@ export default function SchedulesPageClient({
           onClose={() => setSelectedProgram(null)}
         />
       )}
+
+      <LuxuryYearModal
+        isOpen={isCampModalOpen}
+        onClose={() => {
+          setIsCampModalOpen(false)
+          setSelectedCamp(null)
+        }}
+        type="camp"
+        data={selectedCamp}
+        season={selectedCamp?.season ?? 'summer'}
+      />
     </>
   )
 }

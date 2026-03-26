@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
@@ -10,89 +10,46 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import { ZigzagSection } from '@/components/sections'
-import { getCampsFromYear2026, type CampWeek } from '@/lib/camps-data'
-import { campMainPriceSuffix, campPerDaySecondaryLine } from '@/lib/camp-pricing-display'
+import { CampListingCard, CampFAQAccordion } from '@/components/camps'
+import { getCampsFromYear2026, type CampWeek, type CampWithWeeks } from '@/lib/camps-data'
 import { getCampsHeading } from '@/lib/site-copy'
+import { buildCampModalRegistration } from '@/lib/camp-modal-data'
+import type { CampRegistrationData } from '@/lib/camp-modal-data'
 
 const camps = getCampsFromYear2026()
 const campsHeading = getCampsHeading()
 
-// Type for camp data to match YearRegistrationModal expectations
-interface CampModalData {
-  id: string
-  name: string
-  dates: string
-  days: string | number
-  hours: string
-  ages: string
-  location: string
-  price: number
-  perDay?: number
-  halfDay?: number
-  description: string
-  includes?: string[]
-  safetyNote?: string
-  featured?: boolean
-  season?: string
-  coaches?: string[]
-  weeks?: CampWeek[]
-  selectedWeek?: CampWeek
-}
+const SEASON_FILTERS = ['all', 'winter', 'spring', 'summer', 'fall'] as const
 
 export default function CampsPage() {
   const [selectedSeason, setSelectedSeason] = useState<string>('all')
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedCamp, setSelectedCamp] = useState<CampModalData | null>(null)
-  
-  const filteredCamps = selectedSeason === 'all' 
-    ? camps 
-    : camps.filter(camp => camp.season === selectedSeason)
+  const [selectedCamp, setSelectedCamp] = useState<CampRegistrationData | null>(null)
 
-  const handleRegisterClick = (camp: typeof camps[0] & { selectedWeek?: CampWeek }) => {
-    // Convert camp data to modal format - use week-specific pricing if available
-    const modalData: CampModalData = {
-      id: camp.id,
-      name: camp.selectedWeek 
-        ? `${camp.name} - ${camp.selectedWeek.label}` 
-        : camp.name,
-      dates: camp.selectedWeek 
-        ? camp.selectedWeek.dates 
-        : camp.dates,
-      days: camp.selectedWeek 
-        ? `${camp.selectedWeek.days} days`
-        : camp.days,
-      hours: camp.hours,
-      ages: camp.ages,
-      location: camp.location,
-      price: camp.selectedWeek 
-        ? camp.selectedWeek.price 
-        : camp.price,
-      perDay: camp.selectedWeek 
-        ? Math.round(camp.selectedWeek.price / camp.selectedWeek.days)
-        : camp.perDay,
-      halfDay: camp.selectedWeek?.halfDay || camp.halfDay,
-      description: camp.description,
-      includes: camp.includes,
-      safetyNote: camp.safetyNote,
-      featured: camp.featured,
-      season: camp.season,
-      coaches: camp.coaches,
-      selectedWeek: camp.selectedWeek,
-    }
-    setSelectedCamp(modalData)
+  const filteredCamps = useMemo(() => {
+    const list =
+      selectedSeason === 'all' ? camps : camps.filter((c) => c.season === selectedSeason)
+    return [...list].sort((a, b) => {
+      if (a.featured && !b.featured) return -1
+      if (!a.featured && b.featured) return 1
+      return 0
+    })
+  }, [selectedSeason])
+
+  const handleRegisterClick = (camp: CampWithWeeks & { selectedWeek?: CampWeek }) => {
+    setSelectedCamp(buildCampModalRegistration(camp, camp.selectedWeek))
     setIsModalOpen(true)
   }
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative min-h-[65vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden bg-brand-deep-water">
+      <section className="relative min-h-[min(85vh,820px)] overflow-hidden bg-brand-deep-water">
         <div className="absolute inset-0">
           <Image
             src="/images/camps/camp-action-4.webp"
             alt="Junior campers and coaches on court during LBTA holiday and summer tennis camps"
             fill
-            className="object-cover max-md:brightness-[0.9]"
+            className="object-cover max-md:brightness-[0.92]"
             style={{ objectPosition: '50% 42%' }}
             sizes="100vw"
             priority
@@ -101,300 +58,163 @@ export default function CampsPage() {
           <div className="absolute inset-0 hero-scrim-branded" aria-hidden="true" />
         </div>
 
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto py-24">
-          <AnimatedSection delay={0}>
-            <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white mb-4 text-shadow-hero-readable">
-              Holiday & Summer Programs
+        <div className="relative z-10 mx-auto flex min-h-[min(85vh,820px)] max-w-[1200px] flex-col justify-end px-4 pb-16 pt-28 md:px-6 md:pb-24 md:pt-32 lg:justify-center lg:pb-28">
+          <div className="max-w-[34rem] text-left">
+            <p className="font-sans text-eyebrow mb-4 text-brand-victoria-cove text-shadow-hero-readable">
+              Holiday & summer
             </p>
-          </AnimatedSection>
-          <AnimatedSection delay={100}>
-            <h1 className="font-headline text-[40px] md:text-[64px] font-bold leading-[1.05] mb-6 text-shadow-hero-readable">
-              Tennis Camps
+            <h1 className="font-headline text-display-xl mb-5 text-white text-shadow-hero-readable">
+              Camps at LBTA
             </h1>
-          </AnimatedSection>
-          <AnimatedSection delay={200}>
-            <p className="font-sans text-[16px] md:text-[20px] leading-[1.6] text-white mb-10 max-w-[85%] mx-auto text-shadow-hero-readable max-md:text-white/95 md:text-white/90">
-              From holiday break camps to full summer programs — high-energy development with our movement-first philosophy.
+            <p className="font-sans text-body-lg max-w-xl font-light text-white text-shadow-hero-readable max-md:text-white/95 md:text-white/90">
+              School-break sessions and summer weeks for ages 5–17. Movement first, then craft — on court with coaches who know your player&apos;s name.
             </p>
-          </AnimatedSection>
-          <AnimatedSection delay={300}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Link
                 href="#camps"
-                className="inline-block bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
+                className="inline-flex min-h-[48px] items-center justify-center bg-white px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-brand-deep-water transition-all duration-300 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]"
               >
-                View Camps
+                Browse sessions
               </Link>
               <Link
-                href="/programs/utr-match-play"
-                className="inline-block bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
+                href="/schedules#camps"
+                className="inline-flex min-h-[48px] items-center justify-center border border-white/45 bg-transparent px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:border-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]"
               >
-                UTR Match Play →
+                Schedule & pricing
               </Link>
             </div>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
 
-      {/* Breadcrumbs */}
       <div className="bg-white pt-4">
         <Breadcrumbs items={[{ label: 'Camps' }]} />
       </div>
 
-      {/* CAMPS SECTION */}
-      <section id="camps" className="bg-brand-sandstone py-20 md:py-32">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-12">
-          <AnimatedSection delay={0}>
-            <div className="text-center mb-12">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
-                {campsHeading}
-              </p>
-              <h2 className="font-headline text-[36px] md:text-[52px] font-semibold text-black mb-4">
-                Tennis Camps
-              </h2>
-              <p className="font-sans text-[16px] md:text-[18px] text-black/70 max-w-2xl mx-auto">
-                Holiday break camps and summer programs for ages 5–17. High-energy development with our movement-first philosophy.
+      <HorizonDivider />
+
+      <section
+        id="camps"
+        className="scroll-mt-28 border-b border-brand-pacific-dusk/[0.06] bg-brand-morning-light"
+      >
+        <div className="container-lbta section">
+          <div className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-xl">
+              <p className="font-sans text-eyebrow mb-3 text-brand-victoria-cove">{campsHeading}</p>
+              <h2 className="font-headline text-display mb-4 text-brand-pacific-dusk">Sessions</h2>
+              <p className="font-sans text-body-lg text-brand-pacific-dusk/80">
+                Filter by season, then register for a specific week or open the form to choose. Pricing matches{' '}
+                <Link
+                  href="/schedules#camps"
+                  className="font-medium text-brand-victoria-cove underline decoration-brand-victoria-cove/35 underline-offset-4 hover:decoration-brand-victoria-cove focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-sm"
+                >
+                  schedule & pricing
+                </Link>
+                .
               </p>
             </div>
-          </AnimatedSection>
+          </div>
 
-          {/* Season Filter */}
-          <AnimatedSection delay={100}>
-            <div
-              className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 max-w-3xl mx-auto"
-              role="group"
-              aria-label="Filter camps by season"
-            >
-              {['all', 'winter', 'spring', 'summer', 'fall'].map((season) => (
-                <button
-                  key={season}
-                  type="button"
-                  onClick={() => setSelectedSeason(season)}
-                  className={`px-5 sm:px-6 py-2.5 rounded-[2px] font-sans text-[12px] sm:text-[13px] font-medium uppercase tracking-[1px] transition-all duration-300 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
-                    selectedSeason === season
-                      ? 'bg-black text-white'
-                      : 'bg-white text-black/70 border border-black/[0.08] hover:bg-black/[0.04]'
-                  }`}
-                >
-                  {season === 'all' ? 'All Camps' : season}
-                </button>
-              ))}
+          <div
+            className="mb-10 -mx-4 flex gap-0 overflow-x-auto px-4 pb-px sm:mx-0 sm:overflow-visible sm:px-0 snap-x snap-mandatory sm:snap-none"
+            role="group"
+            aria-label="Filter camps by season"
+          >
+            <div className="flex min-w-full shrink-0 gap-0 border-b border-brand-pacific-dusk/10 sm:min-w-0">
+              {SEASON_FILTERS.map((season) => {
+                const active = selectedSeason === season
+                const label = season === 'all' ? 'All' : season.charAt(0).toUpperCase() + season.slice(1)
+                return (
+                  <button
+                    key={season}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setSelectedSeason(season)}
+                    className={`snap-start shrink-0 px-4 py-3 font-sans text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors min-h-[48px] border-b-2 -mb-px focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-sm sm:px-6 ${
+                      active
+                        ? 'border-brand-pacific-dusk text-brand-pacific-dusk'
+                        : 'border-transparent text-brand-pacific-dusk/45 hover:text-brand-pacific-dusk/75'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                )
+              })}
             </div>
-          </AnimatedSection>
+          </div>
 
-          {/* Camp Cards — two columns max: aligned grid, equal-height rows */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
-            {filteredCamps.map((camp, index) => (
-              <AnimatedSection
-                key={camp.id}
-                delay={150 + index * 50}
-                className="h-full min-h-0"
-              >
-                <article
-                  className={`flex flex-col h-full min-h-0 rounded-lg overflow-hidden border-l-4 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ${
-                    camp.featured
-                      ? 'border-l-brand-sunset-cliff ring-2 ring-black/10'
-                      : 'border-l-brand-victoria-cove/40 border border-black/10'
-                  }`}
-                >
-                  {camp.featured && (
-                    <div className="bg-black text-white text-center py-2 font-sans text-[11px] uppercase tracking-[2px] font-semibold shrink-0">
-                      Featured Camp
-                    </div>
-                  )}
-                  <div className="flex flex-col flex-1 min-h-0 p-5 sm:p-6">
-                    <div className="flex items-start justify-between gap-3 mb-4">
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-headline text-[21px] sm:text-[22px] font-semibold text-black mb-1 leading-snug">
-                          {camp.name}
-                        </h3>
-                        <p className="font-sans text-[13px] text-black/60 uppercase tracking-wide">
-                          Ages {camp.ages}
-                        </p>
-                      </div>
-                      <span className="shrink-0 bg-black/[0.06] px-3 py-1.5 rounded-full font-sans text-[11px] sm:text-[12px] text-black/65 capitalize border border-black/[0.06]">
-                        {camp.season}
-                      </span>
-                    </div>
-
-                    <p className="font-sans text-[14px] text-black/70 mb-4 leading-relaxed">
-                      {camp.description}
-                    </p>
-
-                    <dl className="space-y-2.5 mb-4 font-sans text-[13px] text-black/80">
-                      <div className="grid grid-cols-1 sm:grid-cols-[5.75rem_minmax(0,1fr)] gap-x-3 gap-y-1 sm:items-start">
-                        <dt className="text-black/45 font-semibold text-[10px] uppercase tracking-[0.12em] pt-0.5">
-                          Time
-                        </dt>
-                        <dd className="min-w-0 leading-relaxed">{camp.hours}</dd>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-[5.75rem_minmax(0,1fr)] gap-x-3 gap-y-1 sm:items-start">
-                        <dt className="text-black/45 font-semibold text-[10px] uppercase tracking-[0.12em] pt-0.5">
-                          Location
-                        </dt>
-                        <dd className="min-w-0 leading-relaxed">{camp.location}</dd>
-                      </div>
-                    </dl>
-
-                    {/* Week Selection for Multi-Week Camps */}
-                    {camp.weeks && camp.weeks.length > 0 ? (
-                      <div className="border-t border-black/10 pt-4 mt-auto flex flex-col flex-1 min-h-0">
-                        <p className="font-sans text-[11px] text-black/50 uppercase tracking-[0.14em] mb-3">
-                          Select a week · {camp.weeks.length} available
-                        </p>
-                        <div className="max-h-[220px] overflow-y-auto overscroll-contain space-y-2 pr-1 min-h-0 -mr-1">
-                          {camp.weeks.map((week) => (
-                            <button
-                              key={week.week}
-                              type="button"
-                              onClick={() => handleRegisterClick({ ...camp, selectedWeek: week })}
-                              className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 sm:pl-3 sm:pr-3 bg-brand-morning-light/80 hover:bg-brand-morning-light border border-black/[0.06] rounded-[2px] transition-colors group text-left"
-                            >
-                              <div className="min-w-0 flex-1">
-                                <p className="font-sans text-[14px] font-medium text-black">
-                                  {week.label}: {week.dates}
-                                </p>
-                                <p className="font-sans text-[11px] text-black/50 mt-0.5">
-                                  {week.days} days
-                                  {'halfDay' in week && week.halfDay
-                                    ? ` · Half-day: $${week.halfDay}`
-                                    : null}
-                                </p>
-                              </div>
-                              <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 sm:pl-2 border-t border-black/[0.06] sm:border-t-0 pt-2 sm:pt-0">
-                                <span className="font-sans text-[15px] font-semibold text-black tabular-nums">
-                                  ${week.price}
-                                </span>
-                                <svg
-                                  className="w-4 h-4 text-black/35 group-hover:text-black transition-colors shrink-0"
-                                  aria-hidden="true"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M9 5l7 7-7 7"
-                                  />
-                                </svg>
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="border-t border-black/10 pt-4 mt-auto">
-                        <dl className="space-y-2.5 mb-4 font-sans text-[13px] text-black/80">
-                          <div className="grid grid-cols-1 sm:grid-cols-[5.75rem_minmax(0,1fr)] gap-x-3 gap-y-1 sm:items-start">
-                            <dt className="text-black/45 font-semibold text-[10px] uppercase tracking-[0.12em] pt-0.5">
-                              Dates
-                            </dt>
-                            <dd className="min-w-0 leading-relaxed">{camp.dates}</dd>
-                          </div>
-                        </dl>
-                        <div className="mb-4">
-                          <p className="font-sans text-[11px] text-black/50 uppercase tracking-[0.14em] mb-1">
-                            Price
-                          </p>
-                          <p className="font-headline text-[26px] sm:text-[28px] font-semibold text-black tabular-nums">
-                            ${camp.price}
-                            <span className="font-sans text-[13px] font-medium text-black/55 ml-1">
-                              / {campMainPriceSuffix(camp.id)}
-                            </span>
-                          </p>
-                          {camp.perDay != null && (
-                            <p className="font-sans text-[12px] text-black/50 mt-1">
-                              {campPerDaySecondaryLine(camp.id, camp.perDay)}
-                              {camp.halfDay != null ? ` · Half-day: $${camp.halfDay}` : null}
-                            </p>
-                          )}
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => handleRegisterClick(camp)}
-                          className="w-full text-center bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[13px] py-3 rounded-[2px] transition-all duration-300 uppercase tracking-[1px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
-                        >
-                          Register Now
-                        </button>
-                      </div>
-                    )}
-
-                    {camp.safetyNote && (
-                      <p className="font-sans text-[11px] text-black/50 mt-4 italic border-t border-black/[0.06] pt-3">
-                        * {camp.safetyNote}
-                      </p>
-                    )}
-                  </div>
-                </article>
-              </AnimatedSection>
-            ))}
+          <div className="mx-auto flex max-w-[880px] flex-col gap-10 md:gap-12">
+            {filteredCamps.length === 0 ? (
+              <p className="font-sans text-body text-brand-pacific-dusk/65 text-center py-12">
+                No camps in this season. Try &ldquo;All&rdquo; or view the full{' '}
+                <Link href="/schedules" className="text-brand-victoria-cove underline underline-offset-4">
+                  schedule
+                </Link>
+                .
+              </p>
+            ) : (
+              filteredCamps.map((camp, index) => (
+                <AnimatedSection key={camp.id} delay={80 + index * 40}>
+                  <CampListingCard camp={camp} onRegister={handleRegisterClick} />
+                </AnimatedSection>
+              ))
+            )}
           </div>
         </div>
       </section>
 
       <HorizonDivider />
-      {/* CAMP STORY ZIGZAG */}
+
       <ZigzagSection
         className="bg-white py-16 md:py-24"
         title={
-          <AnimatedSection className="text-center mb-12">
-            <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">Camp Life</p>
-            <h2 className="font-headline text-[32px] md:text-[44px] font-semibold text-black mb-4">
-              From First Rallies to Match Play
+          <div className="mb-12 max-w-2xl md:mb-16">
+            <p className="font-sans text-eyebrow mb-3 text-brand-victoria-cove">On court</p>
+            <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">
+              What a week feels like
             </h2>
-            <p className="font-sans text-[16px] md:text-[18px] text-black/70 max-w-2xl mx-auto">
-              High-energy development in a supportive environment. See what happens on court.
+            <div className="section-horizon mb-6 opacity-90" aria-hidden="true" />
+            <p className="font-sans text-body-lg text-brand-pacific-dusk/80">
+              Drills, games, and match play — paced for each group. Same philosophy as our year-round programs.
             </p>
-          </AnimatedSection>
+          </div>
         }
         blocks={[
           {
             imageSrc: '/images/camps/camp-action-1.webp',
-            imageAlt: 'Young players in camp action at LBTA',
+            imageAlt: 'Young players in camp footwork and movement at LBTA',
             content: (
               <AnimatedSection delay={0}>
-                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-3">Movement First</h3>
-                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
-                  Every camp session builds from footwork and court coverage. Players learn to move efficiently before we add technical layers.
+                <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-3">Movement first</h3>
+                <p className="font-sans text-[15px] leading-relaxed text-brand-pacific-dusk/75">
+                  Footwork and court coverage come before we stack technique. Players learn to move efficiently on the
+                  surfaces they play.
                 </p>
               </AnimatedSection>
             ),
           },
           {
             imageSrc: '/images/camps/camp-action-2.webp',
-            imageAlt: 'Campers in drills at Laguna Beach Tennis Academy',
+            imageAlt: 'Campers in progressive ball drills at Laguna Beach Tennis Academy',
             content: (
               <AnimatedSection delay={0}>
-                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-3">Progressive Development</h3>
-                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
-                  Red, orange, and green ball progressions keep each age group challenged. Coaches adapt to the level in the room.
+                <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-3">Progressive groups</h3>
+                <p className="font-sans text-[15px] leading-relaxed text-brand-pacific-dusk/75">
+                  Red, orange, and green ball progressions keep each age band challenged. Coaches adjust to the level in
+                  the room — then add rally and point play when players are ready.
                 </p>
               </AnimatedSection>
             ),
           },
           {
             imageSrc: '/images/camps/camp-action-3.webp',
-            imageAlt: 'Camp action and rally play',
+            imageAlt: 'LBTA camp players in match play and community on court',
             content: (
               <AnimatedSection delay={0}>
-                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-3">Rally and Compete</h3>
-                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
-                  Live-ball rallies and point play are part of every day. Players build confidence through repetition and friendly competition.
-                </p>
-              </AnimatedSection>
-            ),
-          },
-          {
-            imageSrc: '/images/camps/camp-action-4.webp',
-            imageAlt: 'LBTA camp community and fun',
-            content: (
-              <AnimatedSection delay={0}>
-                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-3">Community on Court</h3>
-                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
-                  Camps are as much about making friends and belonging as they are about tennis. Movement. Craft. Community.
+                <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-3">Community</h3>
+                <p className="font-sans text-[15px] leading-relaxed text-brand-pacific-dusk/75">
+                  Camps are about belonging as much as tennis. Players push each other in a supportive environment — the
+                  same community you find in our year-round programs.
                 </p>
               </AnimatedSection>
             ),
@@ -402,174 +222,81 @@ export default function CampsPage() {
         ]}
       />
 
-      <HorizonDivider />
-      {/* OUR FOUNDATION */}
-      <section className="bg-brand-morning-light py-20 md:py-32">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-12">
-          <AnimatedSection delay={0}>
-            <div className="text-center mb-16">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-black/60 mb-4">
-                Our Foundation
-              </p>
-              <h2 className="font-headline text-[36px] md:text-[52px] font-semibold text-black mb-6">
-                What Makes LBTA Different
-              </h2>
-              <p className="font-sans text-[16px] md:text-[18px] text-black/70 max-w-2xl mx-auto leading-relaxed">
-                Everything we teach is built on three core principles that develop complete tennis players.
-              </p>
-            </div>
-          </AnimatedSection>
-          
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-            <AnimatedSection delay={100}>
-              <div className="bg-white p-8 rounded-lg text-center h-full">
-                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-4">
-                  Movement
-                </h3>
-                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
-                  Athletic footwork and court coverage form the foundation of every great player. We train efficient movement patterns that become instinctive.
-                </p>
-              </div>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={200}>
-              <div className="bg-white p-8 rounded-lg text-center h-full">
-                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-4">
-                  Craft
-                </h3>
-                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
-                  Focus, consistency, and mental toughness separate good players from great ones. We build habits that transfer to school and life.
-                </p>
-              </div>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={300}>
-              <div className="bg-white p-8 rounded-lg text-center h-full">
-                <h3 className="font-headline text-[24px] md:text-[28px] font-semibold text-black mb-4">
-                  Community
-                </h3>
-                <p className="font-sans text-[15px] md:text-[16px] text-black/70 leading-relaxed">
-                  Being part of a team creates motivation, accountability, and friendships. Players push each other to improve while having fun together.
-                </p>
-              </div>
-            </AnimatedSection>
-          </div>
-          
-          <AnimatedSection delay={400}>
-            <p className="font-headline text-[20px] md:text-[24px] text-black/80 text-center mt-16 italic">
-              Movement. Craft. Community.
-            </p>
-          </AnimatedSection>
+      <section className="border-t border-brand-pacific-dusk/[0.06] bg-brand-sandstone/50 py-16 md:py-20">
+        <div className="container-lbta">
+          <blockquote className="section-quote my-0 max-w-3xl font-headline text-[clamp(1.25rem,2.5vw,1.5rem)] font-light leading-snug text-brand-pacific-dusk">
+            Movement. Craft. Community. — the same foundation in every camp session as in our academy programs.
+          </blockquote>
         </div>
       </section>
 
       <HorizonDivider />
-      {/* UTR MATCH PLAY SERIES PROMO */}
-      <DarkSection className="py-16 md:py-24">
-        <div className="max-w-[1000px] mx-auto px-4 md:px-12">
-          <AnimatedSection delay={0}>
-            <div className="text-center">
-              <p className="font-sans text-[11px] uppercase tracking-[2px] text-brand-sandstone/80 mb-4">
-                UTR Match Play Series · Season 1
-              </p>
-              <h2 className="font-headline text-[32px] md:text-[44px] font-semibold text-brand-sandstone mb-4">
-                Saturday Matchplay Series
-              </h2>
-              <p className="font-sans text-[16px] md:text-[18px] text-white/85 max-w-2xl mx-auto mb-8">
-                8 Saturdays of UTR-rated competitive play. Five divisions from Color Ball through UTR 7.0. Every match counts toward your Universal Tennis Rating.
+
+      <DarkSection className="py-18 md:py-22">
+        <div className="container-lbta">
+          <div className="grid gap-12 border-b border-white/10 pb-14 md:grid-cols-2 md:gap-16 md:pb-16">
+            <div>
+              <p className="font-sans text-eyebrow mb-3 text-white/60">Match play</p>
+              <h2 className="font-headline text-display-sm mb-4 text-white">Saturday UTR series</h2>
+              <p className="font-sans text-[15px] leading-relaxed text-white/80">
+                Rated Saturday match play in five divisions — separate from camps, but a natural next step for players who
+                want competition on the calendar.
               </p>
               <Link
                 href="/programs/utr-match-play"
-                className="inline-block bg-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                className="mt-6 inline-flex min-h-[48px] items-center justify-center bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]"
               >
-                Register Now →
+                UTR Match Play
               </Link>
             </div>
-          </AnimatedSection>
-        </div>
-      </DarkSection>
-
-      <HorizonDivider />
-      {/* FAQ SECTION */}
-      <section className="bg-brand-morning-light py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-4 md:px-12">
-          <AnimatedSection delay={0}>
-            <div className="text-center mb-12">
-              <h2 className="font-headline text-[32px] md:text-[44px] font-semibold text-black mb-4">
-                Camp FAQs
-              </h2>
+            <div>
+              <p className="font-sans text-eyebrow mb-3 text-white/60">Questions</p>
+              <h2 className="font-headline text-display-sm mb-4 text-white">We&apos;re here</h2>
+              <p className="font-sans text-[15px] leading-relaxed text-white/80">
+                Call or write — we&apos;ll help you pick the right week and explain session vs drop-in where it applies.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Link
+                  href="/contact"
+                  className="inline-flex min-h-[48px] items-center justify-center border border-white/40 bg-transparent px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:border-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]"
+                >
+                  Contact
+                </Link>
+                <a
+                  href="tel:9495340457"
+                  aria-label="Call (949) 534-0457"
+                  className="inline-flex min-h-[48px] items-center justify-center px-2 font-sans text-[14px] font-medium text-white/90 underline underline-offset-4 decoration-white/30 hover:decoration-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm"
+                >
+                  (949) 534-0457
+                </a>
+              </div>
             </div>
-          </AnimatedSection>
-          
-          <div className="space-y-4">
-            {[
-              {
-                q: "What should my child bring to camp?",
-                a: "Tennis racquet (we can provide one if needed), water bottle, sunscreen, hat, and appropriate athletic clothing. For full-day camps, we provide lunch. For half-day camps, bring a snack."
-              },
-              {
-                q: "What skill level is required?",
-                a: "Our camps welcome all skill levels from complete beginners to advanced players. We group campers by age and ability to ensure appropriate instruction and match play."
-              },
-              {
-                q: "Can I register for individual days?",
-                a: "Camp registration is by the week or session. However, we offer drop-in options for some programs. Contact us for availability."
-              },
-              {
-                q: "What is your cancellation policy?",
-                a: "Full refunds are available up to 14 days before camp start. 50% refund up to 7 days before. Credits can be applied to future programs within 7 days of start."
-              },
-              {
-                q: "Is there early drop-off or late pickup?",
-                a: "Extended care is available for an additional fee. Early drop-off starts at 8:00 AM and late pickup extends until 4:00 PM. Contact us to arrange."
-              }
-            ].map((faq, index) => (
-              <AnimatedSection key={index} delay={50 + index * 50}>
-                <div className="bg-white p-6 rounded-lg">
-                  <h3 className="font-sans text-[16px] font-semibold text-black mb-2">{faq.q}</h3>
-                  <p className="font-sans text-[14px] text-black/70 leading-relaxed">{faq.a}</p>
-                </div>
-              </AnimatedSection>
-            ))}
+          </div>
+
+          <div className="border-t border-white/10 pt-14 md:pt-16">
+            <p className="font-sans text-eyebrow mb-6 text-center text-white/55">Common questions</p>
+            <div className="mx-auto max-w-2xl">
+              <CampFAQAccordion />
+            </div>
+          </div>
+
+          <div className="border-t border-white/10 pt-14 text-center md:pt-18">
+            <h2 className="font-headline text-display-sm md:text-[clamp(1.75rem,3vw,2.25rem)] mb-4 text-brand-sandstone">
+              Ready to choose a week?
+            </h2>
+            <p className="mx-auto mb-10 max-w-md font-sans text-[16px] text-white/85">
+              Register from the sessions above, or reach out if you are deciding between programs.
+            </p>
+            <Link
+              href="#camps"
+              className="inline-flex min-h-[48px] items-center justify-center bg-white px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-brand-deep-water transition-all duration-300 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]"
+            >
+              Back to sessions
+            </Link>
           </div>
         </div>
-      </section>
-
-      {/* CTA */}
-      <HorizonDivider />
-      <DarkSection className="py-20 md:py-28">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <AnimatedSection delay={0}>
-            <h2 className="font-headline text-[36px] md:text-[52px] font-semibold text-brand-sandstone mb-6 leading-[1.15]">
-              Reserve Your Spot
-            </h2>
-          </AnimatedSection>
-          <AnimatedSection delay={100}>
-            <p className="font-sans text-[16px] md:text-[18px] leading-[1.6] text-white/90 mb-10">
-              Camp spaces fill quickly — secure your week today. Questions? We're here to help.
-            </p>
-          </AnimatedSection>
-          <AnimatedSection delay={200}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/contact"
-                className="inline-block bg-black text-white font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
-              >
-                Contact Us
-              </Link>
-              <a
-                href="tel:9495340457"
-                aria-label="Call (949) 534-0457"
-                className="inline-block bg-white/10 hover:bg-white/20 text-white border border-white/30 font-sans font-semibold text-[14px] py-4 px-10 rounded-[2px] transition-all duration-300 uppercase tracking-[1.5px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
-              >
-                Call (949) 534-0457
-              </a>
-            </div>
-          </AnimatedSection>
-        </div>
       </DarkSection>
-      
-      {/* Luxury Registration Modal */}
+
       <LuxuryYearModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -577,9 +304,8 @@ export default function CampsPage() {
         data={selectedCamp}
         season={selectedCamp?.season || 'summer'}
       />
-      
-      {/* Sticky Mobile CTA */}
-      <StickyCTA text="Reserve Your Spot" href="#camps" showAfterScroll={600} />
+
+      <StickyCTA text="Browse sessions" href="#camps" showAfterScroll={500} />
     </>
   )
 }

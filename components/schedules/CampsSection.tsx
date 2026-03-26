@@ -1,26 +1,11 @@
 'use client'
 
 import CampRow from './CampRow'
-
-interface Camp {
-  id: string
-  name: string
-  dates: string
-  days: string | number
-  hours: string
-  ages: string
-  location: string
-  price: number
-  perDay?: number
-  halfDay?: number
-  description: string
-  includes?: string[]
-  featured?: boolean
-}
+import type { CampWithWeeks } from '@/lib/camps-data'
 
 interface CampsSectionProps {
-  camps: Camp[]
-  onRegister: (camp: Camp) => void
+  camps: CampWithWeeks[]
+  onRegister: (camp: CampWithWeeks) => void
 }
 
 export default function CampsSection({ camps, onRegister }: CampsSectionProps) {

@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { campModalDropInLabel, campModalSessionLabel } from '@/lib/camp-pricing-display'
+import { getCampDropInDateBounds } from '@/lib/camp-date-bounds'
+import type { CampRegistrationData } from '@/lib/camp-modal-data'
+import type { CampWeek } from '@/lib/camps-data'
 
 // ============================================================
 // LUXURY YEAR-ROUND REGISTRATION MODAL
@@ -11,24 +14,7 @@ import { campModalDropInLabel, campModalSessionLabel } from '@/lib/camp-pricing-
 // Refined neutrals, typography-driven, minimal color
 // ============================================================
 
-interface CampData {
-  id: string
-  name: string
-  dates: string
-  days: string | number
-  hours: string
-  ages: string
-  location: string
-  price: number
-  perDay?: number
-  halfDay?: number
-  description: string
-  includes?: string[]
-  safetyNote?: string
-  featured?: boolean
-  season?: string
-  coaches?: string[]
-}
+type CampData = CampRegistrationData
 
 interface UTRCircuitData {
   id: string
@@ -44,7 +30,7 @@ interface LuxuryYearModalProps {
   isOpen: boolean
   onClose: () => void
   type: 'camp' | 'utr-circuit' | 'jtt' | 'seasonal' | 'inquiry'
-  data: CampData | UTRCircuitData | null
+  data: CampRegistrationData | UTRCircuitData | null
   season?: string
 }
 
@@ -75,6 +61,11 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
     notes: ''
   })
 
+  /** Week chosen in modal (when card opened without a week) */
+  const [selectedWeekInModal, setSelectedWeekInModal] = useState<CampWeek | null>(null)
+  /** ISO date (yyyy-mm-dd) for half-day drop-in */
+  const [dropInDate, setDropInDate] = useState('')
+
   // Focus primary button when success state is shown (a11y)
   useEffect(() => {
     if (isSuccess && isOpen) {
@@ -90,6 +81,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
       setSelectedPrice(null)
       setIsSuccess(false)
       setErrorMessage(null)
+      setDropInDate('')
       setFormData({
         firstName: '',
         lastName: '',
@@ -100,8 +92,14 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
         experience: 'beginner',
         notes: ''
       })
+      if (type === 'camp' && data) {
+        const c = data as CampData
+        setSelectedWeekInModal(c.selectedWeek ?? null)
+      } else {
+        setSelectedWeekInModal(null)
+      }
     }
-  }, [isOpen])
+  }, [isOpen, type, data])
 
   useEffect(() => {
     if (!errorMessage) return
@@ -184,27 +182,34 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
     }
   }
 
-  // Get pricing options
+  // Get pricing options (camp: uses selected week for session + bundle price when applicable)
   const getPricingOptions = () => {
     if (type === 'camp') {
       const campData = data as CampData
-      const options = []
-      if (campData.price) {
+      const activeWeek = selectedWeekInModal ?? campData.selectedWeek ?? null
+      if ((campData.weeks?.length ?? 0) > 0 && !activeWeek) {
+        return []
+      }
+      const sessionPrice = activeWeek ? activeWeek.price : campData.price
+      const dropIn = campData.dropInRate ?? campData.perDay
+      const halfPrice = activeWeek?.halfDay ?? campData.halfDay
+      const options: { label: string; value: string; price: number }[] = []
+      if (sessionPrice) {
         options.push({
           label: campModalSessionLabel(campData.id),
           value: 'full',
-          price: campData.price,
+          price: sessionPrice,
         })
       }
-      if (campData.perDay != null) {
+      if (dropIn != null) {
         options.push({
           label: campModalDropInLabel(campData.id),
           value: 'day',
-          price: campData.perDay,
+          price: dropIn,
         })
       }
-      if (campData.halfDay) {
-        options.push({ label: 'Half Day', value: 'half', price: campData.halfDay })
+      if (halfPrice) {
+        options.push({ label: 'Half Day (week bundle)', value: 'half', price: halfPrice })
       }
       return options
     } else {
@@ -219,6 +224,42 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
 
   const programInfo = getProgramInfo()
   const pricingOptions = getPricingOptions()
+
+  const campActiveWeek =
+    type === 'camp' ? (selectedWeekInModal ?? (data as CampData).selectedWeek ?? null) : null
+  const dropInBounds =
+    type === 'camp' && data ? getCampDropInDateBounds((data as CampData).id, campActiveWeek) : null
+  const needsDropInDay =
+    type === 'camp' &&
+    selectedOption === 'day' &&
+    dropInBounds != null
+
+  const canContinueStep1 =
+    type !== 'camp' ||
+    (() => {
+      const c = data as CampData
+      const w = selectedWeekInModal ?? c.selectedWeek ?? null
+      if ((c.weeks?.length ?? 0) > 0 && !w) return false
+      if (!selectedOption || selectedPrice == null) return false
+      if (selectedOption === 'day' && dropInBounds && !dropInDate) return false
+      return true
+    })()
+
+  const step2SelectionSummary = (): string => {
+    if (type !== 'camp') {
+      return `${programInfo.dates} · ${selectedOption ?? ''}`
+    }
+    const c = data as CampData
+    const w = selectedWeekInModal ?? c.selectedWeek ?? null
+    const weekLine = w ? `${w.label} · ${w.dates}` : programInfo.dates
+    let opt = ''
+    if (selectedOption === 'full') opt = 'Full session'
+    else if (selectedOption === 'day') {
+      opt = `Half-day drop-in${dropInDate ? ` · ${dropInDate}` : ''}`
+    } else if (selectedOption === 'half') opt = 'Half day (week bundle)'
+    else opt = selectedOption ?? ''
+    return [weekLine, opt].filter(Boolean).join(' · ')
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -248,10 +289,22 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
       // Add type-specific fields
       if (type === 'camp') {
         const campData = data as CampData
+        const w = selectedWeekInModal ?? campData.selectedWeek ?? null
         payload.campName = campData.name
         payload.campDates = campData.dates
         payload.campId = campData.id
         payload.location = campData.location
+        payload.campWeek = w ? `${w.label}: ${w.dates}` : ''
+        payload.campPricingOption = selectedOption ?? ''
+        payload.dropInDate = dropInDate || ''
+        const extra = [
+          w ? `Week: ${w.label} (${w.dates})` : '',
+          selectedOption ? `Pricing: ${selectedOption}` : '',
+          dropInDate ? `Drop-in day: ${dropInDate}` : '',
+        ]
+          .filter(Boolean)
+          .join(' · ')
+        payload.notes = [formData.notes, extra].filter(Boolean).join(' | ')
       }
 
       if (type === 'utr-circuit' || type === 'jtt') {
@@ -390,53 +443,126 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                     {programInfo.details}
                   </p>
 
+                  {type === 'camp' && (data as CampData).weeks && (data as CampData).weeks!.length > 0 && !campActiveWeek ? (
+                    <div className="mb-8">
+                      <p className="font-sans text-[12px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.12em] mb-3">
+                        Select camp week
+                      </p>
+                      <div className="space-y-2">
+                        {(data as CampData).weeks!.map((w) => (
+                          <button
+                            key={w.week}
+                            type="button"
+                            onClick={() => {
+                              setSelectedWeekInModal(w)
+                              setSelectedOption(null)
+                              setSelectedPrice(null)
+                              setDropInDate('')
+                            }}
+                            className={`w-full p-4 rounded-[2px] text-left border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
+                              selectedWeekInModal?.week === w.week
+                                ? 'border-black bg-black text-white'
+                                : 'border-black/10 bg-brand-sandstone hover:bg-lbta-stone text-brand-pacific-dusk'
+                            }`}
+                          >
+                            <span className="font-sans text-[14px] font-medium">
+                              {w.label}: {w.dates}
+                            </span>
+                            <span className="block font-headline text-[18px] font-medium mt-1 tabular-nums">
+                              ${w.price}
+                              {w.halfDay != null ? (
+                                <span className="font-sans text-[12px] font-normal opacity-80"> · half-day ${w.halfDay}</span>
+                              ) : null}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {type === 'camp' && campActiveWeek ? (
+                    <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-6">
+                      <span className="font-semibold text-brand-pacific-dusk">Week:</span> {campActiveWeek.label} · {campActiveWeek.dates}
+                    </p>
+                  ) : null}
+
                   {/* Options */}
                   <div className="space-y-3 mb-8">
-                    {pricingOptions.map((option) => (
-                      <button
-                        key={option.value}
-                        onClick={() => {
-                          setSelectedOption(option.value)
-                          setSelectedPrice(option.price)
-                        }}
-                        className={`w-full p-5 rounded-[2px] text-left transition-all duration-200 ${
-                          selectedOption === option.value
-                            ? 'bg-black text-white'
-                            : 'bg-brand-sandstone hover:bg-lbta-stone text-brand-pacific-dusk'
-                        }`}
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="font-sans text-[15px] font-medium">
-                            {option.label}
-                          </span>
-                          <span className={`font-headline text-[22px] font-medium ${
-                            selectedOption === option.value ? 'text-white' : 'text-brand-pacific-dusk'
-                          }`}>
-                            ${option.price}
-                          </span>
-                        </div>
-                      </button>
-                    ))}
+                    {pricingOptions.length === 0 && type === 'camp' ? (
+                      <p className="font-sans text-[14px] text-brand-pacific-dusk/60">
+                        {(data as CampData).weeks?.length ? 'Select a week above to see pricing.' : 'No pricing options available.'}
+                      </p>
+                    ) : (
+                      pricingOptions.map((option) => (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={() => {
+                            setSelectedOption(option.value)
+                            setSelectedPrice(option.price)
+                            if (option.value !== 'day') setDropInDate('')
+                          }}
+                          className={`w-full p-5 rounded-[2px] text-left transition-all duration-200 ${
+                            selectedOption === option.value
+                              ? 'bg-black text-white'
+                              : 'bg-brand-sandstone hover:bg-lbta-stone text-brand-pacific-dusk'
+                          }`}
+                        >
+                          <div className="flex justify-between items-center gap-3">
+                            <span className="font-sans text-[15px] font-medium">
+                              {option.label}
+                            </span>
+                            <span className={`font-headline text-[22px] font-medium shrink-0 tabular-nums ${
+                              selectedOption === option.value ? 'text-white' : 'text-brand-pacific-dusk'
+                            }`}>
+                              ${option.price}
+                            </span>
+                          </div>
+                        </button>
+                      ))
+                    )}
                   </div>
 
                   {/* Selected Price Display */}
-                  {selectedPrice && (
-                    <div className="flex justify-between items-center py-4 border-t border-lbta-stone mb-8">
+                  {selectedPrice != null && (
+                    <div className="flex justify-between items-center py-4 border-t border-lbta-stone mb-4">
                       <span className="font-sans text-[13px] text-brand-pacific-dusk/60 uppercase tracking-[0.05em]">
                         Total
                       </span>
-                      <span className="font-headline text-[28px] font-medium text-brand-pacific-dusk">
+                      <span className="font-headline text-[28px] font-medium text-brand-pacific-dusk tabular-nums">
                         ${selectedPrice}
                       </span>
                     </div>
                   )}
 
+                  {needsDropInDay && dropInBounds ? (
+                    <div className="mb-8">
+                      <label htmlFor="camp-drop-in-date" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        Drop-in day
+                      </label>
+                      <input
+                        id="camp-drop-in-date"
+                        type="date"
+                        min={dropInBounds.min}
+                        max={dropInBounds.max}
+                        value={dropInDate}
+                        onChange={(e) => setDropInDate(e.target.value)}
+                        required
+                        className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
+                      />
+                      <p className="font-sans text-[12px] text-brand-pacific-dusk/50 mt-2">
+                        Choose the calendar day for your half-day drop-in ({dropInBounds.min}–{dropInBounds.max}).
+                      </p>
+                    </div>
+                  ) : null}
+
                   {/* Continue Button */}
                   <button
-                    onClick={() => selectedOption && setStep(2)}
-                    disabled={!selectedOption}
+                    type="button"
+                    onClick={() => canContinueStep1 && setStep(2)}
+                    disabled={!canContinueStep1}
                     className={`w-full py-4 rounded-[2px] min-h-[48px] font-sans text-[14px] font-medium tracking-[0.02em] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 ${
-                      selectedOption
+                      canContinueStep1
                         ? 'bg-black text-white hover:bg-gray-800'
                         : 'bg-lbta-stone text-brand-pacific-dusk/50 cursor-not-allowed'
                     }`}
@@ -459,7 +585,7 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
                     {programInfo.name}
                   </h2>
                   <p className="font-sans text-[14px] text-brand-pacific-dusk/60 mb-8">
-                    {programInfo.dates} · {selectedOption}
+                    {step2SelectionSummary()}
                   </p>
 
                   {/* Form Fields */}
