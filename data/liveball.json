@@ -1,32 +1,28 @@
 {
   "lastReviewed": "2026-03-25",
   "outcomeLine": "Sharpen doubles patterns under pressure—then walk off the court knowing you earned every rep.",
-  "sessionObjective": "LiveBall is a high-intensity, coach-fed doubles session. The coach feeds every ball so there is no serving—just continuous action that sharpens positioning, patterns, and finishing while keeping your heart rate up.",
+  "sessionObjective": "LiveBall is a high-intensity, coach-fed doubles session: continuous action that sharpens positioning, patterns, and finishing while keeping your heart rate up—your coach shapes the session to the group.",
   "howItWorks": [
-    "Doubles only. Two players hold the Champions side (king of the court); two Challengers try to take their spot.",
-    "The coach stands on the Champions side with a full basket and feeds every point—serves are not used in this format.",
-    "Challengers need three points before Champions earn two to win the exchange; when Challengers win, they become the new Champions.",
-    "Rotations stay quick so everyone cycles in and out—expect a fast pace and minimal standing around."
+    "Doubles-first, coach-fed play—your coach runs the basket and sets priorities so the room stays competitive without a fixed script.",
+    "Champions and Challengers rotate quickly; the scoring cadence is explained at the start and adjusted when it helps the group.",
+    "Expect fast cycles, clear communication with your partner, and room to adapt targets as the session unfolds."
   ],
   "firstBall": {
-    "title": "First ball on each point",
-    "intro": "The first feed to a new challenging pair has extra structure so the point starts clean:",
+    "title": "Starting each point",
+    "intro": "First-ball priorities are set by your coach each week—targets, roles, and net rules flex with the group and the moment.",
     "bullets": [
-      "The Challenger at the baseline hits toward a target the coach calls—forehand or backhand crosscourt, inside-out forehand, or an “open” ball where you choose.",
-      "The Champions’ net player does not poach that first ball unless the feed is an open ball.",
-      "Miss the first ball and your team rotates out; a clean winner can move you straight to the Champion side. Your coach reviews house rules at the start of each session."
+      "Ask questions at the huddle; house rules are reviewed when it helps new players.",
+      "Partnership cues (who takes the middle, when to help at net) stay explicit so decisions stay clean under speed.",
+      "Miss a feed or need a breather—step off, hydrate, and step back in on the next rotation."
     ]
   },
   "sessionStructure": {
-    "title": "Inside a 90-minute session",
-    "subtitle": "Six 15-minute blocks—movement prep, then pattern work, then open decision-making.",
+    "title": "Inside a session",
+    "subtitle": "Coaches adapt the arc to who shows up—movement, feeding, and play—without locking you into a printed drill menu.",
     "blocks": [
-      { "label": "Block 1", "title": "Dynamic warm-up", "detail": "Footwork, split-steps, cooperative groundstrokes and short volley warm-up." },
-      { "label": "Block 2", "title": "Forehand crosscourt", "detail": "Deuce-side patterns and spacing; first-ball targets as announced." },
-      { "label": "Block 3", "title": "Backhand crosscourt", "detail": "Ad-side consistency and net teamwork." },
-      { "label": "Block 4", "title": "Forehand inside-out", "detail": "Turn defense into offense from the ad court." },
-      { "label": "Block 5", "title": "Forehand open ball", "detail": "Choose line or cross; net player may poach when the feed allows." },
-      { "label": "Block 6", "title": "Backhand open ball", "detail": "Shot selection and finishing—highest intensity of the hour." }
+      { "label": "Phase 1", "title": "Prep & connection", "detail": "Warm up together, set intentions, and calibrate pace so everyone is ready to work." },
+      { "label": "Phase 2", "title": "Coach-led patterns", "detail": "Feeds and targets shift with the group—emphasis on spacing, communication, and repeatable habits." },
+      { "label": "Phase 3", "title": "Competitive rotations", "detail": "Higher-tempo play with quick changes; finish with clarity on what to carry into the next week." }
     ]
   },
   "testimonial": {

@@ -103,10 +103,10 @@ export default function LiveBallPage() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             <div className="lg:col-span-5 space-y-6">
               <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/55">
-                The format
+                What to expect
               </p>
               <h2 className="font-headline text-[clamp(1.75rem,3.5vw,2.35rem)] text-brand-pacific-dusk leading-tight">
-                How it works
+                How we run LiveBall
               </h2>
               <ul className="space-y-5 font-sans text-[17px] leading-[1.65] text-black/85 list-none p-0 m-0">
                 {content.howItWorks.map((line, idx) => (
@@ -173,7 +173,7 @@ export default function LiveBallPage() {
         <div className="max-w-[1140px] mx-auto px-4 md:px-8">
           <div className="max-w-2xl mb-14 md:mb-16">
             <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/55 mb-3">
-              Session arc
+              Session flow
             </p>
             <h2 className="font-headline text-[clamp(1.75rem,4vw,2.5rem)] text-brand-pacific-dusk mb-4 leading-tight">
               {content.sessionStructure.title}

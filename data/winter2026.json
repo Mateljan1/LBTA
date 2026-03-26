@@ -199,7 +199,7 @@
         { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "LB High School" }
       ],
       "pricing": { "monthly": 150, "drop_in": 50 },
-      "description": "Coach-fed doubles with Champions/Challengers rotations; six 15-minute blocks in each 90-minute session. 8 max."
+      "description": "Coach-fed doubles with Champions/Challengers rotations; 90-minute sessions shaped by your coaches. 8 max."
     },
     {
       "id": "liveball-advanced",
@@ -212,7 +212,7 @@
         { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan" }
       ],
       "pricing": { "monthly": 150, "drop_in": 50 },
-      "description": "Coach-fed doubles at a faster pace; same 90-minute structure as Intermediate LiveBall. 8 max."
+      "description": "Coach-fed doubles at a faster pace; same session length as Intermediate LiveBall. 8 max."
     },
     {
       "id": "cardio-tennis",

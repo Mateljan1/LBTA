@@ -61,13 +61,14 @@ export default function UTRMatchPlayPage() {
             alt="Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 45%' }}
+            style={{ objectPosition: '50% 40%' }}
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-deep-water/90 via-brand-deep-water/75 to-brand-deep-water/55" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_70%_25%,rgba(46,139,139,0.12),transparent_55%)]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
+          {/* Lighter scrims so photography stays visible; readability comes from bottom weight + text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-deep-water/45 via-brand-deep-water/25 to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_65%_30%,rgba(46,139,139,0.06),transparent_60%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/12 to-transparent" />
         </div>
 
         <div className="relative z-10 container-lbta pt-28 pb-12 md:pt-32 md:pb-16 lg:pb-20">

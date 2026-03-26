@@ -30,12 +30,13 @@ export default function UTRMatchPlayDivisions({ divisions }: UTRMatchPlayDivisio
               }
             >
               {d.image ? (
-                <div className="relative aspect-[4/3] w-full max-h-[220px] md:max-h-none shrink-0 overflow-hidden rounded-lg border border-brand-pacific-dusk/8 bg-brand-sandstone">
+                <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-lg border border-brand-pacific-dusk/8 bg-brand-sandstone">
                   <Image
                     src={d.image}
                     alt={d.imageAlt ?? `${d.name} division`}
                     fill
                     className="object-cover"
+                    style={{ objectPosition: d.imageObjectPosition ?? '50% 45%' }}
                     sizes="(max-width: 767px) 100vw, 200px"
                     quality={90}
                   />

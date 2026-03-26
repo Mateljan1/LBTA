@@ -73,7 +73,8 @@
         "time": "1:30–4:00 PM",
         "venue": "Alta Laguna Park",
         "image": "/images/programs/utr-match-play/color-ball.webp",
-        "imageAlt": "Young junior player on court with racket and ball at Laguna Beach Tennis Academy"
+        "imageAlt": "Young junior player on court with racket and ball at Laguna Beach Tennis Academy",
+        "imageObjectPosition": "50% 42%"
       },
       {
         "name": "UTR 2.0–4.0",
@@ -84,7 +85,8 @@
         "time": "4:00–6:30 PM",
         "venue": "Alta Laguna Park",
         "image": "/images/programs/utr-match-play/utr-2-4.webp",
-        "imageAlt": "Adult player hitting a forehand during match play on outdoor hard courts"
+        "imageAlt": "Adult player hitting a forehand during match play on outdoor hard courts",
+        "imageObjectPosition": "50% 38%"
       },
       {
         "name": "UTR 3.0–5.0",
@@ -95,7 +97,8 @@
         "time": "1:30–4:00 PM",
         "venue": "Laguna Beach HS",
         "image": "/images/programs/utr-match-play/utr-3-5.webp",
-        "imageAlt": "Junior player celebrating a point during outdoor match play"
+        "imageAlt": "Junior player celebrating a point during outdoor match play",
+        "imageObjectPosition": "50% 35%"
       },
       {
         "name": "UTR 5.0–7.0",
@@ -106,7 +109,8 @@
         "time": "4:00–6:30 PM",
         "venue": "Laguna Beach HS",
         "image": "/images/programs/utr-match-play/utr-5-7.webp",
-        "imageAlt": "Advanced player hitting a two-handed backhand on an outdoor tennis court"
+        "imageAlt": "Advanced player hitting a two-handed backhand on an outdoor tennis court",
+        "imageObjectPosition": "50% 18%"
       },
       {
         "name": "Doubles Round Robin",
@@ -117,7 +121,8 @@
         "time": "6:30–9:00 PM",
         "venue": "Laguna Beach HS",
         "image": "/images/programs/utr-match-play/doubles.webp",
-        "imageAlt": "Doubles players across the net during outdoor match play at LBTA"
+        "imageAlt": "Doubles players across the net during outdoor match play at LBTA",
+        "imageObjectPosition": "50% 48%"
       }
     ],
     "ntrpToUtr": [

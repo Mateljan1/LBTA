@@ -140,6 +140,8 @@ const utrDivisionSchema = z.object({
   venue: z.string(),
   image: z.string().optional(),
   imageAlt: z.string().optional(),
+  /** CSS object-position for cover crop (e.g. "50% 28%" to keep faces in frame). */
+  imageObjectPosition: z.string().optional(),
 })
 
 const ntrpToUtrRowSchema = z.object({

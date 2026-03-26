@@ -57,6 +57,7 @@ export interface UtrDivisionCard {
   venue: string
   image?: string
   imageAlt?: string
+  imageObjectPosition?: string
 }
 
 export function getUtrDivisionsForPage(): UtrDivisionCard[] {
@@ -71,6 +72,7 @@ export function getUtrDivisionsForPage(): UtrDivisionCard[] {
     venue: d.venue,
     image: d.image,
     imageAlt: d.imageAlt,
+    imageObjectPosition: d.imageObjectPosition,
   }))
 }
 
