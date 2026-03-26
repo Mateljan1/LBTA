@@ -62,6 +62,17 @@
   },
   "utr": {
     "seasonLabel": "April 11 – June 13, 2026 · Grand Finals Night June 13",
+    "regularSeasonSaturdays": [
+      "2026-04-11",
+      "2026-04-18",
+      "2026-04-25",
+      "2026-05-02",
+      "2026-05-09",
+      "2026-05-16",
+      "2026-05-23",
+      "2026-05-30"
+    ],
+    "grandFinalsDate": "2026-06-13",
     "divisions": [
       {
         "name": "Color Ball",

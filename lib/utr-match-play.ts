@@ -34,10 +34,48 @@ export function getUtrSeasonLabel(): string {
   return leagues().utr.seasonLabel ?? 'Season dates — see lagunabeachtennisacademy.com'
 }
 
-/** Structured dates for schema / meta (aligned with page). */
-export function getUtrSeasonIsoRange(): { startDate: string; endDate: string } {
-  return { startDate: '2026-04-11', endDate: '2026-06-13' }
+/** Eight regular-season Saturdays if JSON omits the list (weekly from first Saturday). */
+function fallbackRegularSaturdays(): string[] {
+  const out: string[] = []
+  const start = new Date('2026-04-11T12:00:00')
+  for (let i = 0; i < 8; i++) {
+    const d = new Date(start)
+    d.setDate(start.getDate() + i * 7)
+    out.push(d.toISOString().slice(0, 10))
+  }
+  return out
 }
+
+/** ISO dates (YYYY-MM-DD) for each regular Saturday matchplay — drop-in is per week at division rate when space allows. */
+export function getUtrRegularSeasonSaturdays(): string[] {
+  const list = leagues().utr.regularSeasonSaturdays
+  if (list && list.length > 0) return list
+  return fallbackRegularSaturdays()
+}
+
+export function getUtrGrandFinalsIso(): string {
+  return leagues().utr.grandFinalsDate ?? '2026-06-13'
+}
+
+/** Structured dates for schema / meta (first Saturday → Grand Finals). */
+export function getUtrSeasonIsoRange(): { startDate: string; endDate: string } {
+  const saturdays = getUtrRegularSeasonSaturdays()
+  return {
+    startDate: saturdays[0] ?? '2026-04-11',
+    endDate: getUtrGrandFinalsIso(),
+  }
+}
+
+export function formatUtrSessionDateLong(iso: string): string {
+  const d = new Date(`${iso}T12:00:00`)
+  return new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(d)
+}
+
 
 /** Human duration for form prefill — must match JSON season. */
 export function getUtrCircuitFormDuration(): string {

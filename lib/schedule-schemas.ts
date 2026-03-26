@@ -158,6 +158,10 @@ const leaguesDataSchema = z.object({
   }),
   utr: z.object({
     seasonLabel: z.string().optional(),
+    /** ISO YYYY-MM-DD for each regular-season Saturday (drop-in eligible per week). */
+    regularSeasonSaturdays: z.array(z.string()).optional(),
+    /** ISO YYYY-MM-DD for Grand Finals night (not a standard league Saturday). */
+    grandFinalsDate: z.string().optional(),
     divisions: z.array(utrDivisionSchema),
     ntrpToUtr: z.array(ntrpToUtrRowSchema),
   }),

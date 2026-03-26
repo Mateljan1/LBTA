@@ -20,7 +20,7 @@ export default function UTRMatchPlayDivisions({ divisions }: UTRMatchPlayDivisio
         {divisions.map((d) => (
           <div
             key={d.name}
-            className="bg-white rounded-xl border border-brand-pacific-dusk/8 p-5 md:p-6 transition-all duration-300 hover:border-brand-pacific-dusk/15 hover:shadow-[0_8px_32px_rgba(27,58,92,0.08)] hover:-translate-y-0.5"
+            className="bg-white rounded-2xl border border-brand-pacific-dusk/[0.08] p-5 md:p-6 shadow-[0_2px_20px_rgba(27,58,92,0.04)] transition-all duration-300 hover:border-brand-pacific-dusk/15 hover:shadow-[0_12px_40px_rgba(27,58,92,0.08)] hover:-translate-y-0.5"
           >
             <div
               className={

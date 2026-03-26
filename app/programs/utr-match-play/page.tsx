@@ -5,15 +5,23 @@ import { LeagueEventSchema } from '@/app/schema'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import UTRMatchPlayRegister from './UTRMatchPlayRegister'
 import UTRMatchPlayDivisions from './UTRMatchPlayDivisions'
+import UtrDropInSchedule from './UtrDropInSchedule'
 import {
+  formatUtrSessionDateLong,
   getNtrpToUtrReference,
   getUtrDivisionsForPage,
+  getUtrGrandFinalsIso,
+  getUtrRegularSeasonSaturdays,
   getUtrSeasonIsoRange,
   getUtrSeasonLabel,
 } from '@/lib/utr-match-play'
 
 const seasonLabel = getUtrSeasonLabel()
 const { startDate, endDate } = getUtrSeasonIsoRange()
+const utrRegularSaturdays = getUtrRegularSeasonSaturdays()
+const utrGrandFinalsIso = getUtrGrandFinalsIso()
+const seasonRangeLine = seasonLabel.split('·')[0]?.trim() ?? seasonLabel
+const seasonFinaleLine = seasonLabel.split('·').slice(1).join('·').trim()
 
 export const metadata: Metadata = {
   title: 'UTR Match Play Series | Laguna Beach Tennis Academy',
@@ -61,7 +69,7 @@ export default function UTRMatchPlayPage() {
             alt="Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 40%' }}
+            style={{ objectPosition: '50% 38%' }}
             sizes="100vw"
             priority
           />
@@ -80,7 +88,19 @@ export default function UTRMatchPlayPage() {
           </Link>
 
           <div className="max-w-4xl">
-            <p className="text-eyebrow text-brand-sunset-cliff/90 mb-3 tracking-[0.2em]">{seasonLabel}</p>
+            <div className="mb-6 inline-flex max-w-full flex-col gap-2 rounded-[2px] border border-white/25 bg-black/50 px-5 py-4 shadow-[0_12px_48px_rgba(0,0,0,0.35)] backdrop-blur-md sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-4">
+              <span className="text-[11px] font-sans font-semibold uppercase tracking-[0.22em] text-brand-sunset-cliff/95">
+                Season 1
+              </span>
+              <span className="font-headline text-[clamp(1.2rem,2.8vw,1.75rem)] leading-snug text-white">
+                {seasonRangeLine}
+              </span>
+              {seasonFinaleLine ? (
+                <span className="text-[13px] font-sans font-light leading-snug text-white/85 sm:border-l sm:border-white/20 sm:pl-4">
+                  {seasonFinaleLine}
+                </span>
+              ) : null}
+            </div>
             <div className="section-horizon mb-8 max-w-[140px]" aria-hidden="true" />
             <h1 className="font-headline text-display-xl text-white mb-6 max-w-[18ch] leading-[1.05]">
               Eight Saturdays. Rated matches. Real progress.
@@ -94,10 +114,10 @@ export default function UTRMatchPlayPage() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 md:gap-6 mb-12">
             <UTRMatchPlayRegister variant="hero" />
             <Link
-              href="#divisions"
+              href="#drop-in-saturdays"
               className="inline-flex items-center justify-center bg-transparent text-white border border-white/30 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white/50 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
-              Drop-in pricing
+              Saturday drop-ins
             </Link>
             <a
               href="#utr-and-color-ball"
@@ -131,23 +151,48 @@ export default function UTRMatchPlayPage() {
         </div>
       </section>
 
-      {/* Season strip — high visibility */}
-      <div className="relative bg-brand-sandstone border-y border-brand-pacific-dusk/8">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-victoria-cove/35 to-transparent" aria-hidden="true" />
-        <div className="container-lbta py-5 md:py-6">
-          <p className="text-center text-[13px] md:text-sm font-sans font-medium tracking-[0.12em] uppercase text-brand-pacific-dusk/80">
-            <span className="text-brand-sunset-cliff">Season 1</span>
-            <span className="mx-3 text-brand-pacific-dusk/25" aria-hidden="true">
-              |
-            </span>
-            {seasonLabel.split('·')[0]?.trim()}
-            <span className="mx-3 text-brand-pacific-dusk/25" aria-hidden="true">
-              |
-            </span>
-            Grand Finals June 13
-          </p>
+      {/* Season dates — high-contrast card (readable at a glance) */}
+      <div className="relative border-y border-brand-pacific-dusk/10 bg-gradient-to-b from-brand-morning-light via-brand-sandstone/90 to-brand-sandstone">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-victoria-cove/40 to-transparent" aria-hidden="true" />
+        <div className="container-lbta py-8 md:py-10">
+          <div className="mx-auto max-w-3xl rounded-2xl border border-brand-pacific-dusk/10 bg-white px-6 py-8 text-center shadow-[0_12px_48px_rgba(27,58,92,0.08)] md:px-10">
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-sunset-cliff mb-3">
+              Season 1 schedule
+            </p>
+            <p className="font-headline text-[clamp(1.5rem,3.5vw,2.15rem)] leading-tight text-brand-pacific-dusk">
+              {seasonRangeLine}
+            </p>
+            <p className="mt-3 font-sans text-[15px] md:text-[16px] text-brand-pacific-dusk/75">
+              <span className="font-medium text-brand-pacific-dusk">Grand Finals</span>
+              {' — '}
+              {formatUtrSessionDateLong(utrGrandFinalsIso)}
+            </p>
+          </div>
         </div>
       </div>
+
+      {/* Saturday drop-ins — one row per week */}
+      <section
+        id="drop-in-saturdays"
+        className="scroll-mt-28 border-b border-brand-pacific-dusk/8 bg-white"
+      >
+        <div className="container-lbta section-sm md:pb-24 md:pt-20">
+          <div className="mx-auto mb-10 max-w-3xl text-center md:text-left md:mx-0">
+            <h2 className="font-headline text-display-sm md:text-[clamp(1.85rem,4vw,2.35rem)] text-brand-pacific-dusk mb-3 leading-tight">
+              Saturday drop-ins
+            </h2>
+            <div className="section-horizon mx-auto mb-6 max-w-[120px] md:mx-0" aria-hidden="true" />
+            <p className="text-[16px] md:text-[17px] font-sans font-light leading-relaxed text-brand-pacific-dusk/65 max-w-2xl mx-auto md:mx-0">
+              Each Saturday below is a matchplay week—join for that day at your division&apos;s drop-in rate
+              when space allows. Register and note the date, or commit to the full season for all eight
+              Saturdays plus finals.
+            </p>
+          </div>
+          <div className="mx-auto max-w-5xl">
+            <UtrDropInSchedule saturdays={utrRegularSaturdays} grandFinalsIso={utrGrandFinalsIso} />
+          </div>
+        </div>
+      </section>
 
       <HorizonDivider animate />
 
@@ -209,7 +254,7 @@ export default function UTRMatchPlayPage() {
           <p className="mt-8 text-[14px] font-sans font-light text-brand-pacific-dusk/55 leading-relaxed">
             Unsure which division fits? Note it when you register—we confirm placement before the first
             Saturday. We do not offer separate trial sessions for this series; you can join a Saturday with a{' '}
-            <a href="#divisions" className="text-brand-victoria-cove underline underline-offset-4 font-medium">
+            <a href="#drop-in-saturdays" className="text-brand-victoria-cove underline underline-offset-4 font-medium">
               drop-in
             </a>{' '}
             where listed (subject to space), or{' '}
@@ -320,8 +365,15 @@ export default function UTRMatchPlayPage() {
             <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">Five divisions</h2>
             <div className="section-horizon mb-6" aria-hidden="true" />
             <p className="text-body text-brand-pacific-dusk/60 mb-4 max-w-2xl">
-              Find your level. Season registration includes the full series; drop-in is available where
-              listed for flexibility.
+              Find your level. Season registration covers the full series plus finals; each Saturday you can
+              also drop in at your division rate when space allows—see{' '}
+              <a
+                href="#drop-in-saturdays"
+                className="text-brand-victoria-cove font-medium underline underline-offset-4 decoration-brand-victoria-cove/40 hover:text-brand-pacific-dusk"
+              >
+                the schedule
+              </a>{' '}
+              above.
             </p>
             <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/50 mb-10 max-w-2xl">
               New to UTR or raising a Color Ball player?{' '}
@@ -606,10 +658,10 @@ export default function UTRMatchPlayPage() {
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <UTRMatchPlayRegister variant="footer" />
             <Link
-              href="#divisions"
+              href="#drop-in-saturdays"
               className="inline-flex items-center justify-center bg-transparent text-white border border-white/30 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-white/50 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
-              Drop-in pricing
+              Saturday drop-ins
             </Link>
           </div>
           <p className="text-[13px] font-sans font-light text-white/55 mb-4">
