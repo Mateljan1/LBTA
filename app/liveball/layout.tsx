@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'LiveBall — Coach-Fed Doubles | LBTA',
     description:
       'Coach-fed doubles with constant action—learn how rotations, scoring, and session blocks work before you book.',
-    images: [{ url: '/images/liveball/hero-doubles.webp', width: 1600, height: 1067, alt: 'LiveBall doubles at LBTA' }],
+    images: [{ url: '/images/liveball/hero-doubles.webp', width: 1920, height: 1440, alt: 'LiveBall doubles at LBTA' }],
   },
 }
 

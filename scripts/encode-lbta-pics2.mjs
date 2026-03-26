@@ -31,12 +31,24 @@ async function carousel1920x1080(srcName, outRel) {
   await writeWebp(pipeline, out, srcName)
 }
 
+/** 4:3 cards (philosophy pillars, program row) — 1600×1200 for retina `sizes` (~33vw / 25vw). */
 async function card43(srcName, outRel) {
   const inp = path.join(SRC, srcName)
   const out = path.join(ROOT, outRel)
   const pipeline = sharp(inp)
     .rotate()
-    .resize(800, 600, { fit: 'cover', position: 'centre' })
+    .resize(1600, 1200, { fit: 'cover', position: 'centre' })
+    .webp({ quality: 88, effort: 4 })
+  await writeWebp(pipeline, out, srcName)
+}
+
+/** Homepage + /programs LiveBall card — 4:3, min wide edge 1920. */
+async function liveballHeroCard(srcName, outRel) {
+  const inp = path.join(SRC, srcName)
+  const out = path.join(ROOT, outRel)
+  const pipeline = sharp(inp)
+    .rotate()
+    .resize(1920, 1440, { fit: 'cover', position: 'centre' })
     .webp({ quality: 88, effort: 4 })
   await writeWebp(pipeline, out, srcName)
 }
@@ -48,21 +60,12 @@ async function tileSquare(srcName, outRel, quality = 78) {
   await writeWebp(pipeline, out, srcName)
 }
 
-async function henryPortrait(srcName, outRel) {
-  const inp = path.join(SRC, srcName)
-  const out = path.join(ROOT, outRel)
-  const pipeline = sharp(inp)
-    .rotate()
-    .resize(1200, 1200, { fit: 'inside', withoutEnlargement: false })
-    .webp({ quality: 88, effort: 4 })
-  await writeWebp(pipeline, out, srcName)
-}
-
 async function main() {
   console.log('Source:', SRC)
   await carousel1920x1080('Karue_FH_hero.jpg', 'public/images/results/karue-fh-hero.webp')
   await carousel1920x1080('olov hero.jpg', 'public/images/results/olov-hero-lbta-pics2.webp')
-  await henryPortrait('Henry_mateljan_4.6_UTR_9yrs_old.jpg', 'public/images/success-stories/henry-lbta-pics2.webp')
+  await carousel1920x1080('Henry_mateljan_4.6_UTR_9yrs_old.jpg', 'public/images/success-stories/henry-lbta-pics2.webp')
+  await liveballHeroCard('Advanced_liveball.jpg', 'public/images/liveball/hero-doubles.webp')
 
   await card43('Junior Development 11 yr old.jpg', 'public/images/programs/junior-development-lbta-pics2.webp')
   await card43('Adult_advanced.jpg', 'public/images/programs/adult-lbta-pics2.webp')
