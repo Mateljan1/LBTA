@@ -258,47 +258,49 @@ export default function Home() {
                 const firstGroupLen = (homepageCopy.programs.groups as { items: ProgramItem[] }[])[0]
                   .items.length
                 const baseIndex = groupIndex === 0 ? 0 : firstGroupLen
-                const orphan4 = group.items.length === 4
+                const n = group.items.length
+                /** 4 cards: 2×2 on tablet, one row of four on xl — no 3+1 orphan. 3 cards: balanced row from md up. */
+                const gridClass =
+                  n === 4
+                    ? 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 max-w-[1400px] mx-auto'
+                    : 'grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-[1400px] mx-auto'
+                const imageSizes =
+                  n === 4
+                    ? '(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw'
+                    : '(max-width: 767px) 100vw, 33vw'
                 return (
                   <div key={group.id}>
                     <h3
                       id={group.id}
-                      className="font-headline text-[clamp(1.25rem,2.5vw,1.5rem)] text-brand-pacific-dusk mb-6 md:mb-8 scroll-mt-28 text-center md:text-left max-w-5xl mx-auto"
+                      className="font-headline text-[clamp(1.25rem,2.5vw,1.5rem)] text-brand-pacific-dusk mb-6 md:mb-8 scroll-mt-28 text-center md:text-left max-w-[1400px] mx-auto px-1"
                     >
                       {group.label}
                     </h3>
-                    <div
-                      className={[
-                        'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10 max-w-5xl mx-auto',
-                        orphan4 ? 'xl:[&>div:nth-child(4)]:col-start-2' : '',
-                      ]
-                        .filter(Boolean)
-                        .join(' ')}
-                    >
+                    <div className={gridClass}>
                       {group.items.map((program, index) => {
                         const cardIndex = baseIndex + index
                         return (
                           <AnimatedSection key={program.title} delay={cardIndex * 150}>
                             <Link
                               href={program.link}
-                              className="group block h-full overflow-hidden rounded-subtle border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02),0_4px_8px_rgba(0,0,0,0.02)] transition-all duration-500 hover:border-black/10 hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]"
+                              className="group flex h-full flex-col overflow-hidden rounded-subtle border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02),0_4px_8px_rgba(0,0,0,0.02)] transition-all duration-500 hover:border-black/10 hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]"
                             >
-                              <div className="relative aspect-[4/3] overflow-hidden">
+                              <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden">
                                 <Image
                                   src={program.image}
                                   alt={program.imageAlt}
                                   fill
                                   className="object-cover image-zoom"
                                   style={{ objectPosition: program.objectPosition ?? '50% 40%' }}
-                                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                  sizes={imageSizes}
                                   quality={95}
                                 />
                               </div>
-                              <div className="px-5 pb-6 pt-5">
+                              <div className="flex flex-1 flex-col px-5 pb-6 pt-5">
                                 <h4 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">
                                   {program.title}
                                 </h4>
-                                <p className="text-body text-lbta-slate">{program.description}</p>
+                                <p className="text-body text-lbta-slate flex-1">{program.description}</p>
                               </div>
                             </Link>
                           </AnimatedSection>
