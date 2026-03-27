@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-23",
-  "lastLearnRun": "2026-03-23 UTR Match Play standalone page, form-config duration, AC division tags, mailto vs modal",
+  "updated": "2026-03-27",
+  "lastLearnRun": "2026-03-27 Player Success Cloudinary + contain; slide imageAlt mismatch when shared asset",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -830,6 +830,13 @@
       "avoid": "Primary button opens mailto; modal and register-year API unused; no AC tags, no CRM flow",
       "instead": "Wire LuxuryYearModal as primary CTA; keep mailto as secondary for edge questions",
       "tags": ["conversion", "modal", "registration", "cta"]
+    },
+    {
+      "id": "slide-image-alt-mismatch",
+      "description": "Carousel slide imageAlt names a specific person while the image URL shows a different subject or a shared asset meant for another slide",
+      "avoid": "Ryan slide with imageAlt 'Ryan Seggerman on a blue hard court' while src is olov_hero_yiuwtr.jpg used also for Olov",
+      "instead": "Use one canonical photo per person, or write imageAlt to describe visible content without mis-attributing identity; fix when dedicated asset is uploaded",
+      "tags": ["a11y", "carousel", "alt-text", "images", "player-success"]
     }
   ]
 }

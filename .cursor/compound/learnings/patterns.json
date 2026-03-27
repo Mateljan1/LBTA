@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-23",
-  "lastLearnRun": "2026-03-23 UTR Match Play standalone page, form-config duration from JSON, AC division tags",
+  "updated": "2026-03-27",
+  "lastLearnRun": "2026-03-27 Player Success carousel: Cloudinary URLs + imageFit contain for no head crop; review/validate + deploy",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -1043,6 +1043,18 @@
       "when": "form-config prePopulateData.duration for program with season dates in JSON",
       "example": "Derive via helper (e.g. getUtrCircuitFormDuration()) that reads seasonLabel from leagues JSON; add test asserting duration contains year and matches JSON. Avoids date drift.",
       "tags": ["form-config", "data-integrity", "single-source"]
+    },
+    {
+      "name": "player-success-hero-contain-no-crop",
+      "when": "Player Success carousel (or full-bleed people hero) must show full subject with no cropping of heads/faces",
+      "example": "In homepage-copy.json results.slides[], set imageFit: \"contain\" per slide; PlayerSuccessCarousel uses object-contain and bg-brand-deep-water letterboxing. Pair with well-framed source art. Tradeoff: less edge-to-edge than cover.",
+      "tags": ["carousel", "images", "hero", "contain", "a11y", "player-success"]
+    },
+    {
+      "name": "cloudinary-next-image-delivery",
+      "when": "Using Cloudinary URLs as next/image src",
+      "example": "https://res.cloudinary.com/{cloud}/image/upload/f_auto,q_auto/v{version}/{public_id}.{ext}; ensure next.config images.remotePatterns includes hostname res.cloudinary.com. Prefetch in carousel uses same href string.",
+      "tags": ["cloudinary", "next/image", "performance", "remotePatterns"]
     }
   ]
 }
