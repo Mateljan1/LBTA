@@ -94,7 +94,12 @@
       "price": 325,
       "perDay": 85,
       "description": "Tennis & Games (ages 5–11) at Alta Laguna Park. Junior Development (ages 12–17) at Laguna Beach High School. Morning and afternoon half-day sessions Monday through Thursday. Register for the week or drop in by the day.",
-      "includes": ["Skills clinics", "Match play", "Age-appropriate curriculum"]
+      "includes": ["Skills clinics", "Match play", "Age-appropriate curriculum"],
+      "tennisGamesImages": [
+        "https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto/v1774563300/7048DEF2-DE28-42AC-A598-788BA3C3730F_1_105_c_aj4gmp.jpg",
+        "https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto/v1774563272/1F6EB3BC-14F6-483C-A3EB-96DF310777D3_1_105_c_l5m9hf.jpg",
+        "https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto/v1774563365/F3A05492-C48D-469E-917C-7F007BCFDED5_pf3zxj.heic"
+      ]
     },
     {
       "id": "summer",

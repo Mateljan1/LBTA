@@ -41,6 +41,8 @@ interface YearCamp {
   coaches?: string[]
   featured?: boolean
   safetyNote?: string
+  /** Optional Cloudinary (or other remote) URLs — Tennis & Games track photography for listings */
+  tennisGamesImages?: string[]
 }
 
 export interface CampWithWeeks extends YearCamp {

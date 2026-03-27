@@ -6,7 +6,6 @@ import { campMainPriceSuffix, campPerDaySecondaryLine } from '@/lib/camp-pricing
 const CAMP_IMAGES: Partial<Record<string, string>> = {
   summer: '/images/camps/camp-action-1.webp',
   'swim-tennis': '/images/camps/camp-action-2.webp',
-  'spring-break': '/images/camps/camp-action-3.webp',
   'ski-week': '/images/camps/camp-action-1.webp',
   thanksgiving: '/images/camps/camp-action-3.webp',
   'winter-break': '/images/camps/camp-action-1.webp',
@@ -14,6 +13,15 @@ const CAMP_IMAGES: Partial<Record<string, string>> = {
 }
 
 const DEFAULT_CAMP_IMAGE = '/images/camps/camp-action-4.webp'
+
+const TENNIS_GAMES_ALTS = [
+  'Tennis and Games spring camp — young players on court at Alta Laguna Park',
+  'Tennis and Games camp — drills and activities at LBTA',
+  'Tennis and Games camp — junior players during spring session',
+] as const
+
+const imgMotion =
+  'object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100'
 
 export interface CampListingCardProps {
   camp: CampWithWeeks
@@ -27,6 +35,7 @@ const btnGhost =
   'inline-flex items-center justify-center min-h-[48px] w-full px-5 py-2.5 rounded-[2px] border border-black/15 bg-transparent text-brand-pacific-dusk font-sans text-[11px] font-medium tracking-[2.5px] uppercase transition-all duration-300 hover:border-black/30 hover:bg-brand-morning-light/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20 focus-visible:ring-offset-2'
 
 export default function CampListingCard({ camp, onRegister }: CampListingCardProps) {
+  const tennisGames = camp.tennisGamesImages
   const imageSrc = CAMP_IMAGES[camp.id] ?? DEFAULT_CAMP_IMAGE
   const hasWeeks = camp.weeks && camp.weeks.length > 0
 
@@ -46,22 +55,59 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
         </div>
       )}
 
-      <div className="relative aspect-[21/9] w-full overflow-hidden bg-brand-sandstone/50 md:aspect-[2.4/1]">
-        <Image
-          src={imageSrc}
-          alt=""
-          fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-          sizes="(max-width: 1024px) 100vw, min(896px, 90vw)"
-          quality={88}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" aria-hidden="true" />
-        <div className="absolute bottom-3 left-4 right-4 md:bottom-4 md:left-6">
-          <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk shadow-sm">
-            {camp.season}
-          </span>
+      {tennisGames && tennisGames.length > 0 ? (
+        <div
+          className="relative w-full overflow-hidden bg-brand-sandstone/50"
+          role="group"
+          aria-label="Tennis and Games camp photos"
+        >
+          <div className="grid grid-cols-3 gap-1 sm:gap-2">
+            {tennisGames.map((src, i) => (
+              <div
+                key={`${src}-${i}`}
+                className="relative aspect-[3/4] min-h-[120px] overflow-hidden sm:aspect-[4/5] sm:min-h-[160px]"
+              >
+                <Image
+                  src={src}
+                  alt={TENNIS_GAMES_ALTS[i] ?? `Tennis and Games camp photo ${i + 1}`}
+                  fill
+                  className={imgMotion}
+                  sizes="(max-width: 1024px) 34vw, 300px"
+                  quality={90}
+                />
+              </div>
+            ))}
+          </div>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" aria-hidden="true" />
+          <div className="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-5">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk shadow-sm">
+                {camp.season}
+              </span>
+              <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/90 shadow-sm">
+                Tennis &amp; Games
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="relative aspect-[21/9] w-full overflow-hidden bg-brand-sandstone/50 md:aspect-[2.4/1]">
+          <Image
+            src={imageSrc}
+            alt=""
+            fill
+            className={imgMotion}
+            sizes="(max-width: 1024px) 100vw, min(896px, 90vw)"
+            quality={88}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" aria-hidden="true" />
+          <div className="absolute bottom-3 left-4 right-4 md:bottom-4 md:left-6">
+            <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk shadow-sm">
+              {camp.season}
+            </span>
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-1 flex-col p-6 sm:p-8">
         <div className="mb-5 flex flex-col gap-2 border-b border-black/[0.06] pb-5 sm:flex-row sm:items-start sm:justify-between">

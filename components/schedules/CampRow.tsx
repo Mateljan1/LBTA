@@ -1,7 +1,14 @@
 'use client'
 
+import Image from 'next/image'
 import { campMainPriceSuffix, campPerDaySecondaryLine } from '@/lib/camp-pricing-display'
 import type { CampWithWeeks } from '@/lib/camps-data'
+
+const TENNIS_GAMES_ROW_ALTS = [
+  'Tennis and Games spring camp at Alta Laguna Park',
+  'Tennis and Games camp activities at LBTA',
+  'Tennis and Games camp — junior players',
+] as const
 
 interface CampRowProps {
   camp: CampWithWeeks
@@ -10,12 +17,40 @@ interface CampRowProps {
 }
 
 export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
+  const tennisGames = camp.tennisGamesImages
+
   return (
     <div
       className={`${!isLast ? 'border-b border-black/[0.06]' : ''} ${
         camp.featured ? 'border-l-[3px] border-l-brand-sunset-cliff' : ''
       }`}
     >
+      {tennisGames && tennisGames.length > 0 ? (
+        <div
+          className="border-b border-black/[0.06] bg-brand-morning-light/40 px-4 py-3 md:px-6"
+          role="group"
+          aria-label="Tennis and Games camp photos"
+        >
+          <p className="mb-2 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/55">
+            Tennis &amp; Games
+          </p>
+          <div className="grid max-w-lg grid-cols-3 gap-1.5 sm:gap-2">
+            {tennisGames.map((src, i) => (
+              <div key={`${src}-${i}`} className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-brand-sandstone/50">
+                <Image
+                  src={src}
+                  alt={TENNIS_GAMES_ROW_ALTS[i] ?? `Tennis and Games photo ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 28vw, 200px"
+                  quality={88}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
       {/* Desktop — 3-column grid row */}
       <div className="hidden md:grid md:grid-cols-[1fr_auto_auto] md:items-center gap-8 px-6 py-5">
         {/* Col 1: Camp info */}
