@@ -182,3 +182,31 @@ Use this document when doing future compound work, plan verification, or 10/10 a
 - [ ] League data in leagues-2026.json; JSON-LD on league pages
 - [ ] Focus trap + Programs arrow keys + aria-live on newsletter
 - [ ] Build passes; no lint errors
+
+---
+
+## 2026-03-28 — Audit SSOT + hero clarity + thin page (compound:learn)
+
+**Full note:** `.cursor/compound/learnings/2026-03-28-audit-ssot-pathway-hero-compound-learn.md`
+
+### CORRECTIONS (add)
+
+| Original | Correction |
+|----------|------------|
+| Pathway planner output dollar ranges from client-side formulas | No numeric tuition unless sourced from `/data` shared with schedules; link **Schedule & Pricing** |
+| `/match-play` metadata vs “not offered” body | Align SEO/OG with truth; CTAs to **UTR Match Play** + **schedules**; hero image under `/images/programs/...` when available |
+| Scanners unsure where tuition lives | Homepage hero: optional **`pricingHint`** text link to `/schedules`; GA via **`heroCta('pricing_hint', href)`** |
+
+### PATTERNS (add)
+
+| Pattern | When | Example |
+|--------|------|--------|
+| **Hero pricing hint** | Reduce hidden-pricing friction without duplicating rates | `homepage-copy.json` → `HomeHero`; Victoria Cove link; extend `events.heroCta` |
+| **Unavailable offering page** | Product paused but URL kept | Honest copy; substitute CTAs; metadata matches page |
+
+### STANDARDS (reinforce)
+
+| Rule | Level |
+|------|--------|
+| No authoritative `$` amounts in UI unless from `/data` or `/schedules` content pipeline | Required |
+| Page `description` / `openGraph.description` must not contradict visible H1 | Required |

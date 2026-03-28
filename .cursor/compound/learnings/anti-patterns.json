@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-27",
-  "lastLearnRun": "2026-03-27 Player Success Cloudinary + contain; slide imageAlt mismatch when shared asset",
+  "updated": "2026-03-28",
+  "lastLearnRun": "2026-03-28 12-step audit work: pathway SSOT, hero pricing hint, match-play metadata + CTAs, heroCta pricing_hint",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -837,6 +837,20 @@
       "avoid": "Ryan slide with imageAlt 'Ryan Seggerman on a blue hard court' while src is olov_hero_yiuwtr.jpg used also for Olov",
       "instead": "Use one canonical photo per person, or write imageAlt to describe visible content without mis-attributing identity; fix when dedicated asset is uploaded",
       "tags": ["a11y", "carousel", "alt-text", "images", "player-success"]
+    },
+    {
+      "id": "pathway-calculator-fake-pricing",
+      "description": "Interactive planner or quiz outputs dollar amounts from client-side formulas not backed by /data/*.json",
+      "avoid": "pathwayPlanner monthlyMin/monthlyMax hardcoded; displayed as if authoritative tuition",
+      "instead": "Link to /schedules for rates; optionally show qualitative commitment only; if ranges ever come from data, import from a single JSON module shared with schedules",
+      "tags": ["pricing", "SSOT", "trust", "data-integrity", "pathway-planner"]
+    },
+    {
+      "id": "thin-page-seo-mismatch",
+      "description": "Page body says unavailable or not offered but meta description invites users to view programs generically",
+      "avoid": "match-play og:description implying full program list when hero says not offered",
+      "instead": "Rewrite metadata to match expectation; add CTAs to the closest live substitutes (e.g. UTR page, schedules)",
+      "tags": ["seo", "metadata", "ux", "conversion"]
     }
   ]
 }

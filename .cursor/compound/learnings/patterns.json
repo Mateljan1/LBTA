@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-27",
-  "lastLearnRun": "2026-03-27 Player Success carousel: Cloudinary URLs + imageFit contain for no head crop; review/validate + deploy",
+  "updated": "2026-03-28",
+  "lastLearnRun": "2026-03-28 Audit remediation: homepage pricing hint link; pathway tuition → schedules; match-play honest SEO + dual CTA; analytics heroCta pricing_hint",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -1055,6 +1055,18 @@
       "when": "Using Cloudinary URLs as next/image src",
       "example": "https://res.cloudinary.com/{cloud}/image/upload/f_auto,q_auto/v{version}/{public_id}.{ext}; ensure next.config images.remotePatterns includes hostname res.cloudinary.com. Prefetch in carousel uses same href string.",
       "tags": ["cloudinary", "next/image", "performance", "remotePatterns"]
+    },
+    {
+      "name": "hero-pricing-hint-line",
+      "when": "Homepage hero should reduce 'hidden pricing' friction without duplicating rates",
+      "example": "homepage-copy.json: pricingHint + pricingHintHref → /schedules; HomeHero renders text link under subline (Victoria Cove underline). Extend events.heroCta with variant pricing_hint for GA4.",
+      "tags": ["conversion", "pricing", "SSOT", "homepage", "analytics"]
+    },
+    {
+      "name": "unavailable-offering-landing",
+      "when": "Legacy URL must stay live but the product is paused",
+      "example": "Honest H1/copy; metadata/OG aligned; hero image from main program art (e.g. utr-match-play-hero.webp) not orphan legacy path; primary CTA to substitute product + secondary to /schedules",
+      "tags": ["seo", "ux", "conversion", "thin-page"]
     }
   ]
 }

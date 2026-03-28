@@ -8,6 +8,8 @@ import { events } from '@/lib/analytics'
 type HeroCopy = (typeof homepageCopy)['hero'] & {
   ctaSecondary?: string
   ctaSecondaryHref?: string
+  pricingHint?: string
+  pricingHintHref?: string
 }
 
 const hero = homepageCopy.hero as HeroCopy
@@ -72,9 +74,22 @@ export default function HomeHero() {
           <p className="font-headline text-[clamp(1.25rem,3vw,1.75rem)] font-light text-white/90 text-shadow-subtle">
             {hero.pillars}
           </p>
-          <p className="font-sans text-[clamp(1rem,2.5vw,1.25rem)] font-light text-white/80 mt-4 mb-10 text-shadow-subtle max-w-2xl">
+          <p
+            className={`font-sans text-[clamp(1rem,2.5vw,1.25rem)] font-light text-white/80 mt-4 text-shadow-subtle max-w-2xl ${hero.pricingHint && hero.pricingHintHref ? 'mb-4' : 'mb-10'}`}
+          >
             {hero.subline}
           </p>
+          {hero.pricingHint && hero.pricingHintHref ? (
+            <p className="mb-10 max-w-2xl">
+              <Link
+                href={hero.pricingHintHref}
+                onClick={() => events.heroCta('pricing_hint', hero.pricingHintHref ?? '/schedules')}
+                className="font-sans text-[15px] md:text-[16px] font-medium text-brand-victoria-cove underline underline-offset-4 decoration-white/30 hover:decoration-brand-victoria-cove hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
+              >
+                {hero.pricingHint}
+              </Link>
+            </p>
+          ) : null}
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-4 w-full max-w-xl">
             <Link
               href={hero.ctaPrimaryHref}

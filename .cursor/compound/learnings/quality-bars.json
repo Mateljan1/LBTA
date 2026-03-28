@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-19",
-  "lastLearnRun": "2026-03-19 Visual Elevation Phase 3 & 4 + next/image quality",
+  "updated": "2026-03-28",
+  "lastLearnRun": "2026-03-28 compound:learn — audit SSOT, pathway planner, thin-page SEO, hero pricing hint",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -292,6 +292,14 @@
     "formConfigDurationFromData": {
       "rule": "form-config prePopulateData.duration for programs with season dates in JSON (e.g. utr-circuit, camps) must be derived from that JSON via a helper; add test asserting duration matches season",
       "enforcement": "should"
+    },
+    "metadataMatchesVisibleTruth": {
+      "rule": "export const metadata description and openGraph.description must not promise availability or outcomes the page body contradicts (thin pages, paused offerings)",
+      "enforcement": "must"
+    },
+    "pathwayPlannerNoSyntheticTuition": {
+      "rule": "Quizzes or planners must not display dollar amounts from client-only formulas; point to /schedules or load from shared /data",
+      "enforcement": "must"
     }
   }
 }

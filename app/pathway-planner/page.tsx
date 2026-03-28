@@ -8,8 +8,6 @@ type PathwayResult = {
   program: string
   nextProgram: string
   timeline: string
-  monthlyInvestment: string
-  annualInvestment: string
   recommendation: string
   coach: string
 }
@@ -30,10 +28,8 @@ function PathwayPlannerInteractive() {
       program: '',
       nextProgram: '',
       timeline: '',
-      monthlyInvestment: '',
-      annualInvestment: '',
       recommendation: '',
-      coach: ''
+      coach: '',
     }
 
     // Determine program based on age
@@ -73,29 +69,6 @@ function PathwayPlannerInteractive() {
       pathway.timeline = 'Ongoing development'
       pathway.coach = 'Peter DeFrantz or Robert LeBuhn'
     }
-
-    // Calculate investment
-    let monthlyMin, monthlyMax, annualMin, annualMax
-    
-    if (formData.commitment === '1x') {
-      monthlyMin = 140
-      monthlyMax = 200
-    } else if (formData.commitment === '2x') {
-      monthlyMin = 260
-      monthlyMax = 380
-    } else if (formData.commitment === '3-4x') {
-      monthlyMin = 400
-      monthlyMax = 650
-    } else {
-      monthlyMin = 700
-      monthlyMax = 1200
-    }
-
-    annualMin = monthlyMin * 12
-    annualMax = monthlyMax * 12
-
-    pathway.monthlyInvestment = `$${monthlyMin}-${monthlyMax}`
-    pathway.annualInvestment = `$${annualMin.toLocaleString()}-${annualMax.toLocaleString()}`
 
     // Goal-specific guidance
     if (formData.goal === 'fun') {
@@ -140,7 +113,7 @@ function PathwayPlannerInteractive() {
                 required
                 value={formData.age}
                 onChange={(e) => setFormData({...formData, age: e.target.value})}
-                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff focus:ring-offset-2 min-h-[48px]"
+                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 min-h-[48px]"
               >
                 <option value="">Select age range</option>
                 <option value="3-4">Ages 3-4</option>
@@ -161,7 +134,7 @@ function PathwayPlannerInteractive() {
                 required
                 value={formData.experience}
                 onChange={(e) => setFormData({...formData, experience: e.target.value})}
-                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff focus:ring-offset-2 min-h-[48px]"
+                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 min-h-[48px]"
               >
                 <option value="">Select experience level</option>
                 <option value="never-played">Never Played</option>
@@ -180,7 +153,7 @@ function PathwayPlannerInteractive() {
                 required
                 value={formData.goal}
                 onChange={(e) => setFormData({...formData, goal: e.target.value})}
-                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff focus:ring-offset-2 min-h-[48px]"
+                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 min-h-[48px]"
               >
                 <option value="">Select your goal</option>
                 <option value="fun">Fun & Fitness</option>
@@ -198,7 +171,7 @@ function PathwayPlannerInteractive() {
                 required
                 value={formData.commitment}
                 onChange={(e) => setFormData({...formData, commitment: e.target.value})}
-                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-sunset-cliff focus:ring-offset-2 min-h-[48px]"
+                className="w-full px-4 py-4 border border-gray-300 rounded-sm font-sans focus:outline-none focus:ring-2 focus:ring-brand-victoria-cove focus:ring-offset-2 min-h-[48px]"
               >
                 <option value="">Select commitment level</option>
                 <option value="1x">1 session per week</option>
@@ -249,24 +222,24 @@ function PathwayPlannerInteractive() {
                 </div>
 
                 <div className="card-lbta p-8">
-                  <h3 className="text-sm font-sans tracking-wide uppercase text-lbta-slate mb-2">Investment</h3>
-                  <div className="grid grid-cols-2 gap-6">
-                    <div>
-                      <p className="text-sm text-lbta-slate mb-1">Monthly</p>
-                      <p className="text-xl font-headline font-light text-brand-pacific-dusk">
-                        {results.monthlyInvestment}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-lbta-slate mb-1">Annual</p>
-                      <p className="text-xl font-headline font-light text-brand-pacific-dusk">
-                        {results.annualInvestment}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-lbta-slate mt-4">
-                    Based on {formData.commitment === '1x' ? '1' : formData.commitment === '2x' ? '2' : formData.commitment === '3-4x' ? '3-4' : '5+'} sessions per week
+                  <h3 className="text-sm font-sans tracking-wide uppercase text-lbta-slate mb-2">Tuition</h3>
+                  <p className="text-body text-brand-pacific-dusk leading-relaxed mb-6">
+                    Rates vary by program, season, and how often you train. Your commitment (
+                    {formData.commitment === '1x'
+                      ? '1'
+                      : formData.commitment === '2x'
+                        ? '2'
+                        : formData.commitment === '3-4x'
+                          ? '3–4'
+                          : '5+'}{' '}
+                    sessions per week) helps us recommend the right pathway — exact tuition is always listed on Schedule &amp; Pricing.
                   </p>
+                  <Link
+                    href="/schedules"
+                    className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[0.14em] uppercase min-h-[48px] px-8 py-3 rounded-[2px] transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                  >
+                    View schedule &amp; pricing
+                  </Link>
                 </div>
               </div>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { events } from '@/lib/analytics'
@@ -48,26 +48,68 @@ type Props = {
   variant?: VideoTestimonialsVariant
 }
 
+const vimeoSrc = (id: string) =>
+  `https://player.vimeo.com/video/${id}?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0`
+
 function VimeoIframe({
   testimonial,
-  lazy,
   onLoad,
 }: {
   testimonial: VideoTestimonial
-  lazy?: boolean
   onLoad?: () => void
 }) {
   return (
     <iframe
-      src={`https://player.vimeo.com/video/${testimonial.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0`}
+      src={vimeoSrc(testimonial.vimeoId)}
       className="absolute inset-0 w-full h-full"
       frameBorder="0"
       allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
       allowFullScreen
       title={`${testimonial.name} - ${testimonial.role}`}
-      loading={lazy ? 'lazy' : undefined}
+      loading="lazy"
       onLoad={onLoad}
     />
+  )
+}
+
+/** Defers Vimeo network + third-party cookies until the card is near the viewport (Lighthouse / INP). */
+function DeferredVimeoIframe({
+  testimonial,
+  onLoad,
+}: {
+  testimonial: VideoTestimonial
+  onLoad?: () => void
+}) {
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const [load, setLoad] = useState(false)
+
+  useEffect(() => {
+    const root = wrapRef.current
+    if (!root) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoad(true)
+          obs.disconnect()
+        }
+      },
+      { rootMargin: '160px 0px', threshold: 0.01 }
+    )
+    obs.observe(root)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <div ref={wrapRef} className="absolute inset-0">
+      {load ? (
+        <VimeoIframe testimonial={testimonial} onLoad={onLoad} />
+      ) : (
+        <div
+          className="absolute inset-0 bg-black/55"
+          aria-hidden
+        />
+      )}
+    </div>
   )
 }
 
@@ -90,9 +132,8 @@ function FeaturedHomeTestimonials() {
           {featured.map((testimonial, index) => (
             <div key={testimonial.id} className="flex flex-col">
               <div className="relative aspect-video bg-black/50 rounded-lg overflow-hidden">
-                <VimeoIframe
+                <DeferredVimeoIframe
                   testimonial={testimonial}
-                  lazy
                   onLoad={() => events.videoTestimonialEmbed(testimonial.name, index)}
                 />
               </div>
@@ -190,10 +231,17 @@ function CarouselTestimonials() {
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
-              {videoTestimonials.map((testimonial) => (
+              {videoTestimonials.map((testimonial, slideIndex) => (
                 <div key={testimonial.id} className="w-full flex-shrink-0">
                   <div className="relative aspect-video bg-black/50 rounded-lg overflow-hidden">
-                    <VimeoIframe testimonial={testimonial} />
+                    {slideIndex === currentIndex ? (
+                      <VimeoIframe
+                        testimonial={testimonial}
+                        onLoad={() => events.videoTestimonialEmbed(testimonial.name, slideIndex)}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-black/50" aria-hidden />
+                    )}
                   </div>
                   <div className="mt-4 text-center">
                     <p className="font-sans text-[14px] font-medium text-white">{testimonial.name}</p>

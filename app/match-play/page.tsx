@@ -4,14 +4,23 @@ import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export const metadata: Metadata = {
-  title: 'Match Play | LBTA',
-  description: 'Match play at Laguna Beach Tennis Academy. View our current programs and schedule.',
-  keywords: 'tennis match play Laguna Beach, tennis programs, LBTA',
+  title: 'Friday Match Play | LBTA',
+  description:
+    'Friday match play is not currently on the calendar at Laguna Beach Tennis Academy. Explore UTR Match Play, leagues, and the full schedule.',
+  keywords: 'tennis match play Laguna Beach, UTR match play, tennis programs, LBTA',
   openGraph: {
-    title: 'Match Play | LBTA',
-    description: 'Match play at Laguna Beach Tennis Academy. View our current programs and schedule.',
+    title: 'Friday Match Play | LBTA',
+    description:
+      'Friday match play is not currently offered. See UTR Match Play, leagues, and schedules at LBTA.',
     type: 'website',
-    images: [{ url: '/legacy-working-assets/hero/match-play-hero/match-play-hero.webp', width: 1920, height: 1080, alt: 'LBTA match play' }],
+    images: [
+      {
+        url: '/images/programs/utr-match-play/utr-match-play-hero.webp',
+        width: 1920,
+        height: 1080,
+        alt: 'Rated match play at Laguna Beach Tennis Academy',
+      },
+    ],
   },
 }
 
@@ -20,8 +29,8 @@ export default function MatchPlayPage() {
     <section className="relative min-h-[60vh] flex items-center justify-center pt-32 pb-24 overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="/legacy-working-assets/hero/match-play-hero/match-play-hero.webp"
-          alt="UTR Match Play at LBTA"
+          src="/images/programs/utr-match-play/utr-match-play-hero.webp"
+          alt="Outdoor match play at Laguna Beach Tennis Academy"
           fill
           className="object-cover"
           style={{ objectPosition: '50% 48%' }}
@@ -39,15 +48,23 @@ export default function MatchPlayPage() {
           <h1 className="font-headline text-[32px] md:text-[44px] font-medium text-white leading-[1.15] mb-6">
             Not currently offered
           </h1>
-          <p className="font-sans text-[16px] md:text-[18px] text-white/90 leading-relaxed mb-10">
-            Friday match play is not on the schedule at this time. View our current programs, group sessions, and leagues on the schedule page.
+          <p className="font-sans text-[16px] md:text-[18px] text-white/90 leading-relaxed mb-6">
+            Friday match play is not on the schedule at this time. For rated Saturday play, see UTR Match Play. For team competition, see leagues — or open the full schedule for programs and pricing.
           </p>
-          <Link
-            href="/schedules"
-            className="inline-flex items-center justify-center bg-white text-black font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-brand-sandstone hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-          >
-            View schedule
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center">
+            <Link
+              href="/programs/utr-match-play"
+              className="inline-flex items-center justify-center bg-white text-black font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-brand-sandstone hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            >
+              UTR Match Play
+            </Link>
+            <Link
+              href="/schedules"
+              className="inline-flex items-center justify-center bg-transparent text-white border border-white/25 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            >
+              Schedule &amp; pricing
+            </Link>
+          </div>
         </AnimatedSection>
       </div>
     </section>

@@ -72,14 +72,20 @@ export const events = {
     })
   },
 
-  /** Homepage hero primary (Book a Trial) or secondary (schedule & pricing). */
-  heroCta: (variant: 'primary' | 'secondary', href: string) => {
+  /** Homepage hero primary (Book a Trial), secondary (schedule & pricing), or pricing transparency link. */
+  heroCta: (variant: 'primary' | 'secondary' | 'pricing_hint', href: string) => {
+    const label =
+      variant === 'primary'
+        ? 'Hero Book Trial'
+        : variant === 'secondary'
+          ? 'Hero Schedule'
+          : 'Hero Pricing Hint'
     trackEvent('hero_cta_click', {
       cta_variant: variant,
       link_url: href,
       page_path: typeof window !== 'undefined' ? window.location.pathname : '',
       event_category: 'engagement',
-      event_label: variant === 'primary' ? 'Hero Book Trial' : 'Hero Schedule',
+      event_label: label,
     })
   },
 
