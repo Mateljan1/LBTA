@@ -14,6 +14,8 @@
     "smoke:lead": "node scripts/smoke-lead.js",
     "check:vercel": "npx vercel whoami && npx vercel list --yes",
     "lighthouse": "npx lighthouse http://localhost:3000 --output=html --output-path=./docs/lighthouse-report.html --only-categories=performance,accessibility,best-practices,seo --chrome-flags='--headless'",
+    "capture:emails": "./node_modules/.bin/tsx scripts/capture-emails.ts",
+    "capture:notifications": "./node_modules/.bin/tsx scripts/capture-notifications.ts",
     "quality-gate": "npm run build && npm run lint",
     "ship:gate": "bash scripts/ship-gate.sh",
     "fact-check": "node scripts/fact-check.js",
