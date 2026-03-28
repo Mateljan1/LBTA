@@ -92,9 +92,7 @@ export default function RootLayout({
 
         {/* Performance Optimizations - fonts self-hosted via next/font */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://connect.facebook.net" />
-        {/* Hero video poster = LCP; preload small poster so it paints immediately */}
-        <link rel="preload" as="image" href="/images/hero/hero-poster.webp" fetchPriority="high" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
 
         {/* Schema Markup */}
         <OrganizationSchema />
@@ -109,8 +107,8 @@ export default function RootLayout({
           Skip to main content
         </a>
 
-        {/* Meta Pixel - afterInteractive for performance */}
-        <Script id="meta-pixel" strategy="afterInteractive">
+        {/* Meta Pixel — lazyOnload to reduce main-thread contention before LCP */}
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -139,9 +137,9 @@ export default function RootLayout({
         {/* Google Analytics 4 */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VCH0K84TSF"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

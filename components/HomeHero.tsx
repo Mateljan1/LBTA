@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import homepageCopy from '@/data/homepage-copy.json'
 import { events } from '@/lib/analytics'
@@ -14,9 +15,13 @@ type HeroCopy = (typeof homepageCopy)['hero'] & {
 
 const hero = homepageCopy.hero as HeroCopy
 
+const HERO_POSTER = '/images/hero/hero-poster.webp'
+
 export default function HomeHero() {
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [heroParallax, setHeroParallax] = useState(0)
   const [reduceMotion, setReduceMotion] = useState(false)
+  const [videoPlaying, setVideoPlaying] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -28,36 +33,71 @@ export default function HomeHero() {
 
   useEffect(() => {
     if (reduceMotion) return
+    const id = window.setTimeout(() => {
+      videoRef.current?.load()
+    }, 0)
+    return () => clearTimeout(id)
+  }, [reduceMotion])
+
+  useEffect(() => {
+    if (reduceMotion) return
     const handleScroll = () => setHeroParallax(window.scrollY * 0.3)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [reduceMotion])
+
+  const parallaxStyle =
+    reduceMotion ? undefined : { transform: `translateY(${heroParallax}px) scale(1.1)` }
 
   return (
     <section
       id="hero"
       className="relative min-h-screen overflow-hidden"
     >
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{
-          objectPosition: '50% 70%',
-          transform: reduceMotion ? undefined : `translateY(${heroParallax}px) scale(1.1)`,
-        }}
-        aria-label="Laguna Beach Tennis Academy training video"
-        poster="/images/hero/hero-poster.webp"
-      >
-        {/* WebM first (smaller); MP4 only under legacy path — public/videos has no LBTA-Home-Hero.mp4 (avoid 404 on second source). */}
-        <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
-        <source src="/legacy-working-assets/videos/LBTA-Home-Hero/LBTA-Home-Hero.mp4" type="video/mp4" />
-      </video>
+      {/* LCP: static poster (next/image priority); video loads after paint and fades in on play */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0" style={parallaxStyle}>
+          <div className="relative h-full w-full">
+            <Image
+              src={HERO_POSTER}
+              alt="Laguna Beach Tennis Academy courts at dusk"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+              style={{ objectPosition: '50% 70%' }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {!reduceMotion ? (
+        <div className="absolute inset-0 z-[1]" style={parallaxStyle}>
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out pointer-events-none ${
+              videoPlaying ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ objectPosition: '50% 70%' }}
+            aria-label="Laguna Beach Tennis Academy training video"
+            onPlaying={() => setVideoPlaying(true)}
+          >
+            <source src="/videos/LBTA-Home-Hero.webm" type="video/webm" />
+            <source
+              src="/legacy-working-assets/videos/LBTA-Home-Hero/LBTA-Home-Hero.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+      ) : null}
+
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 z-[2]"
         style={{ background: 'var(--golden-hour-overlay)' }}
         aria-hidden="true"
       />

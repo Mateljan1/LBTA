@@ -8,10 +8,10 @@ import {
 const COACH_HUB_LOGIN = '/coach-hub/login'
 const COACH_HUB_PREFIX = '/coach-hub'
 
-export function middleware(request: NextRequest) {
+/** Coach Hub auth gate — Next.js 16 `proxy` (replaces deprecated middleware). */
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Allow login page and API routes
   if (pathname === COACH_HUB_LOGIN || pathname.startsWith('/api/coach-hub')) {
     return NextResponse.next()
   }
@@ -22,7 +22,6 @@ export function middleware(request: NextRequest) {
 
   const secret = process.env.COACH_HUB_SECRET
   if (!secret) {
-    // Coach Hub must not be reachable when unconfigured; redirect to login so user sees auth form
     const login = new URL(COACH_HUB_LOGIN, request.url)
     return NextResponse.redirect(login)
   }
@@ -34,7 +33,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(login)
   }
 
-  // Verify asynchronously; Edge middleware supports async
   return verifyCoachHubCookie(secret, cookieValue).then((valid) => {
     if (valid) return NextResponse.next()
     const login = new URL(COACH_HUB_LOGIN, request.url)
