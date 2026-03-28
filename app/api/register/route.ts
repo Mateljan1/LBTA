@@ -16,6 +16,7 @@ import {
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
+import { writeNotionLead } from '@/lib/notion-leads'
 import { notifyRegistration, sendConfirmationEmail } from '@/lib/email'
 import { FORM_CONFIGS } from '@/lib/form-config'
 
@@ -127,6 +128,13 @@ export async function POST(request: NextRequest) {
       name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
       phone: data.phone ?? undefined,
       payload: { program: data.program, season: data.season },
+    }))
+    waitUntil(writeNotionLead({
+      parentName: `${data.firstName} ${data.lastName}`,
+      email: data.email,
+      phone: data.phone,
+      program: data.program ?? 'Not specified',
+      category: 'Adult',
     }))
     waitUntil(notifyRegistration({
       firstName: data.firstName,

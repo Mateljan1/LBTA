@@ -104,15 +104,15 @@ export async function POST(request: NextRequest) {
         await notion.pages.create({
           parent: { database_id: getEnvVar('NOTION_DATABASE_ID') },
           properties: {
-            // Parent Name (Title field)
-            'Parent Name': {
-              title: [{ text: { content: `${data.firstName} ${data.lastName}` } }],
-            },
-            // Player Name (student's name)
+            // Player Name (Title field in Notion)
             'Player Name': {
-              rich_text: [
+              title: [
                 { text: { content: data.studentName || `${data.firstName} ${data.lastName}` } },
               ],
+            },
+            // Parent Name (rich_text field)
+            'Parent Name': {
+              rich_text: [{ text: { content: `${data.firstName} ${data.lastName}` } }],
             },
             // Program
             Program: {

@@ -212,11 +212,11 @@ export async function POST(request: NextRequest) {
     try {
       // Notion SDK property types are deeply nested; using `any` for dynamic property construction
       const notionProperties: Record<string, any> = { // eslint-disable-line
-        'Parent Name': {
-          title: [{ text: { content: `${data.firstName} ${data.lastName}` } }]
-        },
         'Player Name': {
-          rich_text: [{ text: { content: data.studentName || data.playerName || `${data.firstName} ${data.lastName}` } }]
+          title: [{ text: { content: data.studentName || data.playerName || `${data.firstName} ${data.lastName}` } }]
+        },
+        'Parent Name': {
+          rich_text: [{ text: { content: `${data.firstName} ${data.lastName}` } }]
         },
         'Program': {
           rich_text: [{ text: { content: data.program } }]

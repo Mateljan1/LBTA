@@ -48,11 +48,11 @@ export async function writeNotionLead(params: NotionLeadParams): Promise<void> {
     const ageNum = params.age != null ? parseInt(String(params.age), 10) : null
 
     const properties: Record<string, unknown> = {
-      'Parent Name': {
-        title: [{ text: { content: params.parentName } }],
-      },
       'Player Name': {
-        rich_text: [{ text: { content: params.playerName || params.parentName } }],
+        title: [{ text: { content: params.playerName || params.parentName } }],
+      },
+      'Parent Name': {
+        rich_text: [{ text: { content: params.parentName } }],
       },
       Program: {
         rich_text: [{ text: { content: params.program } }],
