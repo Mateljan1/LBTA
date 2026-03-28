@@ -18,6 +18,8 @@ export const SUPPORT_EMAIL = 'support@lagunabeachtennisacademy.com' as const
 export const CTA_GLOSSARY = {
   navSticky: 'Book Trial',
   heroPrimary: 'Book a Trial',
+  /** Secondary hero action — routing to schedules (not a duplicate book CTA). */
+  heroSecondary: 'View schedule & pricing',
   formRequestTrial: 'Request a Trial',
 } as const
 

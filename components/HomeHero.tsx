@@ -4,7 +4,12 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import homepageCopy from '@/data/homepage-copy.json'
 
-const hero = homepageCopy.hero as (typeof homepageCopy)['hero']
+type HeroCopy = (typeof homepageCopy)['hero'] & {
+  ctaSecondary?: string
+  ctaSecondaryHref?: string
+}
+
+const hero = homepageCopy.hero as HeroCopy
 
 export default function HomeHero() {
   const [heroParallax, setHeroParallax] = useState(0)
@@ -69,13 +74,21 @@ export default function HomeHero() {
           <p className="font-sans text-[clamp(1rem,2.5vw,1.25rem)] font-light text-white/80 mt-4 mb-10 text-shadow-subtle max-w-2xl">
             {hero.subline}
           </p>
-          <div className="flex flex-col items-start gap-8">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-4 w-full max-w-xl">
             <Link
               href={hero.ctaPrimaryHref}
               className="inline-flex items-center justify-center bg-white text-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 rounded-none hover:bg-white/90 transition-all duration-300 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {hero.ctaPrimary}
             </Link>
+            {hero.ctaSecondary && hero.ctaSecondaryHref ? (
+              <Link
+                href={hero.ctaSecondaryHref}
+                className="inline-flex items-center justify-center bg-transparent text-white border border-white/25 font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 rounded-none hover:bg-white/10 transition-all duration-300 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              >
+                {hero.ctaSecondary}
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>

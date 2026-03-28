@@ -3,9 +3,11 @@
     "eyebrow": "Laguna Beach, California",
     "tagline": "Tennis, as it should\nbe taught.",
     "pillars": "Movement. Craft. Community.",
-    "subline": "Premier tennis in Laguna Beach — from first swings to college pathway. Free trial.",
+    "subline": "Premier tennis in Laguna Beach — for juniors and adults, from first swings to college pathway. Free trial.",
     "ctaPrimary": "Book a Trial",
     "ctaPrimaryHref": "/book",
+    "ctaSecondary": "View schedule & pricing",
+    "ctaSecondaryHref": "/schedules",
     "scrollAriaLabel": "Scroll to content"
   },
   "founder": {

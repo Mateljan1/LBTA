@@ -8,6 +8,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { Menu, X, Phone, ChevronDown } from 'lucide-react'
 import siteStats from '@/data/site-stats.json'
@@ -41,7 +42,7 @@ const programsDropdown = [
 ]
 
 const navigation = [
-  { name: 'Home', href: '/' },
+  { name: 'Results', href: '/#results' },
   { name: 'Schedule', href: '/schedules' },
   { name: 'Coaches', href: '/coaches' },
   { name: 'About', href: '/about' },
@@ -49,7 +50,16 @@ const navigation = [
   { name: 'Camps', href: '/camps' },
 ]
 
+function scrollToResultsSection() {
+  const el = document.getElementById('results')
+  if (!el) return
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' })
+  window.history.replaceState(null, '', '#results')
+}
+
 export default function Header() {
+  const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [programsOpen, setProgramsOpen] = useState(false)
@@ -285,6 +295,12 @@ export default function Header() {
                   key={item.name}
                   href={item.href}
                   className="px-3 py-2 min-h-[48px] inline-flex items-center text-[13px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors duration-300 tracking-wide whitespace-nowrap relative group"
+                  onClick={(e) => {
+                    if (item.href === '/#results' && pathname === '/') {
+                      e.preventDefault()
+                      scrollToResultsSection()
+                    }
+                  }}
                 >
                   {item.name}
                   <span className="absolute bottom-0 left-3 right-3 h-[1.5px] bg-brand-sunset-cliff scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -385,7 +401,13 @@ export default function Header() {
                     key={item.name}
                     href={item.href}
                     className="block text-[16px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff py-3.5 min-h-[48px] border-b border-brand-pacific-dusk/5 transition-all duration-200"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      if (item.href === '/#results' && pathname === '/') {
+                        e.preventDefault()
+                        scrollToResultsSection()
+                      }
+                      setMobileMenuOpen(false)
+                    }}
                     style={{
                       animation: `fadeInUp 0.25s ease-out ${(index + 4) * 0.05}s forwards`,
                       opacity: 0,
