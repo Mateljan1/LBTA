@@ -1,6 +1,6 @@
 # LAGUNA BEACH TENNIS ACADEMY — CURSOR RULES
 # "Tennis, as it should be taught. Movement. Craft. Community."
-# Last Updated: March 8, 2026
+# Last Updated: March 27, 2026
 
 ---
 
@@ -657,6 +657,8 @@ npx lighthouse http://localhost:3000 --view
 ## Part 19: Compound learnings (reference)
 
 For full corrections, patterns, quality bars, and anti-patterns (e.g. webhook ID validation, timing-safe secret, footer contrast, hero CTA on dark), see **plans/COMPOUND_LEARN.md** and **.cursor/compound/learnings/** (quality-bars.json, patterns.json, anti-patterns.json). Run `/compound:learn` after completing a plan or after review/validate (see README).
+
+**Decision lenses (planning & review):** When working under **plans/** or **.cursor/compound/**, or running **compound:plan / review / validate / learn**, apply **`.cursor/rules/decision-lenses.mdc`** — survivorship gaps (what’s missing), loss-function iteration (metric + one variable), CORE tone for feedback, 90d / 18mo / 5yr horizons, and identity (“what we become,” not only what we ship).
 
 **Agent-native architecture:** For agent-native principle scores, recommendations, and how to run the audit, see **docs/AGENT-NATIVE-ARCHITECTURE-AUDIT.md** and **docs/solutions/architecture/agent-native-architecture-audit.md**. Implementation of Phases 6→3→2 (agent tools, context injection, prompt-native copy) documented in **docs/solutions/architecture/agent-tools-action-parity-implementation.md**.
 

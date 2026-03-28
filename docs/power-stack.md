@@ -152,6 +152,7 @@ Record results in [docs/quality-gate.md](./quality-gate.md). See [site-polish-an
 | **.cursor/compound/learnings/** | quality-bars.json, patterns.json, anti-patterns.json, corrections.jsonl. |
 | **.cursor/compound/README.md** | When to run `/compound:learn` and how learnings are used. |
 | **.cursorrules Part 19** | Pointer to compound learnings and `plans/COMPOUND_LEARN.md`. |
+| **`.cursor/rules/decision-lenses.mdc`** | Cognitive checks for compound work: survivorship gaps, loss-function iteration, CORE feedback, 90d/18mo/5yr horizons, identity. Applies when `plans/**` or `.cursor/compound/**` are in context. |
 
 Run `/compound:learn` after completing a plan, after review/validate, or at end of a significant session.
 
@@ -166,6 +167,7 @@ Run `/compound:learn` after completing a plan, after review/validate, or at end 
 | Prove it works at runtime | `/compound:validate` (5 agents). |
 | Ship to production | `/compound:deploy` (after validate). |
 | Capture mistakes and patterns | `/compound:learn`; update COMPOUND_LEARN.md. |
+| Plan/review with explicit judgment (gaps, metrics, horizons) | `decision-lenses.mdc` (see §5 Learnings). |
 | Check AC contacts/automations | ActiveCampaign MCP; see [activecampaign-mcp-setup.md](./activecampaign-mcp-setup.md). |
 | Check Vercel env / deploy | Vercel MCP or `npm run check:vercel`. |
 | Verify Postmark email delivery | Postmark dashboard; see [POSTMARK-SETUP-VERIFICATION.md](./POSTMARK-SETUP-VERIFICATION.md). |

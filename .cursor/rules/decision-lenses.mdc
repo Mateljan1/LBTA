@@ -1,0 +1,54 @@
+---
+description: Compound planning, review, and learn — apply cognitive lenses (survivorship gaps, loss-function iteration, tense conversation CORE, time horizons, identity). Use when editing plans/, .cursor/compound/, or running /compound:* .
+globs:
+  - plans/**
+  - .cursor/compound/**
+alwaysApply: false
+---
+
+# Decision lenses (compound engineering)
+
+Apply these **during Plan, Review, Validate, and Compound** — not for routine one-line fixes.
+
+## 1. Ghost notes (survivorship)
+
+- **Ask:** What never “came back”? (failed deploys, churned flows, abandoned approaches, bugs only seen in prod.)
+- **Absent evidence:** Name **3 things** that logically should appear in the research/plan/slides but are missing; treat silence as data.
+- **Plans:** In *Risks* or *Confidence & uncertainty*, list **selection bias** — what success stories might overstate the case?
+
+## 2. Loss function (error-driven learning)
+
+- **Metric:** What does “better” mean for *this* cycle? (speed, correctness, clarity, conversion — pick one primary.)
+- **Before:** Predict outcome; after: find the **exact** failure signal (test line, metric, user step).
+- **Change one variable** per iteration; rerun `npm run ship:gate` (or scoped lint/test) before declaring done.
+- **Compound:** Prefer corrections from **mistakes** (review/validate failures) over repeating what already worked.
+
+## 3. Adaptive tension (CORE) — reviews & handoffs
+
+Use when giving or summarizing feedback (human or agent):
+
+- **C**uriosity — questions before verdicts (“What am I missing?”).
+- **O**bjectivity — systems and facts over personalities (“Where should the process change?”).
+- **R**eassurance — intent explicit (“Goal is ship safely, not blame.”).
+- **E**mpathy — acknowledge effort before critique.
+
+## 4. Cathedral (time horizons)
+
+Tag significant decisions or plan sections:
+
+| Horizon | Question |
+|--------|----------|
+| **~90 days** | What visible proof ships? |
+| **12–18 months** | What compounding asset (patterns, data, brand) are we building? |
+| **~5 years** | What directional bet does this support or foreclose? |
+
+Long-term **resource** stories (e.g. “oak beams”) are metaphors for stewardship — verify facts before citing history.
+
+## 5. Identity
+
+- **Ask:** “What will this decision **make** us?” (team habits, codebase character, brand), not only what it **gets** (feature, ticket closed).
+- **LBTA:** Align with `.cursorrules` — calm, craft-led, single source of truth in `/data`, quality over speed.
+
+---
+
+**Trigger phrases:** “compound plan”, “retrospective”, “major refactor”, “go/no-go”, “compound:learn”.

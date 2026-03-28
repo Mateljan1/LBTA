@@ -14,6 +14,7 @@ This folder holds outputs from the compound-engineering workflow (plan → work 
 
 ## Use
 
+- **Decision lenses:** For plan → review → compound work, follow **`.cursor/rules/decision-lenses.mdc`** (survivorship/absent evidence, loss-function loops, CORE feedback, time horizons, identity). Referenced from `.cursorrules` Part 19.
 - Before implementing or reviewing, load **learnings/** (especially `anti-patterns.json` and `quality-bars.json`) to avoid repeating past issues.
 - **When to run /compound:learn** (so you don’t have to remember):
   1. **After completing a plan** — e.g. right after `/compound:work` on a plan is done.
