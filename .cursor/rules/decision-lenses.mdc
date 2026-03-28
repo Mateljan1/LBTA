@@ -1,9 +1,11 @@
 ---
-description: Compound planning, review, learn — cognitive lenses + decision OS (survivorship, loss function, CORE, horizons, identity, probabilistic thinking). Full reference in docs/decision-making-frameworks.md.
+description: Compound planning, review, learn — cognitive lenses + decision OS + Intelligent AI Usage (Curve 1/2, DRAG, spotter). Full reference in docs/decision-making-frameworks.md and .cursor/skills/lbta-intelligent-ai-usage/SKILL.md.
 globs:
   - plans/**
   - .cursor/compound/**
   - docs/decision-making-frameworks.md
+  - docs/intelligent-ai-usage-framework-v3-full.md
+  - .cursor/skills/lbta-intelligent-ai-usage/**
 alwaysApply: false
 ---
 
@@ -81,4 +83,25 @@ Use for **go/no-go**, **architecture**, and **post-mortems** (see full doc for b
 
 ---
 
-**Trigger phrases:** “compound plan”, “retrospective”, “major refactor”, “go/no-go”, “compound:learn”, “decision OS”, “premortem”.
+## D. Intelligent AI Usage × Compound (superpowers)
+
+**Sources:** `.cursorrules` **Part 21**; **`.cursor/skills/lbta-intelligent-ai-usage/SKILL.md`** (LBTA execution layer); **`docs/intelligent-ai-usage-framework-v3-full.md`** (verbatim full v3, all protocol text).
+
+**Prime directive:** Every assist should **save time on capped-payoff work** (Curve 1) **or sharpen judgment on uncapped-payoff work** (Curve 2). **DRAG** = Draft → Research → Analysis → Grunt for fast Curve 1 shipping.
+
+| Compound phase | Default curve | How the frameworks combine |
+|----------------|---------------|----------------------------|
+| **`/compound:plan`** | Often **Curve 2** first (what/whether), then **Curve 1** (how/steps) | Use **five lenses** + **ghost notes** + **premortem** in *Risks*; optional **curve check** aloud if scope is ambiguous. Spotter energy: challenge assumptions before locking tasks. |
+| **`/compound:work`** | **Curve 1** execution | **Loss function**: one primary metric per cycle; ship with **DRAG**; avoid polishing past satisficing unless a step is Curve 2 by design. |
+| **`/compound:review`** | Mixed | **CORE** + **anti-resulting** + **red team** on risky diffs; pattern/simplification agents align with **process > outcome**. |
+| **`/compound:validate`** | **Curve 1** proof | Evidence over narrative; **WYSIATI** — what wasn’t exercised? |
+| **`/compound:deploy`** | **Curve 1** with **Curve 2** gates | **Barbell** + **never risk ruin** (secrets, prod data); rollback = optionality. |
+| **`/compound:learn`** | **Curve 2** debrief | **Duke 2×2**: separate decision quality from luck; capture corrections → **compound** (same decision OS as Part B). |
+
+**Command shortcuts** (override anytime): `drag this` / `just answer` → execute fast. `spotter mode` / `curve check` / `pre-mortem` / `red team` / `steelman` / `confidence?` / `base rate` → deepen plan/review/learn steps.
+
+**Full power stack:** **`docs/power-stack.md`** — MCPs + compound agents + skills + this layer.
+
+---
+
+**Trigger phrases:** “compound plan”, “retrospective”, “major refactor”, “go/no-go”, “compound:learn”, “decision OS”, “premortem”, “curve check”, “spotter mode”, “superpowers”, “drag this”.

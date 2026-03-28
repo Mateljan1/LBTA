@@ -15,6 +15,7 @@ This folder holds outputs from the compound-engineering workflow (plan → work 
 ## Use
 
 - **Decision lenses:** For plan → review → compound work, follow **`.cursor/rules/decision-lenses.mdc`** (survivorship/absent evidence, loss-function loops, CORE feedback, time horizons, identity, decision OS). Full reference: **`docs/decision-making-frameworks.md`**. Referenced from `.cursorrules` Part 19.
+- **Intelligent AI Usage (superpowers):** Same 10-book OS, plus **Curve 1 / Curve 2**, **DRAG**, **spotter mode**, and **command shortcuts** — **verbatim canonical:** **`docs/intelligent-ai-usage-framework-v3-full.md`**; **LBTA execution layer:** **`.cursor/skills/lbta-intelligent-ai-usage/SKILL.md`**; **`.cursorrules` Part 21**. **§D in `decision-lenses.mdc`** maps this to `/compound:*`. **`docs/power-stack.md`** lists the unified stack.
 - Before implementing or reviewing, load **learnings/** (especially `anti-patterns.json` and `quality-bars.json`) to avoid repeating past issues.
 - **When to run /compound:learn** (so you don’t have to remember):
   1. **After completing a plan** — e.g. right after `/compound:work` on a plan is done.

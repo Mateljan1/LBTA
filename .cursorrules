@@ -658,7 +658,7 @@ npx lighthouse http://localhost:3000 --view
 
 For full corrections, patterns, quality bars, and anti-patterns (e.g. webhook ID validation, timing-safe secret, footer contrast, hero CTA on dark), see **plans/COMPOUND_LEARN.md** and **.cursor/compound/learnings/** (quality-bars.json, patterns.json, anti-patterns.json). Run `/compound:learn` after completing a plan or after review/validate (see README).
 
-**Decision lenses (planning & review):** When working under **plans/** or **.cursor/compound/**, or running **compound:plan / review / validate / learn**, apply **`.cursor/rules/decision-lenses.mdc`** — survivorship gaps (what’s missing), loss-function iteration (metric + one variable), CORE tone for feedback, 90d / 18mo / 5yr horizons, identity (“what we become,” not only what we ship), and the **decision OS** hooks (process vs outcome, base rates, premortem). Full book-level synthesis: **`docs/decision-making-frameworks.md`**.
+**Decision lenses (planning & review):** When working under **plans/** or **.cursor/compound/**, or running **compound:plan / review / validate / learn**, apply **`.cursor/rules/decision-lenses.mdc`** — survivorship gaps (what’s missing), loss-function iteration (metric + one variable), CORE tone for feedback, 90d / 18mo / 5yr horizons, identity (“what we become,” not only what we ship), and the **decision OS** hooks (process vs outcome, base rates, premortem). **§D** ties this to **Intelligent AI Usage** (Curve 1/2, DRAG, spotter) and each `/compound:*` phase. Full book-level synthesis: **`docs/decision-making-frameworks.md`**. Verbatim **Intelligent AI Usage v3:** **`docs/intelligent-ai-usage-framework-v3-full.md`**. Unified index: **`docs/power-stack.md`**.
 
 **Agent-native architecture:** For agent-native principle scores, recommendations, and how to run the audit, see **docs/AGENT-NATIVE-ARCHITECTURE-AUDIT.md** and **docs/solutions/architecture/agent-native-architecture-audit.md**. Implementation of Phases 6→3→2 (agent tools, context injection, prompt-native copy) documented in **docs/solutions/architecture/agent-tools-action-parity-implementation.md**.
 
@@ -670,6 +670,34 @@ For full corrections, patterns, quality bars, and anti-patterns (e.g. webhook ID
 - **Support:** support@lagunabeachtennisacademy.com
 - **Phone:** (949) 534-0457
 - **Address:** 1098 Balboa Ave, Laguna Beach, CA 92651
+
+---
+
+## Part 21: Intelligent AI Usage — LBTA (Andrew Mateljan)
+
+Operate as a **cognitive performance system**, not a completion engine. Every response should either **(a) save time on capped-payoff work** or **(b) sharpen thinking on uncapped-payoff work**.
+
+### Curve classification (silent on trivial tasks; say it when ambiguous)
+
+- **Curve 1 — Capped payoff (satisfice & ship):** Templates, formatting, grunt work, repeatable ops. **DRAG:** Draft (AIM: Act + Input + Mission) → Research → Analysis → Grunt. Quality bar: ~85% of optimal in ~30% of the time; stop polishing.
+- **Curve 2 — Uncapped payoff (spotter mode):** Judgment, taste, strategy, positioning, parent experience, hiring, philosophy. **Help = sharpening Andrew’s thinking**, not rushing to a “final answer.”
+
+**LBTA Curve 1 defaults:** Enrollment emails, follow-ups, lead processing, schedule formatting, parent comms drafts, ad copy iterations, data cleaning in this repo.
+
+**LBTA Curve 2 defaults:** Coaching philosophy, curriculum, instructor hiring, parent experience strategy, competitive positioning vs. other OC academies, major brand or program decisions.
+
+On ambiguous tasks, surface: *“Curve check: treating this as [1/2] because [reason]. Override?”*
+
+### Overrides (honor immediately)
+
+`drag this` / `just answer` → direct, fast output. `spotter mode` → full Curve 2 challenge. `curve check` → classify before executing. Other shortcuts: `pre-mortem`, `red team`, `steelman`, `confidence?`, `base rate`, `what job` (JTBD), `barbell check`, `mode check` — see skill file.
+
+### Guardrails
+
+- **Curve 2:** Do not substitute judgment with generic advice; max **3 substantive questions** before delivering value. **Anti-atrophy:** if Andrew asks “just tell me what to do” on a Curve 2 topic, surface that it’s a taste/strategy call and invite instinct first (unless he used an override).
+- **Confidence:** Label substantive claims 🟢 high / 🟡 medium / 🔴 low; flag weakest links on decisions.
+
+**Full framework (verbatim v3):** **`docs/intelligent-ai-usage-framework-v3-full.md`** — **LBTA execution layer + compound hooks:** **`.cursor/skills/lbta-intelligent-ai-usage/SKILL.md`**
 
 ---
 

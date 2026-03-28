@@ -87,6 +87,19 @@ These may be configured at user/global level; enable them in Cursor so the agent
 
 **Capability audit:** Can we run it all now? Single agent vs. multiple? See [compound-capability-audit.md](./compound-capability-audit.md).
 
+### Intelligent AI Usage × Compound (superpowers)
+
+Same **decision OS** as `docs/decision-making-frameworks.md`, wired for action:
+
+| Piece | Role |
+|-------|------|
+| **`docs/intelligent-ai-usage-framework-v3-full.md`** | Verbatim v3 (all sections, full protocol text). Canonical; change this when updating the framework. |
+| **`.cursorrules` Part 21** | Prime directive; Curve 1 vs 2; DRAG; overrides (`drag this`, `spotter mode`, …). |
+| **`.cursor/skills/lbta-intelligent-ai-usage/SKILL.md`** | LBTA execution layer + compound hooks; points to full doc for depth. |
+| **`.cursor/rules/decision-lenses.mdc` §D** | Maps each `/compound:*` phase to curve + lenses (plan = often C2→C1, work = C1, learn = debrief). |
+
+**When to use:** Any `/compound:plan` or major go/no-go; when you want **spotter** challenge instead of raw completion; when you say `curve check`, `pre-mortem`, or `superpowers` in chat.
+
 ---
 
 ## 3. Skills to Invoke (when to use)
@@ -105,6 +118,7 @@ Ask the agent to use these by name when the task fits.
 | **systematic-debugging** | Any bug or test failure before proposing fixes. |
 | **verification-before-completion** | Before claiming "done"; run checks and show evidence. |
 | **lbta-messaging** | On-brand copy, tone, forbidden words. |
+| **lbta-intelligent-ai-usage** | Curve 1/2, DRAG, spotter mode, pre-mortem, red team, debrief; compound + strategic judgment for LBTA. |
 | **writing-plans** | Multi-step tasks; produce plan before code. |
 | **requesting-code-review** | After features; before merge. |
 | **receiving-code-review** | When interpreting or implementing review feedback. |
@@ -152,8 +166,10 @@ Record results in [docs/quality-gate.md](./quality-gate.md). See [site-polish-an
 | **.cursor/compound/learnings/** | quality-bars.json, patterns.json, anti-patterns.json, corrections.jsonl. |
 | **.cursor/compound/README.md** | When to run `/compound:learn` and how learnings are used. |
 | **.cursorrules Part 19** | Pointer to compound learnings and `plans/COMPOUND_LEARN.md`. |
-| **`.cursor/rules/decision-lenses.mdc`** | Cognitive checks + decision OS (process vs outcome, base rates, premortem, barbell risk). Applies when `plans/**`, `.cursor/compound/**`, or `docs/decision-making-frameworks.md` are in context. |
+| **`.cursor/rules/decision-lenses.mdc`** | Cognitive checks + decision OS (process vs outcome, base rates, premortem, barbell risk). **§D:** Intelligent AI Usage × Compound. Applies when `plans/**`, `.cursor/compound/**`, `docs/decision-making-frameworks.md`, or `.cursor/skills/lbta-intelligent-ai-usage/**` are in context. |
 | **`docs/decision-making-frameworks.md`** | Full synthesis (10 books): Taleb, Duke, Tetlock, Kahneman, Grant, Robson, Christensen, Duckworth, Clear, Newport. |
+| **`docs/intelligent-ai-usage-framework-v3-full.md`** | Verbatim Intelligent AI Usage Framework v3 (full protocols, multi-entity cues). Canonical source. |
+| **`.cursorrules` Part 21** + **`.cursor/skills/lbta-intelligent-ai-usage/SKILL.md`** | Prime directive, Curve 1/2, DRAG, spotter, command shortcuts — LBTA execution layer; integrated with compound via §D above. |
 
 Run `/compound:learn` after completing a plan, after review/validate, or at end of a significant session.
 
@@ -168,7 +184,8 @@ Run `/compound:learn` after completing a plan, after review/validate, or at end 
 | Prove it works at runtime | `/compound:validate` (5 agents). |
 | Ship to production | `/compound:deploy` (after validate). |
 | Capture mistakes and patterns | `/compound:learn`; update COMPOUND_LEARN.md. |
-| Plan/review with explicit judgment (gaps, metrics, horizons) | `decision-lenses.mdc` (see §5 Learnings). |
+| Plan/review with explicit judgment (gaps, metrics, horizons) | `decision-lenses.mdc` (§A–C; **§D** = Intelligent AI × compound). |
+| Superpowers: curve check, spotter, pre-mortem, DRAG | Part 21 + `lbta-intelligent-ai-usage` skill + `decision-lenses.mdc` §D. |
 | Check AC contacts/automations | ActiveCampaign MCP; see [activecampaign-mcp-setup.md](./activecampaign-mcp-setup.md). |
 | Check Vercel env / deploy | Vercel MCP or `npm run check:vercel`. |
 | Verify Postmark email delivery | Postmark dashboard; see [POSTMARK-SETUP-VERIFICATION.md](./POSTMARK-SETUP-VERIFICATION.md). |
@@ -207,7 +224,10 @@ Run `/compound:learn` after completing a plan, after review/validate, or at end 
 | [plans/COMPOUND_LEARN.md](../plans/COMPOUND_LEARN.md) | Corrections, patterns, standards, anti-patterns. |
 | [plans/compound-engineering-power-up-plan.md](../plans/compound-engineering-power-up-plan.md) | Automations, fact-check, CI, recurring. |
 | [.cursor/compound/README.md](../.cursor/compound/README.md) | Compound folder and when to run learn. |
+| [intelligent-ai-usage-framework-v3-full.md](./intelligent-ai-usage-framework-v3-full.md) | Verbatim v3 framework (full text). |
+| [.cursor/skills/lbta-intelligent-ai-usage/SKILL.md](../.cursor/skills/lbta-intelligent-ai-usage/SKILL.md) | LBTA execution layer (Curve 1/2, DRAG, spotter, commands). |
+| [.cursorrules](../.cursorrules) Part 21 | Short operational hooks. |
 
 ---
 
-**Summary:** Use MCPs for live data and automation (Vercel, AC, GHL, browser, Context7). Use compound-engineering for plan → work → review → validate → deploy → learn. Use the quality gate and scripts for a measurable bar. Invoke specific skills when the task matches (frontend, React, security, debugging, LBTA messaging). This stack is your full power set.
+**Summary:** Use MCPs for live data and automation (Vercel, AC, GHL, browser, Context7). Use compound-engineering for plan → work → review → validate → deploy → learn. Layer **Intelligent AI Usage** (Part 21 + `lbta-intelligent-ai-usage` + `decision-lenses.mdc` §D) so plans stay strategic and execution stays shippable. Use the quality gate and scripts for a measurable bar. Invoke specific skills when the task matches (frontend, React, security, debugging, LBTA messaging, intelligence framework). This stack is your full power set.
