@@ -81,7 +81,7 @@ export default function PlayerSuccessCarousel({
     <section
       id="results"
       role="region"
-      className="relative min-h-[65vh] lg:min-h-[76vh] flex items-center overflow-hidden"
+      className="relative w-full min-h-[65vh] lg:min-h-[76vh] flex items-center overflow-hidden"
       aria-roledescription="carousel"
       aria-label={`${eyebrow}: rotating player stories`}
       onMouseEnter={() => setPaused(true)}
