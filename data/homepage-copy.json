@@ -97,11 +97,13 @@
   "programs": {
     "eyebrow": "Our Programs",
     "headline": "Pathways for Every Player",
-    "subline": "Choose a category, then open the pathway that fits. Everything below links to its own page.",
+    "subline": "Start with coaching and private training, then add match play and leagues when you are ready. Each card links to its own page.",
     "groups": [
       {
         "id": "programs-coaching",
         "label": "Coaching & programs",
+        "tier": "primary",
+        "groupSubline": "Junior and adult pathways, private lessons, and seasonal camps — where most players begin.",
         "items": [
           {
             "title": "Junior Programs",
@@ -140,6 +142,8 @@
       {
         "id": "programs-play",
         "label": "Match play, leagues & classes",
+        "tier": "secondary",
+        "groupSubline": "Rated play, team competition, and high-energy classes beyond your weekly training.",
         "items": [
           {
             "title": "LiveBall",
@@ -174,6 +178,11 @@
   "whyChoose": {
     "headline": "Why Choose Laguna Beach Tennis Academy",
     "subline": "Coaching that starts with movement, adds clear structure, and grows beside people who take the work seriously.",
+    "bullets": [
+      "Movement-first coaching on every court",
+      "Clear progression from first swings to competition",
+      "A community built on showing up and doing the work"
+    ],
     "image1": "/images/facility/hero-ocean-view-tennis-courts-sunset.webp",
     "image2": "/images/facility/detail-sunlit-blue-tennis-courts.webp",
     "image1Alt": "Coastal tennis courts at sunset with the Pacific horizon beyond Laguna Beach",
@@ -192,72 +201,43 @@
     "eyebrow": "Our Community",
     "headline": "Players who train our way.",
     "subline": "Juniors and adults, daytime and under the lights — one standard on every court.",
+    "maxCloudinaryGalleryItems": 4,
     "gallery": [
       {
         "src": "/images/homepage/philosophy-community-group-2026.webp",
         "alt": "Seven LBTA players in a lineup on an outdoor court — community and belonging",
         "span": "large",
-        "objectPosition": "50% 45%"
+        "objectPosition": "50% 42%"
       },
       {
         "src": "/images/community/lbta-pics2-masonry-01.webp",
         "alt": "LBTA community — players gathered on an outdoor court",
         "span": "medium",
-        "objectPosition": "50% 45%"
-      },
-      {
-        "src": "/images/community/lbta-pics2-masonry-02.webp",
-        "alt": "Community play — athletes on a blue court at LBTA",
-        "span": "small",
-        "objectPosition": "50% 42%"
+        "objectPosition": "48% 44%"
       },
       {
         "src": "/images/community/lbta-pics2-liveball-advanced.webp",
         "alt": "Advanced live ball — competitive drills on court",
         "span": "medium",
-        "objectPosition": "50% 44%"
-      },
-      {
-        "src": "/images/community/lbta-pics2-liveball-intermediate.webp",
-        "alt": "Intermediate live ball — structured match-style play",
-        "span": "small",
-        "objectPosition": "50% 42%"
+        "objectPosition": "50% 38%"
       },
       {
         "src": "/images/community/lbta-pics2-michelle-vibes.webp",
         "alt": "Coach Michelle Mateljan with players during a session",
         "span": "small",
-        "objectPosition": "50% 40%"
+        "objectPosition": "50% 36%"
       },
       {
         "src": "/images/community/lbta-pics2-group-fitness-moulton.webp",
         "alt": "Group fitness at Moulton Meadows — outdoor training",
         "span": "large",
-        "objectPosition": "50% 42%"
+        "objectPosition": "50% 44%"
       },
       {
         "src": "/images/community/lbta-pics2-lbhs-location.webp",
         "alt": "Laguna Beach High School courts — LBTA training location",
         "span": "small",
-        "objectPosition": "50% 45%"
-      },
-      {
-        "src": "/images/community/lbta-pics2-group-fitness-moulton-2.webp",
-        "alt": "Group session — players on court at Moulton Meadows",
-        "span": "medium",
-        "objectPosition": "50% 44%"
-      },
-      {
-        "src": "/images/community/lbta-pics2-location-3.webp",
-        "alt": "Outdoor courts — practice and match play at LBTA",
-        "span": "small",
         "objectPosition": "50% 48%"
-      },
-      {
-        "src": "/images/community/lbta-pics2-adult-advanced-2.webp",
-        "alt": "Adult advanced players in a clinic on an outdoor court",
-        "span": "small",
-        "objectPosition": "50% 42%"
       }
     ]
   },

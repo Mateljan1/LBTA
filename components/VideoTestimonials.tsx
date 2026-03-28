@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface VideoTestimonial {
@@ -37,9 +38,75 @@ const videoTestimonials: VideoTestimonial[] = [
   },
 ]
 
-export default function VideoTestimonials() {
+const FEATURED_HOME_COUNT = 3
+
+export type VideoTestimonialsVariant = 'featured' | 'carousel'
+
+type Props = {
+  /** Homepage: three-up grid + “More stories”. Success stories: full carousel. */
+  variant?: VideoTestimonialsVariant
+}
+
+function VimeoIframe({ testimonial, lazy }: { testimonial: VideoTestimonial; lazy?: boolean }) {
+  return (
+    <iframe
+      src={`https://player.vimeo.com/video/${testimonial.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0`}
+      className="absolute inset-0 w-full h-full"
+      frameBorder="0"
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+      allowFullScreen
+      title={`${testimonial.name} - ${testimonial.role}`}
+      loading={lazy ? 'lazy' : undefined}
+    />
+  )
+}
+
+function FeaturedHomeTestimonials() {
+  const featured = videoTestimonials.slice(0, FEATURED_HOME_COUNT)
+
+  return (
+    <section className="bg-black py-16 md:py-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-10 md:mb-14">
+          <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/50 mb-4">
+            Player Stories
+          </p>
+          <h2 className="font-headline text-[28px] md:text-[40px] font-light text-white leading-[1.15]">
+            Hear from our community
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
+          {featured.map((testimonial) => (
+            <div key={testimonial.id} className="flex flex-col">
+              <div className="relative aspect-video bg-black/50 rounded-lg overflow-hidden">
+                <VimeoIframe testimonial={testimonial} lazy />
+              </div>
+              <div className="mt-4 text-center">
+                <p className="font-sans text-[14px] font-medium text-white">{testimonial.name}</p>
+                <p className="font-sans text-[12px] text-white/50">{testimonial.role}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 md:mt-14 flex justify-center">
+          <Link
+            href="/success-stories"
+            className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[2px] border border-white/25 text-white font-sans text-sm font-medium tracking-[2.5px] uppercase transition-all duration-300 hover:border-white/50 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
+          >
+            More stories
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function CarouselTestimonials() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
 
   const totalSlides = videoTestimonials.length
 
@@ -60,25 +127,21 @@ export default function VideoTestimonials() {
     goToSlide(prev)
   }
 
-  // Auto-advance slides (paused when user interacts)
-  const [isPaused, setIsPaused] = useState(false)
-
   useEffect(() => {
     if (isPaused) return
     const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % totalSlides)
+      setCurrentIndex((prev) => (prev + 1) % totalSlides)
     }, 8000)
     return () => clearInterval(interval)
   }, [isPaused, totalSlides])
 
   return (
-    <section 
+    <section
       className="bg-black py-16 md:py-24 overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
         <div className="text-center mb-10 md:mb-14">
           <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/50 mb-4">
             Player Stories
@@ -88,18 +151,18 @@ export default function VideoTestimonials() {
           </h2>
         </div>
 
-        {/* Carousel Container */}
         <div className="relative">
-          {/* Navigation Arrows - Desktop */}
           <button
+            type="button"
             onClick={prevSlide}
             className="hidden md:flex absolute -left-4 lg:-left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 backdrop-blur-sm"
             aria-label="Previous video"
           >
             <ChevronLeft className="w-6 h-6 text-white" />
           </button>
-          
+
           <button
+            type="button"
             onClick={nextSlide}
             className="hidden md:flex absolute -right-4 lg:-right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300 backdrop-blur-sm"
             aria-label="Next video"
@@ -107,46 +170,28 @@ export default function VideoTestimonials() {
             <ChevronRight className="w-6 h-6 text-white" />
           </button>
 
-          {/* Slides Container */}
           <div className="relative overflow-hidden rounded-lg">
-            <div 
+            <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {videoTestimonials.map((testimonial) => (
-                <div 
-                  key={testimonial.id}
-                  className="w-full flex-shrink-0"
-                >
-                  {/* Video Embed - Clean, no overlay */}
+                <div key={testimonial.id} className="w-full flex-shrink-0">
                   <div className="relative aspect-video bg-black/50 rounded-lg overflow-hidden">
-                    <iframe
-                      src={`https://player.vimeo.com/video/${testimonial.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0`}
-                      className="absolute inset-0 w-full h-full"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                      allowFullScreen
-                      title={`${testimonial.name} - ${testimonial.role}`}
-                    />
+                    <VimeoIframe testimonial={testimonial} />
                   </div>
-                  
-                  {/* Minimal Caption */}
                   <div className="mt-4 text-center">
-                    <p className="font-sans text-[14px] font-medium text-white">
-                      {testimonial.name}
-                    </p>
-                    <p className="font-sans text-[12px] text-white/50">
-                      {testimonial.role}
-                    </p>
+                    <p className="font-sans text-[14px] font-medium text-white">{testimonial.name}</p>
+                    <p className="font-sans text-[12px] text-white/50">{testimonial.role}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Mobile Navigation Arrows */}
           <div className="flex md:hidden justify-center gap-4 mt-6">
             <button
+              type="button"
               onClick={prevSlide}
               className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300"
               aria-label="Previous video"
@@ -154,6 +199,7 @@ export default function VideoTestimonials() {
               <ChevronLeft className="w-5 h-5 text-white" />
             </button>
             <button
+              type="button"
               onClick={nextSlide}
               className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-300"
               aria-label="Next video"
@@ -162,19 +208,15 @@ export default function VideoTestimonials() {
             </button>
           </div>
 
-          {/* Dots Indicator */}
           <div className="flex justify-center gap-2 mt-6">
             {videoTestimonials.map((_, index) => (
               <button
                 key={index}
+                type="button"
                 onClick={() => goToSlide(index)}
-                className={`
-                  h-2 rounded-full transition-all duration-300
-                  ${index === currentIndex 
-                    ? 'w-8 bg-white' 
-                    : 'w-2 bg-white/30 hover:bg-white/50'
-                  }
-                `}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? 'w-8 bg-white' : 'w-2 bg-white/30 hover:bg-white/50'
+                }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
@@ -183,4 +225,11 @@ export default function VideoTestimonials() {
       </div>
     </section>
   )
+}
+
+export default function VideoTestimonials({ variant = 'carousel' }: Props) {
+  if (variant === 'featured') {
+    return <FeaturedHomeTestimonials />
+  }
+  return <CarouselTestimonials />
 }

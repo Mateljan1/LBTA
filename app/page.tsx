@@ -69,6 +69,7 @@ export const metadata = {
 type WhyChooseCopy = {
   headline: string
   subline: string
+  bullets?: string[]
   image1: string
   image2: string
   image1Alt: string
@@ -87,6 +88,14 @@ type ProgramItem = (typeof homepageCopy)['programs']['groups'][number]['items'][
   image: string
   imageAlt: string
   objectPosition?: string
+}
+
+type ProgramGroup = {
+  id: string
+  label: string
+  groupSubline?: string
+  tier?: 'primary' | 'secondary'
+  items: ProgramItem[]
 }
 
 type DestinationCopy = (typeof homepageCopy)['destination'] & {
@@ -241,7 +250,7 @@ export default function Home() {
               className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3"
               aria-label="Jump to program category"
             >
-              {(homepageCopy.programs.groups as { id: string; label: string }[]).map((g) => (
+              {(homepageCopy.programs.groups as ProgramGroup[]).map((g) => (
                 <a
                   key={g.id}
                   href={`#${g.id}`}
@@ -253,10 +262,8 @@ export default function Home() {
             </nav>
           </AnimatedSection>
           <div className="space-y-14 md:space-y-16 mb-12">
-            {(homepageCopy.programs.groups as { id: string; label: string; items: ProgramItem[] }[]).map(
-              (group, groupIndex) => {
-                const firstGroupLen = (homepageCopy.programs.groups as { items: ProgramItem[] }[])[0]
-                  .items.length
+            {(homepageCopy.programs.groups as ProgramGroup[]).map((group, groupIndex) => {
+                const firstGroupLen = (homepageCopy.programs.groups as ProgramGroup[])[0].items.length
                 const baseIndex = groupIndex === 0 ? 0 : firstGroupLen
                 const n = group.items.length
                 /** 4 cards: 2×2 on tablet, one row of four on xl — no 3+1 orphan. 3 cards: balanced row from md up. */
@@ -268,14 +275,27 @@ export default function Home() {
                   n === 4
                     ? '(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw'
                     : '(max-width: 767px) 100vw, 33vw'
+                const isSecondary = group.tier === 'secondary'
                 return (
-                  <div key={group.id}>
+                  <div
+                    key={group.id}
+                    className={
+                      isSecondary
+                        ? 'pt-12 md:pt-14 border-t border-black/[0.06] scroll-mt-24'
+                        : undefined
+                    }
+                  >
                     <h3
                       id={group.id}
-                      className="font-headline text-[clamp(1.25rem,2.5vw,1.5rem)] text-brand-pacific-dusk mb-6 md:mb-8 scroll-mt-28 text-center md:text-left max-w-[1400px] mx-auto px-1"
+                      className="font-headline text-[clamp(1.25rem,2.5vw,1.5rem)] text-brand-pacific-dusk mb-3 md:mb-4 scroll-mt-28 text-center md:text-left max-w-[1400px] mx-auto px-1"
                     >
                       {group.label}
                     </h3>
+                    {group.groupSubline ? (
+                      <p className="text-body-sm text-lbta-slate max-w-[1400px] mx-auto mb-6 md:mb-8 px-1 text-center md:text-left leading-relaxed">
+                        {group.groupSubline}
+                      </p>
+                    ) : null}
                     <div className={gridClass}>
                       {group.items.map((program, index) => {
                         const cardIndex = baseIndex + index
@@ -309,8 +329,7 @@ export default function Home() {
                     </div>
                   </div>
                 )
-              },
-            )}
+              })}
           </div>
           <AnimatedSection className="text-center">
             <Link href={homepageCopy.programs.ctaSecondaryHref} className="btn-horizon">
@@ -330,8 +349,20 @@ export default function Home() {
             <p className="text-subhead max-w-2xl mx-auto font-light text-brand-pacific-dusk">
               {whyChoose?.subline ?? ''}
             </p>
+            {whyChoose?.bullets && whyChoose.bullets.length > 0 ? (
+              <ul className="mt-10 max-w-xl mx-auto text-left space-y-3 list-none pl-0">
+                {whyChoose.bullets.map((line) => (
+                  <li
+                    key={line}
+                    className="text-body text-brand-pacific-dusk/90 pl-6 relative before:absolute before:left-0 before:top-[0.55em] before:w-1.5 before:h-1.5 before:rounded-full before:bg-brand-victoria-cove/80"
+                  >
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </AnimatedSection>
-          <div className="grid md:grid-cols-5 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-5 gap-6 lg:gap-8 mt-12 md:mt-14">
             <AnimatedSection delay={100} className="md:col-span-3">
               <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-subtle">
                 <WhyChooseImage
@@ -389,7 +420,7 @@ export default function Home() {
       <HorizonDivider animate />
       <HomeCommunityGallery />
 
-      <VideoTestimonials />
+      <VideoTestimonials variant="featured" />
 
       <FAQSection />
 

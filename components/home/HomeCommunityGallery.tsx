@@ -10,7 +10,11 @@ type CommunityGalleryItem = {
   objectPosition?: string
 }
 
-type CommunitySection = (typeof homepageCopy)['community'] & { gallery: CommunityGalleryItem[] }
+type CommunitySection = (typeof homepageCopy)['community'] & {
+  gallery: CommunityGalleryItem[]
+  /** Cap appended Cloudinary tiles to reduce visual load (static `gallery` is curated first). */
+  maxCloudinaryGalleryItems?: number
+}
 
 export default async function HomeCommunityGallery() {
   const communitySection = homepageCopy.community as CommunitySection
@@ -22,7 +26,8 @@ export default async function HomeCommunityGallery() {
   }))
 
   const fromCloudinary = await getCachedCommunityCloudinary()
-  const items = [...staticItems, ...fromCloudinary]
+  const cap = communitySection.maxCloudinaryGalleryItems ?? 8
+  const items = [...staticItems, ...fromCloudinary.slice(0, Math.max(0, cap))]
 
   return (
     <section id="community" className="bg-white section-lg">
