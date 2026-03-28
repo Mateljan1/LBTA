@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-28",
-  "lastLearnRun": "2026-03-28 Audit remediation: homepage pricing hint link; pathway tuition → schedules; match-play honest SEO + dual CTA; analytics heroCta pricing_hint",
+  "lastLearnRun": "2026-03-28 Lighthouse/proxy: hero next/image LCP + deferred video; GA4+Pixel lazyOnload; middleware→proxy.ts; no global poster preload",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -11,12 +11,33 @@
     },
     {
       "name": "hero-video-poster-lcp",
-      "when": "Hero uses autoplay video with poster for LCP",
-      "example": "Use a small dedicated poster file (e.g. hero-poster.webp < 200KB); preload it in layout; video poster= that path. Full hero image (laguna-horizon.webp) for destination/OG. Generate poster via script (e.g. scripts/generate-hero-poster.js) from full hero when hero image changes.",
+      "when": "Hero uses autoplay video; LCP must not compete with video bytes",
+      "example": "Layer next/image priority + fill of hero-poster.webp (small WebP, <200KB ideal); parent wrapper position:relative + relative h-full w-full for fill. Video preload=none, deferred load() after paint, fade in on onPlaying; omit video poster if same URL as Image to avoid double fetch. prefers-reduced-motion: poster only. Do not add root layout <link rel=preload> for a homepage-only asset (other routes pay the cost). OG/destinations still use laguna-horizon.webp or dedicated art. Poster script: scripts/generate-hero-poster.js when hero changes.",
       "tags": [
         "performance",
         "LCP",
-        "video"
+        "video",
+        "next-image"
+      ]
+    },
+    {
+      "name": "nextjs16-proxy-coach-hub",
+      "when": "Next.js 16+ intercepts requests before handlers; Coach Hub or similar protected matchers",
+      "example": "Root proxy.ts: export function proxy(request: NextRequest) { ... }; export const config = { matcher: ['/coach-hub', '/coach-hub/:path*'] }; same auth logic as legacy middleware. next build lists ƒ Proxy (Middleware).",
+      "tags": [
+        "nextjs",
+        "auth",
+        "coach-hub"
+      ]
+    },
+    {
+      "name": "analytics-scripts-lazyOnload-lcp",
+      "when": "Meta Pixel, GA4, or other non-critical scripts compete with LCP / Best Practices",
+      "example": "next/script strategy=lazyOnload for fbevents and gtag/js; dns-prefetch (not always preconnect) for facebook connect host. Tradeoff: first pageview may fire slightly later than afterInteractive — document if marketing needs earlier attribution.",
+      "tags": [
+        "performance",
+        "third-party",
+        "lighthouse"
       ]
     },
     {

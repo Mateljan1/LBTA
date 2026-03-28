@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-28",
-  "lastLearnRun": "2026-03-28 12-step audit work: pathway SSOT, hero pricing hint, match-play metadata + CTAs, heroCta pricing_hint",
+  "lastLearnRun": "2026-03-28 compound:learn — layout preload LCP dup; hero poster triple-fetch",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -851,6 +851,20 @@
       "avoid": "match-play og:description implying full program list when hero says not offered",
       "instead": "Rewrite metadata to match expectation; add CTAs to the closest live substitutes (e.g. UTR page, schedules)",
       "tags": ["seo", "metadata", "ux", "conversion"]
+    },
+    {
+      "id": "root-layout-preload-homepage-only-lcp",
+      "description": "Global layout preloads an image that only the homepage needs for LCP",
+      "avoid": "<link rel=preload as=image href=/images/hero/hero-poster.webp> in root layout for every route",
+      "instead": "Let homepage HomeHero own the fetch via next/image priority; remove duplicate preload from layout",
+      "tags": ["performance", "LCP", "nextjs", "layout"]
+    },
+    {
+      "id": "hero-poster-triple-fetch",
+      "description": "Same poster URL requested via layout preload, video poster attribute, and next/image without deduping",
+      "avoid": "preload + poster=\"...\" on video + priority Image all pointing at identical hero-poster.webp",
+      "instead": "Single next/image priority layer + video without poster; or one preload OR image priority, not both",
+      "tags": ["performance", "LCP", "video", "hero"]
     }
   ]
 }

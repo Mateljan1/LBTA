@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-03-28",
-  "lastLearnRun": "2026-03-28 compound:learn — audit SSOT, pathway planner, thin-page SEO, hero pricing hint",
+  "lastLearnRun": "2026-03-28 compound:learn — Lighthouse hero LCP, proxy.ts, analytics lazyOnload; homepage + third-party quality bars",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -300,6 +300,14 @@
     "pathwayPlannerNoSyntheticTuition": {
       "rule": "Quizzes or planners must not display dollar amounts from client-only formulas; point to /schedules or load from shared /data",
       "enforcement": "must"
+    },
+    "homepageHeroLcpPosterImage": {
+      "rule": "Homepage hero with video uses next/image priority for the poster asset; video preload=none and deferred load; fade on onPlaying; no triple fetch (layout preload + video poster + image)",
+      "enforcement": "should"
+    },
+    "thirdPartyScriptLoadStrategy": {
+      "rule": "Non-critical third-party scripts (analytics, pixels) default to lazyOnload for LCP; if afterInteractive is required for attribution, document the tradeoff and verify Lighthouse impact",
+      "enforcement": "should"
     }
   }
 }
