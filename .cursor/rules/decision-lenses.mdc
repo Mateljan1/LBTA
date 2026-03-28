@@ -1,8 +1,9 @@
 ---
-description: Compound planning, review, and learn — apply cognitive lenses (survivorship gaps, loss-function iteration, tense conversation CORE, time horizons, identity). Use when editing plans/, .cursor/compound/, or running /compound:* .
+description: Compound planning, review, learn — cognitive lenses + decision OS (survivorship, loss function, CORE, horizons, identity, probabilistic thinking). Full reference in docs/decision-making-frameworks.md.
 globs:
   - plans/**
   - .cursor/compound/**
+  - docs/decision-making-frameworks.md
 alwaysApply: false
 ---
 
@@ -10,31 +11,33 @@ alwaysApply: false
 
 Apply these **during Plan, Review, Validate, and Compound** — not for routine one-line fixes.
 
-## 1. Ghost notes (survivorship)
+**Full reference (10-book synthesis):** `docs/decision-making-frameworks.md` — Taleb, Duke, Tetlock, Kahneman, Grant, Robson, Christensen, Duckworth, Clear, Newport.
+
+---
+
+## A. Original five lenses (LBTA)
+
+### 1. Ghost notes (survivorship)
 
 - **Ask:** What never “came back”? (failed deploys, churned flows, abandoned approaches, bugs only seen in prod.)
 - **Absent evidence:** Name **3 things** that logically should appear in the research/plan/slides but are missing; treat silence as data.
 - **Plans:** In *Risks* or *Confidence & uncertainty*, list **selection bias** — what success stories might overstate the case?
 
-## 2. Loss function (error-driven learning)
+### 2. Loss function (error-driven learning)
 
 - **Metric:** What does “better” mean for *this* cycle? (speed, correctness, clarity, conversion — pick one primary.)
 - **Before:** Predict outcome; after: find the **exact** failure signal (test line, metric, user step).
 - **Change one variable** per iteration; rerun `npm run ship:gate` (or scoped lint/test) before declaring done.
 - **Compound:** Prefer corrections from **mistakes** (review/validate failures) over repeating what already worked.
 
-## 3. Adaptive tension (CORE) — reviews & handoffs
-
-Use when giving or summarizing feedback (human or agent):
+### 3. Adaptive tension (CORE) — reviews & handoffs
 
 - **C**uriosity — questions before verdicts (“What am I missing?”).
 - **O**bjectivity — systems and facts over personalities (“Where should the process change?”).
 - **R**eassurance — intent explicit (“Goal is ship safely, not blame.”).
 - **E**mpathy — acknowledge effort before critique.
 
-## 4. Cathedral (time horizons)
-
-Tag significant decisions or plan sections:
+### 4. Cathedral (time horizons)
 
 | Horizon | Question |
 |--------|----------|
@@ -44,11 +47,38 @@ Tag significant decisions or plan sections:
 
 Long-term **resource** stories (e.g. “oak beams”) are metaphors for stewardship — verify facts before citing history.
 
-## 5. Identity
+### 5. Identity
 
 - **Ask:** “What will this decision **make** us?” (team habits, codebase character, brand), not only what it **gets** (feature, ticket closed).
 - **LBTA:** Align with `.cursorrules` — calm, craft-led, single source of truth in `/data`, quality over speed.
 
 ---
 
-**Trigger phrases:** “compound plan”, “retrospective”, “major refactor”, “go/no-go”, “compound:learn”.
+## B. Decision OS — six meta-principles (condensed)
+
+Use for **go/no-go**, **architecture**, and **post-mortems** (see full doc for book-level detail).
+
+1. **Humble confidence** — Probabilities, not certainties; confidence is narrative coherence, not proof (Kahneman/Tetlock). Separate **decision quality** from **outcome** (Duke / *resulting*).
+2. **Process > outcome** — Systems and checklists; evaluate by reasoning *at decision time*, not luck after (Duke/Taleb/Clear).
+3. **Persist in purpose, pivot in method** — Kill criteria upfront; tactics iterate; strategy rethinks (Duckworth/Grant/Christensen).
+4. **Defaults & environment** — `ship:gate`, lint, data in `/data`, CI — make good choices the path of least resistance (Clear/Kahneman).
+5. **Uncertainty** — Mediocristan vs Extremistan (Taleb): fat-tail domains need barbell thinking, not naive averages; **never risk ruin** (prod data, secrets, auth).
+6. **Identity stack** — Learner → scientist → craftsman; hold identities lightly enough to update (Clear/Grant/Newport/Robson).
+
+---
+
+## C. Hooks for software / this repo
+
+| Idea | Engineering use |
+|------|-------------------|
+| **Resulting** | A green deploy after a sloppy change is still luck; don’t drop standards. |
+| **Base rate / outside view** | Reference class: “How did similar refactors or migrations go?” before estimates. |
+| **Premortem / 10-10-10** | Plan *Risks*, rollback, and “what fails first” before merge. |
+| **WYSIATI** | If the plan feels complete, list **what’s not on the page**. |
+| **RPV (Christensen)** | New processes need **new** habits/automation — not only more people. |
+| **Discovery-driven** | Smallest experiment that falsifies the riskiest assumption (feature flags, canary). |
+| **Barbell** | Core stability (main, `ship:gate`) + small bounded bets (experiments), not mushy middle risk. |
+
+---
+
+**Trigger phrases:** “compound plan”, “retrospective”, “major refactor”, “go/no-go”, “compound:learn”, “decision OS”, “premortem”.

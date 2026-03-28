@@ -152,7 +152,8 @@ Record results in [docs/quality-gate.md](./quality-gate.md). See [site-polish-an
 | **.cursor/compound/learnings/** | quality-bars.json, patterns.json, anti-patterns.json, corrections.jsonl. |
 | **.cursor/compound/README.md** | When to run `/compound:learn` and how learnings are used. |
 | **.cursorrules Part 19** | Pointer to compound learnings and `plans/COMPOUND_LEARN.md`. |
-| **`.cursor/rules/decision-lenses.mdc`** | Cognitive checks for compound work: survivorship gaps, loss-function iteration, CORE feedback, 90d/18mo/5yr horizons, identity. Applies when `plans/**` or `.cursor/compound/**` are in context. |
+| **`.cursor/rules/decision-lenses.mdc`** | Cognitive checks + decision OS (process vs outcome, base rates, premortem, barbell risk). Applies when `plans/**`, `.cursor/compound/**`, or `docs/decision-making-frameworks.md` are in context. |
+| **`docs/decision-making-frameworks.md`** | Full synthesis (10 books): Taleb, Duke, Tetlock, Kahneman, Grant, Robson, Christensen, Duckworth, Clear, Newport. |
 
 Run `/compound:learn` after completing a plan, after review/validate, or at end of a significant session.
 
