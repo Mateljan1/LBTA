@@ -150,7 +150,7 @@ export default function AdultProgramsPage() {
                   Match Play Series
                 </h3>
                 <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/60 mb-4 leading-relaxed">
-                  8 Saturdays of rated matchplay. Five divisions from Color Ball to advanced adults. Every result to UTR.
+                  Eight weekends of rated matchplay. Four divisions from Color Ball to advanced singles and doubles. Every result to UTR.
                 </p>
                 <span className="font-sans text-ui font-medium text-brand-sunset-cliff group-hover:text-brand-sunset-cliff/80 transition-colors">
                   Learn more →

@@ -66,9 +66,9 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
           </h3>
           <div className="section-horizon mb-8 opacity-90" aria-hidden="true" />
           <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[700px] mb-3">
-            8 Saturdays of UTR-rated competitive play. Every match
-            counts toward your Universal Tennis Rating. Five divisions from Color Ball
-            juniors through advanced adults.
+            Eight weekends of UTR-rated competitive play. Every match
+            counts toward your Universal Tennis Rating. Four divisions from Color Ball
+            juniors through advanced singles and doubles.
           </p>
           {utr.seasonLabel && (
             <p className="font-sans text-[14px] font-medium text-brand-pacific-dusk/70 mb-10">

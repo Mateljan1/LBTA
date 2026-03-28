@@ -142,6 +142,10 @@ const utrDivisionSchema = z.object({
   imageAlt: z.string().optional(),
   /** CSS object-position for cover crop (e.g. "50% 28%" to keep faces in frame). */
   imageObjectPosition: z.string().optional(),
+  /** Match day label for division cards (e.g. Saturday at Alta, Sunday at LBHS). */
+  match_day: z.enum(['Saturday', 'Sunday']).optional(),
+  /** Primary CTA accent on light cards. */
+  cta_style: z.enum(['teal', 'sunset']).optional(),
 })
 
 const ntrpToUtrRowSchema = z.object({
@@ -160,8 +164,14 @@ const leaguesDataSchema = z.object({
     seasonLabel: z.string().optional(),
     /** ISO YYYY-MM-DD for each regular-season Saturday (drop-in eligible per week). */
     regularSeasonSaturdays: z.array(z.string()).optional(),
+    /** ISO YYYY-MM-DD for each regular-season Sunday (paired with Saturdays; may be omitted and derived as Sat+1). */
+    regularSeasonSundays: z.array(z.string()).optional(),
     /** ISO YYYY-MM-DD for Grand Finals night (not a standard league Saturday). */
     grandFinalsDate: z.string().optional(),
+    /** Short venue line for date strip / schedule headers. */
+    saturdayVenueShort: z.string().optional(),
+    sundayVenueShort: z.string().optional(),
+    grandFinalsVenueShort: z.string().optional(),
     divisions: z.array(utrDivisionSchema),
     ntrpToUtr: z.array(ntrpToUtrRowSchema),
   }),
