@@ -129,7 +129,7 @@ export default function PlayerSuccessCarousel({
       {/* Dot nav: max-md:mr clears chat FAB */}
       {count > 1 && (
         <div
-          className="absolute right-4 top-1/2 z-30 -translate-y-1/2 flex flex-col gap-2 md:right-8 max-md:mr-[72px]"
+          className="absolute right-4 top-1/2 z-30 -translate-y-1/2 flex flex-col gap-1 md:right-8 max-md:mr-[72px]"
           role="navigation"
           aria-label="Player story slides"
         >
@@ -139,11 +139,16 @@ export default function PlayerSuccessCarousel({
               type="button"
               aria-current={i === safeIndex ? 'true' : undefined}
               aria-label={`Story ${i + 1} of ${count}`}
-              className={`h-2.5 w-2.5 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water ${
-                i === safeIndex ? 'scale-125 bg-white' : 'bg-white/40 hover:bg-white/70'
-              }`}
+              className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               onClick={() => goTo(i)}
-            />
+            >
+              <span
+                className={`block h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+                  i === safeIndex ? 'scale-125 bg-white' : 'bg-white/40 hover:bg-white/70'
+                }`}
+                aria-hidden
+              />
+            </button>
           ))}
         </div>
       )}

@@ -203,7 +203,10 @@ export default function Header() {
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
           <div className="flex items-center justify-between">
-            <Link href="/" className="group flex-shrink-0 flex items-center gap-3 min-h-[48px] min-w-[48px]">
+            <Link
+              href="/"
+              className="group flex-shrink-0 flex items-center gap-3 min-h-[48px] min-w-[48px] rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
+            >
               <Image
                 src="/logos/LBTAblktext.png"
                 alt="Laguna Beach Tennis Academy"
@@ -229,7 +232,7 @@ export default function Header() {
               >
                 <button
                   type="button"
-                  className="inline-flex items-center gap-1 px-3 py-2 min-h-[48px] text-[13px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors duration-300 tracking-wide whitespace-nowrap"
+                  className="inline-flex items-center gap-1 px-3 py-2 min-h-[48px] text-[13px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors duration-300 tracking-wide whitespace-nowrap rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                   aria-expanded={programsOpen}
                   aria-haspopup="menu"
                   aria-controls="programs-panel"
@@ -264,7 +267,7 @@ export default function Header() {
                             key={item.name}
                             href={item.href}
                             role="menuitem"
-                            className="group/item flex flex-col gap-1 px-4 py-3 rounded-md hover:bg-brand-sandstone transition-colors duration-200"
+                            className="group/item flex flex-col gap-1 px-4 py-3 rounded-md hover:bg-brand-sandstone transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-inset"
                             onClick={() => setProgramsOpen(false)}
                           >
                             <span className="text-[14px] font-sans font-medium text-brand-pacific-dusk group-hover/item:text-brand-sunset-cliff transition-colors">
@@ -279,7 +282,7 @@ export default function Header() {
                       <div className="horizon-line-thin mx-4 mt-2" />
                       <Link
                         href="/schedules"
-                        className="flex items-center gap-2 mx-4 my-3 text-[12px] font-sans font-medium text-brand-victoria-cove hover:text-brand-sunset-cliff tracking-wide uppercase transition-colors"
+                        className="flex items-center gap-2 mx-4 my-3 text-[12px] font-sans font-medium text-brand-victoria-cove hover:text-brand-sunset-cliff tracking-wide uppercase transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-white px-1 py-1 -mx-1 -my-1"
                         onClick={() => setProgramsOpen(false)}
                       >
                         View Full Schedule & Pricing
@@ -294,7 +297,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-3 py-2 min-h-[48px] inline-flex items-center text-[13px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors duration-300 tracking-wide whitespace-nowrap relative group"
+                  className="px-3 py-2 min-h-[48px] inline-flex items-center text-[13px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors duration-300 tracking-wide whitespace-nowrap relative group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                   onClick={(e) => {
                     if (item.href === '/#results' && pathname === '/') {
                       e.preventDefault()
@@ -319,7 +322,7 @@ export default function Header() {
             <div className="flex lg:hidden items-center gap-3">
               <a
                 href="tel:9495340457"
-                className="p-3 min-w-[48px] min-h-[48px] flex items-center justify-center text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors"
+                className="p-3 min-w-[48px] min-h-[48px] flex items-center justify-center text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                 aria-label="Call (949) 534-0457"
               >
                 <Phone className="h-5 w-5" aria-hidden="true" />
@@ -327,7 +330,7 @@ export default function Header() {
               <button
                 ref={mobileMenuButtonRef}
                 type="button"
-                className="p-3 text-brand-pacific-dusk bg-brand-sandstone/60 hover:bg-brand-sandstone rounded-lg transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center"
+                className="p-3 text-brand-pacific-dusk bg-brand-sandstone/60 hover:bg-brand-sandstone rounded-lg transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={mobileMenuOpen}
@@ -359,7 +362,7 @@ export default function Header() {
             <div className="p-6 pt-20">
               <button
                 type="button"
-                className="absolute top-4 right-4 p-3 text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full hover:bg-brand-sandstone"
+                className="absolute top-4 right-4 p-3 text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full hover:bg-brand-sandstone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label="Close menu"
               >
@@ -374,7 +377,7 @@ export default function Header() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="flex flex-col gap-1 p-4 bg-white rounded-lg border border-brand-pacific-dusk/5 hover:border-brand-sunset-cliff/20 hover:shadow-soft transition-all duration-200"
+                      className="flex flex-col gap-1 p-4 bg-white rounded-lg border border-brand-pacific-dusk/5 hover:border-brand-sunset-cliff/20 hover:shadow-soft transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                       onClick={() => setMobileMenuOpen(false)}
                       style={{
                         animation: `fadeInUp 0.25s ease-out ${i * 0.05}s forwards`,
@@ -400,7 +403,7 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block text-[16px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff py-3.5 min-h-[48px] border-b border-brand-pacific-dusk/5 transition-all duration-200"
+                    className="block text-[16px] font-sans font-medium text-brand-pacific-dusk hover:text-brand-sunset-cliff py-3.5 min-h-[48px] border-b border-brand-pacific-dusk/5 transition-all duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                     onClick={(e) => {
                       if (item.href === '/#results' && pathname === '/') {
                         e.preventDefault()

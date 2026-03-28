@@ -289,9 +289,12 @@
     cursor: pointer;
   }
 
+  /* High-contrast focus for keyboard users (WCAG 2.1 focus appearance) */
   .btn:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0,0,0,0.1), 0 0 0 4px rgba(0,0,0,0.05);
+    box-shadow:
+      0 0 0 2px var(--salt-air, #fff),
+      0 0 0 4px var(--pacific-dusk, #1b3a5c);
   }
 
   /* Ripple effect on click */

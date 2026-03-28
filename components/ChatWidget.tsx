@@ -153,15 +153,15 @@ export default function ChatWidget() {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className={`group flex h-[60px] w-[60px] min-h-[48px] min-w-[48px] flex-shrink-0 items-center justify-center rounded-full border-0 shadow-lg transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2 ${
-            isOpen ? 'bg-brand-deep-water' : 'bg-brand-sunset-cliff'
+          className={`group flex h-[60px] w-[60px] min-h-[48px] min-w-[48px] flex-shrink-0 items-center justify-center rounded-full border-0 shadow-lg transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-white motion-safe:hover:scale-105 ${
+            isOpen
+              ? 'bg-brand-deep-water ring-1 ring-white/15'
+              : 'bg-black hover:bg-gray-900 hover:ring-2 hover:ring-brand-sunset-cliff/30'
           }`}
           style={{
             boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
             cursor: 'pointer',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
-          onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
           aria-label={isOpen ? 'Close chat' : 'Open chat'}
           title={isOpen ? 'Close chat' : 'Chat with us'}
         >
@@ -397,18 +397,17 @@ export default function ChatWidget() {
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
                 disabled={isLoading}
+                className="flex-1 min-h-[48px] rounded-full border border-brand-pacific-dusk/12 bg-brand-morning-light px-4 text-sm outline-none transition-[border-color,box-shadow] focus-visible:border-brand-victoria-cove focus-visible:ring-2 focus-visible:ring-brand-victoria-cove/35"
                 style={{
                   flex: 1,
-                  padding: '12px 16px',
-                  borderRadius: '24px',
-                  border: '1px solid rgba(27, 58, 92, 0.12)',
-                  outline: 'none',
                   fontSize: '14px',
-                  backgroundColor: 'var(--morning-light, #FAF8F4)',
-                  transition: 'border-color 0.2s',
                 }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--sunset-cliff, #E8834A)')}
-                onBlur={(e) => (e.target.style.borderColor = 'rgba(27, 58, 92, 0.12)')}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--sunset-cliff, #E8834A)'
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = 'rgba(27, 58, 92, 0.12)'
+                }}
               />
               <button
                 type="button"

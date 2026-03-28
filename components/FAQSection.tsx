@@ -77,7 +77,7 @@ export default function FAQSection() {
                   id={buttonId}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
-                  className="w-full min-h-[48px] px-6 py-5 text-left flex items-center justify-between gap-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-inset group"
+                  className="w-full min-h-[48px] px-6 py-5 text-left flex items-center justify-between gap-6 rounded-subtle focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light group"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
                   <span className={`
