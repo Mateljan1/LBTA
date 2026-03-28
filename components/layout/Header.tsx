@@ -12,6 +12,7 @@ import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { Menu, X, Phone, ChevronDown } from 'lucide-react'
 import siteStats from '@/data/site-stats.json'
+import { events } from '@/lib/analytics'
 
 const programsDropdown = [
   {
@@ -312,6 +313,7 @@ export default function Header() {
 
               <Link
                 href="/book"
+                onClick={() => events.bookTraining('header_desktop')}
                 className="ml-4 btn-primary text-[11px] px-6 py-2.5 whitespace-nowrap shadow-sm hover:shadow-md"
               >
                 Book Trial
@@ -322,6 +324,7 @@ export default function Header() {
             <div className="flex lg:hidden items-center gap-3">
               <a
                 href="tel:9495340457"
+                onClick={() => events.phoneClick('header_mobile_bar')}
                 className="p-3 min-w-[48px] min-h-[48px] flex items-center justify-center text-brand-pacific-dusk hover:text-brand-sunset-cliff transition-colors rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                 aria-label="Call (949) 534-0457"
               >
@@ -424,7 +427,10 @@ export default function Header() {
               <Link
                 href="/book"
                 className="block w-full mt-8 text-center btn-primary py-4 text-[12px] min-h-[48px]"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => {
+                  events.bookTraining('header_mobile_drawer')
+                  setMobileMenuOpen(false)
+                }}
                 style={{
                   animation: 'fadeInUp 0.25s ease-out 0.45s forwards',
                   opacity: 0,
@@ -438,6 +444,7 @@ export default function Header() {
                 <a
                   href="tel:9495340457"
                   aria-label="Call (949) 534-0457"
+                  onClick={() => events.phoneClick('header_mobile_drawer')}
                   className="flex items-center gap-3 text-[15px] text-brand-pacific-dusk hover:text-brand-sunset-cliff py-2 transition-colors"
                 >
                   <Phone className="h-4 w-4" aria-hidden="true" />

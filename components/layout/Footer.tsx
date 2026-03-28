@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { SUPPORT_EMAIL } from '@/lib/site-copy'
 import Image from 'next/image'
 import NewsletterForm from '@/components/NewsletterForm'
+import TrackedPhoneLink from '@/components/analytics/TrackedPhoneLink'
 
 export default function Footer() {
   return (
@@ -117,13 +118,14 @@ export default function Footer() {
                 <h4 className="text-eyebrow text-white/70 mb-5">Contact</h4>
                 <ul className="space-y-3">
                   <li>
-                    <a
+                    <TrackedPhoneLink
                       href="tel:9495340457"
+                      location="footer"
                       aria-label="Call (949) 534-0457"
                       className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       (949) 534-0457
-                    </a>
+                    </TrackedPhoneLink>
                   </li>
                   <li>
                     <a

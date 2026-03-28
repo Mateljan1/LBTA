@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import homepageCopy from '@/data/homepage-copy.json'
+import { events, trackEvent } from '@/lib/analytics'
 
 const ctaCopy = homepageCopy.cta as (typeof homepageCopy)['cta']
 
@@ -9,6 +10,13 @@ export default function HomeCTAForm() {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const formStartedRef = useRef(false)
+
+  const handleFormInteraction = () => {
+    if (formStartedRef.current) return
+    formStartedRef.current = true
+    events.homepageTrialFormStart()
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,12 +36,21 @@ export default function HomeCTAForm() {
         }),
       })
       if (response.ok) {
+        events.formSubmit('homepage_trial')
         window.location.href = '/thank-you'
       } else {
+        trackEvent('form_submission_error', {
+          form_type: 'homepage_trial',
+          event_category: 'engagement',
+        })
         setSubmitError('Something went wrong. Please try again or call us.')
       }
     } catch (error) {
       console.error('Error:', error)
+      trackEvent('form_submission_error', {
+        form_type: 'homepage_trial',
+        event_category: 'engagement',
+      })
       setSubmitError('Something went wrong. Please try again or call us.')
     } finally {
       setIsSubmitting(false)
@@ -41,7 +58,7 @@ export default function HomeCTAForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 mb-8">
+    <form onSubmit={handleSubmit} onFocusCapture={handleFormInteraction} className="space-y-4 mb-8">
       <div>
         <label htmlFor="home-cta-first-name" className="sr-only">
           First name

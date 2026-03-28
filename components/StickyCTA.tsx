@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { getStickyCtaSchedules } from '@/lib/site-copy'
+import { events } from '@/lib/analytics'
 import { useReportMobileBottomHeight } from '@/lib/report-mobile-bottom-height'
 
 interface StickyCTAProps {
@@ -90,15 +91,19 @@ export default function StickyCTA({
           </button>
         ) : href && secondaryHref && secondaryText ? (
           <>
-            <Link href={href} className={buttonClasses}>
+            <Link href={href} className={buttonClasses} onClick={() => events.stickyCta('book', href)}>
               {text}
             </Link>
-            <Link href={secondaryHref} className={secondaryButtonClasses}>
+            <Link
+              href={secondaryHref}
+              className={secondaryButtonClasses}
+              onClick={() => events.stickyCta('secondary', secondaryHref)}
+            >
               {secondaryText}
             </Link>
           </>
         ) : href ? (
-          <Link href={href} className={buttonClasses}>
+          <Link href={href} className={buttonClasses} onClick={() => events.stickyCta('book', href)}>
             {text}
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -109,6 +114,7 @@ export default function StickyCTA({
         {!secondaryHref && (
           <a
             href="tel:+19495340457"
+            onClick={() => events.stickyCta('phone', 'tel:+19495340457')}
             className="flex items-center justify-center w-14 h-14 shrink-0 bg-brand-morning-light rounded-full border border-black/10 active:scale-95 transition-transform focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
             aria-label="Call (949) 534-0457"
           >

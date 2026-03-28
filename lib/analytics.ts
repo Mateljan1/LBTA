@@ -2,8 +2,6 @@
  * Google Analytics 4 event tracking utilities for LBTA.
  * Wraps `window.gtag` with type-safe helpers for conversion
  * and engagement events used across the site.
- *
- * Not yet wired: call events.* from layout and CTAs when GA4 is configured (see GA4_INTEGRATION_PLAN.md).
  */
 
 /**
@@ -72,5 +70,73 @@ export const events = {
       event_category: 'engagement',
       event_label: 'Schedule Category Expanded'
     })
-  }
+  },
+
+  /** Homepage hero primary (Book a Trial) or secondary (schedule & pricing). */
+  heroCta: (variant: 'primary' | 'secondary', href: string) => {
+    trackEvent('hero_cta_click', {
+      cta_variant: variant,
+      link_url: href,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      event_category: 'engagement',
+      event_label: variant === 'primary' ? 'Hero Book Trial' : 'Hero Schedule',
+    })
+  },
+
+  /** Homepage program grid cards (coaching vs match play groups). */
+  programCardClick: (title: string, href: string, section: 'coaching' | 'play') => {
+    trackEvent('program_card_click', {
+      program_title: title,
+      link_url: href,
+      program_section: section,
+      event_category: 'engagement',
+      event_label: title,
+    })
+  },
+
+  /** Tel: links — distinguish placement for CRO. */
+  phoneClick: (location: string) => {
+    trackEvent('phone_click', {
+      location,
+      event_category: 'engagement',
+      event_label: 'Phone',
+    })
+  },
+
+  /** Homepage bottom CTA trial form — first interaction. */
+  homepageTrialFormStart: () => {
+    trackEvent('homepage_trial_form_start', {
+      event_category: 'engagement',
+      event_label: 'Homepage CTA Form',
+    })
+  },
+
+  /** Vimeo embed finished loading (proxy for engagement; true “play” needs Player API). */
+  videoTestimonialEmbed: (name: string, index: number) => {
+    trackEvent('video_testimonial_embed', {
+      testimonial_name: name,
+      embed_index: index,
+      event_category: 'engagement',
+      event_label: name,
+    })
+  },
+
+  /** Featured grid “More stories” → /success-stories */
+  moreStoriesClick: () => {
+    trackEvent('more_stories_click', {
+      link_url: '/success-stories',
+      event_category: 'engagement',
+      event_label: 'More stories',
+    })
+  },
+
+  /** Mobile sticky bar — book link, optional secondary, or phone icon. */
+  stickyCta: (kind: 'book' | 'secondary' | 'phone', href?: string) => {
+    trackEvent('sticky_cta_click', {
+      sticky_action: kind,
+      link_url: href ?? '',
+      event_category: 'engagement',
+      event_label: kind === 'phone' ? 'Sticky phone' : 'Sticky CTA',
+    })
+  },
 }

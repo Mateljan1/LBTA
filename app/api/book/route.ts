@@ -188,6 +188,8 @@ export async function POST(request: NextRequest) {
       console.log('[Trial] Request received:', { program: trialBody.program, timestamp: new Date().toISOString() })
     }
     const daysSelected = (trialBody.preferredDays ?? []).join(', ') || 'Flexible'
+    const signupSourceField11 =
+      trialBody.source === 'homepage-cta' ? 'website-homepage-cta' : 'website'
 
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
       try {
@@ -200,7 +202,7 @@ export async function POST(request: NextRequest) {
             { field: '7', value: trialBody.program || 'Trial Request' },
             { field: '8', value: trialBody.location || 'Not specified' },
             { field: '9', value: daysSelected },
-            { field: '11', value: 'website' },
+            { field: '11', value: signupSourceField11 },
             { field: '12', value: 'trial' },
             { field: '5', value: trialBody.experience || 'Not specified' },
           ],

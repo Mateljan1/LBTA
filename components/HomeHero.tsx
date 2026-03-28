@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import homepageCopy from '@/data/homepage-copy.json'
+import { events } from '@/lib/analytics'
 
 type HeroCopy = (typeof homepageCopy)['hero'] & {
   ctaSecondary?: string
@@ -77,6 +78,7 @@ export default function HomeHero() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-4 w-full max-w-xl">
             <Link
               href={hero.ctaPrimaryHref}
+              onClick={() => events.heroCta('primary', hero.ctaPrimaryHref)}
               className="inline-flex items-center justify-center bg-white text-black font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 rounded-none hover:bg-white/90 transition-all duration-300 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               {hero.ctaPrimary}
@@ -84,6 +86,7 @@ export default function HomeHero() {
             {hero.ctaSecondary && hero.ctaSecondaryHref ? (
               <Link
                 href={hero.ctaSecondaryHref}
+                onClick={() => events.heroCta('secondary', hero.ctaSecondaryHref)}
                 className="inline-flex items-center justify-center bg-transparent text-white border border-white/25 font-sans text-[14px] font-medium tracking-[0.1em] uppercase px-10 py-4 rounded-none hover:bg-white/10 transition-all duration-300 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 {hero.ctaSecondary}

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { events } from '@/lib/analytics'
 
 interface VideoTestimonial {
   id: string
@@ -47,7 +48,15 @@ type Props = {
   variant?: VideoTestimonialsVariant
 }
 
-function VimeoIframe({ testimonial, lazy }: { testimonial: VideoTestimonial; lazy?: boolean }) {
+function VimeoIframe({
+  testimonial,
+  lazy,
+  onLoad,
+}: {
+  testimonial: VideoTestimonial
+  lazy?: boolean
+  onLoad?: () => void
+}) {
   return (
     <iframe
       src={`https://player.vimeo.com/video/${testimonial.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0`}
@@ -57,6 +66,7 @@ function VimeoIframe({ testimonial, lazy }: { testimonial: VideoTestimonial; laz
       allowFullScreen
       title={`${testimonial.name} - ${testimonial.role}`}
       loading={lazy ? 'lazy' : undefined}
+      onLoad={onLoad}
     />
   )
 }
@@ -77,10 +87,14 @@ function FeaturedHomeTestimonials() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
-          {featured.map((testimonial) => (
+          {featured.map((testimonial, index) => (
             <div key={testimonial.id} className="flex flex-col">
               <div className="relative aspect-video bg-black/50 rounded-lg overflow-hidden">
-                <VimeoIframe testimonial={testimonial} lazy />
+                <VimeoIframe
+                  testimonial={testimonial}
+                  lazy
+                  onLoad={() => events.videoTestimonialEmbed(testimonial.name, index)}
+                />
               </div>
               <div className="mt-4 text-center">
                 <p className="font-sans text-[14px] font-medium text-white">{testimonial.name}</p>
@@ -93,6 +107,7 @@ function FeaturedHomeTestimonials() {
         <div className="mt-12 md:mt-14 flex justify-center">
           <Link
             href="/success-stories"
+            onClick={() => events.moreStoriesClick()}
             className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[2px] border border-white/25 text-white font-sans text-sm font-medium tracking-[2.5px] uppercase transition-all duration-300 hover:border-white/50 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
           >
             More stories

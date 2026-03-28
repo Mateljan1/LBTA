@@ -111,6 +111,8 @@ export type JTTRegistration = z.infer<typeof jttRegistrationSchema>
  */
 export const bookingSchema = contactSchema.extend({
   program: z.string().max(200).optional(),
+  /** Routing / ops (e.g. homepage-cta → AC field 11). */
+  source: z.string().max(120).optional(),
   location: z.string().max(200).optional(),
   preferredDays: z.array(z.string().max(50)).max(31).optional().default([]),
   experience: z.string().max(200).optional(),

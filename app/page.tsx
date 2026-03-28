@@ -1,5 +1,6 @@
 import Script from 'next/script'
 import Link from 'next/link'
+import HomeProgramCardLink from '@/components/home/HomeProgramCardLink'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import FAQSection from '@/components/FAQSection'
@@ -276,6 +277,7 @@ export default function Home() {
                     ? '(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw'
                     : '(max-width: 767px) 100vw, 33vw'
                 const isSecondary = group.tier === 'secondary'
+                const programSection: 'coaching' | 'play' = isSecondary ? 'play' : 'coaching'
                 return (
                   <div
                     key={group.id}
@@ -301,28 +303,7 @@ export default function Home() {
                         const cardIndex = baseIndex + index
                         return (
                           <AnimatedSection key={program.title} delay={cardIndex * 150}>
-                            <Link
-                              href={program.link}
-                              className="group flex h-full flex-col overflow-hidden rounded-subtle border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.02),0_4px_8px_rgba(0,0,0,0.02)] transition-all duration-500 hover:border-black/10 hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(0,0,0,0.03),0_8px_16px_rgba(0,0,0,0.03)]"
-                            >
-                              <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden">
-                                <Image
-                                  src={program.image}
-                                  alt={program.imageAlt}
-                                  fill
-                                  className="object-cover image-zoom"
-                                  style={{ objectPosition: program.objectPosition ?? '50% 40%' }}
-                                  sizes={imageSizes}
-                                  quality={95}
-                                />
-                              </div>
-                              <div className="flex flex-1 flex-col px-5 pb-6 pt-5">
-                                <h4 className="font-headline text-headline-sm font-light mb-2 group-hover:text-brand-pacific-dusk/70 transition-colors duration-300">
-                                  {program.title}
-                                </h4>
-                                <p className="text-body text-lbta-slate flex-1">{program.description}</p>
-                              </div>
-                            </Link>
+                            <HomeProgramCardLink program={program} section={programSection} imageSizes={imageSizes} />
                           </AnimatedSection>
                         )
                       })}
