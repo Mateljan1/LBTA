@@ -2,7 +2,7 @@
 
 /**
  * Site header: logo (local /logos/LBTAblktext.png per .cursorrules), "The Academy" wordmark,
- * desktop nav (Programs mega-panel, Schedule, Coaches, About, Contact, Camp), primary CTA (Book Trial),
+ * desktop nav (Programs mega-panel, Schedule, Coaches, About, Contact, Camps), primary CTA (Book Trial),
  * and mobile drawer with focus trap. No external logo URLs.
  */
 
@@ -46,7 +46,7 @@ const navigation = [
   { name: 'Coaches', href: '/coaches' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
-  { name: 'Camp', href: '/camps' },
+  { name: 'Camps', href: '/camps' },
 ]
 
 export default function Header() {

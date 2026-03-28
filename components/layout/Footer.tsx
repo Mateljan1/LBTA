@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { SUPPORT_EMAIL } from '@/lib/site-copy'
 import Image from 'next/image'
 import NewsletterForm from '@/components/NewsletterForm'
 
@@ -126,11 +127,11 @@ export default function Footer() {
                   </li>
                   <li>
                     <a
-                      href="mailto:support@lagunabeachtennisacademy.com"
-                      aria-label="Email support at support@lbta.com"
+                      href={`mailto:${SUPPORT_EMAIL}`}
+                      aria-label={`Email support at ${SUPPORT_EMAIL}`}
                       className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
-                      support@lbta.com
+                      {SUPPORT_EMAIL}
                     </a>
                   </li>
                   <li className="pt-2">

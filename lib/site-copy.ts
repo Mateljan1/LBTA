@@ -6,6 +6,21 @@
 
 import { siteCopy } from '@/lib/pricing-supplemental'
 
+/** Canonical support inbox — matches JSON-LD `email` on homepage and all mailto: links. */
+export const SUPPORT_EMAIL = 'support@lagunabeachtennisacademy.com' as const
+
+/**
+ * CTA label glossary (homepage audit Phase 1).
+ * Surfaces differ on purpose: nav/sticky use short labels; hero uses sentence case;
+ * the home CTA form is a request flow, not instant scheduling.
+ * Align consumers over time; do not blanket-replace without checking UX.
+ */
+export const CTA_GLOSSARY = {
+  navSticky: 'Book Trial',
+  heroPrimary: 'Book a Trial',
+  formRequestTrial: 'Request a Trial',
+} as const
+
 export interface SiteCopySlice {
   stickyCtaSchedules?: string
   beginnerProgramCohort?: string

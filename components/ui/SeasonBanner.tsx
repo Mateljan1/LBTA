@@ -34,9 +34,11 @@ export default function SeasonBanner() {
             <p className="text-sm font-sans text-lbta-slate">
               <span className="font-headline font-light">{cta.headline}</span>
               {cta.subline && (
-                <span className="ml-2 hidden sm:inline text-xs text-lbta-slate/60">
-                  {cta.subline}
-                </span>
+                <>
+                  {/* Explicit space avoids headline ending in “Open” + subline “Starts…” reading as one word on some breakpoints */}
+                  {' '}
+                  <span className="hidden sm:inline text-xs text-lbta-slate/60">{cta.subline}</span>
+                </>
               )}
             </p>
           </div>
