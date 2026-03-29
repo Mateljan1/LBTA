@@ -87,7 +87,7 @@ export default function UtrDropInSchedule({
                 Sunday — {sundayVenueLabel}
               </th>
               <th scope="col" className={`py-4 pr-5 md:pr-8 ${th}`}>
-                <span className="sr-only">Register</span>
+                <span className="sr-only">Division signup</span>
               </th>
             </tr>
           </thead>
@@ -103,7 +103,7 @@ export default function UtrDropInSchedule({
                   </td>
                   <td className={`py-3.5 pr-5 md:pr-8`}>
                     <Link href="#divisions" className={link}>
-                      Register →
+                      Season signup →
                     </Link>
                   </td>
                 </tr>
@@ -125,9 +125,9 @@ export default function UtrDropInSchedule({
       </div>
       <div className={foot}>
         <p className={footText}>
-          Drop-in is <strong className={strong}>per weekend</strong> at the price shown for your division when
-          space allows—see divisions above. Season registration covers all regular-season weekends plus Grand
-          Finals programming. Questions?{' '}
+          <strong className={strong}>Single-weekend reference pricing</strong> (shown per division) applies when
+          the academy confirms space—there is no self-serve or day-of online signup. Season registration covers
+          all regular-season weekends plus Grand Finals programming. Questions or to ask about one weekend?{' '}
           <Link href="/contact" className={link}>
             Contact us
           </Link>

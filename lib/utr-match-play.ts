@@ -46,7 +46,7 @@ function fallbackRegularSaturdays(): string[] {
   return out
 }
 
-/** ISO dates (YYYY-MM-DD) for each regular Saturday matchplay — drop-in is per week at division rate when space allows. */
+/** ISO dates (YYYY-MM-DD) for each regular Saturday matchplay. Weekend reference pricing is per division when the academy confirms space (not self-serve online). */
 export function getUtrRegularSeasonSaturdays(): string[] {
   const list = leagues().utr.regularSeasonSaturdays
   if (list && list.length > 0) return list

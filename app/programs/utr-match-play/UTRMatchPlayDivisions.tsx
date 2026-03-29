@@ -146,7 +146,7 @@ export default function UTRMatchPlayDivisions({
                       </p>
                       {d.dropIn != null ? (
                         <p className="mt-1 font-sans text-[13px] text-brand-pacific-dusk/55">
-                          Drop-in ${d.dropIn}
+                          {`Weekend reference $${d.dropIn} — contact us to arrange`}
                         </p>
                       ) : null}
                     </div>
@@ -160,10 +160,10 @@ export default function UTRMatchPlayDivisions({
                         Register
                       </button>
                       <Link
-                        href="#schedule"
+                        href="/contact"
                         className={`inline-flex min-h-[44px] items-center justify-center rounded-md px-4 font-sans text-[13px] font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 ${dropClass}`}
                       >
-                        Drop-in
+                        Contact
                       </Link>
                     </div>
                   </div>
@@ -257,7 +257,7 @@ export default function UTRMatchPlayDivisions({
                     <span className="font-medium text-white tabular-nums">{d.price}</span>
                     {d.dropIn != null ? (
                       <span className="block text-[12px] font-light text-white/55 mt-0.5">
-                        Drop-in ${d.dropIn}
+                        {`Weekend reference $${d.dropIn} — contact to arrange`}
                       </span>
                     ) : null}
                   </div>

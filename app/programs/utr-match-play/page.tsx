@@ -33,10 +33,9 @@ const sunVenueShort = getUtrSundayVenueShort()
 const grandFinalsDisplay = formatUtrGrandFinalsShort(utrGrandFinalsIso)
 const grandFinalsLong = formatUtrSessionDateLong(utrGrandFinalsIso)
 
-const VENUE_ALTA_IMAGE =
-  'https://res.cloudinary.com/dv033eo0x/image/upload/c_fill,w_700,h_280,g_center,q_auto,f_auto/lbta/photos/email-jpg/2026/lbta-2026-youth-development-group-photo-coaches-juniors.jpg'
-const VENUE_LBHS_IMAGE =
-  'https://res.cloudinary.com/dv033eo0x/image/upload/c_fill,w_700,h_280,g_center,q_auto,f_auto/lbta/photos/email-jpg/2026/lbta-2026-utr-5-0-7-0-player-serve-follow-through-blue-court.jpg'
+/** Local WebP — reliable in prod; Cloudinary email paths were 404ing in Image optimizer. */
+const VENUE_ALTA_IMAGE = '/images/about/court-alta-laguna.webp'
+const VENUE_LBHS_IMAGE = '/images/about/court-lbhs.webp'
 
 export const metadata: Metadata = {
   // Segment title only — root layout template adds " | Laguna Beach Tennis Academy"
@@ -84,13 +83,21 @@ export default function UTRMatchPlayPage() {
           </h2>
           <div className="section-horizon mb-6 max-w-[120px] opacity-90" aria-hidden="true" />
           <p className="text-body text-brand-pacific-dusk/75 mb-10 max-w-2xl">
-            Season registration covers all eight weekends plus Grand Finals. Drop in any weekend at your
-            division rate, subject to space—see the{' '}
+            Season registration covers all eight weekends plus Grand Finals. Divisions are by skill band—juniors
+            and adults enroll where they fit. Single-weekend play is not self-serve online; when space allows,
+            we align it with your division rate—see the{' '}
             <a
               href="#schedule"
               className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/35 hover:text-brand-pacific-dusk"
             >
               schedule
+            </a>{' '}
+            or{' '}
+            <a
+              href="/contact"
+              className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/35 hover:text-brand-pacific-dusk"
+            >
+              contact us
             </a>
             .
           </p>
@@ -120,7 +127,8 @@ export default function UTRMatchPlayPage() {
           <div className="section-horizon mb-6 max-w-[120px] opacity-90" aria-hidden="true" />
           <p className="text-[16px] md:text-[17px] font-sans font-light leading-relaxed text-brand-pacific-dusk/70 max-w-2xl mb-10">
             Saturdays at {satVenueShort} (Color Ball + UTR 2.0–5.0 Singles). Sundays at {sunVenueShort} (UTR
-            3.0–7.0 Singles + Doubles). Drop in any weekend or commit to the full season.
+            3.0–7.0 Singles + Doubles). Commit through season registration; for a single weekend, reach out—there
+            is no day-of online signup.
           </p>
           <div className="mx-auto max-w-5xl">
             <UtrDropInSchedule
@@ -195,13 +203,10 @@ export default function UTRMatchPlayPage() {
           </div>
           <p className="mt-8 text-[14px] font-sans font-light text-brand-pacific-dusk/60 leading-relaxed">
             Unsure which division fits? Note it when you register—we confirm placement before the first
-            weekend. We do not offer separate trial sessions for this series; you can join a weekend with a{' '}
-            <a href="#schedule" className="text-brand-victoria-cove underline underline-offset-4 font-medium hover:text-brand-pacific-dusk transition-colors">
-              drop-in
-            </a>{' '}
-            where listed (subject to space), or{' '}
+            weekend. We do not offer separate trial sessions for this series. For a single weekend, reference
+            pricing is listed per division—arrange through the academy (no day-of online signup).{' '}
             <Link href="/contact" className="text-brand-victoria-cove underline underline-offset-4 font-medium hover:text-brand-pacific-dusk transition-colors">
-              contact us
+              Contact us
             </Link>{' '}
             with questions.
           </p>
@@ -486,8 +491,10 @@ export default function UTRMatchPlayPage() {
             Two locations, one series
           </h3>
           <div className="section-horizon mx-auto mb-6 opacity-90" aria-hidden="true" />
-          <p className="text-center text-body text-brand-pacific-dusk/70 max-w-xl mx-auto mb-10">
-            Saturdays on the hill. Sundays under the lights.
+          <p className="text-center text-body text-brand-pacific-dusk/70 max-w-2xl mx-auto mb-10">
+            Juniors and adults compete by level—not by age alone. Saturdays at Alta Laguna Park; Sundays at
+            Laguna Beach High School. Same series; divisions span Color Ball through advanced singles and
+            doubles.
           </p>
           <div className="grid sm:grid-cols-2 gap-6">
             {[
@@ -497,7 +504,8 @@ export default function UTRMatchPlayPage() {
                 courts: '4 courts',
                 days: `Saturdays: Color Ball + UTR 2.0–5.0 Singles`,
                 image: VENUE_ALTA_IMAGE,
-                imageAlt: 'Coaches and junior players grouped on outdoor courts at Alta Laguna Park',
+                imageAlt:
+                  'Outdoor tennis courts at Alta Laguna Park — match play for juniors and adults by division',
                 mapUrl:
                   'https://www.google.com/maps/search/?api=1&query=Alta+Laguna+Park+Laguna+Beach+CA+92651',
               },
@@ -507,7 +515,8 @@ export default function UTRMatchPlayPage() {
                 courts: '6 courts (4 lit)',
                 days: `Sundays: UTR 3.0–7.0 Singles + Doubles · Grand Finals: ${grandFinalsDisplay}`,
                 image: VENUE_LBHS_IMAGE,
-                imageAlt: 'Player serving on a blue hard court at Laguna Beach High School',
+                imageAlt:
+                  'Outdoor tennis courts at Laguna Beach High School — match play for juniors and adults by division',
                 mapUrl: 'https://www.google.com/maps/search/?api=1&query=605+Park+Ave+Laguna+Beach+CA+92651',
               },
             ].map((v) => (
@@ -579,7 +588,11 @@ export default function UTRMatchPlayPage() {
                 },
                 {
                   q: 'Can I try one session first?',
-                  a: 'Drop-in is available every weekend at your division rate, subject to space.',
+                  a: 'We do not offer same-day or self-serve online signup for a single session. If you want to try one weekend, contact us—when space allows, we align you with the weekend reference rate for your division.',
+                },
+                {
+                  q: 'Is this only for juniors?',
+                  a: 'No. Divisions are by level, not age. Adults and juniors enroll in the band that fits—Color Ball is scaled tennis for younger pathways; UTR singles and doubles bands include adults.',
                 },
               ].map((item) => (
                 <div key={item.q} className="py-6 first:pt-0">
