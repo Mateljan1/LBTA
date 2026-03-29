@@ -33,7 +33,7 @@ export default function CoachingTeamSection() {
         </AnimatedSection>
 
         {/* 2×2 from md+: Robert & Peter, then Michelle & Allison (see getTeamCoachesForGrid) */}
-        <div className="grid grid-cols-1 items-stretch gap-9 md:grid-cols-2 md:gap-x-10 md:gap-y-12 xl:gap-x-12 xl:gap-y-14">
+        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-x-8 md:gap-y-10 lg:gap-x-10 lg:gap-y-12">
           {teamCoaches.map((coach, index) => (
             <AnimatedSection
               key={coach.slug ?? `order-${coach.order}-${index}`}
