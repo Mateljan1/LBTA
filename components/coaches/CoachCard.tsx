@@ -119,7 +119,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
           </div>
         </div>
 
-        <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-5 py-6 sm:px-6">
+        <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-5 py-6 sm:px-6 lg:px-7 lg:py-7">
           <div className="shrink-0">
             <p className="mb-2 font-sans text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-brand-pacific-dusk/55 line-clamp-2">
               {coach.title}
