@@ -83,9 +83,10 @@ export default function UTRMatchPlayPage() {
           </h2>
           <div className="section-horizon mb-6 max-w-[120px] opacity-90" aria-hidden="true" />
           <p className="text-body text-brand-pacific-dusk/75 mb-10 max-w-2xl">
-            Season registration covers all eight weekends plus Grand Finals. Divisions are by skill band—juniors
-            and adults enroll where they fit. Single-weekend play is not self-serve online; when space allows,
-            we align it with your division rate—see the{' '}
+            Start with a weekend drop-in: pick your division, choose a date on the card, and request a
+            drop-in—we confirm space after you reach out (not instant checkout). Full season registration
+            covers all eight weekends plus Grand Finals. Divisions are by skill band—juniors and adults enroll
+            where they fit. See the{' '}
             <a
               href="#schedule"
               className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/35 hover:text-brand-pacific-dusk"
@@ -98,8 +99,8 @@ export default function UTRMatchPlayPage() {
               className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/35 hover:text-brand-pacific-dusk"
             >
               contact us
-            </a>
-            .
+            </a>{' '}
+            for questions.
           </p>
           <p className="text-[14px] font-sans font-light text-brand-pacific-dusk/60 mb-10 max-w-2xl">
             New to UTR or raising a Color Ball player?{' '}
@@ -127,8 +128,8 @@ export default function UTRMatchPlayPage() {
           <div className="section-horizon mb-6 max-w-[120px] opacity-90" aria-hidden="true" />
           <p className="text-[16px] md:text-[17px] font-sans font-light leading-relaxed text-brand-pacific-dusk/70 max-w-2xl mb-10">
             Saturdays at {satVenueShort} (Color Ball + UTR 2.0–5.0 Singles). Sundays at {sunVenueShort} (UTR
-            3.0–7.0 Singles + Doubles). Commit through season registration; for a single weekend, reach out—there
-            is no day-of online signup.
+            3.0–7.0 Singles + Doubles). Use the division cards above to pick a date and request a drop-in, or
+            register for the full season—there is no day-of online signup.
           </p>
           <div className="mx-auto max-w-5xl">
             <UtrDropInSchedule

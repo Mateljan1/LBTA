@@ -41,6 +41,9 @@ function UtrLightDivisionCard({
   }, [d.name, d.dropIn, selectedIso])
 
   const fieldId = `utr-dropin-date-${slugifyDivisionName(d.name)}`
+  const hintId = `utr-dropin-hint-${slugifyDivisionName(d.name)}`
+  const selectedDateLabel =
+    dateOptions.find((o) => o.iso === selectedIso)?.label ?? selectedIso
 
   return (
     <article
@@ -155,6 +158,7 @@ function UtrLightDivisionCard({
                       id={fieldId}
                       value={selectedIso}
                       onChange={(e) => setSelectedIso(e.target.value)}
+                      aria-describedby={hintId}
                       className="w-full min-h-[48px] rounded-md border border-brand-pacific-dusk/15 bg-brand-morning-light px-3 py-2.5 font-sans text-[14px] font-medium text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-brand-pacific-dusk/25"
                     >
                       {dateOptions.map((opt) => (
@@ -165,7 +169,7 @@ function UtrLightDivisionCard({
                     </select>
                   </div>
                 ) : null}
-                <p className="font-sans text-[12px] text-brand-pacific-dusk/50">
+                <p id={hintId} className="font-sans text-[12px] text-brand-pacific-dusk/50">
                   We confirm space after you submit — not instant online checkout.
                 </p>
               </>
@@ -181,6 +185,7 @@ function UtrLightDivisionCard({
             {d.dropIn != null ? (
               <Link
                 href={dropInHref}
+                aria-label={`Request drop-in for ${d.name} on ${selectedDateLabel || 'selected date'}`}
                 className={`inline-flex min-h-[48px] items-center justify-center rounded-md px-4 font-sans text-[13px] font-bold transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${registerClass}`}
               >
                 Request drop-in

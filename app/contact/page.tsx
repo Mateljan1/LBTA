@@ -22,7 +22,7 @@ function ContactPageContent() {
   const [errors, setErrors] = useState<{[key: string]: string}>({})
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const utrPrefillAppliedRef = useRef(false)
+  const utrPrefillKeyRef = useRef<string | null>(null)
 
   useEffect(() => {
     return () => {
@@ -31,11 +31,18 @@ function ContactPageContent() {
   }, [])
 
   useEffect(() => {
-    if (utrPrefillAppliedRef.current) return
-    if (searchParams.get('utr_drop_in') !== '1') return
+    if (searchParams.get('utr_drop_in') !== '1') {
+      utrPrefillKeyRef.current = null
+      return
+    }
     const division = searchParams.get('division')
     const dateIso = searchParams.get('date')
     if (!division?.trim() || !dateIso?.trim()) return
+
+    const refPrice = searchParams.get('ref_price') ?? ''
+    const key = `${division.trim()}|${dateIso.trim()}|${refPrice.trim()}`
+    if (utrPrefillKeyRef.current === key) return
+    utrPrefillKeyRef.current = key
 
     let longDate = dateIso
     try {
@@ -43,20 +50,18 @@ function ContactPageContent() {
     } catch {
       longDate = dateIso
     }
-    const refPrice = searchParams.get('ref_price')
     const priceLine =
-      refPrice && refPrice.trim() !== ''
-        ? ` Weekend reference $${refPrice} — please confirm space.`
+      refPrice.trim() !== ''
+        ? ` Weekend reference $${refPrice.trim()} — please confirm space.`
         : ' Please confirm space.'
 
-    const msg = `I'm requesting a UTR Match Play drop-in for ${division} on ${longDate}.${priceLine}\n\n`
+    const msg = `I'm requesting a UTR Match Play drop-in for ${division.trim()} on ${longDate}.${priceLine}\n\n`
 
     setFormData((prev) => ({
       ...prev,
       interestedIn: 'UTR Match Play — Drop-in',
-      message: prev.message.trim() ? prev.message : msg,
+      message: msg,
     }))
-    utrPrefillAppliedRef.current = true
 
     requestAnimationFrame(() => {
       document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -198,7 +203,7 @@ function ContactPageContent() {
       </section>
 
       {/* MAIN FORM SECTION */}
-      <section id="contact-form" className="bg-white py-16 md:py-24">
+      <section id="contact-form" className="scroll-mt-24 bg-white py-16 md:scroll-mt-28 md:py-24">
         <div className="max-w-[1200px] mx-auto px-4 md:px-6 md:pl-10 border-l-0 md:border-l-4 md:border-brand-sandstone">
           {status === 'success' ? (
             /* SUCCESS STATE */

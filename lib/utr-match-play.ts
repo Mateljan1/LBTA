@@ -157,9 +157,10 @@ export function getUtrDropInDateOptions(
   const isos =
     matchDay === 'Sunday' ? getUtrRegularSeasonSundays() : getUtrRegularSeasonSaturdays()
   const fmt = new Intl.DateTimeFormat('en-US', {
-    weekday: 'short',
-    month: 'short',
+    weekday: 'long',
+    month: 'long',
     day: 'numeric',
+    year: 'numeric',
   })
   return isos.map((iso) => ({
     iso,
