@@ -20,7 +20,7 @@ export default function CoachingTeamSection() {
             Decades of combined experience. One philosophy: movement first, then craft—and a community that stays.
           </p>
           <p className="mt-4 font-sans text-[13px] md:text-[14px] text-brand-pacific-dusk/55 max-w-[540px] leading-relaxed border-l-2 border-brand-victoria-cove/35 pl-4">
-            Each coach below works alongside Andrew—same standards on court, with the right fit for your goals.
+            Same philosophy as above. Private sessions with the coach who fits your goals.
           </p>
         </AnimatedSection>
 
