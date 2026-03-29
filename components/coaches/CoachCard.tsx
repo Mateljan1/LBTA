@@ -111,7 +111,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               src={coachImageSrc(coach.image)}
               alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
               fill
-              className="object-cover transition-transform duration-[450ms] motion-safe:group-hover:scale-[1.02]"
+              className="object-contain object-center transition-opacity duration-300 group-hover:opacity-[0.98]"
               style={{ objectPosition: coach.imagePosition }}
               sizes="(max-width: 768px) 92vw, (max-width: 1280px) 42vw, 480px"
               quality={95}
@@ -189,7 +189,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               src={coachImageSrc(coach.image)}
               alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
               fill
-              className="object-cover sm:transition-transform sm:duration-[450ms] motion-safe:sm:group-hover:scale-[1.02]"
+              className="object-contain object-center transition-opacity duration-300 group-hover:opacity-[0.98]"
               style={{ objectPosition: coach.imagePosition }}
               sizes="(max-width: 639px) 92vw, 320px"
               quality={95}
