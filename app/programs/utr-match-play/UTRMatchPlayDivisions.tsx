@@ -61,10 +61,17 @@ export default function UTRMatchPlayDivisions({
                       className="pointer-events-none absolute inset-x-0 bottom-0 h-[100px] bg-gradient-to-t from-black/45 to-transparent"
                       aria-hidden="true"
                     />
+                    {/* Top-right scrim so Sat/Sun pills stay readable on bright courts/sky */}
+                    <div
+                      className="pointer-events-none absolute right-0 top-0 z-[1] h-32 w-[min(100%,15rem)] bg-gradient-to-bl from-black/60 via-black/25 to-transparent"
+                      aria-hidden="true"
+                    />
                     {d.matchDay ? (
                       <span
-                        className={`absolute right-3.5 top-3.5 z-[1] rounded-md px-3.5 py-1.5 font-sans text-[11px] font-extrabold uppercase tracking-[0.12em] text-white ${
-                          d.matchDay === 'Saturday' ? 'bg-brand-victoria-cove/92' : 'bg-brand-sunset-cliff/92'
+                        className={`absolute right-3.5 top-3.5 z-[2] rounded-md px-3.5 py-1.5 font-sans text-[11px] font-extrabold uppercase tracking-[0.12em] text-white shadow-[0_2px_14px_rgba(0,0,0,0.55)] ring-1 ring-black/25 ${
+                          d.matchDay === 'Saturday'
+                            ? 'bg-brand-victoria-cove'
+                            : 'bg-brand-sunset-cliff'
                         }`}
                       >
                         {d.matchDay}
