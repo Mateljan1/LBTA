@@ -1,14 +1,17 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { Suspense, useState, useRef, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { MapPin, Phone, Mail, CheckCircle, Loader2 } from 'lucide-react'
 import StickyCTA from '@/components/StickyCTA'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
+import { formatUtrSessionDateLong } from '@/lib/utr-match-play'
 
-export default function ContactPage() {
+function ContactPageContent() {
+  const searchParams = useSearchParams()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,12 +22,46 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<{[key: string]: string}>({})
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const utrPrefillAppliedRef = useRef(false)
 
   useEffect(() => {
     return () => {
       if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current)
     }
   }, [])
+
+  useEffect(() => {
+    if (utrPrefillAppliedRef.current) return
+    if (searchParams.get('utr_drop_in') !== '1') return
+    const division = searchParams.get('division')
+    const dateIso = searchParams.get('date')
+    if (!division?.trim() || !dateIso?.trim()) return
+
+    let longDate = dateIso
+    try {
+      longDate = formatUtrSessionDateLong(dateIso)
+    } catch {
+      longDate = dateIso
+    }
+    const refPrice = searchParams.get('ref_price')
+    const priceLine =
+      refPrice && refPrice.trim() !== ''
+        ? ` Weekend reference $${refPrice} — please confirm space.`
+        : ' Please confirm space.'
+
+    const msg = `I'm requesting a UTR Match Play drop-in for ${division} on ${longDate}.${priceLine}\n\n`
+
+    setFormData((prev) => ({
+      ...prev,
+      interestedIn: 'UTR Match Play — Drop-in',
+      message: prev.message.trim() ? prev.message : msg,
+    }))
+    utrPrefillAppliedRef.current = true
+
+    requestAnimationFrame(() => {
+      document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }, [searchParams])
 
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const validatePhone = (phone: string) => /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phone)
@@ -296,6 +333,7 @@ export default function ContactPage() {
                       <option value="Fitness Programs">Fitness Programs</option>
                       <option value="Summer Camps">Summer Camps</option>
                       <option value="Private Lessons">Private Lessons</option>
+                      <option value="UTR Match Play — Drop-in">UTR Match Play — Drop-in</option>
                       <option value="Not Sure">Not Sure - Help Me Choose</option>
                     </select>
                   </div>
@@ -403,5 +441,21 @@ export default function ContactPage() {
       {/* Sticky Mobile CTA */}
       <StickyCTA text="Book a Trial" href="/book" showAfterScroll={800} />
     </>
+  )
+}
+
+function ContactLoadingFallback() {
+  return (
+    <div className="flex min-h-[50vh] items-center justify-center bg-brand-morning-light font-sans text-[15px] text-brand-pacific-dusk/60">
+      Loading…
+    </div>
+  )
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<ContactLoadingFallback />}>
+      <ContactPageContent />
+    </Suspense>
   )
 }

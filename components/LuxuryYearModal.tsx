@@ -32,6 +32,8 @@ interface LuxuryYearModalProps {
   type: 'camp' | 'utr-circuit' | 'jtt' | 'seasonal' | 'inquiry'
   data: CampRegistrationData | UTRCircuitData | null
   season?: string
+  /** When opening from a UTR division card, pre-select that division (full season). */
+  utrInitialDivision?: string | null
 }
 
 const springTransition = {
@@ -40,7 +42,14 @@ const springTransition = {
   damping: 35,
 }
 
-export default function LuxuryYearModal({ isOpen, onClose, type, data, season }: LuxuryYearModalProps) {
+export default function LuxuryYearModal({
+  isOpen,
+  onClose,
+  type,
+  data,
+  season,
+  utrInitialDivision,
+}: LuxuryYearModalProps) {
   const [step, setStep] = useState(1)
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null)
@@ -98,8 +107,16 @@ export default function LuxuryYearModal({ isOpen, onClose, type, data, season }:
       } else {
         setSelectedWeekInModal(null)
       }
+      if (type === 'utr-circuit' && data && utrInitialDivision) {
+        const u = data as UTRCircuitData
+        const match = u.divisions.find((x) => x.age === utrInitialDivision)
+        if (match) {
+          setSelectedOption(match.age)
+          setSelectedPrice(match.price)
+        }
+      }
     }
-  }, [isOpen, type, data])
+  }, [isOpen, type, data, utrInitialDivision])
 
   useEffect(() => {
     if (!errorMessage) return

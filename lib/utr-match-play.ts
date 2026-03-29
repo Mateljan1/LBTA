@@ -150,6 +150,23 @@ export function getUtrWeekBadgeLabel(): string {
 }
 
 
+/** Labels for drop-in date pickers on division cards (regular-season dates only). */
+export function getUtrDropInDateOptions(
+  matchDay?: 'Saturday' | 'Sunday'
+): { iso: string; label: string }[] {
+  const isos =
+    matchDay === 'Sunday' ? getUtrRegularSeasonSundays() : getUtrRegularSeasonSaturdays()
+  const fmt = new Intl.DateTimeFormat('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+  })
+  return isos.map((iso) => ({
+    iso,
+    label: fmt.format(new Date(`${iso}T12:00:00`)),
+  }))
+}
+
 /** Human duration for form prefill — must match JSON season. */
 export function getUtrCircuitFormDuration(): string {
   const label = getUtrSeasonLabel()

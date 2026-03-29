@@ -1,11 +1,205 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
-import { getUtrCircuitModalData } from '@/lib/utr-match-play'
+import { getUtrCircuitModalData, getUtrDropInDateOptions } from '@/lib/utr-match-play'
 import type { UtrDivisionCard } from '@/lib/utr-match-play'
+
+function slugifyDivisionName(name: string) {
+  return name.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '') || 'division'
+}
+
+function UtrLightDivisionCard({
+  d,
+  registerClass,
+  dropClass,
+  onFullSeason,
+}: {
+  d: UtrDivisionCard
+  registerClass: string
+  dropClass: string
+  onFullSeason: () => void
+}) {
+  const dateOptions = useMemo(() => getUtrDropInDateOptions(d.matchDay), [d.matchDay])
+  const [selectedIso, setSelectedIso] = useState(dateOptions[0]?.iso ?? '')
+
+  useEffect(() => {
+    setSelectedIso(dateOptions[0]?.iso ?? '')
+  }, [dateOptions])
+
+  const dropInHref = useMemo(() => {
+    if (!selectedIso) return '/contact'
+    const p = new URLSearchParams({
+      utr_drop_in: '1',
+      division: d.name,
+      date: selectedIso,
+    })
+    if (d.dropIn != null) p.set('ref_price', String(d.dropIn))
+    return `/contact?${p.toString()}`
+  }, [d.name, d.dropIn, selectedIso])
+
+  const fieldId = `utr-dropin-date-${slugifyDivisionName(d.name)}`
+
+  return (
+    <article
+      className="flex flex-col overflow-hidden rounded-2xl border border-brand-pacific-dusk/[0.08] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_4px_12px_rgba(27,58,92,0.06)] transition-all duration-300 hover:border-brand-pacific-dusk/15 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(27,58,92,0.08)]"
+    >
+      {d.image ? (
+        <div className="relative h-[236px] w-full shrink-0 overflow-hidden bg-brand-sandstone sm:h-[252px]">
+          <Image
+            src={d.image}
+            alt={d.imageAlt ?? `${d.name} division`}
+            fill
+            className="object-cover"
+            style={{
+              objectPosition: d.imageObjectPosition ?? '50% 24%',
+            }}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={92}
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-[100px] bg-gradient-to-t from-black/45 to-transparent"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute right-0 top-0 z-[1] h-32 w-[min(100%,15rem)] bg-gradient-to-bl from-black/60 via-black/25 to-transparent"
+            aria-hidden="true"
+          />
+          {d.matchDay ? (
+            <span
+              className={`absolute right-3.5 top-3.5 z-[2] rounded-md px-3.5 py-1.5 font-sans text-[11px] font-extrabold uppercase tracking-[0.12em] text-white shadow-[0_2px_14px_rgba(0,0,0,0.55)] ring-1 ring-black/25 ${
+                d.matchDay === 'Saturday' ? 'bg-brand-victoria-cove' : 'bg-brand-sunset-cliff'
+              }`}
+            >
+              {d.matchDay}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="flex flex-1 flex-col px-6 pb-6 pt-5 md:px-7 md:pt-6">
+        <h3 className="font-headline text-[1.65rem] font-bold leading-snug text-brand-pacific-dusk md:text-[1.75rem]">
+          {d.name}
+        </h3>
+        <p className="mt-1 font-sans text-[14px] text-brand-pacific-dusk/65">{d.level}</p>
+
+        {d.name.toLowerCase().includes('color ball') ? (
+          <div className="mt-4 flex flex-wrap gap-4">
+            <div className="flex items-center gap-2">
+              <span
+                className="h-4 w-4 shrink-0 rounded-full bg-red-500 shadow-[0_2px_6px_rgba(204,51,51,0.35)]"
+                aria-hidden="true"
+              />
+              <span className="font-sans text-[14px] font-bold text-brand-pacific-dusk">Red</span>
+              <span className="font-sans text-[13px] text-brand-pacific-dusk/55">4–8</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span
+                className="h-4 w-4 shrink-0 rounded-full bg-brand-sunset-cliff shadow-[0_2px_6px_rgba(232,131,74,0.35)]"
+                aria-hidden="true"
+              />
+              <span className="font-sans text-[14px] font-bold text-brand-pacific-dusk">Orange</span>
+              <span className="font-sans text-[13px] text-brand-pacific-dusk/55">7–10</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span
+                className="h-4 w-4 shrink-0 rounded-full bg-brand-tide-pool shadow-[0_2px_6px_rgba(45,158,62,0.25)]"
+                aria-hidden="true"
+              />
+              <span className="font-sans text-[14px] font-bold text-brand-pacific-dusk">Green</span>
+              <span className="font-sans text-[13px] text-brand-pacific-dusk/55">10–14</span>
+            </div>
+          </div>
+        ) : null}
+
+        {d.note ? (
+          <p className="mt-3 font-sans text-[13px] font-light italic text-brand-pacific-dusk/55">{d.note}</p>
+        ) : null}
+
+        <div className="mt-5 grid grid-cols-2 gap-2 gap-y-3">
+          <div>
+            <span className="block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
+              Venue
+            </span>
+            <span className="font-sans text-[14px] font-semibold text-brand-pacific-dusk">{d.venue}</span>
+          </div>
+          <div>
+            <span className="block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
+              Time
+            </span>
+            <span className="font-sans text-[14px] font-semibold text-brand-pacific-dusk">{d.time}</span>
+          </div>
+        </div>
+
+        <div className="mt-auto flex flex-col gap-4 border-t border-black/[0.06] pt-5">
+          <div className="space-y-3">
+            {d.dropIn != null ? (
+              <>
+                <div>
+                  <p className="font-sans text-2xl font-extrabold tabular-nums text-brand-pacific-dusk">
+                    ${d.dropIn}
+                  </p>
+                  <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/45">Drop-in (per session)</p>
+                </div>
+                {dateOptions.length > 0 ? (
+                  <div>
+                    <label
+                      htmlFor={fieldId}
+                      className="mb-1.5 block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45"
+                    >
+                      Choose a date
+                    </label>
+                    <select
+                      id={fieldId}
+                      value={selectedIso}
+                      onChange={(e) => setSelectedIso(e.target.value)}
+                      className="w-full min-h-[48px] rounded-md border border-brand-pacific-dusk/15 bg-brand-morning-light px-3 py-2.5 font-sans text-[14px] font-medium text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-brand-pacific-dusk/25"
+                    >
+                      {dateOptions.map((opt) => (
+                        <option key={opt.iso} value={opt.iso}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : null}
+                <p className="font-sans text-[12px] text-brand-pacific-dusk/50">
+                  We confirm space after you submit — not instant online checkout.
+                </p>
+              </>
+            ) : null}
+
+            <div className="border-t border-black/[0.04] pt-3">
+              <p className="font-sans text-lg font-bold tabular-nums text-brand-pacific-dusk/90">{d.price}</p>
+              <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/45">Full season</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-end">
+            {d.dropIn != null ? (
+              <Link
+                href={dropInHref}
+                className={`inline-flex min-h-[48px] items-center justify-center rounded-md px-4 font-sans text-[13px] font-bold transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${registerClass}`}
+              >
+                Request drop-in
+              </Link>
+            ) : null}
+            <button
+              type="button"
+              onClick={onFullSeason}
+              aria-label={`Register full season for ${d.name}`}
+              className={`inline-flex min-h-[48px] items-center justify-center rounded-md px-4 font-sans text-[13px] font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 ${dropClass}`}
+            >
+              Full season
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  )
+}
 
 interface UTRMatchPlayDivisionsProps {
   divisions: UtrDivisionCard[]
@@ -13,17 +207,19 @@ interface UTRMatchPlayDivisionsProps {
   variant?: 'light' | 'dark'
 }
 
-function isColorBall(name: string) {
-  return name.toLowerCase().includes('color ball')
-}
-
 export default function UTRMatchPlayDivisions({
   divisions,
   variant = 'light',
 }: UTRMatchPlayDivisionsProps) {
   const [modalOpen, setModalOpen] = useState(false)
+  const [modalUtrDivision, setModalUtrDivision] = useState<string | null>(null)
   const modalData = useMemo(() => getUtrCircuitModalData(), [])
   const isDark = variant === 'dark'
+
+  const closeUtrModal = () => {
+    setModalOpen(false)
+    setModalUtrDivision(null)
+  }
 
   if (!isDark) {
     return (
@@ -39,154 +235,27 @@ export default function UTRMatchPlayDivisions({
               : 'border border-brand-victoria-cove/30 bg-brand-victoria-cove/10 text-brand-victoria-cove hover:bg-brand-victoria-cove/15'
 
             return (
-              <article
+              <UtrLightDivisionCard
                 key={d.name}
-                className="flex flex-col overflow-hidden rounded-2xl border border-brand-pacific-dusk/[0.08] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_4px_12px_rgba(27,58,92,0.06)] transition-all duration-300 hover:border-brand-pacific-dusk/15 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(27,58,92,0.08)]"
-              >
-                {d.image ? (
-                  <div className="relative h-[236px] w-full shrink-0 overflow-hidden bg-brand-sandstone sm:h-[252px]">
-                    <Image
-                      src={d.image}
-                      alt={d.imageAlt ?? `${d.name} division`}
-                      fill
-                      className="object-cover"
-                      style={{
-                        /* Default: bias toward upper frame so faces aren’t cropped off (object-center cuts heads in wide crops). */
-                        objectPosition: d.imageObjectPosition ?? '50% 24%',
-                      }}
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      quality={92}
-                    />
-                    <div
-                      className="pointer-events-none absolute inset-x-0 bottom-0 h-[100px] bg-gradient-to-t from-black/45 to-transparent"
-                      aria-hidden="true"
-                    />
-                    {/* Top-right scrim so Sat/Sun pills stay readable on bright courts/sky */}
-                    <div
-                      className="pointer-events-none absolute right-0 top-0 z-[1] h-32 w-[min(100%,15rem)] bg-gradient-to-bl from-black/60 via-black/25 to-transparent"
-                      aria-hidden="true"
-                    />
-                    {d.matchDay ? (
-                      <span
-                        className={`absolute right-3.5 top-3.5 z-[2] rounded-md px-3.5 py-1.5 font-sans text-[11px] font-extrabold uppercase tracking-[0.12em] text-white shadow-[0_2px_14px_rgba(0,0,0,0.55)] ring-1 ring-black/25 ${
-                          d.matchDay === 'Saturday'
-                            ? 'bg-brand-victoria-cove'
-                            : 'bg-brand-sunset-cliff'
-                        }`}
-                      >
-                        {d.matchDay}
-                      </span>
-                    ) : null}
-                  </div>
-                ) : null}
-
-                <div className="flex flex-1 flex-col px-6 pb-6 pt-5 md:px-7 md:pt-6">
-                  <h3 className="font-headline text-[1.65rem] font-bold leading-snug text-brand-pacific-dusk md:text-[1.75rem]">
-                    {d.name}
-                  </h3>
-                  <p className="mt-1 font-sans text-[14px] text-brand-pacific-dusk/65">{d.level}</p>
-
-                  {isColorBall(d.name) ? (
-                    <div className="mt-4 flex flex-wrap gap-4">
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="h-4 w-4 shrink-0 rounded-full bg-red-500 shadow-[0_2px_6px_rgba(204,51,51,0.35)]"
-                          aria-hidden="true"
-                        />
-                        <span className="font-sans text-[14px] font-bold text-brand-pacific-dusk">Red</span>
-                        <span className="font-sans text-[13px] text-brand-pacific-dusk/55">4–8</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="h-4 w-4 shrink-0 rounded-full bg-brand-sunset-cliff shadow-[0_2px_6px_rgba(232,131,74,0.35)]"
-                          aria-hidden="true"
-                        />
-                        <span className="font-sans text-[14px] font-bold text-brand-pacific-dusk">
-                          Orange
-                        </span>
-                        <span className="font-sans text-[13px] text-brand-pacific-dusk/55">7–10</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="h-4 w-4 shrink-0 rounded-full bg-brand-tide-pool shadow-[0_2px_6px_rgba(45,158,62,0.25)]"
-                          aria-hidden="true"
-                        />
-                        <span className="font-sans text-[14px] font-bold text-brand-pacific-dusk">
-                          Green
-                        </span>
-                        <span className="font-sans text-[13px] text-brand-pacific-dusk/55">10–14</span>
-                      </div>
-                    </div>
-                  ) : null}
-
-                  {d.note ? (
-                    <p className="mt-3 font-sans text-[13px] font-light italic text-brand-pacific-dusk/55">
-                      {d.note}
-                    </p>
-                  ) : null}
-
-                  <div className="mt-5 grid grid-cols-2 gap-2 gap-y-3">
-                    <div>
-                      <span className="block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
-                        Venue
-                      </span>
-                      <span className="font-sans text-[14px] font-semibold text-brand-pacific-dusk">
-                        {d.venue}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
-                        Time
-                      </span>
-                      <span className="font-sans text-[14px] font-semibold text-brand-pacific-dusk">
-                        {d.time}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-auto flex flex-col gap-4 border-t border-black/[0.06] pt-5 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p className="font-sans text-2xl font-extrabold tabular-nums text-brand-pacific-dusk">
-                        {d.price}
-                      </p>
-                      <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/45">
-                        Season
-                      </p>
-                      {d.dropIn != null ? (
-                        <p className="mt-1 font-sans text-[13px] text-brand-pacific-dusk/55">
-                          {`Weekend reference $${d.dropIn} — contact us to arrange`}
-                        </p>
-                      ) : null}
-                    </div>
-                    <div className="flex flex-wrap gap-2 sm:justify-end">
-                      <button
-                        type="button"
-                        onClick={() => setModalOpen(true)}
-                        aria-label={`Register for ${d.name}`}
-                        className={`inline-flex min-h-[44px] items-center justify-center rounded-md px-4 font-sans text-[13px] font-bold transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${registerClass}`}
-                      >
-                        Register
-                      </button>
-                      <Link
-                        href="/contact"
-                        className={`inline-flex min-h-[44px] items-center justify-center rounded-md px-4 font-sans text-[13px] font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 ${dropClass}`}
-                      >
-                        Contact
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </article>
+                d={d}
+                registerClass={registerClass}
+                dropClass={dropClass}
+                onFullSeason={() => {
+                  setModalUtrDivision(d.name)
+                  setModalOpen(true)
+                }}
+              />
             )
           })}
         </div>
 
         <LuxuryYearModal
           isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
+          onClose={closeUtrModal}
           type="utr-circuit"
           data={modalData}
           season="spring"
+          utrInitialDivision={modalUtrDivision}
         />
       </>
     )
@@ -274,7 +343,10 @@ export default function UTRMatchPlayDivisions({
                 <div className="flex-shrink-0 md:justify-self-end">
                   <button
                     type="button"
-                    onClick={() => setModalOpen(true)}
+                    onClick={() => {
+                      setModalUtrDivision(d.name)
+                      setModalOpen(true)
+                    }}
                     aria-label={`Register for ${d.name}`}
                     className="inline-flex items-center justify-center gap-2 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 w-full md:w-auto"
                   >
@@ -303,10 +375,11 @@ export default function UTRMatchPlayDivisions({
 
       <LuxuryYearModal
         isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={closeUtrModal}
         type="utr-circuit"
         data={modalData}
         season="spring"
+        utrInitialDivision={modalUtrDivision}
       />
     </>
   )
