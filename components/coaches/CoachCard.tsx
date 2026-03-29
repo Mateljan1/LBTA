@@ -104,19 +104,17 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
     const shortBio = truncateBio(coach.bio ?? '', 220)
     return (
       <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-black/[0.07] border-l-[3px] border-l-brand-victoria-cove/45 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_16px_40px_rgba(27,58,92,0.07)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06),0_24px_56px_rgba(27,58,92,0.09)]">
-        {/* Full-width navy well + centered 4:5 frame; object-contain shows entire headshot (source is ~800×1000) */}
-        <div className="flex w-full shrink-0 justify-center bg-brand-deep-water py-2 sm:py-3">
-          <div className="relative aspect-[4/5] w-full max-w-[min(100%,420px)]">
-            <Image
-              src={coachImageSrc(coach.image)}
-              alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
-              fill
-              className="object-contain object-center transition-transform duration-[450ms] motion-safe:group-hover:scale-[1.01]"
-              style={{ objectPosition: coach.imagePosition }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 420px"
-              quality={95}
-            />
-          </div>
+        {/* Source headshots are 800×1000 (4:5). Full-width frame + object-cover = edge-to-edge, no side letterboxing. */}
+        <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden rounded-t-2xl bg-brand-morning-light">
+          <Image
+            src={coachImageSrc(coach.image)}
+            alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
+            fill
+            className="object-cover transition-transform duration-[450ms] motion-safe:group-hover:scale-[1.01]"
+            style={{ objectPosition: coach.imagePosition }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 560px"
+            quality={95}
+          />
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col px-5 py-6 sm:px-6">
@@ -182,19 +180,17 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
     const shortBio = truncateBio(coach.bio ?? '', 280)
     return (
       <div className="relative h-full w-full flex flex-col sm:flex-row sm:items-stretch overflow-hidden rounded-2xl border border-black/[0.07] border-l-[3px] border-l-brand-victoria-cove/45 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_16px_40px_rgba(27,58,92,0.07)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06),0_24px_56px_rgba(27,58,92,0.09)]">
-        {/* Portrait column: 4:5 frame + contain (same issue as stacked if we used cover + fixed short height) */}
-        <div className="flex w-full shrink-0 justify-center bg-brand-deep-water py-2 sm:w-[300px] sm:max-w-[300px] sm:justify-start sm:py-0 lg:w-[308px] lg:max-w-[308px]">
-          <div className="relative aspect-[4/5] w-full max-w-[min(100%,420px)] sm:max-w-full">
-            <Image
-              src={coachImageSrc(coach.image)}
-              alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
-              fill
-              className="object-contain object-center sm:transition-transform sm:duration-[450ms] motion-safe:sm:group-hover:scale-[1.01]"
-              style={{ objectPosition: coach.imagePosition }}
-              sizes="(max-width: 639px) 100vw, 308px"
-              quality={95}
-            />
-          </div>
+        {/* 4:5 matches 800×1000 assets; full column width, cover = no wasted side bars */}
+        <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden bg-brand-morning-light sm:w-[320px] sm:max-w-[320px] sm:shrink-0 lg:w-[340px] lg:max-w-[340px]">
+          <Image
+            src={coachImageSrc(coach.image)}
+            alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
+            fill
+            className="object-cover sm:transition-transform sm:duration-[450ms] motion-safe:sm:group-hover:scale-[1.01]"
+            style={{ objectPosition: coach.imagePosition }}
+            sizes="(max-width: 639px) 100vw, 340px"
+            quality={95}
+          />
         </div>
 
         <div className="flex flex-col flex-1 min-w-0 px-5 py-6 sm:px-8 sm:py-7 lg:pr-10">
