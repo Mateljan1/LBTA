@@ -7,7 +7,7 @@ export default function CoachingTeamSection() {
 
   return (
     <section className="bg-brand-sandstone py-20 md:py-28 scroll-mt-28" id="team">
-      <div className="max-w-[1100px] mx-auto px-6 md:px-10 lg:px-12">
+      <div className="max-w-[900px] lg:max-w-[960px] mx-auto px-6 md:px-10 lg:px-12">
         <AnimatedSection className="mb-12 md:mb-16">
           <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-3">
             Coaching Team
@@ -21,9 +21,10 @@ export default function CoachingTeamSection() {
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 items-stretch max-w-[1200px] mx-auto">
+        {/* Single column of horizontal cards: readable line length, scales to 5+ coaches without skinny columns */}
+        <div className="flex flex-col gap-6 md:gap-8">
           {teamCoaches.map((coach, index) => (
-            <AnimatedSection key={coach.slug ?? `order-${coach.order}-${index}`} delay={100 + index * 50} className="h-full flex">
+            <AnimatedSection key={coach.slug ?? `order-${coach.order}-${index}`} delay={100 + index * 50} className="w-full">
               <CoachCard coach={coach} variant="compact" />
             </AnimatedSection>
           ))}
