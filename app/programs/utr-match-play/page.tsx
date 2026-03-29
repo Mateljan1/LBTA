@@ -39,10 +39,11 @@ const VENUE_LBHS_IMAGE =
   'https://res.cloudinary.com/dv033eo0x/image/upload/c_fill,w_700,h_280,g_center,q_auto,f_auto/lbta/photos/email-jpg/2026/lbta-2026-utr-5-0-7-0-player-serve-follow-through-blue-court.jpg'
 
 export const metadata: Metadata = {
-  title: 'UTR Match Play Series | Laguna Beach Tennis Academy',
+  // Segment title only — root layout template adds " | Laguna Beach Tennis Academy"
+  title: 'UTR Match Play Series',
   description: `LBTA UTR Match Play Series — Season 1. Eight weekends of rated matchplay in Laguna Beach. Four divisions from Color Ball juniors to advanced singles and doubles. ${seasonLabel.split('·')[0]?.trim() ?? seasonLabel}.`,
   openGraph: {
-    title: 'UTR Match Play Series | Laguna Beach Tennis Academy',
+    title: 'UTR Match Play Series',
     description: `Rated weekend matchplay by level in Laguna Beach. ${seasonLabel.split('·')[0]?.trim() ?? seasonLabel}.`,
     type: 'website',
     images: [

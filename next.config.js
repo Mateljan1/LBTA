@@ -222,17 +222,6 @@ const nextConfig = {
         destination: '/programs/leagues',
         permanent: true,
       },
-      // Short URL → canonical program page (bookmarks, flyers, typos)
-      {
-        source: '/utr-match-play',
-        destination: '/programs/utr-match-play',
-        permanent: true,
-      },
-      {
-        source: '/utr-match-play/',
-        destination: '/programs/utr-match-play',
-        permanent: true,
-      },
     ]
   },
 }
