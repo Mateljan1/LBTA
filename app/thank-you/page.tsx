@@ -6,10 +6,10 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
-  title: 'Thank You | Laguna Beach Tennis Academy',
+  title: 'Thank You',
   description: 'Your request has been received. We will contact you within 24 hours.',
   openGraph: {
-    title: 'Thank You | Laguna Beach Tennis Academy',
+    title: 'Thank You',
     description: 'Your request has been received. We will contact you within 24 hours.',
     images: [{ url: '/legacy-working-assets/conversion/thank-you-image/thank-you-image.webp', width: 1920, height: 1080, alt: 'Thank you from LBTA' }],
   },

@@ -3,11 +3,11 @@ import Link from 'next/link'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 
 export const metadata: Metadata = {
-  title: 'Adult Programs | Laguna Beach Tennis Academy',
+  title: 'Adult Programs',
   description:
     'Adult tennis progression at LBTA: beginner to advanced. Group classes, private coaching, USTA League, UTR Match Play, and connection to schedule and booking.',
   openGraph: {
-    title: 'Adult Programs | Laguna Beach Tennis Academy',
+    title: 'Adult Programs',
     description:
       'Adult tennis progression at LBTA: beginner to advanced. Group classes, private coaching, USTA League, UTR Match Play.',
     type: 'website',

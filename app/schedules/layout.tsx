@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Schedule & Pricing | Laguna Beach Tennis Academy',
+  title: 'Schedule & Pricing',
   description:
     'View all LBTA programs, schedules, and pricing. Winter, Spring, Summer, and Fall sessions. Register online.',
   openGraph: {
-    title: 'Schedule & Pricing | Laguna Beach Tennis Academy',
+    title: 'Schedule & Pricing',
     description:
       'View all LBTA programs, schedules, and pricing. Winter, Spring, Summer, and Fall sessions. Register online.',
     url: 'https://lagunabeachtennisacademy.com/schedules',

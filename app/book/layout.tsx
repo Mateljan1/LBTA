@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Book Your Free Trial | Laguna Beach Tennis Academy',
+  title: 'Book Your Free Trial',
   description:
     'Book a free trial lesson at LBTA. One conversation, honest guidance, and a path built around you.',
   openGraph: {
-    title: 'Book Your Free Trial | Laguna Beach Tennis Academy',
+    title: 'Book Your Free Trial',
     description:
       'Book a free trial lesson at LBTA. One conversation, honest guidance, and a path built around you.',
     type: 'website',

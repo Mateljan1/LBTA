@@ -11,10 +11,10 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
-  title: 'Allison Cronk — LBTA Coach | Laguna Beach Tennis Academy',
+  title: 'Allison Cronk — LBTA Coach',
   description: 'Collegiate player. Educator. Coach. 5+ years coaching across five academies. NCAA & NAIA tennis. B.A. History, Education minor.',
   openGraph: {
-    title: 'Allison Cronk — LBTA Coach | Laguna Beach Tennis Academy',
+    title: 'Allison Cronk — LBTA Coach',
     description: 'Collegiate player. Educator. Coach. 5+ years coaching across five academies. NCAA & NAIA tennis. B.A. History, Education minor.',
     type: 'website',
     images: [{ url: coachImageSrc(coach.image), width: 800, height: 1000, alt: 'Allison Cronk' }],

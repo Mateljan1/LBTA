@@ -8,7 +8,7 @@ import { getProgramsOverview } from '@/lib/programs-data'
 import ProgramOverviewCard from '@/components/programs/ProgramOverviewCard'
 
 export const metadata: Metadata = {
-  title: 'Programs | Laguna Beach Tennis Academy',
+  title: 'Programs',
   description: 'Choose your path — junior development, youth, high performance, adult programs, camps, fitness, and leagues. Every program built around movement, craft, and community.',
   openGraph: {
     images: [{ url: '/images/programs/hero.webp', width: 1200, height: 900, alt: 'LBTA tennis programs' }],

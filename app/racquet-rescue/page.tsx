@@ -6,11 +6,11 @@ import pricingData from '@/data/pricing-supplemental.json'
 const rr = pricingData.racquetRescue
 
 export const metadata: Metadata = {
-  title: 'Racquet Rescue - Professional Racquet Stringing | Laguna Beach Tennis Academy',
+  title: 'Racquet Rescue — Professional Racquet Stringing',
   description: 'Expert racquet stringing services in Laguna Beach. Same-day service, premium strings, and professional customization for all skill levels.',
   keywords: 'racquet stringing Laguna Beach, tennis racquet restring, professional stringing service, racquet customization',
   openGraph: {
-    title: 'Racquet Rescue | LBTA',
+    title: 'Racquet Rescue',
     description: 'Professional racquet stringing and customization services',
     type: 'website',
     images: [{ url: '/legacy-working-assets/hero/laguna-horizon/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Racquet Rescue at LBTA' }],

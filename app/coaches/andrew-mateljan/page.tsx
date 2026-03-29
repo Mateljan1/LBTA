@@ -9,10 +9,10 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
-  title: 'Andrew Mateljan — Founder & Head Coach | Laguna Beach Tennis Academy',
+  title: 'Andrew Mateljan — Founder & Head Coach',
   description: '25 years of tennis coaching experience. Former top-ranked junior, ATP/WTA tour coach, and founder of LBTA. Currently coaching ATP #262 Karue Sell.',
   openGraph: {
-    title: 'Andrew Mateljan — Founder & Head Coach | Laguna Beach Tennis Academy',
+    title: 'Andrew Mateljan — Founder & Head Coach',
     description: '25 years of tennis coaching experience. Former top-ranked junior, ATP/WTA tour coach, and founder of LBTA. Currently coaching ATP #262 Karue Sell.',
     type: 'website',
     images: [{ url: coachImageSrc('/images/coaches/andrew-mateljan.webp'), width: 800, height: 1000, alt: 'Andrew Mateljan, Founder & Head Coach' }],

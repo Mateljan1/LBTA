@@ -4,12 +4,12 @@ import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export const metadata: Metadata = {
-  title: 'Friday Match Play | LBTA',
+  title: 'Friday Match Play',
   description:
     'Friday match play is not currently on the calendar at Laguna Beach Tennis Academy. Explore UTR Match Play, leagues, and the full schedule.',
   keywords: 'tennis match play Laguna Beach, UTR match play, tennis programs, LBTA',
   openGraph: {
-    title: 'Friday Match Play | LBTA',
+    title: 'Friday Match Play',
     description:
       'Friday match play is not currently offered. See UTR Match Play, leagues, and schedules at LBTA.',
     type: 'website',

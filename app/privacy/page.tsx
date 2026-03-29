@@ -1,7 +1,7 @@
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export const metadata = {
-  title: 'Privacy Policy | Laguna Beach Tennis Academy',
+  title: 'Privacy Policy',
   description: 'Privacy policy and data protection practices at Laguna Beach Tennis Academy.',
 }
 

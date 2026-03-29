@@ -8,10 +8,10 @@ import PullQuote from '@/components/ui/PullQuote'
 import siteStats from '@/data/site-stats.json'
 
 export const metadata: Metadata = {
-  title: 'High Performance Pathway | Tennis Training | LBTA',
+  title: 'High Performance Pathway | Tennis Training',
   description: 'Invitation-only high performance tennis training for competitive players. UTR 5-8+, tournament preparation, and college pathway with ATP/WTA certified coaches.',
   openGraph: {
-    title: 'High Performance Pathway | Laguna Beach Tennis Academy',
+    title: 'High Performance Pathway | Tennis Training',
     description: 'Where serious players become champions. ATP/WTA methodology for tournament and college preparation.',
     type: 'website',
     images: [{ url: '/legacy-working-assets/programs/high-performance/high-performance.webp', width: 1920, height: 1080, alt: 'High performance pathway at LBTA' }],

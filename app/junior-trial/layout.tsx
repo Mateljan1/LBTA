@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'Junior Tennis Trial | Ages 3-17 | Laguna Beach Tennis Academy',
+  title: 'Junior Tennis Trial | Ages 3-17',
   description:
     'Book a free junior tennis trial at LBTA. Programs from Little Stars (age 3) through High Performance. Laguna Beach, CA.',
   openGraph: {
-    title: 'Junior Tennis Trial | Ages 3-17 | Laguna Beach Tennis Academy',
+    title: 'Junior Tennis Trial | Ages 3-17',
     description:
       'Book a free junior tennis trial at LBTA. Programs from Little Stars (age 3) through High Performance. Laguna Beach, CA.',
     type: 'website',

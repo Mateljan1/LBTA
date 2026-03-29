@@ -32,6 +32,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://lagunabeachtennisacademy.com'),
   title: {
     default: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
+    /** Child `title` must be the segment only (e.g. "Programs") — do not append "| Laguna Beach Tennis Academy" or "| LBTA" or the site name appears twice. */
     template: '%s | Laguna Beach Tennis Academy',
   },
   description:

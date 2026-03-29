@@ -9,11 +9,11 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
-  title: 'Michelle Mateljan — LBTA Coach | Laguna Beach Tennis Academy',
+  title: 'Michelle Mateljan — LBTA Coach',
   description:
     'Coach at Laguna Beach Tennis Academy. Junior and adult development with clear communication and steady on-court energy.',
   openGraph: {
-    title: 'Michelle Mateljan — LBTA Coach | Laguna Beach Tennis Academy',
+    title: 'Michelle Mateljan — LBTA Coach',
     description:
       'Coach at Laguna Beach Tennis Academy. Junior and adult development with clear communication and steady on-court energy.',
     type: 'website',

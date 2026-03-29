@@ -9,10 +9,10 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
-  title: 'Robert W. LeBuhn — Director of Tennis Operations | Laguna Beach Tennis Academy',
+  title: 'Robert W. LeBuhn — Director of Tennis Operations',
   description: 'USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Director of Tennis Operations at LBTA.',
   openGraph: {
-    title: 'Robert W. LeBuhn — Director of Tennis Operations | Laguna Beach Tennis Academy',
+    title: 'Robert W. LeBuhn — Director of Tennis Operations',
     description: 'USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Director of Tennis Operations at LBTA.',
     type: 'website',
     images: [{ url: coachImageSrc('/images/coaches/robert-lebuhn.png'), width: 800, height: 1000, alt: 'Robert W. LeBuhn' }],

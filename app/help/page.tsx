@@ -3,7 +3,7 @@ import Link from 'next/link'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 
 export const metadata: Metadata = {
-  title: 'Help & Support | Laguna Beach Tennis Academy',
+  title: 'Help & Support',
   description: 'Get help with programs, pricing, booking, and more. Contact us directly for immediate assistance.',
 }
 

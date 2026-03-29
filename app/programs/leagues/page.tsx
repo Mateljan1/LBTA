@@ -7,11 +7,11 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 const leaguePricing = pricingSupplemental.leagues
 
 export const metadata: Metadata = {
-  title: 'USTA Leagues & UTR Match Play | Laguna Beach Tennis Academy',
+  title: 'USTA Leagues & UTR Match Play',
   description:
     'USTA Adult League team play and the UTR Match Play Series — weekly rostered matches vs. rated Saturday matchplay by level.',
   openGraph: {
-    title: 'USTA Leagues & UTR Match Play | Laguna Beach Tennis Academy',
+    title: 'USTA Leagues & UTR Match Play',
     description:
       'USTA Adult League team play and the UTR Match Play Series — weekly rostered matches vs. rated Saturday matchplay by level.',
     type: 'website',

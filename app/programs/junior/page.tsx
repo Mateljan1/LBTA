@@ -2,11 +2,11 @@ import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Junior Tennis Programs | Ages 3-15 | LBTA',
+  title: 'Junior Tennis Programs | Ages 3-15',
   description:
     'Junior tennis development from Little Stars through Youth Development. Red ball, orange ball, green dot progression in Laguna Beach.',
   openGraph: {
-    title: 'Junior Tennis Programs | Ages 3-15 | LBTA',
+    title: 'Junior Tennis Programs | Ages 3-15',
     description:
       'Junior tennis development from Little Stars through Youth Development. Red ball, orange ball, green dot progression in Laguna Beach.',
     type: 'website',

@@ -24,7 +24,7 @@ function buildCalendarBySeason(): Record<SeasonKey, CalendarSeasonData> {
 }
 
 export const metadata = {
-  title: 'Schedule by Location | Laguna Beach Tennis Academy',
+  title: 'Schedule by Location',
   description:
     'View LBTA program schedule by location: Moulton Meadows Park, Alta Laguna Park, and Laguna Beach High School. Winter, Spring, Summer, Fall.',
 }

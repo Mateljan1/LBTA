@@ -9,11 +9,11 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 const usta = pricingData.ustaAdultLeague
 
 export const metadata: Metadata = {
-  title: 'USTA Adult League Play | Laguna Beach Tennis Academy',
+  title: 'USTA Adult League Play',
   description:
     'Join an LBTA team for USTA Spring & Summer 2026 league play. 4 leagues, weekly matches across Orange County, coached practice with Andrew Mateljan.',
   openGraph: {
-    title: 'USTA Adult League Play | Laguna Beach Tennis Academy',
+    title: 'USTA Adult League Play',
     description:
       'Join an LBTA team for USTA Spring & Summer 2026 league play. 4 leagues, weekly matches across Orange County, coached practice with Andrew Mateljan.',
     type: 'website',

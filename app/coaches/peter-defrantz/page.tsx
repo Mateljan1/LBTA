@@ -11,10 +11,10 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
-  title: 'Peter DeFrantz — LBTA Coach | Laguna Beach Tennis Academy',
+  title: 'Peter DeFrantz — LBTA Coach',
   description: 'USPTA & PTR certified professional. 8+ years coaching. College tennis at Mt. San Jacinto — #1 in SoCal. All ages and levels.',
   openGraph: {
-    title: 'Peter DeFrantz — LBTA Coach | Laguna Beach Tennis Academy',
+    title: 'Peter DeFrantz — LBTA Coach',
     description: 'USPTA & PTR certified professional. 8+ years coaching. College tennis at Mt. San Jacinto — #1 in SoCal. All ages and levels.',
     type: 'website',
     images: [{ url: coachImageSrc(coach.image), width: 800, height: 1000, alt: 'Peter DeFrantz' }],
