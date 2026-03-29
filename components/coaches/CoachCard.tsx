@@ -6,6 +6,8 @@ interface CoachCardProps {
   coach: Coach
   /** 'featured' = large image + long bio; 'grid' = standard card; 'compact' = team section (small image, truncated bio) */
   variant?: 'featured' | 'grid' | 'compact'
+  /** compact only: image-on-top for 2-column Meet the Team grid */
+  compactStacked?: boolean
 }
 
 /** Truncate bio for compact cards — word boundary, fits ~4 lines with line-clamp-4. */
@@ -25,7 +27,7 @@ function ChevronRight({ className }: { className?: string }) {
   )
 }
 
-export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
+export default function CoachCard({ coach, variant = 'grid', compactStacked = false }: CoachCardProps) {
   const hasBioLink = coach.slug != null
   const firstName = coach.name.split(' ')[0] ?? coach.name
   const bookHref = hasBioLink ? `/book?type=private&coach=${coach.slug}` : '/book'
@@ -97,6 +99,82 @@ export default function CoachCard({ coach, variant = 'grid' }: CoachCardProps) {
       </div>
     </>
   )
+
+  if (variant === 'compact' && compactStacked) {
+    const shortBio = truncateBio(coach.bio ?? '', 220)
+    return (
+      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-black/[0.07] border-l-[3px] border-l-brand-victoria-cove/45 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_16px_40px_rgba(27,58,92,0.07)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06),0_24px_56px_rgba(27,58,92,0.09)]">
+        <div className="relative h-[min(40vh,248px)] w-full shrink-0 bg-brand-morning-light sm:h-[268px] md:h-[280px]">
+          <Image
+            src={coachImageSrc(coach.image)}
+            alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
+            fill
+            className="object-cover transition-transform duration-[450ms] motion-safe:group-hover:scale-[1.015]"
+            style={{ objectPosition: coach.imagePosition }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 480px"
+            quality={95}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-deep-water/[0.08] via-transparent to-transparent" aria-hidden />
+        </div>
+
+        <div className="flex min-h-0 flex-1 flex-col px-5 py-6 sm:px-6">
+          <div className="shrink-0">
+            <p className="mb-2 font-sans text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-brand-pacific-dusk/55 line-clamp-2">
+              {coach.title}
+            </p>
+            {hasBioLink ? (
+              <Link href={`/coaches/${coach.slug}`} className="group/link inline-block rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
+                <h3 className="font-headline text-[20px] font-medium tracking-[-0.02em] text-brand-pacific-dusk transition-colors group-hover/link:text-brand-victoria-cove sm:text-[22px]">
+                  {coach.name}
+                </h3>
+              </Link>
+            ) : (
+              <h3 className="font-headline text-[20px] font-medium tracking-[-0.02em] text-brand-pacific-dusk sm:text-[22px]">
+                {coach.name}
+              </h3>
+            )}
+            <p className="mb-4 font-sans text-[12px] leading-relaxed text-brand-pacific-dusk/72 line-clamp-2 sm:text-[13px]">
+              {coach.specialization}
+            </p>
+          </div>
+
+          <p className="font-sans text-[14px] leading-[1.6] text-brand-pacific-dusk/82 line-clamp-4 sm:text-[15px]">
+            {shortBio}
+          </p>
+
+          <div className="mt-auto flex flex-col gap-4 border-t border-black/[0.07] pt-5">
+            <div className="flex flex-wrap gap-2">
+              {coach.credentials.map((cred, i) => (
+                <span
+                  key={`${cred}-${i}`}
+                  className="max-w-full rounded-full border border-black/[0.06] bg-brand-morning-light/90 px-2.5 py-1 font-sans text-[10px] leading-tight tracking-[0.02em] text-brand-pacific-dusk/78 sm:text-[11px]"
+                >
+                  {cred}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-end">
+              {hasBioLink && (
+                <Link
+                  href={`/coaches/${coach.slug}`}
+                  className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-[2px] border border-brand-victoria-cove/30 bg-white/80 px-5 py-2.5 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-victoria-cove transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 sm:flex-initial sm:min-w-[140px]"
+                >
+                  View full bio
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              )}
+              <Link
+                href={bookHref}
+                className="inline-flex min-h-[48px] flex-1 items-center justify-center rounded-[2px] bg-black px-6 py-2.5 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 sm:flex-initial sm:min-w-[160px]"
+              >
+                Book with {firstName}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (variant === 'compact') {
     const shortBio = truncateBio(coach.bio ?? '', 280)

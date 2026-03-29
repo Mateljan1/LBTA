@@ -1,13 +1,13 @@
-import { getTeamCoaches } from '@/lib/coaches-data'
+import { getTeamCoachesForGrid } from '@/lib/coaches-data'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import CoachCard from './CoachCard'
 
 export default function CoachingTeamSection() {
-  const teamCoaches = getTeamCoaches()
+  const teamCoaches = getTeamCoachesForGrid()
 
   return (
     <section className="bg-brand-sandstone py-20 md:py-28 scroll-mt-28" id="team">
-      <div className="max-w-[880px] lg:max-w-[920px] mx-auto px-6 md:px-10 lg:px-12">
+      <div className="max-w-[1140px] lg:max-w-[1180px] mx-auto px-6 md:px-10 lg:px-12">
         <AnimatedSection className="mb-12 md:mb-16">
           <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-3">
             Coaching Team
@@ -24,10 +24,15 @@ export default function CoachingTeamSection() {
           </p>
         </AnimatedSection>
 
-        <div className="flex flex-col gap-7 md:gap-9">
+        {/* 2×2 from md+: Robert & Peter, then Michelle & Allison (see getTeamCoachesForGrid) */}
+        <div className="grid grid-cols-1 gap-7 md:grid-cols-2 md:gap-x-8 md:gap-y-10 xl:gap-x-10">
           {teamCoaches.map((coach, index) => (
-            <AnimatedSection key={coach.slug ?? `order-${coach.order}-${index}`} delay={100 + index * 50} className="w-full">
-              <CoachCard coach={coach} variant="compact" />
+            <AnimatedSection
+              key={coach.slug ?? `order-${coach.order}-${index}`}
+              delay={100 + index * 50}
+              className="flex h-full w-full"
+            >
+              <CoachCard coach={coach} variant="compact" compactStacked />
             </AnimatedSection>
           ))}
         </div>

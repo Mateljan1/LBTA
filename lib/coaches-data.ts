@@ -64,6 +64,18 @@ export function getTeamCoaches(): Coach[] {
   return getCoaches().filter((c) => c.role !== 'founder')
 }
 
+/**
+ * Meet the Team 2×2 grid order: top row Robert & Peter, bottom Michelle & Allison.
+ * (Explicit slugs so layout stays stable if `order` in JSON changes.)
+ */
+const TEAM_GRID_SLUGS = ['robert-lebuhn', 'peter-defrantz', 'michelle-mateljan', 'allison-cronk'] as const
+
+export function getTeamCoachesForGrid(): Coach[] {
+  const team = getTeamCoaches()
+  const bySlug = new Map(team.map((c) => [c.slug, c]))
+  return TEAM_GRID_SLUGS.map((slug) => bySlug.get(slug)).filter((c): c is Coach => Boolean(c))
+}
+
 /** Single coach by slug; returns undefined if slug is null or not found. */
 export function getCoachBySlug(slug: string): Coach | undefined {
   return coachesList.find((c) => c.slug === slug)
