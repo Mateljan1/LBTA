@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import LeagueRow from './LeagueRow'
 import type { LeaguesData } from './SchedulesPageClient'
 
@@ -56,13 +57,13 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
           </p>
         </div>
 
-        {/* UTR Match Play Series (not a USTA league — rated Saturday matchplay) */}
+        {/* UTR Match Play Series (not a USTA league — rated weekend matchplay) */}
         <div id="utr-circuit">
           <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
             UTR MATCH PLAY SERIES · SEASON 1
           </p>
           <h3 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
-            Saturday Matchplay Series
+            UTR Match Play Series
           </h3>
           <div className="section-horizon mb-8 opacity-90" aria-hidden="true" />
           <p className="font-sans text-[16px] md:text-[18px] text-brand-pacific-dusk/60 max-w-[700px] mb-3">
@@ -93,6 +94,17 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
               />
             ))}
           </div>
+
+          <p className="font-sans text-[15px] text-brand-pacific-dusk/60 mt-8 max-w-[700px]">
+            <Link
+              href="/programs/utr-match-play"
+              className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/35 hover:text-brand-pacific-dusk"
+            >
+              Full UTR page
+            </Link>
+            {' — '}
+            schedule, venues, FAQs, and registration for the series.
+          </p>
         </div>
 
       </div>

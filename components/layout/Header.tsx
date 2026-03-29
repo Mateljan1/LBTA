@@ -36,9 +36,14 @@ const programsDropdown = [
     desc: 'Coach-fed doubles — how sessions work',
   },
   {
+    name: 'UTR Match Play',
+    href: '/programs/utr-match-play',
+    desc: 'Rated weekend matchplay by division — Season 1',
+  },
+  {
     name: 'Leagues & Match Play',
     href: '/programs/leagues',
-    desc: 'USTA Adult League teams, UTR Match Play Series',
+    desc: 'USTA Adult League teams and league hub',
   },
 ]
 

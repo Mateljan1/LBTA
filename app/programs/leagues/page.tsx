@@ -34,7 +34,7 @@ const leagues = [
     href: '/programs/utr-match-play',
     season: 'Season 1 — April–June 2026',
     desc: 'Structured, rated matchplay on weekends in Laguna Beach. Four divisions from Color Ball juniors to advanced singles and doubles. UTR-rated results.',
-    highlights: ['8 Saturdays, 5 divisions', 'Juniors and adults by level', `From ${leaguePricing.perSeason}/season`],
+    highlights: ['8 weekends (Sat & Sun)', 'Four divisions by level', `From ${leaguePricing.perSeason}/season`],
     color: 'from-brand-sunset-cliff to-brand-thousand-steps',
     accent: 'text-brand-sunset-cliff',
   },
@@ -66,7 +66,7 @@ export default function LeaguesPage() {
             USTA Leagues &amp; UTR Match Play
           </h1>
           <p className="text-[1.1rem] font-sans font-light text-white/60 max-w-xl mx-auto leading-relaxed">
-            USTA Adult League is team-based league play. The UTR Match Play Series is Saturday
+            USTA Adult League is team-based league play. The UTR Match Play Series is weekend
             rated matchplay by division — a series, not a rostered league.
           </p>
         </div>
