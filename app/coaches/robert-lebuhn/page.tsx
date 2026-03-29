@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Robert W. LeBuhn — Director of Tennis Operations',
     description: 'USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Director of Tennis Operations at LBTA.',
     type: 'website',
-    images: [{ url: coachImageSrc('/images/coaches/robert-lebuhn.png'), width: 800, height: 1000, alt: 'Robert W. LeBuhn' }],
+    images: [{ url: coachImageSrc('/images/coaches/robert-lebuhn.webp'), width: 800, height: 1000, alt: 'Robert W. LeBuhn' }],
   },
 }
 
@@ -46,7 +46,7 @@ export default function RobertLeBuhnPage() {
           <div className="grid md:grid-cols-[200px_1fr] gap-10 items-start">
             <AnimatedSection className="relative aspect-[200/260] overflow-hidden rounded-xl border border-black/5">
               <Image
-                src={coachImageSrc('/images/coaches/robert-lebuhn.png')}
+                src={coachImageSrc('/images/coaches/robert-lebuhn.webp')}
                 alt="Robert W. LeBuhn, Director of Tennis Operations at Laguna Beach Tennis Academy"
                 fill
                 className="object-cover object-top"
