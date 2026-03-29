@@ -99,7 +99,8 @@
         "match_day": "Saturday",
         "cta_style": "teal",
         "image": "/images/programs/utr-match-play/color-ball.webp",
-        "imageAlt": "Color Ball match play on outdoor courts at Laguna Beach Tennis Academy — scaled tennis for developing players"
+        "imageAlt": "Color Ball match play on outdoor courts at Laguna Beach Tennis Academy — scaled tennis for developing players",
+        "imageObjectPosition": "50% 38%"
       },
       {
         "name": "UTR 2.0–5.0 Singles",
@@ -112,7 +113,8 @@
         "match_day": "Saturday",
         "cta_style": "teal",
         "image": "/images/programs/utr-match-play/utr-2-4.webp",
-        "imageAlt": "Singles player during UTR match play on outdoor courts at Alta Laguna Park"
+        "imageAlt": "Singles player during UTR match play on outdoor courts at Alta Laguna Park",
+        "imageObjectPosition": "50% 14%"
       },
       {
         "name": "UTR 3.0–7.0 Singles",
@@ -125,7 +127,8 @@
         "match_day": "Sunday",
         "cta_style": "sunset",
         "image": "/images/programs/utr-match-play/utr-5-7.webp",
-        "imageAlt": "Advanced singles player during match play on an outdoor tennis court"
+        "imageAlt": "Advanced singles player during match play on an outdoor tennis court",
+        "imageObjectPosition": "50% 22%"
       },
       {
         "name": "UTR 3.0–7.0 Doubles",
@@ -138,7 +141,8 @@
         "match_day": "Sunday",
         "cta_style": "sunset",
         "image": "/images/programs/utr-match-play/doubles.webp",
-        "imageAlt": "Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy"
+        "imageAlt": "Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy",
+        "imageObjectPosition": "50% 32%"
       }
     ],
     "ntrpToUtr": [

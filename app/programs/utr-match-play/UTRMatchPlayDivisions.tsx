@@ -44,15 +44,16 @@ export default function UTRMatchPlayDivisions({
                 className="flex flex-col overflow-hidden rounded-2xl border border-brand-pacific-dusk/[0.08] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.02),0_4px_12px_rgba(27,58,92,0.06)] transition-all duration-300 hover:border-brand-pacific-dusk/15 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(27,58,92,0.08)]"
               >
                 {d.image ? (
-                  <div className="relative h-[220px] w-full shrink-0 overflow-hidden bg-brand-sandstone">
+                  <div className="relative h-[236px] w-full shrink-0 overflow-hidden bg-brand-sandstone sm:h-[252px]">
                     <Image
                       src={d.image}
                       alt={d.imageAlt ?? `${d.name} division`}
                       fill
-                      className="object-cover object-center"
-                      style={
-                        d.imageObjectPosition ? { objectPosition: d.imageObjectPosition } : undefined
-                      }
+                      className="object-cover"
+                      style={{
+                        /* Default: bias toward upper frame so faces aren’t cropped off (object-center cuts heads in wide crops). */
+                        objectPosition: d.imageObjectPosition ?? '50% 24%',
+                      }}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       quality={92}
                     />
