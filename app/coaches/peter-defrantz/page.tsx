@@ -12,10 +12,12 @@ import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
   title: 'Peter DeFrantz — LBTA Coach',
-  description: 'USPTA & PTR certified professional. 8+ years coaching. College tennis at Mt. San Jacinto — #1 in SoCal. All ages and levels.',
+  description:
+    'Head Coach, Player Development. USPTA & PTR certified. College tennis at Mt. San Jacinto. 8+ years coaching juniors, adults, and camps at LBTA.',
   openGraph: {
     title: 'Peter DeFrantz — LBTA Coach',
-    description: 'USPTA & PTR certified professional. 8+ years coaching. College tennis at Mt. San Jacinto — #1 in SoCal. All ages and levels.',
+    description:
+      'Head Coach, Player Development. USPTA & PTR certified. College tennis at Mt. San Jacinto. 8+ years coaching juniors, adults, and camps at LBTA.',
     type: 'website',
     images: [{ url: coachImageSrc(coach.image), width: 800, height: 1000, alt: 'Peter DeFrantz' }],
   },
@@ -32,7 +34,7 @@ const strengths = [
 const creds = [
   { title: 'USPTA', sub: 'Certified Professional' },
   { title: 'PTR', sub: 'Certified Professional' },
-  { title: 'College Tennis', sub: '#1 SoCal, #2 California' },
+  { title: 'College Tennis', sub: 'Mt. San Jacinto College' },
 ]
 
 export default function PeterDeFrantzPage() {
@@ -60,17 +62,16 @@ export default function PeterDeFrantzPage() {
             <div>
               <AnimatedSection>
                 <h1 className="text-display-lg heading-display mb-2">Peter DeFrantz</h1>
+                <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-brand-pacific-dusk/55 mb-2">
+                  {coach.title}
+                </p>
                 <p className="font-headline text-lg italic text-brand-pacific-dusk/60 mb-6">
-                  USPTA & PTR Certified Professional. College Tennis. 8+ Years Coaching.
+                  {coach.specialization}
                 </p>
                 <div className="flex flex-wrap gap-6 py-4 border-y border-black/6">
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">8+</div>
                     <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">Years Coaching</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-headline text-2xl font-light text-brand-pacific-dusk">#1</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">SoCal Team</div>
                   </div>
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">2</div>
@@ -98,12 +99,22 @@ export default function PeterDeFrantzPage() {
           </AnimatedSection>
           <AnimatedSection>
             <p className="font-sans text-brand-pacific-dusk/80 leading-relaxed">
-              He played college tennis at Mt. San Jacinto College, where his team was ranked number one in Southern California and number two in the state. That competitive foundation — combined with dual USPTA and PTR certification — shapes how he coaches today: with structure, with intention, and with genuine care for every player.
+              He played college tennis at Mt. San Jacinto College, where the competitive environment and daily training shaped the coach he became. That foundation — combined with dual USPTA and PTR certification — is visible in how he runs a session: structured, intentional, and built around each player&apos;s next step.
+            </p>
+          </AnimatedSection>
+          <AnimatedSection>
+            <p className="font-sans text-brand-pacific-dusk/80 leading-relaxed">
+              Over eight years coaching across Southern California, Peter has developed a teaching style that connects with players of every age. He starts simple, builds in layers, and makes the work feel like play. Kids trust him quickly. Adults respect his eye for detail.
+            </p>
+          </AnimatedSection>
+          <AnimatedSection>
+            <p className="font-sans text-brand-pacific-dusk/80 leading-relaxed">
+              At LBTA, Peter coaches junior development, competitive training, adult programs, and seasonal camps. His sessions are challenging and fun — the kind where players don&apos;t realize how hard they worked until it&apos;s over.
             </p>
           </AnimatedSection>
           <div className="section-quote py-5 pl-6 border-l-2 border-brand-victoria-cove/40">
             <p className="font-headline text-xl italic text-brand-pacific-dusk leading-snug">
-              Over 8+ years of coaching across Southern California, Peter has built a reputation for making tennis accessible and engaging for players of all ages and abilities.
+              Build the player, not just the game.
             </p>
           </div>
 

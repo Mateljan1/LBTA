@@ -46,16 +46,16 @@
     {
       "slug": "peter-defrantz",
       "name": "Peter DeFrantz",
-      "title": "Senior Coach",
-      "specialization": "USPTA & PTR Certified · College Tennis",
-      "bio": "Dual USPTA and PTR certified professional with eight years of coaching experience in Southern California. Competed at Mt. San Jacinto College, ranked number one in Southern California and number two in California. Progressive teaching approach focused on clear communication, player development, and building confidence through structured fundamentals and fitness.",
+      "title": "Head Coach, Player Development",
+      "specialization": "USPTA & PTR Certified Professional · College Tennis at Mt. San Jacinto · 8+ Years Coaching",
+      "bio": "Peter grew up on the tennis court — his father coached high school tennis — and learned early that the game is about more than strokes: how you carry yourself, compete, and treat people. College tennis at Mt. San Jacinto College; dual USPTA and PTR certified. Eight years coaching across Southern California with a progressive, player-centered approach.",
       "quote": "Build the player, not just the game.",
-      "credentials": ["USPTA & PTR Certified", "8+ Years Coaching", "#1 SoCal College Tennis"],
+      "credentials": ["USPTA & PTR Certified", "8+ Years Coaching", "College Tennis — Mt. San Jacinto"],
       "image": "/legacy-working-assets/coaches/headshots-standardized/cropped-portrait-800x1000/peter-defrantz-headshot.png",
       "imagePosition": "50% 50%",
       "role": "program",
       "order": 4,
-      "schemaDescription": "Dual USPTA and PTR certified professional with 8+ years coaching in Southern California. Ranked #1 in SoCal college tennis."
+      "schemaDescription": "Head Coach, Player Development. USPTA and PTR certified. College tennis at Mt. San Jacinto College. 8+ years coaching across Southern California."
     },
     {
       "slug": "allison-cronk",
