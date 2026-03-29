@@ -103,21 +103,23 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
   if (variant === 'compact' && compactStacked) {
     const shortBio = truncateBio(coach.bio ?? '', 220)
     return (
-      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-black/[0.07] border-l-[3px] border-l-brand-victoria-cove/45 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_16px_40px_rgba(27,58,92,0.07)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06),0_24px_56px_rgba(27,58,92,0.09)]">
-        {/* Source headshots are 800×1000 (4:5). Full-width frame + object-cover = edge-to-edge, no side letterboxing. */}
-        <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden rounded-t-2xl bg-brand-morning-light">
-          <Image
-            src={coachImageSrc(coach.image)}
-            alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
-            fill
-            className="object-cover transition-transform duration-[450ms] motion-safe:group-hover:scale-[1.01]"
-            style={{ objectPosition: coach.imagePosition }}
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 560px"
-            quality={95}
-          />
+      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-black/[0.08] border-l-[3px] border-l-brand-victoria-cove/50 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_16px_40px_rgba(27,58,92,0.07)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06),0_24px_56px_rgba(27,58,92,0.09)]">
+        {/* Inset photo well: headshot isn’t glued to the card edge; ring + soft shadow read as editorial frame */}
+        <div className="shrink-0 px-4 pb-4 pt-4 sm:px-5 sm:pb-5 sm:pt-5">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[14px] bg-brand-morning-light ring-1 ring-black/[0.08] shadow-[0_2px_14px_rgba(27,58,92,0.08),inset_0_1px_0_rgba(255,255,255,0.5)]">
+            <Image
+              src={coachImageSrc(coach.image)}
+              alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
+              fill
+              className="object-cover transition-transform duration-[450ms] motion-safe:group-hover:scale-[1.02]"
+              style={{ objectPosition: coach.imagePosition }}
+              sizes="(max-width: 768px) 92vw, (max-width: 1280px) 42vw, 480px"
+              quality={95}
+            />
+          </div>
         </div>
 
-        <div className="flex min-h-0 flex-1 flex-col px-5 py-6 sm:px-6">
+        <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-5 py-6 sm:px-6">
           <div className="shrink-0">
             <p className="mb-2 font-sans text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-brand-pacific-dusk/55 line-clamp-2">
               {coach.title}
@@ -179,21 +181,23 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
   if (variant === 'compact') {
     const shortBio = truncateBio(coach.bio ?? '', 280)
     return (
-      <div className="relative h-full w-full flex flex-col sm:flex-row sm:items-stretch overflow-hidden rounded-2xl border border-black/[0.07] border-l-[3px] border-l-brand-victoria-cove/45 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_16px_40px_rgba(27,58,92,0.07)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06),0_24px_56px_rgba(27,58,92,0.09)]">
-        {/* 4:5 matches 800×1000 assets; full column width, cover = no wasted side bars */}
-        <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden bg-brand-morning-light sm:w-[320px] sm:max-w-[320px] sm:shrink-0 lg:w-[340px] lg:max-w-[340px]">
-          <Image
-            src={coachImageSrc(coach.image)}
-            alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
-            fill
-            className="object-cover sm:transition-transform sm:duration-[450ms] motion-safe:sm:group-hover:scale-[1.01]"
-            style={{ objectPosition: coach.imagePosition }}
-            sizes="(max-width: 639px) 100vw, 340px"
-            quality={95}
-          />
+      <div className="relative h-full w-full flex flex-col sm:flex-row sm:items-stretch overflow-hidden rounded-2xl border border-black/[0.08] border-l-[3px] border-l-brand-victoria-cove/50 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_16px_40px_rgba(27,58,92,0.07)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06),0_24px_56px_rgba(27,58,92,0.09)]">
+        {/* Photo column: padded well + framed portrait (matches stacked Meet the Team) */}
+        <div className="flex w-full shrink-0 flex-col px-4 pb-4 pt-4 sm:w-[min(100%,348px)] sm:max-w-[348px] sm:flex-none sm:justify-center sm:self-stretch sm:px-5 sm:py-5 sm:pb-5 lg:w-[min(100%,360px)] lg:max-w-[360px]">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[14px] bg-brand-morning-light ring-1 ring-black/[0.08] shadow-[0_2px_14px_rgba(27,58,92,0.08),inset_0_1px_0_rgba(255,255,255,0.5)]">
+            <Image
+              src={coachImageSrc(coach.image)}
+              alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
+              fill
+              className="object-cover sm:transition-transform sm:duration-[450ms] motion-safe:sm:group-hover:scale-[1.02]"
+              style={{ objectPosition: coach.imagePosition }}
+              sizes="(max-width: 639px) 92vw, 320px"
+              quality={95}
+            />
+          </div>
         </div>
 
-        <div className="flex flex-col flex-1 min-w-0 px-5 py-6 sm:px-8 sm:py-7 lg:pr-10">
+        <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-5 py-6 sm:border-t-0 sm:border-l sm:border-black/[0.05] sm:px-8 sm:py-7 lg:pr-10">
           <div className="shrink-0">
             <p className="font-sans text-[10px] font-semibold text-brand-pacific-dusk/55 uppercase tracking-[0.14em] mb-2 line-clamp-2 leading-tight">
               {coach.title}
