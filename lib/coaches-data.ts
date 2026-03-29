@@ -11,7 +11,7 @@ const SITE_URL =
     : 'https://lagunabeachtennisacademy.com'
 
 /** Bump when coach headshots are updated so browsers and CDN fetch new images. */
-export const COACH_IMAGE_VERSION = 10
+export const COACH_IMAGE_VERSION = 11
 
 /** Coach image URL with cache-bust query param. Use for all coach headshot src. */
 export function coachImageSrc(path: string): string {
