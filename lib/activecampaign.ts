@@ -327,11 +327,15 @@ interface ACResponse<T> {
 }
 
 /**
- * Create or update a contact in ActiveCampaign
+ * Create or update a contact in ActiveCampaign using the /contact/sync endpoint.
+ * This is a TRUE upsert — creates new contacts and updates existing ones by email.
+ * The old POST /api/3/contacts endpoint was create-only and returned 422 for duplicates,
+ * silently failing for both new and existing contacts in production.
+ * Fixed 2026-03-30 after real registration (Ariana Miramontes) failed to reach AC.
  */
 export async function upsertContact(contact: ContactData): Promise<ACResponse<{ id: string }>> {
   try {
-    const response = await fetch(`${AC_URL()}/api/3/contacts`, {
+    const response = await fetch(`${AC_URL()}/api/3/contact/sync`, {
       method: 'POST',
       headers: {
         'Api-Token': AC_API_KEY(),
@@ -342,19 +346,14 @@ export async function upsertContact(contact: ContactData): Promise<ACResponse<{ 
 
     if (!response.ok) {
       const error = await response.text()
-      if (process.env.NODE_ENV === 'production') {
-        console.error('[AC] Contact creation failed:', response.status)
-      } else {
-        const safeMsg = error.length > 100 ? `${error.slice(0, 100)}…` : error
-        console.error('[AC] Contact creation failed:', response.status, safeMsg)
-      }
+      console.error('[AC] Contact sync failed:', response.status, error.slice(0, 200))
       return { success: false, error }
     }
 
     const data = await response.json()
     return { success: true, data: { id: data.contact.id } }
   } catch (error) {
-    console.error('[AC] Contact creation error:', error)
+    console.error('[AC] Contact sync error:', error instanceof Error ? error.message : error)
     return { success: false, error: String(error) }
   }
 }
@@ -384,12 +383,7 @@ export async function addToList(
 
     if (!response.ok) {
       const error = await response.text()
-      if (process.env.NODE_ENV === 'production') {
-        console.error('[AC] List subscription failed:', response.status)
-      } else {
-        const safeMsg = error.length > 100 ? `${error.slice(0, 100)}…` : error
-        console.error('[AC] List subscription failed:', response.status, safeMsg)
-      }
+      console.error('[AC] List subscription failed:', response.status, error.slice(0, 200))
       return { success: false, error }
     }
 
@@ -424,12 +418,7 @@ export async function addTag(
 
     if (!response.ok) {
       const error = await response.text()
-      if (process.env.NODE_ENV === 'production') {
-        console.error(`[AC] Tag ${tagId} application failed:`, response.status)
-      } else {
-        const safeMsg = error.length > 100 ? `${error.slice(0, 100)}…` : error
-        console.error(`[AC] Tag ${tagId} application failed:`, response.status, safeMsg)
-      }
+      console.error(`[AC] Tag ${tagId} application failed:`, response.status, error.slice(0, 200))
       return { success: false, error }
     }
 
