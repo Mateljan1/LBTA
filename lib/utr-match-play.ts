@@ -126,27 +126,60 @@ export function formatUtrSeasonRangeDisplay(): string {
 }
 
 /**
- * Marketing badge for current week of the 8 Saturday blocks (Season 1).
- * Before first Saturday → WEEK 1 OF 8; during calendar week of a Saturday → that week; after last → WEEK 8 OF 8.
+ * Current week index 1–8 for Season 1 (aligned with Saturday blocks).
+ * Before first Saturday → 1; during a week’s Sat–Fri window → that week; after last Saturday → 8.
  */
-export function getUtrWeekBadgeLabel(): string {
+export function getUtrSeasonWeekNumber(): number {
   const saturdays = getUtrRegularSeasonSaturdays()
-  if (saturdays.length === 0) return 'SEASON 1'
+  if (saturdays.length === 0) return 1
   const now = new Date()
   const first = new Date(`${saturdays[0]}T00:00:00`)
-  if (now < first) return 'WEEK 1 OF 8'
+  if (now < first) return 1
 
   for (let i = 0; i < saturdays.length; i++) {
     const start = new Date(`${saturdays[i]}T00:00:00`)
     const end = new Date(start)
     end.setDate(end.getDate() + 6)
     end.setHours(23, 59, 59, 999)
-    if (now >= start && now <= end) return `WEEK ${i + 1} OF 8`
+    if (now >= start && now <= end) return i + 1
   }
 
   const lastStart = new Date(`${saturdays[saturdays.length - 1]}T00:00:00`)
-  if (now > lastStart) return 'WEEK 8 OF 8'
-  return 'WEEK 1 OF 8'
+  if (now > lastStart) return 8
+  return 1
+}
+
+/**
+ * Sat–Sun date line for a week (e.g. "April 11 – 12") from regular-season ISO lists.
+ */
+export function formatUtrWeekendPairShort(weekIndex1Based: number): string {
+  const sats = getUtrRegularSeasonSaturdays()
+  const suns = getUtrRegularSeasonSundays()
+  const i = Math.min(Math.max(weekIndex1Based, 1), 8) - 1
+  const satIso = sats[i]
+  const sunIso = suns[i]
+  if (!satIso || !sunIso) return ''
+  const ds = new Date(`${satIso}T12:00:00`)
+  const dn = new Date(`${sunIso}T12:00:00`)
+  const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(ds)
+  const day1 = ds.getDate()
+  const day2 = dn.getDate()
+  if (ds.getMonth() === dn.getMonth() && ds.getFullYear() === dn.getFullYear()) {
+    return `${month} ${day1} – ${day2}`
+  }
+  const left = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric' }).format(ds)
+  const right = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric' }).format(dn)
+  return `${left} – ${right}`
+}
+
+/**
+ * Marketing badge for current week of the 8 Saturday blocks (Season 1).
+ * Before first Saturday → WEEK 1 OF 8; during calendar week of a Saturday → that week; after last → WEEK 8 OF 8.
+ */
+export function getUtrWeekBadgeLabel(): string {
+  const saturdays = getUtrRegularSeasonSaturdays()
+  if (saturdays.length === 0) return 'SEASON 1'
+  return `WEEK ${getUtrSeasonWeekNumber()} OF 8`
 }
 
 

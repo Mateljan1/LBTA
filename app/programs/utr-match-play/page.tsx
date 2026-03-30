@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { LeagueEventSchema } from '@/app/schema'
 import UtrSeriesHero from '@/components/programs/UtrSeriesHero'
+import UtrWeekAtGlanceBanner from '@/components/programs/UtrWeekAtGlanceBanner'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import UTRMatchPlayRegister from './UTRMatchPlayRegister'
 import UTRMatchPlayDivisions from './UTRMatchPlayDivisions'
@@ -71,6 +72,8 @@ export default function UTRMatchPlayPage() {
       />
 
       <UtrSeriesHero />
+
+      <UtrWeekAtGlanceBanner />
 
       {/* Divisions — light editorial cards */}
       <section id="divisions" className="scroll-mt-28 border-b border-brand-pacific-dusk/[0.08] bg-white">
