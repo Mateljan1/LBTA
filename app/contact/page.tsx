@@ -89,18 +89,22 @@ function ContactPageContent() {
     }
     
     setStatus('sending')
-    
+
     try {
+      /** POST /api/book — bookingSchema; source=contact-page routes to Contact (not trial) in route handler. */
+      const payload = {
+        firstName: formData.name.split(' ')[0],
+        lastName: formData.name.split(' ').slice(1).join(' ') || formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        program: formData.interestedIn || 'General Inquiry',
+        message: formData.message.trim() || undefined,
+        source: 'contact-page' as const,
+      }
       const response = await fetch('/api/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          firstName: formData.name.split(' ')[0],
-          lastName: formData.name.split(' ').slice(1).join(' ') || formData.name,
-          program: formData.interestedIn || 'General Inquiry',
-          source: 'contact-page',
-        }),
+        body: JSON.stringify(payload),
       })
       
       if (response.ok) {

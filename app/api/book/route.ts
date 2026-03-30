@@ -20,6 +20,7 @@ import {
   notifyTrialRequest,
   notifyPrivateLesson,
   sendTrialConfirmationEmail,
+  sendContactFormConfirmationEmail,
   sendPrivateLessonConfirmationEmail,
 } from '@/lib/email'
 import { writeNotionLead } from '@/lib/notion-leads'
@@ -184,12 +185,23 @@ export async function POST(request: NextRequest) {
     }
 
     const trialBody = body as import('@/lib/validations').BookingRequest
+    const isContactPage = trialBody.source === 'contact-page'
+    const contactMessage = trialBody.message?.trim()
+
     if (process.env.NODE_ENV !== 'production') {
-      console.log('[Trial] Request received:', { program: trialBody.program, timestamp: new Date().toISOString() })
+      console.log('[Trial] Request received:', {
+        program: trialBody.program,
+        source: trialBody.source,
+        isContactPage,
+        timestamp: new Date().toISOString(),
+      })
     }
     const daysSelected = (trialBody.preferredDays ?? []).join(', ') || 'Flexible'
-    const signupSourceField11 =
-      trialBody.source === 'homepage-cta' ? 'website-homepage-cta' : 'website'
+    const signupSourceField11 = isContactPage
+      ? 'website-contact-page'
+      : trialBody.source === 'homepage-cta'
+        ? 'website-homepage-cta'
+        : 'website'
 
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
       try {
@@ -199,12 +211,17 @@ export async function POST(request: NextRequest) {
           lastName: trialBody.lastName,
           phone: trialBody.phone,
           fieldValues: [
-            { field: '7', value: trialBody.program || 'Trial Request' },
+            { field: '7', value: trialBody.program || (isContactPage ? 'Contact Form' : 'Trial Request') },
             { field: '8', value: trialBody.location || 'Not specified' },
             { field: '9', value: daysSelected },
             { field: '11', value: signupSourceField11 },
-            { field: '12', value: 'trial' },
-            { field: '5', value: trialBody.experience || 'Not specified' },
+            { field: '12', value: isContactPage ? 'contact' : 'trial' },
+            {
+              field: '5',
+              value: isContactPage
+                ? [contactMessage, trialBody.experience].filter(Boolean).join('\n\n') || 'Not specified'
+                : trialBody.experience || 'Not specified',
+            },
           ],
         })
         if (contactResult.success && contactResult.data) {
@@ -214,8 +231,13 @@ export async function POST(request: NextRequest) {
             addToList(contactId, LBTA_LIST_ID),
             websiteSignupsListId !== null ? addToList(contactId, websiteSignupsListId) : Promise.resolve(),
           ])
-          const tagsToApply: number[] = [CAMPAIGN_TAGS.website_registration, CAMPAIGN_TAGS.trial_request]
-          if (trialBody.program && PROGRAM_TAGS[trialBody.program]) tagsToApply.push(PROGRAM_TAGS[trialBody.program])
+          const tagsToApply: number[] = [CAMPAIGN_TAGS.website_registration]
+          if (isContactPage) {
+            tagsToApply.push(CAMPAIGN_TAGS.not_sure)
+          } else {
+            tagsToApply.push(CAMPAIGN_TAGS.trial_request)
+            if (trialBody.program && PROGRAM_TAGS[trialBody.program]) tagsToApply.push(PROGRAM_TAGS[trialBody.program])
+          }
           await addTags(contactId, tagsToApply)
         }
       } catch (acError) {
@@ -223,44 +245,83 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    const notionNotes = isContactPage
+      ? [contactMessage && `Message:\n${contactMessage}`, trialBody.experience && `Experience: ${trialBody.experience}`]
+          .filter(Boolean)
+          .join('\n\n') || undefined
+      : trialBody.experience
+        ? `Experience: ${trialBody.experience}`
+        : undefined
+
     waitUntil(writeNotionLead({
       parentName: `${trialBody.firstName} ${trialBody.lastName}`,
       email: trialBody.email,
       phone: trialBody.phone,
-      program: trialBody.program || 'Trial Request',
-      category: 'Trial',
+      program: trialBody.program || (isContactPage ? 'Contact Form' : 'Trial Request'),
+      category: isContactPage ? 'Contact' : 'Trial',
       location: trialBody.location,
-      notes: trialBody.experience ? `Experience: ${trialBody.experience}` : undefined,
+      notes: notionNotes,
     }))
-    waitUntil(sendToGHL({ email: trialBody.email, firstName: trialBody.firstName, lastName: trialBody.lastName, phone: trialBody.phone, tags: ['Trial Request', trialBody.program ?? 'Not Specified'] }))
+    waitUntil(
+      sendToGHL({
+        email: trialBody.email,
+        firstName: trialBody.firstName,
+        lastName: trialBody.lastName,
+        phone: trialBody.phone,
+        tags: isContactPage
+          ? ['Contact Form', trialBody.program ?? 'General inquiry']
+          : ['Trial Request', trialBody.program ?? 'Not Specified'],
+      })
+    )
     waitUntil(storeLead({
       source: 'book',
       email: trialBody.email,
       name: `${trialBody.firstName ?? ''} ${trialBody.lastName ?? ''}`.trim() || undefined,
       phone: trialBody.phone ?? undefined,
-      payload: { program: trialBody.program, location: trialBody.location },
+      payload: {
+        program: trialBody.program,
+        location: trialBody.location,
+        ...(isContactPage && contactMessage ? { message: contactMessage } : {}),
+      },
     }))
-    waitUntil(notifyTrialRequest({
-      firstName: trialBody.firstName,
-      lastName: trialBody.lastName,
-      email: trialBody.email,
-      phone: trialBody.phone,
-      program: trialBody.program,
-      location: trialBody.location,
-      experience: trialBody.experience,
-      preferredDays: trialBody.preferredDays,
-    }))
-    // Send branded confirmation email TO the trial requestor
-    waitUntil(sendTrialConfirmationEmail({
-      email: trialBody.email,
-      firstName: trialBody.firstName,
-      program: trialBody.program,
-      location: trialBody.location,
-    }))
+    waitUntil(
+      notifyTrialRequest({
+        firstName: trialBody.firstName,
+        lastName: trialBody.lastName,
+        email: trialBody.email,
+        phone: trialBody.phone,
+        program: trialBody.program,
+        location: trialBody.location,
+        experience: trialBody.experience,
+        preferredDays: trialBody.preferredDays,
+        message: contactMessage,
+        intent: isContactPage ? 'contact' : 'trial',
+      })
+    )
+    if (isContactPage) {
+      waitUntil(
+        sendContactFormConfirmationEmail({
+          email: trialBody.email,
+          firstName: trialBody.firstName,
+          programInterest: trialBody.program,
+        })
+      )
+    } else {
+      waitUntil(
+        sendTrialConfirmationEmail({
+          email: trialBody.email,
+          firstName: trialBody.firstName,
+          program: trialBody.program,
+          location: trialBody.location,
+        })
+      )
+    }
 
     return NextResponse.json({
       success: true,
-      message: "Trial request received! Our team will contact you within 24 hours.",
+      message: isContactPage
+        ? 'Thanks — we received your message and will respond within 24 hours.'
+        : 'Trial request received! Our team will contact you within 24 hours.',
     })
   } catch (error) {
     console.error('[Booking] Error:', error)

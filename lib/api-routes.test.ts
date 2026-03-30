@@ -109,6 +109,16 @@ describe('bookingSchema (/api/book)', () => {
     expect(bookingSchema.safeParse(data).success).toBe(true)
   })
 
+  it('accepts contact-page message body', () => {
+    const data = {
+      ...valid,
+      source: 'contact-page',
+      program: 'General Inquiry',
+      message: 'Hello — question about junior clinics.',
+    }
+    expect(bookingSchema.safeParse(data).success).toBe(true)
+  })
+
   it('accepts booking with source for AC / GA attribution', () => {
     expect(bookingSchema.safeParse({ ...valid, source: 'homepage-cta' }).success).toBe(true)
   })

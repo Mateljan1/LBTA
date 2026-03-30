@@ -117,6 +117,8 @@ export const bookingSchema = contactSchema.extend({
   preferredDays: z.array(z.string().max(50)).max(31).optional().default([]),
   experience: z.string().max(200).optional(),
   goals: z.string().max(1000).optional(),
+  /** Contact page body; persisted to Notion / ops email when source is contact-page. */
+  message: z.string().max(2000).optional(),
 })
 
 export type BookingRequest = z.infer<typeof bookingSchema>
