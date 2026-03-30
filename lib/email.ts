@@ -530,3 +530,32 @@ export async function sendScholarshipConfirmationEmail(params: {
     }),
   })
 }
+
+// ============================================================
+// Chat widget notification
+// ============================================================
+
+/**
+ * Send an internal notification when someone uses the chat widget.
+ * Returns a Promise — callers should pass to waitUntil() for reliable delivery.
+ */
+export async function notifyChatMessage(params: {
+  message: string
+  pathname?: string
+  messageCount: number
+}): Promise<void> {
+  await sendEmail({
+    to: NOTIFY_TO,
+    subject: `Chat Widget Message — ${params.message.slice(0, 50)}${params.message.length > 50 ? '…' : ''}`,
+    tag: 'chat-message',
+    htmlBody: buildNotificationHtml({
+      type: 'chat widget message',
+      heading: 'Chat Widget Inquiry',
+      fields: [
+        { label: 'Message', value: params.message },
+        { label: 'Page', value: params.pathname || 'Unknown' },
+        { label: 'Messages in conversation', value: String(params.messageCount) },
+      ],
+    }),
+  })
+}
