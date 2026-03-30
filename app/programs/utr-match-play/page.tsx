@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LeagueEventSchema } from '@/app/schema'
+import UtrSeasonOverviewBar from '@/components/programs/UtrSeasonOverviewBar'
 import UtrSeriesHero from '@/components/programs/UtrSeriesHero'
 import UtrWeekAtGlanceBanner from '@/components/programs/UtrWeekAtGlanceBanner'
 import HorizonDivider from '@/components/ui/HorizonDivider'
@@ -21,6 +22,8 @@ import {
   getUtrSeasonIsoRange,
   getUtrSeasonLabel,
   getUtrSundayVenueShort,
+  KARUE_CUTOUT_IMAGE_URL,
+  UTR_SPORTS_CLUB_REGISTER_URL,
 } from '@/lib/utr-match-play'
 
 const seasonLabel = getUtrSeasonLabel()
@@ -38,13 +41,17 @@ const grandFinalsLong = formatUtrSessionDateLong(utrGrandFinalsIso)
 const VENUE_ALTA_IMAGE = '/images/about/court-alta-laguna.webp'
 const VENUE_LBHS_IMAGE = '/images/about/court-lbhs.webp'
 
+const UTR_PAGE_EMAIL = 'andrew@lagunabeachtennisacademy.com'
+
 export const metadata: Metadata = {
   // Segment title only — root layout template adds " | Laguna Beach Tennis Academy"
   title: 'UTR Match Play Series',
-  description: `LBTA UTR Match Play Series — Season 1. Eight weekends of rated matchplay in Laguna Beach. Four divisions from Color Ball juniors to advanced singles and doubles. ${seasonLabel.split('·')[0]?.trim() ?? seasonLabel}.`,
+  description:
+    '8-week UTR-rated match play series in Laguna Beach. Saturdays & Sundays, April 11 – May 30. Color Ball through advanced. Grand Finals June 6 with Karuê Sell exhibition.',
   openGraph: {
     title: 'UTR Match Play Series',
-    description: `Rated weekend matchplay by level in Laguna Beach. ${seasonLabel.split('·')[0]?.trim() ?? seasonLabel}.`,
+    description:
+      '8-week UTR-rated match play in Laguna Beach. Color Ball through advanced singles and doubles. Grand Finals June 6.',
     type: 'website',
     images: [
       {
@@ -65,7 +72,7 @@ export default function UTRMatchPlayPage() {
     <div className="overflow-x-hidden bg-brand-morning-light text-brand-pacific-dusk">
       <LeagueEventSchema
         name="UTR Match Play Series — Season 1"
-        description={`Eight weekends of rated matchplay in Laguna Beach. Four divisions from Color Ball juniors to advanced singles and doubles. ${seasonLabel}`}
+        description={`Eight weekends of rated matchplay in Laguna Beach. Five division bands from Color Ball juniors to level-based singles and doubles. ${seasonLabel}`}
         startDate={startDate}
         endDate={endDate}
         location="Laguna Beach"
@@ -73,35 +80,36 @@ export default function UTRMatchPlayPage() {
 
       <UtrSeriesHero />
 
+      <UtrSeasonOverviewBar />
+
       <UtrWeekAtGlanceBanner />
 
       {/* Divisions — light editorial cards */}
       <section id="divisions" className="scroll-mt-28 border-b border-brand-pacific-dusk/[0.08] bg-white">
         <div className="container-lbta section">
           <p className="font-sans text-[12px] font-extrabold uppercase tracking-[0.22em] text-brand-victoria-cove">
-            Four divisions — by level, not age
+            Five divisions — by level, not age
           </p>
           <h2 className="font-headline text-display-sm md:text-[clamp(2rem,4vw,2.5rem)] text-brand-pacific-dusk mt-2 mb-3 leading-tight">
             Find your level
           </h2>
           <div className="section-horizon mb-6 max-w-[120px] opacity-90" aria-hidden="true" />
           <p className="text-body text-brand-pacific-dusk/75 mb-10 max-w-2xl">
-            Start with a weekend drop-in: pick your division, choose a date on the card, and request a
-            drop-in—we confirm space after you reach out (not instant checkout). Full season registration
-            covers all eight weekends plus Grand Finals. Divisions are by skill band—juniors and adults enroll
-            where they fit. See the{' '}
+            Pick your division and jump in. Drop-ins register directly on the UTR platform — we&apos;ll have you
+            in the draw. Full season registration covers all eight weekends plus Grand Finals. Divisions are by
+            skill level — juniors and adults play where they fit. See the{' '}
             <a
               href="#schedule"
               className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/35 hover:text-brand-pacific-dusk"
             >
               schedule
             </a>{' '}
-            or{' '}
+            or email{' '}
             <a
-              href="/contact"
+              href={`mailto:${UTR_PAGE_EMAIL}`}
               className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/35 hover:text-brand-pacific-dusk"
             >
-              contact us
+              {UTR_PAGE_EMAIL}
             </a>{' '}
             for questions.
           </p>
@@ -130,9 +138,9 @@ export default function UTRMatchPlayPage() {
           </h2>
           <div className="section-horizon mb-6 max-w-[120px] opacity-90" aria-hidden="true" />
           <p className="text-[16px] md:text-[17px] font-sans font-light leading-relaxed text-brand-pacific-dusk/70 max-w-2xl mb-10">
-            Saturdays at {satVenueShort} (Color Ball + UTR 2.0–5.0 Singles). Sundays at {sunVenueShort} (UTR
-            3.0–7.0 Singles + Doubles). Use the division cards above to pick a date and request a drop-in, or
-            register for the full season—there is no day-of online signup.
+            Saturdays at {satVenueShort} (Color Ball + UTR 2.0–5.0 Singles). Sundays at {sunVenueShort}{' '}
+            (Singles + Doubles — level-based). Drop-ins register directly on the UTR platform. Full season
+            registration covers all eight weekends plus Grand Finals.
           </p>
           <div className="mx-auto max-w-5xl">
             <UtrDropInSchedule
@@ -176,10 +184,11 @@ export default function UTRMatchPlayPage() {
               for development; it is not the same display as an adult numeric UTR, and that is by design.
             </p>
             <p>
-              Scaled tennis is serious, structured play. Our{' '}
-              <strong className="font-medium text-brand-pacific-dusk">Color Ball division</strong> sits in
-              the same weekend series: real matchplay, same-day score submission to UTR Sports, and a clear
-              place for juniors who are not on full yellow ball yet.
+              Our{' '}
+              <strong className="font-medium text-brand-pacific-dusk">Color Ball division</strong> sits in the
+              same weekend series: real match play, same-day score submission to UTR Sports, and a clear place
+              for juniors who aren&apos;t on full yellow ball yet. A coach is on court for every Color Ball
+              match — this is structured, supported competition.
             </p>
           </div>
           <div className="mt-10 grid sm:grid-cols-3 gap-6 pt-8 border-t border-brand-pacific-dusk/[0.1]">
@@ -206,13 +215,14 @@ export default function UTRMatchPlayPage() {
             ))}
           </div>
           <p className="mt-8 text-[14px] font-sans font-light text-brand-pacific-dusk/60 leading-relaxed">
-            Unsure which division fits? Note it when you register—we confirm placement before the first
-            weekend. We do not offer separate trial sessions for this series. For a single weekend, reference
-            pricing is listed per division—arrange through the academy (no day-of online signup).{' '}
-            <Link href="/contact" className="text-brand-victoria-cove underline underline-offset-4 font-medium hover:text-brand-pacific-dusk transition-colors">
-              Contact us
-            </Link>{' '}
-            with questions.
+            Unsure which division fits? Note it when you register — we confirm placement before the first
+            weekend. Questions?{' '}
+            <a
+              href={`mailto:${UTR_PAGE_EMAIL}`}
+              className="text-brand-victoria-cove underline underline-offset-4 font-medium hover:text-brand-pacific-dusk transition-colors"
+            >
+              {UTR_PAGE_EMAIL}
+            </a>
           </p>
         </div>
       </section>
@@ -224,23 +234,26 @@ export default function UTRMatchPlayPage() {
             <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">Who it&apos;s for</h2>
             <div className="section-horizon mx-auto md:mx-0 mb-6 opacity-90" aria-hidden="true" />
             <p className="text-body text-brand-pacific-dusk/75 leading-relaxed">
-              One series, four divisions. Pick the band that matches your game; we help with placement if you
-              are between levels.
+              One series, five divisions. Pick the band that matches your game.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
             {[
               {
-                title: 'Junior pathway — Color Ball on up',
-                body: 'Red, orange, and green ball players have a dedicated Color Ball division: development-first matchplay with formats that fit scaled tennis.',
+                title: 'Color Ball juniors',
+                body: 'Red, orange, and green ball players have a dedicated Saturday division. Coach on court. Development-first match play with formats built for scaled tennis. If they can rally, they can play.',
               },
               {
-                title: 'Club & improving adults',
-                body: 'Intermediate bands where every match counts toward UTR and your confidence on court.',
+                title: 'Intermediate players',
+                body: "UTR 2.0–5.0. Saturday afternoons. Whether you're getting back into tennis or building consistency, every match is rated and every week you see where you stand.",
               },
               {
-                title: 'Advanced & doubles',
-                body: 'Higher UTR singles bands and a dedicated doubles block at Laguna Beach High School.',
+                title: 'All-level singles',
+                body: 'Sunday singles — open to all levels, paired by skill. You play people at your level regardless of age or gender. Your UTR moves after every match.',
+              },
+              {
+                title: 'Doubles',
+                body: 'Sunday evenings at Laguna Beach High School. Show up solo and we pair you by combined UTR. No partner needed.',
               },
             ].map((card, i) => (
               <div
@@ -249,7 +262,7 @@ export default function UTRMatchPlayPage() {
                   'group relative rounded-xl border border-brand-pacific-dusk/[0.08] bg-white p-8 md:p-9',
                   'shadow-[0_8px_32px_rgba(27,58,92,0.06)] transition-all duration-500',
                   'hover:border-brand-victoria-cove/25 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(27,58,92,0.1)]',
-                  i === 1 ? 'md:-translate-y-3' : '',
+                  i === 1 ? 'md:-translate-y-1' : '',
                 ].join(' ')}
               >
                 <span
@@ -280,7 +293,11 @@ export default function UTRMatchPlayPage() {
           <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 relative">
             {[
               { step: '01', title: 'Check In', desc: 'Arrive and see the draw. Seeded by your rating.' },
-              { step: '02', title: 'Play', desc: 'Competitive matches in your division. Best of 3 or pro sets.' },
+              {
+                step: '02',
+                title: 'Play',
+                desc: 'Competitive matches in your division. Formats may vary week to week.',
+              },
               {
                 step: '03',
                 title: 'Results',
@@ -314,8 +331,7 @@ export default function UTRMatchPlayPage() {
         <div className="container-lbta section-sm">
           <blockquote className="section-quote max-w-3xl mx-auto my-0">
             <p className="font-headline text-display-sm md:text-[clamp(1.75rem,4vw,2.25rem)] text-brand-pacific-dusk leading-snug">
-              Matchplay is where training meets pressure—where your rating reflects what you actually play,
-              not just what you practice.
+              The whole point is to play more, play better, and actually enjoy the process.
             </p>
           </blockquote>
         </div>
@@ -331,9 +347,12 @@ export default function UTRMatchPlayPage() {
             Every match earns points. Points only go up.
           </h2>
           <div className="section-horizon mb-8 max-w-[120px] opacity-90" aria-hidden="true" />
-          <p className="text-body text-brand-pacific-dusk/70 max-w-2xl mb-12">
-            Two tracks: UTR (national, skill-based) and Season Points (local, effort-based). You do not have to
-            win to climb.
+          <p className="text-body text-brand-pacific-dusk/70 max-w-2xl mb-6">
+            Two tracks run side by side: UTR (national, skill-based) and Season Points (local, effort-based).
+            You don&apos;t have to win to climb.
+          </p>
+          <p className="text-[15px] font-sans font-medium text-brand-pacific-dusk/80 max-w-2xl mb-12">
+            Multipliers: Week 1 — double points (2×). Grand Finals week — 1.5×.
           </p>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
@@ -397,12 +416,12 @@ export default function UTRMatchPlayPage() {
           </p>
           <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] text-white mt-2 mb-2">Season 1 finale</h2>
           <p className="font-sans text-[18px] font-bold text-brand-thousand-steps mb-10">
-            {grandFinalsLong} · {utrGrandFinalsVenue}
+            {grandFinalsLong} · {utrGrandFinalsVenue} · 625 Park Ave
           </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-10">
             {[
-              { t: '4:00 PM', e: 'Division finals', d: 'All four divisions compete' },
-              { t: '6:00 PM', e: 'Social hour', d: 'Food trucks · Season 2 reg opens' },
+              { t: '4:00 PM', e: 'Division finals', d: 'All divisions compete' },
+              { t: '6:00 PM', e: 'Social hour', d: 'Food, drinks · Season 2 registration opens' },
               { t: '7:00 PM', e: 'Awards & raffle', d: 'Champions crowned · Raffle drawn' },
               { t: '8:00 PM', e: 'Pro exhibition', d: 'Doubles under the lights' },
             ].map((row) => (
@@ -420,10 +439,10 @@ export default function UTRMatchPlayPage() {
           <div className="mt-12 grid md:grid-cols-[1.1fr_1fr] gap-10 md:gap-14 items-center">
             <div className="relative aspect-[3/4] w-full max-w-[min(100%,480px)] mx-auto md:mx-0 overflow-hidden rounded-2xl border border-white/10 bg-[#0a1424]">
               <Image
-                src="/images/programs/karue-sell-exhibition.webp"
-                alt="Karue Sell hitting a forehand — exhibition guest for Grand Finals night"
+                src={KARUE_CUTOUT_IMAGE_URL}
+                alt="Karuê Sell — exhibition guest for Grand Finals night"
                 fill
-                className="object-cover object-top"
+                className="object-contain object-bottom"
                 sizes="(max-width: 767px) min(100vw - 48px, 480px), 45vw"
                 quality={95}
               />
@@ -433,11 +452,16 @@ export default function UTRMatchPlayPage() {
                 Guest athlete
               </span>
               <h4 className="font-headline text-[clamp(2rem,5vw,3rem)] text-white leading-tight">
-                Karu&eacute; Sell
+                Karuê Sell
               </h4>
               <p className="text-[16px] md:text-[18px] font-sans font-light text-white/65 leading-relaxed">
-                ATP #262 and UCLA All-American. Karu&eacute; joins the Season 1 finale as a featured
-                exhibition player after division finals and awards.
+                Career-high ATP #258. UCLA All-American (104–31 career record). Former hitting partner for
+                Naomi Osaka. 188K subscribers on YouTube (@Karue-Sell) documenting his &quot;Turning Pro at
+                30&quot; journey.
+              </p>
+              <p className="text-[15px] font-sans font-light text-white/55 leading-relaxed">
+                Division winners step on court and play doubles alongside Karuê under the lights. That&apos;s
+                not something you can buy — you earn it on the leaderboard.
               </p>
               <p className="text-[15px] font-sans font-medium text-brand-victoria-cove">
                 Exhibition doubles · {grandFinalsDisplay}, 8:00 PM
@@ -496,32 +520,32 @@ export default function UTRMatchPlayPage() {
           </h3>
           <div className="section-horizon mx-auto mb-6 opacity-90" aria-hidden="true" />
           <p className="text-center text-body text-brand-pacific-dusk/70 max-w-2xl mx-auto mb-10">
-            Juniors and adults compete by level—not by age alone. Saturdays at Alta Laguna Park; Sundays at
-            Laguna Beach High School. Same series; divisions span Color Ball through advanced singles and
-            doubles.
+            Juniors and adults compete by level — not by age. Saturdays at Alta Laguna Park. Sundays at Laguna
+            Beach High School. Same series — divisions span Color Ball through advanced singles and doubles.
           </p>
           <div className="grid sm:grid-cols-2 gap-6">
             {[
               {
                 name: 'Alta Laguna Park',
-                address: 'Alta Laguna Blvd, Laguna Beach',
+                address: '3300 Alta Laguna Blvd, Laguna Beach, CA 92651',
                 courts: '4 courts',
-                days: `Saturdays: Color Ball + UTR 2.0–5.0 Singles`,
+                days: 'Saturdays — Color Ball + UTR 2.0–5.0 Singles',
                 image: VENUE_ALTA_IMAGE,
                 imageAlt:
                   'Outdoor tennis courts at Alta Laguna Park — match play for juniors and adults by division',
                 mapUrl:
-                  'https://www.google.com/maps/search/?api=1&query=Alta+Laguna+Park+Laguna+Beach+CA+92651',
+                  'https://www.google.com/maps/search/?api=1&query=3300+Alta+Laguna+Blvd+Laguna+Beach+CA+92651',
               },
               {
                 name: 'Laguna Beach High School',
-                address: '605 Park Ave, Laguna Beach',
+                address: '625 Park Ave, Laguna Beach, CA 92651',
                 courts: '6 courts (4 lit)',
-                days: `Sundays: UTR 3.0–7.0 Singles + Doubles · Grand Finals: ${grandFinalsDisplay}`,
+                days: `Sundays — Singles + Doubles (level-based) · Grand Finals: ${grandFinalsDisplay}`,
                 image: VENUE_LBHS_IMAGE,
                 imageAlt:
                   'Outdoor tennis courts at Laguna Beach High School — match play for juniors and adults by division',
-                mapUrl: 'https://www.google.com/maps/search/?api=1&query=605+Park+Ave+Laguna+Beach+CA+92651',
+                mapUrl:
+                  'https://www.google.com/maps/search/?api=1&query=625+Park+Ave+Laguna+Beach+CA+92651',
               },
             ].map((v) => (
               <article
@@ -576,7 +600,7 @@ export default function UTRMatchPlayPage() {
               {[
                 {
                   q: 'Do I need a UTR account?',
-                  a: 'Yes. We submit results to UTR Sports — you need an active profile for rated play.',
+                  a: "Yes. We submit results to UTR Sports — you need an active profile for rated play. It's free to create one at utrsports.net.",
                 },
                 {
                   q: 'Do I have to play both Saturday and Sunday?',
@@ -584,19 +608,35 @@ export default function UTRMatchPlayPage() {
                 },
                 {
                   q: 'My child only plays red or orange ball. Is this for them?',
-                  a: 'Yes. The Color Ball division runs every Saturday with formats built for scaled tennis. Same series, same community.',
+                  a: 'Yes. The Color Ball division runs every Saturday with a coach on court, underhand serves welcome, and formats built for scaled tennis. Same series, same community.',
                 },
                 {
-                  q: 'What if I am between two divisions?',
+                  q: "What if I'm between two divisions?",
                   a: 'Note it when you register — we confirm placement before the first weekend.',
                 },
                 {
-                  q: 'Can I try one session first?',
-                  a: 'We do not offer same-day or self-serve online signup for a single session. If you want to try one weekend, contact us—when space allows, we align you with the weekend reference rate for your division.',
+                  q: 'Can I try one weekend first?',
+                  a: 'Yes. Register as a drop-in directly on the UTR platform for any single weekend. No need to commit to the full season.',
                 },
                 {
                   q: 'Is this only for juniors?',
-                  a: 'No. Divisions are by level, not age. Adults and juniors enroll in the band that fits—Color Ball is scaled tennis for younger pathways; UTR singles and doubles bands include adults.',
+                  a: 'No. Divisions are by level, not age. Adults and juniors enroll in the band that fits.',
+                },
+                {
+                  q: 'What if it rains?',
+                  a: "We'll schedule a makeup date and communicate by email and text the morning of.",
+                },
+                {
+                  q: 'Do I need a partner for doubles?',
+                  a: "No. Show up solo and we'll pair you by combined UTR.",
+                },
+                {
+                  q: 'How does registration work?',
+                  a: 'Full season → register through LBTA (covers all 8 weekends + Grand Finals). Drop-in → register directly on the UTR platform for any single weekend.',
+                },
+                {
+                  q: 'What does the season registration include?',
+                  a: 'All 8 regular-season weekends, Grand Finals admission, Season Points leaderboard eligibility, and weekly prizes.',
                 },
               ].map((item) => (
                 <div key={item.q} className="py-6 first:pt-0">
@@ -618,7 +658,7 @@ export default function UTRMatchPlayPage() {
           <h2 className="font-headline text-display text-white mb-4">Register for Season 1</h2>
           <div className="section-horizon mx-auto mb-8" aria-hidden="true" />
           <p className="text-[1.05rem] font-sans font-light text-white/65 max-w-lg mx-auto mb-10">
-            Eight weekends of competitive, rated matchplay. Choose your division.
+            Eight weekends of match play in Laguna Beach. Choose your division.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <UTRMatchPlayRegister variant="footer" />
@@ -629,12 +669,22 @@ export default function UTRMatchPlayPage() {
               Weekend schedule
             </Link>
           </div>
-          <p className="text-[13px] font-sans font-light text-white/55 mb-4">
+          <p className="text-[14px] font-sans font-light text-white/60 max-w-lg mx-auto mb-6">
             <a
-              href="mailto:info@lagunabeachtennisacademy.com?subject=UTR%20Match%20Play%20Series%20—%20Question"
+              href={UTR_SPORTS_CLUB_REGISTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-brand-victoria-cove/90 underline underline-offset-4 hover:text-white transition-colors"
             >
-              info@lagunabeachtennisacademy.com
+              Register for a single weekend on UTR
+            </a>
+          </p>
+          <p className="text-[13px] font-sans font-light text-white/55 mb-4">
+            <a
+              href={`mailto:${UTR_PAGE_EMAIL}?subject=UTR%20Match%20Play%20Series%20%E2%80%94%20Question`}
+              className="text-brand-victoria-cove/90 underline underline-offset-4 hover:text-white transition-colors"
+            >
+              {UTR_PAGE_EMAIL}
             </a>
             {' · '}
             <a

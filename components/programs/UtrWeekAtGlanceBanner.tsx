@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import {
   formatUtrSessionDateMonthDay,
@@ -5,7 +6,11 @@ import {
   getUtrDivisionsForPage,
   getUtrGrandFinalsIso,
   getUtrSeasonWeekNumber,
+  UTR_LBTA_ICON_WHITE_URL,
+  UTR_SPORTS_CLUB_REGISTER_URL,
 } from '@/lib/utr-match-play'
+
+const UTR_PAGE_EMAIL = 'andrew@lagunabeachtennisacademy.com'
 
 const COLOR_BALL_ROWS = [
   { label: 'Red Ball', dot: 'bg-[#e54b4b]', ages: 'Ages 4–8' },
@@ -38,11 +43,22 @@ export default function UtrWeekAtGlanceBanner() {
       <div className="relative z-[1] mx-auto max-w-[1440px] px-6 py-10 md:px-12 md:py-11">
         <div className="mb-8 flex flex-col justify-between gap-6 md:mb-9 md:flex-row md:items-start">
           <div className="max-w-[min(100%,65%)]">
-            <p className="mb-4 inline-flex flex-wrap items-center gap-x-3 gap-y-1 rounded bg-brand-victoria-cove px-3.5 py-1.5 font-sans text-[11px] font-bold uppercase tracking-[0.15em] text-white">
-              <span>
-                Week {weekNum} of 8 <span className="ml-3 font-normal text-white/50">Season 1</span>
-              </span>
-            </p>
+            <div className="mb-4 flex flex-wrap items-center gap-4">
+              <Image
+                src={UTR_LBTA_ICON_WHITE_URL}
+                alt=""
+                width={44}
+                height={44}
+                className="h-11 w-11 shrink-0 object-contain opacity-95"
+              />
+              <p className="inline-flex flex-wrap items-center gap-x-2 rounded bg-brand-victoria-cove px-3.5 py-1.5 font-sans text-[11px] font-bold uppercase tracking-[0.12em] text-white">
+                <span>
+                  Week {weekNum} of 8
+                  {weekNum === 1 ? ' — Double points' : ''}
+                  <span className="ml-2 font-normal text-white/50">· Season 1</span>
+                </span>
+              </p>
+            </div>
             <h2
               id="utr-week-glance-heading"
               className="font-headline text-[clamp(2rem,6vw,3.5rem)] font-bold leading-[1] tracking-[-0.02em] text-brand-sandstone"
@@ -51,8 +67,7 @@ export default function UtrWeekAtGlanceBanner() {
               <span className="block text-brand-sunset-cliff">Series</span>
             </h2>
             <p className="mt-3 max-w-[500px] font-sans text-[14px] font-light leading-relaxed text-brand-sandstone/70">
-              Good matches. Good people. Your UTR moves after every one. Players paired by skill — not age,
-              not gender.
+              Good matches. Good people. Your UTR moves after every one.
             </p>
           </div>
           <div className="text-left md:pt-2 md:text-right">
@@ -116,7 +131,11 @@ export default function UtrWeekAtGlanceBanner() {
                   <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-brand-victoria-cove" aria-hidden />
                   <div>
                     <div className="font-sans text-[14px] font-medium text-brand-sandstone">{sunSingles.name}</div>
-                    <div className="font-sans text-[11px] text-brand-sandstone/50">Level-based — paired by skill</div>
+                    <div className="font-sans text-[11px] text-brand-sandstone/50">
+                      {sunSingles.level.includes('·')
+                        ? sunSingles.level.split('·').pop()?.trim() ?? 'All levels — paired by skill'
+                        : 'All levels — paired by skill'}
+                    </div>
                   </div>
                 </div>
                 <div className="mt-1 flex shrink-0 items-center gap-4 sm:mt-0">
@@ -135,7 +154,11 @@ export default function UtrWeekAtGlanceBanner() {
                   <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-brand-sunset-cliff" aria-hidden />
                   <div>
                     <div className="font-sans text-[14px] font-medium text-brand-sandstone">{sunDoubles.name}</div>
-                    <div className="font-sans text-[11px] text-brand-sandstone/50">Solo? We&apos;ll pair you.</div>
+                    <div className="font-sans text-[11px] text-brand-sandstone/50">
+                      {sunDoubles.level.includes('·')
+                        ? sunDoubles.level.split('·').pop()?.trim() ?? "We'll pair you"
+                        : "Solo? We'll pair you"}
+                    </div>
                   </div>
                 </div>
                 <div className="mt-1 flex shrink-0 items-center gap-4 sm:mt-0">
@@ -196,7 +219,7 @@ export default function UtrWeekAtGlanceBanner() {
             <p className="font-sans text-[14px] font-semibold text-brand-sandstone">
               Grand Finals · {gfMonthDay}
               <span className="ml-1 font-normal text-brand-sandstone/50">
-                · Karué Sell exhibition (ATP #262 · UCLA All-American)
+                · Karué Sell exhibition (career-high ATP #258 · 188K on YouTube)
               </span>
             </p>
           </div>
@@ -226,22 +249,24 @@ export default function UtrWeekAtGlanceBanner() {
             <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-sandstone/45">
               Drop-in
             </span>
-            <Link
-              href="#divisions"
-              className="font-sans text-[12px] text-brand-sandstone/75 underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+            <a
+              href={UTR_SPORTS_CLUB_REGISTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-[12px] text-brand-victoria-cove underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
-              Pick a date on the division cards — we confirm space after you reach out
-            </Link>
+              Register on UTR Sports (opens new tab)
+            </a>
           </div>
           <div className="flex min-h-[48px] flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
             <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-sandstone/45">
               Questions
             </span>
             <a
-              href="mailto:support@lagunabeachtennisacademy.com"
+              href={`mailto:${UTR_PAGE_EMAIL}`}
               className="font-sans text-[12px] text-brand-victoria-cove underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
-              support@lagunabeachtennisacademy.com
+              {UTR_PAGE_EMAIL}
             </a>
           </div>
         </div>

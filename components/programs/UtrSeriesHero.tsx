@@ -1,19 +1,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import UTRMatchPlayRegister from '@/app/programs/utr-match-play/UTRMatchPlayRegister'
 import UtrDateStrip from '@/components/programs/UtrDateStrip'
 import {
   formatUtrSeasonRangeDisplay,
-  getUtrDivisionsForPage,
+  UTR_DIVISION_STAT_COUNT,
+  UTR_HERO_IMAGE_URL,
 } from '@/lib/utr-match-play'
 
-const HERO_IMAGE = '/images/programs/utr-match-play/utr-match-play-hero.webp'
 const HERO_ALT =
-  'Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy'
+  'Golden hour at Laguna Beach Tennis Academy — outdoor courts for UTR match play'
 
 export default function UtrSeriesHero() {
   const seasonRange = formatUtrSeasonRangeDisplay()
-  const divisionCount = getUtrDivisionsForPage().length
 
   const colorBallRows = [
     { label: 'Red', dotClass: 'bg-red-500 shadow-[0_2px_6px_rgba(204,51,51,0.35)]', ages: '4–8' },
@@ -37,17 +35,17 @@ export default function UtrSeriesHero() {
       >
         <div className="absolute inset-0">
           <Image
-            src={HERO_IMAGE}
+            src={UTR_HERO_IMAGE_URL}
             alt={HERO_ALT}
             fill
             priority
-            className="object-cover object-[50%_22%] sm:object-[50%_20%] lg:object-[50%_18%]"
+            className="object-cover object-center"
             sizes="100vw"
             quality={95}
           />
         </div>
         <div
-          className="absolute inset-0 bg-[linear-gradient(100deg,rgba(15,34,55,0.94)_0%,rgba(15,34,55,0.8)_45%,rgba(15,34,55,0.35)_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(100deg,rgba(15,34,55,0.92)_0%,rgba(15,34,55,0.78)_45%,rgba(15,34,55,0.4)_100%)]"
           aria-hidden="true"
         />
         <div
@@ -65,16 +63,17 @@ export default function UtrSeriesHero() {
             className="font-headline text-[clamp(2.25rem,6vw,3.6rem)] font-bold leading-[1.08] text-white"
           >
             <span className="block">Eight Weekends.</span>
-            <span className="block">Rated Matches.</span>
-            <span className="block text-brand-victoria-cove">Real Progress.</span>
+            <span className="block">Real Matches.</span>
+            <span className="block text-brand-victoria-cove">Real Fun.</span>
           </h1>
 
           <p className="mt-6 max-w-xl font-sans text-[17px] font-light leading-relaxed text-white/70 md:text-[18px]">
-            Structured matchplay by skill level — not age or gender — with same-day UTR submission, season
-            points, weekly prizes, and a Grand Finals night on the coast.
+            Structured match play by skill level — not age or gender. Every match is UTR rated. Season
+            points, weekly prizes, and a Grand Finals night on the coast. The whole point is to play more,
+            play better, and actually enjoy the process.
           </p>
 
-          <p className="mt-4 font-sans text-[13px] font-medium text-white/50 md:hidden">{seasonRange}</p>
+          <p className="mt-4 font-sans text-[14px] font-medium text-white/60">{seasonRange}</p>
 
           <div className="mt-8 flex flex-wrap gap-x-9 gap-y-5 md:mt-10">
             <div>
@@ -87,7 +86,7 @@ export default function UtrSeriesHero() {
             </div>
             <div>
               <p className="font-headline text-[clamp(2rem,5vw,2.65rem)] font-bold leading-none text-white">
-                {divisionCount}
+                {UTR_DIVISION_STAT_COUNT}
               </p>
               <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/40">
                 Divisions
@@ -98,7 +97,7 @@ export default function UtrSeriesHero() {
                 Sat &amp; Sun
               </p>
               <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/40">
-                Two Days
+                Days
               </p>
             </div>
             <div>
@@ -112,7 +111,12 @@ export default function UtrSeriesHero() {
           </div>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <UTRMatchPlayRegister variant="hero-teal" />
+            <Link
+              href="#divisions"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-brand-victoria-cove px-7 font-sans text-[15px] font-bold text-white transition-opacity hover:opacity-[0.92] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f2237]"
+            >
+              Register for Season 1
+            </Link>
             <Link
               href="#schedule"
               className="inline-flex min-h-[48px] items-center justify-center rounded-lg border-[1.5px] border-white/25 bg-transparent px-7 font-sans text-[15px] font-bold text-white/80 transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f2237]/80"

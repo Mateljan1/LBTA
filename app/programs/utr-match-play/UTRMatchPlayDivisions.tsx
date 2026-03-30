@@ -4,7 +4,11 @@ import { useState, useMemo, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
-import { getUtrCircuitModalData, getUtrDropInDateOptions } from '@/lib/utr-match-play'
+import {
+  getUtrCircuitModalData,
+  getUtrDropInDateOptions,
+  UTR_SPORTS_CLUB_REGISTER_URL,
+} from '@/lib/utr-match-play'
 import type { UtrDivisionCard } from '@/lib/utr-match-play'
 
 function slugifyDivisionName(name: string) {
@@ -29,21 +33,8 @@ function UtrLightDivisionCard({
     setSelectedIso(dateOptions[0]?.iso ?? '')
   }, [dateOptions])
 
-  const dropInHref = useMemo(() => {
-    if (!selectedIso) return '/contact'
-    const p = new URLSearchParams({
-      utr_drop_in: '1',
-      division: d.name,
-      date: selectedIso,
-    })
-    if (d.dropIn != null) p.set('ref_price', String(d.dropIn))
-    return `/contact?${p.toString()}`
-  }, [d.name, d.dropIn, selectedIso])
-
   const fieldId = `utr-dropin-date-${slugifyDivisionName(d.name)}`
   const hintId = `utr-dropin-hint-${slugifyDivisionName(d.name)}`
-  const selectedDateLabel =
-    dateOptions.find((o) => o.iso === selectedIso)?.label ?? selectedIso
 
   return (
     <article
@@ -88,6 +79,12 @@ function UtrLightDivisionCard({
         </h3>
         <p className="mt-1 font-sans text-[14px] text-brand-pacific-dusk/65">{d.level}</p>
 
+        {d.description ? (
+          <p className="mt-3 font-sans text-[14px] font-light leading-relaxed text-brand-pacific-dusk/75">
+            {d.description}
+          </p>
+        ) : null}
+
         {d.name.toLowerCase().includes('color ball') ? (
           <div className="mt-4 flex flex-wrap gap-4">
             <div className="flex items-center gap-2">
@@ -118,7 +115,13 @@ function UtrLightDivisionCard({
         ) : null}
 
         {d.note ? (
-          <p className="mt-3 font-sans text-[13px] font-light italic text-brand-pacific-dusk/55">{d.note}</p>
+          <p
+            className={`mt-3 font-sans text-[13px] font-light leading-relaxed text-brand-pacific-dusk/65 ${
+              d.name.toLowerCase().includes('color ball') ? '' : 'italic'
+            }`}
+          >
+            {d.note}
+          </p>
         ) : null}
 
         <div className="mt-5 grid grid-cols-2 gap-2 gap-y-3">
@@ -126,7 +129,9 @@ function UtrLightDivisionCard({
             <span className="block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
               Venue
             </span>
-            <span className="font-sans text-[14px] font-semibold text-brand-pacific-dusk">{d.venue}</span>
+            <span className="font-sans text-[13px] font-semibold leading-snug text-brand-pacific-dusk md:text-[14px]">
+              {d.venue}
+            </span>
           </div>
           <div>
             <span className="block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
@@ -170,7 +175,7 @@ function UtrLightDivisionCard({
                   </div>
                 ) : null}
                 <p id={hintId} className="font-sans text-[12px] text-brand-pacific-dusk/50">
-                  We confirm space after you submit — not instant online checkout.
+                  Register directly on the UTR platform for your weekend.
                 </p>
               </>
             ) : null}
@@ -183,13 +188,15 @@ function UtrLightDivisionCard({
 
           <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-end">
             {d.dropIn != null ? (
-              <Link
-                href={dropInHref}
-                aria-label={`Request drop-in for ${d.name} on ${selectedDateLabel || 'selected date'}`}
+              <a
+                href={UTR_SPORTS_CLUB_REGISTER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Register on UTR Sports for ${d.name}`}
                 className={`inline-flex min-h-[48px] items-center justify-center rounded-md px-4 font-sans text-[13px] font-bold transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${registerClass}`}
               >
-                Request drop-in
-              </Link>
+                Register on UTR
+              </a>
             ) : null}
             <button
               type="button"

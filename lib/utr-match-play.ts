@@ -6,6 +6,25 @@
 import rawLeagues from '@/data/leagues-2026.json'
 import { parseLeagues, type LeaguesData } from '@/lib/schedule-schemas'
 
+/** LBTA club on UTR Sports — drop-in registration. */
+export const UTR_SPORTS_CLUB_REGISTER_URL =
+  'https://app.utrsports.net/clubs/1750420' as const
+
+/** Hero option — golden-hour facility (Cloudinary). */
+export const UTR_HERO_IMAGE_URL =
+  'https://res.cloudinary.com/dv033eo0x/image/upload/v1774752421/lbta/support/canonical/cta/support-cta-cta-background.webp' as const
+
+/** White mark for season banner (Cloudinary). */
+export const UTR_LBTA_ICON_WHITE_URL =
+  'https://res.cloudinary.com/dv033eo0x/image/upload/v1774908285/Blank_x9ugu0.png' as const
+
+/** Karué cutout for Grand Finals card (Cloudinary). */
+export const KARUE_CUTOUT_IMAGE_URL =
+  'https://res.cloudinary.com/dv033eo0x/image/upload/v1774909179/Karue_cut_out_dgrrfg.png' as const
+
+/** Marketing stat in hero (series product bands). */
+export const UTR_DIVISION_STAT_COUNT = 5
+
 /** Modal contract (matches LuxuryYearModal UTRCircuitData). */
 export interface UtrCircuitModalData {
   id: string
@@ -212,6 +231,7 @@ export interface UtrDivisionCard {
   name: string
   level: string
   format: string
+  description?: string
   note?: string
   price: string
   dropIn?: number
@@ -229,6 +249,7 @@ export function getUtrDivisionsForPage(): UtrDivisionCard[] {
     name: d.name,
     level: d.level,
     format: d.format,
+    description: d.description,
     note: d.note,
     price: d.price,
     dropIn: d.drop_in,

@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import { formatUtrSessionDateLong, formatUtrSessionDateMonthDay } from '@/lib/utr-match-play'
+import { formatUtrSessionDateLong, formatUtrSessionDateMonthDay, UTR_SPORTS_CLUB_REGISTER_URL } from '@/lib/utr-match-play'
 
 interface UtrDropInScheduleProps {
   saturdays: string[]
@@ -102,9 +101,9 @@ export default function UtrDropInSchedule({
                     {sunIso ? formatUtrSessionDateMonthDay(sunIso) : '—'}
                   </td>
                   <td className={`py-3.5 pr-5 md:pr-8`}>
-                    <Link href="#divisions" className={link}>
+                    <a href="#divisions" className={link}>
                       Season signup →
-                    </Link>
+                    </a>
                   </td>
                 </tr>
               )
@@ -125,13 +124,18 @@ export default function UtrDropInSchedule({
       </div>
       <div className={foot}>
         <p className={footText}>
-          <strong className={strong}>Single-weekend reference pricing</strong> (shown per division) applies when
-          the academy confirms space—there is no self-serve or day-of online signup. Season registration covers
-          all regular-season weekends plus Grand Finals programming. Questions or to ask about one weekend?{' '}
-          <Link href="/contact" className={link}>
-            Contact us
-          </Link>
-          .
+          Drop-ins register directly on the{' '}
+          <a href={UTR_SPORTS_CLUB_REGISTER_URL} target="_blank" rel="noopener noreferrer" className={link}>
+            UTR Sports
+          </a>{' '}
+          platform for any single weekend. Season registration covers all regular-season weekends plus Grand
+          Finals. Rain? We&apos;ll schedule a makeup date and communicate by email and text the morning of.
+        </p>
+        <p className={`${footText} mt-3`}>
+          Questions?{' '}
+          <a href="mailto:andrew@lagunabeachtennisacademy.com" className={link}>
+            andrew@lagunabeachtennisacademy.com
+          </a>
         </p>
       </div>
     </div>
