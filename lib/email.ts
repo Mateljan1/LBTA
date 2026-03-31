@@ -10,7 +10,7 @@
 
 const POSTMARK_API = 'https://api.postmarkapp.com/email'
 const DEFAULT_FROM = 'LBTA Website <support@lagunabeachtennisacademy.com>'
-const NOTIFY_TO = 'support@lagunabeachtennisacademy.com'
+const DEFAULT_NOTIFY_TO = 'support@lagunabeachtennisacademy.com'
 
 function getToken(): string | null {
   return process.env.POSTMARK_SERVER_TOKEN ?? null
@@ -18,6 +18,15 @@ function getToken(): string | null {
 
 function getFrom(): string {
   return process.env.POSTMARK_FROM_EMAIL ?? DEFAULT_FROM
+}
+
+/**
+ * Returns comma-separated notification recipients.
+ * Env: NOTIFICATION_EMAILS (optional, comma-separated).
+ * Falls back to support@lagunabeachtennisacademy.com.
+ */
+function getNotifyTo(): string {
+  return process.env.NOTIFICATION_EMAILS?.trim() || DEFAULT_NOTIFY_TO
 }
 
 // ============================================================
@@ -157,7 +166,7 @@ export async function notifyTrialRequest(data: NotifyTrialParams): Promise<void>
     ...(data.message ? [{ label: 'Message', value: data.message }] : []),
   ]
   await sendEmail({
-    to: NOTIFY_TO,
+    to: getNotifyTo(),
     subject: isContact
       ? `Contact Form — ${data.firstName} ${data.lastName}`
       : `New Trial Request — ${data.firstName} ${data.lastName}`,
@@ -181,7 +190,7 @@ export type NotifyPrivateLessonParams = {
 
 export async function notifyPrivateLesson(data: NotifyPrivateLessonParams): Promise<void> {
   await sendEmail({
-    to: NOTIFY_TO,
+    to: getNotifyTo(),
     subject: `Private Lesson Request — ${data.firstName} ${data.lastName} → ${data.coach}`,
     tag: 'private-lesson',
     htmlBody: buildNotificationHtml({
@@ -223,7 +232,7 @@ export async function notifyRegistration(data: NotifyRegistrationParams): Promis
       : 'Program Registration'
 
   await sendEmail({
-    to: NOTIFY_TO,
+    to: getNotifyTo(),
     subject: `New ${heading} — ${data.firstName} ${data.lastName} — ${data.program}`,
     tag: 'registration',
     htmlBody: buildNotificationHtml({
@@ -256,7 +265,7 @@ export type NotifyScholarshipParams = {
 
 export async function notifyScholarship(data: NotifyScholarshipParams): Promise<void> {
   await sendEmail({
-    to: NOTIFY_TO,
+    to: getNotifyTo(),
     subject: `Scholarship Application — ${data.parentName || data.email}`,
     tag: 'scholarship',
     htmlBody: buildNotificationHtml({
@@ -274,7 +283,7 @@ export async function notifyScholarship(data: NotifyScholarshipParams): Promise<
 
 export async function notifyNewsletter(email: string): Promise<void> {
   await sendEmail({
-    to: NOTIFY_TO,
+    to: getNotifyTo(),
     subject: `Newsletter Signup — ${email}`,
     tag: 'newsletter',
     htmlBody: buildNotificationHtml({
@@ -584,7 +593,7 @@ export async function notifyChatMessage(params: {
   messageCount: number
 }): Promise<void> {
   await sendEmail({
-    to: NOTIFY_TO,
+    to: getNotifyTo(),
     subject: `Chat Widget Message — ${params.message.slice(0, 50)}${params.message.length > 50 ? '…' : ''}`,
     tag: 'chat-message',
     htmlBody: buildNotificationHtml({

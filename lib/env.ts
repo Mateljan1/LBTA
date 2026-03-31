@@ -29,6 +29,8 @@ const ENV_VARS = {
   GHL_API_KEY: 'GoHighLevel API key (optional; for SMS automation)',
   GHL_LOCATION_ID: 'GoHighLevel location/sub-account ID (optional)',
   GHL_WORKFLOW_ID: 'GoHighLevel workflow ID for LBTA website SMS (optional)',
+  // Optional — comma-separated emails for lead notification delivery (defaults to support@lagunabeachtennisacademy.com)
+  NOTIFICATION_EMAILS: 'Comma-separated staff emails for lead notifications (optional)',
 } as const
 
 type EnvVarName = keyof typeof ENV_VARS
