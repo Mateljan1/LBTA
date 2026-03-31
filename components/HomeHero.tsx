@@ -153,7 +153,7 @@ export default function HomeHero() {
 
       <button
         type="button"
-        className="absolute bottom-8 left-6 md:left-12 flex flex-col items-center gap-2 text-white/60 hover:text-white/80 transition-colors duration-500 min-h-[48px] min-w-[48px] p-2 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        className="absolute bottom-8 left-6 md:left-12 flex flex-col items-center gap-2 text-white/70 hover:text-white transition-colors duration-500 min-h-[44px] min-w-[44px] p-2 rounded-full border border-white/40 bg-black/10 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         onClick={() => {
           const el = document.getElementById('founder')
           if (el) {
@@ -163,12 +163,17 @@ export default function HomeHero() {
         }}
         aria-label={hero.scrollAriaLabel}
       >
-        <span
-          className={`block w-px h-10 bg-white/50 ${reduceMotion ? '' : 'animate-pulse'}`}
-          style={reduceMotion ? undefined : { animationDuration: '2.5s' }}
-          aria-hidden
-        />
-        <span className="font-sans text-[11px] tracking-[0.25em] uppercase">Scroll</span>
+        <svg
+          className={`h-4 w-4 ${reduceMotion ? '' : 'animate-bounce'}`}
+          style={reduceMotion ? undefined : { animationDuration: '2s' }}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14m0 0-5-5m5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </button>
     </section>
   )

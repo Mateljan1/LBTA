@@ -21,6 +21,16 @@ const programsDropdown = [
     desc: 'Ages 3–17 and adults, pathway to college',
   },
   {
+    name: 'Junior Pathway',
+    href: '/programs/junior',
+    desc: 'Red, orange, green, and yellow ball progression',
+  },
+  {
+    name: 'Adult Pathway',
+    href: '/programs/adult',
+    desc: 'Beginner to advanced drills, LiveBall, and leagues',
+  },
+  {
     name: 'Camps',
     href: '/camps',
     desc: 'Seasonal camps, swim & tennis, holiday breaks',
@@ -48,7 +58,7 @@ const programsDropdown = [
 ]
 
 const navigation = [
-  { name: 'Results', href: '/#results' },
+  { name: 'Results', href: '/success-stories' },
   { name: 'Schedule', href: '/schedules' },
   { name: 'Coaches', href: '/coaches' },
   { name: 'About', href: '/about' },

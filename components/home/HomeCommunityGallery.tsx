@@ -38,6 +38,20 @@ export default async function HomeCommunityGallery() {
               <span className="text-eyebrow mb-4 block">{communitySection.eyebrow}</span>
               <h2 className="font-headline text-headline font-light mb-4">{communitySection.headline}</h2>
               <p className="text-subhead max-w-2xl mx-auto font-light">{communitySection.subline}</p>
+              <div className="mt-8 flex flex-wrap justify-center gap-4">
+                <a
+                  href="/book"
+                  className="btn-primary"
+                >
+                  Join the Community
+                </a>
+                <a
+                  href="/success-stories"
+                  className="btn-secondary"
+                >
+                  See Player Stories
+                </a>
+              </div>
             </AnimatedSection>
           }
           items={items}

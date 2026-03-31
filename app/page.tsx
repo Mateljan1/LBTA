@@ -126,14 +126,32 @@ export default function Home() {
               <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">{siteStats.trustStats.playersCount}</p>
               <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">Players Coached</p>
             </div>
-            <div className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10">
-              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">{siteStats.trustStats.rating}</p>
-              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">Google Rating</p>
-            </div>
-            <div className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10">
-              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">{siteStats.trustStats.reviewCount}</p>
-              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">Reviews</p>
-            </div>
+            <Link
+              href="https://www.google.com/maps/place/Laguna+Beach+Tennis+Academy/@33.5427,-117.7854,17z"
+              target="_blank"
+              rel="noreferrer"
+              className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+            >
+              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">
+                {siteStats.trustStats.rating}
+              </p>
+              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">
+                Google Rating
+              </p>
+            </Link>
+            <Link
+              href="https://www.google.com/maps/place/Laguna+Beach+Tennis+Academy/@33.5427,-117.7854,17z/data=!3m1!4b1"
+              target="_blank"
+              rel="noreferrer"
+              className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+            >
+              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">
+                {siteStats.trustStats.reviewCount}
+              </p>
+              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">
+                Reviews
+              </p>
+            </Link>
           </div>
         </div>
       </section>
@@ -342,6 +360,14 @@ export default function Home() {
                 ))}
               </ul>
             ) : null}
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <Link href="/book" className="btn-primary">
+                Book a Trial
+              </Link>
+              <Link href="/programs" className="btn-secondary">
+                View Programs
+              </Link>
+            </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-5 gap-6 lg:gap-8 mt-12 md:mt-14">
             <AnimatedSection delay={100} className="md:col-span-3">
@@ -394,6 +420,16 @@ export default function Home() {
           <AnimatedSection>
             <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] font-light leading-[1.2] mb-4 text-shadow-hero">{destination.headline}</h2>
             <p className="text-body-lg text-white/80 text-shadow-subtle font-light">{destination.subline}</p>
+          </AnimatedSection>
+          <AnimatedSection delay={150}>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <Link href="/programs" className="btn-primary-invert">
+                Explore Programs
+              </Link>
+              <Link href="/schedules" className="btn-secondary-invert">
+                Schedule &amp; Pricing
+              </Link>
+            </div>
           </AnimatedSection>
         </div>
       </section>
