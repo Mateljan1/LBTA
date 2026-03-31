@@ -6,6 +6,9 @@ import { campModalDropInLabel, campModalSessionLabel } from '@/lib/camp-pricing-
 import { getCampDropInDateBounds } from '@/lib/camp-date-bounds'
 import type { CampRegistrationData } from '@/lib/camp-modal-data'
 import type { CampWeek } from '@/lib/camps-data'
+import { UTR_COLOR_BALL_DIVISION_NAME } from '@/lib/validations'
+
+type ColorBallStage = 'red' | 'orange' | 'green'
 
 // ============================================================
 // LUXURY YEAR-ROUND REGISTRATION MODAL
@@ -77,6 +80,9 @@ export default function LuxuryYearModal({
   /** ISO date (yyyy-mm-dd) for half-day drop-in */
   const [dropInDate, setDropInDate] = useState('')
 
+  /** Color Ball: red / orange / green (UTR division only). */
+  const [colorBallStage, setColorBallStage] = useState<ColorBallStage | null>(null)
+
   // Focus primary button when success state is shown (a11y)
   useEffect(() => {
     if (isSuccess && isOpen) {
@@ -104,6 +110,7 @@ export default function LuxuryYearModal({
         notes: '',
         currentUtr: '',
       })
+      setColorBallStage(null)
       if (type === 'camp' && data) {
         const c = data as CampData
         setSelectedWeekInModal(c.selectedWeek ?? null)
@@ -126,6 +133,12 @@ export default function LuxuryYearModal({
     const timer = setTimeout(() => setErrorMessage(null), 8000)
     return () => clearTimeout(timer)
   }, [errorMessage])
+
+  useEffect(() => {
+    if (selectedOption !== UTR_COLOR_BALL_DIVISION_NAME) {
+      setColorBallStage(null)
+    }
+  }, [selectedOption])
 
   // Lock body scroll
   useEffect(() => {
@@ -268,9 +281,13 @@ export default function LuxuryYearModal({
   const step2SelectionSummary = (): string => {
     if (type === 'utr-circuit') {
       const div = selectedOption ?? ''
+      const stage =
+        div === UTR_COLOR_BALL_DIVISION_NAME && colorBallStage
+          ? ` · ${colorBallStage} ball`
+          : ''
       const price =
         selectedPrice != null ? ` · $${selectedPrice} full season` : ''
-      return `${programInfo.dates} · ${div}${price}`
+      return `${programInfo.dates} · ${div}${stage}${price}`
     }
     if (type !== 'camp') {
       return `${programInfo.dates} · ${selectedOption ?? ''}`
@@ -318,11 +335,17 @@ export default function LuxuryYearModal({
           setErrorMessage('Please go back and select a division.')
           return
         }
+        if (selectedOption === UTR_COLOR_BALL_DIVISION_NAME && !colorBallStage) {
+          setErrorMessage('Select red, orange, or green ball stage for Color Ball.')
+          return
+        }
         const utrPayload = {
           ...payload,
           registrationType: 'utr-circuit',
           division: selectedOption,
           programId: 'utr-circuit',
+          colorBallStage:
+            selectedOption === UTR_COLOR_BALL_DIVISION_NAME ? colorBallStage ?? undefined : undefined,
         }
         const checkoutRes = await fetch('/api/checkout/utr-season', {
           method: 'POST',
@@ -340,6 +363,8 @@ export default function LuxuryYearModal({
             experience: formData.experience,
             notes: formData.notes || undefined,
             currentUtr: formData.currentUtr.trim() || undefined,
+            colorBallStage:
+              selectedOption === UTR_COLOR_BALL_DIVISION_NAME ? colorBallStage ?? undefined : undefined,
           }),
         })
         const checkoutJson = (await checkoutRes.json()) as {
@@ -684,10 +709,51 @@ export default function LuxuryYearModal({
                       <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
                         {selectedOption}
                       </p>
+                      {selectedOption === UTR_COLOR_BALL_DIVISION_NAME && colorBallStage ? (
+                        <p className="font-sans text-[15px] text-brand-pacific-dusk/85 mt-1 capitalize">
+                          Ball stage: {colorBallStage}
+                        </p>
+                      ) : null}
                       <p className="font-sans text-[15px] text-brand-pacific-dusk/80 mt-1 tabular-nums">
                         ${selectedPrice} full season (charged at checkout when online payment is enabled)
                       </p>
                     </div>
+                  ) : null}
+
+                  {type === 'utr-circuit' && selectedOption === UTR_COLOR_BALL_DIVISION_NAME ? (
+                    <fieldset className="mb-6">
+                      <legend className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-3">
+                        Ball stage (required)
+                      </legend>
+                      <div className="flex flex-wrap gap-2">
+                        {(['red', 'orange', 'green'] as const).map((stage) => (
+                          <button
+                            key={stage}
+                            type="button"
+                            aria-pressed={colorBallStage === stage}
+                            onClick={() => setColorBallStage(stage)}
+                            className={`min-h-[48px] flex-1 min-w-[88px] rounded-lg font-sans text-[13px] font-medium capitalize transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/30 ${
+                              colorBallStage === stage
+                                ? 'bg-black text-white'
+                                : 'bg-brand-sandstone text-lbta-slate hover:bg-lbta-stone'
+                            }`}
+                          >
+                            {stage}
+                          </button>
+                        ))}
+                      </div>
+                      <p className="font-sans text-[12px] text-brand-pacific-dusk/50 mt-2">
+                        Matches USTA red, orange, or green ball stage so we can place you in the right group.
+                      </p>
+                    </fieldset>
+                  ) : null}
+
+                  {type === 'utr-circuit' ? (
+                    <p className="font-sans text-[12px] text-brand-pacific-dusk/55 mb-6">
+                      Eligible players: enter promotion code{' '}
+                      <span className="font-medium text-brand-pacific-dusk">LBTAJTT</span> on the Stripe checkout page
+                      if your season is comped.
+                    </p>
                   ) : null}
 
                   {/* Form Fields */}

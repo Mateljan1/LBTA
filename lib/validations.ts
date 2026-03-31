@@ -11,6 +11,11 @@ const emailSchema = z.string().email('Invalid email address').max(255)
 const phoneSchema = z.string().min(10, 'Phone number too short').max(20)
 const nameSchema = z.string().min(1, 'Name is required').max(100)
 
+/** UTR Color Ball division label (matches `data/leagues-2026.json` `utr.divisions[].name`). */
+export const UTR_COLOR_BALL_DIVISION_NAME = 'Color Ball' as const
+
+export const colorBallStageSchema = z.enum(['red', 'orange', 'green'])
+
 /**
  * Coach Hub login — password only (no PII in logs).
  * Max length limits buffer size for timing-safe compare and mitigates DoS.
@@ -189,9 +194,25 @@ export const registerYearSchema = z.object({
   campDates: z.string().max(200).optional(),
   campWeek: z.string().max(100).optional(),
   division: z.string().max(100).optional(),
+  /** Red / orange / green — required when division is Color Ball (UTR Match Play). */
+  colorBallStage: colorBallStageSchema.optional(),
   /** Self-reported UTR for UTR Match Play Series (optional). */
   currentUtr: z.string().max(20).optional(),
-}).passthrough()
+})
+  .passthrough()
+  .superRefine((data, ctx) => {
+    if (
+      data.registrationType === 'utr-circuit' &&
+      data.division === UTR_COLOR_BALL_DIVISION_NAME &&
+      !data.colorBallStage
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Select red, orange, or green ball stage for Color Ball.',
+        path: ['colorBallStage'],
+      })
+    }
+  })
 
 export type RegisterYearRequest = z.infer<typeof registerYearSchema>
 
@@ -199,20 +220,31 @@ export type RegisterYearRequest = z.infer<typeof registerYearSchema>
  * Stripe Checkout session for UTR full-season registration (server resolves price from catalog).
  * Used by: POST /api/checkout/utr-season
  */
-export const utrCheckoutSessionSchema = z.object({
-  firstName: nameSchema,
-  lastName: nameSchema,
-  email: emailSchema,
-  phone: phoneSchema,
-  program: z.string().min(1, 'Program is required').max(200),
-  programId: z.string().max(100).optional(),
-  division: z.string().min(1, 'Division is required').max(100),
-  playerName: z.string().max(200).optional(),
-  playerAge: z.union([z.string(), z.number()]).optional(),
-  experience: z.string().max(200).optional(),
-  notes: z.string().max(2000).optional(),
-  currentUtr: z.string().max(20).optional(),
-})
+export const utrCheckoutSessionSchema = z
+  .object({
+    firstName: nameSchema,
+    lastName: nameSchema,
+    email: emailSchema,
+    phone: phoneSchema,
+    program: z.string().min(1, 'Program is required').max(200),
+    programId: z.string().max(100).optional(),
+    division: z.string().min(1, 'Division is required').max(100),
+    playerName: z.string().max(200).optional(),
+    playerAge: z.union([z.string(), z.number()]).optional(),
+    experience: z.string().max(200).optional(),
+    notes: z.string().max(2000).optional(),
+    currentUtr: z.string().max(20).optional(),
+    colorBallStage: colorBallStageSchema.optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.division === UTR_COLOR_BALL_DIVISION_NAME && !data.colorBallStage) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Select red, orange, or green ball stage.',
+        path: ['colorBallStage'],
+      })
+    }
+  })
 
 export type UtrCheckoutSessionPayload = z.infer<typeof utrCheckoutSessionSchema>
 

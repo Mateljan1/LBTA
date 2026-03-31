@@ -30,6 +30,9 @@ function getNotionClient(): Client {
 
 function buildUtrNotes(data: RegisterYearRequest, paymentStripeSessionId?: string): string {
   const parts = [data.notes?.trim()].filter(Boolean) as string[]
+  if (data.colorBallStage) {
+    parts.push(`Color Ball stage: ${data.colorBallStage} ball`)
+  }
   if (data.currentUtr?.trim()) {
     parts.push(`Self-reported UTR: ${data.currentUtr.trim()}`)
   }
@@ -156,6 +159,7 @@ export async function fulfillUtrCircuitRegistration(
         registrationType: data.registrationType,
         program: data.program,
         division: data.division,
+        colorBallStage: data.colorBallStage,
         stripeSessionId: options.paymentStripeSessionId,
         currentUtr: data.currentUtr,
       },

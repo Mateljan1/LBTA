@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
-import { parseJsonBody, utrCheckoutSessionSchema, validateRequest } from '@/lib/validations'
+import {
+  parseJsonBody,
+  utrCheckoutSessionSchema,
+  UTR_COLOR_BALL_DIVISION_NAME,
+  validateRequest,
+} from '@/lib/validations'
 import { hasEnvVar } from '@/lib/env'
 import { resolveUtrDivisionAmountCents, getAllowedUtrDivisionNames } from '@/lib/utr-checkout-pricing'
 
@@ -91,10 +96,15 @@ export async function POST(request: NextRequest) {
     currentUtr: body.currentUtr ? trimMeta(body.currentUtr, 20) : '',
     programId: body.programId ? trimMeta(body.programId, 100) : '',
     season: '',
+    colorBallStage: body.colorBallStage ? trimMeta(body.colorBallStage, 20) : '',
   }
 
   const dollars = amountCents / 100
-  const productName = `UTR Match Play Series — Season 1 — ${body.division}`
+  const colorBallSuffix =
+    body.division === UTR_COLOR_BALL_DIVISION_NAME && body.colorBallStage
+      ? ` (${body.colorBallStage} ball)`
+      : ''
+  const productName = `UTR Match Play Series — Season 1 — ${body.division}${colorBallSuffix}`
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -108,12 +118,16 @@ export async function POST(request: NextRequest) {
             unit_amount: amountCents,
             product_data: {
               name: productName,
-              description: `Full season registration — ${body.division}`,
+              description:
+                body.division === UTR_COLOR_BALL_DIVISION_NAME && body.colorBallStage
+                  ? `Full season — Color Ball — ${body.colorBallStage} ball stage`
+                  : `Full season registration — ${body.division}`,
             },
           },
         },
       ],
       metadata: meta,
+      allow_promotion_codes: true,
       success_url: `${origin}/thank-you?type=year&paid=1&program=${encodeURIComponent(body.program)}`,
       cancel_url: `${origin}/programs/utr-match-play?checkout=cancelled`,
       phone_number_collection: { enabled: false },

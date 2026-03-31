@@ -3,6 +3,8 @@ import {
   contactSchema,
   newsletterSchema,
   registerYearSchema,
+  utrCheckoutSessionSchema,
+  UTR_COLOR_BALL_DIVISION_NAME,
   scholarshipSchema,
   bookingSchema,
   programRegistrationSchema,
@@ -86,6 +88,54 @@ describe('registerYearSchema', () => {
       program: 'Summer Camp',
     }
     expect(registerYearSchema.safeParse(data).success).toBe(true)
+  })
+
+  it('requires colorBallStage when utr-circuit and division is Color Ball', () => {
+    const missing = {
+      registrationType: 'utr-circuit' as const,
+      firstName: 'Parent',
+      lastName: 'User',
+      email: 'parent@example.com',
+      phone: '9495551234',
+      program: 'UTR Match Play Series — Season 1',
+      division: UTR_COLOR_BALL_DIVISION_NAME,
+    }
+    expect(registerYearSchema.safeParse(missing).success).toBe(false)
+    const ok = {
+      ...missing,
+      colorBallStage: 'orange' as const,
+    }
+    expect(registerYearSchema.safeParse(ok).success).toBe(true)
+  })
+})
+
+describe('utrCheckoutSessionSchema', () => {
+  const base = {
+    firstName: 'Pat',
+    lastName: 'Player',
+    email: 'pat@example.com',
+    phone: '9495551234',
+    program: 'UTR Match Play Series — Season 1',
+    division: UTR_COLOR_BALL_DIVISION_NAME,
+  }
+
+  it('rejects Color Ball without colorBallStage', () => {
+    expect(utrCheckoutSessionSchema.safeParse(base).success).toBe(false)
+  })
+
+  it('accepts Color Ball with colorBallStage', () => {
+    expect(
+      utrCheckoutSessionSchema.safeParse({ ...base, colorBallStage: 'green' }).success
+    ).toBe(true)
+  })
+
+  it('accepts non–Color Ball division without colorBallStage', () => {
+    expect(
+      utrCheckoutSessionSchema.safeParse({
+        ...base,
+        division: 'UTR 2.0–5.0 Singles',
+      }).success
+    ).toBe(true)
   })
 })
 

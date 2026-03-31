@@ -3,6 +3,7 @@ import Stripe from 'stripe'
 import { hasEnvVar } from '@/lib/env'
 import { fulfillUtrCircuitRegistration } from '@/lib/fulfill-utr-circuit-registration'
 import type { RegisterYearRequest } from '@/lib/validations'
+import { UTR_COLOR_BALL_DIVISION_NAME, colorBallStageSchema } from '@/lib/validations'
 import { resolveUtrDivisionAmountCents } from '@/lib/utr-checkout-pricing'
 
 export const runtime = 'nodejs'
@@ -42,10 +43,18 @@ export async function POST(request: NextRequest) {
 
   const expectedCents = resolveUtrDivisionAmountCents(division)
   const paidCents = session.amount_total ?? 0
-  if (expectedCents != null && paidCents !== expectedCents) {
-    console.error('[webhooks/stripe] Amount mismatch', { division, expectedCents, paidCents, sessionId: session.id })
+  // Allow less than list price (promotion codes / LBTAJTT comp) and $0 when fully discounted.
+  if (expectedCents != null && paidCents > expectedCents) {
+    console.error('[webhooks/stripe] Amount over list', { division, expectedCents, paidCents, sessionId: session.id })
     return NextResponse.json({ error: 'Amount mismatch' }, { status: 400 })
   }
+
+  const colorBallParsed = colorBallStageSchema.safeParse(meta.colorBallStage?.trim().toLowerCase())
+  if (division === UTR_COLOR_BALL_DIVISION_NAME && !colorBallParsed.success) {
+    console.error('[webhooks/stripe] Color Ball checkout missing valid colorBallStage metadata', session.id)
+    return NextResponse.json({ error: 'Missing color ball stage' }, { status: 400 })
+  }
+  const colorBallStage = colorBallParsed.success ? colorBallParsed.data : undefined
 
   const priceDollars = paidCents / 100
 
@@ -63,6 +72,7 @@ export async function POST(request: NextRequest) {
     experience: meta.experience || undefined,
     notes: meta.notes || undefined,
     currentUtr: meta.currentUtr || undefined,
+    colorBallStage,
     programId: meta.programId || 'utr-circuit',
     price: priceDollars,
     totalPrice: priceDollars,
