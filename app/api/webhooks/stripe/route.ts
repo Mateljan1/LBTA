@@ -42,9 +42,17 @@ export async function POST(request: NextRequest) {
   }
 
   const expectedCents = resolveUtrDivisionAmountCents(division)
+  if (expectedCents == null) {
+    console.error('[webhooks/stripe] Division not in price catalog; skipping fulfillment', {
+      division,
+      sessionId: session.id,
+    })
+    return NextResponse.json({ received: true })
+  }
+
   const paidCents = session.amount_total ?? 0
   // Allow less than list price (promotion codes / LBTAJTT comp) and $0 when fully discounted.
-  if (expectedCents != null && paidCents > expectedCents) {
+  if (paidCents > expectedCents) {
     console.error('[webhooks/stripe] Amount over list', { division, expectedCents, paidCents, sessionId: session.id })
     return NextResponse.json({ error: 'Amount mismatch' }, { status: 400 })
   }

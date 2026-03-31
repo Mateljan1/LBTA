@@ -23,8 +23,8 @@ const ENV_VARS = {
   AGENT_SECRET: 'Agent API shared secret (optional; disabled when unset)',
   /** Stripe secret key for Checkout (optional; UTR paid registration disabled when unset) */
   STRIPE_SECRET_KEY: 'Stripe secret API key (optional; UTR season checkout)',
-  /** Stripe webhook signing secret for /api/webhooks/stripe */
-  STRIPE_WEBHOOK_SECRET: 'Stripe webhook signing secret (optional; required for paid UTR fulfillment)',
+  /** Stripe webhook signing secret for /api/webhooks/stripe (Vercel only; never commit) */
+  STRIPE_WEBHOOK_SECRET: 'Stripe webhook signing secret (optional; required for UTR checkout fulfillment)',
   // Optional — when set, form submissions also sync to GoHighLevel for SMS workflow
   GHL_API_KEY: 'GoHighLevel API key (optional; for SMS automation)',
   GHL_LOCATION_ID: 'GoHighLevel location/sub-account ID (optional)',
