@@ -144,7 +144,7 @@ export default function ChatWidget() {
       >
         {/* Hover label: "Chat with us" so users immediately recognize the control (best practice: Intercom/Drift-style affordance) */}
         <span
-          className="pointer-events-none absolute right-full top-1/2 mr-3 hidden -translate-y-1/2 whitespace-nowrap rounded-md bg-brand-pacific-dusk px-3 py-2 text-xs font-medium text-white shadow-lg opacity-0 transition-opacity duration-200 group-hover/chat:opacity-100 md:block"
+          className="pointer-events-none absolute right-full top-1/2 mr-3 hidden -translate-y-1/2 whitespace-nowrap rounded-md border border-white/10 bg-gradient-to-b from-[#1a2f4a] to-brand-deep-water px-3 py-2 text-xs font-medium tracking-wide text-white shadow-lg opacity-0 ring-1 ring-white/15 transition-opacity duration-200 group-hover/chat:opacity-100 md:block"
           style={{ zIndex: 50 }}
           aria-hidden
         >
@@ -153,13 +153,12 @@ export default function ChatWidget() {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className={`group flex h-[60px] w-[60px] min-h-[48px] min-w-[48px] flex-shrink-0 items-center justify-center rounded-full border-0 shadow-lg transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-white motion-safe:hover:scale-105 ${
+          className={`group relative flex h-[60px] w-[60px] min-h-[48px] min-w-[48px] flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-0 shadow-[0_6px_28px_rgba(15,34,55,0.45),inset_0_1px_0_rgba(255,255,255,0.12)] ring-1 ring-white/25 transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-white motion-safe:hover:scale-105 ${
             isOpen
-              ? 'bg-brand-deep-water ring-1 ring-white/15'
-              : 'bg-black hover:bg-gray-900 hover:ring-2 hover:ring-brand-sunset-cliff/30'
+              ? 'bg-gradient-to-b from-[#1a2f4a] to-brand-deep-water'
+              : 'bg-gradient-to-b from-[#1e3a5c] to-[#0a1628] hover:brightness-110'
           }`}
           style={{
-            boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
             cursor: 'pointer',
           }}
           aria-label={isOpen ? 'Close chat' : 'Open chat'}
@@ -170,9 +169,14 @@ export default function ChatWidget() {
             <path d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" aria-hidden="true">
-            <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
+          <Image
+            src="/logos/lbta-club-profile-480.png"
+            alt=""
+            width={56}
+            height={56}
+            className="h-14 w-14 object-cover"
+            priority={false}
+          />
         )}
         </button>
       </div>
@@ -190,6 +194,7 @@ export default function ChatWidget() {
             borderRadius: '50%',
             backgroundColor: 'var(--tide-pool, #3A8B6E)',
             border: '2px solid white',
+            background: 'linear-gradient(135deg, #E8834A 0%, #C4963C 100%)',
             animation: 'pulse 2s infinite',
             pointerEvents: 'none',
           }}
@@ -210,75 +215,51 @@ export default function ChatWidget() {
             maxHeight:
               'calc(100vh - 140px - var(--lbta-sticky-cta-h, 0px) - var(--lbta-program-bar-h, 0px))',
             backgroundColor: 'var(--color-brand-morning-light, #FAF8F4)',
-            borderRadius: '12px',
-            border: '1px solid rgba(26, 26, 26, 0.08)',
-            boxShadow: '0 20px 40px -8px rgba(0,0,0,0.15)',
+            borderRadius: '16px',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: '0 24px 48px -12px rgba(15, 34, 55, 0.35), 0 0 0 1px rgba(0,0,0,0.06)',
             overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column',
             animation: 'slideUp 0.3s ease',
           }}
         >
-          {/* Header - Minimal, Aman-level */}
+          {/* Header — club mark: deep navy, white type, silver ring (matches circular LBTA profile) */}
           <div
+            className="flex shrink-0 items-center justify-between border-b border-white/10 bg-gradient-to-b from-[#1a2f4a] to-brand-deep-water px-5 py-4 text-white"
             style={{
-              backgroundColor: 'var(--color-brand-morning-light, #FAF8F4)',
-              padding: '20px 24px',
-              borderBottom: '1px solid rgba(26, 26, 26, 0.08)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+            <div className="flex min-w-0 flex-1 items-center gap-3">
+              <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full ring-1 ring-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]">
                 <Image
-                  src="/logos/LBTAblktext.png"
-                  alt="LBTA"
-                  width={32}
-                  height={32}
-                  className="object-contain"
+                  src="/logos/lbta-club-profile-480.png"
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="44px"
                 />
               </div>
-              <div>
-                <h3 style={{ 
-                  fontFamily: 'var(--font-cormorant)', 
-                  color: 'var(--pacific-dusk, #1B3A5C)', 
-                  fontWeight: 400, 
-                  fontSize: '20px', 
-                  margin: 0,
-                  lineHeight: 1.2
-                }}>
-                  LBTA
-                </h3>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--tide-pool, #3A8B6E)' }} />
-                  <p style={{ 
-                    fontFamily: 'var(--font-sans)',
-                    color: 'var(--color-slate, #6B6B6B)', 
-                    fontSize: '11px', 
-                    margin: 0,
-                    letterSpacing: '0.5px'
-                  }}>
-                    Online
-                  </p>
+              <div className="min-w-0">
+                <p className="font-sans text-[11px] font-bold uppercase leading-tight tracking-[0.12em] text-white">
+                  Laguna Beach
+                </p>
+                <p className="font-sans text-[9px] font-normal uppercase leading-tight tracking-[0.28em] text-white/75">
+                  Tennis Academy
+                </p>
+                <div className="mt-1.5 flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-tide-pool shadow-[0_0_0_2px_rgba(255,255,255,0.2)]" />
+                  <p className="m-0 font-sans text-[10px] font-medium tracking-wide text-white/70">Assistant online</p>
                 </div>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="min-h-[48px] min-w-[48px] flex items-center justify-center bg-transparent border-none cursor-pointer opacity-40 hover:opacity-100 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2"
+              className="flex min-h-[48px] min-w-[48px] shrink-0 cursor-pointer items-center justify-center rounded-[2px] border-0 bg-transparent text-white opacity-80 transition-opacity hover:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               aria-label="Close chat"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pacific-dusk, #1B3A5C)" strokeWidth="2" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -311,9 +292,10 @@ export default function ChatWidget() {
                       borderRadius: message.role === 'user' 
                         ? '18px 18px 4px 18px' 
                         : '18px 18px 18px 4px',
-                      backgroundColor: message.role === 'user' ? 'var(--color-brand-sunset-cliff, #E8834A)' : 'white',
+                      backgroundColor: message.role === 'user' ? 'var(--color-brand-deep-water, #0F2237)' : 'white',
                       color: message.role === 'user' ? 'white' : 'var(--pacific-dusk, #1B3A5C)',
-                      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                      border: message.role === 'user' ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(27, 58, 92, 0.1)',
+                      boxShadow: message.role === 'user' ? '0 2px 8px rgba(15,34,55,0.2)' : '0 1px 3px rgba(0,0,0,0.08)',
                       fontSize: '14px',
                       lineHeight: '1.5',
                       whiteSpace: 'pre-wrap',
@@ -327,21 +309,21 @@ export default function ChatWidget() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px', maxWidth: '85%' }}>
                     <a
                       href="/book"
-                      className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 text-xs font-sans font-medium text-brand-pacific-dusk bg-white border border-black/10 rounded-lg hover:bg-brand-sandstone/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2"
+                      className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-brand-pacific-dusk/12 bg-white px-4 py-2 text-xs font-sans font-medium text-brand-pacific-dusk shadow-sm transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 border-l-[3px] border-l-brand-victoria-cove/50 pl-3"
                       style={{ textDecoration: 'none' }}
                     >
                       Book a Trial
                     </a>
                     <a
                       href="/schedules"
-                      className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 text-xs font-sans font-medium text-brand-pacific-dusk bg-white border border-black/10 rounded-lg hover:bg-brand-sandstone/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2"
+                      className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-brand-pacific-dusk/12 bg-white px-4 py-2 text-xs font-sans font-medium text-brand-pacific-dusk shadow-sm transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 border-l-[3px] border-l-brand-victoria-cove/50 pl-3"
                       style={{ textDecoration: 'none' }}
                     >
                       View Programs & Pricing
                     </a>
                     <a
                       href="/contact"
-                      className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 text-xs font-sans font-medium text-brand-pacific-dusk bg-white border border-black/10 rounded-lg hover:bg-brand-sandstone/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2"
+                      className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-brand-pacific-dusk/12 bg-white px-4 py-2 text-xs font-sans font-medium text-brand-pacific-dusk shadow-sm transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 border-l-[3px] border-l-brand-victoria-cove/50 pl-3"
                       style={{ textDecoration: 'none' }}
                     >
                       Contact Us
@@ -364,9 +346,9 @@ export default function ChatWidget() {
                     gap: '4px',
                   }}
                 >
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--driftwood, #B8A88A)', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.32s' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--driftwood, #B8A88A)', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.16s' }} />
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--driftwood, #B8A88A)', animation: 'bounce 1.4s infinite ease-in-out both' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-brand-pacific-dusk, #1B3A5C)', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.32s' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-brand-pacific-dusk, #1B3A5C)', animation: 'bounce 1.4s infinite ease-in-out both', animationDelay: '-0.16s' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-brand-pacific-dusk, #1B3A5C)', animation: 'bounce 1.4s infinite ease-in-out both' }} />
                 </div>
               </div>
             )}
@@ -403,7 +385,7 @@ export default function ChatWidget() {
                   fontSize: '14px',
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--sunset-cliff, #E8834A)'
+                  e.currentTarget.style.borderColor = 'var(--color-brand-victoria-cove, #2E8B8B)'
                 }}
                 onBlur={(e) => {
                   e.target.style.borderColor = 'rgba(27, 58, 92, 0.12)'
@@ -414,15 +396,14 @@ export default function ChatWidget() {
                 onClick={sendMessage}
                 disabled={!input.trim() || isLoading}
                 aria-label="Send message"
-                className="min-w-[48px] min-h-[48px] rounded-full border-0 flex items-center justify-center transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sunset-cliff,#E8834A)] focus-visible:ring-offset-2 disabled:cursor-not-allowed"
+                className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-full border-0 bg-black text-white transition-all duration-200 hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-brand-pacific-dusk/15 disabled:text-brand-pacific-dusk/35"
                 style={{
                   width: '48px',
                   height: '48px',
-                  backgroundColor: input.trim() && !isLoading ? 'var(--sunset-cliff, #E8834A)' : 'rgba(27, 58, 92, 0.12)',
                   cursor: input.trim() && !isLoading ? 'pointer' : 'not-allowed',
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={input.trim() && !isLoading ? 'white' : 'var(--driftwood, #B8A88A)'} strokeWidth="2" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                 </svg>
               </button>
@@ -439,12 +420,12 @@ export default function ChatWidget() {
             }}
           >
             <p style={{ fontSize: '11px', color: 'var(--color-slate, #6B6B6B)', margin: 0 }}>
-              <a href="/help" className="text-brand-sunset-cliff no-underline font-semibold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2 rounded-sm">
+              <a href="/help" className="rounded-sm font-semibold text-brand-victoria-cove no-underline hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
                 What can you do?
               </a>
               {' • '}
               Need immediate help? Call{' '}
-              <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-brand-sunset-cliff no-underline font-semibold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2 rounded-sm">
+              <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="rounded-sm font-semibold text-brand-victoria-cove no-underline hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
                 (949) 534-0457
               </a>
             </p>
