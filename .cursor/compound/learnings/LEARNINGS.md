@@ -2,7 +2,9 @@
 
 Extracted from the Code Review Summary (12-agent parallel review). Use these for future implementation and review.
 
-**Recent:** 2026-03-27 — Player Success carousel: Cloudinary hero URLs (`f_auto,q_auto`), `imageFit: "contain"` on all slides to avoid head crop; `verify-image-paths` skips `https://` refs. Review note: align Ryan slide `imageAlt` with image when Ryan-only asset ships. Patterns: `player-success-hero-contain-no-crop`, `cloudinary-next-image-delivery`. Anti-pattern: `slide-image-alt-mismatch`. See `2026-03-27-player-success-cloudinary-compound-learn.md`.
+**Recent:** 2026-03-28 — UTR Match Play full redesign (spec-driven data + UI) + contact form pipeline fix: `message` must be on `bookingSchema` or Zod strips it; `source=contact-page` branches AC/Notion/GHL/confirmation away from trial path; `sendContactFormConfirmationEmail` + `category: Contact` in email template; `UtrDropInSchedule` anchor uses `<a>` not undefined `Link`. Patterns: `api-schema-field-parity`, `booking-route-multi-intent`. See `2026-03-28-utr-redesign-contact-book-pipeline-compound-learn.md`.
+
+**Previous:** 2026-03-27 — Player Success carousel: Cloudinary hero URLs (`f_auto,q_auto`), `imageFit: "contain"` on all slides to avoid head crop; `verify-image-paths` skips `https://` refs. Review note: align Ryan slide `imageAlt` with image when Ryan-only asset ships. Patterns: `player-success-hero-contain-no-crop`, `cloudinary-next-image-delivery`. Anti-pattern: `slide-image-alt-mismatch`. See `2026-03-27-player-success-cloudinary-compound-learn.md`.
 
 **Previous:** 2026-03-23 — UTR Match Play standalone page: lib/utr-match-play.ts as single source for season, divisions, modal payload from leagues-2026.json; LuxuryYearModal wired as primary CTA; form-config duration derived via getUtrCircuitFormDuration(); AC division tags use data.division; getUtrDivisionTag normalizes en-dash; leagues schema extended with ntrpToUtr. See `2026-03-23-utr-match-play-compound-learn.md`.
 
