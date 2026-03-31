@@ -24,6 +24,12 @@ const CATEGORY_EYEBROWS: Record<string, string> = {
   Fitness: 'FITNESS & COMMUNITY',
 }
 
+const STATUS_LABELS: Record<string, string> = {
+  registration_open: 'Now enrolling',
+  active: 'In progress',
+  coming_soon: 'Coming soon',
+}
+
 export default function ProgramsSection({
   programsBySeason,
   seasons,
@@ -54,6 +60,36 @@ export default function ProgramsSection({
     ? `${seasonData.name} · ${seasonData.dates.replace(/, \d{4}/g, '')} · ${seasonData.weeks} weeks`
     : ''
 
+  const nowEnrolling = useMemo(() => {
+    for (const key of SEASON_KEYS) {
+      const data = seasons[key]
+      if (data?.status === 'registration_open') {
+        return { key, data }
+      }
+    }
+    const fallback = seasons[activeSeason]
+    return fallback ? { key: activeSeason, data: fallback } : null
+  }, [seasons, activeSeason])
+
+  const upNext = useMemo(() => {
+    const startIndex = SEASON_KEYS.indexOf(activeSeason)
+    const ordered = [
+      ...SEASON_KEYS.slice(startIndex + 1),
+      ...SEASON_KEYS.slice(0, startIndex),
+    ]
+    for (const key of ordered) {
+      const data = seasons[key]
+      if (!data) continue
+      if (data.status === 'registration_open' || data.status === 'coming_soon') {
+        const base = `${data.name} · ${data.dates.replace(/, \d{4}/g, '')}`
+        return data.registrationOpen
+          ? `${base} · Registration opens ${data.registrationOpen}`
+          : base
+      }
+    }
+    return null
+  }, [seasons, activeSeason])
+
   const focusTab = useCallback((key: SeasonKey) => {
     setActiveSeason(key)
     setExpandedProgramId(null)
@@ -75,6 +111,15 @@ export default function ProgramsSection({
           Programs & Schedule
         </h2>
         <div className="section-horizon mb-8 opacity-90" aria-hidden="true" />
+
+        {nowEnrolling && (
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-morning-light px-4 py-2 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-brand-pacific-dusk">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-victoria-cove" aria-hidden />
+            <span>
+              {STATUS_LABELS[nowEnrolling.data.status ?? ''] ?? 'Season'}: {nowEnrolling.data.name}
+            </span>
+          </p>
+        )}
 
         {/* Season pills — tablist for keyboard nav */}
         <div
@@ -110,7 +155,7 @@ export default function ProgramsSection({
               }}
               className={`
                 font-sans text-[13px] font-medium tracking-[0.05em] px-5 py-3 rounded-[2px]
-                transition-all duration-200 min-h-[48px] min-w-[88px]
+                transition-all duration-200 min-h-[48px] min-w-[96px]
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2
                 ${activeSeason === key
                   ? 'bg-black text-white shadow-sm'
@@ -118,15 +163,29 @@ export default function ProgramsSection({
                 }
               `}
             >
-              {SEASON_LABELS[key]}
+              <span className="block leading-tight">{SEASON_LABELS[key]}</span>
+              {seasons[key]?.status && STATUS_LABELS[seasons[key]?.status ?? ''] && (
+                <span className="mt-1 block text-[10px] font-sans uppercase tracking-[0.16em] text-brand-pacific-dusk/70">
+                  {STATUS_LABELS[seasons[key]?.status ?? '']}
+                </span>
+              )}
             </button>
           ))}
         </div>
 
         {/* Season info line */}
         {seasonInfoLine && (
-          <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-6">
+          <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-2">
             {seasonInfoLine}
+          </p>
+        )}
+
+        {upNext && (
+          <p className="font-sans text-[12px] text-brand-pacific-dusk/65 mb-6">
+            <span className="inline-flex items-center gap-1 rounded-full bg-brand-morning-light px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-brand-pacific-dusk mr-2">
+              Up Next
+            </span>
+            {upNext}
           </p>
         )}
 
