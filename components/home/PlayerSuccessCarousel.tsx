@@ -113,9 +113,7 @@ export default function PlayerSuccessCarousel({
                 objectPosition: active.objectPosition ?? '50% 50%',
               }}
               sizes="100vw"
-              quality={100}
               decoding="async"
-              priority={safeIndex === 0}
             />
           </motion.div>
         </AnimatePresence>

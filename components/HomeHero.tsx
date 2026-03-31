@@ -34,7 +34,10 @@ export default function HomeHero() {
   useEffect(() => {
     if (reduceMotion) return
     const id = window.setTimeout(() => {
-      videoRef.current?.load()
+      // On mobile, let the poster carry the hero; only load video on larger viewports.
+      if (window.innerWidth >= 768) {
+        videoRef.current?.load()
+      }
     }, 0)
     return () => clearTimeout(id)
   }, [reduceMotion])

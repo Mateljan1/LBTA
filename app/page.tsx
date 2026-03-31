@@ -16,6 +16,7 @@ import PlayerSuccessCarousel, { type PlayerSuccessSlide } from '@/components/hom
 import { coachImageSrc } from '@/lib/coaches-data'
 import siteStats from '@/data/site-stats.json'
 import homepageCopy from '@/data/homepage-copy.json'
+import pricingSupplemental from '@/data/pricing-supplemental.json'
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
@@ -109,6 +110,7 @@ export default function Home() {
   const whyChoose = (homepageCopy as { whyChoose?: WhyChooseCopy }).whyChoose
   const results = homepageCopy.results
   const destination = homepageCopy.destination as DestinationCopy
+  const comparisonTiers = pricingSupplemental.comparisonTiers
   return (
     <>
       <Script id="local-business-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
@@ -174,7 +176,7 @@ export default function Home() {
                         (homepageCopy.founder as { imageObjectPosition?: string }).imageObjectPosition ?? '48% 44%',
                     }}
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    quality={100}
+                    quality={95}
                   />
                 </div>
               </div>
@@ -339,6 +341,60 @@ export default function Home() {
       </section>
 
       <HorizonDivider animate />
+      <section id="tuition-snapshot" className="bg-brand-morning-light section-lg">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-10 md:mb-12">
+            <span className="text-eyebrow mb-4 block">Tuition Snapshot</span>
+            <h2 className="font-headline text-headline font-light mb-4">What training typically costs.</h2>
+            <p className="text-subhead max-w-2xl mx-auto font-light text-brand-pacific-dusk">
+              Full details live on the Schedule &amp; Pricing page. Here&apos;s a quick sense of how most players start.
+            </p>
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <div className="grid gap-6 lg:gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+              {comparisonTiers.slice(0, 3).map((tier) => (
+                <div
+                  key={tier.name}
+                  className="bg-white border border-black/5 rounded-subtle px-5 py-6 flex flex-col shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
+                >
+                  <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-lbta-slate mb-2">
+                    {tier.name}
+                  </p>
+                  <p className="font-headline text-[1.75rem] leading-tight text-brand-pacific-dusk">
+                    {tier.price}
+                    {tier.period ? (
+                      <span className="font-sans text-[13px] text-lbta-slate ml-1 align-middle">
+                        {` ${tier.period}`}
+                      </span>
+                    ) : null}
+                  </p>
+                  <p className="text-body-sm text-lbta-slate mt-2 mb-4">{tier.description}</p>
+                  <ul className="space-y-1.5 text-body-sm text-brand-pacific-dusk/90 mb-5">
+                    {tier.features.slice(0, 3).map((feature: string) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <span className="mt-[6px] h-1.5 w-1.5 rounded-full bg-brand-victoria-cove/80" aria-hidden />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto pt-2">
+                    <Link href={tier.href} className="btn-secondary w-full justify-center text-[13px]">
+                      {tier.cta}
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={200} className="mt-8 text-center">
+            <Link href="/schedules" className="btn-horizon">
+              <span>View full Schedule &amp; Pricing</span>
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <HorizonDivider animate />
       <section id="why-choose" className="bg-brand-sandstone section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-12">
@@ -380,7 +436,7 @@ export default function Home() {
                   className="object-cover image-zoom"
                   style={{ objectPosition: whyChoose?.image1ObjectPosition ?? '50% 45%' }}
                   sizes="(max-width: 768px) 100vw, 60vw"
-                  quality={100}
+                  quality={95}
                 />
               </div>
             </AnimatedSection>
@@ -394,7 +450,7 @@ export default function Home() {
                   className="object-cover image-zoom"
                   style={{ objectPosition: whyChoose?.image2ObjectPosition ?? '50% 52%' }}
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  quality={100}
+                  quality={95}
                 />
               </div>
             </AnimatedSection>
@@ -412,7 +468,7 @@ export default function Home() {
             className="object-cover brightness-[1.02]"
             style={{ objectPosition: destination.objectPosition ?? '50% 45%' }}
             sizes="100vw"
-            quality={100}
+            quality={95}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-brand-deep-water/55 via-brand-deep-water/68 to-brand-deep-water/78" />
         </div>
@@ -438,6 +494,49 @@ export default function Home() {
       <HomeCommunityGallery />
 
       <VideoTestimonials variant="featured" />
+
+      <section className="bg-brand-morning-light section-lg">
+        <div className="container-lbta">
+          <AnimatedSection className="text-center mb-10">
+            <span className="text-eyebrow mb-4 block">What families say</span>
+            <h2 className="font-headline text-headline-md font-light">
+              Quiet confidence from the people on court.
+            </h2>
+          </AnimatedSection>
+          <div className="grid gap-6 md:grid-cols-3">
+            <AnimatedSection delay={50}>
+              <figure className="h-full bg-white border border-black/5 rounded-subtle px-6 py-6 flex flex-col justify-between shadow-[0_10px_40px_rgba(0,0,0,0.04)]">
+                <blockquote className="text-body text-brand-pacific-dusk mb-4">
+                  “Our son went from hating lessons to asking when he can get back on court. The structure and atmosphere at LBTA made all the difference.”
+                </blockquote>
+                <figcaption className="text-body-sm text-lbta-slate">
+                  — Mary, junior parent
+                </figcaption>
+              </figure>
+            </AnimatedSection>
+            <AnimatedSection delay={100}>
+              <figure className="h-full bg-white border border-black/5 rounded-subtle px-6 py-6 flex flex-col justify-between shadow-[0_10px_40px_rgba(0,0,0,0.04)]">
+                <blockquote className="text-body text-brand-pacific-dusk mb-4">
+                  “Coaching here is calm, clear, and honest. As an adult player I feel pushed without being talked down to.”
+                </blockquote>
+                <figcaption className="text-body-sm text-lbta-slate">
+                  — Alex, adult program player
+                </figcaption>
+              </figure>
+            </AnimatedSection>
+            <AnimatedSection delay={150}>
+              <figure className="h-full bg-white border border-black/5 rounded-subtle px-6 py-6 flex flex-col justify-between shadow-[0_10px_40px_rgba(0,0,0,0.04)]">
+                <blockquote className="text-body text-brand-pacific-dusk mb-4">
+                  “There is a real community feel—coaches know every player by name and treat the work seriously.”
+                </blockquote>
+                <figcaption className="text-body-sm text-lbta-slate">
+                  — Laguna Beach family
+                </figcaption>
+              </figure>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
 
       <FAQSection />
 
