@@ -189,9 +189,32 @@ export const registerYearSchema = z.object({
   campDates: z.string().max(200).optional(),
   campWeek: z.string().max(100).optional(),
   division: z.string().max(100).optional(),
+  /** Self-reported UTR for UTR Match Play Series (optional). */
+  currentUtr: z.string().max(20).optional(),
 }).passthrough()
 
 export type RegisterYearRequest = z.infer<typeof registerYearSchema>
+
+/**
+ * Stripe Checkout session for UTR full-season registration (server resolves price from catalog).
+ * Used by: POST /api/checkout/utr-season
+ */
+export const utrCheckoutSessionSchema = z.object({
+  firstName: nameSchema,
+  lastName: nameSchema,
+  email: emailSchema,
+  phone: phoneSchema,
+  program: z.string().min(1, 'Program is required').max(200),
+  programId: z.string().max(100).optional(),
+  division: z.string().min(1, 'Division is required').max(100),
+  playerName: z.string().max(200).optional(),
+  playerAge: z.union([z.string(), z.number()]).optional(),
+  experience: z.string().max(200).optional(),
+  notes: z.string().max(2000).optional(),
+  currentUtr: z.string().max(20).optional(),
+})
+
+export type UtrCheckoutSessionPayload = z.infer<typeof utrCheckoutSessionSchema>
 
 /**
  * Scholarship application schema

@@ -67,7 +67,9 @@ export default function LuxuryYearModal({
     playerName: '',
     playerAge: '',
     experience: 'beginner',
-    notes: ''
+    notes: '',
+    /** Optional self-reported UTR (UTR Match Play Series). */
+    currentUtr: '',
   })
 
   /** Week chosen in modal (when card opened without a week) */
@@ -99,7 +101,8 @@ export default function LuxuryYearModal({
         playerName: '',
         playerAge: '',
         experience: 'beginner',
-        notes: ''
+        notes: '',
+        currentUtr: '',
       })
       if (type === 'camp' && data) {
         const c = data as CampData
@@ -263,6 +266,12 @@ export default function LuxuryYearModal({
     })()
 
   const step2SelectionSummary = (): string => {
+    if (type === 'utr-circuit') {
+      const div = selectedOption ?? ''
+      const price =
+        selectedPrice != null ? ` · $${selectedPrice} full season` : ''
+      return `${programInfo.dates} · ${div}${price}`
+    }
     if (type !== 'camp') {
       return `${programInfo.dates} · ${selectedOption ?? ''}`
     }
@@ -301,6 +310,70 @@ export default function LuxuryYearModal({
         notes: formData.notes || '',
         price: selectedPrice,
         totalPrice: selectedPrice,
+        currentUtr: formData.currentUtr.trim() || undefined,
+      }
+
+      if (type === 'utr-circuit' || type === 'jtt') {
+        if (!selectedOption || selectedPrice == null) {
+          setErrorMessage('Please go back and select a division.')
+          return
+        }
+        const utrPayload = {
+          ...payload,
+          registrationType: 'utr-circuit',
+          division: selectedOption,
+          programId: 'utr-circuit',
+        }
+        const checkoutRes = await fetch('/api/checkout/utr-season', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            program: programInfo.name,
+            programId: 'utr-circuit',
+            division: selectedOption,
+            playerName: formData.playerName || undefined,
+            playerAge: formData.playerAge || undefined,
+            experience: formData.experience,
+            notes: formData.notes || undefined,
+            currentUtr: formData.currentUtr.trim() || undefined,
+          }),
+        })
+        const checkoutJson = (await checkoutRes.json()) as {
+          success?: boolean
+          url?: string
+          stripeNotConfigured?: boolean
+          error?: string
+        }
+        if (checkoutRes.ok && checkoutJson.success && checkoutJson.url) {
+          window.location.href = checkoutJson.url
+          return
+        }
+        if (!checkoutJson.stripeNotConfigured && checkoutRes.status !== 503) {
+          setErrorMessage(
+            checkoutJson.error ?? 'Could not start checkout. Please try again or call (949) 534-0457.'
+          )
+          return
+        }
+        const response = await fetch('/api/register-year', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(utrPayload),
+        })
+        const result = await response.json()
+        if (response.ok && result.success) {
+          setIsSuccess(true)
+        } else {
+          setErrorMessage(
+            (result as { error?: string; message?: string }).error ??
+              (result as { message?: string }).message ??
+              'Registration failed. Please try again or call (949) 534-0457.'
+          )
+        }
+        return
       }
 
       // Add type-specific fields
@@ -322,12 +395,6 @@ export default function LuxuryYearModal({
           .filter(Boolean)
           .join(' · ')
         payload.notes = [formData.notes, extra].filter(Boolean).join(' | ')
-      }
-
-      if (type === 'utr-circuit' || type === 'jtt') {
-        const utrData = data as UTRCircuitData
-        payload.registrationType = 'utr-circuit'
-        payload.division = selectedOption  // The division they selected
       }
 
       if (process.env.NODE_ENV === 'development') {
@@ -605,6 +672,24 @@ export default function LuxuryYearModal({
                     {step2SelectionSummary()}
                   </p>
 
+                  {(type === 'utr-circuit' || type === 'jtt') && selectedOption && selectedPrice != null ? (
+                    <div
+                      className="mb-6 rounded-lg border border-black/10 bg-brand-sandstone/80 px-4 py-4"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-1">
+                        Division and season fee
+                      </p>
+                      <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
+                        {selectedOption}
+                      </p>
+                      <p className="font-sans text-[15px] text-brand-pacific-dusk/80 mt-1 tabular-nums">
+                        ${selectedPrice} full season (charged at checkout when online payment is enabled)
+                      </p>
+                    </div>
+                  ) : null}
+
                   {/* Form Fields */}
                   <div className="space-y-5 mb-8">
                     {/* Name Row */}
@@ -726,6 +811,28 @@ export default function LuxuryYearModal({
                         ))}
                       </div>
                     </fieldset>
+
+                    {(type === 'utr-circuit' || type === 'jtt') ? (
+                      <div>
+                        <label htmlFor="modal-currentUtr" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                          UTR (optional)
+                        </label>
+                        <input
+                          id="modal-currentUtr"
+                          type="text"
+                          inputMode="decimal"
+                          autoComplete="off"
+                          value={formData.currentUtr}
+                          onChange={(e) => setFormData({ ...formData, currentUtr: e.target.value })}
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
+                          placeholder="e.g. 4.2 — leave blank if unsure"
+                          maxLength={20}
+                        />
+                        <p className="font-sans text-[12px] text-brand-pacific-dusk/50 mt-2">
+                          If you have a UTR Sports rating, enter it here. Otherwise leave blank.
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
 
                   {errorMessage && (
@@ -760,7 +867,11 @@ export default function LuxuryYearModal({
                       disabled={isSubmitting}
                       className="flex-1 py-4 rounded-[2px] min-h-[48px] bg-black text-white font-sans text-[14px] font-medium tracking-[0.02em] hover:bg-gray-800 disabled:bg-lbta-stone transition-all focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                     >
-                      {isSubmitting ? 'Submitting...' : 'Complete Registration'}
+                      {isSubmitting
+                        ? 'Submitting...'
+                        : type === 'utr-circuit' || type === 'jtt'
+                          ? 'Continue to secure payment'
+                          : 'Complete Registration'}
                     </button>
                   </div>
 

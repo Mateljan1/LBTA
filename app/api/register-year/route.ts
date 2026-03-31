@@ -10,18 +10,18 @@ import {
   addToList,
   addTags,
   getClassTagFromProgram,
-  getUtrDivisionTag,
   LBTA_LIST_ID,
   getWebsiteSignupsListId,
   CAMPAIGN_TAGS,
   CLASS_TAGS,
-  INTEREST_TAGS,
   SEASON_TAGS as AC_SEASON_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
 import { sendToGHL } from '@/lib/gohighlevel'
 import { notifyRegistration, sendConfirmationEmail } from '@/lib/email'
 import { FORM_CONFIGS } from '@/lib/form-config'
+import { fulfillUtrCircuitRegistration } from '@/lib/fulfill-utr-circuit-registration'
+import { determineCategory, isEarlyBird, type RegistrationType } from '@/lib/register-year-shared'
 
 let notionClient: Client | null = null
 function getNotionClient(): Client {
@@ -31,73 +31,6 @@ function getNotionClient(): Client {
   return notionClient
 }
 
-// ============================================================
-// LBTA Year-Round Registration API
-// ============================================================
-// Handles registrations for:
-// - Seasonal Programs (Winter, Spring, Summer, Fall)
-// - Holiday Camps (Ski Week, Spring Break, Summer, etc.)
-// - JTT (Junior Team Tennis)
-// - Swim & Tennis Camp
-// ============================================================
-
-// Registration types
-type RegistrationType = 'seasonal' | 'camp' | 'utr-circuit' | 'jtt' | 'swim-tennis' | 'private' | 'inquiry'
-
-// Helper function to determine program category
-function determineCategory(programName: string, registrationType: RegistrationType): string {
-  if (registrationType === 'camp' || registrationType === 'swim-tennis') return 'Camp'
-  if (registrationType === 'utr-circuit' || registrationType === 'jtt') return 'Match Play Series'
-  if (registrationType === 'private') return 'Private'
-  
-  const program = programName.toLowerCase()
-  
-  if (program.includes('little stars') || 
-      program.includes('red ball') || 
-      program.includes('orange ball') || 
-      program.includes('green dot')) {
-    return 'Junior'
-  }
-  
-  if (program.includes('youth development') || 
-      program.includes('high performance')) {
-    return 'Youth'
-  }
-  
-  if (program.includes('cardio') || 
-      program.includes('liveball') || 
-      program.includes('family tennis') || 
-      program.includes('match play')) {
-    return 'Fitness'
-  }
-  
-  return 'Adult'
-}
-
-// Helper function to check if Early Bird discount applies
-function isEarlyBird(season?: string): boolean {
-  const now = new Date()
-
-  // Season-specific early bird deadlines
-  const earlyBirdDeadlines: Record<string, Date> = {
-    'winter': new Date('2025-12-20T23:59:59'),
-    'spring': new Date('2026-03-20T23:59:59'),
-    'summer': new Date('2026-05-20T23:59:59'),
-    'fall': new Date('2026-08-01T23:59:59'),
-  }
-
-  if (season && earlyBirdDeadlines[season.toLowerCase()]) {
-    return now < earlyBirdDeadlines[season.toLowerCase()]
-  }
-
-  // Default to winter deadline
-  return now < new Date('2025-12-20T23:59:59')
-}
-
-// ============================================================
-// ActiveCampaign Tag Mapping
-// ============================================================
-// Season list tags — winter/spring use 2026 campaign tags; summer/fall use AC season tags until dedicated 2026 list tags exist (see lib/activecampaign SEASON_TAGS).
 const REGISTRATION_SEASON_TAGS: Record<string, number> = {
   winter: CAMPAIGN_TAGS.winter_2026,
   spring: CAMPAIGN_TAGS.spring_2026,
@@ -105,53 +38,33 @@ const REGISTRATION_SEASON_TAGS: Record<string, number> = {
   fall: AC_SEASON_TAGS.fall_2025,
 }
 
-// Get all applicable tags for a registration
-function getApplicableTags(
+/** Tags for non-UTR paths (register-year still uses inline AC for seasonal/camp). */
+function getApplicableTagsNonUtr(
   data: { season?: string; program?: string; registrationType?: string; division?: string },
   registrationType: RegistrationType
 ): number[] {
-  const tags: number[] = [CAMPAIGN_TAGS.website_registration] // 180
+  const tags: number[] = [CAMPAIGN_TAGS.website_registration]
 
-  // Add season tag if applicable
   if (data.season && REGISTRATION_SEASON_TAGS[data.season.toLowerCase()]) {
     tags.push(REGISTRATION_SEASON_TAGS[data.season.toLowerCase()])
   }
 
-  // Add UTR Match Play / program tag utr_circuit (also handle legacy 'jtt' type)
-  if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
-    tags.push(CAMPAIGN_TAGS.utr_circuit)     // 242
-    tags.push(INTEREST_TAGS.utr_circuit)     // 215
-    const divisionForTag = data.division || data.program || ''
-    if (divisionForTag) {
-      const divisionTag = getUtrDivisionTag(divisionForTag)
-      if (divisionTag) tags.push(divisionTag)
-    }
-  }
-
-  // Add class tag using the consolidated mapping
   if (data.program) {
     const classTag = getClassTagFromProgram(data.program)
-    if (classTag) {
-      tags.push(classTag)
-    }
+    if (classTag) tags.push(classTag)
   }
 
-  // Add summer camp tag for camp registrations
   if (registrationType === 'camp' || registrationType === 'swim-tennis') {
-    tags.push(CLASS_TAGS.summer_camp) // 156
+    tags.push(CLASS_TAGS.summer_camp)
   }
 
   return Array.from(new Set(tags))
 }
 
 export async function POST(request: NextRequest) {
-  // Agent auth: validate X-Agent-Secret header if present (for agent tool calls)
   const agentSecret = request.headers.get('X-Agent-Secret')
   if (agentSecret && !validateAgentSecret(request)) {
-    return NextResponse.json(
-      { success: false, error: 'Invalid agent secret' },
-      { status: 401 }
-    )
+    return NextResponse.json({ success: false, error: 'Invalid agent secret' }, { status: 401 })
   }
 
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
@@ -179,10 +92,7 @@ export async function POST(request: NextRequest) {
   try {
     const parsed = await parseJsonBody(request)
     if (!parsed.ok) {
-      return NextResponse.json(
-        { success: false, error: 'Invalid request format' },
-        { status: 400 }
-      )
+      return NextResponse.json({ success: false, error: 'Invalid request format' }, { status: 400 })
     }
     const validation = validateRequest(registerYearSchema, parsed.data)
 
@@ -201,110 +111,108 @@ export async function POST(request: NextRequest) {
     const category = determineCategory(data.program, registrationType)
     const frequency = (data.preferredDays || []).length
 
-    // No PII in logs
     console.log('[register-year] Received:', {
       type: registrationType,
       timestamp: new Date().toISOString(),
     })
 
-    // 1. Save to Notion
-    if (hasEnvVar('NOTION_API_KEY') && hasEnvVar('NOTION_DATABASE_ID')) {
-    try {
-      // Notion SDK property types are deeply nested; using `any` for dynamic property construction
-      const notionProperties: Record<string, any> = { // eslint-disable-line
-        'Player Name': {
-          title: [{ text: { content: data.studentName || data.playerName || `${data.firstName} ${data.lastName}` } }]
-        },
-        'Parent Name': {
-          rich_text: [{ text: { content: `${data.firstName} ${data.lastName}` } }]
-        },
-        'Program': {
-          rich_text: [{ text: { content: data.program } }]
-        },
-        'Category': {
-          select: { name: category }
-        },
-        'Parent Email': {
-          email: data.email
-        },
-        'Parent Phone': {
-          phone_number: data.phone
-        },
-        'Status': {
-          select: { name: 'New' }
-        },
-        'Timestamp': {
-          date: { start: new Date().toISOString() }
-        },
-        'Notes': {
-          rich_text: [{ text: { content: data.notes || '' } }]
-        }
-      }
-
-      // Add type-specific fields
-      if (registrationType === 'seasonal') {
-        notionProperties['Location'] = { select: { name: data.location || 'Not specified' } }
-        notionProperties['Days Selected'] = { multi_select: (data.preferredDays || []).map((day: string) => ({ name: day })) }
-        notionProperties['Time Slot'] = { rich_text: [{ text: { content: data.timeSlot || '' } }] }
-        notionProperties['Frequency (days/week)'] = { number: frequency }
-        notionProperties['Tuition'] = { number: parseInt(String(data.totalPrice ?? ''), 10) || 0 }
-        notionProperties['Age'] = { number: parseInt(String(data.studentAge ?? ''), 10) || null }
-        notionProperties['Experience Level'] = { select: { name: data.experience || 'Not specified' } }
-        notionProperties['Early Bird Applied'] = { checkbox: isEarlyBird(data.season) }
-      }
-
-      if (registrationType === 'camp' || registrationType === 'swim-tennis') {
-        notionProperties['Camp Name'] = { rich_text: [{ text: { content: data.campName || data.program } }] }
-        notionProperties['Camp Dates'] = { rich_text: [{ text: { content: data.campDates || '' } }] }
-        notionProperties['Camp Week'] = { rich_text: [{ text: { content: data.campWeek || '' } }] }
-        notionProperties['Tuition'] = { number: parseInt(String(data.price ?? ''), 10) || 0 }
-        notionProperties['Age'] = { number: parseInt(String(data.playerAge ?? data.studentAge ?? ''), 10) || null }
-      }
-
-      if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
-        notionProperties['Division'] = { rich_text: [{ text: { content: data.division || data.program || '' } }] }
-        notionProperties['Tuition'] = { number: parseInt(String(data.price ?? ''), 10) || 0 }
-        notionProperties['Age'] = { number: parseInt(String(data.playerAge ?? data.studentAge ?? ''), 10) || null }
-      }
-
-      const notion = getNotionClient()
-      await notion.pages.create({
-        parent: { database_id: getEnvVar('NOTION_DATABASE_ID') },
-        properties: notionProperties
+    if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
+      const { acSynced } = await fulfillUtrCircuitRegistration(data, {})
+      return NextResponse.json({
+        success: true,
+        message:
+          'UTR Match Play Series registration received. Our team will contact you with division placement and next steps.',
+        acSynced:
+          hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY') ? acSynced : undefined,
       })
-
-      console.log('[register-year] Notion entry created')
-    } catch (notionError) {
-      console.error('[register-year] Notion error:', notionError)
-      // Continue even if Notion fails
-    }
     }
 
-    // 2. Add to ActiveCampaign with proper tagging
+    // 1. Save to Notion (seasonal, camp, etc. — not UTR handled above)
+    if (hasEnvVar('NOTION_API_KEY') && hasEnvVar('NOTION_DATABASE_ID')) {
+      try {
+        const notionProperties: Record<string, unknown> = {
+          'Player Name': {
+            title: [{ text: { content: data.studentName || data.playerName || `${data.firstName} ${data.lastName}` } }],
+          },
+          'Parent Name': {
+            rich_text: [{ text: { content: `${data.firstName} ${data.lastName}` } }],
+          },
+          'Program': {
+            rich_text: [{ text: { content: data.program } }],
+          },
+          'Category': {
+            select: { name: category },
+          },
+          'Parent Email': {
+            email: data.email,
+          },
+          'Parent Phone': {
+            phone_number: data.phone,
+          },
+          'Status': {
+            select: { name: 'New' },
+          },
+          'Timestamp': {
+            date: { start: new Date().toISOString() },
+          },
+          'Notes': {
+            rich_text: [{ text: { content: data.notes || '' } }],
+          },
+        }
+
+        if (registrationType === 'seasonal') {
+          notionProperties['Location'] = { select: { name: data.location || 'Not specified' } }
+          notionProperties['Days Selected'] = {
+            multi_select: (data.preferredDays || []).map((day: string) => ({ name: day })),
+          }
+          notionProperties['Time Slot'] = { rich_text: [{ text: { content: data.timeSlot || '' } }] }
+          notionProperties['Frequency (days/week)'] = { number: frequency }
+          notionProperties['Tuition'] = { number: parseInt(String(data.totalPrice ?? ''), 10) || 0 }
+          notionProperties['Age'] = { number: parseInt(String(data.studentAge ?? ''), 10) || null }
+          notionProperties['Experience Level'] = { select: { name: data.experience || 'Not specified' } }
+          notionProperties['Early Bird Applied'] = { checkbox: isEarlyBird(data.season) }
+        }
+
+        if (registrationType === 'camp' || registrationType === 'swim-tennis') {
+          notionProperties['Camp Name'] = { rich_text: [{ text: { content: data.campName || data.program } }] }
+          notionProperties['Camp Dates'] = { rich_text: [{ text: { content: data.campDates || '' } }] }
+          notionProperties['Camp Week'] = { rich_text: [{ text: { content: data.campWeek || '' } }] }
+          notionProperties['Tuition'] = { number: parseInt(String(data.price ?? ''), 10) || 0 }
+          notionProperties['Age'] = {
+            number: parseInt(String(data.playerAge ?? data.studentAge ?? ''), 10) || null,
+          }
+        }
+
+        const notion = getNotionClient()
+        await notion.pages.create({
+          parent: { database_id: getEnvVar('NOTION_DATABASE_ID') },
+          properties: notionProperties as never,
+        })
+
+        console.log('[register-year] Notion entry created')
+      } catch (notionError) {
+        console.error('[register-year] Notion error:', notionError)
+      }
+    }
+
     let acSynced = false
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
       try {
         const daysSelected = (data.preferredDays || []).join(', ') || 'N/A'
         const tuitionAmount = data.totalPrice || data.price || 'Contact for pricing'
 
-        // Build program display value (include season if present)
         const programDisplay = data.season
           ? `${data.program || 'Not specified'} - ${data.season}`
           : data.program || 'Not specified'
 
         const fieldValues = [
-          { field: '7', value: programDisplay },                        // PROGRAM
-          { field: '8', value: data.location || 'Not specified' },      // LOCATION
-          { field: '9', value: daysSelected },                          // DAYS_SELECTED
-          { field: '10', value: String(tuitionAmount) },                // TUITION
-          { field: '11', value: 'website' },                            // LEAD_SOURCE
-          { field: '12', value: registrationType },                     // registration_type
+          { field: '7', value: programDisplay },
+          { field: '8', value: data.location || 'Not specified' },
+          { field: '9', value: daysSelected },
+          { field: '10', value: String(tuitionAmount) },
+          { field: '11', value: 'website' },
+          { field: '12', value: registrationType },
         ]
-
-        // Add Match Play Series / legacy JTT division field
-        if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
-          fieldValues.push({ field: '15', value: data.division || data.program || '' })
-        }
 
         const contactResult = await upsertContact({
           email: data.email,
@@ -319,7 +227,6 @@ export async function POST(request: NextRequest) {
           acSynced = true
           console.log('[register-year] AC contact created:', { contactId })
 
-          // Add to lists
           const websiteSignupsListId = getWebsiteSignupsListId()
           await Promise.all([
             addToList(contactId, LBTA_LIST_ID),
@@ -327,8 +234,7 @@ export async function POST(request: NextRequest) {
           ])
           console.log('[register-year] Added to list(s)')
 
-          // Apply all applicable tags
-          const tags = getApplicableTags(data, registrationType)
+          const tags = getApplicableTagsNonUtr(data, registrationType)
           const tagResult = await addTags(contactId, tags)
           console.log('[register-year] Tags applied:', tagResult)
         } else {
@@ -340,78 +246,80 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    waitUntil(sendToGHL({
-      email: data.email,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phone: data.phone,
-      tags: ['Website Registration', data.program, data.registrationType ?? 'seasonal'],
-    }))
-
-    waitUntil(storeLead({
-      source: 'register-year',
-      email: data.email,
-      name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
-      phone: data.phone ?? undefined,
-      payload: {
-        registrationType: data.registrationType,
-        program: data.program,
-        season: data.season,
-      },
-    }))
-    waitUntil(notifyRegistration({
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      phone: data.phone,
-      program: data.program,
-      registrationType: data.registrationType,
-      division: data.division,
-      season: data.season,
-      location: data.location,
-      studentName: data.studentName ?? data.playerName,
-      studentAge: data.studentAge ?? data.playerAge,
-      experience: data.experience,
-      notes: data.notes,
-    }))
-
-    // Send branded confirmation email TO the registrant.
-    // Try programId first, then match by program display name.
-    const configById = data.programId
-      ? FORM_CONFIGS[data.programId]
-      : undefined
-    const matchedConfig = configById ?? Object.values(FORM_CONFIGS).find(
-      c => c.prePopulateData.programName === data.program
+    waitUntil(
+      sendToGHL({
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+        tags: ['Website Registration', data.program, data.registrationType ?? 'seasonal'],
+      })
     )
+
+    waitUntil(
+      storeLead({
+        source: 'register-year',
+        email: data.email,
+        name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
+        phone: data.phone ?? undefined,
+        payload: {
+          registrationType: data.registrationType,
+          program: data.program,
+          season: data.season,
+        },
+      })
+    )
+    waitUntil(
+      notifyRegistration({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        program: data.program,
+        registrationType: data.registrationType,
+        division: data.division,
+        season: data.season,
+        location: data.location,
+        studentName: data.studentName ?? data.playerName,
+        studentAge: data.studentAge ?? data.playerAge,
+        experience: data.experience,
+        notes: data.notes,
+      })
+    )
+
+    const configById = data.programId ? FORM_CONFIGS[data.programId] : undefined
+    const matchedConfig =
+      configById ?? Object.values(FORM_CONFIGS).find((c) => c.prePopulateData.programName === data.program)
     if (matchedConfig) {
       const pre = matchedConfig.prePopulateData
-      waitUntil(sendConfirmationEmail({
-        email: data.email,
-        firstName: data.firstName,
-        programName: pre.programName,
-        location: pre.location,
-        duration: pre.duration,
-        ageGroup: pre.ageGroup,
-        category: pre.category,
-      }))
+      waitUntil(
+        sendConfirmationEmail({
+          email: data.email,
+          firstName: data.firstName,
+          programName: pre.programName,
+          location: pre.location,
+          duration: pre.duration,
+          ageGroup: pre.ageGroup,
+          category: pre.category,
+        })
+      )
     } else {
-      waitUntil(sendConfirmationEmail({
-        email: data.email,
-        firstName: data.firstName,
-        programName: data.program,
-        location: data.location ?? 'TBD',
-        duration: 'TBD',
-        category: category,
-      }))
+      waitUntil(
+        sendConfirmationEmail({
+          email: data.email,
+          firstName: data.firstName,
+          programName: data.program,
+          location: data.location ?? 'TBD',
+          duration: 'TBD',
+          category: category,
+        })
+      )
     }
 
-    // 3. Return success with confirmation message based on type
     let confirmationMessage = 'Registration received! Our team will confirm within 24 hours.'
-    
+
     if (registrationType === 'camp' || registrationType === 'swim-tennis') {
       confirmationMessage = `Camp registration received! You'll receive a confirmation email with camp details and payment information shortly.`
-    } else if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
-      confirmationMessage = `UTR Match Play Series registration received. Our team will contact you with division placement and next steps.`
     } else if (registrationType === 'inquiry') {
       confirmationMessage = `Thank you for your inquiry! Our team will reach out within 24 hours to discuss your options.`
     }
@@ -419,7 +327,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: confirmationMessage,
-      acSynced: hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY') ? acSynced : undefined,
+      acSynced:
+        hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY') ? acSynced : undefined,
     })
   } catch (error) {
     console.error('[register-year] Error:', error instanceof Error ? error.message : 'Unknown error')
@@ -429,4 +338,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-

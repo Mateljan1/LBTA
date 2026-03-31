@@ -67,7 +67,12 @@ function buildFirstLine(type: ThankYouType, program?: string, location?: string)
 export default async function ThankYouPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ type?: string | string[]; program?: string | string[]; location?: string | string[] }>
+  searchParams?: Promise<{
+    type?: string | string[]
+    program?: string | string[]
+    location?: string | string[]
+    paid?: string | string[]
+  }>
 }) {
   const params = await searchParams
   const type = getThankYouType(params?.type)
@@ -75,7 +80,15 @@ export default async function ThankYouPage({
 
   const programName = Array.isArray(params?.program) ? params.program[0] : params?.program
   const locationName = Array.isArray(params?.location) ? params.location[0] : params?.location
-  const firstLine = buildFirstLine(type, programName, locationName)
+  const paidParam = Array.isArray(params?.paid) ? params.paid[0] : params?.paid
+  const paidSuccess = paidParam === '1' || paidParam === 'true'
+
+  const firstLine =
+    paidSuccess && type === 'year'
+      ? programName
+        ? `Your payment was received for ${programName}. We will confirm your registration and email you any final details shortly.`
+        : 'Your payment was received. We will confirm your registration and email you any final details shortly.'
+      : buildFirstLine(type, programName, locationName)
 
   const isTrial = showTrialPrepStep(type)
   const isRegistration = type === 'program' || type === 'year'
