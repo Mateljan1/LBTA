@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Program } from '@/components/ProgramCard'
-import LuxuryRegistrationModal from '@/components/LuxuryRegistrationModal'
+import RegistrationModal from '@/components/RegistrationModal'
 import LuxuryYearModal from '@/components/LuxuryYearModal'
 import { getCampsFromYear2026 } from '@/lib/camps-data'
 import { buildCampModalRegistration } from '@/lib/camp-modal-data'
@@ -181,9 +181,12 @@ export default function SchedulesPageClient({
       </DarkSection>
 
       {selectedProgram && (
-        <LuxuryRegistrationModal
-          program={selectedProgram}
+        <RegistrationModal
+          programName={selectedProgram.program}
+          programDetails={`Ages ${selectedProgram.ages} · ${selectedProgram.duration} · ${selectedProgram.location}`}
+          isOpen={!!selectedProgram}
           onClose={() => setSelectedProgram(null)}
+          registrationSource="schedules_modal"
         />
       )}
 

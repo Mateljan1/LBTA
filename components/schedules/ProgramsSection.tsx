@@ -213,20 +213,60 @@ export default function ProgramsSection({
           </button>
         </div>
 
-        {/* How registration works — clarity on days, drop-in, make-ups, cancellation */}
+        {/* How registration works — updated to clarify city payment + LBTA app */}
         <div className="mb-10 rounded-lg border border-black/[0.08] bg-brand-morning-light/60 px-4 py-4 md:px-5 md:py-4">
           <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-2">
             How registration works
           </p>
-          <ul className="font-sans text-[14px] text-brand-pacific-dusk/85 space-y-1.5 list-none">
-            <li><strong className="text-brand-pacific-dusk font-medium">Day selection:</strong> When you register, you choose how many days per week (1x, 2x, or 3x). We then confirm your preferred day(s) and coach assignment.</li>
-            <li><strong className="text-brand-pacific-dusk font-medium">Drop-in:</strong> Pay per session with no commitment. Ideal for trying a program or filling in when you can’t commit to the full season.</li>
-            <li><strong className="text-brand-pacific-dusk font-medium">Missed sessions &amp; make-ups:</strong> We accommodate switches or make-ups when possible. Contact us to arrange.</li>
-            <li><strong className="text-brand-pacific-dusk font-medium">Cancellation:</strong> Program refunds available up to 48 hours before the session start date. Full policy on our <a href="/terms" className="text-brand-victoria-cove underline underline-offset-2 hover:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-1 rounded">Terms</a> page.</li>
-          </ul>
-          <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-3 pt-3 border-t border-black/[0.06]">
-            Coaches are assigned by program. <Link href="/coaches" className="text-brand-victoria-cove font-medium underline underline-offset-2 hover:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-1 rounded">Meet our team</Link>
-          </p>
+          <div className="font-sans text-[14px] text-brand-pacific-dusk/85 space-y-1.5">
+            <p>
+              LBTA programs run on City of Laguna Beach public courts, so all registration and payment goes through the
+              city&apos;s recreation department. This covers your liability and insurance on court.
+            </p>
+            <p className="mt-2">
+              When you click &quot;Register&quot; on any program, you&apos;ll have two options:
+            </p>
+            <ul className="space-y-1.5 list-none pl-0">
+              <li>
+                <strong className="text-brand-pacific-dusk font-medium">Register &amp; pay now —</strong>{' '}
+                go directly to the city&apos;s website to complete payment. Takes about 2 minutes.
+              </li>
+              <li>
+                <strong className="text-brand-pacific-dusk font-medium">Have us help —</strong>{' '}
+                fill out a quick form and someone from our team will reach out within 24 hours to walk you through it
+                and send you a direct payment link.
+              </li>
+            </ul>
+            <p className="mt-2">
+              Once registered, download the LBTA app (iOS / Android) to manage your schedule — class confirmations,
+              cancellations, makeups, and coach messages all happen there.
+            </p>
+            <p className="mt-2">
+              <strong className="text-brand-pacific-dusk font-medium">Day selection:</strong>{' '}
+              When you register, you choose how many days per week (1x, 2x, or 3x). We then confirm your preferred
+              day(s) and coach assignment.
+            </p>
+            <p>
+              <strong className="text-brand-pacific-dusk font-medium">Drop-in:</strong>{' '}
+              Pay per session with no commitment. Ideal for trying a program or filling in when you can&apos;t commit
+              to the full season.
+            </p>
+            <p>
+              <strong className="text-brand-pacific-dusk font-medium">Missed sessions &amp; make-ups:</strong>{' '}
+              We accommodate switches or make-ups when possible. Contact us or use the LBTA app to arrange.
+            </p>
+            <p>
+              <strong className="text-brand-pacific-dusk font-medium">Cancellation:</strong>{' '}
+              Program refunds available up to 48 hours before the session start date. Full policy on our{' '}
+              <a
+                href="/terms"
+                className="text-brand-victoria-cove underline underline-offset-2 hover:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-1 rounded"
+              >
+                Terms
+              </a>{' '}
+              page.
+            </p>
+          </div>
         </div>
 
         {/* Grouped programs */}

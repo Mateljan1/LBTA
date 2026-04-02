@@ -29,6 +29,9 @@ yarn-error.log*
 # Cursor MCP config (may contain ActiveCampaign token)
 .cursor/mcp.json
 
+# Local Claude / skills metadata (never commit)
+.claude/
+
 # vercel
 .vercel
 
