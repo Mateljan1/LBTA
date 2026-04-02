@@ -14,7 +14,8 @@ interface RegistrationModalProps {
   hideRec1?: boolean
 }
 
-type ModalState = 'choose' | 'form' | 'confirmation'
+// 'transitioning' = Path A clicked, Rec1 tab open, waiting 2s before confirmation
+type ModalState = 'choose' | 'form' | 'transitioning' | 'confirmation'
 type RegistrationPath = 'a' | 'b' | null
 
 const BASE_REC1_URL =
@@ -35,6 +36,8 @@ export default function RegistrationModal({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const dialogRef = useRef<HTMLDivElement | null>(null)
+  // Capture the element that triggered the modal so we can restore focus on close
+  const triggerElementRef = useRef<Element | null>(null)
 
   const [form, setForm] = useState({
     firstName: '',
@@ -46,9 +49,12 @@ export default function RegistrationModal({
     notes: '',
   })
 
-  // Reset internal state when opening/closing
+  // Reset internal state and capture trigger element when opening
   useEffect(() => {
     if (isOpen) {
+      // Capture the currently focused element before we move focus into the modal
+      triggerElementRef.current = document.activeElement
+
       // Direct bookings (private lessons etc.) skip the choose state
       setState(hideRec1 ? 'form' : 'choose')
       setPath(hideRec1 ? 'b' : null)
@@ -84,34 +90,54 @@ export default function RegistrationModal({
         final_state: state,
       })
     }
+
+    // Return focus to the element that opened the modal before unmounting
+    const trigger = triggerElementRef.current
     onClose()
+    if (trigger instanceof HTMLElement) {
+      // Defer one microtask so the parent state update (which unmounts the modal)
+      // doesn't interfere with focus placement
+      queueMicrotask(() => trigger.focus())
+    }
   }, [onClose, programName, registrationSource, state])
 
-  // Close on escape
+  // Close on Escape
   useEffect(() => {
     if (!isOpen) return
     const handler = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        handleClose()
-      }
+      if (event.key === 'Escape') handleClose()
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [handleClose, isOpen])
 
-  // Basic focus handling when modal opens
+  // Move focus to first focusable element when modal opens or state changes
   useEffect(() => {
     if (!isOpen) return
     const dialog = dialogRef.current
     if (!dialog) return
-    const firstButton = dialog.querySelector<HTMLElement>('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])')
-    firstButton?.focus()
+    const firstFocusable = dialog.querySelector<HTMLElement>(
+      'button, [href], input, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    firstFocusable?.focus()
   }, [isOpen, state])
+
+  // Lock body scroll while modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   const handlePathAClick = () => {
     const url = rec1Url || BASE_REC1_URL
     setPath('a')
-    setState('choose')
+    setState('transitioning')
 
     if (typeof window !== 'undefined') {
       if (window.gtag) {
@@ -126,7 +152,7 @@ export default function RegistrationModal({
 
       window.setTimeout(() => {
         setState('confirmation')
-      }, 2000)
+      }, 2200)
     }
   }
 
@@ -159,9 +185,7 @@ export default function RegistrationModal({
 
       const res = await fetch('/api/book', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           firstName: form.firstName,
           lastName: form.lastName,
@@ -213,18 +237,6 @@ export default function RegistrationModal({
     }
   }
 
-  // Lock body scroll while modal is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
-
   if (!isOpen) return null
 
   return (
@@ -240,7 +252,7 @@ export default function RegistrationModal({
         className="relative w-full md:max-w-[560px] bg-white rounded-t-2xl md:rounded-lg shadow-xl max-h-[90vh] overflow-hidden"
         onClick={(event) => event.stopPropagation()}
       >
-        {/* Close button */}
+        {/* Close button — always visible */}
         <button
           type="button"
           onClick={handleClose}
@@ -251,6 +263,8 @@ export default function RegistrationModal({
         </button>
 
         <div className="overflow-y-auto max-h-[90vh] pt-6 pb-6 md:pt-7 md:pb-7 px-5 md:px-6">
+
+          {/* ── CHOOSE ── */}
           {state === 'choose' && (
             <div>
               <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.18em] mb-2">
@@ -330,9 +344,7 @@ export default function RegistrationModal({
                   <span>Why does payment go through the city?</span>
                   <span
                     aria-hidden="true"
-                    className={`inline-block transform transition-transform duration-200 ${
-                      isAccordionOpen ? 'rotate-90' : ''
-                    }`}
+                    className={`inline-block transform transition-transform duration-200 ${isAccordionOpen ? 'rotate-90' : ''}`}
                   >
                     ›
                   </span>
@@ -347,6 +359,36 @@ export default function RegistrationModal({
             </div>
           )}
 
+          {/* ── TRANSITIONING (Path A: opening city site) ── */}
+          {state === 'transitioning' && (
+            <div className="flex flex-col items-center justify-center text-center py-10 min-h-[260px]" aria-live="polite">
+              {/* Animated spinner — pure CSS, respects reduced-motion */}
+              <span
+                className="block w-9 h-9 rounded-full border-2 border-brand-pacific-dusk/15 border-t-brand-victoria-cove motion-safe:animate-spin mb-6"
+                aria-hidden="true"
+              />
+              <h2 className="font-headline text-[22px] font-medium text-brand-pacific-dusk mb-2">
+                Opening city site…
+              </h2>
+              <p className="font-sans text-[13px] text-brand-pacific-dusk/70 max-w-[320px]">
+                The City of Laguna Beach registration page should be opening in a new tab. Complete your payment there
+                and then return here.
+              </p>
+              <p className="font-sans text-[12px] text-brand-pacific-dusk/50 mt-4">
+                Nothing opened?{' '}
+                <a
+                  href={rec1Url || BASE_REC1_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-victoria-cove underline underline-offset-2 hover:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove rounded-sm"
+                >
+                  Open it manually
+                </a>
+              </p>
+            </div>
+          )}
+
+          {/* ── FORM (Path B) ── */}
           {state === 'form' && (
             <form onSubmit={handleSubmit}>
               {!hideRec1 && (
@@ -496,6 +538,7 @@ export default function RegistrationModal({
             </form>
           )}
 
+          {/* ── CONFIRMATION (both paths) ── */}
           {state === 'confirmation' && (
             <div>
               <div className="flex flex-col items-center text-center mb-5">
@@ -546,9 +589,9 @@ export default function RegistrationModal({
               </div>
             </div>
           )}
+
         </div>
       </div>
     </div>
   )
 }
-
