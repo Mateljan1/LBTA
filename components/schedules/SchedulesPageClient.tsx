@@ -198,7 +198,11 @@ export default function SchedulesPageClient({
 
       {privateCoachName && (
         <RegistrationModal
-          programName={`Private Lessons — ${privateCoachName}`}
+          programName={
+            privateCoachName === 'Private Lessons'
+              ? 'Private Lessons'
+              : `Private Lessons — ${privateCoachName}`
+          }
           programDetails="One-on-one coaching · Laguna Beach High School & Moulton Meadows"
           isOpen={!!privateCoachName}
           onClose={() => setPrivateCoachName(null)}

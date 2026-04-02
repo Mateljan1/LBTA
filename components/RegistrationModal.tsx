@@ -213,9 +213,19 @@ export default function RegistrationModal({
     }
   }
 
-  if (!isOpen) return null
+  // Lock body scroll while modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  if (!isOpen) return null
 
   return (
     <div
@@ -227,9 +237,7 @@ export default function RegistrationModal({
     >
       <div
         ref={dialogRef}
-        className={`relative w-full md:max-w-[560px] bg-white rounded-t-2xl md:rounded-lg shadow-xl max-h-[90vh] overflow-hidden ${
-          isMobile ? '' : ''
-        }`}
+        className="relative w-full md:max-w-[560px] bg-white rounded-t-2xl md:rounded-lg shadow-xl max-h-[90vh] overflow-hidden"
         onClick={(event) => event.stopPropagation()}
       >
         {/* Close button */}
