@@ -10,6 +10,8 @@ interface RegistrationModalProps {
   onClose: () => void
   rec1Url?: string
   registrationSource?: string
+  /** When true, hides the Rec1 "pay now" path. Use for private lessons and direct bookings. */
+  hideRec1?: boolean
 }
 
 type ModalState = 'choose' | 'form' | 'confirmation'
@@ -25,6 +27,7 @@ export default function RegistrationModal({
   onClose,
   rec1Url,
   registrationSource = 'registration_modal',
+  hideRec1 = false,
 }: RegistrationModalProps) {
   const [state, setState] = useState<ModalState>('choose')
   const [path, setPath] = useState<RegistrationPath>(null)
@@ -46,8 +49,9 @@ export default function RegistrationModal({
   // Reset internal state when opening/closing
   useEffect(() => {
     if (isOpen) {
-      setState('choose')
-      setPath(null)
+      // Direct bookings (private lessons etc.) skip the choose state
+      setState(hideRec1 ? 'form' : 'choose')
+      setPath(hideRec1 ? 'b' : null)
       setIsAccordionOpen(false)
       setIsSubmitting(false)
       setError(null)
@@ -69,7 +73,7 @@ export default function RegistrationModal({
         })
       }
     }
-  }, [isOpen, programName, registrationSource])
+  }, [isOpen, programName, registrationSource, hideRec1])
 
   const handleClose = useCallback(() => {
     if (typeof window !== 'undefined' && window.gtag) {
@@ -337,21 +341,30 @@ export default function RegistrationModal({
 
           {state === 'form' && (
             <form onSubmit={handleSubmit}>
-              <button
-                type="button"
-                onClick={() => {
-                  setState('choose')
-                  setPath(null)
-                  setError(null)
-                }}
-                className="mb-3 font-sans text-[12px] text-brand-pacific-dusk/80 hover:text-brand-pacific-dusk inline-flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20 rounded-sm"
-              >
-                <span aria-hidden="true">←</span> Back
-              </button>
+              {!hideRec1 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setState('choose')
+                    setPath(null)
+                    setError(null)
+                  }}
+                  className="mb-3 font-sans text-[12px] text-brand-pacific-dusk/80 hover:text-brand-pacific-dusk inline-flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20 rounded-sm"
+                >
+                  <span aria-hidden="true">←</span> Back
+                </button>
+              )}
+              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.18em] mb-2">
+                {hideRec1 ? 'Book a session' : 'Register for'}
+              </p>
               <h2 className="font-headline text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk leading-tight mb-1">
-                Register for {programName}
+                {programName}
               </h2>
-              <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-5">We&apos;ll reach out within 24 hours.</p>
+              <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-5">
+                {hideRec1
+                  ? "Fill in your details and we\u2019ll follow up within 24 hours to confirm availability and scheduling."
+                  : "We\u2019ll reach out within 24 hours."}
+              </p>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

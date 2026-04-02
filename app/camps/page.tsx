@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import AnimatedSection from '@/components/AnimatedSection'
-import LuxuryYearModal from '@/components/LuxuryYearModal'
+import RegistrationModal from '@/components/RegistrationModal'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
@@ -13,8 +13,6 @@ import { ZigzagSection } from '@/components/sections'
 import { CampListingCard, CampFAQAccordion } from '@/components/camps'
 import { getCampsFromYear2026, type CampWeek, type CampWithWeeks } from '@/lib/camps-data'
 import { getCampsHeading } from '@/lib/site-copy'
-import { buildCampModalRegistration } from '@/lib/camp-modal-data'
-import type { CampRegistrationData } from '@/lib/camp-modal-data'
 
 const camps = getCampsFromYear2026()
 const campsHeading = getCampsHeading()
@@ -23,8 +21,7 @@ const SEASON_FILTERS = ['all', 'winter', 'spring', 'summer', 'fall'] as const
 
 export default function CampsPage() {
   const [selectedSeason, setSelectedSeason] = useState<string>('all')
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedCamp, setSelectedCamp] = useState<CampRegistrationData | null>(null)
+  const [selectedCamp, setSelectedCamp] = useState<(CampWithWeeks & { selectedWeek?: CampWeek }) | null>(null)
 
   const filteredCamps = useMemo(() => {
     const list =
@@ -37,8 +34,7 @@ export default function CampsPage() {
   }, [selectedSeason])
 
   const handleRegisterClick = (camp: CampWithWeeks & { selectedWeek?: CampWeek }) => {
-    setSelectedCamp(buildCampModalRegistration(camp, camp.selectedWeek))
-    setIsModalOpen(true)
+    setSelectedCamp(camp)
   }
 
   return (
@@ -297,13 +293,15 @@ export default function CampsPage() {
         </div>
       </DarkSection>
 
-      <LuxuryYearModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        type="camp"
-        data={selectedCamp}
-        season={selectedCamp?.season || 'summer'}
-      />
+      {selectedCamp && (
+        <RegistrationModal
+          programName={selectedCamp.selectedWeek ? `${selectedCamp.name} — ${selectedCamp.selectedWeek.label}` : selectedCamp.name}
+          programDetails={`Ages ${selectedCamp.ages} · ${selectedCamp.selectedWeek?.dates ?? selectedCamp.dates} · ${selectedCamp.location}`}
+          isOpen={!!selectedCamp}
+          onClose={() => setSelectedCamp(null)}
+          registrationSource="camps_page_modal"
+        />
+      )}
 
       <StickyCTA text="Browse sessions" href="#camps" showAfterScroll={500} />
     </>

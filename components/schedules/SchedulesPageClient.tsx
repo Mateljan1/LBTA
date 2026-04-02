@@ -4,11 +4,9 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Program } from '@/components/ProgramCard'
+import type { CampWithWeeks } from '@/lib/camps-data'
 import RegistrationModal from '@/components/RegistrationModal'
-import LuxuryYearModal from '@/components/LuxuryYearModal'
 import { getCampsFromYear2026 } from '@/lib/camps-data'
-import { buildCampModalRegistration } from '@/lib/camp-modal-data'
-import type { CampRegistrationData } from '@/lib/camp-modal-data'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
@@ -50,8 +48,8 @@ export default function SchedulesPageClient({
   leagues,
 }: SchedulesPageClientProps) {
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null)
-  const [selectedCamp, setSelectedCamp] = useState<CampRegistrationData | null>(null)
-  const [isCampModalOpen, setIsCampModalOpen] = useState(false)
+  const [selectedCamp, setSelectedCamp] = useState<CampWithWeeks | null>(null)
+  const [privateCoachName, setPrivateCoachName] = useState<string | null>(null)
 
   return (
     <>
@@ -134,16 +132,14 @@ export default function SchedulesPageClient({
         monthlyPrograms={year2026.monthlyPrograms}
         discounts={year2026.discounts}
         scholarships={{ available: year2026.scholarships.available, coverage: year2026.scholarships.coverage ?? '', email: year2026.scholarships.email ?? '' }}
+        onBookCoach={setPrivateCoachName}
       />
 
       <HorizonDivider />
 
       <CampsSection
         camps={scheduleCamps}
-        onRegister={(camp) => {
-          setSelectedCamp(buildCampModalRegistration(camp))
-          setIsCampModalOpen(true)
-        }}
+        onRegister={setSelectedCamp}
       />
 
       <HorizonDivider />
@@ -190,16 +186,26 @@ export default function SchedulesPageClient({
         />
       )}
 
-      <LuxuryYearModal
-        isOpen={isCampModalOpen}
-        onClose={() => {
-          setIsCampModalOpen(false)
-          setSelectedCamp(null)
-        }}
-        type="camp"
-        data={selectedCamp}
-        season={selectedCamp?.season ?? 'summer'}
-      />
+      {selectedCamp && (
+        <RegistrationModal
+          programName={selectedCamp.name}
+          programDetails={`Ages ${selectedCamp.ages} · ${selectedCamp.dates} · ${selectedCamp.location}`}
+          isOpen={!!selectedCamp}
+          onClose={() => setSelectedCamp(null)}
+          registrationSource="camps_schedules_modal"
+        />
+      )}
+
+      {privateCoachName && (
+        <RegistrationModal
+          programName={`Private Lessons — ${privateCoachName}`}
+          programDetails="One-on-one coaching · Laguna Beach High School & Moulton Meadows"
+          isOpen={!!privateCoachName}
+          onClose={() => setPrivateCoachName(null)}
+          registrationSource="private_lesson_modal"
+          hideRec1
+        />
+      )}
     </>
   )
 }
