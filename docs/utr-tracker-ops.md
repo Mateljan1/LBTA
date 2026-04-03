@@ -25,7 +25,9 @@ supabase db push
 Primary migration file:
 - `supabase/migrations/20260401_utr_tracker_schema.sql`
 - `supabase/migrations/20260402_utr_tracker_color_ball_atomic.sql`
+- `supabase/migrations/20260403_utr_tracker_matches_scope_replace_atomic.sql`
 - `supabase/migrations/2026040301_utr_tracker_matches_scope_replace_atomic.sql`
+- `supabase/migrations/2026040302_utr_tracker_atomic_followups.sql`
 
 ## Admin Access
 
