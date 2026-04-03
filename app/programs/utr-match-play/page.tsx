@@ -123,6 +123,14 @@ export default function UTRMatchPlayPage() {
             </a>
             .
           </p>
+          <div className="mb-10">
+            <a
+              href="/utr-tracker"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 text-sm font-sans font-medium uppercase tracking-[2.2px] text-white transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+            >
+              View Live Tracker
+            </a>
+          </div>
           <UTRMatchPlayDivisions divisions={divisions} variant="light" />
         </div>
       </section>

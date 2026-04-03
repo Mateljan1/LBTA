@@ -24,6 +24,98 @@ export const coachHubAuthSchema = z.object({
   password: z.string().min(1, 'Password is required').max(512, 'Invalid password'),
 })
 
+export const utrTrackerAdminAuthSchema = z.object({
+  password: z.string().min(1, 'Password is required').max(512, 'Invalid password'),
+})
+
+const divisionSchema = z.enum(['sat_utr_singles', 'sun_singles', 'sun_doubles'])
+const utrTrackerMatchWriteModeSchema = z.enum([
+  'append',
+  'replace_week_division_date',
+])
+
+export const utrTrackerMatchInputSchema = z
+  .object({
+    week: z.coerce.number().int().min(1).max(8),
+    date: z.string().min(1, 'Date is required').max(20),
+    division: divisionSchema,
+    is_doubles: z.boolean().default(false),
+    player1_name: z.string().min(1).max(120),
+    player1_utr: z.coerce.number().min(0).max(20),
+    player1_provisional: z.boolean().default(false),
+    player2_name: z.string().min(1).max(120),
+    player2_utr: z.coerce.number().min(0).max(20),
+    player2_provisional: z.boolean().default(false),
+    player3_name: z.string().max(120).optional(),
+    player3_utr: z.coerce.number().min(0).max(20).optional(),
+    player3_provisional: z.boolean().default(false),
+    player4_name: z.string().max(120).optional(),
+    player4_utr: z.coerce.number().min(0).max(20).optional(),
+    player4_provisional: z.boolean().default(false),
+    score: z.string().min(1).max(60),
+    winner_slot: z.coerce.number().int().min(1).max(4),
+  })
+  .superRefine((data, ctx) => {
+    if (data.is_doubles || data.division === 'sun_doubles') {
+      if (!data.player3_name || !data.player4_name) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Doubles matches require player3_name and player4_name.',
+          path: ['player3_name'],
+        })
+      }
+      if (data.winner_slot !== 1 && data.winner_slot !== 2 && data.winner_slot !== 3 && data.winner_slot !== 4) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'winner_slot must be 1-4 for doubles.',
+          path: ['winner_slot'],
+        })
+      }
+    } else if (data.winner_slot !== 1 && data.winner_slot !== 2) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'winner_slot must be 1 or 2 for singles.',
+        path: ['winner_slot'],
+      })
+    }
+  })
+
+export const utrTrackerMatchesBulkSchema = z.object({
+  matches: z.array(utrTrackerMatchInputSchema).min(1).max(200),
+  write_mode: utrTrackerMatchWriteModeSchema.optional().default('append'),
+})
+
+export const utrTrackerColorBallEntrySchema = z.object({
+  player_id: z.string().uuid('Invalid player id'),
+  attended: z.boolean(),
+  completed_match: z.boolean(),
+  matches_played: z.coerce.number().int().min(0).max(20),
+  coach_badges: z.array(z.string().min(1).max(64)).max(20).default([]),
+})
+
+export const utrTrackerColorBallBatchSchema = z.object({
+  week: z.coerce.number().int().min(1).max(8),
+  entries: z.array(utrTrackerColorBallEntrySchema).min(1).max(200),
+})
+
+export const utrTrackerPlayerInputSchema = z.object({
+  id: z.string().uuid().optional(),
+  name: z.string().min(1).max(120),
+  utr: z.coerce.number().min(0).max(20).nullable().optional(),
+  divisions: z.array(z.enum(['sat_color_ball', 'sat_utr_singles', 'sun_singles', 'sun_doubles'])).default([]),
+  color_ball_stage: z.enum(['red', 'orange', 'green']).nullable().optional(),
+  is_color_ball: z.boolean().default(false),
+  social_opt_in: z.boolean().default(false),
+  season_registration: z.boolean().default(true),
+  is_drop_in: z.boolean().default(false),
+  provisional_utr: z.boolean().default(false),
+  joined_week: z.coerce.number().int().min(1).max(8).default(1),
+})
+
+export const utrTrackerPlayersBatchSchema = z.object({
+  players: z.array(utrTrackerPlayerInputSchema).min(1).max(200),
+})
+
 /**
  * Base contact schema used across multiple forms
  */
