@@ -150,6 +150,13 @@ export default function RootLayout({
             });
           `}
         </Script>
+
+        {/* GHL (GoHighLevel) Conversation AI Chat Widget loader */}
+        <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          strategy="lazyOnload"
+        />
         
         <ConditionalLayout>
           {children}

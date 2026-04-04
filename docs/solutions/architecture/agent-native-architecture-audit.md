@@ -140,7 +140,7 @@ The user requested a full-site check via `/agent-native-audit` (“full entire s
 
 - **Forms and API contracts:** Audit recommendations (action parity, tool layer) affect the same flows as forms. See **lib/form-config.ts**, **lib/validations.ts** (Zod schemas) so agent tools stay aligned with existing APIs and request shapes.
 - **Racquet Rescue (recommendation #10):** If the form is kept, wire it to an API and add an agent tool; reuse patterns from **lib/form-config.ts** and the register/newsletter/book API routes.
-- **Chat / discovery:** **components/ui/Chatbot.tsx** (unused) has a suggested-prompts pattern; **app/api/chat** is the stub to replace or extend.
+- **Chat / discovery:** **components/ChatWidget.tsx** (deferred via `components/layout/ChatWidgetDeferred.tsx`) is the active website chat entry point; **app/api/chat** is the stub to replace or extend.
 - **Shared workspace / data:** Single source of truth: **lib/leads-store.ts**, **lib/activecampaign.ts**; .cursorrules Part 12 (Data Management).
 - **MCP/AC usage:** **docs/ac-ghl-connection-via-mcps.md** (Vercel, AC, GHL).
 

@@ -28,7 +28,7 @@ The site is production-ready (build passes, 42 routes, 53 tests) but has accumul
 - [x] **1.1** `app/apply-scholarship/page.tsx` — Replace all `lbta-burnt` with `brand-sunset-cliff` (22 occurrences)
 - [x] **1.2** `app/coaches/andrew-mateljan/page.tsx` — Replace (12 occurrences)
 - [x] **1.3** `app/match-play/page.tsx` — Replace (9 occurrences)
-- [x] **1.4** `components/ui/Chatbot.tsx` — Replace (5 occurrences)
+- [x] **1.4** `components/ui/Chatbot.tsx` — Replace (5 occurrences) *(legacy component removed in later chat-widget migration)*
 - [x] **1.5** `app/faq/FAQInteractive.tsx` — Replace (5 occurrences)
 - [x] **1.6** `app/pathway-planner/page.tsx` — Replace (4 occurrences)
 - [x] **1.7** `components/ui/FourLabs.tsx` — Replace (3 occurrences)
@@ -118,7 +118,7 @@ The site is production-ready (build passes, 42 routes, 53 tests) but has accumul
   - `components/HomeCTAForm.tsx` (1 occurrence)
   - `components/NewsletterForm.tsx` (1 occurrence)
 - [ ] **5.3** Replace inline hex in `components/ui/FourLabs.tsx` with brand tokens or CSS vars
-- [ ] **5.4** Skip `components/ui/Chatbot.tsx` inline hex — chatbot is a low-priority component with many inline styles; flag for future rewrite
+- [ ] **5.4** Skip legacy `components/ui/Chatbot.tsx` inline hex — component was deprecated by the later `components/ChatWidget.tsx` migration
 
 ---
 
@@ -150,7 +150,7 @@ The site is production-ready (build passes, 42 routes, 53 tests) but has accumul
 | `app/apply-scholarship/page.tsx` | Modify | 1 | Replace lbta-burnt |
 | `app/coaches/andrew-mateljan/page.tsx` | Modify | 1 | Replace lbta-burnt |
 | `app/match-play/page.tsx` | Modify | 1 | Replace lbta-burnt |
-| `components/ui/Chatbot.tsx` | Modify | 1 | Replace lbta-burnt |
+| `components/ui/Chatbot.tsx` | Modify (legacy) | 1 | Replace lbta-burnt in historical component prior to deprecation |
 | `app/faq/FAQInteractive.tsx` | Modify | 1 | Replace lbta-burnt |
 | `app/pathway-planner/page.tsx` | Modify | 1 | Replace lbta-burnt |
 | `components/ui/FourLabs.tsx` | Modify | 1,5 | Replace lbta-burnt + inline hex |
