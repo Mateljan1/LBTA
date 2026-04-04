@@ -7,7 +7,7 @@ interface RegistrationModalProps {
   programName: string
   programDetails: string
   programDays?: string[]
-  pricingSummary?: string
+  pricingOptions?: Array<{ label: string; amount: number }>
   isOpen: boolean
   onClose: () => void
   rec1Url?: string
@@ -27,7 +27,7 @@ export default function RegistrationModal({
   programName,
   programDetails,
   programDays = [],
-  pricingSummary,
+  pricingOptions = [],
   isOpen,
   onClose,
   rec1Url,
@@ -39,6 +39,7 @@ export default function RegistrationModal({
   const [isAccordionOpen, setIsAccordionOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [daySelectionError, setDaySelectionError] = useState<string | null>(null)
   const dialogRef = useRef<HTMLDivElement | null>(null)
   // Capture the element that triggered the modal so we can restore focus on close
   const triggerElementRef = useRef<Element | null>(null)
@@ -68,6 +69,7 @@ export default function RegistrationModal({
       setIsAccordionOpen(false)
       setIsSubmitting(false)
       setError(null)
+      setDaySelectionError(null)
       setForm({
         firstName: '',
         lastName: '',
@@ -187,12 +189,46 @@ export default function RegistrationModal({
     : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
   const togglePreferredDay = (day: string) => {
-    setForm((prev) => ({
-      ...prev,
-      preferredDays: prev.preferredDays.includes(day)
-        ? prev.preferredDays.filter((d) => d !== day)
-        : [...prev.preferredDays, day],
-    }))
+    setForm((prev) => {
+      const selectedDaysPerWeek = Number.parseInt(prev.daysPerWeek, 10)
+      const maxSelectableDays =
+        Number.isFinite(selectedDaysPerWeek) && selectedDaysPerWeek > 0 ? selectedDaysPerWeek : null
+
+      if (prev.preferredDays.includes(day)) {
+        setDaySelectionError(null)
+        return {
+          ...prev,
+          preferredDays: prev.preferredDays.filter((d) => d !== day),
+        }
+      }
+
+      if (maxSelectableDays && prev.preferredDays.length >= maxSelectableDays) {
+        setDaySelectionError(`You selected ${maxSelectableDays} day${maxSelectableDays > 1 ? 's' : ''}/week.`)
+        return prev
+      }
+
+      setDaySelectionError(null)
+      return {
+        ...prev,
+        preferredDays: [...prev.preferredDays, day],
+      }
+    })
+  }
+
+  const handleDaysPerWeekChange = (value: string) => {
+    const selectedDaysPerWeek = Number.parseInt(value, 10)
+    setForm((prev) => {
+      const maxSelectableDays =
+        Number.isFinite(selectedDaysPerWeek) && selectedDaysPerWeek > 0 ? selectedDaysPerWeek : null
+      const nextPreferredDays =
+        maxSelectableDays !== null ? prev.preferredDays.slice(0, maxSelectableDays) : prev.preferredDays
+      return {
+        ...prev,
+        daysPerWeek: value,
+        preferredDays: nextPreferredDays,
+      }
+    })
+    setDaySelectionError(null)
   }
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -303,11 +339,20 @@ export default function RegistrationModal({
               <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-5">
                 {programDetails}
               </p>
-              {pricingSummary && (
-                <p className="font-sans text-[12px] text-brand-pacific-dusk/80 mb-5">
-                  <span className="font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/60 mr-2">Pricing</span>
-                  {pricingSummary}
-                </p>
+              {pricingOptions.length > 0 && (
+                <div className="mb-5 rounded-[8px] border border-black/[0.08] bg-brand-morning-light px-3.5 py-3">
+                  <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk/60 mb-2">
+                    Pricing
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {pricingOptions.map((option) => (
+                      <p key={option.label} className="font-sans text-[13px] text-brand-pacific-dusk/85">
+                        <span className="font-medium">{option.label}</span>{' '}
+                        <span className="text-brand-pacific-dusk">${option.amount}</span>
+                      </p>
+                    ))}
+                  </div>
+                </div>
               )}
 
               <div className="space-y-3 mb-5">
@@ -448,11 +493,20 @@ export default function RegistrationModal({
                   ? "Fill in your details and we\u2019ll follow up within 24 hours to confirm availability and scheduling."
                   : "We\u2019ll reach out within 24 hours."}
               </p>
-              {pricingSummary && (
-                <p className="font-sans text-[12px] text-brand-pacific-dusk/80 mb-5">
-                  <span className="font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/60 mr-2">Pricing</span>
-                  {pricingSummary}
-                </p>
+              {pricingOptions.length > 0 && (
+                <div className="mb-5 rounded-[8px] border border-black/[0.08] bg-brand-morning-light px-3.5 py-3">
+                  <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk/60 mb-2">
+                    Pricing
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {pricingOptions.map((option) => (
+                      <p key={option.label} className="font-sans text-[13px] text-brand-pacific-dusk/85">
+                        <span className="font-medium">{option.label}</span>{' '}
+                        <span className="text-brand-pacific-dusk">${option.amount}</span>
+                      </p>
+                    ))}
+                  </div>
+                </div>
               )}
 
               <div className="space-y-4">
@@ -543,7 +597,7 @@ export default function RegistrationModal({
                     </label>
                     <select
                       value={form.daysPerWeek}
-                      onChange={(e) => handleChange('daysPerWeek', e.target.value)}
+                      onChange={(e) => handleDaysPerWeekChange(e.target.value)}
                       className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
                     >
                       <option value="">Select frequency</option>
@@ -561,15 +615,23 @@ export default function RegistrationModal({
                     <div className="flex flex-wrap gap-2">
                       {dayOptions.map((day) => {
                         const selected = form.preferredDays.includes(day)
+                        const selectedDaysPerWeek = Number.parseInt(form.daysPerWeek, 10)
+                        const maxSelectableDays =
+                          Number.isFinite(selectedDaysPerWeek) && selectedDaysPerWeek > 0 ? selectedDaysPerWeek : null
+                        const isAtLimit =
+                          !selected && maxSelectableDays !== null && form.preferredDays.length >= maxSelectableDays
                         return (
                           <button
                             key={day}
                             type="button"
                             onClick={() => togglePreferredDay(day)}
+                            disabled={isAtLimit}
                             className={`min-h-[40px] px-3 py-1.5 rounded-full border font-sans text-[12px] transition-colors ${
                               selected
                                 ? 'bg-black text-white border-black'
-                                : 'bg-white text-brand-pacific-dusk border-black/[0.12] hover:border-black/30'
+                                : isAtLimit
+                                  ? 'bg-white text-brand-pacific-dusk/35 border-black/[0.08] cursor-not-allowed'
+                                  : 'bg-white text-brand-pacific-dusk border-black/[0.12] hover:border-black/30'
                             }`}
                             aria-pressed={selected}
                           >
@@ -583,6 +645,11 @@ export default function RegistrationModal({
                         ? `Selected: ${form.preferredDays.join(', ')}`
                         : 'Selected: none yet'}
                     </p>
+                    {daySelectionError && (
+                      <p className="mt-1 font-sans text-[12px] text-brand-pacific-dusk/65">
+                        {daySelectionError}
+                      </p>
+                    )}
                   </div>
                 </div>
 
