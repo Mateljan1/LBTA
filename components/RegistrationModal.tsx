@@ -6,6 +6,7 @@ import AppDownloadCard from './AppDownloadCard'
 interface RegistrationModalProps {
   programName: string
   programDetails: string
+  programDays?: string[]
   isOpen: boolean
   onClose: () => void
   rec1Url?: string
@@ -24,6 +25,7 @@ const BASE_REC1_URL =
 export default function RegistrationModal({
   programName,
   programDetails,
+  programDays = [],
   isOpen,
   onClose,
   rec1Url,
@@ -46,6 +48,9 @@ export default function RegistrationModal({
     phone: '',
     playerName: '',
     playerAge: '',
+    daysPerWeek: '',
+    preferredDays: [] as string[],
+    interestedInUtrMatchPlay: false,
     notes: '',
   })
 
@@ -68,6 +73,9 @@ export default function RegistrationModal({
         phone: '',
         playerName: '',
         playerAge: '',
+        daysPerWeek: '',
+        preferredDays: [],
+        interestedInUtrMatchPlay: false,
         notes: '',
       })
 
@@ -172,6 +180,19 @@ export default function RegistrationModal({
     setForm((prev) => ({ ...prev, [field]: value }))
   }
 
+  const dayOptions = programDays.length
+    ? [...new Set(programDays)]
+    : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+  const togglePreferredDay = (day: string) => {
+    setForm((prev) => ({
+      ...prev,
+      preferredDays: prev.preferredDays.includes(day)
+        ? prev.preferredDays.filter((d) => d !== day)
+        : [...prev.preferredDays, day],
+    }))
+  }
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setIsSubmitting(true)
@@ -181,6 +202,9 @@ export default function RegistrationModal({
       const messageParts: string[] = []
       if (form.playerName) messageParts.push(`Player name: ${form.playerName}`)
       if (form.playerAge) messageParts.push(`Player age: ${form.playerAge}`)
+      if (form.daysPerWeek) messageParts.push(`Requested days per week: ${form.daysPerWeek}`)
+      if (form.preferredDays.length) messageParts.push(`Preferred days: ${form.preferredDays.join(', ')}`)
+      if (form.interestedInUtrMatchPlay) messageParts.push('Interested in UTR Match Play add-on: Yes')
       if (form.notes) messageParts.push(`Notes: ${form.notes}`)
 
       const res = await fetch('/api/book', {
@@ -193,6 +217,7 @@ export default function RegistrationModal({
           phone: form.phone,
           program: programName,
           source: registrationSource,
+          preferredDays: form.preferredDays,
           message: messageParts.length ? messageParts.join('\n') : undefined,
         }),
       })
@@ -495,6 +520,81 @@ export default function RegistrationModal({
                       className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
                     />
                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                      Days per week
+                    </label>
+                    <select
+                      value={form.daysPerWeek}
+                      onChange={(e) => handleChange('daysPerWeek', e.target.value)}
+                      className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                    >
+                      <option value="">Select frequency</option>
+                      <option value="1">1 day per week</option>
+                      <option value="2">2 days per week</option>
+                      <option value="3">3 days per week</option>
+                      <option value="4+">4+ days per week</option>
+                      <option value="Not sure">Not sure yet</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                      Preferred days
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {dayOptions.map((day) => {
+                        const selected = form.preferredDays.includes(day)
+                        return (
+                          <button
+                            key={day}
+                            type="button"
+                            onClick={() => togglePreferredDay(day)}
+                            className={`min-h-[40px] px-3 py-1.5 rounded-full border font-sans text-[12px] transition-colors ${
+                              selected
+                                ? 'bg-black text-white border-black'
+                                : 'bg-white text-brand-pacific-dusk border-black/[0.12] hover:border-black/30'
+                            }`}
+                            aria-pressed={selected}
+                          >
+                            {day.slice(0, 3)}
+                          </button>
+                        )
+                      })}
+                    </div>
+                    <p className="mt-2 font-sans text-[12px] text-brand-pacific-dusk/65">
+                      {form.preferredDays.length
+                        ? `Selected: ${form.preferredDays.join(', ')}`
+                        : 'Selected: none yet'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="rounded-[10px] border border-brand-victoria-cove/30 bg-brand-morning-light px-4 py-3">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={form.interestedInUtrMatchPlay}
+                      onChange={(e) => setForm((prev) => ({ ...prev, interestedInUtrMatchPlay: e.target.checked }))}
+                      className="mt-0.5 h-4 w-4 rounded border-black/20 text-brand-victoria-cove focus:ring-brand-victoria-cove"
+                    />
+                    <span>
+                      <span className="block font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-brand-victoria-cove">
+                        Optional add-on
+                      </span>
+                      <span className="block font-sans text-[13px] text-brand-pacific-dusk mt-0.5">
+                        I&apos;m interested in UTR Match Play opportunities for this player.
+                      </span>
+                      <a
+                        href="/programs/utr-match-play"
+                        className="inline-flex mt-1 font-sans text-[12px] text-brand-victoria-cove underline underline-offset-2 decoration-brand-victoria-cove/40 hover:decoration-brand-victoria-cove"
+                      >
+                        View UTR Match Play details
+                      </a>
+                    </span>
+                  </label>
                 </div>
 
                 <div>

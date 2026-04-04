@@ -180,6 +180,7 @@ export default function SchedulesPageClient({
         <RegistrationModal
           programName={selectedProgram.program}
           programDetails={`Ages ${selectedProgram.ages} · ${selectedProgram.duration} · ${selectedProgram.location}`}
+          programDays={selectedProgram.schedule.map((slot) => slot.day)}
           isOpen={!!selectedProgram}
           onClose={() => setSelectedProgram(null)}
           registrationSource="schedules_modal"

@@ -40,6 +40,9 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
     studentName: '',
     studentAge: '',
     experience: 'beginner',
+    daysPerWeek: '',
+    preferredDays: [] as string[],
+    interestedInUtrMatchPlay: false,
     notes: ''
   })
 
@@ -65,6 +68,9 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
         studentName: '',
         studentAge: '',
         experience: 'beginner',
+        daysPerWeek: '',
+        preferredDays: [],
+        interestedInUtrMatchPlay: false,
         notes: ''
       })
     }
@@ -150,12 +156,31 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
     ? pricingOptions.find(opt => opt.value === selectedPlan)?.price 
     : null
 
+  const dayOptions = [...new Set(program.schedule.map((slot) => slot.day))]
+
+  const togglePreferredDay = (day: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      preferredDays: prev.preferredDays.includes(day)
+        ? prev.preferredDays.filter((d) => d !== day)
+        : [...prev.preferredDays, day],
+    }))
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
     setErrorMessage(null)
 
     try {
+      const notesPayload = [
+        formData.notes?.trim(),
+        formData.daysPerWeek ? `Requested days per week: ${formData.daysPerWeek}` : '',
+        formData.interestedInUtrMatchPlay ? 'Interested in UTR Match Play add-on: Yes' : '',
+      ]
+        .filter(Boolean)
+        .join('\n')
+
       const response = await fetch('/api/register-program', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -163,9 +188,9 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
           ...formData,
           program: program.program,
           location: program.location,
-          frequency: selectedPlan,
           totalPrice: selectedPrice,
-          preferredDays: program.schedule.map(s => s.day)
+          preferredDays: formData.preferredDays,
+          notes: notesPayload || undefined,
         })
       })
 
@@ -475,6 +500,88 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         ))}
                       </div>
                     </fieldset>
+
+                    {/* Availability */}
+                    <div className="grid grid-cols-1 gap-4">
+                      <div>
+                        <label htmlFor="modal-daysPerWeek" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                          Days per Week
+                        </label>
+                        <select
+                          id="modal-daysPerWeek"
+                          value={formData.daysPerWeek}
+                          onChange={(e) => setFormData({ ...formData, daysPerWeek: e.target.value })}
+                          className="w-full px-4 py-3.5 bg-brand-sandstone border-0 rounded-lg font-sans text-base text-brand-pacific-dusk focus:outline-none focus:ring-2 focus:ring-black/10 transition-all"
+                        >
+                          <option value="">Select frequency</option>
+                          <option value="1">1 day/week</option>
+                          <option value="2">2 days/week</option>
+                          <option value="3">3 days/week</option>
+                          <option value="4+">4+ days/week</option>
+                          <option value="Not sure yet">Not sure yet</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <p className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                          Preferred Days
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {dayOptions.map((day) => {
+                            const selected = formData.preferredDays.includes(day)
+                            return (
+                              <button
+                                key={day}
+                                type="button"
+                                aria-pressed={selected}
+                                onClick={() => togglePreferredDay(day)}
+                                className={`min-h-[40px] px-3 py-2 rounded-full border font-sans text-[12px] transition-colors ${
+                                  selected
+                                    ? 'bg-black text-white border-black'
+                                    : 'bg-white text-brand-pacific-dusk border-black/15 hover:border-black/35'
+                                }`}
+                              >
+                                {day}
+                              </button>
+                            )
+                          })}
+                        </div>
+                        <p className="mt-2 font-sans text-[12px] text-brand-pacific-dusk/65">
+                          {formData.preferredDays.length
+                            ? `Selected: ${formData.preferredDays.join(', ')}`
+                            : 'Selected: none yet'}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* UTR upsell */}
+                    <div className="rounded-lg border border-brand-victoria-cove/30 bg-brand-sandstone/60 p-4">
+                      <label htmlFor="modal-utr-interest" className="flex items-start gap-3 cursor-pointer">
+                        <input
+                          id="modal-utr-interest"
+                          type="checkbox"
+                          checked={formData.interestedInUtrMatchPlay}
+                          onChange={(e) =>
+                            setFormData({ ...formData, interestedInUtrMatchPlay: e.target.checked })
+                          }
+                          className="mt-1 h-4 w-4 rounded border-black/20 text-brand-victoria-cove focus:ring-brand-victoria-cove"
+                        />
+                        <span>
+                          <span className="block font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-victoria-cove">
+                            Optional Add-On
+                          </span>
+                          <span className="block font-sans text-[14px] text-brand-pacific-dusk mt-1">
+                            Interested in UTR Match Play opportunities for this player.
+                          </span>
+                          <a
+                            href="/programs/utr-match-play"
+                            className="inline-flex mt-1 font-sans text-[12px] text-brand-victoria-cove underline underline-offset-2 decoration-brand-victoria-cove/40 hover:decoration-brand-victoria-cove"
+                          >
+                            View UTR Match Play details
+                          </a>
+                        </span>
+                      </label>
+                    </div>
                   </div>
 
                   {/* Action Buttons */}
