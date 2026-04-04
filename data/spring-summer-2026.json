@@ -86,7 +86,7 @@
         { "day": "Saturday", "time": "9:45–10:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 546, "2x": 1092, "3x": 1635, "saturday1x": 497 },
+        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
         "summer": { "1x": 601, "2x": 1201, "3x": 1799, "saturday1x": 547 },
         "drop_in": 50
       },
@@ -107,7 +107,7 @@
         { "day": "Saturday", "time": "10:45–11:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 546, "2x": 1092, "3x": 1635, "saturday1x": 497 },
+        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
         "summer": { "1x": 601, "2x": 1201, "3x": 1799, "saturday1x": 547 },
         "drop_in": 50
       },
@@ -126,7 +126,7 @@
         { "day": "Saturday", "time": "11:45 AM–12:45 PM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 546, "2x": 1092, "3x": 1635, "saturday1x": 497 },
+        "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
         "summer": { "1x": 601, "2x": 1201, "3x": 1799, "saturday1x": 547 },
         "drop_in": 50
       },
@@ -145,7 +145,7 @@
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 810, "2x": 1620, "3x": 2268 },
+        "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
         "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
         "drop_in": 70
       },
@@ -166,7 +166,7 @@
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 810, "2x": 1620, "3x": 2268 },
+        "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
         "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
         "drop_in": 70
       },
@@ -206,7 +206,7 @@
         { "day": "Saturday", "time": "9:00–10:00 AM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 546, "2x": 797, "saturday1x": 497 },
+        "spring": { "1x": 420, "2x": 615, "saturday1x": 380 },
         "summer": { "1x": 601, "2x": 877, "saturday1x": 547 },
         "drop_in": 55
       },
@@ -224,7 +224,7 @@
         { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" }
       ],
       "pricing": {
-        "spring": { "1x": 546, "2x": 797 },
+        "spring": { "1x": 420, "2x": 615 },
         "summer": { "1x": 601, "2x": 877 },
         "drop_in": 55
       },
@@ -281,7 +281,7 @@
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn & Peter DeFrantz", "location": "Laguna Beach High School", "note": "Match Play" }
       ],
       "pricing": {
-        "spring": { "1x": 810, "2x": 1620, "3x": 2268 },
+        "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
         "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
         "drop_in": 100
       },
