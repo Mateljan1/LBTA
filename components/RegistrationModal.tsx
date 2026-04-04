@@ -7,6 +7,7 @@ interface RegistrationModalProps {
   programName: string
   programDetails: string
   programDays?: string[]
+  pricingSummary?: string
   isOpen: boolean
   onClose: () => void
   rec1Url?: string
@@ -26,6 +27,7 @@ export default function RegistrationModal({
   programName,
   programDetails,
   programDays = [],
+  pricingSummary,
   isOpen,
   onClose,
   rec1Url,
@@ -301,6 +303,12 @@ export default function RegistrationModal({
               <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-5">
                 {programDetails}
               </p>
+              {pricingSummary && (
+                <p className="font-sans text-[12px] text-brand-pacific-dusk/80 mb-5">
+                  <span className="font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/60 mr-2">Pricing</span>
+                  {pricingSummary}
+                </p>
+              )}
 
               <div className="space-y-3 mb-5">
                 {/* Path A card */}
@@ -440,6 +448,12 @@ export default function RegistrationModal({
                   ? "Fill in your details and we\u2019ll follow up within 24 hours to confirm availability and scheduling."
                   : "We\u2019ll reach out within 24 hours."}
               </p>
+              {pricingSummary && (
+                <p className="font-sans text-[12px] text-brand-pacific-dusk/80 mb-5">
+                  <span className="font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/60 mr-2">Pricing</span>
+                  {pricingSummary}
+                </p>
+              )}
 
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

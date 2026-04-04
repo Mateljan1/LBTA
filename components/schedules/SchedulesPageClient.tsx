@@ -39,6 +39,24 @@ interface SchedulesPageClientProps {
 
 const scheduleCamps = getCampsFromYear2026()
 
+function formatPricingSummary(pricing: Program['pricing']): string {
+  const labels: Record<string, string> = {
+    '1x': '1x/wk',
+    '2x': '2x/wk',
+    '3x': '3x/wk',
+    '4x': '4x/wk',
+    '5x': '5x/wk',
+    monthly: 'Monthly',
+    drop_in: 'Drop-in',
+    saturday1x: 'Sat only',
+  }
+
+  return Object.entries(pricing)
+    .filter(([, amount]) => amount !== undefined && amount !== null)
+    .map(([key, amount]) => `${labels[key] ?? key}: $${amount}`)
+    .join(' · ')
+}
+
 export default function SchedulesPageClient({
   programsBySeason,
   seasons,
@@ -181,6 +199,7 @@ export default function SchedulesPageClient({
           programName={selectedProgram.program}
           programDetails={`Ages ${selectedProgram.ages} · ${selectedProgram.duration} · ${selectedProgram.location}`}
           programDays={selectedProgram.schedule.map((slot) => slot.day)}
+          pricingSummary={formatPricingSummary(selectedProgram.pricing)}
           isOpen={!!selectedProgram}
           onClose={() => setSelectedProgram(null)}
           registrationSource="schedules_modal"
