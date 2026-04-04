@@ -70,6 +70,7 @@ export default function ProgramsSection({
     const fallback = seasons[activeSeason]
     return fallback ? { key: activeSeason, data: fallback } : null
   }, [seasons, activeSeason])
+  const currentSeasonKey = nowEnrolling?.key ?? activeSeason
 
   const upNext = useMemo(() => {
     const startIndex = SEASON_KEYS.indexOf(activeSeason)
@@ -127,50 +128,60 @@ export default function ProgramsSection({
           aria-label="Season"
           className="flex flex-wrap gap-2 mb-4"
         >
-          {SEASON_KEYS.map((key, index) => (
-            <button
-              key={key}
-              role="tab"
-              id={`season-tab-${key}`}
-              aria-selected={activeSeason === key}
-              aria-current={activeSeason === key ? 'true' : undefined}
-              tabIndex={activeSeason === key ? 0 : -1}
-              onClick={() => setActiveSeason(key)}
-              onKeyDown={(e) => {
-                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                  e.preventDefault()
-                  const prev = index - 1
-                  focusTab(SEASON_KEYS[prev >= 0 ? prev : SEASON_KEYS.length - 1])
-                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                  e.preventDefault()
-                  const next = index + 1
-                  focusTab(SEASON_KEYS[next < SEASON_KEYS.length ? next : 0])
-                } else if (e.key === 'Home') {
-                  e.preventDefault()
-                  focusTab('winter')
-                } else if (e.key === 'End') {
-                  e.preventDefault()
-                  focusTab('fall')
-                }
-              }}
-              className={`
-                font-sans text-[13px] font-medium tracking-[0.05em] px-5 py-3 rounded-[2px]
-                transition-all duration-200 min-h-[48px] min-w-[96px]
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2
-                ${activeSeason === key
-                  ? 'bg-black text-white shadow-sm'
-                  : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'
-                }
-              `}
-            >
-              <span className="block leading-tight">{SEASON_LABELS[key]}</span>
-              {seasons[key]?.status && STATUS_LABELS[seasons[key]?.status ?? ''] && (
-                <span className="mt-1 block text-[10px] font-sans uppercase tracking-[0.16em] text-brand-pacific-dusk/70">
-                  {STATUS_LABELS[seasons[key]?.status ?? '']}
-                </span>
-              )}
-            </button>
-          ))}
+          {SEASON_KEYS.map((key, index) => {
+            const isActive = activeSeason === key
+            const isCurrent = currentSeasonKey === key
+            return (
+              <button
+                key={key}
+                role="tab"
+                id={`season-tab-${key}`}
+                aria-selected={isActive}
+                aria-current={isCurrent ? 'true' : undefined}
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => setActiveSeason(key)}
+                onKeyDown={(e) => {
+                  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault()
+                    const prev = index - 1
+                    focusTab(SEASON_KEYS[prev >= 0 ? prev : SEASON_KEYS.length - 1])
+                  } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault()
+                    const next = index + 1
+                    focusTab(SEASON_KEYS[next < SEASON_KEYS.length ? next : 0])
+                  } else if (e.key === 'Home') {
+                    e.preventDefault()
+                    focusTab('winter')
+                  } else if (e.key === 'End') {
+                    e.preventDefault()
+                    focusTab('fall')
+                  }
+                }}
+                className={`
+                  font-sans text-[13px] font-medium tracking-[0.05em] px-5 py-3 rounded-[2px]
+                  transition-all duration-200 min-h-[48px] min-w-[96px] border
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2
+                  ${isActive
+                    ? 'bg-black text-white border-black shadow-sm'
+                    : isCurrent
+                      ? 'bg-brand-morning-light border-brand-victoria-cove text-brand-pacific-dusk'
+                      : 'bg-brand-sandstone border-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'
+                  }
+                `}
+              >
+                <span className="block leading-tight">{SEASON_LABELS[key]}</span>
+                {isCurrent ? (
+                  <span className={`mt-1 block text-[10px] font-sans uppercase tracking-[0.16em] ${isActive ? 'text-white/80' : 'text-brand-victoria-cove'}`}>
+                    Current
+                  </span>
+                ) : seasons[key]?.status && STATUS_LABELS[seasons[key]?.status ?? ''] ? (
+                  <span className="mt-1 block text-[10px] font-sans uppercase tracking-[0.16em] text-brand-pacific-dusk/70">
+                    {STATUS_LABELS[seasons[key]?.status ?? '']}
+                  </span>
+                ) : null}
+              </button>
+            )
+          })}
         </div>
 
         {/* Season info line */}
@@ -211,62 +222,6 @@ export default function ProgramsSection({
           >
             Cards
           </button>
-        </div>
-
-        {/* How registration works — updated to clarify city payment + LBTA app */}
-        <div className="mb-10 rounded-lg border border-black/[0.08] bg-brand-morning-light/60 px-4 py-4 md:px-5 md:py-4">
-          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-2">
-            How registration works
-          </p>
-          <div className="font-sans text-[14px] text-brand-pacific-dusk/85 space-y-1.5">
-            <p>
-              LBTA programs run on City of Laguna Beach public courts, so all registration and payment goes through the
-              city&apos;s recreation department. This covers your liability and insurance on court.
-            </p>
-            <p className="mt-2">
-              When you click &quot;Register&quot; on any program, you&apos;ll have two options:
-            </p>
-            <ul className="space-y-1.5 list-none pl-0">
-              <li>
-                <strong className="text-brand-pacific-dusk font-medium">Register &amp; pay now —</strong>{' '}
-                go directly to the city&apos;s website to complete payment. Takes about 2 minutes.
-              </li>
-              <li>
-                <strong className="text-brand-pacific-dusk font-medium">Have us help —</strong>{' '}
-                fill out a quick form and someone from our team will reach out within 24 hours to walk you through it
-                and send you a direct payment link.
-              </li>
-            </ul>
-            <p className="mt-2">
-              Once registered, download the LBTA app (iOS / Android) to manage your schedule — class confirmations,
-              cancellations, makeups, and coach messages all happen there.
-            </p>
-            <p className="mt-2">
-              <strong className="text-brand-pacific-dusk font-medium">Day selection:</strong>{' '}
-              When you register, you choose how many days per week (1x, 2x, or 3x). We then confirm your preferred
-              day(s) and coach assignment.
-            </p>
-            <p>
-              <strong className="text-brand-pacific-dusk font-medium">Drop-in:</strong>{' '}
-              Pay per session with no commitment. Ideal for trying a program or filling in when you can&apos;t commit
-              to the full season.
-            </p>
-            <p>
-              <strong className="text-brand-pacific-dusk font-medium">Missed sessions &amp; make-ups:</strong>{' '}
-              We accommodate switches or make-ups when possible. Contact us or use the LBTA app to arrange.
-            </p>
-            <p>
-              <strong className="text-brand-pacific-dusk font-medium">Cancellation:</strong>{' '}
-              Program refunds available up to 48 hours before the session start date. Full policy on our{' '}
-              <a
-                href="/terms"
-                className="text-brand-victoria-cove underline underline-offset-2 hover:no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-1 rounded"
-              >
-                Terms
-              </a>{' '}
-              page.
-            </p>
-          </div>
         </div>
 
         {/* Grouped programs */}

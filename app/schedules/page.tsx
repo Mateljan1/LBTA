@@ -4,7 +4,7 @@ import {
   getSummerProgramsForDisplay,
   getFall2026Programs,
 } from '@/lib/programs-data'
-import { getCurrentSeason, getAllSeasons, getSeasonCTA, type SeasonKey } from '@/lib/season-utils'
+import { getActiveSeason, getAllSeasons, getSeasonCTA, type SeasonKey } from '@/lib/season-utils'
 import { parseYear2026Sections, parsePrograms, parseLeagues } from '@/lib/schedule-schemas'
 import year2026Data from '@/data/year2026.json'
 import leaguesData from '@/data/leagues-2026.json'
@@ -23,7 +23,7 @@ export default function SchedulesPage() {
     fall,
   }
   const seasons = getAllSeasons()
-  const initialSeason = getCurrentSeason()
+  const initialSeason = getActiveSeason().key
   const seasonCta = getSeasonCTA()
   const year2026 = parseYear2026Sections(year2026Data)
   const leagues = parseLeagues(leaguesData)
