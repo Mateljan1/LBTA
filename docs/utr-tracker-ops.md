@@ -100,3 +100,27 @@ After deploy, confirm all of the following:
 - Roster save works (add/update one test player).
 - Match save works in replace mode and public standings reflect the update.
 - Color Ball week save works and passport cards update after reload.
+
+## Engagement UX QA Checklist (Phase 3)
+
+Run this checklist after leaderboard UI updates:
+
+- **Tooltip/accessibility**
+  - Tab to `This Week Δ` help icon and confirm tooltip appears on focus.
+  - Press `Escape` while focused on the icon and confirm tooltip closes.
+  - Confirm tooltip text explains delta meaning correctly.
+
+- **Row details accessibility**
+  - Tab to a player `Details` button and press `Enter`.
+  - Verify expanded content appears and `Hide` state is announced.
+  - Collapse and expand multiple rows to confirm only one detail section is open at a time.
+
+- **Momentum and rivalry modules**
+  - Confirm `Biggest climb this week` and `Biggest weekly gain` cards show deterministic values for current division.
+  - Open at least 2 player rows and verify `Around you` values match adjacent leaderboard positions and point gaps.
+  - Confirm `GF` chips read correctly (`Qualified`, `N wks needed`, `N wk behind pace`).
+
+- **Responsive checks**
+  - Validate layout at `320`, `375`, `768`, `1024`, `1440` widths.
+  - Confirm no horizontal clipping in expanded row copy and no broken badge chips.
+  - Confirm table still scrolls horizontally on mobile without hidden columns.

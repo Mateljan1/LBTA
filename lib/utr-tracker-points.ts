@@ -247,6 +247,36 @@ export type RankMovement = {
   previousRank: number | null
 }
 
+export type LeaderboardSnapshotRow = {
+  playerId: string
+  playerName: string
+  totalPoints: number
+  weeksPlayed: number
+  rank: number
+}
+
+export type AroundYouContext = {
+  above:
+    | { playerId: string; playerName: string; rank: number; totalPoints: number; gap: number }
+    | null
+  current: { playerId: string; playerName: string; rank: number; totalPoints: number }
+  below:
+    | { playerId: string; playerName: string; rank: number; totalPoints: number; gap: number }
+    | null
+}
+
+export type GfRaceStatus = {
+  trend: 'qualified' | 'on-pace' | 'behind'
+  weeksRemaining: number
+  weeksNeeded: number
+  label: string
+}
+
+export type MomentumSummary = {
+  biggestClimb: { playerId: string; playerName: string; delta: number } | null
+  biggestWeeklyGain: { playerId: string; playerName: string; delta: number } | null
+}
+
 export function calculateRankMovement(
   standings: MovementInputRow[],
   matches: Match[],
@@ -330,5 +360,136 @@ export function calculateRankMovement(
   })
 
   return movement
+}
+
+export function calculateWeeklyDelta(
+  playerId: string,
+  currentWeek: number,
+  matches: Match[],
+  multipliers: Record<string, number>
+): number {
+  const currentPoints = calculateWeeklyPoints(
+    playerId,
+    currentWeek,
+    matches,
+    multipliers
+  ).total
+  const previousPoints =
+    currentWeek > 1
+      ? calculateWeeklyPoints(playerId, currentWeek - 1, matches, multipliers).total
+      : 0
+  return currentPoints - previousPoints
+}
+
+export function getAroundYouContext(
+  standings: LeaderboardSnapshotRow[],
+  playerId: string
+): AroundYouContext | null {
+  const index = standings.findIndex((row) => row.playerId === playerId)
+  if (index === -1) return null
+  const current = standings[index]
+  const above = index > 0 ? standings[index - 1] : null
+  const below = index < standings.length - 1 ? standings[index + 1] : null
+
+  return {
+    above: above
+      ? {
+          playerId: above.playerId,
+          playerName: above.playerName,
+          rank: above.rank,
+          totalPoints: above.totalPoints,
+          gap: above.totalPoints - current.totalPoints,
+        }
+      : null,
+    current: {
+      playerId: current.playerId,
+      playerName: current.playerName,
+      rank: current.rank,
+      totalPoints: current.totalPoints,
+    },
+    below: below
+      ? {
+          playerId: below.playerId,
+          playerName: below.playerName,
+          rank: below.rank,
+          totalPoints: below.totalPoints,
+          gap: current.totalPoints - below.totalPoints,
+        }
+      : null,
+  }
+}
+
+export function getGrandFinalsRaceStatus(
+  weeksPlayed: number,
+  grandFinalsMinWeeks: number,
+  totalWeeks: number,
+  currentWeek: number
+): GfRaceStatus {
+  const weeksRemaining = Math.max(totalWeeks - currentWeek, 0)
+  const weeksNeeded = Math.max(grandFinalsMinWeeks - weeksPlayed, 0)
+  if (weeksNeeded <= 0) {
+    return {
+      trend: 'qualified',
+      weeksRemaining,
+      weeksNeeded: 0,
+      label: 'Qualified',
+    }
+  }
+  if (weeksNeeded <= weeksRemaining) {
+    return {
+      trend: 'on-pace',
+      weeksRemaining,
+      weeksNeeded,
+      label: `${weeksNeeded} wk${weeksNeeded === 1 ? '' : 's'} needed`,
+    }
+  }
+  return {
+    trend: 'behind',
+    weeksRemaining,
+    weeksNeeded,
+    label: `${weeksNeeded - weeksRemaining} wk behind pace`,
+  }
+}
+
+export function getMomentumSummary(
+  standings: LeaderboardSnapshotRow[],
+  movementByPlayer: Map<string, RankMovement>,
+  currentWeek: number,
+  matches: Match[],
+  multipliers: Record<string, number>
+): MomentumSummary {
+  let biggestClimb: MomentumSummary['biggestClimb'] = null
+  let biggestWeeklyGain: MomentumSummary['biggestWeeklyGain'] = null
+
+  for (const row of standings) {
+    const movement = movementByPlayer.get(row.playerId)
+    if (movement?.trend === 'up') {
+      if (!biggestClimb || movement.delta > biggestClimb.delta) {
+        biggestClimb = {
+          playerId: row.playerId,
+          playerName: row.playerName,
+          delta: movement.delta,
+        }
+      }
+    }
+
+    const weeklyDelta = calculateWeeklyDelta(
+      row.playerId,
+      currentWeek,
+      matches,
+      multipliers
+    )
+    if (weeklyDelta > 0) {
+      if (!biggestWeeklyGain || weeklyDelta > biggestWeeklyGain.delta) {
+        biggestWeeklyGain = {
+          playerId: row.playerId,
+          playerName: row.playerName,
+          delta: weeklyDelta,
+        }
+      }
+    }
+  }
+
+  return { biggestClimb, biggestWeeklyGain }
 }
 

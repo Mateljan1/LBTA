@@ -23,6 +23,11 @@ export default function ColorBallPassportGrid({
     ])
   )
   const playersById = new Map(players.map((player) => [player.id, player]))
+  const stageMilestoneCopy: Record<'red' | 'orange' | 'green', string> = {
+    red: 'Target: 3 badges to build Orange confidence.',
+    orange: 'Target: 5 badges to push toward Green readiness.',
+    green: 'Target: 7 badges for an all-star season finish.',
+  }
   const milestoneBadges = [1, 3, 5, 7]
   const playerIds = unsortedPlayerIds.sort((aId, bId) => {
     const aAuto = autoBadgesByPlayer.get(aId)?.length ?? 0
@@ -58,6 +63,7 @@ export default function ColorBallPassportGrid({
           const totalBadges = autoBadges.length + playerBadges.length
           const progressPct = Math.min(100, Math.round((totalBadges / 7) * 100))
           const nextBadgeAt = milestoneBadges.find((threshold) => threshold > totalBadges) ?? null
+          const stage = playersById.get(playerId)?.color_ball_stage
 
           return (
             <article
@@ -89,6 +95,11 @@ export default function ColorBallPassportGrid({
                     ? 'Passport fully loaded this season'
                     : `${nextBadgeAt - totalBadges} more badge${nextBadgeAt - totalBadges === 1 ? '' : 's'} to next milestone`}
                 </p>
+                {stage ? (
+                  <p className="mt-1 text-[11px] text-brand-pacific-dusk/60">
+                    {stageMilestoneCopy[stage]}
+                  </p>
+                ) : null}
               </div>
               <div className="flex flex-wrap gap-1.5 mb-3 min-h-[32px]">
                 {autoBadges.map((id) => (

@@ -1,10 +1,23 @@
 'use client'
 
 import React from 'react'
-import { ArrowDownRight, ArrowUpRight, Flame, Medal, Minus, Target, Trophy } from 'lucide-react'
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  CircleHelp,
+  Flame,
+  Medal,
+  Minus,
+  Target,
+  Trophy,
+} from 'lucide-react'
 import type { Match, SeasonConfig } from '@/lib/utr-tracker-types'
 import {
+  calculateWeeklyDelta,
   calculateRankMovement,
+  getAroundYouContext,
+  getGrandFinalsRaceStatus,
+  getMomentumSummary,
   calculateWeeklyPoints,
   getUpsetOfWeek,
 } from '@/lib/utr-tracker-points'
@@ -108,6 +121,7 @@ export default function UtrLeaderboard({
   const [expandedPlayerId, setExpandedPlayerId] = React.useState<string | null>(
     null
   )
+  const [isWeeklyDeltaHelpOpen, setIsWeeklyDeltaHelpOpen] = React.useState(false)
 
   const divisionData: Record<DivisionKey, DivisionData> = {
     satSingles,
@@ -143,6 +157,13 @@ export default function UtrLeaderboard({
     config.multipliers,
     config.current_week,
     divisionIdByKey[activeDivision]
+  )
+  const momentumSummary = getMomentumSummary(
+    standings,
+    movementByPlayer,
+    config.current_week,
+    matches,
+    config.multipliers
   )
 
   return (
@@ -240,6 +261,29 @@ export default function UtrLeaderboard({
         </div>
       ) : null}
 
+      <div className="mb-5 grid gap-3 md:grid-cols-2">
+        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
+          <p className="text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60 mb-1">
+            Biggest climb this week
+          </p>
+          <p className="text-[13px] text-brand-pacific-dusk">
+            {momentumSummary.biggestClimb
+              ? `${momentumSummary.biggestClimb.playerName} (+${momentumSummary.biggestClimb.delta} rank${momentumSummary.biggestClimb.delta === 1 ? '' : 's'})`
+              : 'No rank climbs yet this week'}
+          </p>
+        </div>
+        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
+          <p className="text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60 mb-1">
+            Biggest weekly gain
+          </p>
+          <p className="text-[13px] text-brand-pacific-dusk">
+            {momentumSummary.biggestWeeklyGain
+              ? `${momentumSummary.biggestWeeklyGain.playerName} (+${momentumSummary.biggestWeeklyGain.delta} pts vs last week)`
+              : 'No positive gains vs last week yet'}
+          </p>
+        </div>
+      </div>
+
       {upset ? (
         <div className="mb-4 rounded-xl border border-brand-thousand-steps/30 bg-brand-sandstone/60 p-3">
           <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
@@ -255,12 +299,47 @@ export default function UtrLeaderboard({
 
       <div className="overflow-x-auto rounded-xl border border-brand-pacific-dusk/10 bg-white shadow-[0_8px_24px_rgba(27,58,92,0.06)]">
         <table className="min-w-full text-left text-[13px] font-sans">
+          <caption className="sr-only">
+            UTR leaderboard standings with movement, weekly delta, and grand finals status.
+          </caption>
           <thead className="bg-brand-sandstone/70 text-brand-pacific-dusk/70">
             <tr>
               <th className="px-3 py-2">Rank</th>
               <th className="px-3 py-2">Player</th>
               <th className="px-3 py-2">Movement</th>
-              <th className="px-3 py-2 text-right">This Week Δ</th>
+              <th className="px-3 py-2 text-right">
+                <span className="relative inline-flex items-center gap-1">
+                  This Week Δ
+                  <button
+                    type="button"
+                    aria-label="What does This Week delta mean?"
+                    aria-describedby="weekly-delta-tooltip"
+                    aria-expanded={isWeeklyDeltaHelpOpen}
+                    className="peer inline-flex rounded-sm text-brand-pacific-dusk/55 transition-colors hover:text-brand-pacific-dusk focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-sandstone/70"
+                    onClick={() => setIsWeeklyDeltaHelpOpen((value) => !value)}
+                    onBlur={() => setIsWeeklyDeltaHelpOpen(false)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Escape') {
+                        setIsWeeklyDeltaHelpOpen(false)
+                      }
+                    }}
+                  >
+                    <CircleHelp className="h-3.5 w-3.5" aria-hidden="true" />
+                  </button>
+                  <span
+                    id="weekly-delta-tooltip"
+                    role="tooltip"
+                    className={[
+                      'pointer-events-none absolute -top-2 right-0 z-20 w-52 -translate-y-full rounded-md border border-brand-pacific-dusk/15 bg-white px-2.5 py-2 text-left text-[11px] normal-case tracking-normal text-brand-pacific-dusk/85 shadow-[0_8px_20px_rgba(27,58,92,0.12)] transition-opacity duration-200',
+                      isWeeklyDeltaHelpOpen
+                        ? 'opacity-100'
+                        : 'opacity-0 peer-hover:opacity-100 peer-focus-visible:opacity-100',
+                    ].join(' ')}
+                  >
+                    Compares this week's points to last week's points for the same player.
+                  </span>
+                </span>
+              </th>
               <th className="px-3 py-2">Tier</th>
               <th className="px-3 py-2">Progress</th>
               <th className="px-3 py-2 text-right">Pts</th>
@@ -278,27 +357,24 @@ export default function UtrLeaderboard({
                 row.tier,
                 config.tiers
               )
-              const currentWeekPoints = calculateWeeklyPoints(
+              const weeklyDelta = calculateWeeklyDelta(
                 row.playerId,
                 config.current_week,
                 matches,
                 config.multipliers
-              ).total
-              const previousWeekPoints =
-                config.current_week > 1
-                  ? calculateWeeklyPoints(
-                      row.playerId,
-                      config.current_week - 1,
-                      matches,
-                      config.multipliers
-                    ).total
-                  : 0
-              const weeklyDelta = currentWeekPoints - previousWeekPoints
+              )
               const movement = movementByPlayer.get(row.playerId) ?? {
                 trend: 'same' as const,
                 delta: 0,
                 previousRank: null,
               }
+              const gfStatus = getGrandFinalsRaceStatus(
+                row.weeksPlayed,
+                config.grand_finals_min_weeks,
+                config.total_weeks,
+                config.current_week
+              )
+              const aroundYou = getAroundYouContext(standings, row.playerId)
 
               return (
                 <React.Fragment key={row.playerId}>
@@ -312,6 +388,8 @@ export default function UtrLeaderboard({
                             expandedPlayerId === row.playerId ? null : row.playerId
                           )
                         }
+                        aria-expanded={expandedPlayerId === row.playerId}
+                        aria-controls={`utr-player-details-${row.playerId}`}
                         className="inline-flex items-center gap-2 rounded px-1 py-1 text-left hover:bg-brand-morning-light"
                       >
                         <span className="font-medium">{row.playerName}</span>
@@ -405,13 +483,28 @@ export default function UtrLeaderboard({
                       {row.weeksPlayed}/{config.total_weeks}
                     </td>
                     <td className="px-3 py-2 text-right text-brand-pacific-dusk/80">
-                      {row.gfEligible ? '✓' : ''}
+                      {row.gfEligible ? (
+                        <span className="inline-flex items-center rounded-full bg-brand-tide-pool/15 px-2 py-1 text-[11px] font-semibold text-brand-tide-pool">
+                          Qualified
+                        </span>
+                      ) : gfStatus.trend === 'on-pace' ? (
+                        <span className="inline-flex items-center rounded-full bg-brand-victoria-cove/15 px-2 py-1 text-[11px] font-semibold text-brand-victoria-cove">
+                          {gfStatus.label}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center rounded-full bg-brand-sunset-cliff/15 px-2 py-1 text-[11px] font-semibold text-brand-sunset-cliff">
+                          {gfStatus.label}
+                        </span>
+                      )}
                     </td>
                   </tr>
                   {expandedPlayerId === row.playerId ? (
-                    <tr className="border-t border-brand-pacific-dusk/5 bg-brand-morning-light/35">
+                    <tr
+                      id={`utr-player-details-${row.playerId}`}
+                      className="border-t border-brand-pacific-dusk/5 bg-brand-morning-light/35"
+                    >
                       <td colSpan={11} className="px-3 py-3">
-                        <div className="grid gap-2 md:grid-cols-2">
+                        <div className="grid gap-2 md:grid-cols-3">
                           <div>
                             <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
                               Weekly breakdown
@@ -472,6 +565,32 @@ export default function UtrLeaderboard({
                                   )
                                 })}
                             </ul>
+                          </div>
+                          <div>
+                            <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
+                              Around you
+                            </p>
+                            <div className="space-y-1 text-[12px] text-brand-pacific-dusk/80">
+                              {aroundYou?.above ? (
+                                <p className="break-words">
+                                  #{aroundYou.above.rank} {aroundYou.above.playerName} ({aroundYou.above.totalPoints} pts)
+                                  {' '}· +{aroundYou.above.gap} gap
+                                </p>
+                              ) : (
+                                <p>Top spot in this division.</p>
+                              )}
+                              <p className="font-semibold text-brand-pacific-dusk break-words">
+                                #{aroundYou?.current.rank ?? row.rank} {aroundYou?.current.playerName ?? row.playerName} ({aroundYou?.current.totalPoints ?? row.totalPoints} pts)
+                              </p>
+                              {aroundYou?.below ? (
+                                <p className="break-words">
+                                  #{aroundYou.below.rank} {aroundYou.below.playerName} ({aroundYou.below.totalPoints} pts)
+                                  {' '}· {aroundYou.below.gap} pts behind you
+                                </p>
+                              ) : (
+                                <p>No player currently below in standings.</p>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </td>

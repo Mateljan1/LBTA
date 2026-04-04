@@ -1,8 +1,12 @@
 import { describe, it, expect } from 'vitest'
 import {
+  calculateWeeklyDelta,
   calculateMatchPoints,
   calculateRankMovement,
   calculateStandings,
+  getAroundYouContext,
+  getGrandFinalsRaceStatus,
+  getMomentumSummary,
   calculateWeeklyPoints,
   getUpsetOfWeek,
 } from './utr-tracker-points'
@@ -327,6 +331,127 @@ describe('calculateRankMovement', () => {
     expect(movement.get('p1')?.trend).toBe('same')
     expect(movement.get('p2')?.trend).toBe('same')
     expect(movement.get('p4')?.trend).toBe('same')
+  })
+})
+
+describe('engagement helpers', () => {
+  it('calculates positive weekly delta exactly', () => {
+    const matches: Match[] = [
+      baseMatch({
+        id: 'w1-loss',
+        week: 1,
+        player1_id: 'p1',
+        player2_id: 'p2',
+        winner_id: 'p2',
+        score: '6-2',
+      }),
+      baseMatch({
+        id: 'w2-win',
+        week: 2,
+        player1_id: 'p1',
+        player2_id: 'p2',
+        winner_id: 'p1',
+        score: '6-2',
+      }),
+    ]
+    const delta = calculateWeeklyDelta('p1', 2, matches, { '1': 1, '2': 1 })
+    expect(delta).toBe(11)
+  })
+
+  it('calculates negative weekly delta exactly', () => {
+    const matches: Match[] = [
+      baseMatch({
+        id: 'w1-win',
+        week: 1,
+        player1_id: 'p1',
+        player2_id: 'p2',
+        winner_id: 'p1',
+        score: '6-2',
+      }),
+      baseMatch({
+        id: 'w2-loss',
+        week: 2,
+        player1_id: 'p1',
+        player2_id: 'p2',
+        winner_id: 'p2',
+        score: '6-2',
+      }),
+    ]
+    const delta = calculateWeeklyDelta('p1', 2, matches, { '1': 1, '2': 1 })
+    expect(delta).toBe(-7)
+  })
+
+  it('calculates zero weekly delta exactly', () => {
+    const matches: Match[] = [
+      baseMatch({
+        id: 'w1-win',
+        week: 1,
+        player1_id: 'p1',
+        player2_id: 'p2',
+        winner_id: 'p2',
+        score: '7-6(4)',
+      }),
+      baseMatch({
+        id: 'w2-win',
+        week: 2,
+        player1_id: 'p1',
+        player2_id: 'p2',
+        winner_id: 'p2',
+        score: '6-2',
+      }),
+    ]
+    const delta = calculateWeeklyDelta('p1', 2, matches, { '1': 1, '2': 1 })
+    expect(delta).toBe(0)
+  })
+
+  it('returns around-you context with gaps', () => {
+    const context = getAroundYouContext(
+      [
+        { playerId: 'p1', playerName: 'P1', totalPoints: 40, weeksPlayed: 2, rank: 1 },
+        { playerId: 'p2', playerName: 'P2', totalPoints: 33, weeksPlayed: 2, rank: 2 },
+        { playerId: 'p3', playerName: 'P3', totalPoints: 30, weeksPlayed: 2, rank: 3 },
+      ],
+      'p2'
+    )
+
+    expect(context?.above?.playerId).toBe('p1')
+    expect(context?.above?.gap).toBe(7)
+    expect(context?.below?.playerId).toBe('p3')
+    expect(context?.below?.gap).toBe(3)
+  })
+
+  it('computes grand finals race states', () => {
+    expect(getGrandFinalsRaceStatus(5, 4, 8, 6).trend).toBe('qualified')
+    expect(getGrandFinalsRaceStatus(2, 4, 8, 5).trend).toBe('on-pace')
+    expect(getGrandFinalsRaceStatus(1, 5, 6, 5).trend).toBe('behind')
+  })
+
+  it('computes momentum summary from movement and weekly deltas', () => {
+    const standings = [
+      { playerId: 'p1', playerName: 'P1', totalPoints: 30, weeksPlayed: 2, rank: 1 },
+      { playerId: 'p2', playerName: 'P2', totalPoints: 25, weeksPlayed: 2, rank: 2 },
+      { playerId: 'p3', playerName: 'P3', totalPoints: 20, weeksPlayed: 2, rank: 3 },
+    ]
+
+    const movement = new Map([
+      ['p1', { trend: 'same', delta: 0, previousRank: 1 }],
+      ['p2', { trend: 'up', delta: 2, previousRank: 4 }],
+      ['p3', { trend: 'up', delta: 1, previousRank: 4 }],
+    ] as const)
+
+    const matches: Match[] = [
+      baseMatch({ id: 'w1-a', week: 1, player1_id: 'p1', player2_id: 'p2', winner_id: 'p1' }),
+      baseMatch({ id: 'w2-a', week: 2, player1_id: 'p2', player2_id: 'p1', winner_id: 'p2' }),
+      baseMatch({ id: 'w2-b', week: 2, player1_id: 'p3', player2_id: 'p1', winner_id: 'p3' }),
+    ]
+
+    const summary = getMomentumSummary(standings, movement, 2, matches, {
+      '1': 1,
+      '2': 1,
+    })
+    expect(summary.biggestClimb?.playerId).toBe('p2')
+    expect(summary.biggestClimb?.delta).toBe(2)
+    expect(summary.biggestWeeklyGain).not.toBeNull()
   })
 })
 
