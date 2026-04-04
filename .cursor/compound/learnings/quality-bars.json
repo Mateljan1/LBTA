@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-28",
-  "lastLearnRun": "2026-03-28 compound:learn — Lighthouse hero LCP, proxy.ts, analytics lazyOnload; homepage + third-party quality bars",
+  "updated": "2026-04-03",
+  "lastLearnRun": "2026-04-03 compound:learn — UTR tracker atomic hardening and migration repair process",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -307,6 +307,22 @@
     },
     "thirdPartyScriptLoadStrategy": {
       "rule": "Non-critical third-party scripts (analytics, pixels) default to lazyOnload for LCP; if afterInteractive is required for attribution, document the tradeoff and verify Lighthouse impact",
+      "enforcement": "should"
+    },
+    "utrPlayersAtomicBatchWrite": {
+      "rule": "UTR roster batch saves must execute as one atomic DB operation (single RPC) for mixed new/existing players",
+      "enforcement": "must"
+    },
+    "utrRosterNormalizedNameUnique": {
+      "rule": "UTR roster writes must reject duplicate normalized player names (payload and existing roster) with 409",
+      "enforcement": "must"
+    },
+    "utrColorBallBadgeIdempotent": {
+      "rule": "Color Ball badge saves must be idempotent for duplicate badge tokens in one payload (API dedupe + SQL DISTINCT)",
+      "enforcement": "must"
+    },
+    "supabaseMigrationRepairFirst": {
+      "rule": "On Supabase migration history mismatch, run targeted migration repair before db push retries (use latest CLI path)",
       "enforcement": "should"
     }
   }

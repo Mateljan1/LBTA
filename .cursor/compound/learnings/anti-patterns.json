@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-28",
-  "lastLearnRun": "2026-03-28 compound:learn — layout preload LCP dup; hero poster triple-fetch",
+  "updated": "2026-04-03",
+  "lastLearnRun": "2026-04-03 compound:learn — UTR tracker atomic hardening and migration repair workflow",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -865,6 +865,34 @@
       "avoid": "preload + poster=\"...\" on video + priority Image all pointing at identical hero-poster.webp",
       "instead": "Single next/image priority layer + video without poster; or one preload OR image priority, not both",
       "tags": ["performance", "LCP", "video", "hero"]
+    },
+    {
+      "id": "utr-player-write-split-operations",
+      "description": "Roster batch save uses separate upsert and insert operations for one logical write",
+      "avoid": "rowsWithId upsert + rowsWithoutId insert in separate API calls, allowing partial persistence on failure",
+      "instead": "Use single transactional RPC for entire batch payload (upsert_players_batch)",
+      "tags": ["utr-tracker", "atomic", "roster", "supabase"]
+    },
+    {
+      "id": "utr-roster-allows-normalized-duplicates",
+      "description": "Roster endpoint allows duplicate names after normalization",
+      "avoid": "Accepting 'Alice Test' and ' alice   test ' as separate players",
+      "instead": "Normalize and reject duplicates in payload and existing roster with conflict response",
+      "tags": ["utr-tracker", "validation", "data-integrity"]
+    },
+    {
+      "id": "color-ball-badges-no-dedup",
+      "description": "Color Ball week badge payload trusts raw badge arrays with duplicates",
+      "avoid": "Passing duplicate badge IDs through to write path, relying on conflict behavior",
+      "instead": "Dedupe badges in API layer and DISTINCT in SQL write function",
+      "tags": ["utr-tracker", "color-ball", "idempotency"]
+    },
+    {
+      "id": "supabase-push-loop-without-repair",
+      "description": "Repeating supabase db push attempts while migration history mismatch is unresolved",
+      "avoid": "Retrying db push after 'Remote migration versions not found' without repair",
+      "instead": "Run targeted migration repair then db push using latest CLI",
+      "tags": ["supabase", "migrations", "operations"]
     }
   ]
 }

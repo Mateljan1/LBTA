@@ -1,0 +1,10 @@
+{
+  "batch_id": "2026-04-03-utr-tracker-atomic-hardening",
+  "status": "approved_applied",
+  "created_at": "2026-04-03",
+  "learning_draft": ".cursor/compound/learnings/2026-04-03-utr-tracker-atomic-hardening-learn-draft.md",
+  "skill_draft": ".cursor/compound/learnings/2026-04-03-utr-tracker-atomic-hardening-skill-draft.md",
+  "approved_decision": "approve all",
+  "resume_hint": "Batch applied. Start a new pending batch for future /learn runs."
+}
+

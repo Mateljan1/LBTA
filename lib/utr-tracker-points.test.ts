@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   calculateMatchPoints,
+  calculateRankMovement,
   calculateStandings,
   calculateWeeklyPoints,
   getUpsetOfWeek,
@@ -263,6 +264,69 @@ describe('getUpsetOfWeek', () => {
       }),
     ]
     expect(getUpsetOfWeek(1, 'sun_doubles', doublesOnly)).toBeNull()
+  })
+})
+
+describe('calculateRankMovement', () => {
+  it('marks players as up/down/same/new correctly week-over-week', () => {
+    const config: SeasonConfig = {
+      multipliers: { '1': 1, '2': 1 },
+      tiers: [{ name: 'Baseline', min: 0, max: 9999, color: '#9CA3AF', badge: 'gray' }],
+      current_week: 2,
+      total_weeks: 2,
+      grand_finals_min_weeks: 1,
+    }
+
+    const players = [
+      { id: 'p1', name: 'P1', divisions: ['sat_utr_singles'] },
+      { id: 'p2', name: 'P2', divisions: ['sat_utr_singles'] },
+      { id: 'p3', name: 'P3', divisions: ['sat_utr_singles'] },
+      { id: 'p4', name: 'P4', divisions: ['sat_utr_singles'] },
+    ]
+
+    const matches: Match[] = [
+      baseMatch({
+        id: 'w1-a',
+        week: 1,
+        player1_id: 'p1',
+        player1_name: 'P1',
+        player2_id: 'p2',
+        player2_name: 'P2',
+        winner_id: 'p1',
+      }),
+      baseMatch({
+        id: 'w2-a',
+        week: 2,
+        player1_id: 'p1',
+        player1_name: 'P1',
+        player2_id: 'p2',
+        player2_name: 'P2',
+        winner_id: 'p2',
+      }),
+      baseMatch({
+        id: 'w2-b',
+        week: 2,
+        player1_id: 'p3',
+        player1_name: 'P3',
+        player2_id: 'p1',
+        player2_name: 'P1',
+        winner_id: 'p3',
+      }),
+    ]
+
+    const standings = calculateStandings('sat_utr_singles', matches, players, config)
+    const movement = calculateRankMovement(
+      standings,
+      matches,
+      config.multipliers,
+      config.current_week,
+      'sat_utr_singles'
+    )
+
+    expect(movement.get('p3')?.trend).toBe('new')
+    expect(movement.get('p1')?.trend).toBe('same')
+    expect(movement.get('p2')?.trend).toBe('same')
+    expect(movement.get('p4')?.trend).toBe('same')
   })
 })
 

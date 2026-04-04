@@ -234,3 +234,101 @@ export function calculateStandings(
     .map((s, i) => ({ ...s, rank: i + 1 }))
 }
 
+type MovementInputRow = {
+  playerId: string
+  playerName: string
+  weeksPlayed: number
+  rank: number
+}
+
+export type RankMovement = {
+  trend: 'up' | 'down' | 'same' | 'new'
+  delta: number
+  previousRank: number | null
+}
+
+export function calculateRankMovement(
+  standings: MovementInputRow[],
+  matches: Match[],
+  multipliers: Record<string, number>,
+  currentWeek: number,
+  division: Match['division']
+): Map<string, RankMovement> {
+  const movement = new Map<string, RankMovement>()
+  if (currentWeek <= 1) {
+    standings.forEach((row) => {
+      movement.set(row.playerId, { trend: 'same', delta: 0, previousRank: null })
+    })
+    return movement
+  }
+
+  const previousRows = standings.map((row) => {
+    let previousPoints = 0
+    let previousWeeksPlayed = 0
+
+    for (let week = 1; week < currentWeek; week++) {
+      const weekly = calculateWeeklyPoints(row.playerId, week, matches, multipliers)
+      if (weekly.played) {
+        previousWeeksPlayed += 1
+        previousPoints += weekly.total
+        const upset = getUpsetOfWeek(week, division, matches)
+        if (upset && upset.id === row.playerId) {
+          previousPoints += Math.ceil(5 * (multipliers[String(week)] ?? 1))
+        }
+      }
+    }
+
+    return {
+      playerId: row.playerId,
+      playerName: row.playerName,
+      previousPoints,
+      previousWeeksPlayed,
+    }
+  })
+
+  const previousRankMap = new Map<string, number>()
+  previousRows
+    .filter((row) => row.previousWeeksPlayed > 0)
+    .sort((a, b) => {
+      if (b.previousPoints !== a.previousPoints) {
+        return b.previousPoints - a.previousPoints
+      }
+      if (b.previousWeeksPlayed !== a.previousWeeksPlayed) {
+        return b.previousWeeksPlayed - a.previousWeeksPlayed
+      }
+      return a.playerName.localeCompare(b.playerName)
+    })
+    .forEach((row, idx) => {
+      previousRankMap.set(row.playerId, idx + 1)
+    })
+
+  standings.forEach((row) => {
+    const previousRank = previousRankMap.get(row.playerId) ?? null
+    if (row.weeksPlayed > 0 && previousRank == null) {
+      movement.set(row.playerId, { trend: 'new', delta: 0, previousRank: null })
+      return
+    }
+    if (previousRank == null) {
+      movement.set(row.playerId, { trend: 'same', delta: 0, previousRank: null })
+      return
+    }
+
+    const delta = previousRank - row.rank
+    if (delta > 0) {
+      movement.set(row.playerId, { trend: 'up', delta, previousRank })
+      return
+    }
+    if (delta < 0) {
+      movement.set(row.playerId, {
+        trend: 'down',
+        delta: Math.abs(delta),
+        previousRank,
+      })
+      return
+    }
+    movement.set(row.playerId, { trend: 'same', delta: 0, previousRank })
+  })
+
+  return movement
+}
+

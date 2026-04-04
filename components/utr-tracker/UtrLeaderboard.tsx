@@ -1,8 +1,13 @@
 'use client'
 
 import React from 'react'
+import { ArrowDownRight, ArrowUpRight, Flame, Medal, Minus, Target, Trophy } from 'lucide-react'
 import type { Match, SeasonConfig } from '@/lib/utr-tracker-types'
-import { calculateWeeklyPoints, getUpsetOfWeek } from '@/lib/utr-tracker-points'
+import {
+  calculateRankMovement,
+  calculateWeeklyPoints,
+  getUpsetOfWeek,
+} from '@/lib/utr-tracker-points'
 
 type Standing = {
   playerId: string
@@ -61,33 +66,93 @@ function getCurrentStreak(playerId: string, matches: Match[]): number {
   return streak
 }
 
-export default function UtrLeaderboard({ config, satSingles, sunSingles, sunDoubles }: Props) {
-  const [activeDivision, setActiveDivision] = React.useState<DivisionKey>('satSingles')
-  const [expandedPlayerId, setExpandedPlayerId] = React.useState<string | null>(null)
+function getTierProgress(
+  totalPoints: number,
+  tier: SeasonConfig['tiers'][number] | null,
+  tiers: SeasonConfig['tiers']
+) {
+  if (!tier) return { progressPct: 0, pointsToNext: null as number | null }
+  const ordered = [...tiers].sort((a, b) => a.min - b.min)
+  const idx = ordered.findIndex(
+    (candidate) =>
+      candidate.name === tier.name &&
+      candidate.min === tier.min &&
+      candidate.max === tier.max
+  )
+  if (idx < 0 || idx === ordered.length - 1) {
+    return { progressPct: 100, pointsToNext: null as number | null }
+  }
+  const nextTier = ordered[idx + 1]
+  const span = Math.max(nextTier.min - tier.min, 1)
+  const progressRaw = ((totalPoints - tier.min) / span) * 100
+  const progressPct = Math.max(0, Math.min(100, Math.round(progressRaw)))
+  const pointsToNext = Math.max(nextTier.min - totalPoints, 0)
+  return { progressPct, pointsToNext }
+}
+
+function getRankAccent(rank: number): string {
+  if (rank === 1) return 'bg-brand-thousand-steps/20 border-brand-thousand-steps/40'
+  if (rank === 2) return 'bg-brand-pacific-dusk/10 border-brand-pacific-dusk/20'
+  if (rank === 3) return 'bg-brand-victoria-cove/10 border-brand-victoria-cove/30'
+  return 'bg-transparent border-transparent'
+}
+
+export default function UtrLeaderboard({
+  config,
+  satSingles,
+  sunSingles,
+  sunDoubles,
+}: Props) {
+  const [activeDivision, setActiveDivision] =
+    React.useState<DivisionKey>('satSingles')
+  const [expandedPlayerId, setExpandedPlayerId] = React.useState<string | null>(
+    null
+  )
 
   const divisionData: Record<DivisionKey, DivisionData> = {
     satSingles,
     sunSingles,
     sunDoubles,
   }
-
   const { standings, matches } = divisionData[activeDivision]
+
   const divisionIdByKey: Record<DivisionKey, Match['division']> = {
     satSingles: 'sat_utr_singles',
     sunSingles: 'sun_singles',
     sunDoubles: 'sun_doubles',
   }
+
   const upset = getUpsetOfWeek(
     config.current_week,
     divisionIdByKey[activeDivision],
     matches
+  )
+  const topThree = standings.slice(0, 3)
+  const activePlayers = standings.filter((row) => row.weeksPlayed > 0).length
+  const currentWeekMatches = matches.filter(
+    (match) => match.week === config.current_week
+  ).length
+  const hottestStreak = standings.reduce((maxStreak, row) => {
+    return Math.max(maxStreak, getCurrentStreak(row.playerId, matches))
+  }, 0)
+  const leaderGap =
+    standings.length >= 2 ? standings[0].totalPoints - standings[1].totalPoints : 0
+  const movementByPlayer = calculateRankMovement(
+    standings,
+    matches,
+    config.multipliers,
+    config.current_week,
+    divisionIdByKey[activeDivision]
   )
 
   return (
     <section aria-labelledby="utr-leaderboard-heading">
       <div className="mb-6 text-center md:text-left">
         <p className="text-eyebrow text-brand-victoria-cove mb-2">Leaderboard</p>
-        <h2 id="utr-leaderboard-heading" className="font-headline text-headline text-brand-pacific-dusk">
+        <h2
+          id="utr-leaderboard-heading"
+          className="font-headline text-headline text-brand-pacific-dusk"
+        >
           Season standings
         </h2>
       </div>
@@ -113,6 +178,68 @@ export default function UtrLeaderboard({ config, satSingles, sunSingles, sunDoub
         ))}
       </div>
 
+      <div className="mb-5 grid gap-3 md:grid-cols-4">
+        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
+          <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
+            <Target className="h-3.5 w-3.5" aria-hidden="true" />
+            Active players
+          </p>
+          <p className="font-headline text-headline-sm text-brand-pacific-dusk">
+            {activePlayers}
+          </p>
+        </div>
+        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
+          <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
+            <Medal className="h-3.5 w-3.5" aria-hidden="true" />
+            Week {config.current_week} matches
+          </p>
+          <p className="font-headline text-headline-sm text-brand-pacific-dusk">
+            {currentWeekMatches}
+          </p>
+        </div>
+        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
+          <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
+            <Flame className="h-3.5 w-3.5" aria-hidden="true" />
+            Hottest streak
+          </p>
+          <p className="font-headline text-headline-sm text-brand-pacific-dusk">
+            {hottestStreak} week{hottestStreak === 1 ? '' : 's'}
+          </p>
+        </div>
+        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
+          <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
+            <Trophy className="h-3.5 w-3.5" aria-hidden="true" />
+            Leader gap
+          </p>
+          <p className="font-headline text-headline-sm text-brand-pacific-dusk">
+            {leaderGap} pts
+          </p>
+        </div>
+      </div>
+
+      {topThree.length > 0 ? (
+        <div className="mb-5 grid gap-3 md:grid-cols-3">
+          {topThree.map((player) => (
+            <article
+              key={`top-${player.playerId}`}
+              className={['rounded-xl border p-4', getRankAccent(player.rank)].join(
+                ' '
+              )}
+            >
+              <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
+                Rank #{player.rank}
+              </p>
+              <h3 className="font-headline text-headline-sm text-brand-pacific-dusk">
+                {player.playerName}
+              </h3>
+              <p className="text-[13px] text-brand-pacific-dusk/75">
+                {player.totalPoints} pts · {player.wins}-{player.losses}
+              </p>
+            </article>
+          ))}
+        </div>
+      ) : null}
+
       {upset ? (
         <div className="mb-4 rounded-xl border border-brand-thousand-steps/30 bg-brand-sandstone/60 p-3">
           <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
@@ -120,7 +247,8 @@ export default function UtrLeaderboard({ config, satSingles, sunSingles, sunDoub
           </p>
           <p className="font-sans text-sm text-brand-pacific-dusk">
             <span className="font-semibold">{upset.name}</span> beat{' '}
-            <span className="font-semibold">{upset.loserName}</span> ({upset.diff.toFixed(2)} UTR gap) — {upset.score}
+            <span className="font-semibold">{upset.loserName}</span> (
+            {upset.diff.toFixed(2)} UTR gap) — {upset.score}
           </p>
         </div>
       ) : null}
@@ -131,7 +259,10 @@ export default function UtrLeaderboard({ config, satSingles, sunSingles, sunDoub
             <tr>
               <th className="px-3 py-2">Rank</th>
               <th className="px-3 py-2">Player</th>
+              <th className="px-3 py-2">Movement</th>
+              <th className="px-3 py-2 text-right">This Week Δ</th>
               <th className="px-3 py-2">Tier</th>
+              <th className="px-3 py-2">Progress</th>
               <th className="px-3 py-2 text-right">Pts</th>
               <th className="px-3 py-2 text-right">W‑L</th>
               <th className="px-3 py-2 text-right">Consec Wks</th>
@@ -140,132 +271,222 @@ export default function UtrLeaderboard({ config, satSingles, sunSingles, sunDoub
             </tr>
           </thead>
           <tbody>
-            {standings.map((row) => (
-              <React.Fragment key={row.playerId}>
-                <tr className="border-t border-brand-pacific-dusk/8">
-                  <td className="px-3 py-2 text-brand-pacific-dusk/70">{row.rank}</td>
-                  <td className="px-3 py-2 text-brand-pacific-dusk">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setExpandedPlayerId(
-                          expandedPlayerId === row.playerId ? null : row.playerId
-                        )
-                      }
-                      className="inline-flex items-center gap-2 rounded px-1 py-1 text-left hover:bg-brand-morning-light"
-                    >
-                      <span className="font-medium">{row.playerName}</span>
-                      <span className="text-[11px] text-brand-pacific-dusk/50">
-                        {expandedPlayerId === row.playerId ? 'Hide' : 'Details'}
-                      </span>
-                    </button>
-                  </td>
-                  <td className="px-3 py-2">
-                    {row.tier ? (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-brand-morning-light px-2 py-1 text-[11px] font-medium text-brand-pacific-dusk/80">
-                        <span
-                          className="h-2 w-2 rounded-full"
-                          style={{ backgroundColor: row.tier.color }}
+            {standings.map((row) => {
+              const streak = getCurrentStreak(row.playerId, matches)
+              const { progressPct, pointsToNext } = getTierProgress(
+                row.totalPoints,
+                row.tier,
+                config.tiers
+              )
+              const currentWeekPoints = calculateWeeklyPoints(
+                row.playerId,
+                config.current_week,
+                matches,
+                config.multipliers
+              ).total
+              const previousWeekPoints =
+                config.current_week > 1
+                  ? calculateWeeklyPoints(
+                      row.playerId,
+                      config.current_week - 1,
+                      matches,
+                      config.multipliers
+                    ).total
+                  : 0
+              const weeklyDelta = currentWeekPoints - previousWeekPoints
+              const movement = movementByPlayer.get(row.playerId) ?? {
+                trend: 'same' as const,
+                delta: 0,
+                previousRank: null,
+              }
+
+              return (
+                <React.Fragment key={row.playerId}>
+                  <tr className="border-t border-brand-pacific-dusk/8">
+                    <td className="px-3 py-2 text-brand-pacific-dusk/70">{row.rank}</td>
+                    <td className="px-3 py-2 text-brand-pacific-dusk">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setExpandedPlayerId(
+                            expandedPlayerId === row.playerId ? null : row.playerId
+                          )
+                        }
+                        className="inline-flex items-center gap-2 rounded px-1 py-1 text-left hover:bg-brand-morning-light"
+                      >
+                        <span className="font-medium">{row.playerName}</span>
+                        <span className="text-[11px] text-brand-pacific-dusk/50">
+                          {expandedPlayerId === row.playerId ? 'Hide' : 'Details'}
+                        </span>
+                      </button>
+                    </td>
+                    <td className="px-3 py-2">
+                      {movement.trend === 'new' ? (
+                        <span className="inline-flex items-center rounded-full bg-brand-victoria-cove/15 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-victoria-cove">
+                          New
+                        </span>
+                      ) : movement.trend === 'up' ? (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-brand-tide-pool/15 px-2 py-1 text-[11px] font-semibold text-brand-tide-pool">
+                          <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />+{movement.delta}
+                        </span>
+                      ) : movement.trend === 'down' ? (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-brand-sunset-cliff/15 px-2 py-1 text-[11px] font-semibold text-brand-sunset-cliff">
+                          <ArrowDownRight className="h-3.5 w-3.5" aria-hidden="true" />-{movement.delta}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-brand-pacific-dusk/10 px-2 py-1 text-[11px] font-semibold text-brand-pacific-dusk/70">
+                          <Minus className="h-3.5 w-3.5" aria-hidden="true" />0
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-right">
+                      {config.current_week === 1 ? (
+                        <span className="text-[11px] text-brand-pacific-dusk/50">—</span>
+                      ) : weeklyDelta > 0 ? (
+                        <span className="inline-flex items-center rounded-full bg-brand-tide-pool/15 px-2 py-1 text-[11px] font-semibold text-brand-tide-pool">
+                          +{weeklyDelta}
+                        </span>
+                      ) : weeklyDelta < 0 ? (
+                        <span className="inline-flex items-center rounded-full bg-brand-sunset-cliff/15 px-2 py-1 text-[11px] font-semibold text-brand-sunset-cliff">
+                          {weeklyDelta}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center rounded-full bg-brand-pacific-dusk/10 px-2 py-1 text-[11px] font-semibold text-brand-pacific-dusk/70">
+                          0
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2">
+                      {row.tier ? (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-brand-morning-light px-2 py-1 text-[11px] font-medium text-brand-pacific-dusk/80">
+                          <span
+                            className="h-2 w-2 rounded-full"
+                            style={{ backgroundColor: row.tier.color }}
+                            aria-hidden="true"
+                          />
+                          {row.tier.name}
+                        </span>
+                      ) : (
+                        <span className="text-brand-pacific-dusk/40 text-[11px]">—</span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 min-w-[160px]">
+                      <div className="h-2 rounded-full bg-brand-pacific-dusk/10">
+                        <div
+                          className="h-2 rounded-full bg-brand-victoria-cove"
+                          style={{ width: `${progressPct}%` }}
                           aria-hidden="true"
                         />
-                        {row.tier.name}
-                      </span>
-                    ) : (
-                      <span className="text-brand-pacific-dusk/40 text-[11px]">—</span>
-                    )}
-                  </td>
-                  <td className="px-3 py-2 text-right text-[13px] font-extrabold text-brand-pacific-dusk">
-                    {row.totalPoints}
-                  </td>
-                  <td className="px-3 py-2 text-right text-brand-pacific-dusk/80">
-                    {row.wins}-{row.losses}
-                  </td>
-                  <td className="px-3 py-2 text-right text-brand-pacific-dusk/70">
-                    {getCurrentStreak(row.playerId, matches)}
-                  </td>
-                  <td className="px-3 py-2 text-right text-brand-pacific-dusk/70">
-                    {row.weeksPlayed}/{config.total_weeks}
-                  </td>
-                  <td className="px-3 py-2 text-right text-brand-pacific-dusk/80">
-                    {row.gfEligible ? '✓' : ''}
-                  </td>
-                </tr>
-                {expandedPlayerId === row.playerId ? (
-                  <tr className="border-t border-brand-pacific-dusk/5 bg-brand-morning-light/35">
-                    <td colSpan={8} className="px-3 py-3">
-                      <div className="grid gap-2 md:grid-cols-2">
-                        <div>
-                          <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
-                            Weekly breakdown
-                          </p>
-                          <ul className="space-y-1 text-[12px] text-brand-pacific-dusk/80">
-                            {Array.from({ length: config.total_weeks }, (_, i) => i + 1).map((week) => {
-                              const result = calculateWeeklyPoints(
-                                row.playerId,
-                                week,
-                                matches,
-                                config.multipliers
-                              )
-                              return (
-                                <li key={`wk-${row.playerId}-${week}`}>
-                                  Week {week}: {result.total} pts
-                                  {result.played
-                                    ? ` (match ${result.matchPoints} + attend ${result.attendance} + streak ${result.streak})`
-                                    : ' (did not play)'}
-                                </li>
-                              )
-                            })}
-                          </ul>
-                        </div>
-                        <div>
-                          <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
-                            Match history
-                          </p>
-                          <ul className="space-y-1 text-[12px] text-brand-pacific-dusk/80">
-                            {matches
-                              .filter(
-                                (match) =>
-                                  match.player1_id === row.playerId ||
-                                  match.player2_id === row.playerId ||
-                                  match.player3_id === row.playerId ||
-                                  match.player4_id === row.playerId
-                              )
-                              .map((match) => {
-                                const points = calculateWeeklyPoints(
-                                  row.playerId,
-                                  match.week,
-                                  [match],
-                                  { [String(match.week)]: 1 }
-                                ).matchPoints
-                                return (
-                                  <li key={match.id}>
-                                    Week {match.week}: {match.player1_name}
-                                    {match.is_doubles && match.player3_name
-                                      ? `/${match.player3_name}`
-                                      : ''}{' '}
-                                    vs {match.player2_name}
-                                    {match.is_doubles && match.player4_name
-                                      ? `/${match.player4_name}`
-                                      : ''}{' '}
-                                    — {match.score} ({points} pts)
-                                  </li>
-                                )
-                              })}
-                          </ul>
-                        </div>
                       </div>
+                      <p className="mt-1 text-[11px] text-brand-pacific-dusk/60">
+                        {pointsToNext == null
+                          ? 'Top tier reached'
+                          : `${pointsToNext} pts to next tier`}
+                      </p>
+                    </td>
+                    <td className="px-3 py-2 text-right text-[13px] font-extrabold text-brand-pacific-dusk">
+                      {row.totalPoints}
+                    </td>
+                    <td className="px-3 py-2 text-right text-brand-pacific-dusk/80">
+                      {row.wins}-{row.losses}
+                    </td>
+                    <td className="px-3 py-2 text-right text-brand-pacific-dusk/70">
+                      <span className="inline-flex items-center gap-1">
+                        {streak >= 3 ? (
+                          <Flame
+                            className="h-3.5 w-3.5 text-brand-sunset-cliff"
+                            aria-hidden="true"
+                          />
+                        ) : null}
+                        {streak}
+                      </span>
+                    </td>
+                    <td className="px-3 py-2 text-right text-brand-pacific-dusk/70">
+                      {row.weeksPlayed}/{config.total_weeks}
+                    </td>
+                    <td className="px-3 py-2 text-right text-brand-pacific-dusk/80">
+                      {row.gfEligible ? '✓' : ''}
                     </td>
                   </tr>
-                ) : null}
-              </React.Fragment>
-            ))}
-            {standings.length === 0 && (
+                  {expandedPlayerId === row.playerId ? (
+                    <tr className="border-t border-brand-pacific-dusk/5 bg-brand-morning-light/35">
+                      <td colSpan={11} className="px-3 py-3">
+                        <div className="grid gap-2 md:grid-cols-2">
+                          <div>
+                            <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
+                              Weekly breakdown
+                            </p>
+                            <ul className="space-y-1 text-[12px] text-brand-pacific-dusk/80">
+                              {Array.from({ length: config.total_weeks }, (_, i) => i + 1).map(
+                                (week) => {
+                                  const result = calculateWeeklyPoints(
+                                    row.playerId,
+                                    week,
+                                    matches,
+                                    config.multipliers
+                                  )
+                                  return (
+                                    <li key={`wk-${row.playerId}-${week}`}>
+                                      Week {week}: {result.total} pts
+                                      {result.played
+                                        ? ` (match ${result.matchPoints} + attend ${result.attendance} + streak ${result.streak})`
+                                        : ' (did not play)'}
+                                    </li>
+                                  )
+                                }
+                              )}
+                            </ul>
+                          </div>
+                          <div>
+                            <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
+                              Match history
+                            </p>
+                            <ul className="space-y-1 text-[12px] text-brand-pacific-dusk/80">
+                              {matches
+                                .filter(
+                                  (match) =>
+                                    match.player1_id === row.playerId ||
+                                    match.player2_id === row.playerId ||
+                                    match.player3_id === row.playerId ||
+                                    match.player4_id === row.playerId
+                                )
+                                .map((match) => {
+                                  const points = calculateWeeklyPoints(
+                                    row.playerId,
+                                    match.week,
+                                    [match],
+                                    { [String(match.week)]: 1 }
+                                  ).matchPoints
+                                  return (
+                                    <li key={match.id}>
+                                      Week {match.week}: {match.player1_name}
+                                      {match.is_doubles && match.player3_name
+                                        ? `/${match.player3_name}`
+                                        : ''}{' '}
+                                      vs {match.player2_name}
+                                      {match.is_doubles && match.player4_name
+                                        ? `/${match.player4_name}`
+                                        : ''}{' '}
+                                      — {match.score} ({points} pts)
+                                    </li>
+                                  )
+                                })}
+                            </ul>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : null}
+                </React.Fragment>
+              )
+            })}
+            {standings.length === 0 ? (
               <tr>
-                <td colSpan={8} className="px-3 py-6 text-center text-brand-pacific-dusk/60">
+                <td colSpan={11} className="px-3 py-6 text-center text-brand-pacific-dusk/60">
                   No results yet for this division.
                 </td>
               </tr>
-            )}
+            ) : null}
           </tbody>
         </table>
       </div>

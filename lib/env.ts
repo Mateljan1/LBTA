@@ -19,6 +19,8 @@ const ENV_VARS = {
   AC_WEBHOOK_SECRET: 'ActiveCampaign webhook shared secret for verification (optional; required in production)',
   /** Coach Hub: shared secret for cookie signing; optional in dev (hub disabled when unset) */
   COACH_HUB_SECRET: 'Coach Hub password / cookie signing secret (optional in dev)',
+  /** UTR Tracker admin: shared secret for admin login and cookie signing */
+  UTR_TRACKER_ADMIN_SECRET: 'UTR Tracker admin password / cookie signing secret (optional in dev)',
   /** Optional — agent tools / X-Agent-Secret header validation when set */
   AGENT_SECRET: 'Agent API shared secret (optional; disabled when unset)',
   /** Stripe secret key for Checkout (optional; UTR paid registration disabled when unset) */

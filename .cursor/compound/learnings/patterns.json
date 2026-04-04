@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-03-28",
-  "lastLearnRun": "2026-03-28 Lighthouse/proxy: hero next/image LCP + deferred video; GA4+Pixel lazyOnload; middleware→proxy.ts; no global poster preload",
+  "updated": "2026-04-03",
+  "lastLearnRun": "2026-04-03 UTR tracker atomic hardening: players RPC batch write, normalized-name collision guard, color-ball badge dedupe, supabase repair-then-push",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -1088,6 +1088,30 @@
       "when": "Legacy URL must stay live but the product is paused",
       "example": "Honest H1/copy; metadata/OG aligned; hero image from main program art (e.g. utr-match-play-hero.webp) not orphan legacy path; primary CTA to substitute product + secondary to /schedules",
       "tags": ["seo", "ux", "conversion", "thin-page"]
+    },
+    {
+      "name": "utr-players-batch-rpc-atomic",
+      "when": "Saving roster player batches with mixed new/existing records in UTR admin",
+      "example": "Use one RPC (upsert_players_batch) for full payload, with DB-side UUID generation for missing ids and ON CONFLICT(id) updates. Avoid split insert+upsert client logic.",
+      "tags": ["utr-tracker", "atomic", "supabase", "roster"]
+    },
+    {
+      "name": "utr-roster-normalized-name-guard",
+      "when": "Accepting roster writes where downstream systems resolve players by normalized display name",
+      "example": "Normalize name via trim+lowercase+whitespace collapse; reject duplicates in payload and conflicts with existing roster using 409 before write.",
+      "tags": ["utr-tracker", "validation", "data-integrity", "roster"]
+    },
+    {
+      "name": "color-ball-badge-dedupe-dual-layer",
+      "when": "Saving Color Ball attendance + coach badges per week",
+      "example": "Dedupe badge tokens in API request transformation and enforce DISTINCT in SQL function insert to keep duplicate badge tokens idempotent.",
+      "tags": ["utr-tracker", "color-ball", "idempotency", "sql"]
+    },
+    {
+      "name": "supabase-repair-then-push-latest-cli",
+      "when": "Supabase push reports remote migration version mismatch or drift",
+      "example": "Use npx supabase@latest; run targeted migration repair for the missing version, then db push. Avoid repeated push loops before reconciliation.",
+      "tags": ["supabase", "migrations", "repair", "operations"]
     }
   ]
 }
