@@ -137,11 +137,11 @@
       "category": "Youth",
       "program": "UTR Green Dot — Competitive",
       "ages": "9-11+",
-      "location": "Moulton Meadows Park (Mon/Wed); Laguna Beach High School (Fri)",
+      "location": "Alta Laguna Park (Mon/Wed); Laguna Beach High School (Fri)",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "5:30–7:30 PM", "coach": "Staff", "location": "Moulton Meadows Park", "note": "Until Alta Laguna resurface complete" },
-        { "day": "Wednesday", "time": "5:30–7:30 PM", "coach": "Staff", "location": "Moulton Meadows Park", "note": "Until Alta Laguna resurface complete" },
+        { "day": "Monday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
+        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Laguna Beach High School" }
       ],
       "pricing": {
@@ -149,7 +149,7 @@
         "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
         "drop_in": 70
       },
-      "description": "Competitive development for green ball players. Placement by coach invitation (level-based). Mon/Wed at Moulton until Alta Laguna resurface is complete; Fri at LBHS. Same pricing as Youth Dev tiers.",
+      "description": "Competitive development for green ball players. Placement by coach invitation (level-based). Mon/Wed at Alta Laguna; Fri at LBHS. Same pricing as Youth Dev tiers.",
       "pricingNote": "Placement by invitation. Contact us to discuss if your player may be ready.",
       "inquiryLabel": "Inquire about placement"
     },
@@ -158,11 +158,11 @@
       "category": "Youth",
       "program": "Youth Development",
       "ages": "11-18 (level-based; UTR 1.5-5)",
-      "location": "Laguna Beach High School",
+      "location": "Alta Laguna Park (Mon/Wed); Laguna Beach High School (Fri)",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School" },
-        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School" },
+        { "day": "Monday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz", "location": "Alta Laguna Park" },
+        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn", "location": "Alta Laguna Park" },
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" }
       ],
       "pricing": {
@@ -185,7 +185,7 @@
             "focus": "Stronger pace and tactical emphasis — patterns under pressure and more advanced point play."
           }
         ],
-        "structure": "Three LBTA coaches divide each session by band so athletes train in the correct group (Mon, Wed & Fri · Laguna Beach High School · 2 hr).",
+        "structure": "Three LBTA coaches divide each session by band so athletes train in the correct group (Mon/Wed · Alta Laguna Park · Fri · Laguna Beach High School · 2 hr).",
         "advancement": "Athletes at UTR 5+ belong in High Performance (separate program, schedule, and pricing)."
       },
       "pricingNote": "Under 11 but already at UTR 1.5+? Contact us to inquire about placement.",
