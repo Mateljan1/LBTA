@@ -18,6 +18,7 @@ interface Pricing {
   '3x'?: number
   '4x'?: number
   '5x'?: number
+  saturday1x?: number
   monthly?: number
   drop_in?: number
 }
@@ -246,6 +247,14 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
                   <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">4× weekly</p>
                   <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing['4x']}
+                  </p>
+                </div>
+              )}
+              {program.pricing.saturday1x && (
+                <div className="bg-brand-sandstone rounded-lg p-4 text-center">
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">Saturday option</p>
+                  <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk">
+                    ${program.pricing.saturday1x}
                   </p>
                 </div>
               )}

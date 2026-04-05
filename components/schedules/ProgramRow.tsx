@@ -5,25 +5,28 @@ import Link from 'next/link'
 import type { Program } from '@/components/ProgramCard'
 import { trackFormStart } from '@/lib/form-analytics'
 
-function getPriceFromPricing(p: Program['pricing']): { amount: number; label: string; fromMultiple?: boolean } | null {
-  const monthly = p.monthly
-  const oneX = p['1x']
-  const twoX = p['2x']
-  const threeX = p['3x']
-  const seasonPrices = [oneX, twoX, threeX].filter((n): n is number => typeof n === 'number')
-  if (monthly != null && (seasonPrices.length === 0 || monthly <= Math.min(...seasonPrices))) {
-    return { amount: monthly, label: '/mo' }
+type PricingKey = 'monthly' | '1x' | '2x' | '3x' | '4x' | '5x' | 'saturday1x' | 'drop_in'
+
+function getPricingRows(pricing: Program['pricing']): Array<{ key: PricingKey; label: string; amount: number }> {
+  const order: PricingKey[] = ['1x', '2x', '3x', '4x', '5x', 'monthly', 'saturday1x', 'drop_in']
+  const labels: Record<PricingKey, string> = {
+    '1x': '1x/wk',
+    '2x': '2x/wk',
+    '3x': '3x/wk',
+    '4x': '4x/wk',
+    '5x': '5x/wk',
+    monthly: 'Monthly',
+    saturday1x: 'Saturday option',
+    drop_in: 'Drop-in',
   }
-  if (seasonPrices.length >= 1) {
-    const min = Math.min(...seasonPrices)
-    return {
-      amount: min,
-      label: '/season',
-      fromMultiple: seasonPrices.length > 1 || (monthly != null && monthly !== min),
-    }
-  }
-  if (oneX != null) return { amount: oneX, label: '/season' }
-  return null
+
+  return order
+    .map((key) => {
+      const amount = pricing[key]
+      if (typeof amount !== 'number') return null
+      return { key, label: labels[key], amount }
+    })
+    .filter((row): row is { key: PricingKey; label: string; amount: number } => row !== null)
 }
 
 interface ProgramRowProps {
@@ -33,12 +36,12 @@ interface ProgramRowProps {
 }
 
 function ProgramRowInner({ program, onRegister, isLast }: ProgramRowProps) {
-  const { monthly, '1x': oneX, '2x': twoX, '3x': threeX } = program.pricing
-  const price = useMemo(
-    () => getPriceFromPricing(program.pricing),
-    // Intentionally only primitives that affect "from" price; program.pricing ref would force recompute every render
+  const { monthly, '1x': oneX, '2x': twoX, '3x': threeX, '4x': fourX, '5x': fiveX, saturday1x, drop_in: dropIn } = program.pricing
+  const pricingRows = useMemo(
+    () => getPricingRows(program.pricing),
+    // Intentionally only primitives that affect pricing rows; avoid object-ref churn
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [monthly, oneX, twoX, threeX]
+    [monthly, oneX, twoX, threeX, fourX, fiveX, saturday1x, dropIn]
   )
 
   const handleRegister = () => {
@@ -75,21 +78,17 @@ function ProgramRowInner({ program, onRegister, isLast }: ProgramRowProps) {
           ))}
         </div>
 
-        {/* Col 3: Price + Register */}
+        {/* Col 3: Pricing tiers + Register */}
         <div className="flex items-center gap-6 flex-shrink-0">
-          <div className="text-right w-[120px]">
-            {price && (
-              <p className="font-headline text-[20px] font-medium text-brand-pacific-dusk leading-tight">
-                {price.fromMultiple ? 'From ' : ''}${price.amount}
-                <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
-                  {price.label}
-                </span>
-              </p>
-            )}
-            {program.pricing.drop_in != null && (
-              <p className="font-sans text-[12px] text-brand-pacific-dusk/70 mt-0.5">
-                Drop-in: ${program.pricing.drop_in}
-              </p>
+          <div className="text-right w-[190px]">
+            {pricingRows.length > 0 && (
+              <div className="space-y-0.5">
+                {pricingRows.map((row) => (
+                  <p key={row.key} className="font-sans text-[12px] text-brand-pacific-dusk/80 leading-relaxed">
+                    <span className="font-medium text-brand-pacific-dusk">{row.label}</span>: ${row.amount}
+                  </p>
+                ))}
+              </div>
             )}
             {program.pricingNote && (
               <p className="font-sans text-[11px] text-brand-pacific-dusk/60 mt-1">
@@ -145,22 +144,18 @@ function ProgramRowInner({ program, onRegister, isLast }: ProgramRowProps) {
           ))}
         </div>
 
-        <div className="mt-4 pt-4 border-t border-black/[0.06] flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
-          {price && (
-            <span className="font-headline text-[20px] font-medium text-brand-pacific-dusk">
-              {price.fromMultiple ? 'From ' : ''}${price.amount}
-              <span className="font-sans text-[12px] text-brand-pacific-dusk/70 ml-0.5">
-                {price.label}
-              </span>
-            </span>
-          )}
-          {program.pricing.drop_in != null && (
-            <span className="font-sans text-[12px] text-brand-pacific-dusk/70">
-              Drop-in ${program.pricing.drop_in}
-            </span>
+        <div className="mt-4 pt-4 border-t border-black/[0.06]">
+          {pricingRows.length > 0 && (
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+              {pricingRows.map((row) => (
+                <p key={row.key} className="font-sans text-[12px] text-brand-pacific-dusk/80">
+                  <span className="font-medium text-brand-pacific-dusk">{row.label}</span>: ${row.amount}
+                </p>
+              ))}
+            </div>
           )}
           {program.pricingNote && (
-            <p className="font-sans text-[11px] text-brand-pacific-dusk/60 w-full mt-1">
+            <p className="font-sans text-[11px] text-brand-pacific-dusk/60 w-full mt-2">
               {program.pricingNote}
             </p>
           )}
