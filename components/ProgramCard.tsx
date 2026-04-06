@@ -252,7 +252,7 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
               )}
               {program.pricing.saturday1x && (
                 <div className="bg-brand-sandstone rounded-lg p-4 text-center">
-                  <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">Saturday option</p>
+                  <p className="font-sans text-[12px] text-brand-pacific-dusk/60 mb-1">1x/wk (Saturday)</p>
                   <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk">
                     ${program.pricing.saturday1x}
                   </p>

@@ -16,7 +16,7 @@ function getPricingRows(pricing: Program['pricing']): Array<{ key: PricingKey; l
     '4x': '4x/wk',
     '5x': '5x/wk',
     monthly: 'Monthly',
-    saturday1x: 'Saturday option',
+    saturday1x: '1x/wk (Saturday)',
     drop_in: 'Drop-in',
   }
 

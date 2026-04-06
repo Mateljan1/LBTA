@@ -444,18 +444,24 @@ export default function UTRMatchPlayPage() {
             ))}
           </div>
 
-          <div className="mt-12 grid md:grid-cols-[1.1fr_1fr] gap-10 md:gap-14 items-center">
-            <div className="relative aspect-[3/4] w-full max-w-[min(100%,480px)] mx-auto md:mx-0 overflow-hidden rounded-2xl border border-white/10 bg-[#0a1424]">
-              <Image
-                src={KARUE_CUTOUT_IMAGE_URL}
-                alt="Karuê Sell — exhibition guest for Grand Finals night"
-                fill
-                className="object-contain object-bottom"
-                sizes="(max-width: 767px) min(100vw - 48px, 480px), 45vw"
-                quality={95}
+          <div className="mt-12 grid items-center gap-10 md:mt-14 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:gap-14">
+            <div className="relative w-full max-w-[min(100%,460px)] mx-auto md:mx-0">
+              <div
+                className="pointer-events-none absolute -inset-5 rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(46,139,139,0.22)_0%,rgba(10,20,36,0)_70%)] opacity-70 blur-2xl"
+                aria-hidden="true"
               />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#071126_0%,#0b1f3b_62%,#102949_100%)]">
+                <Image
+                  src={KARUE_CUTOUT_IMAGE_URL}
+                  alt="Karuê Sell — exhibition guest for Grand Finals night"
+                  fill
+                  className="object-contain object-[center_bottom] scale-[1.03] md:scale-100"
+                  sizes="(max-width: 767px) min(100vw - 48px, 460px), 42vw"
+                  quality={95}
+                />
+              </div>
             </div>
-            <div className="space-y-5 text-center md:text-left">
+            <div className="space-y-5 text-center md:pr-2 md:text-left">
               <span className="text-eyebrow text-brand-sunset-cliff tracking-[0.15em]" aria-hidden="true">
                 Guest athlete
               </span>

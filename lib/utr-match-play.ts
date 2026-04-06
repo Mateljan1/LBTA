@@ -20,7 +20,7 @@ export const UTR_LBTA_ICON_WHITE_URL =
 
 /** Karué cutout for Grand Finals card (Cloudinary). */
 export const KARUE_CUTOUT_IMAGE_URL =
-  'https://res.cloudinary.com/dv033eo0x/image/upload/v1774909179/Karue_cut_out_dgrrfg.png' as const
+  'https://res.cloudinary.com/dv033eo0x/image/upload/v1775499524/Karue_bh_lbta_e0eeyb.png' as const
 
 /** Marketing stat in hero (series product bands). */
 export const UTR_DIVISION_STAT_COUNT = 5

@@ -146,7 +146,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
         '3x': '3× weekly',
         '4x': '4× weekly',
         '5x': '5× weekly',
-        'saturday1x': 'Saturday option',
+        'saturday1x': '1x/wk (Saturday)',
         'drop_in': 'Drop-in (single class)',
       }
       return { label: labels[key] || key, value: key, price: value as number }

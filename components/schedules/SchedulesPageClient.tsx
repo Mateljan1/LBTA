@@ -48,7 +48,7 @@ function formatPricingOptions(pricing: Program['pricing']): Array<{ label: strin
     '5x': '5x/wk',
     monthly: 'Monthly',
     drop_in: 'Drop-in',
-    saturday1x: 'Saturday option',
+    saturday1x: '1x/wk (Saturday)',
   }
 
   return Object.entries(pricing)
