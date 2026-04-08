@@ -12,9 +12,9 @@ export const metadata: Metadata = {
     siteName: 'Laguna Beach Tennis Academy',
     images: [
       {
-        url: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1775614949/Summer-Tennis-Camps-Program-Photo-1200x851-2_ry29pi.jpg',
+        url: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1775663649/CB91DB52-94F3-4E96-A590-8E2CECEBCF05_1_105_c_m7p2uf.jpg',
         width: 1200,
-        height: 851,
+        height: 900,
         alt: 'Laguna Beach Tennis Academy summer camps',
       },
     ],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: 'Summer Tennis Camp 2026 - Ages 5-11 - Laguna Beach Tennis Academy',
     description:
       'Tennis, Splash Wars, field games, and weekly themes at Alta Laguna Park. Ages 5-11, Mon-Thu, June-August. Small groups, real coaching. Full-day $495/week, half-day $325/week.',
-    images: ['https://res.cloudinary.com/dv033eo0x/image/upload/v1775614949/Summer-Tennis-Camps-Program-Photo-1200x851-2_ry29pi.jpg'],
+    images: ['https://res.cloudinary.com/dv033eo0x/image/upload/v1775663649/CB91DB52-94F3-4E96-A590-8E2CECEBCF05_1_105_c_m7p2uf.jpg'],
   },
 }
 
