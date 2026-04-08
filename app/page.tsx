@@ -225,38 +225,52 @@ export default function Home() {
       />
 
       <HorizonDivider animate />
-      <section className="relative min-h-[500px] overflow-hidden bg-brand-deep-water">
-        <div className="absolute inset-0">
-          <Image
-            src="https://res.cloudinary.com/dv033eo0x/image/upload/v1775614949/Summer-Tennis-Camps-Program-Photo-1200x851-2_ry29pi.jpg"
-            alt="LBTA summer camp players on court in Laguna Beach"
-            fill
-            className="object-cover"
-            style={{ objectPosition: '50% 40%' }}
-            sizes="100vw"
-            quality={95}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/35" />
-        </div>
-        <div className="relative z-10 container-lbta flex min-h-[500px] items-center py-16">
-          <div className="max-w-[38rem]">
-            <p className="font-sans text-eyebrow mb-4 text-brand-victoria-cove text-shadow-hero-readable">Summer 2026</p>
-            <h2 className="font-headline text-headline mb-5 text-white text-shadow-hero-readable">
-              Tennis, Splash Wars, and the Best Week of Their Summer
-            </h2>
-            <p className="font-sans text-body-lg leading-relaxed text-white/90 text-shadow-hero-readable">
-              Ages 5-11 at Alta Laguna Park. Monday through Thursday, June 16 - August 19. Ten themed weeks with real tennis coaching,
-              field games, arts and crafts, and Splash Wars every Thursday on the grass. Eight kids per group.
-            </p>
-            <p className="mt-5 font-sans text-[15px] font-medium text-white/90">Full-Day: $495/week - Half-Day: $325/week</p>
-            <div className="mt-8">
-              <Link
-                href="/camps"
-                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-white px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-brand-deep-water transition-all duration-300 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
-              >
-                See Camp Details
-              </Link>
-            </div>
+      <section className="section-lg bg-brand-morning-light" aria-labelledby="home-camps-spotlight">
+        <div className="container-lbta">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
+            <AnimatedSection>
+              <p className="text-eyebrow mb-4">Summer 2026 Camps</p>
+              <h2 id="home-camps-spotlight" className="font-headline text-headline mb-5 font-light">
+                Summer Camp Is Open
+              </h2>
+              <p className="text-body-lg leading-relaxed text-brand-pacific-dusk/85">
+                Ages 5-11 at Alta Laguna Park, Monday through Thursday from June 16 to August 19. Each week blends tennis coaching,
+                field games, arts and crafts, and Thursday Splash Wars in small groups.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2.5">
+                <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-brand-pacific-dusk">
+                  8 kids per group
+                </span>
+                <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-brand-pacific-dusk">
+                  Full-Day: $495/week
+                </span>
+                <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-brand-pacific-dusk">
+                  Half-Day: $325/week
+                </span>
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/camps"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-deep-water focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                >
+                  Explore Summer Camps
+                </Link>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={120}>
+              <div className="relative aspect-[5/4] overflow-hidden rounded-subtle border border-black/10 bg-brand-deep-water shadow-[0_10px_30px_rgba(0,0,0,0.10)]">
+                <Image
+                  src="https://res.cloudinary.com/dv033eo0x/image/upload/v1775614949/Summer-Tennis-Camps-Program-Photo-1200x851-2_ry29pi.jpg"
+                  alt="LBTA summer camp players on court in Laguna Beach"
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: '50% 42%' }}
+                  sizes="(max-width: 1024px) 100vw, 44vw"
+                  quality={95}
+                />
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>

@@ -91,27 +91,9 @@ export default function CampsPage() {
 
   return (
     <>
-      <section className="relative min-h-[min(78vh,700px)] overflow-hidden bg-brand-deep-water">
-        <div className="absolute inset-0">
-          <Image
-            src={CAMP_MEDIA.hero}
-            alt="LBTA summer camp players on court in Laguna Beach"
-            fill
-            className="object-cover"
-            style={{ objectPosition: '62% 62%' }}
-            sizes="100vw"
-            priority
-            quality={95}
-          />
-          <div
-            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,16,28,0.68)_0%,rgba(7,16,28,0.40)_36%,rgba(7,16,28,0.12)_62%,rgba(7,16,28,0.04)_100%)]"
-            aria-hidden="true"
-          />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/35 to-transparent" aria-hidden="true" />
-        </div>
-
-        <div className="relative z-10 mx-auto flex min-h-[min(78vh,700px)] max-w-[1200px] flex-col justify-start px-4 pb-10 pt-28 md:px-6 md:pb-12 md:pt-32 lg:pt-36">
-          <div className="max-w-[31rem] text-left">
+      <section className="bg-brand-deep-water py-16 md:py-20 lg:py-24">
+        <div className="mx-auto grid w-full max-w-[1200px] items-center gap-8 px-4 md:px-6 lg:grid-cols-[minmax(0,31rem)_minmax(0,1fr)] lg:gap-10">
+          <div className="text-left">
             <p className="font-sans text-eyebrow mb-4 text-brand-victoria-cove text-shadow-hero-readable">
               Summer 2026
             </p>
@@ -145,6 +127,20 @@ export default function CampsPage() {
                 Choose Your Schedule
               </Link>
             </div>
+          </div>
+
+          <div className="relative min-h-[320px] overflow-hidden rounded-[2px] border border-white/15 bg-black shadow-[0_14px_38px_rgba(0,0,0,0.28)] md:min-h-[430px] lg:min-h-[520px]">
+            <Image
+              src={CAMP_MEDIA.hero}
+              alt="LBTA summer camp players on court in Laguna Beach"
+              fill
+              className="object-cover"
+              style={{ objectPosition: '60% 78%' }}
+              sizes="(max-width: 1024px) 100vw, 56vw"
+              priority
+              quality={95}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-transparent" aria-hidden="true" />
           </div>
         </div>
       </section>
