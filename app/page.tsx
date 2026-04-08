@@ -58,11 +58,11 @@ export const metadata = {
     absolute: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
   },
   description:
-    'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway. Book a trial.',
+    'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway. Book a trial. Summer camps now enrolling - ages 5-11.',
   openGraph: {
     title: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
     description:
-      'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway. Book a trial.',
+      'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway. Book a trial. Summer camps now enrolling - ages 5-11.',
     type: 'website',
     images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy courts' }],
   },
@@ -223,6 +223,43 @@ export default function Home() {
         intervalMs={results.intervalMs}
         slides={results.slides as PlayerSuccessSlide[]}
       />
+
+      <HorizonDivider animate />
+      <section className="relative min-h-[500px] overflow-hidden bg-brand-deep-water">
+        <div className="absolute inset-0">
+          <Image
+            src="https://res.cloudinary.com/dv033eo0x/image/upload/v1775614949/Summer-Tennis-Camps-Program-Photo-1200x851-2_ry29pi.jpg"
+            alt="LBTA summer camp players on court in Laguna Beach"
+            fill
+            className="object-cover"
+            style={{ objectPosition: '50% 40%' }}
+            sizes="100vw"
+            quality={95}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/35" />
+        </div>
+        <div className="relative z-10 container-lbta flex min-h-[500px] items-center py-16">
+          <div className="max-w-[38rem]">
+            <p className="font-sans text-eyebrow mb-4 text-brand-victoria-cove text-shadow-hero-readable">Summer 2026</p>
+            <h2 className="font-headline text-headline mb-5 text-white text-shadow-hero-readable">
+              Tennis, Splash Wars, and the Best Week of Their Summer
+            </h2>
+            <p className="font-sans text-body-lg leading-relaxed text-white/90 text-shadow-hero-readable">
+              Ages 5-11 at Alta Laguna Park. Monday through Thursday, June 16 - August 19. Ten themed weeks with real tennis coaching,
+              field games, arts and crafts, and Splash Wars every Thursday on the grass. Eight kids per group.
+            </p>
+            <p className="mt-5 font-sans text-[15px] font-medium text-white/90">Full-Day: $495/week - Half-Day: $325/week</p>
+            <div className="mt-8">
+              <Link
+                href="/camps"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-white px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-brand-deep-water transition-all duration-300 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+              >
+                See Camp Details
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <HorizonDivider animate />
       <section id="philosophy" className="bg-brand-morning-light section-lg">

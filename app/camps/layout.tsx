@@ -1,22 +1,32 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Tennis Camps | Spring Break & Summer',
-  description: 'Spring break and summer tennis camps in Laguna Beach for ages 5-17. Full-day and half-day options with professional coaching.',
+  title: 'Summer Tennis Camp 2026 - Ages 5-11 - Laguna Beach Tennis Academy',
+  description:
+    'Tennis, Splash Wars, field games, and weekly themes at Alta Laguna Park. Ages 5-11, Mon-Thu, June-August. Small groups, real coaching. Full-day $495/week, half-day $325/week.',
   openGraph: {
-    title: 'Tennis Camps | Spring Break & Summer',
-    description: 'Spring break and summer tennis camps in Laguna Beach for ages 5-17. Full-day and half-day options with professional coaching.',
+    title: 'Summer Tennis Camp 2026 - Ages 5-11 - Laguna Beach Tennis Academy',
+    description:
+      'Tennis, Splash Wars, field games, and weekly themes at Alta Laguna Park. Ages 5-11, Mon-Thu, June-August. Small groups, real coaching. Full-day $495/week, half-day $325/week.',
     url: 'https://lagunabeachtennisacademy.com/camps',
     siteName: 'Laguna Beach Tennis Academy',
-    images: [{ url: '/images/camps/camp-action-4.webp', width: 2400, height: 1600, alt: 'Laguna Beach Tennis Academy tennis camps' }],
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1775614949/Summer-Tennis-Camps-Program-Photo-1200x851-2_ry29pi.jpg',
+        width: 1200,
+        height: 851,
+        alt: 'Laguna Beach Tennis Academy summer camps',
+      },
+    ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tennis Camps | Spring Break & Summer',
-    description: 'Spring break and summer tennis camps in Laguna Beach for ages 5-17. Full-day and half-day options with professional coaching.',
-    images: ['/images/camps/camp-action-4.webp'],
+    title: 'Summer Tennis Camp 2026 - Ages 5-11 - Laguna Beach Tennis Academy',
+    description:
+      'Tennis, Splash Wars, field games, and weekly themes at Alta Laguna Park. Ages 5-11, Mon-Thu, June-August. Small groups, real coaching. Full-day $495/week, half-day $325/week.',
+    images: ['https://res.cloudinary.com/dv033eo0x/image/upload/v1775614949/Summer-Tennis-Camps-Program-Photo-1200x851-2_ry29pi.jpg'],
   },
 }
 
