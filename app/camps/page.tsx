@@ -5,7 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import StickyCTA from '@/components/StickyCTA'
 import RegistrationModal from '@/components/RegistrationModal'
-import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import AnimatedSection from '@/components/AnimatedSection'
 
@@ -92,32 +91,32 @@ export default function CampsPage() {
 
   return (
     <>
-      <section className="relative min-h-[min(92vh,900px)] overflow-hidden bg-brand-deep-water">
+      <section className="relative min-h-[min(84vh,760px)] overflow-hidden bg-brand-deep-water">
         <div className="absolute inset-0">
           <Image
             src={CAMP_MEDIA.hero}
             alt="LBTA summer camp players on court in Laguna Beach"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 34%' }}
+            style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
             quality={95}
           />
           <div
-            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,16,28,0.84)_0%,rgba(7,16,28,0.58)_42%,rgba(7,16,28,0.30)_70%,rgba(7,16,28,0.14)_100%)]"
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,16,28,0.74)_0%,rgba(7,16,28,0.48)_42%,rgba(7,16,28,0.20)_70%,rgba(7,16,28,0.08)_100%)]"
             aria-hidden="true"
           />
-          <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/65 to-transparent" aria-hidden="true" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/55 to-transparent" aria-hidden="true" />
         </div>
 
-        <div className="relative z-10 mx-auto flex min-h-[min(92vh,900px)] max-w-[1200px] flex-col justify-end px-4 pb-14 pt-28 md:px-6 md:pb-20 md:pt-32 lg:justify-center lg:pb-24">
-          <div className="max-w-[40rem] rounded-[2px] border border-white/20 bg-black/42 p-5 backdrop-blur-[2px] md:p-8 text-left">
+        <div className="relative z-10 mx-auto flex min-h-[min(84vh,760px)] max-w-[1200px] flex-col justify-end px-4 pb-12 pt-28 md:px-6 md:pb-16 md:pt-32 lg:justify-center lg:pb-18">
+          <div className="max-w-[38rem] text-left">
             <p className="font-sans text-eyebrow mb-4 text-brand-victoria-cove text-shadow-hero-readable">
               Summer 2026
             </p>
             <h1 className="font-headline mb-5 text-[clamp(2.7rem,8vw,5.2rem)] leading-[0.95] text-white text-shadow-hero-readable">
-              Summer Camp at Alta Laguna
+              The Best Summer in Laguna Beach
             </h1>
             <p className="font-sans max-w-xl text-[16px] leading-relaxed font-normal text-white/95 text-shadow-hero-readable md:text-[18px]">
               Tennis coaching, field games, arts and crafts, and Splash Wars every Thursday.
@@ -148,7 +147,7 @@ export default function CampsPage() {
               </button>
               <Link
                 href="#choose-schedule"
-                className="inline-flex min-h-[48px] items-center justify-center border border-white/45 bg-transparent px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:border-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]"
+                className="inline-flex min-h-[48px] items-center justify-center border border-white/60 bg-transparent px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:border-white hover:bg-white/12 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]"
               >
                 Choose Your Schedule
               </Link>
@@ -157,13 +156,9 @@ export default function CampsPage() {
         </div>
       </section>
 
-      <div className="bg-white pt-4">
-        <Breadcrumbs items={[{ label: 'Camps' }]} />
-      </div>
-
       <HorizonDivider />
 
-      <section className="bg-brand-morning-light section">
+      <section className="bg-brand-morning-light pb-20 pt-14 md:pb-28 md:pt-20">
         <div className="container-lbta space-y-16 md:space-y-20">
           <AnimatedSection>
             <div className="max-w-2xl">
