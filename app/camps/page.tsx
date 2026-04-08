@@ -91,47 +91,40 @@ export default function CampsPage() {
 
   return (
     <>
-      <section className="relative min-h-[min(84vh,760px)] overflow-hidden bg-brand-deep-water">
+      <section className="relative min-h-[min(78vh,700px)] overflow-hidden bg-brand-deep-water">
         <div className="absolute inset-0">
           <Image
             src={CAMP_MEDIA.hero}
             alt="LBTA summer camp players on court in Laguna Beach"
             fill
             className="object-cover"
-            style={{ objectPosition: '50% 48%' }}
+            style={{ objectPosition: '62% 62%' }}
             sizes="100vw"
             priority
             quality={95}
           />
           <div
-            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,16,28,0.74)_0%,rgba(7,16,28,0.48)_42%,rgba(7,16,28,0.20)_70%,rgba(7,16,28,0.08)_100%)]"
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,16,28,0.68)_0%,rgba(7,16,28,0.40)_36%,rgba(7,16,28,0.12)_62%,rgba(7,16,28,0.04)_100%)]"
             aria-hidden="true"
           />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/55 to-transparent" aria-hidden="true" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/35 to-transparent" aria-hidden="true" />
         </div>
 
-        <div className="relative z-10 mx-auto flex min-h-[min(84vh,760px)] max-w-[1200px] flex-col justify-end px-4 pb-12 pt-28 md:px-6 md:pb-16 md:pt-32 lg:justify-center lg:pb-18">
-          <div className="max-w-[38rem] text-left">
+        <div className="relative z-10 mx-auto flex min-h-[min(78vh,700px)] max-w-[1200px] flex-col justify-start px-4 pb-10 pt-28 md:px-6 md:pb-12 md:pt-32 lg:pt-36">
+          <div className="max-w-[31rem] text-left">
             <p className="font-sans text-eyebrow mb-4 text-brand-victoria-cove text-shadow-hero-readable">
               Summer 2026
             </p>
             <h1 className="font-headline mb-5 text-[clamp(2.7rem,8vw,5.2rem)] leading-[0.95] text-white text-shadow-hero-readable">
               The Best Summer in Laguna Beach
             </h1>
-            <p className="font-sans max-w-xl text-[16px] leading-relaxed font-normal text-white/95 text-shadow-hero-readable md:text-[18px]">
+            <p className="font-sans max-w-[29rem] text-[15px] leading-relaxed font-normal text-white/95 text-shadow-hero-readable md:text-[17px]">
               Tennis coaching, field games, arts and crafts, and Splash Wars every Thursday.
               June 16 to August 19 with small groups and coaches who know each player by name.
             </p>
-            <div className="mt-5 flex flex-wrap gap-2.5">
-              {HERO_HIGHLIGHTS.map((highlight) => (
-                <span
-                  key={highlight}
-                  className="inline-flex items-center rounded-[2px] border border-white/30 bg-white/10 px-2.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-white/95"
-                >
-                  {highlight}
-                </span>
-              ))}
-            </div>
+            <p className="mt-4 font-sans text-[11px] uppercase tracking-[0.16em] text-white/80">
+              {HERO_HIGHLIGHTS.join(' · ')}
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <button
                 type="button"
