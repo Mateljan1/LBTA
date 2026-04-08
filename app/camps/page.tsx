@@ -74,7 +74,7 @@ const PARENT_FAQS = [
 ] as const
 
 const CAMP_MEDIA = {
-  hero: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1775663649/CB91DB52-94F3-4E96-A590-8E2CECEBCF05_1_105_c_m7p2uf.jpg',
+  hero: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1775666357/7048DEF2-DE28-42AC-A598-788BA3C3730F_1_105_c_wohq2f.jpg',
   coaching: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774752370/lbta/support/canonical/camps/support-camps-camp-action-4.webp',
   skills: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774563272/1F6EB3BC-14F6-483C-A3EB-96DF310777D3_1_105_c_l5m9hf.jpg',
   crafts: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774563357/70065BE9-F345-4466-85CD-173147425878_1_102_o_amelfg.jpg',
@@ -368,11 +368,11 @@ export default function CampsPage() {
           </AnimatedSection>
 
           <div className="grid gap-6 md:grid-cols-3">
-            <article className="rounded-[2px] border border-black/8 bg-brand-morning-light p-6">
+            <article className="h-full rounded-[2px] border border-black/8 bg-brand-morning-light p-6 flex flex-col">
               <h3 className="font-headline text-display-sm text-brand-pacific-dusk">Half-Day</h3>
               <p className="mt-2 font-headline text-[2rem] text-brand-pacific-dusk">$325 / week</p>
               <p className="mt-3 font-sans text-[14px] text-brand-pacific-dusk/75">Monday-Thursday · AM 9am-12pm or PM 12pm-3pm</p>
-              <ul className="mt-4 space-y-2 font-sans text-[14px] text-brand-pacific-dusk/80">
+              <ul className="mt-4 space-y-2 font-sans text-[14px] text-brand-pacific-dusk/80 flex-1">
                 <li>5+ hours of tennis coaching</li>
                 <li>Field games or crafts (depending on session)</li>
                 <li>One round of Splash Wars on Thursday</li>
@@ -388,14 +388,14 @@ export default function CampsPage() {
               </button>
             </article>
 
-            <article className="rounded-[2px] border border-brand-pacific-dusk/20 bg-white p-6 shadow-[0_12px_28px_rgba(27,58,92,0.08)]">
+            <article className="h-full rounded-[2px] border border-brand-pacific-dusk/20 bg-white p-6 shadow-[0_12px_28px_rgba(27,58,92,0.08)] flex flex-col">
               <p className="inline-block rounded-[2px] bg-brand-pacific-dusk px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
                 Most Popular
               </p>
               <h3 className="mt-3 font-headline text-display-sm text-brand-pacific-dusk">Full-Day</h3>
               <p className="mt-2 font-headline text-[2rem] text-brand-pacific-dusk">$495 / week</p>
               <p className="mt-3 font-sans text-[14px] text-brand-pacific-dusk/75">Monday-Thursday · 9am-3pm</p>
-              <ul className="mt-4 space-y-2 font-sans text-[14px] text-brand-pacific-dusk/80">
+              <ul className="mt-4 space-y-2 font-sans text-[14px] text-brand-pacific-dusk/80 flex-1">
                 <li>10+ hours of tennis coaching</li>
                 <li>All field games and all crafts</li>
                 <li>Both rounds of Splash Wars on Thursday</li>
@@ -411,10 +411,10 @@ export default function CampsPage() {
               </button>
             </article>
 
-            <article className="rounded-[2px] border border-black/8 bg-brand-morning-light p-6">
+            <article className="h-full rounded-[2px] border border-black/8 bg-brand-morning-light p-6 flex flex-col">
               <h3 className="font-headline text-display-sm text-brand-pacific-dusk">Multi-Week</h3>
               <p className="mt-2 font-sans text-[15px] text-brand-pacific-dusk/80">Save when you commit</p>
-              <ul className="mt-4 space-y-2 font-sans text-[14px] text-brand-pacific-dusk/80">
+              <ul className="mt-4 space-y-2 font-sans text-[14px] text-brand-pacific-dusk/80 flex-1">
                 <li>4+ weeks: 10% off</li>
                 <li>Full summer (10 weeks): 15% off</li>
                 <li>Siblings: 10% off second child (stacks with multi-week)</li>
