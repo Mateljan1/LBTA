@@ -252,7 +252,7 @@ export default function CampsPage() {
               </div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] sm:col-span-2 lg:col-span-1">
                 <Image
-                  src={CAMP_MEDIA.coaching}
+                  src="https://res.cloudinary.com/dv033eo0x/image/upload/v1775663649/CB91DB52-94F3-4E96-A590-8E2CECEBCF05_1_105_c_m7p2uf.jpg"
                   alt="Coach guiding campers through match-play points and movement patterns"
                   fill
                   className="object-cover"
