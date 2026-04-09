@@ -74,7 +74,7 @@ const PARENT_FAQS = [
 
 const CAMP_MEDIA = {
   hero: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1775666357/7048DEF2-DE28-42AC-A598-788BA3C3730F_1_105_c_wohq2f.jpg',
-  coaching: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774752370/lbta/support/canonical/camps/support-camps-camp-action-4.webp',
+  coaching: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1775614949/Summer-Tennis-Camps-Program-Photo-1200x851-2_ry29pi.jpg',
   skills: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774563272/1F6EB3BC-14F6-483C-A3EB-96DF310777D3_1_105_c_l5m9hf.jpg',
   crafts: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774563357/70065BE9-F345-4466-85CD-173147425878_1_102_o_amelfg.jpg',
   team: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774563278/07B99747-2AD2-4A37-8A69-7A5FA905E873_1_105_c_kgynhp.jpg',
