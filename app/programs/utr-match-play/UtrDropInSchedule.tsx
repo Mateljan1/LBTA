@@ -26,11 +26,11 @@ export default function UtrDropInSchedule({
   const isDark = variant === 'dark'
 
   const shell = isDark
-    ? 'rounded-2xl border border-white/[0.09] bg-[#0c1829]/95 shadow-[0_20px_60px_rgba(0,0,0,0.35)] ring-1 ring-white/[0.04] overflow-hidden'
+    ? 'rounded-2xl border border-white/[0.09] bg-brand-deep-water/95 shadow-[0_20px_60px_rgba(0,0,0,0.35)] ring-1 ring-white/[0.04] overflow-hidden'
     : 'rounded-2xl border border-brand-pacific-dusk/10 bg-white shadow-[0_8px_40px_rgba(27,58,92,0.06)] overflow-hidden'
 
   const thead = isDark
-    ? 'border-b border-white/[0.08] bg-[#0a1424]'
+    ? 'border-b border-white/[0.08] bg-brand-deep-water'
     : 'border-b border-brand-pacific-dusk/10 bg-brand-deep-water'
 
   const th = isDark
@@ -56,7 +56,7 @@ export default function UtrDropInSchedule({
   const finalsText = isDark ? 'text-[15px] font-medium text-white' : 'text-[15px] font-bold text-brand-pacific-dusk'
 
   const foot = isDark
-    ? 'px-5 py-5 md:px-8 md:py-6 border-t border-white/[0.08] bg-[#080f1a]/80'
+    ? 'px-5 py-5 md:px-8 md:py-6 border-t border-white/[0.08] bg-black/40'
     : 'px-5 py-5 md:px-8 md:py-6 border-t border-brand-pacific-dusk/8 bg-brand-morning-light/50'
 
   const footText = isDark

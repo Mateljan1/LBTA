@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "name": "LBTA Web Tokens",
+    "version": "1.0.0",
+    "updated": "2026-04-10",
+    "sourceOfTruth": "website"
+  },
+  "colors": {
+    "brand": {
+      "pacific-dusk": "#1B3A5C",
+      "deep-water": "#0F2237",
+      "victoria-cove": "#2E8B8B",
+      "thousand-steps": "#C4963C",
+      "sunset-cliff": "#E8834A",
+      "sandstone": "#F5F0E5",
+      "morning-light": "#FAF8F4",
+      "salt-air": "#FFFFFF",
+      "tide-pool": "#3A8B6E",
+      "sage-hill": "#7A8B6E",
+      "driftwood": "#B8A88A"
+    },
+    "lbta": {
+      "burnt": "#E8834A",
+      "orange": "#E8834A",
+      "red": "#F04E23",
+      "beige": "#F5F0E5",
+      "black": "#0A0A0A",
+      "white": "#FFFFFF",
+      "cream": "#FAF8F4",
+      "sand": "#F5F0E5",
+      "stone": "#E8E4DF",
+      "charcoal": "#1B3A5C",
+      "slate": "#6B6B6B",
+      "primary": "#1B3A5C",
+      "secondary": "#6B6B6B",
+      "coral": "#E8834A",
+      "coral-dark": "#D4773F",
+      "bone": "#FAF8F4"
+    }
+  }
+}

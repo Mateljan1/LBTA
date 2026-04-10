@@ -104,10 +104,17 @@ function getTierProgress(
 }
 
 function getRankAccent(rank: number): string {
-  if (rank === 1) return 'bg-brand-thousand-steps/20 border-brand-thousand-steps/40'
-  if (rank === 2) return 'bg-brand-pacific-dusk/10 border-brand-pacific-dusk/20'
-  if (rank === 3) return 'bg-brand-victoria-cove/10 border-brand-victoria-cove/30'
+  if (rank === 1) return 'bg-brand-thousand-steps/18 border-brand-thousand-steps/40'
+  if (rank === 2) return 'bg-white/10 border-white/25'
+  if (rank === 3) return 'bg-brand-victoria-cove/18 border-brand-victoria-cove/35'
   return 'bg-transparent border-transparent'
+}
+
+function getTableRowSpotlight(rank: number): string {
+  if (rank === 1) return 'bg-brand-thousand-steps/8 hover:bg-brand-thousand-steps/12'
+  if (rank === 2) return 'bg-brand-pacific-dusk/6 hover:bg-brand-pacific-dusk/10'
+  if (rank === 3) return 'bg-brand-victoria-cove/8 hover:bg-brand-victoria-cove/12'
+  return 'hover:bg-brand-morning-light/70'
 }
 
 export default function UtrLeaderboard({
@@ -178,115 +185,111 @@ export default function UtrLeaderboard({
         </h2>
       </div>
 
-      <div className="mb-4 flex flex-wrap gap-2">
-        {DIVISION_LABELS.map((div) => (
-          <button
-            key={div.key}
-            type="button"
-            onClick={() => {
-              setActiveDivision(div.key)
-              setExpandedPlayerId(null)
-            }}
-            className={[
-              'inline-flex items-center justify-center rounded-full border px-4 py-2 text-[13px] font-sans font-medium tracking-[0.16em] uppercase min-h-[48px]',
-              activeDivision === div.key
-                ? 'border-brand-pacific-dusk bg-brand-pacific-dusk text-white'
-                : 'border-brand-pacific-dusk/15 bg-white text-brand-pacific-dusk hover:border-brand-pacific-dusk/40',
-            ].join(' ')}
-          >
-            {div.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="mb-5 grid gap-3 md:grid-cols-4">
-        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
-          <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
-            <Target className="h-3.5 w-3.5" aria-hidden="true" />
-            Active players
-          </p>
-          <p className="font-headline text-headline-sm text-brand-pacific-dusk">
-            {activePlayers}
-          </p>
-        </div>
-        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
-          <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
-            <Medal className="h-3.5 w-3.5" aria-hidden="true" />
-            Week {config.current_week} matches
-          </p>
-          <p className="font-headline text-headline-sm text-brand-pacific-dusk">
-            {currentWeekMatches}
-          </p>
-        </div>
-        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
-          <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
-            <Flame className="h-3.5 w-3.5" aria-hidden="true" />
-            Hottest streak
-          </p>
-          <p className="font-headline text-headline-sm text-brand-pacific-dusk">
-            {hottestStreak} week{hottestStreak === 1 ? '' : 's'}
-          </p>
-        </div>
-        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
-          <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
-            <Trophy className="h-3.5 w-3.5" aria-hidden="true" />
-            Leader gap
-          </p>
-          <p className="font-headline text-headline-sm text-brand-pacific-dusk">
-            {leaderGap} pts
-          </p>
-        </div>
-      </div>
-
-      {topThree.length > 0 ? (
-        <div className="mb-5 grid gap-3 md:grid-cols-3">
-          {topThree.map((player) => (
-            <article
-              key={`top-${player.playerId}`}
-              className={['rounded-xl border p-4', getRankAccent(player.rank)].join(
-                ' '
-              )}
+      <div className="mb-5 rounded-2xl border border-brand-pacific-dusk/20 bg-[linear-gradient(180deg,#10243A_0%,#0F2237_52%,#0B1A2C_100%)] p-4 text-white md:p-5">
+        <div className="mb-4 flex flex-wrap gap-2">
+          {DIVISION_LABELS.map((div) => (
+            <button
+              key={div.key}
+              type="button"
+              onClick={() => {
+                setActiveDivision(div.key)
+                setExpandedPlayerId(null)
+              }}
+              className={[
+                'inline-flex min-h-[48px] items-center justify-center rounded-full border px-4 py-2 text-[13px] font-sans font-medium uppercase tracking-[0.16em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water',
+                activeDivision === div.key
+                  ? 'border-brand-thousand-steps/75 bg-brand-thousand-steps/20 text-white'
+                  : 'border-white/25 bg-white/10 text-white/80 hover:border-white/45 hover:bg-white/15',
+              ].join(' ')}
             >
-              <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
-                Rank #{player.rank}
-              </p>
-              <h3 className="font-headline text-headline-sm text-brand-pacific-dusk">
-                {player.playerName}
-              </h3>
-              <p className="text-[13px] text-brand-pacific-dusk/75">
-                {player.totalPoints} pts · {player.wins}-{player.losses}
-              </p>
-            </article>
+              {div.label}
+            </button>
           ))}
         </div>
-      ) : null}
 
-      <div className="mb-5 grid gap-3 md:grid-cols-2">
-        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
-          <p className="text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60 mb-1">
-            Biggest climb this week
-          </p>
-          <p className="text-[13px] text-brand-pacific-dusk">
-            {momentumSummary.biggestClimb
-              ? `${momentumSummary.biggestClimb.playerName} (+${momentumSummary.biggestClimb.delta} rank${momentumSummary.biggestClimb.delta === 1 ? '' : 's'})`
-              : 'No rank climbs yet this week'}
-          </p>
+        <div className="mb-4 grid gap-3 md:grid-cols-4">
+          <div className="rounded-xl border border-white/16 bg-white/8 p-3">
+            <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+              <Target className="h-3.5 w-3.5" aria-hidden="true" />
+              Active players
+            </p>
+            <p className="font-headline text-headline-sm text-white">{activePlayers}</p>
+          </div>
+          <div className="rounded-xl border border-white/16 bg-white/8 p-3">
+            <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+              <Medal className="h-3.5 w-3.5" aria-hidden="true" />
+              Week {config.current_week} matches
+            </p>
+            <p className="font-headline text-headline-sm text-white">{currentWeekMatches}</p>
+          </div>
+          <div className="rounded-xl border border-white/16 bg-white/8 p-3">
+            <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+              <Flame className="h-3.5 w-3.5" aria-hidden="true" />
+              Hottest streak
+            </p>
+            <p className="font-headline text-headline-sm text-white">
+              {hottestStreak} week{hottestStreak === 1 ? '' : 's'}
+            </p>
+          </div>
+          <div className="rounded-xl border border-white/16 bg-white/8 p-3">
+            <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+              <Trophy className="h-3.5 w-3.5" aria-hidden="true" />
+              Leader gap
+            </p>
+            <p className="font-headline text-headline-sm text-white">{leaderGap} pts</p>
+          </div>
         </div>
-        <div className="rounded-xl border border-brand-pacific-dusk/10 bg-white p-3">
-          <p className="text-[11px] uppercase tracking-[0.16em] text-brand-pacific-dusk/60 mb-1">
-            Biggest weekly gain
-          </p>
-          <p className="text-[13px] text-brand-pacific-dusk">
-            {momentumSummary.biggestWeeklyGain
-              ? `${momentumSummary.biggestWeeklyGain.playerName} (+${momentumSummary.biggestWeeklyGain.delta} pts vs last week)`
-              : 'No positive gains vs last week yet'}
-          </p>
+
+        {topThree.length > 0 ? (
+          <div className="mb-4 grid gap-3 md:grid-cols-3">
+            {topThree.map((player) => (
+              <article
+                key={`top-${player.playerId}`}
+                className={['rounded-xl border p-4', getRankAccent(player.rank)].join(
+                  ' '
+                )}
+              >
+                <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+                  Rank #{player.rank}
+                </p>
+                <h3 className="font-headline text-headline-sm text-white">
+                  {player.playerName}
+                </h3>
+                <p className="text-[13px] text-white/75">
+                  {player.totalPoints} pts · {player.wins}-{player.losses}
+                </p>
+              </article>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="grid gap-3 md:grid-cols-2">
+          <div className="rounded-xl border border-white/16 bg-white/8 p-3">
+            <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-white/60">
+              Biggest climb this week
+            </p>
+            <p className="text-[13px] text-white/80">
+              {momentumSummary.biggestClimb
+                ? `${momentumSummary.biggestClimb.playerName} (+${momentumSummary.biggestClimb.delta} rank${momentumSummary.biggestClimb.delta === 1 ? '' : 's'})`
+                : 'No rank climbs yet this week'}
+            </p>
+          </div>
+          <div className="rounded-xl border border-white/16 bg-white/8 p-3">
+            <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-white/60">
+              Biggest weekly gain
+            </p>
+            <p className="text-[13px] text-white/80">
+              {momentumSummary.biggestWeeklyGain
+                ? `${momentumSummary.biggestWeeklyGain.playerName} (+${momentumSummary.biggestWeeklyGain.delta} pts vs last week)`
+                : 'No positive gains vs last week yet'}
+            </p>
+          </div>
         </div>
       </div>
 
       {upset ? (
-        <div className="mb-4 rounded-xl border border-brand-thousand-steps/30 bg-brand-sandstone/60 p-3">
-          <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
+        <div className="mb-4 rounded-xl border border-brand-thousand-steps/35 bg-brand-thousand-steps/10 p-3">
+          <p className="mb-1 font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/75">
             Upset of the Week
           </p>
           <p className="font-sans text-sm text-brand-pacific-dusk">
@@ -297,12 +300,12 @@ export default function UtrLeaderboard({
         </div>
       ) : null}
 
-      <div className="overflow-x-auto rounded-xl border border-brand-pacific-dusk/10 bg-white shadow-[0_8px_24px_rgba(27,58,92,0.06)]">
+      <div className="overflow-x-auto rounded-xl border border-brand-pacific-dusk/14 bg-white shadow-[0_12px_30px_rgba(27,58,92,0.08)]">
         <table className="min-w-full text-left text-[13px] font-sans">
           <caption className="sr-only">
             UTR leaderboard standings with movement, weekly delta, and grand finals status.
           </caption>
-          <thead className="bg-brand-sandstone/70 text-brand-pacific-dusk/70">
+          <thead className="bg-[linear-gradient(90deg,#0F2237_0%,#17324E_100%)] text-white/85">
             <tr>
               <th className="px-3 py-2">Rank</th>
               <th className="px-3 py-2">Player</th>
@@ -315,7 +318,7 @@ export default function UtrLeaderboard({
                     aria-label="What does This Week delta mean?"
                     aria-describedby="weekly-delta-tooltip"
                     aria-expanded={isWeeklyDeltaHelpOpen}
-                    className="peer inline-flex rounded-sm text-brand-pacific-dusk/55 transition-colors hover:text-brand-pacific-dusk focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-sandstone/70"
+                    className="peer inline-flex rounded-sm text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
                     onClick={() => setIsWeeklyDeltaHelpOpen((value) => !value)}
                     onBlur={() => setIsWeeklyDeltaHelpOpen(false)}
                     onKeyDown={(event) => {
@@ -330,7 +333,7 @@ export default function UtrLeaderboard({
                     id="weekly-delta-tooltip"
                     role="tooltip"
                     className={[
-                      'pointer-events-none absolute -top-2 right-0 z-20 w-52 -translate-y-full rounded-md border border-brand-pacific-dusk/15 bg-white px-2.5 py-2 text-left text-[11px] normal-case tracking-normal text-brand-pacific-dusk/85 shadow-[0_8px_20px_rgba(27,58,92,0.12)] transition-opacity duration-200',
+                      'pointer-events-none absolute -top-2 right-0 z-20 w-52 -translate-y-full rounded-md border border-white/15 bg-brand-deep-water px-2.5 py-2 text-left text-[11px] normal-case tracking-normal text-white/90 shadow-[0_8px_20px_rgba(7,12,20,0.45)] transition-opacity duration-200',
                       isWeeklyDeltaHelpOpen
                         ? 'opacity-100'
                         : 'opacity-0 peer-hover:opacity-100 peer-focus-visible:opacity-100',
@@ -378,7 +381,12 @@ export default function UtrLeaderboard({
 
               return (
                 <React.Fragment key={row.playerId}>
-                  <tr className="border-t border-brand-pacific-dusk/8">
+                  <tr
+                    className={[
+                      'border-t border-brand-pacific-dusk/8 transition-colors',
+                      getTableRowSpotlight(row.rank),
+                    ].join(' ')}
+                  >
                     <td className="px-3 py-2 text-brand-pacific-dusk/70">{row.rank}</td>
                     <td className="px-3 py-2 text-brand-pacific-dusk">
                       <button
@@ -390,7 +398,7 @@ export default function UtrLeaderboard({
                         }
                         aria-expanded={expandedPlayerId === row.playerId}
                         aria-controls={`utr-player-details-${row.playerId}`}
-                        className="inline-flex items-center gap-2 rounded px-1 py-1 text-left hover:bg-brand-morning-light"
+                        className="inline-flex items-center gap-2 rounded px-1 py-1 text-left hover:bg-brand-pacific-dusk/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
                       >
                         <span className="font-medium">{row.playerName}</span>
                         <span className="text-[11px] text-brand-pacific-dusk/50">
@@ -499,13 +507,10 @@ export default function UtrLeaderboard({
                     </td>
                   </tr>
                   {expandedPlayerId === row.playerId ? (
-                    <tr
-                      id={`utr-player-details-${row.playerId}`}
-                      className="border-t border-brand-pacific-dusk/5 bg-brand-morning-light/35"
-                    >
+                    <tr id={`utr-player-details-${row.playerId}`} className="border-t border-brand-pacific-dusk/6 bg-brand-deep-water/[0.03]">
                       <td colSpan={11} className="px-3 py-3">
                         <div className="grid gap-2 md:grid-cols-3">
-                          <div>
+                          <div className="rounded-lg border border-brand-pacific-dusk/10 bg-white/70 p-3">
                             <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
                               Weekly breakdown
                             </p>
@@ -530,7 +535,7 @@ export default function UtrLeaderboard({
                               )}
                             </ul>
                           </div>
-                          <div>
+                          <div className="rounded-lg border border-brand-pacific-dusk/10 bg-white/70 p-3">
                             <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
                               Match history
                             </p>
@@ -566,7 +571,7 @@ export default function UtrLeaderboard({
                                 })}
                             </ul>
                           </div>
-                          <div>
+                          <div className="rounded-lg border border-brand-pacific-dusk/10 bg-white/70 p-3">
                             <p className="font-sans text-xs uppercase tracking-[0.16em] text-brand-pacific-dusk/70 mb-1">
                               Around you
                             </p>

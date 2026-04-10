@@ -274,9 +274,9 @@ export default function UTRMatchPlayDivisions({
   }
 
   const cardClass =
-    'bg-[#0c1829]/95 rounded-2xl border border-white/[0.09] p-5 md:p-6 shadow-[0_16px_48px_rgba(0,0,0,0.35)] ring-1 ring-white/[0.04] transition-all duration-300 hover:border-white/15 hover:shadow-[0_20px_56px_rgba(0,0,0,0.4)] hover:-translate-y-0.5'
+    'bg-brand-deep-water/95 rounded-2xl border border-white/[0.09] p-5 md:p-6 shadow-[0_16px_48px_rgba(0,0,0,0.35)] ring-1 ring-white/[0.04] transition-all duration-300 hover:border-white/15 hover:shadow-[0_20px_56px_rgba(0,0,0,0.4)] hover:-translate-y-0.5'
 
-  const imgWrap = 'border border-white/10 bg-[#0a1424]'
+  const imgWrap = 'border border-white/10 bg-brand-deep-water'
 
   return (
     <>

@@ -113,7 +113,7 @@ export default function PhilosophyPage() {
             <h2 className="text-display-sm heading-display mb-6">
               What We Believe
             </h2>
-            <p className="body-text text-clay-600">
+            <p className="body-text text-brand-pacific-dusk/70">
               These principles guide everything we do—from how we structure lessons 
               to how we communicate with students. They represent our commitment to 
               meaningful, lasting development.
@@ -145,14 +145,14 @@ export default function PhilosophyPage() {
                       </div>
                     )}
                     <div className="flex items-start space-x-4 mb-4">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-sage-100 flex items-center justify-center">
-                        <Icon className="h-6 w-6 text-sage-700" />
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-brand-victoria-cove/15 flex items-center justify-center">
+                        <Icon className="h-6 w-6 text-brand-victoria-cove" />
                       </div>
                       <h3 className="subhead-sm text-brand-pacific-dusk mt-1">
                         {principle.title}
                       </h3>
                     </div>
-                    <p className="text-clay-700 leading-relaxed flex-1">
+                    <p className="text-brand-pacific-dusk/80 leading-relaxed flex-1">
                       {principle.description}
                     </p>
                   </div>
@@ -166,13 +166,13 @@ export default function PhilosophyPage() {
       <HorizonDivider />
 
       {/* Methodology */}
-      <section className="section-spacing bg-sand-50">
+      <section className="section-spacing bg-brand-morning-light">
         <div className="container-luxury">
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
             <h2 className="text-display-sm heading-display mb-6">
               Our Methodology
             </h2>
-            <p className="body-text text-clay-600">
+            <p className="body-text text-brand-pacific-dusk/70">
               Development happens in stages. Our proven progression takes players from 
               wherever they start to wherever they aspire to reach.
             </p>
@@ -183,14 +183,14 @@ export default function PhilosophyPage() {
               <AnimatedSection key={item.phase} delay={index * 0.1}>
                 <div className="card-luxury p-8 md:p-10">
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-sage-600 text-sand-50 flex items-center justify-center font-display text-lg">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-brand-victoria-cove text-white flex items-center justify-center font-display text-lg">
                       {index + 1}
                     </div>
                     <h3 className="subhead-sm text-brand-pacific-dusk">
                       {item.phase}
                     </h3>
                   </div>
-                  <p className="text-clay-700 leading-relaxed pl-14">
+                  <p className="text-brand-pacific-dusk/80 leading-relaxed pl-14">
                     {item.description}
                   </p>
                 </div>
@@ -203,14 +203,14 @@ export default function PhilosophyPage() {
       <HorizonDivider />
 
       {/* Quote */}
-      <section className="section-spacing bg-clay-900 text-sand-100">
+      <section className="section-spacing bg-brand-deep-water text-white">
         <div className="container-narrow text-center">
           <AnimatedSection>
-            <blockquote className="subhead text-brand-pacific-dusk leading-relaxed mb-8">
+            <blockquote className="subhead text-white/90 leading-relaxed mb-8">
               "Tennis, at its highest level, is as much about character as it is about technique. 
               We develop both—because champions are made not just on the court, but in the mind and heart."
             </blockquote>
-            <p className="text-sand-400 tracking-wider uppercase text-sm">
+            <p className="text-white/70 tracking-wider uppercase text-sm">
               — Michael Chen, Academy Director
             </p>
           </AnimatedSection>

@@ -23,7 +23,7 @@ function ContainedShot({
 }) {
   return (
     <div
-      className={`relative w-full min-h-[260px] sm:min-h-[320px] md:min-h-[380px] rounded-[3px] overflow-hidden bg-[#0c1824] ring-1 ring-black/[0.06] shadow-[0_12px_40px_rgba(15,34,55,0.12)] ${className}`}
+      className={`relative w-full min-h-[260px] sm:min-h-[320px] md:min-h-[380px] rounded-[3px] overflow-hidden bg-brand-deep-water ring-1 ring-black/[0.06] shadow-[0_12px_40px_rgba(15,34,55,0.12)] ${className}`}
     >
       <Image
         src={src}

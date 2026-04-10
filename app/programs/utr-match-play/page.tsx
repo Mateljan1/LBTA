@@ -394,7 +394,7 @@ export default function UTRMatchPlayPage() {
                 {[
                   { tier: 'Legend', swatch: 'bg-brand-thousand-steps', req: 'Grand Finals Top 3' },
                   { tier: 'Champion', swatch: 'bg-brand-victoria-cove', req: '450+ points' },
-                  { tier: 'Advanced', swatch: 'bg-[#4A7FB5]', req: '250–449 points' },
+                  { tier: 'Advanced', swatch: 'bg-brand-sunset-cliff', req: '250–449 points' },
                   { tier: 'Contender', swatch: 'bg-brand-pacific-dusk/40', req: '100–249 points' },
                   { tier: 'Challenger', swatch: 'bg-brand-pacific-dusk/20', req: '0–99 points' },
                 ].map((t) => (
@@ -444,24 +444,28 @@ export default function UTRMatchPlayPage() {
             ))}
           </div>
 
-          <div className="mt-12 grid items-center gap-10 md:mt-14 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:gap-14">
-            <div className="relative w-full max-w-[min(100%,460px)] mx-auto md:mx-0">
+          <div className="mt-12 space-y-8 md:mt-14 md:space-y-10">
+            <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#071126_0%,#0b1f3b_62%,#102949_100%)]">
               <div
-                className="pointer-events-none absolute -inset-5 rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(46,139,139,0.22)_0%,rgba(10,20,36,0)_70%)] opacity-70 blur-2xl"
+                className="pointer-events-none absolute -inset-6 rounded-[32px] bg-[radial-gradient(ellipse_at_center,rgba(46,139,139,0.2)_0%,rgba(10,20,36,0)_72%)] opacity-75 blur-2xl"
                 aria-hidden="true"
               />
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#071126_0%,#0b1f3b_62%,#102949_100%)]">
+              <div className="relative aspect-[16/9] w-full md:aspect-[21/8]">
                 <Image
                   src={KARUE_CUTOUT_IMAGE_URL}
                   alt="Karuê Sell — exhibition guest for Grand Finals night"
                   fill
-                  className="object-contain object-[center_bottom] scale-[1.03] md:scale-100"
-                  sizes="(max-width: 767px) min(100vw - 48px, 460px), 42vw"
+                  className="object-cover object-center"
+                  sizes="100vw"
                   quality={95}
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(4,12,24,0.22)_0%,rgba(4,12,24,0.6)_100%)]"
+                  aria-hidden="true"
                 />
               </div>
             </div>
-            <div className="space-y-5 text-center md:pr-2 md:text-left">
+            <div className="mx-auto max-w-3xl space-y-5 text-center">
               <span className="text-eyebrow text-brand-sunset-cliff tracking-[0.15em]" aria-hidden="true">
                 Guest athlete
               </span>

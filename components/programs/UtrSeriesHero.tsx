@@ -80,7 +80,7 @@ export default function UtrSeriesHero() {
               <p className="font-headline text-[clamp(2rem,5vw,2.65rem)] font-bold leading-none text-white">
                 8
               </p>
-              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/40">
+              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">
                 Weekends
               </p>
             </div>
@@ -88,7 +88,7 @@ export default function UtrSeriesHero() {
               <p className="font-headline text-[clamp(2rem,5vw,2.65rem)] font-bold leading-none text-white">
                 {UTR_DIVISION_STAT_COUNT}
               </p>
-              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/40">
+              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">
                 Divisions
               </p>
             </div>
@@ -96,7 +96,7 @@ export default function UtrSeriesHero() {
               <p className="font-headline text-[clamp(1.35rem,3.5vw,1.85rem)] font-bold leading-tight text-white">
                 Sat &amp; Sun
               </p>
-              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/40">
+              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">
                 Days
               </p>
             </div>
@@ -104,7 +104,7 @@ export default function UtrSeriesHero() {
               <p className="font-headline text-[clamp(2rem,5vw,2.65rem)] font-bold leading-none text-white">
                 UTR
               </p>
-              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/40">
+              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">
                 Rated Play
               </p>
             </div>
@@ -113,13 +113,13 @@ export default function UtrSeriesHero() {
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href="#divisions"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-brand-victoria-cove px-7 font-sans text-[15px] font-bold text-white transition-opacity hover:opacity-[0.92] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f2237]"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-brand-victoria-cove px-7 font-sans text-[15px] font-bold text-white transition-opacity hover:opacity-[0.92] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               Register for Season 1
             </Link>
             <Link
               href="#schedule"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg border-[1.5px] border-white/25 bg-transparent px-7 font-sans text-[15px] font-bold text-white/80 transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f2237]/80"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-lg border-[1.5px] border-white/25 bg-transparent px-7 font-sans text-[15px] font-bold text-white/80 transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               Weekend schedule
             </Link>

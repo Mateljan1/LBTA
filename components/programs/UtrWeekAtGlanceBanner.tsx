@@ -13,9 +13,9 @@ import {
 const UTR_PAGE_EMAIL = 'andrew@lagunabeachtennisacademy.com'
 
 const COLOR_BALL_ROWS = [
-  { label: 'Red Ball', dot: 'bg-[#e54b4b]', ages: 'Ages 4–8' },
-  { label: 'Orange Ball', dot: 'bg-[#f5a623]', ages: 'Ages 7–10' },
-  { label: 'Green Ball', dot: 'bg-[#4caf50]', ages: 'Ages 10–14' },
+  { label: 'Red Ball', dot: 'bg-lbta-red', ages: 'Ages 4–8' },
+  { label: 'Orange Ball', dot: 'bg-brand-sunset-cliff', ages: 'Ages 7–10' },
+  { label: 'Green Ball', dot: 'bg-brand-tide-pool', ages: 'Ages 10–14' },
 ]
 
 /**

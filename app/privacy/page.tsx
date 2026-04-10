@@ -8,13 +8,13 @@ export const metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <section className="relative bg-gradient-to-b from-sand-50 to-white pt-40 pb-20">
+      <section className="relative bg-gradient-to-b from-brand-morning-light to-white pt-40 pb-20">
         <div className="container-narrow text-center">
           <AnimatedSection>
             <h1 className="text-display-lg heading-display mb-6">
               Privacy Policy
             </h1>
-            <p className="text-lg text-clay-600">
+            <p className="text-lg text-brand-pacific-dusk/70">
               Last updated: {new Date().toLocaleDateString()}
             </p>
           </AnimatedSection>
@@ -26,7 +26,7 @@ export default function PrivacyPage() {
           <AnimatedSection>
             <div className="space-y-8 body-text">
               <div>
-                <h2 className="text-2xl font-display font-light text-clay-900 mb-4">Introduction</h2>
+                <h2 className="text-2xl font-display font-light text-brand-deep-water mb-4">Introduction</h2>
                 <p>
                   Laguna Beach Tennis Academy ("we," "our," or "us") respects your privacy and is 
                   committed to protecting your personal information. This Privacy Policy explains how 
@@ -36,7 +36,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-display font-light text-clay-900 mb-4">Information We Collect</h2>
+                <h2 className="text-2xl font-display font-light text-brand-deep-water mb-4">Information We Collect</h2>
                 <p>We collect information that you provide directly to us, including:</p>
                 <ul className="list-disc pl-6 space-y-2 mt-4">
                   <li>Name, email address, and phone number</li>
@@ -47,7 +47,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-display font-light text-clay-900 mb-4">How We Use Your Information</h2>
+                <h2 className="text-2xl font-display font-light text-brand-deep-water mb-4">How We Use Your Information</h2>
                 <p>We use the information we collect to:</p>
                 <ul className="list-disc pl-6 space-y-2 mt-4">
                   <li>Provide and improve our tennis instruction services</li>
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-display font-light text-clay-900 mb-4">Data Security</h2>
+                <h2 className="text-2xl font-display font-light text-brand-deep-water mb-4">Data Security</h2>
                 <p>
                   We implement appropriate technical and organizational measures to protect your 
                   personal information. However, no method of transmission over the internet is 
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-display font-light text-clay-900 mb-4">Your Rights</h2>
+                <h2 className="text-2xl font-display font-light text-brand-deep-water mb-4">Your Rights</h2>
                 <p>You have the right to:</p>
                 <ul className="list-disc pl-6 space-y-2 mt-4">
                   <li>Access the personal information we hold about you</li>
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-display font-light text-clay-900 mb-4">Contact Us</h2>
+                <h2 className="text-2xl font-display font-light text-brand-deep-water mb-4">Contact Us</h2>
                 <p>
                   If you have questions about this Privacy Policy, please contact us at{' '}
                   <a href="mailto:privacy@lbtennisacademy.com" className="link-luxury">

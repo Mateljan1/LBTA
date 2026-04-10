@@ -116,7 +116,7 @@ export default function JuniorTrialLanding() {
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen bg-white">
       {/* Season Banner */}
-      <div className="bg-lbta-coral text-white py-3 text-center text-sm font-medium tracking-wide">
+      <div className="bg-brand-sunset-cliff text-white py-3 text-center text-sm font-medium tracking-wide">
         {isEarlyBird ? (
           <><span className="font-bold">Save {earlyBirdDiscountLabel}</span> {activeSeason.name} registration — Sign up by {new Date(seasonCta.earlyBirdDeadline!).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</>
         ) : (
@@ -182,7 +182,7 @@ export default function JuniorTrialLanding() {
 
             <a
               href="#register"
-              className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone"
+              className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone"
             >
               {isEarlyBird ? `Register Now & Save ${earlyBirdDiscountLabel}` : 'Register Now'}
             </a>
@@ -196,12 +196,12 @@ export default function JuniorTrialLanding() {
           <div className="bg-white shadow-2xl">
             {submitted ? (
               <div className="p-16 text-center">
-                <div className="w-16 h-16 bg-lbta-coral/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-8 h-8 text-lbta-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-16 h-16 bg-brand-sunset-cliff/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-8 h-8 text-brand-sunset-cliff" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h4 className="text-3xl font-headline text-lbta-primary mb-4">Registration Received</h4>
+                <h4 className="text-3xl font-headline text-brand-pacific-dusk mb-4">Registration Received</h4>
                 <p className="text-lbta-secondary text-lg">
                   We'll contact you within 24 hours to confirm your spot and finalize details.
                 </p>
@@ -209,10 +209,10 @@ export default function JuniorTrialLanding() {
             ) : (
               <div className="p-12">
                 <div className="mb-10">
-                  <h2 className="text-4xl font-headline text-lbta-primary mb-3">
+                  <h2 className="text-4xl font-headline text-brand-pacific-dusk mb-3">
                     Register for {activeSeason.name}
                   </h2>
-                  <p className="text-lbta-coral font-medium">
+                  <p className="text-brand-sunset-cliff font-medium">
                     {isEarlyBird
                       ? `Save ${earlyBirdDiscountLabel} — ends ${new Date(seasonCta.earlyBirdDeadline!).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} • ${activeSeason.weeks}-week session`
                       : `${activeSeason.weeks}-week session • Registration open`}
@@ -223,11 +223,11 @@ export default function JuniorTrialLanding() {
                   
                   {/* Step 1: Parent Info */}
                   <div className="pb-8 border-b border-gray-200">
-                    <h3 className="text-xl font-medium text-lbta-primary mb-6">Tell Us About Your Player</h3>
+                    <h3 className="text-xl font-medium text-brand-pacific-dusk mb-6">Tell Us About Your Player</h3>
                     
                     <div className="space-y-6">
                       <div>
-                        <label className="block text-sm font-medium text-lbta-primary mb-2">
+                        <label className="block text-sm font-medium text-brand-pacific-dusk mb-2">
                           Parent/Guardian Name *
                         </label>
                         <input
@@ -235,14 +235,14 @@ export default function JuniorTrialLanding() {
                           required
                           value={formData.parentName}
                           onChange={(e) => setFormData({...formData, parentName: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
+                          className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition"
                           placeholder="Your name"
                         />
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-lbta-primary mb-2">
+                          <label className="block text-sm font-medium text-brand-pacific-dusk mb-2">
                             Email *
                           </label>
                           <input
@@ -250,13 +250,13 @@ export default function JuniorTrialLanding() {
                             required
                             value={formData.email}
                             onChange={(e) => setFormData({...formData, email: e.target.value})}
-                            className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
+                            className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition"
                             placeholder="Email"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-lbta-primary mb-2">
+                          <label className="block text-sm font-medium text-brand-pacific-dusk mb-2">
                             Phone *
                           </label>
                           <input
@@ -264,21 +264,21 @@ export default function JuniorTrialLanding() {
                             required
                             value={formData.phone}
                             onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                            className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
+                            className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition"
                             placeholder="Phone"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-lbta-primary mb-2">
+                        <label className="block text-sm font-medium text-brand-pacific-dusk mb-2">
                           Child's Age *
                         </label>
                         <select
                           required
                           value={formData.childAge}
                           onChange={(e) => setFormData({...formData, childAge: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition bg-white"
+                          className="w-full px-4 py-3 border border-gray-300 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition bg-white"
                         >
                           <option value="">Select age group...</option>
                           <option value="3-4">Ages 3-4 (Little Tennis Stars)</option>
@@ -295,12 +295,12 @@ export default function JuniorTrialLanding() {
                   {/* Step 2: Program Selection (appears when age selected) */}
                   {formData.childAge && (
                     <div className="pb-8 border-b border-gray-200">
-                      <h3 className="text-xl font-medium text-lbta-primary mb-6">Choose Program</h3>
+                      <h3 className="text-xl font-medium text-brand-pacific-dusk mb-6">Choose Program</h3>
                       <select
                         required
                         value={formData.program}
                         onChange={(e) => setFormData({...formData, program: e.target.value})}
-                        className="w-full px-4 py-3 border-2 border-lbta-coral/30 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition bg-white"
+                        className="w-full px-4 py-3 border-2 border-brand-sunset-cliff/30 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition bg-white"
                       >
                         <option value="">Select program...</option>
                         {availablePrograms.map(prog => (
@@ -313,12 +313,12 @@ export default function JuniorTrialLanding() {
                   {/* Step 3: Schedule Selection (appears when program selected) */}
                   {formData.program && (
                     <div className="pb-8 border-b border-gray-200">
-                      <h3 className="text-xl font-medium text-lbta-primary mb-6">Select Schedule</h3>
+                      <h3 className="text-xl font-medium text-brand-pacific-dusk mb-6">Select Schedule</h3>
                       <select
                         required
                         value={formData.schedule}
                         onChange={(e) => setFormData({...formData, schedule: e.target.value})}
-                        className="w-full px-4 py-3 border-2 border-lbta-coral/30 focus:ring-2 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition bg-white"
+                        className="w-full px-4 py-3 border-2 border-brand-sunset-cliff/30 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition bg-white"
                       >
                         <option value="">Select day & time...</option>
                         {availableSchedules.map((sched: any) => (
@@ -333,7 +333,7 @@ export default function JuniorTrialLanding() {
                   {/* Step 4: Frequency Selection (appears when schedule selected) */}
                   {formData.schedule && selectedProgramData && (
                     <div className="pb-8 border-b border-gray-200">
-                      <h3 className="text-xl font-medium text-lbta-primary mb-6">Select Training Frequency</h3>
+                      <h3 className="text-xl font-medium text-brand-pacific-dusk mb-6">Select Training Frequency</h3>
                       <div className="space-y-3">
                         {Object.entries(selectedProgramData.pricing)
                           .filter(([key]) => key !== 'billing')
@@ -347,7 +347,7 @@ export default function JuniorTrialLanding() {
                                 key={freq}
                                 className={`block p-4 border-2 cursor-pointer transition ${
                                   formData.frequency === freq
-                                    ? 'border-lbta-coral bg-lbta-coral/5'
+                                    ? 'border-brand-sunset-cliff bg-brand-sunset-cliff/5'
                                     : 'border-gray-200 hover:border-gray-300'
                                 }`}
                               >
@@ -359,7 +359,7 @@ export default function JuniorTrialLanding() {
                                   onChange={(e) => setFormData({...formData, frequency: e.target.value})}
                                   className="mr-3"
                                 />
-                                <span className="font-medium text-lbta-primary">
+                                <span className="font-medium text-brand-pacific-dusk">
                                   {freq === '1x' ? '1x per week' : '2x per week'}
                                 </span>
                                 <span className="float-right">
@@ -378,13 +378,13 @@ export default function JuniorTrialLanding() {
 
                   {/* Summary Box (appears when all selections made) */}
                   {formData.schedule && (
-                    <div className="bg-lbta-bone p-6 border-l-4 border-lbta-coral">
-                      <h4 className="font-medium text-lbta-primary mb-4">Your Selection:</h4>
+                    <div className="bg-brand-morning-light p-6 border-l-4 border-brand-sunset-cliff">
+                      <h4 className="font-medium text-brand-pacific-dusk mb-4">Your Selection:</h4>
                       <div className="space-y-2 text-sm text-brand-pacific-dusk/80">
                         <p><span className="font-medium">Program:</span> {formData.program}</p>
                         <p><span className="font-medium">Schedule:</span> {formData.schedule}</p>
                         <p><span className="font-medium">Frequency:</span> {formData.frequency === '1x' ? '1x per week' : '2x per week'}</p>
-                        <p className="text-lg font-medium text-lbta-coral pt-2">
+                        <p className="text-lg font-medium text-brand-sunset-cliff pt-2">
                           Price: ${finalPrice} {selectedProgramData?.pricing.billing}
                           {discountDollars > 0 && <span className="text-sm"> (Save {earlyBirdDiscountLabel})</span>}
                         </p>
@@ -414,7 +414,7 @@ export default function JuniorTrialLanding() {
                   <button
                     type="submit"
                     disabled={isSubmitting || !formData.schedule}
-                    className="w-full bg-lbta-coral text-white font-bold py-5 px-6 text-lg tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-brand-sunset-cliff text-white font-bold py-5 px-6 text-lg tracking-wide transition duration-300 hover:bg-brand-thousand-steps disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? 'Processing...' : isEarlyBird ? `Claim My ${earlyBirdDiscountLabel} Discount →` : 'Start My Trial →'}
                   </button>
@@ -436,17 +436,17 @@ export default function JuniorTrialLanding() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center">
             <div>
-              <div className="text-4xl font-headline text-lbta-primary mb-1">20+</div>
+              <div className="text-4xl font-headline text-brand-pacific-dusk mb-1">20+</div>
               <p className="text-sm text-lbta-secondary">D1 Placements</p>
             </div>
             <div className="hidden md:block w-px h-12 bg-gray-200" />
             <div>
-              <div className="text-4xl font-headline text-lbta-primary mb-1">200+</div>
+              <div className="text-4xl font-headline text-brand-pacific-dusk mb-1">200+</div>
               <p className="text-sm text-lbta-secondary">Active Juniors</p>
             </div>
             <div className="hidden md:block w-px h-12 bg-gray-200" />
             <div>
-              <div className="text-4xl font-headline text-lbta-primary mb-1">Since 2020</div>
+              <div className="text-4xl font-headline text-brand-pacific-dusk mb-1">Since 2020</div>
               <p className="text-sm text-lbta-secondary">City Partner</p>
             </div>
           </div>
@@ -483,13 +483,13 @@ export default function JuniorTrialLanding() {
       {/* Footer */}
       <footer className="bg-brand-pacific-dusk py-12">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <p className="text-sm text-lbta-bone/60 mb-3">
+          <p className="text-sm text-brand-morning-light/60 mb-3">
             Laguna Beach Tennis Academy • Official City Partner Since 2020
           </p>
-          <p className="text-sm text-lbta-bone/60">
-            <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-lbta-coral">(949) 534-0457</a>
+          <p className="text-sm text-brand-morning-light/60">
+            <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-brand-sunset-cliff hover:text-brand-thousand-steps transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">(949) 534-0457</a>
             <span className="mx-3">•</span>
-            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral">
+            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-brand-sunset-cliff hover:text-brand-thousand-steps transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">
               info@lagunabeachtennisacademy.com
             </a>
           </p>

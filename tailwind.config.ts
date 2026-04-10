@@ -1,4 +1,7 @@
 import type { Config } from 'tailwindcss'
+import generatedTokens from './generated/tokens.tailwind.json'
+
+const { brand, lbta } = generatedTokens
 
 const config: Config = {
   content: [
@@ -9,39 +12,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // LBTA Brand Kit — Laguna Beach Palette
-        brand: {
-          'pacific-dusk': '#1B3A5C',
-          'deep-water': '#0F2237',
-          'victoria-cove': '#2E8B8B',
-          'thousand-steps': '#C4963C',
-          'sunset-cliff': '#E8834A',
-          'sandstone': '#F5F0E5',
-          'morning-light': '#FAF8F4',
-          'salt-air': '#FFFFFF',
-          'tide-pool': '#3A8B6E',
-          'sage-hill': '#7A8B6E',
-          'driftwood': '#B8A88A',
-        },
-        // LBTA mapped to Brand Kit + legacy compat
-        lbta: {
-          burnt: '#E8834A',       // Deprecated: use brand-sunset-cliff instead
-          orange: '#E8834A',      // Sunset Cliff (was #F8A121)
-          red: '#F04E23',         // Legacy — avoid in new code
-          beige: '#F5F0E5',       // Sandstone (was #F8E6BB)
-          black: '#0A0A0A',       // Rich black
-          white: '#FFFFFF',
-          cream: '#FAF8F4',       // Morning Light (was #FAF8F3)
-          sand: '#F5F0E5',        // Sandstone (was #F4EDE4)
-          stone: '#E8E4DF',       // Border/divider
-          charcoal: '#1B3A5C',    // Pacific Dusk (was #2B2B2B)
-          slate: '#6B6B6B',       // Secondary text
-          primary: '#1B3A5C',     // Pacific Dusk
-          secondary: '#6B6B6B',
-          coral: '#E8834A',       // Sunset Cliff alias
-          'coral-dark': '#D4773F',
-          bone: '#FAF8F4',        // Morning Light
-        },
+        // Generated from tokens/lbta-web-tokens.json
+        brand,
+        // Legacy namespace kept for backwards compatibility
+        lbta,
       },
       fontFamily: {
         headline: ['var(--font-cormorant)', 'Cormorant', 'Georgia', 'serif'],

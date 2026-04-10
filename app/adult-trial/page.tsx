@@ -119,7 +119,7 @@ export default function AdultTrialLanding() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#trial"
-                className="inline-flex items-center justify-center bg-white text-lbta-primary px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
+                className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
               >
                 Start Your Trial
               </a>
@@ -136,13 +136,13 @@ export default function AdultTrialLanding() {
       </section>
 
       {/* The Path Forward */}
-      <section className="py-32 bg-lbta-bone">
+      <section className="py-32 bg-brand-morning-light">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-20">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-brand-sunset-cliff mb-4">
               The 12-Week Foundation
             </p>
-            <h2 className="font-headline text-4xl lg:text-5xl text-lbta-primary mb-6">
+            <h2 className="font-headline text-4xl lg:text-5xl text-brand-pacific-dusk mb-6">
               From Zero to Match-Ready
             </h2>
             <p className="text-lg text-lbta-secondary max-w-2xl mx-auto font-light">
@@ -152,24 +152,24 @@ export default function AdultTrialLanding() {
 
           <div className="grid md:grid-cols-3 gap-12">
             <div>
-              <div className="text-7xl font-headline font-light text-lbta-coral mb-6">01</div>
-              <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 1-4</h3>
+              <div className="text-7xl font-headline font-light text-brand-sunset-cliff mb-6">01</div>
+              <h3 className="text-xl font-medium text-brand-pacific-dusk mb-3">Weeks 1-4</h3>
               <p className="text-lbta-secondary leading-relaxed">
                 Fundamentals. Movement patterns, grip, contact point. The building blocks that prevent bad habits from forming.
               </p>
             </div>
 
             <div>
-              <div className="text-7xl font-headline font-light text-lbta-coral mb-6">02</div>
-              <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 5-8</h3>
+              <div className="text-7xl font-headline font-light text-brand-sunset-cliff mb-6">02</div>
+              <h3 className="text-xl font-medium text-brand-pacific-dusk mb-3">Weeks 5-8</h3>
               <p className="text-lbta-secondary leading-relaxed">
                 Rally development. Consistency over power. Learning to sustain points and recognize patterns in play.
               </p>
             </div>
 
             <div>
-              <div className="text-7xl font-headline font-light text-lbta-coral mb-6">03</div>
-              <h3 className="text-xl font-medium text-lbta-primary mb-3">Weeks 9-12</h3>
+              <div className="text-7xl font-headline font-light text-brand-sunset-cliff mb-6">03</div>
+              <h3 className="text-xl font-medium text-brand-pacific-dusk mb-3">Weeks 9-12</h3>
               <p className="text-lbta-secondary leading-relaxed">
                 Match preparation. Scoring, strategy, singles and doubles play. You're ready to compete.
               </p>
@@ -183,10 +183,10 @@ export default function AdultTrialLanding() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-sm font-medium tracking-[0.2em] uppercase text-lbta-coral mb-4">
+              <p className="text-sm font-medium tracking-[0.2em] uppercase text-brand-sunset-cliff mb-4">
                 The System
               </p>
-              <h2 className="font-headline text-4xl text-lbta-primary mb-6">
+              <h2 className="font-headline text-4xl text-brand-pacific-dusk mb-6">
                 Why adult beginners succeed here.
               </h2>
               <div className="space-y-6 text-lbta-secondary leading-relaxed">
@@ -203,29 +203,29 @@ export default function AdultTrialLanding() {
             </div>
 
             <div className="space-y-8">
-              <div className="border-l-2 border-lbta-coral pl-6">
-                <h4 className="font-medium text-lbta-primary mb-2">Professional Systems</h4>
+              <div className="border-l-2 border-brand-sunset-cliff pl-6">
+                <h4 className="font-medium text-brand-pacific-dusk mb-2">Professional Systems</h4>
                 <p className="text-lbta-secondary text-sm">
                   The same ATP/WTA coaching methodology behind three tour players and 20+ D1 scholarships.
                 </p>
               </div>
 
-              <div className="border-l-2 border-lbta-coral pl-6">
-                <h4 className="font-medium text-lbta-primary mb-2">Adult-Focused Groups</h4>
+              <div className="border-l-2 border-brand-sunset-cliff pl-6">
+                <h4 className="font-medium text-brand-pacific-dusk mb-2">Adult-Focused Groups</h4>
                 <p className="text-lbta-secondary text-sm">
                   Maximum 4-6 adults per session. Similar skill levels. Professional environment.
                 </p>
               </div>
 
-              <div className="border-l-2 border-lbta-coral pl-6">
-                <h4 className="font-medium text-lbta-primary mb-2">Flexible Scheduling</h4>
+              <div className="border-l-2 border-brand-sunset-cliff pl-6">
+                <h4 className="font-medium text-brand-pacific-dusk mb-2">Flexible Scheduling</h4>
                 <p className="text-lbta-secondary text-sm">
                   Morning and evening sessions. Designed for working professionals and active retirees.
                 </p>
               </div>
 
-              <div className="border-l-2 border-lbta-coral pl-6">
-                <h4 className="font-medium text-lbta-primary mb-2">Video Analysis Included</h4>
+              <div className="border-l-2 border-brand-sunset-cliff pl-6">
+                <h4 className="font-medium text-brand-pacific-dusk mb-2">Video Analysis Included</h4>
                 <p className="text-lbta-secondary text-sm">
                   Track your progress. See what you're doing right. Understand what needs work.
                 </p>
@@ -242,17 +242,17 @@ export default function AdultTrialLanding() {
             <div className="grid lg:grid-cols-5">
               {/* Left: Context */}
               <div className="lg:col-span-2 bg-brand-pacific-dusk p-12 flex flex-col justify-center">
-                <h3 className="font-headline text-3xl text-lbta-bone mb-6">
+                <h3 className="font-headline text-3xl text-brand-morning-light mb-6">
                   Your Trial Session
                 </h3>
-                <div className="space-y-6 text-lbta-bone/80 text-sm leading-relaxed">
+                <div className="space-y-6 text-brand-morning-light/80 text-sm leading-relaxed">
                   <p>
                     One complimentary 90-minute group session. Experience our methodology. Meet the coaches. See if this is right for you.
                   </p>
                   <p>
                     No equipment needed. Court shoes recommended. All skill levels welcome.
                   </p>
-                  <p className="text-lbta-coral font-medium">
+                  <p className="text-brand-sunset-cliff font-medium">
                     Available mornings and evenings at Alta Laguna Park.
                   </p>
                 </div>
@@ -262,23 +262,23 @@ export default function AdultTrialLanding() {
               <div className="lg:col-span-3 p-12">
                 {submitted ? (
                   <div className="text-center py-12">
-                    <div className="w-16 h-16 bg-lbta-coral/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <svg className="w-8 h-8 text-lbta-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-16 h-16 bg-brand-sunset-cliff/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <svg className="w-8 h-8 text-brand-sunset-cliff" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h4 className="text-2xl font-headline text-lbta-primary mb-3">Request Received</h4>
+                    <h4 className="text-2xl font-headline text-brand-pacific-dusk mb-3">Request Received</h4>
                     <p className="text-lbta-secondary">We'll contact you within 24 hours to schedule your trial session.</p>
                   </div>
                 ) : (
                   <>
-                    <h4 className="text-2xl font-headline text-lbta-primary mb-8">
+                    <h4 className="text-2xl font-headline text-brand-pacific-dusk mb-8">
                       Request Your Trial
                     </h4>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-lbta-primary mb-2">
+                        <label htmlFor="name" className="block text-sm font-medium text-brand-pacific-dusk mb-2">
                           Full Name
                         </label>
                         <input
@@ -287,13 +287,13 @@ export default function AdultTrialLanding() {
                           required
                           value={formData.name}
                           onChange={(e) => setFormData({...formData, name: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
+                          className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition"
                           placeholder="John Smith"
                         />
                       </div>
 
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-lbta-primary mb-2">
+                        <label htmlFor="email" className="block text-sm font-medium text-brand-pacific-dusk mb-2">
                           Email
                         </label>
                         <input
@@ -302,13 +302,13 @@ export default function AdultTrialLanding() {
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
+                          className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition"
                           placeholder="john@example.com"
                         />
                       </div>
 
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-lbta-primary mb-2">
+                        <label htmlFor="phone" className="block text-sm font-medium text-brand-pacific-dusk mb-2">
                           Phone
                         </label>
                         <input
@@ -317,7 +317,7 @@ export default function AdultTrialLanding() {
                           required
                           value={formData.phone}
                           onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-lbta-coral focus:border-lbta-coral outline-none transition"
+                          className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition"
                           placeholder="(949) 123-4567"
                         />
                       </div>
@@ -343,7 +343,7 @@ export default function AdultTrialLanding() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-lbta-coral text-white font-medium py-4 px-6 tracking-wide transition duration-300 hover:bg-lbta-coral-dark disabled:opacity-50 disabled:cursor-not-allowed rounded-[2px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                        className="w-full bg-brand-sunset-cliff text-white font-medium py-4 px-6 tracking-wide transition duration-300 hover:bg-brand-thousand-steps disabled:opacity-50 disabled:cursor-not-allowed rounded-[2px] min-h-[48px] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                       >
                         {isSubmitting ? 'Submitting...' : 'Request Trial Session'}
                       </button>
@@ -367,21 +367,21 @@ export default function AdultTrialLanding() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
             <div>
-              <div className="text-3xl font-headline text-lbta-primary mb-1">5.0</div>
+              <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">5.0</div>
               <p className="text-sm text-lbta-secondary">Google Rating</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
-              <div className="text-3xl font-headline text-lbta-primary mb-1">200+</div>
+              <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">200+</div>
               <p className="text-sm text-lbta-secondary">Adult Members</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
-              <div className="text-3xl font-headline text-lbta-primary mb-1">Since 2020</div>
+              <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">Since 2020</div>
               <p className="text-sm text-lbta-secondary">Official City Partner</p>
             </div>
           </div>
@@ -418,20 +418,20 @@ export default function AdultTrialLanding() {
       {/* Footer */}
       <footer className="bg-brand-pacific-dusk py-12">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <p className="text-sm text-lbta-bone/60 mb-3">
+          <p className="text-sm text-brand-morning-light/60 mb-3">
             Laguna Beach Tennis Academy • Official City of Laguna Beach Tennis Partner Since 2020
           </p>
-          <p className="text-sm text-lbta-bone/60 mb-3">
-            <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-lbta-coral hover:text-lbta-coral-dark transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">(949) 534-0457</a>
+          <p className="text-sm text-brand-morning-light/60 mb-3">
+            <a href="tel:9495340457" aria-label="Call (949) 534-0457" className="text-brand-sunset-cliff hover:text-brand-thousand-steps transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">(949) 534-0457</a>
             <span className="mx-3">•</span>
-            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-lbta-coral hover:text-lbta-coral-dark transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">
+            <a href="mailto:info@lagunabeachtennisacademy.com" className="text-brand-sunset-cliff hover:text-brand-thousand-steps transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">
               info@lagunabeachtennisacademy.com
             </a>
           </p>
-          <p className="text-xs text-lbta-bone/40">
-            <a href="/privacy" className="hover:text-lbta-coral transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">Privacy Policy</a>
+          <p className="text-xs text-brand-morning-light/60">
+            <a href="/privacy" className="hover:text-brand-sunset-cliff transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">Privacy Policy</a>
             <span className="mx-2">•</span>
-            <a href="/terms" className="hover:text-lbta-coral transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">Terms of Service</a>
+            <a href="/terms" className="hover:text-brand-sunset-cliff transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-pacific-dusk rounded-sm">Terms of Service</a>
           </p>
         </div>
       </footer>

@@ -15,14 +15,14 @@ import { useEffect, useState } from 'react'
  *   - The loader script is added in app/layout.tsx via next/script
  *
  * LBTA brand colors mapped to GHL CSS variables:
- *   --chat-widget-primary-color  -> deep-water (#0F2237)
- *   --chat-widget-active-color   -> victoria-cove (#2E8B8B)
+ *   --chat-widget-primary-color  -> deep-water
+ *   --chat-widget-active-color   -> victoria-cove
  */
 
 /** LBTA brand tokens applied to widget chrome */
 const WIDGET_COLORS = {
-  primary: '#0F2237',   // deep-water -- header, send button
-  active: '#2E8B8B',    // victoria-cove -- active/focus accent
+  primary: 'rgb(15 34 55)',   // deep-water -- header, send button
+  active: 'rgb(46 139 139)',  // victoria-cove -- active/focus accent
 } as const
 
 export default function ChatWidget() {
