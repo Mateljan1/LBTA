@@ -169,7 +169,6 @@ export default function Home() {
                     src={coachImageSrc('/images/founder/andrew-mateljan-on-court.webp')}
                     alt="Andrew Mateljan, Founder and Head Coach, reaching for a low ball on court in Laguna Beach"
                     fill
-                    priority
                     className="object-cover"
                     style={{
                       objectPosition:
@@ -233,6 +232,7 @@ export default function Home() {
               <h2 id="home-camps-spotlight" className="font-headline text-headline mb-5 font-light">
                 Summer Camp Is Open
               </h2>
+              <div className="section-horizon mb-6" aria-hidden="true" />
               <p className="text-body-lg leading-relaxed text-brand-pacific-dusk/85">
                 Ages 5-11 at Alta Laguna Park, Monday through Thursday from June 16 to August 19. Each week blends tennis coaching,
                 field games, arts and crafts, and Thursday Splash Wars in small groups.
@@ -251,7 +251,7 @@ export default function Home() {
               <div className="mt-8">
                 <Link
                   href="/camps"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-deep-water focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-deep-water focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                 >
                   Explore Summer Camps
                 </Link>
@@ -281,6 +281,7 @@ export default function Home() {
           <AnimatedSection className="text-center mb-16">
             <span className="text-eyebrow mb-4 block">{homepageCopy.philosophy.eyebrow}</span>
             <h2 className="font-headline text-headline font-light">{homepageCopy.philosophy.headline}</h2>
+            <div className="section-horizon mx-auto mt-4" aria-hidden="true" />
           </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {(homepageCopy.philosophy.pillars as PhilosophyPillar[]).map((pillar, i) => {
@@ -317,6 +318,7 @@ export default function Home() {
           <AnimatedSection className="text-center mb-10 md:mb-12">
             <span className="text-eyebrow mb-4 block">{homepageCopy.programs.eyebrow}</span>
             <h2 className="font-headline text-headline font-light mb-4">{homepageCopy.programs.headline}</h2>
+            <div className="section-horizon mx-auto mb-6" aria-hidden="true" />
             <p className="text-subhead max-w-2xl mx-auto font-light">{homepageCopy.programs.subline}</p>
             <nav
               className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3"
@@ -397,7 +399,8 @@ export default function Home() {
           <AnimatedSection className="text-center mb-10 md:mb-12">
             <span className="text-eyebrow mb-4 block">Tuition Snapshot</span>
             <h2 className="font-headline text-headline font-light mb-4">What training typically costs.</h2>
-            <p className="text-subhead max-w-2xl mx-auto font-light text-brand-pacific-dusk">
+            <div className="section-horizon mx-auto mb-6" aria-hidden="true" />
+            <p className="text-subhead max-w-2xl mx-auto font-light text-brand-pacific-dusk/85">
               Full details live on the Schedule &amp; Pricing page. Here&apos;s a quick sense of how most players start.
             </p>
           </AnimatedSection>
@@ -449,9 +452,11 @@ export default function Home() {
       <section id="why-choose" className="bg-brand-sandstone section-lg">
         <div className="container-lbta">
           <AnimatedSection className="text-center mb-12">
+            <span className="text-eyebrow mb-4 block">Why families choose LBTA</span>
             <h2 className="font-headline text-headline font-light mb-4">
               {whyChoose?.headline ?? 'Why Choose Laguna Beach Tennis Academy'}
             </h2>
+            <div className="section-horizon mx-auto mb-6" aria-hidden="true" />
             <p className="text-subhead max-w-2xl mx-auto font-light text-brand-pacific-dusk">
               {whyChoose?.subline ?? ''}
             </p>
@@ -553,6 +558,7 @@ export default function Home() {
             <h2 className="font-headline text-headline-md font-light">
               Quiet confidence from the people on court.
             </h2>
+            <div className="section-horizon mx-auto mt-4" aria-hidden="true" />
           </AnimatedSection>
           <div className="grid gap-6 md:grid-cols-3">
             <AnimatedSection delay={50}>
@@ -600,7 +606,7 @@ export default function Home() {
             className="object-cover"
             style={{ objectPosition: '50% 55%' }}
             sizes="100vw"
-            quality={100}
+            quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/85 via-black/45 to-black/25" />
         </div>

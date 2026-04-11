@@ -319,7 +319,7 @@ export default function RegistrationModal({
         <button
           type="button"
           onClick={handleClose}
-          className="absolute top-3 right-3 md:top-4 md:right-4 z-10 inline-flex items-center justify-center rounded-full bg-black/5 text-brand-pacific-dusk w-9 h-9 min-w-[36px] min-h-[36px] hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+          className="absolute top-3 right-3 md:top-4 md:right-4 z-10 inline-flex items-center justify-center rounded-full bg-black/5 text-brand-pacific-dusk w-12 h-12 min-w-[48px] min-h-[48px] hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
           aria-label="Close registration"
         >
           <span aria-hidden="true">×</span>

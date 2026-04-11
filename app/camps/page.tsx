@@ -153,6 +153,7 @@ export default function CampsPage() {
             <div className="max-w-2xl">
               <p className="font-sans text-eyebrow mb-3 text-brand-victoria-cove">What they&apos;ll do</p>
               <h2 className="font-headline text-display mb-4 text-brand-pacific-dusk">A clear coaching plan, every day</h2>
+              <div className="section-horizon mb-6" aria-hidden="true" />
             </div>
           </AnimatedSection>
 
@@ -273,6 +274,7 @@ export default function CampsPage() {
           <AnimatedSection className="mb-8 md:mb-10">
             <p className="font-sans text-eyebrow mb-3 text-brand-victoria-cove">A day at camp</p>
             <h2 className="font-headline text-display mb-4 text-brand-pacific-dusk">A clear rhythm, every day</h2>
+            <div className="section-horizon mb-6" aria-hidden="true" />
           </AnimatedSection>
 
           <div className="mb-6 flex gap-2 border-b border-black/10">
@@ -283,7 +285,7 @@ export default function CampsPage() {
                 activeSchedule === 'monWed'
                   ? 'border-brand-pacific-dusk text-brand-pacific-dusk'
                   : 'border-transparent text-brand-pacific-dusk/50'
-              }`}
+              } focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white`}
             >
               Mon-Wed
             </button>
@@ -294,7 +296,7 @@ export default function CampsPage() {
                 activeSchedule === 'thursday'
                   ? 'border-brand-pacific-dusk text-brand-pacific-dusk'
                   : 'border-transparent text-brand-pacific-dusk/50'
-              }`}
+              } focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white`}
             >
               Thursday (Splash Wars)
             </button>
@@ -328,6 +330,7 @@ export default function CampsPage() {
           <AnimatedSection className="mb-8 md:mb-10">
             <p className="font-sans text-eyebrow mb-3 text-brand-victoria-cove">Weekly themes</p>
             <h2 className="font-headline text-display mb-4 text-brand-pacific-dusk">10 Weeks. 10 Themes. No Repeats.</h2>
+            <div className="section-horizon mb-6" aria-hidden="true" />
           </AnimatedSection>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             {WEEKLY_THEMES.map(([week, dates, theme, desc]) => (
@@ -349,6 +352,7 @@ export default function CampsPage() {
           <AnimatedSection className="mb-8 md:mb-10">
             <p className="font-sans text-eyebrow mb-3 text-brand-victoria-cove">Choose your schedule</p>
             <h2 className="font-headline text-display mb-4 text-brand-pacific-dusk">Choose the schedule that fits your family</h2>
+            <div className="section-horizon mb-6" aria-hidden="true" />
           </AnimatedSection>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -366,7 +370,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Half-Day', 'Ages 5-11 · Half-Day session · Alta Laguna Park')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-brand-pacific-dusk transition-all duration-300 hover:border-black/35"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
               >
                 Reserve Half-Day
               </button>
@@ -389,7 +393,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Full-Day', 'Ages 5-11 · Full-Day session · Alta Laguna Park')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-800"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
                 Reserve Full-Day
               </button>
@@ -406,7 +410,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Multi-Week Inquiry', 'Ages 5-11 - Multi-week and sibling discount inquiry')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-brand-pacific-dusk transition-all duration-300 hover:border-black/35"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
               >
                 Contact for Multi-Week Pricing
               </button>
@@ -432,7 +436,7 @@ export default function CampsPage() {
             <button
               type="button"
               onClick={() => openCampModal('Junior Development Camp (12-17)', 'Laguna Beach High School · Half-Day only · $325/week')}
-              className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-800"
+              className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               Reserve Junior Dev Camp
             </button>
@@ -447,14 +451,15 @@ export default function CampsPage() {
           <AnimatedSection className="mb-8 md:mb-10">
             <p className="font-sans text-eyebrow mb-3 text-white/65">Parent info</p>
             <h2 className="font-headline text-display mb-4 text-white">Everything parents ask before week one</h2>
+            <div className="section-horizon mb-6" aria-hidden="true" />
           </AnimatedSection>
           <div className="divide-y divide-white/10 rounded-[2px] border border-white/10 bg-white/5">
             {PARENT_FAQS.map((faq) => (
               <details key={faq.q} className="group px-5 py-1 sm:px-6 open:bg-white/[0.03]">
-                <summary className="cursor-pointer list-none py-4 font-sans text-[15px] font-medium leading-snug text-white outline-none marker:content-none [&::-webkit-details-marker]:hidden">
+                <summary className="cursor-pointer list-none rounded-[2px] py-4 font-sans text-[15px] font-medium leading-snug text-white outline-none marker:content-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water [&::-webkit-details-marker]:hidden">
                   <span className="flex items-start justify-between gap-4">
                     <span>{faq.q}</span>
-                    <span className="mt-0.5 shrink-0 text-white/50 transition-transform duration-300 group-open:rotate-180" aria-hidden="true">
+                    <span className="mt-0.5 shrink-0 text-white/70 transition-transform duration-300 group-open:rotate-180" aria-hidden="true">
                       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                       </svg>
@@ -475,6 +480,7 @@ export default function CampsPage() {
           <AnimatedSection className="mb-8 md:mb-10">
             <p className="font-sans text-eyebrow mb-3 text-brand-victoria-cove">Camps all year</p>
             <h2 className="font-headline text-display mb-4 text-brand-pacific-dusk">We Run Camps Every School Break</h2>
+            <div className="section-horizon mb-6" aria-hidden="true" />
           </AnimatedSection>
           <div className="grid gap-6 md:grid-cols-3">
             <article className="rounded-[2px] border border-black/8 bg-brand-morning-light p-5">
@@ -493,7 +499,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Reserve Your Week', 'Ages 5-11 and 12-17 · Mon-Thu weeks')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-800"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
                 Reserve Your Week
               </button>
@@ -529,7 +535,7 @@ export default function CampsPage() {
           <button
             type="button"
             onClick={() => openCampModal('Summer Camp - Reserve Your Week', 'Ages 5-11 · Mon-Thu · Alta Laguna Park')}
-            className="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-white px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-brand-deep-water transition-all duration-300 hover:bg-gray-100"
+            className="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-white px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-brand-deep-water transition-all duration-300 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
           >
             Reserve Your Week
           </button>

@@ -126,7 +126,7 @@ export default function UTRMatchPlayPage() {
           <div className="mb-10">
             <a
               href="/utr-tracker"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 text-sm font-sans font-medium uppercase tracking-[2.2px] text-white transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 text-sm font-sans font-medium uppercase tracking-[2.2px] text-white transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
             >
               View Live Tracker
             </a>
@@ -239,6 +239,7 @@ export default function UTRMatchPlayPage() {
       <section className="container-lbta section border-b border-brand-pacific-dusk/[0.08] bg-brand-sandstone/40">
         <div className="max-w-6xl mx-auto">
           <div className="text-center md:text-left mb-6 md:mb-12 md:max-w-2xl mx-auto md:mx-0">
+            <p className="text-eyebrow mb-3">Player fit</p>
             <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">Who it&apos;s for</h2>
             <div className="section-horizon mx-auto md:mx-0 mb-6 opacity-90" aria-hidden="true" />
             <p className="text-body text-brand-pacific-dusk/75 leading-relaxed">
@@ -292,6 +293,7 @@ export default function UTRMatchPlayPage() {
       {/* Every weekend — timeline steps */}
       <section className="container-lbta section border-b border-brand-pacific-dusk/[0.08] bg-white">
         <div className="max-w-4xl mx-auto">
+          <p className="text-eyebrow mb-3">Weekend flow</p>
           <h2 className="font-headline text-display text-brand-pacific-dusk mb-4">Every weekend</h2>
           <div className="section-horizon mb-6 opacity-90" aria-hidden="true" />
           <p className="text-body text-brand-pacific-dusk/70 max-w-2xl mb-14 leading-relaxed">
@@ -439,7 +441,7 @@ export default function UTRMatchPlayPage() {
               >
                 <p className="font-sans text-[22px] font-extrabold text-brand-sunset-cliff mb-2">{row.t}</p>
                 <p className="font-sans text-[19px] font-bold text-white mb-1">{row.e}</p>
-                <p className="font-sans text-[14px] text-white/50 leading-snug">{row.d}</p>
+                <p className="font-sans text-[14px] text-white/70 leading-snug">{row.d}</p>
               </div>
             ))}
           </div>
@@ -592,7 +594,7 @@ export default function UTRMatchPlayPage() {
                     href={v.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-block text-[13px] font-sans font-medium text-brand-pacific-dusk underline underline-offset-4 decoration-brand-pacific-dusk/30 hover:text-brand-victoria-cove"
+                    className="mt-4 inline-block rounded-[2px] text-[13px] font-sans font-medium text-brand-pacific-dusk underline underline-offset-4 decoration-brand-pacific-dusk/30 hover:text-brand-victoria-cove focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                   >
                     Open in Google Maps (new tab)
                   </a>
@@ -692,7 +694,7 @@ export default function UTRMatchPlayPage() {
               href={UTR_SPORTS_CLUB_REGISTER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-brand-victoria-cove/90 underline underline-offset-4 hover:text-white transition-colors"
+              className="rounded-[2px] text-brand-victoria-cove/90 underline underline-offset-4 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               Register for a single weekend on UTR
             </a>
@@ -700,19 +702,19 @@ export default function UTRMatchPlayPage() {
           <p className="text-[13px] font-sans font-light text-white/55 mb-4">
             <a
               href={`mailto:${UTR_PAGE_EMAIL}?subject=UTR%20Match%20Play%20Series%20%E2%80%94%20Question`}
-              className="text-brand-victoria-cove/90 underline underline-offset-4 hover:text-white transition-colors"
+              className="rounded-[2px] text-brand-victoria-cove/90 underline underline-offset-4 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               {UTR_PAGE_EMAIL}
             </a>
             {' · '}
             <a
               href="https://lagunabeachtennisacademy.com"
-              className="text-brand-victoria-cove/90 underline underline-offset-4 hover:text-white transition-colors"
+              className="rounded-[2px] text-brand-victoria-cove/90 underline underline-offset-4 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               lagunabeachtennisacademy.com
             </a>
           </p>
-          <p className="text-[12px] font-sans font-light text-white/50">
+          <p className="text-[12px] font-sans font-light text-white/60">
             Presented by Laguna Beach Tennis Academy &amp; Fit4Tennis
           </p>
         </div>

@@ -52,7 +52,8 @@ export default function StickyCTA({
   
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.scrollY > showAfterScroll)
+      const nextVisibility = window.scrollY > showAfterScroll
+      setIsVisible((prev) => (prev === nextVisibility ? prev : nextVisibility))
     }
     
     window.addEventListener('scroll', handleScroll, { passive: true })

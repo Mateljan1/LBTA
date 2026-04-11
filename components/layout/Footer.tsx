@@ -28,7 +28,7 @@ export default function Footer() {
                 width={180}
                 height={54}
                 sizes="180px"
-                quality={100}
+                quality={90}
                 className="brightness-0 invert opacity-90"
               />
             </Link>

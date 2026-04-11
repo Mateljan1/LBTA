@@ -60,45 +60,57 @@ export default async function UtrTrackerPage() {
   }
 
   return (
-    <div className="bg-brand-morning-light text-brand-pacific-dusk">
-      <main className="container-lbta section-sm">
-        <header className="mb-10 text-center md:text-left">
-          <p className="text-eyebrow text-brand-victoria-cove mb-2">Season tracker</p>
-          <h1 className="font-headline text-display text-brand-pacific-dusk mb-3">UTR Match Play Series — Live Tracker</h1>
-          <p className="text-body text-brand-pacific-dusk/75 max-w-2xl">
+    <div className="utr-cinematic-shell">
+      <main className="utr-cinematic-main container-lbta section-sm">
+        <header className="utr-cinematic-hero mb-10 p-6 md:p-8">
+          <p className="text-eyebrow text-brand-thousand-steps mb-2">Season tracker</p>
+          <h1 className="font-headline text-display text-white mb-3">UTR Match Play Series — Live Tracker</h1>
+          <p className="text-body text-white/75 max-w-3xl">
             Season points, tiers, and Color Ball passports for LBTA&apos;s UTR Match Play Series. Standings update as match
             results and attendance are entered by coaches.
           </p>
         </header>
 
-        <section className="mb-12 grid gap-4 rounded-2xl border border-brand-pacific-dusk/10 bg-white p-5 md:grid-cols-3">
-          <div>
-            <h2 className="font-headline text-headline-sm mb-2">How points work</h2>
-            <p className="text-body-sm text-brand-pacific-dusk/75">
-              Weekly totals include match points, attendance points, streak bonus,
-              and any week multiplier from season config.
+        <section className="mb-12 grid gap-4 md:grid-cols-3">
+          <article className="utr-cinematic-card p-4">
+            <h2 className="font-headline text-headline-sm text-white mb-2">
+              <span className="utr-cinematic-step">1</span>
+              How points work
+            </h2>
+            <p className="text-[15px] leading-relaxed text-white/70">
+              Weekly totals include match points, attendance points, streak bonus, and any week multiplier from season
+              config.
             </p>
-          </div>
-          <div>
-            <h2 className="font-headline text-headline-sm mb-2">Grand Finals</h2>
-            <p className="text-body-sm text-brand-pacific-dusk/75">
-              GF eligibility is based on minimum weeks played. Track the GF column
-              in each leaderboard to see current qualification status.
+          </article>
+          <article className="utr-cinematic-card p-4">
+            <h2 className="font-headline text-headline-sm text-white mb-2">
+              <span className="utr-cinematic-step">2</span>
+              Grand Finals
+            </h2>
+            <p className="text-[15px] leading-relaxed text-white/70">
+              GF eligibility is based on minimum weeks played. Track the GF column in each leaderboard to see current
+              qualification status.
             </p>
-          </div>
-          <div>
-            <h2 className="font-headline text-headline-sm mb-2">Need schedule or registration?</h2>
-            <p className="text-body-sm text-brand-pacific-dusk/75">
-              For program details and current schedule, use the official pages:
-              {' '}
-              <Link className="underline decoration-brand-victoria-cove underline-offset-4" href="/programs/utr-match-play">UTR Match Play</Link>
-              {' '}and{' '}
-              <Link className="underline decoration-brand-victoria-cove underline-offset-4" href="/schedules">Schedules</Link>.
+          </article>
+          <article className="utr-cinematic-card p-4">
+            <h2 className="font-headline text-headline-sm text-white mb-2">
+              <span className="utr-cinematic-step">3</span>
+              Need schedule or registration?
+            </h2>
+            <p className="text-[15px] leading-relaxed text-white/70">
+              For program details and current schedule, use the official pages:{' '}
+              <Link className="underline decoration-brand-thousand-steps underline-offset-4 text-white" href="/programs/utr-match-play">
+                UTR Match Play
+              </Link>{' '}
+              and{' '}
+              <Link className="underline decoration-brand-thousand-steps underline-offset-4 text-white" href="/schedules">
+                Schedules
+              </Link>.
             </p>
-          </div>
+          </article>
         </section>
 
-        <section className="mb-16">
+        <section className="utr-cinematic-panel mb-14 p-5 md:p-6">
           <UtrLeaderboard
             config={config}
             satSingles={{ standings: satSinglesStandings, matches: satSinglesMatches }}
@@ -107,7 +119,7 @@ export default async function UtrTrackerPage() {
           />
         </section>
 
-        <section>
+        <section className="utr-cinematic-panel p-5 md:p-6">
           <ColorBallPassportGrid
             players={colorBallPlayers}
             attendance={attendance}

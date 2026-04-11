@@ -75,7 +75,7 @@ export default function AdultTrialLanding() {
           <a
             href="tel:9495340457"
             aria-label="Call (949) 534-0457"
-            className="text-white font-medium hover:text-white/80 transition text-sm tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50 rounded-sm"
+            className="text-white font-medium hover:text-white/80 transition text-sm tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
           >
             (949) 534-0457
           </a>
@@ -119,14 +119,14 @@ export default function AdultTrialLanding() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#trial"
-                className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
+                className="inline-flex items-center justify-center bg-white text-brand-pacific-dusk px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-brand-sandstone rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               >
                 Start Your Trial
               </a>
               <a
                 href="tel:9495340457"
                 aria-label="Call (949) 534-0457"
-                className="inline-flex items-center justify-center border border-white text-white px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-white/10 rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
+                className="inline-flex items-center justify-center border border-white text-white px-10 py-4 font-medium tracking-wide transition-all duration-300 hover:bg-white/10 rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               >
                 Call to Discuss
               </a>

@@ -20,6 +20,8 @@ const HERO_POSTER = '/images/hero/hero-poster.webp'
 export default function HomeHero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [heroParallax, setHeroParallax] = useState(0)
+  const scrollRafRef = useRef<number | null>(null)
+  const lastParallaxRef = useRef(0)
   const [reduceMotion, setReduceMotion] = useState(false)
   const [videoPlaying, setVideoPlaying] = useState(false)
 
@@ -44,9 +46,25 @@ export default function HomeHero() {
 
   useEffect(() => {
     if (reduceMotion) return
-    const handleScroll = () => setHeroParallax(window.scrollY * 0.3)
+    const handleScroll = () => {
+      if (scrollRafRef.current !== null) return
+      scrollRafRef.current = window.requestAnimationFrame(() => {
+        scrollRafRef.current = null
+        const nextParallax = window.scrollY * 0.3
+        if (Math.abs(nextParallax - lastParallaxRef.current) < 0.5) return
+        lastParallaxRef.current = nextParallax
+        setHeroParallax(nextParallax)
+      })
+    }
+
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (scrollRafRef.current !== null) {
+        window.cancelAnimationFrame(scrollRafRef.current)
+        scrollRafRef.current = null
+      }
+    }
   }, [reduceMotion])
 
   const parallaxStyle =
