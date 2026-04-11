@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Program } from '@/components/ProgramCard'
@@ -67,6 +67,27 @@ export default function SchedulesPageClient({
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null)
   const [selectedCamp, setSelectedCamp] = useState<CampWithWeeks | null>(null)
   const [privateCoachName, setPrivateCoachName] = useState<string | null>(null)
+  const [expandedSections, setExpandedSections] = useState({
+    private: false,
+    camps: false,
+    leagues: false,
+  })
+
+  const expandSection = (section: 'private' | 'camps' | 'leagues') => {
+    setExpandedSections((prev) => ({ ...prev, [section]: true }))
+  }
+
+  useEffect(() => {
+    const handleJump = (event: Event) => {
+      const customEvent = event as CustomEvent<{ id?: string }>
+      const targetId = customEvent.detail?.id
+      if (targetId === 'private' || targetId === 'camps' || targetId === 'leagues') {
+        expandSection(targetId)
+      }
+    }
+    window.addEventListener('lbta:schedules:jump', handleJump)
+    return () => window.removeEventListener('lbta:schedules:jump', handleJump)
+  }, [])
 
   return (
     <>
@@ -144,24 +165,99 @@ export default function SchedulesPageClient({
 
       <HorizonDivider />
 
-      <PrivateCoachingSection
-        coaches={year2026.privateCoaching}
-        monthlyPrograms={year2026.monthlyPrograms}
-        discounts={year2026.discounts}
-        scholarships={{ available: year2026.scholarships.available, coverage: year2026.scholarships.coverage ?? '', email: year2026.scholarships.email ?? '' }}
-        onBookCoach={setPrivateCoachName}
-      />
+      {expandedSections.private ? (
+        <PrivateCoachingSection
+          coaches={year2026.privateCoaching}
+          monthlyPrograms={year2026.monthlyPrograms}
+          discounts={year2026.discounts}
+          scholarships={{ available: year2026.scholarships.available, coverage: year2026.scholarships.coverage ?? '', email: year2026.scholarships.email ?? '' }}
+          onBookCoach={setPrivateCoachName}
+        />
+      ) : (
+        <section id="private" className="scroll-mt-28 bg-brand-morning-light py-14 md:py-16">
+          <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+            <div className="rounded-lg border border-black/[0.08] bg-white px-6 py-7 md:px-8 md:py-8">
+              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
+                ONE-ON-ONE
+              </p>
+              <h2 className="font-headline text-[30px] md:text-[38px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
+                Private Coaching
+              </h2>
+              <p className="font-sans text-[15px] md:text-[17px] text-brand-pacific-dusk/70 max-w-2xl mb-6">
+                Personalized sessions with LBTA coaches, plus private-rate packs and monthly drop-in options.
+              </p>
+              <button
+                type="button"
+                onClick={() => expandSection('private')}
+                className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.3px] text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              >
+                Show Private Coaching Details
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
       <HorizonDivider />
 
-      <CampsSection
-        camps={scheduleCamps}
-        onRegister={setSelectedCamp}
-      />
+      {expandedSections.camps ? (
+        <CampsSection
+          camps={scheduleCamps}
+          onRegister={setSelectedCamp}
+        />
+      ) : (
+        <section id="camps" className="scroll-mt-28 bg-brand-morning-light py-14 md:py-16">
+          <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+            <div className="rounded-lg border border-black/[0.08] bg-white px-6 py-7 md:px-8 md:py-8">
+              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
+                SEASONAL & HOLIDAY
+              </p>
+              <h2 className="font-headline text-[30px] md:text-[38px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
+                Holiday Camps
+              </h2>
+              <p className="font-sans text-[15px] md:text-[17px] text-brand-pacific-dusk/70 max-w-2xl mb-6">
+                Full camp lineup for spring, summer, and school-break windows with ages, schedules, and pricing.
+              </p>
+              <button
+                type="button"
+                onClick={() => expandSection('camps')}
+                className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.3px] text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              >
+                Show Camp Schedule Details
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
       <HorizonDivider />
 
-      <LeaguesSection leagues={leagues} />
+      {expandedSections.leagues ? (
+        <LeaguesSection leagues={leagues} />
+      ) : (
+        <section id="leagues" className="scroll-mt-28 bg-white py-14 md:py-16">
+          <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+            <div className="rounded-lg border border-black/[0.08] bg-brand-morning-light px-6 py-7 md:px-8 md:py-8">
+              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
+                LEAGUES & MATCH PLAY
+              </p>
+              <h2 className="font-headline text-[30px] md:text-[38px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
+                USTA + UTR Competition
+              </h2>
+              <p className="font-sans text-[15px] md:text-[17px] text-brand-pacific-dusk/70 max-w-2xl mb-6">
+                Team league options and UTR Match Play division details, with dates, levels, and registration paths.
+              </p>
+              <button
+                type="button"
+                onClick={() => expandSection('leagues')}
+                className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.3px] text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              >
+                Show League & Match Play Details
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
       <HorizonDivider />
 

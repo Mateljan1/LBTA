@@ -14,6 +14,7 @@ const SECTIONS = [
 const SECTION_IDS = SECTIONS.filter((s) => !('href' in s && s.href)).map((s) => s.id)
 
 function scrollToSection(id: string) {
+  window.dispatchEvent(new CustomEvent('lbta:schedules:jump', { detail: { id } }))
   const el = document.getElementById(id)
   if (!el) return
   const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
