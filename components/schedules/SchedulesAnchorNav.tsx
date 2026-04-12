@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 const SECTIONS = [
-  { id: 'programs', label: 'Programs' },
+  { id: 'programs', label: 'Find Programs' },
   { id: 'private', label: 'Private Lessons' },
   { id: 'camps', label: 'Camps' },
   { id: 'leagues', label: 'Leagues & Match Play' },

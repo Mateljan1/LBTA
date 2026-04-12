@@ -1,13 +1,12 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import ProgramCard, { type Program } from '@/components/ProgramCard'
-import ProgramRow from './ProgramRow'
+import type { Program } from '@/components/ProgramCard'
+import SchedulesProgramCard from './ProgramCard'
+import SchedulesProgramFinder, { type ProgramFilters } from './SchedulesProgramFinder'
 import type { SeasonKey, SeasonDataForDisplay } from '@/lib/season-utils'
 import { SEASON_KEYS, SEASON_LABELS } from '@/lib/season-utils'
-
-type ViewMode = 'list' | 'cards'
 
 interface ProgramsSectionProps {
   programsBySeason: Record<SeasonKey, Program[]>
@@ -16,18 +15,49 @@ interface ProgramsSectionProps {
   onRegister: (program: Program) => void
 }
 
-const CATEGORY_ORDER = ['Junior', 'Youth', 'Adult', 'Fitness']
-const CATEGORY_EYEBROWS: Record<string, string> = {
-  Junior: 'AGES 3–11',
-  Youth: 'AGES 11–18',
-  Adult: 'ADULT PROGRAMS',
-  Fitness: 'FITNESS & COMMUNITY',
+const DEFAULT_FILTERS: ProgramFilters = {
+  playerType: 'all',
+  level: 'all',
+  day: 'all',
 }
-
 const STATUS_LABELS: Record<string, string> = {
   registration_open: 'Now enrolling',
   active: 'In progress',
   coming_soon: 'Coming soon',
+}
+
+const DAY_SHORTCUTS: Record<Exclude<ProgramFilters['day'], 'all'>, string> = {
+  mon: 'mon',
+  tue: 'tue',
+  wed: 'wed',
+  thu: 'thu',
+  fri: 'fri',
+  sat: 'sat',
+  sun: 'sun',
+}
+
+function normalizePlayerType(program: Program): Exclude<ProgramFilters['playerType'], 'all'> {
+  const category = program.category.toLowerCase()
+  const name = program.program.toLowerCase()
+  if (category.includes('fitness') || name.includes('liveball') || name.includes('cardio')) return 'fitness'
+  if (category.includes('adult') || name.includes('adult')) return 'adult'
+  if (category.includes('youth') || name.includes('high performance') || name.includes('utr')) return 'youth'
+  return 'junior'
+}
+
+function normalizeLevel(program: Program): Exclude<ProgramFilters['level'], 'all'> {
+  const haystack = `${program.program} ${program.description} ${program.ages}`.toLowerCase()
+  if (haystack.includes('true beginner') || haystack.includes('beginner')) return 'beginner'
+  if (haystack.includes('intermediate') || haystack.includes('ntrp 3.0') || haystack.includes('ntrp 3.5')) return 'intermediate'
+  if (haystack.includes('advanced') || haystack.includes('utr 5+')) return 'advanced'
+  if (haystack.includes('competitive') || haystack.includes('match play') || haystack.includes('utr')) return 'competitive'
+  return 'intermediate'
+}
+
+function matchesDay(program: Program, day: ProgramFilters['day']): boolean {
+  if (day === 'all') return true
+  const token = DAY_SHORTCUTS[day]
+  return program.schedule.some((slot) => slot.day.toLowerCase().slice(0, 3) === token)
 }
 
 export default function ProgramsSection({
@@ -37,23 +67,22 @@ export default function ProgramsSection({
   onRegister,
 }: ProgramsSectionProps) {
   const [activeSeason, setActiveSeason] = useState<SeasonKey>(() => initialSeason)
-  const [viewMode, setViewMode] = useState<ViewMode>('list')
-  const [expandedProgramId, setExpandedProgramId] = useState<string | null>(null)
+  const [filters, setFilters] = useState<ProgramFilters>(DEFAULT_FILTERS)
   const programs: Program[] = useMemo(
     () => programsBySeason[activeSeason] ?? programsBySeason.winter ?? [],
     [programsBySeason, activeSeason]
   )
 
-  const grouped = useMemo(() => {
-    const map: Record<string, Program[]> = {}
-    for (const p of programs) {
-      if (!map[p.category]) map[p.category] = []
-      map[p.category].push(p)
-    }
-    return CATEGORY_ORDER
-      .filter((cat) => map[cat]?.length)
-      .map((cat) => ({ category: cat, programs: map[cat] }))
-  }, [programs])
+  const filteredPrograms = useMemo(() => {
+    return programs.filter((program) => {
+      const playerType = normalizePlayerType(program)
+      const level = normalizeLevel(program)
+      const byType = filters.playerType === 'all' || playerType === filters.playerType
+      const byLevel = filters.level === 'all' || level === filters.level
+      const byDay = matchesDay(program, filters.day)
+      return byType && byLevel && byDay
+    })
+  }, [programs, filters])
 
   const seasonData = seasons[activeSeason]
   const seasonInfoLine = seasonData
@@ -91,25 +120,20 @@ export default function ProgramsSection({
     return null
   }, [seasons, activeSeason])
 
-  const focusTab = useCallback((key: SeasonKey) => {
+  const focusTab = (key: SeasonKey) => {
     setActiveSeason(key)
-    setExpandedProgramId(null)
+    setFilters(DEFAULT_FILTERS)
     setTimeout(() => document.getElementById(`season-tab-${key}`)?.focus(), 0)
-  }, [])
-
-  const handleExpandChange = useCallback((programId: string) => {
-    setExpandedProgramId((prev) => (prev === programId ? null : programId))
-  }, [])
+  }
 
   return (
     <section id="programs" className="scroll-mt-32 bg-white py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 min-w-0">
-        {/* Section heading */}
         <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
           SEASONAL PROGRAMS
         </p>
         <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
-          Programs & Schedule
+          Find Your Program Faster
         </h2>
         <div className="section-horizon mb-8 opacity-90" aria-hidden="true" />
 
@@ -122,7 +146,6 @@ export default function ProgramsSection({
           </p>
         )}
 
-        {/* Season pills — tablist for keyboard nav */}
         <div
           role="tablist"
           aria-label="Season"
@@ -139,7 +162,10 @@ export default function ProgramsSection({
                 aria-selected={isActive}
                 aria-current={isCurrent ? 'true' : undefined}
                 tabIndex={isActive ? 0 : -1}
-                onClick={() => setActiveSeason(key)}
+                onClick={() => {
+                  setActiveSeason(key)
+                  setFilters(DEFAULT_FILTERS)
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                     e.preventDefault()
@@ -184,7 +210,6 @@ export default function ProgramsSection({
           })}
         </div>
 
-        {/* Season info line */}
         {seasonInfoLine && (
           <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-2">
             {seasonInfoLine}
@@ -200,73 +225,46 @@ export default function ProgramsSection({
           </p>
         )}
 
-        {/* View: List | Cards (single-expand in card view) */}
-        <div className="flex flex-wrap items-center gap-2 mb-6" role="tablist" aria-label="View">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={viewMode === 'list'}
-            tabIndex={viewMode === 'list' ? 0 : -1}
-            onClick={() => { setViewMode('list'); setExpandedProgramId(null) }}
-            className={`font-sans text-[13px] font-medium tracking-[0.05em] px-4 py-2.5 rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 ${viewMode === 'list' ? 'bg-black text-white' : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'}`}
-          >
-            List
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={viewMode === 'cards'}
-            tabIndex={viewMode === 'cards' ? 0 : -1}
-            onClick={() => setViewMode('cards')}
-            className={`font-sans text-[13px] font-medium tracking-[0.05em] px-4 py-2.5 rounded-[2px] min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 ${viewMode === 'cards' ? 'bg-black text-white' : 'bg-brand-sandstone text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk hover:bg-brand-sandstone/80'}`}
-          >
-            Cards
-          </button>
-        </div>
+        <SchedulesProgramFinder
+          filters={filters}
+          onChange={setFilters}
+          onReset={() => setFilters(DEFAULT_FILTERS)}
+          resultCount={filteredPrograms.length}
+        />
 
-        {/* Grouped programs */}
-        <div className="space-y-12">
-          {grouped.map(({ category, programs: catPrograms }) => (
-            <div
-              key={category}
-              id={category === 'Fitness' ? 'fitness' : undefined}
-              className={category === 'Fitness' ? 'scroll-mt-28 md:scroll-mt-32' : undefined}
-            >
-              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-2">
-                {CATEGORY_EYEBROWS[category] || category.toUpperCase()}
-              </p>
-              <h3 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk mb-2">
-                {category === 'Youth' ? 'Youth & High Performance' : `${category} Programs`}
-              </h3>
-              <div className="section-horizon mb-4 opacity-90" aria-hidden="true" />
-
-              {viewMode === 'list' ? (
-                <div className="bg-white border border-black/[0.06] rounded-lg overflow-hidden">
-                  {catPrograms.map((program, i) => (
-                    <ProgramRow
-                      key={program.id}
-                      program={program}
-                      onRegister={onRegister}
-                      isLast={i === catPrograms.length - 1}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {catPrograms.map((program) => (
-                    <ProgramCard
-                      key={program.id}
-                      program={program}
-                      onRegister={onRegister}
-                      isExpanded={expandedProgramId === program.id}
-                      onToggle={() => handleExpandChange(program.id)}
-                    />
-                  ))}
-                </div>
-              )}
+        {filteredPrograms.length > 0 ? (
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredPrograms.map((program) => (
+              <SchedulesProgramCard
+                key={program.id}
+                program={program}
+                onRegister={onRegister}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="mt-6 rounded-lg border border-black/[0.08] bg-brand-morning-light px-5 py-8 text-center">
+            <p className="font-headline text-[30px] text-brand-pacific-dusk md:text-[34px]">No exact match yet</p>
+            <p className="mt-2 font-sans text-[15px] leading-relaxed text-brand-pacific-dusk/70">
+              Reset filters or contact us and we will recommend the best fit for your player.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => setFilters(DEFAULT_FILTERS)}
+                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.1px] text-brand-pacific-dusk transition-all duration-300 hover:border-brand-victoria-cove hover:bg-brand-sandstone/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+              >
+                Reset Filters
+              </button>
+              <Link
+                href="/contact"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-5 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.1px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              >
+                Contact Us
+              </Link>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   )

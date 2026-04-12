@@ -15,6 +15,7 @@ import CampsSection from '@/components/schedules/CampsSection'
 import LeaguesSection from '@/components/schedules/LeaguesSection'
 import PrivateCoachingSection from '@/components/schedules/PrivateCoachingSection'
 import SchedulesAnchorNav from '@/components/schedules/SchedulesAnchorNav'
+import SchedulesQuickActions from '@/components/schedules/SchedulesQuickActions'
 import type { SeasonKey, SeasonDataForDisplay } from '@/lib/season-utils'
 import type { LeaguesData, Year2026Sections } from '@/lib/schedule-schemas'
 
@@ -89,6 +90,15 @@ export default function SchedulesPageClient({
     return () => window.removeEventListener('lbta:schedules:jump', handleJump)
   }, [])
 
+  const scrollToPrograms = () => {
+    const target = document.getElementById('programs')
+    if (!target) return
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' })
+  }
+
+  const hasOpenModal = Boolean(selectedProgram || selectedCamp || privateCoachName)
+
   return (
     <>
       <section className="relative min-h-[42vh] md:min-h-[44vh] flex items-center overflow-hidden bg-brand-deep-water">
@@ -118,6 +128,9 @@ export default function SchedulesPageClient({
           <p className="font-sans text-[16px] md:text-[18px] text-white max-w-[600px] mx-auto leading-relaxed text-shadow-hero-readable max-md:text-white/95 md:text-white/90">
             Programs, camps, leagues, and private coaching. Everything we offer, in one place.
           </p>
+          <div className="mt-8 mx-auto max-w-[920px] rounded-lg border border-white/20 bg-white/95 p-3 md:p-4">
+            <SchedulesQuickActions onFindProgram={scrollToPrograms} />
+          </div>
         </div>
       </section>
 
@@ -131,12 +144,12 @@ export default function SchedulesPageClient({
 
       <div className="bg-white px-4 md:px-6 pb-2">
         <div className="max-w-[1200px] mx-auto">
-          <Link
-            href="/schedules/calendar"
-            className="inline-flex items-center gap-2 min-h-[48px] px-4 py-2 rounded-[2px] border border-black/10 bg-brand-sandstone/50 font-sans text-[14px] font-medium text-brand-pacific-dusk hover:border-brand-victoria-cove hover:bg-brand-sandstone focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
-          >
-            Calendar view · Print or save as PDF
-          </Link>
+          <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/60">
+            COMMAND CENTER
+          </p>
+          <h2 className="font-headline mt-2 text-[28px] leading-[1.05] text-brand-pacific-dusk md:text-[34px]">
+            Choose Your Path in Seconds
+          </h2>
           <p className="mt-4 font-sans text-[13px] md:text-[14px] text-brand-pacific-dusk/80 leading-relaxed max-w-2xl">
             New to LBTA?{' '}
             <Link
@@ -186,6 +199,14 @@ export default function SchedulesPageClient({
               <p className="font-sans text-[15px] md:text-[17px] text-brand-pacific-dusk/70 max-w-2xl mb-6">
                 Personalized sessions with LBTA coaches, plus private-rate packs and monthly drop-in options.
               </p>
+              <div className="mb-6 grid gap-2 md:grid-cols-2">
+                <p className="rounded-[2px] bg-brand-morning-light px-3 py-2 font-sans text-[12px] text-brand-pacific-dusk/75">
+                  Best for players who want custom progression and flexible scheduling.
+                </p>
+                <p className="rounded-[2px] bg-brand-morning-light px-3 py-2 font-sans text-[12px] text-brand-pacific-dusk/75">
+                  Includes private packs, monthly drop-in options, and coach-specific booking.
+                </p>
+              </div>
               <button
                 type="button"
                 onClick={() => expandSection('private')}
@@ -218,6 +239,14 @@ export default function SchedulesPageClient({
               <p className="font-sans text-[15px] md:text-[17px] text-brand-pacific-dusk/70 max-w-2xl mb-6">
                 Full camp lineup for spring, summer, and school-break windows with ages, schedules, and pricing.
               </p>
+              <div className="mb-6 grid gap-2 md:grid-cols-2">
+                <p className="rounded-[2px] bg-brand-morning-light px-3 py-2 font-sans text-[12px] text-brand-pacific-dusk/75">
+                  Best for families planning holiday/summer blocks in advance.
+                </p>
+                <p className="rounded-[2px] bg-brand-morning-light px-3 py-2 font-sans text-[12px] text-brand-pacific-dusk/75">
+                  See week-by-week windows, age group splits, and registration paths.
+                </p>
+              </div>
               <button
                 type="button"
                 onClick={() => expandSection('camps')}
@@ -247,6 +276,14 @@ export default function SchedulesPageClient({
               <p className="font-sans text-[15px] md:text-[17px] text-brand-pacific-dusk/70 max-w-2xl mb-6">
                 Team league options and UTR Match Play division details, with dates, levels, and registration paths.
               </p>
+              <div className="mb-6 grid gap-2 md:grid-cols-2">
+                <p className="rounded-[2px] bg-white px-3 py-2 font-sans text-[12px] text-brand-pacific-dusk/75">
+                  Best for players wanting structured competition and ranking progress.
+                </p>
+                <p className="rounded-[2px] bg-white px-3 py-2 font-sans text-[12px] text-brand-pacific-dusk/75">
+                  Includes USTA team pathways and UTR match-play options by level.
+                </p>
+              </div>
               <button
                 type="button"
                 onClick={() => expandSection('leagues')}
@@ -325,6 +362,14 @@ export default function SchedulesPageClient({
           hideRec1
         />
       )}
+
+      {!hasOpenModal ? (
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/95 px-3 py-3 backdrop-blur-sm md:hidden pb-[calc(12px+env(safe-area-inset-bottom))]">
+          <div className="mx-auto max-w-[1200px]">
+            <SchedulesQuickActions compact onFindProgram={scrollToPrograms} />
+          </div>
+        </div>
+      ) : null}
     </>
   )
 }
