@@ -21,28 +21,37 @@ function deriveLevelBadge(program: Program): string {
   if (name.includes('competitive') || name.includes('match play')) return 'Competitive'
   if (name.includes('intermediate') || ages.includes('ntrp 3')) return 'Intermediate'
   if (name.includes('player development') || ages.includes('utr')) return 'Level-Based'
-  if (name.includes('liveball')) return 'NTRP 3.0+'
+  if (name.includes('liveball')) return 'Drop-In'
   if (name.includes('cardio')) return 'All Levels'
-  if (program.category.toLowerCase() === 'junior') return 'Ages ' + program.ages
+  if (name.includes('little') || name.includes('stars')) return 'Intro'
+  if (name.includes('red ball')) return 'Stage 1'
+  if (name.includes('orange ball')) return 'Stage 2'
+  if (name.includes('green dot') && !name.includes('competitive')) return 'Stage 3'
   return 'All Levels'
 }
 
 const PRICE_LABELS: Record<string, string> = {
-  monthly: '/mo',
-  '1x': '1x/wk',
-  '2x': '2x/wk',
-  '3x': '3x/wk',
-  '4x': '4x/wk',
-  '5x': '5x/wk',
-  saturday1x: 'Sat 1x',
+  monthly: 'Monthly',
+  '1x': '1x / week',
+  '2x': '2x / week',
+  '3x': '3x / week',
+  '4x': '4x / week',
+  '5x': '5x / week',
+  saturday1x: 'Saturday',
   drop_in: 'Drop-in',
 }
 const PRICE_ORDER = ['monthly', '1x', '2x', '3x', '4x', '5x', 'saturday1x', 'drop_in']
 
 function getAllPrices(program: Program): Array<{ label: string; amount: number }> {
   const pricing = program.pricing
+  const hasSessionPricing = typeof pricing['1x'] === 'number'
   return PRICE_ORDER
-    .filter((key) => typeof pricing[key as keyof typeof pricing] === 'number')
+    .filter((key) => {
+      const val = pricing[key as keyof typeof pricing]
+      if (typeof val !== 'number') return false
+      if (key === 'monthly' && hasSessionPricing && val === pricing['1x']) return false
+      return true
+    })
     .map((key) => ({ label: PRICE_LABELS[key] ?? key, amount: pricing[key as keyof typeof pricing] as number }))
 }
 
@@ -314,15 +323,20 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
         {/* Schedule grid — grouped by time+location */}
         <div className="mb-3 rounded-md border border-white/[0.10] bg-white/[0.04] px-3 py-2.5">
           {groupScheduleSlots(program.schedule).map((slot) => (
-            <div key={`${program.id}-${slot.days}-${slot.time}`} className="flex items-baseline gap-1.5 py-[3px]">
-              <span className="shrink-0 font-sans text-[11px] font-bold uppercase tracking-[0.02em] text-white/85">
-                {slot.days}
-              </span>
-              <span className="font-sans text-[11px] tabular-nums text-white/65">{slot.time}</span>
-              {slot.location && (
-                <span className="ml-auto shrink-0 font-sans text-[10px] font-medium text-white/45">
-                  {shortenLocation(slot.location)}
+            <div key={`${program.id}-${slot.days}-${slot.time}`}>
+              <div className="flex items-baseline gap-1.5 py-[3px]">
+                <span className="shrink-0 font-sans text-[11px] font-bold uppercase tracking-[0.02em] text-white/85">
+                  {slot.days}
                 </span>
+                <span className="font-sans text-[11px] tabular-nums text-white/65">{slot.time}</span>
+                {slot.location && (
+                  <span className="ml-auto shrink-0 font-sans text-[10px] font-medium text-white/45">
+                    {shortenLocation(slot.location)}
+                  </span>
+                )}
+              </div>
+              {slot.note && (
+                <p className="pl-0 pb-1 font-sans text-[10px] italic text-white/40">{slot.note}</p>
               )}
             </div>
           ))}

@@ -392,7 +392,7 @@ export default function RegistrationModal({
                 </button>
               </div>
 
-              <p className="font-sans text-[11px] text-brand-pacific-dusk/40 leading-relaxed">
+              <p className="font-sans text-[11px] text-brand-pacific-dusk/55 leading-relaxed">
                 All registration goes through the City of Laguna Beach recreation department.
               </p>
             </div>
@@ -581,7 +581,7 @@ export default function RegistrationModal({
                             type="button"
                             onClick={() => togglePreferredDay(day)}
                             disabled={isAtLimit}
-                            className={`min-h-[40px] px-3 py-1.5 rounded-full border font-sans text-[12px] transition-colors ${
+                            className={`min-h-[48px] px-4 py-2 rounded-full border font-sans text-[12px] transition-colors ${
                               selected
                                 ? 'bg-black text-white border-black'
                                 : isAtLimit
@@ -707,7 +707,7 @@ export default function RegistrationModal({
                 </p>
               </div>
 
-              <AppDownloadCard className="mb-6" />
+              {path === 'b' && <AppDownloadCard className="mb-6" />}
 
               <button
                 type="button"

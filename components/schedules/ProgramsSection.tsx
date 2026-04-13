@@ -90,13 +90,14 @@ function normalizePlayerType(program: Program): PlayerType {
 }
 
 function normalizeLevel(program: Program): Exclude<ProgramFilters['level'], 'all'> {
-  const haystack = `${program.program} ${program.description} ${program.ages}`.toLowerCase()
-  if (haystack.includes('new to tennis') || haystack.includes('never played') || haystack.includes('beginner')) return 'beginner'
-  if (haystack.includes('beyond beginner')) return 'beginner'
-  if (haystack.includes('intermediate') || haystack.includes('ntrp 3.0') || haystack.includes('ntrp 3.5')) return 'intermediate'
-  if (haystack.includes('advanced') || haystack.includes('utr 5+')) return 'advanced'
-  if (haystack.includes('competitive') || haystack.includes('match play') || haystack.includes('utr')) return 'competitive'
-  return 'intermediate'
+  const name = program.program.toLowerCase()
+  const ages = program.ages.toLowerCase()
+  if (name.includes('new to tennis') || name.includes('beginner')) return 'beginner'
+  if (name.includes('beyond beginner')) return 'beginner'
+  if (name.includes('intermediate') || ages.includes('ntrp 3.0') || ages.includes('ntrp 3.5')) return 'intermediate'
+  if (name.includes('advanced') || ages.includes('utr 5+')) return 'advanced'
+  if (name.includes('competitive')) return 'competitive'
+  return 'beginner'
 }
 
 function matchesDay(program: Program, day: ProgramFilters['day']): boolean {
