@@ -95,15 +95,55 @@ function getProgramImage(program: Program): ProgramImageConfig {
     }
   }
 
-  if (name.includes('beginner 1') || name.includes('true beginner')) {
+  if (name.includes('beginner 1') || name.includes('true beginner') || name.includes('bridge') || name.includes('beginner 2')) {
     return {
       src: `${CLOUD}/v1776039173/Beginner_Class_moulton_xs5pec.jpg`,
-      alt: 'Adult beginners practicing overhead technique at sunset',
+      alt: 'Adult beginners practicing technique at Moulton Meadows Park',
       objectPosition: 'center 32%',
     }
   }
 
-  if (cat.includes('fitness') || name.includes('liveball') || name.includes('cardio')) {
+  if (name.includes('adult intermediate') || (cat.includes('adult') && name.includes('intermediate'))) {
+    return {
+      src: `${CLOUD}/v1776046298/Adult_intermediat_or_bridge_1_edcu5p.jpg`,
+      alt: 'Adult intermediate players training at Laguna Beach High School',
+      objectPosition: 'center 38%',
+    }
+  }
+
+  if (name.includes('adult advanced') || (cat.includes('adult') && name.includes('advanced'))) {
+    return {
+      src: `${CLOUD}/v1774485572/Adult_advanced_2_tttewq.jpg`,
+      alt: 'Adult advanced players competing in match play',
+      objectPosition: 'center 40%',
+    }
+  }
+
+  if (name.includes('liveball')) {
+    return {
+      src: `${CLOUD}/v1774485572/Advanced_liveball_iyooh6.jpg`,
+      alt: 'LiveBall session — high-energy coach-fed point play',
+      objectPosition: 'center 42%',
+    }
+  }
+
+  if (name.includes('cardio')) {
+    return {
+      src: `${CLOUD}/v1774485572/Liveball_Intermediate_exqowf.jpg`,
+      alt: 'Cardio Tennis fitness-focused hitting session',
+      objectPosition: 'center 45%',
+    }
+  }
+
+  if (name.includes('high performance')) {
+    return {
+      src: `${CLOUD}/v1776047024/High_Performance_d60ibn.jpg`,
+      alt: 'High Performance youth training — tournament-caliber coaching',
+      objectPosition: 'center 35%',
+    }
+  }
+
+  if (cat.includes('fitness')) {
     return {
       src: '/images/facility/overview-coastal-tennis-facility-ocean.webp',
       alt: `${program.program} training session at Laguna Beach Tennis Academy`,
@@ -119,7 +159,7 @@ function getProgramImage(program: Program): ProgramImageConfig {
     }
   }
 
-  if (cat.includes('youth') || name.includes('high performance') || name.includes('utr')) {
+  if (cat.includes('youth') || name.includes('utr')) {
     return {
       src: '/images/facility/hero-ocean-view-tennis-courts-sunset.webp',
       alt: `${program.program} youth training courts at Laguna Beach Tennis Academy`,

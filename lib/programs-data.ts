@@ -428,7 +428,7 @@ export function getFitnessClasses(): Array<{ name: string; day: string; time: st
   })
 }
 
-const LIVE_BALL_IDS: string[] = ['liveball-intermediate', 'liveball-advanced']
+const LIVE_BALL_IDS: string[] = ['liveball', 'liveball-intermediate', 'liveball-advanced']
 
 function isLiveBallProgramId(id: string): boolean {
   return LIVE_BALL_IDS.includes(id)

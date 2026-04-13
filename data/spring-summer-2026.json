@@ -290,38 +290,23 @@
       "inquiryLabel": "Inquire about placement"
     },
     {
-      "id": "liveball-intermediate",
+      "id": "liveball",
       "category": "Fitness",
-      "program": "LiveBall (Int.)",
-      "ages": "NTRP 2.0-3.5",
+      "program": "LiveBall",
+      "ages": "NTRP 3.0+",
       "location": "Moulton Meadows Park / LBHS",
       "duration": "1-1.5 hr",
       "schedule": [
         { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
         { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School" },
-        { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School" }
+        { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School", "note": "Intermediate (3.0–4.0)" },
+        { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School", "note": "Advanced (4.0+)" }
       ],
       "pricing": {
         "monthly": 150,
         "drop_in": 50
       },
-      "description": "Coach-fed hitting with purpose. High-volume point play for extra reps and competitive energy."
-    },
-    {
-      "id": "liveball-advanced",
-      "category": "Fitness",
-      "program": "LiveBall (Adv.)",
-      "ages": "NTRP 3.5+",
-      "location": "Laguna Beach High School",
-      "duration": "1.5 hr",
-      "schedule": [
-        { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School" }
-      ],
-      "pricing": {
-        "monthly": 150,
-        "drop_in": 50
-      },
-      "description": "Ninety minutes of competitive-tempo, coach-fed point play for NTRP 3.5+ players."
+      "description": "Coach-fed hitting with purpose. High-volume point play for extra reps and competitive energy. Intermediate (3.0–4.0) and Advanced (4.0+) levels offered."
     },
     {
       "id": "cardio-tennis",

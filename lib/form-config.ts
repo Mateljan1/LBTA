@@ -230,34 +230,19 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     classTagId: 155 // CLASS_TAGS.cardio
   },
 
-  'liveball-intermediate': {
-    programId: 'liveball-intermediate',
+  'liveball': {
+    programId: 'liveball',
     formEmbedCode: '', // TO BE FILLED
     acFormId: '',
     prePopulateData: {
-      programName: 'LiveBall Intermediate',
-      location: 'Moulton Meadows / LBHS',
-      duration: '1 hr',
-      pricing: getModalPricing('liveball-intermediate'),
+      programName: 'LiveBall',
+      location: 'Moulton Meadows Park / LBHS',
+      duration: '1-1.5 hr',
+      pricing: getModalPricing('liveball'),
       category: 'Fitness',
       billingCycle: 'monthly'
     },
-    classTagId: 153 // CLASS_TAGS.live_ball_intermediate
-  },
-
-  'liveball-advanced': {
-    programId: 'liveball-advanced',
-    formEmbedCode: '', // TO BE FILLED
-    acFormId: '',
-    prePopulateData: {
-      programName: 'LiveBall Advanced',
-      location: 'Laguna Beach High School',
-      duration: '1.5 hr',
-      pricing: getModalPricing('liveball-advanced'),
-      category: 'Fitness',
-      billingCycle: 'monthly'
-    },
-    classTagId: 154 // CLASS_TAGS.live_ball_advanced
+    classTagId: 153 // CLASS_TAGS.live_ball
   },
 
   // ===== CAMPS =====
