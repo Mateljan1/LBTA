@@ -1,7 +1,10 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import AppDownloadCard from './AppDownloadCard'
+
+const LBTA_ICON = 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774502209/LBTA_Icon_-_Color_kv1nv5.png'
 
 interface RegistrationModalProps {
   programName: string
@@ -328,12 +331,17 @@ export default function RegistrationModal({
           {/* ── CHOOSE ── */}
           {state === 'choose' && (
             <div>
-              <h2 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk leading-tight mb-1">
-                {programName}
-              </h2>
-              <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mb-4">
-                {programDetails}
-              </p>
+              <div className="flex items-start gap-3 mb-4">
+                <Image src={LBTA_ICON} alt="" width={40} height={40} className="shrink-0 mt-1" aria-hidden="true" />
+                <div>
+                  <h2 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk leading-tight">
+                    {programName}
+                  </h2>
+                  <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-0.5">
+                    {programDetails}
+                  </p>
+                </div>
+              </div>
 
               {pricingOptions.length > 0 && (
                 <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3.5">
@@ -443,14 +451,19 @@ export default function RegistrationModal({
                   <span aria-hidden="true">←</span> Back
                 </button>
               )}
-              <h2 className="font-headline text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk leading-tight mb-1">
-                {programName}
-              </h2>
-              <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mb-5">
-                {hideRec1
-                  ? "Share your details and we\u2019ll confirm availability within 24 hours."
-                  : "Share your details and we\u2019ll get you registered."}
-              </p>
+              <div className="flex items-start gap-3 mb-4">
+                <Image src={LBTA_ICON} alt="" width={36} height={36} className="shrink-0 mt-0.5" aria-hidden="true" />
+                <div>
+                  <h2 className="font-headline text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk leading-tight">
+                    {programName}
+                  </h2>
+                  <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-0.5">
+                    {hideRec1
+                      ? "Share your details and we\u2019ll confirm availability within 24 hours."
+                      : "Share your details and we\u2019ll get you registered."}
+                  </p>
+                </div>
+              </div>
               {pricingOptions.length > 0 && (
                 <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3.5">
                   <div className="grid grid-cols-2 gap-x-6 gap-y-2">
@@ -678,23 +691,7 @@ export default function RegistrationModal({
           {state === 'confirmation' && (
             <div>
               <div className="flex flex-col items-center text-center mb-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-victoria-cove/10">
-                  <svg
-                    className="h-6 w-6 text-brand-victoria-cove"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M5 13L9 17L19 7"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
+                <Image src={LBTA_ICON} alt="LBTA" width={48} height={48} className="mb-4" />
                 <h2 className="font-headline text-[24px] md:text-[26px] font-medium text-brand-pacific-dusk mb-2">
                   You&apos;re registered.
                 </h2>
