@@ -98,7 +98,7 @@ function normalizeLevel(program: Program): Exclude<ProgramFilters['level'], 'all
 function gridCols(count: number): string {
   if (count <= 2) return 'sm:grid-cols-2'
   if (count === 3) return 'sm:grid-cols-2 lg:grid-cols-3'
-  return 'sm:grid-cols-2'
+  return 'sm:grid-cols-2 lg:grid-cols-4'
 }
 
 function matchesDay(program: Program, day: ProgramFilters['day']): boolean {
@@ -283,7 +283,7 @@ export default function ProgramsSection({
         />
 
         {hasAnyResults ? (
-          <div className="mt-10 space-y-16">
+          <div className="mt-8 space-y-12">
             {SECTION_ORDER.map((sectionKey) => {
               const sectionPrograms = groupedPrograms[sectionKey]
               if (sectionPrograms.length === 0) return null

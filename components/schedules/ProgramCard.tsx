@@ -197,15 +197,15 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
       className="group flex h-full flex-col overflow-hidden rounded-xl bg-[#0a1628] ring-1 ring-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-1 hover:ring-white/[0.12] hover:shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
     >
       {/* ═══ CINEMATIC HERO ═══ */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[3/2] overflow-hidden">
         <Image
           src={img.src}
           alt={img.alt}
           fill
           className="object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform group-hover:scale-[1.05]"
           style={{ objectPosition: img.objectPosition }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          quality={90}
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          quality={85}
         />
 
         {/* Cinematic vignette */}
@@ -227,22 +227,22 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
 
         {/* Accent stripe */}
         <div
-          className="absolute left-5 top-4 h-11 w-[3px] rounded-full shadow-[0_0_12px_rgba(255,255,255,0.12)]"
+          className="absolute left-4 top-3 h-8 w-[2.5px] rounded-full shadow-[0_0_12px_rgba(255,255,255,0.12)]"
           style={{ backgroundColor: accent, boxShadow: `0 0 16px ${accent}44` }}
         />
 
         {/* Level badge — frosted glass */}
-        <span className="absolute right-4 top-4 rounded-[4px] border border-white/[0.12] bg-white/[0.08] px-2.5 py-1 font-sans text-[9px] font-semibold uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+        <span className="absolute right-3 top-3 rounded-[3px] border border-white/[0.12] bg-white/[0.08] px-2 py-0.5 font-sans text-[8px] font-semibold uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
           {levelBadge}
         </span>
 
         {/* Overlay content */}
-        <div className="absolute inset-x-0 bottom-0 flex flex-col px-6 pb-5">
-          <span className="mb-1.5 font-sans text-[9px] font-semibold uppercase tracking-[0.18em] text-white/50">
+        <div className="absolute inset-x-0 bottom-0 flex flex-col px-4 pb-3">
+          <span className="mb-1 font-sans text-[8px] font-semibold uppercase tracking-[0.18em] text-white/50">
             {program.category}
           </span>
           <h4
-            className="font-headline text-[26px] font-semibold leading-[1.0] text-white sm:text-[30px] md:text-[32px]"
+            className="font-headline text-[20px] font-semibold leading-[1.05] text-white sm:text-[22px]"
             style={{
               letterSpacing: '-0.02em',
               textShadow: '0 1px 2px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.2)',
@@ -250,51 +250,54 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           >
             {program.program}
           </h4>
-          <p className="mt-1 font-sans text-[11px] font-normal text-white/55" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.6)' }}>
+          <p className="mt-0.5 font-sans text-[10px] font-normal text-white/55" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.6)' }}>
             Ages {program.ages} &middot; {program.duration}
           </p>
         </div>
       </div>
 
       {/* ═══ CARD BODY ═══ */}
-      <div className="flex flex-1 flex-col px-6 pb-6 pt-4">
+      <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
         {/* Location */}
-        <p className="mb-3.5 font-sans text-[11px] leading-relaxed tracking-wide text-white/40">{program.location}</p>
+        <p className="mb-2.5 font-sans text-[10px] leading-relaxed tracking-wide text-white/40 line-clamp-1">{program.location}</p>
 
         {/* Schedule grid */}
-        <div className="mb-4 rounded-lg border border-white/[0.07] bg-white/[0.03] px-4 py-3">
-          {program.schedule.slice(0, 3).map((slot) => (
-            <div key={`${program.id}-${slot.day}-${slot.time}`} className="flex items-baseline py-[3px]">
-              <span className="w-[38px] shrink-0 font-sans text-[11px] font-semibold uppercase tracking-[0.06em] text-white/70">
+        <div className="mb-3 rounded-md border border-white/[0.07] bg-white/[0.03] px-3 py-2">
+          {program.schedule.slice(0, 2).map((slot) => (
+            <div key={`${program.id}-${slot.day}-${slot.time}`} className="flex items-baseline py-[2px]">
+              <span className="w-[34px] shrink-0 font-sans text-[10px] font-semibold uppercase tracking-[0.06em] text-white/70">
                 {slot.day.slice(0, 3)}
               </span>
-              <span className="font-sans text-[11px] tabular-nums text-white/50">{slot.time}</span>
+              <span className="font-sans text-[10px] tabular-nums text-white/50">{slot.time}</span>
             </div>
           ))}
+          {program.schedule.length > 2 && (
+            <p className="pt-0.5 font-sans text-[9px] text-white/30">+{program.schedule.length - 2} more</p>
+          )}
         </div>
 
         {/* Price */}
-        <div className="mb-5 flex items-baseline gap-2 border-t border-white/[0.07] pt-4">
+        <div className="mb-3 flex items-baseline gap-1.5 border-t border-white/[0.07] pt-3">
           {primaryPrice ? (
             <>
-              <span className="font-headline text-[38px] leading-none tracking-tight text-white">${primaryPrice.amount}</span>
-              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-white/35">
+              <span className="font-headline text-[28px] leading-none tracking-tight text-white">${primaryPrice.amount}</span>
+              <span className="font-sans text-[9px] font-semibold uppercase tracking-[0.16em] text-white/35">
                 {primaryPrice.label}
               </span>
             </>
           ) : (
-            <span className="font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-white/40">
+            <span className="font-sans text-[10px] font-medium uppercase tracking-[0.14em] text-white/40">
               Contact for rates
             </span>
           )}
         </div>
 
         {/* Actions */}
-        <div className="mt-auto flex flex-col gap-2.5">
+        <div className="mt-auto flex flex-col gap-2">
           {program.inquiryLabel ? (
             <Link
               href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-md border border-white/[0.12] px-4 py-3 font-sans text-[10px] font-semibold uppercase tracking-[2px] text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-md border border-white/[0.12] px-3 py-2.5 font-sans text-[9px] font-semibold uppercase tracking-[1.8px] text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
             >
               {program.inquiryLabel}
             </Link>
@@ -302,7 +305,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           <button
             type="button"
             onClick={handleRegister}
-            className="group/btn relative inline-flex min-h-[48px] items-center justify-center overflow-hidden rounded-md bg-white px-4 py-3 font-sans text-[10px] font-semibold uppercase tracking-[2.2px] text-[#0a1628] transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
+            className="group/btn relative inline-flex min-h-[44px] items-center justify-center overflow-hidden rounded-md bg-white px-3 py-2.5 font-sans text-[9px] font-semibold uppercase tracking-[2px] text-[#0a1628] transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
           >
             Register
           </button>
