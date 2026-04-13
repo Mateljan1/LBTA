@@ -55,13 +55,13 @@ export default function SchedulesProgramFinder({
   const active = isFiltered(filters)
 
   return (
-    <div id="program-finder" className="scroll-mt-32 rounded-lg border border-black/[0.06] bg-brand-morning-light/60 px-4 py-4 md:px-5 md:py-5">
+    <div id="program-finder" className="scroll-mt-28 rounded-lg border border-black/[0.06] bg-brand-morning-light/60 px-4 py-4 md:px-5 md:py-5">
       <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
         <p className="font-sans text-[12px] font-medium text-brand-pacific-dusk/50 tracking-wide">
           Filter by age, level, or day
         </p>
         {active && (
-          <p className="rounded-full bg-white px-3 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-brand-pacific-dusk/70">
+          <p aria-live="polite" aria-atomic="true" className="rounded-full bg-white px-3 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-brand-pacific-dusk/70">
             {resultCount} {resultCount === 1 ? 'result' : 'results'}
           </p>
         )}
@@ -69,7 +69,7 @@ export default function SchedulesProgramFinder({
 
       <div className="grid gap-3 md:grid-cols-3">
         <label className="flex flex-col gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/60">
-          Who
+          Age group
           <select
             value={filters.playerType}
             onChange={(event) => onChange({ ...filters, playerType: event.target.value as ProgramFilters['playerType'] })}
@@ -119,7 +119,7 @@ export default function SchedulesProgramFinder({
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex min-h-[40px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-4 py-2 font-sans text-[11px] font-medium uppercase tracking-[1.8px] text-brand-pacific-dusk/70 transition-all duration-300 hover:border-brand-victoria-cove hover:text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[1.8px] text-brand-pacific-dusk/70 transition-all duration-300 hover:border-brand-victoria-cove hover:text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
           >
             Reset
           </button>

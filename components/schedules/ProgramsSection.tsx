@@ -184,7 +184,7 @@ export default function ProgramsSection({
   const hasAnyResults = filteredPrograms.length > 0
 
   return (
-    <section id="programs" className="scroll-mt-32 bg-white py-16 md:py-24">
+    <section id="programs" className="scroll-mt-28 bg-white py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 min-w-0">
 
         {nowEnrolling && (
@@ -294,7 +294,7 @@ export default function ProgramsSection({
                     <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/50 mb-2">
                       {meta.eyebrow}
                     </p>
-                    <h3 className="font-headline text-[28px] md:text-[36px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
+                    <h3 className="font-headline text-[26px] md:text-[32px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
                       {meta.headline}
                     </h3>
                     <p className="font-sans text-[14px] md:text-[15px] text-brand-pacific-dusk/60 leading-relaxed max-w-2xl">
@@ -316,9 +316,9 @@ export default function ProgramsSection({
           </div>
         ) : (
           <div className="mt-6 rounded-lg border border-black/[0.08] bg-brand-morning-light px-5 py-8 text-center">
-            <p className="font-headline text-[30px] text-brand-pacific-dusk md:text-[34px]">No exact match yet</p>
+            <p className="font-headline text-[28px] text-brand-pacific-dusk md:text-[32px]">No programs match</p>
             <p className="mt-2 font-sans text-[15px] leading-relaxed text-brand-pacific-dusk/70">
-              Reset filters or contact us and we will recommend the best fit for your player.
+              Try a different season, reset your filters, or contact us and we will help you find the right fit.
             </p>
             <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
               <button

@@ -140,7 +140,7 @@ function getProgramImage(program: Program): ProgramImageConfig {
   if (name.includes('high performance')) {
     return {
       src: `${CLOUD}/v1776047024/High_Performance_d60ibn.jpg`,
-      alt: 'High Performance youth training — tournament-caliber coaching',
+      alt: 'High Performance youth training session at Laguna Beach Tennis Academy',
       objectPosition: 'center 35%',
     }
   }
@@ -192,8 +192,11 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
     onRegister(program)
   }
 
+  const headingId = `program-${program.id}`
+
   return (
     <article
+      aria-labelledby={headingId}
       className="group flex h-full flex-col overflow-hidden rounded-xl bg-[#0a1628] ring-1 ring-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-1 hover:ring-white/[0.12] hover:shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
     >
       {/* ═══ CINEMATIC HERO ═══ */}
@@ -232,16 +235,17 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
         />
 
         {/* Level badge — frosted glass */}
-        <span className="absolute right-3 top-3 rounded-[3px] border border-white/[0.12] bg-white/[0.08] px-2 py-0.5 font-sans text-[8px] font-semibold uppercase tracking-[0.16em] text-white/75 backdrop-blur-md">
+        <span className="absolute right-3 top-3 rounded-[3px] border border-white/[0.12] bg-white/[0.08] px-2 py-0.5 font-sans text-[9px] font-semibold uppercase tracking-[0.14em] text-white/75 backdrop-blur-md">
           {levelBadge}
         </span>
 
         {/* Overlay content */}
         <div className="absolute inset-x-0 bottom-0 flex flex-col px-4 pb-3">
-          <span className="mb-1 font-sans text-[8px] font-semibold uppercase tracking-[0.18em] text-white/50">
+          <span className="mb-1 font-sans text-[9px] font-semibold uppercase tracking-[0.16em] text-white/50">
             {program.category}
           </span>
           <h4
+            id={headingId}
             className="font-headline text-[20px] font-semibold leading-[1.05] text-white sm:text-[22px]"
             style={{
               letterSpacing: '-0.02em',
@@ -250,7 +254,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           >
             {program.program}
           </h4>
-          <p className="mt-0.5 font-sans text-[10px] font-normal text-white/55" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.6)' }}>
+          <p className="mt-0.5 font-sans text-[11px] font-normal text-white/55" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.6)' }}>
             Ages {program.ages} &middot; {program.duration}
           </p>
         </div>
@@ -259,20 +263,20 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
       {/* ═══ CARD BODY ═══ */}
       <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
         {/* Location */}
-        <p className="mb-2.5 font-sans text-[10px] leading-relaxed tracking-wide text-white/40 line-clamp-1">{program.location}</p>
+        <p className="mb-2.5 font-sans text-[11px] leading-relaxed tracking-wide text-white/40 line-clamp-1">{program.location}</p>
 
         {/* Schedule grid */}
         <div className="mb-3 rounded-md border border-white/[0.07] bg-white/[0.03] px-3 py-2">
           {program.schedule.slice(0, 2).map((slot) => (
             <div key={`${program.id}-${slot.day}-${slot.time}`} className="flex items-baseline py-[2px]">
-              <span className="w-[34px] shrink-0 font-sans text-[10px] font-semibold uppercase tracking-[0.06em] text-white/70">
+              <span className="w-[36px] shrink-0 font-sans text-[11px] font-semibold uppercase tracking-[0.04em] text-white/70">
                 {slot.day.slice(0, 3)}
               </span>
-              <span className="font-sans text-[10px] tabular-nums text-white/50">{slot.time}</span>
+              <span className="font-sans text-[11px] tabular-nums text-white/50">{slot.time}</span>
             </div>
           ))}
           {program.schedule.length > 2 && (
-            <p className="pt-0.5 font-sans text-[9px] text-white/30">+{program.schedule.length - 2} more</p>
+            <p className="pt-0.5 font-sans text-[10px] text-white/30">+{program.schedule.length - 2} more</p>
           )}
         </div>
 
@@ -280,13 +284,13 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
         <div className="mb-3 flex items-baseline gap-1.5 border-t border-white/[0.07] pt-3">
           {primaryPrice ? (
             <>
-              <span className="font-headline text-[28px] leading-none tracking-tight text-white">${primaryPrice.amount}</span>
-              <span className="font-sans text-[9px] font-semibold uppercase tracking-[0.16em] text-white/35">
+              <span className="font-headline text-[26px] leading-none tracking-tight text-white">${primaryPrice.amount}</span>
+              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white/35">
                 {primaryPrice.label}
               </span>
             </>
           ) : (
-            <span className="font-sans text-[10px] font-medium uppercase tracking-[0.14em] text-white/40">
+            <span className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-white/40">
               Contact for rates
             </span>
           )}
@@ -297,7 +301,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           {program.inquiryLabel ? (
             <Link
               href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
-              className="inline-flex min-h-[44px] items-center justify-center rounded-md border border-white/[0.12] px-3 py-2.5 font-sans text-[9px] font-semibold uppercase tracking-[1.8px] text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-md border border-white/[0.12] px-3 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[1.8px] text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
             >
               {program.inquiryLabel}
             </Link>
@@ -305,7 +309,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           <button
             type="button"
             onClick={handleRegister}
-            className="group/btn relative inline-flex min-h-[44px] items-center justify-center overflow-hidden rounded-md bg-white px-3 py-2.5 font-sans text-[9px] font-semibold uppercase tracking-[2px] text-[#0a1628] transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
+            className="group/btn relative inline-flex min-h-[48px] items-center justify-center overflow-hidden rounded-md bg-white px-3 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[2px] text-[#0a1628] transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
           >
             Register
           </button>
