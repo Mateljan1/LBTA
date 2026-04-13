@@ -134,8 +134,8 @@
     },
     {
       "id": "utr-green-dot",
-      "category": "Youth",
-      "program": "UTR Green Dot — Competitive",
+      "category": "Development",
+      "program": "Competitive Green Dot",
       "ages": "9-11+",
       "location": "Alta Laguna Park (Mon/Wed); Laguna Beach High School (Fri)",
       "duration": "2 hr",
@@ -149,14 +149,14 @@
         "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
         "drop_in": 70
       },
-      "description": "Competitive development for green ball players. Placement by coach invitation (level-based). Mon/Wed at Alta Laguna; Fri at LBHS. Same pricing as Youth Dev tiers.",
+      "description": "For green ball players ready for more. Placement by coach invitation.",
       "pricingNote": "Placement by invitation. Contact us to discuss if your player may be ready.",
       "inquiryLabel": "Inquire about placement"
     },
     {
       "id": "youth-development",
-      "category": "Youth",
-      "program": "Youth Development",
+      "category": "Development",
+      "program": "Player Development",
       "ages": "11-18 (level-based; UTR 1.5-5)",
       "location": "Alta Laguna Park (Mon/Wed); Laguna Beach High School (Fri)",
       "duration": "2 hr",
@@ -170,7 +170,7 @@
         "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
         "drop_in": 70
       },
-      "description": "Placement by UTR level (1.5-5) required. Ages 11-18; younger players who already meet the UTR range may qualify with coach approval. Tier 1 (UTR 1.5–3.0) and Tier 2 (UTR 3.0–5.0). Three coaches split by level. UTR 5+ advance to High Performance.",
+      "description": "The core track for serious young players. Two tiers by UTR. Three coaches, every session focused on growth.",
       "utrPlacementBands": {
         "intro": "Placement by UTR (1.5–5) is required. Ages 11–18; younger players who already meet the range may qualify with coach approval.",
         "tiers": [
@@ -194,7 +194,7 @@
     {
       "id": "adult-beginner-1",
       "category": "Adult",
-      "program": "Adult Beginner 1 — True Beginner",
+      "program": "New to Tennis",
       "ages": "NTRP 1.0-2.0",
       "location": "Laguna Beach High School",
       "duration": "1 hr",
@@ -210,12 +210,12 @@
         "summer": { "1x": 601, "2x": 877, "saturday1x": 547 },
         "drop_in": 55
       },
-      "description": "Brand new to tennis? Start here. Strokes, footwork, serving, and scoring from scratch."
+      "description": "Never played? Start here. Strokes, footwork, serving, scoring — everything from the ground up."
     },
     {
       "id": "adult-beginner-2",
       "category": "Adult",
-      "program": "Adult Beginner 2 — Bridge",
+      "program": "Beyond Beginner",
       "ages": "NTRP 1.0-3.0",
       "location": "Moulton Meadows Park",
       "duration": "1 hr",
@@ -228,7 +228,7 @@
         "summer": { "1x": 601, "2x": 877 },
         "drop_in": 55
       },
-      "description": "You can hit—now learn to play. Court positioning, doubles basics, and consistency for intermediate."
+      "description": "You can rally — now learn to play. Court positioning, doubles basics, and the consistency to move up."
     },
     {
       "id": "adult-intermediate",
@@ -266,11 +266,11 @@
         "summer": { "1x": 891, "2x": 1782 },
         "drop_in": 90
       },
-      "description": "2-hour sessions. Coaches Peter DeFrantz & Andrew Mateljan. 6 max."
+      "description": "Two-hour sessions for 4.0+ players. High-level tactics and match play with Andrew and Peter. Six max."
     },
     {
       "id": "high-performance",
-      "category": "Youth",
+      "category": "Development",
       "program": "High Performance",
       "ages": "12-17 (UTR 5+)",
       "location": "Laguna Beach High School",
@@ -291,7 +291,7 @@
     },
     {
       "id": "liveball",
-      "category": "Fitness",
+      "category": "Open Court",
       "program": "LiveBall",
       "ages": "NTRP 3.0+",
       "location": "Moulton Meadows Park / LBHS",
@@ -310,7 +310,7 @@
     },
     {
       "id": "cardio-tennis",
-      "category": "Fitness",
+      "category": "Open Court",
       "program": "Cardio Tennis",
       "ages": "All Levels",
       "location": "Laguna Beach High School",

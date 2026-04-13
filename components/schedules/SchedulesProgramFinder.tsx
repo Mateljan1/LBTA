@@ -1,7 +1,7 @@
 'use client'
 
 export interface ProgramFilters {
-  playerType: 'all' | 'junior' | 'youth' | 'adult' | 'fitness'
+  playerType: 'all' | 'junior' | 'development' | 'adult' | 'openCourt'
   level: 'all' | 'beginner' | 'intermediate' | 'advanced' | 'competitive'
   day: 'all' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
 }
@@ -14,11 +14,11 @@ interface SchedulesProgramFinderProps {
 }
 
 const PLAYER_TYPE_OPTIONS: Array<{ value: ProgramFilters['playerType']; label: string }> = [
-  { value: 'all', label: 'All players' },
-  { value: 'junior', label: 'Juniors (ages 3-11)' },
-  { value: 'youth', label: 'Youth / HP (11-18)' },
-  { value: 'adult', label: 'Adult' },
-  { value: 'fitness', label: 'Fitness & community' },
+  { value: 'all', label: 'All programs' },
+  { value: 'junior', label: 'Kids (3-11)' },
+  { value: 'development', label: 'Player Development (9-17)' },
+  { value: 'adult', label: 'Adults' },
+  { value: 'openCourt', label: 'Open Court (Drop-In)' },
 ]
 
 const LEVEL_OPTIONS: Array<{ value: ProgramFilters['level']; label: string }> = [
@@ -40,6 +40,9 @@ const DAY_OPTIONS: Array<{ value: ProgramFilters['day']; label: string }> = [
   { value: 'sun', label: 'Sunday' },
 ]
 
+const isFiltered = (filters: ProgramFilters) =>
+  filters.playerType !== 'all' || filters.level !== 'all' || filters.day !== 'all'
+
 export default function SchedulesProgramFinder({
   filters,
   resultCount,
@@ -49,25 +52,24 @@ export default function SchedulesProgramFinder({
   const selectClassName =
     'min-h-[48px] rounded-[2px] border border-black/10 bg-white px-3 py-2 font-sans text-[14px] text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2'
 
+  const active = isFiltered(filters)
+
   return (
-    <section id="program-finder" className="scroll-mt-32 rounded-lg border border-black/[0.08] bg-brand-morning-light p-5 md:p-6">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/60">
-            QUICK FINDER
-          </p>
-          <h3 className="font-headline text-[28px] leading-[1.05] text-brand-pacific-dusk md:text-[34px]">
-            Find Your Best-Fit Program
-          </h3>
-        </div>
-        <p className="rounded-full bg-white px-4 py-2 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-brand-pacific-dusk">
-          {resultCount} {resultCount === 1 ? 'option' : 'options'} shown
+    <div id="program-finder" className="scroll-mt-32 rounded-lg border border-black/[0.06] bg-brand-morning-light/60 px-4 py-4 md:px-5 md:py-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+        <p className="font-sans text-[12px] font-medium text-brand-pacific-dusk/50 tracking-wide">
+          Filter by age, level, or day
         </p>
+        {active && (
+          <p className="rounded-full bg-white px-3 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-brand-pacific-dusk/70">
+            {resultCount} {resultCount === 1 ? 'result' : 'results'}
+          </p>
+        )}
       </div>
 
       <div className="grid gap-3 md:grid-cols-3">
-        <label className="flex flex-col gap-2 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/70">
-          Player type
+        <label className="flex flex-col gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/60">
+          Who
           <select
             value={filters.playerType}
             onChange={(event) => onChange({ ...filters, playerType: event.target.value as ProgramFilters['playerType'] })}
@@ -81,7 +83,7 @@ export default function SchedulesProgramFinder({
           </select>
         </label>
 
-        <label className="flex flex-col gap-2 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/70">
+        <label className="flex flex-col gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/60">
           Level
           <select
             value={filters.level}
@@ -96,8 +98,8 @@ export default function SchedulesProgramFinder({
           </select>
         </label>
 
-        <label className="flex flex-col gap-2 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/70">
-          Day preference
+        <label className="flex flex-col gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/60">
+          Day
           <select
             value={filters.day}
             onChange={(event) => onChange({ ...filters, day: event.target.value as ProgramFilters['day'] })}
@@ -112,15 +114,17 @@ export default function SchedulesProgramFinder({
         </label>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-3">
-        <button
-          type="button"
-          onClick={onReset}
-          className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.1px] text-brand-pacific-dusk transition-all duration-300 hover:border-brand-victoria-cove hover:bg-brand-sandstone/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
-        >
-          Reset Filters
-        </button>
-      </div>
-    </section>
+      {active && (
+        <div className="mt-3">
+          <button
+            type="button"
+            onClick={onReset}
+            className="inline-flex min-h-[40px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-4 py-2 font-sans text-[11px] font-medium uppercase tracking-[1.8px] text-brand-pacific-dusk/70 transition-all duration-300 hover:border-brand-victoria-cove hover:text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+          >
+            Reset
+          </button>
+        </div>
+      )}
+    </div>
   )
 }

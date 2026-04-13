@@ -142,33 +142,6 @@ export default function SchedulesPageClient({
 
       <SchedulesAnchorNav />
 
-      <div className="bg-white px-4 md:px-6 pb-2">
-        <div className="max-w-[1200px] mx-auto">
-          <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/60">
-            COMMAND CENTER
-          </p>
-          <h2 className="font-headline mt-2 text-[28px] leading-[1.05] text-brand-pacific-dusk md:text-[34px]">
-            Choose Your Path in Seconds
-          </h2>
-          <p className="mt-4 font-sans text-[13px] md:text-[14px] text-brand-pacific-dusk/80 leading-relaxed max-w-2xl">
-            New to LBTA?{' '}
-            <Link
-              href="/programs"
-              className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/30 hover:decoration-brand-victoria-cove focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-sm"
-            >
-              Browse programs
-            </Link>
-            {' · '}
-            <Link
-              href="/book"
-              className="font-medium text-brand-victoria-cove underline underline-offset-4 decoration-brand-victoria-cove/30 hover:decoration-brand-victoria-cove focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-sm"
-            >
-              Book a trial
-            </Link>
-          </p>
-        </div>
-      </div>
-
       <ProgramsSection
         programsBySeason={programsBySeason}
         seasons={seasons}

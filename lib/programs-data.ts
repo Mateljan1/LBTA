@@ -266,7 +266,7 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
     },
     {
       eyebrow: 'Ages 11–18',
-      title: 'Youth Development',
+      title: 'Player Development',
       description: 'Level-based placement (UTR 1.5-5). Full-court training for growing competitors.',
       href: '/schedules',
       fromPrice: fromYouth,
@@ -567,7 +567,7 @@ export function getTrialProgramOptions(): TrialProgramOption[] {
     )
     .map(p => {
       const value = p.id === 'little-stars' ? 'little-tennis-stars' : p.id === 'adult-beginner-1' || p.id === 'adult-beginner-2' ? 'adult-beginner' : p.id
-      const label = p.id === 'adult-beginner-2' ? 'Adult Beginner (Bridge)' : p.program
+      const label = p.program
       return { value, label, ages: p.ages }
     })
   const uniq = fromWinter.filter((o, i, a) => a.findIndex(x => x.value === o.value) === i)

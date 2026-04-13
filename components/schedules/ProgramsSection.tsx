@@ -36,18 +36,59 @@ const DAY_SHORTCUTS: Record<Exclude<ProgramFilters['day'], 'all'>, string> = {
   sun: 'sun',
 }
 
-function normalizePlayerType(program: Program): Exclude<ProgramFilters['playerType'], 'all'> {
-  const category = program.category.toLowerCase()
+type SectionKey = 'kids' | 'development' | 'adult' | 'openCourt'
+
+const SECTION_ORDER: SectionKey[] = ['kids', 'development', 'adult', 'openCourt']
+
+const SECTION_META: Record<SectionKey, { eyebrow: string; headline: string; subline: string }> = {
+  kids: {
+    eyebrow: 'AGES 3-11',
+    headline: 'Kids Programs',
+    subline: 'First racquet to full court. Each stage matches the right ball, court size, and pace to where they are.',
+  },
+  development: {
+    eyebrow: 'AGES 9-17 \u00B7 LEVEL-BASED',
+    headline: 'Player Development',
+    subline: 'Placement by level, not just age. From Competitive Green Dot through High Performance.',
+  },
+  adult: {
+    eyebrow: 'ALL LEVELS',
+    headline: 'Adult Classes',
+    subline: 'New to tennis through 4.0+. Group classes with clear progression, coached by Andrew and the team.',
+  },
+  openCourt: {
+    eyebrow: 'DROP-IN',
+    headline: 'Open Court',
+    subline: 'No season commitment. Show up, play, sweat.',
+  },
+}
+
+function assignSection(program: Program): SectionKey {
+  const cat = program.category.toLowerCase()
   const name = program.program.toLowerCase()
-  if (category.includes('fitness') || name.includes('liveball') || name.includes('cardio')) return 'fitness'
-  if (category.includes('adult') || name.includes('adult')) return 'adult'
-  if (category.includes('youth') || name.includes('high performance') || name.includes('utr')) return 'youth'
-  return 'junior'
+  if (cat.includes('open court') || name.includes('liveball') || name.includes('cardio')) return 'openCourt'
+  if (cat.includes('adult') || name.includes('new to tennis') || name.includes('beyond beginner')) return 'adult'
+  if (cat.includes('development') || name.includes('high performance') || name.includes('player development') || name.includes('competitive green dot')) return 'development'
+  return 'kids'
+}
+
+type PlayerType = Exclude<ProgramFilters['playerType'], 'all'>
+
+const SECTION_TO_PLAYER_TYPE: Record<SectionKey, PlayerType> = {
+  kids: 'junior',
+  development: 'development',
+  adult: 'adult',
+  openCourt: 'openCourt',
+}
+
+function normalizePlayerType(program: Program): PlayerType {
+  return SECTION_TO_PLAYER_TYPE[assignSection(program)]
 }
 
 function normalizeLevel(program: Program): Exclude<ProgramFilters['level'], 'all'> {
   const haystack = `${program.program} ${program.description} ${program.ages}`.toLowerCase()
-  if (haystack.includes('true beginner') || haystack.includes('beginner')) return 'beginner'
+  if (haystack.includes('new to tennis') || haystack.includes('never played') || haystack.includes('beginner')) return 'beginner'
+  if (haystack.includes('beyond beginner')) return 'beginner'
   if (haystack.includes('intermediate') || haystack.includes('ntrp 3.0') || haystack.includes('ntrp 3.5')) return 'intermediate'
   if (haystack.includes('advanced') || haystack.includes('utr 5+')) return 'advanced'
   if (haystack.includes('competitive') || haystack.includes('match play') || haystack.includes('utr')) return 'competitive'
@@ -84,9 +125,17 @@ export default function ProgramsSection({
     })
   }, [programs, filters])
 
+  const groupedPrograms = useMemo(() => {
+    const groups: Record<SectionKey, Program[]> = { kids: [], development: [], adult: [], openCourt: [] }
+    for (const program of filteredPrograms) {
+      groups[assignSection(program)].push(program)
+    }
+    return groups
+  }, [filteredPrograms])
+
   const seasonData = seasons[activeSeason]
   const seasonInfoLine = seasonData
-    ? `${seasonData.name} · ${seasonData.dates.replace(/, \d{4}/g, '')} · ${seasonData.weeks} weeks`
+    ? `${seasonData.name} \u00B7 ${seasonData.dates.replace(/, \d{4}/g, '')} \u00B7 ${seasonData.weeks} weeks`
     : ''
 
   const nowEnrolling = useMemo(() => {
@@ -111,9 +160,9 @@ export default function ProgramsSection({
       const data = seasons[key]
       if (!data) continue
       if (data.status === 'registration_open' || data.status === 'coming_soon') {
-        const base = `${data.name} · ${data.dates.replace(/, \d{4}/g, '')}`
+        const base = `${data.name} \u00B7 ${data.dates.replace(/, \d{4}/g, '')}`
         return data.registrationOpen
-          ? `${base} · Registration opens ${data.registrationOpen}`
+          ? `${base} \u00B7 Registration opens ${data.registrationOpen}`
           : base
       }
     }
@@ -126,16 +175,11 @@ export default function ProgramsSection({
     setTimeout(() => document.getElementById(`season-tab-${key}`)?.focus(), 0)
   }
 
+  const hasAnyResults = filteredPrograms.length > 0
+
   return (
     <section id="programs" className="scroll-mt-32 bg-white py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 min-w-0">
-        <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
-          SEASONAL PROGRAMS
-        </p>
-        <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
-          Find Your Program Faster
-        </h2>
-        <div className="section-horizon mb-8 opacity-90" aria-hidden="true" />
 
         {nowEnrolling && (
           <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-morning-light px-4 py-2 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-brand-pacific-dusk">
@@ -232,15 +276,37 @@ export default function ProgramsSection({
           resultCount={filteredPrograms.length}
         />
 
-        {filteredPrograms.length > 0 ? (
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredPrograms.map((program) => (
-              <SchedulesProgramCard
-                key={program.id}
-                program={program}
-                onRegister={onRegister}
-              />
-            ))}
+        {hasAnyResults ? (
+          <div className="mt-10 space-y-16">
+            {SECTION_ORDER.map((sectionKey) => {
+              const sectionPrograms = groupedPrograms[sectionKey]
+              if (sectionPrograms.length === 0) return null
+              const meta = SECTION_META[sectionKey]
+              return (
+                <div key={sectionKey}>
+                  <div className="mb-6">
+                    <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/50 mb-2">
+                      {meta.eyebrow}
+                    </p>
+                    <h3 className="font-headline text-[28px] md:text-[36px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
+                      {meta.headline}
+                    </h3>
+                    <p className="font-sans text-[14px] md:text-[15px] text-brand-pacific-dusk/60 leading-relaxed max-w-2xl">
+                      {meta.subline}
+                    </p>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {sectionPrograms.map((program) => (
+                      <SchedulesProgramCard
+                        key={program.id}
+                        program={program}
+                        onRegister={onRegister}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         ) : (
           <div className="mt-6 rounded-lg border border-black/[0.08] bg-brand-morning-light px-5 py-8 text-center">

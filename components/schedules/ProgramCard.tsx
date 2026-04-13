@@ -14,7 +14,8 @@ interface SchedulesProgramCardProps {
 
 function deriveLevelBadge(program: Program): string {
   const haystack = `${program.program} ${program.ages} ${program.description}`.toLowerCase()
-  if (haystack.includes('true beginner') || haystack.includes('beginner')) return 'Beginner'
+  if (haystack.includes('new to tennis') || haystack.includes('never played') || haystack.includes('beginner')) return 'Beginner'
+  if (haystack.includes('beyond beginner')) return 'Beginner–Intermediate'
   if (haystack.includes('utr 5+') || haystack.includes('advanced')) return 'Advanced'
   if (haystack.includes('competitive') || haystack.includes('match play')) return 'Competitive'
   if (haystack.includes('intermediate') || haystack.includes('ntrp 3')) return 'Intermediate'
@@ -32,10 +33,11 @@ function getPrimaryPrice(program: Program): { label: string; amount: number } | 
 function getAccentColor(program: Program): string {
   const cat = program.category.toLowerCase()
   const name = program.program.toLowerCase()
-  if (cat.includes('fitness') || name.includes('liveball') || name.includes('cardio')) return '#2E8B8B'
+  if (cat.includes('open court') || name.includes('liveball') || name.includes('cardio')) return '#2E8B8B'
   if (name.includes('high performance')) return '#C4963C'
   if (cat.includes('adult')) return '#E8834A'
-  if (cat.includes('youth') || name.includes('utr') || name.includes('green dot')) return '#3A8B6E'
+  if (cat.includes('development') || name.includes('competitive') || name.includes('player development')) return '#3A8B6E'
+  if (cat.includes('junior')) return '#E8834A'
   return '#E8834A'
 }
 
@@ -79,7 +81,7 @@ function getProgramImage(program: Program): ProgramImageConfig {
     }
   }
 
-  if (name.includes('utr green dot') || (name.includes('green dot') && name.includes('competitive'))) {
+  if (name.includes('competitive green dot') || name.includes('competitive') && name.includes('green dot')) {
     return {
       src: `${CLOUD}/v1776038831/green_dot_competitive_qmueoa.jpg`,
       alt: 'Competitive Green Dot player running drills on blue hard court',
@@ -87,15 +89,15 @@ function getProgramImage(program: Program): ProgramImageConfig {
     }
   }
 
-  if (name.includes('youth development')) {
+  if (name.includes('player development')) {
     return {
       src: `${CLOUD}/v1776039103/Youth_Development_ydlfwq.jpg`,
-      alt: 'Youth Development player training footwork with agility cones',
+      alt: 'Player Development training footwork with agility cones',
       objectPosition: 'center 40%',
     }
   }
 
-  if (name.includes('beginner 1') || name.includes('true beginner') || name.includes('bridge') || name.includes('beginner 2')) {
+  if (name.includes('new to tennis') || name.includes('beyond beginner')) {
     return {
       src: `${CLOUD}/v1776039173/Beginner_Class_moulton_xs5pec.jpg`,
       alt: 'Adult beginners practicing technique at Moulton Meadows Park',
@@ -103,7 +105,7 @@ function getProgramImage(program: Program): ProgramImageConfig {
     }
   }
 
-  if (name.includes('adult intermediate') || (cat.includes('adult') && name.includes('intermediate'))) {
+  if (name.includes('intermediate') && cat.includes('adult')) {
     return {
       src: `${CLOUD}/v1776046298/Adult_intermediat_or_bridge_1_edcu5p.jpg`,
       alt: 'Adult intermediate players training at Laguna Beach High School',
@@ -111,7 +113,7 @@ function getProgramImage(program: Program): ProgramImageConfig {
     }
   }
 
-  if (name.includes('adult advanced') || (cat.includes('adult') && name.includes('advanced'))) {
+  if (name.includes('advanced') && cat.includes('adult')) {
     return {
       src: `${CLOUD}/v1774485572/Adult_advanced_2_tttewq.jpg`,
       alt: 'Adult advanced players competing in match play',
@@ -143,7 +145,7 @@ function getProgramImage(program: Program): ProgramImageConfig {
     }
   }
 
-  if (cat.includes('fitness')) {
+  if (cat.includes('open court') || cat.includes('fitness')) {
     return {
       src: '/images/facility/overview-coastal-tennis-facility-ocean.webp',
       alt: `${program.program} training session at Laguna Beach Tennis Academy`,
@@ -159,7 +161,7 @@ function getProgramImage(program: Program): ProgramImageConfig {
     }
   }
 
-  if (cat.includes('youth') || name.includes('utr')) {
+  if (cat.includes('development') || cat.includes('youth') || name.includes('utr')) {
     return {
       src: '/images/facility/hero-ocean-view-tennis-courts-sunset.webp',
       alt: `${program.program} youth training courts at Laguna Beach Tennis Academy`,

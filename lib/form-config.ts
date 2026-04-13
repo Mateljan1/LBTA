@@ -126,7 +126,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     formEmbedCode: '', // Using native form
     acFormId: '',
     prePopulateData: {
-      programName: 'Youth Development',
+      programName: 'Player Development',
       location: 'Laguna Beach High School',
       duration: '2 hr',
       pricing: getModalPricing('youth-development'),
@@ -159,7 +159,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     formEmbedCode: '', // Using native form
     acFormId: '',
     prePopulateData: {
-      programName: 'Adult Beginner 1',
+      programName: 'New to Tennis',
       location: 'Laguna Beach High School',
       duration: '1.5 hr',
       pricing: getModalPricing('adult-beginner-1'),
@@ -174,7 +174,7 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
     formEmbedCode: '', // Using native form
     acFormId: '',
     prePopulateData: {
-      programName: 'Adult Beginner 2 (Bridge)',
+      programName: 'Beyond Beginner',
       location: 'Moulton Meadows',
       duration: '1.5 hr',
       pricing: getModalPricing('adult-beginner-2'),
