@@ -272,7 +272,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
 
         {/* Schedule grid */}
         <div className="mb-3 rounded-md border border-white/[0.07] bg-white/[0.03] px-3 py-2">
-          {program.schedule.slice(0, 2).map((slot) => (
+          {program.schedule.map((slot) => (
             <div key={`${program.id}-${slot.day}-${slot.time}`} className="flex items-baseline py-[2px]">
               <span className="w-[36px] shrink-0 font-sans text-[11px] font-semibold uppercase tracking-[0.04em] text-white/70">
                 {slot.day.slice(0, 3)}
@@ -280,9 +280,6 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
               <span className="font-sans text-[11px] tabular-nums text-white/50">{slot.time}</span>
             </div>
           ))}
-          {program.schedule.length > 2 && (
-            <p className="pt-0.5 font-sans text-[10px] text-white/30">+{program.schedule.length - 2} more</p>
-          )}
         </div>
 
         {/* Price */}

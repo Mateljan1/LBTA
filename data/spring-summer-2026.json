@@ -137,11 +137,11 @@
       "category": "Development",
       "program": "Competitive Green Dot",
       "ages": "9-11+",
-      "location": "Alta Laguna Park (Mon/Wed); Laguna Beach High School (Fri)",
+      "location": "Alta Laguna Park (Tue/Thu); Laguna Beach High School (Fri)",
       "duration": "2 hr",
       "schedule": [
-        { "day": "Monday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
-        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
+        { "day": "Tuesday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
+        { "day": "Thursday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Alta Laguna Park" },
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Staff", "location": "Laguna Beach High School" }
       ],
       "pricing": {
