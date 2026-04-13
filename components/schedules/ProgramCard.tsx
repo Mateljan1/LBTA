@@ -27,12 +27,23 @@ function deriveLevelBadge(program: Program): string {
   return 'All Levels'
 }
 
-function getPrimaryPrice(program: Program): { label: string; amount: number } | null {
+const PRICE_LABELS: Record<string, string> = {
+  monthly: '/mo',
+  '1x': '1x/wk',
+  '2x': '2x/wk',
+  '3x': '3x/wk',
+  '4x': '4x/wk',
+  '5x': '5x/wk',
+  saturday1x: 'Sat 1x',
+  drop_in: 'Drop-in',
+}
+const PRICE_ORDER = ['monthly', '1x', '2x', '3x', '4x', '5x', 'saturday1x', 'drop_in']
+
+function getAllPrices(program: Program): Array<{ label: string; amount: number }> {
   const pricing = program.pricing
-  if (typeof pricing.monthly === 'number') return { label: 'Monthly', amount: pricing.monthly }
-  if (typeof pricing['1x'] === 'number') return { label: '1x/wk', amount: pricing['1x'] }
-  if (typeof pricing.drop_in === 'number') return { label: 'Drop-in', amount: pricing.drop_in }
-  return null
+  return PRICE_ORDER
+    .filter((key) => typeof pricing[key as keyof typeof pricing] === 'number')
+    .map((key) => ({ label: PRICE_LABELS[key] ?? key, amount: pricing[key as keyof typeof pricing] as number }))
 }
 
 function getAccentColor(program: Program): string {
@@ -220,7 +231,7 @@ const GRAIN_URI = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='h
 
 export default function SchedulesProgramCard({ program, onRegister }: SchedulesProgramCardProps) {
   const levelBadge = deriveLevelBadge(program)
-  const primaryPrice = getPrimaryPrice(program)
+  const prices = getAllPrices(program)
   const img = getProgramImage(program)
   const accent = getAccentColor(program)
 
@@ -317,15 +328,17 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           ))}
         </div>
 
-        {/* Price */}
-        <div className="mb-3 flex items-baseline gap-1.5 border-t border-white/[0.10] pt-3">
-          {primaryPrice ? (
-            <>
-              <span className="font-headline text-[24px] leading-none tracking-tight text-white">${primaryPrice.amount}</span>
-              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-white/50">
-                {primaryPrice.label}
-              </span>
-            </>
+        {/* Pricing tiers */}
+        <div className="mb-3 border-t border-white/[0.10] pt-3">
+          {prices.length > 0 ? (
+            <div className="flex flex-wrap gap-x-4 gap-y-1">
+              {prices.map((p) => (
+                <div key={p.label} className="flex items-baseline gap-1">
+                  <span className="font-headline text-[16px] leading-none text-white">${p.amount.toLocaleString()}</span>
+                  <span className="font-sans text-[9px] font-semibold uppercase tracking-[0.10em] text-white/50">{p.label}</span>
+                </div>
+              ))}
+            </div>
           ) : (
             <span className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-white/50">
               Contact for rates
