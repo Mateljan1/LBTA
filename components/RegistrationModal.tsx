@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import AppDownloadCard from './AppDownloadCard'
 
-const LBTA_ICON = 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774502209/LBTA_Icon_-_Color_kv1nv5.png'
+const LBTA_LOGO_HORIZONTAL = 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774908286/LBTA_Logo_-_Horizontal_pkmav6.png'
+const CITY_SEAL = 'https://res.cloudinary.com/dv033eo0x/image/upload/v1774908287/City_of_Laguna_Beach_Seal_zstoin.png'
 
 interface RegistrationModalProps {
   programName: string
@@ -313,14 +314,14 @@ export default function RegistrationModal({
     >
       <div
         ref={dialogRef}
-        className="relative w-full md:max-w-[560px] bg-white rounded-t-2xl md:rounded-lg shadow-xl max-h-[90vh] overflow-hidden"
+        className="relative w-full md:max-w-[560px] bg-brand-deep-water rounded-t-2xl md:rounded-lg shadow-2xl max-h-[90vh] overflow-hidden"
         onClick={(event) => event.stopPropagation()}
       >
         {/* Close button — always visible */}
         <button
           type="button"
           onClick={handleClose}
-          className="absolute top-3 right-3 md:top-4 md:right-4 z-10 inline-flex items-center justify-center rounded-full bg-black/5 text-brand-pacific-dusk w-12 h-12 min-w-[48px] min-h-[48px] hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+          className="absolute top-3 right-3 md:top-4 md:right-4 z-10 inline-flex items-center justify-center rounded-full bg-white/10 text-white/80 w-12 h-12 min-w-[48px] min-h-[48px] hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
           aria-label="Close registration"
         >
           <span aria-hidden="true">×</span>
@@ -331,32 +332,31 @@ export default function RegistrationModal({
           {/* ── CHOOSE ── */}
           {state === 'choose' && (
             <div>
-              <div className="flex items-start gap-3 mb-4">
-                <Image src={LBTA_ICON} alt="" width={40} height={40} className="shrink-0 mt-1" aria-hidden="true" />
-                <div>
-                  <h2 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk leading-tight">
-                    {programName}
-                  </h2>
-                  <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-0.5">
-                    {programDetails}
-                  </p>
-                </div>
+              <div className="flex items-center gap-4 mb-5">
+                <Image src={LBTA_LOGO_HORIZONTAL} alt="Laguna Beach Tennis Academy" width={160} height={40} className="shrink-0 brightness-0 invert" />
               </div>
 
+              <h2 className="font-headline text-[24px] md:text-[28px] font-medium text-white leading-tight mb-1">
+                {programName}
+              </h2>
+              <p className="font-sans text-[13px] text-white/60 mb-5">
+                {programDetails}
+              </p>
+
               {pricingOptions.length > 0 && (
-                <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3.5">
+                <div className="mb-5 rounded-lg border border-white/10 bg-white/[0.06] px-4 py-3.5">
                   <div className="grid grid-cols-2 gap-x-6 gap-y-2">
                     {pricingOptions.map((option) => (
                       <div key={option.label} className="flex items-baseline justify-between">
-                        <span className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60">{option.label}</span>
-                        <span className="font-sans text-[15px] font-bold tabular-nums text-brand-pacific-dusk">${option.amount.toLocaleString()}</span>
+                        <span className="font-sans text-[12px] font-medium text-white/50">{option.label}</span>
+                        <span className="font-sans text-[15px] font-bold tabular-nums text-white">${option.amount.toLocaleString()}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
 
-              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/50 uppercase tracking-[0.16em] mb-3">
+              <p className="font-sans text-[11px] font-medium text-white/50 uppercase tracking-[0.16em] mb-3">
                 How would you like to register?
               </p>
 
@@ -364,43 +364,46 @@ export default function RegistrationModal({
                 <button
                   type="button"
                   onClick={handlePathAClick}
-                  className="w-full text-left rounded-lg border border-black/[0.08] bg-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+                  className="w-full text-left rounded-lg border border-white/10 bg-white/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
                 >
                   <div className="border-t-[3px] border-brand-sunset-cliff rounded-t-lg" />
                   <div className="px-5 py-4 flex items-center justify-between gap-3">
-                    <div>
-                      <p className="font-headline text-[17px] font-medium text-brand-pacific-dusk mb-0.5">
-                        Register and Pay
-                      </p>
-                      <p className="font-sans text-[13px] text-brand-pacific-dusk/60">
-                        Complete registration on the City of Laguna Beach site.
-                      </p>
+                    <div className="flex items-center gap-3">
+                      <Image src={CITY_SEAL} alt="" width={28} height={28} className="shrink-0 rounded-full" aria-hidden="true" />
+                      <div>
+                        <p className="font-headline text-[17px] font-medium text-white mb-0.5">
+                          Register and Pay
+                        </p>
+                        <p className="font-sans text-[13px] text-white/55">
+                          Complete registration on the City of Laguna Beach site.
+                        </p>
+                      </div>
                     </div>
-                    <span className="shrink-0 font-sans text-[13px] font-medium text-brand-pacific-dusk" aria-hidden="true">↗</span>
+                    <span className="shrink-0 font-sans text-[13px] font-medium text-white/70" aria-hidden="true">↗</span>
                   </div>
                 </button>
 
                 <button
                   type="button"
                   onClick={handlePathBClick}
-                  className="w-full text-left rounded-lg border border-black/[0.08] bg-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+                  className="w-full text-left rounded-lg border border-white/10 bg-white/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
                 >
                   <div className="border-t-[3px] border-brand-victoria-cove rounded-t-lg" />
                   <div className="px-5 py-4 flex items-center justify-between gap-3">
                     <div>
-                      <p className="font-headline text-[17px] font-medium text-brand-pacific-dusk mb-0.5">
+                      <p className="font-headline text-[17px] font-medium text-white mb-0.5">
                         We&apos;ll Handle It
                       </p>
-                      <p className="font-sans text-[13px] text-brand-pacific-dusk/60">
+                      <p className="font-sans text-[13px] text-white/55">
                         Share your details and we&apos;ll get you registered within 24 hours.
                       </p>
                     </div>
-                    <span className="shrink-0 font-sans text-[13px] font-medium text-brand-pacific-dusk" aria-hidden="true">→</span>
+                    <span className="shrink-0 font-sans text-[13px] font-medium text-white/70" aria-hidden="true">→</span>
                   </div>
                 </button>
               </div>
 
-              <p className="font-sans text-[11px] text-brand-pacific-dusk/55 leading-relaxed">
+              <p className="font-sans text-[11px] text-white/40 leading-relaxed">
                 All registration goes through the City of Laguna Beach recreation department.
               </p>
             </div>
@@ -409,19 +412,18 @@ export default function RegistrationModal({
           {/* ── TRANSITIONING (Path A: opening city site) ── */}
           {state === 'transitioning' && (
             <div className="flex flex-col items-center justify-center text-center py-10 min-h-[260px]" aria-live="polite">
-              {/* Animated spinner — pure CSS, respects reduced-motion */}
               <span
-                className="block w-9 h-9 rounded-full border-2 border-brand-pacific-dusk/15 border-t-brand-victoria-cove motion-safe:animate-spin mb-6"
+                className="block w-9 h-9 rounded-full border-2 border-white/15 border-t-brand-victoria-cove motion-safe:animate-spin mb-6"
                 aria-hidden="true"
               />
-              <h2 className="font-headline text-[22px] font-medium text-brand-pacific-dusk mb-2">
+              <h2 className="font-headline text-[22px] font-medium text-white mb-2">
                 Opening city site…
               </h2>
-              <p className="font-sans text-[13px] text-brand-pacific-dusk/70 max-w-[320px]">
+              <p className="font-sans text-[13px] text-white/65 max-w-[320px]">
                 The City of Laguna Beach registration page should be opening in a new tab. Complete your payment there
                 and then return here.
               </p>
-              <p className="font-sans text-[12px] text-brand-pacific-dusk/50 mt-4">
+              <p className="font-sans text-[12px] text-white/50 mt-4">
                 Nothing opened?{' '}
                 <a
                   href={rec1Url || BASE_REC1_URL}
@@ -446,31 +448,32 @@ export default function RegistrationModal({
                     setPath(null)
                     setError(null)
                   }}
-                  className="mb-3 font-sans text-[12px] text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk inline-flex items-center gap-1 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20 rounded-sm"
+                  className="mb-3 font-sans text-[12px] text-white/60 hover:text-white inline-flex items-center gap-1 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 rounded-sm"
                 >
                   <span aria-hidden="true">←</span> Back
                 </button>
               )}
-              <div className="flex items-start gap-3 mb-4">
-                <Image src={LBTA_ICON} alt="" width={36} height={36} className="shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <h2 className="font-headline text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk leading-tight">
-                    {programName}
-                  </h2>
-                  <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mt-0.5">
-                    {hideRec1
-                      ? "Share your details and we\u2019ll confirm availability within 24 hours."
-                      : "Share your details and we\u2019ll get you registered."}
-                  </p>
-                </div>
+
+              <div className="flex items-center gap-4 mb-4">
+                <Image src={LBTA_LOGO_HORIZONTAL} alt="Laguna Beach Tennis Academy" width={140} height={35} className="shrink-0 brightness-0 invert" />
               </div>
+
+              <h2 className="font-headline text-[22px] md:text-[24px] font-medium text-white leading-tight mb-1">
+                {programName}
+              </h2>
+              <p className="font-sans text-[13px] text-white/55 mb-5">
+                {hideRec1
+                  ? "Share your details and we\u2019ll confirm availability within 24 hours."
+                  : "Share your details and we\u2019ll get you registered."}
+              </p>
+
               {pricingOptions.length > 0 && (
-                <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3.5">
+                <div className="mb-5 rounded-lg border border-white/10 bg-white/[0.06] px-4 py-3.5">
                   <div className="grid grid-cols-2 gap-x-6 gap-y-2">
                     {pricingOptions.map((option) => (
                       <div key={option.label} className="flex items-baseline justify-between">
-                        <span className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60">{option.label}</span>
-                        <span className="font-sans text-[15px] font-bold tabular-nums text-brand-pacific-dusk">${option.amount.toLocaleString()}</span>
+                        <span className="font-sans text-[12px] font-medium text-white/50">{option.label}</span>
+                        <span className="font-sans text-[15px] font-bold tabular-nums text-white">${option.amount.toLocaleString()}</span>
                       </div>
                     ))}
                   </div>
@@ -480,7 +483,7 @@ export default function RegistrationModal({
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                    <label className="block font-sans text-[11px] font-medium text-white/60 uppercase tracking-[0.15em] mb-1.5">
                       First name*
                     </label>
                     <input
@@ -488,11 +491,11 @@ export default function RegistrationModal({
                       required
                       value={form.firstName}
                       onChange={(e) => handleChange('firstName', e.target.value)}
-                      className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                      className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]"
                     />
                   </div>
                   <div>
-                    <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                    <label className="block font-sans text-[11px] font-medium text-white/60 uppercase tracking-[0.15em] mb-1.5">
                       Last name*
                     </label>
                     <input
@@ -500,13 +503,13 @@ export default function RegistrationModal({
                       required
                       value={form.lastName}
                       onChange={(e) => handleChange('lastName', e.target.value)}
-                      className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                      className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                  <label className="block font-sans text-[11px] font-medium text-white/60 uppercase tracking-[0.15em] mb-1.5">
                     Email*
                   </label>
                   <input
@@ -514,12 +517,12 @@ export default function RegistrationModal({
                     required
                     value={form.email}
                     onChange={(e) => handleChange('email', e.target.value)}
-                    className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                    className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                  <label className="block font-sans text-[11px] font-medium text-white/60 uppercase tracking-[0.15em] mb-1.5">
                     Phone*
                   </label>
                   <input
@@ -527,24 +530,24 @@ export default function RegistrationModal({
                     required
                     value={form.phone}
                     onChange={(e) => handleChange('phone', e.target.value)}
-                    className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                    className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                    <label className="block font-sans text-[11px] font-medium text-white/60 uppercase tracking-[0.15em] mb-1.5">
                       Player name
                     </label>
                     <input
                       type="text"
                       value={form.playerName}
                       onChange={(e) => handleChange('playerName', e.target.value)}
-                      className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                      className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]"
                     />
                   </div>
                   <div>
-                    <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                    <label className="block font-sans text-[11px] font-medium text-white/60 uppercase tracking-[0.15em] mb-1.5">
                       Player age
                     </label>
                     <input
@@ -553,31 +556,31 @@ export default function RegistrationModal({
                       max={99}
                       value={form.playerAge}
                       onChange={(e) => handleChange('playerAge', e.target.value)}
-                      className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                      className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                    <label className="block font-sans text-[11px] font-medium text-white/60 uppercase tracking-[0.15em] mb-1.5">
                       Days per week
                     </label>
                     <select
                       value={form.daysPerWeek}
                       onChange={(e) => handleDaysPerWeekChange(e.target.value)}
-                      className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                      className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]"
                     >
-                      <option value="">Select frequency</option>
-                      <option value="1">1 day per week</option>
-                      <option value="2">2 days per week</option>
-                      <option value="3">3 days per week</option>
-                      <option value="4+">4+ days per week</option>
-                      <option value="Not sure">Not sure yet</option>
+                      <option value="" className="bg-brand-deep-water text-white">Select frequency</option>
+                      <option value="1" className="bg-brand-deep-water text-white">1 day per week</option>
+                      <option value="2" className="bg-brand-deep-water text-white">2 days per week</option>
+                      <option value="3" className="bg-brand-deep-water text-white">3 days per week</option>
+                      <option value="4+" className="bg-brand-deep-water text-white">4+ days per week</option>
+                      <option value="Not sure" className="bg-brand-deep-water text-white">Not sure yet</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                    <label className="block font-sans text-[11px] font-medium text-white/60 uppercase tracking-[0.15em] mb-1.5">
                       Preferred days
                     </label>
                     <div className="flex flex-wrap gap-2">
@@ -596,10 +599,10 @@ export default function RegistrationModal({
                             disabled={isAtLimit}
                             className={`min-h-[48px] px-4 py-2 rounded-full border font-sans text-[12px] transition-colors ${
                               selected
-                                ? 'bg-black text-white border-black'
+                                ? 'bg-white text-brand-deep-water border-white'
                                 : isAtLimit
-                                  ? 'bg-white text-brand-pacific-dusk/35 border-black/[0.08] cursor-not-allowed'
-                                  : 'bg-white text-brand-pacific-dusk border-black/[0.12] hover:border-black/30'
+                                  ? 'bg-transparent text-white/25 border-white/10 cursor-not-allowed'
+                                  : 'bg-transparent text-white/80 border-white/20 hover:border-white/40'
                             }`}
                             aria-pressed={selected}
                           >
@@ -608,32 +611,32 @@ export default function RegistrationModal({
                         )
                       })}
                     </div>
-                    <p className="mt-2 font-sans text-[12px] text-brand-pacific-dusk/65">
+                    <p className="mt-2 font-sans text-[12px] text-white/50">
                       {form.preferredDays.length
                         ? `Selected: ${form.preferredDays.join(', ')}`
                         : 'Selected: none yet'}
                     </p>
                     {daySelectionError && (
-                      <p className="mt-1 font-sans text-[12px] text-brand-pacific-dusk/65">
+                      <p className="mt-1 font-sans text-[12px] text-white/50">
                         {daySelectionError}
                       </p>
                     )}
                   </div>
                 </div>
 
-                <div className="rounded-[10px] border border-brand-victoria-cove/30 bg-brand-morning-light px-4 py-3">
+                <div className="rounded-[10px] border border-brand-victoria-cove/30 bg-brand-victoria-cove/10 px-4 py-3">
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={form.interestedInUtrMatchPlay}
                       onChange={(e) => setForm((prev) => ({ ...prev, interestedInUtrMatchPlay: e.target.checked }))}
-                      className="mt-0.5 h-4 w-4 rounded border-black/20 text-brand-victoria-cove focus:ring-brand-victoria-cove"
+                      className="mt-0.5 h-4 w-4 rounded border-white/20 text-brand-victoria-cove focus:ring-brand-victoria-cove"
                     />
                     <span>
                       <span className="block font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-brand-victoria-cove">
                         Optional add-on
                       </span>
-                      <span className="block font-sans text-[13px] text-brand-pacific-dusk mt-0.5">
+                      <span className="block font-sans text-[13px] text-white/80 mt-0.5">
                         I&apos;m interested in UTR Match Play opportunities for this player.
                       </span>
                       <a
@@ -647,20 +650,20 @@ export default function RegistrationModal({
                 </div>
 
                 <div>
-                  <label className="block font-sans text-[11px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.15em] mb-1.5">
+                  <label className="block font-sans text-[11px] font-medium text-white/60 uppercase tracking-[0.15em] mb-1.5">
                     Notes (optional)
                   </label>
                   <textarea
                     rows={3}
                     value={form.notes}
                     onChange={(e) => handleChange('notes', e.target.value)}
-                    className="w-full rounded-[6px] bg-brand-morning-light border border-black/[0.06] px-3.5 py-3 font-sans text-[14px] text-brand-pacific-dusk placeholder:text-brand-pacific-dusk/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/15 resize-none"
+                    className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12] resize-none"
                     placeholder="Anything helpful for our team to know."
                   />
                 </div>
 
                 {error && (
-                  <p className="font-sans text-[13px] text-lbta-red mt-1" role="alert">
+                  <p className="font-sans text-[13px] text-red-400 mt-1" role="alert">
                     {error}
                   </p>
                 )}
@@ -668,16 +671,16 @@ export default function RegistrationModal({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-1 w-full inline-flex items-center justify-center rounded-[2px] bg-black text-white font-sans text-[13px] font-medium tracking-[0.18em] uppercase px-6 py-3.5 min-h-[48px] transition-all duration-300 hover:bg-gray-800 disabled:bg-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="mt-1 w-full inline-flex items-center justify-center rounded-[2px] bg-white text-brand-deep-water font-sans text-[13px] font-medium tracking-[0.18em] uppercase px-6 py-3.5 min-h-[48px] transition-all duration-300 hover:bg-white/90 disabled:bg-white/20 disabled:text-white/40 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
                 >
                   {isSubmitting ? 'Submitting…' : 'Register'}
                 </button>
 
-                <p className="font-sans text-[12px] text-brand-pacific-dusk/55 mt-3">
+                <p className="font-sans text-[12px] text-white/45 mt-3">
                   Questions? Call{' '}
                   <a
                     href="tel:19495340457"
-                    className="underline underline-offset-2 decoration-brand-victoria-cove/40 hover:decoration-brand-victoria-cove"
+                    className="text-brand-victoria-cove underline underline-offset-2 decoration-brand-victoria-cove/40 hover:decoration-brand-victoria-cove"
                   >
                     (949) 534-0457
                   </a>
@@ -691,11 +694,16 @@ export default function RegistrationModal({
           {state === 'confirmation' && (
             <div>
               <div className="flex flex-col items-center text-center mb-6">
-                <Image src={LBTA_ICON} alt="LBTA" width={48} height={48} className="mb-4" />
-                <h2 className="font-headline text-[24px] md:text-[26px] font-medium text-brand-pacific-dusk mb-2">
+                <Image src={LBTA_LOGO_HORIZONTAL} alt="Laguna Beach Tennis Academy" width={160} height={40} className="mb-5 brightness-0 invert" />
+                <div className="w-14 h-14 rounded-full bg-brand-tide-pool/20 flex items-center justify-center mb-4">
+                  <svg className="w-7 h-7 text-brand-tide-pool" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h2 className="font-headline text-[24px] md:text-[26px] font-medium text-white mb-2">
                   You&apos;re registered.
                 </h2>
-                <p className="font-sans text-[14px] text-brand-pacific-dusk/70 max-w-[360px] leading-relaxed">
+                <p className="font-sans text-[14px] text-white/65 max-w-[360px] leading-relaxed">
                   {path === 'a' ? (
                     <>Complete payment on the city site — the tab should be open.</>
                   ) : (
@@ -704,12 +712,12 @@ export default function RegistrationModal({
                 </p>
               </div>
 
-              {path === 'b' && <AppDownloadCard className="mb-6" />}
+              {path === 'b' && <AppDownloadCard className="mb-6" variant="dark" />}
 
               <button
                 type="button"
                 onClick={handleClose}
-                className="w-full inline-flex items-center justify-center rounded-[2px] bg-black text-white font-sans text-[13px] font-medium tracking-[0.18em] uppercase px-6 py-3.5 min-h-[48px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                className="w-full inline-flex items-center justify-center rounded-[2px] bg-white text-brand-deep-water font-sans text-[13px] font-medium tracking-[0.18em] uppercase px-6 py-3.5 min-h-[48px] transition-all duration-300 hover:bg-white/90 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               >
                 Done
               </button>
