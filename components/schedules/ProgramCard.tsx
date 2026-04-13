@@ -272,26 +272,26 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
         />
 
         {/* Level badge — frosted glass */}
-        <span className="absolute right-3 top-3 rounded-[3px] border border-white/[0.12] bg-white/[0.08] px-2 py-0.5 font-sans text-[9px] font-semibold uppercase tracking-[0.14em] text-white/75 backdrop-blur-md">
+        <span className="absolute right-3 top-3 rounded-[3px] border border-white/[0.15] bg-white/[0.1] px-2 py-0.5 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-white/90 backdrop-blur-md">
           {levelBadge}
         </span>
 
         {/* Overlay content */}
         <div className="absolute inset-x-0 bottom-0 flex flex-col px-4 pb-3">
-          <span className="mb-1 font-sans text-[9px] font-semibold uppercase tracking-[0.16em] text-white/50">
+          <span className="mb-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
             {program.category}
           </span>
           <h4
             id={headingId}
-            className="font-headline text-[20px] font-semibold leading-[1.05] text-white sm:text-[22px]"
+            className="font-headline text-[18px] font-semibold leading-[1.1] text-white sm:text-[20px]"
             style={{
-              letterSpacing: '-0.02em',
-              textShadow: '0 1px 2px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.2)',
+              letterSpacing: '-0.01em',
+              textShadow: '0 1px 2px rgba(0,0,0,0.8), 0 4px 16px rgba(0,0,0,0.5)',
             }}
           >
             {program.program}
           </h4>
-          <p className="mt-0.5 font-sans text-[11px] font-normal text-white/55" style={{ textShadow: '0 1px 6px rgba(0,0,0,0.6)' }}>
+          <p className="mt-0.5 font-sans text-[11px] font-medium text-white/75" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.7)' }}>
             Ages {program.ages} &middot; {program.duration}
           </p>
         </div>
@@ -301,15 +301,15 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
       <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
 
         {/* Schedule grid — grouped by time+location */}
-        <div className="mb-3 rounded-md border border-white/[0.07] bg-white/[0.03] px-3 py-2.5">
+        <div className="mb-3 rounded-md border border-white/[0.10] bg-white/[0.04] px-3 py-2.5">
           {groupScheduleSlots(program.schedule).map((slot) => (
             <div key={`${program.id}-${slot.days}-${slot.time}`} className="flex items-baseline gap-1.5 py-[3px]">
-              <span className="shrink-0 font-sans text-[11px] font-semibold uppercase tracking-[0.02em] text-white/70">
+              <span className="shrink-0 font-sans text-[11px] font-bold uppercase tracking-[0.02em] text-white/85">
                 {slot.days}
               </span>
-              <span className="font-sans text-[11px] tabular-nums text-white/50">{slot.time}</span>
+              <span className="font-sans text-[11px] tabular-nums text-white/65">{slot.time}</span>
               {slot.location && (
-                <span className="ml-auto shrink-0 font-sans text-[10px] text-white/30">
+                <span className="ml-auto shrink-0 font-sans text-[10px] font-medium text-white/45">
                   {shortenLocation(slot.location)}
                 </span>
               )}
@@ -318,16 +318,16 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
         </div>
 
         {/* Price */}
-        <div className="mb-3 flex items-baseline gap-1.5 border-t border-white/[0.07] pt-3">
+        <div className="mb-3 flex items-baseline gap-1.5 border-t border-white/[0.10] pt-3">
           {primaryPrice ? (
             <>
-              <span className="font-headline text-[26px] leading-none tracking-tight text-white">${primaryPrice.amount}</span>
-              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white/35">
+              <span className="font-headline text-[24px] leading-none tracking-tight text-white">${primaryPrice.amount}</span>
+              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-white/50">
                 {primaryPrice.label}
               </span>
             </>
           ) : (
-            <span className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-white/40">
+            <span className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-white/50">
               Contact for rates
             </span>
           )}
