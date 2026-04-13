@@ -95,8 +95,7 @@ function normalizeLevel(program: Program): Exclude<ProgramFilters['level'], 'all
   return 'intermediate'
 }
 
-function gridCols(count: number): string {
-  if (count <= 2) return 'sm:grid-cols-2'
+function gridCols(): string {
   return 'sm:grid-cols-2 lg:grid-cols-3'
 }
 
@@ -300,7 +299,7 @@ export default function ProgramsSection({
                       {meta.subline}
                     </p>
                   </div>
-                  <div className={`grid gap-4 ${gridCols(sectionPrograms.length)}`}>
+                  <div className={`grid gap-4 ${gridCols()}`}>
                     {sectionPrograms.map((program) => (
                       <SchedulesProgramCard
                         key={program.id}
