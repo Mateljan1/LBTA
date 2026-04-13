@@ -13,12 +13,17 @@ interface SchedulesProgramCardProps {
 /* ── Helpers ── */
 
 function deriveLevelBadge(program: Program): string {
-  const haystack = `${program.program} ${program.ages} ${program.description}`.toLowerCase()
-  if (haystack.includes('new to tennis') || haystack.includes('never played') || haystack.includes('beginner')) return 'Beginner'
-  if (haystack.includes('beyond beginner')) return 'Beginner–Intermediate'
-  if (haystack.includes('utr 5+') || haystack.includes('advanced')) return 'Advanced'
-  if (haystack.includes('competitive') || haystack.includes('match play')) return 'Competitive'
-  if (haystack.includes('intermediate') || haystack.includes('ntrp 3')) return 'Intermediate'
+  const name = program.program.toLowerCase()
+  const ages = program.ages.toLowerCase()
+  if (name.includes('new to tennis') || name.includes('beginner')) return 'Beginner'
+  if (name.includes('beyond beginner')) return 'Beginner–Intermediate'
+  if (ages.includes('utr 5+') || name.includes('advanced')) return 'Advanced'
+  if (name.includes('competitive') || name.includes('match play')) return 'Competitive'
+  if (name.includes('intermediate') || ages.includes('ntrp 3')) return 'Intermediate'
+  if (name.includes('player development') || ages.includes('utr')) return 'Level-Based'
+  if (name.includes('liveball')) return 'NTRP 3.0+'
+  if (name.includes('cardio')) return 'All Levels'
+  if (program.category.toLowerCase() === 'junior') return 'Ages ' + program.ages
   return 'All Levels'
 }
 
@@ -200,14 +205,14 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
       className="group flex h-full flex-col overflow-hidden rounded-xl bg-[#0a1628] ring-1 ring-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-1 hover:ring-white/[0.12] hover:shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
     >
       {/* ═══ CINEMATIC HERO ═══ */}
-      <div className="relative aspect-[3/2] overflow-hidden">
+      <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={img.src}
           alt={img.alt}
           fill
           className="object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform group-hover:scale-[1.05]"
           style={{ objectPosition: img.objectPosition }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           quality={85}
         />
 

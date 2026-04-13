@@ -98,7 +98,7 @@ function normalizeLevel(program: Program): Exclude<ProgramFilters['level'], 'all
 function gridCols(count: number): string {
   if (count <= 2) return 'sm:grid-cols-2'
   if (count === 3) return 'sm:grid-cols-2 lg:grid-cols-3'
-  return 'sm:grid-cols-2 lg:grid-cols-4'
+  return 'sm:grid-cols-2'
 }
 
 function matchesDay(program: Program, day: ProgramFilters['day']): boolean {
