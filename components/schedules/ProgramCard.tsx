@@ -331,7 +331,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
         {/* Pricing tiers — label-first table layout */}
         <div className="mb-3 border-t border-white/[0.10] pt-3">
           {prices.length > 0 ? (
-            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+            <div className={`grid gap-x-4 gap-y-1.5 ${prices.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
               {prices.map((p) => (
                 <div key={p.label} className="flex items-baseline justify-between">
                   <span className="font-sans text-[11px] font-medium text-white/60">{p.label}</span>
