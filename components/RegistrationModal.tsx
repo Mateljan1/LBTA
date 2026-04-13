@@ -336,13 +336,13 @@ export default function RegistrationModal({
               </p>
 
               {pricingOptions.length > 0 && (
-                <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3">
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+                <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3.5">
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-2">
                     {pricingOptions.map((option) => (
-                      <p key={option.label} className="font-sans text-[14px] text-brand-pacific-dusk">
-                        <span className="font-bold">${option.amount.toLocaleString()}</span>{' '}
-                        <span className="text-[11px] text-brand-pacific-dusk/55">{option.label}</span>
-                      </p>
+                      <div key={option.label} className="flex items-baseline justify-between">
+                        <span className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60">{option.label}</span>
+                        <span className="font-sans text-[15px] font-bold tabular-nums text-brand-pacific-dusk">${option.amount.toLocaleString()}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -452,13 +452,13 @@ export default function RegistrationModal({
                   : "Share your details and we\u2019ll get you registered."}
               </p>
               {pricingOptions.length > 0 && (
-                <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3">
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+                <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3.5">
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-2">
                     {pricingOptions.map((option) => (
-                      <p key={option.label} className="font-sans text-[14px] text-brand-pacific-dusk">
-                        <span className="font-bold">${option.amount.toLocaleString()}</span>{' '}
-                        <span className="text-[11px] text-brand-pacific-dusk/55">{option.label}</span>
-                      </p>
+                      <div key={option.label} className="flex items-baseline justify-between">
+                        <span className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60">{option.label}</span>
+                        <span className="font-sans text-[15px] font-bold tabular-nums text-brand-pacific-dusk">${option.amount.toLocaleString()}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
