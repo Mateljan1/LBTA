@@ -46,6 +46,14 @@ function getAccentColor(program: Program): string {
   return '#E8834A'
 }
 
+function shortenLocation(location: string): string {
+  const loc = location.toLowerCase()
+  if (loc.includes('moulton')) return 'Moulton'
+  if (loc.includes('alta laguna')) return 'Alta Laguna'
+  if (loc.includes('high school') || loc.includes('lbhs') || loc.includes('lb high')) return 'LBHS'
+  return location.length > 14 ? location.slice(0, 12) + '...' : location
+}
+
 type ProgramImageConfig = { src: string; alt: string; objectPosition: string }
 
 const CLOUD = 'https://res.cloudinary.com/dv033eo0x/image/upload'
@@ -267,17 +275,20 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
 
       {/* ═══ CARD BODY ═══ */}
       <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
-        {/* Location */}
-        <p className="mb-2.5 font-sans text-[11px] leading-relaxed tracking-wide text-white/40 line-clamp-1">{program.location}</p>
 
-        {/* Schedule grid */}
-        <div className="mb-3 rounded-md border border-white/[0.07] bg-white/[0.03] px-3 py-2">
+        {/* Schedule grid — day, time, location per row */}
+        <div className="mb-3 rounded-md border border-white/[0.07] bg-white/[0.03] px-3 py-2.5">
           {program.schedule.map((slot) => (
-            <div key={`${program.id}-${slot.day}-${slot.time}`} className="flex items-baseline py-[2px]">
-              <span className="w-[36px] shrink-0 font-sans text-[11px] font-semibold uppercase tracking-[0.04em] text-white/70">
+            <div key={`${program.id}-${slot.day}-${slot.time}`} className="flex items-baseline gap-1 py-[3px]">
+              <span className="w-[34px] shrink-0 font-sans text-[11px] font-semibold uppercase tracking-[0.04em] text-white/70">
                 {slot.day.slice(0, 3)}
               </span>
               <span className="font-sans text-[11px] tabular-nums text-white/50">{slot.time}</span>
+              {slot.location && (
+                <span className="ml-auto shrink-0 font-sans text-[10px] text-white/30">
+                  {shortenLocation(slot.location)}
+                </span>
+              )}
             </div>
           ))}
         </div>
