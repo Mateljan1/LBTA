@@ -40,26 +40,30 @@ type SectionKey = 'kids' | 'development' | 'adult' | 'openCourt'
 
 const SECTION_ORDER: SectionKey[] = ['kids', 'development', 'adult', 'openCourt']
 
-const SECTION_META: Record<SectionKey, { eyebrow: string; headline: string; subline: string }> = {
+const SECTION_META: Record<SectionKey, { eyebrow: string; headline: string; subline: string; gridClass: string }> = {
   kids: {
     eyebrow: 'AGES 3-11',
     headline: 'Kids Programs',
     subline: 'First racquet to full court. Each stage matches the right ball, court size, and pace to where they are.',
+    gridClass: 'grid gap-4 sm:grid-cols-2 lg:grid-cols-4',
   },
   development: {
     eyebrow: 'AGES 9-17 \u00B7 LEVEL-BASED',
     headline: 'Player Development',
     subline: 'Placement by level, not just age. From Competitive Green Dot through High Performance.',
+    gridClass: 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3',
   },
   adult: {
     eyebrow: 'ALL LEVELS',
     headline: 'Adult Classes',
     subline: 'New to tennis through 4.0+. Group classes with clear progression, coached by Andrew and the team.',
+    gridClass: 'grid gap-4 sm:grid-cols-2 lg:grid-cols-4',
   },
   openCourt: {
     eyebrow: 'DROP-IN',
     headline: 'Open Court',
     subline: 'No season commitment. Show up, play, sweat.',
+    gridClass: 'grid gap-4 sm:grid-cols-2',
   },
 }
 
@@ -93,12 +97,6 @@ function normalizeLevel(program: Program): Exclude<ProgramFilters['level'], 'all
   if (haystack.includes('advanced') || haystack.includes('utr 5+')) return 'advanced'
   if (haystack.includes('competitive') || haystack.includes('match play') || haystack.includes('utr')) return 'competitive'
   return 'intermediate'
-}
-
-function gridCols(count: number): string {
-  if (count <= 2) return 'sm:grid-cols-2'
-  if (count === 3) return 'sm:grid-cols-2 lg:grid-cols-3'
-  return 'sm:grid-cols-2 lg:grid-cols-4'
 }
 
 function matchesDay(program: Program, day: ProgramFilters['day']): boolean {
@@ -301,7 +299,7 @@ export default function ProgramsSection({
                       {meta.subline}
                     </p>
                   </div>
-                  <div className={`grid gap-4 ${gridCols(sectionPrograms.length)}`}>
+                  <div className={meta.gridClass}>
                     {sectionPrograms.map((program) => (
                       <SchedulesProgramCard
                         key={program.id}
