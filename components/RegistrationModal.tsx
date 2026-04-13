@@ -36,7 +36,6 @@ export default function RegistrationModal({
 }: RegistrationModalProps) {
   const [state, setState] = useState<ModalState>('choose')
   const [path, setPath] = useState<RegistrationPath>(null)
-  const [isAccordionOpen, setIsAccordionOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [daySelectionError, setDaySelectionError] = useState<string | null>(null)
@@ -66,7 +65,6 @@ export default function RegistrationModal({
       // Direct bookings (private lessons etc.) skip the choose state
       setState(hideRec1 ? 'form' : 'choose')
       setPath(hideRec1 ? 'b' : null)
-      setIsAccordionOpen(false)
       setIsSubmitting(false)
       setError(null)
       setDaySelectionError(null)
@@ -330,110 +328,73 @@ export default function RegistrationModal({
           {/* ── CHOOSE ── */}
           {state === 'choose' && (
             <div>
-              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.18em] mb-2">
-                Register for
-              </p>
               <h2 className="font-headline text-[24px] md:text-[28px] font-medium text-brand-pacific-dusk leading-tight mb-1">
                 {programName}
               </h2>
-              <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-5">
+              <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mb-4">
                 {programDetails}
               </p>
+
               {pricingOptions.length > 0 && (
-                <div className="mb-5 rounded-[8px] border border-black/[0.08] bg-brand-morning-light px-3.5 py-3">
-                  <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk/60 mb-2">
-                    Pricing
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
                     {pricingOptions.map((option) => (
-                      <p key={option.label} className="font-sans text-[13px] text-brand-pacific-dusk/85">
-                        <span className="font-medium">{option.label}</span>{' '}
-                        <span className="text-brand-pacific-dusk">${option.amount}</span>
+                      <p key={option.label} className="font-sans text-[14px] text-brand-pacific-dusk">
+                        <span className="font-bold">${option.amount.toLocaleString()}</span>{' '}
+                        <span className="text-[11px] text-brand-pacific-dusk/55">{option.label}</span>
                       </p>
                     ))}
                   </div>
                 </div>
               )}
 
-              <div className="space-y-3 mb-5">
-                {/* Path A card */}
+              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/50 uppercase tracking-[0.16em] mb-3">
+                How would you like to register?
+              </p>
+
+              <div className="space-y-3 mb-4">
                 <button
                   type="button"
                   onClick={handlePathAClick}
-                  className="w-full text-left rounded-[10px] border border-black/[0.08] bg-white shadow-[0_12px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_18px_55px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+                  className="w-full text-left rounded-lg border border-black/[0.08] bg-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
                 >
-                  <div className="border-t-4 border-brand-sunset-cliff rounded-t-[10px]" />
-                  <div className="px-5 pt-4 pb-4 md:px-5 md:pt-5 md:pb-5">
-                    <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-pacific-dusk/70 mb-1.5">
-                      Pay now
-                    </p>
-                    <p className="font-headline text-[18px] font-medium text-brand-pacific-dusk mb-2">
-                      Register &amp; pay on the city website
-                    </p>
-                    <p className="font-sans text-[13px] text-brand-pacific-dusk/75 leading-relaxed mb-3">
-                      Your payment goes through the City of Laguna Beach recreation department — this covers your court
-                      access and insurance.
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1 font-sans text-[12px] font-medium text-brand-pacific-dusk">
-                        <span className="inline-flex h-1.5 w-1.5 rounded-full bg-brand-victoria-cove" aria-hidden />
-                        Takes about 2 minutes
-                      </span>
-                      <span className="inline-flex items-center gap-1 font-sans text-[12px] font-medium text-brand-pacific-dusk">
-                        Register &amp; pay
-                        <span aria-hidden="true">↗</span>
-                      </span>
+                  <div className="border-t-[3px] border-brand-sunset-cliff rounded-t-lg" />
+                  <div className="px-5 py-4 flex items-center justify-between gap-3">
+                    <div>
+                      <p className="font-headline text-[17px] font-medium text-brand-pacific-dusk mb-0.5">
+                        Register and Pay
+                      </p>
+                      <p className="font-sans text-[13px] text-brand-pacific-dusk/60">
+                        Complete registration on the City of Laguna Beach site.
+                      </p>
                     </div>
+                    <span className="shrink-0 font-sans text-[13px] font-medium text-brand-pacific-dusk" aria-hidden="true">↗</span>
                   </div>
                 </button>
 
-                {/* Path B card */}
                 <button
                   type="button"
                   onClick={handlePathBClick}
-                  className="w-full text-left rounded-[10px] border border-black/[0.08] bg-white shadow-[0_12px_35px_rgba(0,0,0,0.03)] hover:shadow-[0_18px_55px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+                  className="w-full text-left rounded-lg border border-black/[0.08] bg-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
                 >
-                  <div className="border-t-4 border-brand-victoria-cove rounded-t-[10px]" />
-                  <div className="px-5 pt-4 pb-4 md:px-5 md:pt-5 md:pb-5">
-                    <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-pacific-dusk/70 mb-1.5">
-                      Have us help
-                    </p>
-                    <p className="font-headline text-[18px] font-medium text-brand-pacific-dusk mb-2">
-                      Register here — we&apos;ll walk you through it
-                    </p>
-                    <p className="font-sans text-[13px] text-brand-pacific-dusk/75 leading-relaxed mb-3">
-                      Someone from our team will reach out within 24 hours to get you registered and on court.
-                    </p>
-                    <span className="inline-flex items-center gap-1 font-sans text-[12px] font-medium text-brand-pacific-dusk">
-                      We&apos;ll send a direct payment link after we confirm details.
-                    </span>
+                  <div className="border-t-[3px] border-brand-victoria-cove rounded-t-lg" />
+                  <div className="px-5 py-4 flex items-center justify-between gap-3">
+                    <div>
+                      <p className="font-headline text-[17px] font-medium text-brand-pacific-dusk mb-0.5">
+                        We&apos;ll Handle It
+                      </p>
+                      <p className="font-sans text-[13px] text-brand-pacific-dusk/60">
+                        Share your details and we&apos;ll get you registered within 24 hours.
+                      </p>
+                    </div>
+                    <span className="shrink-0 font-sans text-[13px] font-medium text-brand-pacific-dusk" aria-hidden="true">→</span>
                   </div>
                 </button>
               </div>
 
-              {/* Why city payment accordion */}
-              <div className="mt-4 border-t border-black/[0.08] pt-4">
-                <button
-                  type="button"
-                  onClick={() => setIsAccordionOpen((prev) => !prev)}
-                  aria-expanded={isAccordionOpen}
-                  className="w-full flex items-center justify-between font-sans text-[13px] text-brand-pacific-dusk/85 hover:text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20 rounded-sm"
-                >
-                  <span>Why does payment go through the city?</span>
-                  <span
-                    aria-hidden="true"
-                    className={`inline-block transform transition-transform duration-200 ${isAccordionOpen ? 'rotate-90' : ''}`}
-                  >
-                    ›
-                  </span>
-                </button>
-                {isAccordionOpen && (
-                  <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/70 leading-relaxed">
-                    LBTA runs on City of Laguna Beach public courts. The city requires all participants to register
-                    through their recreation department for liability and insurance coverage.
-                  </p>
-                )}
-              </div>
+              <p className="font-sans text-[11px] text-brand-pacific-dusk/40 leading-relaxed">
+                All registration goes through the City of Laguna Beach recreation department.
+              </p>
             </div>
           )}
 
@@ -477,32 +438,26 @@ export default function RegistrationModal({
                     setPath(null)
                     setError(null)
                   }}
-                  className="mb-3 font-sans text-[12px] text-brand-pacific-dusk/80 hover:text-brand-pacific-dusk inline-flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20 rounded-sm"
+                  className="mb-3 font-sans text-[12px] text-brand-pacific-dusk/70 hover:text-brand-pacific-dusk inline-flex items-center gap-1 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20 rounded-sm"
                 >
                   <span aria-hidden="true">←</span> Back
                 </button>
               )}
-              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.18em] mb-2">
-                {hideRec1 ? 'Book a session' : 'Register for'}
-              </p>
               <h2 className="font-headline text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk leading-tight mb-1">
                 {programName}
               </h2>
-              <p className="font-sans text-[13px] text-brand-pacific-dusk/70 mb-5">
+              <p className="font-sans text-[13px] text-brand-pacific-dusk/60 mb-5">
                 {hideRec1
-                  ? "Fill in your details and we\u2019ll follow up within 24 hours to confirm availability and scheduling."
-                  : "We\u2019ll reach out within 24 hours."}
+                  ? "Share your details and we\u2019ll confirm availability within 24 hours."
+                  : "Share your details and we\u2019ll get you registered."}
               </p>
               {pricingOptions.length > 0 && (
-                <div className="mb-5 rounded-[8px] border border-black/[0.08] bg-brand-morning-light px-3.5 py-3">
-                  <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk/60 mb-2">
-                    Pricing
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="mb-5 rounded-lg border border-black/[0.06] bg-brand-morning-light px-4 py-3">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
                     {pricingOptions.map((option) => (
-                      <p key={option.label} className="font-sans text-[13px] text-brand-pacific-dusk/85">
-                        <span className="font-medium">{option.label}</span>{' '}
-                        <span className="text-brand-pacific-dusk">${option.amount}</span>
+                      <p key={option.label} className="font-sans text-[14px] text-brand-pacific-dusk">
+                        <span className="font-bold">${option.amount.toLocaleString()}</span>{' '}
+                        <span className="text-[11px] text-brand-pacific-dusk/55">{option.label}</span>
                       </p>
                     ))}
                   </div>
@@ -702,7 +657,7 @@ export default function RegistrationModal({
                   disabled={isSubmitting}
                   className="mt-1 w-full inline-flex items-center justify-center rounded-[2px] bg-black text-white font-sans text-[13px] font-medium tracking-[0.18em] uppercase px-6 py-3.5 min-h-[48px] transition-all duration-300 hover:bg-gray-800 disabled:bg-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
-                  {isSubmitting ? 'Submitting…' : 'Submit registration'}
+                  {isSubmitting ? 'Submitting…' : 'Register'}
                 </button>
 
                 <p className="font-sans text-[12px] text-brand-pacific-dusk/55 mt-3">
@@ -722,7 +677,7 @@ export default function RegistrationModal({
           {/* ── CONFIRMATION (both paths) ── */}
           {state === 'confirmation' && (
             <div>
-              <div className="flex flex-col items-center text-center mb-5">
+              <div className="flex flex-col items-center text-center mb-6">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-victoria-cove/10">
                   <svg
                     className="h-6 w-6 text-brand-victoria-cove"
@@ -741,33 +696,26 @@ export default function RegistrationModal({
                   </svg>
                 </div>
                 <h2 className="font-headline text-[24px] md:text-[26px] font-medium text-brand-pacific-dusk mb-2">
-                  You&apos;re on your way.
+                  You&apos;re registered.
                 </h2>
-                <p className="font-sans text-[14px] text-brand-pacific-dusk/75 max-w-[360px]">
+                <p className="font-sans text-[14px] text-brand-pacific-dusk/70 max-w-[360px] leading-relaxed">
                   {path === 'a' ? (
-                    <>
-                      Complete your registration on the City of Laguna Beach site — the tab should be open now. Once we
-                      receive your receipt, we&apos;ll set up your account and send a confirmation email.
-                    </>
+                    <>Complete payment on the city site — the tab should be open.</>
                   ) : (
-                    <>
-                      Someone from our team will reach out within 24 hours to help you get registered and on court.
-                    </>
+                    <>We&apos;ll reach out within 24 hours to confirm your spot.</>
                   )}
                 </p>
               </div>
 
               <AppDownloadCard className="mb-6" />
 
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={handleClose}
-                  className="inline-flex items-center justify-center rounded-[2px] bg-black text-white font-sans text-[13px] font-medium tracking-[0.18em] uppercase px-6 py-3 min-h-[44px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
-                >
-                  Done
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="w-full inline-flex items-center justify-center rounded-[2px] bg-black text-white font-sans text-[13px] font-medium tracking-[0.18em] uppercase px-6 py-3.5 min-h-[48px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+              >
+                Done
+              </button>
             </div>
           )}
 

@@ -328,15 +328,15 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           ))}
         </div>
 
-        {/* Pricing tiers */}
+        {/* Pricing tiers — structured 2-col grid */}
         <div className="mb-3 border-t border-white/[0.10] pt-3">
           {prices.length > 0 ? (
-            <div className="flex flex-wrap gap-x-4 gap-y-1">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1">
               {prices.map((p) => (
-                <div key={p.label} className="flex items-baseline gap-1">
-                  <span className="font-headline text-[16px] leading-none text-white">${p.amount.toLocaleString()}</span>
-                  <span className="font-sans text-[9px] font-semibold uppercase tracking-[0.10em] text-white/50">{p.label}</span>
-                </div>
+                <p key={p.label} className="font-sans text-[12px] text-white/90">
+                  <span className="font-bold">${p.amount.toLocaleString()}</span>{' '}
+                  <span className="text-[10px] text-white/50">{p.label}</span>
+                </p>
               ))}
             </div>
           ) : (
