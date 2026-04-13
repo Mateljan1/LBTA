@@ -95,8 +95,10 @@ function normalizeLevel(program: Program): Exclude<ProgramFilters['level'], 'all
   return 'intermediate'
 }
 
-function gridCols(): string {
-  return 'sm:grid-cols-2 lg:grid-cols-3'
+function gridCols(count: number): string {
+  if (count <= 2) return 'sm:grid-cols-2'
+  if (count === 3) return 'sm:grid-cols-2 lg:grid-cols-3'
+  return 'sm:grid-cols-2 lg:grid-cols-4'
 }
 
 function matchesDay(program: Program, day: ProgramFilters['day']): boolean {
@@ -183,7 +185,7 @@ export default function ProgramsSection({
 
   return (
     <section id="programs" className="scroll-mt-28 bg-white py-16 md:py-24">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 min-w-0">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 min-w-0">
 
         {nowEnrolling && (
           <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-morning-light px-4 py-2 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-brand-pacific-dusk">
@@ -299,7 +301,7 @@ export default function ProgramsSection({
                       {meta.subline}
                     </p>
                   </div>
-                  <div className={`grid gap-4 ${gridCols()}`}>
+                  <div className={`grid gap-4 ${gridCols(sectionPrograms.length)}`}>
                     {sectionPrograms.map((program) => (
                       <SchedulesProgramCard
                         key={program.id}
