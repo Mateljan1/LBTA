@@ -95,6 +95,12 @@ function normalizeLevel(program: Program): Exclude<ProgramFilters['level'], 'all
   return 'intermediate'
 }
 
+function gridCols(count: number): string {
+  if (count <= 2) return 'sm:grid-cols-2'
+  if (count === 3) return 'sm:grid-cols-2 lg:grid-cols-3'
+  return 'sm:grid-cols-2'
+}
+
 function matchesDay(program: Program, day: ProgramFilters['day']): boolean {
   if (day === 'all') return true
   const token = DAY_SHORTCUTS[day]
@@ -295,7 +301,7 @@ export default function ProgramsSection({
                       {meta.subline}
                     </p>
                   </div>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className={`grid gap-4 ${gridCols(sectionPrograms.length)}`}>
                     {sectionPrograms.map((program) => (
                       <SchedulesProgramCard
                         key={program.id}
