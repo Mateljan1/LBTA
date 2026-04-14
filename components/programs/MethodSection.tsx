@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import PullQuote from '@/components/ui/PullQuote'
 
@@ -15,6 +16,19 @@ export default function MethodSection() {
 
   return (
     <section className="relative bg-brand-deep-water overflow-hidden">
+      {/* Background photo with heavy overlay */}
+      <div className="absolute inset-0" aria-hidden="true">
+        <Image
+          src="/images/philosophy/craft-hp-class-lbta-pics2.webp"
+          alt=""
+          fill
+          className="object-cover opacity-[0.12]"
+          style={{ objectPosition: '50% 40%' }}
+          sizes="100vw"
+          quality={60}
+        />
+        <div className="absolute inset-0 bg-brand-deep-water/80" />
+      </div>
       {/* Radial depth glows */}
       <div
         className="pointer-events-none absolute inset-0 opacity-40"
