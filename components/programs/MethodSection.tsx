@@ -33,12 +33,12 @@ export default function MethodSection() {
           <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] font-light text-white leading-[1.1] tracking-[-0.02em] mb-6">
             A coaching system, not a curriculum.
           </h2>
-          <p className="font-sans text-[16px] text-white/50 max-w-2xl mx-auto mb-5 leading-[1.7]">
+          <p className="font-sans text-[16px] md:text-[17px] text-white/70 max-w-2xl mx-auto mb-5 leading-[1.75]">
             Every session runs on a documented system built from twenty years of playing, coaching,
             and studying the game across three continents. Traditional coaching focuses on the swing.
             We train the complete chain.
           </p>
-          <p className="font-sans text-[14px] text-white/35 max-w-xl mx-auto mb-16 leading-relaxed">
+          <p className="font-sans text-[15px] text-white/50 max-w-xl mx-auto mb-16 leading-relaxed">
             Whether a player is five or fifty, everyone learns the same shared language:
             Five Ball Controls and Phase Play.
           </p>
@@ -68,7 +68,7 @@ export default function MethodSection() {
                     <h3 className="font-headline text-[22px] md:text-[26px] font-light text-white mb-2 tracking-[-0.01em]">
                       {step.label}
                     </h3>
-                    <p className="font-sans text-[13px] text-white/40 leading-relaxed">
+                    <p className="font-sans text-[13px] text-white/55 leading-relaxed">
                       {step.detail}
                     </p>
                     {i < steps.length - 1 && (

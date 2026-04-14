@@ -182,13 +182,13 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
               className={`flex flex-col items-start gap-0.5 whitespace-nowrap px-5 py-3.5 rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 ${
                 isActive
                   ? 'bg-brand-deep-water text-white shadow-[0_4px_16px_rgba(15,34,55,0.2)]'
-                  : 'bg-transparent text-brand-pacific-dusk/50 hover:text-brand-pacific-dusk/80 hover:bg-brand-pacific-dusk/[0.04]'
+                  : 'bg-transparent text-brand-pacific-dusk/65 hover:text-brand-pacific-dusk/80 hover:bg-brand-pacific-dusk/[0.04]'
               }`}
             >
               <span className="font-sans text-[13px] font-semibold">
                 {tab.label}
               </span>
-              <span className={`font-sans text-[10px] ${isActive ? 'text-white/50' : 'text-brand-pacific-dusk/35'}`}>
+              <span className={`font-sans text-[10px] ${isActive ? 'text-white/50' : 'text-brand-pacific-dusk/55'}`}>
                 {tab.sublabel}
               </span>
             </button>
@@ -207,7 +207,7 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
       >
         {activeTab === 'kids' && (
           <>
-            <p className="font-sans text-[15px] text-brand-pacific-dusk/55 max-w-2xl mb-10 leading-relaxed">
+            <p className="font-sans text-[15px] md:text-[16px] text-brand-pacific-dusk/70 max-w-2xl mb-10 leading-[1.75]">
               Your child&rsquo;s first experience with tennis should be one they want to repeat. Small groups. Game-based learning. A clear pathway from play to competition &mdash; each stage matches the right ball, court size, and pace to where they are.
             </p>
             <div className="space-y-12 md:space-y-16">
@@ -235,7 +235,7 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
       >
         {activeTab === 'competitive' && (
           <>
-            <p className="font-sans text-[15px] text-brand-pacific-dusk/55 max-w-2xl mb-10 leading-relaxed">
+            <p className="font-sans text-[15px] md:text-[16px] text-brand-pacific-dusk/70 max-w-2xl mb-10 leading-[1.75]">
               These programs are not open enrollment. Every player is reviewed and approved by a coach before joining. From Competitive Green Dot through High Performance &mdash; structured training for players who are ready to compete.
             </p>
             <div className="space-y-12 md:space-y-16">
@@ -263,7 +263,7 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
       >
         {activeTab === 'adult' && (
           <>
-            <p className="font-sans text-[14px] text-brand-pacific-dusk/55 max-w-2xl mb-8 leading-relaxed">
+            <p className="font-sans text-[15px] md:text-[16px] text-brand-pacific-dusk/70 max-w-2xl mb-10 leading-[1.75]">
               Whether you played in college or picked up a racket last month, there is a place for you here. Small groups. Real instruction. A clear path into leagues and rated competition when you&rsquo;re ready.
             </p>
             <div className="space-y-12 md:space-y-16">
@@ -290,7 +290,7 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
       >
         {activeTab === 'liveball' && (
           <>
-            <p className="font-sans text-[14px] text-brand-pacific-dusk/55 max-w-2xl mb-8 leading-relaxed">
+            <p className="font-sans text-[15px] md:text-[16px] text-brand-pacific-dusk/70 max-w-2xl mb-10 leading-[1.75]">
               High-energy, coach-fed sessions. $150/month or drop in at $50. No season commitment required — just show up.
             </p>
             {visiblePrograms.length > 0 ? (
@@ -343,7 +343,7 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
         ].map((item) => (
           <div key={item.label} className="text-center sm:text-left">
             <p className="font-headline text-[17px] font-medium text-brand-pacific-dusk mb-1.5">{item.label}</p>
-            <p className="font-sans text-[13px] text-brand-pacific-dusk/45 leading-relaxed">{item.detail}</p>
+            <p className="font-sans text-[13px] text-brand-pacific-dusk/60 leading-relaxed">{item.detail}</p>
           </div>
         ))}
       </div>
@@ -399,7 +399,7 @@ function LiveBallStaticCards({ onRegister: _ }: { onRegister: (p: Program) => vo
           <div className="p-5">
             <span className="font-sans text-[11px] font-medium tracking-[2px] uppercase text-brand-victoria-cove/70 mb-2 block">{s.level}</span>
             <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-2">{s.name}</h3>
-            <p className="font-sans text-[13px] text-brand-pacific-dusk/60 leading-relaxed mb-4">{descriptions[s.name]}</p>
+            <p className="font-sans text-[13px] text-brand-pacific-dusk/70 leading-relaxed mb-4">{descriptions[s.name]}</p>
             <div className="border-t border-brand-pacific-dusk/6 pt-3 mb-4 space-y-1">
               <div className="flex items-baseline gap-2">
                 <span className="font-sans text-[12px] font-semibold text-brand-pacific-dusk w-[52px]">{s.days}</span>
@@ -419,7 +419,7 @@ function LiveBallStaticCards({ onRegister: _ }: { onRegister: (p: Program) => vo
               </Link>
               <Link
                 href="/book"
-                className="inline-flex min-h-[48px] items-center justify-center border border-brand-pacific-dusk/15 rounded-[2px] px-4 font-sans text-[11px] font-medium tracking-[2px] uppercase text-brand-pacific-dusk/60 hover:border-brand-pacific-dusk/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                className="inline-flex min-h-[48px] items-center justify-center border border-brand-pacific-dusk/15 rounded-[2px] px-4 font-sans text-[11px] font-medium tracking-[2px] uppercase text-brand-pacific-dusk/70 hover:border-brand-pacific-dusk/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Book Trial
               </Link>
@@ -437,7 +437,7 @@ function CampsPanel({ year2026 }: { year2026: Year2026Sections }) {
   const camps = year2026.camps ?? []
   return (
     <>
-      <p className="font-sans text-[14px] text-brand-pacific-dusk/55 max-w-2xl mb-8 leading-relaxed">
+      <p className="font-sans text-[15px] md:text-[16px] text-brand-pacific-dusk/70 max-w-2xl mb-10 leading-[1.75]">
         Summer, spring break, Thanksgiving, and winter break. Two tracks by age — Tennis &amp; Adventure for kids 5–11, intensive training for competitive juniors 12–17.
       </p>
       {camps.length > 0 ? (
@@ -465,11 +465,11 @@ function CampsPanel({ year2026 }: { year2026: Year2026Sections }) {
                   Ages {camp.ages} · {camp.dates}
                 </span>
                 <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-2">{camp.name}</h3>
-                <p className="font-sans text-[13px] text-brand-pacific-dusk/60 leading-relaxed mb-3">{camp.description}</p>
+                <p className="font-sans text-[13px] text-brand-pacific-dusk/70 leading-relaxed mb-3">{camp.description}</p>
                 {camp.includes && camp.includes.length > 0 && (
                   <ul className="space-y-1 mb-4">
                     {camp.includes.slice(0, 3).map((item) => (
-                      <li key={item} className="font-sans text-[12px] text-brand-pacific-dusk/50 flex items-start gap-1.5">
+                      <li key={item} className="font-sans text-[12px] text-brand-pacific-dusk/65 flex items-start gap-1.5">
                         <span className="w-1 h-1 rounded-full bg-brand-victoria-cove/40 mt-[6px] shrink-0" aria-hidden="true" />
                         {item}
                       </li>
@@ -478,18 +478,18 @@ function CampsPanel({ year2026 }: { year2026: Year2026Sections }) {
                 )}
                 <div className="border-t border-brand-pacific-dusk/6 pt-3 mb-4">
                   <div className="flex justify-between">
-                    <span className="font-sans text-[12px] text-brand-pacific-dusk/50">Full day</span>
+                    <span className="font-sans text-[12px] text-brand-pacific-dusk/65">Full day</span>
                     <span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${camp.price.toLocaleString()}/week</span>
                   </div>
                   {camp.halfDay != null && (
                     <div className="flex justify-between mt-1">
-                      <span className="font-sans text-[12px] text-brand-pacific-dusk/50">Half day</span>
+                      <span className="font-sans text-[12px] text-brand-pacific-dusk/65">Half day</span>
                       <span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${camp.halfDay.toLocaleString()}/week</span>
                     </div>
                   )}
                   {camp.perDay != null && (
                     <div className="flex justify-between mt-1">
-                      <span className="font-sans text-[12px] text-brand-pacific-dusk/50">Drop-in</span>
+                      <span className="font-sans text-[12px] text-brand-pacific-dusk/65">Drop-in</span>
                       <span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${camp.perDay}/day</span>
                     </div>
                   )}
@@ -562,11 +562,11 @@ function StaticCampsCards() {
               Ages {c.ages} · {c.dates}
             </span>
             <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-2">{c.title}</h3>
-            <p className="font-sans text-[13px] text-brand-pacific-dusk/60 leading-relaxed mb-3">{c.description}</p>
+            <p className="font-sans text-[13px] text-brand-pacific-dusk/70 leading-relaxed mb-3">{c.description}</p>
             <div className="border-t border-brand-pacific-dusk/6 pt-3 mb-4 space-y-1">
-              <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/50">Full day</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.fullDay}/week</span></div>
-              <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/50">Half day</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.halfDay}/week</span></div>
-              <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/50">Drop-in</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.dropIn}/day</span></div>
+              <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/65">Full day</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.fullDay}/week</span></div>
+              <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/65">Half day</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.halfDay}/week</span></div>
+              <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/65">Drop-in</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.dropIn}/day</span></div>
             </div>
             <Link href="/camps" className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-[11px] font-medium tracking-[2.5px] uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2">
               View &amp; Register
@@ -610,7 +610,7 @@ function LeaguesPanel() {
 
   return (
     <>
-      <p className="font-sans text-[14px] text-brand-pacific-dusk/55 max-w-2xl mb-8 leading-relaxed">
+      <p className="font-sans text-[15px] md:text-[16px] text-brand-pacific-dusk/70 max-w-2xl mb-10 leading-[1.75]">
         Two formats, different commitments. UTR Match Play is weekend rated matchplay by division. USTA Adult League is team-based competition against clubs across Orange County.
       </p>
       <div className="grid sm:grid-cols-2 gap-5 md:gap-6 max-w-3xl">
@@ -632,17 +632,17 @@ function LeaguesPanel() {
                 {league.eyebrow}
               </span>
               <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-2">{league.title}</h3>
-              <p className="font-sans text-[13px] text-brand-pacific-dusk/60 leading-relaxed mb-3">{league.description}</p>
+              <p className="font-sans text-[13px] text-brand-pacific-dusk/70 leading-relaxed mb-3">{league.description}</p>
               <ul className="space-y-1 mb-4">
                 {league.highlights.map((h) => (
-                  <li key={h} className="font-sans text-[12px] text-brand-pacific-dusk/50 flex items-start gap-1.5">
+                  <li key={h} className="font-sans text-[12px] text-brand-pacific-dusk/65 flex items-start gap-1.5">
                     <span className="w-1 h-1 rounded-full bg-brand-victoria-cove/40 mt-[6px] shrink-0" aria-hidden="true" />
                     {h}
                   </li>
                 ))}
               </ul>
               <div className="border-t border-brand-pacific-dusk/6 pt-3 mb-4">
-                <span className="font-sans text-[12px] text-brand-pacific-dusk/50">From {league.from}</span>
+                <span className="font-sans text-[12px] text-brand-pacific-dusk/65">From {league.from}</span>
               </div>
               <Link
                 href={league.href}
