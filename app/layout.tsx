@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Cormorant, DM_Sans } from 'next/font/google'
 import Script from 'next/script'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import ExitIntentPopupLoader from '@/components/ExitIntentPopupLoader'
@@ -157,6 +159,9 @@ export default function RootLayout({
         
         {/* Exit Intent Popup for Lead Capture */}
         <ExitIntentPopupLoader />
+
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
