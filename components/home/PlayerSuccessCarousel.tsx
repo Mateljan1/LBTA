@@ -81,7 +81,8 @@ export default function PlayerSuccessCarousel({
     <section
       id="results"
       role="region"
-      className="relative w-full min-h-[65vh] lg:min-h-[76vh] flex items-center overflow-hidden"
+      // bg-brand-deep-water prevents white/blank flash while images load on first paint
+      className="relative w-full min-h-[65vh] lg:min-h-[76vh] flex items-center overflow-hidden bg-brand-deep-water"
       aria-roledescription="carousel"
       aria-label={`${eyebrow}: rotating player stories`}
       onMouseEnter={() => setPaused(true)}
@@ -102,28 +103,40 @@ export default function PlayerSuccessCarousel({
                 : { duration: CROSSFADE_SEC, ease: EASE_LUXURY }
             }
           >
+            {/*
+             * unoptimized: bypass the Next.js /api/_next/image re-compression hop.
+             * Images are already optimised by Cloudinary (f_auto,q_auto,w_1920,c_limit)
+             * and served from Cloudinary's global CDN edge — no extra Vercel roundtrip.
+             * priority on slide 0 so the first image is preloaded; subsequent slides
+             * are prefetched by the useEffect below.
+             */}
             <Image
               src={active.image}
               alt={active.imageAlt}
               fill
-              quality={90}
+              unoptimized
+              priority={safeIndex === 0}
               className={`${
                 (active.imageFit ?? 'cover') === 'contain' ? 'object-contain' : 'object-cover'
-              } brightness-[1.02] saturate-[1.02]`}
+              }`}
               style={{
                 objectPosition: active.objectPosition ?? '50% 50%',
               }}
               sizes="100vw"
-              decoding="async"
             />
           </motion.div>
         </AnimatePresence>
-        {/* Left-weighted scrim: enough contrast for copy, light enough images still breathe */}
+        {/* Slight full-frame cinematic overlay — uniform across the whole image */}
+        <div
+          className="absolute inset-0 z-[12] bg-black/18 pointer-events-none"
+          aria-hidden
+        />
+        {/* Left-weighted text scrim: strong behind copy, fades right so subjects stay visible */}
         <div
           className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.82] from-0% via-black/22 via-[44%] to-transparent to-[68%] pointer-events-none"
           aria-hidden
         />
-        {/* Mobile: modest extra darkening — keeps text readable without muddying the image */}
+        {/* Mobile: modest extra darkening for small viewports */}
         <div
           className="absolute inset-0 z-[14] bg-black/15 md:hidden pointer-events-none"
           aria-hidden
