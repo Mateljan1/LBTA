@@ -22,12 +22,12 @@ export default function MethodSection() {
           src="/images/philosophy/craft-hp-class-lbta-pics2.webp"
           alt=""
           fill
-          className="object-cover opacity-[0.12]"
+          className="object-cover opacity-[0.30]"
           style={{ objectPosition: '50% 40%' }}
           sizes="100vw"
-          quality={60}
+          quality={75}
         />
-        <div className="absolute inset-0 bg-brand-deep-water/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-deep-water/70 via-brand-deep-water/80 to-brand-deep-water/90" />
       </div>
       {/* Radial depth glows */}
       <div
