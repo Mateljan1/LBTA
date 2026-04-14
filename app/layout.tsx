@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Cormorant, DM_Sans } from 'next/font/google'
 import Script from 'next/script'
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
