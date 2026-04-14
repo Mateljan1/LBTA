@@ -107,13 +107,6 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
               {badge}
             </span>
           )}
-          {/* Step number */}
-          <span
-            className="absolute bottom-4 left-4 font-headline text-[64px] md:text-[80px] font-light leading-none text-white/[0.06] select-none"
-            aria-hidden="true"
-          >
-            {String(index + 1).padStart(2, '0')}
-          </span>
         </div>
 
         {/* Content side */}
