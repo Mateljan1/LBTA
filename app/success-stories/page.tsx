@@ -173,11 +173,11 @@ export default function SuccessStoriesPage() {
             src="https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto:best,w_1920,c_limit,e_improve:70/v1776167429/Ladies_3.5_usta_team__Warm_Up_hero_nxep4b.jpg"
             alt="On-court play at Laguna Beach Tennis Academy"
             fill
+            unoptimized
+            priority
             className="object-cover object-center max-md:brightness-[0.88]"
             style={{ objectPosition: '50% 44%' }}
             sizes="100vw"
-            priority
-            quality={95}
           />
           <div className="absolute inset-0 hero-scrim-branded" aria-hidden="true" />
         </div>
@@ -261,6 +261,7 @@ export default function SuccessStoriesPage() {
                       src={story.image}
                       alt={story.name}
                       fill
+                      unoptimized
                       className="object-cover"
                       style={{ objectPosition: successStoryImagePosition[story.id] ?? '50% 45%' }}
                       sizes="(max-width: 768px) 100vw, 50vw"

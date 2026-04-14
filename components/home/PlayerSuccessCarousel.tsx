@@ -82,7 +82,8 @@ export default function PlayerSuccessCarousel({
       id="results"
       role="region"
       // bg-brand-deep-water prevents white/blank flash while images load on first paint
-      className="relative w-full min-h-[65vh] lg:min-h-[76vh] flex items-center overflow-hidden bg-brand-deep-water"
+      // items-end on mobile so text sits at the bottom and the image shows above it
+      className="relative w-full min-h-[65vh] lg:min-h-[76vh] flex items-end md:items-center pb-10 md:pb-0 overflow-hidden bg-brand-deep-water"
       aria-roledescription="carousel"
       aria-label={`${eyebrow}: rotating player stories`}
       onMouseEnter={() => setPaused(true)}
@@ -136,9 +137,9 @@ export default function PlayerSuccessCarousel({
           className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.82] from-0% via-black/22 via-[44%] to-transparent to-[68%] pointer-events-none"
           aria-hidden
         />
-        {/* Mobile: modest extra darkening for small viewports */}
+        {/* Mobile: bottom-to-top gradient so text zone at bottom has solid backing */}
         <div
-          className="absolute inset-0 z-[14] bg-black/15 md:hidden pointer-events-none"
+          className="absolute inset-0 z-[14] bg-gradient-to-t from-brand-deep-water/80 from-0% via-black/20 via-[50%] to-transparent to-[75%] md:hidden pointer-events-none"
           aria-hidden
         />
       </div>
@@ -177,7 +178,7 @@ export default function PlayerSuccessCarousel({
           </AnimatedSection>
           <AnimatedSection delay={100}>
             <h2
-              className="font-headline text-[clamp(2.5rem,6vw,4rem)] font-light text-white leading-[1.15] tracking-[-0.02em] mb-6"
+              className="font-headline text-[clamp(1.75rem,5vw,4rem)] font-light text-white leading-[1.15] tracking-[-0.02em] mb-4 md:mb-6"
               style={{ textShadow: '0 1px 4px rgba(0,0,0,0.55), 0 3px 12px rgba(0,0,0,0.35)' }}
             >
               {headline}
@@ -185,7 +186,7 @@ export default function PlayerSuccessCarousel({
           </AnimatedSection>
           <AnimatedSection delay={200}>
             <p
-              className="text-body-lg text-white/90 mb-8"
+              className="text-[15px] md:text-body-lg text-white/90 mb-6 md:mb-8 line-clamp-3 md:line-clamp-none"
               key={safeIndex}
               style={{ textShadow: '0 1px 3px rgba(0,0,0,0.6)' }}
             >
