@@ -118,9 +118,14 @@ export default function PlayerSuccessCarousel({
             />
           </motion.div>
         </AnimatePresence>
-        {/* Left-weighted scrim: strong behind copy; fades out toward the right so players stay visible */}
+        {/* Left-weighted scrim: strong behind copy; fades toward the right so players stay visible */}
         <div
-          className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.88] from-0% via-black/35 via-[42%] to-transparent to-[68%] pointer-events-none"
+          className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.94] from-0% via-brand-deep-water/60 via-[52%] to-brand-deep-water/10 to-[80%] pointer-events-none"
+          aria-hidden
+        />
+        {/* Mobile overlay: additional darkening so text is always legible at small viewports */}
+        <div
+          className="absolute inset-0 z-[14] bg-black/35 md:hidden pointer-events-none"
           aria-hidden
         />
       </div>
@@ -158,12 +163,19 @@ export default function PlayerSuccessCarousel({
             <span className="text-eyebrow text-white/90 mb-4 block">{eyebrow}</span>
           </AnimatedSection>
           <AnimatedSection delay={100}>
-            <h2 className="font-headline text-[clamp(2.5rem,6vw,4rem)] font-light text-white leading-[1.15] tracking-[-0.02em] mb-6">
+            <h2
+              className="font-headline text-[clamp(2.5rem,6vw,4rem)] font-light text-white leading-[1.15] tracking-[-0.02em] mb-6"
+              style={{ textShadow: '0 1px 4px rgba(0,0,0,0.55), 0 3px 12px rgba(0,0,0,0.35)' }}
+            >
               {headline}
             </h2>
           </AnimatedSection>
           <AnimatedSection delay={200}>
-            <p className="text-body-lg text-white/80 mb-8" key={safeIndex}>
+            <p
+              className="text-body-lg text-white/90 mb-8"
+              key={safeIndex}
+              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.6)' }}
+            >
               {active.subline}
             </p>
           </AnimatedSection>
