@@ -65,33 +65,41 @@ function formatPricingOptions(pricing: Program['pricing']): Array<{ label: strin
 
 /* ─── Tabs ─── */
 
-type TabId = 'junior' | 'adult' | 'liveball' | 'camps' | 'leagues'
+type TabId = 'kids' | 'competitive' | 'adult' | 'liveball' | 'camps' | 'leagues'
 
 const TABS: Array<{ id: TabId; label: string; sublabel: string }> = [
-  { id: 'junior',   label: 'Junior Programs',      sublabel: 'Ages 3–17'         },
-  { id: 'adult',    label: 'Adult Programs',        sublabel: 'Beginner – Advanced' },
-  { id: 'liveball', label: 'LiveBall & Cardio',     sublabel: 'Monthly drop-in'   },
-  { id: 'camps',    label: 'Camps',                 sublabel: 'Seasonal & holiday' },
-  { id: 'leagues',  label: 'Leagues & Competition', sublabel: 'USTA & UTR'        },
+  { id: 'kids',        label: 'Kids Programs',            sublabel: 'Ages 3–11'           },
+  { id: 'competitive', label: 'Junior Dev & HP',          sublabel: 'Ages 9–17 · Competitive' },
+  { id: 'adult',       label: 'Adult Programs',           sublabel: 'Beginner – Advanced'  },
+  { id: 'liveball',    label: 'LiveBall & Cardio',        sublabel: 'Monthly drop-in'      },
+  { id: 'camps',       label: 'Camps',                    sublabel: 'Seasonal & holiday'   },
+  { id: 'leagues',     label: 'Leagues & Competition',    sublabel: 'USTA & UTR'           },
 ]
 
 function filterPrograms(programs: Program[], tab: TabId): Program[] {
   switch (tab) {
-    case 'junior':
+    case 'kids':
+      return programs.filter((p) => {
+        const name = p.program.toLowerCase()
+        return (
+          name.includes('little tennis stars') ||
+          name.includes('red ball') ||
+          name.includes('orange ball') ||
+          (name.includes('green dot') && !name.includes('competitive') && !name.includes('utr'))
+        )
+      })
+    case 'competitive':
       return programs.filter((p) => {
         const cat = p.category.toLowerCase()
         const name = p.program.toLowerCase()
         return (
-          cat.includes('youth') ||
-          cat.includes('junior') ||
-          cat.includes('development') ||
-          name.includes('little tennis stars') ||
-          name.includes('red ball') ||
-          name.includes('orange ball') ||
-          name.includes('green dot') ||
+          name.includes('competitive green dot') ||
+          name.includes('utr green dot') ||
           name.includes('player development') ||
           name.includes('youth development') ||
-          name.includes('high performance')
+          name.includes('junior development') ||
+          name.includes('high performance') ||
+          (cat.includes('development') && !name.includes('little') && !name.includes('red ball') && !name.includes('orange ball'))
         )
       })
     case 'adult':
@@ -130,7 +138,7 @@ interface ProgramsTabViewProps {
 /* ─── Component ─── */
 
 export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewProps) {
-  const [activeTab, setActiveTab] = useState<TabId>('junior')
+  const [activeTab, setActiveTab] = useState<TabId>('kids')
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null)
   const tablistRef = useRef<HTMLDivElement>(null)
 
@@ -190,17 +198,45 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
 
       {/* ── Tab panels ── */}
 
-      {/* Junior */}
+      {/* Kids (Ages 3-11) */}
       <div
-        id="panel-junior"
+        id="panel-kids"
         role="tabpanel"
-        aria-labelledby="tab-junior"
-        hidden={activeTab !== 'junior'}
+        aria-labelledby="tab-kids"
+        hidden={activeTab !== 'kids'}
       >
-        {activeTab === 'junior' && (
+        {activeTab === 'kids' && (
           <>
-            <p className="font-sans text-[14px] text-brand-pacific-dusk/55 max-w-2xl mb-8 leading-relaxed">
-              A three-year-old picks up a foam racket at Moulton Meadows. Ten years later, she&rsquo;s training at LBHS, competing in USTA tournaments, building a UTR that college coaches follow. One continuous pathway — same academy, same coaching philosophy.
+            <p className="font-sans text-[15px] text-brand-pacific-dusk/55 max-w-2xl mb-10 leading-relaxed">
+              Your child&rsquo;s first experience with tennis should be one they want to repeat. Small groups. Game-based learning. A clear pathway from play to competition &mdash; each stage matches the right ball, court size, and pace to where they are.
+            </p>
+            <div className="space-y-12 md:space-y-16">
+              {visiblePrograms.map((p, i) => (
+                <ProgramPathwayCard
+                  key={p.id}
+                  program={p}
+                  description={getDescription(p)}
+                  onRegister={setSelectedProgram}
+                  badge={getBadge(p)}
+                  index={i}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Competitive / Junior Dev / HP (Ages 9-17) */}
+      <div
+        id="panel-competitive"
+        role="tabpanel"
+        aria-labelledby="tab-competitive"
+        hidden={activeTab !== 'competitive'}
+      >
+        {activeTab === 'competitive' && (
+          <>
+            <p className="font-sans text-[15px] text-brand-pacific-dusk/55 max-w-2xl mb-10 leading-relaxed">
+              These programs are not open enrollment. Every player is reviewed and approved by a coach before joining. From Competitive Green Dot through High Performance &mdash; structured training for players who are ready to compete.
             </p>
             <div className="space-y-12 md:space-y-16">
               {visiblePrograms.map((p, i) => (
