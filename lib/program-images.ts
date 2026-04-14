@@ -44,7 +44,7 @@ export const PROGRAM_IMAGES: Record<string, ProgramImageConfig> = {
   },
   'player-development': {
     src: `${CLOUD}/v1776039103/Youth_Development_ydlfwq.jpg`,
-    alt: 'Player Development training footwork with agility cones',
+    alt: 'Junior Development training footwork with agility cones',
     objectPosition: 'center 40%',
   },
   'high-performance': {
@@ -88,9 +88,9 @@ export const PROGRAM_IMAGES: Record<string, ProgramImageConfig> = {
     objectPosition: 'center 42%',
   },
   'leagues': {
-    src: `${CLOUD}/v1774752421/lbta/support/canonical/cta/support-cta-cta-background.webp`,
-    alt: 'League and team tennis on outdoor courts at LBTA',
-    objectPosition: 'center 48%',
+    src: `${CLOUD}/v1774752454/lbta/support/canonical/programs/support-programs-cardio-tennis.webp`,
+    alt: 'USTA league team on blue courts at Laguna Beach Tennis Academy',
+    objectPosition: 'center 40%',
   },
 } as const
 

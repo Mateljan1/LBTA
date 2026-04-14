@@ -106,6 +106,7 @@ export default function PlayerSuccessCarousel({
               src={active.image}
               alt={active.imageAlt}
               fill
+              quality={90}
               className={`${
                 (active.imageFit ?? 'cover') === 'contain' ? 'object-contain' : 'object-cover'
               } brightness-[1.02] saturate-[1.02]`}
