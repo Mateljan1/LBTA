@@ -18,57 +18,85 @@ const successStories = [
     name: 'Karue Sell',
     title: 'ATP Tour Player',
     achievement: '#858 → #262 ATP Ranking',
-    image: '/images/results/karue-fh-hero.webp',
+    image:
+      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/Karue_FH_hero_2_cnd53p.jpg',
     quote: "Andrew's movement-first approach transformed my game. The structured training and accountability pushed me to levels I didn't know I could reach.",
     story:
       'Karue trained at LBTA with Coach Andrew while rebuilding his professional game. From a ranking in the #800s on the ATP tour, he climbed to a career high of #262 — a jump that reflects sustained work on movement efficiency, patterns, and mental toughness under pressure.',
     videoId: 'karue-journey',
     featured: true,
-  },
-  {
-    id: 'ryan-seggerman',
-    name: 'Ryan Seggerman',
-    title: 'ATP Tour Player',
-    achievement: 'Career-high ATP singles #72',
-    image: '/images/success-stories/ryan-seggerman.webp',
-    quote:
-      "When I'm home, LBTA is where I sharpen movement patterns before heading back on the road. The work here matches how I prepare on tour.",
-    story:
-      'Ryan Seggerman has trained at LBTA with Coach Andrew as part of his professional preparation. His career includes a career-high ATP singles ranking of #72, doubles success on tour, and Masters-level experience.',
-    featured: true,
+    ctaLabel: 'See How We Develop Players',
+    ctaHref: '/programs',
   },
   {
     id: 'henry-mateljan',
     name: 'Henry Mateljan',
     title: 'Junior Competitor',
     achievement: 'Age 9 · 4.6 UTR · Little Mo',
-    image: '/images/success-stories/henry-lbta-pics2.webp',
+    image:
+      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/Henry_mateljan_4.6_UTR_9yrs_old_backhand_roqsfu.jpg',
     quote:
       'Little Mo was a special week—sharing that with Coach Andrew is something I will always remember.',
     story:
       'Henry is nine years old with a 4.6 UTR. He trains at LBTA with Coach Andrew and was recognized at the Little Mo tournament, supported by the Maureen Connolly Brinker Tennis Foundation—an important milestone in his junior competitive journey.',
     featured: true,
+    ctaLabel: "Start Your Child's Tennis Journey",
+    ctaHref: '/programs/junior',
   },
   {
     id: 'olov',
     name: 'Olov',
     title: 'USTA National Competition',
     achievement: '4.0 → 5.0 · National events',
-    image: '/images/results/olov-hero-lbta-pics2.webp',
+    image:
+      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164927/Olov_fh_hero_qgzara.jpg',
     quote:
       'The step up to 5.0 came from training that matches how I compete—structure in practice, clarity in matches.',
     story:
       'Olov moved from a 4.0 to a 5.0 USTA competitor with strong results in 5.0 tournaments. He continues to represent his age division at national-level events.',
     featured: true,
+    ctaLabel: "Want to Compete at a Higher Level? Let's Talk",
+    ctaHref: '/contact',
+  },
+  {
+    id: 'usta-womens-35',
+    name: "Women's 3.5 Team",
+    title: 'USTA League Team',
+    achievement: '4-9 → 10-3 · 10th to 3rd in one season',
+    image:
+      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/USTA_ladies_3.5__Team_ha3yi4.jpg',
+    quote:
+      'A lot of our players were new to competitive doubles. They committed to weekly team practice and put in the work on their own — the record followed.',
+    story:
+      'In the fall of 2024, the LBTA Women\'s 3.5 team finished 10th out of 14 in the OC SCTA Doubles flight with a 4-9 record. One year later, the team climbed to 3rd with a 10-3 record — individual match wins flipping from 15-24 to 24-15. Consistent team practice, doubles strategy work, and players dedicating time outside of sessions made the difference.',
+    featured: true,
+    ctaLabel: 'Interested in Joining Our USTA Team?',
+    ctaHref: '/contact',
+  },
+  {
+    id: 'ryan-seggerman',
+    name: 'Ryan Seggerman',
+    title: 'ATP Tour Player',
+    achievement: 'Career-high ATP singles #72',
+    image:
+      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/Ryan_Seggerman__Serve_Hero_srkabk.jpg',
+    quote:
+      "When I'm home, LBTA is where I sharpen movement patterns before heading back on the road. The work here matches how I prepare on tour.",
+    story:
+      'Ryan Seggerman has trained at LBTA with Coach Andrew as part of his professional preparation. His career includes a career-high ATP singles ranking of #72, doubles success on tour, and Masters-level experience.',
+    featured: true,
+    ctaLabel: 'Train Where the Pros Train',
+    ctaHref: '/book',
   },
 ]
 
 /** Per-story focal points for `object-cover` cards (tune without changing assets). */
 const successStoryImagePosition: Record<string, string> = {
-  'karue-sell': '50% 48%',
-  'ryan-seggerman': '50% 40%',
+  'karue-sell': '50% 42%',
+  'ryan-seggerman': '50% 42%',
   'henry-mateljan': '50% 42%',
-  olov: '50% 45%',
+  olov: '50% 44%',
+  'usta-womens-35': '50% 48%',
 }
 
 const testimonials = [
@@ -142,11 +170,11 @@ export default function SuccessStoriesPage() {
       <section className="relative min-h-[55vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/results/karue-fh-hero.webp"
+            src="https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/USTA_ladies_3.5__Team_ha3yi4.jpg"
             alt="On-court play at Laguna Beach Tennis Academy"
             fill
             className="object-cover object-center max-md:brightness-[0.88]"
-            style={{ objectPosition: '50% 45%' }}
+            style={{ objectPosition: '50% 44%' }}
             sizes="100vw"
             priority
             quality={95}
@@ -275,6 +303,13 @@ export default function SuccessStoriesPage() {
                     <p className="font-sans text-[15px] text-black/70 leading-relaxed mb-6">
                       {story.story}
                     </p>
+                    <Link
+                      href={story.ctaHref}
+                      className="inline-flex items-center gap-2 bg-brand-sunset-cliff text-white font-sans text-[12px] font-medium tracking-[1.8px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff/40 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
+                    >
+                      {story.ctaLabel}
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
                   </div>
                 </div>
               </AnimatedSection>
