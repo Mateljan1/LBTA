@@ -15,14 +15,12 @@ export type RegistrationType =
   | 'seasonal'
   | 'camp'
   | 'utr-circuit'
-  | 'jtt'
-  | 'swim-tennis'
   | 'private'
   | 'inquiry'
 
 export function determineCategory(programName: string, registrationType: RegistrationType): string {
-  if (registrationType === 'camp' || registrationType === 'swim-tennis') return 'Camp'
-  if (registrationType === 'utr-circuit' || registrationType === 'jtt') return 'Match Play Series'
+  if (registrationType === 'camp') return 'Camp'
+  if (registrationType === 'utr-circuit') return 'Match Play Series'
   if (registrationType === 'private') return 'Private'
 
   const program = programName.toLowerCase()
@@ -69,7 +67,7 @@ export function getApplicableTags(
     tags.push(REGISTRATION_SEASON_TAGS[data.season.toLowerCase()])
   }
 
-  if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
+  if (registrationType === 'utr-circuit') {
     tags.push(CAMPAIGN_TAGS.utr_circuit)
     tags.push(INTEREST_TAGS.utr_circuit)
     const divisionForTag = data.division || data.program || ''
@@ -84,7 +82,7 @@ export function getApplicableTags(
     if (classTag) tags.push(classTag)
   }
 
-  if (registrationType === 'camp' || registrationType === 'swim-tennis') {
+  if (registrationType === 'camp') {
     tags.push(CLASS_TAGS.summer_camp)
   }
 

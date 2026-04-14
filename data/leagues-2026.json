@@ -103,7 +103,7 @@
         "imageObjectPosition": "50% 38%"
       },
       {
-        "name": "UTR 2.0–5.0 Singles",
+        "name": "UTR 1–7 Singles",
         "level": "Saturdays at Alta Laguna Park",
         "format": "8-Game Pro Sets",
         "price": "$399",
@@ -117,8 +117,8 @@
         "imageObjectPosition": "50% 14%"
       },
       {
-        "name": "Singles — Level-Based",
-        "level": "Sundays at Laguna Beach High School · All levels welcome",
+        "name": "UTR 3–12 Singles",
+        "level": "Sundays at Laguna Beach High School · UTR 3–12",
         "format": "Formats may vary week to week",
         "description": "You'll be paired against players at your level. Formats may vary week to week.",
         "price": "$399",
@@ -132,7 +132,7 @@
         "imageObjectPosition": "50% 4%"
       },
       {
-        "name": "Doubles — Level-Based",
+        "name": "UTR 1–12 Doubles",
         "level": "Sundays at Laguna Beach High School · Show up solo — we'll pair you",
         "format": "8-Game Pro Sets",
         "description": "Teams matched by combined UTR. No partner needed.",

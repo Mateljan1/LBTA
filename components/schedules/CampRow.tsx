@@ -32,7 +32,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
           aria-label="Tennis and Games camp photos"
         >
           <p className="mb-2 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/55">
-            Tennis &amp; Games
+            Tennis &amp; Adventure
           </p>
           <div className="grid max-w-lg grid-cols-3 gap-1.5 sm:gap-2">
             {tennisGames.map((src, i) => (

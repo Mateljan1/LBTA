@@ -92,8 +92,8 @@
     {
       "id": "youth-development",
       "category": "Development",
-      "program": "Player Development",
-      "ages": "11-18 (level-based; UTR 1.5-5)",
+      "program": "Junior Development",
+      "ages": "11-18 (UTR 1–4 / UTR 4–7)",
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
@@ -110,7 +110,7 @@
       "id": "high-performance",
       "category": "Development",
       "program": "High Performance",
-      "ages": "12-17 (UTR 5+)",
+      "ages": "12-17 (UTR 8+)",
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
@@ -119,15 +119,15 @@
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn & Peter DeFrantz", "note": "Match Play" }
       ],
       "pricing": { "1x": 1000, "2x": 2000, "3x": 2792, "drop_in": 100 },
-      "description": "Tournament-caliber training. UTR 5+ required. Ages 12–17. 6 max.",
-      "pricingNote": "UTR 5+ required. Under 12 or close to UTR 5? Contact us to discuss readiness.",
+      "description": "The highest level of training at LBTA. Every session simulates tournament conditions. UTR 8+ required. Coach approval required.",
+      "pricingNote": "UTR 8+ required. Under 12 or close to UTR 8? Contact us to discuss readiness.",
       "inquiryLabel": "Inquire about placement"
     },
     {
       "id": "adult-beginner-1",
       "category": "Adult",
       "program": "New to Tennis",
-      "ages": "NTRP 1.0-2.0",
+      "ages": "All Levels",
       "location": "Laguna Beach High School",
       "duration": "1 hr",
       "schedule": [
@@ -144,7 +144,7 @@
       "id": "adult-beginner-2",
       "category": "Adult",
       "program": "Beyond Beginner",
-      "ages": "NTRP 1.0-3.0",
+      "ages": "All Levels",
       "location": "Moulton Meadows Park",
       "duration": "1 hr",
       "schedule": [
@@ -158,7 +158,7 @@
       "id": "adult-intermediate",
       "category": "Adult",
       "program": "Adult Intermediate",
-      "ages": "NTRP 3.0-3.5",
+      "ages": "NTRP 3.0-4.0",
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
@@ -188,7 +188,7 @@
       "id": "liveball",
       "category": "Open Court",
       "program": "LiveBall",
-      "ages": "NTRP 3.0+",
+      "ages": "NTRP 2.5+",
       "location": "Moulton Meadows Park / LBHS",
       "duration": "1-1.5 hr",
       "schedule": [

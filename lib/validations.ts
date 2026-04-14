@@ -262,7 +262,7 @@ export type ChatPayload = z.infer<typeof chatSchema>
  * Used by: /api/register-year
  */
 export const registerYearSchema = z.object({
-  registrationType: z.enum(['seasonal', 'camp', 'utr-circuit', 'jtt', 'swim-tennis', 'private', 'inquiry']).optional().default('seasonal'),
+  registrationType: z.enum(['seasonal', 'camp', 'utr-circuit', 'private', 'inquiry']).optional().default('seasonal'),
   firstName: nameSchema,
   lastName: nameSchema,
   email: emailSchema,

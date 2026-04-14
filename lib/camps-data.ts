@@ -1,6 +1,7 @@
 /**
  * Camps page data from year2026.json (single source of truth).
- * Adds season and week arrays for summer/swim-tennis using prices from data.
+ * Adds season and week arrays for summer using prices from data.
+ * Suspended camps (e.g. Swim & Tennis) are filtered out.
  */
 import year2026Data from '@/data/year2026.json'
 
@@ -41,7 +42,8 @@ interface YearCamp {
   coaches?: string[]
   featured?: boolean
   safetyNote?: string
-  /** Optional Cloudinary (or other remote) URLs — Tennis & Games track photography for listings */
+  suspended?: boolean
+  /** Optional Cloudinary (or other remote) URLs — Tennis & Adventure track photography for listings */
   tennisGamesImages?: string[]
 }
 
@@ -115,12 +117,14 @@ function buildSwimTennisWeeks(camp: YearCamp): CampWeek[] {
 }
 
 export function getCampsFromYear2026(): CampWithWeeks[] {
-  const list = (year2026.camps as YearCamp[]).map((c) => {
-    const season = SEASON_BY_ID[c.id] ?? 'summer'
-    const camp: CampWithWeeks = { ...c, season }
-    if (c.id === 'summer') camp.weeks = buildSummerWeeks(c)
-    if (c.id === 'swim-tennis') camp.weeks = buildSwimTennisWeeks(c)
-    return camp
-  })
+  const raw = year2026.camps as YearCamp[]
+  const list = raw
+    .filter((c) => !(c as YearCamp & { suspended?: boolean }).suspended)
+    .map((c) => {
+      const season = SEASON_BY_ID[c.id] ?? 'summer'
+      const camp: CampWithWeeks = { ...c, season }
+      if (c.id === 'summer') camp.weeks = buildSummerWeeks(c)
+      return camp
+    })
   return list
 }

@@ -9,7 +9,7 @@ import siteStats from '@/data/site-stats.json'
 
 export const metadata: Metadata = {
   title: 'High Performance Pathway | Tennis Training',
-  description: 'Invitation-only high performance tennis training for competitive players. UTR 5-8+, tournament preparation, and college pathway with ATP/WTA certified coaches.',
+  description: 'Invitation-only high performance tennis training for competitive players. UTR 8+ required, tournament preparation, and college pathway with ATP/WTA certified coaches.',
   openGraph: {
     title: 'High Performance Pathway | Tennis Training',
     description: 'Where serious players become champions. ATP/WTA methodology for tournament and college preparation.',
@@ -22,13 +22,13 @@ const highPerformanceSchema = {
   "@context": "https://schema.org",
   "@type": "Course",
   "name": "High Performance Pathway - Tennis Training",
-  "description": "Invitation-only high performance tennis program for competitive players with UTR 5-8+",
+  "description": "Invitation-only high performance tennis program for competitive players with UTR 8+",
   "provider": {
     "@type": "Organization",
     "name": "Laguna Beach Tennis Academy",
     "sameAs": "https://lagunabeachtennisacademy.com"
   },
-  "coursePrerequisites": "UTR 5+ or equivalent competitive experience",
+  "coursePrerequisites": "UTR 8+ or equivalent competitive experience",
   "educationalLevel": "Advanced",
   "hasCourseInstance": {
     "@type": "CourseInstance",
@@ -67,7 +67,7 @@ const pillars = [
 ]
 
 const requirements = [
-  'UTR 5+ or equivalent competitive ranking',
+  'UTR 8+ or equivalent competitive ranking',
   'Commitment to minimum 2 sessions per week',
   'Active tournament participation',
   'Coachable attitude and growth mindset',

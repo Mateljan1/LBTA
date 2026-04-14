@@ -9,11 +9,11 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
-  title: 'Robert W. LeBuhn — Director of Tennis Operations',
-  description: 'USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Director of Tennis Operations at LBTA.',
+  title: 'Robert W. LeBuhn — Adult Programs Coach',
+  description: 'USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Adult Programs Coach at LBTA.',
   openGraph: {
-    title: 'Robert W. LeBuhn — Director of Tennis Operations',
-    description: 'USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Director of Tennis Operations at LBTA.',
+    title: 'Robert W. LeBuhn — Adult Programs Coach',
+    description: 'USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Adult Programs Coach at LBTA.',
     type: 'website',
     images: [{ url: coachImageSrc('/images/coaches/robert-lebuhn.webp'), width: 800, height: 1000, alt: 'Robert W. LeBuhn' }],
   },
@@ -47,7 +47,7 @@ export default function RobertLeBuhnPage() {
             <AnimatedSection className="relative aspect-[200/260] overflow-hidden rounded-xl border border-black/5">
               <Image
                 src={coachImageSrc('/images/coaches/robert-lebuhn.webp')}
-                alt="Robert W. LeBuhn, Director of Tennis Operations at Laguna Beach Tennis Academy"
+                alt="Robert W. LeBuhn, Adult Programs Coach at Laguna Beach Tennis Academy"
                 fill
                 className="object-cover object-top"
                 sizes="200px"
@@ -58,7 +58,7 @@ export default function RobertLeBuhnPage() {
               <AnimatedSection>
                 <h1 className="text-display-lg heading-display mb-2">Robert W. LeBuhn</h1>
                 <p className="font-headline text-lg italic text-brand-pacific-dusk/60 mb-6">
-                  Director of Tennis Operations & Growth. NCAA Division I. USPTR Professional.
+                  Adult Programs Coach. NCAA Division I. USPTR Professional.
                 </p>
                 <div className="flex flex-wrap gap-6 py-4 border-y border-black/6">
                   <div className="text-center">

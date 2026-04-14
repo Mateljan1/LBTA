@@ -56,6 +56,7 @@
     {
       "id": "swim-tennis",
       "name": "Swim & Tennis Camp",
+      "suspended": true,
       "dates": "June 16 – August 14, 2026",
       "days": "Weekly (Mon–Thu)",
       "hours": "9:00 AM – 3:00 PM",
@@ -64,7 +65,7 @@
       "price": 495,
       "threeDayFullPrice": 375,
       "perDay": 124,
-      "description": "The pool at Alta Laguna is closed for construction and remodeling in summer 2026. We are offering our full-day Tennis & Games camp instead — same great location, tennis instruction, field games, and activities. See Summer Camps (Tennis & Games) for dates and enrollment.",
+      "description": "The pool at Alta Laguna is closed for construction and remodeling in summer 2026. We are offering our Tennis & Adventure Camp instead — same great location, tennis instruction, field games, and activities. See Summer Camps (Tennis & Adventure) for dates and enrollment.",
       "includes": ["Tennis instruction", "Supervised swimming", "Team activities", "Certified lifeguards"],
       "coaches": ["Andrew Mateljan", "Robert LeBuhn"],
       "featured": false,
@@ -104,32 +105,39 @@
     {
       "id": "summer",
       "name": "Summer Camps",
-      "dates": "June 15 – August 28, 2026",
-      "days": "Weekly (5 days)",
+      "dates": "June 15 – August 20, 2026",
+      "days": "Weekly (Mon–Thu Adventure, Mon–Fri Training)",
       "hours": "9:00 AM – 3:00 PM",
       "ages": "5-17",
       "location": "Alta Laguna Park / Laguna Beach High School",
       "price": 495,
-      "threeDayFullPrice": 435,
-      "threeDayHalfPrice": 255,
-      "halfDay": 295,
-      "jrDevPrice": 325,
+      "halfDayAM": 325,
+      "halfDayPM": 325,
+      "trainingFullDay": 595,
+      "trainingHalfDay": 325,
       "perDay": 99,
-      "description": "Full-day Tennis & Games, half-day option, or Junior Development. Multi-week discount (4+ weeks) available.",
+      "perDayHalf": 85,
+      "perDayTrainingFull": 120,
+      "perDayTrainingHalf": 85,
+      "description": "Tennis & Adventure Camp (ages 5–11, Mon–Thu) at Alta Laguna Park — tennis instruction, field games, arts and crafts, and Water Day Thursdays. Summer Training Camp (ages 12–17, Mon–Fri, by application) at LBHS. Multi-week discount (4+ weeks) available.",
       "includes": ["Tennis instruction", "Match play", "Age-appropriate curriculum"]
     },
     {
       "id": "back-to-school",
-      "name": "Back-to-School Mini",
-      "dates": "August 17–19, 2026",
+      "name": "Back-to-School Mini Camp",
+      "dates": "August 17–20, 2026 (Mon–Wed, 3 days)",
       "days": 3,
-      "hours": "9:00 AM – 1:00 PM",
-      "ages": "5-14",
-      "location": "Laguna Beach High School",
-      "price": 325,
-      "perDay": 108,
-      "description": "Get back in the groove before school starts",
-      "includes": ["Snacks provided", "Skills refresher", "Fun games"]
+      "hours": "9:00 AM – 3:00 PM (Full) / 9:00 AM – 12:00 PM or 12:00 – 3:00 PM (Half)",
+      "ages": "5-17",
+      "location": "Alta Laguna Park / Laguna Beach High School",
+      "adventureFullDay": 372,
+      "adventureHalfDay": 245,
+      "trainingFullDay": 447,
+      "trainingHalfDay": 245,
+      "price": 372,
+      "perDay": 124,
+      "description": "Week 10 of Summer Camp — prorated at 3/4 of weekly rate. Tennis & Adventure (5–11) at Alta Laguna, Summer Training (12–17) at LBHS.",
+      "includes": ["Prorated summer camp pricing", "Age-appropriate curriculum", "3-day format"]
     },
     {
       "id": "thanksgiving",
@@ -148,50 +156,19 @@
     {
       "id": "winter-break",
       "name": "Winter Break Camp",
-      "dates": "December 21–24 & December 28–31, 2026",
+      "dates": "December 21–24 & December 28–31, 2026 (two 4-day sessions)",
       "days": "4 per session",
-      "hours": "9:00 AM – 1:00 PM",
-      "ages": "5-14",
-      "location": "Laguna Beach High School",
+      "hours": "9:00 AM – 3:00 PM (Full) / 9:00 AM – 12:00 PM or 12:00 – 3:00 PM (Half)",
+      "ages": "5-17",
+      "location": "Alta Laguna Park / Laguna Beach High School",
+      "adventureFullDay": 425,
+      "adventureHalfDay": 280,
+      "jrDevHalfDay": 280,
       "price": 425,
       "perDay": 106,
-      "description": "Holiday camps during winter break",
-      "includes": ["Snacks provided", "Holiday fun", "Two session options"]
-    }
-  ],
-
-  "jtt": [
-    {
-      "id": "spring-jtt",
-      "name": "Spring JTT",
-      "dates": "January 12 – April 26, 2026",
-      "weeks": 15,
-      "matchDay": "Sundays",
-      "practiceIncluded": true,
-      "divisions": [
-        { "age": "10U", "price": 2800 },
-        { "age": "12U", "price": 2800 },
-        { "age": "14U", "price": 2800 },
-        { "age": "18U", "price": 2800 }
-      ],
-      "includes": ["Weekly practice (2x)", "Sunday matches", "Team uniform", "USTA registration"],
-      "description": "USTA Junior Team Tennis league play"
-    },
-    {
-      "id": "fall-jtt",
-      "name": "Fall JTT",
-      "dates": "September 5 – November 22",
-      "weeks": 12,
-      "matchDay": "Sundays",
-      "practiceIncluded": true,
-      "divisions": [
-        { "age": "10U", "price": 2800 },
-        { "age": "12U", "price": 2800 },
-        { "age": "14U", "price": 2800 },
-        { "age": "18U", "price": 2800 }
-      ],
-      "includes": ["Weekly practice (2x)", "Sunday matches", "Team uniform", "USTA registration"],
-      "description": "Fall league competition season"
+      "perDayDropIn": "85–106",
+      "description": "Tennis & Adventure (5–11) at Alta Laguna, Junior Development (12–17) at LBHS. Each session is 4 days. Families can register for one or both sessions.",
+      "includes": ["Two 4-day session options", "Age-appropriate curriculum", "Holiday scheduling"]
     }
   ],
 
@@ -210,8 +187,8 @@
       "popular": "2x"
     },
     "youthDevelopment": {
-      "label": "Youth Development",
-      "subtitle": "Competitive Training Track",
+      "label": "Junior Development",
+      "subtitle": "Tier 1 (UTR 1–4) & Tier 2 (UTR 4–7)",
       "ages": "11-18",
       "duration": "2 hr",
       "winterPrices": {
@@ -224,8 +201,8 @@
     },
     "highPerformance": {
       "label": "High Performance",
-      "subtitle": "College Prep & Tournament",
-      "ages": "12-18 (UTR 5+)",
+      "subtitle": "UTR 8+ Required · College Prep & Tournament",
+      "ages": "12-17 (UTR 8+)",
       "duration": "2 hr",
       "winterPrices": {
         "1x": 810,
@@ -237,7 +214,7 @@
     },
     "adultBeginner": {
       "label": "Adult Beginner",
-      "subtitle": "NTRP 1.0-2.5",
+      "subtitle": "All Levels Welcome",
       "ages": "18+",
       "duration": "1 hr",
       "winterPrices": {
@@ -249,7 +226,7 @@
     },
     "adultIntermediate": {
       "label": "Adult Intermediate",
-      "subtitle": "NTRP 3.0-3.5",
+      "subtitle": "NTRP 3.0-4.0",
       "ages": "18+",
       "duration": "1.5 hr",
       "winterPrices": {
@@ -292,10 +269,10 @@
   },
 
   "privateCoaching": [
-    { "coach": "Andrew Mateljan", "title": "Founder", "rate60": 250, "rate90": 350, "pack10": 2300, "pack20": 4200, "availability": "Limited" },
-    { "coach": "Robert LeBuhn", "title": "Senior Coach", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" },
-    { "coach": "Peter DeFrantz", "title": "Head Coach, Player Development", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" },
-    { "coach": "Allison Cronk", "title": "Coach", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" }
+    { "coach": "Andrew Mateljan", "title": "Founder & Director of Tennis", "rate60": 250, "rate90": 350, "pack10": 2300, "pack20": 4200, "availability": "Limited" },
+    { "coach": "Robert LeBuhn", "title": "Adult Programs Coach", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" },
+    { "coach": "Peter DeFrantz", "title": "Head Coach, Junior Development", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" },
+    { "coach": "Allison Cronk", "title": "Head Coach, Youth Programs", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" }
   ],
 
   "discounts": {
@@ -309,7 +286,7 @@
     "available": true,
     "awardedAnnually": 25000,
     "coverage": "25-50%",
-    "email": "scholarships@lagunabeachtennisacademy.com"
+    "email": "support@lagunabeachtennisacademy.com"
   }
 }
 

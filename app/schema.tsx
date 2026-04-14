@@ -77,7 +77,7 @@ export function CourseSchema() {
     {
       "@type": "Course",
       "name": "High Performance Pathway",
-      "description": "Invitation-only training for advanced juniors (UTR 5-8) preparing for tournaments and collegiate play.",
+      "description": "Invitation-only training for advanced juniors (UTR 8+) preparing for tournaments and collegiate play.",
       "provider": {
         "@type": "Organization",
         "name": "Laguna Beach Tennis Academy"

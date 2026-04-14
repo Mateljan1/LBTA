@@ -12,15 +12,12 @@
     "adult-advanced": "Contact for pricing",
     "cardio-tennis": "Contact for pricing",
     "liveball": "Contact for pricing",
-    "swim-tennis": "$495/week",
     "ski-week": "$525/week",
     "spring-break": "$325 Mon–Thu session · $85 half-day drop-in (both tracks)",
-    "summer-camp": "$495/week (Full Day) · $295/week (Half Day) · $325/week (Jr Dev)",
+    "summer-camp": "$495/week (Full Day) · $325/week (Half Day AM or PM) · $595/week (Training Full Day) · $325/week (Training Half Day) · Drop-in: $99 Full / $85 Half / $120 Training",
     "back-to-school": "$325/3 days",
     "thanksgiving": "$221–244/3 days",
-    "winter-break": "$425/session (4 days)",
-    "spring-jtt": "$2,800",
-    "fall-jtt": "$2,800"
+    "winter-break": "$425/session (4 days)"
   },
   "siteCopy": {
     "stickyCtaSchedules": "Spring & Summer 2026 Registration Open",
@@ -57,11 +54,11 @@
     },
     {
       "name": "Seasonal",
-      "price": "$546",
-      "period": "per quarter",
+      "price": "$420",
+      "period": "per season",
       "description": "Most popular choice",
       "features": [
-        "13 weeks of training",
+        "10 weeks of training",
         "1x per week sessions",
         "Progress tracking",
         "Priority scheduling",
@@ -75,17 +72,17 @@
     },
     {
       "name": "Committed",
-      "price": "$1,092",
-      "period": "per quarter",
+      "price": "$840",
+      "period": "per season",
       "description": "Maximum results",
       "features": [
-        "13 weeks of training",
+        "10 weeks of training",
         "2x per week sessions",
         "Accelerated progress",
         "Video analysis included",
         "Private coach access",
         "Competition preparation",
-        "$84/session value"
+        "$42/session value"
       ],
       "cta": "Go All In",
       "href": "/book",

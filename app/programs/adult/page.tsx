@@ -18,14 +18,14 @@ export const metadata: Metadata = {
 const progression = [
   {
     stage: 'Beginner',
-    ntrp: 'NTRP 1.0–2.5',
+    ntrp: 'All Levels',
     description: 'New to tennis or returning after a long break. Build fundamentals, rally consistency, and basic match play.',
     href: '/schedules',
     cta: 'View beginner programs',
   },
   {
     stage: 'Intermediate',
-    ntrp: 'NTRP 3.0–3.5',
+    ntrp: 'NTRP 3.0–4.0',
     description: 'Consistent rally and developing serve. Strategy sessions, doubles tactics, and league preparation.',
     href: '/schedules',
     cta: 'View intermediate programs',

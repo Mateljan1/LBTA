@@ -25,7 +25,7 @@
       "dates": "March 30 – April 2, 2026 (Mon–Thu)",
       "options": [
         {
-          "name": "Tennis & Games",
+          "name": "Tennis & Adventure",
           "ages": "5–11",
           "location": "Alta Laguna Park",
           "pricePerWeek": 325,
@@ -47,9 +47,11 @@
       "label": "Summer Camps",
       "dates": "June 15 – August 28, 2026",
       "options": [
-        { "name": "Tennis & Games Full Day", "ages": "5-11", "hours": "9am-3pm", "pricePerWeek": 495 },
-        { "name": "Tennis & Games Half Day", "ages": "5-11", "pricePerWeek": 295 },
-        { "name": "Junior Development", "ages": "12-17", "location": "LBHS", "pricePerWeek": 325 }
+        { "name": "Tennis & Adventure Full Day", "ages": "5-11", "hours": "9am-3pm", "pricePerWeek": 495, "perDay": 99 },
+        { "name": "Tennis & Adventure Half Day AM", "ages": "5-11", "hours": "9am-12pm", "pricePerWeek": 325, "perDay": 85 },
+        { "name": "Tennis & Adventure Half Day PM", "ages": "5-11", "hours": "12pm-3pm", "pricePerWeek": 325, "perDay": 85 },
+        { "name": "Summer Training Camp Full Day", "ages": "12-17", "hours": "9am-3pm", "location": "LBHS", "pricePerWeek": 595, "perDay": 120 },
+        { "name": "Summer Training Camp Half Day", "ages": "12-17", "hours": "9am-12pm or 12pm-3pm", "location": "LBHS", "pricePerWeek": 325, "perDay": 85 }
       ],
       "coach": "Peter DeFrantz"
     }
@@ -60,77 +62,77 @@
       "category": "Junior",
       "program": "Little Tennis Stars",
       "ages": "3-4",
-      "location": "Moulton Meadows Park + Saturday at LBHS",
+      "location": "Moulton Meadows Park + Saturday at Alta Laguna",
       "duration": "45 min",
       "schedule": [
         { "day": "Monday", "time": "3:30–4:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
         { "day": "Wednesday", "time": "3:30–4:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
-        { "day": "Saturday", "time": "9:00–9:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
+        { "day": "Saturday", "time": "9:00–9:45 AM", "coach": "Allison Cronk", "location": "Alta Laguna Park" }
       ],
       "pricing": {
         "monthly": { "1x": 120, "2x": 200 },
         "drop_in": 40
       },
-      "description": "An engaging intro to tennis through age-appropriate activities focused on movement and coordination. Part of the LBTA Player Journey — players earn achievement milestones on court."
+      "description": "Your child's first time on a tennis court should feel like play — because it is. Foam balls, low nets, mini courts. Movement games, relay races, treasure hunts. No drills. No pressure."
     },
     {
       "id": "red-ball",
       "category": "Junior",
       "program": "Red Ball",
       "ages": "5-6",
-      "location": "Moulton Meadows Park + Saturday at LBHS",
+      "location": "Moulton Meadows Park + Saturday at Alta Laguna",
       "duration": "60 min",
       "schedule": [
         { "day": "Monday", "time": "4:15–5:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
         { "day": "Wednesday", "time": "4:15–5:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
-        { "day": "Saturday", "time": "9:45–10:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
+        { "day": "Saturday", "time": "9:45–10:45 AM", "coach": "Allison Cronk", "location": "Alta Laguna Park" }
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
-        "summer": { "1x": 601, "2x": 1201, "3x": 1799, "saturday1x": 547 },
+        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
         "drop_in": 50
       },
-      "description": "Proper stroke development, footwork fundamentals, and rally building on a 36-foot court."
+      "description": "The real starting line. Players learn to swing, move, and rally on a 36-foot court with low-compression red balls. By the end of the season, your child is hitting 4–6 ball rallies, serving to start a point, and keeping score."
     },
     {
       "id": "orange-ball",
       "category": "Junior",
       "program": "Orange Ball",
       "ages": "7-8",
-      "location": "Moulton Meadows Park + Saturday at LBHS",
+      "location": "Moulton Meadows Park + Saturday at Alta Laguna",
       "duration": "60 min",
       "schedule": [
         { "day": "Monday", "time": "5:15–6:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
         { "day": "Wednesday", "time": "5:15–6:15 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
         { "day": "Tuesday", "time": "3:30–4:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
         { "day": "Thursday", "time": "3:30–4:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
-        { "day": "Saturday", "time": "10:45–11:45 AM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
+        { "day": "Saturday", "time": "10:45–11:45 AM", "coach": "Allison Cronk", "location": "Alta Laguna Park" }
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
-        "summer": { "1x": 601, "2x": 1201, "3x": 1799, "saturday1x": 547 },
+        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
         "drop_in": 50
       },
-      "description": "Mid-court tennis where directional play, consistent rallies, and competitive instincts start to form."
+      "description": "Bigger court. Faster ball. Players move to a 60-foot court with orange balls — closer to the real game. Direction becomes a coached focus. Volleys and overhand serves are introduced through games, and structured point play begins."
     },
     {
       "id": "green-dot",
       "category": "Junior",
       "program": "Green Dot",
       "ages": "9-11",
-      "location": "Moulton Meadows Park + Saturday at LBHS",
+      "location": "Moulton Meadows Park + Saturday at Alta Laguna",
       "duration": "60 min",
       "schedule": [
         { "day": "Tuesday", "time": "4:30–5:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
         { "day": "Thursday", "time": "4:30–5:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
-        { "day": "Saturday", "time": "11:45 AM–12:45 PM", "coach": "Allison Cronk", "location": "Laguna Beach High School" }
+        { "day": "Saturday", "time": "11:45 AM–12:45 PM", "coach": "Allison Cronk", "location": "Alta Laguna Park" }
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 840, "3x": 1260, "saturday1x": 380 },
-        "summer": { "1x": 601, "2x": 1201, "3x": 1799, "saturday1x": 547 },
+        "summer": { "1x": 462, "2x": 924, "3x": 1386, "saturday1x": 418 },
         "drop_in": 50
       },
-      "description": "Full-court tennis with green balls — building consistency, tactical awareness, and the competitive mindset that carries forward."
+      "description": "Full-size court. Green dot balls — 25% slower than regulation. This is where players learn to think. We introduce Phase Play: is this a rally ball, an attack ball, or a defensive ball?"
     },
     {
       "id": "utr-green-dot",
@@ -146,18 +148,18 @@
       ],
       "pricing": {
         "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
-        "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
+        "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
         "drop_in": 70
       },
-      "description": "For green ball players ready for more. Placement by coach invitation.",
+      "description": "For green dot players who are ready for more than group classes. Match play, point construction, and tournament preparation. Placement by coach invitation.",
       "pricingNote": "Placement by invitation. Contact us to discuss if your player may be ready.",
       "inquiryLabel": "Inquire about placement"
     },
     {
       "id": "youth-development",
       "category": "Development",
-      "program": "Player Development",
-      "ages": "11-18 (level-based; UTR 1.5-5)",
+      "program": "Junior Development",
+      "ages": "11-18 (UTR 1–4 / UTR 4–7)",
       "location": "Alta Laguna Park (Mon/Wed); Laguna Beach High School (Fri)",
       "duration": "2 hr",
       "schedule": [
@@ -167,26 +169,26 @@
       ],
       "pricing": {
         "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
-        "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
+        "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
         "drop_in": 70
       },
-      "description": "The core track for serious young players. Two tiers by UTR. Three coaches, every session focused on growth.",
+      "description": "The first competitive training tier. Players develop their own playing style, learn to manage points independently, and build the physical and mental habits that tournament play demands. Two tiers by UTR — Tier 1 (UTR 1–4) and Tier 2 (UTR 4–7).",
       "utrPlacementBands": {
-        "intro": "Placement by UTR (1.5–5) is required. Ages 11–18; younger players who already meet the range may qualify with coach approval.",
+        "intro": "Placement by UTR is required. Ages 11–18; younger players who already meet the range may qualify with coach approval.",
         "tiers": [
           {
             "label": "Tier 1",
-            "utrRange": "UTR 1.5–3.0",
+            "utrRange": "UTR 1–4",
             "focus": "Foundation work and controlled match play with peers at a similar rating."
           },
           {
             "label": "Tier 2",
-            "utrRange": "UTR 3.0–5.0",
-            "focus": "Stronger pace and tactical emphasis — patterns under pressure and more advanced point play."
+            "utrRange": "UTR 4–7",
+            "focus": "Higher intensity. Deeper tactical work. Players at this level are refining their competitive identity."
           }
         ],
         "structure": "Three LBTA coaches divide each session by band so athletes train in the correct group (Mon/Wed · Alta Laguna Park · Fri · Laguna Beach High School · 2 hr).",
-        "advancement": "Athletes at UTR 5+ belong in High Performance (separate program, schedule, and pricing)."
+        "advancement": "Athletes at UTR 8+ belong in High Performance (separate program, schedule, and pricing)."
       },
       "pricingNote": "Under 11 but already at UTR 1.5+? Contact us to inquire about placement.",
       "inquiryLabel": "Inquire about placement"
@@ -195,28 +197,28 @@
       "id": "adult-beginner-1",
       "category": "Adult",
       "program": "New to Tennis",
-      "ages": "NTRP 1.0-2.0",
+      "ages": "All Levels",
       "location": "Laguna Beach High School",
       "duration": "1 hr",
       "schedule": [
-        { "day": "Monday", "time": "6:30–7:30 PM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School" },
-        { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School" },
+        { "day": "Monday", "time": "6:30–7:30 PM", "coach": "Peter DeFrantz", "location": "Moulton Meadows Park" },
+        { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Peter DeFrantz", "location": "Moulton Meadows Park" },
         { "day": "Tuesday", "time": "10:00–11:00 AM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" },
         { "day": "Thursday", "time": "10:00–11:00 AM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" },
         { "day": "Saturday", "time": "9:00–10:00 AM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 615, "saturday1x": 380 },
-        "summer": { "1x": 601, "2x": 877, "saturday1x": 547 },
+        "summer": { "1x": 462, "2x": 677, "saturday1x": 418 },
         "drop_in": 55
       },
-      "description": "Never played? Start here. Strokes, footwork, serving, scoring — everything from the ground up."
+      "description": "No rating required. No experience needed. We get you hitting the ball on day one."
     },
     {
       "id": "adult-beginner-2",
       "category": "Adult",
       "program": "Beyond Beginner",
-      "ages": "NTRP 1.0-3.0",
+      "ages": "All Levels",
       "location": "Moulton Meadows Park",
       "duration": "1 hr",
       "schedule": [
@@ -225,16 +227,16 @@
       ],
       "pricing": {
         "spring": { "1x": 420, "2x": 615 },
-        "summer": { "1x": 601, "2x": 877 },
+        "summer": { "1x": 462, "2x": 677 },
         "drop_in": 55
       },
-      "description": "You can rally — now learn to play. Court positioning, doubles basics, and the consistency to move up."
+      "description": "You can rally. You can serve. Now learn to place the ball and start thinking about doubles strategy."
     },
     {
       "id": "adult-intermediate",
       "category": "Adult",
       "program": "Adult Intermediate",
-      "ages": "NTRP 3.0-3.5",
+      "ages": "NTRP 3.0-4.0",
       "location": "Laguna Beach High School",
       "duration": "1.5 hr",
       "schedule": [
@@ -243,12 +245,12 @@
         { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Robert LeBuhn", "location": "Laguna Beach High School", "note": "Separate pricing" }
       ],
       "pricing": {
-        "spring": { "1x": 756, "2x": 1437, "3x": 2042 },
-        "summer": { "1x": 832, "2x": 1581, "3x": 2246 },
+        "spring": { "1x": 580, "2x": 1105, "3x": 1570 },
+        "summer": { "1x": 638, "2x": 1216, "3x": 1727 },
         "drop_in": 70
       },
       "pricingNote": "Saturday session has separate pricing.",
-      "description": "Purposeful training for the developing player. Stroke reliability, tactical awareness, match-play confidence."
+      "description": "Tennis becomes a tactical sport at this level. The 90-minute format gives 30+ minutes of real match play every session. USTA league preparation begins here."
     },
     {
       "id": "adult-advanced",
@@ -262,17 +264,17 @@
         { "day": "Friday", "time": "12:00–2:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School" }
       ],
       "pricing": {
-        "spring": { "1x": 810, "2x": 1620 },
-        "summer": { "1x": 891, "2x": 1782 },
+        "spring": { "1x": 625, "2x": 1250 },
+        "summer": { "1x": 688, "2x": 1375 },
         "drop_in": 90
       },
-      "description": "Two-hour sessions for 4.0+ players. High-level tactics and match play with Andrew and Peter. Six max."
+      "description": "Full tactical play. Phase Play is assumed. All five ball controls are active. Feeds directly into USTA league teams and UTR competition."
     },
     {
       "id": "high-performance",
       "category": "Development",
       "program": "High Performance",
-      "ages": "12-17 (UTR 5+)",
+      "ages": "12-17 (UTR 8+)",
       "location": "Laguna Beach High School",
       "duration": "2 hr",
       "schedule": [
@@ -282,18 +284,18 @@
       ],
       "pricing": {
         "spring": { "1x": 625, "2x": 1250, "3x": 1745 },
-        "summer": { "1x": 891, "2x": 1782, "3x": 2495 },
+        "summer": { "1x": 688, "2x": 1375, "3x": 1920 },
         "drop_in": 100
       },
-      "description": "Tournament-caliber training. UTR 5+ required. Ages 12–17. 6 max.",
-      "pricingNote": "UTR 5+ required. Under 12 or close to UTR 5? Contact us to discuss readiness.",
+      "description": "The highest level of training at LBTA. Every session simulates tournament conditions. UTR 8+ required. Coach approval required.",
+      "pricingNote": "UTR 8+ required. Under 12 or close to UTR 8? Contact us to discuss readiness.",
       "inquiryLabel": "Inquire about placement"
     },
     {
       "id": "liveball",
       "category": "Open Court",
       "program": "LiveBall",
-      "ages": "NTRP 3.0+",
+      "ages": "NTRP 2.5+",
       "location": "Moulton Meadows Park / LBHS",
       "duration": "1-1.5 hr",
       "schedule": [
@@ -306,7 +308,7 @@
         "monthly": 150,
         "drop_in": 50
       },
-      "description": "Coach-fed hitting with purpose. High-volume point play for extra reps and competitive energy. Intermediate (3.0–4.0) and Advanced (4.0+) levels offered."
+      "description": "High-energy, coach-fed sessions. 150–200 ball contacts per session. Intermediate (NTRP 2.5+) and Advanced (3.5+) levels."
     },
     {
       "id": "cardio-tennis",
@@ -322,7 +324,7 @@
         "monthly": 150,
         "drop_in": 50
       },
-      "description": "Tennis as a workout. High-energy, fitness-focused hitting. All levels welcome."
+      "description": "Tennis-based fitness. High-intensity rallies, movement drills, and competitive games — all coach-fed."
     }
   ]
 }

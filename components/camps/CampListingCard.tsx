@@ -85,7 +85,7 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
                 {camp.season}
               </span>
               <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/90 shadow-sm">
-                Tennis &amp; Games
+                Tennis &amp; Adventure
               </span>
             </div>
           </div>

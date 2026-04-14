@@ -54,7 +54,7 @@ function getApplicableTagsNonUtr(
     if (classTag) tags.push(classTag)
   }
 
-  if (registrationType === 'camp' || registrationType === 'swim-tennis') {
+  if (registrationType === 'camp') {
     tags.push(CLASS_TAGS.summer_camp)
   }
 
@@ -116,7 +116,7 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     })
 
-    if (registrationType === 'utr-circuit' || registrationType === 'jtt') {
+    if (registrationType === 'utr-circuit') {
       const { acSynced } = await fulfillUtrCircuitRegistration(data, {})
       return NextResponse.json({
         success: true,
@@ -173,7 +173,7 @@ export async function POST(request: NextRequest) {
           notionProperties['Early Bird Applied'] = { checkbox: isEarlyBird(data.season) }
         }
 
-        if (registrationType === 'camp' || registrationType === 'swim-tennis') {
+        if (registrationType === 'camp') {
           notionProperties['Camp Name'] = { rich_text: [{ text: { content: data.campName || data.program } }] }
           notionProperties['Camp Dates'] = { rich_text: [{ text: { content: data.campDates || '' } }] }
           notionProperties['Camp Week'] = { rich_text: [{ text: { content: data.campWeek || '' } }] }
@@ -318,7 +318,7 @@ export async function POST(request: NextRequest) {
 
     let confirmationMessage = 'Registration received! Our team will confirm within 24 hours.'
 
-    if (registrationType === 'camp' || registrationType === 'swim-tennis') {
+    if (registrationType === 'camp') {
       confirmationMessage = `Camp registration received! You'll receive a confirmation email with camp details and payment information shortly.`
     } else if (registrationType === 'inquiry') {
       confirmationMessage = `Thank you for your inquiry! Our team will reach out within 24 hours to discuss your options.`

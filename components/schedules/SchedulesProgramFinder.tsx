@@ -16,7 +16,7 @@ interface SchedulesProgramFinderProps {
 const PLAYER_TYPE_OPTIONS: Array<{ value: ProgramFilters['playerType']; label: string }> = [
   { value: 'all', label: 'All programs' },
   { value: 'junior', label: 'Kids (3-11)' },
-  { value: 'development', label: 'Player Development (9-17)' },
+  { value: 'development', label: 'Junior Development (9-17)' },
   { value: 'adult', label: 'Adults' },
   { value: 'openCourt', label: 'Open Court (Drop-In)' },
 ]

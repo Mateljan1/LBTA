@@ -3,8 +3,8 @@
     {
       "slug": "andrew-mateljan",
       "name": "Andrew Mateljan",
-      "title": "Director & Head Coach",
-      "specialization": "ATP/WTA Tour Coach",
+      "title": "Founder & Director of Tennis",
+      "specialization": "Founder & Director of Tennis · Head Coach, LBHS Boys Varsity Tennis",
       "bio": "Twenty years developing competitive players from junior foundations to professional tour. Former #3 SoCal and #12 nationally ranked junior. Seven years coaching internationally across Spain, Croatia, and Norway shaped a movement-first approach grounded in clarity and accountability. Currently coaches ATP #262 Karue Sell. Training history includes Max McKennon (ATP #458), Ryan Seggerman (ATP #63 Doubles), with Masters 1000 experience at Indian Wells. Founder of Fit4Tennis platform serving 100K+ users worldwide.",
       "quote": "Structure creates confidence.",
       "quoteExtended": "Structure creates confidence, and confidence creates champions.",
@@ -18,8 +18,8 @@
     {
       "slug": "robert-lebuhn",
       "name": "Robert LeBuhn",
-      "title": "Director of Tennis Operations",
-      "specialization": "Director of Tennis Operations · USPTR Certified",
+      "title": "Adult Programs Coach",
+      "specialization": "Adult Programs Coach · USPTR Certified",
       "bio": "Twenty-five years developing players from junior foundations to collegiate competition. USPTR-certified professional who trained at the Harry Hopman Academy and competed as a Top 20 USTA Eastern junior and 1983 New Jersey State Singles Champion. Played NCAA Division I tennis at Lafayette College. Multiple Coach of the Year honoree across New Jersey, Union County, Somerset County, and San Diego CIF. Certified in Adaptive Tennis, Cardio Tennis, and CPR/AED.",
       "quote": "Development never stops.",
       "credentials": ["USPTR Certified", "25+ Years Experience", "NCAA D1 Lafayette", "Multiple Coach of Year"],
@@ -46,7 +46,7 @@
     {
       "slug": "peter-defrantz",
       "name": "Peter DeFrantz",
-      "title": "Head Coach, Player Development",
+      "title": "Head Coach, Junior Development",
       "specialization": "USPTA & PTR Certified Professional · College Tennis at Mt. San Jacinto · 8+ Years Coaching",
       "bio": "Peter grew up on the tennis court — his father coached high school tennis — and learned early that the game is about more than strokes: how you carry yourself, compete, and treat people. College tennis at Mt. San Jacinto College; dual USPTA and PTR certified. Eight years coaching across Southern California with a progressive, player-centered approach.",
       "quote": "Build the player, not just the game.",
@@ -55,13 +55,13 @@
       "imagePosition": "50% 50%",
       "role": "program",
       "order": 4,
-      "schemaDescription": "Head Coach, Player Development. USPTA and PTR certified. College tennis at Mt. San Jacinto College. 8+ years coaching across Southern California."
+      "schemaDescription": "Head Coach, Junior Development. USPTA and PTR certified. College tennis at Mt. San Jacinto College. 8+ years coaching across Southern California."
     },
     {
       "slug": "allison-cronk",
       "name": "Allison Cronk",
-      "title": "Coach",
-      "specialization": "Collegiate Player · Educator · All Ages",
+      "title": "Head Coach, Youth Programs",
+      "specialization": "Head Coach, Youth Programs · Collegiate Player · Educator",
       "bio": "Allison played varsity tennis at Mira Costa High School, then competed at Westcliff University (NAIA) and Shepherd University (NCAA) — Dean's List every semester at both. She has coached at five academies across Orange County and the South Bay. Beginners, juniors, adults, competitors. She adapts to whoever is on the other side of the net.",
       "quote": "She doesn't just teach the game. She teaches the person playing it.",
       "credentials": ["NCAA & NAIA Collegiate Tennis", "B.A. History, Education Minor", "5+ Years Coaching", "CPR / AED Certified"],

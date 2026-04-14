@@ -49,7 +49,7 @@ const SECTION_META: Record<SectionKey, { eyebrow: string; headline: string; subl
   },
   development: {
     eyebrow: 'AGES 9-17 \u00B7 LEVEL-BASED',
-    headline: 'Player Development',
+    headline: 'Junior Development',
     subline: 'Placement by level, not just age. From Competitive Green Dot through High Performance.',
     gridClass: 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3',
   },

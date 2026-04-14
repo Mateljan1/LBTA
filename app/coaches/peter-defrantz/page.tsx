@@ -13,11 +13,11 @@ import DarkSection from '@/components/ui/DarkSection'
 export const metadata: Metadata = {
   title: 'Peter DeFrantz — LBTA Coach',
   description:
-    'Head Coach, Player Development. USPTA & PTR certified. College tennis at Mt. San Jacinto. 8+ years coaching juniors, adults, and camps at LBTA.',
+    'Head Coach, Junior Development. USPTA & PTR certified. College tennis at Mt. San Jacinto. 8+ years coaching juniors, adults, and camps at LBTA.',
   openGraph: {
     title: 'Peter DeFrantz — LBTA Coach',
     description:
-      'Head Coach, Player Development. USPTA & PTR certified. College tennis at Mt. San Jacinto. 8+ years coaching juniors, adults, and camps at LBTA.',
+      'Head Coach, Junior Development. USPTA & PTR certified. College tennis at Mt. San Jacinto. 8+ years coaching juniors, adults, and camps at LBTA.',
     type: 'website',
     images: [{ url: coachImageSrc(coach.image), width: 800, height: 1000, alt: 'Peter DeFrantz' }],
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const strengths = [
   { title: 'Communication', desc: 'Connects with children of all ages. Builds real relationships, not just runs drills.' },
   { title: 'Teaching Method', desc: 'Progressive, scaffolded approach — starts inside the service line, gradually expanding distance and complexity.' },
-  { title: 'Player Development', desc: 'Strong observation and evaluation skills. Delivers feedback constructively, meeting each player where they are.' },
+  { title: 'Junior Development', desc: 'Strong observation and evaluation skills. Delivers feedback constructively, meeting each player where they are.' },
   { title: 'Fitness Integration', desc: 'Passionate about on-court and off-court fitness, current with modern training trends.' },
   { title: 'Energy & Attitude', desc: 'Consistently positive presence. Lessons are fun, challenging, and engaging — players stay motivated and come back.' },
 ]
