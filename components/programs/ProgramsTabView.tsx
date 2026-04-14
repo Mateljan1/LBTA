@@ -202,14 +202,15 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
             <p className="font-sans text-[14px] text-brand-pacific-dusk/55 max-w-2xl mb-8 leading-relaxed">
               A three-year-old picks up a foam racket at Moulton Meadows. Ten years later, she&rsquo;s training at LBHS, competing in USTA tournaments, building a UTR that college coaches follow. One continuous pathway — same academy, same coaching philosophy.
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-              {visiblePrograms.map((p) => (
+            <div className="space-y-12 md:space-y-16">
+              {visiblePrograms.map((p, i) => (
                 <ProgramPathwayCard
                   key={p.id}
                   program={p}
                   description={getDescription(p)}
                   onRegister={setSelectedProgram}
                   badge={getBadge(p)}
+                  index={i}
                 />
               ))}
             </div>
@@ -229,13 +230,14 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
             <p className="font-sans text-[14px] text-brand-pacific-dusk/55 max-w-2xl mb-8 leading-relaxed">
               Whether you played in college or picked up a racket last month, there is a place for you here. Small groups. Real instruction. A clear path into leagues and rated competition when you&rsquo;re ready.
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-              {visiblePrograms.map((p) => (
+            <div className="space-y-12 md:space-y-16">
+              {visiblePrograms.map((p, i) => (
                 <ProgramPathwayCard
                   key={p.id}
                   program={p}
                   description={getDescription(p)}
                   onRegister={setSelectedProgram}
+                  index={i}
                 />
               ))}
             </div>
@@ -256,13 +258,14 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
               High-energy, coach-fed sessions. $150/month or drop in at $50. No season commitment required — just show up.
             </p>
             {visiblePrograms.length > 0 ? (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-                {visiblePrograms.map((p) => (
+              <div className="space-y-12 md:space-y-16">
+                {visiblePrograms.map((p, i) => (
                   <ProgramPathwayCard
                     key={p.id}
                     program={p}
                     description={getDescription(p)}
                     onRegister={setSelectedProgram}
+                    index={i}
                   />
                 ))}
               </div>
