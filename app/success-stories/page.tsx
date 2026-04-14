@@ -64,7 +64,7 @@ const successStories = [
     title: 'USTA League Team',
     achievement: '4-9 → 10-3 · 10th to 3rd in one season',
     image:
-      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/USTA_ladies_3.5__Team_ha3yi4.jpg',
+      'https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto:best,e_sharpen:180/v1776164749/USTA_ladies_3.5__Team_ha3yi4.jpg',
     quote:
       'A lot of our players were new to competitive doubles. They committed to weekly team practice and put in the work on their own — the record followed.',
     story:
@@ -79,7 +79,7 @@ const successStories = [
     title: 'ATP Tour Player',
     achievement: 'Career-high ATP singles #72',
     image:
-      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/Ryan_Seggerman__Serve_Hero_srkabk.jpg',
+      'https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto:best,e_sharpen:180/v1776164749/Ryan_Seggerman__Serve_Hero_srkabk.jpg',
     quote:
       "When I'm home, LBTA is where I sharpen movement patterns before heading back on the road. The work here matches how I prepare on tour.",
     story:
@@ -170,7 +170,7 @@ export default function SuccessStoriesPage() {
       <section className="relative min-h-[55vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/USTA_ladies_3.5__Team_ha3yi4.jpg"
+            src="https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto:best,e_sharpen:180/v1776164749/USTA_ladies_3.5__Team_ha3yi4.jpg"
             alt="On-court play at Laguna Beach Tennis Academy"
             fill
             className="object-cover object-center max-md:brightness-[0.88]"
