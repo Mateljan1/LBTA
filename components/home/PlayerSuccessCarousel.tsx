@@ -127,19 +127,25 @@ export default function PlayerSuccessCarousel({
             />
           </motion.div>
         </AnimatePresence>
-        {/* Slight full-frame cinematic overlay — uniform across the whole image */}
+        {/* Full-frame base darken */}
         <div
-          className="absolute inset-0 z-[12] bg-black/18 pointer-events-none"
+          className="absolute inset-0 z-[12] bg-black/25 pointer-events-none"
           aria-hidden
         />
-        {/* Left-weighted text scrim: strong behind copy, fades right so subjects stay visible */}
+        {/* Desktop: left-weighted scrim — strong behind copy, fades right */}
         <div
-          className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.82] from-0% via-black/22 via-[44%] to-transparent to-[68%] pointer-events-none"
+          className="absolute inset-0 z-[15] pointer-events-none hidden md:block"
+          style={{
+            background: 'linear-gradient(to right, rgba(15,34,55,0.92) 0%, rgba(15,34,55,0.75) 30%, rgba(0,0,0,0.35) 50%, transparent 72%)',
+          }}
           aria-hidden
         />
-        {/* Mobile: bottom-to-top gradient so text zone at bottom has solid backing */}
+        {/* Mobile: strong bottom-to-top scrim — text sits at bottom */}
         <div
-          className="absolute inset-0 z-[14] bg-gradient-to-t from-brand-deep-water/80 from-0% via-black/20 via-[50%] to-transparent to-[75%] md:hidden pointer-events-none"
+          className="absolute inset-0 z-[15] pointer-events-none md:hidden"
+          style={{
+            background: 'linear-gradient(to top, rgba(15,34,55,0.95) 0%, rgba(15,34,55,0.80) 35%, rgba(0,0,0,0.30) 60%, rgba(0,0,0,0.15) 100%)',
+          }}
           aria-hidden
         />
       </div>
