@@ -132,11 +132,11 @@ export default function PlayerSuccessCarousel({
           className="absolute inset-0 z-[12] bg-black/25 pointer-events-none"
           aria-hidden
         />
-        {/* Desktop: left-weighted scrim — strong behind copy, fades right */}
+        {/* Desktop: left-weighted scrim — nearly opaque behind copy */}
         <div
           className="absolute inset-0 z-[15] pointer-events-none hidden md:block"
           style={{
-            background: 'linear-gradient(to right, rgba(15,34,55,0.92) 0%, rgba(15,34,55,0.75) 30%, rgba(0,0,0,0.35) 50%, transparent 72%)',
+            background: 'linear-gradient(to right, rgba(10,18,32,0.95) 0%, rgba(15,34,55,0.85) 28%, rgba(0,0,0,0.50) 48%, rgba(0,0,0,0.15) 65%, transparent 78%)',
           }}
           aria-hidden
         />
@@ -144,7 +144,7 @@ export default function PlayerSuccessCarousel({
         <div
           className="absolute inset-0 z-[15] pointer-events-none md:hidden"
           style={{
-            background: 'linear-gradient(to top, rgba(15,34,55,0.95) 0%, rgba(15,34,55,0.80) 35%, rgba(0,0,0,0.30) 60%, rgba(0,0,0,0.15) 100%)',
+            background: 'linear-gradient(to top, rgba(10,18,32,0.97) 0%, rgba(15,34,55,0.88) 30%, rgba(0,0,0,0.45) 55%, rgba(0,0,0,0.20) 100%)',
           }}
           aria-hidden
         />
@@ -192,8 +192,9 @@ export default function PlayerSuccessCarousel({
           </AnimatedSection>
           <AnimatedSection delay={200}>
             <p
-              className="text-[15px] md:text-body-lg text-white font-medium mb-6 md:mb-8 line-clamp-3 md:line-clamp-none bg-brand-deep-water/60 backdrop-blur-[6px] rounded-[4px] px-4 py-3 inline-block"
+              className="text-[16px] md:text-[18px] text-white leading-[1.6] mb-6 md:mb-8 line-clamp-3 md:line-clamp-none"
               key={safeIndex}
+              style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.6)' }}
             >
               {active.subline}
             </p>
