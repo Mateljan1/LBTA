@@ -157,7 +157,7 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
         ref={tablistRef}
         role="tablist"
         aria-label="Program categories"
-        className="flex overflow-x-auto scrollbar-hide gap-1 pb-1 mb-8 md:mb-10 border-b border-brand-pacific-dusk/8"
+        className="flex overflow-x-auto scrollbar-hide gap-2 pb-2 mb-10 md:mb-14"
       >
         {TABS.map((tab, idx) => {
           const isActive = activeTab === tab.id
@@ -171,16 +171,16 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
               tabIndex={isActive ? 0 : -1}
               onClick={() => setActiveTab(tab.id)}
               onKeyDown={(e) => handleTabKeyDown(e, idx)}
-              className={`flex flex-col items-start gap-0.5 whitespace-nowrap px-4 py-3 rounded-t-[2px] border-b-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 ${
+              className={`flex flex-col items-start gap-0.5 whitespace-nowrap px-5 py-3.5 rounded-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 ${
                 isActive
-                  ? 'border-brand-pacific-dusk text-brand-pacific-dusk bg-brand-pacific-dusk/[0.03]'
-                  : 'border-transparent text-brand-pacific-dusk/50 hover:text-brand-pacific-dusk/75 hover:border-brand-pacific-dusk/20'
+                  ? 'bg-brand-deep-water text-white shadow-[0_4px_16px_rgba(15,34,55,0.2)]'
+                  : 'bg-transparent text-brand-pacific-dusk/50 hover:text-brand-pacific-dusk/80 hover:bg-brand-pacific-dusk/[0.04]'
               }`}
             >
-              <span className={`font-sans text-[13px] font-medium ${isActive ? '' : ''}`}>
+              <span className="font-sans text-[13px] font-semibold">
                 {tab.label}
               </span>
-              <span className="font-sans text-[11px] text-brand-pacific-dusk/40">
+              <span className={`font-sans text-[10px] ${isActive ? 'text-white/50' : 'text-brand-pacific-dusk/35'}`}>
                 {tab.sublabel}
               </span>
             </button>
@@ -299,15 +299,15 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
       </div>
 
       {/* Trust strip */}
-      <div className="mt-12 md:mt-14 pt-8 border-t border-brand-pacific-dusk/6 grid sm:grid-cols-3 gap-4 text-center">
+      <div className="mt-16 md:mt-20 rounded-xl bg-brand-deep-water/[0.03] border border-brand-pacific-dusk/[0.06] p-8 md:p-10 grid sm:grid-cols-3 gap-6 md:gap-8">
         {[
           { label: 'First class free', detail: 'One free group class per family. All programs.' },
-          { label: 'You never lose a session to weather', detail: 'LBTA cancels proactively and schedules makeups automatically.' },
+          { label: 'No lost sessions', detail: 'LBTA cancels proactively and schedules makeups automatically.' },
           { label: 'No long-term commitment', detail: 'Seasonal or monthly. Drop in anytime.' },
         ].map((item) => (
-          <div key={item.label} className="px-4">
-            <p className="font-sans text-[13px] font-medium text-brand-pacific-dusk mb-1">{item.label}</p>
-            <p className="font-sans text-[12px] text-brand-pacific-dusk/45 leading-relaxed">{item.detail}</p>
+          <div key={item.label} className="text-center sm:text-left">
+            <p className="font-headline text-[17px] font-medium text-brand-pacific-dusk mb-1.5">{item.label}</p>
+            <p className="font-sans text-[13px] text-brand-pacific-dusk/45 leading-relaxed">{item.detail}</p>
           </div>
         ))}
       </div>
