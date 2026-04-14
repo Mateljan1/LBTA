@@ -79,8 +79,8 @@ export default function LiveBallPage() {
           </div>
           <div className="relative min-h-[48vh] lg:min-h-full order-1 lg:order-2">
             <Image
-              src="/images/liveball/hero-doubles.webp"
-              alt="Coach and players during a LiveBall doubles session at LBTA"
+              src="https://res.cloudinary.com/dv033eo0x/image/upload/v1774485572/Advanced_liveball_iyooh6.jpg"
+              alt="LiveBall session — high-energy coach-fed point play"
               fill
               className="object-cover object-[center_42%] lg:object-[center_40%]"
               sizes="(max-width: 1023px) 100vw, 50vw"
@@ -124,8 +124,8 @@ export default function LiveBallPage() {
             </div>
             <div className="lg:col-span-7">
               <ContainedShot
-                src="/images/liveball/patterns-ready.webp"
-                alt="Players in ready position during a high-tempo LiveBall session on a blue court"
+                src="https://res.cloudinary.com/dv033eo0x/image/upload/v1774485572/Liveball_Intermediate_exqowf.jpg"
+                alt="Cardio Tennis fitness-focused hitting session"
                 sizes="(max-width: 1024px) 100vw, 58vw"
               />
             </div>
@@ -301,8 +301,8 @@ export default function LiveBallPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-6">
             <ContainedShot
-              src="/images/liveball/lifestyle.webp"
-              alt="Outdoor tennis court during an LBTA session"
+              src="https://res.cloudinary.com/dv033eo0x/image/upload/v1774485572/Advanced_liveball_iyooh6.jpg"
+              alt="LiveBall session at Laguna Beach Tennis Academy"
               sizes="(max-width: 1024px) 100vw, 48vw"
             />
           </div>
@@ -319,8 +319,8 @@ export default function LiveBallPage() {
       <section className="relative min-h-[300px] md:min-h-[320px] flex items-center py-20 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/liveball/session-mood.webp"
-            alt="Tennis court at dusk with warm light through the fence at LBTA"
+            src="https://res.cloudinary.com/dv033eo0x/image/upload/v1774485572/Liveball_Intermediate_exqowf.jpg"
+            alt="LiveBall players during an evening session at LBTA"
             fill
             className="object-cover object-[center_38%]"
             sizes="100vw"

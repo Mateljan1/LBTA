@@ -86,8 +86,8 @@ export default function AdultTrialLanding() {
       <section className="relative h-[85vh] min-h-[700px] flex items-center">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/hero/adult-trial-hero/adult-trial-hero.webp"
-            alt="Adult tennis development at LBTA"
+            src="https://res.cloudinary.com/dv033eo0x/image/upload/v1776046298/Adult_intermediat_or_bridge_1_edcu5p.jpg"
+            alt="Adult intermediate players training at Laguna Beach High School"
             fill
             priority
             quality={95}

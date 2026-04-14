@@ -9,6 +9,7 @@ import fall2026Data from '@/data/fall2026.json'
 import privateRatesData from '@/data/private-rates.json'
 import pricingSupplementalData from '@/data/pricing-supplemental.json'
 import { getCurrentSeason, type SeasonKey } from '@/lib/season-utils'
+import { PROGRAM_IMAGES } from '@/lib/program-images'
 
 export interface WinterProgram {
   id: string
@@ -261,8 +262,8 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
       description: 'Where it begins. Build coordination, rhythm, and love for the game from Little Stars through Green Dot.',
       href: '/schedules',
       fromPrice: fromJunior,
-      image: '/images/programs/juniors.webp',
-      objectPosition: '50% 24%',
+      image: PROGRAM_IMAGES['little-tennis-stars'].src,
+      objectPosition: PROGRAM_IMAGES['little-tennis-stars'].objectPosition,
     },
     {
       eyebrow: 'Ages 11–18',
@@ -270,8 +271,8 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
       description: 'Level-based placement (UTR 1.5-5). Full-court training for growing competitors.',
       href: '/schedules',
       fromPrice: fromYouth,
-      image: '/images/programs/youth-dev-2.webp',
-      objectPosition: '50% 40%',
+      image: PROGRAM_IMAGES['player-development'].src,
+      objectPosition: PROGRAM_IMAGES['player-development'].objectPosition,
     },
     {
       eyebrow: 'UTR 5–8, College Bound',
@@ -279,8 +280,8 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
       description: 'UTR 5+ required. Selective training for advanced juniors preparing for tournaments and collegiate play.',
       href: '/schedules',
       fromPrice: fromHP,
-      image: '/images/programs/high-performance.webp',
-      objectPosition: '50% 32%',
+      image: PROGRAM_IMAGES['high-performance'].src,
+      objectPosition: PROGRAM_IMAGES['high-performance'].objectPosition,
     },
     {
       eyebrow: 'Beginner – Advanced',
@@ -288,8 +289,8 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
       description: 'Progression with purpose. From fundamentals to competitive match-play at every level.',
       href: '/schedules',
       fromPrice: fromAdult,
-      image: '/images/programs/adults.webp',
-      objectPosition: '50% 30%',
+      image: PROGRAM_IMAGES['adult-intermediate'].src,
+      objectPosition: PROGRAM_IMAGES['adult-intermediate'].objectPosition,
     },
     {
       eyebrow: 'Seasonal & Holiday',
@@ -297,8 +298,8 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
       description: 'Swim & tennis, holiday breaks, and intensive sessions for juniors and youth.',
       href: '/camps',
       fromPrice: CAMPS_FROM_PRICE_FALLBACK,
-      image: '/images/camps/camp-action-2.webp',
-      objectPosition: '50% 42%',
+      image: PROGRAM_IMAGES['camps'].src,
+      objectPosition: PROGRAM_IMAGES['camps'].objectPosition,
     },
     {
       eyebrow: 'Cardio / LiveBall',
@@ -306,8 +307,8 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
       description: 'High-energy sessions combining fitness, competition, and community. All levels welcome.',
       href: '/fitness',
       fromPrice: fromFitness,
-      image: '/images/programs/fitness.webp',
-      objectPosition: '50% 38%',
+      image: PROGRAM_IMAGES['liveball'].src,
+      objectPosition: PROGRAM_IMAGES['liveball'].objectPosition,
     },
     {
       eyebrow: 'USTA & UTR',
@@ -315,8 +316,8 @@ export function getProgramsOverview(): ProgramsOverviewCard[] {
       description: 'USTA Adult League teams and the UTR Match Play Series — league play vs. rated Saturday matchplay.',
       href: '/programs/leagues',
       fromPrice: LEAGUES_FROM_PRICE_FALLBACK,
-      image: '/images/leagues/leagues-hero.webp',
-      objectPosition: '50% 48%',
+      image: PROGRAM_IMAGES['leagues'].src,
+      objectPosition: PROGRAM_IMAGES['leagues'].objectPosition,
     },
   ]
 }

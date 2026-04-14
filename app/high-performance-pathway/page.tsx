@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'High Performance Pathway | Tennis Training',
     description: 'Where serious players become champions. ATP/WTA methodology for tournament and college preparation.',
     type: 'website',
-    images: [{ url: '/legacy-working-assets/programs/high-performance/high-performance.webp', width: 1920, height: 1080, alt: 'High performance pathway at LBTA' }],
+    images: [{ url: 'https://res.cloudinary.com/dv033eo0x/image/upload/v1776047024/High_Performance_d60ibn.jpg', width: 1920, height: 1080, alt: 'High performance pathway at LBTA' }],
   },
 }
 
@@ -87,8 +87,8 @@ export default function HighPerformancePathwayPage() {
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/programs/high-performance/high-performance.webp"
-            alt="High performance tennis training at LBTA"
+            src="https://res.cloudinary.com/dv033eo0x/image/upload/v1776047024/High_Performance_d60ibn.jpg"
+            alt="High Performance youth training session at Laguna Beach Tennis Academy"
             fill
             priority
             className="object-cover"

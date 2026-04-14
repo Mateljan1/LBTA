@@ -111,17 +111,17 @@
             "title": "Junior Programs",
             "description": "Red, orange, and green ball through college prep.",
             "link": "/programs/junior",
-            "image": "/images/programs/junior-development-lbta-pics2.webp",
-            "imageAlt": "Junior development — young player training on an outdoor court at LBTA",
-            "objectPosition": "50% 38%"
+            "image": "https://res.cloudinary.com/dv033eo0x/image/upload/v1776035010/9D30C663-85F2-48B0-B34C-87D340674789_1_105_c_tahv0a.jpg",
+            "imageAlt": "Young player smiling on court during Little Tennis Stars session",
+            "objectPosition": "center 26%"
           },
           {
             "title": "Adult Programs",
             "description": "Focused development for any level.",
             "link": "/programs/adult",
-            "image": "/images/programs/adult-lbta-pics2.webp",
-            "imageAlt": "Adult players in an advanced clinic on an outdoor court",
-            "objectPosition": "50% 42%"
+            "image": "https://res.cloudinary.com/dv033eo0x/image/upload/v1776046298/Adult_intermediat_or_bridge_1_edcu5p.jpg",
+            "imageAlt": "Adult intermediate players training at Laguna Beach High School",
+            "objectPosition": "center 38%"
           },
           {
             "title": "Private Coaching",
@@ -135,9 +135,9 @@
             "title": "Camps",
             "description": "Seasonal camps and intensive blocks for juniors.",
             "link": "/camps",
-            "image": "/images/camps/camp-action-1.webp",
-            "imageAlt": "Junior players in a camp drill on outdoor courts at Laguna Beach Tennis Academy",
-            "objectPosition": "50% 45%"
+            "image": "https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto/v1775614949/Summer-Tennis-Camps-Program-Photo-1200x851-2_ry29pi.jpg",
+            "imageAlt": "Junior players training during a seasonal tennis camp at Laguna Beach Tennis Academy",
+            "objectPosition": "center 42%"
           }
         ]
       },
@@ -151,9 +151,9 @@
             "title": "LiveBall",
             "description": "High-energy group class—movement, patterns, and doubles play in rotating formats.",
             "link": "/liveball",
-            "image": "/images/liveball/hero-doubles.webp",
-            "imageAlt": "Coach and players during a LiveBall doubles session at LBTA",
-            "objectPosition": "50% 42%"
+            "image": "https://res.cloudinary.com/dv033eo0x/image/upload/v1774485572/Advanced_liveball_iyooh6.jpg",
+            "imageAlt": "LiveBall session — high-energy coach-fed point play",
+            "objectPosition": "center 42%"
           },
           {
             "title": "UTR Match Play",
@@ -167,9 +167,9 @@
             "title": "Leagues & team play",
             "description": "USTA leagues, team formats, and organized competition in Laguna Beach.",
             "link": "/programs/leagues",
-            "image": "/images/leagues/leagues-hero.webp",
+            "image": "https://res.cloudinary.com/dv033eo0x/image/upload/v1774752421/lbta/support/canonical/cta/support-cta-cta-background.webp",
             "imageAlt": "League and team tennis on outdoor courts at LBTA",
-            "objectPosition": "50% 45%"
+            "objectPosition": "center 48%"
           }
         ]
       }

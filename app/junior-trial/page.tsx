@@ -148,8 +148,8 @@ export default function JuniorTrialLanding() {
       <section className="relative h-[85vh] min-h-[700px] flex items-center">
         <div className="absolute inset-0">
           <Image
-            src="/legacy-working-assets/hero/junior-trial-hero/junior-trial-hero.webp"
-            alt="Junior tennis players training at Laguna Beach Tennis Academy"
+            src="https://res.cloudinary.com/dv033eo0x/image/upload/v1776035010/9D30C663-85F2-48B0-B34C-87D340674789_1_105_c_tahv0a.jpg"
+            alt="Young player smiling on court during Little Tennis Stars session"
             fill
             priority
             quality={95}
