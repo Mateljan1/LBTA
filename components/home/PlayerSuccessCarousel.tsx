@@ -118,14 +118,14 @@ export default function PlayerSuccessCarousel({
             />
           </motion.div>
         </AnimatePresence>
-        {/* Left-weighted scrim: strong behind copy; fades toward the right so players stay visible */}
+        {/* Left-weighted scrim: enough contrast for copy, light enough images still breathe */}
         <div
-          className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.94] from-0% via-brand-deep-water/60 via-[52%] to-brand-deep-water/10 to-[80%] pointer-events-none"
+          className="absolute inset-0 z-[15] bg-gradient-to-r from-brand-deep-water/[0.82] from-0% via-black/22 via-[44%] to-transparent to-[68%] pointer-events-none"
           aria-hidden
         />
-        {/* Mobile overlay: additional darkening so text is always legible at small viewports */}
+        {/* Mobile: modest extra darkening — keeps text readable without muddying the image */}
         <div
-          className="absolute inset-0 z-[14] bg-black/35 md:hidden pointer-events-none"
+          className="absolute inset-0 z-[14] bg-black/15 md:hidden pointer-events-none"
           aria-hidden
         />
       </div>

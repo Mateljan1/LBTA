@@ -19,7 +19,7 @@ const successStories = [
     title: 'ATP Tour Player',
     achievement: '#858 → #262 ATP Ranking',
     image:
-      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/Karue_FH_hero_2_cnd53p.jpg',
+      'https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto,w_1200,c_limit/v1776164749/Karue_FH_hero_2_cnd53p.jpg',
     quote: "Andrew's movement-first approach transformed my game. The structured training and accountability pushed me to levels I didn't know I could reach.",
     story:
       'Karue trained at LBTA with Coach Andrew while rebuilding his professional game. From a ranking in the #800s on the ATP tour, he climbed to a career high of #262 — a jump that reflects sustained work on movement efficiency, patterns, and mental toughness under pressure.',
@@ -34,7 +34,7 @@ const successStories = [
     title: 'Junior Competitor',
     achievement: 'Age 9 · 4.6 UTR · Little Mo',
     image:
-      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/Henry_mateljan_4.6_UTR_9yrs_old_backhand_roqsfu.jpg',
+      'https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto,w_1200,c_limit/v1776164749/Henry_mateljan_4.6_UTR_9yrs_old_backhand_roqsfu.jpg',
     quote:
       'Little Mo was a special week—sharing that with Coach Andrew is something I will always remember.',
     story:
@@ -49,7 +49,7 @@ const successStories = [
     title: 'USTA National Competition',
     achievement: '4.0 → 5.0 · National events',
     image:
-      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164927/Olov_fh_hero_qgzara.jpg',
+      'https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto,w_1200,c_limit/v1776164927/Olov_fh_hero_qgzara.jpg',
     quote:
       'The step up to 5.0 came from training that matches how I compete—structure in practice, clarity in matches.',
     story:
@@ -64,7 +64,7 @@ const successStories = [
     title: 'USTA League Team',
     achievement: '4-9 → 10-3 · 10th to 3rd in one season',
     image:
-      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776167429/Ladies_3.5_usta_team__Warm_Up_hero_nxep4b.jpg',
+      'https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto,w_1200,c_limit/v1776167429/Ladies_3.5_usta_team__Warm_Up_hero_nxep4b.jpg',
     quote:
       'A lot of our players were new to competitive doubles. They committed to weekly team practice and put in the work on their own — the record followed.',
     story:
@@ -79,7 +79,7 @@ const successStories = [
     title: 'ATP Tour Player',
     achievement: 'Career-high ATP singles #72',
     image:
-      'https://res.cloudinary.com/dv033eo0x/image/upload/v1776164749/Ryan_Seggerman__Serve_Hero_srkabk.jpg',
+      'https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto,w_1200,c_limit/v1776164749/Ryan_Seggerman__Serve_Hero_srkabk.jpg',
     quote:
       "When I'm home, LBTA is where I sharpen movement patterns before heading back on the road. The work here matches how I prepare on tour.",
     story:
@@ -170,7 +170,7 @@ export default function SuccessStoriesPage() {
       <section className="relative min-h-[55vh] flex items-center justify-center py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://res.cloudinary.com/dv033eo0x/image/upload/v1776167429/Ladies_3.5_usta_team__Warm_Up_hero_nxep4b.jpg"
+            src="https://res.cloudinary.com/dv033eo0x/image/upload/f_auto,q_auto,w_1920,c_limit/v1776167429/Ladies_3.5_usta_team__Warm_Up_hero_nxep4b.jpg"
             alt="On-court play at Laguna Beach Tennis Academy"
             fill
             className="object-cover object-center max-md:brightness-[0.88]"
