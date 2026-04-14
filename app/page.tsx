@@ -117,46 +117,7 @@ export default function Home() {
 
       <HomeHero />
 
-      <section id="stat-strip" className="bg-brand-deep-water py-12 md:py-14" aria-label="Academy at a glance">
-        <div className="container-lbta">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
-            <div className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10">
-              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">{siteStats.trustStats.yearsExperience}</p>
-              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">Years Experience</p>
-            </div>
-            <div className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10">
-              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">{siteStats.trustStats.playersCount}</p>
-              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">Players Coached</p>
-            </div>
-            <Link
-              href="https://www.google.com/maps/place/Laguna+Beach+Tennis+Academy/@33.5427,-117.7854,17z"
-              target="_blank"
-              rel="noreferrer"
-              className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
-            >
-              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">
-                {siteStats.trustStats.rating}
-              </p>
-              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">
-                Google Rating
-              </p>
-            </Link>
-            <Link
-              href="https://www.google.com/maps/place/Laguna+Beach+Tennis+Academy/@33.5427,-117.7854,17z/data=!3m1!4b1"
-              target="_blank"
-              rel="noreferrer"
-              className="bg-brand-deep-water px-6 py-6 md:px-8 md:py-8 text-center border border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
-            >
-              <p className="font-headline text-3xl md:text-4xl font-light text-white tabular-nums">
-                {siteStats.trustStats.reviewCount}
-              </p>
-              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-white/70 mt-2">
-                Reviews
-              </p>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Stats strip removed — keeping it clean */}
 
       <HorizonDivider animate />
       <section id="founder" className="bg-brand-morning-light section-lg">
