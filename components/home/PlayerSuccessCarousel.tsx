@@ -192,9 +192,8 @@ export default function PlayerSuccessCarousel({
           </AnimatedSection>
           <AnimatedSection delay={200}>
             <p
-              className="text-[15px] md:text-body-lg text-white/90 mb-6 md:mb-8 line-clamp-3 md:line-clamp-none"
+              className="text-[15px] md:text-body-lg text-white font-medium mb-6 md:mb-8 line-clamp-3 md:line-clamp-none bg-brand-deep-water/60 backdrop-blur-[6px] rounded-[4px] px-4 py-3 inline-block"
               key={safeIndex}
-              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.6)' }}
             >
               {active.subline}
             </p>
