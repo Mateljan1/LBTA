@@ -57,11 +57,18 @@ export default function Programs() {
             priority
             quality={95}
           />
-          <div className="absolute inset-0 hero-scrim-branded" aria-hidden="true" />
+          <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,0,0,0.45) 0%, transparent 80%), linear-gradient(to top, rgba(15,34,55,0.85) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.35) 100%)',
+            }}
+            aria-hidden="true"
+          />
         </div>
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
           <AnimatedSection>
-            <span className="text-eyebrow text-brand-victoria-cove mb-4 block text-shadow-hero-readable">
+            <span className="text-eyebrow text-white/80 mb-4 block text-shadow-hero-readable">
               Laguna Beach, California
             </span>
           </AnimatedSection>
@@ -71,7 +78,7 @@ export default function Programs() {
             </h1>
           </AnimatedSection>
           <AnimatedSection delay={200}>
-            <p className="font-sans text-body-lg font-light text-white/85 max-w-2xl mx-auto mb-8 text-shadow-hero-readable">
+            <p className="font-sans text-body-lg font-light text-white/90 max-w-2xl mx-auto mb-8 text-shadow-hero-readable">
               From age three to college pathway. From first rally to USTA league.
               One coaching system, every court.
             </p>
