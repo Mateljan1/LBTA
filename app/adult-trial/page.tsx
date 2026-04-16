@@ -318,7 +318,7 @@ export default function AdultTrialLanding() {
                           value={formData.phone}
                           onChange={(e) => setFormData({...formData, phone: e.target.value})}
                           className="w-full px-4 py-3 border border-gray-300 focus:ring-1 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition"
-                          placeholder="(949) 123-4567"
+                          placeholder="(949) 534-0457"
                         />
                       </div>
 

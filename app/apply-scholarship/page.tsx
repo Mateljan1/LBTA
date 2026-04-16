@@ -204,7 +204,7 @@ export default function ApplyScholarshipPage() {
                     value={formData.phone}
                     onChange={(e) => handleChange('phone', e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-sm font-sans text-base focus:outline-none focus:ring-1 focus:ring-brand-sunset-cliff transition-all"
-                    placeholder="(949) 123-4567"
+                    placeholder="(949) 534-0457"
                   />
                 </div>
 
