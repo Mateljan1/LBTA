@@ -1,12 +1,13 @@
 User-agent: *
 Allow: /
+
+# Legacy / discontinued programs
 Disallow: /vylo
 Disallow: /vylo-apply
-Disallow: /beginner-program
-Disallow: /adult-trial
-Disallow: /junior-trial
-Disallow: /pricing
-Disallow: /philosophy
-Disallow: /success-stories
+
+# Internal / admin surfaces
+Disallow: /coach-hub
+Disallow: /utr-tracker/admin
+Disallow: /print/
 
 Sitemap: https://lagunabeachtennisacademy.com/sitemap.xml
