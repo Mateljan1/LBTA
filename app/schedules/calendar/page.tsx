@@ -27,6 +27,8 @@ export const metadata = {
   title: 'Schedule by Location',
   description:
     'View LBTA program schedule by location: Moulton Meadows Park, Alta Laguna Park, and Laguna Beach High School. Winter, Spring, Summer, Fall.',
+  /** Thin variant view of /schedules — keep out of Google to avoid duplicate content. Users reach it via the calendar toggle on /schedules. */
+  robots: { index: false, follow: false },
 }
 
 export default async function ScheduleCalendarPage({

@@ -8,6 +8,8 @@ export const dynamic = 'force-dynamic'
 export const metadata = {
   title: 'Thank You',
   description: 'Your request has been received. We will contact you within 24 hours.',
+  /** Post-form confirmation page — never surface in Google. Prevents diluting crawl budget with thousands of thank-you URL variants. */
+  robots: { index: false, follow: false },
   openGraph: {
     title: 'Thank You',
     description: 'Your request has been received. We will contact you within 24 hours.',
