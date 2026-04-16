@@ -37,6 +37,10 @@ export const metadata: Metadata = {
     /** Child `title` must be the segment only (e.g. "Programs") — do not append "| Laguna Beach Tennis Academy" or "| LBTA" or the site name appears twice. */
     template: '%s | Laguna Beach Tennis Academy',
   },
+  /** Default self-referencing canonical — resolved against metadataBase above. Child routes should override with their own path (e.g. alternates: { canonical: '/programs/junior' }) to avoid all pages canonicaling to the homepage. */
+  alternates: {
+    canonical: '/',
+  },
   description:
     'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, and high-performance pathway. Official City of Laguna Beach partner. Book a trial.',
   keywords:

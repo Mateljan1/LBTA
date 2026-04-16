@@ -10,6 +10,10 @@ import siteStats from '@/data/site-stats.json'
 export const metadata: Metadata = {
   title: 'High Performance Pathway | Tennis Training',
   description: 'Invitation-only high performance tennis training for competitive players. UTR 8+ required, tournament preparation, and college pathway with ATP/WTA certified coaches.',
+  /** Canonical to the programs hub so Google consolidates duplicate-content signal between this landing and /programs/high-performance. */
+  alternates: {
+    canonical: '/programs/high-performance',
+  },
   openGraph: {
     title: 'High Performance Pathway | Tennis Training',
     description: 'Where serious players become champions. ATP/WTA methodology for tournament and college preparation.',
