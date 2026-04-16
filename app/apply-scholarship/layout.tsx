@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/apply-scholarship' },
   title: 'Apply for Tennis Scholarship',
   description:
     'Apply for LBTA\'s tennis scholarship program. Over $25,000 awarded annually to families demonstrating need and commitment.',

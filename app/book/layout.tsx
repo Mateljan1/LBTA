@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/book' },
   title: 'Book Your Free Trial',
   description:
     'Book a free trial lesson at LBTA. One conversation, honest guidance, and a path built around you.',

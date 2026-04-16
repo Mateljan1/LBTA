@@ -11,6 +11,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/coaches/allison-cronk' },
   title: 'Allison Cronk — LBTA Coach',
   description: 'Collegiate player. Educator. Coach. 5+ years coaching across five academies. NCAA & NAIA tennis. B.A. History, Education minor.',
   openGraph: {

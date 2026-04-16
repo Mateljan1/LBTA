@@ -6,6 +6,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/philosophy' },
   title: 'Our Philosophy — Movement. Craft. Community.',
   description: 'The LBTA coaching philosophy: movement-first technique, structured development, and a community built on respect and accountability.',
   openGraph: {

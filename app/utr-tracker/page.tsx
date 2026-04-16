@@ -13,6 +13,7 @@ import UtrLeaderboard from '@/components/utr-tracker/UtrLeaderboard'
 import ColorBallPassportGrid from '@/components/utr-tracker/ColorBallPassportGrid'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/utr-tracker' },
   title: 'UTR Match Play Tracker',
   description:
     'Live standings and Color Ball passports for the LBTA UTR Match Play Series — points, tiers, and badges updated as match results are entered.',

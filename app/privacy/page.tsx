@@ -1,6 +1,7 @@
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export const metadata = {
+  alternates: { canonical: '/privacy' },
   title: 'Privacy Policy',
   description: 'Privacy policy and data protection practices at Laguna Beach Tennis Academy.',
 }

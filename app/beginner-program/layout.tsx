@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/beginner-program' },
   title: 'Beginner Tennis Program | Start Playing Today',
   description:
     'New to tennis? LBTA\'s beginner program teaches strokes, footwork, serving, and scoring from scratch. Laguna Beach, CA.',

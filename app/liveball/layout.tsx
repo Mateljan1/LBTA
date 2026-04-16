@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/liveball' },
   title: 'LiveBall — Coach-Fed Doubles',
   description:
     'How LBTA runs LiveBall: coach-fed doubles, Champions and Challengers, first-ball rules, and a 90-minute session built in six blocks. Movement, craft, community.',

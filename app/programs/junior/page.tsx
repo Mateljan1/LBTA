@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/programs/junior' },
   title: 'Junior Tennis Programs | Ages 3-15',
   description:
     'Junior tennis development from Little Stars through Youth Development. Red ball, orange ball, green dot progression in Laguna Beach.',

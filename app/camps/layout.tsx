@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/camps' },
   title: 'Summer Tennis Camp 2026 - Ages 5-11 - Laguna Beach Tennis Academy',
   description:
     'Tennis, Splash Wars, field games, and weekly themes at Alta Laguna Park. Ages 5-11, Mon-Thu, June-August. Small groups, real coaching. Full-day $495/week, half-day $325/week.',

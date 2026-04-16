@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/adult-trial' },
   title: 'Adult Tennis Trial',
   description:
     'Book a free adult tennis trial at LBTA. Programs for all levels from true beginners to NTRP 4.0+. Laguna Beach, CA.',

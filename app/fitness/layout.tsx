@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/fitness' },
   title: 'Fitness Programs — Cardio Tennis & LiveBall',
   description: 'High-energy fitness tennis in Laguna Beach. Cardio Tennis, LiveBall Intermediate, and LiveBall Advanced. All levels welcome.',
   openGraph: {

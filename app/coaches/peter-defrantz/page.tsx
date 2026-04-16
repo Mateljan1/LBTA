@@ -11,6 +11,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/coaches/peter-defrantz' },
   title: 'Peter DeFrantz — LBTA Coach',
   description:
     'Head Coach, Junior Development. USPTA & PTR certified. College tennis at Mt. San Jacinto. 8+ years coaching juniors, adults, and camps at LBTA.',

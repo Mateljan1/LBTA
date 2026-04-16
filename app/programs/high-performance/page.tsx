@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/programs/high-performance' },
   title: 'High Performance Tennis Academy',
   description:
     'The highest level of training at LBTA. Tournament-caliber training for UTR 8+ juniors. Technical refinement, tactical patterns, conditioning, and mental performance.',

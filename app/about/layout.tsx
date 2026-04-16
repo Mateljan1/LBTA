@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/about' },
   title: {
     absolute: 'About Laguna Beach Tennis Academy | Movement. Craft. Community.',
   },

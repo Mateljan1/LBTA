@@ -9,6 +9,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/coaches/robert-lebuhn' },
   title: 'Robert W. LeBuhn — Adult Programs Coach',
   description: 'USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Adult Programs Coach at LBTA.',
   openGraph: {

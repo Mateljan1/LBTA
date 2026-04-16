@@ -7,6 +7,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 const leaguePricing = pricingSupplemental.leagues
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/programs/leagues' },
   title: 'USTA Leagues & UTR Match Play',
   description:
     'USTA Adult League team play and the UTR Match Play Series — weekly rostered matches vs. rated Saturday matchplay by level.',

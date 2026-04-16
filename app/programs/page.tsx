@@ -12,6 +12,7 @@ import { parsePrograms, parseYear2026Sections } from '@/lib/schedule-schemas'
 import year2026Data from '@/data/year2026.json'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/programs' },
   title: 'Programs | Find Your Path',
   description:
     'Junior development from age 3 through college pathway. Adult programs from beginner to advanced. LiveBall, camps, leagues — all built on the Mateljan Method in Laguna Beach.',

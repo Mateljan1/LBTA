@@ -4,6 +4,7 @@ import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/match-play' },
   title: 'Friday Match Play',
   description:
     'Friday match play is not currently on the calendar at Laguna Beach Tennis Academy. Explore UTR Match Play, leagues, and the full schedule.',

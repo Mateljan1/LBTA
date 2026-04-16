@@ -9,6 +9,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/coaches/andrew-mateljan' },
   title: 'Andrew Mateljan — Founder & Head Coach',
   description: '25 years of tennis coaching experience. Former top-ranked junior, ATP/WTA tour coach, and founder of LBTA. Currently coaching ATP #262 Karue Sell.',
   openGraph: {

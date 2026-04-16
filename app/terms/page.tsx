@@ -1,6 +1,7 @@
 import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export const metadata = {
+  alternates: { canonical: '/terms' },
   title: 'Terms of Service',
   description: 'Terms and conditions for using Laguna Beach Tennis Academy services.',
 }

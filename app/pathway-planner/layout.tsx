@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/pathway-planner' },
   title: 'Pathway Planner | Find Your Program',
   description: 'Answer a few questions and we\'ll recommend the perfect tennis program for your age, skill level, and goals at LBTA.',
   openGraph: {

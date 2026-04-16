@@ -9,6 +9,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 const usta = pricingData.ustaAdultLeague
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/programs/usta-adult-league' },
   title: 'USTA Adult League Play',
   description:
     'Join an LBTA team for USTA Spring & Summer 2026 league play. 4 leagues, weekly matches across Orange County, coached practice with Andrew Mateljan.',

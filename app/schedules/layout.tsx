@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/schedules' },
   title: 'Schedule & Pricing',
   description:
     'View all LBTA programs, schedules, and pricing. Winter, Spring, Summer, and Fall sessions. Register online.',

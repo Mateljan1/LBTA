@@ -54,6 +54,7 @@ const localBusinessSchema = {
 }
 
 export const metadata = {
+  alternates: { canonical: '/' },
   title: {
     absolute: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
   },

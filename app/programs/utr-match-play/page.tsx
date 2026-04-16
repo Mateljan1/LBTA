@@ -44,6 +44,7 @@ const VENUE_LBHS_IMAGE = '/images/about/court-lbhs.webp'
 const UTR_PAGE_EMAIL = 'andrew@lagunabeachtennisacademy.com'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/programs/utr-match-play' },
   // Segment title only — root layout template adds " | Laguna Beach Tennis Academy"
   title: 'UTR Match Play Series',
   description:

@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/success-stories' },
   title: 'Success Stories & Testimonials',
   description: 'Player stories from LBTA. From junior development to ATP tour, see how our coaching philosophy creates lasting results.',
   openGraph: {

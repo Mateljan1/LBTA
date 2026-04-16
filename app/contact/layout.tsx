@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/contact' },
   title: 'Contact Us',
   description: 'Get in touch with Laguna Beach Tennis Academy. Call (949) 534-0457 or visit us at Moulton Meadows Park, 1098 Balboa Ave, Laguna Beach, CA 92651.',
   openGraph: {
