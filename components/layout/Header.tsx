@@ -62,6 +62,7 @@ const navigation = [
   { name: 'Schedule', href: '/schedules' },
   { name: 'Coaches', href: '/coaches' },
   { name: 'About', href: '/about' },
+  { name: 'Journal', href: '/blog' },
   { name: 'Contact', href: '/contact' },
   { name: 'Camps', href: '/camps' },
 ]

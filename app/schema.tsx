@@ -249,3 +249,53 @@ export function LeagueEventSchema({
     />
   )
 }
+
+/** Article JSON-LD for journal posts (`/blog/[slug]`). */
+export function BlogArticleSchema({
+  title,
+  description,
+  slug,
+  datePublished,
+  dateModified,
+  authorName,
+}: {
+  title: string
+  description: string
+  slug: string
+  datePublished: string
+  dateModified: string
+  authorName: string
+}) {
+  const url = `https://lagunabeachtennisacademy.com/blog/${slug}`
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished,
+    dateModified,
+    author: {
+      '@type': 'Person',
+      name: authorName,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Laguna Beach Tennis Academy',
+      url: 'https://lagunabeachtennisacademy.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://lagunabeachtennisacademy.com/logos/LBTAblktext.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}

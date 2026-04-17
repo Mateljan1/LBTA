@@ -104,6 +104,7 @@ export default function Footer() {
                 {[
                   { name: 'About Us', href: '/about' },
                   { name: 'Our Coaches', href: '/coaches' },
+                  { name: 'Journal', href: '/blog' },
                   { name: 'Book a Trial', href: '/book' },
                   { name: 'Contact', href: '/contact' },
                   { name: 'FAQ', href: '/faq' },

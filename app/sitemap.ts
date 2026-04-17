@@ -1,10 +1,26 @@
 import { MetadataRoute } from 'next'
+import { getAllPostsMeta } from '@/lib/blog'
 
 // Coach Hub (/coach-hub, /coach-hub/login) is intentionally excluded — noindex, coach-only.
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://lagunabeachtennisacademy.com'
   const currentDate = new Date()
-  
+  const posts = await getAllPostsMeta()
+  const blogEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.72,
+    },
+    ...posts.map((p) => ({
+      url: `${baseUrl}/blog/${p.slug}`,
+      lastModified: new Date(p.updated ?? p.date),
+      changeFrequency: 'monthly' as const,
+      priority: 0.65,
+    })),
+  ]
+
   return [
     // Primary Pages (High Priority)
     {
@@ -209,6 +225,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+
+    ...blogEntries,
   ]
 }
 
