@@ -1,5 +1,13 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lbtennisacademy.com/sitemap.xml
+# Legacy / discontinued programs
+Disallow: /vylo
+Disallow: /vylo-apply
 
+# Internal / admin surfaces
+Disallow: /coach-hub
+Disallow: /utr-tracker/admin
+Disallow: /print/
+
+Sitemap: https://lagunabeachtennisacademy.com/sitemap.xml
