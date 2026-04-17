@@ -9,6 +9,7 @@ import StickyCTA from '@/components/StickyCTA'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import { formatUtrSessionDateLong } from '@/lib/utr-match-play'
+import FacilitiesSection from '@/components/contact/FacilitiesSection'
 
 function ContactPageContent() {
   const searchParams = useSearchParams()
@@ -148,13 +149,22 @@ function ContactPageContent() {
           <p className="font-headline text-[18px] md:text-[24px] leading-[1.3] mb-8 text-white/95">
             Movement. Craft. Community — it starts here.
           </p>
-          <button 
-            type="button"
-            className="bg-white text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide hover:bg-white/90 transition-colors min-h-[48px] px-6 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
-            onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Get in Touch ↓
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <button
+              type="button"
+              className="bg-white text-black font-sans text-[14px] md:text-[16px] uppercase tracking-wide hover:bg-white/90 transition-colors min-h-[48px] px-6 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50 w-full sm:w-auto"
+              onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Get in Touch ↓
+            </button>
+            <button
+              type="button"
+              className="bg-transparent text-white border border-white/35 font-sans text-[14px] md:text-[16px] uppercase tracking-wide hover:bg-white/10 transition-colors min-h-[48px] px-6 rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50 w-full sm:w-auto"
+              onClick={() => document.getElementById('our-facilities')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Our facilities ↓
+            </button>
+          </div>
         </div>
       </section>
 
@@ -163,13 +173,19 @@ function ContactPageContent() {
       <section className="bg-brand-sandstone border-b border-black/10 py-8 md:py-12">
         <div className="max-w-[1200px] mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 text-center">
-            {/* Location */}
+            {/* Locations */}
             <div className="flex flex-col items-center gap-3">
               <MapPin className="w-6 h-6 text-brand-victoria-cove" aria-hidden="true" />
               <div>
-                <p className="font-sans font-semibold text-[15px] text-brand-pacific-dusk mb-1">Location</p>
-                <p className="font-sans text-[14px] text-brand-pacific-dusk/80">1098 Balboa Ave</p>
-                <p className="font-sans text-[14px] text-brand-pacific-dusk/80">Laguna Beach, CA 92651</p>
+                <p className="font-sans font-semibold text-[15px] text-brand-pacific-dusk mb-1">Locations</p>
+                <p className="font-sans text-[14px] text-brand-pacific-dusk/80">Three sites in Laguna Beach</p>
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('our-facilities')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="mt-2 font-sans text-[14px] text-brand-victoria-cove hover:text-brand-victoria-cove/80 underline decoration-brand-victoria-cove/30 underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 rounded-sm"
+                >
+                  Addresses &amp; maps
+                </button>
               </div>
             </div>
             
@@ -205,6 +221,10 @@ function ContactPageContent() {
           </div>
         </div>
       </section>
+
+      <FacilitiesSection />
+
+      <HorizonDivider />
 
       {/* MAIN FORM SECTION */}
       <section id="contact-form" className="scroll-mt-24 bg-white py-16 md:scroll-mt-28 md:py-24">

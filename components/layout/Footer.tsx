@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SUPPORT_EMAIL } from '@/lib/site-copy'
+import { PUBLIC_FACILITIES } from '@/lib/facilities'
 import Image from 'next/image'
 import NewsletterForm from '@/components/NewsletterForm'
 import TrackedPhoneLink from '@/components/analytics/TrackedPhoneLink'
@@ -143,6 +144,21 @@ export default function Footer() {
                       1098 Balboa Ave<br />
                       Laguna Beach, CA 92651
                     </p>
+                  </li>
+                  <li className="pt-4 border-t border-white/10">
+                    <p className="text-eyebrow text-white/70 mb-3">Training sites</p>
+                    <ul className="space-y-2">
+                      {PUBLIC_FACILITIES.map((f) => (
+                        <li key={f.anchor}>
+                          <Link
+                            href={`/contact#${f.anchor}`}
+                            className="inline-flex items-center min-h-[44px] text-[13px] font-sans font-light text-white/70 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                          >
+                            {f.heading}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </li>
                 </ul>
               </div>
