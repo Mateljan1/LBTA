@@ -195,10 +195,10 @@ export default function SuccessStoriesPage() {
               </div>
               <div>
                 <p className="font-headline text-[48px] md:text-[64px] font-bold text-white leading-none mb-2">
-                  {siteStats.trustStats.rating}
+                  2020
                 </p>
                 <p className="font-sans text-[13px] md:text-[14px] text-white/60 uppercase tracking-[1.5px]">
-                  Google Rating
+                  Founded
                 </p>
               </div>
               <div>
@@ -349,38 +349,6 @@ export default function SuccessStoriesPage() {
 
       {/* Video Testimonials */}
       <VideoTestimonials />
-
-      <HorizonDivider />
-
-      {/* Google Reviews — direct link replaces prior composite testimonials for privacy + verifiability */}
-      <section className="bg-lbta-beige py-16 md:py-24">
-        <div className="max-w-[720px] mx-auto px-6">
-          <AnimatedSection>
-            <div className="text-center">
-              <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-black mb-4">
-                What Players Say
-              </h2>
-              <div className="flex items-center justify-center gap-2 mb-3">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="h-6 w-6 text-brand-sunset-cliff fill-brand-sunset-cliff" />
-                ))}
-              </div>
-              <p className="font-sans text-[17px] text-black/80 mb-6">
-                {siteStats.trustStats.rating} average from {siteStats.trustStats.reviewCount}+ Google reviews
-              </p>
-              <Link
-                href="https://www.google.com/search?q=Laguna+Beach+Tennis+Academy+reviews"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-sans text-[14px] font-medium tracking-[2px] uppercase text-black border-b border-black/30 hover:border-black transition-colors pb-0.5"
-              >
-                Read reviews on Google
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
 
       <HorizonDivider />
 

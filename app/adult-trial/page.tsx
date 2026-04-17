@@ -367,8 +367,8 @@ export default function AdultTrialLanding() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
             <div>
-              <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">5.0</div>
-              <p className="text-sm text-lbta-secondary">Google Rating</p>
+              <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">2020</div>
+              <p className="text-sm text-lbta-secondary">Founded</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
