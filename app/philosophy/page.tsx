@@ -7,7 +7,7 @@ import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/philosophy' },
-  title: 'Our Coaching Philosophy | LBTA Laguna Beach',
+  title: 'Our Coaching Philosophy',
   description: 'The LBTA coaching philosophy: movement-first technique, structured development, and a community built on respect and accountability.',
   openGraph: {
     title: 'Our Coaching Philosophy | LBTA Laguna Beach',
