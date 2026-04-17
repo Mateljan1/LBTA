@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 compound:learn — SEO bundle deploy (canonical cascade, app/robots.txt shadow, proxy.ts vs middleware.ts, audit-verification-before-prioritization)",
+  "lastLearnRun": "2026-04-16 compound:learn (2nd run same day) — P1 bundle deploy (child-title-with-brand-when-template-set, measure-rendered-not-raw-for-length, privacy-first-content)",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -928,6 +928,20 @@
       "avoid": "Framing placeholder='(949) 123-4567' as 'prospects literally can't reach you' — it's UX hint text that disappears when the user types",
       "instead": "Distinguish placeholder/hint text from actual contact info rendered in copy. Fix placeholders for trust/polish; framing should match the real impact.",
       "tags": ["ux", "seo-audit", "accuracy", "framing"]
+    },
+    {
+      "id": "child-title-with-brand-when-template-set",
+      "description": "Setting `title: 'Something | Brand'` on a child page's metadata when the root layout declares `metadata.title.template: '%s | Brand'` — template appends brand AGAIN, producing '... | Brand | Brand' in the live <title> tag",
+      "avoid": "In a child page: `export const metadata = { title: 'FAQ | Tennis Training Questions | LBTA' }` when root layout has `title.template: '%s | Laguna Beach Tennis Academy'` — final title becomes 'FAQ | Tennis Training Questions | LBTA | Laguna Beach Tennis Academy' (83 chars, brand duplicated)",
+      "instead": "Segment-only titles: `title: 'Tennis Training FAQ'` — template resolves to 'Tennis Training FAQ | Laguna Beach Tennis Academy' (49 chars). OR bypass template with `title: { absolute: 'Full Custom Title' }` when you need total control.",
+      "tags": ["seo", "next-metadata", "title-template", "duplicate-brand"]
+    },
+    {
+      "id": "measure-char-length-on-raw-source",
+      "description": "Validating title/description character-length constraints against the source string in a page's metadata export, when the rendered output may be longer due to template interpolation or additional markup",
+      "avoid": "Counting `title: 'FAQ | ...' = 38 chars` and declaring it under 60 — ignores the root layout's `title.template: '%s | Brand'` that adds 31 chars at render time",
+      "instead": "Measure the RENDERED <title> tag content in the static build output (`.next/server/app/*.html`) or via live curl. Same rule for <meta name=\"description\"> content and any other length-gated field.",
+      "tags": ["seo", "validation", "rendering", "build-output", "char-length"]
     }
   ]
 }

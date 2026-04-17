@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 compound:learn — SEO bundle deploy with per-page canonical strategy and live smoke-test gate",
+  "lastLearnRun": "2026-04-16 (2nd run) P1 bundle — segment-only titles + rendered-output length validation + privacy-first-content bar",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -344,6 +344,18 @@
     "proxyTsAwarenessNextjs16": {
       "rule": "When reviewing route auth or middleware, grep for both middleware.ts AND proxy.ts at repo root. Next.js 16 renamed the file; missing this pattern can create false-positive security findings.",
       "enforcement": "should"
+    },
+    "segmentOnlyTitlesWhenTemplateSet": {
+      "rule": "When app/layout.tsx declares metadata.title.template (e.g. '%s | Brand'), child pages set `title: 'Segment'` (no brand suffix) OR `title: { absolute: 'Full Custom' }` to bypass. Never include the same brand suffix the template appends — double-brand blows SERP character budget.",
+      "enforcement": "must"
+    },
+    "measureRenderedNotRaw": {
+      "rule": "Title and description char-length constraints (≤60, 150–160) are measured on the RENDERED <title> or <meta content=\"...\"> tag in the static build output (`.next/server/app/*.html`) or live curl — never on the raw source string in metadata exports. Metadata templates, framework transforms, and provider interpolation can all change the rendered length.",
+      "enforcement": "must"
+    },
+    "privacyFirstContent": {
+      "rule": "Do not introduce family, student, or client names in new on-site content, metadata, or JSON-LD schema unless permission is documented. For testimonials, prefer a live Google Reviews link + AggregateRating. For bios, prefer credentials + geography. Pre-existing named content is out of scope unless a dedicated cleanup PR is explicitly requested.",
+      "enforcement": "must"
     }
   }
 }

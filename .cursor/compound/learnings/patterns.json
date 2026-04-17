@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 SEO bundle deploy: per-page canonicals, live smoke test in Phase 5, atomic commits per concern, build-output validation fallback",
+  "lastLearnRun": "2026-04-16 (2nd run) P1 bundle: segment-only titles with template, rendered-output length validation, privacy-first content, full-loop-in-one-session",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -1142,6 +1142,30 @@
       "when": "About to edit a static asset (robots.txt, sitemap.xml, manifest.json, etc.) in a Next.js App Router project",
       "example": "ls app/<name>* public/<name>* — if both exist, app/ wins. Pick one: delete the other or edit the winner.",
       "tags": ["next-app-router", "static-assets", "shadow-files"]
+    },
+    {
+      "name": "segment-only-titles-with-template",
+      "when": "Root layout declares metadata.title.template (e.g. '%s | Brand'); child pages need their own titles",
+      "example": "Child page: `title: 'Tennis Training FAQ'` (segment only, no brand suffix). Root template appends '| Laguna Beach Tennis Academy'. Final: 'Tennis Training FAQ | Laguna Beach Tennis Academy' (49 chars). For pages where the brand should not be appended (e.g. the homepage), use `title: { absolute: 'Full Custom Title' }` to bypass the template.",
+      "tags": ["seo", "next-metadata", "title-template", "convention"]
+    },
+    {
+      "name": "rendered-output-length-validation",
+      "when": "Validating any char-length constraint (titles ≤60, descriptions 150–160) on Next.js App Router pages",
+      "example": "After build, `grep -oE '<title>[^<]+</title>' .next/server/app/<page>.html` and measure the content. Or curl the live URL and do the same. Never trust raw source length when metadata templates, frameworks, or any other layer may transform the output.",
+      "tags": ["seo", "validation", "rendered-output", "build-output"]
+    },
+    {
+      "name": "privacy-first-content-pattern",
+      "when": "Founder/stakeholder directive: do not introduce family, student, or client names in new work",
+      "example": "Replace named testimonials with a 'Read reviews on Google' link that reads the live review count from a single JSON source of truth. Replace name-bearing schema Reviews with AggregateRating only. Replace name-bearing founder bios with credentials + geography. Scope guard: explicitly distinguish pre-existing named content (out of scope) from new work (in scope); track pre-existing cleanup as a separate dedicated PR.",
+      "tags": ["privacy", "content", "schema", "scope-guard"]
+    },
+    {
+      "name": "full-compound-loop-in-one-session",
+      "when": "Scoped bundle (≤12 files, known shape, memory loaded) where Plan/Work/Review/Validate/Deploy/Learn can run sequentially in one session",
+      "example": "SEO P1 bundle: 4 hours total. Plan with memory auto-load + audit-verification caught 1 wasted commit. Work in 8 atomic commits. Review happened inline (mid-work) when live smoke caught title-template bug — fixed in one follow-up commit before push. Validate via build output. Deploy to Vercel prod, smoke test immediately. Learn bakes the new patterns back. Entire loop is compounding, not linear.",
+      "tags": ["compound-engineering", "workflow", "throughput"]
     }
   ]
 }
