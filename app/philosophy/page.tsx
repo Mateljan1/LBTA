@@ -7,10 +7,10 @@ import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/philosophy' },
-  title: 'Our Philosophy — Movement. Craft. Community.',
+  title: 'Our Coaching Philosophy | LBTA Laguna Beach',
   description: 'The LBTA coaching philosophy: movement-first technique, structured development, and a community built on respect and accountability.',
   openGraph: {
-    title: 'Our Philosophy — Movement. Craft. Community.',
+    title: 'Our Coaching Philosophy | LBTA Laguna Beach',
     description: 'The LBTA coaching philosophy: movement-first technique, structured development, and a community built on respect and accountability.',
     type: 'website',
     images: [{ url: '/legacy-working-assets/hero/philosophy-hero/philosophy-hero.webp', width: 1920, height: 1080, alt: 'LBTA coaching philosophy' }],

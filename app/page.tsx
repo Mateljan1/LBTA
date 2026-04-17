@@ -56,7 +56,7 @@ const localBusinessSchema = {
 export const metadata = {
   alternates: { canonical: '/' },
   title: {
-    absolute: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
+    absolute: 'Laguna Beach Tennis Academy | Tennis as It Should Be',
   },
   description:
     'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway. Book a trial. Summer camps now enrolling - ages 5-11.',

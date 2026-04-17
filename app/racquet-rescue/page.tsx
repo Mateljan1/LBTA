@@ -7,7 +7,7 @@ const rr = pricingData.racquetRescue
 
 export const metadata: Metadata = {
   alternates: { canonical: '/racquet-rescue' },
-  title: 'Racquet Rescue — Professional Racquet Stringing',
+  title: 'Racquet Stringing | Laguna Beach Tennis Academy',
   description: 'Expert racquet stringing services in Laguna Beach. Same-day service, premium strings, and professional customization for all skill levels.',
   keywords: 'racquet stringing Laguna Beach, tennis racquet restring, professional stringing service, racquet customization',
   openGraph: {

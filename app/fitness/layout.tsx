@@ -2,10 +2,10 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/fitness' },
-  title: 'Fitness Programs — Cardio Tennis & LiveBall',
+  title: 'Fitness Tennis Programs | Laguna Beach Academy',
   description: 'High-energy fitness tennis in Laguna Beach. Cardio Tennis, LiveBall Intermediate, and LiveBall Advanced. All levels welcome.',
   openGraph: {
-    title: 'Fitness Programs — Cardio Tennis & LiveBall',
+    title: 'Fitness Tennis Programs | Laguna Beach Academy',
     description: 'High-energy fitness tennis in Laguna Beach. Cardio Tennis, LiveBall Intermediate, and LiveBall Advanced. All levels welcome.',
     type: 'website',
     images: [{ url: '/images/fitness/fitness-hero.webp', width: 1920, height: 1080, alt: 'LBTA fitness programs' }],

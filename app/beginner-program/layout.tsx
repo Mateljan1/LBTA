@@ -3,11 +3,11 @@ import Script from 'next/script'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/beginner-program' },
-  title: 'Beginner Tennis Program | Start Playing Today',
+  title: 'Beginner Tennis Program | Laguna Beach Academy',
   description:
     'New to tennis? LBTA\'s beginner program teaches strokes, footwork, serving, and scoring from scratch. Laguna Beach, CA.',
   openGraph: {
-    title: 'Beginner Tennis Program | Start Playing Today',
+    title: 'Beginner Tennis Program | Laguna Beach Academy',
     description:
       'New to tennis? LBTA\'s beginner program teaches strokes, footwork, serving, and scoring from scratch. Laguna Beach, CA.',
     type: 'website',
