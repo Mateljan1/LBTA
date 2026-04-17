@@ -49,6 +49,11 @@ const philosophy = [
   }
 ]
 
+const highlightCredentials = [
+  'Coached Alex Michelsen — ATP career-high #30, 2022 Wimbledon Boys\' Doubles champion — at ages 12–13 in Orange County, pre-LBTA.',
+  'Organized LBTA\'s host role for the GPTCA / ATP Level B–C coach certification (May 2025, Irvine, CA) — Toni Nadal on the international speaker faculty.',
+] as const
+
 const atpPlayers = [
   { name: "Karue Sell", rank: "ATP #262", status: "Current", achievement: "Active ATP Tour Professional" },
   { name: "Max McKennon", rank: "ATP #458", status: "Career High 2024", achievement: "Featured in Fit4Tennis Pro Workout Series" },
@@ -75,6 +80,7 @@ export default function AndrewMateljanPage() {
           'GPTCA-ATP Certification',
           'ITF Futures Professional',
           'Sánchez-Casal Academy — Barcelona (Training Director)',
+          ...highlightCredentials,
         ]}
       />
       <Breadcrumbs items={[
@@ -166,6 +172,20 @@ export default function AndrewMateljanPage() {
               </ul>
             </AnimatedSection>
           </div>
+
+          <AnimatedSection className="mt-12 md:mt-16">
+            <h2 className="text-2xl font-headline font-light text-brand-pacific-dusk mb-6">
+              Credentials
+            </h2>
+            <ul className="space-y-3 text-lbta-slate max-w-3xl">
+              {highlightCredentials.map((line) => (
+                <li key={line} className="flex items-start gap-3">
+                  <span className="text-brand-sunset-cliff mt-1">•</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </AnimatedSection>
         </div>
       </section>
 
