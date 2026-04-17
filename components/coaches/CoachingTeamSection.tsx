@@ -32,8 +32,8 @@ export default function CoachingTeamSection() {
           </p>
         </AnimatedSection>
 
-        {/* 2×2 from md+: Robert & Peter, then Michelle & Allison (see getTeamCoachesForGrid) */}
-        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-x-8 md:gap-y-10 lg:gap-x-10 lg:gap-y-12">
+        {/* 3-col from md+ for 3 active coaches (Robert, Peter, Allison). Paused coaches (hidden flag) auto-filter via getTeamCoachesForGrid. When roster grows back to 4, swap to md:grid-cols-2. */}
+        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 items-stretch gap-8 md:grid-cols-3 md:gap-x-8 md:gap-y-10 lg:gap-x-10 lg:gap-y-12">
           {teamCoaches.map((coach, index) => (
             <AnimatedSection
               key={coach.slug ?? `order-${coach.order}-${index}`}

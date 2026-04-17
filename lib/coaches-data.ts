@@ -24,6 +24,9 @@ export interface Coach {
   slug: string | null
   name: string
   title: string
+  /** Optional: when true, coach is excluded from all public listings + schema. Direct links to their page still resolve so pausing is reversible without data loss. */
+  hidden?: boolean
+  hiddenReason?: string
   specialization: string
   bio: string
   quote: string
@@ -39,44 +42,55 @@ export interface Coach {
 
 const coachesList: Coach[] = (coachesData as { coaches: Coach[] }).coaches
 
-/** All coaches in display order (founder, lead, then program). */
+/** Coaches visible on the public site (excludes any with hidden: true). */
+function getVisibleCoaches(): Coach[] {
+  return coachesList.filter((c) => !c.hidden)
+}
+
+/** All visible coaches in display order (founder, lead, then program). */
 export function getCoaches(): Coach[] {
-  return [...coachesList].sort((a, b) => a.order - b.order)
+  return [...getVisibleCoaches()].sort((a, b) => a.order - b.order)
 }
 
 /** Founder only (Andrew). */
 export function getFounder(): Coach | undefined {
-  return coachesList.find((c) => c.role === 'founder')
+  return getVisibleCoaches().find((c) => c.role === 'founder')
 }
 
 /** Lead coach only (Robert). */
 export function getLeadCoach(): Coach | undefined {
-  return coachesList.find((c) => c.role === 'lead')
+  return getVisibleCoaches().find((c) => c.role === 'lead')
 }
 
 /** Program coaches (Peter, Allison, etc.) in order. */
 export function getProgramCoaches(): Coach[] {
-  return coachesList.filter((c) => c.role === 'program').sort((a, b) => a.order - b.order)
+  return getVisibleCoaches()
+    .filter((c) => c.role === 'program')
+    .sort((a, b) => a.order - b.order)
 }
 
-/** All coaches except the founder (for team grid below founder block). Robert, Peter, Allison in order. */
+/** All visible coaches except the founder (for team grid below founder block). */
 export function getTeamCoaches(): Coach[] {
   return getCoaches().filter((c) => c.role !== 'founder')
 }
 
 /**
- * Meet the Team 2×2 grid order: top row Robert & Peter, bottom Michelle & Allison.
- * (Explicit slugs so layout stays stable if `order` in JSON changes.)
+ * Meet the Team grid order: Robert, Peter, Allison. Paused coaches are filtered
+ * out automatically via getTeamCoaches() (which uses the visible-only list).
+ * Explicit slugs keep layout stable if `order` in JSON changes.
  */
 const TEAM_GRID_SLUGS = ['robert-lebuhn', 'peter-defrantz', 'michelle-mateljan', 'allison-cronk'] as const
 
 export function getTeamCoachesForGrid(): Coach[] {
-  const team = getTeamCoaches()
+  const team = getTeamCoaches() // already filters hidden
   const bySlug = new Map(team.map((c) => [c.slug, c]))
   return TEAM_GRID_SLUGS.map((slug) => bySlug.get(slug)).filter((c): c is Coach => Boolean(c))
 }
 
-/** Single coach by slug; returns undefined if slug is null or not found. */
+/**
+ * Single coach by slug — intentionally does NOT filter hidden coaches, so paused
+ * coach pages remain reachable by direct link (for reactivation without data loss).
+ */
 export function getCoachBySlug(slug: string): Coach | undefined {
   return coachesList.find((c) => c.slug === slug)
 }

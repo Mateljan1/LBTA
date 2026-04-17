@@ -9,6 +9,8 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 
 export const metadata: Metadata = {
+  /** Paused 2026 — page remains reachable by direct link but kept out of Google and the public /coaches listing (see data/coaches.json hidden: true). Reactivate by flipping hidden → false in coaches.json and removing this robots block. */
+  robots: { index: false, follow: false },
   title: 'Michelle Mateljan — LBTA Coach',
   description:
     'Coach at Laguna Beach Tennis Academy. Junior and adult development with clear communication and steady on-court energy.',
