@@ -1,9 +1,14 @@
 import Link from 'next/link'
+import { Phone, Mail, MapPin } from 'lucide-react'
 import { SUPPORT_EMAIL } from '@/lib/site-copy'
 import { PUBLIC_FACILITIES } from '@/lib/facilities'
 import Image from 'next/image'
 import NewsletterForm from '@/components/NewsletterForm'
 import TrackedPhoneLink from '@/components/analytics/TrackedPhoneLink'
+
+const footerMailAt = SUPPORT_EMAIL.indexOf('@')
+const footerEmailLocal = footerMailAt >= 0 ? SUPPORT_EMAIL.slice(0, footerMailAt) : SUPPORT_EMAIL
+const footerEmailDomain = footerMailAt >= 0 ? SUPPORT_EMAIL.slice(footerMailAt + 1) : ''
 
 export default function Footer() {
   return (
@@ -116,38 +121,59 @@ export default function Footer() {
                 </ul>
               </div>
 
-              <div className="col-span-2 sm:col-span-1">
+              <div className="col-span-2 sm:col-span-1 min-w-0">
                 <h4 className="text-eyebrow text-white/70 mb-5">Contact</h4>
-                <ul className="space-y-3">
+                <ul className="space-y-6">
                   <li>
                     <TrackedPhoneLink
                       href="tel:9495340457"
                       location="footer"
                       aria-label="Call (949) 534-0457"
-                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      className="group inline-flex items-start gap-3 min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
-                      (949) 534-0457
+                      <Phone
+                        className="w-4 h-4 shrink-0 mt-0.5 text-white/45 group-hover:text-brand-sunset-cliff/90 transition-colors"
+                        aria-hidden
+                      />
+                      <span className="pt-0.5">(949) 534-0457</span>
                     </TrackedPhoneLink>
                   </li>
                   <li>
                     <a
                       href={`mailto:${SUPPORT_EMAIL}`}
                       aria-label={`Email support at ${SUPPORT_EMAIL}`}
-                      className="inline-flex items-center min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
+                      className="group inline-flex items-start gap-3 min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
-                      {SUPPORT_EMAIL}
+                      <Mail
+                        className="w-4 h-4 shrink-0 mt-0.5 text-white/45 group-hover:text-brand-sunset-cliff/90 transition-colors"
+                        aria-hidden
+                      />
+                      <span className="min-w-0 pt-0.5 leading-snug [overflow-wrap:anywhere]">
+                        {footerEmailDomain ? (
+                          <>
+                            <span className="whitespace-nowrap">{footerEmailLocal}@</span>
+                            <wbr />
+                            <span>{footerEmailDomain}</span>
+                          </>
+                        ) : (
+                          SUPPORT_EMAIL
+                        )}
+                      </span>
                     </a>
                   </li>
-                  <li className="pt-2">
-                    <p className="text-[13px] font-sans font-light text-white/70 leading-relaxed">
-                      Moulton Meadows Park<br />
-                      1098 Balboa Ave<br />
-                      Laguna Beach, CA 92651
-                    </p>
+                  <li>
+                    <div className="inline-flex items-start gap-3 text-[13px] font-sans font-light text-white/70 leading-relaxed">
+                      <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-white/45" aria-hidden />
+                      <div className="min-w-0 pt-0.5">
+                        <span className="block">Moulton Meadows Park</span>
+                        <span className="block">1098 Balboa Ave</span>
+                        <span className="block">Laguna Beach, CA 92651</span>
+                      </div>
+                    </div>
                   </li>
-                  <li className="pt-4 border-t border-white/10">
+                  <li className="pt-2 border-t border-white/10">
                     <p className="text-eyebrow text-white/70 mb-3">Training sites</p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1">
                       {PUBLIC_FACILITIES.map((f) => (
                         <li key={f.anchor}>
                           <Link
