@@ -246,21 +246,11 @@ export const FORM_CONFIGS: Record<string, FormConfig> = {
   },
 
   // ===== CAMPS =====
-  'swim-tennis': {
-    programId: 'swim-tennis',
-    formEmbedCode: '',
-    acFormId: '',
-    prePopulateData: {
-      programName: 'Swim & Tennis Camp',
-      location: 'Alta Laguna Park',
-      duration: '6 hours (9 AM - 3 PM)',
-      pricing: getModalPricing('swim-tennis'),
-      category: 'Camp',
-      ageGroup: '5-11 years',
-      billingCycle: 'quarterly'
-    },
-    classTagId: 156 // CLASS_TAGS.summer_camp (general camp tag)
-  },
+  // Note: 'swim-tennis' intentionally omitted — suspended in 2026 because the
+  // Alta Laguna pool is closed for construction. Registrations route to the
+  // general Summer Camp (Tennis & Adventure) flow. See data/year2026.json
+  // camps['swim-tennis'].suspended = true + description for the public
+  // "enroll in Summer Camp instead" copy.
 
   'ski-week': {
     programId: 'ski-week',
