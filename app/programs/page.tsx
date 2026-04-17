@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/programs' },
   title: 'Programs | Find Your Path',
   description:
-    'Junior development from age 3 through college pathway. Adult programs from beginner to advanced. LiveBall, camps, leagues — all built on the Mateljan Method in Laguna Beach.',
+    'Junior development, adult classes, high-performance training, LiveBall, camps, and leagues — all built on the Mateljan Method in Laguna Beach.',
   openGraph: {
     images: [
       {

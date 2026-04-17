@@ -4,11 +4,11 @@ export const metadata: Metadata = {
   alternates: { canonical: '/adult-trial' },
   title: 'Adult Tennis Trial',
   description:
-    'Book a free adult tennis trial at LBTA. Programs for all levels from true beginners to NTRP 4.0+. Laguna Beach, CA.',
+    'Book a free adult tennis trial at LBTA. Programs for all levels from true beginners to NTRP 4.0+ in Laguna Beach, CA. No strings attached.',
   openGraph: {
     title: 'Adult Tennis Trial',
     description:
-      'Book a free adult tennis trial at LBTA. Programs for all levels from true beginners to NTRP 4.0+. Laguna Beach, CA.',
+      'Book a free adult tennis trial at LBTA. Programs for all levels from true beginners to NTRP 4.0+ in Laguna Beach, CA. No strings attached.',
     type: 'website',
     url: 'https://lagunabeachtennisacademy.com/adult-trial',
     images: [

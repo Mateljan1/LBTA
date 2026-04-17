@@ -4,11 +4,11 @@ export const metadata: Metadata = {
   alternates: { canonical: '/book' },
   title: 'Book Your Free Trial',
   description:
-    'Book a free trial lesson at LBTA. One conversation, honest guidance, and a path built around you.',
+    'Book a free trial lesson at Laguna Beach Tennis Academy. One conversation, honest guidance, and a development path built around you. Ages 3 to adult.',
   openGraph: {
     title: 'Book Your Free Trial',
     description:
-      'Book a free trial lesson at LBTA. One conversation, honest guidance, and a path built around you.',
+      'Book a free trial lesson at Laguna Beach Tennis Academy. One conversation, honest guidance, and a development path built around you. Ages 3 to adult.',
     type: 'website',
     images: [
       {

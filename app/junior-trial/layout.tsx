@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   alternates: { canonical: '/junior-trial' },
   title: 'Junior Tennis Trial | Ages 3-17',
   description:
-    'Book a free junior tennis trial at LBTA. Programs from Little Stars (age 3) through High Performance. Laguna Beach, CA.',
+    'Book a free junior trial at LBTA. Programs from Little Stars (age 3) through High Performance in Laguna Beach, CA. No commitment required.',
   openGraph: {
     title: 'Junior Tennis Trial | Ages 3-17',
     description:
-      'Book a free junior tennis trial at LBTA. Programs from Little Stars (age 3) through High Performance. Laguna Beach, CA.',
+      'Book a free junior trial at LBTA. Programs from Little Stars (age 3) through High Performance in Laguna Beach, CA. No commitment required.',
     type: 'website',
     url: 'https://lagunabeachtennisacademy.com/junior-trial',
     images: [

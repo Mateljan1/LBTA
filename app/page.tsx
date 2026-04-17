@@ -59,11 +59,11 @@ export const metadata = {
     absolute: 'Laguna Beach Tennis Academy | Tennis as It Should Be',
   },
   description:
-    'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway. Book a trial. Summer camps now enrolling - ages 5-11.',
+    'Tennis programs for ages 3 to adult in Laguna Beach. Junior development, adult classes, and high-performance training. Book a free trial today.',
   openGraph: {
-    title: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
+    title: 'Laguna Beach Tennis Academy | Tennis as It Should Be',
     description:
-      'Movement. Craft. Community. Tennis in Laguna Beach — junior programs, adult training, high-performance pathway. Book a trial. Summer camps now enrolling - ages 5-11.',
+      'Tennis programs for ages 3 to adult in Laguna Beach. Junior development, adult classes, and high-performance training. Book a free trial today.',
     type: 'website',
     images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy courts' }],
   },
