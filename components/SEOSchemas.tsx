@@ -72,50 +72,6 @@ export function ReviewSchema() {
       "ratingCount": siteStats.trustStats.reviewCount,
       "reviewCount": siteStats.trustStats.reviewCount
     },
-    "review": [
-      {
-        "@type": "Review",
-        "author": {
-          "@type": "Person",
-          "name": "Mary S."
-        },
-        "datePublished": "2024-11-15",
-        "reviewBody": "Andrew and his team have transformed my daughter's game. She's gone from struggling with basics to winning her first tournament in just 8 months. The structure and discipline they teach extends beyond tennis.",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        }
-      },
-      {
-        "@type": "Review",
-        "author": {
-          "@type": "Person",
-          "name": "David R."
-        },
-        "datePublished": "2024-10-22",
-        "reviewBody": "At 45, I thought it was too late to learn tennis properly. LBTA proved me wrong. In 18 months, I went from complete beginner to USTA 4.0. The coaching methodology is exceptional.",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        }
-      },
-      {
-        "@type": "Review",
-        "author": {
-          "@type": "Person",
-          "name": "Jennifer L."
-        },
-        "datePublished": "2024-09-10",
-        "reviewBody": "Both my kids train here and the improvement has been remarkable. The coaches' attention to detail and positive reinforcement makes every session productive. Highly recommend for families.",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        }
-      }
-    ],
     "priceRange": "$$",
     "openingHoursSpecification": [
       {
