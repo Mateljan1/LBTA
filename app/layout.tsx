@@ -6,7 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import ExitIntentPopupLoader from '@/components/ExitIntentPopupLoader'
-import { OrganizationSchema } from './schema'
+import { OrganizationSchema, LocalBusinessArraySchema } from './schema'
 import { ReviewSchema } from '@/components/SEOSchemas'
 
 const cormorant = Cormorant({
@@ -99,6 +99,7 @@ export default function RootLayout({
 
         {/* Schema Markup */}
         <OrganizationSchema />
+        <LocalBusinessArraySchema />
         <ReviewSchema />
       </head>
       <body className={`${dmSans.className} flex flex-col min-h-screen overflow-x-hidden`}>

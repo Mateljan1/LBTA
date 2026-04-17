@@ -6,6 +6,7 @@ export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "SportsActivityLocation",
+    "@id": "https://lagunabeachtennisacademy.com/#organization",
     "name": "Laguna Beach Tennis Academy",
     "description": "Professional tennis training academy in Laguna Beach offering programs for ages 3 to professional, including junior development, adult programs, and high-performance training with ATP/WTA-trained coaches.",
     "url": "https://lagunabeachtennisacademy.com",
@@ -110,6 +111,73 @@ export function CourseSchema() {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(courses) }}
+    />
+  )
+}
+
+/**
+ * Multi-location LocalBusiness schema — signals that LBTA operates across
+ * three public courts in Laguna Beach, so Google can associate local-pack
+ * queries with each facility. Each location inherits from the main
+ * Organization node via parentOrganization @id reference.
+ *
+ * LBHS: 6 courts (primary facility — HP, Youth Development, Adult, LiveBall)
+ * Moulton Meadows: 4 courts (Little Tennis Stars, Red/Orange Ball, beginner)
+ * Alta Laguna: 2 courts (Saturday juniors, Youth Development, summer camps)
+ */
+export function LocalBusinessArraySchema() {
+  const locations = [
+    {
+      '@id': 'https://lagunabeachtennisacademy.com/#lbhs',
+      name: 'Laguna Beach Tennis Academy — LBHS Courts',
+      description:
+        'Primary facility with 6 courts at Laguna Beach High School. Home to High Performance, Youth Development, Adult, and LiveBall programs.',
+      streetAddress: '625 Park Ave',
+      openingHours: 'Mo-Su 07:00-21:00',
+    },
+    {
+      '@id': 'https://lagunabeachtennisacademy.com/#moulton',
+      name: 'Laguna Beach Tennis Academy — Moulton Meadows',
+      description:
+        '4-court facility at Moulton Meadows Park. Home to Little Tennis Stars, Red Ball, Orange Ball, Adult Beginner, and LiveBall Intermediate.',
+      streetAddress: '1098 Balboa Ave',
+      openingHours: 'Mo-Su 07:00-21:00',
+    },
+    {
+      '@id': 'https://lagunabeachtennisacademy.com/#altalaguna',
+      name: 'Laguna Beach Tennis Academy — Alta Laguna',
+      description:
+        '2-court facility at Alta Laguna Park. Home to Saturday juniors, Youth Development, and Summer Tennis Camps.',
+      streetAddress: 'Alta Laguna Park',
+      openingHours: 'Mo-Sa 07:00-21:00',
+    },
+  ]
+
+  const schema = locations.map((loc) => ({
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': loc['@id'],
+    name: loc.name,
+    description: loc.description,
+    url: 'https://lagunabeachtennisacademy.com',
+    telephone: '+1-949-534-0457',
+    email: 'support@lagunabeachtennisacademy.com',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: loc.streetAddress,
+      addressLocality: 'Laguna Beach',
+      addressRegion: 'CA',
+      postalCode: '92651',
+      addressCountry: 'US',
+    },
+    openingHours: loc.openingHours,
+    parentOrganization: { '@id': 'https://lagunabeachtennisacademy.com/#organization' },
+  }))
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   )
 }
