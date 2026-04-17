@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-04-03",
-  "lastLearnRun": "2026-04-03 compound:learn — UTR tracker atomic hardening and migration repair workflow",
+  "updated": "2026-04-16",
+  "lastLearnRun": "2026-04-16 compound:learn — SEO bundle deploy (canonical cascade, app/robots.txt shadow, proxy.ts vs middleware.ts, audit-verification-before-prioritization)",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -893,6 +893,41 @@
       "avoid": "Retrying db push after 'Remote migration versions not found' without repair",
       "instead": "Run targeted migration repair then db push using latest CLI",
       "tags": ["supabase", "migrations", "operations"]
+    },
+    {
+      "id": "root-layout-canonical-cascade",
+      "description": "Setting alternates.canonical in root layout.tsx cascades to every child page that doesn't override — collapses the site into one URL in Google's index",
+      "avoid": "export const metadata = { alternates: { canonical: '/' } } in app/layout.tsx when child pages don't set their own alternates",
+      "instead": "Leave alternates out of root layout; set self-referencing alternates.canonical per page (or per feature-section layout). Use root layout ONLY for metadataBase.",
+      "tags": ["seo", "next-metadata", "canonical", "inheritance"]
+    },
+    {
+      "id": "app-robots-txt-shadows-public",
+      "description": "When both app/robots.txt and public/robots.txt exist, Next.js App Router serves app/robots.txt — edits to public/robots.txt are silently ignored by the live site",
+      "avoid": "Editing public/robots.txt without checking whether app/robots.txt (or app/robots.ts) exists",
+      "instead": "Run: ls app/robots.* public/robots.* — if app/robots.* exists, edit that file and delete public/robots.txt to eliminate shadow. One source of truth.",
+      "tags": ["seo", "next-app-router", "robots", "static-assets"]
+    },
+    {
+      "id": "middleware-search-misses-nextjs-16-proxy",
+      "description": "Searching only for middleware.ts when verifying route auth — misses Next.js 16 proxy.ts (the renamed routing middleware file)",
+      "avoid": "Glob middleware.* at repo root and conclude 'no auth middleware' when proxy.ts exists",
+      "instead": "Grep for both middleware.ts AND proxy.ts at repo root. Next.js 16 renamed the file but semantics are identical (NextRequest → NextResponse with matcher config).",
+      "tags": ["nextjs-16", "middleware", "proxy", "routing", "security-review"]
+    },
+    {
+      "id": "seo-audit-claims-unverified",
+      "description": "Prioritizing P0 SEO fixes based on audit claims without reading the actual files — wastes engineering time on non-issues and hides real bugs the audit missed",
+      "avoid": "Reading an external SEO audit and immediately queuing P0 commits from the report",
+      "instead": "Per flagged file: read the file, confirm the claim, THEN prioritize. Every claim has three possible outcomes (confirmed / wrong / partially correct with different fix). Separately: find what the audit missed by checking revenue-critical paths.",
+      "tags": ["seo", "audit", "verification", "compound-plan"]
+    },
+    {
+      "id": "placeholder-phone-vs-displayed-phone",
+      "description": "Confusing an input `placeholder='...'` attribute (UX hint shown in empty fields) with a displayed phone number — not a broken conversion path even when the placeholder value looks fake",
+      "avoid": "Framing placeholder='(949) 123-4567' as 'prospects literally can't reach you' — it's UX hint text that disappears when the user types",
+      "instead": "Distinguish placeholder/hint text from actual contact info rendered in copy. Fix placeholders for trust/polish; framing should match the real impact.",
+      "tags": ["ux", "seo-audit", "accuracy", "framing"]
     }
   ]
 }

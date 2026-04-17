@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-04-03",
-  "lastLearnRun": "2026-04-03 UTR tracker atomic hardening: players RPC batch write, normalized-name collision guard, color-ball badge dedupe, supabase repair-then-push",
+  "updated": "2026-04-16",
+  "lastLearnRun": "2026-04-16 SEO bundle deploy: per-page canonicals, live smoke test in Phase 5, atomic commits per concern, build-output validation fallback",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -1112,6 +1112,36 @@
       "when": "Supabase push reports remote migration version mismatch or drift",
       "example": "Use npx supabase@latest; run targeted migration repair for the missing version, then db push. Avoid repeated push loops before reconciliation.",
       "tags": ["supabase", "migrations", "repair", "operations"]
+    },
+    {
+      "name": "per-page-self-referencing-canonical",
+      "when": "Adding canonical tags to a Next.js App Router site to consolidate duplicate-content signal",
+      "example": "export const metadata: Metadata = { alternates: { canonical: '/programs/junior' }, title: '...' }. Root layout sets ONLY metadataBase. 33 public routes each declare their own canonical; landing variants (e.g. /high-performance-pathway) canonical to their hub (/programs/high-performance).",
+      "tags": ["seo", "canonical", "next-metadata", "per-page"]
+    },
+    {
+      "name": "post-deploy-live-smoke-test",
+      "when": "After any production deploy — especially SEO / config bundles where static validation passes but route-handler precedence or edge caching could hide bugs",
+      "example": "curl the live domain for key markers: robots.txt content, canonical tags on 3-6 sample routes, noindex on protected routes, HTTP 200 on sitemap routes. Caught the app/robots.txt shadow bug that prerendered-HTML validation missed.",
+      "tags": ["deploy", "smoke-test", "verification", "compound-phase-5"]
+    },
+    {
+      "name": "atomic-commits-per-logical-concern",
+      "when": "Bundling multiple independent changes into one deploy",
+      "example": "8 atomic commits for one PR: phone fix, robots.txt, canonical-root-layout, noindex, hp-canonical, hero-test, remove-root-canonical, per-page-canonicals, robots-shadow-hotfix. Each reversible via git revert <sha> without touching the others.",
+      "tags": ["git", "compound-work", "rollback", "review"]
+    },
+    {
+      "name": "build-output-validation-fallback",
+      "when": "Live HTTP smoke testing blocked by port conflicts, stale dev servers, or network — need to validate metadata before pushing",
+      "example": "grep .next/server/app/*.html for canonical tags, robots meta, key copy. Works for prerendered static routes; flag dynamic routes (force-dynamic, searchParams) for a live check later. Faster than booting a fresh dev server and doesn't mask caching issues.",
+      "tags": ["validation", "static-build", "next-ssg", "fallback"]
+    },
+    {
+      "name": "shadow-file-detection-script",
+      "when": "About to edit a static asset (robots.txt, sitemap.xml, manifest.json, etc.) in a Next.js App Router project",
+      "example": "ls app/<name>* public/<name>* — if both exist, app/ wins. Pick one: delete the other or edit the winner.",
+      "tags": ["next-app-router", "static-assets", "shadow-files"]
     }
   ]
 }

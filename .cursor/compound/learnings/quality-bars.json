@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-04-03",
-  "lastLearnRun": "2026-04-03 compound:learn — UTR tracker atomic hardening and migration repair process",
+  "updated": "2026-04-16",
+  "lastLearnRun": "2026-04-16 compound:learn — SEO bundle deploy with per-page canonical strategy and live smoke-test gate",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -323,6 +323,26 @@
     },
     "supabaseMigrationRepairFirst": {
       "rule": "On Supabase migration history mismatch, run targeted migration repair before db push retries (use latest CLI path)",
+      "enforcement": "should"
+    },
+    "canonicalPerPageOnly": {
+      "rule": "Every indexable route MUST declare its own alternates.canonical in its metadata export. The root layout MUST NOT declare alternates.canonical (avoids cascade). Pages that consolidate to another URL (landing variants -> hub) canonical to the hub intentionally.",
+      "enforcement": "must"
+    },
+    "oneRobotsTxtSource": {
+      "rule": "Exactly one robots.txt source per project. If app/robots.txt (or app/robots.ts) exists, delete public/robots.txt. Edit the winner. Any change to robots content gets a live HTTP smoke test post-deploy to confirm the live content matches the commit.",
+      "enforcement": "must"
+    },
+    "deployLiveSmokeTest": {
+      "rule": "Every compound:deploy phase ends with a live HTTP smoke test against the production domain: HTTP 200 on 5+ key routes, robots.txt content, canonical tag on at least one deep page, noindex on at least one protected route. Static prerender validation alone is insufficient.",
+      "enforcement": "must"
+    },
+    "auditClaimsVerifiedBeforeP0": {
+      "rule": "External audits (SEO, accessibility, performance) are treated as hypotheses, not priorities. Each flagged file must be read and the claim confirmed before being added to a P0 queue. Capture the verdict (confirmed / wrong / partial) alongside the remediation action in the plan doc.",
+      "enforcement": "should"
+    },
+    "proxyTsAwarenessNextjs16": {
+      "rule": "When reviewing route auth or middleware, grep for both middleware.ts AND proxy.ts at repo root. Next.js 16 renamed the file; missing this pattern can create false-positive security findings.",
       "enforcement": "should"
     }
   }
