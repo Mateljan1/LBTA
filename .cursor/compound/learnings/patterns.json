@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 (3rd run) Aman-standards: aggregate-rating-invisible-only, brand-split-visible-vs-invisible, founder-voice-memo-decode",
+  "lastLearnRun": "2026-04-16 (4th run) 3-blocker cleanup: build-codegen-as-canonical-source, reversible-pause-for-hidden-entity, ship-gate-commit-first, founder-decision-via-structured-question",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -1172,6 +1172,30 @@
       "when": "A standard SEO technique (ratings, social proof widgets, aggregator links) conflicts with a founder-directed aesthetic (Aman / boutique / editorial)",
       "example": "Split into two layers. Visible (what users read): governed by brand aesthetic — editorial, credentials, heritage, restraint. Invisible (what Google parses): JSON-LD schema, meta tags, OpenGraph — every SEO technique stays. Users get Aman. Google gets the full SEO surface. This is how luxury brands rank for their city without a Tripadvisor widget on the page.",
       "tags": ["seo", "brand", "architecture", "aesthetic"]
+    },
+    {
+      "name": "build-codegen-as-canonical-source",
+      "when": "Running ship:gate / quality-gate / build and tracked files become dirty — codegen step (tokens:build, data:sync, etc.) auto-rewrote them with canonical values",
+      "example": "When ship:gate reports 'tracked files have uncommitted changes' AFTER a successful build + lint + tests, DO NOT revert the changes. Diff them first. The codegen knew the canonical answer (e.g. 'Aug 29' camp end date) and resolved drift across JSON + components. Commit the codegen output + fix any remaining hardcoded literals in views that bypassed the data layer. This session: codegen auto-aligned year2026.json + spring-summer-2026.json + ProgramsTabView.tsx to Aug 29; I added matching fix to app/camps/page.tsx. Ops-audit blocker resolved without founder input.",
+      "tags": ["codegen", "canonical-source", "ship-gate", "data-layer"]
+    },
+    {
+      "name": "reversible-pause-for-hidden-entity",
+      "when": "An entity (coach, program, location, camp week) is temporarily paused — may return later. Need to hide from public surfaces but preserve the data for zero-cost reactivation",
+      "example": "1) Add optional `hidden?: boolean` + `hiddenReason?: string` to the entity type. 2) Set hidden=true in JSON data. 3) Add private getVisibleX() helper; all public getters + schema builders filter via it. 4) Single-link getters (getBySlug) stay UNFILTERED so direct URLs still resolve for reactivation testing. 5) Explicit robots: { index: false, follow: false } on the entity's detail page with a JSDoc comment describing the reactivation steps. 6) If the hidden entity was part of a fixed-layout grid (2x2), swap to grid-cols-N for the remaining N and note the revert path in a comment. This session: paused Michelle coach — 4 files touched, full reversibility.",
+      "tags": ["data-layer", "reversibility", "scope-guard", "coaches", "paused-entity"]
+    },
+    {
+      "name": "ship-gate-commit-first",
+      "when": "Running npm run ship:gate after making local changes",
+      "example": "Always commit tracked changes BEFORE running ship:gate. The clean-tree check is the final gate — it fires hard even if build/lint/tests all passed. Pattern: `git add ... && git commit -m '...' && npm run ship:gate`. If codegen auto-modifies files DURING ship:gate (e.g. tokens:build rewriting JSON), that's expected; commit those too, then re-run. NEVER try to 'run ship:gate first then commit' — you'll spend time debugging a guardrail, not a real problem.",
+      "tags": ["tooling", "ship-gate", "workflow"]
+    },
+    {
+      "name": "founder-decision-via-structured-question",
+      "when": "A blocking decision has 2-4 distinct options with different engineering paths (e.g. active/departed/paused/status-quo for coach status)",
+      "example": "Use the AskQuestion tool with explicit labeled options that each describe the engineering consequence. Saves a round trip vs. vague text reply. Works because founder only has to read + select, not formulate + type. This session: Michelle pause decision took 30 seconds of founder time, zero clarification round trips.",
+      "tags": ["communication", "founder", "decision", "tooling"]
     },
     {
       "name": "founder-voice-memo-decode",

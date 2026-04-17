@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 (3rd run) Aman-standards touch-up — amend privacyFirstContent, add aggregateRatingInvisibleOnly + brandSplitVisibleVsInvisible",
+  "lastLearnRun": "2026-04-16 (4th run) 3-blocker cleanup — add checkCodegenOutputBeforeReverting + pausedEntityHiddenFlagPattern",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -366,6 +366,14 @@
     "brandSplitVisibleVsInvisible": {
       "rule": "When a founder-directed aesthetic conflicts with a standard SEO technique, split into two layers: visible (what users read — governed by brand aesthetic) and invisible (what Google parses — JSON-LD, meta tags, OpenGraph). Both get what they need. Applies to ratings, reviews, keyword stuffing, upsell badges, and any pattern that earns SEO value but reads consumer-grade.",
       "enforcement": "should"
+    },
+    "checkCodegenOutputBeforeReverting": {
+      "rule": "If `npm run ship:gate` fails the clean-tree check and reports dirty tracked files you didn't edit, ALWAYS `git diff` them before reverting. Codegen steps (tokens:build, data:sync, schema generators) may have auto-resolved canonical values across multiple files. Commit those diffs; they represent the canonical answer the repo already knows. Reverting would lose that answer and send you back to square one.",
+      "enforcement": "must"
+    },
+    "pausedEntityHiddenFlagPattern": {
+      "rule": "To pause (not delete) a coach, program, location, or other entity: add `hidden?: boolean` to the type, flag in JSON, filter via a private `getVisibleX()` helper used by ALL public listing/schema getters. Keep single-entity getters (getBySlug) unfiltered so direct links still resolve. Add `robots: { index: false, follow: false }` to the entity's own page with a JSDoc comment describing the 1-line reactivation path. Never delete the data for a pause that may reverse.",
+      "enforcement": "must"
     }
   }
 }
