@@ -45,7 +45,7 @@
     },
     "summer": {
       "label": "Summer Camps",
-      "dates": "June 15 – August 28, 2026",
+      "dates": "June 15 – August 29, 2026",
       "options": [
         { "name": "Tennis & Adventure Full Day", "ages": "5-11", "hours": "9am-3pm", "pricePerWeek": 495, "perDay": 99 },
         { "name": "Tennis & Adventure Half Day AM", "ages": "5-11", "hours": "9am-12pm", "pricePerWeek": 325, "perDay": 85 },

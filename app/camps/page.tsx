@@ -102,7 +102,7 @@ export default function CampsPage() {
             </h1>
             <p className="font-sans max-w-[29rem] text-[15px] leading-relaxed font-normal text-white/95 text-shadow-hero-readable md:text-[17px]">
               Tennis coaching, field games, arts and crafts, and Splash Wars every Thursday.
-              June 16 to August 19 with small groups and coaches who know each player by name.
+              June 15 to August 29 with small groups and coaches who know each player by name.
             </p>
             <p className="mt-4 font-sans text-[11px] uppercase tracking-[0.16em] text-white/80">
               {HERO_HIGHLIGHTS.join(' · ')}
@@ -113,7 +113,7 @@ export default function CampsPage() {
                 onClick={() =>
                   openCampModal(
                     'Summer Camp - Reserve Your Week',
-                    'Ages 5-11 · Alta Laguna Park · Mon-Thu (June 16 - Aug 19)'
+                    'Ages 5-11 · Alta Laguna Park · Mon-Thu (June 15 - Aug 29)'
                   )
                 }
                 className="inline-flex min-h-[48px] items-center justify-center bg-white px-10 py-4 font-sans text-sm font-medium uppercase tracking-[2.5px] text-brand-deep-water transition-all duration-300 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]"
@@ -493,7 +493,7 @@ export default function CampsPage() {
             <article className="rounded-[2px] border border-brand-pacific-dusk/20 bg-white p-5 shadow-[0_12px_28px_rgba(27,58,92,0.08)]">
               <p className="inline-block rounded-[2px] bg-brand-pacific-dusk px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white">Now Enrolling</p>
               <h3 className="mt-3 font-headline text-display-sm text-brand-pacific-dusk">Summer Camp</h3>
-              <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">10 weeks · Mon-Thu · June 16-Aug 19</p>
+              <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">11 weeks · Mon-Thu · June 15-Aug 29</p>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Ages 5-11 and 12-17</p>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Full-Day $495/wk · Half-Day $325/wk</p>
               <button
@@ -555,7 +555,7 @@ export default function CampsPage() {
       <StickyCTA
         text="Reserve Your Week"
         onClick={() =>
-          openCampModal('Summer Camp - Reserve Your Week', 'Ages 5-11 · Mon-Thu (June 16 - Aug 19)')
+          openCampModal('Summer Camp - Reserve Your Week', 'Ages 5-11 · Mon-Thu (June 15 - Aug 29)')
         }
         showAfterScroll={500}
       />
