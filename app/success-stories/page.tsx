@@ -99,33 +99,6 @@ const successStoryImagePosition: Record<string, string> = {
   'usta-womens-35': '50% 48%',
 }
 
-const testimonials = [
-  {
-    name: 'Sarah M.',
-    program: 'Junior Development Parent',
-    rating: 5,
-    text: "Andrew's coaching transformed my son's game in just one season. The movement-first approach is unlike anything we've experienced.",
-  },
-  {
-    name: 'Michael T.',
-    program: 'High Performance',
-    rating: 5,
-    text: "The attention to detail and personalized approach at LBTA is exceptional. My daughter's ranking improved dramatically.",
-  },
-  {
-    name: 'Jennifer L.',
-    program: 'Adult Intermediate',
-    rating: 5,
-    text: "Finally found a program that takes adult players seriously. The coaching quality matches what the juniors receive.",
-  },
-  {
-    name: 'Robert K.',
-    program: 'Private Lessons',
-    rating: 5,
-    text: "The one-on-one attention helped me fix technique issues I'd had for 20 years. Worth every penny.",
-  },
-]
-
 // Schema for success stories
 const successStoriesSchema = {
   "@context": "https://schema.org",
@@ -379,49 +352,33 @@ export default function SuccessStoriesPage() {
 
       <HorizonDivider />
 
-      {/* Testimonials Wall */}
+      {/* Google Reviews — direct link replaces prior composite testimonials for privacy + verifiability */}
       <section className="bg-lbta-beige py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[720px] mx-auto px-6">
           <AnimatedSection>
-            <div className="text-center mb-12">
+            <div className="text-center">
               <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-black mb-4">
                 What Players Say
               </h2>
-              <div className="flex items-center justify-center gap-2 mb-2">
+              <div className="flex items-center justify-center gap-2 mb-3">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star key={star} className="h-6 w-6 text-brand-sunset-cliff fill-brand-sunset-cliff" />
                 ))}
               </div>
-              <p className="font-sans text-[15px] text-black/70">
-                {siteStats.trustStats.rating} average from {siteStats.trustStats.reviewCount} Google reviews
+              <p className="font-sans text-[17px] text-black/80 mb-6">
+                {siteStats.trustStats.rating} average from {siteStats.trustStats.reviewCount}+ Google reviews
               </p>
+              <Link
+                href="https://www.google.com/search?q=Laguna+Beach+Tennis+Academy+reviews"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-sans text-[14px] font-medium tracking-[2px] uppercase text-black border-b border-black/30 hover:border-black transition-colors pb-0.5"
+              >
+                Read reviews on Google
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <AnimatedSection key={testimonial.name} delay={index * 50}>
-                <div className="bg-white p-6 rounded-lg h-full flex flex-col">
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-brand-sunset-cliff fill-brand-sunset-cliff" />
-                    ))}
-                  </div>
-                  <p className="font-sans text-[14px] text-black/80 leading-relaxed flex-grow mb-4">
-                    "{testimonial.text}"
-                  </p>
-                  <div>
-                    <p className="font-sans text-[14px] font-semibold text-black">
-                      {testimonial.name}
-                    </p>
-                    <p className="font-sans text-[12px] text-black/60">
-                      {testimonial.program}
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
         </div>
       </section>
 
