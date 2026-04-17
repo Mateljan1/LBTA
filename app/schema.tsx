@@ -114,6 +114,55 @@ export function CourseSchema() {
   )
 }
 
+/**
+ * Per-coach Person schema — E-E-A-T signal for Google and IP inventory for
+ * due diligence. Renders one JSON-LD block with name, jobTitle, url, employer,
+ * credentials, and expertise areas. Descriptions contain credentials only —
+ * never names of students, families, or current players.
+ */
+export function PersonSchema({
+  name,
+  jobTitle,
+  slug,
+  description,
+  knowsAbout,
+  credentials,
+}: {
+  name: string
+  jobTitle: string
+  slug: string
+  description: string
+  knowsAbout?: string[]
+  credentials?: string[]
+}) {
+  const schema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name,
+    jobTitle,
+    url: `https://lagunabeachtennisacademy.com/coaches/${slug}`,
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Laguna Beach Tennis Academy',
+      url: 'https://lagunabeachtennisacademy.com',
+    },
+    description,
+  }
+  if (knowsAbout?.length) schema.knowsAbout = knowsAbout
+  if (credentials?.length) {
+    schema.hasCredential = credentials.map((cred) => ({
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: cred,
+    }))
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
 export function LeagueEventSchema({
   name,
   description,

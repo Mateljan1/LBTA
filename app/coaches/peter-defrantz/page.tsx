@@ -9,6 +9,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
+import { PersonSchema } from '@/app/schema'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/coaches/peter-defrantz' },
@@ -41,6 +42,22 @@ const creds = [
 export default function PeterDeFrantzPage() {
   return (
     <>
+      <PersonSchema
+        name="Peter DeFrantz"
+        jobTitle="Head Coach, Junior Development"
+        slug="peter-defrantz"
+        description="USPTA and PTR certified tennis professional. College tennis at Mt. San Jacinto College. 8+ years coaching juniors, adults, and camps at LBTA with a progressive, scaffolded teaching method."
+        knowsAbout={[
+          'Junior tennis development',
+          'Progressive teaching method',
+          'On-court fitness integration',
+        ]}
+        credentials={[
+          'USPTA Certified Professional',
+          'PTR Certified Professional',
+          'College Tennis — Mt. San Jacinto',
+        ]}
+      />
       <Breadcrumbs items={[
         { label: 'Coaches', href: '/coaches' },
         { label: 'Peter DeFrantz' }

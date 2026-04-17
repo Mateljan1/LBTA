@@ -7,6 +7,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
+import { PersonSchema } from '@/app/schema'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/coaches/andrew-mateljan' },
@@ -58,6 +59,24 @@ const atpPlayers = [
 export default function AndrewMateljanPage() {
   return (
     <>
+      <PersonSchema
+        name="Andrew Mateljan"
+        jobTitle="Founder & Head Coach"
+        slug="andrew-mateljan"
+        description="GPTCA-ATP certified coach with 25 years in tennis. Former top-ranked junior, ITF Futures professional, and training director at Sánchez-Casal Barcelona and in Croatia. Founder and head coach of Laguna Beach Tennis Academy."
+        knowsAbout={[
+          'Tennis coaching',
+          'High performance training',
+          'Junior tennis development',
+          'ATP/WTA tour coaching',
+          'Movement-first methodology',
+        ]}
+        credentials={[
+          'GPTCA-ATP Certification',
+          'ITF Futures Professional',
+          'Sánchez-Casal Academy — Barcelona (Training Director)',
+        ]}
+      />
       <Breadcrumbs items={[
         { label: 'Coaches', href: '/coaches' },
         { label: 'Andrew Mateljan' }

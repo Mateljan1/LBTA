@@ -7,6 +7,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
+import { PersonSchema } from '@/app/schema'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/coaches/robert-lebuhn' },
@@ -37,6 +38,24 @@ const creds = [
 export default function RobertLeBuhnPage() {
   return (
     <>
+      <PersonSchema
+        name="Robert W. LeBuhn"
+        jobTitle="Adult Programs Coach"
+        slug="robert-lebuhn"
+        description="USPTR-certified tennis professional with 25+ years coaching. NCAA Division I at Lafayette College. Multiple Coach of the Year awards (NJ, NY, CA). Adaptive Tennis and CPR/AED certified."
+        knowsAbout={[
+          'Adult tennis coaching',
+          'Team and league preparation',
+          'Adaptive tennis',
+          'High school varsity coaching',
+        ]}
+        credentials={[
+          'USPTR Professional (Highest Level)',
+          'NCAA Division I — Lafayette College',
+          'Adaptive Tennis — Special Olympics Certified',
+          'CPR / AED — Red Cross Certified',
+        ]}
+      />
       <Breadcrumbs items={[
         { label: 'Coaches', href: '/coaches' },
         { label: 'Robert LeBuhn' }

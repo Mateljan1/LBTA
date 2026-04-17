@@ -9,6 +9,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
+import { PersonSchema } from '@/app/schema'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/coaches/allison-cronk' },
@@ -32,6 +33,23 @@ const creds = [
 export default function AllisonCronkPage() {
   return (
     <>
+      <PersonSchema
+        name="Allison Cronk"
+        jobTitle="Youth Development Coach"
+        slug="allison-cronk"
+        description="Collegiate tennis player and educator. NCAA and NAIA tennis across two programs. 5+ years coaching youth tennis across five academies. B.A. History with Education minor (Shepherd University). Dean's List every semester."
+        knowsAbout={[
+          'Youth tennis development',
+          'Little Tennis Stars programming',
+          'Adult beginner coaching',
+          'Education and youth pedagogy',
+        ]}
+        credentials={[
+          'NCAA & NAIA Collegiate Tennis (2 programs)',
+          'B.A. History, Education Minor — Shepherd University',
+          'CPR / AED — HSI Certified',
+        ]}
+      />
       <Breadcrumbs items={[
         { label: 'Coaches', href: '/coaches' },
         { label: 'Allison Cronk' }
