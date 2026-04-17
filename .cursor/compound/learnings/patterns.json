@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 (2nd run) P1 bundle: segment-only titles with template, rendered-output length validation, privacy-first content, full-loop-in-one-session",
+  "lastLearnRun": "2026-04-16 (3rd run) Aman-standards: aggregate-rating-invisible-only, brand-split-visible-vs-invisible, founder-voice-memo-decode",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -1160,6 +1160,24 @@
       "when": "Founder/stakeholder directive: do not introduce family, student, or client names in new work",
       "example": "Replace named testimonials with a 'Read reviews on Google' link that reads the live review count from a single JSON source of truth. Replace name-bearing schema Reviews with AggregateRating only. Replace name-bearing founder bios with credentials + geography. Scope guard: explicitly distinguish pre-existing named content (out of scope) from new work (in scope); track pre-existing cleanup as a separate dedicated PR.",
       "tags": ["privacy", "content", "schema", "scope-guard"]
+    },
+    {
+      "name": "aggregate-rating-invisible-only",
+      "when": "Brand aesthetic rejects visible rating widgets but SERP stars are still valuable",
+      "example": "Keep `aggregateRating` block in JSON-LD schema (components/SEOSchemas.tsx or equivalent) so Google renders ★ in search results. Remove all on-page copy that mentions the rating number or review count. Hero trust stats use heritage-flavored facts ('2020 Founded', 'Official City Partner') instead of a Google Rating stat. Net: full CTR lift, zero brand cost.",
+      "tags": ["seo", "brand", "aman", "schema", "aggregate-rating"]
+    },
+    {
+      "name": "brand-split-visible-vs-invisible-seo",
+      "when": "A standard SEO technique (ratings, social proof widgets, aggregator links) conflicts with a founder-directed aesthetic (Aman / boutique / editorial)",
+      "example": "Split into two layers. Visible (what users read): governed by brand aesthetic — editorial, credentials, heritage, restraint. Invisible (what Google parses): JSON-LD schema, meta tags, OpenGraph — every SEO technique stays. Users get Aman. Google gets the full SEO surface. This is how luxury brands rank for their city without a Tripadvisor widget on the page.",
+      "tags": ["seo", "brand", "architecture", "aesthetic"]
+    },
+    {
+      "name": "founder-voice-memo-decode",
+      "when": "Founder sends voice-to-text feedback with garbled phrases (e.g. 'among standards' for 'Aman standards', 'I went off the goal is deep and throws you want' as garble)",
+      "example": "Parse: ignore mistranscribed filler, anchor on the clear nouns + .cursorrules brand references. 'Aman standards' + 'marketing and what they do' → compare current UI against aman.com patterns (no ratings, no aggregator links, long-form editorial, heritage stats). Restate the decoded intent back before executing so founder can course-correct if I misread.",
+      "tags": ["communication", "voice-to-text", "founder", "decoding"]
     },
     {
       "name": "full-compound-loop-in-one-session",

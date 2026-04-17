@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 compound:learn (2nd run same day) — P1 bundle deploy (child-title-with-brand-when-template-set, measure-rendered-not-raw-for-length, privacy-first-content)",
+  "lastLearnRun": "2026-04-16 compound:learn (3rd run same day) — Aman-standards touch-up: google-reviews-cta-as-aman-substitute anti-pattern + privacyFirstContent amendment",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -935,6 +935,13 @@
       "avoid": "In a child page: `export const metadata = { title: 'FAQ | Tennis Training Questions | LBTA' }` when root layout has `title.template: '%s | Laguna Beach Tennis Academy'` — final title becomes 'FAQ | Tennis Training Questions | LBTA | Laguna Beach Tennis Academy' (83 chars, brand duplicated)",
       "instead": "Segment-only titles: `title: 'Tennis Training FAQ'` — template resolves to 'Tennis Training FAQ | Laguna Beach Tennis Academy' (49 chars). OR bypass template with `title: { absolute: 'Full Custom Title' }` when you need total control.",
       "tags": ["seo", "next-metadata", "title-template", "duplicate-brand"]
+    },
+    {
+      "id": "google-reviews-cta-as-aman-substitute",
+      "description": "Replacing composite / unpermissioned testimonials with a visible 'Read reviews on Google' link + star count + 'N Google reviews' callout as the substitute — reads as consumer-grade review-fishing, breaks boutique hospitality aesthetic",
+      "avoid": "`<Star>` row + `{rating} from {reviewCount}+ Google reviews` + `Read reviews on Google →` CTA inside any visible section labeled 'What Players Say' or equivalent",
+      "instead": "Let earned editorial (named player journeys with photography + outcomes) carry trust. If no editorial exists, omit the block entirely — restraint. Keep AggregateRating in JSON-LD only for SERP stars. Heritage-flavored facts ('Founded 2020', 'Official City Partner') work better than ratings as trust stats.",
+      "tags": ["brand", "aman", "luxury", "testimonials", "aesthetic"]
     },
     {
       "id": "measure-char-length-on-raw-source",

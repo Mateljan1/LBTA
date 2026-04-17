@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
   "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 (2nd run) P1 bundle — segment-only titles + rendered-output length validation + privacy-first-content bar",
+  "lastLearnRun": "2026-04-16 (3rd run) Aman-standards touch-up — amend privacyFirstContent, add aggregateRatingInvisibleOnly + brandSplitVisibleVsInvisible",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -354,8 +354,18 @@
       "enforcement": "must"
     },
     "privacyFirstContent": {
-      "rule": "Do not introduce family, student, or client names in new on-site content, metadata, or JSON-LD schema unless permission is documented. For testimonials, prefer a live Google Reviews link + AggregateRating. For bios, prefer credentials + geography. Pre-existing named content is out of scope unless a dedicated cleanup PR is explicitly requested.",
+      "rule": "Do not introduce family, student, or client names in new on-site content, metadata, or JSON-LD schema unless permission is documented. For testimonials, the correct substitute is NOT a visible 'Read reviews on Google' link or a star-count callout — those feel consumer-grade / Yelp, not boutique hospitality. Preferred substitutes: (a) let existing earned editorial (long-form player journeys with photography) carry the trust, or (b) quietly omit the block entirely. AggregateRating stays in JSON-LD only (invisible to users, visible to Google SERP). For bios, prefer credentials + geography. Pre-existing named content is out of scope unless a dedicated cleanup PR is explicitly requested.",
+      "enforcement": "must",
+      "amendedFrom": "2026-04-16 (2nd run)",
+      "amendmentReason": "Original wording suggested a live Google Reviews link as the substitute. Founder rejected that — reads as Yelp, not Aman. Corrected here."
+    },
+    "aggregateRatingInvisibleOnly": {
+      "rule": "AggregateRating lives in JSON-LD only — never on the page as visible copy. Google SERP stars are a cheap ~10-20% CTR lift; on-page rating widgets and 'average of N reviews' callouts feel consumer-grade review-fishing and conflict with the LBTA / boutique aesthetic. Split: visible layer = editorial + credentials, invisible layer = schema.",
       "enforcement": "must"
+    },
+    "brandSplitVisibleVsInvisible": {
+      "rule": "When a founder-directed aesthetic conflicts with a standard SEO technique, split into two layers: visible (what users read — governed by brand aesthetic) and invisible (what Google parses — JSON-LD, meta tags, OpenGraph). Both get what they need. Applies to ratings, reviews, keyword stuffing, upsell badges, and any pattern that earns SEO value but reads consumer-grade.",
+      "enforcement": "should"
     }
   }
 }
