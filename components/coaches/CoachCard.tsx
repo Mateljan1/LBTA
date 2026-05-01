@@ -31,6 +31,12 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
   const hasBioLink = coach.slug != null
   const firstName = coach.name.split(' ')[0] ?? coach.name
   const bookHref = hasBioLink ? `/book?type=private&coach=${coach.slug}` : '/book'
+  const compactImagePositionBySlug: Record<string, string> = {
+    'peter-defrantz': '50% 16%',
+    'andrew-mateljan': '50% 20%',
+    'allison-cronk': '50% 16%',
+  }
+  const compactImagePosition = (coach.slug && compactImagePositionBySlug[coach.slug]) || coach.imagePosition || '50% 24%'
   const cardContent = (
     <>
       <div className="relative aspect-[3/4] overflow-hidden shrink-0">
@@ -103,63 +109,64 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
   if (variant === 'compact' && compactStacked) {
     const shortBio = truncateBio(coach.bio ?? '', 220)
     return (
-      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl border border-black/[0.08] border-l-[2px] border-l-brand-victoria-cove/45 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.03),0_8px_24px_rgba(27,58,92,0.05)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_2px_10px_rgba(0,0,0,0.05),0_14px_30px_rgba(27,58,92,0.07)]">
+      <div className="relative flex h-full w-full max-w-[332px] flex-col overflow-hidden rounded-xl border border-black/[0.08] border-l-[2px] border-l-brand-victoria-cove/42 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.03),0_7px_20px_rgba(27,58,92,0.045)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_2px_9px_rgba(0,0,0,0.045),0_12px_26px_rgba(27,58,92,0.065)]">
         {/* Inset photo well: headshot isn’t glued to the card edge; ring + soft shadow read as editorial frame */}
-        <div className="shrink-0 px-3.5 pb-3.5 pt-3.5 sm:px-4 sm:pb-4 sm:pt-4">
-          {/* 3:4 frame + object-contain + object-top: full bitmap visible, heads aligned to top (no zoom crop) */}
-          <div className="relative aspect-[5/6] w-full overflow-hidden rounded-[12px] bg-brand-morning-light ring-1 ring-black/[0.07] shadow-[0_1px_10px_rgba(27,58,92,0.07),inset_0_1px_0_rgba(255,255,255,0.45)]">
+        <div className="shrink-0 px-3 pb-3 pt-3 sm:px-3.5 sm:pb-3.5 sm:pt-3.5">
+          {/* Portrait window with tighter crop keeps cards elegant and less oversized. */}
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[11px] bg-brand-morning-light ring-1 ring-black/[0.07] shadow-[0_1px_8px_rgba(27,58,92,0.06),inset_0_1px_0_rgba(255,255,255,0.45)]">
             <Image
               src={coachImageSrc(coach.image)}
               alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
               fill
-              className="object-contain object-top transition-opacity duration-300 group-hover:opacity-[0.98]"
-              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 34vw, 360px"
+              className="object-cover transition-opacity duration-300 group-hover:opacity-[0.985]"
+              style={{ objectPosition: compactImagePosition }}
+              sizes="(max-width: 640px) 88vw, (max-width: 1024px) 45vw, 300px"
               quality={95}
             />
           </div>
         </div>
 
-        <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-4 py-5 sm:px-5 sm:py-5 lg:px-6 lg:py-6">
+        <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-4 py-4 sm:px-5 sm:py-5">
           <div className="shrink-0">
-            <p className="mb-2 font-sans text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-brand-pacific-dusk/55 line-clamp-2">
+            <p className="mb-1.5 font-sans text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-brand-pacific-dusk/55 line-clamp-2">
               {coach.title}
             </p>
             {hasBioLink ? (
               <Link href={`/coaches/${coach.slug}`} className="group/link inline-block rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
-                <h3 className="font-headline text-[19px] font-medium tracking-[-0.02em] text-brand-pacific-dusk transition-colors group-hover/link:text-brand-victoria-cove sm:text-[20px]">
+                <h3 className="font-headline text-[18px] font-medium tracking-[-0.02em] text-brand-pacific-dusk transition-colors group-hover/link:text-brand-victoria-cove sm:text-[19px]">
                   {coach.name}
                 </h3>
               </Link>
             ) : (
-              <h3 className="font-headline text-[19px] font-medium tracking-[-0.02em] text-brand-pacific-dusk sm:text-[20px]">
+              <h3 className="font-headline text-[18px] font-medium tracking-[-0.02em] text-brand-pacific-dusk sm:text-[19px]">
                 {coach.name}
               </h3>
             )}
-            <p className="mb-3.5 font-sans text-[12px] leading-relaxed text-brand-pacific-dusk/72 line-clamp-2 sm:text-[12px]">
+            <p className="mb-3 font-sans text-[11px] leading-relaxed text-brand-pacific-dusk/72 line-clamp-2 sm:text-[12px]">
               {coach.specialization}
             </p>
           </div>
 
-          <p className="min-h-0 flex-1 font-sans text-[13px] leading-[1.55] text-brand-pacific-dusk/82 line-clamp-3 sm:text-[14px]">
+          <p className="min-h-0 flex-1 font-sans text-[13px] leading-[1.5] text-brand-pacific-dusk/82 line-clamp-3 sm:text-[13px]">
             {shortBio}
           </p>
 
-          <div className="mt-auto flex flex-col gap-5 border-t border-black/[0.06] pt-5 sm:pt-6">
-            <div className="flex flex-wrap gap-2">
+          <div className="mt-auto flex flex-col gap-4 border-t border-black/[0.06] pt-4 sm:pt-5">
+            <div className="flex flex-wrap gap-1.5">
               {coach.credentials.map((cred, i) => (
                 <span
                   key={`${cred}-${i}`}
-                  className="max-w-full rounded-full border border-black/[0.06] bg-brand-morning-light/90 px-2.5 py-1 font-sans text-[10px] leading-tight tracking-[0.02em] text-brand-pacific-dusk/78 sm:text-[11px]"
+                  className="max-w-full rounded-full border border-black/[0.06] bg-brand-morning-light/90 px-2 py-1 font-sans text-[10px] leading-tight tracking-[0.02em] text-brand-pacific-dusk/78"
                 >
                   {cred}
                 </span>
               ))}
             </div>
-            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
+            <div className="grid grid-cols-1 gap-2 sm:gap-2.5">
               {hasBioLink && (
                 <Link
                   href={`/coaches/${coach.slug}`}
-                  className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center gap-2 rounded-[2px] border border-brand-victoria-cove/30 bg-white/80 px-4 py-2.5 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-victoria-cove transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                  className="inline-flex min-h-[46px] w-full min-w-0 items-center justify-center gap-2 rounded-[2px] border border-brand-victoria-cove/30 bg-white/80 px-4 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-victoria-cove transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
                 >
                   View full bio
                   <ChevronRight className="h-4 w-4 shrink-0" />
@@ -167,7 +174,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               )}
               <Link
                 href={bookHref}
-                className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center rounded-[2px] bg-black px-4 py-2.5 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                className="inline-flex min-h-[46px] w-full min-w-0 items-center justify-center rounded-[2px] bg-black px-4 py-2.5 text-center font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Book with {firstName}
               </Link>

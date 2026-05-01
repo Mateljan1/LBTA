@@ -75,11 +75,11 @@ export function getTeamCoaches(): Coach[] {
 }
 
 /**
- * Meet the Team grid order: Peter, Allison. Paused coaches are filtered
+ * Meet the Team grid order: Peter, Andrew, Allison. Paused coaches are filtered
  * out automatically via getTeamCoaches() (which uses the visible-only list).
  * Explicit slugs keep layout stable if `order` in JSON changes.
  */
-const TEAM_GRID_SLUGS = ['peter-defrantz', 'michelle-mateljan', 'allison-cronk'] as const
+const TEAM_GRID_SLUGS = ['peter-defrantz', 'andrew-mateljan', 'michelle-mateljan', 'allison-cronk'] as const
 
 export function getTeamCoachesForGrid(): Coach[] {
   const team = getTeamCoaches() // already filters hidden

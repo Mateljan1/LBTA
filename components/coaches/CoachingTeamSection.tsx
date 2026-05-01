@@ -7,13 +7,13 @@ export default function CoachingTeamSection() {
 
   return (
     <section
-      className="scroll-mt-28 bg-brand-sandstone py-24 md:py-28 lg:py-32"
+      className="scroll-mt-28 bg-brand-sandstone py-20 md:py-24 lg:py-28"
       id="team"
       aria-labelledby="meet-the-team-heading"
     >
       {/* Match FounderSection max-width + horizontal padding so the page reads as one editorial column */}
       <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-16">
-        <AnimatedSection className="mb-14 md:mb-16 lg:mb-20">
+        <AnimatedSection className="mb-12 md:mb-14 lg:mb-16">
           <p className="mb-3 font-sans text-[11px] font-semibold uppercase tracking-[0.15em] text-brand-pacific-dusk/60">
             Coaching Team
           </p>
@@ -25,15 +25,15 @@ export default function CoachingTeamSection() {
           </h2>
           <div className="section-horizon mb-3 mt-3 max-w-[min(100%,12rem)] opacity-90" aria-hidden="true" />
           <p className="max-w-[52ch] font-sans text-[15px] leading-relaxed text-brand-pacific-dusk/70 md:text-[16px]">
-            Decades of combined experience. One philosophy: movement first, then craft—and a community that stays.
+            One coaching standard across every program: movement first, then craft.
           </p>
           <p className="mt-4 max-w-[52ch] border-l-2 border-brand-victoria-cove/35 pl-4 font-sans text-[13px] leading-relaxed text-brand-pacific-dusk/58 md:text-[14px]">
-            Private sessions with the coach who best fits your goals.
+            Choose the coach and track that match your goals.
           </p>
         </AnimatedSection>
 
-        {/* Two-column presentation on medium+ keeps cards compact and avoids oversized portraits. */}
-        <div className="mx-auto grid w-full max-w-[920px] grid-cols-1 items-stretch gap-7 md:grid-cols-2 md:gap-x-7 md:gap-y-8 lg:gap-x-8 lg:gap-y-9">
+        {/* Balanced 3-up layout on desktop keeps cards compact and editorial. */}
+        <div className="mx-auto grid w-full max-w-[1060px] grid-cols-1 items-stretch justify-items-center gap-6 sm:gap-7 md:grid-cols-2 md:gap-x-6 md:gap-y-7 lg:grid-cols-3 lg:gap-x-7 lg:gap-y-8">
           {teamCoaches.map((coach, index) => (
             <AnimatedSection
               key={coach.slug ?? `order-${coach.order}-${index}`}
