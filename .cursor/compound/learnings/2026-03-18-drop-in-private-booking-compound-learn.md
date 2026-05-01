@@ -38,4 +38,4 @@
 
 - data/leagues-2026.json, lib/schedule-schemas.ts, components/schedules/LeagueRow.tsx, LeaguesSection.tsx
 - lib/coach-slug.ts (new), app/book/page.tsx, components/PrivateLessonModal.tsx, components/schedules/PrivateCoachingSection.tsx
-- app/coaches/* (andrew-mateljan, robert-lebuhn, peter-defrantz, allison-cronk), app/api/book/route.ts
+- app/coaches/* (andrew-mateljan, former-coach-removed, peter-defrantz, allison-cronk), app/api/book/route.ts

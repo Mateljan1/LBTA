@@ -46,7 +46,7 @@
 |------|------|--------|------------------------|---------------|--------|--------|
 | `/images/founder/andrew-portrait.webp` | Home founder block, high-perf page | **4∶5** or 3∶4 | **800×1000** or 960×1280 | ≤250KB | WebP | Single source for “Andrew portrait”; add if missing (home 404) |
 | `/images/coaches/andrew-headshot.png` | Coaches listing (founder), data/coaches.json | 3∶4 | **600×800** | ≤200KB | WebP or PNG | Prefer WebP; used in FounderSection |
-| `/images/coaches/robert-lebuhn.png` | Robert — listing + bio page | 3∶4 or 4∶5 | **800×1000** (bio), **600×800** (cards) | ≤250KB | WebP preferred | OG: 800×1000 |
+| `/images/coaches/former-coach-removed.png` | Former coach (removed) — archived listing + bio reference | 3∶4 or 4∶5 | **800×1000** (bio), **600×800** (cards) | ≤250KB | WebP preferred | OG: 800×1000 |
 | `/images/coaches/michelle.webp` | Michelle — listing only (on leave) | 3∶4 | **600×800** | ≤200KB | WebP | Replace placeholder when real photo ready |
 | `/images/coaches/peter-defrantz.png` | Peter — listing + bio page | 3∶4 or 4∶5 | **800×1000** (bio), **600×800** (cards) | ≤250KB | WebP preferred | OG: 800×1000 |
 | `/images/coaches/allison-cronk.png` | Allison — listing + bio page | 3∶4 or 4∶5 | **800×1000** (bio), **600×800** (cards) | ≤250KB | WebP preferred | OG: 800×1000 |
@@ -244,12 +244,12 @@ Copy and image paths live in `data/homepage-copy.json` under `whyChoose`; add fi
 | Page/section | Key images | Priority |
 |--------------|------------|----------|
 | Home | laguna-horizon, andrew-portrait, karue-training, philosophy (×3), programs (×3), community (×6), cta-background | LCP: hero + founder |
-| Coaches | schedules-hero, andrew-headshot, robert-lebuhn, michelle, peter-defrantz, allison-cronk | LCP: schedules-hero |
+| Coaches | schedules-hero, andrew-headshot, former-coach-removed, michelle, peter-defrantz, allison-cronk | LCP: schedules-hero |
 | Schedules | schedules-hero (CTA), laguna-horizon | — |
 | Programs | hero.webp, then card images | LCP: hero.webp |
 | About / Contact | laguna-horizon, private-specialty | — |
 | Book / Trials | laguna-horizon (OG), adult-trial-hero, LBTAblktext | — |
-| Coach bios | Single coach image per page (robert-lebuhn, peter-defrantz, allison-cronk) | — |
+| Coach bios | Single coach image per page (former-coach-removed, peter-defrantz, allison-cronk) | — |
 
 **Adding more images?** See **§10. Recommended additional images** for page heroes, camps, facility, success stories, and coach action shots — with the same size/format rules so everything stays best-in-class.
 

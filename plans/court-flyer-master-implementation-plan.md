@@ -26,7 +26,7 @@ Produce the **final** LBTA Master Court Flyer as a print-ready asset: data-drive
    - `data/private-rates.json` (private lesson table).
    - `data/spring-summer-2026.json` (season dates, programs, schedules, camps, pricing).
    - Contact/registration from `.cursorrules` or a single config (phone, email, register URL).
-2. **Coach photos:** Copy the four user-provided images into the project (e.g. `public/images/print/coach-andrew.jpg`, `coach-robert.jpg`, `coach-allison.jpg`, `coach-peter.jpg`) and reference them in the flyer. **Photo-to-coach mapping** (see below) must be confirmed with the user.
+2. **Coach photos:** Copy the four user-provided images into the project (e.g. `public/images/print/coach-andrew.jpg`, `coach-former-removed.jpg`, `coach-allison.jpg`, `coach-peter.jpg`) and reference them in the flyer. **Photo-to-coach mapping** (see below) must be confirmed with the user.
 3. **Layout:** One primary layout matching the draft structure: header (“CERTIFIED CITY OF LAGUNA BEACH COACHING TEAM”), FREE TRIAL CTA, “Your Certified Coaching Team” with four coach cards (photo + name + title + short bio), private lessons table, contact/register block, “LBTA RESERVED COURTS” and addresses, schedule grids by location (MM, LBHS, Alta Laguna), camps summary, program pricing tables, footer with tagline and season. Design for **11×17 (tabloid)** first so it reads well on court; support **8.5×11** via print CSS (e.g. scale or two-page break) if needed.
 4. **Print workflow:** User opens `/print/court-flyer` in browser, uses **Print → Save as PDF** (or Print to printer). Optional: add a Node script using Puppeteer to generate `public/print/LBTA_Master_Flyer.pdf` for distribution.
 5. **Single source of truth:** No hardcoded prices or schedule rows in the flyer component; all numbers and program names come from JSON (or a small flyer-specific JSON that extends coaches for flyer titles/bios). (Source: COMPOUND_LEARN, data management rules.)
@@ -40,7 +40,7 @@ The four images are saved in the project (Cursor assets folder). **Confirmed map
 | Coach (draft order) | Image | Source file |
 |--------------------|-------|-------------|
 | Andrew Mateljan    | **4** | `assets/4-ddcec2f1-159c-4c0b-9a71-d882afa2090c.png` → `public/images/print/coach-andrew.png` |
-| Robert LeBuhn      | **2** | `assets/2-48306354-7696-4ef7-b961-64c67d50bbf2.png` → `public/images/print/coach-robert.png` |
+| Former coach (removed) | **2** | `assets/2-48306354-7696-4ef7-b961-64c67d50bbf2.png` → `public/images/print/coach-former-removed.png` |
 | Allison Cronk      | **3** | `assets/3-b8412297-4628-4f11-b38a-32445428a316.png` → `public/images/print/coach-allison.png` |
 | Peter DeFrantz     | **1** | `assets/1-9f3bf562-0b55-43fd-b062-cb04e5dfb156.png` → `public/images/print/coach-peter.png` |
 
@@ -52,10 +52,10 @@ Copy assets into `public/images/print/` with the canonical names above for use i
 
 ### Phase 1: Assets and data prep
 
-- [x] **1.1** Copy the four coach images into `public/images/print/` with canonical names (mapping confirmed: 1=Peter, 2=Robert, 3=Allison, 4=Andrew): `assets/1-*.png` → `coach-peter.png`, `assets/2-*.png` → `coach-robert.png`, `assets/3-*.png` → `coach-allison.png`, `assets/4-*.png` → `coach-andrew.png`.
+- [x] **1.1** Copy the four coach images into `public/images/print/` with canonical names (mapping confirmed: 1=Peter, 2=former coach removed, 3=Allison, 4=Andrew): `assets/1-*.png` → `coach-peter.png`, `assets/2-*.png` → `coach-former-removed.png`, `assets/3-*.png` → `coach-allison.png`, `assets/4-*.png` → `coach-andrew.png`.
 - [x] **1.2** Add flyer-specific copy (titles and short bios) so the flyer matches the draft without hardcoding in the component. Options: (A) New file `data/flyer-coach-bios.json` with keys by coach slug and fields `flyerTitle`, `flyerBio` (2–3 lines); or (B) extend `data/coaches.json` with optional `flyerTitle` and `flyerBio`. Draft text:
   - **Andrew:** Title: “Founder & Academy Director”. Bio: “ATP Coach · ITF Professional · LBHS Head Coach … Competed professionally on the ITF Futures circuit. Seven years coaching in Europe. GPTCA-ATP certified. Has coached 5 ATP/WTA-ranked players including Alex Michelsen. Founder of Fit4Tennis (100K+ followers).”
-  - **Robert:** Title: “Director of Tennis Operations”. Bio: “NCAA Division I · USPTR Certified · 4x Coach of the Year … Over 25 years … Lafayette College (NCAA D-I). Four-time Coach of the Year. Manages daily operations … LBHS Associate Head Coach.”
+  - **Former coach (removed):** Archived bio retained for historical draft context only.
   - **Allison:** Title: “Director of Youth Development”. Bio: “NCAA & NAIA Tennis · B.A. History, Education Minor … Westcliff University (NAIA) and Shepherd University (NCAA). Dean's List. Coaching across five academies. Specializes in youth development from beginners to competitive juniors.”
   - **Peter:** Title: “Head Coach”. Bio: “USPTA + PTR Dual Certified · #1 SoCal Collegiate Team … Mt. San Jacinto College (#1 SoCal). Dual USPTA/PTR certified. Over eight years professional coaching across juniors, adults, and competitive training.”
 - [x] **1.3** Add a small config or constants for flyer contact/CTA (phone, email, register URL, season label “Spring 2026 · April 6 – June 13”) if not already derivable from `data/spring-summer-2026.json` and .cursorrules. Use one place so updates don’t require editing the component.
@@ -65,7 +65,7 @@ Copy assets into `public/images/print/` with the canonical names above for use i
 - [x] **2.1** Create `app/print/court-flyer/page.tsx` (server component): load coaches (with flyer titles/bios), private rates, spring season dates, programs, schedule-by-location data, and camps from existing lib + data. Pass to a client or server flyer component that renders the full layout.
 - [x] **2.2** Implement the flyer UI (single component or a few subcomponents):
   - **Header:** “CERTIFIED CITY OF LAGUNA BEACH COACHING TEAM” + “Only LBTA coaches are authorized to teach at City of Laguna Beach tennis courts.” + “FREE TRIAL — Try Any Group Class”.
-  - **Coach section:** “Your Certified Coaching Team” — four cards in draft order (Andrew, Robert, Allison, Peter): photo (`next/image` or `<img>` with stable paths), name, flyer title, flyer bio (short).
+  - **Coach section:** “Your Certified Coaching Team” — four cards in draft order (Andrew, former coach removed, Allison, Peter): photo (`next/image` or `<img>` with stable paths), name, flyer title, flyer bio (short).
   - **Private lessons:** Table from `data/private-rates.json` (COACH, 60 MIN, 90 MIN, 10-PACK, 20-PACK).
   - **CTA block:** FREE TRIAL (phone), EMAIL, REGISTER (City phone/URL) — from config.
   - **Reserved courts:** Moulton Meadows Park (Court 2, address), Alta Laguna Park (Courts 1 & 2, address), Laguna Beach High School (Courts 1 & 2, address). Optional: Sat 1–3 PM USTA League note.
@@ -93,7 +93,7 @@ Copy assets into `public/images/print/` with the canonical names above for use i
 | File | Action | Purpose |
 |------|--------|---------|
 | `public/images/print/coach-andrew.png` | Create (copy) | Coach photo for Andrew (from assets, per mapping). |
-| `public/images/print/coach-robert.png` | Create (copy) | Coach photo for Robert. |
+| `public/images/print/coach-former-removed.png` | Create (copy) | Archived coach photo placeholder for historical draft parity. |
 | `public/images/print/coach-allison.png` | Create (copy) | Coach photo for Allison. |
 | `public/images/print/coach-peter.png` | Create (copy) | Coach photo for Peter. |
 | `data/flyer-coach-bios.json` or extend `data/coaches.json` | Create or Modify | Flyer-specific titles and short bios. |
@@ -108,7 +108,7 @@ Copy assets into `public/images/print/` with the canonical names above for use i
 # files (for tooling; do not edit by hand)
 create:
   - public/images/print/coach-andrew.png
-  - public/images/print/coach-robert.png
+  - public/images/print/coach-former-removed.png
   - public/images/print/coach-allison.png
   - public/images/print/coach-peter.png
   - data/flyer-coach-bios.json
@@ -146,7 +146,7 @@ create_optional:
 
 ## Acceptance checklist
 
-- [ ] [Photos] Four coach photos appear in the correct order (Andrew, Robert, Allison, Peter): Andrew=image 4, Robert=image 2, Allison=image 3, Peter=image 1.
+- [ ] [Photos] Four coach photos appear in the correct order (Andrew, former coach removed, Allison, Peter): Andrew=image 4, former coach removed=image 2, Allison=image 3, Peter=image 1.
 - [ ] [Data] Private lesson table matches `data/private-rates.json`; program pricing and schedule grids match spring 2026 data.
 - [ ] [Print] PDF exported from the route has no site chrome, readable text, and no horizontal overflow.
 - [ ] [Brand] No hardcoded hex; fonts are Cormorant (headlines) and DM Sans (body).
@@ -183,5 +183,5 @@ create_optional:
 
 ## Next step
 
-1. Run **Work** phase: implement Phase 1 (copy photos per mapping: 1=Peter, 2=Robert, 3=Allison, 4=Andrew; add flyer bios/config), Phase 2 (print route + layout + print CSS), Phase 3 (data wiring), then optionally Phase 4 (PDF script).
+1. Run **Work** phase: implement Phase 1 (copy photos per mapping: 1=Peter, 2=former coach removed, 3=Allison, 4=Andrew; add flyer bios/config), Phase 2 (print route + layout + print CSS), Phase 3 (data wiring), then optionally Phase 4 (PDF script).
 2. **Validate:** Open `/print/court-flyer`, print to PDF, and verify against the acceptance checklist.

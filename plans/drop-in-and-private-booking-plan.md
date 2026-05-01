@@ -30,7 +30,7 @@ Add (1) visible drop-in pricing for UTR Circuit / Saturday Matchplay leagues on 
 
 ### Phase 3: Coach slug → name and book URL
 - [ ] 3.1 Add a small helper or use `data/coaches.json`: map coach slug to display name (e.g. `andrew-mateljan` → `Andrew Mateljan`) for use on book page and in modal. Ensure book page and PrivateLessonModal can resolve `?coach=slug` to a name that matches `year2026.privateCoaching[].coach`.
-- [ ] 3.2 Coach bio pages: change “Book” / “Book a lesson” link from `href="/book"` to `href="/book?type=private&coach=<slug>"` (andrew-mateljan, robert-lebuhn, peter-defrantz, allison-cronk).
+- [ ] 3.2 Coach bio pages: change “Book” / “Book a lesson” link from `href="/book"` to `href="/book?type=private&coach=<slug>"` (andrew-mateljan, former-coach-removed, peter-defrantz, allison-cronk).
 
 ### Phase 4: Book page and PrivateLessonModal — coach pre-select
 - [ ] 4.1 Book page: when `searchParams.type === 'private'` and `searchParams.coach` is present, resolve slug to display name and pass `defaultCoach={displayName}` to PrivateLessonModal; open private modal by default (already handled by existing `isPrivate` from `type=private`).
@@ -52,7 +52,7 @@ Add (1) visible drop-in pricing for UTR Circuit / Saturday Matchplay leagues on 
 | `components/schedules/LeagueRow.tsx` | Modify | Add `dropIn` prop and render “Drop-in $X” |
 | `components/schedules/LeaguesSection.tsx` | Modify | Pass `dropIn` from division to LeagueRow |
 | `app/coaches/andrew-mateljan/page.tsx` | Modify | Link to `/book?type=private&coach=andrew-mateljan` |
-| `app/coaches/robert-lebuhn/page.tsx` | Modify | Link to `/book?type=private&coach=robert-lebuhn` |
+| `app/coaches/former-coach-removed/page.tsx` | Modify | Link to `/book?type=private&coach=former-coach-removed` |
 | `app/coaches/peter-defrantz/page.tsx` | Modify | Link to `/book?type=private&coach=peter-defrantz` |
 | `app/coaches/allison-cronk/page.tsx` | Modify | Link to `/book?type=private&coach=allison-cronk` |
 | `app/book/page.tsx` | Modify | Read `coach` searchParam; resolve slug→name; pass defaultCoach to PrivateLessonModal |

@@ -170,13 +170,13 @@ export default function PeterDeFrantzPage() {
           </h2>
           <p className="text-white/70 font-sans mb-6">No commitment. No pressure. Just tennis.</p>
           <div className="flex flex-col gap-4 mb-8 items-center">
-            <a href="mailto:andrew@lagunabeachtennisacademy.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+            <a href="mailto:support@lagunabeachtennisacademy.com" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
               <Mail className="w-5 h-5" aria-hidden />
-              <span>andrew@lagunabeachtennisacademy.com</span>
+              <span>support@lagunabeachtennisacademy.com</span>
             </a>
-            <a href="tel:9492410847" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+            <a href="tel:9495340457" className="flex items-center gap-3 text-white/80 hover:text-white transition-colors">
               <Phone className="w-5 h-5" aria-hidden />
-              <span>(949) 241-0847</span>
+              <span>(949) 534-0457</span>
             </a>
           </div>
           <Link

@@ -70,7 +70,7 @@ if (seasonsStr) {
 }
 console.log('SEASONS keys:', Object.keys(seasons).join(', '))
 
-// Coach schedules: ALLISON_SCHED, PETER_SCHED, ROBERT_SCHED (lines 1277, 1306, 1323) then COACH_SCHEDS
+// Coach schedules: ALLISON_SCHED, PETER_SCHED (lines 1277, 1306) then COACH_SCHEDS
 function extractScheduleBlock(lines, startLine) {
   const start = startLine - 1
   let acc = ''
@@ -97,7 +97,6 @@ function extractScheduleBlock(lines, startLine) {
 
 const allisonStr = extractScheduleBlock(lines, 1277)
 const peterStr = extractScheduleBlock(lines, 1306)
-const robertStr = extractScheduleBlock(lines, 1323)
 
 function parseSchedule(s) {
   if (!s) return null
@@ -112,12 +111,10 @@ function parseSchedule(s) {
 
 const ALLISON_SCHED = parseSchedule(allisonStr)
 const PETER_SCHED = parseSchedule(peterStr)
-const ROBERT_SCHED = parseSchedule(robertStr)
 
 const coachSchedules = {
   'Allison Cronk': ALLISON_SCHED || {},
   'Peter DeFrantz': PETER_SCHED || {},
-  'Robert LeBuhn': ROBERT_SCHED || {},
 }
 
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })

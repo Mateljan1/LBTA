@@ -103,48 +103,48 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
   if (variant === 'compact' && compactStacked) {
     const shortBio = truncateBio(coach.bio ?? '', 220)
     return (
-      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-black/[0.08] border-l-[3px] border-l-brand-victoria-cove/50 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_16px_40px_rgba(27,58,92,0.07)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06),0_24px_56px_rgba(27,58,92,0.09)]">
+      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl border border-black/[0.08] border-l-[2px] border-l-brand-victoria-cove/45 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.03),0_8px_24px_rgba(27,58,92,0.05)] transition-[box-shadow] duration-500 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 hover:shadow-[0_2px_10px_rgba(0,0,0,0.05),0_14px_30px_rgba(27,58,92,0.07)]">
         {/* Inset photo well: headshot isn’t glued to the card edge; ring + soft shadow read as editorial frame */}
-        <div className="shrink-0 px-4 pb-4 pt-4 sm:px-5 sm:pb-5 sm:pt-5">
+        <div className="shrink-0 px-3.5 pb-3.5 pt-3.5 sm:px-4 sm:pb-4 sm:pt-4">
           {/* 3:4 frame + object-contain + object-top: full bitmap visible, heads aligned to top (no zoom crop) */}
-          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[14px] bg-brand-morning-light ring-1 ring-black/[0.08] shadow-[0_2px_14px_rgba(27,58,92,0.08),inset_0_1px_0_rgba(255,255,255,0.5)]">
+          <div className="relative aspect-[5/6] w-full overflow-hidden rounded-[12px] bg-brand-morning-light ring-1 ring-black/[0.07] shadow-[0_1px_10px_rgba(27,58,92,0.07),inset_0_1px_0_rgba(255,255,255,0.45)]">
             <Image
               src={coachImageSrc(coach.image)}
               alt={`${coach.name}, ${coach.title} at Laguna Beach Tennis Academy`}
               fill
               className="object-contain object-top transition-opacity duration-300 group-hover:opacity-[0.98]"
-              sizes="(max-width: 768px) 92vw, (max-width: 1280px) 42vw, 480px"
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 34vw, 360px"
               quality={95}
             />
           </div>
         </div>
 
-        <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-5 py-6 sm:px-6 lg:px-7 lg:py-7">
+        <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-4 py-5 sm:px-5 sm:py-5 lg:px-6 lg:py-6">
           <div className="shrink-0">
             <p className="mb-2 font-sans text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-brand-pacific-dusk/55 line-clamp-2">
               {coach.title}
             </p>
             {hasBioLink ? (
               <Link href={`/coaches/${coach.slug}`} className="group/link inline-block rounded-[2px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2">
-                <h3 className="font-headline text-[20px] font-medium tracking-[-0.02em] text-brand-pacific-dusk transition-colors group-hover/link:text-brand-victoria-cove sm:text-[22px]">
+                <h3 className="font-headline text-[19px] font-medium tracking-[-0.02em] text-brand-pacific-dusk transition-colors group-hover/link:text-brand-victoria-cove sm:text-[20px]">
                   {coach.name}
                 </h3>
               </Link>
             ) : (
-              <h3 className="font-headline text-[20px] font-medium tracking-[-0.02em] text-brand-pacific-dusk sm:text-[22px]">
+              <h3 className="font-headline text-[19px] font-medium tracking-[-0.02em] text-brand-pacific-dusk sm:text-[20px]">
                 {coach.name}
               </h3>
             )}
-            <p className="mb-4 font-sans text-[12px] leading-relaxed text-brand-pacific-dusk/72 line-clamp-2 sm:text-[13px]">
+            <p className="mb-3.5 font-sans text-[12px] leading-relaxed text-brand-pacific-dusk/72 line-clamp-2 sm:text-[12px]">
               {coach.specialization}
             </p>
           </div>
 
-          <p className="min-h-0 flex-1 font-sans text-[14px] leading-[1.6] text-brand-pacific-dusk/82 line-clamp-4 sm:text-[15px]">
+          <p className="min-h-0 flex-1 font-sans text-[13px] leading-[1.55] text-brand-pacific-dusk/82 line-clamp-3 sm:text-[14px]">
             {shortBio}
           </p>
 
-          <div className="mt-auto flex flex-col gap-6 border-t border-black/[0.06] pt-6 sm:pt-7">
+          <div className="mt-auto flex flex-col gap-5 border-t border-black/[0.06] pt-5 sm:pt-6">
             <div className="flex flex-wrap gap-2">
               {coach.credentials.map((cred, i) => (
                 <span

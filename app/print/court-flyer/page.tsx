@@ -91,7 +91,7 @@ export default async function CourtFlyerPage({
 
   const discountLine = COURT_FLYER_DISCOUNT_LINE
 
-  const privateRatesOrder = ['Andrew Mateljan', 'Robert LeBuhn', 'Peter DeFrantz', 'Allison Cronk']
+  const privateRatesOrder = ['Andrew Mateljan', 'Peter DeFrantz', 'Allison Cronk']
   let orderedPrivateRates = privateRatesOrder.map((name) => privateRates.find((r) => r.coach === name)).filter(Boolean)
   if (orderedPrivateRates.length === 0) orderedPrivateRates = [...privateRates]
 

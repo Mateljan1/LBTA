@@ -6,7 +6,7 @@ Filename            Used on
 --------            -------
 andrew-headshot     Home founder block, Coaches listing
 andrew-action.webp  Coach bio / About
-robert-lebuhn       Coaches listing + bio page
+former-coach-removed       Coaches listing + bio page
 robert-action.webp  Coach bio
 peter-defrantz      Coaches listing + bio page
 peter-action.webp   Coach bio

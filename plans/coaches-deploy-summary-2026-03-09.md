@@ -21,7 +21,7 @@
 | Pre-Deploy Checker | ✅ PASS | Build OK, lint OK, env documented. Uncommitted changes present — commit coaches + image + plan/learnings before deploy so they ship. |
 | Environment Validator | ⚠️ (same as 2026-03-08) | Deploy via Git push to Vercel-connected repo. Set ACTIVECAMPAIGN_*, AC_WEBHOOK_SECRET in Vercel prod env. |
 | Rollback Guardian | ✅ | Rollback: Vercel Dashboard "Promote to Production" for previous deployment, or `git revert` + push. No irreversible ops in coaches work. |
-| Smoke Tester | ✅ | Use plans/SMOKE_TEST_CHECKLIST.md; after deploy verify /, /coaches, /schedules, /book, /coaches/robert-lebuhn. |
+| Smoke Tester | ✅ | Use plans/SMOKE_TEST_CHECKLIST.md; after deploy verify /, /coaches, /schedules, /book, /coaches/peter-defrantz. |
 | Post-Deploy Monitor | ⚠️ | No /health endpoint; monitor Vercel Logs and response times. |
 
 ---

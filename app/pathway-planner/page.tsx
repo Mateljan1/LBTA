@@ -37,37 +37,37 @@ function PathwayPlannerInteractive() {
       pathway.program = 'Little Tennis Stars'
       pathway.nextProgram = 'Red Ball Tennis'
       pathway.timeline = '1-2 years to progress'
-      pathway.coach = 'Robert LeBuhn'
+      pathway.coach = 'Peter DeFrantz'
     } else if (formData.age === '5-7') {
       pathway.program = formData.experience === 'never-played' ? 'Red Ball Tennis' : 'Orange Ball Tennis'
       pathway.nextProgram = 'Green Dot Tennis'
       pathway.timeline = '2-3 years to competitive level'
-      pathway.coach = 'Robert LeBuhn'
+      pathway.coach = 'Peter DeFrantz'
     } else if (formData.age === '7-9') {
       pathway.program = formData.experience === 'advanced' ? 'Green Dot Tennis' : 'Orange Ball Tennis'
       pathway.nextProgram = 'Youth Development'
       pathway.timeline = '2-4 years to high school varsity'
-      pathway.coach = 'Robert LeBuhn or Peter DeFrantz'
+      pathway.coach = 'Peter DeFrantz or Allison Cronk'
     } else if (formData.age === '9-11') {
       pathway.program = 'Green Dot Tennis'
       pathway.nextProgram = 'Youth Development → High Performance'
       pathway.timeline = '4-6 years to college recruitment'
-      pathway.coach = 'Robert LeBuhn'
+      pathway.coach = 'Peter DeFrantz'
     } else if (formData.age === '11-15') {
       pathway.program = 'Youth Development'
       pathway.nextProgram = 'High Performance → College Bound'
       pathway.timeline = '3-5 years to D1 scholarship readiness'
-      pathway.coach = 'Robert LeBuhn'
+      pathway.coach = 'Peter DeFrantz'
     } else if (formData.age === '15-18') {
       pathway.program = 'High Performance'
       pathway.nextProgram = 'College Recruitment Active'
       pathway.timeline = '1-3 years to college placement'
-      pathway.coach = 'Andrew Mateljan or Robert LeBuhn'
+      pathway.coach = 'Andrew Mateljan or Peter DeFrantz'
     } else {
       pathway.program = 'Adult Programs'
       pathway.nextProgram = 'Competitive Match Play'
       pathway.timeline = 'Ongoing development'
-      pathway.coach = 'Peter DeFrantz or Robert LeBuhn'
+      pathway.coach = 'Peter DeFrantz or Allison Cronk'
     }
 
     // Goal-specific guidance

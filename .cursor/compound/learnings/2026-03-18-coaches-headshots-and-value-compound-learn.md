@@ -17,7 +17,7 @@
 | Original | Correction |
 |----------|------------|
 | Coach headshots not updating after deploy (same URL, CDN/browser cache) | Use cache-bust: COACH_IMAGE_VERSION in lib/coaches-data.ts and coachImageSrc(path) appending ?v=N to every coach image URL; bump version when replacing assets. |
-| Coach image mapping by number (1,2,3,4) error-prone when user provides named files | When user provides named assets (e.g. Andrew_Bio_pic-*.png, Robert_bio_pic-*.png), copy those to canonical public paths (andrew-headshot.png, robert-lebuhn.png, etc.); prefer named files over numbered when both exist. |
+| Coach image mapping by number (1,2,3,4) error-prone when user provides named files | When user provides named assets (e.g. Andrew_Bio_pic-*.png, former_coach_removed_bio_pic-*.png), copy those to canonical public paths (andrew-headshot.png, former-coach-removed.png, etc.); prefer named files over numbered when both exist. |
 
 ---
 

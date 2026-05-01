@@ -49,7 +49,7 @@ community-1.webp … community-12.webp  → Home community grid, success stories
 andrew-headshot.webp          → Home founder, Coaches listing
 andrew-portrait.webp          → Home founder (alternative), founder/
 andrew-action.webp            → Coach bio / About
-robert-lebuhn, peter-defrantz, allison-cronk (+ -action) → Coaches
+former-coach-removed, peter-defrantz, allison-cronk (+ -action) → Coaches
 
 --- FOUNDER ---
 andrew-portrait.webp          → 800×1000 (4:5), founder/

@@ -27,13 +27,13 @@ export default function CoachingTeamSection() {
           <p className="max-w-[52ch] font-sans text-[15px] leading-relaxed text-brand-pacific-dusk/70 md:text-[16px]">
             Decades of combined experience. One philosophy: movement first, then craft—and a community that stays.
           </p>
-          <p className="mt-5 max-w-[52ch] border-l-2 border-brand-victoria-cove/40 pl-4 font-sans text-[13px] leading-relaxed text-brand-pacific-dusk/58 md:text-[14px]">
-            Same philosophy as above. Private sessions with the coach who fits your goals.
+          <p className="mt-4 max-w-[52ch] border-l-2 border-brand-victoria-cove/35 pl-4 font-sans text-[13px] leading-relaxed text-brand-pacific-dusk/58 md:text-[14px]">
+            Private sessions with the coach who best fits your goals.
           </p>
         </AnimatedSection>
 
-        {/* 3-col from md+ for 3 active coaches (Robert, Peter, Allison). Paused coaches (hidden flag) auto-filter via getTeamCoachesForGrid. When roster grows back to 4, swap to md:grid-cols-2. */}
-        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 items-stretch gap-8 md:grid-cols-3 md:gap-x-8 md:gap-y-10 lg:gap-x-10 lg:gap-y-12">
+        {/* Two-column presentation on medium+ keeps cards compact and avoids oversized portraits. */}
+        <div className="mx-auto grid w-full max-w-[920px] grid-cols-1 items-stretch gap-7 md:grid-cols-2 md:gap-x-7 md:gap-y-8 lg:gap-x-8 lg:gap-y-9">
           {teamCoaches.map((coach, index) => (
             <AnimatedSection
               key={coach.slug ?? `order-${coach.order}-${index}`}

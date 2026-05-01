@@ -98,7 +98,7 @@
       "duration": "2 hr",
       "schedule": [
         { "day": "Monday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" },
-        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn" },
+        { "day": "Wednesday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz" },
         { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Andrew Mateljan" }
       ],
       "pricing": { "1x": 1000, "2x": 2000, "3x": 2792, "drop_in": 70 },
@@ -116,7 +116,7 @@
       "schedule": [
         { "day": "Monday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "note": "Training" },
         { "day": "Wednesday", "time": "6:30–8:30 PM", "coach": "Andrew Mateljan & Peter DeFrantz", "note": "Training" },
-        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Robert LeBuhn & Peter DeFrantz", "note": "Match Play" }
+        { "day": "Friday", "time": "4:30–6:30 PM", "coach": "Peter DeFrantz & Allison Cronk", "note": "Match Play" }
       ],
       "pricing": { "1x": 1000, "2x": 2000, "3x": 2792, "drop_in": 100 },
       "description": "The highest level of training at LBTA. Every session simulates tournament conditions. UTR 8+ required. Coach approval required.",
@@ -135,7 +135,7 @@
         { "day": "Wednesday", "time": "6:30–7:30 PM", "coach": "Peter DeFrantz" },
         { "day": "Tuesday", "time": "10:00–11:00 AM", "coach": "Andrew Mateljan" },
         { "day": "Thursday", "time": "10:00–11:00 AM", "coach": "Andrew Mateljan" },
-        { "day": "Saturday", "time": "9:00–10:00 AM", "coach": "Robert LeBuhn" }
+        { "day": "Saturday", "time": "9:00–10:00 AM", "coach": "Peter DeFrantz" }
       ],
       "pricing": { "1x": 672, "2x": 984, "saturday1x": 608, "drop_in": 55 },
       "description": "Never played? Start here. Strokes, footwork, serving, scoring — everything from the ground up."
@@ -164,7 +164,7 @@
       "schedule": [
         { "day": "Tuesday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan" },
         { "day": "Thursday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan" },
-        { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Robert LeBuhn", "note": "Separate pricing" }
+        { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Peter DeFrantz", "note": "Separate pricing" }
       ],
       "pricing": { "1x": 928, "2x": 1768, "3x": 2512, "drop_in": 70 },
       "pricingNote": "Saturday session has separate pricing.",
@@ -193,7 +193,7 @@
       "duration": "1-1.5 hr",
       "schedule": [
         { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
-        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Robert LeBuhn", "location": "LB High School" },
+        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Peter DeFrantz", "location": "LB High School" },
         { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "LB High School", "note": "Intermediate (3.0–4.0)" },
         { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "LB High School", "note": "Advanced (4.0+)" }
       ],

@@ -54,7 +54,7 @@ Execute audit in **6 phases**. Each phase produces a checklist; fixes tracked pe
 | `/coaches` | Full | |
 | `/coaches/andrew-mateljan` | Full | |
 | `/coaches/allison-cronk` | Full | |
-| `/coaches/robert-lebuhn` | Full | |
+| `/coaches/former-coach-removed` | Full | historical route reference |
 | `/coaches/peter-defrantz` | Full | |
 | `/programs` | Full | Overview |
 | `/programs/adult` | Full | |
@@ -154,7 +154,7 @@ Per .cursorrules breakpoints. For each page in scope:
 | /programs/utr-match-play | | | | |
 | /coaches/andrew-mateljan | | | | |
 | /coaches/allison-cronk | | | | |
-| /coaches/robert-lebuhn | | | | |
+| /coaches/former-coach-removed | | | | |
 | /coaches/peter-defrantz | | | | |
 | /privacy | | | | |
 | /terms | | | | |

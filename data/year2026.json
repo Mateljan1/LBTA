@@ -67,7 +67,7 @@
       "perDay": 124,
       "description": "The pool at Alta Laguna is closed for construction and remodeling in summer 2026. We are offering our Tennis & Adventure Camp instead — same great location, tennis instruction, field games, and activities. See Summer Camps (Tennis & Adventure) for dates and enrollment.",
       "includes": ["Tennis instruction", "Supervised swimming", "Team activities", "Certified lifeguards"],
-      "coaches": ["Andrew Mateljan", "Robert LeBuhn"],
+      "coaches": ["Andrew Mateljan", "Peter DeFrantz"],
       "featured": false,
       "safetyNote": "All participants must be able to swim independently."
     },
@@ -270,7 +270,6 @@
 
   "privateCoaching": [
     { "coach": "Andrew Mateljan", "title": "Founder & Director of Tennis", "rate60": 250, "rate90": 350, "pack10": 2300, "pack20": 4200, "availability": "Limited" },
-    { "coach": "Robert LeBuhn", "title": "Adult Programs Coach", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" },
     { "coach": "Peter DeFrantz", "title": "Head Coach, Junior Development", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" },
     { "coach": "Allison Cronk", "title": "Head Coach, Youth Programs", "rate60": 120, "rate90": 165, "pack10": 1100, "pack20": 2000, "availability": "Available" }
   ],

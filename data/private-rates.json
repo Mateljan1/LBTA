@@ -1,6 +1,5 @@
 [
   { "coach": "Andrew Mateljan", "specialty": "Founder & Director of Tennis", "rate_60": 250, "rate_90": 350, "pack_10": 2300, "pack_20": 4200 },
-  { "coach": "Robert LeBuhn", "specialty": "Adult Programs Coach", "rate_60": 120, "rate_90": 165, "pack_10": 1100, "pack_20": 2000 },
   { "coach": "Peter DeFrantz", "specialty": "Head Coach, Junior Development", "rate_60": 120, "rate_90": 165, "pack_10": 1100, "pack_20": 2000 },
   { "coach": "Allison Cronk", "specialty": "Head Coach, Youth Programs", "rate_60": 120, "rate_90": 165, "pack_10": 1100, "pack_20": 2000 }
 ]

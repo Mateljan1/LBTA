@@ -11,7 +11,7 @@ const SITE_URL =
     : 'https://lagunabeachtennisacademy.com'
 
 /** Bump when coach headshots are updated so browsers and CDN fetch new images. */
-export const COACH_IMAGE_VERSION = 13
+export const COACH_IMAGE_VERSION = 14
 
 /** Coach image URL with cache-bust query param. Use for all coach headshot src. */
 export function coachImageSrc(path: string): string {
@@ -57,7 +57,7 @@ export function getFounder(): Coach | undefined {
   return getVisibleCoaches().find((c) => c.role === 'founder')
 }
 
-/** Lead coach only (Robert). */
+/** Lead coach if configured in roster data. */
 export function getLeadCoach(): Coach | undefined {
   return getVisibleCoaches().find((c) => c.role === 'lead')
 }
@@ -75,11 +75,11 @@ export function getTeamCoaches(): Coach[] {
 }
 
 /**
- * Meet the Team grid order: Robert, Peter, Allison. Paused coaches are filtered
+ * Meet the Team grid order: Peter, Allison. Paused coaches are filtered
  * out automatically via getTeamCoaches() (which uses the visible-only list).
  * Explicit slugs keep layout stable if `order` in JSON changes.
  */
-const TEAM_GRID_SLUGS = ['robert-lebuhn', 'peter-defrantz', 'michelle-mateljan', 'allison-cronk'] as const
+const TEAM_GRID_SLUGS = ['peter-defrantz', 'michelle-mateljan', 'allison-cronk'] as const
 
 export function getTeamCoachesForGrid(): Coach[] {
   const team = getTeamCoaches() // already filters hidden

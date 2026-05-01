@@ -28424,7 +28424,7 @@
       "stage": "STG-11-14_YELLOW",
       "duration": 120,
       "max": 18,
-      "coach": "Peter DeFrantz, Robert LeBuhn, Andrew Mateljan",
+      "coach": "Peter DeFrantz, Allison Cronk, Andrew Mateljan",
       "location": "Laguna Beach High School",
       "freq_options": [
         "1x/week",
@@ -28494,7 +28494,7 @@
           "time": "4:30–6:30 PM",
           "code": "C",
           "focus": "Match Play",
-          "coach": "Robert LeBuhn, Peter DeFrantz"
+          "coach": "Peter DeFrantz, Allison Cronk"
         }
       ]
     },
@@ -28552,7 +28552,7 @@
           "day": "Saturday",
           "time": "9:00–10:00 AM",
           "code": "A",
-          "coach": "Robert LeBuhn",
+          "coach": "Peter DeFrantz",
           "location": "LBHS"
         }
       ]
@@ -28623,7 +28623,7 @@
           "day": "Saturday",
           "time": "10:00–11:30 AM",
           "code": "A",
-          "coach": "Robert LeBuhn",
+          "coach": "Peter DeFrantz",
           "notes": "Separate pricing"
         }
       ]
@@ -28690,7 +28690,7 @@
           "day": "Saturday",
           "time": "11:30 AM–1:00 PM",
           "code": "A",
-          "coach": "Robert LeBuhn",
+          "coach": "Peter DeFrantz",
           "location": "LBHS"
         },
         {
@@ -28737,7 +28737,7 @@
       "stage": "STG-ADULT_COMP",
       "duration": 90,
       "max": 6,
-      "coach": "Robert LeBuhn",
+      "coach": "Peter DeFrantz",
       "location": "Laguna Beach High School",
       "freq_options": [
         "monthly",
@@ -28781,14 +28781,14 @@
       "notes": "Limited availability. Tailored to student goals."
     },
     {
-      "id": "private_robert",
-      "name": "Private Lesson — Robert LeBuhn",
+      "id": "private_peter_2",
+      "name": "Private Lesson — Peter DeFrantz",
       "category": "private",
       "ages": "All",
       "stage": null,
       "duration": 60,
       "max": 1,
-      "coach": "Robert LeBuhn",
+      "coach": "Peter DeFrantz",
       "location": "Laguna Beach High School",
       "freq_options": [
         "single",
@@ -46564,14 +46564,6 @@
       "20pack": "$4,200",
       "availability": "Limited"
     },
-    "Robert LeBuhn": {
-      "60": "$120",
-      "90": "$165",
-      "title": "Senior Coach",
-      "10pack": "$1,100",
-      "20pack": "$2,000",
-      "availability": "Available"
-    },
     "Peter DeFrantz": {
       "60": "$120",
       "90": "$165",
@@ -47165,14 +47157,14 @@
       "day1": "Pickup: '[Child] did amazing! They picked up [skill] fast. Have you thought about fall programs?' Hand out flyer.",
       "day3": "'[Child] is really developing. They'd be perfect for [Orange Ball / Green Dot] this fall. Want me to save a spot?'",
       "thursday": "During awards, publicly recognize growth. After: 'It would be a shame to lose momentum. Fall starts [date].'",
-      "post_camp": "Robert texts: 'Allison mentioned [Child] had a great week. [Program] would be a perfect next step. Want a free trial?'"
+      "post_camp": "Peter texts: 'Allison mentioned [Child] had a great week. [Program] would be a perfect next step. Want a free trial?'"
     }
   },
   "lbhs_team": {
     "name": "LBHS Boys Tennis",
     "season": "Spring 2026",
     "head_coach": "Andrew Mateljan",
-    "asst_coach": "Robert LeBuhn",
+    "asst_coach": "Peter DeFrantz",
     "courts": 6,
     "location": "Laguna Beach High School",
     "roster": [

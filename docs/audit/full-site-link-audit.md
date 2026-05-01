@@ -56,7 +56,7 @@
 | Page | Book link | Status |
 |------|-----------|--------|
 | andrew-mateljan | /book?type=private&coach=andrew-mateljan | ✅ |
-| robert-lebuhn | /book?type=private&coach=robert-lebuhn | ✅ |
+| former-coach-removed | /book?type=private&coach=former-coach-removed | ✅ |
 | allison-cronk | /book?type=private&coach=allison-cronk | ✅ |
 | peter-defrantz | (via CoachCard) | ✅ |
 

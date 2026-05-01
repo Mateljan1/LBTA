@@ -7,11 +7,13 @@ Combining luxury restraint with California warmth and founder-led excellence.
 ## Brand Essence
 
 ### Positioning
+
 - **NOT** a quiet spa experience
 - **YES** ATP/WTA-level training with sophisticated presentation
 - Small by design. Results-driven. Honest communication.
 
 ### Key Differentiators
+
 - ATP/WTA coaching (currently coaching ATP #262 Karue Sell)
 - 20+ D1 college placements since 2020
 - Official City of Laguna Beach tennis partner since 2020
@@ -20,6 +22,7 @@ Combining luxury restraint with California warmth and founder-led excellence.
 ## Site Architecture
 
 ### Core Pages
+
 ```
 /                        → Home (video hero)
 /about                   → About the academy
@@ -45,6 +48,7 @@ Combining luxury restraint with California warmth and founder-led excellence.
 ```
 
 ### Campaign Landing Pages
+
 ```
 /junior-trial            → Junior winter registration
 /adult-trial             → Adult trial landing
@@ -155,6 +159,7 @@ vercel --prod
 ```
 
 ### Via Dashboard
+
 1. Push to GitHub
 2. Import to Vercel
 3. Deploy automatically
@@ -163,23 +168,20 @@ vercel --prod
 
 Run these after each deploy to confirm key flows and SEO:
 
-1. **FAQ schema (rich results)**  
-   Open [Google Rich Results Test](https://search.google.com/test/rich-results) and enter your live FAQ URL (e.g. `https://lagunabeachtennisacademy.com/faq`). Confirm the tool detects the FAQPage structured data and shows no errors.
-
-2. **Contact form**  
-   Visit `/contact`, fill and submit the form once. Confirm you see the loading state (“Sending…”), then either success or the inline error message. Verifies form submission and loading/error UI.
-
-3. **Book Trial (optional)**  
-   Open `/book`, open the trial modal, and submit once. Confirm “Submitting…” and success or error message.
-
-4. **Critical pages load**  
-   Quick click-through: `/` → `/schedules` → `/programs` → `/contact`. No blank or broken layout.
+1. **FAQ schema (rich results)**
+  Open [Google Rich Results Test](https://search.google.com/test/rich-results) and enter your live FAQ URL (e.g. `https://lagunabeachtennisacademy.com/faq`). Confirm the tool detects the FAQPage structured data and shows no errors.
+2. **Contact form**
+  Visit `/contact`, fill and submit the form once. Confirm you see the loading state (“Sending…”), then either success or the inline error message. Verifies form submission and loading/error UI.
+3. **Book Trial (optional)**
+  Open `/book`, open the trial modal, and submit once. Confirm “Submitting…” and success or error message.
+4. **Critical pages load**
+  Quick click-through: `/` → `/schedules` → `/programs` → `/contact`. No blank or broken layout.
 
 **Local check (before pushing):** Run `npm run build` and `npm start`, then open `http://localhost:3000/faq` and `http://localhost:3000/contact` and run steps 1–2 against localhost if you want to validate before deploy.
 
 ### When to run compound:learn
 
-Run **`/compound:learn`** (or have your agent run it) in these situations so you don’t have to remember:
+Run `**/compound:learn`** (or have your agent run it) in these situations so you don’t have to remember:
 
 1. **After completing a plan** — When you finish executing a plan (e.g. product improvements, a feature), run learn to capture corrections, patterns, and standards in `plans/COMPOUND_LEARN.md`.
 2. **After a code review or validation pass** — After `/compound:review` or `/compound:validate`, run learn to update the learnings file from the latest findings.
@@ -194,26 +196,22 @@ Form submissions (book, newsletter, register, scholarship, JTT, etc.) can be sto
 **Using the Supabase CLI (recommended):**
 
 1. **Log in and link** (one-time):
-   ```bash
+  ```bash
    npx supabase login
    npx supabase link --project-ref mapbbmrjgpusegjvbkod
-   ```
+  ```
    Use the same project as your existing storage (`mapbbmrjgpusegjvbkod.supabase.co`).
-
 2. **Apply the leads table migration:**
-   ```bash
+  ```bash
    npx supabase db push
-   ```
+  ```
    This runs `supabase/migrations/20260306000000_create_leads_table.sql` on the linked project.
-
 3. **Set environment variables** in Vercel (and optionally in local `.env`):
-   - `SUPABASE_URL` — Project URL (e.g. `https://mapbbmrjgpusegjvbkod.supabase.co`)
-   - `SUPABASE_SERVICE_ROLE_KEY` — Service role key (Settings → API; keep secret)
+  - `SUPABASE_URL` — Project URL (e.g. `https://mapbbmrjgpusegjvbkod.supabase.co`)
+  - `SUPABASE_SERVICE_ROLE_KEY` — Service role key (Settings → API; keep secret)
 
 **Alternative (run from repo with your DB URL):**
-  ```bash
-  DATABASE_URL='postgresql://postgres.[ref]:[PASSWORD]@...' node scripts/run-leads-migration.js
-  ```
+
   Get the connection string from Supabase Dashboard → Project Settings → Database → Connection string (URI). Requires `psql` (PostgreSQL client) installed.
 
 **Alternative (no CLI, no script):** In Supabase Dashboard → SQL Editor, run the contents of `supabase/leads.sql` once.
@@ -223,6 +221,7 @@ If the env vars are not set, the app still works; the lead store no-ops.
 ## Content Overview
 
 ### Coaching Team
+
 - Andrew Mateljan — Director & Head Coach, ATP/WTA Tour Coach, Founder
 - Kevin Jackson — Head Coach & Performance Director, 25+ years, 3,000+ athletes
 - Savriyan Danilov — High Performance Coach, ATP Pro #556
@@ -230,6 +229,7 @@ If the env vars are not set, the app still works; the lead store no-ops.
 - Michelle Bevins — Youth Director, Red/Orange Ball Specialist
 
 ### Programs
+
 - Junior Pathway (ages 3-17)
 - Adult Training
 - High Performance (invitation-only)
@@ -240,8 +240,9 @@ If the env vars are not set, the app still works; the lead store no-ops.
 Pricing lives in `/data/*.json` files — never hardcode in components.
 
 ### Contact
+
 - Phone: (949) 534-0457
-- Email: support@lagunabeachtennisacademy.com
+- Email: [support@lagunabeachtennisacademy.com](mailto:support@lagunabeachtennisacademy.com)
 - Address: 1098 Balboa Ave, Laguna Beach, CA 92651
 - Hours: Mon-Fri 7AM-9PM, Sat-Sun 8AM-6PM
 
@@ -264,9 +265,11 @@ Pricing lives in `/data/*.json` files — never hardcode in components.
 ## Conversion Strategy
 
 **Primary CTA:** "Book a Trial" / "Book Free Trial"
+
 - Links to: `/book` (on-site modal)
 
 **Trust Builders:**
+
 - Free trial (zero commitment)
 - 30-day money-back guarantee
 - Transparent pricing
@@ -280,7 +283,7 @@ Page content lives in `app/` route components. Pricing and schedule data lives i
 
 ### Update Colors
 
-Edit `tailwind.config.ts` — use `brand-*` tokens for new code:
+Edit `tailwind.config.ts` — use `brand-`* tokens for new code:
 
 ```typescript
 colors: {
@@ -301,7 +304,8 @@ Edit coach data in `app/coaches/page.tsx`.
 ## Support
 
 For questions:
-- Email: support@lagunabeachtennisacademy.com
+
+- Email: [support@lagunabeachtennisacademy.com](mailto:support@lagunabeachtennisacademy.com)
 - Phone: (949) 534-0457
 
 ## License

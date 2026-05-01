@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
 import { X, Check } from 'lucide-react'
-import siteStats from '@/data/site-stats.json'
 
 /** Exit-intent only on program/booking funnel pages — not philosophy, legal, thank-you, or internal tools. */
 function isExitIntentPath(pathname: string | null): boolean {
@@ -36,7 +35,7 @@ export default function ExitIntentPopup() {
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const previousActiveRef = useRef<HTMLElement | null>(null)
   const hasScrolledPastThresholdRef = useRef(false)
-  const SCROLL_THRESHOLD_PX = 200 // Never show on initial load: only after user has scrolled past this
+  const SCROLL_THRESHOLD_PX = 360 // Stronger engagement gate before popup can appear
 
   useEffect(() => {
     if (!isExitIntentPath(pathname)) return
@@ -68,7 +67,7 @@ export default function ExitIntentPopup() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       if (currentScrollY > SCROLL_THRESHOLD_PX) hasScrolledPastThresholdRef.current = true
-      if (currentScrollY < lastScrollY - 100 && currentScrollY < 200 && !hasShown && hasScrolledPastThresholdRef.current) {
+      if (currentScrollY < lastScrollY - 140 && currentScrollY < 140 && !hasShown && hasScrolledPastThresholdRef.current) {
         setIsVisible(true)
         setHasShown(true)
         sessionStorage.setItem('exitPopupShown', 'true')
@@ -80,7 +79,7 @@ export default function ExitIntentPopup() {
     const timer = setTimeout(() => {
       document.addEventListener('mouseleave', handleMouseLeave)
       window.addEventListener('scroll', handleScroll, { passive: true })
-    }, 10000)
+    }, 18000)
 
     return () => {
       clearTimeout(timer)
@@ -111,7 +110,7 @@ export default function ExitIntentPopup() {
         body: JSON.stringify({
           email,
           source: 'exit-intent-popup',
-          offer: 'free-trial'
+          offer: 'training-tips'
         }),
       })
 
@@ -182,7 +181,7 @@ export default function ExitIntentPopup() {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-black/45 backdrop-blur-[1px] animate-fade-in"
         onClick={close}
         aria-hidden="true"
       />
@@ -191,7 +190,7 @@ export default function ExitIntentPopup() {
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="relative bg-brand-morning-light w-full max-w-[440px] animate-scale-in outline-none"
+        className="relative bg-brand-morning-light w-full max-w-[400px] animate-scale-in outline-none"
         role="dialog"
         aria-modal="true"
         aria-labelledby="exit-popup-title"
@@ -208,7 +207,7 @@ export default function ExitIntentPopup() {
 
         {isSuccess ? (
           /* Success State */
-          <div className="px-10 py-16 text-center">
+          <div className="px-8 py-14 text-center">
             <div className="w-14 h-14 bg-brand-pacific-dusk rounded-full flex items-center justify-center mx-auto mb-6">
               <Check className="h-7 w-7 text-white" strokeWidth={2} aria-hidden />
             </div>
@@ -219,7 +218,7 @@ export default function ExitIntentPopup() {
               You&apos;re In
             </h3>
             <p className="font-sans text-[15px] text-brand-pacific-dusk/80 leading-relaxed max-w-[280px] mx-auto">
-              Check your email for your complimentary trial details. We look forward to seeing you on the court.
+              Check your email for practical tennis tips and key schedule updates.
             </p>
           </div>
         ) : (
@@ -228,23 +227,23 @@ export default function ExitIntentPopup() {
             <div className="h-[3px] bg-brand-pacific-dusk" />
 
             {/* Content */}
-            <div className="px-10 py-12 md:py-14">
+            <div className="px-8 py-10 md:px-9 md:py-11">
               {/* Eyebrow */}
               <p className="text-eyebrow text-brand-pacific-dusk/60 text-center mb-4">
-                Complimentary Trial
+                LBTA Insider Notes
               </p>
 
               {/* Headline */}
               <h3
                 id="exit-popup-title"
-                className="font-headline text-[32px] md:text-[36px] font-semibold text-brand-pacific-dusk text-center leading-[1.1] mb-4"
+                className="font-headline text-[30px] md:text-[34px] font-semibold text-brand-pacific-dusk text-center leading-[1.1] mb-4"
               >
-                Experience LBTA
+                Stay Close to the Court
               </h3>
 
               {/* Subhead */}
-              <p className="font-sans text-[16px] text-brand-pacific-dusk/80 text-center leading-relaxed mb-8 max-w-[320px] mx-auto">
-                Discover expert tennis instruction with a complimentary private lesson.
+              <p className="font-sans text-[15px] text-brand-pacific-dusk/80 text-center leading-relaxed mb-7 max-w-[300px] mx-auto">
+                Get practical training tips, schedule updates, and useful notes from our coaching team.
               </p>
 
               {/* Form */}
@@ -268,7 +267,7 @@ export default function ExitIntentPopup() {
                   disabled={isSubmitting}
                   className="btn-primary w-full"
                 >
-                  {isSubmitting ? 'Sending...' : 'Claim Your Free Lesson'}
+                  {isSubmitting ? 'Sending...' : 'Send Me the Tips'}
                 </button>
               </form>
 
@@ -277,37 +276,6 @@ export default function ExitIntentPopup() {
                 No spam, ever. Unsubscribe anytime.
               </p>
 
-              {/* Divider */}
-              <div className="my-8 h-px w-12 mx-auto bg-brand-pacific-dusk/15" aria-hidden="true" />
-
-              {/* Trust indicators — from single source: data/site-stats.json */}
-              <div className="flex items-center justify-center gap-6">
-                <div className="text-center">
-                  <p className="font-headline text-[24px] font-semibold text-brand-pacific-dusk">{siteStats.trustStats.playersCount}</p>
-                  <p className="font-sans text-[11px] text-brand-pacific-dusk/80 uppercase tracking-wider">Players</p>
-                </div>
-                <div className="w-px h-10 bg-brand-pacific-dusk/15" aria-hidden="true" />
-                <div className="text-center">
-                  <p className="font-headline text-[24px] font-semibold text-brand-pacific-dusk">{siteStats.trustStats.yearsExperience}</p>
-                  <p className="font-sans text-[11px] text-brand-pacific-dusk/80 uppercase tracking-wider">Years</p>
-                </div>
-                <div className="w-px h-10 bg-brand-pacific-dusk/15" aria-hidden="true" />
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-0.5 mb-0.5">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <svg
-                        key={star}
-                        className="w-3.5 h-3.5 text-brand-pacific-dusk fill-current"
-                        viewBox="0 0 20 20"
-                        aria-hidden="true"
-                      >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="font-sans text-[11px] text-brand-pacific-dusk/80 uppercase tracking-wider">{siteStats.trustStats.rating} Rating</p>
-                </div>
-              </div>
             </div>
           </>
         )}

@@ -8,12 +8,11 @@ import flyerBiosData from '@/data/flyer-coach-bios.json'
 
 const flyerBios = flyerBiosData as Record<string, { flyerTitle: string; flyerBio: string }>
 
-/** Display order on the flyer: Andrew, Robert, Peter, Allison. */
-const FLYER_COACH_ORDER = ['andrew-mateljan', 'robert-lebuhn', 'peter-defrantz', 'allison-cronk'] as const
+/** Display order on the flyer: Andrew, Peter, Allison. */
+const FLYER_COACH_ORDER = ['andrew-mateljan', 'peter-defrantz', 'allison-cronk'] as const
 
 const SLUG_TO_PRINT_IMG: Record<string, string> = {
   'andrew-mateljan': 'andrew',
-  'robert-lebuhn': 'robert',
   'peter-defrantz': 'peter',
   'allison-cronk': 'allison',
 }

@@ -345,7 +345,7 @@ function buildFlyerHtml(options: {
       ? `<a class="city-register-qr-link" href="${escapeHtml(FLYER_CONTACT.cityClassesRegistrationUrl)}" aria-label="Open City of Laguna Beach recreation class registration"><img class="city-register-qr" src="${cityQrFileUrl}" alt="QR code: City of Laguna Beach recreation classes and registration" width="128" height="128" /></a>`
       : ''
 
-  const privateRatesOrder = ['Andrew Mateljan', 'Robert LeBuhn', 'Peter DeFrantz', 'Allison Cronk']
+  const privateRatesOrder = ['Andrew Mateljan', 'Peter DeFrantz', 'Allison Cronk']
   const orderedRates = privateRatesOrder.map((name) => privateRates.find((r) => r.coach === name)).filter(Boolean) as PrivateRateRow[]
   const ratesForTable = orderedRates.length > 0 ? orderedRates : privateRates
 
@@ -680,10 +680,9 @@ async function main(): Promise<void> {
     }>
   }
 
-  const FLYER_ORDER = ['andrew-mateljan', 'robert-lebuhn', 'peter-defrantz', 'allison-cronk'] as const
+  const FLYER_ORDER = ['andrew-mateljan', 'peter-defrantz', 'allison-cronk'] as const
   const SLUG_TO_IMG: Record<string, string> = {
     'andrew-mateljan': 'andrew',
-    'robert-lebuhn': 'robert',
     'allison-cronk': 'allison',
     'peter-defrantz': 'peter',
   }

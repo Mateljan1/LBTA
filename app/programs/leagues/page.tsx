@@ -131,8 +131,8 @@ export default function LeaguesPage() {
             court to find your level.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="tel:9492410847" className="btn-primary">
-              Call (949) 241-0847
+            <a href="tel:9495340457" className="btn-primary">
+              Call (949) 534-0457
             </a>
             <Link href="/book" className="btn-secondary">
               Book a Trial

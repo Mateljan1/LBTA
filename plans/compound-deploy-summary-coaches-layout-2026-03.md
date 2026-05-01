@@ -17,7 +17,7 @@
 | Pre-Deploy Checker | ⚠️ WARNINGS | Build OK, lint OK; 3 npm audit findings (axios, lodash, next). Env vars per .env.example. Migrations N/A. |
 | Environment Validator | ✅ PASS | Vercel CLI 50.28; vercel.json present; no hardcoded secrets. |
 | Rollback Guardian | ✅ PASS | Prod was f25cc45; rollback feasible; no irreversible ops. |
-| Smoke Tester | ✅ PASS | /, /coaches, /coaches/andrew-mateljan, /coaches/robert-lebuhn, /schedules all 200; "Meet the Team" present. |
+| Smoke Tester | ✅ PASS | /, /coaches, /coaches/andrew-mateljan, /coaches/former-coach-removed, /schedules all 200; "Meet the Team" present. |
 | Post-Deploy Monitor | ✅ PASS | Live 200 on homepage (~223 ms) and /coaches (~549 ms). Monitor API and LCP in Vercel next 5–10 min. |
 
 ### Gate Check (Pre-Deploy)

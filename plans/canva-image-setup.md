@@ -74,7 +74,7 @@ Drop the final file (WebP or PNG/JPG) into the repo so the path matches what the
 | `public/images/programs/` | hero.webp, schedules-hero, juniors, adults, private-lessons, high-performance, fitness, youth-dev-1, private-specialty. |
 | `public/images/philosophy/` | movement, discipline, belonging. |
 | `public/images/founder/` | andrew-portrait. |
-| `public/images/coaches/` | andrew-headshot, robert-lebuhn, michelle, peter-defrantz, allison-cronk. |
+| `public/images/coaches/` | andrew-headshot, former-coach-removed, michelle, peter-defrantz, allison-cronk. |
 | `public/images/community/` | community-1 … community-7 (and more if you add). |
 | `public/images/results/` | karue-training, any other player success. |
 | `public/photos/` | adult-trial-hero, facility gallery (LBCOURTSETTING, VideoAnalysisRoom, GymSetting, OncourtTraining, Court setting). |

@@ -143,7 +143,7 @@
 | 47 | `andrew-headshot.webp` | Andrew | Portrait | 600×800 or 800×1000 | Coaches listing, Founder section |
 | 48 | `andrew-portrait.webp` | Andrew | Portrait (approachable) | 800×1000 | Homepage founder block |
 | 49 | `andrew-action.webp` | Andrew | Action on court | 1200×800 (3:2) | Coach bio / About |
-| 50 | `robert-lebuhn.png` → .webp | Robert | Portrait | 600×800 | Coaches |
+| 50 | `former-coach-removed.png` → .webp | Former coach (removed) | Portrait | 600×800 | Coaches |
 | 51 | `robert-action.webp` | Robert | Action | 1200×800 | Coach bio |
 | 52 | `peter-defrantz` → .webp | Peter | Portrait | 600×800 | Coaches |
 | 53 | `peter-action.webp` | Peter | Action | 1200×800 | Coach bio |
