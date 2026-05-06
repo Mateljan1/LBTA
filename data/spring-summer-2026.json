@@ -242,15 +242,14 @@
       "schedule": [
         { "day": "Tuesday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" },
         { "day": "Thursday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan", "location": "Laguna Beach High School" },
-        { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School", "note": "Separate pricing" }
+        { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School" }
       ],
       "pricing": {
         "spring": { "1x": 580, "2x": 1105, "3x": 1570 },
         "summer": { "1x": 638, "2x": 1216, "3x": 1727 },
         "drop_in": 70
       },
-      "pricingNote": "Saturday session has separate pricing.",
-      "description": "Tennis becomes a tactical sport at this level. The 90-minute format gives 30+ minutes of real match play every session. USTA league preparation begins here."
+      "description": "Tennis becomes a tactical sport at this level. The 90-minute format gives 30+ minutes of real match play every session. USTA league preparation begins here. Tue, Thu, and Sat are interchangeable days inside the 1×/2×/3× package — pick any combination."
     },
     {
       "id": "adult-advanced",
@@ -295,12 +294,13 @@
       "id": "liveball",
       "category": "Open Court",
       "program": "LiveBall",
-      "ages": "NTRP 2.5+",
+      "ages": "NTRP 3.0+",
       "location": "Moulton Meadows Park / LBHS",
       "duration": "1-1.5 hr",
+      "minPlayersToRun": 5,
       "schedule": [
-        { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
-        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School" },
+        { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park", "note": "Intermediate (3.0–4.0)" },
+        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Peter DeFrantz", "location": "Laguna Beach High School", "note": "Intermediate (3.0–4.0)" },
         { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School", "note": "Intermediate (3.0–4.0)" },
         { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "Laguna Beach High School", "note": "Advanced (4.0+)" }
       ],
@@ -308,7 +308,7 @@
         "monthly": 150,
         "drop_in": 50
       },
-      "description": "High-energy, coach-fed sessions. 150–200 ball contacts per session. Intermediate (NTRP 2.5+) and Advanced (3.5+) levels."
+      "description": "High-energy, coach-fed sessions. 150–200 ball contacts per session. Intermediate (NTRP 3.0–4.0) and Advanced (4.0+) levels. Minimum 5 players to run."
     },
     {
       "id": "cardio-tennis",

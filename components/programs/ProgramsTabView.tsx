@@ -369,8 +369,8 @@ export default function ProgramsTabView({ programs, year2026 }: ProgramsTabViewP
 
 function LiveBallStaticCards({ onRegister: _ }: { onRegister: (p: Program) => void }) {
   const sessions = [
-    { name: 'LiveBall — Intermediate', days: 'Thu · Sat · Sun', time: '6 PM / 11:30 AM / 9 AM', location: 'Moulton & LBHS', level: 'NTRP 2.5+' },
-    { name: 'LiveBall — Advanced', days: 'Sunday', time: '10:30 AM–12:00 PM', location: 'LBHS', level: 'NTRP 3.5+' },
+    { name: 'LiveBall — Intermediate', days: 'Thu · Sat · Sun', time: '6 PM / 11:30 AM / 9 AM', location: 'Moulton & LBHS', level: 'NTRP 3.0–4.0' },
+    { name: 'LiveBall — Advanced', days: 'Sunday', time: '10:30 AM–12:00 PM', location: 'LBHS', level: 'NTRP 4.0+' },
     { name: 'Cardio Tennis', days: 'Friday', time: '9:00–10:30 AM', location: 'LBHS', level: 'All Levels' },
   ]
   const descriptions: Record<string, string> = {

@@ -34,7 +34,7 @@ export interface Program {
   pricing: Pricing
   description: string
   coach?: string
-  /** e.g. "Friday Match Play: $65/mo or $25/session." or "Saturday session has separate pricing." */
+  /** e.g. "Friday Match Play: $65/mo or $25/session." or "Placement by invitation." */
   pricingNote?: string
   /** When set, show an "Inquire" link (e.g. for UTR placement) pointing to contact. */
   inquiryLabel?: string

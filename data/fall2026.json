@@ -164,11 +164,10 @@
       "schedule": [
         { "day": "Tuesday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan" },
         { "day": "Thursday", "time": "11:00 AM–12:30 PM", "coach": "Andrew Mateljan" },
-        { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Peter DeFrantz", "note": "Separate pricing" }
+        { "day": "Saturday", "time": "10:00–11:30 AM", "coach": "Peter DeFrantz" }
       ],
       "pricing": { "1x": 928, "2x": 1768, "3x": 2512, "drop_in": 70 },
-      "pricingNote": "Saturday session has separate pricing.",
-      "description": "Purposeful training for the developing player. Stroke reliability, tactical awareness, match-play confidence."
+      "description": "Purposeful training for the developing player. Stroke reliability, tactical awareness, match-play confidence. Tue, Thu, and Sat are interchangeable days inside the 1×/2×/3× package — pick any combination."
     },
     {
       "id": "adult-advanced",
@@ -188,17 +187,18 @@
       "id": "liveball",
       "category": "Open Court",
       "program": "LiveBall",
-      "ages": "NTRP 2.5+",
+      "ages": "NTRP 3.0+",
       "location": "Moulton Meadows Park / LBHS",
       "duration": "1-1.5 hr",
+      "minPlayersToRun": 5,
       "schedule": [
-        { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park" },
-        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Peter DeFrantz", "location": "LB High School" },
+        { "day": "Thursday", "time": "6:00–7:30 PM", "coach": "Allison Cronk", "location": "Moulton Meadows Park", "note": "Intermediate (3.0–4.0)" },
+        { "day": "Saturday", "time": "11:30 AM–1:00 PM", "coach": "Peter DeFrantz", "location": "LB High School", "note": "Intermediate (3.0–4.0)" },
         { "day": "Sunday", "time": "9:00–10:30 AM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "LB High School", "note": "Intermediate (3.0–4.0)" },
         { "day": "Sunday", "time": "10:30 AM–12:00 PM", "coach": "Peter DeFrantz & Andrew Mateljan", "location": "LB High School", "note": "Advanced (4.0+)" }
       ],
       "pricing": { "monthly": 150, "drop_in": 50 },
-      "description": "Coach-fed hitting with purpose. High-volume point play for extra reps and competitive energy. Intermediate (3.0–4.0) and Advanced (4.0+) levels offered."
+      "description": "Coach-fed hitting with purpose. High-volume point play for extra reps and competitive energy. Intermediate (3.0–4.0) and Advanced (4.0+) levels offered. Minimum 5 players to run."
     },
     {
       "id": "cardio-tennis",
