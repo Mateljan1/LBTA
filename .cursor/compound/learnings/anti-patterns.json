@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 compound:learn (3rd run same day) — Aman-standards touch-up: google-reviews-cta-as-aman-substitute anti-pattern + privacyFirstContent amendment",
+  "updated": "2026-05-06",
+  "lastLearnRun": "2026-05-06 leads pipeline dedup + double-submit guard: relying-only-on-disabled-for-double-submit, single-storage-assumption-without-audit, deprecated-route-edit-without-read",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -808,147 +808,368 @@
       "description": "form-config prePopulateData.duration hardcoded when season dates exist in JSON",
       "avoid": "duration: '8 Saturdays (Apr 11 - May 30)' in form-config while leagues-2026.json has different seasonLabel",
       "instead": "Derive via helper (getUtrCircuitFormDuration) that reads from JSON; add test asserting duration matches season",
-      "tags": ["form-config", "data-integrity", "single-source"]
+      "tags": [
+        "form-config",
+        "data-integrity",
+        "single-source"
+      ]
     },
     {
       "id": "ac-division-tag-use-program",
       "description": "Using data.program for UTR division tag lookup when data.division exists",
-      "avoid": "getUtrDivisionTag(data.program) when payload has division: 'Color Ball' and program: 'UTR Match Play Series — Season 1'",
+      "avoid": "getUtrDivisionTag(data.program) when payload has division: 'Color Ball' and program: 'UTR Match Play Series \u2014 Season 1'",
       "instead": "Use data.division || data.program for getUtrDivisionTag; register-year receives division from modal",
-      "tags": ["activecampaign", "register-year", "utr", "tags"]
+      "tags": [
+        "activecampaign",
+        "register-year",
+        "utr",
+        "tags"
+      ]
     },
     {
       "id": "slug-lookup-unicode-dash",
       "description": "Slug/lookup key from label with en-dash (U+2013) fails ASCII-hyphen map",
-      "avoid": "Division 'UTR 2.0–4.0' → toLowerCase().replace(/\\s+/g, '-') yields 'utr-2.0–4.0' which does not match 'utr-2.0-4.0'",
+      "avoid": "Division 'UTR 2.0\u20134.0' \u2192 toLowerCase().replace(/\\s+/g, '-') yields 'utr-2.0\u20134.0' which does not match 'utr-2.0-4.0'",
       "instead": "Normalize unicode dashes: .replace(/[\\u2013\\u2014\\u2212]/g, '-') before slug lookup",
-      "tags": ["activecampaign", "slug", "unicode", "utr"]
+      "tags": [
+        "activecampaign",
+        "slug",
+        "unicode",
+        "utr"
+      ]
     },
     {
       "id": "mailto-primary-when-modal-exists",
       "description": "Program landing using mailto as primary CTA when LuxuryYearModal and API route exist",
       "avoid": "Primary button opens mailto; modal and register-year API unused; no AC tags, no CRM flow",
       "instead": "Wire LuxuryYearModal as primary CTA; keep mailto as secondary for edge questions",
-      "tags": ["conversion", "modal", "registration", "cta"]
+      "tags": [
+        "conversion",
+        "modal",
+        "registration",
+        "cta"
+      ]
     },
     {
       "id": "slide-image-alt-mismatch",
       "description": "Carousel slide imageAlt names a specific person while the image URL shows a different subject or a shared asset meant for another slide",
       "avoid": "Ryan slide with imageAlt 'Ryan Seggerman on a blue hard court' while src is olov_hero_yiuwtr.jpg used also for Olov",
       "instead": "Use one canonical photo per person, or write imageAlt to describe visible content without mis-attributing identity; fix when dedicated asset is uploaded",
-      "tags": ["a11y", "carousel", "alt-text", "images", "player-success"]
+      "tags": [
+        "a11y",
+        "carousel",
+        "alt-text",
+        "images",
+        "player-success"
+      ]
     },
     {
       "id": "pathway-calculator-fake-pricing",
       "description": "Interactive planner or quiz outputs dollar amounts from client-side formulas not backed by /data/*.json",
       "avoid": "pathwayPlanner monthlyMin/monthlyMax hardcoded; displayed as if authoritative tuition",
       "instead": "Link to /schedules for rates; optionally show qualitative commitment only; if ranges ever come from data, import from a single JSON module shared with schedules",
-      "tags": ["pricing", "SSOT", "trust", "data-integrity", "pathway-planner"]
+      "tags": [
+        "pricing",
+        "SSOT",
+        "trust",
+        "data-integrity",
+        "pathway-planner"
+      ]
     },
     {
       "id": "thin-page-seo-mismatch",
       "description": "Page body says unavailable or not offered but meta description invites users to view programs generically",
       "avoid": "match-play og:description implying full program list when hero says not offered",
       "instead": "Rewrite metadata to match expectation; add CTAs to the closest live substitutes (e.g. UTR page, schedules)",
-      "tags": ["seo", "metadata", "ux", "conversion"]
+      "tags": [
+        "seo",
+        "metadata",
+        "ux",
+        "conversion"
+      ]
     },
     {
       "id": "root-layout-preload-homepage-only-lcp",
       "description": "Global layout preloads an image that only the homepage needs for LCP",
       "avoid": "<link rel=preload as=image href=/images/hero/hero-poster.webp> in root layout for every route",
       "instead": "Let homepage HomeHero own the fetch via next/image priority; remove duplicate preload from layout",
-      "tags": ["performance", "LCP", "nextjs", "layout"]
+      "tags": [
+        "performance",
+        "LCP",
+        "nextjs",
+        "layout"
+      ]
     },
     {
       "id": "hero-poster-triple-fetch",
       "description": "Same poster URL requested via layout preload, video poster attribute, and next/image without deduping",
       "avoid": "preload + poster=\"...\" on video + priority Image all pointing at identical hero-poster.webp",
       "instead": "Single next/image priority layer + video without poster; or one preload OR image priority, not both",
-      "tags": ["performance", "LCP", "video", "hero"]
+      "tags": [
+        "performance",
+        "LCP",
+        "video",
+        "hero"
+      ]
     },
     {
       "id": "utr-player-write-split-operations",
       "description": "Roster batch save uses separate upsert and insert operations for one logical write",
       "avoid": "rowsWithId upsert + rowsWithoutId insert in separate API calls, allowing partial persistence on failure",
       "instead": "Use single transactional RPC for entire batch payload (upsert_players_batch)",
-      "tags": ["utr-tracker", "atomic", "roster", "supabase"]
+      "tags": [
+        "utr-tracker",
+        "atomic",
+        "roster",
+        "supabase"
+      ]
     },
     {
       "id": "utr-roster-allows-normalized-duplicates",
       "description": "Roster endpoint allows duplicate names after normalization",
       "avoid": "Accepting 'Alice Test' and ' alice   test ' as separate players",
       "instead": "Normalize and reject duplicates in payload and existing roster with conflict response",
-      "tags": ["utr-tracker", "validation", "data-integrity"]
+      "tags": [
+        "utr-tracker",
+        "validation",
+        "data-integrity"
+      ]
     },
     {
       "id": "color-ball-badges-no-dedup",
       "description": "Color Ball week badge payload trusts raw badge arrays with duplicates",
       "avoid": "Passing duplicate badge IDs through to write path, relying on conflict behavior",
       "instead": "Dedupe badges in API layer and DISTINCT in SQL write function",
-      "tags": ["utr-tracker", "color-ball", "idempotency"]
+      "tags": [
+        "utr-tracker",
+        "color-ball",
+        "idempotency"
+      ]
     },
     {
       "id": "supabase-push-loop-without-repair",
       "description": "Repeating supabase db push attempts while migration history mismatch is unresolved",
       "avoid": "Retrying db push after 'Remote migration versions not found' without repair",
       "instead": "Run targeted migration repair then db push using latest CLI",
-      "tags": ["supabase", "migrations", "operations"]
+      "tags": [
+        "supabase",
+        "migrations",
+        "operations"
+      ]
     },
     {
       "id": "root-layout-canonical-cascade",
-      "description": "Setting alternates.canonical in root layout.tsx cascades to every child page that doesn't override — collapses the site into one URL in Google's index",
+      "description": "Setting alternates.canonical in root layout.tsx cascades to every child page that doesn't override \u2014 collapses the site into one URL in Google's index",
       "avoid": "export const metadata = { alternates: { canonical: '/' } } in app/layout.tsx when child pages don't set their own alternates",
       "instead": "Leave alternates out of root layout; set self-referencing alternates.canonical per page (or per feature-section layout). Use root layout ONLY for metadataBase.",
-      "tags": ["seo", "next-metadata", "canonical", "inheritance"]
+      "tags": [
+        "seo",
+        "next-metadata",
+        "canonical",
+        "inheritance"
+      ]
     },
     {
       "id": "app-robots-txt-shadows-public",
-      "description": "When both app/robots.txt and public/robots.txt exist, Next.js App Router serves app/robots.txt — edits to public/robots.txt are silently ignored by the live site",
+      "description": "When both app/robots.txt and public/robots.txt exist, Next.js App Router serves app/robots.txt \u2014 edits to public/robots.txt are silently ignored by the live site",
       "avoid": "Editing public/robots.txt without checking whether app/robots.txt (or app/robots.ts) exists",
-      "instead": "Run: ls app/robots.* public/robots.* — if app/robots.* exists, edit that file and delete public/robots.txt to eliminate shadow. One source of truth.",
-      "tags": ["seo", "next-app-router", "robots", "static-assets"]
+      "instead": "Run: ls app/robots.* public/robots.* \u2014 if app/robots.* exists, edit that file and delete public/robots.txt to eliminate shadow. One source of truth.",
+      "tags": [
+        "seo",
+        "next-app-router",
+        "robots",
+        "static-assets"
+      ]
     },
     {
       "id": "middleware-search-misses-nextjs-16-proxy",
-      "description": "Searching only for middleware.ts when verifying route auth — misses Next.js 16 proxy.ts (the renamed routing middleware file)",
+      "description": "Searching only for middleware.ts when verifying route auth \u2014 misses Next.js 16 proxy.ts (the renamed routing middleware file)",
       "avoid": "Glob middleware.* at repo root and conclude 'no auth middleware' when proxy.ts exists",
-      "instead": "Grep for both middleware.ts AND proxy.ts at repo root. Next.js 16 renamed the file but semantics are identical (NextRequest → NextResponse with matcher config).",
-      "tags": ["nextjs-16", "middleware", "proxy", "routing", "security-review"]
+      "instead": "Grep for both middleware.ts AND proxy.ts at repo root. Next.js 16 renamed the file but semantics are identical (NextRequest \u2192 NextResponse with matcher config).",
+      "tags": [
+        "nextjs-16",
+        "middleware",
+        "proxy",
+        "routing",
+        "security-review"
+      ]
     },
     {
       "id": "seo-audit-claims-unverified",
-      "description": "Prioritizing P0 SEO fixes based on audit claims without reading the actual files — wastes engineering time on non-issues and hides real bugs the audit missed",
+      "description": "Prioritizing P0 SEO fixes based on audit claims without reading the actual files \u2014 wastes engineering time on non-issues and hides real bugs the audit missed",
       "avoid": "Reading an external SEO audit and immediately queuing P0 commits from the report",
       "instead": "Per flagged file: read the file, confirm the claim, THEN prioritize. Every claim has three possible outcomes (confirmed / wrong / partially correct with different fix). Separately: find what the audit missed by checking revenue-critical paths.",
-      "tags": ["seo", "audit", "verification", "compound-plan"]
+      "tags": [
+        "seo",
+        "audit",
+        "verification",
+        "compound-plan"
+      ]
     },
     {
       "id": "placeholder-phone-vs-displayed-phone",
-      "description": "Confusing an input `placeholder='...'` attribute (UX hint shown in empty fields) with a displayed phone number — not a broken conversion path even when the placeholder value looks fake",
-      "avoid": "Framing placeholder='(949) 123-4567' as 'prospects literally can't reach you' — it's UX hint text that disappears when the user types",
+      "description": "Confusing an input `placeholder='...'` attribute (UX hint shown in empty fields) with a displayed phone number \u2014 not a broken conversion path even when the placeholder value looks fake",
+      "avoid": "Framing placeholder='(949) 123-4567' as 'prospects literally can't reach you' \u2014 it's UX hint text that disappears when the user types",
       "instead": "Distinguish placeholder/hint text from actual contact info rendered in copy. Fix placeholders for trust/polish; framing should match the real impact.",
-      "tags": ["ux", "seo-audit", "accuracy", "framing"]
+      "tags": [
+        "ux",
+        "seo-audit",
+        "accuracy",
+        "framing"
+      ]
     },
     {
       "id": "child-title-with-brand-when-template-set",
-      "description": "Setting `title: 'Something | Brand'` on a child page's metadata when the root layout declares `metadata.title.template: '%s | Brand'` — template appends brand AGAIN, producing '... | Brand | Brand' in the live <title> tag",
-      "avoid": "In a child page: `export const metadata = { title: 'FAQ | Tennis Training Questions | LBTA' }` when root layout has `title.template: '%s | Laguna Beach Tennis Academy'` — final title becomes 'FAQ | Tennis Training Questions | LBTA | Laguna Beach Tennis Academy' (83 chars, brand duplicated)",
-      "instead": "Segment-only titles: `title: 'Tennis Training FAQ'` — template resolves to 'Tennis Training FAQ | Laguna Beach Tennis Academy' (49 chars). OR bypass template with `title: { absolute: 'Full Custom Title' }` when you need total control.",
-      "tags": ["seo", "next-metadata", "title-template", "duplicate-brand"]
+      "description": "Setting `title: 'Something | Brand'` on a child page's metadata when the root layout declares `metadata.title.template: '%s | Brand'` \u2014 template appends brand AGAIN, producing '... | Brand | Brand' in the live <title> tag",
+      "avoid": "In a child page: `export const metadata = { title: 'FAQ | Tennis Training Questions | LBTA' }` when root layout has `title.template: '%s | Laguna Beach Tennis Academy'` \u2014 final title becomes 'FAQ | Tennis Training Questions | LBTA | Laguna Beach Tennis Academy' (83 chars, brand duplicated)",
+      "instead": "Segment-only titles: `title: 'Tennis Training FAQ'` \u2014 template resolves to 'Tennis Training FAQ | Laguna Beach Tennis Academy' (49 chars). OR bypass template with `title: { absolute: 'Full Custom Title' }` when you need total control.",
+      "tags": [
+        "seo",
+        "next-metadata",
+        "title-template",
+        "duplicate-brand"
+      ]
     },
     {
       "id": "google-reviews-cta-as-aman-substitute",
-      "description": "Replacing composite / unpermissioned testimonials with a visible 'Read reviews on Google' link + star count + 'N Google reviews' callout as the substitute — reads as consumer-grade review-fishing, breaks boutique hospitality aesthetic",
-      "avoid": "`<Star>` row + `{rating} from {reviewCount}+ Google reviews` + `Read reviews on Google →` CTA inside any visible section labeled 'What Players Say' or equivalent",
-      "instead": "Let earned editorial (named player journeys with photography + outcomes) carry trust. If no editorial exists, omit the block entirely — restraint. Keep AggregateRating in JSON-LD only for SERP stars. Heritage-flavored facts ('Founded 2020', 'Official City Partner') work better than ratings as trust stats.",
-      "tags": ["brand", "aman", "luxury", "testimonials", "aesthetic"]
+      "description": "Replacing composite / unpermissioned testimonials with a visible 'Read reviews on Google' link + star count + 'N Google reviews' callout as the substitute \u2014 reads as consumer-grade review-fishing, breaks boutique hospitality aesthetic",
+      "avoid": "`<Star>` row + `{rating} from {reviewCount}+ Google reviews` + `Read reviews on Google \u2192` CTA inside any visible section labeled 'What Players Say' or equivalent",
+      "instead": "Let earned editorial (named player journeys with photography + outcomes) carry trust. If no editorial exists, omit the block entirely \u2014 restraint. Keep AggregateRating in JSON-LD only for SERP stars. Heritage-flavored facts ('Founded 2020', 'Official City Partner') work better than ratings as trust stats.",
+      "tags": [
+        "brand",
+        "aman",
+        "luxury",
+        "testimonials",
+        "aesthetic"
+      ]
     },
     {
       "id": "measure-char-length-on-raw-source",
       "description": "Validating title/description character-length constraints against the source string in a page's metadata export, when the rendered output may be longer due to template interpolation or additional markup",
-      "avoid": "Counting `title: 'FAQ | ...' = 38 chars` and declaring it under 60 — ignores the root layout's `title.template: '%s | Brand'` that adds 31 chars at render time",
+      "avoid": "Counting `title: 'FAQ | ...' = 38 chars` and declaring it under 60 \u2014 ignores the root layout's `title.template: '%s | Brand'` that adds 31 chars at render time",
       "instead": "Measure the RENDERED <title> tag content in the static build output (`.next/server/app/*.html`) or via live curl. Same rule for <meta name=\"description\"> content and any other length-gated field.",
-      "tags": ["seo", "validation", "rendering", "build-output", "char-length"]
+      "tags": [
+        "seo",
+        "validation",
+        "rendering",
+        "build-output",
+        "char-length"
+      ]
+    },
+    {
+      "id": "sms-implied-policy-as-codified-fact",
+      "description": "Codifying a number/threshold from a single SMS quote (inbound or outbound) as policy in the bot KB without founder confirmation. SMS reflects what was said in the moment, not what's policy.",
+      "avoid": "Reading 'we don't have enough players for tonight \u2014 we need at least 2' in an outbound SMS and writing 'LiveBall needs at least 2 players to run' as a Q&A in the bot KB.",
+      "instead": "Either ask founder via AskQuestion (live), flag as an open reconciliation item in the KB's Appendix C until verified, or quote vaguely without a number ('if we don't have enough players to run the format'). Move from Open \u2192 Resolved with timestamp once founder confirms. This loop's correct value was 5, not 2.",
+      "tags": [
+        "bot-kb",
+        "policy",
+        "founder-verification",
+        "sms-log",
+        "reconciliation"
+      ]
+    },
+    {
+      "id": "ntrp-band-mixed-truth-in-record",
+      "description": "Setting `ages: 'NTRP 2.5+'` while `description` says 'Intermediate (3.0\u20134.0) and Advanced (4.0+)' and `schedule[*].note` says 'Intermediate (3.0\u20134.0)' \u2014 three different truths in the same JSON record. The bot will pick whichever one its retrieval surfaces first.",
+      "avoid": "Updating only one of (ages, description, schedule.note) when founder corrects a level band \u2014 leaving stale truth in the other two fields.",
+      "instead": "When founder corrects an NTRP/UTR band on a program, update ALL THREE fields in the same record (`ages`, `description`, every `schedule[*].note`) and run the acceptance script. data/{winter,spring-summer,fall}2026.json LiveBall block was the example: ages='NTRP 3.0+', description='Intermediate (3.0\u20134.0) and Advanced (4.0+)', every non-Sunday-10:30 row has note='Intermediate (3.0\u20134.0)'.",
+      "tags": [
+        "data-integrity",
+        "ntrp",
+        "utr",
+        "level-bands",
+        "founder-correction"
+      ]
+    },
+    {
+      "id": "bot-kb-quote-without-source-line",
+      "description": "A bot/AI knowledge base Q&A that asserts a price/time/policy without a `**Sources:**` line pointing to a JSON path or named source. Future audits cannot verify; future founder corrections cannot grep the dependent answers.",
+      "avoid": "Q&A like 'Adult Intermediate is $580 for the season' without any source pointer.",
+      "instead": "Every Q&A in `gpt/03-KNOWLEDGE-BRAIN/23-*.md` ends with `**Sources:** data/spring-summer-2026.json \u2014 id: adult-intermediate` and either `**Escalate:** (949) 534-0457` or `**Self-serve:** /schedules`. Verified by grep at acceptance time. Acceptance script can grep `^### Q\\d+\\.` and assert each Q has `**Sources:**` within N lines below.",
+      "tags": [
+        "bot-kb",
+        "documentation",
+        "auditability",
+        "data-integrity"
+      ]
+    },
+    {
+      "id": "relying-only-on-disabled-for-double-submit",
+      "description": "Form submit handler that only relies on disabled={isSubmitting} to prevent double submission \u2014 useState updates batch async, so rapid clicks fire onSubmit twice before the disabled prop renders",
+      "avoid": "const handleSubmit = async (e) => { e.preventDefault(); setIsSubmitting(true); /* network call */ } with no synchronous guard; production data shows 14 duplicate (email,source) pairs within 25-95s windows",
+      "instead": "Add synchronous useRef guard: const submittingRef = useRef(false); in handler: if (submittingRef.current) return; submittingRef.current = true; setIsSubmitting(true); release in finally. Pair with server-side dedup window in the storeLead-equivalent function",
+      "tags": [
+        "react",
+        "forms",
+        "double-submit",
+        "useref",
+        "useState-batching"
+      ]
+    },
+    {
+      "id": "single-storage-assumption-without-audit",
+      "description": "Claiming 'leads are being saved' or 'we have N leads' based only on the storage target the codebase writes to \u2014 ignores parallel paths (Meta lead ads, Zapier, n8n, manual imports) that write directly to a CRM or Notion",
+      "avoid": "Querying Supabase leads table, finding 86 rows, telling founder that's the complete lead set. Real total (LBTA): 251 in Notion DB, 165 of which never touched Supabase because they came from Meta lead-ad forms via Zapier",
+      "instead": "Enumerate every storage target before answering: Supabase, Notion DB, ActiveCampaign, GoHighLevel, any Zapier/n8n integrations, manual CSV imports. Query each. Report the union and explain the gaps. Recommend a unified mirror pattern (Notion \u2192 Supabase cron) when gaps are persistent",
+      "tags": [
+        "lead-pipeline",
+        "audit",
+        "multi-storage",
+        "completeness",
+        "notion",
+        "supabase",
+        "meta-ads"
+      ]
+    },
+    {
+      "id": "deprecated-route-edit-without-read",
+      "description": "Suggesting integration edits to an API route based on its filename or URL convention without reading the route file first \u2014 risks reanimating deprecated code",
+      "avoid": "Suggesting 'wire jtt-registration to storeLead' because it follows the naming pattern of register/register-program \u2014 without checking the route first. JTT was deprecated to 410 Gone in spring 2026; storeLead would have been re-added to dead code",
+      "instead": "Always Read or Grep the route file before suggesting pipeline integration. Look for: deprecation JSDoc, return status (200/410/etc.), redirect logic. Only suggest edits when route is actively serving traffic",
+      "tags": [
+        "api-routes",
+        "deprecated",
+        "verify-before-suggest",
+        "review-discipline"
+      ]
+    },
+    {
+      "id": "bundle-unrelated-dirty-files-in-focused-commit",
+      "description": "When committing a focused fix, sweeping up unrelated tracked-file modifications already present in the working tree",
+      "avoid": "git add -A or git add . when the tree has a focused leads-pipeline fix PLUS unrelated program data edits, ProgramCard tweaks, and auto-managed compound learning files",
+      "instead": "Stage only files in the plan's Files to Create/Modify list (or the focused commit's scope). Leave the rest dirty for the user/owner to commit separately. Be explicit in the response that unrelated dirty files were skipped, and what they look like \u2014 so the user can ship them as a coherent second commit",
+      "tags": [
+        "git",
+        "commit-hygiene",
+        "focused-commit",
+        "scope-guard"
+      ]
+    },
+    {
+      "id": "echo-pipe-secret-to-vercel-env",
+      "description": "Using 'echo \"$SECRET\" | npx vercel env add NAME production' to add a secret env var \u2014 echo appends a trailing newline that gets captured. If the secret is used in an HTTP header, Vercel build will fail with 'leading or trailing whitespace, not allowed in HTTP header values'",
+      "avoid": "echo \"$SECRET\" | npx vercel env add CRON_SECRET production",
+      "instead": "printf '%s' \"$SECRET\" | npx vercel env add CRON_SECRET production. printf does NOT add a trailing newline. After adding, sanity-check by curl-ing the cron endpoint with the local secret and confirming 200 (proves header parses cleanly)",
+      "tags": [
+        "vercel",
+        "env",
+        "ops",
+        "shell",
+        "newline"
+      ]
+    },
+    {
+      "id": "skip-multi-storage-cron-when-channels-fragment",
+      "description": "Leaving lead/contact records fragmented across Notion + CRM + Supabase + Zapier when external channels (Meta lead ads, manual imports) bypass the website code path. Compounds: future dashboards, attribution, retention reports all see partial data",
+      "avoid": "Adding new lead channels (Meta lead ads, GHL, etc.) without a path that funnels back to the primary record (Supabase leads). Audit found 165 of 251 leads bypassed Supabase, making it 66% incomplete",
+      "instead": "Audit storage targets quarterly. When a gap is found, add a daily cron mirror from the orphan source into the primary record, keyed on the orphan's natural ID for idempotency. See pattern notion-supabase-mirror-cron",
+      "tags": [
+        "lead-pipeline",
+        "single-source",
+        "audit",
+        "channel-fragmentation"
+      ]
     }
   ]
 }

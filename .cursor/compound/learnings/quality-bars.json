@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 (4th run) 3-blocker cleanup — add checkCodegenOutputBeforeReverting + pausedEntityHiddenFlagPattern",
+  "updated": "2026-05-06",
+  "lastLearnRun": "2026-05-06 leads pipeline dedup + double-submit guard: formPipelineServerSideDedup (must), formPipelineClientSyncGuard (should), multiStorageLeadAuditBeforeClaim (must)",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -34,7 +34,7 @@
       "enforcement": "should"
     },
     "framerMotionEntranceReducedMotion": {
-      "rule": "Framer Motion entrance (AnimatedSection, initial/whileInView) must use useReducedMotion(); when true render plain div — JS motion not gated by CSS",
+      "rule": "Framer Motion entrance (AnimatedSection, initial/whileInView) must use useReducedMotion(); when true render plain div \u2014 JS motion not gated by CSS",
       "enforcement": "must"
     },
     "jsonLdOnServer": {
@@ -54,7 +54,7 @@
       "enforcement": "should"
     },
     "resizeThrottle": {
-      "rule": "Throttle resize listeners when used for layout (e.g. 150–200ms)",
+      "rule": "Throttle resize listeners when used for layout (e.g. 150\u2013200ms)",
       "enforcement": "should"
     },
     "ctaConsistency": {
@@ -90,7 +90,7 @@
       "enforcement": "should"
     },
     "closeButton48px": {
-      "rule": "Close buttons on modals/dialogs are at least 48×48px (min-w-[48px] min-h-[48px])",
+      "rule": "Close buttons on modals/dialogs are at least 48\u00d748px (min-w-[48px] min-h-[48px])",
       "enforcement": "must"
     },
     "footerContrast": {
@@ -174,7 +174,7 @@
       "enforcement": "should"
     },
     "formHandlerValidPayload200": {
-      "rule": "When request body is valid (parse + Zod pass), form handler must return 200; optional integrations (AC, GHL, storeLead) and rate limit must not cause 500 — use try/catch on rateLimit, .catch() on fire-and-forget",
+      "rule": "When request body is valid (parse + Zod pass), form handler must return 200; optional integrations (AC, GHL, storeLead) and rate limit must not cause 500 \u2014 use try/catch on rateLimit, .catch() on fire-and-forget",
       "enforcement": "must"
     },
     "nextImageSizesLogos": {
@@ -210,11 +210,11 @@
       "enforcement": "should"
     },
     "interactiveButton48pxFocusRing": {
-      "rule": "All interactive buttons (including chat quick-reply, Send, floating toggle) must have min-h-[48px] (or 48×48) and visible focus ring (focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2)",
+      "rule": "All interactive buttons (including chat quick-reply, Send, floating toggle) must have min-h-[48px] (or 48\u00d748) and visible focus ring (focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2)",
       "enforcement": "must"
     },
     "singleTypeFromZodBoundary": {
-      "rule": "Data passed server→client with runtime validation must use a single type from the Zod schema (export type T = z.infer<typeof schema>); client imports that type; no 'as unknown as T' at the boundary",
+      "rule": "Data passed server\u2192client with runtime validation must use a single type from the Zod schema (export type T = z.infer<typeof schema>); client imports that type; no 'as unknown as T' at the boundary",
       "enforcement": "should"
     },
     "apiDocsBodyAndResponse": {
@@ -242,7 +242,7 @@
       "enforcement": "must"
     },
     "mobileChecklist": {
-      "rule": "Before shipping mobile changes: test at 320px, 375px, 768px; no horizontal scroll; primary actions ≥48×48px; anchor sections have scroll-mt when sticky nav present",
+      "rule": "Before shipping mobile changes: test at 320px, 375px, 768px; no horizontal scroll; primary actions \u226548\u00d748px; anchor sections have scroll-mt when sticky nav present",
       "enforcement": "should"
     },
     "formInput16pxMobile": {
@@ -346,25 +346,25 @@
       "enforcement": "should"
     },
     "segmentOnlyTitlesWhenTemplateSet": {
-      "rule": "When app/layout.tsx declares metadata.title.template (e.g. '%s | Brand'), child pages set `title: 'Segment'` (no brand suffix) OR `title: { absolute: 'Full Custom' }` to bypass. Never include the same brand suffix the template appends — double-brand blows SERP character budget.",
+      "rule": "When app/layout.tsx declares metadata.title.template (e.g. '%s | Brand'), child pages set `title: 'Segment'` (no brand suffix) OR `title: { absolute: 'Full Custom' }` to bypass. Never include the same brand suffix the template appends \u2014 double-brand blows SERP character budget.",
       "enforcement": "must"
     },
     "measureRenderedNotRaw": {
-      "rule": "Title and description char-length constraints (≤60, 150–160) are measured on the RENDERED <title> or <meta content=\"...\"> tag in the static build output (`.next/server/app/*.html`) or live curl — never on the raw source string in metadata exports. Metadata templates, framework transforms, and provider interpolation can all change the rendered length.",
+      "rule": "Title and description char-length constraints (\u226460, 150\u2013160) are measured on the RENDERED <title> or <meta content=\"...\"> tag in the static build output (`.next/server/app/*.html`) or live curl \u2014 never on the raw source string in metadata exports. Metadata templates, framework transforms, and provider interpolation can all change the rendered length.",
       "enforcement": "must"
     },
     "privacyFirstContent": {
-      "rule": "Do not introduce family, student, or client names in new on-site content, metadata, or JSON-LD schema unless permission is documented. For testimonials, the correct substitute is NOT a visible 'Read reviews on Google' link or a star-count callout — those feel consumer-grade / Yelp, not boutique hospitality. Preferred substitutes: (a) let existing earned editorial (long-form player journeys with photography) carry the trust, or (b) quietly omit the block entirely. AggregateRating stays in JSON-LD only (invisible to users, visible to Google SERP). For bios, prefer credentials + geography. Pre-existing named content is out of scope unless a dedicated cleanup PR is explicitly requested.",
+      "rule": "Do not introduce family, student, or client names in new on-site content, metadata, or JSON-LD schema unless permission is documented. For testimonials, the correct substitute is NOT a visible 'Read reviews on Google' link or a star-count callout \u2014 those feel consumer-grade / Yelp, not boutique hospitality. Preferred substitutes: (a) let existing earned editorial (long-form player journeys with photography) carry the trust, or (b) quietly omit the block entirely. AggregateRating stays in JSON-LD only (invisible to users, visible to Google SERP). For bios, prefer credentials + geography. Pre-existing named content is out of scope unless a dedicated cleanup PR is explicitly requested.",
       "enforcement": "must",
       "amendedFrom": "2026-04-16 (2nd run)",
-      "amendmentReason": "Original wording suggested a live Google Reviews link as the substitute. Founder rejected that — reads as Yelp, not Aman. Corrected here."
+      "amendmentReason": "Original wording suggested a live Google Reviews link as the substitute. Founder rejected that \u2014 reads as Yelp, not Aman. Corrected here."
     },
     "aggregateRatingInvisibleOnly": {
-      "rule": "AggregateRating lives in JSON-LD only — never on the page as visible copy. Google SERP stars are a cheap ~10-20% CTR lift; on-page rating widgets and 'average of N reviews' callouts feel consumer-grade review-fishing and conflict with the LBTA / boutique aesthetic. Split: visible layer = editorial + credentials, invisible layer = schema.",
+      "rule": "AggregateRating lives in JSON-LD only \u2014 never on the page as visible copy. Google SERP stars are a cheap ~10-20% CTR lift; on-page rating widgets and 'average of N reviews' callouts feel consumer-grade review-fishing and conflict with the LBTA / boutique aesthetic. Split: visible layer = editorial + credentials, invisible layer = schema.",
       "enforcement": "must"
     },
     "brandSplitVisibleVsInvisible": {
-      "rule": "When a founder-directed aesthetic conflicts with a standard SEO technique, split into two layers: visible (what users read — governed by brand aesthetic) and invisible (what Google parses — JSON-LD, meta tags, OpenGraph). Both get what they need. Applies to ratings, reviews, keyword stuffing, upsell badges, and any pattern that earns SEO value but reads consumer-grade.",
+      "rule": "When a founder-directed aesthetic conflicts with a standard SEO technique, split into two layers: visible (what users read \u2014 governed by brand aesthetic) and invisible (what Google parses \u2014 JSON-LD, meta tags, OpenGraph). Both get what they need. Applies to ratings, reviews, keyword stuffing, upsell badges, and any pattern that earns SEO value but reads consumer-grade.",
       "enforcement": "should"
     },
     "checkCodegenOutputBeforeReverting": {
@@ -373,6 +373,38 @@
     },
     "pausedEntityHiddenFlagPattern": {
       "rule": "To pause (not delete) a coach, program, location, or other entity: add `hidden?: boolean` to the type, flag in JSON, filter via a private `getVisibleX()` helper used by ALL public listing/schema getters. Keep single-entity getters (getBySlug) unfiltered so direct links still resolve. Add `robots: { index: false, follow: false }` to the entity's own page with a JSDoc comment describing the 1-line reactivation path. Never delete the data for a pause that may reverse.",
+      "enforcement": "must"
+    },
+    "botKnowledgeBaseSourceLine": {
+      "rule": "Every Q&A in `gpt/03-KNOWLEDGE-BRAIN/23-bot-knowledge-base-2026.md` (or any future bot KB matching `gpt/03-KNOWLEDGE-BRAIN/2[0-9]-*.md`) ends with a `**Sources:**` line pointing to a JSON path or named source, AND either `**Escalate:**` (phone/email) or `**Self-serve:**` (URL). Verified by grep at acceptance time; never invent numbers \u2014 if the answer isn't in `/data/*.json` or a documented source, route to support@lagunabeachtennisacademy.com or (949) 534-0457.",
+      "enforcement": "must"
+    },
+    "founderCorrectionCrossSurfaceSweep": {
+      "rule": "When applying a founder correction to a fact (price, level, schedule, policy, name), grep the corrected term across `data/**/*.json` (incl. `data/coach-hub/`), `components/**/*.{tsx,ts}` (hardcoded literals), and `gpt/03-KNOWLEDGE-BRAIN/**.md` (parallel docs) BEFORE marking the loop complete. Resolve every match in the same loop. Plan should list ALL surfaces upfront via initial grep. A correction in one place that drifts in another is worse than no correction (creates contradicting truths).",
+      "enforcement": "must"
+    },
+    "numericalFactValidationScript": {
+      "rule": "Docs files claiming \u226510 numerical facts (prices, times, thresholds) ship with a Python or Node assertion script next to them: one assert per claim, comparing the doc's number to the source JSON. Re-run after every edit. Pattern: `data_checks = [(label, get(json,'path')==expected), ...]; report passed/failed counts`. Cheap; obvious in hindsight; saves an hour of manual cross-checking per pass. Acceptance script is the living spec.",
+      "enforcement": "should"
+    },
+    "formPipelineServerSideDedup": {
+      "rule": "Form-pipeline lib (storeLead-equivalent) MUST implement server-side dedup window before insert",
+      "detail": "Lookup recent (email, source) within DEDUP_WINDOW_MS (120s default); skip insert + log if found; fail-open on lookup error. Protects every route that calls the lib without per-form code changes",
+      "enforcement": "must"
+    },
+    "formPipelineClientSyncGuard": {
+      "rule": "Form modals SHOULD include synchronous useRef guard alongside disabled={isSubmitting}",
+      "detail": "useState batches async; rapid double-clicks fire two onSubmits before disabled renders. Add submittingRef and check at handler entry; release in finally",
+      "enforcement": "should"
+    },
+    "multiStorageLeadAuditBeforeClaim": {
+      "rule": "Before answering 'are leads being saved' or 'how many leads do we have', enumerate and query EVERY storage target",
+      "detail": "LBTA writes to Supabase + Notion + ActiveCampaign + GoHighLevel; Meta lead-ad forms write directly to Notion via Zapier (bypasses code). Query each, dedupe by email + normalized phone, report union",
+      "enforcement": "must"
+    },
+    "deprecatedRouteReadBeforeEdit": {
+      "rule": "Always read an API route's source before suggesting integration edits",
+      "detail": "Look for deprecation JSDoc, response status (200/410), redirect logic. Don't propose pipeline edits to routes returning 410 Gone",
       "enforcement": "must"
     }
   }

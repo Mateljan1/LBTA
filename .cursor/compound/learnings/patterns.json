@@ -1,13 +1,17 @@
 {
   "project": "lbta-website",
-  "updated": "2026-04-16",
-  "lastLearnRun": "2026-04-16 (4th run) 3-blocker cleanup: build-codegen-as-canonical-source, reversible-pause-for-hidden-entity, ship-gate-commit-first, founder-decision-via-structured-question",
+  "updated": "2026-05-06",
+  "lastLearnRun": "2026-05-06 leads pipeline dedup + double-submit guard: lib-level-form-pipeline-dedup, useref-synchronous-double-submit-guard, multi-storage-lead-audit, vercel-deploy-verify-via-timing",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
       "when": "Homepage or hero uses multiple HTML5 video source elements",
-      "example": "List only URLs that exist under public/; if MP4 lives only under legacy-working-assets, omit a broken /videos/foo.mp4 source — browsers do not always fall through cleanly. Verify with ls public/videos and Network tab 200s.",
-      "tags": ["video", "assets", "homepage"]
+      "example": "List only URLs that exist under public/; if MP4 lives only under legacy-working-assets, omit a broken /videos/foo.mp4 source \u2014 browsers do not always fall through cleanly. Verify with ls public/videos and Network tab 200s.",
+      "tags": [
+        "video",
+        "assets",
+        "homepage"
+      ]
     },
     {
       "name": "hero-video-poster-lcp",
@@ -23,7 +27,7 @@
     {
       "name": "nextjs16-proxy-coach-hub",
       "when": "Next.js 16+ intercepts requests before handlers; Coach Hub or similar protected matchers",
-      "example": "Root proxy.ts: export function proxy(request: NextRequest) { ... }; export const config = { matcher: ['/coach-hub', '/coach-hub/:path*'] }; same auth logic as legacy middleware. next build lists ƒ Proxy (Middleware).",
+      "example": "Root proxy.ts: export function proxy(request: NextRequest) { ... }; export const config = { matcher: ['/coach-hub', '/coach-hub/:path*'] }; same auth logic as legacy middleware. next build lists \u0192 Proxy (Middleware).",
       "tags": [
         "nextjs",
         "auth",
@@ -33,7 +37,7 @@
     {
       "name": "analytics-scripts-lazyOnload-lcp",
       "when": "Meta Pixel, GA4, or other non-critical scripts compete with LCP / Best Practices",
-      "example": "next/script strategy=lazyOnload for fbevents and gtag/js; dns-prefetch (not always preconnect) for facebook connect host. Tradeoff: first pageview may fire slightly later than afterInteractive — document if marketing needs earlier attribution.",
+      "example": "next/script strategy=lazyOnload for fbevents and gtag/js; dns-prefetch (not always preconnect) for facebook connect host. Tradeoff: first pageview may fire slightly later than afterInteractive \u2014 document if marketing needs earlier attribution.",
       "tags": [
         "performance",
         "third-party",
@@ -1057,157 +1061,478 @@
       "name": "program-landing-single-source-from-json",
       "when": "Program page (e.g. UTR Match Play) needs season copy, divisions, modal payload, form prefill",
       "example": "Create lib facade (e.g. utr-match-play.ts) over leagues-2026.json; export getUtrSeasonLabel, getUtrDivisionsForPage, getUtrCircuitModalData, getUtrCircuitFormDuration; page, LuxuryYearModal data, form-config all import. Single source of truth.",
-      "tags": ["single-source", "data-integrity", "form-config", "modal", "utr"]
+      "tags": [
+        "single-source",
+        "data-integrity",
+        "form-config",
+        "modal",
+        "utr"
+      ]
     },
     {
       "name": "form-prefill-duration-from-data",
       "when": "form-config prePopulateData.duration for program with season dates in JSON",
       "example": "Derive via helper (e.g. getUtrCircuitFormDuration()) that reads seasonLabel from leagues JSON; add test asserting duration contains year and matches JSON. Avoids date drift.",
-      "tags": ["form-config", "data-integrity", "single-source"]
+      "tags": [
+        "form-config",
+        "data-integrity",
+        "single-source"
+      ]
     },
     {
       "name": "player-success-hero-contain-no-crop",
       "when": "Player Success carousel (or full-bleed people hero) must show full subject with no cropping of heads/faces",
       "example": "In homepage-copy.json results.slides[], set imageFit: \"contain\" per slide; PlayerSuccessCarousel uses object-contain and bg-brand-deep-water letterboxing. Pair with well-framed source art. Tradeoff: less edge-to-edge than cover.",
-      "tags": ["carousel", "images", "hero", "contain", "a11y", "player-success"]
+      "tags": [
+        "carousel",
+        "images",
+        "hero",
+        "contain",
+        "a11y",
+        "player-success"
+      ]
     },
     {
       "name": "cloudinary-next-image-delivery",
       "when": "Using Cloudinary URLs as next/image src",
       "example": "https://res.cloudinary.com/{cloud}/image/upload/f_auto,q_auto/v{version}/{public_id}.{ext}; ensure next.config images.remotePatterns includes hostname res.cloudinary.com. Prefetch in carousel uses same href string.",
-      "tags": ["cloudinary", "next/image", "performance", "remotePatterns"]
+      "tags": [
+        "cloudinary",
+        "next/image",
+        "performance",
+        "remotePatterns"
+      ]
     },
     {
       "name": "hero-pricing-hint-line",
       "when": "Homepage hero should reduce 'hidden pricing' friction without duplicating rates",
-      "example": "homepage-copy.json: pricingHint + pricingHintHref → /schedules; HomeHero renders text link under subline (Victoria Cove underline). Extend events.heroCta with variant pricing_hint for GA4.",
-      "tags": ["conversion", "pricing", "SSOT", "homepage", "analytics"]
+      "example": "homepage-copy.json: pricingHint + pricingHintHref \u2192 /schedules; HomeHero renders text link under subline (Victoria Cove underline). Extend events.heroCta with variant pricing_hint for GA4.",
+      "tags": [
+        "conversion",
+        "pricing",
+        "SSOT",
+        "homepage",
+        "analytics"
+      ]
     },
     {
       "name": "unavailable-offering-landing",
       "when": "Legacy URL must stay live but the product is paused",
       "example": "Honest H1/copy; metadata/OG aligned; hero image from main program art (e.g. utr-match-play-hero.webp) not orphan legacy path; primary CTA to substitute product + secondary to /schedules",
-      "tags": ["seo", "ux", "conversion", "thin-page"]
+      "tags": [
+        "seo",
+        "ux",
+        "conversion",
+        "thin-page"
+      ]
     },
     {
       "name": "utr-players-batch-rpc-atomic",
       "when": "Saving roster player batches with mixed new/existing records in UTR admin",
       "example": "Use one RPC (upsert_players_batch) for full payload, with DB-side UUID generation for missing ids and ON CONFLICT(id) updates. Avoid split insert+upsert client logic.",
-      "tags": ["utr-tracker", "atomic", "supabase", "roster"]
+      "tags": [
+        "utr-tracker",
+        "atomic",
+        "supabase",
+        "roster"
+      ]
     },
     {
       "name": "utr-roster-normalized-name-guard",
       "when": "Accepting roster writes where downstream systems resolve players by normalized display name",
       "example": "Normalize name via trim+lowercase+whitespace collapse; reject duplicates in payload and conflicts with existing roster using 409 before write.",
-      "tags": ["utr-tracker", "validation", "data-integrity", "roster"]
+      "tags": [
+        "utr-tracker",
+        "validation",
+        "data-integrity",
+        "roster"
+      ]
     },
     {
       "name": "color-ball-badge-dedupe-dual-layer",
       "when": "Saving Color Ball attendance + coach badges per week",
       "example": "Dedupe badge tokens in API request transformation and enforce DISTINCT in SQL function insert to keep duplicate badge tokens idempotent.",
-      "tags": ["utr-tracker", "color-ball", "idempotency", "sql"]
+      "tags": [
+        "utr-tracker",
+        "color-ball",
+        "idempotency",
+        "sql"
+      ]
     },
     {
       "name": "supabase-repair-then-push-latest-cli",
       "when": "Supabase push reports remote migration version mismatch or drift",
       "example": "Use npx supabase@latest; run targeted migration repair for the missing version, then db push. Avoid repeated push loops before reconciliation.",
-      "tags": ["supabase", "migrations", "repair", "operations"]
+      "tags": [
+        "supabase",
+        "migrations",
+        "repair",
+        "operations"
+      ]
     },
     {
       "name": "per-page-self-referencing-canonical",
       "when": "Adding canonical tags to a Next.js App Router site to consolidate duplicate-content signal",
       "example": "export const metadata: Metadata = { alternates: { canonical: '/programs/junior' }, title: '...' }. Root layout sets ONLY metadataBase. 33 public routes each declare their own canonical; landing variants (e.g. /high-performance-pathway) canonical to their hub (/programs/high-performance).",
-      "tags": ["seo", "canonical", "next-metadata", "per-page"]
+      "tags": [
+        "seo",
+        "canonical",
+        "next-metadata",
+        "per-page"
+      ]
     },
     {
       "name": "post-deploy-live-smoke-test",
-      "when": "After any production deploy — especially SEO / config bundles where static validation passes but route-handler precedence or edge caching could hide bugs",
+      "when": "After any production deploy \u2014 especially SEO / config bundles where static validation passes but route-handler precedence or edge caching could hide bugs",
       "example": "curl the live domain for key markers: robots.txt content, canonical tags on 3-6 sample routes, noindex on protected routes, HTTP 200 on sitemap routes. Caught the app/robots.txt shadow bug that prerendered-HTML validation missed.",
-      "tags": ["deploy", "smoke-test", "verification", "compound-phase-5"]
+      "tags": [
+        "deploy",
+        "smoke-test",
+        "verification",
+        "compound-phase-5"
+      ]
     },
     {
       "name": "atomic-commits-per-logical-concern",
       "when": "Bundling multiple independent changes into one deploy",
       "example": "8 atomic commits for one PR: phone fix, robots.txt, canonical-root-layout, noindex, hp-canonical, hero-test, remove-root-canonical, per-page-canonicals, robots-shadow-hotfix. Each reversible via git revert <sha> without touching the others.",
-      "tags": ["git", "compound-work", "rollback", "review"]
+      "tags": [
+        "git",
+        "compound-work",
+        "rollback",
+        "review"
+      ]
     },
     {
       "name": "build-output-validation-fallback",
-      "when": "Live HTTP smoke testing blocked by port conflicts, stale dev servers, or network — need to validate metadata before pushing",
+      "when": "Live HTTP smoke testing blocked by port conflicts, stale dev servers, or network \u2014 need to validate metadata before pushing",
       "example": "grep .next/server/app/*.html for canonical tags, robots meta, key copy. Works for prerendered static routes; flag dynamic routes (force-dynamic, searchParams) for a live check later. Faster than booting a fresh dev server and doesn't mask caching issues.",
-      "tags": ["validation", "static-build", "next-ssg", "fallback"]
+      "tags": [
+        "validation",
+        "static-build",
+        "next-ssg",
+        "fallback"
+      ]
     },
     {
       "name": "shadow-file-detection-script",
       "when": "About to edit a static asset (robots.txt, sitemap.xml, manifest.json, etc.) in a Next.js App Router project",
-      "example": "ls app/<name>* public/<name>* — if both exist, app/ wins. Pick one: delete the other or edit the winner.",
-      "tags": ["next-app-router", "static-assets", "shadow-files"]
+      "example": "ls app/<name>* public/<name>* \u2014 if both exist, app/ wins. Pick one: delete the other or edit the winner.",
+      "tags": [
+        "next-app-router",
+        "static-assets",
+        "shadow-files"
+      ]
     },
     {
       "name": "segment-only-titles-with-template",
       "when": "Root layout declares metadata.title.template (e.g. '%s | Brand'); child pages need their own titles",
       "example": "Child page: `title: 'Tennis Training FAQ'` (segment only, no brand suffix). Root template appends '| Laguna Beach Tennis Academy'. Final: 'Tennis Training FAQ | Laguna Beach Tennis Academy' (49 chars). For pages where the brand should not be appended (e.g. the homepage), use `title: { absolute: 'Full Custom Title' }` to bypass the template.",
-      "tags": ["seo", "next-metadata", "title-template", "convention"]
+      "tags": [
+        "seo",
+        "next-metadata",
+        "title-template",
+        "convention"
+      ]
     },
     {
       "name": "rendered-output-length-validation",
-      "when": "Validating any char-length constraint (titles ≤60, descriptions 150–160) on Next.js App Router pages",
+      "when": "Validating any char-length constraint (titles \u226460, descriptions 150\u2013160) on Next.js App Router pages",
       "example": "After build, `grep -oE '<title>[^<]+</title>' .next/server/app/<page>.html` and measure the content. Or curl the live URL and do the same. Never trust raw source length when metadata templates, frameworks, or any other layer may transform the output.",
-      "tags": ["seo", "validation", "rendered-output", "build-output"]
+      "tags": [
+        "seo",
+        "validation",
+        "rendered-output",
+        "build-output"
+      ]
     },
     {
       "name": "privacy-first-content-pattern",
       "when": "Founder/stakeholder directive: do not introduce family, student, or client names in new work",
       "example": "Replace named testimonials with a 'Read reviews on Google' link that reads the live review count from a single JSON source of truth. Replace name-bearing schema Reviews with AggregateRating only. Replace name-bearing founder bios with credentials + geography. Scope guard: explicitly distinguish pre-existing named content (out of scope) from new work (in scope); track pre-existing cleanup as a separate dedicated PR.",
-      "tags": ["privacy", "content", "schema", "scope-guard"]
+      "tags": [
+        "privacy",
+        "content",
+        "schema",
+        "scope-guard"
+      ]
     },
     {
       "name": "aggregate-rating-invisible-only",
       "when": "Brand aesthetic rejects visible rating widgets but SERP stars are still valuable",
-      "example": "Keep `aggregateRating` block in JSON-LD schema (components/SEOSchemas.tsx or equivalent) so Google renders ★ in search results. Remove all on-page copy that mentions the rating number or review count. Hero trust stats use heritage-flavored facts ('2020 Founded', 'Official City Partner') instead of a Google Rating stat. Net: full CTR lift, zero brand cost.",
-      "tags": ["seo", "brand", "aman", "schema", "aggregate-rating"]
+      "example": "Keep `aggregateRating` block in JSON-LD schema (components/SEOSchemas.tsx or equivalent) so Google renders \u2605 in search results. Remove all on-page copy that mentions the rating number or review count. Hero trust stats use heritage-flavored facts ('2020 Founded', 'Official City Partner') instead of a Google Rating stat. Net: full CTR lift, zero brand cost.",
+      "tags": [
+        "seo",
+        "brand",
+        "aman",
+        "schema",
+        "aggregate-rating"
+      ]
     },
     {
       "name": "brand-split-visible-vs-invisible-seo",
       "when": "A standard SEO technique (ratings, social proof widgets, aggregator links) conflicts with a founder-directed aesthetic (Aman / boutique / editorial)",
-      "example": "Split into two layers. Visible (what users read): governed by brand aesthetic — editorial, credentials, heritage, restraint. Invisible (what Google parses): JSON-LD schema, meta tags, OpenGraph — every SEO technique stays. Users get Aman. Google gets the full SEO surface. This is how luxury brands rank for their city without a Tripadvisor widget on the page.",
-      "tags": ["seo", "brand", "architecture", "aesthetic"]
+      "example": "Split into two layers. Visible (what users read): governed by brand aesthetic \u2014 editorial, credentials, heritage, restraint. Invisible (what Google parses): JSON-LD schema, meta tags, OpenGraph \u2014 every SEO technique stays. Users get Aman. Google gets the full SEO surface. This is how luxury brands rank for their city without a Tripadvisor widget on the page.",
+      "tags": [
+        "seo",
+        "brand",
+        "architecture",
+        "aesthetic"
+      ]
     },
     {
       "name": "build-codegen-as-canonical-source",
-      "when": "Running ship:gate / quality-gate / build and tracked files become dirty — codegen step (tokens:build, data:sync, etc.) auto-rewrote them with canonical values",
+      "when": "Running ship:gate / quality-gate / build and tracked files become dirty \u2014 codegen step (tokens:build, data:sync, etc.) auto-rewrote them with canonical values",
       "example": "When ship:gate reports 'tracked files have uncommitted changes' AFTER a successful build + lint + tests, DO NOT revert the changes. Diff them first. The codegen knew the canonical answer (e.g. 'Aug 29' camp end date) and resolved drift across JSON + components. Commit the codegen output + fix any remaining hardcoded literals in views that bypassed the data layer. This session: codegen auto-aligned year2026.json + spring-summer-2026.json + ProgramsTabView.tsx to Aug 29; I added matching fix to app/camps/page.tsx. Ops-audit blocker resolved without founder input.",
-      "tags": ["codegen", "canonical-source", "ship-gate", "data-layer"]
+      "tags": [
+        "codegen",
+        "canonical-source",
+        "ship-gate",
+        "data-layer"
+      ]
     },
     {
       "name": "reversible-pause-for-hidden-entity",
-      "when": "An entity (coach, program, location, camp week) is temporarily paused — may return later. Need to hide from public surfaces but preserve the data for zero-cost reactivation",
-      "example": "1) Add optional `hidden?: boolean` + `hiddenReason?: string` to the entity type. 2) Set hidden=true in JSON data. 3) Add private getVisibleX() helper; all public getters + schema builders filter via it. 4) Single-link getters (getBySlug) stay UNFILTERED so direct URLs still resolve for reactivation testing. 5) Explicit robots: { index: false, follow: false } on the entity's detail page with a JSDoc comment describing the reactivation steps. 6) If the hidden entity was part of a fixed-layout grid (2x2), swap to grid-cols-N for the remaining N and note the revert path in a comment. This session: paused Michelle coach — 4 files touched, full reversibility.",
-      "tags": ["data-layer", "reversibility", "scope-guard", "coaches", "paused-entity"]
+      "when": "An entity (coach, program, location, camp week) is temporarily paused \u2014 may return later. Need to hide from public surfaces but preserve the data for zero-cost reactivation",
+      "example": "1) Add optional `hidden?: boolean` + `hiddenReason?: string` to the entity type. 2) Set hidden=true in JSON data. 3) Add private getVisibleX() helper; all public getters + schema builders filter via it. 4) Single-link getters (getBySlug) stay UNFILTERED so direct URLs still resolve for reactivation testing. 5) Explicit robots: { index: false, follow: false } on the entity's detail page with a JSDoc comment describing the reactivation steps. 6) If the hidden entity was part of a fixed-layout grid (2x2), swap to grid-cols-N for the remaining N and note the revert path in a comment. This session: paused Michelle coach \u2014 4 files touched, full reversibility.",
+      "tags": [
+        "data-layer",
+        "reversibility",
+        "scope-guard",
+        "coaches",
+        "paused-entity"
+      ]
     },
     {
       "name": "ship-gate-commit-first",
       "when": "Running npm run ship:gate after making local changes",
-      "example": "Always commit tracked changes BEFORE running ship:gate. The clean-tree check is the final gate — it fires hard even if build/lint/tests all passed. Pattern: `git add ... && git commit -m '...' && npm run ship:gate`. If codegen auto-modifies files DURING ship:gate (e.g. tokens:build rewriting JSON), that's expected; commit those too, then re-run. NEVER try to 'run ship:gate first then commit' — you'll spend time debugging a guardrail, not a real problem.",
-      "tags": ["tooling", "ship-gate", "workflow"]
+      "example": "Always commit tracked changes BEFORE running ship:gate. The clean-tree check is the final gate \u2014 it fires hard even if build/lint/tests all passed. Pattern: `git add ... && git commit -m '...' && npm run ship:gate`. If codegen auto-modifies files DURING ship:gate (e.g. tokens:build rewriting JSON), that's expected; commit those too, then re-run. NEVER try to 'run ship:gate first then commit' \u2014 you'll spend time debugging a guardrail, not a real problem.",
+      "tags": [
+        "tooling",
+        "ship-gate",
+        "workflow"
+      ]
     },
     {
       "name": "founder-decision-via-structured-question",
       "when": "A blocking decision has 2-4 distinct options with different engineering paths (e.g. active/departed/paused/status-quo for coach status)",
       "example": "Use the AskQuestion tool with explicit labeled options that each describe the engineering consequence. Saves a round trip vs. vague text reply. Works because founder only has to read + select, not formulate + type. This session: Michelle pause decision took 30 seconds of founder time, zero clarification round trips.",
-      "tags": ["communication", "founder", "decision", "tooling"]
+      "tags": [
+        "communication",
+        "founder",
+        "decision",
+        "tooling"
+      ]
     },
     {
       "name": "founder-voice-memo-decode",
       "when": "Founder sends voice-to-text feedback with garbled phrases (e.g. 'among standards' for 'Aman standards', 'I went off the goal is deep and throws you want' as garble)",
-      "example": "Parse: ignore mistranscribed filler, anchor on the clear nouns + .cursorrules brand references. 'Aman standards' + 'marketing and what they do' → compare current UI against aman.com patterns (no ratings, no aggregator links, long-form editorial, heritage stats). Restate the decoded intent back before executing so founder can course-correct if I misread.",
-      "tags": ["communication", "voice-to-text", "founder", "decoding"]
+      "example": "Parse: ignore mistranscribed filler, anchor on the clear nouns + .cursorrules brand references. 'Aman standards' + 'marketing and what they do' \u2192 compare current UI against aman.com patterns (no ratings, no aggregator links, long-form editorial, heritage stats). Restate the decoded intent back before executing so founder can course-correct if I misread.",
+      "tags": [
+        "communication",
+        "voice-to-text",
+        "founder",
+        "decoding"
+      ]
     },
     {
       "name": "full-compound-loop-in-one-session",
-      "when": "Scoped bundle (≤12 files, known shape, memory loaded) where Plan/Work/Review/Validate/Deploy/Learn can run sequentially in one session",
-      "example": "SEO P1 bundle: 4 hours total. Plan with memory auto-load + audit-verification caught 1 wasted commit. Work in 8 atomic commits. Review happened inline (mid-work) when live smoke caught title-template bug — fixed in one follow-up commit before push. Validate via build output. Deploy to Vercel prod, smoke test immediately. Learn bakes the new patterns back. Entire loop is compounding, not linear.",
-      "tags": ["compound-engineering", "workflow", "throughput"]
+      "when": "Scoped bundle (\u226412 files, known shape, memory loaded) where Plan/Work/Review/Validate/Deploy/Learn can run sequentially in one session",
+      "example": "SEO P1 bundle: 4 hours total. Plan with memory auto-load + audit-verification caught 1 wasted commit. Work in 8 atomic commits. Review happened inline (mid-work) when live smoke caught title-template bug \u2014 fixed in one follow-up commit before push. Validate via build output. Deploy to Vercel prod, smoke test immediately. Learn bakes the new patterns back. Entire loop is compounding, not linear.",
+      "tags": [
+        "compound-engineering",
+        "workflow",
+        "throughput"
+      ]
+    },
+    {
+      "name": "bot-fact-source-of-truth-hierarchy",
+      "when": "Building a bot/front-desk GPT knowledge base for an org with structured data files and a public website",
+      "example": "LBTA bot facts lookup order: (1) data/year2026.json [calendar, base pricing, camps] \u2192 (2) data/{season}2026.json [per-season program rows] \u2192 (3) data/leagues-2026.json + private-rates.json + pricing-supplemental.json \u2192 (4) KB markdown derived from above \u2192 (5) UI mirror /schedules. When answer not in 1-3, bot says 'let me get the desk on this' and routes to support@ or (949) 534-0457. Every Q&A in gpt/03-KNOWLEDGE-BRAIN/23-bot-knowledge-base-2026.md ends with **Sources:** line + Escalate/Self-serve. Never invent numbers.",
+      "tags": [
+        "bot",
+        "knowledge-base",
+        "single-source",
+        "ai",
+        "front-desk"
+      ]
+    },
+    {
+      "name": "acceptance-script-as-validator",
+      "when": "Shipping a docs/data file claiming numerical facts (\u226510 prices, times, or thresholds)",
+      "example": "Write a Python assertion script next to the doc: one assert per claim, comparing the doc's number to the source JSON. This loop ran 49 assertions in <100ms and caught LiveBall NTRP drift mechanically. Pattern: data_checks = [(label, get(json,'path')==expected), ...]; report passed/failed counts. Re-run after every correction. Cheap; obvious in hindsight; saves an hour of manual cross-checking per pass. The script becomes a living spec.",
+      "tags": [
+        "docs",
+        "validation",
+        "ci",
+        "data-integrity",
+        "compound-validate"
+      ]
+    },
+    {
+      "name": "founder-correction-cross-surface-sweep",
+      "when": "Founder corrects a single fact (price, level, schedule, policy) that may be mirrored in multiple files",
+      "example": "After applying the correction in one place, grep the corrected term across data/**/*.json (incl. data/coach-hub/), components/**/*.{tsx,ts}, and gpt/03-KNOWLEDGE-BRAIN/**.md. Resolve every match in the SAME loop. Plan should list ALL surfaces upfront via an initial grep, not just the obvious ones. This loop's example: LiveBall NTRP correction touched 6 files: 3 season JSONs + coach-hub mirror + ProgramsTabView (hardcoded card) + brain doc 02. Almost shipped Saturday-Adult-Intermediate-not-separate correction without catching ProgramCard.tsx JSDoc + brain doc 02 + coach-hub mirror.",
+      "tags": [
+        "founder-correction",
+        "cross-surface",
+        "data-integrity",
+        "compound-review"
+      ]
+    },
+    {
+      "name": "bot-kb-q-and-a-structure-2026",
+      "when": "Authoring a bot/AI knowledge base for retrieval (not narrative reading)",
+      "example": "Each Q&A: '### Q{n}. {canonical question}' heading + '**Tags:** k1, k2, k3' line + '**Answer:**' (\u2264120 words, one factual anchor) + '**Sources:**' (\u22651 path/URL) + '**Escalate:** phone/email' or '**Self-serve:** URL'. Plus two compounding appendices: Appendix B (coverage matrix vs SMS/support log \u2192 Q-numbers, so we know what we DIDN'T cover) and Appendix C (reconciliation notes \u2014 Resolved YYYY-MM-DD vs Open). Founder confirmations move items from Open\u2192Resolved with timestamp; doc grows without rotting.",
+      "tags": [
+        "bot",
+        "knowledge-base",
+        "structure",
+        "retrieval",
+        "documentation"
+      ]
+    },
+    {
+      "name": "season-aware-pricing-quote",
+      "when": "Quoting any LBTA program price in bot/AI/marketing copy",
+      "example": "Never quote a single program price without anchoring to a season \u2014 per-session value is similar but absolute totals differ because Winter=13wk, Spring=10wk, Summer=11wk, Fall=16wk. Junior 1\u00d7/wk: $546 / $420 / $462 / $672 across seasons. Bot rule: 'Always confirm season first when quoting prices. If unsure which season, ask.' Encoded in KB header rules of engagement and in Q10 of 23-bot-knowledge-base-2026.md.",
+      "tags": [
+        "pricing",
+        "seasons",
+        "bot",
+        "marketing",
+        "data-integrity"
+      ]
+    },
+    {
+      "name": "lib-level-form-pipeline-dedup",
+      "when": "Form pipeline writes to a primary storage system (e.g. Supabase leads) from many API routes; need to dedupe accidental rapid resubmissions across all forms",
+      "example": "Add 120s server-side dedup window IN the shared lib (e.g. lib/leads-store.ts), not per route. Pattern: const DEDUP_WINDOW_MS = 120_000; lookup recent (email, source) within window; skip insert + log if found; fail-open on lookup error (logging) rather than dropping leads. Single fix protects every route that calls the lib. LBTA uses this for storeLead() called from book/register/register-program/register-year/newsletter/scholarship/chat",
+      "tags": [
+        "form-pipeline",
+        "dedup",
+        "lib-level",
+        "supabase",
+        "leads-store"
+      ]
+    },
+    {
+      "name": "useref-synchronous-double-submit-guard",
+      "when": "React form modal where rapid double-clicks bypass the disabled prop because useState batches async (production shows 14 duplicate submissions in real LBTA data)",
+      "example": "const submittingRef = useRef(false); in handleSubmit: e.preventDefault(); if (submittingRef.current) return; submittingRef.current = true; setIsSubmitting(true); /* ... */ finally { setIsSubmitting(false); submittingRef.current = false; }. Belt-and-suspenders with server-side dedup. Comment: 'Synchronous double-submit guard: useState updates batch async, so a fast double-click can fire two submissions before the disabled prop renders.'",
+      "tags": [
+        "react",
+        "forms",
+        "useref",
+        "double-submit",
+        "modal",
+        "useState-batching"
+      ]
+    },
+    {
+      "name": "multi-storage-lead-audit",
+      "when": "Founder asks 'are leads being saved' or 'how many leads do we have'",
+      "example": "Enumerate every storage target before answering. LBTA writes to: (1) Supabase leads table via storeLead(), (2) Notion 'Registrations' database via writeNotionLead(), (3) ActiveCampaign contacts via createOrUpdateContact, (4) GoHighLevel via sendToGHL, plus (5) Meta lead-ad forms write directly to Notion via Zapier (bypasses website code). Query each, dedupe by email + normalized phone, present the union. Flag persistent gaps as candidates for a unified-mirror cron",
+      "tags": [
+        "lead-pipeline",
+        "audit",
+        "multi-storage",
+        "completeness",
+        "notion",
+        "supabase",
+        "meta-ads"
+      ]
+    },
+    {
+      "name": "vercel-deploy-verify-via-timing",
+      "when": "Need to confirm Vercel production deployed the latest commit but no VERCEL_TOKEN is available for API queries",
+      "example": "Capture local HEAD SHA + commit time. After git push, run npx vercel ls --prod and check: (1) deployment 'created' time is within seconds of commit time (auto-trigger from git push), (2) status is \u2713 Ready, (3) duration is plausible (40-90s for typical builds), (4) aliases include the production domain. Then HEAD curl the live domain for HTTP 200. The triple match (timing + ready + alias + 200) is sufficient verification when the API token isn't loaded",
+      "tags": [
+        "deploy",
+        "vercel",
+        "verification",
+        "ship-gate",
+        "compound-deploy"
+      ]
+    },
+    {
+      "name": "lead-export-csv-with-channel-classification",
+      "when": "Founder needs an offline working copy of leads with 'class interested in' across multi-storage systems",
+      "example": "One CSV with columns: Date, Time, Name, Email, Phone, Channel, Class / Program Interest, Details, Notion Page. Channel column distinguishes 'Trial Booking (Website)', 'Private Lesson Booking (Website)', 'Meta Lead Ad', 'Newsletter (Website)', 'Imported (filename)'. Use payload.program for website leads; payload.bookingType=='private' \u2192 'Private Lesson'. Sort by created_at desc. Write to ~/Desktop/lbta-leads-ALL-{date}.csv. Single Python block reads from Supabase REST + Notion API and merges deduped by email + last-10-digit phone",
+      "tags": [
+        "csv",
+        "export",
+        "leads",
+        "ops",
+        "founder-handoff",
+        "supabase",
+        "notion"
+      ]
+    },
+    {
+      "name": "notion-supabase-mirror-cron",
+      "when": "Multiple lead/contact channels write to Notion (Meta lead-ad forms, Zapier integrations) but the codebase only writes to Supabase \u2014 need to unify so reporting + dashboards see everything",
+      "example": "Vercel cron daily \u2192 /api/cron/mirror-meta-leads (Authorization: Bearer ${CRON_SECRET}) \u2192 mirrorMetaLeadsToSupabase({sinceMs}). Filter Notion query by created_time + Meta-channel signal (campaign_name | ad_name | form_name | platform). Idempotency via unique partial index on notion_page_id (text column added to leads table). Default scan window > cron interval (36h for daily) to recover from a one-off skipped run. storeLead() updated to dedup by notionPageId when set, falling back to (email, source) time-window dedup",
+      "tags": [
+        "cron",
+        "vercel",
+        "notion",
+        "supabase",
+        "lead-mirror",
+        "idempotency"
+      ]
+    },
+    {
+      "name": "auth-gated-admin-route-under-existing-prefix",
+      "when": "Need an internal admin view (e.g. /admin/leads) but already have an auth-gated prefix (e.g. /coach-hub) with cookie path scoped to that prefix",
+      "example": "Put the new view UNDER the existing prefix (/coach-hub/leads, not /admin/leads) so proxy.ts already gates it via /coach-hub/:path*. Cookie path matches. No new auth surface. For the matching API export route (/api/coach-hub/leads/export), add defense-in-depth cookie verification at handler entry since proxy.ts has a passthrough for /api/coach-hub/* paths. Pattern: server-rendered table with searchParams-based filter (no client JS for filter); brand tokens; force-dynamic + robots noindex",
+      "tags": [
+        "auth",
+        "admin",
+        "coach-hub",
+        "proxy",
+        "internal-view",
+        "csv-export"
+      ]
+    },
+    {
+      "name": "csv-export-shared-lib-server-only",
+      "when": "Two surfaces (UI table + CSV download route) need the same shape of data and same row formatting",
+      "example": "lib/leads-query.ts exports getAllLeads, channelLabel(row), programLabel(row), leadMatchesChannel(row, channel), leadsToCsv(rows). Both /coach-hub/leads (page) and /api/coach-hub/leads/export (CSV route) import from this lib. Single source of truth for channel buckets, friendly labels, and CSV column shape. RFC-4180 csvField() helper for quoting",
+      "tags": [
+        "csv",
+        "export",
+        "DRY",
+        "single-source",
+        "lib",
+        "leads-query"
+      ]
+    },
+    {
+      "name": "vercel-env-add-no-newline",
+      "when": "Adding a secret env var to Vercel that will be used in HTTP headers (Authorization: Bearer X, X-Webhook-Secret, etc.)",
+      "example": "Use printf '%s' \"$SECRET\" | npx vercel env add NAME production. echo \"$SECRET\" | ... appends a trailing newline that gets captured into the env var value, causing Vercel build to fail with 'CRON_SECRET environment variable contains leading or trailing whitespace, which is not allowed in HTTP header values'. Symptom: Vercel deploy fails at build step within ~1s",
+      "tags": [
+        "vercel",
+        "env",
+        "ops",
+        "cron",
+        "shell",
+        "newline"
+      ]
+    },
+    {
+      "name": "supabase-unique-partial-index-for-mirror-idempotency",
+      "when": "Mirroring rows from an external system (Notion, Airtable, Stripe) into Supabase and need DB-level idempotency without disrupting other inserts that don't have the source ID",
+      "example": "alter table leads add column notion_page_id text; create unique index ... on leads (notion_page_id) where notion_page_id is not null; \u2014 partial index lets website-form leads (no notion_page_id, value NULL) coexist with mirrored leads (notion_page_id set, unique). storeLead handles the unique-violation error code (PG '23505') as success-equivalent for the mirror path. Lookup-and-skip cheaper than catching error in normal path; fallback handles parallel runs",
+      "tags": [
+        "supabase",
+        "postgres",
+        "unique-index",
+        "idempotency",
+        "mirror",
+        "migrations"
+      ]
     }
   ]
 }
