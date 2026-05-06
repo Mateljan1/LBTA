@@ -202,7 +202,7 @@ export default function JuniorTrialLanding() {
                   </svg>
                 </div>
                 <h4 className="text-3xl font-headline text-brand-pacific-dusk mb-4">Registration Received</h4>
-                <p className="text-lbta-secondary text-lg">
+                <p className="text-lbta-slate text-lg">
                   We'll contact you within 24 hours to confirm your spot and finalize details.
                 </p>
               </div>
@@ -437,17 +437,17 @@ export default function JuniorTrialLanding() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center">
             <div>
               <div className="text-4xl font-headline text-brand-pacific-dusk mb-1">20+</div>
-              <p className="text-sm text-lbta-secondary">D1 Placements</p>
+              <p className="text-sm text-lbta-slate">D1 Placements</p>
             </div>
             <div className="hidden md:block w-px h-12 bg-gray-200" />
             <div>
               <div className="text-4xl font-headline text-brand-pacific-dusk mb-1">200+</div>
-              <p className="text-sm text-lbta-secondary">Active Juniors</p>
+              <p className="text-sm text-lbta-slate">Active Juniors</p>
             </div>
             <div className="hidden md:block w-px h-12 bg-gray-200" />
             <div>
               <div className="text-4xl font-headline text-brand-pacific-dusk mb-1">Since 2020</div>
-              <p className="text-sm text-lbta-secondary">City Partner</p>
+              <p className="text-sm text-lbta-slate">City Partner</p>
             </div>
           </div>
         </div>

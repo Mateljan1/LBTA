@@ -75,9 +75,48 @@ The internal showcase route at **`/brand`** renders every color, type scale, but
 1. Every `BRAND.*` constant matches `tokens/lbta-web-tokens.json` exactly (catches stale generated files).
 2. The full-repo `tokens:check --all` returns zero errors and zero warnings (catches new drift the moment it's introduced).
 
-## Migration guidance (legacy `lbta-*`)
+## Two namespaces — brand identity vs system utility
 
-- Prefer `brand-*` classes for new code.
-- Keep `lbta-*` only for backwards compatibility in untouched legacy areas.
-- For dark surfaces (`bg-brand-deep-water`, `bg-brand-deep-card`), avoid low-opacity body text — keep CTA styles solid-fill with visible focus rings.
-- Use `text-white/55` minimum for body content on dark surfaces; `/65–/75` for eyebrows; `/80–/90` for primary copy. Never `/40` or `/25`.
+The codebase has two color namespaces by design. They are NOT interchangeable.
+
+### `brand.*` — the 12 brand identity colors (use for design)
+
+Pacific Dusk, Deep Water, Deep Card, Victoria Cove, Thousand Steps, Sunset Cliff, Sandstone, Morning Light, Salt Air, Tide Pool, Sage Hill, Driftwood. All 11 of the original Pacific palette plus `brand-deep-card` for elevated dark cards. **These define what LBTA looks like.**
+
+### `lbta.*` — 4 system utility colors (use for non-brand semantic roles)
+
+| Class | Hex | Role |
+|---|---|---|
+| `lbta-slate` | `#6B6B6B` | Neutral secondary text (body fine print, captions, labels) |
+| `lbta-stone` | `#E8E4DF` | Neutral border / disabled background / divider |
+| `lbta-red` | `#F04E23` | **Error/alert only** — required-field asterisks, validation errors. NEVER use for marketing or brand accents. |
+| `lbta-black` | `#0A0A0A` | True black for premium CTAs (the `.btn-primary` background) |
+
+**These are not brand colors.** They fill semantic roles the 11-color brand palette doesn't address. Documenting them as a separate tier prevents drift back into "well, lbta-orange ≈ brand-sunset-cliff so they're the same thing."
+
+### Deprecated `lbta-*` (must migrate to `brand-*`)
+
+These names exist in `tokens/lbta-web-tokens.json` for backwards compat but are **forbidden in new code**:
+
+| Deprecated | Replacement |
+|---|---|
+| `lbta-primary` | `brand-pacific-dusk` |
+| `lbta-charcoal` | `brand-pacific-dusk` |
+| `lbta-cream` / `lbta-bone` | `brand-morning-light` |
+| `lbta-beige` / `lbta-sand` | `brand-sandstone` |
+| `lbta-orange` / `lbta-coral` / `lbta-burnt` | `brand-sunset-cliff` |
+| `lbta-coral-dark` | `brand-sunset-cliff/85` (opacity for hover) |
+| `lbta-secondary` | `lbta-slate` (alias dedup) |
+
+The checker enforces this list — adding any of these in new code fails strict mode.
+
+## Dark-surface contrast rules
+
+For text on `bg-brand-deep-water`, `bg-brand-deep-card`, or any dark surface:
+
+- **Primary copy**: `text-white/85` to `text-white/90`
+- **Secondary copy**: `text-white/70` to `text-white/80`
+- **Eyebrows / labels**: `text-white/65` to `text-white/75`
+- **Helper / footnote**: `text-white/55` to `text-white/65`
+- **Decorative borders/dividers**: `border-white/10` to `border-white/20` (non-text only)
+- **❌ Never** `text-white/40` or `text-white/25` for any text — fails WCAG 7:1

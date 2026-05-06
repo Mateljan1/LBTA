@@ -156,7 +156,7 @@ export default function BeginnerProgramLanding() {
             <h2 className="font-headline text-4xl lg:text-5xl text-brand-pacific-dusk mb-6">
               From Zero to Match-Ready
             </h2>
-            <p className="text-lg text-lbta-secondary max-w-2xl mx-auto font-light">
+            <p className="text-lg text-lbta-slate max-w-2xl mx-auto font-light">
               Most adults believe tennis takes years to learn. Our systematic approach proves otherwise.
             </p>
           </div>
@@ -165,7 +165,7 @@ export default function BeginnerProgramLanding() {
             <div>
               <div className="text-7xl font-headline font-light text-brand-sunset-cliff mb-6">01</div>
               <h3 className="text-xl font-medium text-brand-pacific-dusk mb-3">Weeks 1-4: Foundation</h3>
-              <p className="text-lbta-secondary leading-relaxed mb-4">
+              <p className="text-lbta-slate leading-relaxed mb-4">
                 Master the fundamentals that prevent bad habits. By week 4, you'll have proper grip, balanced stance, and clean contact point on both groundstrokes.
               </p>
               <p className="text-sm font-medium text-brand-sunset-cliff">
@@ -176,7 +176,7 @@ export default function BeginnerProgramLanding() {
             <div>
               <div className="text-7xl font-headline font-light text-brand-sunset-cliff mb-6">02</div>
               <h3 className="text-xl font-medium text-brand-pacific-dusk mb-3">Weeks 5-8: Rally Development</h3>
-              <p className="text-lbta-secondary leading-relaxed mb-4">
+              <p className="text-lbta-slate leading-relaxed mb-4">
                 Consistency over power. Learning to sustain cross-court and down-the-line rallies. Pattern recognition and court positioning.
               </p>
               <p className="text-sm font-medium text-brand-sunset-cliff">
@@ -187,7 +187,7 @@ export default function BeginnerProgramLanding() {
             <div>
               <div className="text-7xl font-headline font-light text-brand-sunset-cliff mb-6">03</div>
               <h3 className="text-xl font-medium text-brand-pacific-dusk mb-3">Weeks 9-12: Match Ready</h3>
-              <p className="text-lbta-secondary leading-relaxed mb-4">
+              <p className="text-lbta-slate leading-relaxed mb-4">
                 Scoring, serve mechanics, return positioning, singles and doubles strategy. You'll play your first competitive match.
               </p>
               <p className="text-sm font-medium text-brand-sunset-cliff">
@@ -209,7 +209,7 @@ export default function BeginnerProgramLanding() {
               <h2 className="font-headline text-4xl text-brand-pacific-dusk mb-6">
                 Why adult beginners succeed here.
               </h2>
-              <div className="space-y-6 text-lbta-secondary leading-relaxed">
+              <div className="space-y-6 text-lbta-slate leading-relaxed">
                 <p>
                   Most tennis instruction treats adults like children. Simplified drills. Patience without precision. The assumption that "fun" matters more than progress.
                 </p>
@@ -225,28 +225,28 @@ export default function BeginnerProgramLanding() {
             <div className="space-y-8">
               <div className="border-l-2 border-brand-sunset-cliff pl-6">
                 <h4 className="font-medium text-brand-pacific-dusk mb-2">Professional Systems</h4>
-                <p className="text-lbta-secondary text-sm">
+                <p className="text-lbta-slate text-sm">
                   The same ATP/WTA coaching methodology behind three tour players and 20+ D1 scholarships.
                 </p>
               </div>
 
               <div className="border-l-2 border-brand-sunset-cliff pl-6">
                 <h4 className="font-medium text-brand-pacific-dusk mb-2">Adult-Focused Groups</h4>
-                <p className="text-lbta-secondary text-sm">
+                <p className="text-lbta-slate text-sm">
                   Maximum 4-6 adults per session. Similar skill levels. Professional environment.
                 </p>
               </div>
 
               <div className="border-l-2 border-brand-sunset-cliff pl-6">
                 <h4 className="font-medium text-brand-pacific-dusk mb-2">Flexible Scheduling</h4>
-                <p className="text-lbta-secondary text-sm">
+                <p className="text-lbta-slate text-sm">
                   Morning and evening sessions. Designed for working professionals and active retirees.
                 </p>
               </div>
 
               <div className="border-l-2 border-brand-sunset-cliff pl-6">
                 <h4 className="font-medium text-brand-pacific-dusk mb-2">Video Analysis Included</h4>
-                <p className="text-lbta-secondary text-sm">
+                <p className="text-lbta-slate text-sm">
                   Track your progress. See what you're doing right. Understand what needs work.
                 </p>
               </div>
@@ -265,7 +265,7 @@ export default function BeginnerProgramLanding() {
             <h2 className="font-headline text-4xl lg:text-5xl text-brand-pacific-dusk mb-6">
               Hear From Our Members
             </h2>
-            <p className="text-lg text-lbta-secondary max-w-2xl mx-auto font-light">
+            <p className="text-lg text-lbta-slate max-w-2xl mx-auto font-light">
               Adults who started as complete beginners and now play confidently every week.
             </p>
           </div>
@@ -299,25 +299,25 @@ export default function BeginnerProgramLanding() {
               <div className="flex justify-between items-center pb-4 border-b border-brand-pacific-dusk/10">
                 <div>
                   <h4 className="font-medium text-brand-pacific-dusk mb-1">{bp.valueStack.groupSessions.label}</h4>
-                  <p className="text-sm text-lbta-secondary">{bp.valueStack.groupSessions.description}</p>
+                  <p className="text-sm text-lbta-slate">{bp.valueStack.groupSessions.description}</p>
                 </div>
-                <p className="text-xl font-headline text-lbta-secondary">${bp.valueStack.groupSessions.value.toLocaleString()}</p>
+                <p className="text-xl font-headline text-lbta-slate">${bp.valueStack.groupSessions.value.toLocaleString()}</p>
               </div>
 
               <div className="flex justify-between items-center pb-4 border-b border-brand-pacific-dusk/10">
                 <div>
                   <h4 className="font-medium text-brand-pacific-dusk mb-1">{bp.valueStack.videoAnalysis.label}</h4>
-                  <p className="text-sm text-lbta-secondary">{bp.valueStack.videoAnalysis.description}</p>
+                  <p className="text-sm text-lbta-slate">{bp.valueStack.videoAnalysis.description}</p>
                 </div>
-                <p className="text-xl font-headline text-lbta-secondary">${bp.valueStack.videoAnalysis.value.toLocaleString()}</p>
+                <p className="text-xl font-headline text-lbta-slate">${bp.valueStack.videoAnalysis.value.toLocaleString()}</p>
               </div>
 
               <div className="flex justify-between items-center pb-4 border-b border-brand-pacific-dusk/10">
                 <div>
                   <h4 className="font-medium text-brand-pacific-dusk mb-1">{bp.valueStack.trainingPlan.label}</h4>
-                  <p className="text-sm text-lbta-secondary">{bp.valueStack.trainingPlan.description}</p>
+                  <p className="text-sm text-lbta-slate">{bp.valueStack.trainingPlan.description}</p>
                 </div>
-                <p className="text-xl font-headline text-lbta-secondary">${bp.valueStack.trainingPlan.value.toLocaleString()}</p>
+                <p className="text-xl font-headline text-lbta-slate">${bp.valueStack.trainingPlan.value.toLocaleString()}</p>
               </div>
 
               <div className="flex justify-between items-center pt-6">
@@ -331,11 +331,11 @@ export default function BeginnerProgramLanding() {
                 <div className="flex justify-between items-center">
                   <div>
                     <h4 className="font-medium text-brand-sunset-cliff text-2xl mb-1">Your Investment</h4>
-                    <p className="text-sm text-lbta-secondary">Plus ${bp.discount} off with {bp.discountDeadline} enrollment</p>
+                    <p className="text-sm text-lbta-slate">Plus ${bp.discount} off with {bp.discountDeadline} enrollment</p>
                   </div>
                   <div className="text-right">
                     <p className="text-4xl font-headline text-brand-sunset-cliff">${bp.schedules[0].discountedPrice}-${bp.schedules[2].discountedPrice}</p>
-                    <p className="text-sm text-lbta-secondary">Normally ${bp.schedules[0].price}-${bp.schedules[2].price}</p>
+                    <p className="text-sm text-lbta-slate">Normally ${bp.schedules[0].price}-${bp.schedules[2].price}</p>
                   </div>
                 </div>
               </div>
@@ -349,7 +349,7 @@ export default function BeginnerProgramLanding() {
               </svg>
               <div className="text-left">
                 <p className="font-medium text-brand-pacific-dusk">30-Day Satisfaction Guarantee</p>
-                <p className="text-sm text-lbta-secondary">Not progressing as expected? Full refund within first 30 days.</p>
+                <p className="text-sm text-lbta-slate">Not progressing as expected? Full refund within first 30 days.</p>
               </div>
             </div>
           </div>
@@ -405,7 +405,7 @@ export default function BeginnerProgramLanding() {
                       </svg>
                     </div>
                     <h4 className="text-2xl font-headline text-brand-pacific-dusk mb-3">Request Received</h4>
-                    <p className="text-lbta-secondary">We'll contact you within 24 hours to schedule your trial session.</p>
+                    <p className="text-lbta-slate">We'll contact you within 24 hours to schedule your trial session.</p>
                   </div>
                 ) : (
                   <>
@@ -528,21 +528,21 @@ export default function BeginnerProgramLanding() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
             <div>
               <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">2020</div>
-              <p className="text-sm text-lbta-secondary">Founded</p>
+              <p className="text-sm text-lbta-slate">Founded</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
               <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">200+</div>
-              <p className="text-sm text-lbta-secondary">Adult Members</p>
+              <p className="text-sm text-lbta-slate">Adult Members</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
               <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">Since 2020</div>
-              <p className="text-sm text-lbta-secondary">Official City Partner</p>
+              <p className="text-sm text-lbta-slate">Official City Partner</p>
             </div>
           </div>
         </div>

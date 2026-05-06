@@ -18,7 +18,31 @@ const inlineGradientHexRegex = /style=\{[^}]*linear-gradient[^}]*#[0-9a-fA-F]{3,
 // Forbidden font families in app code (lib/email.ts is exempted — emails use fallback fonts legitimately)
 const forbiddenFontRegex = /\b(Inter|Roboto|Arial|Space Grotesk|Playfair|Work Sans|Helvetica)\b/g
 
-const deprecatedLbtaClasses = new Set(['lbta-primary', 'lbta-coral', 'lbta-coral-dark', 'lbta-bone'])
+// Hand-rolled eyebrow pattern (matches "text-[10-12px] ... uppercase ... tracking-[any]" in any order
+// within a single class string). These should use .text-eyebrow / .text-eyebrow-sm utilities.
+// WARN only — not strict — because some intentional cases exist (e.g. compact UI labels).
+const handRolledEyebrowRegex = /class(?:Name)?=["'`][^"'`]*\btext-\[1[0-2]px\][^"'`]*\buppercase\b[^"'`]*\btracking-\[[^\]]+\][^"'`]*["'`]|class(?:Name)?=["'`][^"'`]*\btracking-\[[^\]]+\][^"'`]*\buppercase\b[^"'`]*\btext-\[1[0-2]px\][^"'`]*["'`]|class(?:Name)?=["'`][^"'`]*\buppercase\b[^"'`]*\btext-\[1[0-2]px\][^"'`]*\btracking-\[[^\]]+\][^"'`]*["'`]/g
+
+// Hand-rolled section padding (py-[80-200px] or px-[80-200px] when .section/.section-lg/.section-sm exists).
+// WARN only — captures common section-spacing pattern.
+const handRolledSectionPaddingRegex = /\bpy-\[(?:8\d|9\d|1[0-9]\d|200)px\]/g
+
+// Deprecated lbta-* classes that have direct brand-* equivalents and must migrate.
+// Allowed lbta-* utility classes (slate, stone, red, black) are NOT deprecated — they fill
+// system/utility roles the 11-color brand kit doesn't address. See docs/brand-token-system.md.
+const deprecatedLbtaClasses = new Set([
+  'lbta-primary',     // → brand-pacific-dusk
+  'lbta-coral',       // → brand-sunset-cliff
+  'lbta-coral-dark',  // → brand-sunset-cliff/85 hover
+  'lbta-bone',        // → brand-morning-light
+  'lbta-cream',       // → brand-morning-light
+  'lbta-charcoal',    // → brand-pacific-dusk
+  'lbta-orange',      // → brand-sunset-cliff
+  'lbta-burnt',       // → brand-sunset-cliff
+  'lbta-beige',       // → brand-sandstone
+  'lbta-sand',        // → brand-sandstone
+  'lbta-secondary',   // → lbta-slate (alias dedup)
+])
 
 // Files exempt from raw-hex scan (own the tokens themselves)
 const rawHexSkipFiles = new Set([
@@ -44,6 +68,8 @@ type ReportData = {
   inlineGradient: Hit[]
   forbiddenFont: Hit[]
   legacyLbta: Hit[]
+  handRolledEyebrow: Hit[]
+  handRolledSectionPadding: Hit[]
 }
 
 async function walkFiles(dirPath: string, files: string[] = []): Promise<string[]> {
@@ -158,6 +184,8 @@ async function writeReport(reportData: ReportData) {
     inlineGradient: reportData.inlineGradient.length,
     forbiddenFont: reportData.forbiddenFont.length,
     legacyLbta: reportData.legacyLbta.length,
+    handRolledEyebrow: reportData.handRolledEyebrow.length,
+    handRolledSectionPadding: reportData.handRolledSectionPadding.length,
   }
   const generatedAt = new Date().toISOString()
   const allClear =
@@ -182,8 +210,12 @@ async function writeReport(reportData: ReportData) {
   sections.push(`| Inline gradient hex literals | ${totals.inlineGradient} | ${totals.inlineGradient === 0 ? '✅' : '⚠'} |`)
   sections.push(`| Forbidden fonts (app code) | ${totals.forbiddenFont} | ${totals.forbiddenFont === 0 ? '✅' : '❌'} |`)
   sections.push(`| Deprecated lbta-* classes | ${totals.legacyLbta} | ${totals.legacyLbta === 0 ? '✅' : '⚠'} |`)
+  sections.push(`| Hand-rolled eyebrow patterns (info) | ${totals.handRolledEyebrow} | ${totals.handRolledEyebrow === 0 ? '✅' : 'ℹ'} |`)
+  sections.push(`| Hand-rolled section padding (info) | ${totals.handRolledSectionPadding} | ${totals.handRolledSectionPadding === 0 ? '✅' : 'ℹ'} |`)
   sections.push('')
   sections.push(allClear ? '**Result: 🟢 LOCKED IN — zero brand drift.**' : '**Result: 🟡 Drift present — see breakdown below.**')
+  sections.push('')
+  sections.push('_Hand-rolled patterns are informational — they do not block CI. They surface where the design system primitives could replace ad-hoc styles. Migrate opportunistically when touching a file._')
   sections.push('')
   sections.push(reportSection('Forbidden contrast errors', reportData.forbidden))
   sections.push(reportSection('Raw hex literals', reportData.rawHex))
@@ -191,6 +223,8 @@ async function writeReport(reportData: ReportData) {
   sections.push(reportSection('Inline gradient hex literals', reportData.inlineGradient))
   sections.push(reportSection('Forbidden fonts (app code)', reportData.forbiddenFont))
   sections.push(reportSection('Deprecated lbta-* classes', reportData.legacyLbta))
+  sections.push(reportSection('Hand-rolled eyebrow patterns (informational)', reportData.handRolledEyebrow))
+  sections.push(reportSection('Hand-rolled section padding (informational)', reportData.handRolledSectionPadding))
 
   const liveBlock = sections.join('\n')
 
@@ -234,6 +268,8 @@ async function main() {
     inlineGradient: [],
     forbiddenFont: [],
     legacyLbta: [],
+    handRolledEyebrow: [],
+    handRolledSectionPadding: [],
   }
 
   for (const file of files) {
@@ -286,12 +322,20 @@ async function main() {
       )
       reportData.legacyLbta.push(...legacyHits)
     }
+
+    // Hand-rolled patterns (WARN only — never strict; designers may have intentional cases)
+    if (extension === '.tsx') {
+      reportData.handRolledEyebrow.push(...gatherLineHits(contents, relativeFile, handRolledEyebrowRegex))
+      reportData.handRolledSectionPadding.push(...gatherLineHits(contents, relativeFile, handRolledSectionPaddingRegex))
+    }
   }
 
   printHits('Deprecated lbta-* classes (warning):', 'WARN', reportData.legacyLbta)
   printHits('Raw hex usage (warning):', 'WARN', reportData.rawHex)
   printHits('Arbitrary Tailwind color values (warning):', 'WARN', reportData.arbitraryTailwind)
   printHits('Inline gradient hex literals (warning):', 'WARN', reportData.inlineGradient)
+  printHits('Hand-rolled eyebrow patterns — prefer .text-eyebrow (info, never blocks):', 'WARN', reportData.handRolledEyebrow, 30)
+  printHits('Hand-rolled section padding — prefer .section / .section-lg / .section-sm (info, never blocks):', 'WARN', reportData.handRolledSectionPadding, 30)
   printHits('Forbidden font families in app code (error):', 'ERROR', reportData.forbiddenFont)
   printHits('Forbidden low-contrast white text (error):', 'ERROR', reportData.forbidden)
 

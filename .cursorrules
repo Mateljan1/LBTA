@@ -193,6 +193,18 @@ colors: {
 - For arbitrary Tailwind values: forbidden — `bg-[#0a1628]` ❌ → `bg-brand-deep-card` ✅.
 - Visual proof of system: `/brand` route (internal, noindex). See `docs/brand-token-system.md`.
 
+**Two namespaces by design — `brand.*` and `lbta.*`:**
+- **`brand-*`** = 12 brand identity colors (the Pacific palette + `brand-deep-card`). Use for everything brand-related.
+- **`lbta-*`** = 4 system utility colors only:
+  - `lbta-slate` (#6B6B6B) — neutral secondary text
+  - `lbta-stone` (#E8E4DF) — neutral border / disabled / divider
+  - `lbta-red` (#F04E23) — **error/alert only**, never marketing
+  - `lbta-black` (#0A0A0A) — true black for premium CTAs
+- **Any other `lbta-*` name is deprecated** (lbta-cream, lbta-charcoal, lbta-orange, lbta-beige, lbta-sand, lbta-bone, lbta-burnt, lbta-coral, lbta-coral-dark, lbta-primary, lbta-secondary). The checker fails strict mode if any appear in new code. Migrate per `docs/brand-token-system.md` mapping table.
+
+**Hand-rolled patterns (informational, don't block CI):**
+- Prefer `.text-eyebrow` / `.text-eyebrow-sm` over hand-rolled `text-[10-12px] uppercase tracking-[N]`. The checker surfaces all hand-rolled instances in the audit report. Migrate opportunistically when touching a file. **202 instances exist today across 43 files** — see `docs/brand-page-audit-2026-05-06.md` for the per-file ledger and cleanup priority.
+
 ---
 
 ## Part 8: Typography System

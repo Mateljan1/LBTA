@@ -145,7 +145,7 @@ export default function AdultTrialLanding() {
             <h2 className="font-headline text-4xl lg:text-5xl text-brand-pacific-dusk mb-6">
               From Zero to Match-Ready
             </h2>
-            <p className="text-lg text-lbta-secondary max-w-2xl mx-auto font-light">
+            <p className="text-lg text-lbta-slate max-w-2xl mx-auto font-light">
               Most adults believe tennis takes years to learn. Our systematic approach proves otherwise.
             </p>
           </div>
@@ -154,7 +154,7 @@ export default function AdultTrialLanding() {
             <div>
               <div className="text-7xl font-headline font-light text-brand-sunset-cliff mb-6">01</div>
               <h3 className="text-xl font-medium text-brand-pacific-dusk mb-3">Weeks 1-4</h3>
-              <p className="text-lbta-secondary leading-relaxed">
+              <p className="text-lbta-slate leading-relaxed">
                 Fundamentals. Movement patterns, grip, contact point. The building blocks that prevent bad habits from forming.
               </p>
             </div>
@@ -162,7 +162,7 @@ export default function AdultTrialLanding() {
             <div>
               <div className="text-7xl font-headline font-light text-brand-sunset-cliff mb-6">02</div>
               <h3 className="text-xl font-medium text-brand-pacific-dusk mb-3">Weeks 5-8</h3>
-              <p className="text-lbta-secondary leading-relaxed">
+              <p className="text-lbta-slate leading-relaxed">
                 Rally development. Consistency over power. Learning to sustain points and recognize patterns in play.
               </p>
             </div>
@@ -170,7 +170,7 @@ export default function AdultTrialLanding() {
             <div>
               <div className="text-7xl font-headline font-light text-brand-sunset-cliff mb-6">03</div>
               <h3 className="text-xl font-medium text-brand-pacific-dusk mb-3">Weeks 9-12</h3>
-              <p className="text-lbta-secondary leading-relaxed">
+              <p className="text-lbta-slate leading-relaxed">
                 Match preparation. Scoring, strategy, singles and doubles play. You're ready to compete.
               </p>
             </div>
@@ -189,7 +189,7 @@ export default function AdultTrialLanding() {
               <h2 className="font-headline text-4xl text-brand-pacific-dusk mb-6">
                 Why adult beginners succeed here.
               </h2>
-              <div className="space-y-6 text-lbta-secondary leading-relaxed">
+              <div className="space-y-6 text-lbta-slate leading-relaxed">
                 <p>
                   Most tennis instruction treats adults like children. Simplified drills. Patience without precision. The assumption that "fun" matters more than progress.
                 </p>
@@ -205,28 +205,28 @@ export default function AdultTrialLanding() {
             <div className="space-y-8">
               <div className="border-l-2 border-brand-sunset-cliff pl-6">
                 <h4 className="font-medium text-brand-pacific-dusk mb-2">Professional Systems</h4>
-                <p className="text-lbta-secondary text-sm">
+                <p className="text-lbta-slate text-sm">
                   The same ATP/WTA coaching methodology behind three tour players and 20+ D1 scholarships.
                 </p>
               </div>
 
               <div className="border-l-2 border-brand-sunset-cliff pl-6">
                 <h4 className="font-medium text-brand-pacific-dusk mb-2">Adult-Focused Groups</h4>
-                <p className="text-lbta-secondary text-sm">
+                <p className="text-lbta-slate text-sm">
                   Maximum 4-6 adults per session. Similar skill levels. Professional environment.
                 </p>
               </div>
 
               <div className="border-l-2 border-brand-sunset-cliff pl-6">
                 <h4 className="font-medium text-brand-pacific-dusk mb-2">Flexible Scheduling</h4>
-                <p className="text-lbta-secondary text-sm">
+                <p className="text-lbta-slate text-sm">
                   Morning and evening sessions. Designed for working professionals and active retirees.
                 </p>
               </div>
 
               <div className="border-l-2 border-brand-sunset-cliff pl-6">
                 <h4 className="font-medium text-brand-pacific-dusk mb-2">Video Analysis Included</h4>
-                <p className="text-lbta-secondary text-sm">
+                <p className="text-lbta-slate text-sm">
                   Track your progress. See what you're doing right. Understand what needs work.
                 </p>
               </div>
@@ -268,7 +268,7 @@ export default function AdultTrialLanding() {
                       </svg>
                     </div>
                     <h4 className="text-2xl font-headline text-brand-pacific-dusk mb-3">Request Received</h4>
-                    <p className="text-lbta-secondary">We'll contact you within 24 hours to schedule your trial session.</p>
+                    <p className="text-lbta-slate">We'll contact you within 24 hours to schedule your trial session.</p>
                   </div>
                 ) : (
                   <>
@@ -368,21 +368,21 @@ export default function AdultTrialLanding() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
             <div>
               <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">2020</div>
-              <p className="text-sm text-lbta-secondary">Founded</p>
+              <p className="text-sm text-lbta-slate">Founded</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
               <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">200+</div>
-              <p className="text-sm text-lbta-secondary">Adult Members</p>
+              <p className="text-sm text-lbta-slate">Adult Members</p>
             </div>
 
             <div className="hidden md:block w-px h-12 bg-gray-200" />
 
             <div>
               <div className="text-3xl font-headline text-brand-pacific-dusk mb-1">Since 2020</div>
-              <p className="text-sm text-lbta-secondary">Official City Partner</p>
+              <p className="text-sm text-lbta-slate">Official City Partner</p>
             </div>
           </div>
         </div>

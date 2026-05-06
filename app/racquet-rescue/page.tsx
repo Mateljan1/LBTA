@@ -169,7 +169,7 @@ export default function RacquetRescuePage() {
                 <h3 className="font-headline text-3xl mb-2">{rr.services.sameDay.label}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-headline text-5xl text-brand-sunset-cliff">${rr.services.sameDay.price}</span>
-                  <span className="font-body text-lbta-secondary">{rr.services.sameDay.unit}</span>
+                  <span className="font-body text-lbta-slate">{rr.services.sameDay.unit}</span>
                 </div>
               </div>
               <ul className="space-y-3 font-body text-brand-pacific-dusk/70">
@@ -198,7 +198,7 @@ export default function RacquetRescuePage() {
                 <h3 className="font-headline text-3xl mb-2">{rr.services.customization.label}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-headline text-5xl text-brand-sunset-cliff">{rr.services.customization.priceLabel}</span>
-                  <span className="font-body text-lbta-secondary">{rr.services.customization.unit}</span>
+                  <span className="font-body text-lbta-slate">{rr.services.customization.unit}</span>
                 </div>
               </div>
               <ul className="space-y-3 font-body text-brand-pacific-dusk/70">
@@ -227,7 +227,7 @@ export default function RacquetRescuePage() {
                 <h3 className="font-headline text-3xl mb-2">{rr.services.grip.label}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-headline text-5xl text-brand-sunset-cliff">${rr.services.grip.price}</span>
-                  <span className="font-body text-lbta-secondary">{rr.services.grip.unit}</span>
+                  <span className="font-body text-lbta-slate">{rr.services.grip.unit}</span>
                 </div>
               </div>
               <ul className="space-y-3 font-body text-brand-pacific-dusk/70">

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { BRAND } from '@/lib/brand-tokens'
+import { BRAND, LBTA } from '@/lib/brand-tokens'
 
 export const metadata: Metadata = {
   title: { absolute: 'Brand System — LBTA (internal)' },
@@ -96,10 +96,10 @@ export default function BrandShowcasePage() {
               Locked in. Polished. Beautiful.
             </h1>
           </div>
-          <div className="flex flex-wrap gap-2 text-[11px] font-sans uppercase tracking-[0.16em]">
-            <span className="rounded-sm bg-brand-tide-pool/10 px-3 py-1.5 text-brand-tide-pool font-semibold">0 errors</span>
-            <span className="rounded-sm bg-brand-tide-pool/10 px-3 py-1.5 text-brand-tide-pool font-semibold">0 warnings</span>
-            <span className="rounded-sm bg-brand-pacific-dusk/8 px-3 py-1.5 text-brand-pacific-dusk/70 font-medium">audited 2026-05-05</span>
+          <div className="flex flex-wrap gap-2">
+            <span className="rounded-sm bg-brand-tide-pool/10 px-3 py-1.5 text-brand-tide-pool font-semibold text-eyebrow">0 errors</span>
+            <span className="rounded-sm bg-brand-tide-pool/10 px-3 py-1.5 text-brand-tide-pool font-semibold text-eyebrow">0 warnings</span>
+            <span className="rounded-sm bg-brand-pacific-dusk/8 px-3 py-1.5 text-brand-pacific-dusk/70 font-medium text-eyebrow">audited 2026-05-06 v1.2</span>
           </div>
         </div>
         <hr className="horizon-line" />
@@ -145,7 +145,7 @@ export default function BrandShowcasePage() {
                     <span className="font-mono text-[11px] text-brand-pacific-dusk/60">{swatch.hex}</span>
                   </div>
                   <p className="font-mono text-[11px] text-brand-pacific-dusk/55 mb-3">{swatch.twClass}</p>
-                  <div className="flex gap-3 text-[10px] font-sans uppercase tracking-[0.14em]">
+                  <div className="flex gap-3 text-eyebrow-sm">
                     <span className="flex items-center gap-1">
                       <span className="text-brand-pacific-dusk/60">on white</span>
                       <span className={`font-bold ${whiteBadge.color}`}>{whiteBadge.label}</span>
@@ -164,6 +164,41 @@ export default function BrandShowcasePage() {
         </div>
       </section>
 
+      {/* ─────── SYSTEM UTILITY COLORS (non-brand) ─────── */}
+      <section className="container-lbta py-16">
+        <div className="mb-10">
+          <p className="text-eyebrow text-brand-victoria-cove mb-2">01b · System utility colors (non-brand)</p>
+          <h2 className="font-headline text-headline-xl font-light text-brand-pacific-dusk">The 4 allowed lbta-* classes</h2>
+          <p className="font-sans text-body text-brand-pacific-dusk/70 mt-3 max-w-2xl">
+            These are <em>not</em> brand colors — they fill semantic roles the 11-color brand palette doesn&apos;t address.
+            All other lbta-* names are deprecated; migrate per <code className="font-mono text-[0.92em] bg-brand-pacific-dusk/5 px-1.5 py-0.5 rounded">docs/brand-token-system.md</code>.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { name: 'lbta-slate', hex: LBTA.slate, role: 'Neutral secondary text', tw: 'text-lbta-slate' },
+            { name: 'lbta-stone', hex: LBTA.stone, role: 'Neutral border / divider', tw: 'border-lbta-stone' },
+            { name: 'lbta-red', hex: LBTA.red, role: 'Error / alert ONLY', tw: 'text-lbta-red' },
+            { name: 'lbta-black', hex: LBTA.black, role: 'True black for premium CTAs', tw: 'bg-lbta-black' },
+          ].map((u) => (
+            <article key={u.name} className="card overflow-hidden">
+              <div
+                className={`h-20 ${u.name === 'lbta-stone' ? 'bg-lbta-stone' : u.name === 'lbta-black' ? 'bg-lbta-black' : u.name === 'lbta-red' ? 'bg-lbta-red' : 'bg-lbta-slate'}`}
+                aria-label={`${u.name} swatch`}
+              />
+              <div className="p-5">
+                <div className="flex items-baseline justify-between mb-1">
+                  <h3 className="font-mono text-sm font-semibold text-brand-pacific-dusk">{u.name}</h3>
+                  <span className="font-mono text-[11px] text-brand-pacific-dusk/60">{u.hex}</span>
+                </div>
+                <p className="font-sans text-body-sm text-brand-pacific-dusk/70 mb-2">{u.role}</p>
+                <p className="font-mono text-[11px] text-brand-pacific-dusk/55">{u.tw}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* ─────── TYPOGRAPHY ─────── */}
       <section className="container-lbta py-16">
         <div className="mb-10">
@@ -177,7 +212,7 @@ export default function BrandShowcasePage() {
           {TYPE_SCALE.map((row) => (
             <div key={row.label} className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-8 items-baseline border-b border-brand-pacific-dusk/8 pb-6">
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-brand-pacific-dusk/60">{row.label}</p>
+                <p className="font-mono text-eyebrow text-brand-pacific-dusk/60">{row.label}</p>
                 <p className="font-mono text-[10px] text-brand-pacific-dusk/40 mt-1">{row.className}</p>
               </div>
               <p className={`${row.className} text-brand-pacific-dusk leading-tight`}>{row.sample}</p>
