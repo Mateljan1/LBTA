@@ -70,8 +70,14 @@ export default function CoachHubClient({
     <div className="min-h-screen bg-brand-morning-light text-brand-pacific-dusk">
       <header className="sticky top-0 z-50 bg-gradient-to-br from-brand-pacific-dusk to-brand-deep-water text-brand-sandstone shadow-lg px-4 py-3 md:px-6">
         <div className="max-w-[1320px] mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <span className="font-headline text-brand-sandstone text-lg">Coach Hub</span>
+            <Link
+              href="/coach-hub/leads"
+              className="inline-flex items-center font-sans text-xs uppercase tracking-[1.5px] text-brand-sandstone/80 hover:text-brand-sandstone transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm px-2 py-1"
+            >
+              Leads →
+            </Link>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <select
