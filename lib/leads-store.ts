@@ -40,6 +40,13 @@ export type StoreLeadParams = {
   name?: string | null
   phone?: string | null
   payload?: Record<string, unknown>
+  /**
+   * Optional Notion page ID. When set, dedup is keyed on notion_page_id
+   * instead of (email, source) — used by the Meta lead-ad mirror to ensure
+   * one row per Notion page. The unique partial index in Supabase guarantees
+   * idempotency at the DB layer too.
+   */
+  notionPageId?: string | null
 }
 
 /**
@@ -62,28 +69,49 @@ export async function storeLead(params: StoreLeadParams): Promise<void> {
   const supabase = getClient()
   if (!supabase) return
 
-  const { source, email, name, phone, payload } = params
+  const { source, email, name, phone, payload, notionPageId } = params
   if (!email?.trim()) return
 
   const cleanEmail = email.trim()
+  const cleanNotionPageId = notionPageId?.trim() || null
 
   try {
-    const sinceIso = new Date(Date.now() - DEDUP_WINDOW_MS).toISOString()
-    const { data: recent, error: lookupError } = await supabase
-      .from('leads')
-      .select('id')
-      .eq('email', cleanEmail)
-      .eq('source', source)
-      .gte('created_at', sinceIso)
-      .limit(1)
-      .maybeSingle()
+    // Notion-page-keyed dedup (used by Meta lead-ad mirror): if we already
+    // stored a row for this Notion page, skip. The DB also enforces this via
+    // unique partial index, but lookup-and-skip is cheaper than catching the
+    // unique-violation error.
+    if (cleanNotionPageId) {
+      const { data: existing, error: lookupError } = await supabase
+        .from('leads')
+        .select('id')
+        .eq('notion_page_id', cleanNotionPageId)
+        .limit(1)
+        .maybeSingle()
 
-    if (lookupError) {
-      // Log and continue — failing open is safer than dropping leads silently.
-      console.error('[leads-store] Dedup lookup failed:', lookupError.message)
-    } else if (recent) {
-      console.info(`[leads-store] Skipping duplicate within ${DEDUP_WINDOW_MS}ms: ${cleanEmail} (${source})`)
-      return
+      if (lookupError) {
+        console.error('[leads-store] Notion-page dedup lookup failed:', lookupError.message)
+      } else if (existing) {
+        return
+      }
+    } else {
+      // (email, source) time-window dedup for website forms.
+      const sinceIso = new Date(Date.now() - DEDUP_WINDOW_MS).toISOString()
+      const { data: recent, error: lookupError } = await supabase
+        .from('leads')
+        .select('id')
+        .eq('email', cleanEmail)
+        .eq('source', source)
+        .gte('created_at', sinceIso)
+        .limit(1)
+        .maybeSingle()
+
+      if (lookupError) {
+        // Log and continue — failing open is safer than dropping leads silently.
+        console.error('[leads-store] Dedup lookup failed:', lookupError.message)
+      } else if (recent) {
+        console.info(`[leads-store] Skipping duplicate within ${DEDUP_WINDOW_MS}ms: ${cleanEmail} (${source})`)
+        return
+      }
     }
 
     const { error } = await supabase.from('leads').insert({
@@ -92,9 +120,13 @@ export async function storeLead(params: StoreLeadParams): Promise<void> {
       name: name?.trim() || null,
       phone: phone?.trim() || null,
       payload: payload ?? {},
+      ...(cleanNotionPageId ? { notion_page_id: cleanNotionPageId } : {}),
     })
 
     if (error) {
+      // Unique-violation on notion_page_id is expected if a parallel mirror
+      // run inserted first; treat as success-equivalent.
+      if (cleanNotionPageId && error.code === '23505') return
       console.error('[leads-store] Insert failed:', error.message)
     }
   } catch (err) {

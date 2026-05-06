@@ -40,5 +40,10 @@
       ]
     }
   ],
-  "crons": []
+  "crons": [
+    {
+      "path": "/api/cron/mirror-meta-leads",
+      "schedule": "0 10 * * *"
+    }
+  ]
 }
