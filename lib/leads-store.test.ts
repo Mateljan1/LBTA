@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { getClient, storeLead } from './leads-store'
+import { getClient, storeLead, DEDUP_WINDOW_MS } from './leads-store'
 
 describe('leads-store', () => {
   const origUrl = process.env.SUPABASE_URL
@@ -52,6 +52,16 @@ describe('leads-store', () => {
       await expect(
         storeLead({ source: 'test', email: '   ' })
       ).resolves.toBeUndefined()
+    })
+  })
+
+  describe('DEDUP_WINDOW_MS', () => {
+    it('exports a positive duration covering common rapid-resubmit patterns', () => {
+      // Real users have re-submitted within ~95 seconds in production.
+      // Window must comfortably cover that without blocking legitimate
+      // re-submissions hours/days later.
+      expect(DEDUP_WINDOW_MS).toBeGreaterThanOrEqual(60_000)
+      expect(DEDUP_WINDOW_MS).toBeLessThanOrEqual(600_000)
     })
   })
 })

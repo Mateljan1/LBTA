@@ -39,6 +39,9 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
   const modalRef = useRef<HTMLDivElement>(null)
   const previousFocusRef = useRef<HTMLElement | null>(null)
   const successRedirectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Synchronous double-submit guard: useState updates batch async, so a fast
+  // double-click can fire two submissions before the disabled prop renders.
+  const submittingRef = useRef(false)
 
   useEffect(() => {
     if (!errorMessage) return
@@ -147,6 +150,8 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (submittingRef.current) return
+    submittingRef.current = true
     setIsSubmitting(true)
 
     // Fire Meta Pixel Lead event
@@ -188,6 +193,10 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
       setErrorMessage('Something went wrong. Please call (949) 534-0457.')
     } finally {
       setIsSubmitting(false)
+      // Release the synchronous lock so the user can retry on error or after
+      // success view closes. Server-side dedup (lib/leads-store) handles any
+      // legitimate races that slip through.
+      submittingRef.current = false
     }
   }
 

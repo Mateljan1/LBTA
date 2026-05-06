@@ -43,8 +43,20 @@ export type StoreLeadParams = {
 }
 
 /**
+ * Window (ms) used to suppress accidental duplicate submissions of the same
+ * email + source. Real users sometimes click "Submit" again 30-90 seconds after
+ * a successful submission (modal closed, navigated back, retried). 120s catches
+ * those without blocking legitimate re-submissions days later.
+ */
+export const DEDUP_WINDOW_MS = 120_000
+
+/**
  * Store a lead. Runs only when SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set.
  * Does not throw; logs errors so form handlers can still return success.
+ *
+ * Skips inserts when an identical (email, source) pair was stored within the
+ * last DEDUP_WINDOW_MS (120 seconds) — protects against accidental double
+ * submissions without affecting legitimate later re-submissions.
  */
 export async function storeLead(params: StoreLeadParams): Promise<void> {
   const supabase = getClient()
@@ -53,10 +65,30 @@ export async function storeLead(params: StoreLeadParams): Promise<void> {
   const { source, email, name, phone, payload } = params
   if (!email?.trim()) return
 
+  const cleanEmail = email.trim()
+
   try {
+    const sinceIso = new Date(Date.now() - DEDUP_WINDOW_MS).toISOString()
+    const { data: recent, error: lookupError } = await supabase
+      .from('leads')
+      .select('id')
+      .eq('email', cleanEmail)
+      .eq('source', source)
+      .gte('created_at', sinceIso)
+      .limit(1)
+      .maybeSingle()
+
+    if (lookupError) {
+      // Log and continue — failing open is safer than dropping leads silently.
+      console.error('[leads-store] Dedup lookup failed:', lookupError.message)
+    } else if (recent) {
+      console.info(`[leads-store] Skipping duplicate within ${DEDUP_WINDOW_MS}ms: ${cleanEmail} (${source})`)
+      return
+    }
+
     const { error } = await supabase.from('leads').insert({
       source,
-      email: email.trim(),
+      email: cleanEmail,
       name: name?.trim() || null,
       phone: phone?.trim() || null,
       payload: payload ?? {},
