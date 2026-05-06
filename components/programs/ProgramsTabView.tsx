@@ -392,12 +392,12 @@ function LiveBallStaticCards({ onRegister: _ }: { onRegister: (p: Program) => vo
               sizes="(max-width: 640px) 100vw, 33vw"
               quality={85}
             />
-            <span className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-pacific-dusk font-sans text-[10px] font-semibold tracking-[1.5px] uppercase px-2.5 py-1.5 rounded-[2px]">
+            <span className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-pacific-dusk font-sans text-eyebrow-sm font-semibold uppercase px-2.5 py-1.5 rounded-[2px]">
               Drop-in $50
             </span>
           </div>
           <div className="p-5">
-            <span className="font-sans text-[11px] font-medium tracking-[2px] uppercase text-brand-victoria-cove/70 mb-2 block">{s.level}</span>
+            <span className="font-sans text-eyebrow font-medium uppercase text-brand-victoria-cove/70 mb-2 block">{s.level}</span>
             <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-2">{s.name}</h3>
             <p className="font-sans text-[13px] text-brand-pacific-dusk/70 leading-relaxed mb-4">{descriptions[s.name]}</p>
             <div className="border-t border-brand-pacific-dusk/6 pt-3 mb-4 space-y-1">
@@ -413,13 +413,13 @@ function LiveBallStaticCards({ onRegister: _ }: { onRegister: (p: Program) => vo
             <div className="mt-3 flex gap-2">
               <Link
                 href="/fitness"
-                className="flex-1 inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-[11px] font-medium tracking-[2.5px] uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                className="flex-1 inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-eyebrow font-medium uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
               >
                 View schedule
               </Link>
               <Link
                 href="/book"
-                className="inline-flex min-h-[48px] items-center justify-center border border-brand-pacific-dusk/15 rounded-[2px] px-4 font-sans text-[11px] font-medium tracking-[2px] uppercase text-brand-pacific-dusk/70 hover:border-brand-pacific-dusk/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                className="inline-flex min-h-[48px] items-center justify-center border border-brand-pacific-dusk/15 rounded-[2px] px-4 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/70 hover:border-brand-pacific-dusk/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Book Trial
               </Link>
@@ -455,13 +455,13 @@ function CampsPanel({ year2026 }: { year2026: Year2026Sections }) {
                   quality={85}
                 />
                 {camp.featured && (
-                  <span className="absolute top-3 left-3 bg-brand-deep-water/75 backdrop-blur-sm text-white/90 font-sans text-[10px] font-medium tracking-[2px] uppercase px-2.5 py-1.5 rounded-[2px]">
+                  <span className="absolute top-3 left-3 bg-brand-deep-water/75 backdrop-blur-sm text-white/90 font-sans text-eyebrow-sm font-medium uppercase px-2.5 py-1.5 rounded-[2px]">
                     Featured
                   </span>
                 )}
               </div>
               <div className="p-5">
-                <span className="font-sans text-[11px] font-medium tracking-[2px] uppercase text-brand-victoria-cove/70 mb-2 block">
+                <span className="font-sans text-eyebrow font-medium uppercase text-brand-victoria-cove/70 mb-2 block">
                   Ages {camp.ages} · {camp.dates}
                 </span>
                 <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-2">{camp.name}</h3>
@@ -496,7 +496,7 @@ function CampsPanel({ year2026 }: { year2026: Year2026Sections }) {
                 </div>
                 <Link
                   href="/camps"
-                  className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-[11px] font-medium tracking-[2.5px] uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-eyebrow font-medium uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   View &amp; Register
                 </Link>
@@ -552,13 +552,13 @@ function StaticCampsCards() {
               quality={85}
             />
             {c.badge && (
-              <span className="absolute top-3 left-3 bg-brand-deep-water/75 backdrop-blur-sm text-white/90 font-sans text-[10px] font-medium tracking-[2px] uppercase px-2.5 py-1.5 rounded-[2px]">
+              <span className="absolute top-3 left-3 bg-brand-deep-water/75 backdrop-blur-sm text-white/90 font-sans text-eyebrow-sm font-medium uppercase px-2.5 py-1.5 rounded-[2px]">
                 {c.badge}
               </span>
             )}
           </div>
           <div className="p-5">
-            <span className="font-sans text-[11px] font-medium tracking-[2px] uppercase text-brand-victoria-cove/70 mb-2 block">
+            <span className="font-sans text-eyebrow font-medium uppercase text-brand-victoria-cove/70 mb-2 block">
               Ages {c.ages} · {c.dates}
             </span>
             <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-2">{c.title}</h3>
@@ -568,7 +568,7 @@ function StaticCampsCards() {
               <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/65">Half day</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.halfDay}/week</span></div>
               <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/65">Drop-in</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.dropIn}/day</span></div>
             </div>
-            <Link href="/camps" className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-[11px] font-medium tracking-[2.5px] uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2">
+            <Link href="/camps" className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-eyebrow font-medium uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2">
               View &amp; Register
             </Link>
           </div>
@@ -628,7 +628,7 @@ function LeaguesPanel() {
               />
             </div>
             <div className="p-5">
-              <span className="font-sans text-[11px] font-medium tracking-[2px] uppercase text-brand-victoria-cove/70 mb-2 block">
+              <span className="font-sans text-eyebrow font-medium uppercase text-brand-victoria-cove/70 mb-2 block">
                 {league.eyebrow}
               </span>
               <h3 className="font-headline text-[20px] font-medium text-brand-pacific-dusk mb-2">{league.title}</h3>
@@ -646,7 +646,7 @@ function LeaguesPanel() {
               </div>
               <Link
                 href={league.href}
-                className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-[11px] font-medium tracking-[2.5px] uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-eyebrow font-medium uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
               >
                 Learn More
               </Link>

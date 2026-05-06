@@ -51,7 +51,7 @@ export default function UtrWeekAtGlanceBanner() {
                 height={44}
                 className="h-11 w-11 shrink-0 object-contain opacity-95"
               />
-              <p className="inline-flex flex-wrap items-center gap-x-2 rounded bg-brand-victoria-cove px-3.5 py-1.5 font-sans text-[11px] font-bold uppercase tracking-[0.12em] text-white">
+              <p className="inline-flex flex-wrap items-center gap-x-2 rounded bg-brand-victoria-cove px-3.5 py-1.5 font-sans text-eyebrow font-bold uppercase text-white">
                 <span>
                   Week {weekNum} of 8
                   {weekNum === 1 ? ' — Double points' : ''}
@@ -81,7 +81,7 @@ export default function UtrWeekAtGlanceBanner() {
         <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1.3fr_0.9fr]">
           {/* Color Ball */}
           <div className="rounded-xl border border-brand-sandstone/[0.08] bg-brand-pacific-dusk/55 p-5 backdrop-blur-md">
-            <p className="mb-4 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-sandstone/50">
+            <p className="mb-4 font-sans text-eyebrow-sm font-semibold uppercase text-brand-sandstone/50">
               Color Ball — Saturday
             </p>
             <ul className="space-y-0">
@@ -106,7 +106,7 @@ export default function UtrWeekAtGlanceBanner() {
 
           {/* UTR divisions */}
           <div className="rounded-xl border border-brand-sandstone/[0.08] bg-brand-pacific-dusk/[0.55] p-5 backdrop-blur-md">
-            <p className="mb-4 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-victoria-cove">
+            <p className="mb-4 font-sans text-eyebrow-sm font-semibold uppercase text-brand-victoria-cove">
               UTR divisions
             </p>
             {satSingles && (
@@ -116,7 +116,7 @@ export default function UtrWeekAtGlanceBanner() {
                   <span className="font-sans text-[14px] font-medium text-brand-sandstone">{satSingles.name}</span>
                 </div>
                 <div className="mt-1 flex shrink-0 items-center gap-4 sm:mt-0">
-                  <span className="font-sans text-[11px] uppercase tracking-[0.05em] text-brand-sandstone/50">
+                  <span className="font-sans text-eyebrow uppercase text-brand-sandstone/50">
                     Saturday
                   </span>
                   <span className="min-w-[6.25rem] text-right font-sans text-[12px] font-medium text-brand-sandstone/80">
@@ -139,7 +139,7 @@ export default function UtrWeekAtGlanceBanner() {
                   </div>
                 </div>
                 <div className="mt-1 flex shrink-0 items-center gap-4 sm:mt-0">
-                  <span className="font-sans text-[11px] uppercase tracking-[0.05em] text-brand-sandstone/50">
+                  <span className="font-sans text-eyebrow uppercase text-brand-sandstone/50">
                     Sunday
                   </span>
                   <span className="min-w-[6.25rem] text-right font-sans text-[12px] font-medium text-brand-sandstone/80">
@@ -162,7 +162,7 @@ export default function UtrWeekAtGlanceBanner() {
                   </div>
                 </div>
                 <div className="mt-1 flex shrink-0 items-center gap-4 sm:mt-0">
-                  <span className="font-sans text-[11px] uppercase tracking-[0.05em] text-brand-sandstone/50">
+                  <span className="font-sans text-eyebrow uppercase text-brand-sandstone/50">
                     Sunday
                   </span>
                   <span className="min-w-[6.25rem] text-right font-sans text-[12px] font-medium text-brand-sandstone/80">
@@ -175,7 +175,7 @@ export default function UtrWeekAtGlanceBanner() {
 
           {/* Prizes */}
           <div className="rounded-xl border border-brand-sandstone/[0.08] bg-brand-pacific-dusk/[0.55] p-5 backdrop-blur-md">
-            <p className="mb-4 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-sunset-cliff">
+            <p className="mb-4 font-sans text-eyebrow-sm font-semibold uppercase text-brand-sunset-cliff">
               Prizes &amp; season points
             </p>
             <ul className="space-y-1.5">
@@ -235,7 +235,7 @@ export default function UtrWeekAtGlanceBanner() {
 
         <div className="mt-5 flex flex-col gap-4 border-t border-white/[0.06] pt-5 md:flex-row md:flex-wrap md:justify-between md:gap-6">
           <div className="flex min-h-[48px] flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-            <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-sandstone/45">
+            <span className="font-sans text-eyebrow font-semibold uppercase text-brand-sandstone/45">
               Season
             </span>
             <Link
@@ -246,7 +246,7 @@ export default function UtrWeekAtGlanceBanner() {
             </Link>
           </div>
           <div className="flex min-h-[48px] flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-            <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-sandstone/45">
+            <span className="font-sans text-eyebrow font-semibold uppercase text-brand-sandstone/45">
               Drop-in
             </span>
             <a
@@ -259,7 +259,7 @@ export default function UtrWeekAtGlanceBanner() {
             </a>
           </div>
           <div className="flex min-h-[48px] flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-            <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-sandstone/45">
+            <span className="font-sans text-eyebrow font-semibold uppercase text-brand-sandstone/45">
               Questions
             </span>
             <a

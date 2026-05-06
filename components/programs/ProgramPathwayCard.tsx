@@ -99,7 +99,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
             aria-hidden="true"
           />
           {badge && (
-            <span className="absolute top-4 left-4 bg-brand-thousand-steps/90 text-white font-sans text-[10px] font-bold tracking-[2px] uppercase px-3 py-1.5 rounded-[2px]">
+            <span className="absolute top-4 left-4 bg-brand-thousand-steps/90 text-white font-sans text-eyebrow-sm font-bold uppercase px-3 py-1.5 rounded-[2px]">
               {badge}
             </span>
           )}
@@ -113,7 +113,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
             aria-hidden="true"
           />
 
-          <span className="font-sans text-[11px] font-bold tracking-[3px] uppercase text-brand-victoria-cove mb-4 block">
+          <span className="font-sans text-eyebrow font-bold uppercase text-brand-victoria-cove mb-4 block">
             Ages {program.ages} &middot; {program.duration}
           </span>
 
@@ -129,7 +129,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-7">
             {slots.length > 0 && (
               <div>
-                <span className="font-sans text-[10px] font-bold tracking-[3px] uppercase text-white/65 mb-3 block">
+                <span className="font-sans text-eyebrow-sm font-bold uppercase text-white/65 mb-3 block">
                   Schedule
                 </span>
                 <div className="space-y-2">
@@ -154,7 +154,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
 
             {prices.length > 0 && (
               <div>
-                <span className="font-sans text-[10px] font-bold tracking-[3px] uppercase text-white/65 mb-3 block">
+                <span className="font-sans text-eyebrow-sm font-bold uppercase text-white/65 mb-3 block">
                   Investment
                 </span>
                 <div className="space-y-2">
@@ -183,7 +183,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
             {program.inquiryLabel ? (
               <Link
                 href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
-                className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[3px] border border-white/[0.15] font-sans text-[11px] font-semibold tracking-[2.5px] uppercase text-white/70 transition-all duration-300 hover:border-white/30 hover:bg-white/[0.05] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[3px] border border-white/[0.15] font-sans text-eyebrow font-semibold uppercase text-white/70 transition-all duration-300 hover:border-white/30 hover:bg-white/[0.05] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               >
                 {program.inquiryLabel}
               </Link>
@@ -191,14 +191,14 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
               <button
                 type="button"
                 onClick={handleRegister}
-                className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[3px] bg-white text-brand-deep-water font-sans text-[11px] font-semibold tracking-[2.5px] uppercase transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[3px] bg-white text-brand-deep-water font-sans text-eyebrow font-semibold uppercase transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               >
                 Register
               </button>
             )}
             <Link
               href="/book"
-              className="inline-flex min-h-[48px] items-center justify-center px-6 py-3 rounded-[3px] border border-white/[0.15] font-sans text-[11px] font-semibold tracking-[2.5px] uppercase text-white/60 transition-all duration-300 hover:border-white/30 hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+              className="inline-flex min-h-[48px] items-center justify-center px-6 py-3 rounded-[3px] border border-white/[0.15] font-sans text-eyebrow font-semibold uppercase text-white/60 transition-all duration-300 hover:border-white/30 hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               Book Trial
             </Link>

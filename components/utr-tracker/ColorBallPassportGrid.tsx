@@ -71,15 +71,15 @@ export default function ColorBallPassportGrid({
 
       <div className="mb-4 grid gap-3 md:grid-cols-3">
         <article className="rounded-xl border border-brand-pacific-dusk/12 bg-[linear-gradient(180deg,#10243A_0%,#0F2237_100%)] p-3 text-white">
-          <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-white/60">Passport players</p>
+          <p className="text-eyebrow mb-1 uppercase text-white/60">Passport players</p>
           <p className="font-headline text-headline-sm text-white">{totalPassportPlayers}</p>
         </article>
         <article className="rounded-xl border border-brand-pacific-dusk/12 bg-[linear-gradient(180deg,#10243A_0%,#0F2237_100%)] p-3 text-white">
-          <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-white/60">Attendance logs</p>
+          <p className="text-eyebrow mb-1 uppercase text-white/60">Attendance logs</p>
           <p className="font-headline text-headline-sm text-white">{totalAttendanceWeeks}</p>
         </article>
         <article className="rounded-xl border border-brand-pacific-dusk/12 bg-[linear-gradient(180deg,#10243A_0%,#0F2237_100%)] p-3 text-white">
-          <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-white/60">Average badges</p>
+          <p className="text-eyebrow mb-1 uppercase text-white/60">Average badges</p>
           <p className="font-headline text-headline-sm text-white">{averageBadges}</p>
         </article>
       </div>
@@ -109,7 +109,7 @@ export default function ColorBallPassportGrid({
                 <h3 className="font-headline text-[18px] text-brand-pacific-dusk">
                   {playersById.get(playerId)?.name ?? 'Player'}
                 </h3>
-                <span className="inline-flex items-center gap-1 text-[11px] font-sans font-medium uppercase tracking-[0.16em] text-brand-pacific-dusk/60">
+                <span className="inline-flex items-center gap-1 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/60">
                   <Star className="h-3 w-3 text-brand-thousand-steps" aria-hidden="true" />
                   {totalBadges} badges
                 </span>

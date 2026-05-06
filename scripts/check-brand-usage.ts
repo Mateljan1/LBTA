@@ -20,8 +20,11 @@ const forbiddenFontRegex = /\b(Inter|Roboto|Arial|Space Grotesk|Playfair|Work Sa
 
 // Hand-rolled eyebrow pattern (matches "text-[10-12px] ... uppercase ... tracking-[any]" in any order
 // within a single class string). These should use .text-eyebrow / .text-eyebrow-sm utilities.
-// WARN only — not strict — because some intentional cases exist (e.g. compact UI labels).
+// Responsive size variants (e.g. md:text-[12px]) are intentional hero-context bumps and excluded.
 const handRolledEyebrowRegex = /class(?:Name)?=["'`][^"'`]*\btext-\[1[0-2]px\][^"'`]*\buppercase\b[^"'`]*\btracking-\[[^\]]+\][^"'`]*["'`]|class(?:Name)?=["'`][^"'`]*\btracking-\[[^\]]+\][^"'`]*\buppercase\b[^"'`]*\btext-\[1[0-2]px\][^"'`]*["'`]|class(?:Name)?=["'`][^"'`]*\buppercase\b[^"'`]*\btext-\[1[0-2]px\][^"'`]*\btracking-\[[^\]]+\][^"'`]*["'`]/g
+
+// Patterns matching this regex are intentional responsive variants (md:text-[Npx] etc.) — exclude from drift count
+const responsiveSizeVariantRegex = /(?:sm|md|lg|xl|2xl):text-\[\d+px\]/
 
 // Hand-rolled section padding (py-[80-200px] or px-[80-200px] when .section/.section-lg/.section-sm exists).
 // WARN only — captures common section-spacing pattern.
@@ -324,8 +327,11 @@ async function main() {
     }
 
     // Hand-rolled patterns (WARN only — never strict; designers may have intentional cases)
+    // Filter out responsive size variants (e.g. md:text-[12px]) — those are intentional hero bumps
     if (extension === '.tsx') {
-      reportData.handRolledEyebrow.push(...gatherLineHits(contents, relativeFile, handRolledEyebrowRegex))
+      const eyebrowHits = gatherLineHits(contents, relativeFile, handRolledEyebrowRegex)
+        .filter((hit) => !responsiveSizeVariantRegex.test(hit.value))
+      reportData.handRolledEyebrow.push(...eyebrowHits)
       reportData.handRolledSectionPadding.push(...gatherLineHits(contents, relativeFile, handRolledSectionPaddingRegex))
     }
   }
@@ -352,9 +358,12 @@ async function main() {
       process.exitCode = 1
       return
     }
-    // In strict mode, also fail on warnings (raw hex / arbitrary Tailwind / inline gradient)
+    // In strict mode, also fail on warnings (raw hex / arbitrary Tailwind / inline gradient / hand-rolled eyebrows)
     const totalWarnings =
-      reportData.rawHex.length + reportData.arbitraryTailwind.length + reportData.inlineGradient.length
+      reportData.rawHex.length +
+      reportData.arbitraryTailwind.length +
+      reportData.inlineGradient.length +
+      reportData.handRolledEyebrow.length
     if (totalWarnings > 0) {
       console.log(`STRICT mode: ${totalWarnings} warning(s) treated as errors — failing build.`)
       process.exitCode = 1

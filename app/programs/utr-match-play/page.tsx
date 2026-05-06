@@ -88,7 +88,7 @@ export default function UTRMatchPlayPage() {
       {/* Divisions — light editorial cards */}
       <section id="divisions" className="scroll-mt-28 border-b border-brand-pacific-dusk/[0.08] bg-white">
         <div className="container-lbta section">
-          <p className="font-sans text-[12px] font-extrabold uppercase tracking-[0.22em] text-brand-victoria-cove">
+          <p className="font-sans text-eyebrow font-extrabold uppercase text-brand-victoria-cove">
             Five divisions — by level, not age
           </p>
           <h2 className="font-headline text-display-sm md:text-[clamp(2rem,4vw,2.5rem)] text-brand-pacific-dusk mt-2 mb-3 leading-tight">
@@ -139,7 +139,7 @@ export default function UTRMatchPlayPage() {
       {/* Weekend schedule */}
       <section id="schedule" className="scroll-mt-28 border-b border-brand-pacific-dusk/[0.08] bg-brand-morning-light">
         <div className="container-lbta section-sm md:pb-24 md:pt-20">
-          <p className="font-sans text-[12px] font-extrabold uppercase tracking-[0.22em] text-brand-victoria-cove">
+          <p className="font-sans text-eyebrow font-extrabold uppercase text-brand-victoria-cove">
             Season 1 schedule
           </p>
           <h2 className="font-headline text-display-sm md:text-[clamp(1.85rem,4vw,2.35rem)] text-brand-pacific-dusk mt-2 mb-3 leading-tight">
@@ -351,7 +351,7 @@ export default function UTRMatchPlayPage() {
       {/* Season points & tiers — light */}
       <section className="container-lbta section border-b border-brand-pacific-dusk/[0.08] bg-white">
         <div className="max-w-5xl mx-auto">
-          <p className="font-sans text-[12px] font-extrabold uppercase tracking-[0.22em] text-brand-victoria-cove">
+          <p className="font-sans text-eyebrow font-extrabold uppercase text-brand-victoria-cove">
             Season points &amp; tiers
           </p>
           <h2 className="font-headline text-display-sm md:text-[clamp(2rem,4vw,2.5rem)] text-brand-pacific-dusk mt-2 mb-3">
@@ -390,7 +390,7 @@ export default function UTRMatchPlayPage() {
               </table>
             </div>
             <div>
-              <p className="font-sans text-[12px] font-extrabold uppercase tracking-[0.15em] text-brand-pacific-dusk/45 mb-4">
+              <p className="font-sans text-eyebrow font-extrabold uppercase text-brand-pacific-dusk/45 mb-4">
                 Season tiers
               </p>
               <div className="flex flex-col gap-2.5">
@@ -422,7 +422,7 @@ export default function UTRMatchPlayPage() {
         className="scroll-mt-28 border-b border-white/[0.06] bg-brand-deep-water py-16 md:py-20"
       >
         <div className="container-lbta max-w-5xl mx-auto">
-          <p className="font-sans text-[12px] font-extrabold uppercase tracking-[0.22em] text-brand-thousand-steps">
+          <p className="font-sans text-eyebrow font-extrabold uppercase text-brand-thousand-steps">
             Grand Finals
           </p>
           <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] text-white mt-2 mb-2">Season 1 finale</h2>
@@ -533,7 +533,7 @@ export default function UTRMatchPlayPage() {
       {/* Venues */}
       <section className="container-lbta section-sm border-b border-brand-pacific-dusk/[0.08] bg-white">
         <div className="max-w-5xl mx-auto">
-          <p className="font-sans text-[12px] font-extrabold uppercase tracking-[0.22em] text-brand-victoria-cove text-center">
+          <p className="font-sans text-eyebrow font-extrabold uppercase text-brand-victoria-cove text-center">
             Venues
           </p>
           <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-2 text-center mt-2">
@@ -610,7 +610,7 @@ export default function UTRMatchPlayPage() {
       <section className="border-t border-brand-pacific-dusk/[0.08] bg-brand-morning-light">
         <div className="container-lbta section-sm">
           <div className="max-w-2xl mx-auto">
-            <p className="font-sans text-[12px] font-extrabold uppercase tracking-[0.22em] text-brand-victoria-cove text-center">
+            <p className="font-sans text-eyebrow font-extrabold uppercase text-brand-victoria-cove text-center">
               Common questions
             </p>
             <h3 className="font-headline text-display-sm text-brand-pacific-dusk mb-2 text-center mt-2">

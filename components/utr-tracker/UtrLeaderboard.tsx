@@ -209,21 +209,21 @@ export default function UtrLeaderboard({
 
         <div className="mb-4 grid gap-3 md:grid-cols-4">
           <div className="rounded-xl border border-white/16 bg-white/8 p-3">
-            <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+            <p className="text-eyebrow mb-1 flex items-center gap-1 uppercase text-white/65">
               <Target className="h-3.5 w-3.5" aria-hidden="true" />
               Active players
             </p>
             <p className="font-headline text-headline-sm text-white">{activePlayers}</p>
           </div>
           <div className="rounded-xl border border-white/16 bg-white/8 p-3">
-            <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+            <p className="text-eyebrow mb-1 flex items-center gap-1 uppercase text-white/65">
               <Medal className="h-3.5 w-3.5" aria-hidden="true" />
               Week {config.current_week} matches
             </p>
             <p className="font-headline text-headline-sm text-white">{currentWeekMatches}</p>
           </div>
           <div className="rounded-xl border border-white/16 bg-white/8 p-3">
-            <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+            <p className="text-eyebrow mb-1 flex items-center gap-1 uppercase text-white/65">
               <Flame className="h-3.5 w-3.5" aria-hidden="true" />
               Hottest streak
             </p>
@@ -232,7 +232,7 @@ export default function UtrLeaderboard({
             </p>
           </div>
           <div className="rounded-xl border border-white/16 bg-white/8 p-3">
-            <p className="mb-1 flex items-center gap-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+            <p className="text-eyebrow mb-1 flex items-center gap-1 uppercase text-white/65">
               <Trophy className="h-3.5 w-3.5" aria-hidden="true" />
               Leader gap
             </p>
@@ -249,7 +249,7 @@ export default function UtrLeaderboard({
                   ' '
                 )}
               >
-                <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-white/65">
+                <p className="text-eyebrow mb-1 uppercase text-white/65">
                   Rank #{player.rank}
                 </p>
                 <h3 className="font-headline text-headline-sm text-white">
@@ -265,7 +265,7 @@ export default function UtrLeaderboard({
 
         <div className="grid gap-3 md:grid-cols-2">
           <div className="rounded-xl border border-white/16 bg-white/8 p-3">
-            <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-white/60">
+            <p className="text-eyebrow mb-1 uppercase text-white/60">
               Biggest climb this week
             </p>
             <p className="text-[13px] text-white/80">
@@ -275,7 +275,7 @@ export default function UtrLeaderboard({
             </p>
           </div>
           <div className="rounded-xl border border-white/16 bg-white/8 p-3">
-            <p className="mb-1 text-[11px] uppercase tracking-[0.16em] text-white/60">
+            <p className="text-eyebrow mb-1 uppercase text-white/60">
               Biggest weekly gain
             </p>
             <p className="text-[13px] text-white/80">
@@ -408,7 +408,7 @@ export default function UtrLeaderboard({
                     </td>
                     <td className="px-3 py-2">
                       {movement.trend === 'new' ? (
-                        <span className="inline-flex items-center rounded-full bg-brand-victoria-cove/15 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-victoria-cove">
+                        <span className="text-eyebrow inline-flex items-center rounded-full bg-brand-victoria-cove/15 px-2 py-1 font-semibold uppercase text-brand-victoria-cove">
                           New
                         </span>
                       ) : movement.trend === 'up' ? (

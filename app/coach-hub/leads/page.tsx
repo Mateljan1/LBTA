@@ -164,7 +164,7 @@ export default async function CoachHubLeadsPage({
                         )}
                       </td>
                       <td className="px-4 py-3 align-top">
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] tracking-[0.5px] uppercase bg-brand-pacific-dusk/5 text-brand-pacific-dusk">
+                        <span className="text-eyebrow inline-flex items-center px-2 py-0.5 rounded-full uppercase bg-brand-pacific-dusk/5 text-brand-pacific-dusk">
                           {channelLabel(row)}
                         </span>
                       </td>

@@ -126,7 +126,7 @@ function UtrLightDivisionCard({
 
         <div className="mt-5 grid grid-cols-2 gap-2 gap-y-3">
           <div>
-            <span className="block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
+            <span className="block font-sans text-eyebrow-sm font-extrabold uppercase text-brand-pacific-dusk/45">
               Venue
             </span>
             <span className="font-sans text-[13px] font-semibold leading-snug text-brand-pacific-dusk md:text-[14px]">
@@ -134,7 +134,7 @@ function UtrLightDivisionCard({
             </span>
           </div>
           <div>
-            <span className="block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
+            <span className="block font-sans text-eyebrow-sm font-extrabold uppercase text-brand-pacific-dusk/45">
               Time
             </span>
             <span className="font-sans text-[14px] font-semibold text-brand-pacific-dusk">{d.time}</span>
@@ -155,7 +155,7 @@ function UtrLightDivisionCard({
                   <div>
                     <label
                       htmlFor={fieldId}
-                      className="mb-1.5 block font-sans text-[10px] font-extrabold uppercase tracking-[0.12em] text-brand-pacific-dusk/45"
+                      className="mb-1.5 block font-sans text-eyebrow-sm font-extrabold uppercase text-brand-pacific-dusk/45"
                     >
                       Choose a date
                     </label>
@@ -322,25 +322,25 @@ export default function UTRMatchPlayDivisions({
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 sm:gap-x-6 sm:gap-y-1 text-[14px] font-sans min-w-0">
                   <div>
-                    <span className="block text-[11px] font-medium uppercase tracking-[0.12em] text-white/45 mb-0.5">
+                    <span className="text-eyebrow block font-medium uppercase text-white/45 mb-0.5">
                       Venue
                     </span>
                     <span className="font-light text-white/85">{d.venue}</span>
                   </div>
                   <div>
-                    <span className="block text-[11px] font-medium uppercase tracking-[0.12em] text-white/45 mb-0.5">
+                    <span className="text-eyebrow block font-medium uppercase text-white/45 mb-0.5">
                       Format
                     </span>
                     <span className="font-light text-white/85">{d.format}</span>
                   </div>
                   <div>
-                    <span className="block text-[11px] font-medium uppercase tracking-[0.12em] text-white/45 mb-0.5">
+                    <span className="text-eyebrow block font-medium uppercase text-white/45 mb-0.5">
                       Time
                     </span>
                     <span className="font-light text-white/85">{d.time}</span>
                   </div>
                   <div>
-                    <span className="block text-[11px] font-medium uppercase tracking-[0.12em] text-white/45 mb-0.5">
+                    <span className="text-eyebrow block font-medium uppercase text-white/45 mb-0.5">
                       Season
                     </span>
                     <span className="font-medium text-white tabular-nums">{d.price}</span>
@@ -360,7 +360,7 @@ export default function UTRMatchPlayDivisions({
                       setModalOpen(true)
                     }}
                     aria-label={`Register for ${d.name}`}
-                    className="inline-flex items-center justify-center gap-2 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 w-full md:w-auto"
+                    className="inline-flex items-center justify-center gap-2 bg-black text-white font-sans text-eyebrow font-medium uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 w-full md:w-auto"
                   >
                     Register
                     <svg

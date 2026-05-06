@@ -22,7 +22,7 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
 
         {/* USTA Leagues */}
         <div id="usta-leagues" className="mb-16 md:mb-20">
-          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
+          <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-3">
             USTA LEAGUE TENNIS
           </p>
           <h3 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
@@ -59,7 +59,7 @@ export default function LeaguesSection({ leagues }: LeaguesSectionProps) {
 
         {/* UTR Match Play Series (not a USTA league — rated weekend matchplay) */}
         <div id="utr-circuit">
-          <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
+          <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-3">
             UTR MATCH PLAY SERIES · SEASON 1
           </p>
           <h3 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">

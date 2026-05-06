@@ -157,7 +157,7 @@ export default function SuccessStoriesPage() {
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <AnimatedSection>
             <div className="text-center max-w-3xl mx-auto text-white">
-              <p className="font-sans text-[11px] text-white uppercase tracking-[2px] mb-4 text-shadow-hero-readable">
+              <p className="font-sans text-eyebrow text-white uppercase mb-4 text-shadow-hero-readable">
                 Player Achievements
               </p>
               <h1 className="font-headline text-[40px] md:text-[56px] font-semibold text-brand-sandstone mb-6 leading-[1.1] text-shadow-hero-readable">
@@ -256,7 +256,7 @@ export default function SuccessStoriesPage() {
                   {/* Content */}
                   <div className={index % 2 === 1 ? 'md:order-1' : ''}>
                     <div className="mb-4">
-                      <span className="inline-block bg-brand-sunset-cliff/10 text-brand-sunset-cliff font-sans text-[12px] font-semibold uppercase tracking-[1.5px] px-3 py-1 rounded-full">
+                      <span className="inline-block bg-brand-sunset-cliff/10 text-brand-sunset-cliff font-sans text-eyebrow font-semibold uppercase px-3 py-1 rounded-full">
                         {story.title}
                       </span>
                     </div>
@@ -279,7 +279,7 @@ export default function SuccessStoriesPage() {
                     </p>
                     <Link
                       href={story.ctaHref}
-                      className="inline-flex items-center gap-2 bg-brand-sunset-cliff text-white font-sans text-[12px] font-medium tracking-[1.8px] uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff/40 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
+                      className="inline-flex items-center gap-2 bg-brand-sunset-cliff text-white font-sans text-eyebrow font-medium uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff/40 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                     >
                       {story.ctaLabel}
                       <ArrowRight className="h-4 w-4" />
@@ -327,7 +327,7 @@ export default function SuccessStoriesPage() {
                           />
                         </div>
                         <div className="p-6 md:p-8">
-                          <span className="inline-block text-brand-sunset-cliff font-sans text-[12px] font-medium uppercase tracking-[1.5px] mb-2">
+                          <span className="inline-block text-brand-sunset-cliff font-sans text-eyebrow font-medium uppercase mb-2">
                             {story.title}
                           </span>
                           <h3 className="font-headline text-[24px] font-semibold text-black mb-2">

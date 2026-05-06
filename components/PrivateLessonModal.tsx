@@ -247,7 +247,7 @@ export default function PrivateLessonModal({ isOpen, onClose, defaultCoach }: Pr
               ) : (
                 <form onSubmit={handleSubmit}>
                   <div className="mb-8">
-                    <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
+                    <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                       Private Lesson
                     </p>
                     <h2 id="private-modal-title" className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">

@@ -54,7 +54,7 @@ export default function MethodSection() {
           />
 
           <div className="relative z-10 px-6 py-14 md:px-10 md:py-20 lg:px-14 lg:py-24 max-w-2xl">
-            <span className="font-sans text-[10px] font-bold tracking-[4px] uppercase text-brand-victoria-cove mb-5 block">
+            <span className="font-sans text-eyebrow-sm font-bold uppercase text-brand-victoria-cove mb-5 block">
               The Mateljan Method
             </span>
             <h2 className="font-headline text-[clamp(2rem,4.5vw,3rem)] font-light text-white leading-[1.1] tracking-[-0.02em] mb-6">
@@ -90,7 +90,7 @@ export default function MethodSection() {
                 return (
                   <Wrapper key={step.label} {...props}>
                     <div className="rounded-lg bg-white/[0.05] border border-white/[0.08] px-3 py-6 text-center transition-all duration-300 hover:bg-white/[0.08] hover:border-white/[0.16]">
-                      <span className="font-sans text-[10px] font-bold tracking-[3px] uppercase text-brand-victoria-cove/60 mb-2 block">
+                      <span className="font-sans text-eyebrow-sm font-bold uppercase text-brand-victoria-cove/60 mb-2 block">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <h3 className="font-headline text-[20px] md:text-[22px] font-light text-white mb-1.5 tracking-[-0.01em]">

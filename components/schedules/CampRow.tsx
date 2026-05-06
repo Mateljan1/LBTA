@@ -31,7 +31,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
           role="group"
           aria-label="Tennis and Games camp photos"
         >
-          <p className="mb-2 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/55">
+          <p className="mb-2 font-sans text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/55">
             Tennis &amp; Adventure
           </p>
           <div className="grid max-w-lg grid-cols-3 gap-1.5 sm:gap-2">
@@ -95,7 +95,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
           <button
             onClick={() => onRegister(camp)}
             aria-label={`Register for ${camp.name}`}
-            className="inline-flex items-center gap-1.5 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
+            className="inline-flex items-center gap-1.5 bg-black text-white font-sans text-eyebrow font-medium uppercase px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
           >
             Register
             <svg className="w-3.5 h-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -140,7 +140,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
         <button
           onClick={() => onRegister(camp)}
           aria-label={`Register for ${camp.name}`}
-          className="mt-4 w-full inline-flex items-center justify-center gap-1.5 bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase px-5 py-3 rounded-[2px] transition-all duration-300 ease-out active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
+          className="mt-4 w-full inline-flex items-center justify-center gap-1.5 bg-black text-white font-sans text-eyebrow font-medium uppercase px-5 py-3 rounded-[2px] transition-all duration-300 ease-out active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
         >
           Register
           <svg className="w-3.5 h-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">

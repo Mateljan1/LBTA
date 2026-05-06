@@ -14,7 +14,7 @@ export default function CoachingTeamSection() {
       {/* Match FounderSection max-width + horizontal padding so the page reads as one editorial column */}
       <div className="mx-auto max-w-[1200px] px-6 md:px-12 lg:px-16">
         <AnimatedSection className="mb-12 md:mb-14 lg:mb-16">
-          <p className="mb-3 font-sans text-[11px] font-semibold uppercase tracking-[0.15em] text-brand-pacific-dusk/60">
+          <p className="mb-3 font-sans text-eyebrow font-semibold uppercase text-brand-pacific-dusk/60">
             Coaching Team
           </p>
           <h2

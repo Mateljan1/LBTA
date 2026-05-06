@@ -297,7 +297,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
               ) : step === 1 ? (
                 // Step 1: Plan Selection
                 <div className="p-8 md:p-10">
-                  <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
+                  <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                     Select Plan
                   </p>
                   <h2 id="modal-title" className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
@@ -370,7 +370,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
               ) : (
                 // Step 2: Contact Information
                 <form onSubmit={handleSubmit} className="p-8 md:p-10">
-                  <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
+                  <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                     Your Details
                   </p>
                   <h2 className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em]">
@@ -385,7 +385,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     {/* Name Row */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="modal-firstName" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-firstName" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           First Name
                         </label>
                         <input
@@ -399,7 +399,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         />
                       </div>
                       <div>
-                        <label htmlFor="modal-lastName" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-lastName" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           Last Name
                         </label>
                         <input
@@ -416,7 +416,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
                     {/* Email */}
                     <div>
-                      <label htmlFor="modal-email" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                      <label htmlFor="modal-email" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                         Email Address
                       </label>
                       <input
@@ -432,7 +432,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
                     {/* Phone */}
                     <div>
-                      <label htmlFor="modal-phone" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                      <label htmlFor="modal-phone" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                         Phone Number
                       </label>
                       <input
@@ -449,7 +449,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     {/* Player Info */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="modal-studentName" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-studentName" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           Player Name
                         </label>
                         <input
@@ -462,7 +462,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                         />
                       </div>
                       <div>
-                        <label htmlFor="modal-studentAge" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-studentAge" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           Age
                         </label>
                         <input
@@ -480,7 +480,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
 
                     {/* Experience Level */}
                     <fieldset>
-                      <legend className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                      <legend className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                         Experience Level
                       </legend>
                       <div className="flex gap-2">
@@ -505,7 +505,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                     {/* Availability */}
                     <div className="grid grid-cols-1 gap-4">
                       <div>
-                        <label htmlFor="modal-daysPerWeek" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-daysPerWeek" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           Days per Week
                         </label>
                         <select
@@ -524,7 +524,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                       </div>
 
                       <div>
-                        <p className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <p className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           Preferred Days
                         </p>
                         <div className="flex flex-wrap gap-2">
@@ -568,7 +568,7 @@ export default function LuxuryRegistrationModal({ program, onClose }: LuxuryRegi
                           className="mt-1 h-4 w-4 rounded border-black/20 text-brand-victoria-cove focus:ring-brand-victoria-cove"
                         />
                         <span>
-                          <span className="block font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-victoria-cove">
+                          <span className="block font-sans text-eyebrow font-semibold uppercase text-brand-victoria-cove">
                             Optional Add-On
                           </span>
                           <span className="block font-sans text-[14px] text-brand-pacific-dusk mt-1">

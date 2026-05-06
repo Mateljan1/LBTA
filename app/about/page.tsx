@@ -110,7 +110,7 @@ export default function AboutPage() {
             
             {/* Content */}
             <div>
-              <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
+              <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/60 uppercase mb-4">
                 Our Story
               </p>
               <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-8 tracking-[-0.02em] leading-[1.15]">
@@ -136,15 +136,15 @@ export default function AboutPage() {
                 <div className="grid grid-cols-3 gap-6">
                   <div>
                     <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">{siteStats.trustStats.d1Placements}</span>
-                    <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">D1 Placements</p>
+                    <p className="font-sans text-eyebrow text-lbta-slate uppercase mt-1">D1 Placements</p>
                   </div>
                   <div>
                     <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">{siteStats.trustStats.coachCount}</span>
-                    <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">Expert Coaches</p>
+                    <p className="font-sans text-eyebrow text-lbta-slate uppercase mt-1">Expert Coaches</p>
                   </div>
                   <div>
                     <span className="font-headline text-[36px] md:text-[42px] font-medium text-brand-pacific-dusk">{siteStats.trustStats.activeStudents}</span>
-                    <p className="font-sans text-[12px] text-lbta-slate uppercase tracking-[0.1em] mt-1">Active Students</p>
+                    <p className="font-sans text-eyebrow text-lbta-slate uppercase mt-1">Active Students</p>
                   </div>
                 </div>
               </div>
@@ -171,7 +171,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-brand-deep-water/75" />
         </div>
         <div className="relative z-10 max-w-[900px] mx-auto px-6 md:px-16 text-center">
-          <p className="font-sans text-[11px] font-semibold text-white/80 uppercase tracking-[0.15em] mb-8">
+          <p className="font-sans text-eyebrow font-semibold text-white/80 uppercase mb-8">
             Our Philosophy
           </p>
           <blockquote id="philosophy-quote-heading" className="font-headline text-[28px] md:text-[40px] font-medium text-white leading-[1.3] tracking-[-0.02em] mb-8">
@@ -188,7 +188,7 @@ export default function AboutPage() {
       <section className="bg-brand-sandstone py-20 md:py-28">
         <div className="max-w-[1200px] mx-auto px-6 md:px-16">
           <div className="mb-16">
-            <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
+            <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/60 uppercase mb-4">
               Our Foundation
             </p>
             <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
@@ -221,7 +221,7 @@ export default function AboutPage() {
       {/* FACILITY — Featured + strip (one large + 2 smaller) */}
       <section id="facility" className="bg-brand-morning-light py-20 md:py-28" aria-labelledby="facility-heading">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
-          <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
+          <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/60 uppercase mb-4">
             Our Courts
           </p>
           <h2 id="facility-heading" className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-10 tracking-[-0.02em]">
@@ -274,7 +274,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Content */}
             <div className="order-2 lg:order-1">
-              <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
+              <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/60 uppercase mb-4">
                 Our Home
               </p>
               <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk mb-6 tracking-[-0.02em]">

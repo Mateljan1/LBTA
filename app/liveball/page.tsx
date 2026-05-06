@@ -50,7 +50,7 @@ export default function LiveBallPage() {
       <section className="bg-brand-deep-water">
         <div className="lg:grid lg:grid-cols-2 lg:min-h-[min(88vh,900px)] lg:max-w-[1600px] lg:mx-auto">
           <div className="relative z-10 flex flex-col justify-center px-4 pt-28 pb-14 md:px-10 md:pt-32 md:pb-20 lg:px-12 lg:py-24 xl:px-16 order-2 lg:order-1">
-            <p className="font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-brand-victoria-cove mb-4">
+            <p className="font-sans text-eyebrow font-medium uppercase text-brand-victoria-cove mb-4">
               Fitness & community
             </p>
             <h1 className="font-headline text-[clamp(2.25rem,5vw,3.75rem)] font-medium text-white leading-[1.05] tracking-[-0.02em] mb-5">
@@ -102,7 +102,7 @@ export default function LiveBallPage() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-8">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             <div className="lg:col-span-5 space-y-6">
-              <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/55">
+              <p className="font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/55">
                 What to expect
               </p>
               <h2 className="font-headline text-[clamp(1.75rem,3.5vw,2.35rem)] text-brand-pacific-dusk leading-tight">
@@ -172,7 +172,7 @@ export default function LiveBallPage() {
       <section className="bg-brand-morning-light py-20 md:py-28 border-t border-black/[0.06]">
         <div className="max-w-[1140px] mx-auto px-4 md:px-8">
           <div className="max-w-2xl mb-14 md:mb-16">
-            <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/55 mb-3">
+            <p className="font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/55 mb-3">
               Session flow
             </p>
             <h2 className="font-headline text-[clamp(1.75rem,4vw,2.5rem)] text-brand-pacific-dusk mb-4 leading-tight">
@@ -187,7 +187,7 @@ export default function LiveBallPage() {
                 key={b.label}
                 className="group bg-white border border-black/[0.07] p-7 rounded-[3px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:border-brand-victoria-cove/25 hover:shadow-[0_8px_28px_rgba(15,34,55,0.08)]"
               >
-                <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/45 mb-3">
+                <p className="font-sans text-eyebrow-sm font-medium uppercase text-brand-pacific-dusk/45 mb-3">
                   {b.label}
                 </p>
                 <h3 className="font-headline text-[1.28rem] text-brand-pacific-dusk mb-3 leading-snug">{b.title}</h3>
@@ -207,7 +207,7 @@ export default function LiveBallPage() {
       >
         <div className="max-w-[1140px] mx-auto px-4 md:px-8">
           <div className="max-w-2xl mb-12 md:mb-16">
-            <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/55 mb-3">
+            <p className="font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/55 mb-3">
               Membership
             </p>
             <h2 id="liveball-schedule-heading" className="font-headline text-[clamp(1.65rem,3.5vw,2.15rem)] text-brand-pacific-dusk mb-5 leading-tight">
@@ -251,7 +251,7 @@ export default function LiveBallPage() {
                       Weekly times for {prog.program}: {prog.ages}
                     </caption>
                     <thead>
-                      <tr className="border-b border-black/[0.08] bg-brand-pacific-dusk/[0.04] text-left text-[10px] font-medium uppercase tracking-[0.16em] text-brand-pacific-dusk/65">
+                      <tr className="text-eyebrow-sm border-b border-black/[0.08] bg-brand-pacific-dusk/[0.04] text-left font-medium uppercase text-brand-pacific-dusk/65">
                         <th scope="col" className="py-3.5 px-5 md:px-8 font-medium">
                           Day
                         </th>
@@ -307,7 +307,7 @@ export default function LiveBallPage() {
             />
           </div>
           <div className="lg:col-span-6 space-y-6">
-            <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/55">On court</p>
+            <p className="font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/55">On court</p>
             <div className="bg-white border border-black/[0.06] rounded-[3px] p-8 md:p-10 shadow-[0_2px_16px_rgba(0,0,0,0.04)]">
               <p className="font-sans text-[16px] leading-[1.65] text-black/82 mb-6">{content.culture.communication}</p>
               <p className="font-sans text-[15px] leading-[1.65] text-black/70">{content.culture.safety}</p>
@@ -338,7 +338,7 @@ export default function LiveBallPage() {
 
       <DarkSection className="py-20 md:py-28">
         <div className="max-w-xl mx-auto px-4 text-center">
-          <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-white/55 mb-4">Next step</p>
+          <p className="font-sans text-eyebrow font-medium uppercase text-white/55 mb-4">Next step</p>
           <h2 className="font-headline text-[clamp(1.85rem,4vw,2.4rem)] text-brand-sandstone mb-8 leading-tight">
             Ready to try a session?
           </h2>

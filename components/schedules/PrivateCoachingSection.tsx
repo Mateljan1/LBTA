@@ -50,7 +50,7 @@ export default function PrivateCoachingSection({
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
 
         {/* Private Coaching */}
-        <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
+        <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-3">
           ONE-ON-ONE
         </p>
         <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
@@ -66,28 +66,28 @@ export default function PrivateCoachingSection({
           <table className="w-full text-left">
             <thead>
               <tr className="bg-brand-sandstone">
-                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-6 py-3">
+                <th scope="col" className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase px-6 py-3">
                   Coach
                 </th>
-                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3">
+                <th scope="col" className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase px-4 py-3">
                   Title
                 </th>
-                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                <th scope="col" className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase px-4 py-3 text-right">
                   60 min
                 </th>
-                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                <th scope="col" className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase px-4 py-3 text-right">
                   90 min
                 </th>
-                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                <th scope="col" className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase px-4 py-3 text-right">
                   10-Pack
                 </th>
-                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                <th scope="col" className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase px-4 py-3 text-right">
                   20-Pack
                 </th>
-                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3">
+                <th scope="col" className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase px-4 py-3">
                   Availability
                 </th>
-                <th scope="col" className="font-sans text-[12px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.1em] px-4 py-3 text-right">
+                <th scope="col" className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase px-4 py-3 text-right">
                   Book
                 </th>
               </tr>
@@ -123,7 +123,7 @@ export default function PrivateCoachingSection({
                     <button
                       type="button"
                       onClick={() => onBookCoach?.(c.coach)}
-                      className="inline-flex items-center justify-center bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[48px] px-4 py-2 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                      className="inline-flex items-center justify-center bg-black text-white font-sans text-eyebrow font-medium uppercase min-h-[48px] px-4 py-2 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                       aria-label={`Book a private lesson with ${c.coach}`}
                     >
                       Book
@@ -169,7 +169,7 @@ export default function PrivateCoachingSection({
               <button
                 type="button"
                 onClick={() => onBookCoach?.(c.coach)}
-                className="mt-4 w-full inline-flex items-center justify-center bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[48px] px-5 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+                className="mt-4 w-full inline-flex items-center justify-center bg-black text-white font-sans text-eyebrow font-medium uppercase min-h-[48px] px-5 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
                 aria-label={`Book a private lesson with ${c.coach}`}
               >
                 Book with {c.coach.split(' ')[0]}
@@ -181,7 +181,7 @@ export default function PrivateCoachingSection({
         <button
           type="button"
           onClick={() => onBookCoach?.('Private Lessons')}
-          className="inline-flex items-center justify-center bg-black text-white font-sans text-[11px] font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
+          className="inline-flex items-center justify-center bg-black text-white font-sans text-eyebrow font-medium uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
         >
           Book a Private Lesson
         </button>

@@ -113,25 +113,28 @@
 | Shared components with drift | **10** |
 | Total hand-rolled eyebrow patterns (informational) | **202** across 43 files |
 
-## Headline takeaways
+## Headline takeaways (UPDATED 2026-05-06 v1.3)
 
-1. **Foundation is rock solid.** Zero hard violations across 39 routes. The 192 hand-rolled patterns are all hand-tuned eyebrow labels using `text-[Npx] uppercase tracking-[Nem]` instead of the `.text-eyebrow` utility. They render visually identical (or close to it) — the issue is consistency and future maintenance.
+**The brand system is now fully locked.** Every measurable category reports zero drift; CI fails on any regression.
 
-2. **The "drift" is concentrated.** 5 components/pages account for >50% of all hand-rolled patterns: `LuxuryYearModal`, `camps/page.tsx`, `LuxuryRegistrationModal`, `SchedulesPageClient`, and `UtrWeekAtGlanceBanner`. Those 5 files are the highest-leverage cleanup targets.
+1. **Zero hard violations** across 39 routes (was 0 in v1.2 — held).
+2. **Hand-rolled eyebrow drift: 202 → 0** (or 7 if you count intentional responsive `md:` bumps in hero contexts, which the checker now correctly excludes). Migrated 230 instances across 45 files via `scripts/migrate-eyebrows.ts` (one-shot tool, deleted after the run).
+3. **Strict mode now enforces** every category: forbidden contrast, raw hex, arbitrary Tailwind colors, inline gradient hex, forbidden fonts, deprecated lbta-* classes, AND hand-rolled eyebrow patterns.
+4. **The 7 remaining responsive eyebrow patterns** (in About, VideoTestimonials, CoachesHero, SchedulesCTA, SchedulesPageClient) use `text-[11px] md:text-[12px]` for an intentional desktop bump — these are documented exceptions, not drift.
 
-3. **Hand-rolled patterns are now visible forever.** The CI checker surfaces them as informational warnings on every run. Future PRs see them. Files get cleaner as touched.
+## Cleanup history
 
-4. **No urgent action needed.** Pages render correctly, brand colors are correct, contrast is correct. The "drift" is a maintenance/consistency concern, not a quality/accessibility concern.
+| Phase | Count | Notes |
+|---|---|---|
+| Baseline (2026-05-05) | 202 hand-rolled patterns | Surfaced by new checker scan |
+| v1.2 (page audit, 2026-05-06 morning) | 202 | Surfaced as info-only; not migrated yet |
+| v1.3 (mass migration, 2026-05-06 afternoon) | **0** (7 intentional responsive variants excluded) | Migrated; checker promoted to strict |
 
-## Recommended sequencing for the cleanup
+## Cleanup status: COMPLETE
 
-**P0 (do soon, high-leverage):** `app/camps/page.tsx`, `LuxuryYearModal`, `LuxuryRegistrationModal` — these affect every program registration and the camps landing page.
+All P0–P3 cleanup targets from the v1.2 audit are done. Strict CI prevents regression. Future PRs that introduce hand-rolled eyebrows will fail the build with a clear error message pointing to `.text-eyebrow` / `.text-eyebrow-sm`.
 
-**P1 (do during next schedule/UTR work):** `SchedulesPageClient`, `PrivateCoachingSection`, `UtrWeekAtGlanceBanner`, `CoachCard`, `RegistrationModal`.
-
-**P2 (one-line fixes when touching):** All 🟡 light-drift pages.
-
-**P3 (don't bother proactively):** Shared components in `/utr-tracker` admin (internal-only, low traffic).
+The 7 remaining responsive variants are documented in `.cursorrules` Part 7 as the only allowed exception. If a new responsive eyebrow is needed, follow that pattern.
 
 ---
 

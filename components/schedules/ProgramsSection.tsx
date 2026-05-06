@@ -187,7 +187,7 @@ export default function ProgramsSection({
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 min-w-0">
 
         {nowEnrolling && (
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-morning-light px-4 py-2 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-brand-pacific-dusk">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-morning-light px-4 py-2 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-victoria-cove" aria-hidden />
             <span>
               {STATUS_LABELS[nowEnrolling.data.status ?? ''] ?? 'Season'}: {nowEnrolling.data.name}
@@ -250,7 +250,7 @@ export default function ProgramsSection({
                     Current
                   </span>
                 ) : seasons[key]?.status && STATUS_LABELS[seasons[key]?.status ?? ''] ? (
-                  <span className="mt-1 block text-[10px] font-sans uppercase tracking-[0.16em] text-brand-pacific-dusk/70">
+                  <span className="mt-1 block font-sans text-eyebrow-sm uppercase text-brand-pacific-dusk/70">
                     {STATUS_LABELS[seasons[key]?.status ?? '']}
                   </span>
                 ) : null}
@@ -267,7 +267,7 @@ export default function ProgramsSection({
 
         {upNext && (
           <p className="font-sans text-[12px] text-brand-pacific-dusk/65 mb-6">
-            <span className="inline-flex items-center gap-1 rounded-full bg-brand-morning-light px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-brand-pacific-dusk mr-2">
+            <span className="text-eyebrow-sm inline-flex items-center gap-1 rounded-full bg-brand-morning-light px-3 py-1 font-medium uppercase text-brand-pacific-dusk mr-2">
               Up Next
             </span>
             {upNext}
@@ -290,7 +290,7 @@ export default function ProgramsSection({
               return (
                 <div key={sectionKey}>
                   <div className="mb-6">
-                    <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-brand-pacific-dusk/50 mb-2">
+                    <p className="font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/50 mb-2">
                       {meta.eyebrow}
                     </p>
                     <h3 className="font-headline text-[26px] md:text-[32px] font-medium text-brand-pacific-dusk leading-[1.1] mb-2">
@@ -323,13 +323,13 @@ export default function ProgramsSection({
               <button
                 type="button"
                 onClick={() => setFilters(DEFAULT_FILTERS)}
-                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.1px] text-brand-pacific-dusk transition-all duration-300 hover:border-brand-victoria-cove hover:bg-brand-sandstone/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-brand-victoria-cove hover:bg-brand-sandstone/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Reset Filters
               </button>
               <Link
                 href="/contact"
-                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-5 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.1px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-5 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
               >
                 Contact Us
               </Link>

@@ -83,7 +83,7 @@ npm run tokens:check -- --all --report   # writes/updates this file (Phase 1.3)
 
 ## Live audit — current state
 
-**Generated:** 2026-05-06T20:14:39.803Z
+**Generated:** 2026-05-06T20:43:59.795Z
 
 | Category | Count | Status |
 |---|---|---|
@@ -93,7 +93,7 @@ npm run tokens:check -- --all --report   # writes/updates this file (Phase 1.3)
 | Inline gradient hex literals | 0 | ✅ |
 | Forbidden fonts (app code) | 0 | ✅ |
 | Deprecated lbta-* classes | 0 | ✅ |
-| Hand-rolled eyebrow patterns (info) | 199 | ℹ |
+| Hand-rolled eyebrow patterns (info) | 0 | ✅ |
 | Hand-rolled section padding (info) | 0 | ✅ |
 
 **Result: 🟢 LOCKED IN — zero brand drift.**
@@ -126,52 +126,7 @@ _None._
 
 ### Hand-rolled eyebrow patterns (informational)
 
-**Total:** 199 across 42 file(s).
-
-| File | Count | Lines |
-|---|---|---|
-| `components/LuxuryYearModal.tsx` | 14 | 542, 557, 649, 690, 706, 725, 764, 778, 795, 811, 828, 841, 859, 883 |
-| `app/camps/page.tsx` | 13 | 107, 309, 310, 338, 373, 380, 396, 413, 439, 491, 494, 502, 511 |
-| `components/LuxuryRegistrationModal.tsx` | 12 | 300, 373, 388, 402, 419, 435, 452, 465, 483, 508, 527, 571 |
-| `components/schedules/SchedulesPageClient.tsx` | 11 | 119, 166, 187, 194, 215, 236, 242, 260, 281, 287, 301 |
-| `components/programs/UtrWeekAtGlanceBanner.tsx` | 10 | 54, 84, 109, 119, 142, 165, 178, 238, 249, 262 |
-| `app/about/page.tsx` | 9 | 78, 113, 139, 143, 147, 174, 191, 224, 277 |
-| `components/schedules/PrivateCoachingSection.tsx` | 9 | 53, 69, 72, 75, 78, 81, 84, 87, 90 |
-| `app/liveball/page.tsx` | 8 | 53, 105, 175, 190, 210, 254, 310, 341 |
-| `components/camps/CampListingCard.tsx` | 8 | 52, 84, 87, 105, 143, 158, 206, 212 |
-| `components/coaches/CoachCard.tsx` | 8 | 61, 131, 169, 177, 208, 246, 254, 280 |
-| `components/utr-tracker/UtrLeaderboard.tsx` | 8 | 212, 219, 226, 235, 252, 268, 278, 411 |
-| `app/programs/utr-match-play/UTRMatchPlayDivisions.tsx` | 7 | 129, 137, 158, 325, 331, 337, 343 |
-| `app/programs/utr-match-play/page.tsx` | 7 | 91, 142, 354, 393, 425, 536, 613 |
-| `components/RegistrationModal.tsx` | 7 | 402, 527, 551, 567, 592, 647, 680 |
-| `components/schedules/ProgramCard.tsx` | 6 | 159, 165, 192, 221, 232, 240 |
-| `components/schedules/ProgramsSection.tsx` | 6 | 190, 253, 270, 293, 326, 332 |
-| `components/schedules/ScheduleCalendarView.tsx` | 6 | 143, 187, 208, 280, 287, 412 |
-| `components/programs/UtrSeriesHero.tsx` | 5 | 83, 91, 99, 107, 129 |
-| `components/schedules/SchedulesProgramFinder.tsx` | 5 | 64, 71, 86, 101, 122 |
-| `app/thank-you/page.tsx` | 4 | 149, 167, 193, 215 |
-| `components/programs/UtrDateStrip.tsx` | 4 | 27, 34, 41, 48 |
-| `components/utr-tracker/ColorBallPassportGrid.tsx` | 4 | 74, 78, 82, 112 |
-| `app/page.tsx` | 3 | 203, 206, 209 |
-| `app/success-stories/page.tsx` | 3 | 160, 259, 330 |
-| `app/high-performance-pathway/page.tsx` | 2 | 106, 268 |
-| `components/ProgramCard.tsx` | 2 | 177, 204 |
-| `components/VideoTestimonials.tsx` | 2 | 123, 202 |
-| `components/schedules/LeaguesSection.tsx` | 2 | 25, 62 |
-| `app/coaches/peter-defrantz/page.tsx` | 1 | 83 |
-| `app/match-play/page.tsx` | 1 | 46 |
-| `app/not-found.tsx` | 1 | 28 |
-| `components/PricingComparison.tsx` | 1 | 50 |
-| `components/PrivateLessonModal.tsx` | 1 | 250 |
-| `components/TimelineSection.tsx` | 1 | 69 |
-| `components/TrialBookingModal.tsx` | 1 | 265 |
-| `components/coaches/CoachesHero.tsx` | 1 | 49 |
-| `components/coaches/CoachingTeamSection.tsx` | 1 | 17 |
-| `components/coaches/FounderSection.tsx` | 1 | 38 |
-| `components/programs/UtrSeasonOverviewBar.tsx` | 1 | 34 |
-| `components/schedules/CampRow.tsx` | 1 | 34 |
-| `components/schedules/CampsSection.tsx` | 1 | 15 |
-| `components/schedules/SchedulesCTA.tsx` | 1 | 27 |
+_None._
 
 ### Hand-rolled section padding (informational)
 

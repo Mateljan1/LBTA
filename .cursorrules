@@ -202,8 +202,10 @@ colors: {
   - `lbta-black` (#0A0A0A) — true black for premium CTAs
 - **Any other `lbta-*` name is deprecated** (lbta-cream, lbta-charcoal, lbta-orange, lbta-beige, lbta-sand, lbta-bone, lbta-burnt, lbta-coral, lbta-coral-dark, lbta-primary, lbta-secondary). The checker fails strict mode if any appear in new code. Migrate per `docs/brand-token-system.md` mapping table.
 
-**Hand-rolled patterns (informational, don't block CI):**
-- Prefer `.text-eyebrow` / `.text-eyebrow-sm` over hand-rolled `text-[10-12px] uppercase tracking-[N]`. The checker surfaces all hand-rolled instances in the audit report. Migrate opportunistically when touching a file. **202 instances exist today across 43 files** — see `docs/brand-page-audit-2026-05-06.md` for the per-file ledger and cleanup priority.
+**Hand-rolled eyebrow patterns (now strict-mode enforced):**
+- Use `text-eyebrow` (0.7rem, 0.18em tracking) or `text-eyebrow-sm` (0.65rem, 0.12em tracking). **Never** hand-roll `text-[10-12px] uppercase tracking-[N]` — CI will fail.
+- The only allowed exception: responsive size jumps in hero contexts, e.g. `text-[11px] md:text-[12px] uppercase tracking-[0.2em]`. The checker explicitly excludes these. There are 7 documented instances site-wide.
+- All other historical hand-rolled eyebrows were migrated in v1.3 (commit ddd76e6 → bd702bf → e7fa23d → next). 230 instances cleaned in one pass.
 
 ---
 

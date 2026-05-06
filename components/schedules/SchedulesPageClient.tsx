@@ -163,7 +163,7 @@ export default function SchedulesPageClient({
         <section id="private" className="scroll-mt-28 bg-brand-morning-light py-14 md:py-16">
           <div className="max-w-[1200px] mx-auto px-4 md:px-6">
             <div className="rounded-lg border border-black/[0.08] bg-white px-6 py-7 md:px-8 md:py-8">
-              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
+              <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-3">
                 ONE-ON-ONE
               </p>
               <h2 className="font-headline text-[30px] md:text-[38px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
@@ -184,14 +184,14 @@ export default function SchedulesPageClient({
                 <button
                   type="button"
                   onClick={() => expandSection('private')}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.3px] text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   View Rates & Coaches
                 </button>
                 <button
                   type="button"
                   onClick={() => setPrivateCoachName('Private Lessons')}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.3px] text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   Book a Private Lesson
                 </button>
@@ -212,7 +212,7 @@ export default function SchedulesPageClient({
         <section id="camps" className="scroll-mt-28 bg-brand-morning-light py-14 md:py-16">
           <div className="max-w-[1200px] mx-auto px-4 md:px-6">
             <div className="rounded-lg border border-black/[0.08] bg-white px-6 py-7 md:px-8 md:py-8">
-              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
+              <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-3">
                 SEASONAL & HOLIDAY
               </p>
               <h2 className="font-headline text-[30px] md:text-[38px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
@@ -233,13 +233,13 @@ export default function SchedulesPageClient({
                 <button
                   type="button"
                   onClick={() => expandSection('camps')}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.3px] text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   View Camp Schedule
                 </button>
                 <Link
                   href="/contact?inquiry=camps"
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.3px] text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   Register for Camp
                 </Link>
@@ -257,7 +257,7 @@ export default function SchedulesPageClient({
         <section id="leagues" className="scroll-mt-28 bg-white py-14 md:py-16">
           <div className="max-w-[1200px] mx-auto px-4 md:px-6">
             <div className="rounded-lg border border-black/[0.08] bg-brand-morning-light px-6 py-7 md:px-8 md:py-8">
-              <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-3">
+              <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-3">
                 LEAGUES & MATCH PLAY
               </p>
               <h2 className="font-headline text-[30px] md:text-[38px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
@@ -278,13 +278,13 @@ export default function SchedulesPageClient({
                 <button
                   type="button"
                   onClick={() => expandSection('leagues')}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.3px] text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   View League Details
                 </button>
                 <Link
                   href="/programs/leagues"
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.3px] text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   Explore Leagues
                 </Link>

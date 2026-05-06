@@ -25,7 +25,7 @@ export default function NotFound() {
 
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
-          <p className="font-sans text-[11px] text-white/60 uppercase tracking-[3px] mb-4">
+          <p className="font-sans text-eyebrow text-white/60 uppercase mb-4">
             Page Not Found
           </p>
           <h1 className="font-headline text-[80px] md:text-[120px] font-light text-white mb-4 leading-none">

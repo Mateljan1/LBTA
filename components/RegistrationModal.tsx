@@ -399,7 +399,7 @@ export default function RegistrationModal({
                 </div>
               )}
 
-              <p className="font-sans text-[11px] font-medium text-white/50 uppercase tracking-[0.16em] mb-3">
+              <p className="font-sans text-eyebrow font-medium text-white/50 uppercase mb-3">
                 How would you like to register?
               </p>
 
@@ -524,7 +524,7 @@ export default function RegistrationModal({
               <div className="space-y-5">
                 {/* ── Contact ── */}
                 <div className="space-y-3">
-                  <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em]">Your info</p>
+                  <p className="font-sans text-eyebrow font-medium text-white/65 uppercase">Your info</p>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="sr-only">First name</label>
@@ -548,7 +548,7 @@ export default function RegistrationModal({
                 {/* ── Player info (juniors / development / private) ── */}
                 {showPlayerFields && (
                   <div className="space-y-3">
-                    <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em]">About the player</p>
+                    <p className="font-sans text-eyebrow font-medium text-white/65 uppercase">About the player</p>
                     <div className="grid grid-cols-3 gap-3">
                       <div className="col-span-2">
                         <label className="sr-only">Player name</label>
@@ -564,7 +564,7 @@ export default function RegistrationModal({
 
                 {/* ── Experience / Level ── */}
                 <div>
-                  <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em] mb-2">{levelLabel}</p>
+                  <p className="font-sans text-eyebrow font-medium text-white/65 uppercase mb-2">{levelLabel}</p>
                   <div className="flex flex-wrap gap-2">
                     {levelOptions.map((opt) => {
                       const selected = form.experienceLevel === opt
@@ -589,7 +589,7 @@ export default function RegistrationModal({
 
                 {/* ── Schedule ── */}
                 <div className="space-y-3">
-                  <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em]">Schedule preference</p>
+                  <p className="font-sans text-eyebrow font-medium text-white/65 uppercase">Schedule preference</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="sr-only">Days per week</label>
@@ -644,7 +644,7 @@ export default function RegistrationModal({
 
                 {/* ── How did you find us? ── */}
                 <div>
-                  <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em] mb-2">How did you find us?</p>
+                  <p className="font-sans text-eyebrow font-medium text-white/65 uppercase mb-2">How did you find us?</p>
                   <div className="flex flex-wrap gap-1.5">
                     {REFERRAL_OPTIONS.map((opt) => {
                       const selected = form.referralSource === opt
@@ -677,7 +677,7 @@ export default function RegistrationModal({
                       className="mt-0.5 h-4 w-4 rounded border-white/20 text-brand-victoria-cove focus:ring-brand-victoria-cove"
                     />
                     <span>
-                      <span className="block font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-victoria-cove">
+                      <span className="block font-sans text-eyebrow font-semibold uppercase text-brand-victoria-cove">
                         Optional add-on
                       </span>
                       <span className="block font-sans text-[13px] text-white/80 mt-0.5">

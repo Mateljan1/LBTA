@@ -47,7 +47,7 @@ export default function PricingComparison() {
               {/* Popular Badge */}
               {tier.popular && (
                 <div className="absolute top-0 left-0 right-0 bg-brand-pacific-dusk text-white text-center py-2">
-                  <span className="font-sans text-[11px] uppercase tracking-[2px] font-medium">
+                  <span className="font-sans text-eyebrow uppercase font-medium">
                     Most Popular
                   </span>
                 </div>

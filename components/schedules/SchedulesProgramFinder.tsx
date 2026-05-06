@@ -61,14 +61,14 @@ export default function SchedulesProgramFinder({
           Filter by age, level, or day
         </p>
         {active && (
-          <p aria-live="polite" aria-atomic="true" className="rounded-full bg-white px-3 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-brand-pacific-dusk/70">
+          <p aria-live="polite" aria-atomic="true" className="rounded-full bg-white px-3 py-1.5 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/70">
             {resultCount} {resultCount === 1 ? 'result' : 'results'}
           </p>
         )}
       </div>
 
       <div className="grid gap-3 md:grid-cols-3">
-        <label className="flex flex-col gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/60">
+        <label className="flex flex-col gap-1.5 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/60">
           Age group
           <select
             value={filters.playerType}
@@ -83,7 +83,7 @@ export default function SchedulesProgramFinder({
           </select>
         </label>
 
-        <label className="flex flex-col gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/60">
+        <label className="flex flex-col gap-1.5 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/60">
           Level
           <select
             value={filters.level}
@@ -98,7 +98,7 @@ export default function SchedulesProgramFinder({
           </select>
         </label>
 
-        <label className="flex flex-col gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-brand-pacific-dusk/60">
+        <label className="flex flex-col gap-1.5 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/60">
           Day
           <select
             value={filters.day}
@@ -119,7 +119,7 @@ export default function SchedulesProgramFinder({
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[1.8px] text-brand-pacific-dusk/70 transition-all duration-300 hover:border-brand-victoria-cove hover:text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-2.5 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/70 transition-all duration-300 hover:border-brand-victoria-cove hover:text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
           >
             Reset
           </button>

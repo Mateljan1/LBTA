@@ -140,7 +140,7 @@ export default function ScheduleCalendarView({
     <div className={printable ? 'schedule-calendar-print' : ''}>
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-8 md:py-12">
         {/* Title and season dates */}
-        <p className="font-sans text-[11px] font-medium text-brand-pacific-dusk/60 uppercase tracking-[0.2em] mb-2">
+        <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-2">
           Schedule by location
         </p>
         <h1 className="font-headline text-[28px] md:text-[40px] font-medium text-brand-pacific-dusk leading-tight mb-2">
@@ -184,7 +184,7 @@ export default function ScheduleCalendarView({
             {/* Location + View filters */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mb-8">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="font-sans text-[12px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.08em]">
+                <span className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/70 uppercase">
                   Location
                 </span>
                 {['', ...LOCATION_KEYS].map((loc) => (
@@ -205,7 +205,7 @@ export default function ScheduleCalendarView({
               </div>
               <div className="h-6 w-px bg-black/10 hidden sm:block" aria-hidden />
               <div className="flex flex-wrap items-center gap-2">
-                <span className="font-sans text-[12px] font-medium text-brand-pacific-dusk/70 uppercase tracking-[0.08em]">
+                <span className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/70 uppercase">
                   View
                 </span>
                 <button
@@ -277,14 +277,14 @@ export default function ScheduleCalendarView({
                     <table className="w-full border-collapse font-sans min-w-[640px]" aria-label={`Weekly schedule for ${locationName}`}>
                       <thead>
                         <tr className="bg-brand-sandstone/50">
-                          <th scope="col" className="text-left font-sans text-[11px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-[0.12em] py-4 pl-4 pr-3 w-[80px] border-b border-r border-black/[0.08]">
+                          <th scope="col" className="text-left font-sans text-eyebrow font-semibold text-brand-pacific-dusk/80 uppercase py-4 pl-4 pr-3 w-[80px] border-b border-r border-black/[0.08]">
                             Time
                           </th>
                           {DAY_ORDER.map((day) => (
                             <th
                               key={day}
                               scope="col"
-                              className="text-center font-sans text-[11px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-[0.12em] py-4 px-2 border-b border-black/[0.08] last:border-r-0"
+                              className="text-center font-sans text-eyebrow font-semibold text-brand-pacific-dusk/80 uppercase py-4 px-2 border-b border-black/[0.08] last:border-r-0"
                             >
                               {DAY_SHORT[day]}
                             </th>
@@ -409,7 +409,7 @@ export default function ScheduleCalendarView({
                       if (!slots?.length) return null
                       return (
                         <div key={day}>
-                          <h3 className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/80 uppercase tracking-[0.12em] mb-3">
+                          <h3 className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/80 uppercase mb-3">
                             {day}
                           </h3>
                           <ul className="space-y-2 list-none">

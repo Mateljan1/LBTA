@@ -104,7 +104,7 @@ export default function CampsPage() {
               Tennis coaching, field games, arts and crafts, and Splash Wars every Thursday.
               June 15 to August 29 with small groups and coaches who know each player by name.
             </p>
-            <p className="mt-4 font-sans text-[11px] uppercase tracking-[0.16em] text-white/80">
+            <p className="mt-4 font-sans text-eyebrow uppercase text-white/80">
               {HERO_HIGHLIGHTS.join(' · ')}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
@@ -306,8 +306,8 @@ export default function CampsPage() {
             <table className="w-full min-w-[760px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-black/10 bg-brand-sandstone/40">
-                  <th className="px-4 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/60">Time</th>
-                  <th className="px-4 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/60">Activity</th>
+                  <th className="px-4 py-3 font-sans text-eyebrow font-semibold uppercase text-brand-pacific-dusk/60">Time</th>
+                  <th className="px-4 py-3 font-sans text-eyebrow font-semibold uppercase text-brand-pacific-dusk/60">Activity</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-black/10">
@@ -335,7 +335,7 @@ export default function CampsPage() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             {WEEKLY_THEMES.map(([week, dates, theme, desc]) => (
               <article key={week} className="rounded-[2px] border border-black/8 bg-white p-4">
-                <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk/50">{week}</p>
+                <p className="font-sans text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/50">{week}</p>
                 <p className="mt-1 font-sans text-[12px] text-brand-pacific-dusk/65">{dates}</p>
                 <h3 className="mt-3 font-headline text-[1.3rem] leading-tight text-brand-pacific-dusk">{theme}</h3>
                 <p className="mt-2 font-sans text-[13px] leading-relaxed text-brand-pacific-dusk/75">{desc}</p>
@@ -370,14 +370,14 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Half-Day', 'Ages 5-11 · Half-Day session · Alta Laguna Park')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
               >
                 Reserve Half-Day
               </button>
             </article>
 
             <article className="h-full rounded-[2px] border border-brand-pacific-dusk/20 bg-white p-6 shadow-[0_12px_28px_rgba(27,58,92,0.08)] flex flex-col">
-              <p className="inline-block rounded-[2px] bg-brand-pacific-dusk px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
+              <p className="inline-block rounded-[2px] bg-brand-pacific-dusk px-2.5 py-1 font-sans text-eyebrow-sm font-semibold uppercase text-white">
                 Most Popular
               </p>
               <h3 className="mt-3 font-headline text-display-sm text-brand-pacific-dusk">Full-Day</h3>
@@ -393,7 +393,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Full-Day', 'Ages 5-11 · Full-Day session · Alta Laguna Park')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
                 Reserve Full-Day
               </button>
@@ -410,7 +410,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Multi-Week Inquiry', 'Ages 5-11 - Multi-week and sibling discount inquiry')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
               >
                 Contact for Multi-Week Pricing
               </button>
@@ -436,7 +436,7 @@ export default function CampsPage() {
             <button
               type="button"
               onClick={() => openCampModal('Junior Development Camp (12-17)', 'Laguna Beach High School · Half-Day only · $325/week')}
-              className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               Reserve Junior Dev Camp
             </button>
@@ -488,10 +488,10 @@ export default function CampsPage() {
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">4 days · Mon-Thu · Alta Laguna Park + LBHS</p>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Ages 5-11 and 12-17</p>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Full-Day $495 · Half-Day $325</p>
-              <p className="mt-4 font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/50">Completed · Spring 2026</p>
+              <p className="mt-4 font-sans text-eyebrow font-semibold uppercase text-brand-pacific-dusk/50">Completed · Spring 2026</p>
             </article>
             <article className="rounded-[2px] border border-brand-pacific-dusk/20 bg-white p-5 shadow-[0_12px_28px_rgba(27,58,92,0.08)]">
-              <p className="inline-block rounded-[2px] bg-brand-pacific-dusk px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white">Now Enrolling</p>
+              <p className="inline-block rounded-[2px] bg-brand-pacific-dusk px-2.5 py-1 font-sans text-eyebrow-sm font-semibold uppercase text-white">Now Enrolling</p>
               <h3 className="mt-3 font-headline text-display-sm text-brand-pacific-dusk">Summer Camp</h3>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">11 weeks · Mon-Thu · June 15-Aug 29</p>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Ages 5-11 and 12-17</p>
@@ -499,7 +499,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Reserve Your Week', 'Ages 5-11 and 12-17 · Mon-Thu weeks')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-[11px] font-medium uppercase tracking-[2.5px] text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
                 Reserve Your Week
               </button>
@@ -508,7 +508,7 @@ export default function CampsPage() {
               <h3 className="font-headline text-display-sm text-brand-pacific-dusk">Thanksgiving Break Camp</h3>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">3 days · Mon-Wed · Nov 23-25</p>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Ages 5-11: $221 · Ages 12-17: $244</p>
-              <p className="mt-4 font-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/50">Registration opens October</p>
+              <p className="mt-4 font-sans text-eyebrow font-semibold uppercase text-brand-pacific-dusk/50">Registration opens October</p>
             </article>
           </div>
         </div>

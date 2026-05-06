@@ -146,7 +146,7 @@ export default async function ThankYouPage({
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <AnimatedSection className="text-center mb-16">
-            <p className="font-sans text-[11px] text-black/50 uppercase tracking-[2px] mb-4">
+            <p className="font-sans text-eyebrow text-black/50 uppercase mb-4">
               Next Steps
             </p>
             <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-black">
@@ -164,7 +164,7 @@ export default async function ThankYouPage({
                 <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 relative">
                   <div className="md:w-1/2 md:text-right md:pr-12">
                     <div className="bg-brand-morning-light p-6 md:p-8 rounded-lg">
-                      <div className="inline-flex items-center gap-2 text-brand-tide-pool font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
+                      <div className="inline-flex items-center gap-2 text-brand-tide-pool font-sans text-eyebrow font-semibold uppercase mb-3">
                         <span className="w-6 h-6 rounded-full bg-brand-tide-pool/20 flex items-center justify-center text-brand-tide-pool">1</span>
                         Within 24 Hours
                       </div>
@@ -190,7 +190,7 @@ export default async function ThankYouPage({
                   <div className="hidden md:flex items-center justify-center w-4 h-4 rounded-full bg-black absolute left-1/2 -translate-x-1/2" />
                   <div className="md:w-1/2 md:pl-12">
                     <div className="bg-brand-morning-light p-6 md:p-8 rounded-lg">
-                      <div className="inline-flex items-center gap-2 text-brand-victoria-cove font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
+                      <div className="inline-flex items-center gap-2 text-brand-victoria-cove font-sans text-eyebrow font-semibold uppercase mb-3">
                         <span className="w-6 h-6 rounded-full bg-brand-victoria-cove/10 flex items-center justify-center text-brand-victoria-cove">2</span>
                         {isTrial ? 'Before Your Trial' : 'Getting Started'}
                       </div>
@@ -212,7 +212,7 @@ export default async function ThankYouPage({
                 <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 relative">
                   <div className="md:w-1/2 md:text-right md:pr-12">
                     <div className="bg-brand-morning-light p-6 md:p-8 rounded-lg">
-                      <div className="inline-flex items-center gap-2 text-brand-sunset-cliff font-sans text-[12px] font-semibold uppercase tracking-[1.5px] mb-3">
+                      <div className="inline-flex items-center gap-2 text-brand-sunset-cliff font-sans text-eyebrow font-semibold uppercase mb-3">
                         <span className="w-6 h-6 rounded-full bg-brand-sunset-cliff/10 flex items-center justify-center text-brand-sunset-cliff">3</span>
                         Your First Session
                       </div>

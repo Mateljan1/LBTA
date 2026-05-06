@@ -200,13 +200,13 @@ export default function Home() {
                 field games, arts and crafts, and Thursday Splash Wars in small groups.
               </p>
               <div className="mt-6 flex flex-wrap gap-2.5">
-                <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-brand-pacific-dusk">
+                <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk">
                   8 kids per group
                 </span>
-                <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-brand-pacific-dusk">
+                <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk">
                   Full-Day: $495/week
                 </span>
-                <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-brand-pacific-dusk">
+                <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk">
                   Half-Day: $325/week
                 </span>
               </div>
@@ -373,7 +373,7 @@ export default function Home() {
                   key={tier.name}
                   className="bg-white border border-black/5 rounded-subtle px-5 py-6 flex flex-col shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
                 >
-                  <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-lbta-slate mb-2">
+                  <p className="font-sans text-eyebrow uppercase text-lbta-slate mb-2">
                     {tier.name}
                   </p>
                   <p className="font-headline text-[1.75rem] leading-tight text-brand-pacific-dusk">

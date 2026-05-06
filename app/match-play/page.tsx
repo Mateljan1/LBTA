@@ -43,7 +43,7 @@ export default function MatchPlayPage() {
       </div>
       <div className="max-w-[640px] mx-auto px-4 md:px-6 text-center relative z-10">
         <AnimatedSection>
-          <p className="font-sans text-[11px] font-medium text-white/80 uppercase tracking-[0.2em] mb-4">
+          <p className="font-sans text-eyebrow font-medium text-white/80 uppercase mb-4">
             Match Play
           </p>
           <h1 className="font-headline text-[32px] md:text-[44px] font-medium text-white leading-[1.15] mb-6">

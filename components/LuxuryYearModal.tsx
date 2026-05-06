@@ -539,7 +539,7 @@ export default function LuxuryYearModal({
               ) : step === 1 ? (
                 // Step 1: Option Selection
                 <div className="p-8 md:p-10">
-                  <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
+                  <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                     {type === 'camp' ? 'Camp Registration' : 'UTR Match Play Series Registration'}
                   </p>
                   <h2 id="modal-title" className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
@@ -554,7 +554,7 @@ export default function LuxuryYearModal({
 
                   {type === 'camp' && (data as CampData).weeks && (data as CampData).weeks!.length > 0 && !campActiveWeek ? (
                     <div className="mb-8">
-                      <p className="font-sans text-[12px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.12em] mb-3">
+                      <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-3">
                         Select camp week
                       </p>
                       <div className="space-y-2">
@@ -646,7 +646,7 @@ export default function LuxuryYearModal({
 
                   {needsDropInDay && dropInBounds ? (
                     <div className="mb-8">
-                      <label htmlFor="camp-drop-in-date" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                      <label htmlFor="camp-drop-in-date" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                         Drop-in day
                       </label>
                       <input
@@ -687,7 +687,7 @@ export default function LuxuryYearModal({
               ) : (
                 // Step 2: Contact Information
                 <form onSubmit={handleSubmit} className="p-8 md:p-10">
-                  <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.15em] mb-2">
+                  <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                     Your Details
                   </p>
                   <h2 className="font-headline text-[28px] md:text-[32px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.02em] pr-10">
@@ -703,7 +703,7 @@ export default function LuxuryYearModal({
                       role="status"
                       aria-live="polite"
                     >
-                      <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-1">
+                      <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-1">
                         Division and season fee
                       </p>
                       <p className="font-headline text-[22px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">
@@ -722,7 +722,7 @@ export default function LuxuryYearModal({
 
                   {type === 'utr-circuit' && selectedOption === UTR_COLOR_BALL_DIVISION_NAME ? (
                     <fieldset className="mb-6">
-                      <legend className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-3">
+                      <legend className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-3">
                         Ball stage (required)
                       </legend>
                       <div className="flex flex-wrap gap-2">
@@ -761,7 +761,7 @@ export default function LuxuryYearModal({
                     {/* Name Row */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="modal-firstName" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-firstName" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           First Name
                         </label>
                         <input
@@ -775,7 +775,7 @@ export default function LuxuryYearModal({
                         />
                       </div>
                       <div>
-                        <label htmlFor="modal-lastName" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-lastName" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           Last Name
                         </label>
                         <input
@@ -792,7 +792,7 @@ export default function LuxuryYearModal({
 
                     {/* Email */}
                     <div>
-                      <label htmlFor="modal-email" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                      <label htmlFor="modal-email" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                         Email Address
                       </label>
                       <input
@@ -808,7 +808,7 @@ export default function LuxuryYearModal({
 
                     {/* Phone */}
                     <div>
-                      <label htmlFor="modal-phone" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                      <label htmlFor="modal-phone" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                         Phone Number
                       </label>
                       <input
@@ -825,7 +825,7 @@ export default function LuxuryYearModal({
                     {/* Player Info */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="modal-playerName" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-playerName" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           Player Name
                         </label>
                         <input
@@ -838,7 +838,7 @@ export default function LuxuryYearModal({
                         />
                       </div>
                       <div>
-                        <label htmlFor="modal-playerAge" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-playerAge" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           Age
                         </label>
                         <input
@@ -856,7 +856,7 @@ export default function LuxuryYearModal({
 
                     {/* Experience Level */}
                     <fieldset>
-                      <legend className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                      <legend className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                         Experience Level
                       </legend>
                       <div className="flex gap-2">
@@ -880,7 +880,7 @@ export default function LuxuryYearModal({
 
                     {(type === 'utr-circuit' || type === 'jtt') ? (
                       <div>
-                        <label htmlFor="modal-currentUtr" className="block font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-2">
+                        <label htmlFor="modal-currentUtr" className="block font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-2">
                           UTR (optional)
                         </label>
                         <input

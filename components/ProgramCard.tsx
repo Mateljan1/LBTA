@@ -174,7 +174,7 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
           
           {/* Schedule */}
           <div className="mb-8">
-            <h4 className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-4">
+            <h4 className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-4">
               Schedule
             </h4>
             <div className="space-y-0">
@@ -201,7 +201,7 @@ export default function ProgramCard({ program, onRegister, isExpanded: controlle
           
           {/* Pricing */}
           <div className="mb-8">
-            <h4 className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/50 uppercase tracking-[0.1em] mb-4">
+            <h4 className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/50 uppercase mb-4">
               Investment
             </h4>
             {program.pricingNote && (

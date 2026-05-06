@@ -49,7 +49,7 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
     >
       {camp.featured && (
         <div className="bg-brand-deep-water px-4 py-2 text-center">
-          <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90">
+          <p className="font-sans text-eyebrow-sm font-semibold uppercase text-white/90">
             Featured session
           </p>
         </div>
@@ -81,10 +81,10 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" aria-hidden="true" />
           <div className="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-5">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk shadow-sm">
+              <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk shadow-sm">
                 {camp.season}
               </span>
-              <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/90 shadow-sm">
+              <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/90 shadow-sm">
                 Tennis &amp; Adventure
               </span>
             </div>
@@ -102,7 +102,7 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" aria-hidden="true" />
           <div className="absolute bottom-3 left-4 right-4 md:bottom-4 md:left-6">
-            <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk shadow-sm">
+            <span className="inline-block rounded-[2px] bg-white/95 px-2.5 py-1 font-sans text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk shadow-sm">
               {camp.season}
             </span>
           </div>
@@ -123,13 +123,13 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
 
         <dl className="mt-6 space-y-3 font-sans text-[14px] text-brand-pacific-dusk/85">
           <div className="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
-            <dt className="shrink-0 font-semibold uppercase tracking-[0.1em] text-brand-pacific-dusk/45 text-[11px]">
+            <dt className="text-eyebrow shrink-0 font-semibold uppercase text-brand-pacific-dusk/45">
               Time
             </dt>
             <dd>{camp.hours}</dd>
           </div>
           <div className="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
-            <dt className="shrink-0 font-semibold uppercase tracking-[0.1em] text-brand-pacific-dusk/45 text-[11px]">
+            <dt className="text-eyebrow shrink-0 font-semibold uppercase text-brand-pacific-dusk/45">
               Location
             </dt>
             <dd>{camp.location}</dd>
@@ -140,7 +140,7 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
           <div className="mt-8 border-t border-black/[0.06] pt-6">
             <div className="mb-4 flex items-end justify-between gap-3">
               <div>
-                <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-pacific-dusk/50">
+                <p className="font-sans text-eyebrow font-semibold uppercase text-brand-pacific-dusk/50">
                   Weeks & registration
                 </p>
                 <p className="mt-1 font-sans text-[13px] text-brand-pacific-dusk/65">
@@ -155,7 +155,7 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
                   {camp.name}: weeks, dates, and pricing
                 </caption>
                 <thead>
-                  <tr className="border-b border-black/[0.06] bg-brand-sandstone/60 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/55">
+                  <tr className="border-b border-black/[0.06] bg-brand-sandstone/60 font-sans text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/55">
                     <th scope="col" className="px-3 py-3 font-semibold sm:px-4">
                       Week
                     </th>
@@ -203,13 +203,13 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
         ) : (
           <div className="mt-8 border-t border-black/[0.06] pt-6">
             <dl className="mb-6">
-              <dt className="font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
+              <dt className="font-sans text-eyebrow font-semibold uppercase text-brand-pacific-dusk/45">
                 Dates
               </dt>
               <dd className="mt-1 font-sans text-[15px] text-brand-pacific-dusk">{camp.dates}</dd>
             </dl>
             <div className="mb-6">
-              <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-pacific-dusk/45">
+              <p className="font-sans text-eyebrow font-semibold uppercase text-brand-pacific-dusk/45">
                 From
               </p>
               <p className="font-headline text-[clamp(1.75rem,3vw,2.25rem)] font-medium tabular-nums text-brand-pacific-dusk">

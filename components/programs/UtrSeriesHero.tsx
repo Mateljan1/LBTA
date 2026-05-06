@@ -80,7 +80,7 @@ export default function UtrSeriesHero() {
               <p className="font-headline text-[clamp(2rem,5vw,2.65rem)] font-bold leading-none text-white">
                 8
               </p>
-              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">
+              <p className="mt-1 font-sans text-eyebrow font-bold uppercase text-white/60">
                 Weekends
               </p>
             </div>
@@ -88,7 +88,7 @@ export default function UtrSeriesHero() {
               <p className="font-headline text-[clamp(2rem,5vw,2.65rem)] font-bold leading-none text-white">
                 {UTR_DIVISION_STAT_COUNT}
               </p>
-              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">
+              <p className="mt-1 font-sans text-eyebrow font-bold uppercase text-white/60">
                 Divisions
               </p>
             </div>
@@ -96,7 +96,7 @@ export default function UtrSeriesHero() {
               <p className="font-headline text-[clamp(1.35rem,3.5vw,1.85rem)] font-bold leading-tight text-white">
                 Sat &amp; Sun
               </p>
-              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">
+              <p className="mt-1 font-sans text-eyebrow font-bold uppercase text-white/60">
                 Days
               </p>
             </div>
@@ -104,7 +104,7 @@ export default function UtrSeriesHero() {
               <p className="font-headline text-[clamp(2rem,5vw,2.65rem)] font-bold leading-none text-white">
                 UTR
               </p>
-              <p className="mt-1 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">
+              <p className="mt-1 font-sans text-eyebrow font-bold uppercase text-white/60">
                 Rated Play
               </p>
             </div>
@@ -126,7 +126,7 @@ export default function UtrSeriesHero() {
           </div>
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-black/25 p-5 backdrop-blur-sm md:mt-10 md:max-w-xl">
-            <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-white/45">
+            <p className="font-sans text-eyebrow-sm font-bold uppercase text-white/45">
               Color Ball stages
             </p>
             <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-3">

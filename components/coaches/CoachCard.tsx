@@ -58,7 +58,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
       </div>
 
       <div className="p-6 md:p-7 flex flex-col min-h-0 flex-1">
-        <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.1em] mb-1.5">
+        <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/60 uppercase mb-1.5">
           {coach.title}
         </p>
         <h3 className="font-headline text-[22px] md:text-[24px] font-medium text-brand-pacific-dusk mb-1 tracking-[-0.01em] group-hover:text-brand-victoria-cove">
@@ -128,7 +128,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
 
         <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-4 py-4 sm:px-5 sm:py-5">
           <div className="shrink-0">
-            <p className="mb-1.5 font-sans text-[10px] font-semibold uppercase leading-tight tracking-[0.14em] text-brand-pacific-dusk/55 line-clamp-2">
+            <p className="mb-1.5 font-sans text-eyebrow-sm font-semibold uppercase leading-tight text-brand-pacific-dusk/55 line-clamp-2">
               {coach.title}
             </p>
             {hasBioLink ? (
@@ -166,7 +166,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               {hasBioLink && (
                 <Link
                   href={`/coaches/${coach.slug}`}
-                  className="inline-flex min-h-[46px] w-full min-w-0 items-center justify-center gap-2 rounded-[2px] border border-brand-victoria-cove/30 bg-white/80 px-4 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-victoria-cove transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                  className="inline-flex min-h-[46px] w-full min-w-0 items-center justify-center gap-2 rounded-[2px] border border-brand-victoria-cove/30 bg-white/80 px-4 py-2.5 font-sans text-eyebrow-sm font-semibold uppercase text-brand-victoria-cove transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
                 >
                   View full bio
                   <ChevronRight className="h-4 w-4 shrink-0" />
@@ -174,7 +174,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               )}
               <Link
                 href={bookHref}
-                className="inline-flex min-h-[46px] w-full min-w-0 items-center justify-center rounded-[2px] bg-black px-4 py-2.5 text-center font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                className="inline-flex min-h-[46px] w-full min-w-0 items-center justify-center rounded-[2px] bg-black px-4 py-2.5 text-center font-sans text-eyebrow-sm font-semibold uppercase text-white transition-colors hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Book with {firstName}
               </Link>
@@ -205,7 +205,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
 
         <div className="flex min-h-0 flex-1 flex-col border-t border-black/[0.05] px-5 py-6 sm:border-t-0 sm:border-l sm:border-black/[0.05] sm:px-8 sm:py-7 lg:pr-10">
           <div className="shrink-0">
-            <p className="font-sans text-[10px] font-semibold text-brand-pacific-dusk/55 uppercase tracking-[0.14em] mb-2 line-clamp-2 leading-tight">
+            <p className="font-sans text-eyebrow-sm font-semibold text-brand-pacific-dusk/55 uppercase mb-2 line-clamp-2 leading-tight">
               {coach.title}
             </p>
             {hasBioLink ? (
@@ -243,7 +243,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               {hasBioLink && (
                 <Link
                   href={`/coaches/${coach.slug}`}
-                  className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center gap-2 rounded-[2px] border border-brand-victoria-cove/30 bg-white/80 px-4 py-2.5 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-victoria-cove transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                  className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center gap-2 rounded-[2px] border border-brand-victoria-cove/30 bg-white/80 px-4 py-2.5 font-sans text-eyebrow font-semibold uppercase text-brand-victoria-cove transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
                 >
                   View full bio
                   <ChevronRight className="h-4 w-4 shrink-0" />
@@ -251,7 +251,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               )}
               <Link
                 href={bookHref}
-                className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center rounded-[2px] bg-black px-4 py-2.5 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center rounded-[2px] bg-black px-4 py-2.5 text-center font-sans text-eyebrow font-semibold uppercase text-white transition-colors hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Book with {firstName}
               </Link>
@@ -277,7 +277,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
           />
         </div>
         <div className="p-8 md:p-10 lg:py-12 flex flex-col justify-center min-h-0 text-left">
-          <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-3">
+          <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/60 uppercase mb-3">
             {coach.title}
           </p>
           {hasBioLink ? (

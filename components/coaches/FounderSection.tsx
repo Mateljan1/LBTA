@@ -35,7 +35,7 @@ export default function FounderSection() {
 
           <div className="lg:col-start-2 lg:row-start-1 lg:pt-2 w-full min-w-0 text-left relative z-10">
             <AnimatedSection delay={100}>
-              <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-2">
+              <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/60 uppercase mb-2">
                 Founder & Director
               </p>
               <div className="section-horizon mb-4 opacity-90 w-16" aria-hidden="true" />

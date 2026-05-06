@@ -80,7 +80,7 @@ export default function PeterDeFrantzPage() {
             <div>
               <AnimatedSection>
                 <h1 className="text-display-lg heading-display mb-2">Peter DeFrantz</h1>
-                <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-brand-pacific-dusk/55 mb-2">
+                <p className="font-sans text-eyebrow uppercase text-brand-pacific-dusk/55 mb-2">
                   {coach.title}
                 </p>
                 <p className="font-headline text-lg italic text-brand-pacific-dusk/60 mb-6">

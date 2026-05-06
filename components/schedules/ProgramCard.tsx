@@ -156,13 +156,13 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
         />
 
         {/* Level badge — frosted glass */}
-        <span className="absolute right-3 top-3 rounded-[3px] border border-white/[0.15] bg-white/[0.1] px-2 py-0.5 font-sans text-[10px] font-semibold uppercase tracking-[0.12em] text-white/90 backdrop-blur-md">
+        <span className="absolute right-3 top-3 rounded-[3px] border border-white/[0.15] bg-white/[0.1] px-2 py-0.5 font-sans text-eyebrow-sm font-semibold uppercase text-white/90 backdrop-blur-md">
           {levelBadge}
         </span>
 
         {/* Overlay content */}
         <div className="absolute inset-x-0 bottom-0 flex flex-col px-4 pb-3">
-          <span className="mb-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
+          <span className="mb-1 font-sans text-eyebrow-sm font-semibold uppercase text-white/70">
             {program.category}
           </span>
           <h4
@@ -189,7 +189,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           {groupScheduleSlots(program.schedule).map((slot) => (
             <div key={`${program.id}-${slot.days}-${slot.time}`}>
               <div className="flex items-baseline gap-1.5 py-[3px]">
-                <span className="shrink-0 font-sans text-[11px] font-bold uppercase tracking-[0.02em] text-white/85">
+                <span className="shrink-0 font-sans text-eyebrow font-bold uppercase text-white/85">
                   {slot.days}
                 </span>
                 <span className="font-sans text-[11px] tabular-nums text-white/65">{slot.time}</span>
@@ -218,7 +218,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
               ))}
             </div>
           ) : (
-            <span className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-white/50">
+            <span className="font-sans text-eyebrow font-medium uppercase text-white/50">
               Contact for rates
             </span>
           )}
@@ -229,7 +229,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           {program.inquiryLabel ? (
             <Link
               href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-md border border-white/[0.12] px-3 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[1.8px] text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-md border border-white/[0.12] px-3 py-2.5 font-sans text-eyebrow-sm font-semibold uppercase text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
             >
               {program.inquiryLabel}
             </Link>
@@ -237,7 +237,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           <button
             type="button"
             onClick={handleRegister}
-            className="group/btn relative inline-flex min-h-[48px] items-center justify-center overflow-hidden rounded-md bg-white px-3 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[2px] text-brand-deep-card transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
+            className="group/btn relative inline-flex min-h-[48px] items-center justify-center overflow-hidden rounded-md bg-white px-3 py-2.5 font-sans text-eyebrow-sm font-semibold uppercase text-brand-deep-card transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
           >
             Register
           </button>

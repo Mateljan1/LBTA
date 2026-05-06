@@ -31,7 +31,7 @@ export default function UtrSeasonOverviewBar() {
         <div className="grid grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-4 md:gap-8">
           {rows.map((row) => (
             <div key={row.label}>
-              <p className="font-sans text-[10px] font-extrabold uppercase tracking-[0.14em] text-brand-pacific-dusk/45">
+              <p className="font-sans text-eyebrow-sm font-extrabold uppercase text-brand-pacific-dusk/45">
                 {row.label}
               </p>
               <p className="mt-1 font-sans text-[13px] font-medium leading-snug text-brand-pacific-dusk md:text-[14px]">

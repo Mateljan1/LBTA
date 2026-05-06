@@ -66,7 +66,7 @@ export default function TimelineSection() {
     <section className="bg-brand-sandstone py-20 md:py-28">
       <div className="max-w-[1200px] mx-auto px-6 md:px-16">
         <div className="mb-16">
-          <p className="font-sans text-[11px] font-semibold text-brand-pacific-dusk/60 uppercase tracking-[0.15em] mb-4">
+          <p className="font-sans text-eyebrow font-semibold text-brand-pacific-dusk/60 uppercase mb-4">
             Our Journey
           </p>
           <h2 className="font-headline text-[32px] md:text-[44px] font-medium text-brand-pacific-dusk tracking-[-0.02em]">

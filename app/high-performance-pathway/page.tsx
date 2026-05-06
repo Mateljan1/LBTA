@@ -103,7 +103,7 @@ export default function HighPerformancePathwayPage() {
         </div>
 
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
-          <p className="font-sans text-[11px] uppercase tracking-[3px] text-white/60 mb-6">
+          <p className="font-sans text-eyebrow uppercase text-white/60 mb-6">
             Invitation Only
           </p>
           <h1 className="font-headline text-[clamp(2.5rem,7vw,4.5rem)] font-semibold leading-[1.05] mb-6">
@@ -265,7 +265,7 @@ export default function HighPerformancePathwayPage() {
       {/* Application CTA */}
       <section id="apply" className="bg-brand-pacific-dusk py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="font-sans text-[11px] uppercase tracking-[3px] text-white/50 mb-6">
+          <p className="font-sans text-eyebrow uppercase text-white/50 mb-6">
             Start Your Journey
           </p>
           <h2 className="font-headline text-[32px] md:text-[40px] font-semibold text-white leading-tight mb-6">
