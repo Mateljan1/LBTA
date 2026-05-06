@@ -49,17 +49,17 @@ export default function MichelleMateljanPage() {
             </AnimatedSection>
             <div>
               <AnimatedSection>
-                <p className="font-sans text-[10px] font-semibold uppercase tracking-widest text-brand-thousand-steps mb-2">LBTA Coach</p>
+                <p className="font-sans text-eyebrow-sm font-semibold uppercase text-brand-thousand-steps mb-2">LBTA Coach</p>
                 <h1 className="text-display-lg heading-display mb-2">Michelle Mateljan</h1>
                 <p className="font-headline text-lg italic text-brand-pacific-dusk/60 mb-6">Juniors &amp; Adult Development</p>
                 <div className="flex flex-wrap gap-6 py-4 border-y border-black/6">
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">LBTA</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">Team</div>
+                    <div className="text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/30">Team</div>
                   </div>
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">All</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">Levels</div>
+                    <div className="text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/30">Levels</div>
                   </div>
                 </div>
               </AnimatedSection>

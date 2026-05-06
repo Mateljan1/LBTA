@@ -107,7 +107,7 @@ export default function AndrewMateljanPage() {
             </AnimatedSection>
             <div>
               <AnimatedSection>
-                <p className="font-sans text-[10px] font-semibold uppercase tracking-widest text-brand-thousand-steps mb-2">Founder & Director</p>
+                <p className="font-sans text-eyebrow-sm font-semibold uppercase text-brand-thousand-steps mb-2">Founder & Director</p>
                 <h1 className="text-display-lg heading-display mb-2">
                   Andrew Mateljan
                 </h1>

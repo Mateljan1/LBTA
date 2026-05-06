@@ -183,7 +183,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
             {program.inquiryLabel ? (
               <Link
                 href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
-                className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[3px] border border-white/[0.15] font-sans text-eyebrow font-semibold uppercase text-white/70 transition-all duration-300 hover:border-white/30 hover:bg-white/[0.05] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[3px] border border-white/[0.15] font-sans text-button uppercase text-white/70 transition-all duration-300 hover:border-white/30 hover:bg-white/[0.05] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               >
                 {program.inquiryLabel}
               </Link>
@@ -191,14 +191,14 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
               <button
                 type="button"
                 onClick={handleRegister}
-                className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[3px] bg-white text-brand-deep-water font-sans text-eyebrow font-semibold uppercase transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                className="inline-flex min-h-[48px] items-center justify-center px-8 py-3 rounded-[3px] bg-white text-brand-deep-water font-sans text-button uppercase transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
               >
                 Register
               </button>
             )}
             <Link
               href="/book"
-              className="inline-flex min-h-[48px] items-center justify-center px-6 py-3 rounded-[3px] border border-white/[0.15] font-sans text-eyebrow font-semibold uppercase text-white/60 transition-all duration-300 hover:border-white/30 hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+              className="inline-flex min-h-[48px] items-center justify-center px-6 py-3 rounded-[3px] border border-white/[0.15] font-sans text-button uppercase text-white/60 transition-all duration-300 hover:border-white/30 hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
             >
               Book Trial
             </Link>

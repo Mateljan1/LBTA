@@ -360,7 +360,7 @@ export default function UTRMatchPlayDivisions({
                       setModalOpen(true)
                     }}
                     aria-label={`Register for ${d.name}`}
-                    className="inline-flex items-center justify-center gap-2 bg-black text-white font-sans text-eyebrow font-medium uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 w-full md:w-auto"
+                    className="inline-flex items-center justify-center gap-2 bg-black text-white font-sans text-button uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 w-full md:w-auto"
                   >
                     Register
                     <svg

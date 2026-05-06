@@ -89,15 +89,15 @@ export default function PeterDeFrantzPage() {
                 <div className="flex flex-wrap gap-6 py-4 border-y border-black/6">
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">8+</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">Years Coaching</div>
+                    <div className="text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/30">Years Coaching</div>
                   </div>
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">2</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">Certifications</div>
+                    <div className="text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/30">Certifications</div>
                   </div>
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">All</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">Ages & Levels</div>
+                    <div className="text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/30">Ages & Levels</div>
                   </div>
                 </div>
               </AnimatedSection>
@@ -137,7 +137,7 @@ export default function PeterDeFrantzPage() {
           </div>
 
           <AnimatedSection>
-            <p className="font-sans text-[10px] font-semibold uppercase tracking-widest text-brand-thousand-steps mb-4">Coaching Strengths</p>
+            <p className="font-sans text-eyebrow-sm font-semibold uppercase text-brand-thousand-steps mb-4">Coaching Strengths</p>
             <div className="grid md:grid-cols-2 gap-4">
               {strengths.map((s) => (
                 <div key={s.title} className="bg-white border border-black/5 rounded-md p-4">

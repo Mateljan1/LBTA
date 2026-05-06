@@ -74,25 +74,6 @@ function buildTypedTokens(tokens: TokenFile): string {
   lines.push('} as const')
   lines.push('')
 
-  // Helper: get hex by kebab-case name (matches the JSON key + CSS var)
-  lines.push('/**')
-  lines.push(' * Look up a brand hex by its kebab-case token name')
-  lines.push(' * (matches the CSS variable suffix and Tailwind class).')
-  lines.push(' *')
-  lines.push(' * @example brandHex(\'pacific-dusk\') // \'#1B3A5C\'')
-  lines.push(' */')
-  lines.push('export function brandHex(token: string): string | undefined {')
-  lines.push(`  return BRAND_BY_KEBAB[token]`)
-  lines.push('}')
-  lines.push('')
-
-  lines.push('const BRAND_BY_KEBAB: Record<string, string> = {')
-  for (const [token, value] of Object.entries(tokens.colors.brand)) {
-    lines.push(`  '${token}': '${value}',`)
-  }
-  lines.push('}')
-  lines.push('')
-
   return lines.join('\n')
 }
 

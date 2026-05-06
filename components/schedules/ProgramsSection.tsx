@@ -323,13 +323,13 @@ export default function ProgramsSection({
               <button
                 type="button"
                 onClick={() => setFilters(DEFAULT_FILTERS)}
-                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-brand-victoria-cove hover:bg-brand-sandstone/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-3 font-sans text-button uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-brand-victoria-cove hover:bg-brand-sandstone/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Reset Filters
               </button>
               <Link
                 href="/contact"
-                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-5 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-5 py-3 font-sans text-button uppercase text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
               >
                 Contact Us
               </Link>

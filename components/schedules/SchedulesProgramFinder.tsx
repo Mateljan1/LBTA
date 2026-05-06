@@ -119,7 +119,7 @@ export default function SchedulesProgramFinder({
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-2.5 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/70 transition-all duration-300 hover:border-brand-victoria-cove hover:text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-[2px] border border-black/10 bg-white px-5 py-2.5 font-sans text-button uppercase text-brand-pacific-dusk/70 transition-all duration-300 hover:border-brand-victoria-cove hover:text-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
           >
             Reset
           </button>

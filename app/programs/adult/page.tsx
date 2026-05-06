@@ -49,7 +49,7 @@ export default function AdultProgramsPage() {
         <div className="relative container-lbta section-lg">
           <Link
             href="/programs"
-            className="inline-flex items-center gap-2 text-[12px] font-sans font-medium text-brand-victoria-cove/70 tracking-wider uppercase mb-8 hover:text-brand-victoria-cove transition-colors"
+            className="inline-flex items-center gap-2 font-sans text-eyebrow font-medium text-brand-victoria-cove/70 uppercase mb-8 hover:text-brand-victoria-cove transition-colors"
           >
             <span>&larr;</span> Programs
           </Link>

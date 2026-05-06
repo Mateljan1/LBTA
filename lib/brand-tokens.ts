@@ -46,28 +46,3 @@ export const LBTA = {
   coralDark: '#D4773F',
   bone: '#FAF8F4',
 } as const
-
-/**
- * Look up a brand hex by its kebab-case token name
- * (matches the CSS variable suffix and Tailwind class).
- *
- * @example brandHex('pacific-dusk') // '#1B3A5C'
- */
-export function brandHex(token: string): string | undefined {
-  return BRAND_BY_KEBAB[token]
-}
-
-const BRAND_BY_KEBAB: Record<string, string> = {
-  'pacific-dusk': '#1B3A5C',
-  'deep-water': '#0F2237',
-  'deep-card': '#0A1628',
-  'victoria-cove': '#2E8B8B',
-  'thousand-steps': '#C4963C',
-  'sunset-cliff': '#E8834A',
-  'sandstone': '#F5F0E5',
-  'morning-light': '#FAF8F4',
-  'salt-air': '#FFFFFF',
-  'tide-pool': '#3A8B6E',
-  'sage-hill': '#7A8B6E',
-  'driftwood': '#B8A88A',
-}

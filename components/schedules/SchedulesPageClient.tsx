@@ -184,14 +184,14 @@ export default function SchedulesPageClient({
                 <button
                   type="button"
                   onClick={() => expandSection('private')}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-button uppercase text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   View Rates & Coaches
                 </button>
                 <button
                   type="button"
                   onClick={() => setPrivateCoachName('Private Lessons')}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-button uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   Book a Private Lesson
                 </button>
@@ -233,13 +233,13 @@ export default function SchedulesPageClient({
                 <button
                   type="button"
                   onClick={() => expandSection('camps')}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-button uppercase text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   View Camp Schedule
                 </button>
                 <Link
                   href="/contact?inquiry=camps"
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-button uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   Register for Camp
                 </Link>
@@ -278,13 +278,13 @@ export default function SchedulesPageClient({
                 <button
                   type="button"
                   onClick={() => expandSection('leagues')}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] bg-black px-8 py-3 font-sans text-button uppercase text-white transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   View League Details
                 </button>
                 <Link
                   href="/programs/leagues"
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-[2px] border border-black/15 bg-transparent px-8 py-3 font-sans text-button uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/30 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   Explore Leagues
                 </Link>

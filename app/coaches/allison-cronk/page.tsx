@@ -71,7 +71,7 @@ export default function AllisonCronkPage() {
             </AnimatedSection>
             <div>
               <AnimatedSection>
-                <p className="font-sans text-[10px] font-semibold uppercase tracking-widest text-brand-thousand-steps mb-2">LBTA Coach</p>
+                <p className="font-sans text-eyebrow-sm font-semibold uppercase text-brand-thousand-steps mb-2">LBTA Coach</p>
                 <h1 className="text-display-lg heading-display mb-2">Allison Cronk</h1>
                 <p className="font-headline text-lg italic text-brand-pacific-dusk/60 mb-6">
                   Collegiate Player. Educator. Coach.
@@ -79,19 +79,19 @@ export default function AllisonCronkPage() {
                 <div className="flex flex-wrap gap-6 py-4 border-y border-black/6">
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">5+</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">Years Coaching</div>
+                    <div className="text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/30">Years Coaching</div>
                   </div>
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">2</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">College Programs</div>
+                    <div className="text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/30">College Programs</div>
                   </div>
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">4–60</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">Ages Coached</div>
+                    <div className="text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/30">Ages Coached</div>
                   </div>
                   <div className="text-center">
                     <div className="font-headline text-2xl font-light text-brand-pacific-dusk">5</div>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-pacific-dusk/30">Academies</div>
+                    <div className="text-eyebrow-sm font-semibold uppercase text-brand-pacific-dusk/30">Academies</div>
                   </div>
                 </div>
               </AnimatedSection>

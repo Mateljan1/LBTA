@@ -3,7 +3,7 @@ import { execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 
-import { BRAND, brandHex } from './brand-tokens'
+import { BRAND } from './brand-tokens'
 
 const REPO_ROOT = path.resolve(__dirname, '..')
 const TOKEN_JSON_PATH = path.join(REPO_ROOT, 'tokens', 'lbta-web-tokens.json')
@@ -20,12 +20,6 @@ describe('brand-tokens drift detector', () => {
       const camel = kebab.replace(/-([a-z0-9])/g, (_, ch: string) => ch.toUpperCase()) as keyof typeof BRAND
       expect(BRAND[camel], `BRAND.${camel} should match tokens.colors.brand["${kebab}"]`).toBe(value)
     }
-  })
-
-  it('brandHex() looks up by kebab-case name', () => {
-    expect(brandHex('pacific-dusk')).toBe(tokens.colors.brand['pacific-dusk'])
-    expect(brandHex('deep-card')).toBe(tokens.colors.brand['deep-card'])
-    expect(brandHex('not-a-real-token')).toBeUndefined()
   })
 
   it('every brand token has a hex value (no empty/null)', () => {

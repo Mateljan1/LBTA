@@ -56,7 +56,7 @@ export default function PricingComparison() {
               {/* Savings Badge */}
               {tier.savings && !tier.popular && (
                 <div className="absolute top-4 right-4">
-                  <span className="font-sans text-[10px] uppercase tracking-wider bg-brand-morning-light text-brand-pacific-dusk px-2 py-1 rounded-sm">
+                  <span className="font-sans text-eyebrow-sm uppercase bg-brand-morning-light text-brand-pacific-dusk px-2 py-1 rounded-sm font-semibold">
                     {tier.savings}
                   </span>
                 </div>

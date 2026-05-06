@@ -70,12 +70,25 @@ const config: Config = {
         'eyebrow': ['0.7rem', {
           lineHeight: '1.4',
           letterSpacing: '0.18em',
-          fontWeight: '600'
+          // Note: no fontWeight — callers must specify (font-medium/font-semibold/font-bold).
+          // This avoids silent weight regressions when migrating ad-hoc patterns to .text-eyebrow.
         }],
         'eyebrow-sm': ['0.65rem', {
           lineHeight: '1.4',
           letterSpacing: '0.12em',
-          fontWeight: '600'
+          // Same: no fontWeight; explicit at callsite.
+        }],
+        // Button label sizing — used by small CTAs (Register / Reserve / Book / etc.)
+        // Distinct from eyebrow because buttons are interactive, not labels.
+        'button': ['0.7rem', {
+          lineHeight: '1',
+          letterSpacing: '0.18em',
+          fontWeight: '500',
+        }],
+        'button-sm': ['0.65rem', {
+          lineHeight: '1',
+          letterSpacing: '0.16em',
+          fontWeight: '600',
         }],
       },
       spacing: {

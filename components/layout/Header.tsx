@@ -299,7 +299,7 @@ export default function Header() {
                       <div className="horizon-line-thin mx-4 mt-2" />
                       <Link
                         href="/schedules"
-                        className="flex items-center gap-2 mx-4 my-3 text-[12px] font-sans font-medium text-brand-victoria-cove hover:text-brand-sunset-cliff tracking-wide uppercase transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-white px-1 py-1 -mx-1 -my-1"
+                        className="flex items-center gap-2 mx-4 my-3 font-sans text-eyebrow font-medium text-brand-victoria-cove hover:text-brand-sunset-cliff uppercase transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pacific-dusk focus-visible:ring-offset-2 focus-visible:ring-offset-white px-1 py-1 -mx-1 -my-1"
                         onClick={() => setProgramsOpen(false)}
                       >
                         View Full Schedule & Pricing

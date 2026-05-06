@@ -413,13 +413,13 @@ function LiveBallStaticCards({ onRegister: _ }: { onRegister: (p: Program) => vo
             <div className="mt-3 flex gap-2">
               <Link
                 href="/fitness"
-                className="flex-1 inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-eyebrow font-medium uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                className="flex-1 inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-button uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
               >
                 View schedule
               </Link>
               <Link
                 href="/book"
-                className="inline-flex min-h-[48px] items-center justify-center border border-brand-pacific-dusk/15 rounded-[2px] px-4 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk/70 hover:border-brand-pacific-dusk/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                className="inline-flex min-h-[48px] items-center justify-center border border-brand-pacific-dusk/15 rounded-[2px] px-4 font-sans text-button uppercase text-brand-pacific-dusk/70 hover:border-brand-pacific-dusk/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Book Trial
               </Link>
@@ -496,7 +496,7 @@ function CampsPanel({ year2026 }: { year2026: Year2026Sections }) {
                 </div>
                 <Link
                   href="/camps"
-                  className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-eyebrow font-medium uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                  className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-button uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
                 >
                   View &amp; Register
                 </Link>
@@ -568,7 +568,7 @@ function StaticCampsCards() {
               <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/65">Half day</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.halfDay}/week</span></div>
               <div className="flex justify-between"><span className="font-sans text-[12px] text-brand-pacific-dusk/65">Drop-in</span><span className="font-sans text-[13px] font-semibold text-brand-pacific-dusk">${c.dropIn}/day</span></div>
             </div>
-            <Link href="/camps" className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-eyebrow font-medium uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2">
+            <Link href="/camps" className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-button uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2">
               View &amp; Register
             </Link>
           </div>
@@ -646,7 +646,7 @@ function LeaguesPanel() {
               </div>
               <Link
                 href={league.href}
-                className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-eyebrow font-medium uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
+                className="w-full inline-flex min-h-[48px] items-center justify-center bg-black text-white rounded-[2px] font-sans text-button uppercase transition-all hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2"
               >
                 Learn More
               </Link>

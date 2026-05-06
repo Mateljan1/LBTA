@@ -94,7 +94,18 @@ The temptation was to do everything in one giant commit. Splitting v1.2 (audit +
 - **Mass-migration scripts:** Default to dry-run; require `--apply` to write; print first-10 sample diffs; one-shot tools deleted in the commit that uses them.
 - **Guardrail introduction sequence:** Three commits — introduce-as-info → coordinated-cleanup → promote-to-strict. Never combine (1) and (3).
 
-## Final brand audit state — v1.3
+## Final brand audit state — v1.3 (CORRECTED 2026-05-06 PM after review pass found gaps)
+
+**v1.3 originally claimed 8 categories enforced and 0 drift. Both claims were partially wrong:**
+
+- "8 categories enforced" — actually 6 (`legacyLbta` was collected but not in strict totals; `handRolledSectionPadding` was info-only). Fixed in v1.4.
+- "0 hand-rolled eyebrows" — actually ~30 patterns slipped through because the regex required `tracking-[…]` arbitrary values and `class(?:Name)?=` attribute prefix, missing `tracking-widest`/`tracking-wider` and JSX template literals and const-string classNames. Surfaced and migrated in v1.4.
+- "discoverable via git log" claim about `migrate-eyebrows.ts` — false, the script was never committed before deletion. Don't make this claim again unless the script is actually in history.
+- About-page stat labels and ~30 button CTAs were silently weight-shifted (400→600) or tracking-shifted because the regex over-matched and the utility baked in font-weight 600. Buttons reverted to a new `text-button` utility in v1.4; eyebrows now require explicit `font-*` since the utility no longer bakes weight.
+
+See `2026-05-06-brand-system-v14-postreview-fixes-compound-learn.md` for the post-review corrections that landed all of these.
+
+## Verified state after v1.4
 
 ```
 Forbidden contrast errors:        0
@@ -102,18 +113,17 @@ Raw hex literals (TS/TSX):        0
 Arbitrary Tailwind colors:        0
 Inline gradient hex literals:     0
 Forbidden fonts (app code):       0
-Deprecated lbta-* classes:        0
-Hand-rolled eyebrow patterns:     0  (was 202 in v1.2; 7 responsive variants excluded)
-Hand-rolled section padding:      0
+Deprecated lbta-* classes:        0    (now strict-enforced)
+Hand-rolled eyebrow patterns:     0    (regex tightened; verified)
 
-Strict CI: ENFORCED on all 8 categories
-Drift detector test: PASSING
+Strict CI: ENFORCES all 7 categories
+Drift detector test: PASSING (3 tests)
 Showcase route: LIVE at /brand
 ```
 
 ## What's truly next
 
-The brand-system thread is **closed**. Three follow-up plan stubs remain queued:
+The brand-system thread is **closed** (v1.4 actually closed it; v1.3 was premature). Three follow-up plan stubs remain queued:
 
 1. `plans/2026-05-06-mobile-responsive-sweep-plan.md`
 2. `plans/2026-05-06-transaction-email-brand-audit-plan.md`

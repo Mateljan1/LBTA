@@ -95,7 +95,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
           <button
             onClick={() => onRegister(camp)}
             aria-label={`Register for ${camp.name}`}
-            className="inline-flex items-center gap-1.5 bg-black text-white font-sans text-eyebrow font-medium uppercase px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
+            className="inline-flex items-center gap-1.5 bg-black text-white font-sans text-button uppercase px-6 py-3 rounded-[2px] transition-all duration-300 ease-out hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
           >
             Register
             <svg className="w-3.5 h-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -140,7 +140,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
         <button
           onClick={() => onRegister(camp)}
           aria-label={`Register for ${camp.name}`}
-          className="mt-4 w-full inline-flex items-center justify-center gap-1.5 bg-black text-white font-sans text-eyebrow font-medium uppercase px-5 py-3 rounded-[2px] transition-all duration-300 ease-out active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
+          className="mt-4 w-full inline-flex items-center justify-center gap-1.5 bg-black text-white font-sans text-button uppercase px-5 py-3 rounded-[2px] transition-all duration-300 ease-out active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 min-h-[48px]"
         >
           Register
           <svg className="w-3.5 h-3.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">

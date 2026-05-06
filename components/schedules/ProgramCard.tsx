@@ -229,7 +229,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           {program.inquiryLabel ? (
             <Link
               href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-md border border-white/[0.12] px-3 py-2.5 font-sans text-eyebrow-sm font-semibold uppercase text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-md border border-white/[0.12] px-3 py-2.5 font-sans text-button-sm uppercase text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
             >
               {program.inquiryLabel}
             </Link>
@@ -237,7 +237,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           <button
             type="button"
             onClick={handleRegister}
-            className="group/btn relative inline-flex min-h-[48px] items-center justify-center overflow-hidden rounded-md bg-white px-3 py-2.5 font-sans text-eyebrow-sm font-semibold uppercase text-brand-deep-card transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
+            className="group/btn relative inline-flex min-h-[48px] items-center justify-center overflow-hidden rounded-md bg-white px-3 py-2.5 font-sans text-button-sm uppercase text-brand-deep-card transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
           >
             Register
           </button>

@@ -370,7 +370,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Half-Day', 'Ages 5-11 · Half-Day session · Alta Laguna Park')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-button uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
               >
                 Reserve Half-Day
               </button>
@@ -393,7 +393,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Full-Day', 'Ages 5-11 · Full-Day session · Alta Laguna Park')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-button uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
                 Reserve Full-Day
               </button>
@@ -410,7 +410,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Multi-Week Inquiry', 'Ages 5-11 - Multi-week and sibling discount inquiry')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] border border-black/15 bg-transparent px-4 py-3 font-sans text-button uppercase text-brand-pacific-dusk transition-all duration-300 hover:border-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
               >
                 Contact for Multi-Week Pricing
               </button>
@@ -436,7 +436,7 @@ export default function CampsPage() {
             <button
               type="button"
               onClick={() => openCampModal('Junior Development Camp (12-17)', 'Laguna Beach High School · Half-Day only · $325/week')}
-              className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 font-sans text-button uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               Reserve Junior Dev Camp
             </button>
@@ -499,7 +499,7 @@ export default function CampsPage() {
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Reserve Your Week', 'Ages 5-11 and 12-17 · Mon-Thu weeks')}
-                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-eyebrow font-medium uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                className="mt-6 inline-flex min-h-[48px] w-full items-center justify-center rounded-[2px] bg-black px-4 py-3 font-sans text-button uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
                 Reserve Your Week
               </button>

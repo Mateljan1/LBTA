@@ -58,7 +58,7 @@ export function ConcurrentScheduleCellBody({
     : 'text-[13px] font-medium text-brand-pacific-dusk leading-snug'
   const headerCls = isFlyer
     ? 'text-[8px] font-bold uppercase tracking-wider text-brand-deep-water/95 mb-1'
-    : 'text-[10px] font-bold uppercase tracking-wider text-brand-pacific-dusk mb-1.5'
+    : 'text-eyebrow-sm font-bold uppercase text-brand-pacific-dusk mb-1.5'
   const noteCls = isFlyer ? 'text-[8px]' : 'text-[11px]'
   const guideCls = isFlyer
     ? 'text-[8px] font-medium text-brand-pacific-dusk/90 mt-0.5 leading-snug'

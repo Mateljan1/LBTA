@@ -18,17 +18,26 @@ const inlineGradientHexRegex = /style=\{[^}]*linear-gradient[^}]*#[0-9a-fA-F]{3,
 // Forbidden font families in app code (lib/email.ts is exempted — emails use fallback fonts legitimately)
 const forbiddenFontRegex = /\b(Inter|Roboto|Arial|Space Grotesk|Playfair|Work Sans|Helvetica)\b/g
 
-// Hand-rolled eyebrow pattern (matches "text-[10-12px] ... uppercase ... tracking-[any]" in any order
-// within a single class string). These should use .text-eyebrow / .text-eyebrow-sm utilities.
-// Responsive size variants (e.g. md:text-[12px]) are intentional hero-context bumps and excluded.
-const handRolledEyebrowRegex = /class(?:Name)?=["'`][^"'`]*\btext-\[1[0-2]px\][^"'`]*\buppercase\b[^"'`]*\btracking-\[[^\]]+\][^"'`]*["'`]|class(?:Name)?=["'`][^"'`]*\btracking-\[[^\]]+\][^"'`]*\buppercase\b[^"'`]*\btext-\[1[0-2]px\][^"'`]*["'`]|class(?:Name)?=["'`][^"'`]*\buppercase\b[^"'`]*\btext-\[1[0-2]px\][^"'`]*\btracking-\[[^\]]+\][^"'`]*["'`]/g
+// Hand-rolled eyebrow pattern detector.
+// Matches any string literal (single, double, or backtick-quoted) that contains all three:
+//   - text-[10-12px]  (font-size 10/11/12 in arbitrary px)
+//   - uppercase
+//   - tracking utility — either arbitrary tracking-[…] OR named tracking-(widest|wider|wide|tight|tighter)
+//
+// Catches all 4 historical drift idioms:
+//   1. className="text-[11px] uppercase tracking-[0.18em]"            ← attribute string
+//   2. className={`text-[11px] uppercase tracking-[0.18em] ...`}      ← JSX expression with template literal
+//   3. const cls = 'text-[11px] uppercase tracking-widest'             ← const string later passed to className
+//   4. ternary ? 'text-[11px] uppercase tracking-[…]' : 'other'        ← string literal in expression
+//
+// The pattern is strict: all 3 markers must appear within the same string literal (no cross-string splits).
+const eyebrowSize = /\btext-\[1[0-2]px\]/
+const eyebrowUppercase = /\buppercase\b/
+const eyebrowTracking = /\btracking-(?:\[[^\]]+\]|widest|wider|wide|tight|tighter)\b/
+const stringLiteralRegex = /(["'`])((?:\\.|(?!\1).)*?)\1/g
 
 // Patterns matching this regex are intentional responsive variants (md:text-[Npx] etc.) — exclude from drift count
-const responsiveSizeVariantRegex = /(?:sm|md|lg|xl|2xl):text-\[\d+px\]/
-
-// Hand-rolled section padding (py-[80-200px] or px-[80-200px] when .section/.section-lg/.section-sm exists).
-// WARN only — captures common section-spacing pattern.
-const handRolledSectionPaddingRegex = /\bpy-\[(?:8\d|9\d|1[0-9]\d|200)px\]/g
+const responsiveSizeVariantRegex = /\b(?:sm|md|lg|xl|2xl|max-(?:sm|md|lg|xl|2xl)|min-(?:sm|md|lg|xl|2xl)):text-\[[\d.]+px\]/
 
 // Deprecated lbta-* classes that have direct brand-* equivalents and must migrate.
 // Allowed lbta-* utility classes (slate, stone, red, black) are NOT deprecated — they fill
@@ -72,7 +81,43 @@ type ReportData = {
   forbiddenFont: Hit[]
   legacyLbta: Hit[]
   handRolledEyebrow: Hit[]
-  handRolledSectionPadding: Hit[]
+}
+
+/**
+ * Scan source for hand-rolled eyebrow patterns. Walks every string literal
+ * (attribute strings, template literals, const strings, ternary branches) and
+ * checks whether it contains all three eyebrow markers. Excludes intentional
+ * responsive size variants (e.g. md:text-[12px]) which are documented hero bumps.
+ */
+// Button context heuristic: any class string with `min-h-[48px]` is a button/link
+// per .cursorrules touch-target rule. Eyebrows are labels, not buttons — exclude.
+const buttonContextRegex = /\bmin-h-\[48px\]/
+
+function findEyebrowPatterns(contents: string, file: string): Hit[] {
+  const hits: Hit[] = []
+  const lines = contents.split('\n')
+
+  lines.forEach((line, idx) => {
+    const matcher = new RegExp(stringLiteralRegex.source, stringLiteralRegex.flags)
+    let m: RegExpExecArray | null
+    while ((m = matcher.exec(line)) !== null) {
+      const literal = m[2]
+      if (!eyebrowSize.test(literal)) continue
+      if (!eyebrowUppercase.test(literal)) continue
+      if (!eyebrowTracking.test(literal)) continue
+      // Skip intentional responsive size variants
+      if (responsiveSizeVariantRegex.test(literal)) continue
+      // Skip button-context classes (touch target = button, not eyebrow label)
+      if (buttonContextRegex.test(literal)) continue
+      hits.push({
+        file,
+        line: idx + 1,
+        value: literal.length > 140 ? literal.slice(0, 140) + '…' : literal,
+      })
+    }
+  })
+
+  return hits
 }
 
 async function walkFiles(dirPath: string, files: string[] = []): Promise<string[]> {
@@ -188,7 +233,6 @@ async function writeReport(reportData: ReportData) {
     forbiddenFont: reportData.forbiddenFont.length,
     legacyLbta: reportData.legacyLbta.length,
     handRolledEyebrow: reportData.handRolledEyebrow.length,
-    handRolledSectionPadding: reportData.handRolledSectionPadding.length,
   }
   const generatedAt = new Date().toISOString()
   const allClear =
@@ -196,7 +240,9 @@ async function writeReport(reportData: ReportData) {
     totals.rawHex === 0 &&
     totals.arbitraryTailwind === 0 &&
     totals.inlineGradient === 0 &&
-    totals.forbiddenFont === 0
+    totals.forbiddenFont === 0 &&
+    totals.legacyLbta === 0 &&
+    totals.handRolledEyebrow === 0
 
   const sections: string[] = []
   sections.push('<!-- Auto-generated by scripts/check-brand-usage.ts --report. Do not hand-edit the section below. -->')
@@ -212,22 +258,20 @@ async function writeReport(reportData: ReportData) {
   sections.push(`| Arbitrary Tailwind colors | ${totals.arbitraryTailwind} | ${totals.arbitraryTailwind === 0 ? '✅' : '⚠'} |`)
   sections.push(`| Inline gradient hex literals | ${totals.inlineGradient} | ${totals.inlineGradient === 0 ? '✅' : '⚠'} |`)
   sections.push(`| Forbidden fonts (app code) | ${totals.forbiddenFont} | ${totals.forbiddenFont === 0 ? '✅' : '❌'} |`)
-  sections.push(`| Deprecated lbta-* classes | ${totals.legacyLbta} | ${totals.legacyLbta === 0 ? '✅' : '⚠'} |`)
-  sections.push(`| Hand-rolled eyebrow patterns (info) | ${totals.handRolledEyebrow} | ${totals.handRolledEyebrow === 0 ? '✅' : 'ℹ'} |`)
-  sections.push(`| Hand-rolled section padding (info) | ${totals.handRolledSectionPadding} | ${totals.handRolledSectionPadding === 0 ? '✅' : 'ℹ'} |`)
+  sections.push(`| Deprecated lbta-* classes | ${totals.legacyLbta} | ${totals.legacyLbta === 0 ? '✅' : '❌'} |`)
+  sections.push(`| Hand-rolled eyebrow patterns | ${totals.handRolledEyebrow} | ${totals.handRolledEyebrow === 0 ? '✅' : '❌'} |`)
   sections.push('')
-  sections.push(allClear ? '**Result: 🟢 LOCKED IN — zero brand drift.**' : '**Result: 🟡 Drift present — see breakdown below.**')
+  sections.push(allClear ? '**Result: 🟢 LOCKED IN — zero brand drift across all 7 strict categories.**' : '**Result: 🔴 Drift present — see breakdown below. Strict CI will fail.**')
   sections.push('')
-  sections.push('_Hand-rolled patterns are informational — they do not block CI. They surface where the design system primitives could replace ad-hoc styles. Migrate opportunistically when touching a file._')
-  sections.push('')
-  sections.push(reportSection('Forbidden contrast errors', reportData.forbidden))
-  sections.push(reportSection('Raw hex literals', reportData.rawHex))
-  sections.push(reportSection('Arbitrary Tailwind colors', reportData.arbitraryTailwind))
-  sections.push(reportSection('Inline gradient hex literals', reportData.inlineGradient))
-  sections.push(reportSection('Forbidden fonts (app code)', reportData.forbiddenFont))
-  sections.push(reportSection('Deprecated lbta-* classes', reportData.legacyLbta))
-  sections.push(reportSection('Hand-rolled eyebrow patterns (informational)', reportData.handRolledEyebrow))
-  sections.push(reportSection('Hand-rolled section padding (informational)', reportData.handRolledSectionPadding))
+
+  // Only emit per-category sections when there are hits — keeps the doc clean
+  if (reportData.forbidden.length > 0) sections.push(reportSection('Forbidden contrast errors', reportData.forbidden))
+  if (reportData.forbiddenFont.length > 0) sections.push(reportSection('Forbidden fonts (app code)', reportData.forbiddenFont))
+  if (reportData.rawHex.length > 0) sections.push(reportSection('Raw hex literals', reportData.rawHex))
+  if (reportData.arbitraryTailwind.length > 0) sections.push(reportSection('Arbitrary Tailwind colors', reportData.arbitraryTailwind))
+  if (reportData.inlineGradient.length > 0) sections.push(reportSection('Inline gradient hex literals', reportData.inlineGradient))
+  if (reportData.legacyLbta.length > 0) sections.push(reportSection('Deprecated lbta-* classes', reportData.legacyLbta))
+  if (reportData.handRolledEyebrow.length > 0) sections.push(reportSection('Hand-rolled eyebrow patterns', reportData.handRolledEyebrow))
 
   const liveBlock = sections.join('\n')
 
@@ -272,7 +316,6 @@ async function main() {
     forbiddenFont: [],
     legacyLbta: [],
     handRolledEyebrow: [],
-    handRolledSectionPadding: [],
   }
 
   for (const file of files) {
@@ -326,22 +369,17 @@ async function main() {
       reportData.legacyLbta.push(...legacyHits)
     }
 
-    // Hand-rolled patterns (WARN only — never strict; designers may have intentional cases)
-    // Filter out responsive size variants (e.g. md:text-[12px]) — those are intentional hero bumps
+    // Hand-rolled eyebrow patterns (strict-mode enforced as of v1.3, full string-literal scan as of v1.4)
     if (extension === '.tsx') {
-      const eyebrowHits = gatherLineHits(contents, relativeFile, handRolledEyebrowRegex)
-        .filter((hit) => !responsiveSizeVariantRegex.test(hit.value))
-      reportData.handRolledEyebrow.push(...eyebrowHits)
-      reportData.handRolledSectionPadding.push(...gatherLineHits(contents, relativeFile, handRolledSectionPaddingRegex))
+      reportData.handRolledEyebrow.push(...findEyebrowPatterns(contents, relativeFile))
     }
   }
 
-  printHits('Deprecated lbta-* classes (warning):', 'WARN', reportData.legacyLbta)
-  printHits('Raw hex usage (warning):', 'WARN', reportData.rawHex)
-  printHits('Arbitrary Tailwind color values (warning):', 'WARN', reportData.arbitraryTailwind)
-  printHits('Inline gradient hex literals (warning):', 'WARN', reportData.inlineGradient)
-  printHits('Hand-rolled eyebrow patterns — prefer .text-eyebrow (info, never blocks):', 'WARN', reportData.handRolledEyebrow, 30)
-  printHits('Hand-rolled section padding — prefer .section / .section-lg / .section-sm (info, never blocks):', 'WARN', reportData.handRolledSectionPadding, 30)
+  printHits('Deprecated lbta-* classes (warning, strict-blocking):', 'WARN', reportData.legacyLbta)
+  printHits('Raw hex usage (warning, strict-blocking):', 'WARN', reportData.rawHex)
+  printHits('Arbitrary Tailwind color values (warning, strict-blocking):', 'WARN', reportData.arbitraryTailwind)
+  printHits('Inline gradient hex literals (warning, strict-blocking):', 'WARN', reportData.inlineGradient)
+  printHits('Hand-rolled eyebrow patterns — prefer .text-eyebrow (warning, strict-blocking):', 'WARN', reportData.handRolledEyebrow, 30)
   printHits('Forbidden font families in app code (error):', 'ERROR', reportData.forbiddenFont)
   printHits('Forbidden low-contrast white text (error):', 'ERROR', reportData.forbidden)
 
@@ -358,12 +396,13 @@ async function main() {
       process.exitCode = 1
       return
     }
-    // In strict mode, also fail on warnings (raw hex / arbitrary Tailwind / inline gradient / hand-rolled eyebrows)
+    // In strict mode, also fail on warnings (every category the docs claim is enforced).
     const totalWarnings =
       reportData.rawHex.length +
       reportData.arbitraryTailwind.length +
       reportData.inlineGradient.length +
-      reportData.handRolledEyebrow.length
+      reportData.handRolledEyebrow.length +
+      reportData.legacyLbta.length
     if (totalWarnings > 0) {
       console.log(`STRICT mode: ${totalWarnings} warning(s) treated as errors — failing build.`)
       process.exitCode = 1

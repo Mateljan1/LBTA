@@ -243,7 +243,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               {hasBioLink && (
                 <Link
                   href={`/coaches/${coach.slug}`}
-                  className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center gap-2 rounded-[2px] border border-brand-victoria-cove/30 bg-white/80 px-4 py-2.5 font-sans text-eyebrow font-semibold uppercase text-brand-victoria-cove transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                  className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center gap-2 rounded-[2px] border border-brand-victoria-cove/30 bg-white/80 px-4 py-2.5 font-sans text-button uppercase text-brand-victoria-cove transition-colors hover:bg-brand-morning-light focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
                 >
                   View full bio
                   <ChevronRight className="h-4 w-4 shrink-0" />
@@ -251,7 +251,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               )}
               <Link
                 href={bookHref}
-                className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center rounded-[2px] bg-black px-4 py-2.5 text-center font-sans text-eyebrow font-semibold uppercase text-white transition-colors hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+                className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center rounded-[2px] bg-black px-4 py-2.5 text-center font-sans text-button uppercase text-white transition-colors hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
               >
                 Book with {firstName}
               </Link>

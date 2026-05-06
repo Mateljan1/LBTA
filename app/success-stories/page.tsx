@@ -279,7 +279,7 @@ export default function SuccessStoriesPage() {
                     </p>
                     <Link
                       href={story.ctaHref}
-                      className="inline-flex items-center gap-2 bg-brand-sunset-cliff text-white font-sans text-eyebrow font-medium uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff/40 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
+                      className="inline-flex items-center gap-2 bg-brand-sunset-cliff text-white font-sans text-button uppercase min-h-[48px] px-6 py-3 rounded-[2px] transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-pacific-dusk focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff/40 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-morning-light"
                     >
                       {story.ctaLabel}
                       <ArrowRight className="h-4 w-4" />

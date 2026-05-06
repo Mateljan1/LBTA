@@ -251,15 +251,12 @@
     color: var(--pacific-dusk);
   }
 
-  .text-eyebrow {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--victoria-cove);
-  }
+  /*
+   * `.text-eyebrow` lives in tailwind.config.ts as a fontSize utility
+   * (0.7rem + 0.18em letter-spacing, no baked weight or color).
+   * Callsites must add their own font-weight + color + uppercase explicitly.
+   * See docs/brand-token-system.md for the full eyebrow contract.
+   */
 
   .text-caption {
     font-family: var(--font-sans);
