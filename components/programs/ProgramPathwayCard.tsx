@@ -109,8 +109,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
         <div className="relative flex-1 flex flex-col justify-center px-6 py-8 md:px-10 md:py-10 lg:px-14">
           {/* Horizon accent bar */}
           <div
-            className={`absolute top-0 ${isImageLeft ? 'left-0' : 'right-0'} w-[3px] h-full hidden md:block`}
-            style={{ background: 'linear-gradient(to bottom, #2E8B8B, #E8834A, #C4963C)' }}
+            className={`absolute top-0 ${isImageLeft ? 'left-0' : 'right-0'} w-[3px] h-full hidden md:block bg-[image:var(--horizon-vertical)]`}
             aria-hidden="true"
           />
 
@@ -130,7 +129,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-7">
             {slots.length > 0 && (
               <div>
-                <span className="font-sans text-[10px] font-bold tracking-[3px] uppercase text-white/40 mb-3 block">
+                <span className="font-sans text-[10px] font-bold tracking-[3px] uppercase text-white/65 mb-3 block">
                   Schedule
                 </span>
                 <div className="space-y-2">
@@ -143,7 +142,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
                         {slot.time}
                       </span>
                       {slot.location && (
-                        <span className="font-sans text-[11px] text-white/40 ml-auto">
+                        <span className="font-sans text-[11px] text-white/55 ml-auto">
                           {shortenLocation(slot.location)}
                         </span>
                       )}
@@ -155,7 +154,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
 
             {prices.length > 0 && (
               <div>
-                <span className="font-sans text-[10px] font-bold tracking-[3px] uppercase text-white/40 mb-3 block">
+                <span className="font-sans text-[10px] font-bold tracking-[3px] uppercase text-white/65 mb-3 block">
                   Investment
                 </span>
                 <div className="space-y-2">
@@ -169,7 +168,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
                   ))}
                 </div>
                 {program.pricingNote && (
-                  <p className="font-sans text-[11px] text-white/40 mt-2 italic">{program.pricingNote}</p>
+                  <p className="font-sans text-[11px] text-white/60 mt-2 italic">{program.pricingNote}</p>
                 )}
               </div>
             )}

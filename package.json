@@ -18,7 +18,7 @@
     "lighthouse": "npx lighthouse http://localhost:3000 --output=html --output-path=./docs/lighthouse-report.html --only-categories=performance,accessibility,best-practices,seo --chrome-flags='--headless'",
     "capture:emails": "./node_modules/.bin/tsx scripts/capture-emails.ts",
     "capture:notifications": "./node_modules/.bin/tsx scripts/capture-notifications.ts",
-    "quality-gate": "npm run tokens:build && npm run tokens:check && npm run build && npm run lint",
+    "quality-gate": "npm run tokens:build && STRICT_BRAND_CHECK=1 npm run tokens:check -- --all && npm run build && npm run lint",
     "ship:gate": "bash scripts/ship-gate.sh",
     "fact-check": "node scripts/fact-check.js",
     "verify:images": "node scripts/verify-image-paths.mjs",

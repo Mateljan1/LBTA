@@ -1,14 +1,15 @@
 {
   "meta": {
     "name": "LBTA Web Tokens",
-    "version": "1.0.0",
-    "updated": "2026-04-10",
+    "version": "1.1.0",
+    "updated": "2026-05-05",
     "sourceOfTruth": "website"
   },
   "colors": {
     "brand": {
       "pacific-dusk": "#1B3A5C",
       "deep-water": "#0F2237",
+      "deep-card": "#0A1628",
       "victoria-cove": "#2E8B8B",
       "thousand-steps": "#C4963C",
       "sunset-cliff": "#E8834A",

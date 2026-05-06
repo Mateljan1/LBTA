@@ -446,7 +446,7 @@ export default function RegistrationModal({
                 </button>
               </div>
 
-              <p className="font-sans text-[11px] text-white/40 leading-relaxed">
+              <p className="font-sans text-[11px] text-white/60 leading-relaxed">
                 All registration goes through the City of Laguna Beach recreation department.
               </p>
             </div>
@@ -524,39 +524,39 @@ export default function RegistrationModal({
               <div className="space-y-5">
                 {/* ── Contact ── */}
                 <div className="space-y-3">
-                  <p className="font-sans text-[11px] font-medium text-white/40 uppercase tracking-[0.16em]">Your info</p>
+                  <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em]">Your info</p>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="sr-only">First name</label>
-                      <input type="text" required value={form.firstName} onChange={(e) => handleChange('firstName', e.target.value)} placeholder="First name *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                      <input type="text" required value={form.firstName} onChange={(e) => handleChange('firstName', e.target.value)} placeholder="First name *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                     </div>
                     <div>
                       <label className="sr-only">Last name</label>
-                      <input type="text" required value={form.lastName} onChange={(e) => handleChange('lastName', e.target.value)} placeholder="Last name *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                      <input type="text" required value={form.lastName} onChange={(e) => handleChange('lastName', e.target.value)} placeholder="Last name *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                     </div>
                   </div>
                   <div>
                     <label className="sr-only">Email</label>
-                    <input type="email" required value={form.email} onChange={(e) => handleChange('email', e.target.value)} placeholder="Email *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                    <input type="email" required value={form.email} onChange={(e) => handleChange('email', e.target.value)} placeholder="Email *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                   </div>
                   <div>
                     <label className="sr-only">Phone</label>
-                    <input type="tel" required value={form.phone} onChange={(e) => handleChange('phone', e.target.value)} placeholder="Phone *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                    <input type="tel" required value={form.phone} onChange={(e) => handleChange('phone', e.target.value)} placeholder="Phone *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                   </div>
                 </div>
 
                 {/* ── Player info (juniors / development / private) ── */}
                 {showPlayerFields && (
                   <div className="space-y-3">
-                    <p className="font-sans text-[11px] font-medium text-white/40 uppercase tracking-[0.16em]">About the player</p>
+                    <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em]">About the player</p>
                     <div className="grid grid-cols-3 gap-3">
                       <div className="col-span-2">
                         <label className="sr-only">Player name</label>
-                        <input type="text" value={form.playerName} onChange={(e) => handleChange('playerName', e.target.value)} placeholder="Player's first name" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                        <input type="text" value={form.playerName} onChange={(e) => handleChange('playerName', e.target.value)} placeholder="Player's first name" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                       </div>
                       <div>
                         <label className="sr-only">Player age</label>
-                        <input type="number" min={3} max={99} value={form.playerAge} onChange={(e) => handleChange('playerAge', e.target.value)} placeholder="Age" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                        <input type="number" min={3} max={99} value={form.playerAge} onChange={(e) => handleChange('playerAge', e.target.value)} placeholder="Age" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                       </div>
                     </div>
                   </div>
@@ -564,7 +564,7 @@ export default function RegistrationModal({
 
                 {/* ── Experience / Level ── */}
                 <div>
-                  <p className="font-sans text-[11px] font-medium text-white/40 uppercase tracking-[0.16em] mb-2">{levelLabel}</p>
+                  <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em] mb-2">{levelLabel}</p>
                   <div className="flex flex-wrap gap-2">
                     {levelOptions.map((opt) => {
                       const selected = form.experienceLevel === opt
@@ -589,7 +589,7 @@ export default function RegistrationModal({
 
                 {/* ── Schedule ── */}
                 <div className="space-y-3">
-                  <p className="font-sans text-[11px] font-medium text-white/40 uppercase tracking-[0.16em]">Schedule preference</p>
+                  <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em]">Schedule preference</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="sr-only">Days per week</label>
@@ -644,7 +644,7 @@ export default function RegistrationModal({
 
                 {/* ── How did you find us? ── */}
                 <div>
-                  <p className="font-sans text-[11px] font-medium text-white/40 uppercase tracking-[0.16em] mb-2">How did you find us?</p>
+                  <p className="font-sans text-[11px] font-medium text-white/65 uppercase tracking-[0.16em] mb-2">How did you find us?</p>
                   <div className="flex flex-wrap gap-1.5">
                     {REFERRAL_OPTIONS.map((opt) => {
                       const selected = form.referralSource === opt
@@ -706,7 +706,7 @@ export default function RegistrationModal({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-1 w-full inline-flex items-center justify-center rounded-[2px] bg-white text-brand-deep-water font-sans text-[13px] font-medium tracking-[0.18em] uppercase px-6 py-3.5 min-h-[48px] transition-all duration-300 hover:bg-white/90 disabled:bg-white/20 disabled:text-white/40 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
+                  className="mt-1 w-full inline-flex items-center justify-center rounded-[2px] bg-white text-brand-deep-water font-sans text-[13px] font-medium tracking-[0.18em] uppercase px-6 py-3.5 min-h-[48px] transition-all duration-300 hover:bg-white/90 disabled:bg-white/20 disabled:text-white/55 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water"
                 >
                   {isSubmitting ? 'Submitting…' : 'Register'}
                 </button>

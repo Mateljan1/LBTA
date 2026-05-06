@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { Program } from '@/components/ProgramCard'
 import { trackFormStart } from '@/lib/form-analytics'
+import { BRAND } from '@/lib/brand-tokens'
 
 interface SchedulesProgramCardProps {
   program: Program
@@ -58,12 +59,12 @@ function getAllPrices(program: Program): Array<{ label: string; amount: number }
 function getAccentColor(program: Program): string {
   const cat = program.category.toLowerCase()
   const name = program.program.toLowerCase()
-  if (cat.includes('open court') || name.includes('liveball') || name.includes('cardio')) return '#2E8B8B'
-  if (name.includes('high performance')) return '#C4963C'
-  if (cat.includes('adult')) return '#E8834A'
-  if (cat.includes('development') || name.includes('competitive') || name.includes('player development')) return '#3A8B6E'
-  if (cat.includes('junior')) return '#E8834A'
-  return '#E8834A'
+  if (cat.includes('open court') || name.includes('liveball') || name.includes('cardio')) return BRAND.victoriaCove
+  if (name.includes('high performance')) return BRAND.thousandSteps
+  if (cat.includes('adult')) return BRAND.sunsetCliff
+  if (cat.includes('development') || name.includes('competitive') || name.includes('player development')) return BRAND.tidePool
+  if (cat.includes('junior')) return BRAND.sunsetCliff
+  return BRAND.sunsetCliff
 }
 
 function shortenLocation(location: string): string {
@@ -117,7 +118,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
   return (
     <article
       aria-labelledby={headingId}
-      className="group flex h-full flex-col overflow-hidden rounded-xl bg-[#0a1628] ring-1 ring-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-1 hover:ring-white/[0.12] hover:shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
+      className="group flex h-full flex-col overflow-hidden rounded-xl bg-brand-deep-card ring-1 ring-white/[0.06] transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-1 hover:ring-white/[0.12] hover:shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
     >
       {/* ═══ CINEMATIC HERO ═══ */}
       <div className="relative aspect-[16/9] overflow-hidden">
@@ -199,7 +200,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
                 )}
               </div>
               {slot.note && (
-                <p className="pl-0 pb-1 font-sans text-[10px] italic text-white/40">{slot.note}</p>
+                <p className="pl-0 pb-1 font-sans text-[10px] italic text-white/60">{slot.note}</p>
               )}
             </div>
           ))}
@@ -228,7 +229,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           {program.inquiryLabel ? (
             <Link
               href={`/contact?program=${encodeURIComponent(program.program)}&inquiry=placement`}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-md border border-white/[0.12] px-3 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[1.8px] text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-md border border-white/[0.12] px-3 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[1.8px] text-white/60 transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-white/25 hover:bg-white/[0.05] hover:text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
             >
               {program.inquiryLabel}
             </Link>
@@ -236,7 +237,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           <button
             type="button"
             onClick={handleRegister}
-            className="group/btn relative inline-flex min-h-[48px] items-center justify-center overflow-hidden rounded-md bg-white px-3 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[2px] text-[#0a1628] transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
+            className="group/btn relative inline-flex min-h-[48px] items-center justify-center overflow-hidden rounded-md bg-white px-3 py-2.5 font-sans text-[10px] font-semibold uppercase tracking-[2px] text-brand-deep-card transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-card"
           >
             Register
           </button>

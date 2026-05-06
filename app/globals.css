@@ -27,9 +27,11 @@
     --driftwood: var(--brand-driftwood);
 
     /* Brand Kit Horizon — signature gradient (Victoria Cove → Sunset Cliff → Thousand Steps → back) */
-    --horizon: linear-gradient(90deg, #2E8B8B, #E8834A 35%, #C4963C 50%, #E8834A 65%, #2E8B8B);
+    --horizon: linear-gradient(90deg, var(--brand-victoria-cove), var(--brand-sunset-cliff) 35%, var(--brand-thousand-steps) 50%, var(--brand-sunset-cliff) 65%, var(--brand-victoria-cove));
+    /* Vertical horizon — same stops, top→bottom (used on cards/dividers that run vertically) */
+    --horizon-vertical: linear-gradient(180deg, var(--brand-victoria-cove), var(--brand-sunset-cliff) 50%, var(--brand-thousand-steps));
     /* Golden hour hero overlay — deep water → warm mid → deep water */
-    --golden-hour-overlay: linear-gradient(180deg, rgba(15,34,55,0.1) 0%, rgba(196,168,124,0.08) 40%, rgba(15,34,55,0.6) 80%, #0F2237 100%);
+    --golden-hour-overlay: linear-gradient(180deg, rgba(15,34,55,0.1) 0%, rgba(196,168,124,0.08) 40%, rgba(15,34,55,0.6) 80%, var(--brand-deep-water) 100%);
 
     /* Fixed mobile chrome — set by StickyCTA / ProgramCard (see lib/report-mobile-bottom-height.ts) */
     --lbta-sticky-cta-h: 0px;

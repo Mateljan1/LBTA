@@ -36,8 +36,7 @@ export default function MethodSection() {
           />
           {/* Right edge blend into dark content on desktop */}
           <div
-            className="absolute inset-0 hidden lg:block"
-            style={{ background: 'linear-gradient(to right, transparent 50%, #0F2237 100%)' }}
+            className="absolute inset-0 hidden lg:block bg-[linear-gradient(to_right,transparent_50%,var(--brand-deep-water)_100%)]"
             aria-hidden="true"
           />
         </div>

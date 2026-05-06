@@ -180,10 +180,18 @@ colors: {
 - Never use more than 3 colors in a single section
 - **Buttons**: Black/white for primary CTAs; Sunset Cliff (#E8834A) for hover/accent only
 - **Links/Focus**: Victoria Cove (#2E8B8B)
-- **Backgrounds**: Morning Light (#FAF8F4) default, Sandstone (#F5F0E5) warm sections, Deep Water (#0F2237) dark sections
+- **Backgrounds**: Morning Light (#FAF8F4) default, Sandstone (#F5F0E5) warm sections, Deep Water (#0F2237) dark sections, Deep Card (#0A1628) for elevated dark cards on light pages
 - **Text**: Pacific Dusk (#1B3A5C) for headings/body, use opacity variants for secondary text
 - Prefer `brand-*` classes for new code; `lbta-*` for backwards compat only
 - **Brand Guide**: Visual and section accents follow the LBTA Brand Guide — horizon gradient (`--horizon`), `.section-quote` for pull quotes, and HorizonDivider or `.section-horizon` under key section headings.
+
+**Hex literals — single source of truth (locked v1.1, 2026-05-05):**
+- All brand hex values live in `tokens/lbta-web-tokens.json`. Tailwind classes, CSS vars, and TS constants are all generated from it.
+- **Never hardcode `'#XXXXXX'`** in `app/` or `components/`. CI fails in strict mode.
+- For TS logic (computed accent colors, charts, canvas): `import { BRAND } from '@/lib/brand-tokens'` and use `BRAND.victoriaCove`, `BRAND.deepWater`, etc.
+- For inline styles or CSS-in-JS: prefer `var(--brand-…)` over `BRAND.…`.
+- For arbitrary Tailwind values: forbidden — `bg-[#0a1628]` ❌ → `bg-brand-deep-card` ✅.
+- Visual proof of system: `/brand` route (internal, noindex). See `docs/brand-token-system.md`.
 
 ---
 
@@ -542,6 +550,10 @@ lib/
 ❌ Generic emoji icons (🎾 ⭐ etc.)
 ❌ Footer or dark-section text below text-white/50 (fails WCAG 7:1)
 ❌ Hero primary CTA with only text color on dark gradient (use solid bg)
+❌ Hardcoded `'#XXXXXX'` literals in app/components TS — use `BRAND` from `lib/brand-tokens.ts` or `var(--brand-…)`
+❌ Arbitrary Tailwind colors (`bg-[#…]`, `text-[#…]`, `from-[#…]`, …) — extend `tokens/lbta-web-tokens.json` instead
+❌ Inline `style={{ background: 'linear-gradient(... #...)' }}` — use `var(--horizon)` / `var(--horizon-vertical)` or a Tailwind class
+❌ `text-white/40` or `text-white/25` on dark surfaces — fails WCAG 7:1 (use ≥/55 for body, /65–/75 for eyebrows)
 ❌ Webhook: using payload ID in URLs/bodies without validating as positive integer
 ❌ Webhook: comparing secret with == or === (use crypto.timingSafeEqual, same-length buffers)
 ```
