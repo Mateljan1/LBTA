@@ -250,6 +250,38 @@ export function LeagueEventSchema({
   )
 }
 
+/**
+ * BreadcrumbList JSON-LD — improves Google's path display in search results.
+ * Pass an ordered array of crumbs from root to current. The last crumb's `href`
+ * is optional; if omitted, only the name appears (current-page behavior).
+ *
+ * @example
+ * <BreadcrumbListSchema items={[
+ *   { name: 'Home', href: '/' },
+ *   { name: 'Coaches', href: '/coaches' },
+ *   { name: 'Andrew Mateljan' },
+ * ]} />
+ */
+export function BreadcrumbListSchema({ items }: { items: Array<{ name: string; href?: string }> }) {
+  const baseUrl = 'https://lagunabeachtennisacademy.com'
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: item.name,
+      ...(item.href && { item: `${baseUrl}${item.href}` }),
+    })),
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
 /** Article JSON-LD for journal posts (`/blog/[slug]`). */
 export function BlogArticleSchema({
   title,

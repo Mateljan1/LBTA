@@ -10,4 +10,8 @@ Disallow: /coach-hub
 Disallow: /utr-tracker/admin
 Disallow: /print/
 
+# Internal showcase / post-form confirmation (also noindex via metadata; belt-and-suspenders)
+Disallow: /brand
+Disallow: /thank-you
+
 Sitemap: https://lagunabeachtennisacademy.com/sitemap.xml

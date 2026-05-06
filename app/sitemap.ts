@@ -211,7 +211,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 0.6,
     },
-    
+    {
+      url: `${baseUrl}/coaches/allison-cronk`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.55,
+    },
+    {
+      url: `${baseUrl}/coaches/peter-defrantz`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.55,
+    },
+    // Note: coaches/michelle-mateljan is intentionally noindex (paused 2026)
+    // Note: coaches/robert-lebuhn is a redirect to /coaches (coach inactive)
+
+    // Support
+    {
+      url: `${baseUrl}/help`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+
     // Legal Pages
     {
       url: `${baseUrl}/privacy`,

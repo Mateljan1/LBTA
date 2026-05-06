@@ -9,7 +9,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
-import { PersonSchema } from '@/app/schema'
+import { PersonSchema, BreadcrumbListSchema } from '@/app/schema'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/coaches/allison-cronk' },
@@ -33,6 +33,11 @@ const creds = [
 export default function AllisonCronkPage() {
   return (
     <>
+      <BreadcrumbListSchema items={[
+        { name: 'Home', href: '/' },
+        { name: 'Coaches', href: '/coaches' },
+        { name: 'Allison Cronk' },
+      ]} />
       <PersonSchema
         name="Allison Cronk"
         jobTitle="Youth Development Coach"

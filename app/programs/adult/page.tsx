@@ -1,6 +1,44 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import HorizonDivider from '@/components/ui/HorizonDivider'
+import { BreadcrumbListSchema } from '@/app/schema'
+import pricingSupplemental from '@/data/pricing-supplemental.json'
+
+const adultCourseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: 'Adult Tennis Programs at Laguna Beach Tennis Academy',
+  description:
+    'Adult tennis progression from beginner fundamentals to advanced competitive match play. Group classes, private coaching, USTA League, and UTR Match Play in Laguna Beach.',
+  provider: {
+    '@type': 'Organization',
+    name: 'Laguna Beach Tennis Academy',
+    url: 'https://lagunabeachtennisacademy.com',
+  },
+  courseMode: ['Onsite'],
+  educationalLevel: 'Beginner to Advanced (NTRP 2.0–4.5+)',
+  offers: {
+    '@type': 'Offer',
+    price: String(pricingSupplemental.schema.courses.adultPrograms),
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: 'https://lagunabeachtennisacademy.com/schedules',
+  },
+  hasCourseInstance: {
+    '@type': 'CourseInstance',
+    courseMode: 'Onsite',
+    location: {
+      '@type': 'Place',
+      name: 'Laguna Beach Tennis Academy',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Laguna Beach',
+        addressRegion: 'CA',
+        addressCountry: 'US',
+      },
+    },
+  },
+}
 
 export const metadata: Metadata = {
   alternates: { canonical: '/programs/adult' },
@@ -43,6 +81,15 @@ const progression = [
 export default function AdultProgramsPage() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(adultCourseSchema) }}
+      />
+      <BreadcrumbListSchema items={[
+        { name: 'Home', href: '/' },
+        { name: 'Programs', href: '/programs' },
+        { name: 'Adult Programs' },
+      ]} />
       {/* Hero */}
       <section className="relative bg-brand-deep-water text-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-deep-water via-brand-pacific-dusk/80 to-brand-deep-water" />
