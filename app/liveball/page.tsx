@@ -4,6 +4,7 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import DarkSection from '@/components/ui/DarkSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import StickyCTA from '@/components/StickyCTA'
+import { BreadcrumbListSchema } from '@/app/schema'
 import { getLiveBallContent } from '@/lib/liveball-content'
 import { getLiveBallSeasonSnapshot } from '@/lib/programs-data'
 
@@ -44,6 +45,11 @@ export default function LiveBallPage() {
 
   return (
     <>
+      <BreadcrumbListSchema items={[
+        { name: 'Home', href: '/' },
+        { name: 'Fitness', href: '/fitness' },
+        { name: 'LiveBall' },
+      ]} />
       <Breadcrumbs items={[{ label: 'Fitness', href: '/fitness' }, { label: 'LiveBall' }]} />
 
       {/* Hero: split on lg so photography uses half the viewport — less edge crop than full-bleed */}

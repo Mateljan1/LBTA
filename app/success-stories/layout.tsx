@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { BreadcrumbListSchema } from '@/app/schema'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/success-stories' },
@@ -17,6 +18,14 @@ export default function SuccessStoriesLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      <BreadcrumbListSchema items={[
+        { name: 'Home', href: '/' },
+        { name: 'Success Stories' },
+      ]} />
+      {children}
+    </>
+  )
 }
 

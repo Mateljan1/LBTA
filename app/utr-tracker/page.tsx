@@ -17,6 +17,12 @@ export const metadata: Metadata = {
   title: 'UTR Match Play Tracker',
   description:
     'Live standings and Color Ball passports for the LBTA UTR Match Play Series — points, tiers, and badges updated as match results are entered.',
+  openGraph: {
+    title: 'UTR Match Play Tracker | Laguna Beach Tennis Academy',
+    description: 'Live standings and Color Ball passports for the LBTA UTR Match Play Series.',
+    type: 'website',
+    images: [{ url: '/images/programs/utr-match-play/utr-match-play-hero.webp', width: 1920, height: 1080, alt: 'LBTA UTR Match Play' }],
+  },
 }
 
 export default async function UtrTrackerPage() {

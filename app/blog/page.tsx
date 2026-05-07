@@ -3,11 +3,19 @@ import type { Metadata } from 'next'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
+import { BreadcrumbListSchema } from '@/app/schema'
 import { getAllPostsMeta } from '@/lib/blog'
 
 export const metadata: Metadata = {
   title: 'Journal',
+  description: 'Tennis insights and behind-the-scenes notes from Andrew Mateljan and the LBTA coaching team. Movement, craft, community, and the work it takes.',
   alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'Journal | Laguna Beach Tennis Academy',
+    description: 'Tennis insights and behind-the-scenes notes from Andrew Mateljan and the LBTA coaching team.',
+    type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy Journal' }],
+  },
 }
 
 function formatDate(iso: string) {
@@ -28,6 +36,10 @@ export default async function BlogIndexPage() {
 
   return (
     <>
+      <BreadcrumbListSchema items={[
+        { name: 'Home', href: '/' },
+        { name: 'Journal' },
+      ]} />
       <section className="relative bg-gradient-to-b from-brand-morning-light to-white pt-32 md:pt-40 pb-16 md:pb-20">
         <div className="container-narrow px-6 md:px-8">
           <Breadcrumbs

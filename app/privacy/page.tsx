@@ -4,6 +4,12 @@ export const metadata = {
   alternates: { canonical: '/privacy' },
   title: 'Privacy Policy',
   description: 'Privacy policy and data protection practices at Laguna Beach Tennis Academy.',
+  openGraph: {
+    title: 'Privacy Policy | Laguna Beach Tennis Academy',
+    description: 'Privacy policy and data protection practices at Laguna Beach Tennis Academy.',
+    type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
+  },
 }
 
 export default function PrivacyPage() {

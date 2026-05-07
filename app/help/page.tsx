@@ -3,8 +3,15 @@ import Link from 'next/link'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/help' },
   title: 'Help & Support',
   description: 'Get help with programs, pricing, booking, and more. Contact us directly for immediate assistance.',
+  openGraph: {
+    title: 'Help & Support | Laguna Beach Tennis Academy',
+    description: 'Get help with programs, pricing, booking, and more. Contact us directly.',
+    type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
+  },
 }
 
 export default function HelpPage() {

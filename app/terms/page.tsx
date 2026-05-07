@@ -4,6 +4,12 @@ export const metadata = {
   alternates: { canonical: '/terms' },
   title: 'Terms of Service',
   description: 'Terms and conditions for using Laguna Beach Tennis Academy services.',
+  openGraph: {
+    title: 'Terms of Service | Laguna Beach Tennis Academy',
+    description: 'Terms and conditions for using Laguna Beach Tennis Academy services.',
+    type: 'website',
+    images: [{ url: '/images/hero/laguna-horizon.webp', width: 1920, height: 1080, alt: 'Laguna Beach Tennis Academy' }],
+  },
 }
 
 export default function TermsPage() {

@@ -5,7 +5,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import BlogMarkdown from '@/components/blog/BlogMarkdown'
-import { BlogArticleSchema } from '@/app/schema'
+import { BlogArticleSchema, BreadcrumbListSchema } from '@/app/schema'
 import { getAllPostsMeta, getPostBySlug, getPostSlugs } from '@/lib/blog'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -70,6 +70,11 @@ export default async function BlogArticlePage({ params }: Props) {
         dateModified={post.updated ?? post.date}
         authorName={post.author}
       />
+      <BreadcrumbListSchema items={[
+        { name: 'Home', href: '/' },
+        { name: 'Journal', href: '/blog' },
+        { name: post.title },
+      ]} />
 
       <article>
         <header className="relative bg-gradient-to-b from-brand-morning-light to-white pt-32 md:pt-40 pb-12 md:pb-16">
