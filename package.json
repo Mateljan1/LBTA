@@ -20,6 +20,7 @@
     "capture:notifications": "./node_modules/.bin/tsx scripts/capture-notifications.ts",
     "quality-gate": "npm run tokens:build && STRICT_BRAND_CHECK=1 npm run tokens:check -- --all && npm run build && npm run lint",
     "ship:gate": "bash scripts/ship-gate.sh",
+    "health:prod": "./node_modules/.bin/tsx scripts/check-prod-health.ts",
     "fact-check": "node scripts/fact-check.js",
     "verify:images": "node scripts/verify-image-paths.mjs",
     "create:spring-campaign": "node scripts/create-ac-campaign.js assets/emails/lbta-spring-2026.html",

@@ -589,8 +589,10 @@ When the user says **done**, **shipped**, **deploy**, or **production is good**,
 1. **Tracked code committed** — No unstaged/staged diff on tracked files (`git diff` / `git diff --cached` empty). Do not leave fixes (e.g. `lib/validations.ts`, `lib/form-config.ts`) local-only.
 2. **Verify locally** — `npm run ship:gate` (build + lint + tests + fails if tracked files are dirty). Use `npm run quality-gate` if tests are intentionally skipped (still commit first).
 3. **Push** — `git push origin main` when work belongs on production branch (or the branch Vercel watches).
-4. **Deploy proof** — Repo alone does not prove Vercel deployed. After push: confirm in **Vercel dashboard** that the latest **Production** deployment’s commit SHA matches `git rev-parse HEAD`, **or** run `vercel --prod` per project rules, **or** smoke the live site for the change.
-5. **Say explicitly** — Report: clean tree ✓, commit SHA, pushed ✓/✗, and “Vercel prod SHA verified” ✓/needs human dashboard.
+4. **Deploy proof — END-USER PERSPECTIVE, not Vercel status alone.** `vercel ls` showing `Ready` only proves the build succeeded; it does NOT prove the site is serving real traffic. Always run `npm run health:prod` after push (canary-route check that catches `DEPLOYMENT_DISABLED`, `DEPLOYMENT_PAUSED`, `DEPLOYMENT_NOT_FOUND`, 5xx, 404). Exit 0 = serving; exit 2 = project-level dark; exit 1 = route failure.
+5. **Say explicitly** — Report: clean tree ✓, commit SHA, pushed ✓/✗, `health:prod` exit code, and any project-level/route-level issues surfaced.
+
+**Why this matters (incident 2026-05-07):** Pushed v1.5 + v1.6 SEO commits with "Ready" Vercel build status, but project was actually `DEPLOYMENT_DISABLED` (billing). Real user requests returned HTTP 402 for hours before catching it. `vercel ls` alone is insufficient; `health:prod` is the source of truth for "is the site actually serving."
 
 Untracked files (e.g. local assets) do not fail `ship:gate`; only **uncommitted tracked changes** do.
 
