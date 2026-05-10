@@ -107,7 +107,7 @@ export default function AndrewMateljanPage() {
                 className="object-cover"
                 style={{ objectPosition: coach.imagePosition }}
                 sizes="(max-width: 768px) 240px, 320px"
-                quality={95}
+                quality={80}
               />
             </AnimatedSection>
             <div>

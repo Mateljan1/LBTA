@@ -73,7 +73,7 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
                   fill
                   className={imgMotion}
                   sizes="(max-width: 1024px) 34vw, 300px"
-                  quality={90}
+                  quality={80}
                 />
               </div>
             ))}
@@ -98,7 +98,7 @@ export default function CampListingCard({ camp, onRegister }: CampListingCardPro
             fill
             className={imgMotion}
             sizes="(max-width: 1024px) 100vw, min(896px, 90vw)"
-            quality={88}
+            quality={80}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" aria-hidden="true" />
           <div className="absolute bottom-3 left-4 right-4 md:bottom-4 md:left-6">

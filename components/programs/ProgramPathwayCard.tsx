@@ -87,7 +87,7 @@ export default function ProgramPathwayCard({ program, description, onRegister, b
             className="object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.04]"
             style={{ objectPosition: img.objectPosition }}
             sizes="(max-width: 768px) 100vw, 50vw"
-            quality={90}
+            quality={80}
           />
           <div
             className="pointer-events-none absolute inset-0"

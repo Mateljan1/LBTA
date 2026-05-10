@@ -44,7 +44,7 @@ export default function MichelleMateljanPage() {
                 fill
                 className="object-cover object-top"
                 sizes="200px"
-                quality={95}
+                quality={80}
               />
             </AnimatedSection>
             <div>

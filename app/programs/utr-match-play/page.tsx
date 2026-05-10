@@ -460,7 +460,7 @@ export default function UTRMatchPlayPage() {
                   fill
                   className="object-cover object-center"
                   sizes="100vw"
-                  quality={95}
+                  quality={80}
                 />
                 <div
                   className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(4,12,24,0.22)_0%,rgba(4,12,24,0.6)_100%)]"
@@ -580,7 +580,7 @@ export default function UTRMatchPlayPage() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, 50vw"
-                    quality={90}
+                    quality={80}
                   />
                 </div>
                 <div className="p-6 md:p-7">

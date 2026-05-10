@@ -64,7 +64,7 @@ export default function AboutPage() {
             fill
             priority
             className="object-cover"
-            quality={95}
+            quality={80}
             style={{
               objectPosition: '50% 60%',
               transform: reduceMotion ? undefined : `translateY(${heroParallax}px)`,
@@ -103,7 +103,7 @@ export default function AboutPage() {
                   className="object-cover"
                   style={{ objectPosition: '50% 55%' }}
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  quality={95}
+                  quality={80}
                 />
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function AboutPage() {
             className="object-cover"
             style={{ objectPosition: '50% 42%' }}
             sizes="100vw"
-            quality={95}
+            quality={80}
           />
           <div className="absolute inset-0 bg-brand-deep-water/75" />
         </div>
@@ -236,7 +236,7 @@ export default function AboutPage() {
                 className="object-cover"
                 style={{ objectPosition: '50% 48%' }}
                 sizes="(max-width: 768px) 100vw, 66vw"
-                quality={95}
+                quality={80}
               />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-6">
@@ -248,7 +248,7 @@ export default function AboutPage() {
                   className="object-cover"
                   style={{ objectPosition: '50% 50%' }}
                   sizes="(max-width: 768px) 50vw, 33vw"
-                  quality={95}
+                  quality={80}
                 />
               </div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-subtle">
@@ -259,7 +259,7 @@ export default function AboutPage() {
                   className="object-cover"
                   style={{ objectPosition: '50% 50%' }}
                   sizes="(max-width: 768px) 50vw, 33vw"
-                  quality={95}
+                  quality={80}
                 />
               </div>
             </div>
@@ -325,7 +325,7 @@ export default function AboutPage() {
                   className="object-cover"
                   style={{ objectPosition: '50% 60%' }}
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  quality={95}
+                  quality={80}
                 />
               </div>
             </div>

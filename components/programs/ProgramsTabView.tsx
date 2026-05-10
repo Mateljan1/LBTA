@@ -390,7 +390,7 @@ function LiveBallStaticCards({ onRegister: _ }: { onRegister: (p: Program) => vo
               className="object-cover"
               style={{ objectPosition: PROGRAM_IMAGES['liveball'].objectPosition }}
               sizes="(max-width: 640px) 100vw, 33vw"
-              quality={85}
+              quality={80}
             />
             <span className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-pacific-dusk font-sans text-eyebrow-sm font-semibold uppercase px-2.5 py-1.5 rounded-[2px]">
               Drop-in $50
@@ -452,7 +452,7 @@ function CampsPanel({ year2026 }: { year2026: Year2026Sections }) {
                   className="object-cover"
                   style={{ objectPosition: PROGRAM_IMAGES['camps'].objectPosition }}
                   sizes="(max-width: 640px) 100vw, 33vw"
-                  quality={85}
+                  quality={80}
                 />
                 {camp.featured && (
                   <span className="absolute top-3 left-3 bg-brand-deep-water/75 backdrop-blur-sm text-white/90 font-sans text-eyebrow-sm font-medium uppercase px-2.5 py-1.5 rounded-[2px]">
@@ -549,7 +549,7 @@ function StaticCampsCards() {
               className="object-cover"
               style={{ objectPosition: PROGRAM_IMAGES['camps'].objectPosition }}
               sizes="(max-width: 640px) 100vw, 50vw"
-              quality={85}
+              quality={80}
             />
             {c.badge && (
               <span className="absolute top-3 left-3 bg-brand-deep-water/75 backdrop-blur-sm text-white/90 font-sans text-eyebrow-sm font-medium uppercase px-2.5 py-1.5 rounded-[2px]">
@@ -624,7 +624,7 @@ function LeaguesPanel() {
                 className="object-cover"
                 style={{ objectPosition: league.imagePosition }}
                 sizes="(max-width: 640px) 100vw, 50vw"
-                quality={85}
+                quality={80}
               />
             </div>
             <div className="p-5">

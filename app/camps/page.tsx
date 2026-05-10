@@ -138,7 +138,7 @@ export default function CampsPage() {
               style={{ objectPosition: '60% 78%' }}
               sizes="(max-width: 1024px) 100vw, 56vw"
               priority
-              quality={95}
+              quality={80}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-transparent" aria-hidden="true" />
           </div>
@@ -167,7 +167,7 @@ export default function CampsPage() {
                   className="object-cover"
                   style={{ objectPosition: '50% 52%' }}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={92}
+                  quality={80}
                 />
               </div>
               <div>
@@ -198,7 +198,7 @@ export default function CampsPage() {
                   className="object-cover"
                   style={{ objectPosition: '50% 56%' }}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={92}
+                  quality={80}
                 />
               </div>
             </div>
@@ -214,7 +214,7 @@ export default function CampsPage() {
                   className="object-cover"
                   style={{ objectPosition: '50% 58%' }}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={92}
+                  quality={80}
                 />
               </div>
               <div>
@@ -237,7 +237,7 @@ export default function CampsPage() {
                   className="object-cover"
                   style={{ objectPosition: '50% 52%' }}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  quality={90}
+                  quality={80}
                 />
               </div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2px]">
@@ -248,7 +248,7 @@ export default function CampsPage() {
                   className="object-cover"
                   style={{ objectPosition: '50% 50%' }}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  quality={90}
+                  quality={80}
                 />
               </div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] sm:col-span-2 lg:col-span-1">
@@ -259,7 +259,7 @@ export default function CampsPage() {
                   className="object-cover"
                   style={{ objectPosition: '52% 48%' }}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  quality={90}
+                  quality={80}
                 />
               </div>
             </div>
@@ -524,7 +524,7 @@ export default function CampsPage() {
             fill
             className="object-cover"
             sizes="100vw"
-            quality={92}
+            quality={80}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/45 to-black/25" />
         </div>

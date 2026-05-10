@@ -90,7 +90,7 @@ export default function PhotoVideoGallery({ className = '' }: PhotoVideoGalleryP
           src={currentItem.src}
           alt={currentItem.alt}
           fill
-          quality={95}
+          quality={80}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           className="object-cover transition-all duration-1000 ease-out"
           priority={currentIndex === 0}

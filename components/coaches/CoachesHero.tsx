@@ -35,7 +35,7 @@ export default function CoachesHero() {
           fill
           priority
           className="object-cover max-md:brightness-[0.92] md:[filter:brightness(1.04)]"
-          quality={95}
+          quality={80}
           style={{
             objectPosition: '50% 48%',
             transform: reduceMotion ? undefined : `translateY(${heroParallax}px)`,

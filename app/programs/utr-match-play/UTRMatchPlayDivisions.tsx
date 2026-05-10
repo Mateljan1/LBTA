@@ -51,7 +51,7 @@ function UtrLightDivisionCard({
               objectPosition: d.imageObjectPosition ?? '50% 24%',
             }}
             sizes="(max-width: 768px) 100vw, 50vw"
-            quality={92}
+            quality={80}
           />
           <div
             className="pointer-events-none absolute inset-x-0 bottom-0 h-[100px] bg-gradient-to-t from-black/45 to-transparent"
@@ -303,7 +303,7 @@ export default function UTRMatchPlayDivisions({
                       d.imageObjectPosition ? { objectPosition: d.imageObjectPosition } : undefined
                     }
                     sizes="(max-width: 767px) 100vw, 200px"
-                    quality={90}
+                    quality={80}
                   />
                 </div>
               ) : null}

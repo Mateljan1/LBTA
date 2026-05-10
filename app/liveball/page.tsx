@@ -32,7 +32,7 @@ function ContainedShot({
         fill
         className="object-contain object-center"
         sizes={sizes}
-        quality={92}
+        quality={80}
         priority={priority}
       />
     </div>
@@ -91,7 +91,7 @@ export default function LiveBallPage() {
               className="object-cover object-[center_42%] lg:object-[center_40%]"
               sizes="(max-width: 1023px) 100vw, 50vw"
               priority
-              quality={93}
+              quality={80}
             />
             <div
               className="absolute inset-0 bg-gradient-to-t from-brand-deep-water via-brand-deep-water/25 to-transparent lg:bg-gradient-to-l lg:from-brand-deep-water/90 lg:via-transparent lg:to-transparent"
@@ -330,7 +330,7 @@ export default function LiveBallPage() {
             fill
             className="object-cover object-[center_38%]"
             sizes="100vw"
-            quality={88}
+            quality={80}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-deep-water/95 via-brand-deep-water/55 to-brand-deep-water/35" aria-hidden="true" />
         </div>

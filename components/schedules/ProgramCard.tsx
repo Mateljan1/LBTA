@@ -129,7 +129,7 @@ export default function SchedulesProgramCard({ program, onRegister }: SchedulesP
           className="object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform group-hover:scale-[1.05]"
           style={{ objectPosition: img.objectPosition }}
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          quality={85}
+          quality={80}
         />
 
         {/* Cinematic vignette */}

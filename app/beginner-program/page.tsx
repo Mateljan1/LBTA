@@ -101,7 +101,7 @@ export default function BeginnerProgramLanding() {
             alt="Adult beginners practicing technique at Moulton Meadows Park"
             fill
             priority
-            quality={95}
+            quality={80}
             sizes="100vw"
             className="object-cover"
             style={{ objectPosition: '50% 48%' }}

@@ -90,7 +90,7 @@ export default function AdultTrialLanding() {
             alt="Adult intermediate players training at Laguna Beach High School"
             fill
             priority
-            quality={95}
+            quality={80}
             sizes="100vw"
             className="object-cover"
             style={{ objectPosition: '50% 48%' }}

@@ -26,7 +26,7 @@ export default function MethodSection() {
             className="object-cover"
             style={{ objectPosition: '50% 35%' }}
             sizes="(max-width: 1024px) 100vw, 45vw"
-            quality={90}
+            quality={80}
           />
           {/* Bottom gradient for mobile text readability */}
           <div

@@ -47,7 +47,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           style={{ objectPosition: coach.imagePosition }}
           sizes={variant === 'featured' ? '(max-width: 1024px) 100vw, 40vw' : '(max-width: 768px) 100vw, 50vw'}
-          quality={95}
+          quality={80}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
@@ -121,7 +121,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               className="object-cover transition-opacity duration-300 group-hover:opacity-[0.985]"
               style={{ objectPosition: compactImagePosition }}
               sizes="(max-width: 640px) 88vw, (max-width: 1024px) 45vw, 300px"
-              quality={95}
+              quality={80}
             />
           </div>
         </div>
@@ -198,7 +198,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
               fill
               className="object-contain object-top transition-opacity duration-300 group-hover:opacity-[0.98]"
               sizes="(max-width: 639px) 92vw, 320px"
-              quality={95}
+              quality={80}
             />
           </div>
         </div>
@@ -273,7 +273,7 @@ export default function CoachCard({ coach, variant = 'grid', compactStacked = fa
             className="object-cover"
             style={{ objectPosition: coach.imagePosition }}
             sizes="(max-width: 1024px) 100vw, 360px"
-            quality={95}
+            quality={80}
           />
         </div>
         <div className="p-8 md:p-10 lg:py-12 flex flex-col justify-center min-h-0 text-left">

@@ -152,7 +152,7 @@ export default function JuniorTrialLanding() {
             alt="Young player smiling on court during Little Tennis Stars session"
             fill
             priority
-            quality={95}
+            quality={80}
             sizes="100vw"
             className="object-cover"
             style={{ objectPosition: '50% 48%' }}

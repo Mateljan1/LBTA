@@ -71,7 +71,7 @@ export default function AllisonCronkPage() {
                 className="object-cover"
                 style={{ objectPosition: coach.imagePosition }}
                 sizes="200px"
-                quality={95}
+                quality={80}
               />
             </AnimatedSection>
             <div>

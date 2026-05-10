@@ -43,7 +43,7 @@ export default function CampRow({ camp, onRegister, isLast }: CampRowProps) {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 28vw, 200px"
-                  quality={88}
+                  quality={80}
                 />
               </div>
             ))}

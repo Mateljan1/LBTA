@@ -34,7 +34,7 @@ export default function HomeProgramCardLink({ program, section, imageSizes }: Pr
           className="object-cover image-zoom"
           style={{ objectPosition: program.objectPosition ?? '50% 40%' }}
           sizes={imageSizes}
-          quality={95}
+          quality={80}
         />
       </div>
       <div className="flex flex-1 flex-col px-5 pb-6 pt-5">

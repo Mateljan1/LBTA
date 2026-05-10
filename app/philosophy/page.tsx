@@ -87,7 +87,7 @@ export default function PhilosophyPage() {
             style={{ objectPosition: '50% 48%' }}
             sizes="100vw"
             priority
-            quality={95}
+            quality={80}
           />
           <div className="absolute inset-0 bg-brand-deep-water/70" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-brand-deep-water/40" />
@@ -141,7 +141,7 @@ export default function PhilosophyPage() {
                           className="object-cover"
                           style={{ objectPosition: '50% 48%' }}
                           sizes="(max-width: 768px) 100vw, 66vw"
-                          quality={95}
+                          quality={80}
                         />
                       </div>
                     )}

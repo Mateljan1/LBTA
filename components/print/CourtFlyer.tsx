@@ -120,7 +120,7 @@ export default function CourtFlyer({
           width={460}
           height={96}
           sizes="(max-width: 640px) 85vw, 300px"
-          quality={95}
+          quality={80}
           style={{ height: COURT_FLYER_LOGO_ROW_PX, width: 'auto', maxWidth: 300, minWidth: 180 }}
           className="flyer-lbta-wordmark object-contain object-center brightness-0 invert opacity-[0.95] [print-color-adjust:exact] shrink-0"
           priority
@@ -170,7 +170,7 @@ export default function CourtFlyer({
                   height={128}
                   className="block w-[128px] h-[128px] [print-color-adjust:exact]"
                   sizes="128px"
-                  quality={95}
+                  quality={80}
                 />
               </a>
             </div>
@@ -553,7 +553,7 @@ export default function CourtFlyer({
             width={220}
             height={56}
             sizes="220px"
-            quality={95}
+            quality={80}
             className="h-10 w-auto max-w-[220px] object-contain object-center brightness-0 invert opacity-95 [print-color-adjust:exact]"
             aria-hidden
           />

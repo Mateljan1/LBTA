@@ -27,7 +27,7 @@ export default function FounderSection() {
                 className="object-cover"
                 style={{ objectPosition: founder.imagePosition }}
                 sizes="(max-width: 1024px) 100vw, 420px"
-                quality={95}
+                quality={80}
               />
             </div>
             </AnimatedSection>

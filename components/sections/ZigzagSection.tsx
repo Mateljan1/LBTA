@@ -49,7 +49,7 @@ export default function ZigzagSection({
                     className="object-cover image-zoom"
                     style={{ objectPosition: '50% 50%' }}
                     sizes={block.imageSizes ?? '(max-width: 768px) 100vw, 50vw'}
-                    quality={95}
+                    quality={80}
                   />
                 </div>
                 <div

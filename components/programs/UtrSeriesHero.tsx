@@ -41,7 +41,7 @@ export default function UtrSeriesHero() {
             priority
             className="object-cover object-center"
             sizes="100vw"
-            quality={95}
+            quality={80}
           />
         </div>
         <div
