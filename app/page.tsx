@@ -1,4 +1,3 @@
-import Script from 'next/script'
 import Link from 'next/link'
 import HomeProgramCardLink from '@/components/home/HomeProgramCardLink'
 import Image from 'next/image'
@@ -14,44 +13,14 @@ import HomeHero from '@/components/HomeHero'
 import HomeCTAForm from '@/components/HomeCTAForm'
 import PlayerSuccessCarousel, { type PlayerSuccessSlide } from '@/components/home/PlayerSuccessCarousel'
 import { coachImageSrc } from '@/lib/coaches-data'
-import siteStats from '@/data/site-stats.json'
 import homepageCopy from '@/data/homepage-copy.json'
 import pricingSupplemental from '@/data/pricing-supplemental.json'
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'SportsActivityLocation',
-  name: 'Laguna Beach Tennis Academy',
-  alternateName: 'LBTA',
-  description:
-    'Tennis academy in Laguna Beach offering junior programs, adult lessons, high-performance training, and fitness classes. Movement-first coaching philosophy.',
-  url: 'https://lagunabeachtennisacademy.com',
-  telephone: '+1-949-534-0457',
-  email: 'support@lagunabeachtennisacademy.com',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Moulton Meadows Park, 1098 Balboa Ave',
-    addressLocality: 'Laguna Beach',
-    addressRegion: 'CA',
-    postalCode: '92651',
-    addressCountry: 'US',
-  },
-  geo: { '@type': 'GeoCoordinates', latitude: 33.5427, longitude: -117.7854 },
-  openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '07:00', closes: '21:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday', 'Sunday'], opens: '08:00', closes: '18:00' },
-  ],
-  priceRange: '$$',
-  image: 'https://lagunabeachtennisacademy.com/images/hero/laguna-horizon.webp',
-  logo: 'https://lagunabeachtennisacademy.com/logos/LBTAblktext.png',
-  sameAs: ['https://www.instagram.com/lagunabeachtennisacademy', 'https://www.facebook.com/lagunabeachtennisacademy'],
-  founder: { '@type': 'Person', name: 'Andrew Mateljan', jobTitle: 'Director & Head Coach' },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: siteStats.trustStats.rating,
-    reviewCount: siteStats.trustStats.reviewCount,
-  },
-}
+// Note: SportsActivityLocation / Organization schema lives in app/layout.tsx (OrganizationSchema)
+// with @id "https://lagunabeachtennisacademy.com/#organization" so every page has it once.
+// We previously duplicated it here on the homepage with no shared @id — caused entity confusion
+// in Google's rich-results testing. Removed 2026-05-09; rely on the global schema instead.
+// AggregateRating now lives only on ReviewSchema (root layout) to keep one source.
 
 export const metadata = {
   alternates: { canonical: '/' },
@@ -114,8 +83,6 @@ export default function Home() {
   const comparisonTiers = pricingSupplemental.comparisonTiers
   return (
     <>
-      <Script id="local-business-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-
       <HomeHero />
 
       {/* Stats strip removed — keeping it clean */}

@@ -13,6 +13,7 @@ const frontmatterSchema = z.object({
   date: z.string(),
   updated: z.string().optional(),
   author: z.string().optional(),
+  image: z.string().optional(),
 })
 
 export type BlogPostMeta = {
@@ -22,6 +23,8 @@ export type BlogPostMeta = {
   date: string
   updated?: string
   author: string
+  /** Optional per-post hero image URL (relative to /public). Falls back to brand default if absent. */
+  image?: string
 }
 
 export type BlogPost = BlogPostMeta & { content: string }
@@ -41,6 +44,7 @@ function metaFromData(data: unknown, slug: string): BlogPostMeta | null {
     date: d.date,
     updated: d.updated,
     author: d.author ?? 'Laguna Beach Tennis Academy',
+    image: d.image,
   }
 }
 

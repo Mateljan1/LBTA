@@ -528,20 +528,20 @@ export default function RegistrationModal({
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="sr-only">First name</label>
-                      <input type="text" required value={form.firstName} onChange={(e) => handleChange('firstName', e.target.value)} placeholder="First name *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                      <input type="text" required value={form.firstName} onChange={(e) => handleChange('firstName', e.target.value)} placeholder="First name *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-base text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                     </div>
                     <div>
                       <label className="sr-only">Last name</label>
-                      <input type="text" required value={form.lastName} onChange={(e) => handleChange('lastName', e.target.value)} placeholder="Last name *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                      <input type="text" required value={form.lastName} onChange={(e) => handleChange('lastName', e.target.value)} placeholder="Last name *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-base text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                     </div>
                   </div>
                   <div>
                     <label className="sr-only">Email</label>
-                    <input type="email" required value={form.email} onChange={(e) => handleChange('email', e.target.value)} placeholder="Email *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                    <input type="email" required value={form.email} onChange={(e) => handleChange('email', e.target.value)} placeholder="Email *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-base text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                   </div>
                   <div>
                     <label className="sr-only">Phone</label>
-                    <input type="tel" required value={form.phone} onChange={(e) => handleChange('phone', e.target.value)} placeholder="Phone *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                    <input type="tel" required value={form.phone} onChange={(e) => handleChange('phone', e.target.value)} placeholder="Phone *" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-base text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                   </div>
                 </div>
 
@@ -552,11 +552,11 @@ export default function RegistrationModal({
                     <div className="grid grid-cols-3 gap-3">
                       <div className="col-span-2">
                         <label className="sr-only">Player name</label>
-                        <input type="text" value={form.playerName} onChange={(e) => handleChange('playerName', e.target.value)} placeholder="Player's first name" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                        <input type="text" value={form.playerName} onChange={(e) => handleChange('playerName', e.target.value)} placeholder="Player's first name" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-base text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                       </div>
                       <div>
                         <label className="sr-only">Player age</label>
-                        <input type="number" min={3} max={99} value={form.playerAge} onChange={(e) => handleChange('playerAge', e.target.value)} placeholder="Age" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
+                        <input type="number" min={3} max={99} value={form.playerAge} onChange={(e) => handleChange('playerAge', e.target.value)} placeholder="Age" className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-base text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]" />
                       </div>
                     </div>
                   </div>
@@ -596,7 +596,7 @@ export default function RegistrationModal({
                       <select
                         value={form.daysPerWeek}
                         onChange={(e) => handleDaysPerWeekChange(e.target.value)}
-                        className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]"
+                        className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-base text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12]"
                       >
                         <option value="" className="bg-brand-deep-water text-white">Days per week</option>
                         <option value="1" className="bg-brand-deep-water text-white">1 day/week</option>
@@ -694,7 +694,7 @@ export default function RegistrationModal({
                     rows={2}
                     value={form.notes}
                     onChange={(e) => handleChange('notes', e.target.value)}
-                    className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-[14px] text-white placeholder:text-white/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12] resize-none"
+                    className="w-full rounded-[6px] bg-white/[0.08] border border-white/10 px-3.5 py-3 font-sans text-base text-white placeholder:text-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus:bg-white/[0.12] resize-none"
                     placeholder="Anything else? (optional)"
                   />
                 </div>

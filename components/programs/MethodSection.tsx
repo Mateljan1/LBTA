@@ -59,14 +59,14 @@ export default function MethodSection() {
             </span>
             <h2 className="font-headline text-[clamp(2rem,4.5vw,3rem)] font-light text-white leading-[1.1] tracking-[-0.02em] mb-6">
               A coaching system,{' '}
-              <span className="text-white/50">not a curriculum.</span>
+              <span className="text-white/65">not a curriculum.</span>
             </h2>
             <p className="font-sans text-[16px] text-white/75 leading-[1.8] mb-4">
               Every session runs on a documented system built from twenty years
               of playing, coaching, and studying the game across three continents.
               Traditional coaching focuses on the swing. We train the complete chain.
             </p>
-            <p className="font-sans text-[14px] text-white/50 leading-relaxed mb-10">
+            <p className="font-sans text-[14px] text-white/70 leading-relaxed mb-10">
               Whether a player is five or fifty, everyone learns the same shared
               language: Five Ball Controls and Phase Play.
             </p>

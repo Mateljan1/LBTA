@@ -13,10 +13,12 @@ const coach = getCoachBySlug('andrew-mateljan')!
 
 export const metadata: Metadata = {
   alternates: { canonical: '/coaches/andrew-mateljan' },
-  title: 'Andrew Mateljan — Founder & Head Coach',
+  // Use title.absolute to bypass the root-layout " | Laguna Beach Tennis Academy" template
+  // (which would push total title to 68 chars and truncate in SERPs). 47 chars fits cleanly.
+  title: { absolute: 'Andrew Mateljan — Founder & Head Coach | LBTA' },
   description: '25 years of tennis coaching experience. Former top-ranked junior, ATP/WTA tour coach, and founder of LBTA. Currently coaching ATP #262 Karue Sell.',
   openGraph: {
-    title: 'Andrew Mateljan — Founder & Head Coach',
+    title: 'Andrew Mateljan — Founder & Head Coach | LBTA',
     description: '25 years of tennis coaching experience. Former top-ranked junior, ATP/WTA tour coach, and founder of LBTA. Currently coaching ATP #262 Karue Sell.',
     type: 'website',
     images: [{ url: coachImageSrc(coach.image), width: 800, height: 1000, alt: 'Andrew Mateljan, Founder & Head Coach' }],

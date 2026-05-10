@@ -120,7 +120,7 @@ function FeaturedHomeTestimonials() {
     <section className="bg-black py-16 md:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-10 md:mb-14">
-          <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/50 mb-4">
+          <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/65 mb-4">
             Player Stories
           </p>
           <h2 className="font-headline text-[28px] md:text-[40px] font-light text-white leading-[1.15]">
@@ -139,7 +139,7 @@ function FeaturedHomeTestimonials() {
               </div>
               <div className="mt-4 text-center">
                 <p className="font-sans text-[14px] font-medium text-white">{testimonial.name}</p>
-                <p className="font-sans text-[12px] text-white/50">{testimonial.role}</p>
+                <p className="font-sans text-[12px] text-white/65">{testimonial.role}</p>
               </div>
             </div>
           ))}
@@ -199,7 +199,7 @@ function CarouselTestimonials() {
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-10 md:mb-14">
-          <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/50 mb-4">
+          <p className="font-sans text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/65 mb-4">
             Player Stories
           </p>
           <h2 className="font-headline text-[28px] md:text-[40px] font-light text-white leading-[1.15]">
@@ -245,7 +245,7 @@ function CarouselTestimonials() {
                   </div>
                   <div className="mt-4 text-center">
                     <p className="font-sans text-[14px] font-medium text-white">{testimonial.name}</p>
-                    <p className="font-sans text-[12px] text-white/50">{testimonial.role}</p>
+                    <p className="font-sans text-[12px] text-white/65">{testimonial.role}</p>
                   </div>
                 </div>
               ))}

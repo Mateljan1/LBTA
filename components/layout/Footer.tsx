@@ -133,7 +133,7 @@ export default function Footer() {
                       className="group inline-flex items-start gap-3 min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       <Phone
-                        className="w-4 h-4 shrink-0 mt-0.5 text-white/45 group-hover:text-brand-sunset-cliff/90 transition-colors"
+                        className="w-4 h-4 shrink-0 mt-0.5 text-white/55 group-hover:text-brand-sunset-cliff/90 transition-colors"
                         aria-hidden
                       />
                       <span className="pt-0.5">(949) 534-0457</span>
@@ -146,7 +146,7 @@ export default function Footer() {
                       className="group inline-flex items-start gap-3 min-h-[48px] text-[14px] font-sans font-light text-white/70 hover:text-brand-sunset-cliff transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm"
                     >
                       <Mail
-                        className="w-4 h-4 shrink-0 mt-0.5 text-white/45 group-hover:text-brand-sunset-cliff/90 transition-colors"
+                        className="w-4 h-4 shrink-0 mt-0.5 text-white/55 group-hover:text-brand-sunset-cliff/90 transition-colors"
                         aria-hidden
                       />
                       <span className="min-w-0 pt-0.5 leading-snug [overflow-wrap:anywhere]">
@@ -164,7 +164,7 @@ export default function Footer() {
                   </li>
                   <li>
                     <div className="inline-flex items-start gap-3 text-[13px] font-sans font-light text-white/70 leading-relaxed">
-                      <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-white/45" aria-hidden />
+                      <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-white/55" aria-hidden />
                       <div className="min-w-0 pt-0.5">
                         <span className="block">Moulton Meadows Park</span>
                         <span className="block">1098 Balboa Ave</span>

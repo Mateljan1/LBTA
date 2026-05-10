@@ -282,6 +282,13 @@ export function BreadcrumbListSchema({ items }: { items: Array<{ name: string; h
   )
 }
 
+/**
+ * Default Article hero image — used when a post doesn't specify its own
+ * `image` in frontmatter. Brand-consistent fallback ensures every post
+ * has a valid og:image and Article.image for rich-result eligibility.
+ */
+const DEFAULT_ARTICLE_IMAGE = 'https://lagunabeachtennisacademy.com/images/hero/laguna-horizon.webp'
+
 /** Article JSON-LD for journal posts (`/blog/[slug]`). */
 export function BlogArticleSchema({
   title,
@@ -290,6 +297,7 @@ export function BlogArticleSchema({
   datePublished,
   dateModified,
   authorName,
+  image,
 }: {
   title: string
   description: string
@@ -297,13 +305,21 @@ export function BlogArticleSchema({
   datePublished: string
   dateModified: string
   authorName: string
+  /** Optional per-post image URL (relative to /public or absolute). Defaults to brand hero. */
+  image?: string
 }) {
   const url = `https://lagunabeachtennisacademy.com/blog/${slug}`
+  const articleImage = image
+    ? image.startsWith('http')
+      ? image
+      : `https://lagunabeachtennisacademy.com${image.startsWith('/') ? image : `/${image}`}`
+    : DEFAULT_ARTICLE_IMAGE
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: title,
     description,
+    image: articleImage,
     datePublished,
     dateModified,
     author: {

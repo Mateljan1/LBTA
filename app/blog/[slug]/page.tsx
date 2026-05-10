@@ -15,6 +15,9 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }))
 }
 
+// Brand-default Article hero (1920×1080 WebP). Used when post frontmatter has no image.
+const DEFAULT_OG_IMAGE = '/images/hero/laguna-horizon.webp'
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = await getPostBySlug(slug)
@@ -22,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Article' }
   }
   const canonical = `/blog/${slug}`
+  const ogImage = post.image ?? DEFAULT_OG_IMAGE
   return {
     title: post.title,
     description: post.description,
@@ -33,6 +37,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.date,
       modifiedTime: post.updated ?? post.date,
       url: `https://lagunabeachtennisacademy.com${canonical}`,
+      images: [
+        {
+          url: ogImage,
+          width: 1920,
+          height: 1080,
+          alt: post.title,
+        },
+      ],
+      authors: [post.author],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [ogImage],
     },
   }
 }
@@ -69,6 +88,7 @@ export default async function BlogArticlePage({ params }: Props) {
         datePublished={post.date}
         dateModified={post.updated ?? post.date}
         authorName={post.author}
+        image={post.image}
       />
       <BreadcrumbListSchema items={[
         { name: 'Home', href: '/' },
