@@ -120,3 +120,59 @@ For text on `bg-brand-deep-water`, `bg-brand-deep-card`, or any dark surface:
 - **Helper / footnote**: `text-white/55` to `text-white/65`
 - **Decorative borders/dividers**: `border-white/10` to `border-white/20` (non-text only)
 - **❌ Never** `text-white/40` or `text-white/25` for any text — fails WCAG 7:1
+
+---
+
+## Adding an exception (escape-hatch playbook)
+
+The strict checker enforces brand discipline by default. When you have a legitimate reason to add a new pattern that would normally fail strict mode, here's the recipe per scenario. **All exceptions must be documented at the place they're added** — that's the rule that keeps the system from drifting.
+
+### Scenario A: New responsive eyebrow variant (e.g. `lg:text-[14px]`)
+
+The 7 documented responsive variants (`text-[11px] md:text-[12px]`) are excluded via `responsiveSizeVariantRegex` in `scripts/check-brand-usage.ts`. To add an 8th:
+
+1. Confirm it's in a hero context (designer-deliberate desktop bump, not drift).
+2. The existing regex `(?:sm|md|lg|xl|2xl|max-(?:sm|md|lg|xl|2xl)|min-(?:sm|md|lg|xl|2xl)):text-\[[\d.]+px\]` covers most cases — try first.
+3. If your variant uses a custom breakpoint (e.g. `tablet:text-[12px]`), edit the regex.
+4. Increment the count in `.cursorrules` Part 7: "There are N documented instances site-wide."
+
+### Scenario B: New brand color
+
+The Brand Kit is locked at 12 colors. Adding a 13th breaks the "max 11 colors" rule from `.cursorrules` Part 6. **Strongly prefer using opacity** (`bg-brand-victoria-cove/85`) over a new color. If you must add one:
+
+1. Edit `tokens/lbta-web-tokens.json` — add to `colors.brand`.
+2. Run `npm run tokens:build` to regenerate Tailwind config + CSS vars + TS constants.
+3. Add a swatch row to `app/brand/page.tsx` (visual proof — required, not optional).
+4. Update `.cursorrules` Part 7 color list.
+5. Update this doc's "12 brand identity colors" sentence above.
+6. Document the rationale in this doc: what role does this color fill that the existing 12 don't?
+
+### Scenario C: New deprecation (an existing class is being replaced)
+
+Single source of truth: `tokens/lbta-web-tokens.json` `deprecations` field.
+
+1. Edit `tokens/lbta-web-tokens.json` — add to `deprecations`: `"old-class-name": "replacement-name (or guidance)"`.
+2. Run `npm run tokens:build` — `lib/brand-tokens.ts` `DEPRECATED_LBTA_CLASSES` updates automatically.
+3. The brand checker reads from `DEPRECATED_LBTA_CLASSES`, so it picks up the new deprecation immediately.
+4. Add the row to the table above.
+5. If existing code uses the deprecated name, run a one-shot migration script (see `2026-05-06-brand-system-v13-eyebrow-migration-compound-learn.md` for the dry-run-default pattern) before flipping the build to fail on it.
+
+### Scenario D: New forbidden font (a font joins the no-list)
+
+1. Edit `scripts/check-brand-usage.ts` `forbiddenFontRegex`.
+2. Update `.cursorrules` Part 8 (Typography System) "NEVER USE" list.
+3. If `lib/email.ts` or any other exempted file legitimately uses the new forbidden font for fallbacks, add it to `fontSkipFiles` in the checker.
+
+### Scenario E: New utility lbta-* color (semantic role brand can't fill)
+
+The 4 allowed `lbta-*` utility colors (slate, stone, red, black) are documented in `tokens/lbta-web-tokens.json` `lbtaUtility.allowed`. To add a 5th:
+
+1. Confirm the new role is genuinely outside brand identity (e.g. a system success-green that's distinct from brand-tide-pool).
+2. Edit `tokens/lbta-web-tokens.json` — add to `lbtaUtility.allowed` AND add a `rationale` entry explaining why it's not a brand color.
+3. Run `npm run tokens:build` — `LBTA_UTIL` updates with the new key.
+4. Update the "Two namespaces" section above with the new role.
+5. Update `.cursorrules` Part 7 to mention it.
+
+### General rule
+
+If you're stuck on whether something is an exception or drift, ask: **"Does this serve the design system, or work around it?"** Exceptions serve the system (they fill gaps the system can't address). Drift works around it (it bypasses the system rather than extending it). When in doubt, extend the system — don't bypass it.

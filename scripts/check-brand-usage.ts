@@ -39,22 +39,12 @@ const stringLiteralRegex = /(["'`])((?:\\.|(?!\1).)*?)\1/g
 // Patterns matching this regex are intentional responsive variants (md:text-[Npx] etc.) — exclude from drift count
 const responsiveSizeVariantRegex = /\b(?:sm|md|lg|xl|2xl|max-(?:sm|md|lg|xl|2xl)|min-(?:sm|md|lg|xl|2xl)):text-\[[\d.]+px\]/
 
-// Deprecated lbta-* classes that have direct brand-* equivalents and must migrate.
+// Deprecated lbta-* classes — sourced from `tokens/lbta-web-tokens.json` `deprecations` field
+// via the generated `DEPRECATED_LBTA_CLASSES` constant. Single source of truth.
 // Allowed lbta-* utility classes (slate, stone, red, black) are NOT deprecated — they fill
 // system/utility roles the 11-color brand kit doesn't address. See docs/brand-token-system.md.
-const deprecatedLbtaClasses = new Set([
-  'lbta-primary',     // → brand-pacific-dusk
-  'lbta-coral',       // → brand-sunset-cliff
-  'lbta-coral-dark',  // → brand-sunset-cliff/85 hover
-  'lbta-bone',        // → brand-morning-light
-  'lbta-cream',       // → brand-morning-light
-  'lbta-charcoal',    // → brand-pacific-dusk
-  'lbta-orange',      // → brand-sunset-cliff
-  'lbta-burnt',       // → brand-sunset-cliff
-  'lbta-beige',       // → brand-sandstone
-  'lbta-sand',        // → brand-sandstone
-  'lbta-secondary',   // → lbta-slate (alias dedup)
-])
+import { DEPRECATED_LBTA_CLASSES } from '../lib/brand-tokens'
+const deprecatedLbtaClasses = new Set(Object.keys(DEPRECATED_LBTA_CLASSES))
 
 // Files exempt from raw-hex scan (own the tokens themselves)
 const rawHexSkipFiles = new Set([

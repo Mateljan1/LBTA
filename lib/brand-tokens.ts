@@ -9,6 +9,7 @@
  * Source of truth: tokens/lbta-web-tokens.json
  */
 
+/** Brand identity colors. Use these for everything brand-related. */
 export const BRAND = {
   pacificDusk: '#1B3A5C',
   deepWater: '#0F2237',
@@ -27,7 +28,62 @@ export const BRAND = {
 export type BrandToken = keyof typeof BRAND
 export type BrandValue = (typeof BRAND)[BrandToken]
 
-/** Legacy lbta.* palette. Prefer BRAND for new code. */
+/**
+ * System utility colors — semantic roles the brand palette doesn't address.
+ * These are NOT brand colors. They fill specific functional needs.
+ *
+ * - red: Error/alert ONLY (#F04E23). Brand palette has no error red. Never use for marketing.
+ * - black: True black for premium CTAs (#0A0A0A). Distinct from brand-deep-water/-deep-card.
+ * - stone: Neutral border / disabled / divider (#E8E4DF). Brand palette has no neutral border tone.
+ * - slate: Neutral secondary text (#6B6B6B). Brand palette has no neutral gray.
+ */
+export const LBTA_UTIL = {
+  red: '#F04E23',
+  black: '#0A0A0A',
+  stone: '#E8E4DF',
+  slate: '#6B6B6B',
+} as const
+
+export type LbtaUtilToken = keyof typeof LBTA_UTIL
+
+/**
+ * Legacy lbta-* color exports. ALL DEPRECATED.
+ *
+ * Editor tooling should surface @deprecated warnings on each key.
+ * Prefer BRAND.* (identity) or LBTA_UTIL.* (utility).
+ * See `tokens/lbta-web-tokens.json` `deprecations` map for replacement guidance.
+ */
+export const LBTA_LEGACY = {
+  /** @deprecated Use brand-sunset-cliff instead. */
+  burnt: '#E8834A',
+  /** @deprecated Use brand-sunset-cliff instead. */
+  orange: '#E8834A',
+  /** @deprecated Use brand-sandstone instead. */
+  beige: '#F5F0E5',
+  /** @deprecated Use brand-salt-air (or Tailwind native text-white/bg-white) instead. */
+  white: '#FFFFFF',
+  /** @deprecated Use brand-morning-light instead. */
+  cream: '#FAF8F4',
+  /** @deprecated Use brand-sandstone instead. */
+  sand: '#F5F0E5',
+  /** @deprecated Use brand-pacific-dusk instead. */
+  charcoal: '#1B3A5C',
+  /** @deprecated Use brand-pacific-dusk instead. */
+  primary: '#1B3A5C',
+  /** @deprecated Use lbta-slate (alias dedup) instead. */
+  secondary: '#6B6B6B',
+  /** @deprecated Use brand-sunset-cliff instead. */
+  coral: '#E8834A',
+  /** @deprecated Use brand-sunset-cliff/85 (use opacity for hover state) instead. */
+  coralDark: '#D4773F',
+  /** @deprecated Use brand-morning-light instead. */
+  bone: '#FAF8F4',
+} as const
+
+/**
+ * Combined lbta.* palette (utility + legacy). Kept for backwards compat with existing imports.
+ * New code should prefer LBTA_UTIL (allowed) or BRAND (brand identity).
+ */
 export const LBTA = {
   burnt: '#E8834A',
   orange: '#E8834A',
@@ -45,4 +101,24 @@ export const LBTA = {
   coral: '#E8834A',
   coralDark: '#D4773F',
   bone: '#FAF8F4',
+} as const
+
+/**
+ * Deprecated Tailwind class names → recommended replacements.
+ * Used by scripts/check-brand-usage.ts to enforce migration.
+ * Single source: `tokens/lbta-web-tokens.json` `deprecations` field.
+ */
+export const DEPRECATED_LBTA_CLASSES: Readonly<Record<string, string>> = {
+  'lbta-primary': 'brand-pacific-dusk',
+  'lbta-charcoal': 'brand-pacific-dusk',
+  'lbta-cream': 'brand-morning-light',
+  'lbta-bone': 'brand-morning-light',
+  'lbta-beige': 'brand-sandstone',
+  'lbta-sand': 'brand-sandstone',
+  'lbta-orange': 'brand-sunset-cliff',
+  'lbta-coral': 'brand-sunset-cliff',
+  'lbta-burnt': 'brand-sunset-cliff',
+  'lbta-coral-dark': 'brand-sunset-cliff/85 (use opacity for hover state)',
+  'lbta-secondary': 'lbta-slate (alias dedup)',
+  'lbta-white': 'brand-salt-air (or Tailwind native text-white/bg-white)',
 } as const

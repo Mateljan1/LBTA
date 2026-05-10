@@ -1,8 +1,8 @@
 {
   "meta": {
     "name": "LBTA Web Tokens",
-    "version": "1.1.0",
-    "updated": "2026-05-05",
+    "version": "1.2.0",
+    "updated": "2026-05-09",
     "sourceOfTruth": "website"
   },
   "colors": {
@@ -38,5 +38,28 @@
       "coral-dark": "#D4773F",
       "bone": "#FAF8F4"
     }
+  },
+  "lbtaUtility": {
+    "allowed": ["slate", "stone", "red", "black"],
+    "rationale": {
+      "slate": "Neutral secondary text (#6B6B6B). Brand palette has no neutral gray.",
+      "stone": "Neutral border / disabled / divider (#E8E4DF). Brand palette has no neutral border tone.",
+      "red": "Error/alert ONLY (#F04E23). Brand palette has no error red. Never use for marketing.",
+      "black": "True black for premium CTAs (#0A0A0A). Distinct from brand-deep-water/-deep-card."
+    }
+  },
+  "deprecations": {
+    "lbta-primary": "brand-pacific-dusk",
+    "lbta-charcoal": "brand-pacific-dusk",
+    "lbta-cream": "brand-morning-light",
+    "lbta-bone": "brand-morning-light",
+    "lbta-beige": "brand-sandstone",
+    "lbta-sand": "brand-sandstone",
+    "lbta-orange": "brand-sunset-cliff",
+    "lbta-coral": "brand-sunset-cliff",
+    "lbta-burnt": "brand-sunset-cliff",
+    "lbta-coral-dark": "brand-sunset-cliff/85 (use opacity for hover state)",
+    "lbta-secondary": "lbta-slate (alias dedup)",
+    "lbta-white": "brand-salt-air (or Tailwind native text-white/bg-white)"
   }
 }
