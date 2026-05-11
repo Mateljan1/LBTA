@@ -91,14 +91,17 @@ const fontSkipFiles = new Set([
  * line 42) and `null` for file-level findings (e.g. a missing CAN-SPAM
  * postal address — there is no specific line to point to). Printers and
  * the report writer render `null` as "(file)".
+ *
+ * Internal to this script. Tests that need to assert on hits use the
+ * exported `scanEmailTemplate` return shape instead.
  */
-export type Hit = {
+type Hit = {
   file: string
   line: number | null
   value: string
 }
 
-export type ReportData = {
+type ReportData = {
   forbidden: Hit[]
   rawHex: Hit[]
   arbitraryTailwind: Hit[]

@@ -4,14 +4,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import { BRAND, LBTA_UTIL, LBTA_LEGACY, LBTA, DEPRECATED_LBTA_CLASSES } from './brand-tokens'
-import {
-  scanEmailTemplate,
-  emailScanRoot,
-  emailExemptFiles,
-  emailForbiddenHexes,
-  emailRequiredPostalMarker,
-  emailCustomerFacingMarker,
-} from '../scripts/check-brand-usage'
+import { scanEmailTemplate } from '../scripts/check-brand-usage'
 
 const REPO_ROOT = path.resolve(__dirname, '..')
 const TOKEN_JSON_PATH = path.join(REPO_ROOT, 'tokens', 'lbta-web-tokens.json')
@@ -202,14 +195,11 @@ describe('email brand checker — behavior', () => {
     expect(missingPostalAddress).toHaveLength(0)
   })
 
-  it('composes exempt files from emailScanRoot (no hardcoded duplication)', () => {
-    expect(emailScanRoot).toBe('assets/emails')
-    expect(emailExemptFiles.has(`${emailScanRoot}/lbta-spring-2026.html`)).toBe(true)
-  })
-
-  it('configures the consolidated wrapper hex and postal markers', () => {
-    expect(emailForbiddenHexes.has('#d5d1ca')).toBe(true)
-    expect(emailRequiredPostalMarker).toBe('1098 Balboa')
-    expect(emailCustomerFacingMarker).toBe('Laguna Beach')
-  })
+  // Note: config-pinning tests for emailScanRoot, emailExemptFiles, emailForbiddenHexes,
+  // emailRequiredPostalMarker, and emailCustomerFacingMarker were removed as redundant.
+  // The behavior tests above implicitly cover them — e.g. test #1 ("flags forbidden hex
+  // #d5d1ca") fails if #d5d1ca is removed from the Set; test #4 ("flags missing postal
+  // address") asserts on `value: stringContaining('1098 Balboa')`, so changing the
+  // postal marker fails it; tests #4-#6 use 'Laguna Beach' literally, so changing the
+  // customer-facing marker fails them.
 })

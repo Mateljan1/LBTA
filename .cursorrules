@@ -193,6 +193,12 @@ colors: {
 - For arbitrary Tailwind values: forbidden — `bg-[#0a1628]` ❌ → `bg-brand-deep-card` ✅.
 - Visual proof of system: `/brand` route (internal, noindex). See `docs/brand-token-system.md`.
 
+**Email templates (`assets/emails/**/*.html`) — separate ruleset (locked v1.2, 2026-05-11):**
+- Tracked email templates are scanned by the same `tokens:check` script in both `--all` and edited-files mode.
+- **Forbidden hex** (consolidated to a brand token): currently `#d5d1ca` → `lbta-stone (#E8E4DF)`. Adding more to `emailForbiddenHexes` in `scripts/check-brand-usage.ts` strict-blocks new violations. **WARN → ERROR in strict.**
+- **CAN-SPAM postal address**: customer-facing templates (containing "Laguna Beach") MUST contain `1098 Balboa`. **ERROR (legal compliance, §316.5).** AC placeholder stub `lbta-spring-2026.html` is exempt.
+- Generic body grays (`#333`, `#666`, `#999`, `#667788`) are explicitly **allowed** in `lib/email.ts` per the BRAND COLOR POLICY comment header (visual hierarchy + email-design convention). See `docs/brand-token-system.md` Guardrails → Email templates.
+
 **Two namespaces by design — `brand.*` and `lbta.*`:**
 - **`brand-*`** = 12 brand identity colors (the Pacific palette + `brand-deep-card`). Use for everything brand-related.
 - **`lbta-*`** = 4 system utility colors only:
@@ -570,6 +576,8 @@ lib/
 ❌ `text-white/40` or `text-white/25` on dark surfaces — fails WCAG 7:1 (use ≥/55 for body, /65–/75 for eyebrows)
 ❌ Webhook: using payload ID in URLs/bodies without validating as positive integer
 ❌ Webhook: comparing secret with == or === (use crypto.timingSafeEqual, same-length buffers)
+❌ Email: `#d5d1ca` outer wrapper — consolidated to `#E8E4DF` (lbta-stone). Adding to `emailForbiddenHexes` strict-blocks it.
+❌ Email: customer-facing template (mentions "Laguna Beach") shipped without `1098 Balboa` postal address — CAN-SPAM §316.5 violation
 ```
 
 ---
