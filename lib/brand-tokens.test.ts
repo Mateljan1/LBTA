@@ -126,3 +126,34 @@ describe('brand usage guardrail', () => {
     expect(exitCode).toBe(0)
   }, 30_000)
 })
+
+describe('email brand checker rules (contract test)', () => {
+  // Prevents regressions where someone deletes the email-scan extension.
+  // If you intentionally remove these rules, update this test in the same PR.
+  const checkerSource = readFileSync(
+    path.join(REPO_ROOT, 'scripts', 'check-brand-usage.ts'),
+    'utf8',
+  )
+
+  it('declares emailScanRoot pointing at assets/emails', () => {
+    expect(checkerSource).toMatch(/emailScanRoot\s*=\s*['"]assets\/emails['"]/)
+  })
+
+  it('forbids the consolidated #d5d1ca wrapper hex in tracked email templates', () => {
+    expect(checkerSource).toMatch(/emailForbiddenHexes\s*=\s*new Set\(\[\s*['"]#d5d1ca['"]/i)
+  })
+
+  it('requires the CAN-SPAM "1098 Balboa" postal marker on customer-facing emails', () => {
+    expect(checkerSource).toMatch(/emailRequiredPostalMarker\s*=\s*['"]1098 Balboa['"]/)
+    expect(checkerSource).toMatch(/emailCustomerFacingMarker\s*=\s*['"]Laguna Beach['"]/)
+  })
+
+  it('exempts the lbta-spring-2026.html ActiveCampaign placeholder stub', () => {
+    expect(checkerSource).toMatch(/emailExemptFiles\s*=\s*new Set\(\[\s*['"]assets\/emails\/lbta-spring-2026\.html['"]/)
+  })
+
+  it('treats missing postal address as ERROR (CAN-SPAM is legal compliance, not style)', () => {
+    expect(checkerSource).toMatch(/emailMissingPostalAddress\.length/)
+    expect(checkerSource).toMatch(/totalErrors\s*=[\s\S]*?emailMissingPostalAddress\.length/)
+  })
+})

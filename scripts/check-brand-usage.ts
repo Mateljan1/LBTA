@@ -9,6 +9,28 @@ const allowedExtensions = new Set(['.ts', '.tsx', '.css'])
 // Forbidden Tailwind classes (low-contrast white text on dark surfaces, fails WCAG 7:1)
 const forbiddenClasses = ['text-white/40', 'text-white/25']
 
+// ────────────────────────────────────────────────────────────────────
+// Email template scanning (separate domain, looser rules than React)
+// ────────────────────────────────────────────────────────────────────
+// Emails inherently allow more permissive styling than React components
+// (email-client compat: Outlook, Apple Mail, Gmail render brand colors
+// inconsistently — see lib/email.ts BRAND COLOR POLICY). So the email
+// scanner only enforces:
+//   1. Forbidden hex values (specifically the consolidated wrappers)
+//   2. CAN-SPAM postal address presence on customer-facing templates
+const emailScanRoot = 'assets/emails'
+// Hex values that have been consolidated to a brand token. Adding more here
+// will fail any tracked email template that still uses them.
+const emailForbiddenHexes = new Set(['#d5d1ca'])
+// AC placeholder stubs (not real customer-facing email content).
+// CAN-SPAM and brand rules don't apply.
+const emailExemptFiles = new Set(['assets/emails/lbta-spring-2026.html'])
+// Required physical address marker for CAN-SPAM compliance. If a template
+// mentions "Laguna Beach" (i.e. is customer-facing), it must also include
+// the full street address.
+const emailRequiredPostalMarker = '1098 Balboa'
+const emailCustomerFacingMarker = 'Laguna Beach'
+
 // Scans
 const rawHexRegex = /#[0-9a-fA-F]{6}(?:[0-9a-fA-F]{2})?\b/g
 const lbtaClassRegex = /\blbta-[a-z0-9-]+\b/g
@@ -71,6 +93,14 @@ type ReportData = {
   forbiddenFont: Hit[]
   legacyLbta: Hit[]
   handRolledEyebrow: Hit[]
+  /** Forbidden hex values found in tracked email templates */
+  emailForbiddenHex: Hit[]
+  /**
+   * Customer-facing email templates missing the CAN-SPAM-required full postal
+   * address. One Hit per file (not per line) since this is a template-level
+   * compliance issue.
+   */
+  emailMissingPostalAddress: Hit[]
 }
 
 /**
@@ -129,6 +159,72 @@ async function walkFiles(dirPath: string, files: string[] = []): Promise<string[
   }
 
   return files
+}
+
+/**
+ * Get tracked email template paths (relative to repoRoot). Uses git ls-files
+ * so we don't flag work-in-progress untracked email drafts at assets/emails/
+ * root. Returns empty array if git or the directory aren't available.
+ */
+function getTrackedEmailTemplates(): string[] {
+  try {
+    const output = execSync(`git ls-files ${emailScanRoot}`, {
+      cwd: repoRoot,
+      stdio: ['ignore', 'pipe', 'ignore'],
+      encoding: 'utf8',
+    })
+    return output
+      .split('\n')
+      .map((line) => line.trim())
+      .filter((p) => p.endsWith('.html'))
+      .filter((p) => !emailExemptFiles.has(p))
+      .map((relativePath) => path.join(repoRoot, relativePath))
+  } catch {
+    return []
+  }
+}
+
+/**
+ * Scan a single email template for the two enforced rules:
+ *   1. Forbidden hex values that have been consolidated to a brand token
+ *   2. CAN-SPAM postal address presence on customer-facing templates
+ */
+function scanEmailTemplate(
+  contents: string,
+  relativeFile: string,
+  reportData: ReportData,
+) {
+  // Rule 1: forbidden hex (case-insensitive)
+  const lines = contents.split('\n')
+  lines.forEach((line, idx) => {
+    for (const forbiddenHex of emailForbiddenHexes) {
+      // Match the hex literal as a whole (preceded/followed by non-hex char or boundary)
+      const pattern = new RegExp(`${forbiddenHex.replace('#', '#')}\\b`, 'gi')
+      const matches = line.match(pattern)
+      if (matches) {
+        for (const value of matches) {
+          reportData.emailForbiddenHex.push({
+            file: relativeFile,
+            line: idx + 1,
+            value,
+          })
+        }
+      }
+    }
+  })
+
+  // Rule 2: customer-facing emails (mentioning "Laguna Beach") must contain
+  // the required postal marker. One hit per file.
+  if (
+    contents.includes(emailCustomerFacingMarker) &&
+    !contents.includes(emailRequiredPostalMarker)
+  ) {
+    reportData.emailMissingPostalAddress.push({
+      file: relativeFile,
+      line: 0,
+      value: `Missing "${emailRequiredPostalMarker}" — CAN-SPAM §316.5 requires a valid postal address`,
+    })
+  }
 }
 
 function getEditedFiles(): string[] {
@@ -223,6 +319,8 @@ async function writeReport(reportData: ReportData) {
     forbiddenFont: reportData.forbiddenFont.length,
     legacyLbta: reportData.legacyLbta.length,
     handRolledEyebrow: reportData.handRolledEyebrow.length,
+    emailForbiddenHex: reportData.emailForbiddenHex.length,
+    emailMissingPostalAddress: reportData.emailMissingPostalAddress.length,
   }
   const generatedAt = new Date().toISOString()
   const allClear =
@@ -232,7 +330,9 @@ async function writeReport(reportData: ReportData) {
     totals.inlineGradient === 0 &&
     totals.forbiddenFont === 0 &&
     totals.legacyLbta === 0 &&
-    totals.handRolledEyebrow === 0
+    totals.handRolledEyebrow === 0 &&
+    totals.emailForbiddenHex === 0 &&
+    totals.emailMissingPostalAddress === 0
 
   const sections: string[] = []
   sections.push('<!-- Auto-generated by scripts/check-brand-usage.ts --report. Do not hand-edit the section below. -->')
@@ -250,8 +350,10 @@ async function writeReport(reportData: ReportData) {
   sections.push(`| Forbidden fonts (app code) | ${totals.forbiddenFont} | ${totals.forbiddenFont === 0 ? '✅' : '❌'} |`)
   sections.push(`| Deprecated lbta-* classes | ${totals.legacyLbta} | ${totals.legacyLbta === 0 ? '✅' : '❌'} |`)
   sections.push(`| Hand-rolled eyebrow patterns | ${totals.handRolledEyebrow} | ${totals.handRolledEyebrow === 0 ? '✅' : '❌'} |`)
+  sections.push(`| Email: forbidden hex (consolidated) | ${totals.emailForbiddenHex} | ${totals.emailForbiddenHex === 0 ? '✅' : '❌'} |`)
+  sections.push(`| Email: missing postal address (CAN-SPAM) | ${totals.emailMissingPostalAddress} | ${totals.emailMissingPostalAddress === 0 ? '✅' : '❌'} |`)
   sections.push('')
-  sections.push(allClear ? '**Result: 🟢 LOCKED IN — zero brand drift across all 7 strict categories.**' : '**Result: 🔴 Drift present — see breakdown below. Strict CI will fail.**')
+  sections.push(allClear ? '**Result: 🟢 LOCKED IN — zero brand drift across all 9 strict categories.**' : '**Result: 🔴 Drift present — see breakdown below. Strict CI will fail.**')
   sections.push('')
 
   // Only emit per-category sections when there are hits — keeps the doc clean
@@ -262,6 +364,8 @@ async function writeReport(reportData: ReportData) {
   if (reportData.inlineGradient.length > 0) sections.push(reportSection('Inline gradient hex literals', reportData.inlineGradient))
   if (reportData.legacyLbta.length > 0) sections.push(reportSection('Deprecated lbta-* classes', reportData.legacyLbta))
   if (reportData.handRolledEyebrow.length > 0) sections.push(reportSection('Hand-rolled eyebrow patterns', reportData.handRolledEyebrow))
+  if (reportData.emailForbiddenHex.length > 0) sections.push(reportSection('Email: forbidden hex (consolidated to brand token)', reportData.emailForbiddenHex))
+  if (reportData.emailMissingPostalAddress.length > 0) sections.push(reportSection('Email: missing CAN-SPAM postal address', reportData.emailMissingPostalAddress))
 
   const liveBlock = sections.join('\n')
 
@@ -306,6 +410,24 @@ async function main() {
     forbiddenFont: [],
     legacyLbta: [],
     handRolledEyebrow: [],
+    emailForbiddenHex: [],
+    emailMissingPostalAddress: [],
+  }
+
+  // Scan tracked email templates (separate domain — see emailScanRoot above).
+  // Only runs in --all or full-scan mode; doesn't run for edited-files mode
+  // unless an email file is being edited. Skipped if no .html files match.
+  const emailFiles =
+    editedFiles.length > 0
+      ? editedFiles.filter((f) =>
+          path.relative(repoRoot, f).startsWith(`${emailScanRoot}/`),
+        )
+      : getTrackedEmailTemplates()
+  for (const file of emailFiles) {
+    const relativeFile = path.relative(repoRoot, file)
+    if (emailExemptFiles.has(relativeFile)) continue
+    const contents = await readFile(file, 'utf8')
+    scanEmailTemplate(contents, relativeFile, reportData)
   }
 
   for (const file of files) {
@@ -370,6 +492,8 @@ async function main() {
   printHits('Arbitrary Tailwind color values (warning, strict-blocking):', 'WARN', reportData.arbitraryTailwind)
   printHits('Inline gradient hex literals (warning, strict-blocking):', 'WARN', reportData.inlineGradient)
   printHits('Hand-rolled eyebrow patterns — prefer .text-eyebrow (warning, strict-blocking):', 'WARN', reportData.handRolledEyebrow, 30)
+  printHits('Email templates: forbidden hex (consolidated to brand token, strict-blocking):', 'WARN', reportData.emailForbiddenHex)
+  printHits('Email templates: missing CAN-SPAM postal address (strict-blocking):', 'ERROR', reportData.emailMissingPostalAddress)
   printHits('Forbidden font families in app code (error):', 'ERROR', reportData.forbiddenFont)
   printHits('Forbidden low-contrast white text (error):', 'ERROR', reportData.forbidden)
 
@@ -377,7 +501,11 @@ async function main() {
     await writeReport(reportData)
   }
 
-  const totalErrors = reportData.forbidden.length + reportData.forbiddenFont.length
+  // CAN-SPAM postal address is treated as an ERROR (legal compliance, not just style)
+  const totalErrors =
+    reportData.forbidden.length +
+    reportData.forbiddenFont.length +
+    reportData.emailMissingPostalAddress.length
 
   const isStrict = process.env.STRICT_BRAND_CHECK === '1'
   if (isStrict) {
@@ -392,7 +520,8 @@ async function main() {
       reportData.arbitraryTailwind.length +
       reportData.inlineGradient.length +
       reportData.handRolledEyebrow.length +
-      reportData.legacyLbta.length
+      reportData.legacyLbta.length +
+      reportData.emailForbiddenHex.length
     if (totalWarnings > 0) {
       console.log(`STRICT mode: ${totalWarnings} warning(s) treated as errors — failing build.`)
       process.exitCode = 1
