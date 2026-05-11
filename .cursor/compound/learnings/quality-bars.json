@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-05-06",
-  "lastLearnRun": "2026-05-06 leads pipeline dedup + double-submit guard: formPipelineServerSideDedup (must), formPipelineClientSyncGuard (should), multiStorageLeadAuditBeforeClaim (must)",
+  "updated": "2026-05-11",
+  "lastLearnRun": "2026-05-11 email brand audit r2 cleanup: emailForbiddenHexConsolidation (must), emailCanSpamPostalAddress (must), brandCheckerSeparateScannersPerDomain (must), testsBehaviorOverContract (should), legalComplianceFailLoud (must), shipGateProofInCommitBody (must)",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -34,7 +34,7 @@
       "enforcement": "should"
     },
     "framerMotionEntranceReducedMotion": {
-      "rule": "Framer Motion entrance (AnimatedSection, initial/whileInView) must use useReducedMotion(); when true render plain div \u2014 JS motion not gated by CSS",
+      "rule": "Framer Motion entrance (AnimatedSection, initial/whileInView) must use useReducedMotion(); when true render plain div — JS motion not gated by CSS",
       "enforcement": "must"
     },
     "jsonLdOnServer": {
@@ -54,7 +54,7 @@
       "enforcement": "should"
     },
     "resizeThrottle": {
-      "rule": "Throttle resize listeners when used for layout (e.g. 150\u2013200ms)",
+      "rule": "Throttle resize listeners when used for layout (e.g. 150–200ms)",
       "enforcement": "should"
     },
     "ctaConsistency": {
@@ -90,7 +90,7 @@
       "enforcement": "should"
     },
     "closeButton48px": {
-      "rule": "Close buttons on modals/dialogs are at least 48\u00d748px (min-w-[48px] min-h-[48px])",
+      "rule": "Close buttons on modals/dialogs are at least 48×48px (min-w-[48px] min-h-[48px])",
       "enforcement": "must"
     },
     "footerContrast": {
@@ -174,7 +174,7 @@
       "enforcement": "should"
     },
     "formHandlerValidPayload200": {
-      "rule": "When request body is valid (parse + Zod pass), form handler must return 200; optional integrations (AC, GHL, storeLead) and rate limit must not cause 500 \u2014 use try/catch on rateLimit, .catch() on fire-and-forget",
+      "rule": "When request body is valid (parse + Zod pass), form handler must return 200; optional integrations (AC, GHL, storeLead) and rate limit must not cause 500 — use try/catch on rateLimit, .catch() on fire-and-forget",
       "enforcement": "must"
     },
     "nextImageSizesLogos": {
@@ -210,11 +210,11 @@
       "enforcement": "should"
     },
     "interactiveButton48pxFocusRing": {
-      "rule": "All interactive buttons (including chat quick-reply, Send, floating toggle) must have min-h-[48px] (or 48\u00d748) and visible focus ring (focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2)",
+      "rule": "All interactive buttons (including chat quick-reply, Send, floating toggle) must have min-h-[48px] (or 48×48) and visible focus ring (focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2)",
       "enforcement": "must"
     },
     "singleTypeFromZodBoundary": {
-      "rule": "Data passed server\u2192client with runtime validation must use a single type from the Zod schema (export type T = z.infer<typeof schema>); client imports that type; no 'as unknown as T' at the boundary",
+      "rule": "Data passed server→client with runtime validation must use a single type from the Zod schema (export type T = z.infer<typeof schema>); client imports that type; no 'as unknown as T' at the boundary",
       "enforcement": "should"
     },
     "apiDocsBodyAndResponse": {
@@ -242,7 +242,7 @@
       "enforcement": "must"
     },
     "mobileChecklist": {
-      "rule": "Before shipping mobile changes: test at 320px, 375px, 768px; no horizontal scroll; primary actions \u226548\u00d748px; anchor sections have scroll-mt when sticky nav present",
+      "rule": "Before shipping mobile changes: test at 320px, 375px, 768px; no horizontal scroll; primary actions ≥48×48px; anchor sections have scroll-mt when sticky nav present",
       "enforcement": "should"
     },
     "formInput16pxMobile": {
@@ -346,25 +346,25 @@
       "enforcement": "should"
     },
     "segmentOnlyTitlesWhenTemplateSet": {
-      "rule": "When app/layout.tsx declares metadata.title.template (e.g. '%s | Brand'), child pages set `title: 'Segment'` (no brand suffix) OR `title: { absolute: 'Full Custom' }` to bypass. Never include the same brand suffix the template appends \u2014 double-brand blows SERP character budget.",
+      "rule": "When app/layout.tsx declares metadata.title.template (e.g. '%s | Brand'), child pages set `title: 'Segment'` (no brand suffix) OR `title: { absolute: 'Full Custom' }` to bypass. Never include the same brand suffix the template appends — double-brand blows SERP character budget.",
       "enforcement": "must"
     },
     "measureRenderedNotRaw": {
-      "rule": "Title and description char-length constraints (\u226460, 150\u2013160) are measured on the RENDERED <title> or <meta content=\"...\"> tag in the static build output (`.next/server/app/*.html`) or live curl \u2014 never on the raw source string in metadata exports. Metadata templates, framework transforms, and provider interpolation can all change the rendered length.",
+      "rule": "Title and description char-length constraints (≤60, 150–160) are measured on the RENDERED <title> or <meta content=\"...\"> tag in the static build output (`.next/server/app/*.html`) or live curl — never on the raw source string in metadata exports. Metadata templates, framework transforms, and provider interpolation can all change the rendered length.",
       "enforcement": "must"
     },
     "privacyFirstContent": {
-      "rule": "Do not introduce family, student, or client names in new on-site content, metadata, or JSON-LD schema unless permission is documented. For testimonials, the correct substitute is NOT a visible 'Read reviews on Google' link or a star-count callout \u2014 those feel consumer-grade / Yelp, not boutique hospitality. Preferred substitutes: (a) let existing earned editorial (long-form player journeys with photography) carry the trust, or (b) quietly omit the block entirely. AggregateRating stays in JSON-LD only (invisible to users, visible to Google SERP). For bios, prefer credentials + geography. Pre-existing named content is out of scope unless a dedicated cleanup PR is explicitly requested.",
+      "rule": "Do not introduce family, student, or client names in new on-site content, metadata, or JSON-LD schema unless permission is documented. For testimonials, the correct substitute is NOT a visible 'Read reviews on Google' link or a star-count callout — those feel consumer-grade / Yelp, not boutique hospitality. Preferred substitutes: (a) let existing earned editorial (long-form player journeys with photography) carry the trust, or (b) quietly omit the block entirely. AggregateRating stays in JSON-LD only (invisible to users, visible to Google SERP). For bios, prefer credentials + geography. Pre-existing named content is out of scope unless a dedicated cleanup PR is explicitly requested.",
       "enforcement": "must",
       "amendedFrom": "2026-04-16 (2nd run)",
-      "amendmentReason": "Original wording suggested a live Google Reviews link as the substitute. Founder rejected that \u2014 reads as Yelp, not Aman. Corrected here."
+      "amendmentReason": "Original wording suggested a live Google Reviews link as the substitute. Founder rejected that — reads as Yelp, not Aman. Corrected here."
     },
     "aggregateRatingInvisibleOnly": {
-      "rule": "AggregateRating lives in JSON-LD only \u2014 never on the page as visible copy. Google SERP stars are a cheap ~10-20% CTR lift; on-page rating widgets and 'average of N reviews' callouts feel consumer-grade review-fishing and conflict with the LBTA / boutique aesthetic. Split: visible layer = editorial + credentials, invisible layer = schema.",
+      "rule": "AggregateRating lives in JSON-LD only — never on the page as visible copy. Google SERP stars are a cheap ~10-20% CTR lift; on-page rating widgets and 'average of N reviews' callouts feel consumer-grade review-fishing and conflict with the LBTA / boutique aesthetic. Split: visible layer = editorial + credentials, invisible layer = schema.",
       "enforcement": "must"
     },
     "brandSplitVisibleVsInvisible": {
-      "rule": "When a founder-directed aesthetic conflicts with a standard SEO technique, split into two layers: visible (what users read \u2014 governed by brand aesthetic) and invisible (what Google parses \u2014 JSON-LD, meta tags, OpenGraph). Both get what they need. Applies to ratings, reviews, keyword stuffing, upsell badges, and any pattern that earns SEO value but reads consumer-grade.",
+      "rule": "When a founder-directed aesthetic conflicts with a standard SEO technique, split into two layers: visible (what users read — governed by brand aesthetic) and invisible (what Google parses — JSON-LD, meta tags, OpenGraph). Both get what they need. Applies to ratings, reviews, keyword stuffing, upsell badges, and any pattern that earns SEO value but reads consumer-grade.",
       "enforcement": "should"
     },
     "checkCodegenOutputBeforeReverting": {
@@ -376,7 +376,7 @@
       "enforcement": "must"
     },
     "botKnowledgeBaseSourceLine": {
-      "rule": "Every Q&A in `gpt/03-KNOWLEDGE-BRAIN/23-bot-knowledge-base-2026.md` (or any future bot KB matching `gpt/03-KNOWLEDGE-BRAIN/2[0-9]-*.md`) ends with a `**Sources:**` line pointing to a JSON path or named source, AND either `**Escalate:**` (phone/email) or `**Self-serve:**` (URL). Verified by grep at acceptance time; never invent numbers \u2014 if the answer isn't in `/data/*.json` or a documented source, route to support@lagunabeachtennisacademy.com or (949) 534-0457.",
+      "rule": "Every Q&A in `gpt/03-KNOWLEDGE-BRAIN/23-bot-knowledge-base-2026.md` (or any future bot KB matching `gpt/03-KNOWLEDGE-BRAIN/2[0-9]-*.md`) ends with a `**Sources:**` line pointing to a JSON path or named source, AND either `**Escalate:**` (phone/email) or `**Self-serve:**` (URL). Verified by grep at acceptance time; never invent numbers — if the answer isn't in `/data/*.json` or a documented source, route to support@lagunabeachtennisacademy.com or (949) 534-0457.",
       "enforcement": "must"
     },
     "founderCorrectionCrossSurfaceSweep": {
@@ -384,7 +384,7 @@
       "enforcement": "must"
     },
     "numericalFactValidationScript": {
-      "rule": "Docs files claiming \u226510 numerical facts (prices, times, thresholds) ship with a Python or Node assertion script next to them: one assert per claim, comparing the doc's number to the source JSON. Re-run after every edit. Pattern: `data_checks = [(label, get(json,'path')==expected), ...]; report passed/failed counts`. Cheap; obvious in hindsight; saves an hour of manual cross-checking per pass. Acceptance script is the living spec.",
+      "rule": "Docs files claiming ≥10 numerical facts (prices, times, thresholds) ship with a Python or Node assertion script next to them: one assert per claim, comparing the doc's number to the source JSON. Re-run after every edit. Pattern: `data_checks = [(label, get(json,'path')==expected), ...]; report passed/failed counts`. Cheap; obvious in hindsight; saves an hour of manual cross-checking per pass. Acceptance script is the living spec.",
       "enforcement": "should"
     },
     "formPipelineServerSideDedup": {
@@ -405,6 +405,36 @@
     "deprecatedRouteReadBeforeEdit": {
       "rule": "Always read an API route's source before suggesting integration edits",
       "detail": "Look for deprecation JSDoc, response status (200/410), redirect logic. Don't propose pipeline edits to routes returning 410 Gone",
+      "enforcement": "must"
+    },
+    "emailForbiddenHexConsolidation": {
+      "rule": "Tracked email templates (assets/emails/**/*.html) must not contain hex values that have been consolidated to a brand token",
+      "detail": "Currently #d5d1ca → lbta-stone (#E8E4DF). Adding to emailForbiddenHexes Set in scripts/check-brand-usage.ts strict-blocks the violation. WARN → ERROR in STRICT_BRAND_CHECK=1 mode.",
+      "enforcement": "must"
+    },
+    "emailCanSpamPostalAddress": {
+      "rule": "Customer-facing email templates must include valid physical postal address per CAN-SPAM Act §316.5",
+      "detail": "Heuristic: any template containing \"Laguna Beach\" must also contain \"1098 Balboa\". ERROR severity (legal compliance, not style). Wired into totalErrors in scripts/check-brand-usage.ts. AC placeholder stub lbta-spring-2026.html is exempt via emailExemptFiles.",
+      "enforcement": "must"
+    },
+    "brandCheckerSeparateScannersPerDomain": {
+      "rule": "Adding a new file domain to the brand checker requires a separate scanner with its own scanRoot, exemptions, and rules — not appending to existing scanRoots",
+      "detail": "Different file types (.tsx vs .html) have different rule profiles (e.g. forbidden-fonts list flags Helvetica/Arial in React but those are required in email font-fallback stacks). Domain-aware routing at the dispatch layer prevents false positives.",
+      "enforcement": "must"
+    },
+    "testsBehaviorOverContract": {
+      "rule": "Tests for scanner/linter rules must exercise the exported function with synthetic fixtures, not regex-match against script source",
+      "detail": "Source-grep contract tests (readFileSync + regex.match) are brittle to reformatting, type annotations, Set ordering, and accidental flags. Behavior tests via exported public API survive refactoring as long as behavior stays correct. Pre-existing \"STRICT mode passes\" integration test guards against scanner deletion; behavior tests guard against rule-specific regressions.",
+      "enforcement": "should"
+    },
+    "legalComplianceFailLoud": {
+      "rule": "Code paths that enforce legal compliance must fail-loud, never silent-skip",
+      "detail": "try { ... } catch { return [] } in legal-compliance code (CAN-SPAM, GDPR, etc.) means the check could pass without ever running on a runner that lacks the precondition (e.g. git, network). Replace with console.warn + fall back to a less-precise method that still runs the check. Bias toward false-positive over silent skip.",
+      "enforcement": "must"
+    },
+    "shipGateProofInCommitBody": {
+      "rule": "Every commit that touches code consumed by production must record health:prod proof in the commit body",
+      "detail": "Per .cursorrules Part 15 §4. Body should include: (a) quality-gate exit, (b) test count + pass status, (c) health:prod exit + canary route count + local HEAD SHA. Reviewers can audit ship-gate compliance from git history alone.",
       "enforcement": "must"
     }
   }

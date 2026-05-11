@@ -169,3 +169,53 @@ Full extraction: `.cursor/compound/learnings/2026-03-08-extraction.md`.
 - parallaxReducedMotion (should), pullQuoteSectionQuote (should), decorativeSvgAriaHidden (should), tailwindColorDefined (should).
 
 Source: `plans/2026-03-09-compound-review-validate-deploy-summary.md` and `plans/COMPOUND_LEARN.md` learn run log.
+
+---
+
+## 2026-05-11 — Email brand audit Round 2 + cleanup (5 commits, 2 review rounds)
+
+**Trigger:** `/compound-engineering work plan 2` → `/compound-engineering review` → "Option B" cleanup → `/compound-engineering learn`.
+**Result:** 5 atomic commits shipped + verified live. Brand checker now strict-enforces 9 categories across React + email domains. Score: Round 1 78/100 → Round 2 89/100 → final ~91.
+
+### New corrections (corrections.jsonl, 12 entries)
+
+- Source-grep contract tests are brittle → write behavior tests via exported scanner API + synthetic fixtures.
+- `getEditedFiles()` scoped to wrong domain when extending checker → audit ALL input pipelines (full-scan + edited-files).
+- HTML email files routed through React-side font scanner → flagged Helvetica/Arial false positives → domain-aware routing at dispatch layer.
+- Silent error swallowing in legal-compliance code (`catch { return [] }` in CAN-SPAM check) → fail-loud + filesystem-walk fallback.
+- `scanEmailTemplate` mutated state → return `{ forbiddenHex, missingPostalAddress }` for consistency with sibling scanners.
+- `Hit.line: number` overloaded with magic value 0 → narrow to `number | null`, render null as "(file)".
+- Cargo-cult `.replace('#', '#')` no-op → delete; if metachars need escaping, write the actual escape.
+- BRAND COLOR POLICY rationale technically false ("Outlook renders inconsistently") → state real reason (visual hierarchy + email convention) + back-link to escape-hatch playbook.
+- Premature exports of `Hit` and `ReportData` types → don't export until a consumer asks.
+- Hardcoded "9 strict categories" magic number → compute via `Object.keys(totals).length`.
+- Config-pinning tests in disguise (`expect(constant).toBe(...)`) → behavior tests #1-#6 implicitly cover config; delete redundant.
+- Skipped `health:prod` proof in commit body → required by `.cursorrules` Part 15 §4 for auditability.
+
+### New patterns (patterns.json, 8 entries)
+
+- **separate-domain-scanners-over-scanroots-extension** — different file types deserve separate scanners with own constants/exemptions.
+- **compose-paths-from-single-root-constant** — `\`${root}/sub\`` over hardcoded paths.
+- **cli-library-dual-mode-isMainModule-guard** — `if (process.argv[1].endsWith('script.ts')) main()` lets same file be CLI + library.
+- **precompile-regex-outside-per-line-loops** — costs nothing at small N, scales correctly.
+- **three-layer-exception-documentation** — JSON config + JSDoc + framework back-link.
+- **plan-aware-reviewer-agents** — pass plan + acceptance + out-of-scope to every agent.
+- **round-N-review-with-prior-findings** — agents verify fixes for THEIR own previous findings; tracks resolution rate.
+- **fix-forward-vs-revert-decision-rule** — STRICT green + acceptance met → fix-forward; otherwise → revert/amend.
+
+### New anti-patterns (anti-patterns.json, 6 entries)
+
+- source-grep-contract-tests, silent-skip-in-legal-compliance-checks, magic-zero-for-file-level-findings, cargo-cult-defensive-no-op, bolting-new-domain-onto-existing-scanroots, config-pinning-tests-disguised-as-behavior-tests.
+
+### New quality bars (quality-bars.json, 6 entries)
+
+- emailForbiddenHexConsolidation (must), emailCanSpamPostalAddress (must), brandCheckerSeparateScannersPerDomain (must), testsBehaviorOverContract (should), legalComplianceFailLoud (must), shipGateProofInCommitBody (must).
+
+### Project state at end of session
+
+- Brand checker: 9 strict categories, all green
+- Tests: 17/17 passing (was 10 — net +7 behavior tests after consolidation)
+- Commits live in prod: bb017b7, e88206f, 325ba29, 0cf42a4, d51e9ed
+- All 6 reviewers in Round 2: "ready"
+
+Full extraction: `.cursor/compound/learnings/2026-05-11-email-brand-audit-r2-cleanup-compound-learn.md`.

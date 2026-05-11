@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-05-06",
-  "lastLearnRun": "2026-05-06 leads pipeline dedup + double-submit guard: relying-only-on-disabled-for-double-submit, single-storage-assumption-without-audit, deprecated-route-edit-without-read",
+  "updated": "2026-05-11",
+  "lastLearnRun": "2026-05-11 email brand audit r2 cleanup: source-grep-contract-tests, silent-skip-in-legal-compliance-checks, magic-zero-for-file-level-findings, cargo-cult-defensive-no-op, bolting-new-domain-onto-existing-scanroots, config-pinning-tests-disguised-as-behavior-tests",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -271,7 +271,7 @@
       "id": "inline-blockquote-instead-of-section-quote",
       "description": "Blockquote with solid left border instead of Brand Guide pull-quote style",
       "avoid": "border-l-2 border-brand-pacific-dusk/30 or similar on blockquote",
-      "instead": "Use <PullQuote> or class section-quote for gradient left edge (Victoria Cove \u2192 Sunset Cliff); single source for quote styling",
+      "instead": "Use <PullQuote> or class section-quote for gradient left edge (Victoria Cove → Sunset Cliff); single source for quote styling",
       "tags": [
         "brand-guide",
         "pull-quote",
@@ -338,7 +338,7 @@
       "id": "log-full-external-api-error-body",
       "description": "Logging full response body when a third-party API returns an error",
       "avoid": "console.error('[GHL] Create failed:', res.status, await res.text()); full body can contain PII or internal IDs",
-      "instead": "Truncate: const safeMsg = text.length > 100 ? text.slice(0, 100) + '\u2026' : text; log res.status and safeMsg only",
+      "instead": "Truncate: const safeMsg = text.length > 100 ? text.slice(0, 100) + '…' : text; log res.status and safeMsg only",
       "tags": [
         "security",
         "logging",
@@ -432,7 +432,7 @@
     {
       "id": "program-copy-inconsistent-across-seasons",
       "description": "Same program has different display name or ages in different season JSON files",
-      "avoid": "Winter: 'Adult Beginner 1', ages 'True Beginner'; Spring-Summer: 'Adult Beginner 1 \u2014 True Beginner', 'NTRP 1.0-2.0'",
+      "avoid": "Winter: 'Adult Beginner 1', ages 'True Beginner'; Spring-Summer: 'Adult Beginner 1 — True Beginner', 'NTRP 1.0-2.0'",
       "instead": "Use identical program name and ages string across winter, spring-summer, fall so UI and data consumers see consistent copy",
       "tags": [
         "data-integrity",
@@ -477,7 +477,7 @@
     },
     {
       "id": "generic-emoji-in-ui",
-      "description": "Generic emoji (\ud83c\udfbe \ud83d\udcc5 \ud83d\udcb0 \ud83d\udcde) in buttons or links",
+      "description": "Generic emoji (🎾 📅 💰 📞) in buttons or links",
       "avoid": "Chatbot quick-reply buttons or any UI using emoji as primary icon; .cursorrules forbid generic emoji icons",
       "instead": "Use text labels only or non-generic icons (e.g. Lucide); keeps brand and a11y consistent",
       "tags": [
@@ -489,7 +489,7 @@
     },
     {
       "id": "server-client-type-cast",
-      "description": "Using 'as unknown as T' at server\u2192client data boundary when type could come from schema",
+      "description": "Using 'as unknown as T' at server→client data boundary when type could come from schema",
       "avoid": "parseYear2026Sections(data) as unknown as Year2026Sections with Year2026Sections defined only in client",
       "instead": "Export type from lib (e.g. schedule-schemas.ts: export type Year2026Sections = Year2026SectionsValidated); client imports that type; no cast",
       "tags": [
@@ -502,7 +502,7 @@
     {
       "id": "next16-turbopack-under-experimental",
       "description": "Putting turbopack config under experimental in Next.js 16",
-      "avoid": "experimental: { turbo: { root: __dirname } } \u2014 Next 16 reports 'Unrecognized key turbo at experimental'",
+      "avoid": "experimental: { turbo: { root: __dirname } } — Next 16 reports 'Unrecognized key turbo at experimental'",
       "instead": "Top-level turbopack: { root: __dirname } in next.config.js (Next 15.3+ / 16)",
       "tags": [
         "nextjs",
@@ -561,7 +561,7 @@
       "id": "modal-overlay-no-focus-trap-escape",
       "description": "Modal/overlay without focus trap and Escape-to-close",
       "avoid": "Dialog with no onKeyDown(Escape); focus can leave; keyboard users cannot close",
-      "instead": "Add onKeyDown(Escape \u2192 onClose) and focus trap (e.g. focus first focusable on open)",
+      "instead": "Add onKeyDown(Escape → onClose) and focus trap (e.g. focus first focusable on open)",
       "tags": [
         "a11y",
         "modal",
@@ -632,7 +632,7 @@
     {
       "id": "multiple-expandable-cards-without-single-expand",
       "description": "List of expandable cards (e.g. ProgramCard) each with a fixed/sticky bar when expanded, but no single-expand",
-      "avoid": "Each card manages its own isExpanded state; multiple cards can be expanded \u2192 multiple fixed bottom bars stack; wrong program may open on Register",
+      "avoid": "Each card manages its own isExpanded state; multiple cards can be expanded → multiple fixed bottom bars stack; wrong program may open on Register",
       "instead": "Lift expanded id to parent: expandedProgramId; pass isExpanded and onToggle to each card so only one can be expanded; single sticky bar in DOM. See pattern single-expand-cards-in-list.",
       "tags": [
         "ux",
@@ -645,7 +645,7 @@
     {
       "id": "api-400-raw-validation-error",
       "description": "Form/booking API returns raw Zod validation.error in 400 response",
-      "avoid": "NextResponse.json({ success: false, error: validation.error }, { status: 400 }) \u2014 exposes field names and internal messages to client",
+      "avoid": "NextResponse.json({ success: false, error: validation.error }, { status: 400 }) — exposes field names and internal messages to client",
       "instead": "Log validation.error server-side; return generic message (e.g. 'Invalid request. Please check your input.') or sanitized field errors only",
       "tags": [
         "api",
@@ -694,8 +694,8 @@
     {
       "id": "next-image-localpatterns-incomplete",
       "description": "next.config images.localPatterns omits a prefix used by next/image (Next 15+)",
-      "avoid": "Only { pathname: '/images/**' } while Header/Footer/trials use /logos/*.png or /photos/*.webp \u2192 production _next/image returns 400 INVALID_IMAGE_OPTIMIZE_REQUEST; browser shows broken image + alt text",
-      "instead": "Grep for Image src=\"/\u2026\"; add each top-level folder to localPatterns (/logos/**, /photos/**, etc.)",
+      "avoid": "Only { pathname: '/images/**' } while Header/Footer/trials use /logos/*.png or /photos/*.webp → production _next/image returns 400 INVALID_IMAGE_OPTIMIZE_REQUEST; browser shows broken image + alt text",
+      "instead": "Grep for Image src=\"/…\"; add each top-level folder to localPatterns (/logos/**, /photos/**, etc.)",
       "tags": [
         "nextjs",
         "next/image",
@@ -719,7 +719,7 @@
     {
       "id": "chat-widget-close-button-no-a11y",
       "description": "ChatWidget close button without min-h-[48px] and focus-visible:ring",
-      "avoid": "32px \u00d7 32px close button with inline styles, no focus ring, opacity transitions only",
+      "avoid": "32px × 32px close button with inline styles, no focus ring, opacity transitions only",
       "instead": "min-h-[48px] min-w-[48px] with Tailwind classes, focus-visible:ring-2 focus-visible:ring-brand-sunset-cliff focus-visible:ring-offset-2",
       "tags": [
         "a11y",
@@ -817,7 +817,7 @@
     {
       "id": "ac-division-tag-use-program",
       "description": "Using data.program for UTR division tag lookup when data.division exists",
-      "avoid": "getUtrDivisionTag(data.program) when payload has division: 'Color Ball' and program: 'UTR Match Play Series \u2014 Season 1'",
+      "avoid": "getUtrDivisionTag(data.program) when payload has division: 'Color Ball' and program: 'UTR Match Play Series — Season 1'",
       "instead": "Use data.division || data.program for getUtrDivisionTag; register-year receives division from modal",
       "tags": [
         "activecampaign",
@@ -829,7 +829,7 @@
     {
       "id": "slug-lookup-unicode-dash",
       "description": "Slug/lookup key from label with en-dash (U+2013) fails ASCII-hyphen map",
-      "avoid": "Division 'UTR 2.0\u20134.0' \u2192 toLowerCase().replace(/\\s+/g, '-') yields 'utr-2.0\u20134.0' which does not match 'utr-2.0-4.0'",
+      "avoid": "Division 'UTR 2.0–4.0' → toLowerCase().replace(/\\s+/g, '-') yields 'utr-2.0–4.0' which does not match 'utr-2.0-4.0'",
       "instead": "Normalize unicode dashes: .replace(/[\\u2013\\u2014\\u2212]/g, '-') before slug lookup",
       "tags": [
         "activecampaign",
@@ -959,7 +959,7 @@
     },
     {
       "id": "root-layout-canonical-cascade",
-      "description": "Setting alternates.canonical in root layout.tsx cascades to every child page that doesn't override \u2014 collapses the site into one URL in Google's index",
+      "description": "Setting alternates.canonical in root layout.tsx cascades to every child page that doesn't override — collapses the site into one URL in Google's index",
       "avoid": "export const metadata = { alternates: { canonical: '/' } } in app/layout.tsx when child pages don't set their own alternates",
       "instead": "Leave alternates out of root layout; set self-referencing alternates.canonical per page (or per feature-section layout). Use root layout ONLY for metadataBase.",
       "tags": [
@@ -971,9 +971,9 @@
     },
     {
       "id": "app-robots-txt-shadows-public",
-      "description": "When both app/robots.txt and public/robots.txt exist, Next.js App Router serves app/robots.txt \u2014 edits to public/robots.txt are silently ignored by the live site",
+      "description": "When both app/robots.txt and public/robots.txt exist, Next.js App Router serves app/robots.txt — edits to public/robots.txt are silently ignored by the live site",
       "avoid": "Editing public/robots.txt without checking whether app/robots.txt (or app/robots.ts) exists",
-      "instead": "Run: ls app/robots.* public/robots.* \u2014 if app/robots.* exists, edit that file and delete public/robots.txt to eliminate shadow. One source of truth.",
+      "instead": "Run: ls app/robots.* public/robots.* — if app/robots.* exists, edit that file and delete public/robots.txt to eliminate shadow. One source of truth.",
       "tags": [
         "seo",
         "next-app-router",
@@ -983,9 +983,9 @@
     },
     {
       "id": "middleware-search-misses-nextjs-16-proxy",
-      "description": "Searching only for middleware.ts when verifying route auth \u2014 misses Next.js 16 proxy.ts (the renamed routing middleware file)",
+      "description": "Searching only for middleware.ts when verifying route auth — misses Next.js 16 proxy.ts (the renamed routing middleware file)",
       "avoid": "Glob middleware.* at repo root and conclude 'no auth middleware' when proxy.ts exists",
-      "instead": "Grep for both middleware.ts AND proxy.ts at repo root. Next.js 16 renamed the file but semantics are identical (NextRequest \u2192 NextResponse with matcher config).",
+      "instead": "Grep for both middleware.ts AND proxy.ts at repo root. Next.js 16 renamed the file but semantics are identical (NextRequest → NextResponse with matcher config).",
       "tags": [
         "nextjs-16",
         "middleware",
@@ -996,7 +996,7 @@
     },
     {
       "id": "seo-audit-claims-unverified",
-      "description": "Prioritizing P0 SEO fixes based on audit claims without reading the actual files \u2014 wastes engineering time on non-issues and hides real bugs the audit missed",
+      "description": "Prioritizing P0 SEO fixes based on audit claims without reading the actual files — wastes engineering time on non-issues and hides real bugs the audit missed",
       "avoid": "Reading an external SEO audit and immediately queuing P0 commits from the report",
       "instead": "Per flagged file: read the file, confirm the claim, THEN prioritize. Every claim has three possible outcomes (confirmed / wrong / partially correct with different fix). Separately: find what the audit missed by checking revenue-critical paths.",
       "tags": [
@@ -1008,8 +1008,8 @@
     },
     {
       "id": "placeholder-phone-vs-displayed-phone",
-      "description": "Confusing an input `placeholder='...'` attribute (UX hint shown in empty fields) with a displayed phone number \u2014 not a broken conversion path even when the placeholder value looks fake",
-      "avoid": "Framing placeholder='(949) 123-4567' as 'prospects literally can't reach you' \u2014 it's UX hint text that disappears when the user types",
+      "description": "Confusing an input `placeholder='...'` attribute (UX hint shown in empty fields) with a displayed phone number — not a broken conversion path even when the placeholder value looks fake",
+      "avoid": "Framing placeholder='(949) 123-4567' as 'prospects literally can't reach you' — it's UX hint text that disappears when the user types",
       "instead": "Distinguish placeholder/hint text from actual contact info rendered in copy. Fix placeholders for trust/polish; framing should match the real impact.",
       "tags": [
         "ux",
@@ -1020,9 +1020,9 @@
     },
     {
       "id": "child-title-with-brand-when-template-set",
-      "description": "Setting `title: 'Something | Brand'` on a child page's metadata when the root layout declares `metadata.title.template: '%s | Brand'` \u2014 template appends brand AGAIN, producing '... | Brand | Brand' in the live <title> tag",
-      "avoid": "In a child page: `export const metadata = { title: 'FAQ | Tennis Training Questions | LBTA' }` when root layout has `title.template: '%s | Laguna Beach Tennis Academy'` \u2014 final title becomes 'FAQ | Tennis Training Questions | LBTA | Laguna Beach Tennis Academy' (83 chars, brand duplicated)",
-      "instead": "Segment-only titles: `title: 'Tennis Training FAQ'` \u2014 template resolves to 'Tennis Training FAQ | Laguna Beach Tennis Academy' (49 chars). OR bypass template with `title: { absolute: 'Full Custom Title' }` when you need total control.",
+      "description": "Setting `title: 'Something | Brand'` on a child page's metadata when the root layout declares `metadata.title.template: '%s | Brand'` — template appends brand AGAIN, producing '... | Brand | Brand' in the live <title> tag",
+      "avoid": "In a child page: `export const metadata = { title: 'FAQ | Tennis Training Questions | LBTA' }` when root layout has `title.template: '%s | Laguna Beach Tennis Academy'` — final title becomes 'FAQ | Tennis Training Questions | LBTA | Laguna Beach Tennis Academy' (83 chars, brand duplicated)",
+      "instead": "Segment-only titles: `title: 'Tennis Training FAQ'` — template resolves to 'Tennis Training FAQ | Laguna Beach Tennis Academy' (49 chars). OR bypass template with `title: { absolute: 'Full Custom Title' }` when you need total control.",
       "tags": [
         "seo",
         "next-metadata",
@@ -1032,9 +1032,9 @@
     },
     {
       "id": "google-reviews-cta-as-aman-substitute",
-      "description": "Replacing composite / unpermissioned testimonials with a visible 'Read reviews on Google' link + star count + 'N Google reviews' callout as the substitute \u2014 reads as consumer-grade review-fishing, breaks boutique hospitality aesthetic",
-      "avoid": "`<Star>` row + `{rating} from {reviewCount}+ Google reviews` + `Read reviews on Google \u2192` CTA inside any visible section labeled 'What Players Say' or equivalent",
-      "instead": "Let earned editorial (named player journeys with photography + outcomes) carry trust. If no editorial exists, omit the block entirely \u2014 restraint. Keep AggregateRating in JSON-LD only for SERP stars. Heritage-flavored facts ('Founded 2020', 'Official City Partner') work better than ratings as trust stats.",
+      "description": "Replacing composite / unpermissioned testimonials with a visible 'Read reviews on Google' link + star count + 'N Google reviews' callout as the substitute — reads as consumer-grade review-fishing, breaks boutique hospitality aesthetic",
+      "avoid": "`<Star>` row + `{rating} from {reviewCount}+ Google reviews` + `Read reviews on Google →` CTA inside any visible section labeled 'What Players Say' or equivalent",
+      "instead": "Let earned editorial (named player journeys with photography + outcomes) carry trust. If no editorial exists, omit the block entirely — restraint. Keep AggregateRating in JSON-LD only for SERP stars. Heritage-flavored facts ('Founded 2020', 'Official City Partner') work better than ratings as trust stats.",
       "tags": [
         "brand",
         "aman",
@@ -1046,7 +1046,7 @@
     {
       "id": "measure-char-length-on-raw-source",
       "description": "Validating title/description character-length constraints against the source string in a page's metadata export, when the rendered output may be longer due to template interpolation or additional markup",
-      "avoid": "Counting `title: 'FAQ | ...' = 38 chars` and declaring it under 60 \u2014 ignores the root layout's `title.template: '%s | Brand'` that adds 31 chars at render time",
+      "avoid": "Counting `title: 'FAQ | ...' = 38 chars` and declaring it under 60 — ignores the root layout's `title.template: '%s | Brand'` that adds 31 chars at render time",
       "instead": "Measure the RENDERED <title> tag content in the static build output (`.next/server/app/*.html`) or via live curl. Same rule for <meta name=\"description\"> content and any other length-gated field.",
       "tags": [
         "seo",
@@ -1059,8 +1059,8 @@
     {
       "id": "sms-implied-policy-as-codified-fact",
       "description": "Codifying a number/threshold from a single SMS quote (inbound or outbound) as policy in the bot KB without founder confirmation. SMS reflects what was said in the moment, not what's policy.",
-      "avoid": "Reading 'we don't have enough players for tonight \u2014 we need at least 2' in an outbound SMS and writing 'LiveBall needs at least 2 players to run' as a Q&A in the bot KB.",
-      "instead": "Either ask founder via AskQuestion (live), flag as an open reconciliation item in the KB's Appendix C until verified, or quote vaguely without a number ('if we don't have enough players to run the format'). Move from Open \u2192 Resolved with timestamp once founder confirms. This loop's correct value was 5, not 2.",
+      "avoid": "Reading 'we don't have enough players for tonight — we need at least 2' in an outbound SMS and writing 'LiveBall needs at least 2 players to run' as a Q&A in the bot KB.",
+      "instead": "Either ask founder via AskQuestion (live), flag as an open reconciliation item in the KB's Appendix C until verified, or quote vaguely without a number ('if we don't have enough players to run the format'). Move from Open → Resolved with timestamp once founder confirms. This loop's correct value was 5, not 2.",
       "tags": [
         "bot-kb",
         "policy",
@@ -1071,9 +1071,9 @@
     },
     {
       "id": "ntrp-band-mixed-truth-in-record",
-      "description": "Setting `ages: 'NTRP 2.5+'` while `description` says 'Intermediate (3.0\u20134.0) and Advanced (4.0+)' and `schedule[*].note` says 'Intermediate (3.0\u20134.0)' \u2014 three different truths in the same JSON record. The bot will pick whichever one its retrieval surfaces first.",
-      "avoid": "Updating only one of (ages, description, schedule.note) when founder corrects a level band \u2014 leaving stale truth in the other two fields.",
-      "instead": "When founder corrects an NTRP/UTR band on a program, update ALL THREE fields in the same record (`ages`, `description`, every `schedule[*].note`) and run the acceptance script. data/{winter,spring-summer,fall}2026.json LiveBall block was the example: ages='NTRP 3.0+', description='Intermediate (3.0\u20134.0) and Advanced (4.0+)', every non-Sunday-10:30 row has note='Intermediate (3.0\u20134.0)'.",
+      "description": "Setting `ages: 'NTRP 2.5+'` while `description` says 'Intermediate (3.0–4.0) and Advanced (4.0+)' and `schedule[*].note` says 'Intermediate (3.0–4.0)' — three different truths in the same JSON record. The bot will pick whichever one its retrieval surfaces first.",
+      "avoid": "Updating only one of (ages, description, schedule.note) when founder corrects a level band — leaving stale truth in the other two fields.",
+      "instead": "When founder corrects an NTRP/UTR band on a program, update ALL THREE fields in the same record (`ages`, `description`, every `schedule[*].note`) and run the acceptance script. data/{winter,spring-summer,fall}2026.json LiveBall block was the example: ages='NTRP 3.0+', description='Intermediate (3.0–4.0) and Advanced (4.0+)', every non-Sunday-10:30 row has note='Intermediate (3.0–4.0)'.",
       "tags": [
         "data-integrity",
         "ntrp",
@@ -1086,7 +1086,7 @@
       "id": "bot-kb-quote-without-source-line",
       "description": "A bot/AI knowledge base Q&A that asserts a price/time/policy without a `**Sources:**` line pointing to a JSON path or named source. Future audits cannot verify; future founder corrections cannot grep the dependent answers.",
       "avoid": "Q&A like 'Adult Intermediate is $580 for the season' without any source pointer.",
-      "instead": "Every Q&A in `gpt/03-KNOWLEDGE-BRAIN/23-*.md` ends with `**Sources:** data/spring-summer-2026.json \u2014 id: adult-intermediate` and either `**Escalate:** (949) 534-0457` or `**Self-serve:** /schedules`. Verified by grep at acceptance time. Acceptance script can grep `^### Q\\d+\\.` and assert each Q has `**Sources:**` within N lines below.",
+      "instead": "Every Q&A in `gpt/03-KNOWLEDGE-BRAIN/23-*.md` ends with `**Sources:** data/spring-summer-2026.json — id: adult-intermediate` and either `**Escalate:** (949) 534-0457` or `**Self-serve:** /schedules`. Verified by grep at acceptance time. Acceptance script can grep `^### Q\\d+\\.` and assert each Q has `**Sources:**` within N lines below.",
       "tags": [
         "bot-kb",
         "documentation",
@@ -1096,7 +1096,7 @@
     },
     {
       "id": "relying-only-on-disabled-for-double-submit",
-      "description": "Form submit handler that only relies on disabled={isSubmitting} to prevent double submission \u2014 useState updates batch async, so rapid clicks fire onSubmit twice before the disabled prop renders",
+      "description": "Form submit handler that only relies on disabled={isSubmitting} to prevent double submission — useState updates batch async, so rapid clicks fire onSubmit twice before the disabled prop renders",
       "avoid": "const handleSubmit = async (e) => { e.preventDefault(); setIsSubmitting(true); /* network call */ } with no synchronous guard; production data shows 14 duplicate (email,source) pairs within 25-95s windows",
       "instead": "Add synchronous useRef guard: const submittingRef = useRef(false); in handler: if (submittingRef.current) return; submittingRef.current = true; setIsSubmitting(true); release in finally. Pair with server-side dedup window in the storeLead-equivalent function",
       "tags": [
@@ -1109,9 +1109,9 @@
     },
     {
       "id": "single-storage-assumption-without-audit",
-      "description": "Claiming 'leads are being saved' or 'we have N leads' based only on the storage target the codebase writes to \u2014 ignores parallel paths (Meta lead ads, Zapier, n8n, manual imports) that write directly to a CRM or Notion",
+      "description": "Claiming 'leads are being saved' or 'we have N leads' based only on the storage target the codebase writes to — ignores parallel paths (Meta lead ads, Zapier, n8n, manual imports) that write directly to a CRM or Notion",
       "avoid": "Querying Supabase leads table, finding 86 rows, telling founder that's the complete lead set. Real total (LBTA): 251 in Notion DB, 165 of which never touched Supabase because they came from Meta lead-ad forms via Zapier",
-      "instead": "Enumerate every storage target before answering: Supabase, Notion DB, ActiveCampaign, GoHighLevel, any Zapier/n8n integrations, manual CSV imports. Query each. Report the union and explain the gaps. Recommend a unified mirror pattern (Notion \u2192 Supabase cron) when gaps are persistent",
+      "instead": "Enumerate every storage target before answering: Supabase, Notion DB, ActiveCampaign, GoHighLevel, any Zapier/n8n integrations, manual CSV imports. Query each. Report the union and explain the gaps. Recommend a unified mirror pattern (Notion → Supabase cron) when gaps are persistent",
       "tags": [
         "lead-pipeline",
         "audit",
@@ -1124,8 +1124,8 @@
     },
     {
       "id": "deprecated-route-edit-without-read",
-      "description": "Suggesting integration edits to an API route based on its filename or URL convention without reading the route file first \u2014 risks reanimating deprecated code",
-      "avoid": "Suggesting 'wire jtt-registration to storeLead' because it follows the naming pattern of register/register-program \u2014 without checking the route first. JTT was deprecated to 410 Gone in spring 2026; storeLead would have been re-added to dead code",
+      "description": "Suggesting integration edits to an API route based on its filename or URL convention without reading the route file first — risks reanimating deprecated code",
+      "avoid": "Suggesting 'wire jtt-registration to storeLead' because it follows the naming pattern of register/register-program — without checking the route first. JTT was deprecated to 410 Gone in spring 2026; storeLead would have been re-added to dead code",
       "instead": "Always Read or Grep the route file before suggesting pipeline integration. Look for: deprecation JSDoc, return status (200/410/etc.), redirect logic. Only suggest edits when route is actively serving traffic",
       "tags": [
         "api-routes",
@@ -1138,7 +1138,7 @@
       "id": "bundle-unrelated-dirty-files-in-focused-commit",
       "description": "When committing a focused fix, sweeping up unrelated tracked-file modifications already present in the working tree",
       "avoid": "git add -A or git add . when the tree has a focused leads-pipeline fix PLUS unrelated program data edits, ProgramCard tweaks, and auto-managed compound learning files",
-      "instead": "Stage only files in the plan's Files to Create/Modify list (or the focused commit's scope). Leave the rest dirty for the user/owner to commit separately. Be explicit in the response that unrelated dirty files were skipped, and what they look like \u2014 so the user can ship them as a coherent second commit",
+      "instead": "Stage only files in the plan's Files to Create/Modify list (or the focused commit's scope). Leave the rest dirty for the user/owner to commit separately. Be explicit in the response that unrelated dirty files were skipped, and what they look like — so the user can ship them as a coherent second commit",
       "tags": [
         "git",
         "commit-hygiene",
@@ -1148,7 +1148,7 @@
     },
     {
       "id": "echo-pipe-secret-to-vercel-env",
-      "description": "Using 'echo \"$SECRET\" | npx vercel env add NAME production' to add a secret env var \u2014 echo appends a trailing newline that gets captured. If the secret is used in an HTTP header, Vercel build will fail with 'leading or trailing whitespace, not allowed in HTTP header values'",
+      "description": "Using 'echo \"$SECRET\" | npx vercel env add NAME production' to add a secret env var — echo appends a trailing newline that gets captured. If the secret is used in an HTTP header, Vercel build will fail with 'leading or trailing whitespace, not allowed in HTTP header values'",
       "avoid": "echo \"$SECRET\" | npx vercel env add CRON_SECRET production",
       "instead": "printf '%s' \"$SECRET\" | npx vercel env add CRON_SECRET production. printf does NOT add a trailing newline. After adding, sanity-check by curl-ing the cron endpoint with the local secret and confirming 200 (proves header parses cleanly)",
       "tags": [
@@ -1169,6 +1169,77 @@
         "single-source",
         "audit",
         "channel-fragmentation"
+      ]
+    },
+    {
+      "id": "source-grep-contract-tests",
+      "description": "Tests that readFileSync(scriptSource) and assert via regex match",
+      "avoid": "expect(checkerSource).toMatch(/emailScanRoot\\s*=\\s*[\"']assets\\/emails[\"']/) — breaks on reformatting, type annotations, Set member reordering, accidental flags",
+      "instead": "Export the rule function + constants from the script. Wrap main() in isMainModule guard. Write behavior tests that import and call the function with synthetic fixtures, assert on returned values",
+      "tags": [
+        "testing",
+        "contract-tests",
+        "brittleness",
+        "brand-checker"
+      ]
+    },
+    {
+      "id": "silent-skip-in-legal-compliance-checks",
+      "description": "try { ... } catch { return [] } in a code path that enforces legal compliance",
+      "avoid": "getTrackedEmailTemplates() returning [] silently on git failure — CAN-SPAM check then passes without ever running",
+      "instead": "console.warn loudly + fall back to a less-precise method (filesystem walk vs git ls-files). Bias toward false-positive over silent skip. Worst case: noise. Best case: catches violations",
+      "tags": [
+        "error-handling",
+        "silent-failure",
+        "legal-compliance",
+        "fail-loud"
+      ]
+    },
+    {
+      "id": "magic-zero-for-file-level-findings",
+      "description": "Using line: 0 in a { line: number } Hit type to mean \"file-level finding\"",
+      "avoid": "reportData.push({ file, line: 0, value }) — printer renders foo.html:0 (impossible line number); type system cannot enforce the distinction",
+      "instead": "Type-narrow to { line: number | null } with null as the file-level marker. Printers render null as \"(file)\". Type system enforces at every consumer",
+      "tags": [
+        "typescript",
+        "magic-values",
+        "type-narrowing"
+      ]
+    },
+    {
+      "id": "cargo-cult-defensive-no-op",
+      "description": "Defensive code that compiles but does nothing (cargo-cult escaping, redundant null checks, etc.)",
+      "avoid": "forbiddenHex.replace('#', '#') as 'defensive escaping' when # is not a regex metacharacter — pure no-op that misleads readers into thinking escaping is happening",
+      "instead": "If escaping is needed, write the actual escape: forbiddenHex.replace(/[.*+?^()|[\\]\\\\]/g, \"\\\\$&\"). If not needed, write the comment explaining why",
+      "tags": [
+        "regex",
+        "cargo-cult",
+        "dead-code",
+        "defensive-coding"
+      ]
+    },
+    {
+      "id": "bolting-new-domain-onto-existing-scanroots",
+      "description": "Adding a new file type (e.g. .html) to scanRoots without filtering domain-incompatible scanners",
+      "avoid": "Adding assets/emails to the React-side files[] loop where the font scanner flags Helvetica/Arial in legitimate email font-fallback stacks (48 false-positive ERRORS in one run)",
+      "instead": "Domain-aware routing at the dispatch layer. files[] (React-side scanners) excludes .html. HTML files go ONLY to the email scanner. Different domains = different rules = separate dispatch",
+      "tags": [
+        "linter",
+        "domain-routing",
+        "false-positives",
+        "scanner-architecture"
+      ]
+    },
+    {
+      "id": "config-pinning-tests-disguised-as-behavior-tests",
+      "description": "Tests that import a constant and assert its value, branded as \"behavior tests\"",
+      "avoid": "expect(emailScanRoot).toBe('assets/emails') and expect(emailForbiddenHexes.has('#d5d1ca')).toBe(true) — same anti-pattern as source-grep, just relocated to import-and-assert",
+      "instead": "Behavior tests should call the function and assert on output. If the constant matters, a behavior test that uses it implicitly verifies it (e.g. test #1 \"flags forbidden hex #d5d1ca\" fails if the hex is removed from the Set)",
+      "tags": [
+        "testing",
+        "behavior-tests",
+        "config-pinning",
+        "redundancy"
       ]
     }
   ]
