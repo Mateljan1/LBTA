@@ -6,6 +6,30 @@
  *
  * Env: POSTMARK_SERVER_TOKEN, POSTMARK_FROM_EMAIL (optional, defaults below).
  * Failures are logged only — they never affect the API response.
+ *
+ * ──────────────────────────────────────────────────────────────────
+ * BRAND COLOR POLICY (LBTA email templates)
+ * ──────────────────────────────────────────────────────────────────
+ * Brand tokens used in this file (see tokens/lbta-web-tokens.json):
+ *   #1B3A5C  Pacific Dusk  (headings, primary text)
+ *   #0F2237  Deep Water    (dark surfaces, hero background)
+ *   #2E8B8B  Victoria Cove (links, accents)
+ *   #E8834A  Sunset Cliff  (CTA, italic emphasis)
+ *   #C4963C  Thousand Steps (eyebrows, gold accent)
+ *   #FAF8F4  Morning Light (default surface)
+ *   #F5F0E5  Sandstone     (warm surface in dark sections)
+ *   #E8E4DF  lbta-stone    (outer wrapper, neutral border)
+ *
+ * Documented exceptions (intentionally NOT brand tokens):
+ *   #333, #666, #999  — Generic body grays. Outlook 2007–2019, Apple
+ *                       Mail, and Gmail web all render brand colors
+ *                       inconsistently for body text. Generic grays
+ *                       are the safest cross-client choice. Do not
+ *                       migrate to brand tokens without testing in
+ *                       Litmus across 30+ clients first.
+ *   #667788           — Slate gray, used for secondary metadata.
+ *                       Same rationale as above.
+ * ──────────────────────────────────────────────────────────────────
  */
 
 const POSTMARK_API = 'https://api.postmarkapp.com/email'
@@ -88,7 +112,7 @@ function escapeHtml(str: string): string {
 
 function field(label: string, value: string | undefined | null): string {
   if (!value) return ''
-  return `<tr><td style="padding:6px 12px;font-weight:600;color:#1B2A4A;white-space:nowrap;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:6px 12px;color:#333;">${escapeHtml(value)}</td></tr>`
+  return `<tr><td style="padding:6px 12px;font-weight:600;color:#1B3A5C;white-space:nowrap;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:6px 12px;color:#333;">${escapeHtml(value)}</td></tr>`
 }
 
 function buildNotificationHtml(options: {
@@ -100,7 +124,7 @@ function buildNotificationHtml(options: {
   return `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
-<body style="margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif;background:#d5d1ca;">
+<body style="margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif;background:#E8E4DF;">
   <div style="max-width:600px;margin:20px auto;background:#FAF8F4;border-radius:4px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
     <div style="height:3px;background:linear-gradient(90deg,#2E8B8B,#E8834A 35%,#C4963C 50%,#E8834A 65%,#2E8B8B);"></div>
     <div style="padding:16px 24px;">
@@ -395,10 +419,10 @@ a{color:#2E8B8B;text-decoration:none;}
 .ht{font-size:36px!important;}.bt{font-size:15px!important;}
 }
 </style></head>
-<body style="margin:0;padding:0;background-color:#d5d1ca;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#d5d1ca;">
+<body style="margin:0;padding:0;background-color:#E8E4DF;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#E8E4DF;">
 <tr><td align="center">
-<div style="display:none;font-size:1px;color:#d5d1ca;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">${isContact ? `We received your message about ${escapeHtml(programName)} &mdash; our team will respond soon.` : `Your ${escapeHtml(programName)} ${isTrial || isPrivate ? 'request' : isScholarship ? 'application' : 'registration'} is confirmed &mdash; here are your details and next steps.`}</div>
+<div style="display:none;font-size:1px;color:#E8E4DF;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">${isContact ? `We received your message about ${escapeHtml(programName)} &mdash; our team will respond soon.` : `Your ${escapeHtml(programName)} ${isTrial || isPrivate ? 'request' : isScholarship ? 'application' : 'registration'} is confirmed &mdash; here are your details and next steps.`}</div>
 <table role="presentation" class="wrap" width="660" cellpadding="0" cellspacing="0" style="max-width:660px;width:100%;background-color:#FAF8F4;">
 <tr><td style="height:3px;background:linear-gradient(90deg,#2E8B8B,#E8834A 35%,#C4963C 50%,#E8834A 65%,#2E8B8B);font-size:0;">&nbsp;</td></tr>
 <tr><td style="padding:20px 40px 12px;">
