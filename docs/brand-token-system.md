@@ -51,7 +51,9 @@ When adding or updating a token:
 
 ## Guardrails (what `tokens:check` catches)
 
-The checker scans `app/` and `components/` for:
+The checker scans `app/`, `components/`, and `assets/emails/` (separate ruleset for emails — see below) for:
+
+**App / components (`app/`, `components/`):**
 
 - **`text-white/40` and `text-white/25`** — fail WCAG 7:1 on dark surfaces. **ERROR** in strict mode.
 - **Raw hex literals** in TS/TSX/CSS (outside `app/globals.css`, `app/embedded-forms.css`). **WARN → ERROR in strict mode.**
@@ -59,6 +61,16 @@ The checker scans `app/` and `components/` for:
 - **Inline `style={{ background: 'linear-gradient(... #...)' }}`** — bypasses the token system. **WARN → ERROR in strict mode.**
 - **Forbidden font families** (`Inter`, `Roboto`, `Arial`, `Space Grotesk`, `Playfair`, `Work Sans`, `Helvetica`) in app code. `lib/email.ts` is exempted (email-client fallbacks). **ERROR.**
 - **Deprecated `lbta-*` classes** (`lbta-primary`, `lbta-coral`, `lbta-coral-dark`, `lbta-bone`). Run `tsx scripts/fix-deprecated-tokens.ts` to auto-migrate. **WARN.**
+- **Hand-rolled eyebrow patterns** (`text-[Npx] uppercase tracking-…` on a non-button element). Use `text-eyebrow` / `text-eyebrow-sm` instead. **WARN → ERROR in strict mode.**
+
+**Email templates (`assets/emails/**/*.html`, tracked files only):**
+
+Emails follow a different ruleset from React components — they use generic body-text grays and email-fallback fonts (Helvetica/Arial) by design. See `lib/email.ts` BRAND COLOR POLICY for rationale and exception list.
+
+- **Email forbidden hex** — values that have been consolidated to a brand token (currently `#d5d1ca` → `lbta-stone`). Adding more to `emailForbiddenHexes` will gate any tracked email template that still uses them. **WARN → ERROR in strict mode.**
+- **Email missing CAN-SPAM postal address** — any customer-facing template (heuristic: contains the literal text `Laguna Beach`) must also contain `1098 Balboa`. **ERROR (legal compliance, CAN-SPAM Act §316.5).** The `lbta-spring-2026.html` placeholder stub is exempted.
+
+The email scanner runs in both `--all` mode and edited-files (pre-commit) mode, so a violation in either domain blocks the build.
 
 ## Visual proof — `/brand`
 

@@ -12,24 +12,29 @@ const forbiddenClasses = ['text-white/40', 'text-white/25']
 // ────────────────────────────────────────────────────────────────────
 // Email template scanning (separate domain, looser rules than React)
 // ────────────────────────────────────────────────────────────────────
-// Emails inherently allow more permissive styling than React components
-// (email-client compat: Outlook, Apple Mail, Gmail render brand colors
-// inconsistently — see lib/email.ts BRAND COLOR POLICY). So the email
-// scanner only enforces:
-//   1. Forbidden hex values (specifically the consolidated wrappers)
-//   2. CAN-SPAM postal address presence on customer-facing templates
-const emailScanRoot = 'assets/emails'
-// Hex values that have been consolidated to a brand token. Adding more here
+// Emails follow visual hierarchy and email-design convention rather than
+// the strict brand palette (see lib/email.ts BRAND COLOR POLICY for the
+// rationale). The email scanner only enforces two rules:
+//   1. Forbidden hex values (consolidated wrapper colors). WARN, strict-blocking.
+//   2. CAN-SPAM postal address on customer-facing templates. ERROR (legal).
+// Exported so lib/brand-tokens.test.ts can call the rules directly with
+// fixture content (behavior tests, not source-grep tests).
+export const emailScanRoot = 'assets/emails'
+// Hex values that have been consolidated to a brand token. Adding more
 // will fail any tracked email template that still uses them.
-const emailForbiddenHexes = new Set(['#d5d1ca'])
-// AC placeholder stubs (not real customer-facing email content).
-// CAN-SPAM and brand rules don't apply.
-const emailExemptFiles = new Set(['assets/emails/lbta-spring-2026.html'])
-// Required physical address marker for CAN-SPAM compliance. If a template
-// mentions "Laguna Beach" (i.e. is customer-facing), it must also include
-// the full street address.
-const emailRequiredPostalMarker = '1098 Balboa'
-const emailCustomerFacingMarker = 'Laguna Beach'
+export const emailForbiddenHexes = new Set(['#d5d1ca'])
+// AC placeholder stubs (not real customer-facing email content). CAN-SPAM
+// and brand rules don't apply. Composed from emailScanRoot so a future rename
+// of the email directory keeps this in sync.
+export const emailExemptFiles = new Set([`${emailScanRoot}/lbta-spring-2026.html`])
+// CAN-SPAM §316.5 requires a valid physical address in commercial email.
+// We use a heuristic: if a template contains the literal customer-facing
+// marker ("Laguna Beach"), it must also contain the postal marker
+// ("1098 Balboa"). Heuristic is acceptable for the current 19-template corpus
+// where every footer spells out the city; revisit if templates abbreviate
+// to "LBTA" only.
+export const emailRequiredPostalMarker = '1098 Balboa'
+export const emailCustomerFacingMarker = 'Laguna Beach'
 
 // Scans
 const rawHexRegex = /#[0-9a-fA-F]{6}(?:[0-9a-fA-F]{2})?\b/g
@@ -79,13 +84,21 @@ const fontSkipFiles = new Set([
   'lib/email.ts',
 ])
 
-type Hit = {
+/**
+ * A finding from one of the scanners.
+ *
+ * `line` is `number` for line-scoped findings (e.g. a `#d5d1ca` literal at
+ * line 42) and `null` for file-level findings (e.g. a missing CAN-SPAM
+ * postal address — there is no specific line to point to). Printers and
+ * the report writer render `null` as "(file)".
+ */
+export type Hit = {
   file: string
-  line: number
+  line: number | null
   value: string
 }
 
-type ReportData = {
+export type ReportData = {
   forbidden: Hit[]
   rawHex: Hit[]
   arbitraryTailwind: Hit[]
@@ -162,11 +175,17 @@ async function walkFiles(dirPath: string, files: string[] = []): Promise<string[
 }
 
 /**
- * Get tracked email template paths (relative to repoRoot). Uses git ls-files
- * so we don't flag work-in-progress untracked email drafts at assets/emails/
- * root. Returns empty array if git or the directory aren't available.
+ * Get tracked email template paths (absolute paths relative to repoRoot).
+ *
+ * Primary path: `git ls-files` so untracked WIP drafts at assets/emails/
+ * root don't generate noise.
+ *
+ * Fallback: if git fails (no checkout, sparse checkout, permission error,
+ * git not on PATH), fall back to a filesystem walk so the email scan can
+ * never silently skip on CI. CAN-SPAM is a legal-compliance check; a
+ * silent skip is worse than a false positive against a WIP file.
  */
-function getTrackedEmailTemplates(): string[] {
+async function getTrackedEmailTemplates(): Promise<string[]> {
   try {
     const output = execSync(`git ls-files ${emailScanRoot}`, {
       cwd: repoRoot,
@@ -180,66 +199,126 @@ function getTrackedEmailTemplates(): string[] {
       .filter((p) => !emailExemptFiles.has(p))
       .map((relativePath) => path.join(repoRoot, relativePath))
   } catch {
-    return []
+    console.warn(
+      `[check-brand-usage] git ls-files failed for ${emailScanRoot}; ` +
+        `falling back to filesystem walk (will include any untracked .html files).`,
+    )
+    const absoluteRoot = path.join(repoRoot, emailScanRoot)
+    try {
+      const all = await walkEmailFiles(absoluteRoot)
+      return all.filter((abs) => {
+        const rel = path.relative(repoRoot, abs)
+        return !emailExemptFiles.has(rel)
+      })
+    } catch (err) {
+      console.warn(
+        `[check-brand-usage] filesystem fallback also failed for ${emailScanRoot}:`,
+        err instanceof Error ? err.message : err,
+      )
+      return []
+    }
   }
 }
 
 /**
- * Scan a single email template for the two enforced rules:
- *   1. Forbidden hex values that have been consolidated to a brand token
- *   2. CAN-SPAM postal address presence on customer-facing templates
+ * Walk for .html files only — used as the email-scan fallback when git
+ * is unavailable. Mirrors `walkFiles` but with a different extension filter.
  */
-function scanEmailTemplate(
+async function walkEmailFiles(dirPath: string, files: string[] = []): Promise<string[]> {
+  const entries = await readdir(dirPath)
+  for (const entry of entries) {
+    const absolutePath = path.join(dirPath, entry)
+    const entryStat = await stat(absolutePath)
+    if (entryStat.isDirectory()) {
+      await walkEmailFiles(absolutePath, files)
+      continue
+    }
+    if (path.extname(entry) === '.html') {
+      files.push(absolutePath)
+    }
+  }
+  return files
+}
+
+/**
+ * Scan a single email template for the two enforced rules and return all
+ * hits found. Caller pushes into the appropriate report buckets.
+ *
+ * Returning hits (rather than mutating ReportData) matches the pattern of
+ * `gatherLineHits` and `findEyebrowPatterns`, and lets tests call this
+ * function with fixture content without constructing a full ReportData.
+ *
+ * Exported so behavior tests in lib/brand-tokens.test.ts can call this
+ * directly with synthetic HTML.
+ */
+export function scanEmailTemplate(
   contents: string,
   relativeFile: string,
-  reportData: ReportData,
-) {
-  // Rule 1: forbidden hex (case-insensitive)
+): { forbiddenHex: Hit[]; missingPostalAddress: Hit[] } {
+  const forbiddenHex: Hit[] = []
+  const missingPostalAddress: Hit[] = []
+
+  // Rule 1: forbidden hex (case-insensitive). Compile each pattern once,
+  // not once per line. emailForbiddenHexes only ever contains '#' + 6 hex
+  // digits — no regex metacharacters need escaping. If a future entry
+  // contained metacharacters, it would not be a valid hex literal.
+  const hexPatterns = [...emailForbiddenHexes].map(
+    (hex) => new RegExp(`${hex}\\b`, 'gi'),
+  )
   const lines = contents.split('\n')
   lines.forEach((line, idx) => {
-    for (const forbiddenHex of emailForbiddenHexes) {
-      // Match the hex literal as a whole (preceded/followed by non-hex char or boundary)
-      const pattern = new RegExp(`${forbiddenHex.replace('#', '#')}\\b`, 'gi')
+    for (const pattern of hexPatterns) {
       const matches = line.match(pattern)
       if (matches) {
         for (const value of matches) {
-          reportData.emailForbiddenHex.push({
-            file: relativeFile,
-            line: idx + 1,
-            value,
-          })
+          forbiddenHex.push({ file: relativeFile, line: idx + 1, value })
         }
       }
     }
   })
 
   // Rule 2: customer-facing emails (mentioning "Laguna Beach") must contain
-  // the required postal marker. One hit per file.
+  // the required postal marker. One hit per file (line: null = file-level).
+  // Heuristic note: see emailCustomerFacingMarker docstring.
   if (
     contents.includes(emailCustomerFacingMarker) &&
     !contents.includes(emailRequiredPostalMarker)
   ) {
-    reportData.emailMissingPostalAddress.push({
+    missingPostalAddress.push({
       file: relativeFile,
-      line: 0,
+      line: null,
       value: `Missing "${emailRequiredPostalMarker}" — CAN-SPAM §316.5 requires a valid postal address`,
     })
   }
+
+  return { forbiddenHex, missingPostalAddress }
 }
 
+/**
+ * Get edited files (relative paths converted to absolute). In edited-files
+ * mode the script only re-scans files touched in the working tree — much
+ * faster than --all. We include both app/components TypeScript/CSS and the
+ * email scan root so that pre-commit edits to either domain are gated.
+ */
 function getEditedFiles(): string[] {
   try {
-    const output = execSync('git diff --name-only -- app components', {
-      cwd: repoRoot,
-      stdio: ['ignore', 'pipe', 'ignore'],
-      encoding: 'utf8',
-    })
+    const output = execSync(
+      `git diff --name-only -- app components ${emailScanRoot}`,
+      {
+        cwd: repoRoot,
+        stdio: ['ignore', 'pipe', 'ignore'],
+        encoding: 'utf8',
+      },
+    )
 
     return output
       .split('\n')
       .map((line) => line.trim())
       .filter(Boolean)
-      .filter((relativePath) => allowedExtensions.has(path.extname(relativePath)))
+      .filter((relativePath) => {
+        const ext = path.extname(relativePath)
+        return allowedExtensions.has(ext) || ext === '.html'
+      })
       .map((relativePath) => path.join(repoRoot, relativePath))
   } catch {
     return []
@@ -276,7 +355,8 @@ function printHits(title: string, level: 'WARN' | 'ERROR', hits: Hit[], limit = 
   const visible = hits.slice(0, limit)
 
   for (const hit of visible) {
-    console.log(`  ${level} ${hit.file}:${hit.line} -> ${hit.value}`)
+    const lineLabel = hit.line === null ? '(file)' : String(hit.line)
+    console.log(`  ${level} ${hit.file}:${lineLabel} -> ${hit.value}`)
   }
 
   if (hits.length > visible.length) {
@@ -303,7 +383,7 @@ function reportSection(title: string, hits: Hit[]): string {
   lines.push('|---|---|---|')
   const entries = [...grouped.entries()].sort((a, b) => b[1].length - a[1].length)
   for (const [file, fileHits] of entries) {
-    const lineList = fileHits.map((h) => h.line).join(', ')
+    const lineList = fileHits.map((h) => (h.line === null ? '(file)' : String(h.line))).join(', ')
     lines.push(`| \`${file}\` | ${fileHits.length} | ${lineList} |`)
   }
   return `${lines.join('\n')}\n`
@@ -323,16 +403,8 @@ async function writeReport(reportData: ReportData) {
     emailMissingPostalAddress: reportData.emailMissingPostalAddress.length,
   }
   const generatedAt = new Date().toISOString()
-  const allClear =
-    totals.forbidden === 0 &&
-    totals.rawHex === 0 &&
-    totals.arbitraryTailwind === 0 &&
-    totals.inlineGradient === 0 &&
-    totals.forbiddenFont === 0 &&
-    totals.legacyLbta === 0 &&
-    totals.handRolledEyebrow === 0 &&
-    totals.emailForbiddenHex === 0 &&
-    totals.emailMissingPostalAddress === 0
+  const categoryCount = Object.keys(totals).length
+  const allClear = Object.values(totals).every((n) => n === 0)
 
   const sections: string[] = []
   sections.push('<!-- Auto-generated by scripts/check-brand-usage.ts --report. Do not hand-edit the section below. -->')
@@ -353,7 +425,11 @@ async function writeReport(reportData: ReportData) {
   sections.push(`| Email: forbidden hex (consolidated) | ${totals.emailForbiddenHex} | ${totals.emailForbiddenHex === 0 ? '✅' : '❌'} |`)
   sections.push(`| Email: missing postal address (CAN-SPAM) | ${totals.emailMissingPostalAddress} | ${totals.emailMissingPostalAddress === 0 ? '✅' : '❌'} |`)
   sections.push('')
-  sections.push(allClear ? '**Result: 🟢 LOCKED IN — zero brand drift across all 9 strict categories.**' : '**Result: 🔴 Drift present — see breakdown below. Strict CI will fail.**')
+  sections.push(
+    allClear
+      ? `**Result: 🟢 LOCKED IN — zero brand drift across all ${categoryCount} strict categories.**`
+      : '**Result: 🔴 Drift present — see breakdown below. Strict CI will fail.**',
+  )
   sections.push('')
 
   // Only emit per-category sections when there are hits — keeps the doc clean
@@ -390,10 +466,13 @@ async function main() {
   const scanAll = process.argv.includes('--all')
   const writeReportFlag = process.argv.includes('--report')
   const editedFiles = scanAll ? [] : getEditedFiles()
+  // Split edited files by domain. The main `files[]` loop runs React-side
+  // scanners (raw-hex, forbidden fonts, etc.) that would false-positive on
+  // HTML emails (Helvetica/Arial in email font fallback stacks, brand hexes
+  // inline). HTML files are only fed to the dedicated email scanner below.
   const files: string[] = []
-
   if (editedFiles.length > 0) {
-    files.push(...editedFiles)
+    files.push(...editedFiles.filter((f) => path.extname(f) !== '.html'))
   } else {
     for (const root of scanRoots) {
       const absoluteRoot = path.join(repoRoot, root)
@@ -414,20 +493,23 @@ async function main() {
     emailMissingPostalAddress: [],
   }
 
-  // Scan tracked email templates (separate domain — see emailScanRoot above).
-  // Only runs in --all or full-scan mode; doesn't run for edited-files mode
-  // unless an email file is being edited. Skipped if no .html files match.
+  // Scan email templates (separate domain — see emailScanRoot above).
+  // Edited-files mode now includes any edited email .html files (see
+  // getEditedFiles), so the email scan is correctly gated in pre-commit
+  // as well as full --all CI mode.
   const emailFiles =
     editedFiles.length > 0
       ? editedFiles.filter((f) =>
           path.relative(repoRoot, f).startsWith(`${emailScanRoot}/`),
         )
-      : getTrackedEmailTemplates()
+      : await getTrackedEmailTemplates()
   for (const file of emailFiles) {
     const relativeFile = path.relative(repoRoot, file)
     if (emailExemptFiles.has(relativeFile)) continue
     const contents = await readFile(file, 'utf8')
-    scanEmailTemplate(contents, relativeFile, reportData)
+    const { forbiddenHex, missingPostalAddress } = scanEmailTemplate(contents, relativeFile)
+    reportData.emailForbiddenHex.push(...forbiddenHex)
+    reportData.emailMissingPostalAddress.push(...missingPostalAddress)
   }
 
   for (const file of files) {
@@ -546,8 +628,16 @@ async function main() {
   console.log('Brand usage checks passed.')
 }
 
-main().catch((error) => {
-  console.error('Brand usage check failed unexpectedly.')
-  console.error(error)
-  process.exitCode = 1
-})
+// CLI guard: only run main() when invoked directly via tsx, not when
+// imported by tests. process.argv[1] is the entry-point file path.
+const isMainModule =
+  typeof process.argv[1] === 'string' &&
+  process.argv[1].endsWith('check-brand-usage.ts')
+
+if (isMainModule) {
+  main().catch((error) => {
+    console.error('Brand usage check failed unexpectedly.')
+    console.error(error)
+    process.exitCode = 1
+  })
+}

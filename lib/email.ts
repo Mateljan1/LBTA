@@ -10,6 +10,9 @@
  * ──────────────────────────────────────────────────────────────────
  * BRAND COLOR POLICY (LBTA email templates)
  * ──────────────────────────────────────────────────────────────────
+ * Framework: see docs/brand-token-system.md → "Adding an exception
+ * (escape-hatch playbook)" for the rules these exceptions follow.
+ *
  * Brand tokens used in this file (see tokens/lbta-web-tokens.json):
  *   #1B3A5C  Pacific Dusk  (headings, primary text)
  *   #0F2237  Deep Water    (dark surfaces, hero background)
@@ -21,14 +24,18 @@
  *   #E8E4DF  lbta-stone    (outer wrapper, neutral border)
  *
  * Documented exceptions (intentionally NOT brand tokens):
- *   #333, #666, #999  — Generic body grays. Outlook 2007–2019, Apple
- *                       Mail, and Gmail web all render brand colors
- *                       inconsistently for body text. Generic grays
- *                       are the safest cross-client choice. Do not
- *                       migrate to brand tokens without testing in
- *                       Litmus across 30+ clients first.
- *   #667788           — Slate gray, used for secondary metadata.
- *                       Same rationale as above.
+ *   #333, #666, #999  — Generic body-text grays. Justification:
+ *                       (a) visual hierarchy — brand-colored headings
+ *                       paired with neutral-gray body keeps emphasis
+ *                       on the headline, which would flatten if body
+ *                       text used a brand token; (b) email-design
+ *                       convention — these greys are the long-standing
+ *                       default in transactional templates with strong
+ *                       cross-client predictability. Migrating body
+ *                       text to brand tokens is reversible only after
+ *                       Litmus testing across 30+ clients.
+ *   #667788           — Slate gray for secondary metadata. Same
+ *                       hierarchy rationale.
  * ──────────────────────────────────────────────────────────────────
  */
 

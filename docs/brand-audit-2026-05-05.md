@@ -83,7 +83,7 @@ npm run tokens:check -- --all --report   # writes/updates this file (Phase 1.3)
 
 ## Live audit — current state
 
-**Generated:** 2026-05-06T20:43:59.795Z
+**Generated:** 2026-05-11T13:12:27.098Z
 
 | Category | Count | Status |
 |---|---|---|
@@ -93,42 +93,9 @@ npm run tokens:check -- --all --report   # writes/updates this file (Phase 1.3)
 | Inline gradient hex literals | 0 | ✅ |
 | Forbidden fonts (app code) | 0 | ✅ |
 | Deprecated lbta-* classes | 0 | ✅ |
-| Hand-rolled eyebrow patterns (info) | 0 | ✅ |
-| Hand-rolled section padding (info) | 0 | ✅ |
+| Hand-rolled eyebrow patterns | 0 | ✅ |
+| Email: forbidden hex (consolidated) | 0 | ✅ |
+| Email: missing postal address (CAN-SPAM) | 0 | ✅ |
 
-**Result: 🟢 LOCKED IN — zero brand drift.**
-
-_Hand-rolled patterns are informational — they do not block CI. They surface where the design system primitives could replace ad-hoc styles. Migrate opportunistically when touching a file._
-
-### Forbidden contrast errors
-
-_None._
-
-### Raw hex literals
-
-_None._
-
-### Arbitrary Tailwind colors
-
-_None._
-
-### Inline gradient hex literals
-
-_None._
-
-### Forbidden fonts (app code)
-
-_None._
-
-### Deprecated lbta-* classes
-
-_None._
-
-### Hand-rolled eyebrow patterns (informational)
-
-_None._
-
-### Hand-rolled section padding (informational)
-
-_None._
+**Result: 🟢 LOCKED IN — zero brand drift across all 9 strict categories.**
 

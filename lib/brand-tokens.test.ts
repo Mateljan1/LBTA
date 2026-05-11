@@ -4,6 +4,14 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import { BRAND, LBTA_UTIL, LBTA_LEGACY, LBTA, DEPRECATED_LBTA_CLASSES } from './brand-tokens'
+import {
+  scanEmailTemplate,
+  emailScanRoot,
+  emailExemptFiles,
+  emailForbiddenHexes,
+  emailRequiredPostalMarker,
+  emailCustomerFacingMarker,
+} from '../scripts/check-brand-usage'
 
 const REPO_ROOT = path.resolve(__dirname, '..')
 const TOKEN_JSON_PATH = path.join(REPO_ROOT, 'tokens', 'lbta-web-tokens.json')
@@ -127,33 +135,81 @@ describe('brand usage guardrail', () => {
   }, 30_000)
 })
 
-describe('email brand checker rules (contract test)', () => {
-  // Prevents regressions where someone deletes the email-scan extension.
-  // If you intentionally remove these rules, update this test in the same PR.
-  const checkerSource = readFileSync(
-    path.join(REPO_ROOT, 'scripts', 'check-brand-usage.ts'),
-    'utf8',
-  )
+describe('email brand checker — behavior', () => {
+  // Behavior tests over contract tests: import the actual scanner and call
+  // it with synthetic fixture content. Survives reformatting, renaming,
+  // and refactoring as long as the behavior stays correct. The companion
+  // "STRICT mode passes" test above guards against the scanner being
+  // deleted altogether (CI would fail on real templates).
+  //
+  // Importing scripts/check-brand-usage.ts only loads the module (constants
+  // + functions); main() is gated by an isMainModule check and does not
+  // auto-run during test collection.
 
-  it('declares emailScanRoot pointing at assets/emails', () => {
-    expect(checkerSource).toMatch(/emailScanRoot\s*=\s*['"]assets\/emails['"]/)
+  it('flags forbidden hex (e.g. #d5d1ca) anywhere in template content', () => {
+    const html = '<body bgcolor="#d5d1ca">hello</body>'
+    const { forbiddenHex } = scanEmailTemplate(html, 'fixture/forbidden.html')
+    expect(forbiddenHex).toHaveLength(1)
+    expect(forbiddenHex[0]).toMatchObject({
+      file: 'fixture/forbidden.html',
+      line: 1,
+      value: expect.stringMatching(/^#d5d1ca$/i),
+    })
   })
 
-  it('forbids the consolidated #d5d1ca wrapper hex in tracked email templates', () => {
-    expect(checkerSource).toMatch(/emailForbiddenHexes\s*=\s*new Set\(\[\s*['"]#d5d1ca['"]/i)
+  it('matches forbidden hex case-insensitively (#D5D1CA)', () => {
+    const html = '<table bgcolor="#D5D1CA">'
+    const { forbiddenHex } = scanEmailTemplate(html, 'fixture/upper.html')
+    expect(forbiddenHex).toHaveLength(1)
   })
 
-  it('requires the CAN-SPAM "1098 Balboa" postal marker on customer-facing emails', () => {
-    expect(checkerSource).toMatch(/emailRequiredPostalMarker\s*=\s*['"]1098 Balboa['"]/)
-    expect(checkerSource).toMatch(/emailCustomerFacingMarker\s*=\s*['"]Laguna Beach['"]/)
+  it('does NOT match a longer hex that shares the same prefix (#d5d1cafe)', () => {
+    // Word-boundary check: #d5d1cafe should not match the #d5d1ca rule
+    const html = '<span style="color:#d5d1cafe;">'
+    const { forbiddenHex } = scanEmailTemplate(html, 'fixture/long.html')
+    expect(forbiddenHex).toHaveLength(0)
   })
 
-  it('exempts the lbta-spring-2026.html ActiveCampaign placeholder stub', () => {
-    expect(checkerSource).toMatch(/emailExemptFiles\s*=\s*new Set\(\[\s*['"]assets\/emails\/lbta-spring-2026\.html['"]/)
+  it('flags customer-facing template missing the postal address (CAN-SPAM)', () => {
+    const html = '<footer>Laguna Beach Tennis Academy · (949) 534-0457</footer>'
+    const { missingPostalAddress } = scanEmailTemplate(html, 'fixture/no-addr.html')
+    expect(missingPostalAddress).toHaveLength(1)
+    expect(missingPostalAddress[0]).toMatchObject({
+      file: 'fixture/no-addr.html',
+      line: null,
+      value: expect.stringContaining('1098 Balboa'),
+    })
   })
 
-  it('treats missing postal address as ERROR (CAN-SPAM is legal compliance, not style)', () => {
-    expect(checkerSource).toMatch(/emailMissingPostalAddress\.length/)
-    expect(checkerSource).toMatch(/totalErrors\s*=[\s\S]*?emailMissingPostalAddress\.length/)
+  it('does NOT flag missing postal address when "1098 Balboa" is present', () => {
+    const html =
+      '<footer>Laguna Beach Tennis Academy · 1098 Balboa Ave, Laguna Beach, CA 92651 · (949) 534-0457</footer>'
+    const { missingPostalAddress } = scanEmailTemplate(html, 'fixture/has-addr.html')
+    expect(missingPostalAddress).toHaveLength(0)
+  })
+
+  it('does NOT flag missing postal address when template is internal-only (no "Laguna Beach" mention)', () => {
+    const html = '<p>Internal staff notification</p>'
+    const { missingPostalAddress } = scanEmailTemplate(html, 'fixture/internal.html')
+    expect(missingPostalAddress).toHaveLength(0)
+  })
+
+  it('returns zero hits for a clean template', () => {
+    const html =
+      '<body bgcolor="#E8E4DF"><footer>Laguna Beach Tennis Academy · 1098 Balboa Ave, Laguna Beach, CA 92651</footer></body>'
+    const { forbiddenHex, missingPostalAddress } = scanEmailTemplate(html, 'fixture/clean.html')
+    expect(forbiddenHex).toHaveLength(0)
+    expect(missingPostalAddress).toHaveLength(0)
+  })
+
+  it('composes exempt files from emailScanRoot (no hardcoded duplication)', () => {
+    expect(emailScanRoot).toBe('assets/emails')
+    expect(emailExemptFiles.has(`${emailScanRoot}/lbta-spring-2026.html`)).toBe(true)
+  })
+
+  it('configures the consolidated wrapper hex and postal markers', () => {
+    expect(emailForbiddenHexes.has('#d5d1ca')).toBe(true)
+    expect(emailRequiredPostalMarker).toBe('1098 Balboa')
+    expect(emailCustomerFacingMarker).toBe('Laguna Beach')
   })
 })
