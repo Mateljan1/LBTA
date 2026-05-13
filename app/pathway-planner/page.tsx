@@ -106,10 +106,11 @@ function PathwayPlannerInteractive() {
         <div className="container-narrow">
           <form onSubmit={calculatePathway} className="max-w-2xl mx-auto space-y-8">
             <div>
-              <label className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
+              <label htmlFor="pathway-age" className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
                 1. What is your (or your child's) age?
               </label>
               <select
+                id="pathway-age"
                 required
                 value={formData.age}
                 onChange={(e) => setFormData({...formData, age: e.target.value})}
@@ -127,10 +128,11 @@ function PathwayPlannerInteractive() {
             </div>
 
             <div>
-              <label className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
+              <label htmlFor="pathway-experience" className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
                 2. What is your current tennis experience?
               </label>
               <select
+                id="pathway-experience"
                 required
                 value={formData.experience}
                 onChange={(e) => setFormData({...formData, experience: e.target.value})}
@@ -146,10 +148,11 @@ function PathwayPlannerInteractive() {
             </div>
 
             <div>
-              <label className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
+              <label htmlFor="pathway-goal" className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
                 3. What is your primary tennis goal?
               </label>
               <select
+                id="pathway-goal"
                 required
                 value={formData.goal}
                 onChange={(e) => setFormData({...formData, goal: e.target.value})}
@@ -164,10 +167,11 @@ function PathwayPlannerInteractive() {
             </div>
 
             <div>
-              <label className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
+              <label htmlFor="pathway-commitment" className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">
                 4. How many sessions per week can you commit to?
               </label>
               <select
+                id="pathway-commitment"
                 required
                 value={formData.commitment}
                 onChange={(e) => setFormData({...formData, commitment: e.target.value})}
