@@ -27,7 +27,10 @@ export default function SeasonBanner() {
   if (isDismissed || !cta) return null
 
   return (
-    <div className="relative bg-brand-morning-light border-b border-gray-200 py-2">
+    <aside
+      aria-label="Season notice"
+      className="relative bg-brand-morning-light border-b border-gray-200 py-2"
+    >
       <div className="container-lbta">
         <div className="flex items-center justify-between">
           <div className="flex-1 text-center">
@@ -51,6 +54,6 @@ export default function SeasonBanner() {
           </button>
         </div>
       </div>
-    </div>
+    </aside>
   )
 }
