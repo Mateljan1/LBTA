@@ -495,17 +495,23 @@ export default function Header() {
       )}
 
       <style jsx>{`
-        @keyframes slideInRight {
-          from { transform: translateX(100%); }
-          to { transform: translateX(0); }
-        }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-          from { opacity: 0; transform: translateY(-8px); }
-          to { opacity: 1; transform: translateY(0); }
+        /* Drawer + nav-item entrance keyframes gated on prefers-reduced-motion.
+           Belt-and-suspenders with the global override in app/globals.css —
+           if a future motion preference flag bypasses the global rule, this
+           per-component gate still suppresses the slide/fade animations. */
+        @media (prefers-reduced-motion: no-preference) {
+          @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+          }
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
         }
       `}</style>
     </>
