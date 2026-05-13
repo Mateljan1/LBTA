@@ -3,13 +3,21 @@
 import { usePathname } from 'next/navigation'
 import Header from './Header'
 import Footer from './Footer'
-import SeasonBanner from '@/components/ui/SeasonBanner'
 import BackToTop from '@/components/ui/BackToTop'
 
+/**
+ * `seasonBanner` is rendered by the (server) `app/layout.tsx` and passed
+ * through here as a slot. SeasonBanner needs server-side cookie access to
+ * avoid CLS (audit C-4 fix), and a client component cannot import a server
+ * component — only render one passed as a prop. ConditionalLayout still
+ * decides *whether* to show it based on pathname.
+ */
 export default function ConditionalLayout({
   children,
+  seasonBanner,
 }: {
   children: React.ReactNode
+  seasonBanner?: React.ReactNode
 }) {
   const pathname = usePathname()
   const isBeginnerLanding = pathname?.startsWith('/beginner-program')
@@ -25,7 +33,7 @@ export default function ConditionalLayout({
   // All other pages get LBTA header/footer
   return (
     <>
-      <SeasonBanner />
+      {seasonBanner}
       <Header />
       <main
         id="main-content"

@@ -1,35 +1,38 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { X } from 'lucide-react'
+import { cookies } from 'next/headers'
 import { getSeasonCTA } from '@/lib/season-utils'
+import SeasonBannerDismiss from './SeasonBannerDismiss'
 
-export default function SeasonBanner() {
-  const [isDismissed, setIsDismissed] = useState(true)
-  const [cta, setCta] = useState<ReturnType<typeof getSeasonCTA> | null>(null)
+/**
+ * Server-rendered season banner.
+ *
+ * Why server-rendered (audit C-4 fix): the previous client-only version
+ * defaulted `isDismissed=true` and only mounted real banner content after a
+ * `useEffect` read `localStorage`. Lighthouse measured a universal 0.097 CLS
+ * shift on every shared-layout route as the banner appeared post-hydration
+ * and pushed the footer down. Reading the dismissal cookie + computing the
+ * active CTA on the server lets SSR emit the final DOM in one paint, so
+ * there's nothing left to shift after hydration.
+ *
+ * The dismiss button is the only interactive surface and lives in a tiny
+ * client child (`SeasonBannerDismiss`) that writes the cookie and removes
+ * the banner from the DOM. The shift caused by user-initiated dismissal
+ * does not count toward CLS (Lighthouse only measures shifts before the
+ * first user interaction), so a single round-trip refresh later, the
+ * dismissal persists with zero CLS cost.
+ */
+export default async function SeasonBanner() {
+  const cookieStore = await cookies()
+  const isDismissed = cookieStore.get('season-banner-dismissed')?.value === 'true'
+  if (isDismissed) return null
 
-  useEffect(() => {
-    const dismissed = localStorage.getItem('season-banner-dismissed')
-    if (dismissed) return
-
-    const seasonCta = getSeasonCTA()
-    if (seasonCta.headline) {
-      setCta(seasonCta)
-      setIsDismissed(false)
-    }
-  }, [])
-
-  const handleDismiss = () => {
-    setIsDismissed(true)
-    localStorage.setItem('season-banner-dismissed', 'true')
-  }
-
-  if (isDismissed || !cta) return null
+  const cta = getSeasonCTA()
+  if (!cta.headline) return null
 
   return (
     <aside
       aria-label="Season notice"
       className="relative bg-brand-morning-light border-b border-gray-200 py-2"
+      data-component="season-banner"
     >
       <div className="container-lbta">
         <div className="flex items-center justify-between">
@@ -45,13 +48,7 @@ export default function SeasonBanner() {
               )}
             </p>
           </div>
-          <button
-            onClick={handleDismiss}
-            className="flex-shrink-0 min-h-[48px] min-w-[48px] flex items-center justify-center hover:bg-black/5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"
-            aria-label="Dismiss banner"
-          >
-            <X className="w-4 h-4 text-lbta-slate/60" />
-          </button>
+          <SeasonBannerDismiss />
         </div>
       </div>
     </aside>

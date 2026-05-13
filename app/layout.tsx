@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import ConditionalLayout from '@/components/layout/ConditionalLayout'
 import ExitIntentPopupLoader from '@/components/ExitIntentPopupLoader'
+import SeasonBanner from '@/components/ui/SeasonBanner'
 import { OrganizationSchema, LocalBusinessArraySchema } from './schema'
 import { ReviewSchema } from '@/components/SEOSchemas'
 
@@ -154,7 +155,11 @@ export default function RootLayout({
           `}
         </Script>
 
-        <ConditionalLayout>
+        {/* SeasonBanner is rendered server-side so SSR can read the dismissal
+            cookie + active season CTA in one paint — no post-hydration mount
+            shift (audit C-4 fix). ConditionalLayout decides whether to show
+            it based on pathname. */}
+        <ConditionalLayout seasonBanner={<SeasonBanner />}>
           {children}
         </ConditionalLayout>
         
