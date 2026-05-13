@@ -483,8 +483,8 @@ export default function Header() {
                         />
                       ))}
                     </div>
-                    <p className="text-[12px] text-brand-pacific-dusk/50">
-                      <span className="font-medium text-brand-pacific-dusk">{siteStats.trustStats.playersCount}</span> players trained
+                    <p className="text-[12px] text-brand-pacific-dusk-soft">
+                      <span className="font-medium text-brand-pacific-dusk">Founded 2020</span> · Official City Partner
                     </p>
                   </div>
                 </div>
