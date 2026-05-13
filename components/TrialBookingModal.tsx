@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Shield, CheckCircle } from 'lucide-react'
 import { getTrialProgramOptions } from '@/lib/programs-data'
 
@@ -22,6 +22,10 @@ interface FormData {
 }
 
 export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: TrialBookingModalProps) {
+  // Respect OS-level Reduce Motion. framer-motion captures the preference on
+  // hook init; for our use case (modal opens after the user clicks a CTA),
+  // the preference is already established before the modal mounts.
+  const prefersReducedMotion = useReducedMotion()
   const programs = useMemo(() => getTrialProgramOptions(), [])
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
@@ -223,10 +227,12 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
-            initial={{ opacity: 0, scale: 0.96, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 20 }}
-            transition={{ type: "spring", stiffness: 400, damping: 35 }}
+            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 20 }}
+            animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+            exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 20 }}
+            transition={prefersReducedMotion
+              ? { duration: 0.01 }
+              : { type: 'spring', stiffness: 400, damping: 35 }}
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-[520px] max-h-[90vh] bg-white rounded-lg shadow-2xl overflow-hidden"
           >
@@ -245,7 +251,12 @@ export default function TrialBookingModal({ isOpen, onClose, defaultProgram }: T
             <div className="overflow-y-auto max-h-[90vh] p-8 md:p-10">
               {isSuccess ? (
                 // Success Screen
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-8">
+                <motion.div
+                  initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
+                  animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                  transition={prefersReducedMotion ? { duration: 0.01 } : undefined}
+                  className="text-center py-8"
+                >
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-tide-pool/10 flex items-center justify-center">
                     <CheckCircle className="w-8 h-8 text-brand-tide-pool" />
                   </div>
