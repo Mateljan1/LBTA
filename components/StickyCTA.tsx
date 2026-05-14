@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { getStickyCtaSchedules } from '@/lib/site-copy'
 import { events } from '@/lib/analytics'
 import { useReportMobileBottomHeight } from '@/lib/report-mobile-bottom-height'
+import { isConversionPage } from '@/lib/conversion-pages'
 
 interface StickyCTAProps {
   text: string
@@ -61,7 +62,12 @@ export default function StickyCTA({
   }, [showAfterScroll])
 
   useReportMobileBottomHeight(barRef, isVisible, '--lbta-sticky-cta-h')
-  
+
+  // Suppress on dedicated conversion-form pages — competing CTAs hurt conversion
+  // and risk overlay regressions on the page's own submit button. See
+  // lib/conversion-pages.ts and the 2026-05-13 lead-pipeline incident.
+  if (isConversionPage(pathname)) return null
+
   if (!isVisible) return null
   
   const buttonClasses = "flex-1 bg-black hover:bg-gray-800 text-white font-sans font-semibold text-[15px] py-3.5 rounded-[2px] transition-all duration-200 shadow-md text-center min-h-[48px] active:scale-[0.98] flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2"

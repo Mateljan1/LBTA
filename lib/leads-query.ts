@@ -5,6 +5,7 @@
  */
 
 import { getClient } from '@/lib/leads-store'
+import { HEALTH_CANARY_SOURCE } from '@/lib/leads-canary'
 
 /** Row shape returned to UI. Keeps payload as `unknown` until callers read fields. */
 export type LeadRow = {
@@ -109,9 +110,12 @@ export async function getAllLeads(opts: { limit?: number } = {}): Promise<LeadRo
   if (!supabase) return []
 
   const limit = opts.limit ?? 1000
+  // Filter synthetic canary rows out of the Coach Hub view so the every-6h
+  // pipeline probe never pollutes the leads table the team actually reads.
   const { data, error } = await supabase
     .from('leads')
     .select('id, created_at, source, email, name, phone, payload, notion_page_id')
+    .neq('source', HEALTH_CANARY_SOURCE)
     .order('created_at', { ascending: false })
     .limit(limit)
 

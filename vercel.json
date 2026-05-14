@@ -44,6 +44,10 @@
     {
       "path": "/api/cron/mirror-meta-leads",
       "schedule": "0 10 * * *"
+    },
+    {
+      "path": "/api/cron/leads-canary",
+      "schedule": "0 */6 * * *"
     }
   ]
 }

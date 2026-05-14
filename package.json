@@ -14,6 +14,7 @@
     "lead": "node scripts/lead.js",
     "connection-check": "node scripts/connection-check.js",
     "smoke:lead": "node scripts/smoke-lead.js",
+    "smoke:lead-canary": "./node_modules/.bin/tsx scripts/smoke-lead-canary.ts",
     "check:vercel": "npx vercel whoami && npx vercel list --yes",
     "lighthouse": "npx lighthouse http://localhost:3000 --output=html --output-path=./docs/lighthouse-report.html --only-categories=performance,accessibility,best-practices,seo --chrome-flags='--headless'",
     "capture:emails": "./node_modules/.bin/tsx scripts/capture-emails.ts",
