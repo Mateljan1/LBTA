@@ -83,7 +83,7 @@ npm run tokens:check -- --all --report   # writes/updates this file (Phase 1.3)
 
 ## Live audit — current state
 
-**Generated:** 2026-05-11T13:12:27.098Z
+**Generated:** 2026-05-13T23:30:58.888Z
 
 | Category | Count | Status |
 |---|---|---|
@@ -94,8 +94,93 @@ npm run tokens:check -- --all --report   # writes/updates this file (Phase 1.3)
 | Forbidden fonts (app code) | 0 | ✅ |
 | Deprecated lbta-* classes | 0 | ✅ |
 | Hand-rolled eyebrow patterns | 0 | ✅ |
+| text-brand-pacific-dusk/{30-70} on light (info, not strict) | 402 | ℹ |
 | Email: forbidden hex (consolidated) | 0 | ✅ |
 | Email: missing postal address (CAN-SPAM) | 0 | ✅ |
 
-**Result: 🟢 LOCKED IN — zero brand drift across all 9 strict categories.**
+**Result: 🔴 Drift present — see breakdown below. Strict CI will fail.**
+
+### text-brand-pacific-dusk/{30-70} on light surfaces (info-only — migrate to text-brand-pacific-dusk-soft)
+
+**Total:** 402 across 77 file(s).
+
+| File | Count | Lines |
+|---|---|---|
+| `components/LuxuryYearModal.tsx` | 32 | 542, 548, 551, 557, 593, 601, 638, 649, 662, 683, 690, 696, 706, 725, 745, 764, 773, 778, 787, 795, 804, 811, 820, 828, 836, 841, 849, 859, 883, 893, 897, 945 |
+| `components/LuxuryRegistrationModal.tsx` | 23 | 300, 306, 339, 366, 373, 379, 388, 397, 402, 411, 419, 428, 435, 444, 452, 460, 465, 473, 483, 508, 527, 550, 614 |
+| `app/brand/page.tsx` | 19 | 145, 150, 152, 155, 157, 194, 207, 215, 216, 232, 265, 267, 269, 275, 278, 285, 310, 340, 345 |
+| `components/schedules/PrivateCoachingSection.tsx` | 19 | 53, 60, 69, 72, 75, 78, 81, 84, 87, 90, 104, 119, 148, 153, 157, 161, 165, 197, 212 |
+| `app/racquet-rescue/page.tsx` | 17 | 85, 95, 104, 113, 128, 140, 143, 175, 204, 233, 258, 266, 281, 305, 320, 341, 355 |
+| `components/programs/ProgramsTabView.tsx` | 17 | 210, 238, 266, 293, 346, 402, 406, 407, 440, 468, 472, 481, 486, 492, 613, 635, 638 |
+| `components/ProgramCard.tsx` | 14 | 126, 140, 177, 194, 204, 208, 215, 223, 231, 239, 247, 255, 263, 272 |
+| `app/programs/utr-match-play/page.tsx` | 12 | 117, 149, 220, 226, 285, 300, 329, 361, 410, 543, 588, 665 |
+| `app/coach-hub/leads/page.tsx` | 11 | 116, 127, 128, 129, 130, 131, 132, 133, 143, 145, 185 |
+| `app/help/page.tsx` | 11 | 26, 46, 57, 68, 79, 92, 95, 121, 126, 137, 148 |
+| `app/programs/usta-adult-league/page.tsx` | 9 | 81, 131, 149, 166, 175, 184, 186, 192, 198 |
+| `app/camps/page.tsx` | 8 | 287, 298, 309, 310, 338, 339, 369, 511 |
+| `components/schedules/CampRow.tsx` | 8 | 61, 64, 84, 89, 113, 116, 128, 133 |
+| `components/schedules/LeagueRow.tsx` | 8 | 53, 58, 90, 95, 120, 125, 149, 154 |
+| `components/utr-tracker/UtrLeaderboard.tsx` | 8 | 390, 430, 467, 479, 490, 539, 575, 609 |
+| `components/TrialBookingModal.tsx` | 7 | 267, 276, 282, 395, 443, 447, 452 |
+| `components/coach-hub-coach/CoachDataView.tsx` | 7 | 53, 74, 149, 245, 253, 265, 292 |
+| `components/coaches/CoachCard.tsx` | 7 | 61, 67, 71, 82, 280, 294, 309 |
+| `components/schedules/LeaguesSection.tsx` | 7 | 25, 32, 55, 62, 69, 75, 98 |
+| `app/coaches/allison-cronk/page.tsx` | 6 | 81, 87, 91, 95, 99, 138 |
+| `app/coaches/peter-defrantz/page.tsx` | 6 | 91, 97, 101, 105, 150, 161 |
+| `components/PrivateLessonModal.tsx` | 6 | 245, 250, 256, 375, 410, 413 |
+| `components/coach-hub-coach/CoachWeekScheduleView.tsx` | 6 | 103, 131, 135, 164, 170, 176 |
+| `components/schedules/ProgramRow.tsx` | 6 | 61, 75, 94, 129, 141, 158 |
+| `components/schedules/ProgramsSection.tsx` | 6 | 253, 263, 269, 293, 299, 319 |
+| `components/schedules/ScheduleCalendarView.tsx` | 6 | 143, 187, 297, 300, 402, 430 |
+| `components/schedules/SchedulesPageClient.tsx` | 6 | 166, 172, 215, 221, 260, 266 |
+| `components/schedules/SchedulesProgramFinder.tsx` | 6 | 60, 64, 71, 86, 101, 122 |
+| `components/utr-tracker/ColorBallPassportGrid.tsx` | 6 | 112, 135, 141, 165, 170, 177 |
+| `app/about/page.tsx` | 5 | 113, 191, 205, 224, 277 |
+| `app/programs/adult/page.tsx` | 5 | 123, 141, 167, 182, 200 |
+| `components/coach-hub-coach/LessonFrameworkView.tsx` | 5 | 37, 58, 61, 196, 236 |
+| `app/coaches/michelle-mateljan/page.tsx` | 4 | 54, 58, 62, 92 |
+| `components/camps/CampListingCard.tsx` | 4 | 143, 146, 181, 235 |
+| `components/coach-hub/BinderOverlay.tsx` | 4 | 82, 85, 97, 99 |
+| `components/coach-hub-coach/CoachTodayShell.tsx` | 4 | 42, 51, 57, 83 |
+| `components/coach-hub-coach/LessonPlanDetailView.tsx` | 4 | 78, 115, 184, 207 |
+| `components/coach-hub-coach/LessonPlanLibraryView.tsx` | 4 | 127, 129, 182, 194 |
+| `app/blog/[slug]/page.tsx` | 3 | 118, 140, 153 |
+| `app/high-performance-pathway/page.tsx` | 3 | 153, 201, 235 |
+| `app/programs/leagues/page.tsx` | 3 | 97, 105, 129 |
+| `app/programs/utr-match-play/UTRMatchPlayDivisions.tsx` | 3 | 80, 119, 177 |
+| `components/coaches/FounderSection.tsx` | 3 | 38, 53, 82 |
+| `components/layout/Header.tsx` | 3 | 293, 409, 471 |
+| `app/philosophy/page.tsx` | 2 | 117, 176 |
+| `app/programs/page.tsx` | 2 | 140, 157 |
+| `components/ExitIntentPopup.tsx` | 2 | 202, 275 |
+| `components/coach-hub-coach/LessonPlanCard.tsx` | 2 | 38, 54 |
+| `components/coaches/CoachingTeamSection.tsx` | 2 | 17, 27 |
+| `components/contact/FacilitiesSection.tsx` | 2 | 46, 58 |
+| `components/schedules/CampsSection.tsx` | 2 | 15, 22 |
+| `components/ui/PartnershipSection.tsx` | 2 | 91, 101 |
+| `app/blog/page.tsx` | 1 | 66 |
+| `app/coach-hub/[coach]/login/page.tsx` | 1 | 86 |
+| `app/coach-hub/[coach]/today/page.tsx` | 1 | 38 |
+| `app/coach-hub/login/page.tsx` | 1 | 61 |
+| `app/page.tsx` | 1 | 232 |
+| `app/privacy/page.tsx` | 1 | 24 |
+| `app/terms/page.tsx` | 1 | 24 |
+| `app/utr-tracker/admin/login/page.tsx` | 1 | 64 |
+| `app/utr-tracker/page.tsx` | 1 | 47 |
+| `components/PricingComparison.tsx` | 1 | 27 |
+| `components/TimelineSection.tsx` | 1 | 69 |
+| `components/camps/CampFAQAccordion.tsx` | 1 | 38 |
+| `components/coach-hub/GuideOverlay.tsx` | 1 | 66 |
+| `components/coach-hub/tabs/HandbookTab.tsx` | 1 | 32 |
+| `components/coach-hub/tabs/LBHSTab.tsx` | 1 | 14 |
+| `components/coach-hub/tabs/LiveBallTab.tsx` | 1 | 19 |
+| `components/coach-hub/tabs/PrivateTab.tsx` | 1 | 13 |
+| `components/coaches/CoachesAnchorNav.tsx` | 1 | 36 |
+| `components/home/HomeProgramCardLink.tsx` | 1 | 41 |
+| `components/print/CourtFlyer.tsx` | 1 | 351 |
+| `components/programs/ProgramOverviewCard.tsx` | 1 | 67 |
+| `components/ui/PullQuote.tsx` | 1 | 23 |
+| `components/ui/StatGrid.tsx` | 1 | 28 |
+| `components/utr-tracker/AdminMatches.tsx` | 1 | 232 |
+| `components/utr-tracker/ColorBallAdmin.tsx` | 1 | 140 |
 

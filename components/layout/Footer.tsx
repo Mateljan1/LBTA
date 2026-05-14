@@ -76,7 +76,7 @@ export default function Footer() {
           <div className="md:col-span-7">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
               <div>
-                <h4 className="text-eyebrow text-white/70 mb-5">Programs</h4>
+                <h3 className="text-eyebrow text-white/70 mb-5">Programs</h3>
                 <ul className="space-y-3">
                   {[
                     { name: 'All Programs', href: '/programs' },
@@ -99,7 +99,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <h4 className="text-eyebrow text-white/70 mb-5">Academy</h4>
+              <h3 className="text-eyebrow text-white/70 mb-5">Academy</h3>
               <ul className="space-y-3">
                 {[
                   { name: 'About Us', href: '/about' },
@@ -123,7 +123,7 @@ export default function Footer() {
               </div>
 
               <div className="col-span-2 sm:col-span-1 min-w-0">
-                <h4 className="text-eyebrow text-white/70 mb-5">Contact</h4>
+                <h3 className="text-eyebrow text-white/70 mb-5">Contact</h3>
                 <ul className="space-y-6">
                   <li>
                     <TrackedPhoneLink

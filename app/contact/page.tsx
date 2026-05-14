@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useState, useRef, useEffect } from 'react'
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -11,25 +11,26 @@ import HorizonDivider from '@/components/ui/HorizonDivider'
 import { formatUtrSessionDateLong } from '@/lib/utr-match-play'
 import FacilitiesSection from '@/components/contact/FacilitiesSection'
 
-function ContactPageContent() {
-  const searchParams = useSearchParams()
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    interestedIn: '',
-    message: ''
-  })
-  const [errors, setErrors] = useState<{[key: string]: string}>({})
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
-  const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const utrPrefillKeyRef = useRef<string | null>(null)
+type ContactFormPrefill = {
+  interestedIn: string
+  message: string
+}
 
-  useEffect(() => {
-    return () => {
-      if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current)
-    }
-  }, [])
+/**
+ * `useSearchParams()` is the only API that requires this component to live
+ * inside a Suspense boundary. Wrapping the *entire* contact page in Suspense
+ * meant SSR emitted only the small `ContactLoadingFallback` (~411px on a
+ * 412×823 lighthouse mobile viewport), then post-hydration the real ~6,200px
+ * page replaced it and pushed the footer down by ~3,700px — the 0.402 CLS
+ * shift attributed to `<footer>` on /contact (audit C-4 unique component).
+ *
+ * Extracting just the prefill into a separate child lets the main page
+ * render without a Suspense fallback, so SSR/hydration produce identical
+ * heights and the 0.402 shift is gone.
+ */
+function ContactSearchParamsPrefill({ onPrefill }: { onPrefill: (data: ContactFormPrefill) => void }) {
+  const searchParams = useSearchParams()
+  const utrPrefillKeyRef = useRef<string | null>(null)
 
   useEffect(() => {
     if (searchParams.get('utr_drop_in') !== '1') {
@@ -58,16 +59,40 @@ function ContactPageContent() {
 
     const msg = `I'm requesting a UTR Match Play drop-in for ${division.trim()} on ${longDate}.${priceLine}\n\n`
 
-    setFormData((prev) => ({
-      ...prev,
+    onPrefill({
       interestedIn: 'UTR Match Play — Drop-in',
       message: msg,
-    }))
+    })
 
     requestAnimationFrame(() => {
       document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     })
-  }, [searchParams])
+  }, [searchParams, onPrefill])
+
+  return null
+}
+
+function ContactPageContent() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    interestedIn: '',
+    message: ''
+  })
+  const [errors, setErrors] = useState<{[key: string]: string}>({})
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current)
+    }
+  }, [])
+
+  const handlePrefill = useCallback((data: ContactFormPrefill) => {
+    setFormData((prev) => ({ ...prev, ...data }))
+  }, [])
 
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const validatePhone = (phone: string) => /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phone)
@@ -127,6 +152,14 @@ function ContactPageContent() {
 
   return (
     <>
+      {/* useSearchParams must live inside Suspense; isolating it to a tiny
+          null-fallback child keeps the rest of the page out of any Suspense
+          boundary, eliminating the SSR-fallback → real-content CLS shift
+          (audit C-4, /contact 0.402 component). */}
+      <Suspense fallback={null}>
+        <ContactSearchParamsPrefill onPrefill={handlePrefill} />
+      </Suspense>
+
       {/* HERO SECTION */}
       <section className="relative min-h-[65vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -473,18 +506,6 @@ function ContactPageContent() {
   )
 }
 
-function ContactLoadingFallback() {
-  return (
-    <div className="flex min-h-[50vh] items-center justify-center bg-brand-morning-light font-sans text-[15px] text-brand-pacific-dusk/60">
-      Loading…
-    </div>
-  )
-}
-
 export default function ContactPage() {
-  return (
-    <Suspense fallback={<ContactLoadingFallback />}>
-      <ContactPageContent />
-    </Suspense>
-  )
+  return <ContactPageContent />
 }

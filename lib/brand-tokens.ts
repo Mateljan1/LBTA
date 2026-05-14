@@ -12,6 +12,7 @@
 /** Brand identity colors. Use these for everything brand-related. */
 export const BRAND = {
   pacificDusk: '#1B3A5C',
+  pacificDuskSoft: '#3D4658',
   deepWater: '#0F2237',
   deepCard: '#0A1628',
   victoriaCove: '#2E8B8B',

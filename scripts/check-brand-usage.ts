@@ -10,6 +10,84 @@ const allowedExtensions = new Set(['.ts', '.tsx', '.css'])
 const forbiddenClasses = ['text-white/40', 'text-white/25']
 
 // ────────────────────────────────────────────────────────────────────
+// forbiddenTextOpacityOnLight (info-only as of v1.5; strict-mode in next PR)
+// ────────────────────────────────────────────────────────────────────
+// `text-brand-pacific-dusk/{30,40,50,60,65,70}` on light surfaces fails WCAG
+// AA (audit C-3, 30+ documented sites). The new `text-brand-pacific-dusk-soft`
+// token (#3D4658, AAA on every light brand surface) is the canonical
+// replacement — see tokens/lbta-web-tokens.json v1.3.0.
+//
+// Why surface-aware (not regex-only): the same opacity utilities are still
+// legitimate on dark surfaces (e.g. `text-brand-pacific-dusk/65` on
+// `bg-brand-deep-water` for footer subtext). A blind sweep would over-match
+// and visually break dark-surface content. Per the v1.4
+// `mass-migration-needs-context-heuristics` learning, shape-only regex
+// without context is the exact failure mode v1.4 corrected.
+//
+// Detection: for each `text-brand-pacific-dusk/{30-70}` hit, look at a
+// ±6-line window for any dark-surface marker. If found → skip. If
+// `// @brand-allow:dark` opt-out comment on the same or previous line →
+// skip. Otherwise → flag.
+const opacityOnLightRegex = /\btext-brand-pacific-dusk\/(?:30|40|50|60|65|70)\b/
+const darkSurfaceMarkers: RegExp[] = [
+  /\bbg-brand-deep-water\b/,
+  /\bbg-brand-deep-card\b/,
+  /\bbg-brand-pacific-dusk(?!-soft)\b/, // dark `pacific-dusk`, NOT `pacific-dusk-soft`
+  /\bbg-black\b/,
+  /\bbg-lbta-black\b/,
+  /\bfrom-brand-deep-water\b/,
+  /\bto-brand-deep-water\b/,
+  /\bvia-brand-deep-water\b/,
+  /\bfrom-brand-deep-card\b/,
+  /\bto-brand-deep-card\b/,
+  /\bfrom-brand-pacific-dusk(?!-soft)\b/,
+  /\bto-brand-pacific-dusk(?!-soft)\b/,
+  /\bfrom-black\b/,
+  /\bto-black\b/,
+  /<DarkSection\b/,
+]
+const inlineAllowDarkComment = /\/\/\s*@brand-allow:dark\b/
+const opacityOnLightContextLines = 6
+
+/**
+ * Scan source for `text-brand-pacific-dusk/{30-70}` hits that are NOT on a
+ * dark surface (heuristic: no dark-surface marker in ±6 surrounding lines and
+ * no `// @brand-allow:dark` opt-out comment).
+ *
+ * Exported so fixture tests can call this directly without constructing a
+ * full ReportData. Mirrors the `scanEmailTemplate` shape.
+ */
+export function findTextOpacityOnLight(contents: string, file: string): Hit[] {
+  const hits: Hit[] = []
+  const lines = contents.split('\n')
+
+  lines.forEach((line, idx) => {
+    const matcher = new RegExp(opacityOnLightRegex.source, 'g')
+    let m: RegExpExecArray | null
+    while ((m = matcher.exec(line)) !== null) {
+      // Inline opt-out: `// @brand-allow:dark` on this or previous line
+      const prevLine = idx > 0 ? lines[idx - 1] : ''
+      if (inlineAllowDarkComment.test(line) || inlineAllowDarkComment.test(prevLine)) continue
+
+      // Surface heuristic: scan ±6 lines for any dark-surface marker
+      const start = Math.max(0, idx - opacityOnLightContextLines)
+      const end = Math.min(lines.length, idx + opacityOnLightContextLines + 1)
+      const window = lines.slice(start, end).join('\n')
+      const onDark = darkSurfaceMarkers.some((re) => re.test(window))
+      if (onDark) continue
+
+      hits.push({
+        file,
+        line: idx + 1,
+        value: m[0],
+      })
+    }
+  })
+
+  return hits
+}
+
+// ────────────────────────────────────────────────────────────────────
 // Email template scanning (separate domain, looser rules than React)
 // ────────────────────────────────────────────────────────────────────
 // Emails follow visual hierarchy and email-design convention rather than
@@ -109,6 +187,12 @@ type ReportData = {
   forbiddenFont: Hit[]
   legacyLbta: Hit[]
   handRolledEyebrow: Hit[]
+  /**
+   * `text-brand-pacific-dusk/{30-70}` on light surfaces (heuristic-filtered).
+   * INFO-ONLY in v1.5; promoted to strict-mode in next PR per
+   * introduce-cleanup-enforce rhythm.
+   */
+  textOpacityOnLight: Hit[]
   /** Forbidden hex values found in tracked email templates */
   emailForbiddenHex: Hit[]
   /**
@@ -402,6 +486,7 @@ async function writeReport(reportData: ReportData) {
     forbiddenFont: reportData.forbiddenFont.length,
     legacyLbta: reportData.legacyLbta.length,
     handRolledEyebrow: reportData.handRolledEyebrow.length,
+    textOpacityOnLight: reportData.textOpacityOnLight.length,
     emailForbiddenHex: reportData.emailForbiddenHex.length,
     emailMissingPostalAddress: reportData.emailMissingPostalAddress.length,
   }
@@ -425,6 +510,7 @@ async function writeReport(reportData: ReportData) {
   sections.push(`| Forbidden fonts (app code) | ${totals.forbiddenFont} | ${totals.forbiddenFont === 0 ? '✅' : '❌'} |`)
   sections.push(`| Deprecated lbta-* classes | ${totals.legacyLbta} | ${totals.legacyLbta === 0 ? '✅' : '❌'} |`)
   sections.push(`| Hand-rolled eyebrow patterns | ${totals.handRolledEyebrow} | ${totals.handRolledEyebrow === 0 ? '✅' : '❌'} |`)
+  sections.push(`| text-brand-pacific-dusk/{30-70} on light (info, not strict) | ${totals.textOpacityOnLight} | ${totals.textOpacityOnLight === 0 ? '✅' : 'ℹ'} |`)
   sections.push(`| Email: forbidden hex (consolidated) | ${totals.emailForbiddenHex} | ${totals.emailForbiddenHex === 0 ? '✅' : '❌'} |`)
   sections.push(`| Email: missing postal address (CAN-SPAM) | ${totals.emailMissingPostalAddress} | ${totals.emailMissingPostalAddress === 0 ? '✅' : '❌'} |`)
   sections.push('')
@@ -443,6 +529,7 @@ async function writeReport(reportData: ReportData) {
   if (reportData.inlineGradient.length > 0) sections.push(reportSection('Inline gradient hex literals', reportData.inlineGradient))
   if (reportData.legacyLbta.length > 0) sections.push(reportSection('Deprecated lbta-* classes', reportData.legacyLbta))
   if (reportData.handRolledEyebrow.length > 0) sections.push(reportSection('Hand-rolled eyebrow patterns', reportData.handRolledEyebrow))
+  if (reportData.textOpacityOnLight.length > 0) sections.push(reportSection('text-brand-pacific-dusk/{30-70} on light surfaces (info-only — migrate to text-brand-pacific-dusk-soft)', reportData.textOpacityOnLight))
   if (reportData.emailForbiddenHex.length > 0) sections.push(reportSection('Email: forbidden hex (consolidated to brand token)', reportData.emailForbiddenHex))
   if (reportData.emailMissingPostalAddress.length > 0) sections.push(reportSection('Email: missing CAN-SPAM postal address', reportData.emailMissingPostalAddress))
 
@@ -492,6 +579,7 @@ async function main() {
     forbiddenFont: [],
     legacyLbta: [],
     handRolledEyebrow: [],
+    textOpacityOnLight: [],
     emailForbiddenHex: [],
     emailMissingPostalAddress: [],
   }
@@ -570,6 +658,11 @@ async function main() {
     if (extension === '.tsx') {
       reportData.handRolledEyebrow.push(...findEyebrowPatterns(contents, relativeFile))
     }
+
+    // text-brand-pacific-dusk/{30-70} on light surfaces (info-only as of v1.5)
+    if (extension === '.tsx' || extension === '.ts') {
+      reportData.textOpacityOnLight.push(...findTextOpacityOnLight(contents, relativeFile))
+    }
   }
 
   printHits('Deprecated lbta-* classes (warning, strict-blocking):', 'WARN', reportData.legacyLbta)
@@ -581,6 +674,11 @@ async function main() {
   printHits('Email templates: missing CAN-SPAM postal address (strict-blocking):', 'ERROR', reportData.emailMissingPostalAddress)
   printHits('Forbidden font families in app code (error):', 'ERROR', reportData.forbiddenFont)
   printHits('Forbidden low-contrast white text (error):', 'ERROR', reportData.forbidden)
+  // INFO-ONLY (not yet strict-blocking) — annotates light-surface hits the
+  // codemod should target. Use `// @brand-allow:dark` to opt out a known
+  // dark-surface line that the heuristic mis-classifies. Strict-mode
+  // promotion follows the introduce-cleanup-enforce three-PR rhythm.
+  printHits('text-brand-pacific-dusk/{30-70} on LIGHT surfaces — migrate to text-brand-pacific-dusk-soft (info, not yet strict):', 'WARN', reportData.textOpacityOnLight, 60)
 
   if (writeReportFlag) {
     await writeReport(reportData)

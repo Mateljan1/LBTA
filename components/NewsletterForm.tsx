@@ -72,6 +72,10 @@ export default function NewsletterForm() {
                   </svg>
                 ) : (
                   <>
+                    {/* sr-only label gives the button an accessible name on mobile,
+                        where the visible "Subscribe" span is hidden. Survives even if
+                        the surrounding span class set is later refactored. */}
+                    <span className="sr-only sm:hidden">Subscribe</span>
                     <span className="hidden sm:inline">Subscribe</span>
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

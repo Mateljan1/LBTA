@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import { BRAND, LBTA_UTIL, LBTA_LEGACY, LBTA, DEPRECATED_LBTA_CLASSES } from './brand-tokens'
-import { scanEmailTemplate } from '../scripts/check-brand-usage'
+import { scanEmailTemplate, findTextOpacityOnLight } from '../scripts/check-brand-usage'
 
 const REPO_ROOT = path.resolve(__dirname, '..')
 const TOKEN_JSON_PATH = path.join(REPO_ROOT, 'tokens', 'lbta-web-tokens.json')
@@ -202,4 +202,74 @@ describe('email brand checker — behavior', () => {
   // address") asserts on `value: stringContaining('1098 Balboa')`, so changing the
   // postal marker fails it; tests #4-#6 use 'Laguna Beach' literally, so changing the
   // customer-facing marker fails them.
+})
+
+describe('forbiddenTextOpacityOnLight — behavior', () => {
+  // The detector flags `text-brand-pacific-dusk/{30,40,50,60,65,70}` only when
+  // a ±6-line context window has no dark-surface marker. Per the v1.4
+  // mass-migration-needs-context-heuristics learning, fixture tests must
+  // cover known-bad and known-good inputs before strict-mode promotion so
+  // changes to the heuristic surface as test failures, not silent drift.
+
+  // ── KNOWN-BAD (should flag) ──────────────────────────────────────────
+
+  it('flags pacific-dusk/60 on plain morning-light surface', () => {
+    const tsx = `<div className="bg-brand-morning-light p-4">
+      <p className="text-brand-pacific-dusk/60">Body copy</p>
+    </div>`
+    const hits = findTextOpacityOnLight(tsx, 'fixture/light-1.tsx')
+    expect(hits).toHaveLength(1)
+    expect(hits[0].value).toBe('text-brand-pacific-dusk/60')
+  })
+
+  it('flags pacific-dusk/50 on sandstone surface (the C-3 audit case)', () => {
+    const tsx = `<section className="bg-brand-sandstone py-8">
+      <button className="text-brand-pacific-dusk/50">Inactive tab</button>
+    </section>`
+    const hits = findTextOpacityOnLight(tsx, 'fixture/sandstone.tsx')
+    expect(hits).toHaveLength(1)
+  })
+
+  it('flags pacific-dusk/70 inside a card on a white parent (no dark marker in window)', () => {
+    const tsx = `function Card() {
+      return (
+        <article className="bg-white border rounded-lg p-6">
+          <h3 className="text-brand-pacific-dusk">Title</h3>
+          <p className="text-brand-pacific-dusk/70">Subtitle</p>
+        </article>
+      )
+    }`
+    const hits = findTextOpacityOnLight(tsx, 'fixture/white-card.tsx')
+    expect(hits).toHaveLength(1)
+  })
+
+  // ── KNOWN-GOOD (should NOT flag — surface heuristic skips them) ──────
+
+  it('does NOT flag pacific-dusk/65 on bg-brand-deep-water (footer subtext)', () => {
+    const tsx = `<footer className="bg-brand-deep-water text-white">
+      <p className="text-brand-pacific-dusk/65">Hidden until you look closely</p>
+    </footer>`
+    const hits = findTextOpacityOnLight(tsx, 'fixture/dark-footer.tsx')
+    expect(hits).toHaveLength(0)
+  })
+
+  it('does NOT flag pacific-dusk/60 inside a <DarkSection> wrapper', () => {
+    const tsx = `<DarkSection className="py-16">
+      <div>
+        <p className="text-brand-pacific-dusk/60">Eyebrow</p>
+      </div>
+    </DarkSection>`
+    const hits = findTextOpacityOnLight(tsx, 'fixture/dark-section.tsx')
+    expect(hits).toHaveLength(0)
+  })
+
+  it('does NOT flag a hit with `// @brand-allow:dark` on the previous line', () => {
+    const tsx = `<div className="bg-brand-morning-light">
+      {/* @brand-allow:dark */}
+      // @brand-allow:dark
+      <p className="text-brand-pacific-dusk/50">Edge case opt-out</p>
+    </div>`
+    const hits = findTextOpacityOnLight(tsx, 'fixture/optout.tsx')
+    expect(hits).toHaveLength(0)
+  })
 })

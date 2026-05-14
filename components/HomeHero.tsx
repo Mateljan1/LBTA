@@ -174,7 +174,7 @@ export default function HomeHero() {
 
       <button
         type="button"
-        className="absolute bottom-8 left-6 md:left-12 flex flex-col items-center gap-2 text-white/70 hover:text-white transition-colors duration-500 min-h-[44px] min-w-[44px] p-2 rounded-full border border-white/40 bg-black/10 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        className="absolute bottom-8 left-6 md:left-12 flex flex-col items-center gap-2 text-white/70 hover:text-white transition-colors duration-500 min-h-[48px] min-w-[48px] p-2 rounded-full border border-white/40 bg-black/10 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         onClick={() => {
           const el = document.getElementById('founder')
           if (el) {

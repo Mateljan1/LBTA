@@ -271,10 +271,11 @@ export default function JuniorTrialLanding() {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-brand-pacific-dusk mb-2">
+                        <label htmlFor="junior-child-age" className="block text-sm font-medium text-brand-pacific-dusk mb-2">
                           Child's Age *
                         </label>
                         <select
+                          id="junior-child-age"
                           required
                           value={formData.childAge}
                           onChange={(e) => setFormData({...formData, childAge: e.target.value})}
@@ -296,8 +297,12 @@ export default function JuniorTrialLanding() {
                   {formData.childAge && (
                     <div className="pb-8 border-b border-gray-200">
                       <h3 className="text-xl font-medium text-brand-pacific-dusk mb-6">Choose Program</h3>
+                      {/* aria-label gives the select its accessible name; the visible <h3>
+                          is a section heading rather than a per-field label, so a hidden
+                          <label htmlFor> would duplicate the announcement. */}
                       <select
                         required
+                        aria-label="Choose program"
                         value={formData.program}
                         onChange={(e) => setFormData({...formData, program: e.target.value})}
                         className="w-full px-4 py-3 border-2 border-brand-sunset-cliff/30 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition bg-white"
@@ -316,6 +321,7 @@ export default function JuniorTrialLanding() {
                       <h3 className="text-xl font-medium text-brand-pacific-dusk mb-6">Select Schedule</h3>
                       <select
                         required
+                        aria-label="Select schedule"
                         value={formData.schedule}
                         onChange={(e) => setFormData({...formData, schedule: e.target.value})}
                         className="w-full px-4 py-3 border-2 border-brand-sunset-cliff/30 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition bg-white"
