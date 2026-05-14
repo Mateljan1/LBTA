@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-05-11",
-  "lastLearnRun": "2026-05-11 email brand audit r2 cleanup: emailForbiddenHexConsolidation (must), emailCanSpamPostalAddress (must), brandCheckerSeparateScannersPerDomain (must), testsBehaviorOverContract (should), legalComplianceFailLoud (must), shipGateProofInCommitBody (must)",
+  "updated": "2026-05-13",
+  "lastLearnRun": "2026-05-13 mobile UX tier 1 remediation: tokenContrastVerifyBeforeLanding (must), clsFixReadTraceFirst (must), workLighthouseProductionBuild (must), previewSmokeIndependent (must), tokenMigrationPlanReviewWhenLarge (must), pacificDuskSoftCanonicalAAA (should), victoriaCoveInteractiveOnly (should)",
   "qualityBars": {
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
@@ -436,6 +436,41 @@
       "rule": "Every commit that touches code consumed by production must record health:prod proof in the commit body",
       "detail": "Per .cursorrules Part 15 §4. Body should include: (a) quality-gate exit, (b) test count + pass status, (c) health:prod exit + canary route count + local HEAD SHA. Reviewers can audit ship-gate compliance from git history alone.",
       "enforcement": "must"
+    },
+    "tokenContrastVerifyBeforeLanding": {
+      "rule": "All new brand text tokens must verify WCAG AAA contrast (≥7:1) on morning-light, sandstone, AND white before landing",
+      "detail": "The three light surfaces in the LBTA palette. Document hex + WebAIM ratio against each surface in the commit body. This loop's example: pacific-dusk-soft (#3D4658) — 8.71:1 on morning-light, 8.34:1 on sandstone, 9.04:1 on white. Pre-Work plan-doc review independently re-runs the contrast math; #4A5568 returned 6.62:1 on sandstone and was rejected.",
+      "enforcement": "must"
+    },
+    "clsFixReadTraceFirst": {
+      "rule": "All CLS fixes must read the layout-shift trace (Lighthouse 'Avoid large layout shifts' diagnostics) before fixing",
+      "detail": "Hypothesis-only fixes are blocked. Identify EVERY shift source — universal (e.g. cookie hydration) vs route-specific (e.g. useSearchParams-dependent layout chunk). This loop's example: /contact CLS=0.499 had two distinct sources (SeasonBanner ≈0.097 universal, useSearchParams ≈0.402 route-specific). Plan-only attribution to SeasonBanner alone would have left ~80% of the CLS unaddressed.",
+      "enforcement": "must"
+    },
+    "workLighthouseProductionBuild": {
+      "rule": "All Work-phase Lighthouse claims must be re-verified on a production build before deploy",
+      "detail": "Turbopack dev mode tanks Performance score (HMR overhead, source maps, no minification, runtime asserts). Run ./node_modules/.bin/next build then ./node_modules/.bin/next start (or measure against a real Vercel preview) before reporting Performance. Accessibility and Best Practices scores tend to hold across dev/prod; Performance does not.",
+      "enforcement": "must"
+    },
+    "previewSmokeIndependent": {
+      "rule": "All preview deploys must run an independent route smoke (≥6 routes) regardless of vercel ls state",
+      "detail": "Per the 2026-05-07 incident lesson: vercel ls Ready is necessary but not sufficient. Smoke must assert HTTP 200 + absence of x-vercel-error response header on each route. Combine with npm run health:prod (canary set) for belt-and-suspenders coverage.",
+      "enforcement": "must"
+    },
+    "tokenMigrationPlanReviewWhenLarge": {
+      "rule": "Mass design-token migrations across >40 files must run pre-Work plan-doc review with independent contrast verification",
+      "detail": "Naïve regex sweeps blow the blast radius (this loop: 444 raw hits vs plan's 30) and risk flipping contrast on dark surfaces where opacity is intentional. STOP gate at >40 files in any single codemod batch. Use surface-aware regex with ±N-line context heuristic.",
+      "enforcement": "must"
+    },
+    "pacificDuskSoftCanonicalAAA": {
+      "rule": "pacific-dusk-soft (#3D4658) is the canonical AAA secondary-text token on light surfaces (LBTA-specific)",
+      "detail": "text-brand-pacific-dusk/{30-70} utilities are scanner-warned on light surfaces (forbiddenTextOpacityOnLight category) and reserved for legitimate dark-surface use. Promote this rule to 'must' after the 6 follow-up codemod PRs land and forbiddenTextOpacityOnLight is promoted to ERROR severity in strict mode.",
+      "enforcement": "should"
+    },
+    "victoriaCoveInteractiveOnly": {
+      "rule": "victoria-cove is link/interactive/focus only (LBTA-specific)",
+      "detail": "Never use for body or static descriptive copy. Reserved for hyperlinks, focus rings, button accents, and other interactive affordances per Brand Guide.",
+      "enforcement": "should"
     }
   }
 }

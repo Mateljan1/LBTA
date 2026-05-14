@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-05-11",
-  "lastLearnRun": "2026-05-11 email brand audit r2 cleanup: source-grep-contract-tests, silent-skip-in-legal-compliance-checks, magic-zero-for-file-level-findings, cargo-cult-defensive-no-op, bolting-new-domain-onto-existing-scanroots, config-pinning-tests-disguised-as-behavior-tests",
+  "updated": "2026-05-13",
+  "lastLearnRun": "2026-05-13 mobile UX tier 1 remediation: token-rename-collapses-role-and-value, naive-mass-migration-regex-without-context, cls-hypothesis-without-layout-shift-trace, lighthouse-on-dev-build-claims-prod-perf, vercel-ls-ready-as-deploy-proof",
   "antiPatterns": [
     {
       "id": "animated-section-without-reduced-motion",
@@ -1240,6 +1240,70 @@
         "behavior-tests",
         "config-pinning",
         "redundancy"
+      ]
+    },
+    {
+      "id": "token-rename-collapses-role-and-value",
+      "description": "Renaming an opacity utility (e.g. text-brand-pacific-dusk/50) to a semantic name (text-brand-pacific-dusk-soft) — collapses role and value into one identifier, violates v1.4 token system separability",
+      "avoid": "Sweeping rename of text-brand-pacific-dusk/{30-70} → text-brand-pacific-dusk-soft across the repo; the opacity utility computed value (#1B3A5C@50% = #8D9CAE) is not the same as the AAA secondary-text value (#3D4658)",
+      "instead": "Add a NEW semantic token (pacific-dusk-soft = #3D4658) with its own hex, AAA-verified on every light surface (morning-light, sandstone, white). Keep the opacity utility class for legitimate dark-surface use. Migrate light-surface usages over time with surface-aware codemod batches",
+      "tags": [
+        "design-tokens",
+        "naming",
+        "separability",
+        "v1.4"
+      ]
+    },
+    {
+      "id": "naive-mass-migration-regex-without-context",
+      "description": "Single regex pass to migrate a token across the whole repo without parent-surface detection",
+      "avoid": "Bulk replace text-brand-pacific-dusk/{30-70} → text-brand-pacific-dusk-soft based on a hand-counted ~30 occurrences. Real blast radius was 444 raw hits, many on dark surfaces (footer, deep-water sections) where the opacity is intentional, not an AAA-fail",
+      "instead": "Surface-aware regex with ±N-line context heuristic (peek for bg-brand-deep-water, bg-brand-pacific-dusk, from-brand-deep-water markers; skip if found). STOP gate at >40 files in any single batch. Run dry-run + manifest mode before any write",
+      "tags": [
+        "codemod",
+        "regex",
+        "blast-radius",
+        "surface-aware",
+        "design-tokens"
+      ]
+    },
+    {
+      "id": "cls-hypothesis-without-layout-shift-trace",
+      "description": "Attributing a route's CLS entirely to one component based on intuition, without reading the layout-shift breakdown",
+      "avoid": "Plan attributes /contact CLS=0.499 entirely to SeasonBanner cookie/SSR shift (≈0.097); proposes one-component fix; ships fix that leaves ~80% of the CLS unaddressed",
+      "instead": "Always read the layout-shift trace (Lighthouse 'Avoid large layout shifts' diagnostics) before fixing. Identify EVERY shift source — universal (e.g. cookie hydration) vs route-specific (e.g. useSearchParams-dependent layout chunk). Validate on production build that all sources are addressed",
+      "tags": [
+        "performance",
+        "CLS",
+        "core-web-vitals",
+        "lighthouse",
+        "diagnosis"
+      ]
+    },
+    {
+      "id": "lighthouse-on-dev-build-claims-prod-perf",
+      "description": "Reporting Lighthouse Performance scores from a Turbopack dev build as if they reflected production",
+      "avoid": "Running Lighthouse against next dev (Turbopack HMR overhead, source maps, no minification, runtime asserts) and writing the Performance score into a Validate or Deploy summary",
+      "instead": "Always re-measure Performance on a production build (./node_modules/.bin/next build then ./node_modules/.bin/next start) or against a real Vercel preview before reporting. Accessibility and Best Practices scores tend to hold across dev/prod; Performance does not",
+      "tags": [
+        "performance",
+        "lighthouse",
+        "next-build",
+        "dev-vs-prod",
+        "validate"
+      ]
+    },
+    {
+      "id": "vercel-ls-ready-as-deploy-proof",
+      "description": "Treating 'vercel ls' showing Ready as sufficient proof the site is serving",
+      "avoid": "git push origin main → vercel ls Ready → claim 'shipped'. The 2026-05-07 incident proved the project can be DEPLOYMENT_DISABLED (billing) or a route can return 5xx while the build itself is Ready",
+      "instead": "After every push: (1) wait for vercel ls Ready, (2) run npm run health:prod and confirm exit 0, (3) run independent smoke against ≥6 routes asserting HTTP 200 + no x-vercel-error header. All three are required",
+      "tags": [
+        "deploy",
+        "vercel",
+        "health-check",
+        "smoke",
+        "ship-gate"
       ]
     }
   ]

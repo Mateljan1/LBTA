@@ -1,7 +1,7 @@
 {
   "project": "lbta-website",
-  "updated": "2026-05-11",
-  "lastLearnRun": "2026-05-11 email brand audit r2 cleanup: separate-domain-scanners, compose-paths-from-root, cli-library-isMainModule-guard, precompile-regex-outside-loops, three-layer-exception-docs, plan-aware-reviewer-agents, round-N-review-with-prior-findings, fix-forward-vs-revert-rule",
+  "updated": "2026-05-13",
+  "lastLearnRun": "2026-05-13 mobile UX tier 1 remediation: two-pass-audit-curve1-curve2, token-scanner-codemod-three-step, plan-aware-review-of-plan-doc, cookie-driven-ssr-banner, suspense-isolate-useSearchParams, sequential-review-validate-deploy-gates, acceptance-as-exit-condition, preview-deploy-then-manual-main-merge, ship-gate-disclosure-when-wip-orthogonal, untracked-orphan-deps-stash-restore-pattern",
   "patterns": [
     {
       "name": "video-source-paths-must-exist",
@@ -1620,6 +1620,132 @@
         "fix-forward",
         "revert-discipline",
         "review-response"
+      ]
+    },
+    {
+      "name": "two-pass-audit-curve1-curve2",
+      "when": "Cross-cutting audit (mobile UX, a11y, performance, brand) where measurable issues and taste issues both need surfacing",
+      "example": "Pass 1 = hard scorecard (axe critical=0, Lighthouse mobile A11y, CLS thresholds — pass/fail). Pass 2 = luxury-flow gap report (qualitative founder-voice, restraint, micro-interactions — Andrew-decision). Both score independently so neither blocks the other. Curve-1 drives remediation tickets; Curve-2 drives andrew-decisions.md questions with deadlines.",
+      "tags": [
+        "audit",
+        "two-pass",
+        "curve-1",
+        "curve-2",
+        "scorecard",
+        "gap-report"
+      ]
+    },
+    {
+      "name": "token-scanner-codemod-three-step",
+      "when": "Design-token migration, naming refactor, or convention rollout that touches >20 files",
+      "example": "Commit 1: add the new semantic token (pacific-dusk-soft = #3D4658) — pure addition, no behavior change. Commit 2: add an info-only scanner category (forbiddenTextOpacityOnLight) that warns but doesn't fail strict mode. Commit 3+: codemod batches per route, each ≤40 files with surface-aware context heuristic. Final: promote scanner to ERROR severity in strict mode after all batches land. Avoids big-bang refactor diff-shock.",
+      "tags": [
+        "design-tokens",
+        "codemod",
+        "scanner",
+        "refactor",
+        "incremental"
+      ]
+    },
+    {
+      "name": "plan-aware-review-of-plan-doc",
+      "when": "Plan that touches >5 files, makes architectural choices (token names, schema shapes, public API), or proposes a fix where the diagnosis isn't independently verified",
+      "example": "Run the same persona reviewers (correctness, maintainability, testing, kieran-typescript, simplicity, project-standards) against the plan markdown — not the eventual diff. Score the plan; surface must-fix items before Work starts. This loop's outcome: 5 must-fix items caught (hex value failing AAA, CLS hypothesis 20% complete, codemod blast radius, victoria-cove policy, strict-mode env var) — two would have shipped silently because dev tools wouldn't catch them.",
+      "tags": [
+        "compound-engineering",
+        "plan-review",
+        "pre-work",
+        "must-fix",
+        "shift-left"
+      ]
+    },
+    {
+      "name": "cookie-driven-ssr-banner",
+      "when": "Persistent UI state depends on a cookie (banner dismissed, user role, theme preference, session flag) and currently mounts/dismounts/resizes after hydration causing CLS",
+      "example": "Read the cookie in the Server Component (e.g. app/layout.tsx via next/headers cookies()), pass the resolved state to the banner so it renders with correct hydration state in initial HTML. No useEffect-driven re-render = no layout shift. Eliminated SeasonBanner's universal 0.097 CLS without client hydration latency.",
+      "tags": [
+        "performance",
+        "CLS",
+        "SSR",
+        "cookies",
+        "next-app-router",
+        "SeasonBanner"
+      ]
+    },
+    {
+      "name": "suspense-isolate-useSearchParams",
+      "when": "Route's layout chunk depends on useSearchParams (or any client-only hook that resolves async) and that chunk causes CLS by mounting after hydration",
+      "example": "Extract the useSearchParams-dependent UI into a child component wrapped in <Suspense fallback={<StableShapePlaceholder />}>. Parent layout is stable while param-driven slice resolves. Killed /contact's unique 0.402 CLS; final production CLS = 0.000.",
+      "tags": [
+        "performance",
+        "CLS",
+        "suspense",
+        "useSearchParams",
+        "next-app-router"
+      ]
+    },
+    {
+      "name": "sequential-review-validate-deploy-gates",
+      "when": "Every shipped feature touching >5 files",
+      "example": "Each phase's structured output gates the next: Review (88) → unlocks Validate; Validate (92) on production build → unlocks Deploy; Deploy preview → AC confirmed on real Vercel-served URL → unlocks main merge. Catches dev-mode-vs-prod-build discrepancies before push.",
+      "tags": [
+        "compound-engineering",
+        "review",
+        "validate",
+        "deploy",
+        "gating",
+        "ship-gate"
+      ]
+    },
+    {
+      "name": "acceptance-as-exit-condition",
+      "when": "Plan with measurable performance, accessibility, or correctness goals",
+      "example": "Every Success Criterion mapped to a measurable Acceptance check tied to a tool/command BEFORE Work starts. AC1 axe critical=0 across N routes; AC2 Lighthouse mobile A11y ≥ X; AC3 CLS ≤ Y on route Z. Validate phase mechanically re-runs each AC; PASS/FAIL is the unambiguous gate.",
+      "tags": [
+        "compound-engineering",
+        "acceptance",
+        "exit-condition",
+        "measurable",
+        "validate"
+      ]
+    },
+    {
+      "name": "preview-deploy-then-manual-main-merge",
+      "when": "Default for any PR that changes production behavior",
+      "example": "Push branch → Vercel preview deploys → run AC checks against the real Vercel-served preview (real region, real build, real headers) → Andrew reviews → manual git merge --no-ff to main → push → production deploy. Keeps Andrew in the loop for production promotion without slowing the verify cycle. Bypass only for hotfixes Andrew explicitly authorizes.",
+      "tags": [
+        "deploy",
+        "vercel",
+        "preview",
+        "main-merge",
+        "human-in-loop"
+      ]
+    },
+    {
+      "name": "ship-gate-disclosure-when-wip-orthogonal",
+      "when": "Tracked tree dirty at ship time with WIP that's verifiably unrelated to the PR's scope (parallel workstream)",
+      "example": "Disclose the dirty file list in deploy-summary.md with confirmation that none are touched by the PR diff (git diff --name-only main..branch). Then split the WIP onto its own local branch (e.g. coach-hub-wip-2026-05-13) BEFORE the main merge — preserves both lineages, ship-gate runs against actual PR scope. Better than blanket hard-stop when WIP is provably orthogonal AND in-flight.",
+      "tags": [
+        "ship-gate",
+        "git",
+        "wip",
+        "disclosure",
+        "branch-hygiene",
+        "scope-guard"
+      ]
+    },
+    {
+      "name": "untracked-orphan-deps-stash-restore-pattern",
+      "when": "Local ship-gate (next build) fails on untracked files importing exports that were just relocated to another branch — but the untracked files are NOT in any git history (Vercel won't see them)",
+      "example": "Verify with `git ls-files --error-unmatch <file>` and `git cat-file -e <branch>:<file>` that the failing files are untracked everywhere. Move them to /tmp/<stash>/<original/path/> with mkdir -p preserving directory structure. Re-run ship:gate (now passes). Push. Wait for Vercel build (it never sees /tmp). Confirm health:prod + smoke. Restore from stash with mv. Document the discovery in deploy-summary so future-you remembers Vercel only sees committed files.",
+      "tags": [
+        "git",
+        "ship-gate",
+        "build",
+        "untracked",
+        "orphan-deps",
+        "stash",
+        "vercel"
       ]
     }
   ]
