@@ -58,3 +58,8 @@ async function handle(request: Request) {
 
 export const GET = handle
 export const POST = handle
+
+// 30s budget: cold start (1–3s) + Supabase write (~500ms) + readback poll (up
+// to 5s) + Postmark fetch (~500ms) + prune (~100ms). Default 10s would risk
+// spurious cron failures on cold starts. Mirror-meta-leads uses 60s.
+export const maxDuration = 30

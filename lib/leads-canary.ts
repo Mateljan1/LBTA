@@ -141,6 +141,13 @@ export async function runLeadCanary(): Promise<CanaryResult> {
   }
 }
 
+/**
+ * Builds a fresh Supabase client per canary run rather than reusing the cached
+ * `getClient()` from `lib/leads-store.ts`. This is intentional — the canary
+ * exists to verify env access is healthy, so we shouldn't use a client that
+ * was instantiated at module load time and might be referencing a stale (or
+ * since-rotated) cached connection. Don't "simplify" by importing `getClient`.
+ */
 function getCanaryClient(): SupabaseClient | null {
   const url = process.env.SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
