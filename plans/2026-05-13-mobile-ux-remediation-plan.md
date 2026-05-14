@@ -656,3 +656,30 @@ Together the two fixes target both shift components; `/contact` CLS expected to 
 
 **B-2 — Phase 4.3 strict-mode promotion blocked by B-1.** Strict-mode promotion of `forbiddenTextOpacityOnLight` cannot land in this PR because the cleanup is incomplete (Phase 4.2 is gated). Token + info-only scanner + fixture tests stay in this PR. Strict mode follows once Andrew-approved batches land.
 
+### Phase 3–5 outcomes (2026-05-13 sequential `/compound:review` → `/compound:validate` → `/compound:deploy` preview-only)
+
+**Phase 3 (REVIEW) — `docs/audits/2026-05/post-remediation/review-summary.md`**
+
+- **Score: 88/100. Decision: ready.** 11 in-thread personas: scope 95, security 92, perf 80, simplicity 86, pattern 92, architecture 85, a11y 92, memory 95, regression 84, docs 90, test-coverage 88.
+- 0 critical findings. 2 warnings (SeasonBannerDismiss DOM-mutation pattern W-1; NewsletterForm sr-only redundancy W-2). 5 notes (incl. cookie-driven dynamic rendering site-wide N-1; `-soft` naming convention undocumented N-2; page-internal heading-order on /schedules + /adult-trial N-3).
+- **All 5 pre-Work review must-fix items resolved or appropriately deferred.** Hex value `#3D4658` ✓; CLS dual-component fix (cookie SSR + Suspense extraction) ✓; surface-aware codemod regex with ±6-line context ✓; victoria-cove policy deferred to per-route follow-up PRs (acceptable); strict-mode env var (`STRICT_BRAND_CHECK=1` via `quality-gate`) ✓.
+
+**Phase 4 (VALIDATE) — `docs/audits/2026-05/post-remediation/validate-summary.md`**
+
+- **Score: 92/100. Decision: ready.** Re-ran AC1, AC2, AC3, AC7 against a clean **production build** (`./node_modules/.bin/next build` then `./node_modules/.bin/next start` on port 3001) to confirm dev-mode numbers hold.
+- AC1 axe critical = 0 across 11 routes ✓ (production-rendered DOM); AC2 Lighthouse Mobile A11y 0.97 / 1.00 / 0.97 on /, /pathway-planner, /contact production spot-check ✓; AC3 /contact CLS = 0.000 production ✓; AC5 strict-mode integration test passes (221/221 tests) ✓; AC7 reduced-motion DevTools toggle proof.
+- API smoke: /api/book, /api/newsletter, /api/scholarship all return HTTP 400 with sanitized error message (no Zod field-name leak — per `apiValidationErrorGeneric` quality bar). Zero API regression.
+
+**Phase 5 (DEPLOY — preview only) — `docs/audits/2026-05/post-remediation/deploy-summary.md` + `preview-smoke.md`**
+
+- Branch SHA pushed: `d48d6cdf21afe78960fcaf51094d64d908dd05b5` to `origin/mobile-ux-remediation-tier-1`.
+- Rollback target (current `main`): `5a4cc502cd653e7dfb62535d01a8e1fd7898f536`.
+- **Preview URL:** https://laguna-beach-tennis-academy-6m7k7qn06-andrew-mateljans-projects.vercel.app
+- Vercel build: ● Ready · 51s · Preview · `iad1`.
+- Preview smoke: 6/6 HTTP 200 (`/`, `/schedules`, `/contact`, `/junior-trial`, `/pathway-planner`, `/book`); 0 `x-vercel-error` headers.
+- **🎯 AC3 strongest possible confirmation: Lighthouse on real Vercel-served preview `/contact` returns CLS = 0.000 (zero shift events, score 1.0).** Performance 0.86, Accessibility 0.97.
+- **Ship-gate disclosure:** 10 tracked files dirty pre-push (all unrelated coach-hub WIP per `.cursorrules` Part 13 hard out-of-scope); `git push` only ships the 19 reviewed/validated commits. Disclosed in `deploy-summary.md`. Recommended: Andrew commits coach-hub WIP to its own branch before main merge.
+- **NOT merged to main. NOT promoted to production.** Andrew reviews preview, then manual merge.
+
+**B-3 — Tracked-tree cleanup before main merge.** 10 tracked files have uncommitted edits unrelated to this audit (per-coach-hub auth/env/validation WIP, lesson-plan-generator schemas, brand-checker compound learnings, vercel.json/proxy.ts tweaks, coach-hub schedule data). They must be committed/stashed/reverted before `mobile-ux-remediation-tier-1` merges to main, or `ship:gate` will fail. Recommended: separate branch + PR for the per-coach-hub workstream; mobile-ux PR ships from a clean tree.
+
