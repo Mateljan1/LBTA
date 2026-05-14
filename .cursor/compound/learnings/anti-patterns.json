@@ -1,8 +1,36 @@
 {
   "project": "lbta-website",
   "updated": "2026-05-13",
-  "lastLearnRun": "2026-05-13 mobile UX tier 1 remediation: token-rename-collapses-role-and-value, naive-mass-migration-regex-without-context, cls-hypothesis-without-layout-shift-trace, lighthouse-on-dev-build-claims-prod-perf, vercel-ls-ready-as-deploy-proof",
+  "lastLearnRun": "2026-05-13 lead-pipeline resilience: silent-failure-on-credentialed-integration, canary-using-fire-and-forget-writer, floating-cta-on-conversion-page, prod-write-script-default-target-prod",
   "antiPatterns": [
+    {
+      "id": "silent-failure-on-credentialed-integration",
+      "description": "Critical external integration (Postmark, AC, Stripe, Notion, etc.) authenticated by env-var token, with no synthetic canary exercising the credential path; failures are only detected via user reports / gut feeling.",
+      "avoid": "Token in env, lib/email.ts sends via /email with X-Postmark-Server-Token, errors logged to console.error inside waitUntil() and never surfaced. Vercel ls Ready + health:prod GET 200s do not detect a revoked Postmark token.",
+      "instead": "Scheduled canary (Vercel cron + lib/<x>-canary.ts + /api/cron/<x>-canary route) that pings the credential endpoint (e.g. GET https://api.postmarkapp.com/server) on a cadence shorter than your business tolerance (we use 6h). Returns 503 on failure so the platform's cron dashboard surfaces it.",
+      "tags": ["observability", "credentials", "integrations", "vercel-cron"]
+    },
+    {
+      "id": "canary-using-fire-and-forget-writer",
+      "description": "Canary calls a fire-and-forget library function (storeLead, notify…) that intentionally swallows errors via console.error, then reports the step green because the function did not throw.",
+      "avoid": "runLeadCanary calling storeLead(...) and returning 'inserted' unconditionally — storeLead's purpose is to NEVER fail the user-facing form path, so it logs and continues on RLS/auth/network errors. The canary then lies.",
+      "instead": "Canary writes to the data store directly with the supabase-js client (or equivalent) and lets insert errors propagate as a failed step. Public writers fail-open; canaries fail-loud. Don't share fire-and-forget paths.",
+      "tags": ["canary", "observability", "error-handling"]
+    },
+    {
+      "id": "floating-cta-on-conversion-page",
+      "description": "Site-wide sticky/floating CTA renders on a page whose primary purpose is itself a different conversion form (contact, scholarship, registration), causing z-index regressions on the page's own submit button and self-cannibalizing conversion architecture.",
+      "avoid": "<StickyCTA text='Book a Trial' href='/book' /> rendered unconditionally on /contact (where the user is already converting via the contact form).",
+      "instead": "lib/conversion-pages.ts registry + isConversionPage(pathname) helper. Floating components self-suppress on registered prefixes via early return null before any layout-affecting hooks (so CSS vars like --lbta-sticky-cta-h stay 0px on suppressed pages).",
+      "tags": ["ux", "sticky-cta", "conversion", "z-index"]
+    },
+    {
+      "id": "prod-write-script-default-target-prod",
+      "description": "CLI script with a --full / --apply / --send mode that mutates external systems and defaults its target host to production, with no confirmation gate. Easy to invoke during normal dev work and create real ActiveCampaign contacts / Postmark emails / payments.",
+      "avoid": "npm run smoke:foo -- --full where SMOKE_BASE_URL defaults to https://lagunabeachtennisacademy.com and there's no env-var guard.",
+      "instead": "Detect production target (URL host match) AND require explicit env var like SMOKE_CONFIRM_PROD=yes for any mutating mode. Refuse with non-zero exit code (we use 3 to distinguish from 1=fail / 2=env-missing) and a clear 'what would happen if I let you' message.",
+      "tags": ["scripts", "production-safety", "footgun"]
+    },
     {
       "id": "animated-section-without-reduced-motion",
       "description": "AnimatedSection or any Framer Motion entrance without useReducedMotion()",

@@ -1,8 +1,44 @@
 {
   "project": "lbta-website",
   "updated": "2026-05-13",
-  "lastLearnRun": "2026-05-13 mobile UX tier 1 remediation: two-pass-audit-curve1-curve2, token-scanner-codemod-three-step, plan-aware-review-of-plan-doc, cookie-driven-ssr-banner, suspense-isolate-useSearchParams, sequential-review-validate-deploy-gates, acceptance-as-exit-condition, preview-deploy-then-manual-main-merge, ship-gate-disclosure-when-wip-orthogonal, untracked-orphan-deps-stash-restore-pattern",
+  "lastLearnRun": "2026-05-13 lead-pipeline resilience: lead-pipeline-canary-cron, conversion-page-registry-suppresses-competing-ctas, synthetic-probe-source-sentinel-filter, prod-write-script-confirmation-gate, live-canary-as-deploy-validation, parallel-review-agents-with-plan-summary",
   "patterns": [
+    {
+      "name": "lead-pipeline-canary-cron",
+      "when": "Business-critical workflow depends on multiple external integrations (Supabase, transactional email, CRM, etc.) where silent failure of any one is invisible to the user.",
+      "example": "Shared lib/<x>-canary.ts exposing run<X>Canary(): Promise<CanaryResult> with named steps[]. Cron route app/api/cron/<x>-canary/route.ts auth-gated by Authorization: Bearer ${CRON_SECRET} (constant-time-ish compare matching mirror-meta-leads pattern), returns 503 on any blocking step failure. Manual CLI scripts/smoke-<x>-canary.ts with optional --full and SMOKE_CONFIRM_PROD=yes guard. Synthetic rows tagged source: 'health-canary'; lib/<x>-query.ts::getAll filters them out. Self-prune step deletes rows older than 7d (treated as non-blocking for overall ok/fail). Cadence: detection latency < daily, e.g. '0 */6 * * *' for 6-hourly. Reference: lib/leads-canary.ts, app/api/cron/leads-canary/route.ts, scripts/smoke-lead-canary.ts.",
+      "tags": ["observability", "canary", "vercel-cron", "credentials", "integrations"]
+    },
+    {
+      "name": "conversion-page-registry-suppresses-competing-ctas",
+      "when": "App has dedicated conversion-form pages (contact, trial booking, scholarship, etc.) AND has site-wide floating/sticky CTAs that would compete with the page's own submit button.",
+      "example": "lib/conversion-pages.ts: CONVERSION_PAGE_PREFIXES (readonly tuple) + isConversionPage(pathname). Match on prefix so nested routes (/contact/thank-you) inherit. Floating components call isConversionPage(usePathname()) and early-return null BEFORE any state hooks that affect layout (so CSS vars like --lbta-sticky-cta-h stay 0px and don't add orphan padding). Unit tests pin the registry to known prefixes including non-matching false-positive guards (/contacts ≠ /contact). Reference: lib/conversion-pages.ts, components/StickyCTA.tsx.",
+      "tags": ["ux", "sticky-cta", "conversion", "registry"]
+    },
+    {
+      "name": "synthetic-probe-source-sentinel-filter",
+      "when": "Canary writes to a shared data store also read by a team-facing UI; team should never see synthetic rows.",
+      "example": "Tag synthetic rows with a fixed sentinel value (source: 'health-canary' for Supabase leads). Filter at the query layer (getAllLeads adds .neq('source', HEALTH_CANARY_SOURCE)) so the UI can never show probe rows even if a future caller forgets. Constant lives next to the canary code (lib/leads-canary.ts::HEALTH_CANARY_SOURCE) and is imported by both writer and reader — single source of truth. Reference: lib/leads-canary.ts, lib/leads-query.ts::getAllLeads.",
+      "tags": ["observability", "data-integrity", "canary"]
+    },
+    {
+      "name": "prod-write-script-confirmation-gate",
+      "when": "CLI script can mutate production state (email send, real contact create, payment) but is convenient to invoke locally.",
+      "example": "looksLikeProduction(url) helper checks URL host. When mutating mode + production target → require SMOKE_CONFIRM_PROD=yes. Refuse with exit code 3 (distinct from 1=fail / 2=env-missing) and a clear message explaining what side effects would occur. Default behavior stays safe. Reference: scripts/smoke-lead-canary.ts.",
+      "tags": ["scripts", "production-safety", "footgun-prevention"]
+    },
+    {
+      "name": "live-canary-as-deploy-validation",
+      "when": "Deploy ships a new endpoint or critical path; need stronger proof than 'GET / returns 200'.",
+      "example": "After git push + Vercel auto-deploy, hit the new endpoint with the production CRON_SECRET (pulled via vercel env pull --environment production /tmp/<file>) and inspect the JSON response. The response is the literal output of the new code running in the new deploy — much stronger than health:prod which only checks GET 200s on existing routes. Use this in /compound:deploy when an endpoint is net-new.",
+      "tags": ["deploy", "validation", "vercel"]
+    },
+    {
+      "name": "parallel-review-agents-with-plan-summary",
+      "when": "Review phase of /compound:full or /compound:review with a small-to-medium change set (8–15 files).",
+      "example": "Launch 3 parallel reviewer subagents (ce-correctness-reviewer, ce-security-reviewer, ce-maintainability-reviewer) each given: (a) plan path or pasted plan summary, (b) explicit list of files changed, (c) the plan's Acceptance checklist, (d) specific scrutiny questions. Wall clock ~10 min. Findings dedup-friendly because each agent has a distinct lens. Yield: 0 critical / 2 warnings / 4 notes for an 11-file change in our incident.",
+      "tags": ["compound-engineering", "review", "subagents"]
+    },
     {
       "name": "video-source-paths-must-exist",
       "when": "Homepage or hero uses multiple HTML5 video source elements",

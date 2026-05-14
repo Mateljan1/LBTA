@@ -1,8 +1,29 @@
 {
   "project": "lbta-website",
   "updated": "2026-05-13",
-  "lastLearnRun": "2026-05-13 mobile UX tier 1 remediation: tokenContrastVerifyBeforeLanding (must), clsFixReadTraceFirst (must), workLighthouseProductionBuild (must), previewSmokeIndependent (must), tokenMigrationPlanReviewWhenLarge (must), pacificDuskSoftCanonicalAAA (should), victoriaCoveInteractiveOnly (should)",
+  "lastLearnRun": "2026-05-13 lead-pipeline resilience: externalIntegrationMustHaveCanary (must), silentErrorHandlingMustHaveObservability (must), prodWriteScriptMustRequireConfirm (must)",
   "qualityBars": {
+    "externalIntegrationMustHaveCanary": {
+      "level": "must",
+      "rule": "Any production-critical external integration (transactional email, CRM contact write, payment confirmation, webhook receiver) MUST ship with a scheduled canary that exercises its credential + happy-path within 24 hours of deploy. Detection latency target: shorter than business tolerance (LBTA = 6h).",
+      "rationale": "2026-05-13 incident: Postmark token revoked silently, all notification emails failed for unknown duration; only detected when Andrew noticed leads had stopped arriving (13+ days). vercel ls Ready + health:prod GET 200s do not detect credential rot.",
+      "enforcement": "Plan-time gate: 'Risks: how do we detect silent failure of <integration>?' /compound:review reliability agent flags any new credentialed integration without a canary.",
+      "reference": "lib/leads-canary.ts, app/api/cron/leads-canary/route.ts, .cursor/compound/learnings/2026-05-13-lead-pipeline-resilience-compound-learn.md"
+    },
+    "silentErrorHandlingMustHaveObservability": {
+      "level": "must",
+      "rule": "When console.error / waitUntil / try-catch swallow patterns are the correct production behavior (don't break user flow), the same code path MUST have at least one alternate consumer (canary or test) that surfaces the swallowed error.",
+      "rationale": "lib/leads-store.ts::storeLead is fire-and-forget by design — correct for the form path. Without a canary that writes directly with surfaced errors, an RLS / service-role / network failure goes undetected indefinitely.",
+      "enforcement": "/compound:review reliability/correctness agent flags any new fire-and-forget integration call without an alternate-consumer test or canary.",
+      "reference": "lib/leads-canary.ts (writes Supabase directly, not via storeLead)"
+    },
+    "prodWriteScriptMustRequireConfirm": {
+      "level": "must",
+      "rule": "Any CLI script with a mode that mutates production external systems (email send, real contact create, payment) MUST require an explicit env-var confirmation (SMOKE_CONFIRM_PROD=yes or equivalent) when target host matches production. Refuse with non-zero exit + clear 'what would happen' message when missing.",
+      "rationale": "2026-05-13 review (W2): scripts/smoke-lead-canary.ts --full would have created a real AC contact + Postmark email + Notion page on every dev invocation by default. Production-default targets are a footgun.",
+      "enforcement": "/compound:review security agent flags any new scripts/smoke-*.ts --full mode (or equivalent) that defaults to prod with no confirm gate.",
+      "reference": "scripts/smoke-lead-canary.ts::looksLikeProduction"
+    },
     "dataIntegrity": {
       "rule": "No hardcoded prices or duplicate program/option lists in components",
       "source": "Single source in /data/*.json or lib/programs-data",
