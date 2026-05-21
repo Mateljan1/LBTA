@@ -7,7 +7,8 @@
 
 import { getEnvVar, hasEnvVar } from './env'
 
-const GHL_BASE = process.env.GHL_API_BASE || 'https://services.leadconnectorhq.com'
+/** Lead Connector API (PIT tokens). Do not set GHL_API_BASE to legacy rest.gohighlevel.com/v1. */
+const GHL_BASE = 'https://services.leadconnectorhq.com'
 const GHL_VERSION_HEADER = '2021-07-28'
 const GHL_CONVERSATIONS_API = 'https://services.leadconnectorhq.com/conversations/messages'
 
@@ -24,6 +25,8 @@ export type GHLSyncResult = {
   contactId: string | null
   workflowEnrolled: boolean
   created: boolean
+  /** Set when sync could not create or find a contact (for cron diagnostics). */
+  error?: string
 }
 
 function getGhlAuthKey(): string | null {
@@ -49,36 +52,45 @@ function apiHeaders(apiKey: string): Record<string, string> {
   return headers
 }
 
+function ghlLocationId(): string {
+  return (process.env.GHL_LOCATION_ID ?? getEnvVar('GHL_LOCATION_ID', true)).trim()
+}
+
 async function findContactByEmail(email: string): Promise<string | null> {
-  const locationId = getEnvVar('GHL_LOCATION_ID', true)
+  const locationId = ghlLocationId()
   const apiKey = getGhlAuthKey()
   if (!apiKey) return null
-  const q = new URLSearchParams({
-    locationId,
-    email: email.trim(),
-  })
-  const res = await fetch(`${GHL_BASE}/contacts/search/duplicate?${q}`, {
+  const normalized = email.trim().toLowerCase()
+
+  const listQ = new URLSearchParams({ locationId, query: email.trim() })
+  const listRes = await fetch(`${GHL_BASE}/contacts/?${listQ}`, {
     method: 'GET',
     headers: apiHeaders(apiKey),
   })
-  if (!res.ok) {
-    const fallback = new URLSearchParams({ locationId, query: email.trim() })
-    const res2 = await fetch(`${GHL_BASE}/contacts/?${fallback}`, {
-      method: 'GET',
-      headers: apiHeaders(apiKey),
+  if (listRes.ok) {
+    const listData = (await listRes.json()) as {
+      contacts?: Array<{ id?: string; email?: string; emailLowerCase?: string }>
+    }
+    const hit = listData.contacts?.find((c) => {
+      const e = (c.email ?? c.emailLowerCase ?? '').toLowerCase()
+      return e === normalized
     })
-    if (!res2.ok) return null
-    const data2 = (await res2.json()) as { contacts?: Array<{ id?: string; email?: string }> }
-    const hit = data2.contacts?.find((c) => c.email?.toLowerCase() === email.toLowerCase())
-    return hit?.id ?? null
+    if (hit?.id) return hit.id
   }
-  const data = (await res.json()) as { contact?: { id?: string }; id?: string }
-  const id = data?.contact?.id ?? data?.id
+
+  const dupQ = new URLSearchParams({ locationId, email: email.trim() })
+  const dupRes = await fetch(`${GHL_BASE}/contacts/search/duplicate?${dupQ}`, {
+    method: 'GET',
+    headers: apiHeaders(apiKey),
+  })
+  if (!dupRes.ok) return null
+  const dupData = (await dupRes.json()) as { contact?: { id?: string }; id?: string }
+  const id = dupData?.contact?.id ?? dupData?.id
   return typeof id === 'string' ? id : null
 }
 
 async function createContact(payload: GHLContactPayload): Promise<string | null> {
-  const locationId = getEnvVar('GHL_LOCATION_ID', true)
+  const locationId = ghlLocationId()
   const apiKey = getGhlAuthKey()
   if (!apiKey) return null
 
@@ -96,15 +108,11 @@ async function createContact(payload: GHLContactPayload): Promise<string | null>
     }),
   })
   if (!res.ok) {
-    if (res.status === 422 || res.status === 400) {
+    if (res.status === 422 || res.status === 400 || res.status === 409) {
       return findContactByEmail(payload.email)
     }
-    if (process.env.NODE_ENV === 'production') {
-      console.error('[GHL] Create contact failed:', res.status)
-    } else {
-      const text = await res.text()
-      console.error('[GHL] Create contact failed:', res.status, text.slice(0, 120))
-    }
+    const text = await res.text()
+    console.error('[GHL] Create contact failed:', res.status, text.slice(0, 200))
     return null
   }
   const data = (await res.json()) as { contact?: { id?: string }; id?: string }
@@ -142,16 +150,21 @@ export async function syncContactToGHL(payload: GHLContactPayload): Promise<GHLS
     workflowEnrolled: false,
     created: false,
   }
-  if (!isGHLConfigured()) return result
+  if (!isGHLConfigured()) {
+    result.error = 'GHL not configured (API key, location, or workflow missing)'
+    return result
+  }
 
   let contactId = await findContactByEmail(payload.email)
   if (!contactId) {
     contactId = await createContact(payload)
     result.created = !!contactId
+    if (!contactId) result.error = 'create and lookup failed'
   }
   result.contactId = contactId
   if (contactId) {
     result.workflowEnrolled = await addContactToWorkflow(contactId)
+    if (!result.workflowEnrolled) result.error = 'workflow enroll failed'
   }
   return result
 }

@@ -6,9 +6,11 @@ Website forms use **GoHighLevel only** when `GHL_API_KEY` (or `GHL_PIT_TOKEN`), 
 
 1. Log in to [GoHighLevel](https://app.gohighlevel.com/) → **Settings** → **Private Integrations** (or Location API key).
 2. Create a new key with scopes: **contacts**, **workflows**, **locations** (read).
-3. Vercel → `lbta-website` → **Environment Variables** → update **`GHL_API_KEY`** (Production + Preview).
-4. **Redeploy** production.
-5. Verify: `GET https://lagunabeachtennisacademy.com/api/cron/leads-canary` with `Authorization: Bearer $CRON_SECRET` → `ghl-token` step **ok**.
+3. Vercel → **`laguna-beach-tennis-academy`** → **Environment Variables** → set **`GHL_API_KEY`** to the **LBTA Private Integration Token** from 1Password (`Gohighlevel · Lbta · GHL_PIT_TOKEN`). Do **not** use the legacy JWT or `rest.gohighlevel.com` key.
+4. **Remove** `GHL_API_BASE` if present (must not point at `https://rest.gohighlevel.com/v1` — contacts API uses `services.leadconnectorhq.com` only).
+5. **Redeploy** production.
+6. Verify: `GET https://lagunabeachtennisacademy.com/api/cron/leads-canary` with `Authorization: Bearer $CRON_SECRET` → `ghl-token` step **ok**.
+7. Optional probe: `GET .../api/cron/backfill-ghl?probe=1` (same auth) → `workflowEnrolled: true` for a known contact.
 
 ## 2. Workflow must send email + SMS + notify you
 

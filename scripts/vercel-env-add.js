@@ -18,7 +18,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const PROJECT_NAME = process.env.VERCEL_PROJECT_NAME || 'lbta-website'
+const PROJECT_NAME = process.env.VERCEL_PROJECT_NAME || 'laguna-beach-tennis-academy'
 const TEAM_SLUG = process.env.VERCEL_TEAM_SLUG || 'andrew-mateljans-projects'
 
 function loadEnvVercel() {

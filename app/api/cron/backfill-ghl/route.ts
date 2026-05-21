@@ -43,6 +43,60 @@ async function handle(request: Request) {
 
   const url = new URL(request.url)
   const dryRun = url.searchParams.get('dryRun') === '1'
+  const probe = url.searchParams.get('probe') === '1'
+
+  if (probe) {
+    const key = process.env.GHL_API_KEY?.trim() || process.env.GHL_PIT_TOKEN?.trim() || ''
+    const locationId = process.env.GHL_LOCATION_ID ?? ''
+    const headers: Record<string, string> = {
+      Authorization: `Bearer ${key}`,
+      'Content-Type': 'application/json',
+      Version: '2021-07-28',
+    }
+    const email = 'paulinen88@gmail.com'
+    const listQ = new URLSearchParams({ locationId, query: email })
+    const listRes = await fetch(
+      `https://services.leadconnectorhq.com/contacts/?${listQ}`,
+      { headers }
+    )
+    const listData = listRes.ok
+      ? ((await listRes.json()) as {
+          contacts?: Array<{ id?: string; email?: string; emailLowerCase?: string }>
+        })
+      : null
+    const normalized = email.toLowerCase()
+    const inlineHit = listData?.contacts?.find((c) => {
+      const e = (c.email ?? c.emailLowerCase ?? '').toLowerCase()
+      return e === normalized
+    })
+    const dupQ = new URLSearchParams({ locationId, email })
+    const dupRes = await fetch(
+      `https://services.leadconnectorhq.com/contacts/search/duplicate?${dupQ}`,
+      { headers }
+    )
+    const dupData = dupRes.ok
+      ? ((await dupRes.json()) as { contact?: { id?: string } })
+      : null
+    const { firstName, lastName } = splitName('Pauline Test')
+    const result = await syncContactToGHL({
+      email,
+      firstName,
+      lastName,
+      tags: ['Website Lead', 'Probe'],
+    })
+    return NextResponse.json({
+      keyKind: key.startsWith('pit-') ? 'pit' : key.startsWith('eyJ') ? 'jwt' : 'other',
+      keyLen: key.length,
+      locationId,
+      workflowId: process.env.GHL_WORKFLOW_ID ? 'set' : 'missing',
+      listStatus: listRes.status,
+      dupStatus: dupRes.status,
+      inlineHitId: inlineHit?.id ?? null,
+      dupContactId: dupData?.contact?.id ?? null,
+      contactEmails: listData?.contacts?.slice(0, 3).map((c) => c.email ?? c.emailLowerCase ?? null),
+      result,
+    })
+  }
 
   const sbUrl = process.env.SUPABASE_URL
   const sbKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -95,7 +149,7 @@ async function handle(request: Request) {
       if (result.contactId) contacts++
       if (result.workflowEnrolled) workflowEnrolled++
       else if (result.contactId) failures.push(`${row.email}: workflow not enrolled`)
-      else failures.push(`${row.email}: no contact id`)
+      else failures.push(`${row.email}: ${result.error ?? 'no contact id'}`)
     } catch (err) {
       failures.push(`${row.email}: ${err instanceof Error ? err.message : String(err)}`)
     }
