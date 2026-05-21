@@ -97,6 +97,27 @@ export async function runLeadCanary(): Promise<CanaryResult> {
     throw new Error(`row not visible within ${READ_TIMEOUT_MS}ms`)
   }))
 
+  steps.push(await runStep('ghl-token', async () => {
+    const apiKey = process.env.GHL_API_KEY
+    const locationId = process.env.GHL_LOCATION_ID
+    if (!apiKey || !locationId) throw new Error('GHL_API_KEY or GHL_LOCATION_ID not set')
+    const res = await fetch(
+      `https://services.leadconnectorhq.com/locations/${encodeURIComponent(locationId)}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          Version: '2021-07-28',
+        },
+      }
+    )
+    if (!res.ok) {
+      const body = await res.text().catch(() => '')
+      throw new Error(`GHL location returned ${res.status}: ${body.slice(0, 120)}`)
+    }
+    return 'location reachable'
+  }))
+
   steps.push(await runStep('postmark-token', async () => {
     const token = process.env.POSTMARK_SERVER_TOKEN
     if (!token) throw new Error('POSTMARK_SERVER_TOKEN not set')

@@ -39,6 +39,8 @@
  * ──────────────────────────────────────────────────────────────────
  */
 
+import { useGhlLeadDelivery } from './lead-delivery'
+
 const POSTMARK_API = 'https://api.postmarkapp.com/email'
 const DEFAULT_FROM = 'LBTA Website <support@lagunabeachtennisacademy.com>'
 const DEFAULT_NOTIFY_TO = 'support@lagunabeachtennisacademy.com'
@@ -70,6 +72,7 @@ async function sendEmail(options: {
   htmlBody: string
   tag?: string
 }): Promise<boolean> {
+  if (useGhlLeadDelivery()) return false
   const token = getToken()
   if (!token) return false
 
@@ -181,11 +184,12 @@ export type NotifyTrialParams = {
   /** Free-text from contact form or notes */
   message?: string
   /** contact = /contact page inquiry (different subject; not a trial-only lead). */
-  intent?: 'trial' | 'contact'
+  intent?: 'trial' | 'contact' | 'racquet-rescue'
 }
 
 export async function notifyTrialRequest(data: NotifyTrialParams): Promise<void> {
   const isContact = data.intent === 'contact'
+  const isRacquetRescue = data.intent === 'racquet-rescue'
   const fields = [
     { label: 'Name', value: `${data.firstName} ${data.lastName}` },
     { label: 'Email', value: data.email },
@@ -198,13 +202,19 @@ export async function notifyTrialRequest(data: NotifyTrialParams): Promise<void>
   ]
   await sendEmail({
     to: getNotifyTo(),
-    subject: isContact
-      ? `Contact Form — ${data.firstName} ${data.lastName}`
-      : `New Trial Request — ${data.firstName} ${data.lastName}`,
-    tag: isContact ? 'contact-inquiry' : 'trial-request',
+    subject: isRacquetRescue
+      ? `Racquet Rescue — ${data.firstName} ${data.lastName}`
+      : isContact
+        ? `Contact Form — ${data.firstName} ${data.lastName}`
+        : `New Trial Request — ${data.firstName} ${data.lastName}`,
+    tag: isRacquetRescue ? 'racquet-rescue' : isContact ? 'contact-inquiry' : 'trial-request',
     htmlBody: buildNotificationHtml({
-      type: isContact ? 'contact form message' : 'trial class request',
-      heading: isContact ? 'New Contact Form Message' : 'New Trial Request',
+      type: isRacquetRescue ? 'racquet stringing request' : isContact ? 'contact form message' : 'trial class request',
+      heading: isRacquetRescue
+        ? 'New Racquet Rescue Request'
+        : isContact
+          ? 'New Contact Form Message'
+          : 'New Trial Request',
       fields,
     }),
   })
@@ -489,7 +499,7 @@ a{color:#2E8B8B;text-decoration:none;}
   <p style="margin:0 0 10px;font-family:'DM Sans',Helvetica,Arial,sans-serif;font-size:10px;color:rgba(245,240,229,0.2);">Official Tennis Programming Partner of the City of Laguna Beach</p>
   <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;"><tr>
     <td style="padding:0 3px;"><a href="https://apps.apple.com/us/app/lbta/id6746348933" style="text-decoration:none;"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" width="85" style="width:85px;height:auto;"></a></td>
-    <td style="padding:0 3px;"><a href="https://play.google.com/store/apps/details?id=com.playbypoint.appx" style="text-decoration:none;"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" width="95" style="width:95px;height:auto;"></a></td>
+    <td style="padding:0 3px;"><a href="https://play.google.com/store/apps/details?id=com.court.laguna" style="text-decoration:none;"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" width="95" style="width:95px;height:auto;"></a></td>
   </tr></table>
 </td></tr>
 </table></td></tr></table></body></html>`
