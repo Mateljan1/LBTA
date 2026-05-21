@@ -26,9 +26,13 @@ export type GHLSyncResult = {
   created: boolean
 }
 
+function getGhlAuthKey(): string | null {
+  return process.env.GHL_API_KEY?.trim() || process.env.GHL_PIT_TOKEN?.trim() || null
+}
+
 function isGHLConfigured(): boolean {
   return !!(
-    hasEnvVar('GHL_API_KEY') &&
+    getGhlAuthKey() &&
     hasEnvVar('GHL_LOCATION_ID') &&
     hasEnvVar('GHL_WORKFLOW_ID')
   )
@@ -47,7 +51,8 @@ function apiHeaders(apiKey: string): Record<string, string> {
 
 async function findContactByEmail(email: string): Promise<string | null> {
   const locationId = getEnvVar('GHL_LOCATION_ID', true)
-  const apiKey = getEnvVar('GHL_API_KEY', true)
+  const apiKey = getGhlAuthKey()
+  if (!apiKey) return null
   const q = new URLSearchParams({
     locationId,
     email: email.trim(),
@@ -74,7 +79,8 @@ async function findContactByEmail(email: string): Promise<string | null> {
 
 async function createContact(payload: GHLContactPayload): Promise<string | null> {
   const locationId = getEnvVar('GHL_LOCATION_ID', true)
-  const apiKey = getEnvVar('GHL_API_KEY', true)
+  const apiKey = getGhlAuthKey()
+  if (!apiKey) return null
 
   const res = await fetch(`${GHL_BASE}/contacts/`, {
     method: 'POST',
@@ -107,8 +113,9 @@ async function createContact(payload: GHLContactPayload): Promise<string | null>
 }
 
 async function addContactToWorkflow(contactId: string): Promise<boolean> {
-  const apiKey = getEnvVar('GHL_API_KEY', true)
+  const apiKey = getGhlAuthKey()
   const workflowId = getEnvVar('GHL_WORKFLOW_ID', true)
+  if (!apiKey) return false
 
   const res = await fetch(
     `${GHL_BASE}/contacts/${encodeURIComponent(contactId)}/workflow/${encodeURIComponent(workflowId)}`,

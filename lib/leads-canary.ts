@@ -98,9 +98,9 @@ export async function runLeadCanary(): Promise<CanaryResult> {
   }))
 
   steps.push(await runStep('ghl-token', async () => {
-    const apiKey = process.env.GHL_API_KEY
+    const apiKey = process.env.GHL_API_KEY?.trim() || process.env.GHL_PIT_TOKEN?.trim()
     const locationId = process.env.GHL_LOCATION_ID
-    if (!apiKey || !locationId) throw new Error('GHL_API_KEY or GHL_LOCATION_ID not set')
+    if (!apiKey || !locationId) throw new Error('GHL_API_KEY/GHL_PIT_TOKEN or GHL_LOCATION_ID not set')
     const res = await fetch(
       `https://services.leadconnectorhq.com/locations/${encodeURIComponent(locationId)}`,
       {
