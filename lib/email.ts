@@ -39,7 +39,7 @@
  * ──────────────────────────────────────────────────────────────────
  */
 
-import { useGhlLeadDelivery } from './lead-delivery'
+import { shouldUseGhlLeadDelivery } from './lead-delivery'
 
 const POSTMARK_API = 'https://api.postmarkapp.com/email'
 const DEFAULT_FROM = 'LBTA Website <support@lagunabeachtennisacademy.com>'
@@ -66,13 +66,16 @@ function getNotifyTo(): string {
 // Core send function
 // ============================================================
 
+/**
+ * Send via Postmark. Never blocked by GHL delivery mode — customer confirmations
+ * must always go out. GHL routing is applied upstream in notify* helpers only.
+ */
 async function sendEmail(options: {
   to: string
   subject: string
   htmlBody: string
   tag?: string
 }): Promise<boolean> {
-  if (useGhlLeadDelivery()) return false
   const token = getToken()
   if (!token) return false
 
@@ -184,12 +187,14 @@ export type NotifyTrialParams = {
   /** Free-text from contact form or notes */
   message?: string
   /** contact = /contact page inquiry (different subject; not a trial-only lead). */
-  intent?: 'trial' | 'contact' | 'racquet-rescue'
+  intent?: 'trial' | 'contact' | 'racquet-rescue' | 'registration-assist'
 }
 
 export async function notifyTrialRequest(data: NotifyTrialParams): Promise<void> {
+  if (shouldUseGhlLeadDelivery()) return
   const isContact = data.intent === 'contact'
   const isRacquetRescue = data.intent === 'racquet-rescue'
+  const isRegistrationAssist = data.intent === 'registration-assist'
   const fields = [
     { label: 'Name', value: `${data.firstName} ${data.lastName}` },
     { label: 'Email', value: data.email },
@@ -204,14 +209,18 @@ export async function notifyTrialRequest(data: NotifyTrialParams): Promise<void>
     to: getNotifyTo(),
     subject: isRacquetRescue
       ? `Racquet Rescue — ${data.firstName} ${data.lastName}`
+      : isRegistrationAssist
+        ? `Registration Assist — ${data.firstName} ${data.lastName}`
       : isContact
         ? `Contact Form — ${data.firstName} ${data.lastName}`
         : `New Trial Request — ${data.firstName} ${data.lastName}`,
-    tag: isRacquetRescue ? 'racquet-rescue' : isContact ? 'contact-inquiry' : 'trial-request',
+    tag: isRacquetRescue ? 'racquet-rescue' : isRegistrationAssist ? 'registration-assist' : isContact ? 'contact-inquiry' : 'trial-request',
     htmlBody: buildNotificationHtml({
-      type: isRacquetRescue ? 'racquet stringing request' : isContact ? 'contact form message' : 'trial class request',
+      type: isRacquetRescue ? 'racquet stringing request' : isRegistrationAssist ? 'registration assist request' : isContact ? 'contact form message' : 'trial class request',
       heading: isRacquetRescue
         ? 'New Racquet Rescue Request'
+        : isRegistrationAssist
+          ? 'New Registration Assistance Request'
         : isContact
           ? 'New Contact Form Message'
           : 'New Trial Request',
@@ -230,6 +239,7 @@ export type NotifyPrivateLessonParams = {
 }
 
 export async function notifyPrivateLesson(data: NotifyPrivateLessonParams): Promise<void> {
+  if (shouldUseGhlLeadDelivery()) return
   await sendEmail({
     to: getNotifyTo(),
     subject: `Private Lesson Request — ${data.firstName} ${data.lastName} → ${data.coach}`,
@@ -265,6 +275,7 @@ export type NotifyRegistrationParams = {
 }
 
 export async function notifyRegistration(data: NotifyRegistrationParams): Promise<void> {
+  if (shouldUseGhlLeadDelivery()) return
   const regType = data.registrationType ?? 'registration'
   const heading = regType === 'utr-circuit'
     ? 'UTR Circuit Registration'
@@ -305,6 +316,7 @@ export type NotifyScholarshipParams = {
 }
 
 export async function notifyScholarship(data: NotifyScholarshipParams): Promise<void> {
+  if (shouldUseGhlLeadDelivery()) return
   await sendEmail({
     to: getNotifyTo(),
     subject: `Scholarship Application — ${data.parentName || data.email}`,
@@ -323,6 +335,7 @@ export async function notifyScholarship(data: NotifyScholarshipParams): Promise<
 }
 
 export async function notifyNewsletter(email: string): Promise<void> {
+  if (shouldUseGhlLeadDelivery()) return
   await sendEmail({
     to: getNotifyTo(),
     subject: `Newsletter Signup — ${email}`,
@@ -633,6 +646,7 @@ export async function notifyChatMessage(params: {
   pathname?: string
   messageCount: number
 }): Promise<void> {
+  if (shouldUseGhlLeadDelivery()) return
   await sendEmail({
     to: getNotifyTo(),
     subject: `Chat Widget Message — ${params.message.slice(0, 50)}${params.message.length > 50 ? '…' : ''}`,
