@@ -16,9 +16,10 @@ import {
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
-import { sendToGHL } from '@/lib/gohighlevel'
+import { sendToAirtable } from '@/lib/airtable-leads'
 import { notifyRegistration, sendConfirmationEmail } from '@/lib/email'
 import { FORM_CONFIGS } from '@/lib/form-config'
+import { buildPendingCityPaymentWorkflow } from '@/lib/lead-workflow'
 
 // Initialize Notion client lazily
 let notionClient: Client | null = null
@@ -235,12 +236,13 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    waitUntil(sendToGHL({
+    waitUntil(sendToAirtable({
+      name: `${data.firstName} ${data.lastName}`,
       email: data.email,
-      firstName: data.firstName,
-      lastName: data.lastName,
       phone: data.phone,
-      tags: ['Website Registration', data.program],
+      program: data.program,
+      formSource: 'register-program',
+      category: 'registration',
     }))
 
     waitUntil(storeLead({
@@ -248,7 +250,11 @@ export async function POST(request: NextRequest) {
       email: data.email,
       name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
       phone: data.phone ?? undefined,
-      payload: { program: data.program, location: data.location },
+      payload: {
+        program: data.program,
+        location: data.location,
+        workflow: buildPendingCityPaymentWorkflow(24),
+      },
     }))
     waitUntil(notifyRegistration({
       firstName: data.firstName,

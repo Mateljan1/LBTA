@@ -15,7 +15,7 @@ import {
   CLASS_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
-import { sendToGHL } from '@/lib/gohighlevel'
+import { sendToAirtable } from '@/lib/airtable-leads'
 import {
   notifyTrialRequest,
   notifyPrivateLesson,
@@ -24,6 +24,10 @@ import {
   sendPrivateLessonConfirmationEmail,
 } from '@/lib/email'
 import { writeNotionLead } from '@/lib/notion-leads'
+import {
+  buildRegistrationAssistWorkflow,
+  buildTrialRequestedWorkflow,
+} from '@/lib/lead-workflow'
 
 // ============================================================
 // LBTA Booking/Trial Request API
@@ -148,19 +152,29 @@ export async function POST(request: NextRequest) {
         category: 'Private Lesson',
         notes: `Option: ${privateBody.option}`,
       }))
-      waitUntil(sendToGHL({
+      waitUntil(sendToAirtable({
+        name: `${privateBody.firstName} ${privateBody.lastName}`,
         email: privateBody.email,
-        firstName: privateBody.firstName,
-        lastName: privateBody.lastName,
         phone: privateBody.phone,
-        tags: ['Private Lesson', privateBody.coach],
+        program: `Private Lessons — ${privateBody.coach}`,
+        formSource: 'book-private',
+        category: 'private',
       }))
       waitUntil(storeLead({
         source: 'book',
         email: privateBody.email,
         name: `${privateBody.firstName ?? ''} ${privateBody.lastName ?? ''}`.trim() || undefined,
         phone: privateBody.phone ?? undefined,
-        payload: { bookingType: 'private', coach: privateBody.coach, option: privateBody.option },
+      payload: {
+        bookingType: 'private',
+        coach: privateBody.coach,
+        option: privateBody.option,
+        workflow: {
+          stage: 'not_required',
+          cityPaymentStatus: 'not_required',
+          createdAt: new Date().toISOString(),
+        },
+      },
       }))
       waitUntil(notifyPrivateLesson({
         firstName: privateBody.firstName,
@@ -186,6 +200,13 @@ export async function POST(request: NextRequest) {
 
     const trialBody = body as import('@/lib/validations').BookingRequest
     const isContactPage = trialBody.source === 'contact-page'
+    const isRacquetRescue = trialBody.source === 'racquet-rescue'
+    const isRegistrationAssist = [
+      'schedules_modal',
+      'camps_schedules_modal',
+      'programs_page',
+      'camps_page_modal',
+    ].includes(trialBody.source ?? '')
     const contactMessage = trialBody.message?.trim()
 
     if (process.env.NODE_ENV !== 'production') {
@@ -199,9 +220,13 @@ export async function POST(request: NextRequest) {
     const daysSelected = (trialBody.preferredDays ?? []).join(', ') || 'Flexible'
     const signupSourceField11 = isContactPage
       ? 'website-contact-page'
-      : trialBody.source === 'homepage-cta'
-        ? 'website-homepage-cta'
-        : 'website'
+      : isRacquetRescue
+        ? 'website-racquet-rescue'
+        : isRegistrationAssist
+          ? 'website-registration-assist'
+        : trialBody.source === 'homepage-cta'
+          ? 'website-homepage-cta'
+          : 'website'
 
     if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
       try {
@@ -211,14 +236,19 @@ export async function POST(request: NextRequest) {
           lastName: trialBody.lastName,
           phone: trialBody.phone,
           fieldValues: [
-            { field: '7', value: trialBody.program || (isContactPage ? 'Contact Form' : 'Trial Request') },
+            {
+              field: '7',
+              value:
+                trialBody.program ||
+                (isRacquetRescue ? 'Racquet Rescue' : isContactPage ? 'Contact Form' : isRegistrationAssist ? 'Registration Assistance' : 'Trial Request'),
+            },
             { field: '8', value: trialBody.location || 'Not specified' },
             { field: '9', value: daysSelected },
             { field: '11', value: signupSourceField11 },
-            { field: '12', value: isContactPage ? 'contact' : 'trial' },
+            { field: '12', value: isRacquetRescue ? 'racquet-rescue' : isContactPage ? 'contact' : isRegistrationAssist ? 'registration-assist' : 'trial' },
             {
               field: '5',
-              value: isContactPage
+              value: isContactPage || isRacquetRescue || isRegistrationAssist
                 ? [contactMessage, trialBody.experience].filter(Boolean).join('\n\n') || 'Not specified'
                 : trialBody.experience || 'Not specified',
             },
@@ -234,6 +264,10 @@ export async function POST(request: NextRequest) {
           const tagsToApply: number[] = [CAMPAIGN_TAGS.website_registration]
           if (isContactPage) {
             tagsToApply.push(CAMPAIGN_TAGS.not_sure)
+          } else if (isRacquetRescue) {
+            tagsToApply.push(CAMPAIGN_TAGS.not_sure)
+          } else if (isRegistrationAssist) {
+            tagsToApply.push(CAMPAIGN_TAGS.not_sure)
           } else {
             tagsToApply.push(CAMPAIGN_TAGS.trial_request)
             if (trialBody.program && PROGRAM_TAGS[trialBody.program]) tagsToApply.push(PROGRAM_TAGS[trialBody.program])
@@ -245,7 +279,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const notionNotes = isContactPage
+    const notionNotes = isContactPage || isRacquetRescue || isRegistrationAssist
       ? [contactMessage && `Message:\n${contactMessage}`, trialBody.experience && `Experience: ${trialBody.experience}`]
           .filter(Boolean)
           .join('\n\n') || undefined
@@ -257,20 +291,21 @@ export async function POST(request: NextRequest) {
       parentName: `${trialBody.firstName} ${trialBody.lastName}`,
       email: trialBody.email,
       phone: trialBody.phone,
-      program: trialBody.program || (isContactPage ? 'Contact Form' : 'Trial Request'),
-      category: isContactPage ? 'Contact' : 'Trial',
+      program:
+        trialBody.program ||
+        (isRacquetRescue ? 'Racquet Rescue' : isContactPage ? 'Contact Form' : isRegistrationAssist ? 'Registration Assistance' : 'Trial Request'),
+      category: isRacquetRescue ? 'Racquet Rescue' : isContactPage ? 'Contact' : isRegistrationAssist ? 'Registration Assist' : 'Trial',
       location: trialBody.location,
       notes: notionNotes,
     }))
     waitUntil(
-      sendToGHL({
+      sendToAirtable({
+        name: `${trialBody.firstName} ${trialBody.lastName}`,
         email: trialBody.email,
-        firstName: trialBody.firstName,
-        lastName: trialBody.lastName,
         phone: trialBody.phone,
-        tags: isContactPage
-          ? ['Contact Form', trialBody.program ?? 'General inquiry']
-          : ['Trial Request', trialBody.program ?? 'Not Specified'],
+        program: trialBody.program,
+        formSource: isRacquetRescue ? 'racquet-rescue' : isContactPage ? 'contact-page' : isRegistrationAssist ? 'registration-assist' : 'book-trial',
+        category: isRacquetRescue ? 'racquet-rescue' : isContactPage ? 'contact' : isRegistrationAssist ? 'registration-assist' : 'trial',
       })
     )
     waitUntil(storeLead({
@@ -281,7 +316,24 @@ export async function POST(request: NextRequest) {
       payload: {
         program: trialBody.program,
         location: trialBody.location,
-        ...(isContactPage && contactMessage ? { message: contactMessage } : {}),
+        ...((isContactPage || isRacquetRescue || isRegistrationAssist) && contactMessage ? { message: contactMessage } : {}),
+        ...(isRacquetRescue ? { source: 'racquet-rescue' } : {}),
+        ...(isRegistrationAssist ? { source: 'registration-assist' } : {}),
+        workflow: isRacquetRescue
+          ? {
+              stage: 'not_required',
+              cityPaymentStatus: 'not_required',
+              createdAt: new Date().toISOString(),
+            }
+          : isContactPage
+            ? {
+                stage: 'not_required',
+                cityPaymentStatus: 'not_required',
+                createdAt: new Date().toISOString(),
+              }
+            : isRegistrationAssist
+              ? buildRegistrationAssistWorkflow(24)
+              : buildTrialRequestedWorkflow(),
       },
     }))
     waitUntil(
@@ -295,15 +347,15 @@ export async function POST(request: NextRequest) {
         experience: trialBody.experience,
         preferredDays: trialBody.preferredDays,
         message: contactMessage,
-        intent: isContactPage ? 'contact' : 'trial',
+        intent: isRacquetRescue ? 'racquet-rescue' : isContactPage ? 'contact' : isRegistrationAssist ? 'registration-assist' : 'trial',
       })
     )
-    if (isContactPage) {
+    if (isContactPage || isRacquetRescue || isRegistrationAssist) {
       waitUntil(
         sendContactFormConfirmationEmail({
           email: trialBody.email,
           firstName: trialBody.firstName,
-          programInterest: trialBody.program,
+          programInterest: trialBody.program ?? (isRacquetRescue ? 'Racquet Rescue' : isRegistrationAssist ? 'Program registration support' : undefined),
         })
       )
     } else {
@@ -319,9 +371,13 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: isContactPage
-        ? 'Thanks — we received your message and will respond within 24 hours.'
-        : 'Trial request received! Our team will contact you within 24 hours.',
+      message: isRacquetRescue
+        ? 'Thanks — we received your stringing request and will confirm within one business day.'
+        : isContactPage
+          ? 'Thanks — we received your message and will respond within 24 hours.'
+          : isRegistrationAssist
+            ? 'Thanks — we received your request and will help you complete City registration within 24 hours.'
+          : 'Trial request received! Our team will contact you within 24 hours.',
     })
   } catch (error) {
     console.error('[Booking] Error:', error)

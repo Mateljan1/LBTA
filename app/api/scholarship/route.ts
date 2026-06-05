@@ -13,7 +13,7 @@ import {
   getWebsiteSignupsListId,
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
-import { sendToGHL } from '@/lib/gohighlevel'
+import { sendToAirtable } from '@/lib/airtable-leads'
 import { notifyScholarship, sendScholarshipConfirmationEmail } from '@/lib/email'
 import { writeNotionLead } from '@/lib/notion-leads'
 
@@ -110,12 +110,13 @@ export async function POST(request: NextRequest) {
       program: 'Scholarship Application',
       category: 'Scholarship',
     }))
-    waitUntil(sendToGHL({
+    waitUntil(sendToAirtable({
+      name: parentName || validation.data.email,
       email: validation.data.email,
-      firstName: ghlFirstName,
-      lastName: ghlLastName,
       phone: validation.data.phone ?? undefined,
-      tags: ['Scholarship Application'],
+      program: validation.data.studentName ? `Scholarship — ${validation.data.studentName}` : 'Scholarship Application',
+      formSource: 'scholarship',
+      category: 'scholarship',
     }))
 
     waitUntil(storeLead({

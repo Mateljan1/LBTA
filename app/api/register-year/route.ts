@@ -17,11 +17,12 @@ import {
   SEASON_TAGS as AC_SEASON_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
-import { sendToGHL } from '@/lib/gohighlevel'
+import { sendToAirtable } from '@/lib/airtable-leads'
 import { notifyRegistration, sendConfirmationEmail } from '@/lib/email'
 import { FORM_CONFIGS } from '@/lib/form-config'
 import { fulfillUtrCircuitRegistration } from '@/lib/fulfill-utr-circuit-registration'
 import { determineCategory, isEarlyBird, type RegistrationType } from '@/lib/register-year-shared'
+import { buildPendingCityPaymentWorkflow } from '@/lib/lead-workflow'
 
 let notionClient: Client | null = null
 function getNotionClient(): Client {
@@ -247,12 +248,13 @@ export async function POST(request: NextRequest) {
     }
 
     waitUntil(
-      sendToGHL({
+      sendToAirtable({
+        name: `${data.firstName} ${data.lastName}`,
         email: data.email,
-        firstName: data.firstName,
-        lastName: data.lastName,
         phone: data.phone,
-        tags: ['Website Registration', data.program, data.registrationType ?? 'seasonal'],
+        program: data.program,
+        formSource: `register-year${data.registrationType ? `-${data.registrationType}` : ''}`,
+        category: 'registration',
       })
     )
 
@@ -266,6 +268,7 @@ export async function POST(request: NextRequest) {
           registrationType: data.registrationType,
           program: data.program,
           season: data.season,
+          workflow: buildPendingCityPaymentWorkflow(24),
         },
       })
     )

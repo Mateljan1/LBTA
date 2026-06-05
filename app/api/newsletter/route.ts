@@ -6,7 +6,7 @@ import { hasEnvVar } from '@/lib/env'
 import { validateAgentSecret } from '@/lib/agent-auth'
 import { upsertContact, addToList, addTag, getWebsiteSignupsListId, CAMPAIGN_TAGS } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
-import { sendToGHL } from '@/lib/gohighlevel'
+import { sendToAirtable } from '@/lib/airtable-leads'
 import { notifyNewsletter } from '@/lib/email'
 import { writeNotionLead } from '@/lib/notion-leads'
 
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
       program: 'Newsletter Signup',
       category: 'Newsletter',
     }))
-    waitUntil(sendToGHL({ email: email.trim(), tags: ['Newsletter'] }))
+    waitUntil(sendToAirtable({ name: email.trim(), email: email.trim(), category: 'newsletter', formSource: 'newsletter' }))
     waitUntil(storeLead({ source: 'newsletter', email: email.trim() }))
     waitUntil(notifyNewsletter(email.trim()))
 

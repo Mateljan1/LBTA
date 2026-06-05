@@ -39,7 +39,6 @@
  * ──────────────────────────────────────────────────────────────────
  */
 
-import { shouldUseGhlLeadDelivery } from './lead-delivery'
 
 const POSTMARK_API = 'https://api.postmarkapp.com/email'
 const DEFAULT_FROM = 'LBTA Website <support@lagunabeachtennisacademy.com>'
@@ -191,7 +190,6 @@ export type NotifyTrialParams = {
 }
 
 export async function notifyTrialRequest(data: NotifyTrialParams): Promise<void> {
-  if (shouldUseGhlLeadDelivery()) return
   const isContact = data.intent === 'contact'
   const isRacquetRescue = data.intent === 'racquet-rescue'
   const isRegistrationAssist = data.intent === 'registration-assist'
@@ -239,7 +237,6 @@ export type NotifyPrivateLessonParams = {
 }
 
 export async function notifyPrivateLesson(data: NotifyPrivateLessonParams): Promise<void> {
-  if (shouldUseGhlLeadDelivery()) return
   await sendEmail({
     to: getNotifyTo(),
     subject: `Private Lesson Request — ${data.firstName} ${data.lastName} → ${data.coach}`,
@@ -275,7 +272,6 @@ export type NotifyRegistrationParams = {
 }
 
 export async function notifyRegistration(data: NotifyRegistrationParams): Promise<void> {
-  if (shouldUseGhlLeadDelivery()) return
   const regType = data.registrationType ?? 'registration'
   const heading = regType === 'utr-circuit'
     ? 'UTR Circuit Registration'
@@ -316,7 +312,6 @@ export type NotifyScholarshipParams = {
 }
 
 export async function notifyScholarship(data: NotifyScholarshipParams): Promise<void> {
-  if (shouldUseGhlLeadDelivery()) return
   await sendEmail({
     to: getNotifyTo(),
     subject: `Scholarship Application — ${data.parentName || data.email}`,
@@ -335,7 +330,6 @@ export async function notifyScholarship(data: NotifyScholarshipParams): Promise<
 }
 
 export async function notifyNewsletter(email: string): Promise<void> {
-  if (shouldUseGhlLeadDelivery()) return
   await sendEmail({
     to: getNotifyTo(),
     subject: `Newsletter Signup — ${email}`,
@@ -646,7 +640,6 @@ export async function notifyChatMessage(params: {
   pathname?: string
   messageCount: number
 }): Promise<void> {
-  if (shouldUseGhlLeadDelivery()) return
   await sendEmail({
     to: getNotifyTo(),
     subject: `Chat Widget Message — ${params.message.slice(0, 50)}${params.message.length > 50 ? '…' : ''}`,

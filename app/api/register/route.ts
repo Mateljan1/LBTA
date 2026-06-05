@@ -15,10 +15,11 @@ import {
   CAMPAIGN_TAGS,
 } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
-import { sendToGHL } from '@/lib/gohighlevel'
+import { sendToAirtable } from '@/lib/airtable-leads'
 import { writeNotionLead } from '@/lib/notion-leads'
 import { notifyRegistration, sendConfirmationEmail } from '@/lib/email'
 import { FORM_CONFIGS } from '@/lib/form-config'
+import { buildPendingCityPaymentWorkflow } from '@/lib/lead-workflow'
 
 export async function POST(request: NextRequest) {
   // Agent auth: validate X-Agent-Secret header if present (for agent tool calls)
@@ -114,12 +115,13 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    waitUntil(sendToGHL({
+    waitUntil(sendToAirtable({
+      name: `${data.firstName} ${data.lastName}`,
       email: data.email,
-      firstName: data.firstName,
-      lastName: data.lastName,
       phone: data.phone,
-      tags: ['Website Registration', data.program ?? 'General Inquiry'],
+      program: data.program,
+      formSource: 'register',
+      category: 'registration',
     }))
 
     waitUntil(storeLead({
@@ -127,7 +129,11 @@ export async function POST(request: NextRequest) {
       email: data.email,
       name: `${data.firstName ?? ''} ${data.lastName ?? ''}`.trim() || undefined,
       phone: data.phone ?? undefined,
-      payload: { program: data.program, season: data.season },
+      payload: {
+        program: data.program,
+        season: data.season,
+        workflow: buildPendingCityPaymentWorkflow(24),
+      },
     }))
     waitUntil(writeNotionLead({
       parentName: `${data.firstName} ${data.lastName}`,
