@@ -78,6 +78,12 @@ export default function CoachHubClient({
             >
               Leads →
             </Link>
+            <Link
+              href="/coach-hub/matchday"
+              className="inline-flex items-center font-sans text-xs uppercase tracking-[1.5px] text-brand-sandstone/80 hover:text-brand-sandstone transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-sm px-2 py-1"
+            >
+              Match Day →
+            </Link>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <select
