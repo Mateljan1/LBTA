@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LBTA City Payment Flow - Simple View</title>
+    <style>
+      :root {
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --accent: #0f766e;
+        --line: #d1d5db;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 20px 50px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 30px;
+      }
+      .sub {
+        margin: 0 0 22px;
+        color: var(--muted);
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 14px;
+      }
+      .step {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 12px;
+        align-items: start;
+        margin-bottom: 12px;
+      }
+      .num {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        border: 2px solid var(--accent);
+        color: var(--accent);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      h2 {
+        margin: 0 0 10px;
+        font-size: 19px;
+      }
+      h3 {
+        margin: 0 0 4px;
+        font-size: 16px;
+      }
+      p {
+        margin: 0;
+        line-height: 1.5;
+      }
+      ul {
+        margin: 8px 0 0;
+        padding-left: 20px;
+      }
+      li {
+        margin: 4px 0;
+      }
+      code {
+        background: #eef2ff;
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 13px;
+      }
+      .status {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 999px;
+        padding: 4px 8px;
+        margin-right: 6px;
+      }
+      .pending {
+        background: #fff7ed;
+        color: #c2410c;
+      }
+      .paid {
+        background: #ecfdf5;
+        color: #166534;
+      }
+      .not-required {
+        background: #f3f4f6;
+        color: #374151;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>LBTA City Payment Flow - Simple Explanation</h1>
+      <p class="sub">
+        This is the exact system now in place so leads do not fall through the cracks between website form submission and City payment.
+      </p>
+
+      <section class="card">
+        <h2>What problem this solves</h2>
+        <p>
+          Before: someone could submit on LBTA site, but we had weak visibility into whether they actually finished payment in City Rec1.
+        </p>
+        <p style="margin-top: 8px;">
+          Now: every registration-related lead gets a workflow status, stale leads are detectable, and City-paid records can be reconciled back into LBTA data.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Core statuses now used</h2>
+        <p>
+          <span class="status pending">pending_city_payment</span>
+          Lead submitted intent, but city payment is still outstanding
+        </p>
+        <p style="margin-top: 6px;">
+          <span class="status paid">city_paid</span>
+          We confirmed the family completed payment in City
+        </p>
+        <p style="margin-top: 6px;">
+          <span class="status not-required">not_required</span>
+          City payment does not apply (example: private inquiry, racquet rescue)
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Flow (in plain English)</h2>
+
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <h3>Lead submits on LBTA website</h3>
+            <p>
+              From trial/register pages (or registration-assist modal), the lead is saved with a workflow state.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <h3>Lead is marked as pending city payment</h3>
+            <p>
+              Registration-related sources default to <code>pending_city_payment</code> so we can track unresolved intent.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <h3>Stale-lead checks find people stuck in limbo</h3>
+            <p>
+              We can run stale reports locally or by cron endpoint to list leads still pending after a time threshold.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">4</div>
+          <div>
+            <h3>Ops reconciles city-paid families</h3>
+            <p>
+              Using email list from City export, we dry-run then update lead workflow to <code>city_paid</code>.
+            </p>
+          </div>
+        </div>
+
+        <div class="step" style="margin-bottom: 0;">
+          <div class="num">5</div>
+          <div>
+            <h3>Daily KPI summary gives visibility</h3>
+            <p>
+              We can pull one summary showing new leads, trials, pending 24h/72h, and city-paid counts.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>What was added today</h2>
+        <ul>
+          <li>Workflow state model for lead lifecycle.</li>
+          <li>Stale pending city payment report logic + cron endpoint.</li>
+          <li>City payment sync logic (dry-run + real update mode).</li>
+          <li>Lead funnel summary endpoint for daily KPI snapshot.</li>
+          <li>CLI commands for ops to run these workflows quickly.</li>
+          <li>Master docs + runbook so any person/agent can operate the system.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Commands you can run</h2>
+        <ul>
+          <li><code>npm run leads:stale-city-payment</code></li>
+          <li><code>DRY_RUN=1 npm run leads:city-payment-sync -- family@example.com</code></li>
+          <li><code>npm run leads:city-payment-sync -- family@example.com</code></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Live verification we just performed</h2>
+        <ul>
+          <li>Stale report command executed successfully (exit code 0).</li>
+          <li>Dry-run city payment sync executed successfully (exit code 0).</li>
+          <li>Dry-run returned safe no-op for unmatched sample email, as expected.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

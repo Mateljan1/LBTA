@@ -1,0 +1,137 @@
+{
+  "source": "LBTA_Coaching_LessonPlanLibrary_v1.md",
+  "schemaIntro": "Every LBTA lesson follows the 4-block schema. Blocks are non-negotiable; minute splits adjust by age and length. The schema maps to the Movement · Craft · Community pillar.",
+  "blocks": [
+    {
+      "id": "movement",
+      "label": "Movement Warm-up",
+      "defaultMinutes": 8,
+      "purpose": "Dynamic warm-up + footwork — connects Fit4Tennis principles",
+      "accent": "tide-pool"
+    },
+    {
+      "id": "craft",
+      "label": "Craft Block",
+      "defaultMinutes": 25,
+      "purpose": "One technical or tactical focus — drilled to mastery",
+      "accent": "thousand-steps"
+    },
+    {
+      "id": "live-ball",
+      "label": "Live-Ball / Game-Based",
+      "defaultMinutes": 20,
+      "purpose": "Applied scenarios, point play, decision-making",
+      "accent": "victoria-cove"
+    },
+    {
+      "id": "review",
+      "label": "Review + Homework",
+      "defaultMinutes": 7,
+      "purpose": "Recap + 1 homework drill (logged to RacquetIQ)",
+      "accent": "pacific-dusk"
+    }
+  ],
+  "warmupLibrary": {
+    "universalOpener": "3-line dynamic mobility (high-knees, lateral skips, carioca) + 4-corner footwork ladder.",
+    "byAge": [
+      {
+        "label": "5–7 (Red)",
+        "drills": ["Animal walks", "Agility ladder", "Spider tag"]
+      },
+      {
+        "label": "8–10 (Orange/Green)",
+        "drills": ["Split-step → first step drills", "Reaction-color cones"]
+      },
+      {
+        "label": "11–14 (Yellow / juniors)",
+        "drills": [
+          "Power hop → directional sprint",
+          "Gym-style activation (band walks, RDL warmup)"
+        ]
+      },
+      {
+        "label": "HP / Adult",
+        "drills": [
+          "Full Fit4Tennis pre-court protocol (see 03_Fit4Tennis/Programs/)"
+        ]
+      }
+    ]
+  },
+  "craftLibrary": {
+    "strokeFundamentals": [
+      { "stroke": "Forehand", "subFoci": "grip → unit turn → racket lag → contact → recovery" },
+      { "stroke": "Backhand (1H/2H)", "subFoci": "shoulder turn → low-to-high → rotation → finish" },
+      { "stroke": "Serve", "subFoci": "toss → trophy → drop → drive → pronation" },
+      { "stroke": "Return", "subFoci": "split-step timing → block return → swing return" },
+      { "stroke": "Volley", "subFoci": "grip → punch vs slice → split-step before contact" },
+      { "stroke": "Overhead", "subFoci": "pivot turn → tracking → contact point" },
+      { "stroke": "Drop shot", "subFoci": "feel + disguise" },
+      { "stroke": "Slice", "subFoci": "rhythm + depth" }
+    ],
+    "tactical": {
+      "title": "Tactical patterns (mix in throughout)",
+      "items": [
+        "1-2 punch (deep middle → wide forehand)",
+        "Wide-and-open-court",
+        "Body serve + off-shoulder forehand",
+        "Cross-cross-down-the-line",
+        "Approach and volley off the short ball",
+        "Defensive lob → recover"
+      ]
+    },
+    "mental": {
+      "title": "Mental / decision",
+      "items": [
+        "Score-aware play (15-30 vs 30-15)",
+        "Break-point ritual (one breath, one cue)",
+        "Changeover protocol"
+      ]
+    }
+  },
+  "liveBallFormats": [
+    {
+      "name": "King of the court",
+      "description": "Rotation winner stays."
+    },
+    {
+      "name": "First-to-7 cooperative rallies",
+      "description": "With target zones."
+    },
+    {
+      "name": "Set-up sets",
+      "description": "Score 30-30, deuce, ad — start there to compress rep count."
+    },
+    {
+      "name": "Pattern point play",
+      "description": "Point must include the day's pattern; coach scores extra."
+    }
+  ],
+  "reviewTemplates": [
+    {
+      "title": "60-second debrief",
+      "body": "What worked? What's the cue you take home?"
+    },
+    {
+      "title": "Homework assignment",
+      "body": "One assigned homework drill — logged into RacquetIQ practice planner."
+    },
+    {
+      "title": "Parent recap (one line)",
+      "body": "Texted via GHL automation after the session."
+    }
+  ],
+  "variants": [
+    {
+      "variant": "Academy (group)",
+      "note": "Minute splits adjust to court ratio (1:6 ratio max for Yellow+)."
+    },
+    {
+      "variant": "Private (1:1)",
+      "note": "Block 2 doubles to 40 min; Block 3 → 1:1 patterns."
+    },
+    {
+      "variant": "Junior Pathway (HP)",
+      "note": "90-min default, adds tactical block + a daily drill from Fit4Tennis."
+    }
+  ]
+}

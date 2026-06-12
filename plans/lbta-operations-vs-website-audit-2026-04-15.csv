@@ -1,0 +1,38 @@
+Category,Topic,Status,Severity,Operations_Guide,Website_A,Website_B_or_notes
+Seasons,Winter dates,Match,,January 5 – April 5 · 13 wk,data/year2026.json seasons.winter; data/winter2026.json,
+Seasons,Spring dates,Match,,April 6 – June 13 · 10 wk · skip May 25,data/year2026.json; data/spring-summer-2026.json,
+Seasons,Summer dates (season block),Match,,June 15 – August 29 · 11 wk · Jun 19 Jul 4 off,data/year2026.json; spring-summer-2026.json summer.dates,
+Seasons,Fall dates,Match,,August 31 – December 19 · 16 wk,data/year2026.json; data/fall2026.json,
+Doc vs doc,Summer length in §14 vs §2,Doc internal conflict,Medium,§2: 11 weeks to Aug 29 · §14 line ~954: June 15 – August 20 (10 weeks),N/A,Reconcile guide sections
+Website internal,Summer end date in JSON,Mismatch,High,June 15 – August 29 (11 wk),data/spring-summer-2026.json summer.dates = Aug 29,data/spring-summer-2026.json camps.summer.dates = June 15 – August 28
+Website internal,year2026 camps id summer dates,Mismatch,High,Season summer ends Aug 29,data/year2026.json seasons.summer = Aug 29,data/year2026.json camps id summer dates = June 15 – August 20
+UI hardcode,ProgramsTabView summer range,Mismatch,Medium,June 15 – August 29,components/programs/ProgramsTabView.tsx = June 15 – August 28,
+Email,LBTA_R7 summer session line,Mismatch,High,11 weeks June 15 – August 29,assets/emails/spring-2026/returning/LBTA_R7_SummerPlan_SEND_READY.html: June 16 – Aug 29; Back-to-School Sep 1–5,Doc + year2026: Back-to-School Aug 17–20; summer starts June 15
+Pricing,Private coaching rates all four coaches,Match,,60/90/packs as doc §5,data/private-rates.json; data/year2026.json privateCoaching,
+Pricing,basePricing winter seasonal totals §11,Match,,Junior youth dev HP adult tables,data/year2026.json basePricing,
+Pricing,Spring Red/Orange/Green 1x/2x/3x sample,Match,,Doc §11 spring column,data/spring-summer-2026.json red-ball pricing.spring,
+Pricing,LiveBall monthly + drop-in,Match,,$150 / $50,data/spring-summer-2026.json liveball; year2026 monthlyPrograms,
+Pricing,Summer camp Tennis Adventure full/half/drop-in,Match,,$495 / $325 / $99 & $85,data/spring-summer-2026.json camps.summer.options; year2026 camp summer,
+Pricing,Summer Training Camp,Match,,$595 full · $325 half · $120/$85 drop-in,Same in spring-summer-2026.json,
+Schedule spring,Little Tennis Stars Sat location,Match,,Alta Laguna,data/spring-summer-2026.json little-stars schedule,
+Schedule winter fall,Little Tennis Stars Sat location vs guide §6,Mismatch,High,Saturday Alta Laguna (doc §6),data/winter2026.json location includes Saturday at LBHS,data/fall2026.json same LBHS Saturday
+Schedule spring,Cardio Tennis Friday coach,Mismatch,Medium,Peter DeFrantz only (doc §12),data/spring-summer-2026.json cardio-tennis = Andrew Mateljan & Peter DeFrantz,
+Schedule spring,LiveBall Sunday coaches,Mismatch,Low,Peter DeFrantz both sessions (doc),data/spring-summer-2026.json = Peter DeFrantz & Andrew Mateljan,Clarify listing vs co-feeding
+Schedule spring,Competitive Green Dot Tue/Thu coach label,Partial,,Peter DeFrantz (doc),JSON coach field Staff,OK if intentional anonymity
+Schedule spring,High Performance Friday coaches,Mismatch,Low,Friday competition Peter and Andrew combined,JSON Friday HP = Peter DeFrantz & Andrew Mateljan (no third coach),May be roster nuance
+Schedule,USTA League Practice Tue 6–8 (doc §12),Not in program JSON,Low,Listed in doc weekly grid,Not in data/spring-summer-2026.json programs,May be team-only calendar
+Locations,Three facilities addresses,Match,,Doc §3,data/homepage or site copy; aligns with leagues JSON venues,
+Phone,Main academy phone,Match,,(949) 534-0457,Consistent across site components and faq.json,
+Leagues,UTR Season 1 window,Match,,April 11 – June 6,data/leagues-2026.json utr seasonLabel and dates,
+Leagues,UTR division prices/times vs doc §15,Match,,349/399 · times/venues,data/leagues-2026.json utr divisions,
+Leagues,USTA team cost and membership,Match,,$5500 total · $48 membership,data/leagues-2026.json usta,
+Leagues,USTA league rows Apr–Jul etc,Match,,Doc table,data/leagues-2026.json leagues array,
+Camps,Back-to-School Aug 17–20 pricing,Match,,Doc §14; $372/$245,data/year2026.json back-to-school id,
+Camps,Spring Break Mar 30 – Apr 2,Match,,Doc §14,data/spring-summer-2026.json and year2026,
+Discounts,Sibling Early Bird Multi-session,Match,,Doc camp footers,data/spring-summer-2026.json discounts,
+Program copy,Little Stars description tone,Partial,,Doc §6 longer; JSON spring has full paragraph,winter2026 shorter variant,Seasonal copy OK if intentional
+Suspended,Swim & Tennis camp,Match,,Pool closed narrative,year2026.json swim-tennis suspended + replacement text,
+Coach bios,Four core coaches in doc §4,Partial,,Long bios on doc,data/coaches.json shorter,OK for web; verify ATP claims if needed
+Email,lbta-spring2026-week2 Adult Intermediate seasonal totals,Mismatch,High,Spring 10 wk: 1x $580 · 2x $1,105 · 3x $1,570 (doc §11),assets/emails/lbta-spring2026-week2.html shows 1x $756 · 2x $1,437 · 3x $2,042,Those figures match WINTER 13 wk not spring
+Email,lbta-spring2026-week2 Adult Advanced seasonal totals,Mismatch,High,Spring: 1x $625 · 2x $1,250 (doc §11),Same email shows 1x $810 · 2x $1,620,Winter totals; should be spring column
+Email,lbta-spring2026-week2 Intermediate NTRP band,Partial,,NTRP 3.0–4.0 (doc + JSON),Email program-meta says NTRP 3.0–3.5,Align to 3.0–4.0 if spring email is updated

@@ -297,12 +297,12 @@ export default function JuniorTrialLanding() {
                   {formData.childAge && (
                     <div className="pb-8 border-b border-gray-200">
                       <h3 className="text-xl font-medium text-brand-pacific-dusk mb-6">Choose Program</h3>
-                      {/* aria-label gives the select its accessible name; the visible <h3>
-                          is a section heading rather than a per-field label, so a hidden
-                          <label htmlFor> would duplicate the announcement. */}
+                      <label htmlFor="junior-program" className="block text-sm font-medium text-brand-pacific-dusk mb-2">
+                        Program *
+                      </label>
                       <select
+                        id="junior-program"
                         required
-                        aria-label="Choose program"
                         value={formData.program}
                         onChange={(e) => setFormData({...formData, program: e.target.value})}
                         className="w-full px-4 py-3 border-2 border-brand-sunset-cliff/30 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition bg-white"
@@ -319,9 +319,12 @@ export default function JuniorTrialLanding() {
                   {formData.program && (
                     <div className="pb-8 border-b border-gray-200">
                       <h3 className="text-xl font-medium text-brand-pacific-dusk mb-6">Select Schedule</h3>
+                      <label htmlFor="junior-schedule" className="block text-sm font-medium text-brand-pacific-dusk mb-2">
+                        Schedule *
+                      </label>
                       <select
+                        id="junior-schedule"
                         required
-                        aria-label="Select schedule"
                         value={formData.schedule}
                         onChange={(e) => setFormData({...formData, schedule: e.target.value})}
                         className="w-full px-4 py-3 border-2 border-brand-sunset-cliff/30 focus:ring-2 focus:ring-brand-sunset-cliff focus:border-brand-sunset-cliff outline-none transition bg-white"
@@ -426,7 +429,7 @@ export default function JuniorTrialLanding() {
                   </button>
 
                   <p className="text-xs text-center text-lbta-slate">
-                    By submitting, you agree to receive communications from LBTA. No spam, unsubscribe anytime.
+                    By submitting, you agree to receive communications from LBTA. Spot confirmation happens after City registration payment.
                   </p>
                 </form>
               </div>

@@ -1,0 +1,525 @@
+{
+  "meta": {
+    "title": "LBTA Revenue Risk Register Premortem",
+    "version": "2026-05-17",
+    "project": "LBTA_WEBSITE_DRAFT_3:5:26",
+    "primarySite": "https://lagunabeachtennisacademy.com",
+    "owners": {
+      "decisionOwner": "Andrew Mateljan",
+      "executionOwnerDefault": "Front desk / Saska"
+    },
+    "scope": [
+      "Website lead capture",
+      "Trial booking and attendance",
+      "City Rec1 payment handoff",
+      "Post-payment app activation",
+      "Marketing attribution and local listing integrity",
+      "Racquet Rescue intake and conversion"
+    ],
+    "companions": [
+      "docs/lbta-registration-marketing-racquet-rescue-2026.md",
+      "docs/lbta-system-map-2026.md",
+      "docs/lbta-system-map-2026.json",
+      "docs/audits/2026-05/scorecard.md",
+      "docs/audits/2026-05/post-remediation/validate-summary.md"
+    ]
+  },
+  "canonicalPolicies": {
+    "enrollmentRule": "Spot is confirmed only after City Rec1 payment.",
+    "groupProgramsPaymentSystem": "City Rec1",
+    "privateAndStringingPaymentSystem": "LBTA direct",
+    "primaryNAP": {
+      "name": "Laguna Beach Tennis Academy",
+      "address": "1098 Balboa Ave, Laguna Beach, CA 92651",
+      "phone": "(949) 534-0457",
+      "website": "https://lagunabeachtennisacademy.com"
+    },
+    "secondaryFacilities": [
+      "3300 Alta Laguna Blvd",
+      "625 Park Ave",
+      "380 Third St (City registration office context only)"
+    ]
+  },
+  "workflow": {
+    "stages": [
+      "new_lead",
+      "trial_requested",
+      "trial_completed",
+      "pending_city_payment",
+      "city_paid",
+      "app_activated"
+    ],
+    "knownFriction": [
+      "Lead submitted but City payment not completed",
+      "Parent confusion between trial/app and payment confirmation",
+      "Schedule to Rec1 listing lag",
+      "Inconsistent app links in templates",
+      "No full lead-to-paid attribution loop"
+    ]
+  },
+  "riskScoring": {
+    "impactScale": "1-5",
+    "likelihoodScale": "1-5",
+    "scoreFormula": "impact * likelihood",
+    "priorityBands": {
+      "P0": "16-25",
+      "P1": "10-15",
+      "P2": "6-9",
+      "P3": "1-5"
+    }
+  },
+  "riskRegister": [
+    {
+      "id": "R-001",
+      "domain": "enrollment_handoff",
+      "failureMode": "Lead/trial submitted but City payment never completed",
+      "impact": 5,
+      "likelihood": 5,
+      "score": 25,
+      "priority": "P0",
+      "owner": "front_desk",
+      "leadingIndicators": [
+        "pending_city_payment leads older than 24h",
+        "high trial volume with flat city_paid count"
+      ],
+      "preventiveControls": [
+        "2h/24h/72h follow-up tasks",
+        "required city_payment_status field"
+      ],
+      "recoveryPlaybook": [
+        "call parent with exact Rec1 listing name",
+        "send direct payment link + class details",
+        "assign same-day close owner"
+      ]
+    },
+    {
+      "id": "R-002",
+      "domain": "messaging",
+      "failureMode": "Parent believes trial/app signup already reserved spot",
+      "impact": 5,
+      "likelihood": 4,
+      "score": 20,
+      "priority": "P0",
+      "owner": "front_desk_and_bot_owner",
+      "leadingIndicators": [
+        "support messages with 'I already signed up' and no payment",
+        "repeat confusion questions in chat logs"
+      ],
+      "preventiveControls": [
+        "uniform script in modal/email/SMS/bot",
+        "explicit payment warning in confirmation flows"
+      ],
+      "recoveryPlaybook": [
+        "priority callback",
+        "walk-through payment steps"
+      ]
+    },
+    {
+      "id": "R-003",
+      "domain": "registration_quality",
+      "failureMode": "Parent pays wrong City listing/session",
+      "impact": 4,
+      "likelihood": 4,
+      "score": 16,
+      "priority": "P0",
+      "owner": "front_desk",
+      "leadingIndicators": [
+        "post-payment correction requests",
+        "class mismatch reports"
+      ],
+      "preventiveControls": [
+        "send exact Rec1 listing text in follow-ups",
+        "per-program deep links where reliable"
+      ],
+      "recoveryPlaybook": [
+        "city transfer guidance",
+        "manual placement hold"
+      ]
+    },
+    {
+      "id": "R-004",
+      "domain": "data_sync",
+      "failureMode": "Website schedules and City listings out of sync",
+      "impact": 5,
+      "likelihood": 4,
+      "score": 20,
+      "priority": "P0",
+      "owner": "ops_coordinator",
+      "leadingIndicators": [
+        "city sku missing for live website class",
+        "frequent support corrections"
+      ],
+      "preventiveControls": [
+        "publish parity checklist before sends",
+        "weekly Rec1 export diff"
+      ],
+      "recoveryPlaybook": [
+        "temporary banner clarifying booking path",
+        "manual outbound to affected families"
+      ]
+    },
+    {
+      "id": "R-005",
+      "domain": "analytics",
+      "failureMode": "No reliable source/campaign attribution to paid enrollment",
+      "impact": 5,
+      "likelihood": 4,
+      "score": 20,
+      "priority": "P0",
+      "owner": "marketing_ops",
+      "leadingIndicators": [
+        "cannot produce lead-to-paid report by source",
+        "high '(not set)' or unknown source rows"
+      ],
+      "preventiveControls": [
+        "mandatory UTM standards",
+        "city_payment_status + payment_confirmed_at fields"
+      ],
+      "recoveryPlaybook": [
+        "manual city export reconciliation",
+        "weekly attribution backfill"
+      ]
+    },
+    {
+      "id": "R-006",
+      "domain": "crm_pipeline",
+      "failureMode": "Leads stuck without explicit payment status",
+      "impact": 5,
+      "likelihood": 4,
+      "score": 20,
+      "priority": "P0",
+      "owner": "crm_owner",
+      "leadingIndicators": [
+        "stale leads >3 days in generic stage",
+        "no owner assigned to pending payment leads"
+      ],
+      "preventiveControls": [
+        "required stage transitions",
+        "SLA task automation"
+      ],
+      "recoveryPlaybook": [
+        "daily stale lead sweep",
+        "owner reassignment"
+      ]
+    },
+    {
+      "id": "R-007",
+      "domain": "sla",
+      "failureMode": "Slow first response to high-intent leads",
+      "impact": 4,
+      "likelihood": 4,
+      "score": 16,
+      "priority": "P0",
+      "owner": "front_desk",
+      "leadingIndicators": [
+        "median first response >4 business hours"
+      ],
+      "preventiveControls": [
+        "task creation on lead",
+        "response time dashboard"
+      ],
+      "recoveryPlaybook": [
+        "end-of-day callback block",
+        "escalation queue"
+      ]
+    },
+    {
+      "id": "R-008",
+      "domain": "messaging_consistency",
+      "failureMode": "Bot, staff, and coaches give conflicting instructions",
+      "impact": 4,
+      "likelihood": 4,
+      "score": 16,
+      "priority": "P0",
+      "owner": "ops_and_bot_owner",
+      "leadingIndicators": [
+        "chat QA findings with conflicting language",
+        "repeat payment confusion tickets"
+      ],
+      "preventiveControls": [
+        "single source script for payment statements",
+        "monthly script review"
+      ],
+      "recoveryPlaybook": [
+        "corrective outreach",
+        "KB update + retraining"
+      ]
+    },
+    {
+      "id": "R-009",
+      "domain": "campaign_hygiene",
+      "failureMode": "UTM inconsistency prevents clean attribution",
+      "impact": 4,
+      "likelihood": 4,
+      "score": 16,
+      "priority": "P0",
+      "owner": "marketing_ops",
+      "leadingIndicators": [
+        "GA4 source '(not set)' spike",
+        "campaign links missing medium/source"
+      ],
+      "preventiveControls": [
+        "UTM builder and naming policy",
+        "template lint before send"
+      ],
+      "recoveryPlaybook": [
+        "campaign relabeling where possible",
+        "template hotfix"
+      ]
+    },
+    {
+      "id": "R-010",
+      "domain": "link_integrity",
+      "failureMode": "Mixed Android app links reduce trust and conversion",
+      "impact": 4,
+      "likelihood": 4,
+      "score": 16,
+      "priority": "P0",
+      "owner": "website_owner",
+      "leadingIndicators": [
+        "multiple package IDs in active templates"
+      ],
+      "preventiveControls": [
+        "single canonical app link constant",
+        "periodic grep/audit of templates"
+      ],
+      "recoveryPlaybook": [
+        "replace non-canonical links",
+        "send corrected CTA if needed"
+      ]
+    },
+    {
+      "id": "R-011",
+      "domain": "trial_conversion",
+      "failureMode": "Trial attended but no same-day conversion follow-up",
+      "impact": 5,
+      "likelihood": 3,
+      "score": 15,
+      "priority": "P1",
+      "owner": "front_desk",
+      "leadingIndicators": [
+        "trial attendance with no next action after 12h"
+      ],
+      "preventiveControls": [
+        "coach trigger to desk at session end",
+        "required post-trial recommendation note"
+      ],
+      "recoveryPlaybook": [
+        "next-day personalized follow-up",
+        "exact class recommendation + city link"
+      ]
+    },
+    {
+      "id": "R-012",
+      "domain": "trial_no_show",
+      "failureMode": "No-show trials are not recovered",
+      "impact": 4,
+      "likelihood": 3,
+      "score": 12,
+      "priority": "P1",
+      "owner": "front_desk",
+      "leadingIndicators": [
+        "no-show with no contact within 24h"
+      ],
+      "preventiveControls": [
+        "no-show recovery automation"
+      ],
+      "recoveryPlaybook": [
+        "reschedule offer and reassurance script"
+      ]
+    },
+    {
+      "id": "R-013",
+      "domain": "capacity",
+      "failureMode": "Campaign drives demand for classes already full in City",
+      "impact": 4,
+      "likelihood": 3,
+      "score": 12,
+      "priority": "P1",
+      "owner": "ops_coordinator",
+      "leadingIndicators": [
+        "post-send increase in full class complaints"
+      ],
+      "preventiveControls": [
+        "pre-send availability check gate"
+      ],
+      "recoveryPlaybook": [
+        "suggest closest alternative",
+        "create waitlist and callback"
+      ]
+    },
+    {
+      "id": "R-014",
+      "domain": "web_performance",
+      "failureMode": "Slow pages increase conversion abandonment",
+      "impact": 4,
+      "likelihood": 3,
+      "score": 12,
+      "priority": "P1",
+      "owner": "engineering",
+      "leadingIndicators": [
+        "LCP over target on key pages",
+        "drop in mobile form completion rate"
+      ],
+      "preventiveControls": [
+        "performance budget on conversion pages",
+        "script/image governance"
+      ],
+      "recoveryPlaybook": [
+        "prioritize /book and /schedules perf fixes first"
+      ]
+    },
+    {
+      "id": "R-015",
+      "domain": "accessibility",
+      "failureMode": "Contrast/readability issues reduce completions",
+      "impact": 3,
+      "likelihood": 3,
+      "score": 9,
+      "priority": "P2",
+      "owner": "engineering",
+      "leadingIndicators": [
+        "a11y audit serious findings remain on conversion surfaces"
+      ],
+      "preventiveControls": [
+        "resolve known color-contrast backlog"
+      ],
+      "recoveryPlaybook": [
+        "hotfix text styles for key CTAs and form labels"
+      ]
+    },
+    {
+      "id": "R-016",
+      "domain": "local_listings",
+      "failureMode": "NAP inconsistency across GBP/Yelp/Apple/Bing",
+      "impact": 4,
+      "likelihood": 3,
+      "score": 12,
+      "priority": "P1",
+      "owner": "marketing_ops",
+      "leadingIndicators": [
+        "listing audit finds phone/address variance"
+      ],
+      "preventiveControls": [
+        "monthly citation audit against canonical NAP"
+      ],
+      "recoveryPlaybook": [
+        "correct listing data and track completion"
+      ]
+    },
+    {
+      "id": "R-017",
+      "domain": "seo_verification",
+      "failureMode": "Ranking claims made without GSC/GBP evidence",
+      "impact": 4,
+      "likelihood": 3,
+      "score": 12,
+      "priority": "P1",
+      "owner": "marketing_ops",
+      "leadingIndicators": [
+        "no weekly query and local insight reports"
+      ],
+      "preventiveControls": [
+        "weekly rank evidence report"
+      ],
+      "recoveryPlaybook": [
+        "pause claims until evidence is available"
+      ]
+    },
+    {
+      "id": "R-018",
+      "domain": "racquet_rescue_ops",
+      "failureMode": "Stringing requests captured without formal ticketing",
+      "impact": 3,
+      "likelihood": 4,
+      "score": 12,
+      "priority": "P1",
+      "owner": "front_desk",
+      "leadingIndicators": [
+        "requests in inbox with no assigned owner or SLA"
+      ],
+      "preventiveControls": [
+        "single intake workflow with required fields"
+      ],
+      "recoveryPlaybook": [
+        "same-day triage board and confirmations"
+      ]
+    },
+    {
+      "id": "R-019",
+      "domain": "racquet_rescue_sla",
+      "failureMode": "Same-day promise exceeds capacity and harms trust",
+      "impact": 4,
+      "likelihood": 3,
+      "score": 12,
+      "priority": "P1",
+      "owner": "racquet_rescue_lead",
+      "leadingIndicators": [
+        "accepted same-day requests after cut-off",
+        "late pickup complaints"
+      ],
+      "preventiveControls": [
+        "capacity and cut-off guardrails in intake copy"
+      ],
+      "recoveryPlaybook": [
+        "expectation reset and priority slot options"
+      ]
+    },
+    {
+      "id": "R-020",
+      "domain": "platform_transition",
+      "failureMode": "ActiveCampaign to GHL migration creates nurture gaps",
+      "impact": 4,
+      "likelihood": 3,
+      "score": 12,
+      "priority": "P1",
+      "owner": "crm_owner",
+      "leadingIndicators": [
+        "new leads absent from expected nurture path",
+        "automation parity checklist incomplete"
+      ],
+      "preventiveControls": [
+        "dual-run and parity QA before cutover"
+      ],
+      "recoveryPlaybook": [
+        "re-enroll affected leads and backfill"
+      ]
+    }
+  ],
+  "dailyDashboard": {
+    "requiredMetrics": [
+      "new_leads",
+      "trials_requested",
+      "trials_completed",
+      "pending_city_payment_24h",
+      "pending_city_payment_72h",
+      "city_paid_count",
+      "lead_to_paid_conversion_rate",
+      "median_first_response_time_hours",
+      "no_show_recovery_conversion_rate",
+      "top_leak_reason"
+    ],
+    "cadence": "daily"
+  },
+  "actionPlan30Days": {
+    "week1": [
+      "Finalize payment-confirmation scripts across bot/staff/site",
+      "Implement pipeline stages including pending_city_payment and city_paid",
+      "Enable 2h/24h/72h unresolved payment task automations"
+    ],
+    "week2": [
+      "Enforce UTM naming and link template policy",
+      "Create daily City export reconciliation process",
+      "Unify Android app link across active website/templates"
+    ],
+    "week3": [
+      "Run local listing audit across GBP/Yelp/Apple/Bing",
+      "Establish weekly GSC and GBP evidence report"
+    ],
+    "week4": [
+      "Publish monthly risk review with incidents, SLA misses, and leak reasons",
+      "Reprioritize top mitigation work based on measured leakage"
+    ]
+  }
+}
+

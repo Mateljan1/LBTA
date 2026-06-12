@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LBTA — Queued Initiatives Plan (Preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --pacific-dusk:#1B3A5C;
+    --deep-water:#0F2237;
+    --victoria-cove:#2E8B8B;
+    --thousand-steps:#C4963C;
+    --sunset-cliff:#E8834A;
+    --sandstone:#F5F0E5;
+    --morning-light:#FAF8F4;
+    --salt-air:#FFFFFF;
+    --tide-pool:#3A8B6E;
+    --driftwood:#B8A88A;
+    --line:rgba(27,58,92,.12);
+    --line-strong:rgba(27,58,92,.28);
+    --shadow-sm:0 1px 2px rgba(15,34,55,.04),0 2px 6px rgba(15,34,55,.04);
+    --radius:4px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--morning-light);color:var(--pacific-dusk);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:'Cormorant',Georgia,serif;font-weight:500;color:var(--pacific-dusk);margin:0 0 .5rem;letter-spacing:-.005em}
+  h1{font-size:clamp(32px,4.6vw,52px);line-height:1.05}
+  h2{font-size:clamp(24px,3vw,36px);line-height:1.12}
+  h3{font-size:clamp(20px,2.2vw,26px);line-height:1.2}
+  h4{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;letter-spacing:.02em}
+  .eyebrow{font-family:'DM Sans',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--victoria-cove);font-weight:500}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:rgba(27,58,92,.06);padding:1px 6px;border-radius:3px}
+  pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.55;background:rgba(15,34,55,.05);padding:14px 16px;border-radius:var(--radius);overflow-x:auto;margin:0;white-space:pre-wrap;word-break:break-word;color:var(--pacific-dusk)}
+  a{color:var(--victoria-cove);text-decoration:none;border-bottom:1px solid rgba(46,139,139,.3)}
+  .horizon{height:1px;width:120px;margin:14px 0;background:linear-gradient(90deg,transparent,var(--thousand-steps) 40%,var(--sunset-cliff) 60%,transparent)}
+
+  /* Hero */
+  header.hero{
+    background:
+      radial-gradient(900px 400px at 85% -10%, rgba(46,139,139,.18), transparent 60%),
+      linear-gradient(180deg,var(--deep-water),#13304e);
+    color:var(--salt-air);padding:60px 28px 48px;
+  }
+  header.hero .wrap{max-width:1100px;margin:0 auto}
+  header.hero h1{color:var(--salt-air)}
+  header.hero h1 em{color:var(--thousand-steps);font-style:italic;font-weight:400}
+  header.hero .eyebrow{color:rgba(255,255,255,.72)}
+  header.hero p.lede{max-width:780px;color:rgba(255,255,255,.82);font-size:17px;margin-top:12px}
+
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:20px}
+  @media (min-width:640px){ .stats{grid-template-columns:repeat(5,1fr)} }
+  .stats .s{border-left:2px solid var(--thousand-steps);padding-left:12px}
+  .stats .v{font-family:'Cormorant';font-size:26px;line-height:1;color:var(--salt-air);font-weight:500}
+  .stats .k{font-size:10.5px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.65);margin-top:6px;display:block}
+
+  /* Jump nav */
+  nav.jump{background:var(--sandstone);border-bottom:1px solid var(--line);padding:12px 28px;position:sticky;top:0;z-index:10;overflow-x:auto;white-space:nowrap}
+  nav.jump .wrap{max-width:1100px;margin:0 auto;display:flex;gap:6px;flex-wrap:nowrap}
+  nav.jump a{display:inline-block;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:999px;background:var(--salt-air);color:var(--pacific-dusk);border:1px solid var(--line);border-bottom:1px solid var(--line)}
+  nav.jump a:hover{border-color:var(--victoria-cove);color:var(--victoria-cove)}
+
+  main{max-width:1100px;margin:0 auto;padding:52px 28px 80px}
+
+  /* Initiative card */
+  .initiative{margin-bottom:68px;scroll-margin-top:70px}
+  .initiative .head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap;margin-bottom:6px}
+  .initiative .head h2{margin:0}
+  .initiative .chips{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;margin-top:8px}
+  .chip{display:inline-flex;align-items:center;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;padding:4px 10px;border-radius:999px;font-weight:600;border:1px solid var(--line);background:var(--sandstone);color:var(--pacific-dusk);white-space:nowrap}
+  .chip.ready{background:rgba(58,139,110,.12);color:#1f5a3f;border-color:rgba(58,139,110,.3)}
+  .chip.medium{background:rgba(196,150,60,.12);color:#7a5a17;border-color:rgba(196,150,60,.3)}
+  .chip.large{background:rgba(232,131,74,.14);color:#8a3d12;border-color:rgba(232,131,74,.35)}
+  .chip.ops{background:rgba(46,139,139,.12);color:#1e5a5a;border-color:rgba(46,139,139,.3)}
+
+  .card{background:var(--salt-air);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-top:14px;overflow:hidden;border-left:3px solid var(--victoria-cove)}
+  .card.ops{border-left-color:var(--sunset-cliff)}
+  .card.ready{border-left-color:var(--tide-pool)}
+  .card .body{padding:22px 24px}
+  .card .sub{padding:14px 24px;background:var(--morning-light);border-top:1px solid var(--line);font-size:13px}
+  .card h3{margin:0 0 12px;font-size:22px}
+  .card p{margin:0 0 10px;font-size:15px;line-height:1.65}
+  .card .note{font-size:13px;color:rgba(27,58,92,.72);margin-top:8px}
+
+  /* Diff blocks */
+  .diff{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+  @media (min-width:760px){ .diff{grid-template-columns:1fr 1fr} }
+  .diff .side{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;background:var(--morning-light);min-width:0}
+  .diff .side.before{background:rgba(232,131,74,.05);border-color:rgba(232,131,74,.2)}
+  .diff .side.after{background:rgba(58,139,110,.05);border-color:rgba(58,139,110,.2)}
+  .diff .label{font-size:10.5px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:6px}
+  .diff .side.before .label{color:#8a3d12}
+  .diff .side.after .label{color:#1f5a3f}
+  .diff .val{font-size:14px;line-height:1.5;color:var(--pacific-dusk);word-break:break-word}
+
+  /* Files table */
+  .files{margin:14px 0}
+  .files h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--victoria-cove)}
+  .files ul{list-style:none;margin:0;padding:0}
+  .files li{padding:8px 0;border-top:1px dashed var(--line);font-size:13.5px;display:flex;gap:12px;align-items:flex-start}
+  .files li:first-child{border-top:0}
+  .files li .act{flex-shrink:0;width:70px;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--victoria-cove);font-weight:600}
+  .files li .act.create{color:#1f5a3f}
+  .files li .act.edit{color:var(--victoria-cove)}
+  .files li .act.delete{color:#8a3d12}
+  .files li .desc{color:rgba(27,58,92,.75);font-size:13px}
+
+  /* Approval box */
+  .approve{margin-top:18px;padding:16px 20px;background:linear-gradient(135deg,rgba(196,150,60,.08),rgba(232,131,74,.06));border:1px solid rgba(196,150,60,.3);border-radius:var(--radius);display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .approve .q{font-weight:600;color:var(--pacific-dusk)}
+  .approve .opts{display:flex;gap:8px;flex-wrap:wrap}
+  .approve .opts label{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid var(--line);border-radius:2px;background:var(--salt-air);font-size:12.5px;cursor:pointer;transition:all .15s ease;user-select:none}
+  .approve .opts label:hover{border-color:var(--line-strong)}
+  .approve .opts input[type=radio]{accent-color:var(--pacific-dusk)}
+  .approve .opts label:has(input:checked){background:var(--pacific-dusk);color:var(--salt-air);border-color:var(--pacific-dusk)}
+
+  /* Footer */
+  footer{background:var(--deep-water);color:rgba(255,255,255,.7);padding:36px 28px}
+  footer .wrap{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px}
+  footer em{font-style:italic;color:rgba(255,255,255,.55)}
+
+  /* Mobile */
+  @media (max-width:640px){
+    header.hero{padding:44px 18px 36px}
+    nav.jump{padding:10px 14px}
+    main{padding:32px 18px 60px}
+    .initiative{margin-bottom:44px}
+    .card .body{padding:18px 18px}
+    .card .sub{padding:12px 18px}
+    .diff .side{padding:12px 14px}
+    .approve{padding:14px}
+    .stats{padding:14px;gap:10px}
+    .stats .v{font-size:20px}
+  }
+
+  @media (prefers-reduced-motion:reduce){ *{animation-duration:.01ms!important;transition-duration:.01ms!important} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Queued initiatives · preview · April 16, 2026</span>
+    <h1>Five follow-ups.<br><em>What we'll do, what needs your call.</em></h1>
+    <p class="lede">Everything in this plan is still on the runway — nothing is live yet. Read through each initiative, approve or flag via the radio below each section, and I'll execute the approved ones in sequence. Exit target: October 2027.</p>
+
+    <div class="stats">
+      <div class="s"><div class="v">5</div><span class="k">Initiatives</span></div>
+      <div class="s"><div class="v">4</div><span class="k">Quick wins (≤1d)</span></div>
+      <div class="s"><div class="v">1</div><span class="k">Multi-week</span></div>
+      <div class="s"><div class="v">1</div><span class="k">Ops (off-repo)</span></div>
+      <div class="s"><div class="v">~8</div><span class="k">Files touched</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Jump to initiative">
+  <div class="wrap">
+    <a href="#emails">1 · Email sweep</a>
+    <a href="#nadal">2 · GPTCA + Michelsen</a>
+    <a href="#locations">3 · Contact + footer</a>
+    <a href="#blog">4 · Blog foundation</a>
+    <a href="#nap">5 · Directory NAP sweep</a>
+    <a href="#sequence">Sequence &amp; approval</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ================ INITIATIVE 1: EMAIL SWEEP ================ -->
+<section class="initiative" id="emails">
+  <div class="head">
+    <h2>1 · Derivative email sweep</h2>
+    <div class="chips">
+      <span class="chip ready">Ready</span>
+      <span class="chip">~45 min</span>
+    </div>
+  </div>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <div class="card ready">
+    <div class="body">
+      <h3>Align summer camp dates across email templates</h3>
+      <p>The site now canonical-dates summer camp as <strong>June 15 – August 29, 2026</strong> everywhere — but at least one send-ready email still has the wrong start date. Quick text-level fix.</p>
+
+      <div class="diff">
+        <div class="side before">
+          <div class="label">Before — LBTA_R7_SummerPlan_SEND_READY.html</div>
+          <div class="val"><strong>"11-week session: June 16 – August 29"</strong> — start date incorrect (should be June 15)</div>
+        </div>
+        <div class="side after">
+          <div class="label">After</div>
+          <div class="val"><strong>"11-week session: June 15 – August 29"</strong> — aligned to site canonical</div>
+        </div>
+      </div>
+
+      <div class="files">
+        <h4>Files to check</h4>
+        <ul>
+          <li><span class="act edit">Edit</span><div><code>assets/emails/spring-2026/returning/LBTA_R7_SummerPlan_SEND_READY.html</code><div class="desc">Line 45: "June 16 – August 29" → "June 15 – August 29"</div></div></li>
+          <li><span class="act edit">Audit</span><div><code>assets/emails/lbta-spring2026-week2.html</code><div class="desc">Scan for any date references; fix if stale</div></div></li>
+          <li><span class="act edit">Audit</span><div><code>assets/emails/lbta-utr-season1-week1-kickoff.html</code><div class="desc">UTR season kickoff email — UTR dates only, no camp refs expected</div></div></li>
+          <li><span class="act edit">Audit</span><div>All 19 files under <code>assets/emails/spring-2026/</code><div class="desc">Already grep'd — 0 stale date strings found beyond the one above. Verify before send each time.</div></div></li>
+        </ul>
+      </div>
+
+      <p class="note"><strong>Note:</strong> The prospect/returning email series (LBTA_P* and LBTA_R*) are narrative / soft-marketing. Zero prices, zero phone numbers, minimal hard dates. The sweep is smaller than I initially estimated — one confirmed fix plus a precautionary re-scan.</p>
+    </div>
+    <div class="sub">
+      <strong>Acceptance:</strong> <code>rg "June 16" assets/emails/</code> returns 0 hits · any email template scheduled for the next AC send flow verified once more before hitting send.
+    </div>
+  </div>
+
+  <div class="approve">
+    <span class="q">Approve initiative #1 (email sweep)?</span>
+    <div class="opts">
+      <label><input type="radio" name="a1" value="approve"> Approve — ship</label>
+      <label><input type="radio" name="a1" value="edit"> Edit first</label>
+      <label><input type="radio" name="a1" value="hold"> Hold</label>
+    </div>
+  </div>
+</section>
+
+<!-- ================ INITIATIVE 2: NADAL + MICHELSEN ================ -->
+<section class="initiative" id="nadal">
+  <div class="head">
+    <h2>2 · GPTCA certification + Alex Michelsen — put what we already have, correctly</h2>
+    <div class="chips">
+      <span class="chip ready">Ready</span>
+      <span class="chip">~30 min</span>
+    </div>
+  </div>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <p style="max-width:780px;color:rgba(27,58,92,.78);margin:0 0 18px;font-size:15px">Per your directive — <em>"take the context we have and put it in correctly."</em> Both claims already appear in founder-approved LBTA materials; they just haven't been brought onto the public website. This surface them as quietly-authoritative credentials on Andrew's coach page, not as flashy callouts.</p>
+
+  <!-- Alex Michelsen -->
+  <div class="card ready">
+    <div class="body">
+      <h3>Alex Michelsen — credential on Andrew's coach page</h3>
+      <p><strong>Source of truth in-repo:</strong></p>
+      <pre>assets/other info_LBTA/LBTA_Winter2026_Program_Overview.html (line 569):
+"Pre-LBTA, Andrew coached Alex Michelsen (now ATP #30,
+ 2022 Wimbledon Boys Doubles champion) at ages 12–13 in Orange County.
+ Also founder of Fit4Tennis, a global tennis fitness platform with 100,000+ followers."
+
+plans/court-flyer-master-implementation-plan.md (line 57):
+same claim: "Has coached 5 ATP/WTA-ranked players including Alex Michelsen."
+
+assets/other info_LBTA/LBTA_USTA_League_Flyer.html (line 345):
+"Two #1 Nationally Ranked Juniors — Alex Michelsen (ATP #30), Sean Daryabeigi."</pre>
+
+      <p style="margin-top:16px"><strong>Proposed public-site copy:</strong></p>
+      <div class="diff">
+        <div class="side before">
+          <div class="label">Current live on /coaches/andrew-mateljan</div>
+          <div class="val">No Michelsen mention on the public site today. The credential lives in internal / flyer / founder-materials only.</div>
+        </div>
+        <div class="side after">
+          <div class="label">Proposed — quiet, factual, one line</div>
+          <div class="val">"Coached Alex Michelsen — ATP career-high #30, 2022 Wimbledon Boys' Doubles champion — at ages 12–13 in Orange County, pre-LBTA."</div>
+        </div>
+      </div>
+
+      <p class="note"><strong>Where it lives:</strong> Credentials section on <code>/coaches/andrew-mateljan</code> (a single bullet line in the existing credentials list). Restraint by design — not headline, not pull quote. Discover it only when a serious buyer or parent reads the page.</p>
+      <p class="note"><strong>Where it does NOT go:</strong> homepage hero, <code>/success-stories</code> (that's player editorial, not founder credentials), schema descriptions (already scrubbed of names per <code>privacyFirstContent</code> quality bar — this is an exception because it's a founder credential, not a current student).</p>
+    </div>
+    <div class="sub">
+      <strong>One word to sanity-check:</strong> I propose "pre-LBTA" to be explicit that this was before LBTA existed. If you'd rather frame it differently (e.g. "Orange County, 2016–2017" or just "Orange County juniors"), tell me and I'll adjust.
+    </div>
+  </div>
+
+  <!-- GPTCA / Toni Nadal (faculty, not a private LBTA appearance) -->
+  <div class="card ready" style="margin-top:18px">
+    <div class="body">
+      <h3>GPTCA / ATP coach certification — May 2025 (Toni Nadal on faculty)</h3>
+      <p><strong>What actually happened (founder-confirmed framing):</strong> LBTA was not a solo “Toni Nadal came to our club” appearance. Andrew organized LBTA’s role around the <strong>GPTCA / ATP Level B–C coach certification</strong> — a coaches’ workshop / certification course — with <strong>Toni Nadal on the international speaker faculty</strong> alongside other presenters. Public reference page: <a href="https://www.gptca-atpcourseusa.com/irvine" target="_blank" rel="noopener noreferrer">gptca-atpcourseusa.com/irvine</a> (dates and speaker row match the event).</p>
+
+      <p><strong>Retire this wording:</strong></p>
+      <pre>LBTA_Exit_Playbook_2M_Target.md-style shorthand:
+"Toni Nadal hosted at LBTA (May 2025)"
+→ Too easy to read as a private visit. Replace everywhere with certification framing.</pre>
+
+      <p style="margin-top:16px"><strong>Proposed public-site copy (one line):</strong></p>
+      <div class="diff">
+        <div class="side before">
+          <div class="label">Current live</div>
+          <div class="val">No mention of the certification course or faculty on the public site.</div>
+        </div>
+        <div class="side after">
+          <div class="label">Proposed — accurate, quiet, no implied one-to-one “hosted Toni” story</div>
+          <div class="val">"Organized LBTA’s host role for the GPTCA / ATP Level B–C coach certification (May 2025, Irvine, CA) — Toni Nadal on the international speaker faculty."</div>
+        </div>
+      </div>
+
+      <p class="note"><strong>Venue clarity:</strong> The course page lists the Racquet Club of Irvine as the session location; LBTA is described there as the official host academy for the California certification. The site line above names <strong>Irvine</strong> so we never imply Toni Nadal taught on LBTA courts unless you explicitly want that detail.</p>
+      <p class="note"><strong>Where it lives:</strong> One line in the credentials section on <code>/coaches/andrew-mateljan</code>, under the Michelsen line. No hero, no pull quote. Optional: small “Credentials” footnote link to the GPTCA page for buyers who want receipts — not required for v1.</p>
+      <p class="note"><strong>Curriculum research (separate):</strong> Internal notes on Rafa Nadal Academy pedagogical hierarchy stay in methodology docs — not bundled into this credential line.</p>
+    </div>
+    <div class="sub">
+      <strong>Wording tweak:</strong> If you prefer even shorter: "GPTCA / ATP coach certification (May 2025) — host organizer; Toni Nadal, faculty speaker." Say the word and we’ll lock the final string before shipping.
+    </div>
+  </div>
+
+  <div class="card ready" style="margin-top:18px">
+    <div class="body">
+      <h4 style="font-family:'Cormorant';font-size:22px;font-weight:500;margin:0 0 10px">Combined implementation — one PR</h4>
+      <div class="files">
+        <h4>Files</h4>
+        <ul>
+          <li><span class="act edit">Edit</span><div><code>app/coaches/andrew-mateljan/page.tsx</code><div class="desc">Add two credentials lines to the existing <code>creds</code> / credentials array. Exact JSX matches the existing credential rendering so it looks native to the page.</div></li>
+          <li><span class="act edit">Edit</span><div><code>data/homepage-copy.json</code> → optional<div class="desc">If you want Michelsen credit reflected in the homepage founder section, add a one-line <code>founder.credentialsLine</code> field. Default: leave homepage as-is, these credits only on the dedicated coach page.</div></li>
+          <li><span class="act edit">Edit</span><div><code>app/schema.tsx</code> PersonSchema for Andrew → optional<div class="desc">If you want these credentials in structured data too (E-E-A-T for Google), add them to <code>credentials</code> array in Andrew's PersonSchema. Default: JSON-LD schema stays credentials-only, not player-name-bearing, per <code>privacyFirstContent</code>.</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="approve">
+    <span class="q">Approve initiative #2 (Michelsen + GPTCA / Toni Nadal faculty credential)?</span>
+    <div class="opts">
+      <label><input type="radio" name="a2" value="approve"> Approve both lines as proposed</label>
+      <label><input type="radio" name="a2" value="michelsen-only"> Michelsen only, hold GPTCA line</label>
+      <label><input type="radio" name="a2" value="nadal-only"> GPTCA line only, hold Michelsen</label>
+      <label><input type="radio" name="a2" value="edit"> Edit wording</label>
+      <label><input type="radio" name="a2" value="hold"> Hold all</label>
+    </div>
+  </div>
+</section>
+
+<!-- ================ INITIATIVE 3: CONTACT + FOOTER (LOCATIONS HUB) ================ -->
+<section class="initiative" id="locations">
+  <div class="head">
+    <h2>3 · Facilities hub on <code>/contact</code> + richer footer</h2>
+    <div class="chips">
+      <span class="chip ready">~1 day</span>
+      <span class="chip">SEO · simplicity</span>
+    </div>
+  </div>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <div class="card ready">
+    <div class="body">
+      <h3>One URL for “where we train” — no new <code>/locations/*</code> routes</h3>
+      <p>Instead of three thin location pages few players will bookmark, we make <strong><code>/contact</code></strong> the single logistics hub: three factual facility cards (LBHS, Moulton Meadows, Alta Laguna) with address, map link, court count, what programs run there, parking notes. The <strong>footer</strong> gains a compact “Facilities” block so the answer is one scroll away on every page.</p>
+
+      <p><strong>SEO (still covered):</strong> We already emit three <code>LocalBusiness</code> nodes in JSON-LD. Point each node’s <code>url</code> to <code>/contact#lbhs</code>, <code>/contact#moulton-meadows</code>, <code>/contact#alta-laguna</code> (stable section <code>id</code>s) so crawlers and users land on the right anchor. No sitemap explosion; topical relevance stays on one strong page + schema.</p>
+
+      <div class="diff">
+        <div class="side before">
+          <div class="label">Before</div>
+          <div class="val">Contact page and footer don’t fully answer “which site for which program?” · schema URLs may not deep-link to on-page copy.</div>
+        </div>
+        <div class="side after">
+          <div class="label">After</div>
+          <div class="val">Contact = facilities hub + existing form/hours · footer lists all three NAP blocks · schema <code>url</code>s = anchored <code>/contact</code> sections.</div>
+        </div>
+      </div>
+
+      <div class="files">
+        <h4>Files to touch</h4>
+        <ul>
+          <li><span class="act edit">Edit</span><div><code>app/contact/page.tsx</code><div class="desc">Add “Our facilities” section: 3 cards (headline, address, courts, programs, map link, optional photo). Semantic <code>id</code>s for anchors.</div></li>
+          <li><span class="act edit">Edit</span><div><code>components/layout/Footer.tsx</code><div class="desc">Compact facilities list: names + addresses + link to <code>/contact#…</code> anchors.</div></li>
+          <li><span class="act edit">Edit</span><div><code>app/schema.tsx</code> (LocalBusinessArraySchema)<div class="desc">Set each location’s <code>url</code> to the matching <code>/contact#anchor</code>.</div></li>
+          <li><span class="act edit">Optional</span><div><code>data/locations.json</code> or inline constants<div class="desc">Only if we want one source for footer + contact; otherwise keep a typed constant next to schema to avoid drift.</div></li>
+        </ul>
+      </div>
+
+      <p class="note"><strong>Design restraint:</strong> Logistics, not marketing. Same Aman rule: facts, maps, one optional editorial image per card if you have it — placeholders OK for v1.</p>
+    </div>
+    <div class="sub">
+      <strong>Dependencies:</strong> Optional: one photo per facility. Can ship with text + maps first.
+    </div>
+  </div>
+
+  <div class="approve">
+    <span class="q">Approve initiative #3 (contact + footer facilities hub)?</span>
+    <div class="opts">
+      <label><input type="radio" name="a3" value="approve"> Approve — ship hub + footer + schema URLs</label>
+      <label><input type="radio" name="a3" value="contact-only"> Contact page only — hold footer for pass 2</label>
+      <label><input type="radio" name="a3" value="edit"> Edit layout/copy first</label>
+      <label><input type="radio" name="a3" value="hold"> Hold</label>
+    </div>
+  </div>
+</section>
+
+<!-- ================ INITIATIVE 4: BLOG FOUNDATION ================ -->
+<section class="initiative" id="blog">
+  <div class="head">
+    <h2>4 · Blog foundation — <code>/blog</code> scaffold + 5 launch posts</h2>
+    <div class="chips">
+      <span class="chip large">Multi-week</span>
+      <span class="chip">Uncapped SEO</span>
+    </div>
+  </div>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <div class="card">
+    <div class="body">
+      <h3>The only real long-tail SEO asset LBTA doesn't have yet</h3>
+      <p>Currently zero blog → zero long-tail traffic. Every post after launch is a new ranking URL that compounds. More importantly: for an October 2027 buyer, "the site has a blog with traffic" is a concrete asset in the CIM (not the same thing as "the site has a blog").</p>
+
+      <h4 style="margin-top:14px">Scope split</h4>
+      <div class="diff">
+        <div class="side before">
+          <div class="label">Phase A — scaffold only (~1 week of dev)</div>
+          <div class="val"><strong>Goal:</strong> make <code>/blog</code> exist, render posts from MDX or a data-driven source, generate sitemap entries, emit Article schema. No posts yet.
+          <br><br><strong>Outputs:</strong>
+          <br>• <code>app/blog/page.tsx</code> — blog index
+          <br>• <code>app/blog/[slug]/page.tsx</code> — post template
+          <br>• <code>content/blog/*.mdx</code> — post source
+          <br>• <code>lib/blog.ts</code> — listing + front-matter parsing
+          <br>• Article + BreadcrumbList JSON-LD schema per post
+          <br>• RSS feed <code>/blog/rss.xml</code></div>
+        </div>
+        <div class="side after">
+          <div class="label">Phase B — 5 launch posts (~3–4 weeks content)</div>
+          <div class="val">Five posts that answer real search queries, in the LBTA calm-authority voice:
+          <br>• <strong>"How to Choose a Summer Tennis Camp"</strong> — long-tail: "tennis camp choosing [age]"
+          <br>• <strong>"Movement Before Strokes — Why Footwork Comes First"</strong> — methodology authority
+          <br>• <strong>"Understanding UTR — What the Number Really Measures"</strong> — educational, high search volume
+          <br>• <strong>"College Tennis: The Four Years That Actually Matter"</strong> — parent-intent, high UTR fee tier
+          <br>• <strong>"Private vs Group Lessons — Which Works for Your Family"</strong> — comparison query (money keyword)
+          <br><br>~1500 words each. Andrew drafts from voice memo; I turn into publish-ready MDX with frontmatter + OG image.</div>
+        </div>
+      </div>
+
+      <h4 style="margin-top:18px">Why not more posts at launch?</h4>
+      <p>Five high-quality posts with internal cross-links and strong titles outrank twenty thin posts. Google's threshold is content depth; readers' threshold is "does this teach me something I didn't know?" — also depth. After launch, cadence = one post every 2 weeks.</p>
+
+      <h4 style="margin-top:18px">Buyer-facing footprint</h4>
+      <p>CIM line in the exit-playbook asset inventory becomes: <em>"Blog with N original long-form posts, Article + BreadcrumbList schema, organic search traffic for [top 3 keywords]."</em> — specific, measurable, transferable. A blog that's just a CMS with zero posts doesn't earn that line.</p>
+
+      <div class="files">
+        <h4>Phase A file list</h4>
+        <ul>
+          <li><span class="act create">Create</span><code>app/blog/page.tsx</code></li>
+          <li><span class="act create">Create</span><code>app/blog/[slug]/page.tsx</code></li>
+          <li><span class="act create">Create</span><code>lib/blog.ts</code></li>
+          <li><span class="act create">Create</span><code>content/blog/</code> (directory for MDX)</li>
+          <li><span class="act create">Create</span><code>app/blog/rss.xml/route.ts</code></li>
+          <li><span class="act edit">Edit</span><code>app/sitemap.ts</code> — dynamic blog entries</li>
+          <li><span class="act edit">Edit</span><code>app/schema.tsx</code> — add ArticleSchema + BreadcrumbListSchema helpers</li>
+          <li><span class="act edit">Edit</span><code>package.json</code> — add @next/mdx + remark-gfm if not present</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub">
+      <strong>Voice memo → publishable post:</strong> I can take a 10-minute audio dump from you on any of these 5 topics, structure it into the LBTA voice (calm, specific, no hyperbole), add internal links, generate OG image, and publish. Writer-in-the-loop, not writer-from-scratch.
+    </div>
+  </div>
+
+  <div class="approve">
+    <span class="q">Approve initiative #4 (blog)?</span>
+    <div class="opts">
+      <label><input type="radio" name="a4" value="both"> Approve Phase A + B</label>
+      <label><input type="radio" name="a4" value="scaffold-only"> Scaffold only — hold posts for later</label>
+      <label><input type="radio" name="a4" value="different-posts"> Edit post topics first</label>
+      <label><input type="radio" name="a4" value="hold"> Hold blog entirely</label>
+    </div>
+  </div>
+</section>
+
+<!-- ================ INITIATIVE 5: NAP SWEEP ================ -->
+<section class="initiative" id="nap">
+  <div class="head">
+    <h2>5 · Directory NAP sweep — Google / Yelp / Apple Maps / directories</h2>
+    <div class="chips">
+      <span class="chip ops">Ops (off-repo)</span>
+      <span class="chip">~2 hours</span>
+    </div>
+  </div>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <div class="card ops">
+    <div class="body">
+      <h3>This one is not on the website — but it's the cheapest local SEO win left</h3>
+      <p>We just aligned Name / Address / Phone / Email (NAP) on the site, in schema, and in robots.txt. Directories off-site still have varying answers — old phone numbers on some, old addresses on others. Google gives strong local-pack ranking boost to businesses whose NAP is identical across the top 10-15 directories.</p>
+
+      <h4 style="margin-top:14px">Canonical NAP (source of truth)</h4>
+      <div class="diff">
+        <div class="side after">
+          <div class="label">What every directory should say</div>
+          <div class="val"><strong>Name:</strong> Laguna Beach Tennis Academy
+          <br><strong>Address:</strong> Moulton Meadows Park, 1098 Balboa Ave, Laguna Beach, CA 92651
+          <br><strong>Phone:</strong> (949) 534-0457
+          <br><strong>Email:</strong> support@lagunabeachtennisacademy.com
+          <br><strong>Website:</strong> https://lagunabeachtennisacademy.com
+          <br><strong>Hours:</strong> Mon–Sun 7:00am – 9:00pm</div>
+        </div>
+      </div>
+
+      <h4 style="margin-top:18px">Directories to audit + update</h4>
+      <div class="files">
+        <h4>Priority 1 — major platforms (daily queries)</h4>
+        <ul>
+          <li><span class="act edit">Update</span><div>Google Business Profile<div class="desc">Biggest impact. Claim/verify ownership, upload photos, add regular posts. 10 Google reviews per month beats any single SEO tactic.</div></li>
+          <li><span class="act edit">Update</span><div>Yelp<div class="desc">Most likely to carry old phone number per the SEO audit's April 2026 note. Verify phone on the listing.</div></li>
+          <li><span class="act edit">Update</span><div>Apple Maps Connect<div class="desc">Free listing; iPhone users dominate Orange County.</div></li>
+          <li><span class="act edit">Update</span><div>Bing Places<div class="desc">Small share but free and easy.</div></li>
+        </ul>
+        <h4 style="margin-top:14px">Priority 2 — tennis-specific directories</h4>
+        <ul>
+          <li><span class="act edit">Update</span><div>USTA Find a Court / Tennis Provider directory<div class="desc">Authority backlink for tennis queries.</div></li>
+          <li><span class="act edit">Update</span><div>PlayYourCourt + FindTennisLessons<div class="desc">These aggregators currently outrank LBTA for "private tennis lessons Laguna Beach" per the audit. Claim/verify listings so our data is right even if we can't move past them in SERP.</div></li>
+          <li><span class="act edit">Update</span><div>Tennis Plaza · TennisPoint · Court Reserve<div class="desc">Smaller but free. Consistency compounds.</div></li>
+        </ul>
+        <h4 style="margin-top:14px">Priority 3 — social</h4>
+        <ul>
+          <li><span class="act edit">Update</span><div>Facebook business page<div class="desc">Address + hours + phone.</div></li>
+          <li><span class="act edit">Update</span><div>Instagram bio<div class="desc">Website link, phone in bio text.</div></li>
+        </ul>
+      </div>
+
+      <h4 style="margin-top:18px">Deliverable</h4>
+      <p>A checklist document <code>plans/2026-NAP-directory-sweep.md</code> with each directory, current listing status (right/wrong/missing), and evidence (screenshot URL / link). Founder or Robert does the actual clicking — I can't claim Google Business Profile on your behalf. I prepare the exact text to paste + a ranked priority order.</p>
+    </div>
+    <div class="sub">
+      <strong>Why this belongs in the queue:</strong> zero code changes, but it's the single-best local-SEO compounding move after the on-site canonical work we've done. One quiet 2-hour session per quarter beats any content marketing activity.
+    </div>
+  </div>
+
+  <div class="approve">
+    <span class="q">Approve initiative #5 (NAP sweep)?</span>
+    <div class="opts">
+      <label><input type="radio" name="a5" value="approve"> Approve — I'll generate the checklist doc</label>
+      <label><input type="radio" name="a5" value="priority1-only"> Priority 1 only (GBP + Yelp + Apple + Bing)</label>
+      <label><input type="radio" name="a5" value="hold"> Hold — defer</label>
+    </div>
+  </div>
+</section>
+
+<!-- ================ SEQUENCE ================ -->
+<section class="initiative" id="sequence">
+  <div class="head">
+    <h2>Suggested execution sequence</h2>
+  </div>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <div class="card ready">
+    <div class="body">
+      <h3>If you approve everything, run in this order</h3>
+
+      <pre>WEEK 1 (this week)
+├─ DAY 1  (~45 min)  Email sweep — 1 file edit, quick win
+├─ DAY 1  (~30 min)  GPTCA + Michelsen credential lines on Andrew's coach page
+├─ DAY 2  (~4–6 hrs)  /contact facilities hub + footer + schema anchor URLs
+└─ DAY 2  (~2 hrs)   NAP sweep checklist drafted; you/Robert execute the clicks
+
+WEEK 2
+└─ Blog Phase A — scaffold /blog, post template, schema, RSS, sitemap wiring
+
+WEEKS 3–7
+└─ Blog Phase B — 5 launch posts from Andrew voice memos
+     ~1500 words/post · writer-in-the-loop from you
+     One post every 4–5 days
+
+Total engineering time if all approved: ~5–7 weeks active work (facilities hub is ~1 day).
+Your time required: ~10 voice memos (one per post) + directory clicks + review.</pre>
+
+      <h4 style="margin-top:18px">Dependency graph</h4>
+      <pre>Email sweep       ─ independent
+Credentials ─ independent (GPTCA + Michelsen wording locked with you)
+Contact + footer  ─ independent; optional photos
+Blog scaffold     ─ independent
+Blog posts        ─ needs scaffold + Andrew voice memos
+NAP sweep         ─ independent, off-repo, low priority but highest local-SEO ROI</pre>
+
+      <h4 style="margin-top:18px">What I need from you to start</h4>
+      <ol style="font-size:15px;line-height:1.7;padding-left:22px">
+        <li>Use the radio options above to approve/edit/hold each initiative.</li>
+        <li>For initiative #2 (GPTCA + Michelsen): confirm the one-line strings or flag an edit — especially GPTCA/Irvine/May 2025 framing.</li>
+        <li>For initiative #3 (contact + footer): optional facility photos; v1 can be text + maps only.</li>
+        <li>For initiative #4 (blog): approve the 5 proposed topics or swap. If you want a different post mix, tell me.</li>
+        <li>For initiative #5 (NAP): I draft the checklist; you/Robert do the actual account-claim clicks.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>LBTA · Queued initiatives preview · April 16, 2026<br/>Exit target: October 2027 · Linked to <em>LBTA_Exit_Playbook_2M_Target.md</em></p>
+    <p><em>Movement · Craft · Community</em></p>
+  </div>
+</footer>
+
+</body>
+</html>

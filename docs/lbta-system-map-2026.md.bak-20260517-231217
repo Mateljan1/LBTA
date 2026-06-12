@@ -1,0 +1,364 @@
+# LBTA System Map 2026
+
+**Purpose:** Single cross-agent briefing for Laguna Beach Tennis Academy — website, apps, calendar, coaches, programs, packages, and how they connect to other systems.
+
+**Machine-readable source of truth:** [`lbta-system-map-2026.json`](./lbta-system-map-2026.json) — pass that file to agents for structured parsing; this doc is the human-readable companion.
+
+**Generated:** 2026-05-17 · **Repo:** `LBTA_WEBSITE_DRAFT_3:5:26` · **Production:** https://lagunabeachtennisacademy.com
+
+---
+
+## How to use this doc
+
+| If you are… | Start here |
+|-------------|------------|
+| **Quoting price or schedule** | `/schedules` + `data/spring-summer-2026.json` — never invent numbers |
+| **Linking apps or registration** | [Mobile apps](#mobile-apps--registration) — note Android URL discrepancy |
+| **Writing as Rally / bot** | `gpt/03-KNOWLEDGE-BRAIN/23-bot-knowledge-base-2026.md` |
+| **Editing website pages** | [Website inventory](#website-pages) + `app/sitemap.ts` |
+| **Coach Hub / internal tools** | [Coach Hub](#coach-hub-internal) |
+| **Comparing to Notion/GHL/Airtable** | [External systems](#external-systems-cross-reference) |
+
+**Hard rules (org-wide):**
+
+- Customer phone: **(949) 534-0457** · Email: **support@lagunabeachtennisacademy.com**
+- **Do not use** coaches: Robert LeBuhn, Kevin Jackson, Savriyan Danilov, Jay Grollman, Ryan Fritzinger
+- **ActiveCampaign:** deprecating — do not preserve
+- **Rally** = front-desk persona (not “Coach”, Ben, Rowley, etc.)
+- **The Pod:** no approved pricing or copy — flag Andrew
+
+---
+
+## Canonical contact & facilities
+
+| Field | Value |
+|-------|--------|
+| Phone | (949) 534-0457 |
+| Email | support@lagunabeachtennisacademy.com |
+| Book trial | https://lagunabeachtennisacademy.com/book |
+| Schedules (SSOT) | https://lagunabeachtennisacademy.com/schedules |
+
+### Training sites
+
+| Site | Address | Courts | Primary programs |
+|------|---------|--------|------------------|
+| **Moulton Meadows** | 1098 Balboa Ave | 4 | Little Stars, Red/Orange/Green, adult beginner, Thu LiveBall |
+| **Alta Laguna** | 3300 Alta Laguna Blvd | 2 | Saturday juniors, camps, UTR Match Play |
+| **LBHS** | 625 Park Ave | 6 | HP, Junior Dev, adults, LiveBall, leagues, 12–17 training camp |
+
+Facility anchors on contact page: `/contact#moulton-meadows`, `#alta-laguna`, `#lbhs`  
+Source: `lib/facilities.ts`
+
+---
+
+## Mobile apps & registration
+
+### LBTA app (parent-facing)
+
+| Platform | Canonical URL | Package / ID |
+|----------|---------------|--------------|
+| **iOS (App Store)** | https://apps.apple.com/us/app/lbta/id6746348933 | App ID `6746348933` |
+| **Android (canonical for bots)** | https://play.google.com/store/apps/details?id=com.court.laguna | `com.court.laguna` |
+
+**Where canonical Android is used:** `gpt/03-KNOWLEDGE-BRAIN/07-website-and-links.md`, bot KB, Spring 2026 schedule email (refined version).
+
+### Android discrepancy (must resolve)
+
+| Variant | URL | Where it appears |
+|---------|-----|------------------|
+| **PlayByPoint package** | `…/details?id=com.playbypoint.appx` | `/thank-you`, `lib/email.ts`, most spring-2026 email footers |
+
+**Action for Andrew:** Confirm which Play Store listing is the live LBTA app, then unify site + emails to one URL. Until then, bots should use **`com.court.laguna`**; engineers fixing thank-you/email should align to confirmed listing.
+
+### Other registration surfaces
+
+| System | URL / role |
+|--------|------------|
+| **City of Laguna Beach (Rec1)** | https://secure.rec1.com/CA/city-of-laguna-beach/catalog — **payment here confirms spot** for many programs |
+| **PlayByPoint** | playbypoint.com — app backend, booking, waivers (GPT whitelist) |
+| **Website Stripe** | `/api/checkout/utr-season` — UTR season pass checkout |
+| **Website forms** | `/api/book`, `/api/register-program`, etc. → leads + optional Supabase + AC (legacy) |
+
+Rec1 deep links in repo use different filter IDs (`lib/flyer-config.ts`, `RegistrationModal.tsx`, emails). Prefer **base catalog** in bots.
+
+---
+
+## 2026 calendar (year at a glance)
+
+**Source:** `data/year2026.json` (last updated 2026-03-26)
+
+| Season | Dates | Weeks | Status | Program data file |
+|--------|-------|-------|--------|-------------------|
+| Winter 2026 | Jan 5 – Apr 5 | 13 | active | `data/winter2026.json` |
+| Spring 2026 | Apr 6 – Jun 13 | 10 | registration open | `data/spring-summer-2026.json` |
+| Summer 2026 | Jun 15 – Aug 29 | 11 | registration open | `data/spring-summer-2026.json` |
+| Fall 2026 | Aug 31 – Dec 19 | 16 | coming soon | `data/fall2026.json` |
+
+**Skip dates (examples):** Spring — May 25 · Summer — Jun 19, Jul 4 · Fall — Sep 7, Nov 11, Nov 26–27
+
+### Camp & break calendar (2026)
+
+| Event | Dates | Notes |
+|-------|-------|-------|
+| Ski Week | Feb 16–20 | Completed |
+| Spring Break | Mar 30 – Apr 2 | Completed |
+| Summer camps | Jun 15 – Aug 29 | `/camps` — Tennis & Adventure 5–11, Training 12–17 |
+| Swim & Tennis | — | **Suspended** (pool construction) → Adventure camp |
+| Back-to-school mini | Aug 17–20 | Week 10 prorated |
+| Thanksgiving | Nov 23–25 | Half-day options |
+| Winter break | Dec 21–24 & Dec 28–31 | Two 4-day sessions |
+
+Coach Hub season starts: `data/coach-hub/seasons.json`
+
+---
+
+## Programs & packages
+
+**Public display SSOT:** https://lagunabeachtennisacademy.com/schedules  
+**Structured data SSOT:** `data/spring-summer-2026.json` (+ winter/fall files per season)
+
+### First-touch pricing anchors (Spring 2026)
+
+Use for bots and quick answers; confirm on `/schedules` before contracts:
+
+| Anchor | Amount |
+|--------|--------|
+| Drop-in | $50 |
+| Seasonal 1×/week | $420 |
+| Committed 2×/week | $840 |
+| 3×/week | $1,260 |
+| Saturday-only | $380 |
+
+Summer ≈ Spring × **1.10** (e.g. Red 1× = $462).
+
+### Program catalog (IDs in data)
+
+| ID | Program | Ages / notes |
+|----|---------|----------------|
+| `little-stars` | Little Tennis Stars | 3–4 |
+| `red-ball` | Red Ball | 5–6 |
+| `orange-ball` | Orange Ball | 7–8 |
+| `green-dot` | Green Dot | 9–11 |
+| `utr-green-dot` | Competitive Green Dot | UTR-tracked |
+| `youth-development` | Junior Development | 11–18, UTR tiers 1–4 / 4–7 |
+| `high-performance` | High Performance | 12–17, UTR 8+ |
+| `adult-beginner-1` | New to Tennis | Adult |
+| `adult-beginner-2` | Beyond Beginner | Adult |
+| `adult-intermediate` | Adult Intermediate | NTRP 3.0–4.0 |
+| `adult-advanced` | Adult Advanced | NTRP 4.0+ |
+| `liveball` | LiveBall | Monthly / drop-in |
+| `cardio-tennis` | Cardio Tennis | Fitness |
+
+Full menus and tables: `gpt/03-KNOWLEDGE-BRAIN/02-programs-and-pricing.md`
+
+### Package frequencies
+
+`1x` · `2x` · `3x` · `saturday1x` · `monthly` · `drop_in`
+
+### Discounts (`year2026.json` / spring-summer)
+
+| Discount | % | Condition |
+|----------|---|-----------|
+| Sibling | 10 | Same program, additional child |
+| Early Bird | 5 | 2+ weeks before session |
+| Multi-Session | 5 | Spring + Summer together |
+| Multi-Camp Week | 10 | 4+ summer weeks |
+
+### Private lessons (`data/private-rates.json`)
+
+| Coach | 60 min | 90 min | 10-pack | 20-pack |
+|-------|--------|--------|---------|---------|
+| Andrew Mateljan | $250 | $350 | $2,300 | $4,200 |
+| Peter DeFrantz | $120 | $165 | $1,100 | $2,000 |
+| Allison Cronk | $120 | $165 | $1,100 | $2,000 |
+
+Book: `/book?type=private` or support line.
+
+### Leagues & UTR
+
+| Offering | Data | Website |
+|----------|------|---------|
+| USTA Adult leagues 2026 | `data/leagues-2026.json` | `/programs/leagues`, `/programs/usta-adult-league` |
+| UTR Match Play S1 | spring-summer + leagues data | `/programs/utr-match-play` |
+| Live standings | Supabase | `/utr-tracker` |
+
+UTR Season 1: Apr 11 – Jun 6, 2026 · Grand Finals Jun 6.
+
+---
+
+## Coaches & staff
+
+### Public website roster (`data/coaches.json`)
+
+| Name | Slug | URL | Listed |
+|------|------|-----|--------|
+| Andrew Mateljan | andrew-mateljan | /coaches/andrew-mateljan | Yes |
+| Allison Cronk | allison-cronk | /coaches/allison-cronk | Yes |
+| Peter DeFrantz | peter-defrantz | /coaches/peter-defrantz | Yes |
+| Michelle Mateljan | michelle-mateljan | /coaches/michelle-mateljan | **Hidden** (paused 2026, noindex) |
+| Robert LeBuhn | robert-lebuhn | → redirect `/coaches` | **Departed** |
+
+### Coach Hub (internal, noindex)
+
+**Status (2026-05-17):** Routes and APIs exist in repo; feature build in progress (much uncommitted).
+
+| Coach slug | Name | Hub content |
+|------------|------|-------------|
+| `andrew` | Andrew Mateljan | JSON coaching-today + lesson plans |
+| `allison` | Allison Cronk | HTML hub content |
+| `peter` | Peter de Frantz | HTML hub content |
+
+Base: https://lagunabeachtennisacademy.com/coach-hub  
+`robots.txt` disallows `/coach-hub`. Not in sitemap.
+
+---
+
+## Website pages
+
+**40 URLs in sitemap** + 5 blog posts. Full JSON list: `website.pages` in [`lbta-system-map-2026.json`](./lbta-system-map-2026.json).
+
+### Navigation map
+
+**Header:** Programs (mega-menu), Results → `/success-stories`, Schedule, Coaches, About, Journal → `/blog`, Contact, Camps, **Book Trial**
+
+**Footer Programs:** All Programs, Camps, Fitness, Leagues, UTR Match Play, Schedule & Pricing  
+**Footer Academy:** About, Coaches, Journal, Book, Contact, FAQ, Racquet Rescue
+
+### Core pages
+
+| URL | Purpose | Status | Known gaps |
+|-----|---------|--------|------------|
+| `/` | Home, conversion, trust | Shipped | Mobile nav stat; perf lab |
+| `/schedules` | **Pricing SSOT** | Shipped | Contrast; density |
+| `/book` | Trial / private | Shipped | Modal a11y |
+| `/programs` | Pathway hub | Shipped | — |
+| `/camps` | Camp sales | Shipped | Sync dates with JSON |
+| `/coaches` | Roster | Shipped | — |
+| `/about` | Story | Shipped | — |
+| `/contact` | Form + facilities | Shipped | **CLS 0.499** |
+| `/faq` | FAQ | Shipped | Link contrast |
+| `/blog` | Journal (5 posts) | Shipped | Low volume |
+
+### Pathway & specialty
+
+| URL | In main nav? |
+|-----|----------------|
+| `/programs/junior` | Programs menu |
+| `/programs/adult` | Programs menu |
+| `/programs/high-performance` | Programs menu |
+| `/programs/leagues` | Footer + menu |
+| `/programs/usta-adult-league` | — |
+| `/programs/utr-match-play` | Footer + menu |
+| `/fitness` | Programs menu |
+| `/liveball` | Programs menu only |
+| `/philosophy` | **Orphan** |
+| `/success-stories` | Header “Results” |
+
+### Landing / conversion
+
+| URL | API |
+|-----|-----|
+| `/junior-trial` | POST `/api/book` |
+| `/adult-trial` | POST `/api/book` |
+| `/beginner-program` | POST `/api/book` |
+| `/high-performance-pathway` | CTAs → book/schedules |
+| `/pathway-planner` | Quiz → schedules/book |
+| `/apply-scholarship` | POST `/api/scholarship` |
+| `/match-play` | Explains Friday play **not offered** |
+| `/racquet-rescue` | Stringing service |
+| `/help` | Support hub (**orphan**) |
+
+### Tools & legal
+
+| URL | Index? |
+|-----|--------|
+| `/utr-tracker` | Yes (needs Supabase) |
+| `/utr-tracker/admin` | No |
+| `/privacy`, `/terms` | Yes |
+| `/thank-you` | **No** (post-form; has app CTAs) |
+| `/brand` | No (internal tokens) |
+| `/schedules/calendar` | No |
+
+### Blog posts
+
+- `/blog/movement-before-strokes-footwork-first`
+- `/blog/what-utr-measures-and-what-it-does-not`
+- `/blog/how-to-choose-a-summer-tennis-camp-for-your-child`
+- `/blog/private-lessons-vs-group-training`
+- `/blog/college-tennis-path-balance-and-expectations`
+
+### Legacy redirects (sample)
+
+`/pricing` → `/schedules` · `/private-lessons` → `/book` · `/vylo` → `/programs/high-performance` · `/jtt` → `/programs/leagues` · `/racket-stringing` → `/contact` (consider `/racquet-rescue`)
+
+---
+
+## External systems cross-reference
+
+| System | LBTA relationship | Agent access in Cursor |
+|--------|---------------------|-------------------------|
+| **This website (Vercel)** | Primary marketing + forms | Yes — this repo |
+| **LBTA iOS/Android apps** | Booking, schedule | Links only |
+| **PlayByPoint** | App backend | GPT whitelist |
+| **City Rec1** | Paid registration | URLs in components/emails |
+| **Supabase** | UTR tracker, optional leads | MCP if env set |
+| **Stripe** | UTR checkout | Env in Vercel |
+| **ActiveCampaign** | Legacy form sync | **Killing** — don’t expand |
+| **GoHighLevel** | Target CRM / SMS | Claude only, not Cursor |
+| **Notion** | Andrew Operations Hub canon | Notion MCP |
+| **Airtable** | Receipts / ops (other projects) | MCP read-mostly |
+| **Fit4Tennis / RacquetIQ / Pod** | Sibling brands | **Do not cross-pollinate** |
+
+**Related repo knowledge (not duplicated here):**
+
+- `gpt/03-KNOWLEDGE-BRAIN/` — bot facts, pricing, links
+- `docs/audits/2026-05/` — May mobile/a11y audit
+- `brochures/` — print system + `data/content.json`
+- `plans/` — implementation history
+
+---
+
+## Data file index (repo)
+
+| File | Contents |
+|------|----------|
+| `data/spring-summer-2026.json` | Spring/Summer programs, schedules, pricing |
+| `data/winter2026.json` | Winter programs |
+| `data/fall2026.json` | Fall programs |
+| `data/year2026.json` | Seasons, camps, discounts, base pricing |
+| `data/private-rates.json` | Private lesson rates |
+| `data/leagues-2026.json` | USTA leagues |
+| `data/coaches.json` | Public coach bios |
+| `data/liveball.json` | LiveBall content |
+| `data/pricing-supplemental.json` | Promo/schema extras |
+| `data/faq.json` | FAQ content |
+| `data/homepage-copy.json` | Home page copy |
+| `data/site-stats.json` | Trust stats (header) |
+| `data/coach-hub/*` | Internal hub |
+
+---
+
+## Quality & ship status (May 2026 audit)
+
+**Reports:** `docs/audits/2026-05/findings.md`, `gap-report.md`, `scorecard.md`
+
+**Critical before calling “done” on UX/a11y:**
+
+1. Newsletter submit — no accessible name on mobile (footer everywhere)
+2. Unlabeled `<select>` on `/junior-trial`, `/pathway-planner`
+3. Low-opacity `text-brand-pacific-dusk/50–70` contrast sitewide
+4. `/contact` CLS 0.499
+
+**Ship protocol:** `npm run ship:gate` → push → `npm run health:prod` (not `vercel ls` alone)
+
+---
+
+## Changelog
+
+| Date | Change |
+|------|--------|
+| 2026-05-17 | Initial system map (JSON + MD) from repo + knowledge brain |
+
+---
+
+*When this doc conflicts with live production, trust production + `data/*.json`. Update both this file and `lbta-system-map-2026.json` when routes, apps, or calendar change.*

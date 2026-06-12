@@ -1,5 +1,6 @@
 import pricingSupplemental from '@/data/pricing-supplemental.json'
 import { PUBLIC_FACILITIES, facilityContactUrl } from '@/lib/facilities'
+import { LBTA_PUBLIC_CONTACT } from '@/lib/public-contact'
 
 const schemaPricing = pricingSupplemental.schema
 
@@ -11,15 +12,15 @@ export function OrganizationSchema() {
     "name": "Laguna Beach Tennis Academy",
     "description": "Professional tennis training academy in Laguna Beach offering programs for ages 3 to professional, including junior development, adult programs, and high-performance training with ATP/WTA-trained coaches.",
     "url": "https://lagunabeachtennisacademy.com",
-    "telephone": "+1-949-534-0457",
-    "email": "support@lagunabeachtennisacademy.com",
+    "telephone": LBTA_PUBLIC_CONTACT.phoneE164,
+    "email": LBTA_PUBLIC_CONTACT.email,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "1098 Balboa Ave",
-      "addressLocality": "Laguna Beach",
-      "addressRegion": "CA",
-      "postalCode": "92651",
-      "addressCountry": "US"
+      "streetAddress": LBTA_PUBLIC_CONTACT.address.street,
+      "addressLocality": LBTA_PUBLIC_CONTACT.address.city,
+      "addressRegion": LBTA_PUBLIC_CONTACT.address.region,
+      "postalCode": LBTA_PUBLIC_CONTACT.address.postalCode,
+      "addressCountry": LBTA_PUBLIC_CONTACT.address.country
     },
     "geo": {
       "@type": "GeoCoordinates",
@@ -133,8 +134,8 @@ export function LocalBusinessArraySchema() {
     name: f.schemaName,
     description: f.schemaDescription,
     url: facilityContactUrl(f.anchor),
-    telephone: '+1-949-534-0457',
-    email: 'support@lagunabeachtennisacademy.com',
+    telephone: LBTA_PUBLIC_CONTACT.phoneE164,
+    email: LBTA_PUBLIC_CONTACT.email,
     address: {
       '@type': 'PostalAddress',
       streetAddress: f.streetLine,

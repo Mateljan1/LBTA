@@ -1,0 +1,398 @@
+<!doctype html>
+<!-- @page width="11in" height="8.5in" landscape="true" -->
+<!--
+  14 — Annual Calendar (Year At-a-Glance)
+  ========================================
+  12-month Gantt-style timeline. Programs as horizontal bars across month
+  columns. Camps as point events. Leagues + UTR Match Play as bars. Plus
+  a key-dates strip (registration opens, early-bird deadlines).
+
+  Layout:
+    Top band         — title + lede + LBTA logo
+    Month axis       — Jan – Dec column heads
+    Group programs   — 4 season bars (Winter / Spring / Summer / Fall)
+    Open court       — 1 year-round bar (LiveBall + Cardio)
+    Camps            — 6 point events on the timeline
+    Match play       — UTR + USTA bars
+    Bottom strip     — Key dates list + foot
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · 2026 Annual Calendar</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 11in 8.5in; margin: 0; }
+    .sheet {
+      width: 11in; height: 8.5in;
+      position: relative; overflow: hidden;
+      background: var(--morning-light);
+    }
+    .pad { padding: 18pt 26pt 12pt; }
+
+    /* Header */
+    .top {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 16pt; margin-bottom: 10pt;
+    }
+    .top .titles { flex: 1; }
+    .top .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 7pt;
+      color: var(--victoria-cove); margin-bottom: 2pt;
+    }
+    .top h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 24pt; line-height: 1.05; color: var(--text-heading);
+      margin: 0; letter-spacing: -0.005em;
+    }
+    .top .lede {
+      font-size: 9pt; color: var(--text-on-light); margin-top: 3pt;
+      max-width: 6.5in; line-height: 1.45;
+    }
+    .top .logo { height: 32pt; width: auto; }
+
+    /* Calendar grid (12 months) — uses CSS grid for alignment */
+    .cal {
+      width: 100%;
+      display: grid;
+      /* Row label = 1.4in fixed; 12 months = remaining */
+      grid-template-columns: 1.5in repeat(12, 1fr);
+      column-gap: 0;
+    }
+    /* Header row */
+    .cal .month-head {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em; font-size: 7pt;
+      color: var(--text-muted);
+      padding: 4pt 4pt 6pt;
+      text-align: center;
+      border-bottom: 0.5pt solid var(--border-light);
+      background: var(--morning-light);
+    }
+    .cal .row-label {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; font-size: 6.5pt;
+      color: var(--text-muted);
+      padding: 0 8pt 0 0;
+      align-self: center;
+      text-align: right;
+    }
+    /* Generic cell — a relative positioning container for bars */
+    .cal .cell {
+      position: relative;
+      height: 18pt;
+      border-bottom: 0.5pt dotted rgba(27,58,92,0.10);
+    }
+    .cal .cell.alt { background: rgba(245,240,229,0.40); }
+
+    /* Section row group label */
+    .cal .group-label {
+      grid-column: 1 / -1;
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--sunset-cliff);
+      padding: 5pt 0 2pt;
+      border-bottom: 0.5pt solid var(--border-light);
+    }
+    .cal .group-label.cove   { color: var(--victoria-cove); }
+    .cal .group-label.gold   { color: var(--gold-deep); }
+    .cal .group-label.deep   { color: var(--pacific-dusk); }
+
+    /* Bars + dots */
+    .bar {
+      position: absolute; top: 4pt; bottom: 4pt;
+      border-radius: 3pt;
+      display: flex; align-items: center;
+      padding: 0 6pt;
+      font-family: var(--font-body); font-weight: 600;
+      font-size: 6.5pt; color: #FFFFFF;
+      letter-spacing: 0.04em;
+      box-shadow: 0 1px 2px rgba(15,34,55,0.10);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .bar.deep    { background: var(--deep-water); }
+    .bar.cove    { background: var(--victoria-cove); }
+    .bar.sunset  { background: var(--sunset-cliff); }
+    .bar.gold    { background: var(--gold-deep); }
+    .bar.pacific { background: var(--pacific-dusk); }
+    .bar .meta {
+      font-weight: 400;
+      opacity: 0.82;
+      margin-left: 6pt;
+      font-size: 5.8pt;
+    }
+
+    .dot {
+      position: absolute; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 11pt; height: 11pt;
+      border-radius: 50%;
+      box-shadow: 0 1px 2px rgba(15,34,55,0.20);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .dot.gold   { background: var(--gold); border: 1pt solid var(--gold-deep); }
+    .dot.cove   { background: var(--victoria-cove); }
+    .dot.sunset { background: var(--sunset-cliff); }
+    .dot.deep   { background: var(--deep-water); }
+    .dot-label {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      margin-left: 12pt;
+      font-family: var(--font-body); font-weight: 600;
+      font-size: 6pt; color: var(--text-on-light);
+      white-space: nowrap;
+    }
+
+    /* Bottom strip — key dates + foot */
+    .bottom {
+      margin-top: 6pt;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 14pt;
+    }
+    .keydates {
+      background: var(--deep-water); color: var(--text-on-dark);
+      border-radius: 4pt; padding: 8pt 14pt;
+    }
+    .keydates .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--gold); margin-bottom: 4pt;
+    }
+    .keydates h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 12pt; color: #FFFFFF; margin: 0 0 4pt;
+    }
+    .keydates .grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12pt;
+      margin-top: 4pt; font-size: 7pt; line-height: 1.5;
+    }
+    .keydates .row {
+      display: grid; grid-template-columns: 0.55fr 1fr; gap: 6pt;
+      padding: 1.5pt 0;
+      border-bottom: 0.4pt solid rgba(245,240,229,0.14);
+    }
+    .keydates .row:last-child { border-bottom: none; }
+    .keydates .row .when {
+      font-weight: 700; color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+    .keydates .row .what { color: rgba(245,240,229,0.86); }
+
+    .legend-card {
+      background: var(--sandstone); border-radius: 4pt;
+      padding: 8pt 14pt;
+      font-size: 6.8pt; line-height: 1.5;
+      color: var(--text-on-light);
+    }
+    .legend-card .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--victoria-cove); margin-bottom: 4pt;
+    }
+    .legend-card h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 12pt; color: var(--text-heading); margin: 0 0 4pt;
+    }
+    .legend-card .swatch {
+      display: inline-block; width: 9pt; height: 9pt; border-radius: 2pt;
+      vertical-align: middle; margin-right: 5pt;
+    }
+    .legend-card .scholarship {
+      margin-top: 6pt; padding-top: 5pt;
+      border-top: 0.5pt solid var(--border-light);
+      font-size: 6.5pt;
+      color: var(--text-muted);
+    }
+    .legend-card .scholarship strong { color: var(--gold-deep); }
+
+    .foot {
+      margin-top: 6pt; padding-top: 4pt;
+      border-top: 0.5pt solid var(--divider-light);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 6pt; color: var(--text-muted);
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .foot .tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic; font-weight: 400; font-size: 9pt;
+      color: var(--gold-deep); letter-spacing: normal; text-transform: none;
+    }
+  </style>
+</head>
+<body>
+{# Helper macro: bar from start to end month (1-12 inclusive on both sides) #}
+{% macro bar_style(start, end) -%}
+left: 0; right: 0;
+{%- endmacro %}
+
+<div class="sheet">
+  <span class="horizon-bar h-med" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+
+    <div class="top">
+      <div class="titles">
+        <div class="eyebrow">Annual Calendar · {{ annual_calendar.year }}</div>
+        <h1>The year at a glance.</h1>
+        <div class="lede">
+          Four group sessions, two open-court formats running year-round, six camps, USTA leagues, and the UTR Match Play season — laid out across twelve months.
+        </div>
+      </div>
+      <img class="logo" src="../assets/logos/LBTAblktext.png" alt="LBTA" />
+    </div>
+
+    <!-- ============= CALENDAR GRID ============= -->
+    <div class="cal">
+
+      {# Header row: 12 months #}
+      <div></div>
+      {% for m in ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] %}
+        <div class="month-head">{{ m }}</div>
+      {% endfor %}
+
+      {# ===== Group programs ===== #}
+      <div class="group-label cove">Group programs · seasonal sessions</div>
+
+      {% for s in annual_calendar.season_bars %}
+      <div class="row-label">{{ s.label }}</div>
+      {% for m in range(1, 13) %}
+        {% if m == s.start %}
+          <div class="cell{% if m % 2 == 0 %} alt{% endif %}" style="grid-column: span {{ s.end - s.start + 1 }};">
+            <div class="bar {{ s.color }}" style="left: 4pt; right: 4pt;">
+              {{ s.label }}<span class="meta">{{ s.weeks }} wks · {{ s.dates }}</span>
+            </div>
+          </div>
+        {% elif m > s.start and m <= s.end %}
+          {# Skipped — covered by the spanning cell above #}
+        {% else %}
+          <div class="cell{% if m % 2 == 0 %} alt{% endif %}"></div>
+        {% endif %}
+      {% endfor %}
+      {% endfor %}
+
+      {# ===== Open court ===== #}
+      <div class="group-label deep">Open court · year-round</div>
+      {% for s in annual_calendar.open_court_bars %}
+      <div class="row-label">{{ s.label }}</div>
+      <div class="cell{% if 1 % 2 == 0 %} alt{% endif %}" style="grid-column: span 12;">
+        <div class="bar {{ s.color }}" style="left: 4pt; right: 4pt;">
+          {{ s.label }}<span class="meta">$150/mo · $50 drop-in</span>
+        </div>
+      </div>
+      {% endfor %}
+
+      {# ===== Camps ===== #}
+      <div class="group-label">Camps · point events</div>
+      <div class="row-label">Tennis camps</div>
+      {% for m in range(1, 13) %}
+        <div class="cell{% if m % 2 == 0 %} alt{% endif %}">
+          {% for c in annual_calendar.camps %}
+            {% if c.start is defined and m >= c.start and m <= c.end %}
+              {% if m == c.start %}
+                {# Render a bar across the camp duration #}
+              {% endif %}
+            {% elif c.month is defined and c.month == m %}
+              <div class="dot {{ c.color }}" style="left: 50%;"></div>
+              <div class="dot-label" style="left: 50%; transform: translate(-50%, calc(50% + 8pt)); top: auto; bottom: 0; margin-left: 0; text-align: center; width: 100%;">
+                <span style="display: block; font-weight: 700; color: var(--text-heading); font-size: 6pt;">{{ c.label }}</span>
+                <span style="display: block; color: var(--text-muted); font-size: 5.5pt;">{{ c.dates }}</span>
+              </div>
+            {% endif %}
+          {% endfor %}
+          {# Render Summer Camps as bar (start/end form) #}
+          {% for c in annual_calendar.camps %}
+            {% if c.start is defined and m == c.start %}
+              <div class="bar {{ c.color }}" style="left: 4pt; width: calc({{ (c.end - c.start + 1) * 100 }}% - 8pt);">
+                {{ c.label }}<span class="meta">{{ c.dates }}</span>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      {# ===== USTA Leagues ===== #}
+      <div class="group-label cove">USTA Adult Leagues</div>
+      {% for s in annual_calendar.leagues_usta_bars %}
+      <div class="row-label">{{ s.label.replace('USTA ', '') }}</div>
+      {% for m in range(1, 13) %}
+        {% if m == s.start %}
+          <div class="cell{% if m % 2 == 0 %} alt{% endif %}" style="grid-column: span {{ s.end - s.start + 1 }};">
+            <div class="bar {{ s.color }}" style="left: 4pt; right: 4pt;">
+              {{ s.label }}<span class="meta">{{ s.dates }}</span>
+            </div>
+          </div>
+        {% elif m > s.start and m <= s.end %}
+        {% else %}
+          <div class="cell{% if m % 2 == 0 %} alt{% endif %}"></div>
+        {% endif %}
+      {% endfor %}
+      {% endfor %}
+
+      {# ===== UTR Match Play ===== #}
+      <div class="group-label gold">UTR Match Play</div>
+      {% for s in annual_calendar.matchplay_bars %}
+      <div class="row-label">{{ s.label.replace('UTR ', '').replace('Match Play ', '') }}</div>
+      {% for m in range(1, 13) %}
+        {% if m == s.start %}
+          <div class="cell{% if m % 2 == 0 %} alt{% endif %}" style="grid-column: span {{ s.end - s.start + 1 }};">
+            <div class="bar {{ s.color }}" style="left: 4pt; right: 4pt;">
+              {{ s.label }}<span class="meta">{{ s.dates }}</span>
+            </div>
+          </div>
+        {% elif m > s.start and m <= s.end %}
+        {% else %}
+          <div class="cell{% if m % 2 == 0 %} alt{% endif %}"></div>
+        {% endif %}
+      {% endfor %}
+      {% endfor %}
+
+    </div>
+
+    <!-- ============= BOTTOM ============= -->
+    <div class="bottom">
+      <div class="keydates">
+        <div class="eyebrow">Key dates</div>
+        <h3>Mark your calendar.</h3>
+        <div class="grid">
+          {% set k = annual_calendar.key_dates %}
+          {% set per_col = (k|length / 3)|round(0, 'ceil')|int %}
+          <div>
+            {% for d in k[:4] %}<div class="row"><span class="when">{{ d.date }}</span><span class="what">{{ d.event }}</span></div>{% endfor %}
+          </div>
+          <div>
+            {% for d in k[4:8] %}<div class="row"><span class="when">{{ d.date }}</span><span class="what">{{ d.event }}</span></div>{% endfor %}
+          </div>
+          <div>
+            {% for d in k[8:] %}<div class="row"><span class="when">{{ d.date }}</span><span class="what">{{ d.event }}</span></div>{% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="legend-card">
+        <div class="eyebrow">Legend</div>
+        <h3>How to read this.</h3>
+        <div><span class="swatch" style="background: var(--deep-water);"></span> Winter session · year-round open court</div>
+        <div><span class="swatch" style="background: var(--victoria-cove);"></span> Spring session · USTA leagues</div>
+        <div><span class="swatch" style="background: var(--sunset-cliff);"></span> Summer session · UTR Match Play · summer camps</div>
+        <div><span class="swatch" style="background: var(--gold-deep);"></span> Fall session · holiday camps</div>
+        <div class="scholarship">
+          <strong>Scholarships available.</strong> $25,000 awarded annually · 25–50% coverage. Email support@lagunabeachtennisacademy.com to apply.
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="tagline">Movement. Craft. Community.</span>
+      <span>support@lagunabeachtennisacademy.com · (949) 534-0457 · Official City of Laguna Beach Tennis Partner since 2020</span>
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="display: block; width: 100%;"></span>
+</div>
+</body>
+</html>

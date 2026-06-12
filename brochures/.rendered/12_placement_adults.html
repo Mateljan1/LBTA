@@ -1,0 +1,289 @@
+<!doctype html>
+<!-- @page width="8.5in" height="11in" landscape="false" -->
+<!--
+  12 — Placement Guide · Adults (prospect-facing distribution)
+  ===========================================================
+  Send to adult prospects asking "where do I belong?" Letter portrait, single
+  page. Peer voice — coach talking to a player, not parent talking to parent.
+  Cross-program callout shows the whole stack: LiveBall, Cardio, USTA, UTR.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · Adult Placement Guide</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 8.5in 11in; margin: 0; }
+    .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--morning-light); }
+    .pad  { padding: 28pt 44pt 24pt; }
+
+    .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6pt; }
+    .top .logo { height: 36pt; width: auto; }
+    .top .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 8pt;
+      color: var(--sunset-cliff);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 32pt; line-height: 1.05; color: var(--text-heading);
+      margin: 6pt 0 4pt; letter-spacing: -0.005em;
+    }
+    .subhead {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+      font-weight: 400; font-size: 13pt; color: var(--gold-deep);
+      margin-bottom: 8pt;
+    }
+    p.lede {
+      font-size: 10pt; line-height: 1.55; color: var(--text-on-light);
+      margin: 0 0 12pt; max-width: 6.5in;
+    }
+
+    .hero-img {
+      width: 100%; height: 150pt; object-fit: cover;
+      border-radius: 4pt; margin-bottom: 14pt;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 16pt; color: var(--text-heading); line-height: 1.15;
+      margin: 14pt 0 4pt 0;
+    }
+    .col-eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 7.5pt;
+      color: var(--sunset-cliff);
+      margin-bottom: 2pt;
+    }
+
+    /* Decision card */
+    .decision {
+      background: var(--sandstone); border-radius: 4pt;
+      padding: 12pt 16pt; margin: 4pt 0 14pt;
+    }
+    .decision .label {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em; font-size: 7pt;
+      color: var(--text-muted); margin-bottom: 5pt;
+    }
+    .decision .row {
+      display: grid; grid-template-columns: 1.7fr 1fr; gap: 10pt;
+      font-size: 9pt; line-height: 1.45; padding: 4pt 0;
+      border-bottom: 0.5pt dotted var(--border-light);
+    }
+    .decision .row:last-child { border-bottom: none; }
+    .decision .row .when { color: var(--text-on-light); }
+    .decision .row .then {
+      font-weight: 700; color: var(--text-heading);
+      text-align: right;
+    }
+
+    /* Program grid */
+    .grid-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 2pt; table-layout: fixed; }
+    .grid-table col.c-name  { width: 30%; }
+    .grid-table col.c-meta1 { width: 20%; }
+    .grid-table col.c-meta2 { width: 30%; }
+    .grid-table col.c-also  { width: 20%; }
+    .grid-table th {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; font-size: 6.5pt;
+      color: var(--text-muted); text-align: left;
+      padding: 5pt 5pt 4pt; border-bottom: 0.5pt solid var(--border-light);
+    }
+    .grid-table td {
+      padding: 5pt; vertical-align: top;
+      border-bottom: 0.5pt solid var(--divider-light); line-height: 1.4;
+    }
+    .grid-table tr:last-child td { border-bottom: none; }
+    .grid-table .name { font-weight: 700; color: var(--text-heading); }
+    .grid-table .meta { color: var(--text-muted); font-size: 7.5pt; }
+    .grid-table .also { color: var(--text-on-light); font-size: 7.5pt; }
+
+    /* Cross-program — the killer feature for adults */
+    .cross-callout {
+      background: var(--deep-water); color: var(--text-on-dark);
+      border-radius: 4pt; padding: 14pt 18pt; margin-top: 14pt;
+    }
+    .cross-callout .head {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 7pt;
+      color: var(--gold); margin-bottom: 4pt;
+    }
+    .cross-callout h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 16pt; color: #FFFFFF; line-height: 1.15; margin: 0 0 8pt;
+    }
+    .cross-callout p {
+      font-size: 9pt; line-height: 1.55;
+      color: rgba(255,255,255,0.86); margin: 0 0 4pt;
+    }
+    .cross-callout .stack-row {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 10pt;
+      font-size: 8pt; line-height: 1.45; padding: 4pt 0;
+      border-bottom: 0.5pt solid rgba(245,240,229,0.14);
+    }
+    .cross-callout .stack-row:last-child { border-bottom: none; }
+    .cross-callout .stack-row .who { font-weight: 700; color: #FFFFFF; }
+    .cross-callout .stack-row .what { color: rgba(245,240,229,0.86); }
+
+    /* CTA */
+    .cta-card {
+      background: #FFFFFF; border: 0.5pt solid var(--border-light);
+      border-radius: 4pt; padding: 16pt 18pt;
+      margin-top: 14pt; text-align: center;
+    }
+    .cta-card .head {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 20pt; color: var(--text-heading); line-height: 1.15;
+    }
+    .cta-card .meta {
+      font-size: 8pt; color: var(--text-muted); margin-top: 6pt;
+      letter-spacing: 0.06em;
+    }
+    .cta-card .url {
+      font-family: var(--font-body); font-weight: 700;
+      color: var(--sunset-cliff); font-size: 10pt; margin-top: 4pt;
+    }
+
+    .foot {
+      margin-top: 12pt; padding-top: 8pt;
+      border-top: 0.5pt solid var(--divider-light);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 7pt; color: var(--text-muted);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .foot .tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic; font-weight: 400; font-size: 9pt;
+      color: var(--gold-deep); letter-spacing: normal; text-transform: none;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <span class="horizon-bar h-med" style="position:absolute; top:0; left:0;"></span>
+
+  <div class="pad">
+    <div class="top">
+      <img class="logo" src="../assets/logos/LBTAblktext.png" alt="LBTA" />
+      <span class="eyebrow">Placement Guide · Adults</span>
+    </div>
+
+    <h1>Find your level. Find your community.</h1>
+    <div class="subhead">From new-to-tennis to nationally rated — one academy.</div>
+    <p class="lede">
+      A quick map for adults asking <em>"where do I belong?"</em> Find what describes you.
+      Then see what else stacks with it — most adults end up in two or three formats a week:
+      coaching plus open-court, plus league or match play.
+    </p>
+
+    <img class="hero-img" src="../assets/photos/hero-women-team.jpg" alt="LBTA Women's USTA team with Coach Andrew on blue courts at Laguna Beach High School" />
+
+    <span class="col-eyebrow">Find your level</span>
+    <h2>Where to start.</h2>
+    <div class="decision">
+      <div class="label">By experience</div>
+      <div class="row">
+        <span class="when">Never picked up a racquet</span>
+        <span class="then">New to Tennis</span>
+      </div>
+      <div class="row">
+        <span class="when">Can rally and serve, inconsistent</span>
+        <span class="then">Beyond Beginner</span>
+      </div>
+      <div class="row">
+        <span class="when">Comfortable rallying, 1+ years, consistent serve · NTRP 3.0–4.0</span>
+        <span class="then">Adult Intermediate</span>
+      </div>
+      <div class="row">
+        <span class="when">Tournament / league experience · NTRP 4.0+</span>
+        <span class="then">Adult Advanced</span>
+      </div>
+    </div>
+
+    <span class="col-eyebrow">The programs</span>
+    <h2>What's running.</h2>
+    <table class="grid-table">
+      <colgroup><col class="c-name"/><col class="c-meta1"/><col class="c-meta2"/><col class="c-also"/></colgroup>
+      <thead>
+        <tr><th>Program</th><th>Level</th><th>Where &amp; when</th><th>Also fits</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">New to Tennis</td>
+          <td class="meta">Beginner</td>
+          <td class="meta">Tue/Thu 10a · Mon/Wed 6:30p · Sat 9a</td>
+          <td class="also">Just here. Foundation first.</td>
+        </tr>
+        <tr>
+          <td class="name">Beyond Beginner</td>
+          <td class="meta">Advanced beginner</td>
+          <td class="meta">Mon/Wed 6:30p Moulton</td>
+          <td class="also">Cardio Tennis (Fri all levels) when ready</td>
+        </tr>
+        <tr>
+          <td class="name">Adult Intermediate</td>
+          <td class="meta">NTRP 3.0–4.0</td>
+          <td class="meta">Tue/Thu 11a · Sat 10a LBHS</td>
+          <td class="also">LiveBall Intermediate (Thu/Sat/Sun · $50) · Cardio Tennis (Fri · $50) · USTA Adult League (3.0/3.5/4.0) · UTR Doubles (Sun · $65)</td>
+        </tr>
+        <tr>
+          <td class="name">Adult Advanced</td>
+          <td class="meta">NTRP 4.0+</td>
+          <td class="meta">Mon/Fri 12–2p LBHS</td>
+          <td class="also">LiveBall Advanced (Sun 10:30a · $50) · Cardio Tennis (Fri) · USTA League (4.0/4.5/5.0) · UTR Singles 3–12 + Doubles (Sun · $65)</td>
+        </tr>
+        <tr>
+          <td class="name">LiveBall</td>
+          <td class="meta">NTRP 3.0+</td>
+          <td class="meta">Thu Moulton · Sat/Sun LBHS · monthly $150 / $50 drop-in</td>
+          <td class="also">Cardio · USTA League at your level · UTR Doubles</td>
+        </tr>
+        <tr>
+          <td class="name">Cardio Tennis</td>
+          <td class="meta">All levels</td>
+          <td class="meta">Fri 9a LBHS · monthly $150 / $50 drop-in</td>
+          <td class="also">LiveBall at your level · USTA League</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="cross-callout">
+      <div class="head">What stacks with what</div>
+      <h3>One enrollment opens the door to several formats.</h3>
+      <div class="stack-row">
+        <span class="who">Beyond Beginner</span>
+        <span class="what">Cardio Tennis (Fri all levels) when you're ready for more reps</span>
+      </div>
+      <div class="stack-row">
+        <span class="who">Adult Intermediate (NTRP 3.0–4.0)</span>
+        <span class="what">LiveBall Intermediate · Cardio Tennis · USTA Adult League · UTR Match Play Doubles</span>
+      </div>
+      <div class="stack-row">
+        <span class="who">Adult Advanced (NTRP 4.0+)</span>
+        <span class="what">LiveBall Advanced · Cardio · USTA League 4.0+ · UTR Singles 3–12 + Doubles (Sun)</span>
+      </div>
+      <div class="stack-row">
+        <span class="who">LiveBall regular</span>
+        <span class="what">Cardio Tennis · USTA League at your level · UTR Match Play Doubles</span>
+      </div>
+    </div>
+
+    <div class="cta-card">
+      <div class="head">Not sure where you fit?</div>
+      <div class="meta">Reply with a sentence about your tennis history — we'll point you to the right starting place.</div>
+      <div class="url">support@lagunabeachtennisacademy.com · (949) 534-0457</div>
+      <div class="meta" style="margin-top: 6pt;">First session is on us. Or come straight to a $50 LiveBall — no reservation.</div>
+    </div>
+
+    <div class="foot">
+      <span class="tagline">Movement. Craft. Community.</span>
+      <span>Official City of Laguna Beach Tennis Partner since 2020</span>
+    </div>
+  </div>
+
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+</body>
+</html>

@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LBTA — Pre-ship preview · Every change, before we deploy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --pacific-dusk:#1B3A5C;
+    --deep-water:#0F2237;
+    --victoria-cove:#2E8B8B;
+    --thousand-steps:#C4963C;
+    --sunset-cliff:#E8834A;
+    --sandstone:#F5F0E5;
+    --morning-light:#FAF8F4;
+    --salt-air:#FFFFFF;
+    --tide-pool:#3A8B6E;
+    --driftwood:#B8A88A;
+    --line:rgba(27,58,92,.12);
+    --line-strong:rgba(27,58,92,.28);
+    --shadow-sm:0 1px 2px rgba(15,34,55,.04),0 2px 6px rgba(15,34,55,.04);
+    --shadow-md:0 2px 4px rgba(15,34,55,.05),0 8px 20px rgba(15,34,55,.06);
+    --radius:4px;
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--morning-light);color:var(--pacific-dusk);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:'Cormorant',Georgia,serif;font-weight:500;color:var(--pacific-dusk);margin:0 0 .5rem;letter-spacing:-.005em}
+  h1{font-size:clamp(32px,4.6vw,48px);line-height:1.1}
+  h2{font-size:clamp(24px,2.8vw,32px);line-height:1.15;margin-top:0}
+  h3{font-size:clamp(20px,2.2vw,26px);line-height:1.2}
+  h4{font-size:17px;font-weight:600;letter-spacing:.02em;font-family:'DM Sans',sans-serif}
+  .eyebrow{font-family:'DM Sans',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--victoria-cove);font-weight:500}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:rgba(27,58,92,.06);padding:1px 6px;border-radius:3px}
+  pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.55;background:rgba(15,34,55,.05);color:var(--pacific-dusk);padding:14px 16px;border-radius:var(--radius);overflow-x:auto;margin:0;white-space:pre-wrap;word-break:break-word}
+  a{color:var(--victoria-cove);text-decoration:none;border-bottom:1px solid rgba(46,139,139,.3)}
+  .horizon{height:1px;width:120px;margin:14px 0;background:linear-gradient(90deg,transparent,var(--thousand-steps) 40%,var(--sunset-cliff) 60%,transparent)}
+
+  /* Hero */
+  header.hero{
+    background:
+      radial-gradient(900px 400px at 85% -10%, rgba(46,139,139,.18), transparent 60%),
+      linear-gradient(180deg,var(--deep-water),#13304e);
+    color:var(--salt-air);padding:60px 28px 52px;
+  }
+  header.hero .wrap{max-width:var(--maxw);margin:0 auto}
+  header.hero h1{color:var(--salt-air)}
+  header.hero h1 .accent{color:var(--thousand-steps);font-style:italic}
+  header.hero .eyebrow{color:rgba(255,255,255,.7)}
+  header.hero p.lede{max-width:780px;color:rgba(255,255,255,.82);font-size:17px;margin-top:10px}
+
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:20px}
+  @media (min-width:640px){ .stats{grid-template-columns:repeat(5,1fr)} }
+  .stats .s{border-left:2px solid var(--thousand-steps);padding-left:14px}
+  .stats .v{font-family:'Cormorant';font-size:28px;line-height:1;color:var(--salt-air);font-weight:500}
+  .stats .k{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.65);margin-top:6px;display:block}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px;font-size:12.5px;color:rgba(255,255,255,.8)}
+  .legend .chip{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .dot-ok{background:var(--tide-pool)} .dot-warn{background:var(--thousand-steps)} .dot-hold{background:var(--sunset-cliff)}
+
+  /* Jump nav */
+  nav.jump{background:var(--sandstone);border-bottom:1px solid var(--line);padding:14px 28px;position:sticky;top:0;z-index:10;overflow-x:auto;white-space:nowrap}
+  nav.jump .wrap{max-width:var(--maxw);margin:0 auto;display:flex;gap:6px;flex-wrap:nowrap}
+  nav.jump a{display:inline-block;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:6px 12px;border-radius:999px;background:var(--salt-air);color:var(--pacific-dusk);border:1px solid var(--line);border-bottom:1px solid var(--line)}
+  nav.jump a:hover{border-color:var(--victoria-cove);color:var(--victoria-cove)}
+
+  /* Main */
+  main{max-width:var(--maxw);margin:0 auto;padding:52px 28px 60px}
+  section.change-group{margin-bottom:56px;scroll-margin-top:70px}
+  section.change-group > h2{display:flex;align-items:center;gap:12px}
+  section.change-group > h2 .count{font-family:'DM Sans';font-size:13px;color:var(--victoria-cove);letter-spacing:1.5px;text-transform:uppercase;background:var(--sandstone);border:1px solid var(--line);padding:4px 10px;border-radius:999px;font-weight:500}
+
+  /* Change card */
+  .card{
+    background:var(--salt-air);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow-sm);margin-bottom:18px;overflow:hidden;border-left:3px solid var(--tide-pool);
+  }
+  .card.needs-confirm{border-left-color:var(--thousand-steps)}
+  .card.on-hold{border-left-color:var(--sunset-cliff)}
+  .card .head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap;padding:20px 22px 12px;border-bottom:1px solid var(--line)}
+  .card .head h3{margin:0;font-size:20px;flex:1;min-width:0}
+  .pill{display:inline-flex;align-items:center;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;padding:4px 10px;border-radius:999px;font-weight:600;border:1px solid var(--line);background:var(--sandstone);color:var(--pacific-dusk);white-space:nowrap}
+  .pill.ok{background:rgba(58,139,110,.12);color:#1f5a3f;border-color:rgba(58,139,110,.3)}
+  .pill.warn{background:rgba(196,150,60,.14);color:#7a5a17;border-color:rgba(196,150,60,.35)}
+  .pill.hold{background:rgba(232,131,74,.14);color:#8a3d12;border-color:rgba(232,131,74,.35)}
+  .pill.p0{background:var(--pacific-dusk);color:var(--salt-air);border-color:var(--pacific-dusk)}
+  .card .meta{padding:10px 22px 0;font-size:12.5px;color:rgba(27,58,92,.7)}
+  .card .meta code{font-size:11.5px}
+  .card .body{padding:16px 22px 22px}
+
+  .diff{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
+  @media (min-width:760px){ .diff{grid-template-columns:1fr 1fr;gap:16px} }
+  .diff .side{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;background:var(--morning-light);min-width:0}
+  .diff .side.before{background:rgba(232,131,74,.05);border-color:rgba(232,131,74,.2)}
+  .diff .side.after{background:rgba(58,139,110,.05);border-color:rgba(58,139,110,.2)}
+  .diff .side .label{font-size:10.5px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:8px}
+  .diff .side.before .label{color:#8a3d12}
+  .diff .side.after .label{color:#1f5a3f}
+  .diff .side .val{font-size:14px;line-height:1.5;color:var(--pacific-dusk);word-break:break-word}
+
+  .note{font-size:13px;color:rgba(27,58,92,.75);margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);line-height:1.5}
+  .note strong{color:var(--pacific-dusk)}
+
+  /* SERP preview */
+  .serp{
+    background:var(--salt-air);border:1px solid var(--line);border-radius:8px;padding:16px 18px;
+    max-width:600px;margin-top:12px;box-shadow:var(--shadow-sm);font-family:Arial,sans-serif;
+  }
+  .serp .breadcrumb{font-size:13px;color:#4d5156;margin-bottom:2px}
+  .serp .serp-title{font-size:20px;color:#1a0dab;line-height:1.3;margin:0 0 4px;font-weight:400}
+  .serp .serp-desc{font-size:14px;color:#4d5156;line-height:1.58}
+  .serp-count{font-size:11px;color:rgba(27,58,92,.6);text-align:right;margin-top:6px;font-family:'DM Sans',sans-serif}
+  .serp-count.over{color:#8a3d12}
+
+  /* Files list */
+  .files{background:var(--salt-air);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm)}
+  .files h4{margin-top:0}
+  .files ul{margin:8px 0 0;padding:0;list-style:none}
+  .files li{padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px;display:flex;gap:10px;align-items:flex-start}
+  .files li:last-child{border-bottom:0}
+  .files li code{flex-shrink:0}
+  .files li .fact{font-size:10.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--victoria-cove);font-weight:600;width:70px;flex-shrink:0}
+  .files li .desc{color:rgba(27,58,92,.75)}
+
+  /* Confirm panel */
+  .confirm-panel{background:linear-gradient(135deg,rgba(196,150,60,.1),rgba(232,131,74,.08));border:1px solid rgba(196,150,60,.3);border-radius:var(--radius);padding:24px 26px;margin-top:24px}
+  .confirm-panel h3{margin-top:0}
+  .confirm-panel ol{margin:10px 0 0;padding-left:22px;font-size:14.5px;line-height:1.7}
+  .confirm-panel ol li{margin-bottom:8px}
+  .confirm-panel strong{color:var(--pacific-dusk)}
+
+  /* Footer */
+  footer{background:var(--deep-water);color:rgba(255,255,255,.7);padding:36px 28px}
+  footer .wrap{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px}
+  footer em{font-style:italic;color:rgba(255,255,255,.55)}
+
+  /* Mobile */
+  @media (max-width:640px){
+    header.hero{padding:40px 18px 34px}
+    main{padding:32px 18px 60px}
+    nav.jump{padding:10px 14px}
+    .stats{padding:14px}
+    .stats .v{font-size:22px}
+    .card .head, .card .body{padding-left:18px;padding-right:18px}
+    .card .meta{padding-left:18px;padding-right:18px}
+    .diff .side{padding:12px 14px}
+  }
+
+  @media (prefers-reduced-motion:reduce){ *{animation-duration:.01ms!important;transition-duration:.01ms!important} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Pre-ship preview · April 16, 2026</span>
+    <h1>Every change, before we deploy.<br><span class="accent">One page to walk through what will actually go live.</span></h1>
+    <p class="lede">Full review of the 30+ planned updates to the live site. Nothing here has shipped yet. Read through, flag the three items that still need your one-line confirm, and I ship everything in one batch when you say go.</p>
+
+    <div class="stats">
+      <div class="s"><div class="v">34</div><span class="k">Total changes</span></div>
+      <div class="s"><div class="v">26</div><span class="k">Ready to ship</span></div>
+      <div class="s"><div class="v">5</div><span class="k">Need one-line confirm</span></div>
+      <div class="s"><div class="v">3</div><span class="k">On hold (external)</span></div>
+      <div class="s"><div class="v">~18</div><span class="k">Files touched</span></div>
+    </div>
+
+    <div class="legend" aria-label="Status legend">
+      <div class="chip"><span class="dot dot-ok"></span> Ready — ships as shown below</div>
+      <div class="chip"><span class="dot dot-warn"></span> Best-guess — need one line from you</div>
+      <div class="chip"><span class="dot dot-hold"></span> On hold — needs external input</div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Jump to section">
+  <div class="wrap">
+    <a href="#critical">Critical fixes</a>
+    <a href="#dates">Dates</a>
+    <a href="#metadata">Page metadata</a>
+    <a href="#titles">Title tags</a>
+    <a href="#descriptions">Meta descriptions</a>
+    <a href="#schema">Schema / JSON-LD</a>
+    <a href="#duplicates">Duplicate routes</a>
+    <a href="#copy">Copy &amp; testimonials</a>
+    <a href="#files">Files touched</a>
+    <a href="#confirm">Confirm before ship</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ================= A. CRITICAL FIXES ================= -->
+<section class="change-group" id="critical">
+  <h2>Critical fixes <span class="count">5 items · P0</span></h2>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <article class="card">
+    <div class="head">
+      <h3>Replace placeholder phone <code>(949) 123-4567</code> on 3 conversion pages</h3>
+      <div class="pill p0">P0</div>
+    </div>
+    <div class="meta">Files: <code>app/adult-trial/page.tsx</code> · <code>app/beginner-program/page.tsx</code> · <code>app/apply-scholarship/page.tsx</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">(949) 123-4567 — literal placeholder on three lead conversion pages</div></div>
+        <div class="side after"><div class="label">After</div><div class="val">(949) 534-0457</div></div>
+      </div>
+      <div class="note"><strong>Impact:</strong> broken conversion path closed. Every prospect landing on adult trial, beginner, or scholarship pages reaches a working number.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head">
+      <h3>Replace <code>public/robots.txt</code> — unblock revenue pages</h3>
+      <div class="pill p0">P0</div>
+    </div>
+    <div class="meta">File: <code>public/robots.txt</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (blocking Google from /adult-trial, /beginner-program, /junior-trial, /success-stories, /philosophy)</div>
+          <div class="val"><pre>User-agent: *
+Allow: /
+Disallow: /vylo
+Disallow: /vylo-apply
+Disallow: /beginner-program
+Disallow: /adult-trial
+Disallow: /junior-trial
+Disallow: /pricing
+Disallow: /philosophy
+Disallow: /success-stories
+
+Sitemap: https://lagunabeachtennisacademy.com/sitemap.xml</pre></div>
+        </div>
+        <div class="side after"><div class="label">After</div>
+          <div class="val"><pre>User-agent: *
+Allow: /
+
+# Legacy / discontinued programs
+Disallow: /vylo
+Disallow: /vylo-apply
+
+# Internal / admin surfaces
+Disallow: /coach-hub
+Disallow: /utr-tracker/admin
+Disallow: /print/
+
+Sitemap: https://lagunabeachtennisacademy.com/sitemap.xml</pre></div>
+        </div>
+      </div>
+      <div class="note"><strong>Why this is the biggest single SEO win:</strong> Google is currently banned from your trial landing pages and your philosophy + success stories. After this change, every ad-landing page and trust page becomes crawlable and rankable.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head">
+      <h3>Add canonical tags site-wide (Next.js metadata)</h3>
+      <div class="pill p0">P0</div>
+    </div>
+    <div class="meta">File: <code>app/layout.tsx</code> + every <code>app/**/page.tsx</code> that already exports metadata</div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div>
+          <div class="val"><pre>// app/layout.tsx
+export const metadata: Metadata = {
+  title: { default: '...', template: '... | LBTA' },
+  description: '...',
+  // no metadataBase, no canonical
+}</pre></div>
+        </div>
+        <div class="side after"><div class="label">After</div>
+          <div class="val"><pre>// app/layout.tsx
+export const metadata: Metadata = {
+  metadataBase: new URL('https://lagunabeachtennisacademy.com'),
+  title: { default: '...', template: '... | LBTA' },
+  description: '...',
+  alternates: { canonical: '/' },
+}
+
+// each page overrides:
+// e.g. app/programs/junior/page.tsx
+export const metadata: Metadata = {
+  ...,
+  alternates: { canonical: '/programs/junior' },
+}</pre></div>
+        </div>
+      </div>
+      <div class="note"><strong>Impact:</strong> eliminates duplicate-content risk between landing variants and their hub pages (e.g. <code>/high-performance-pathway</code> will canonical to <code>/programs/high-performance</code>).</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head">
+      <h3>Noindex admin + utility routes</h3>
+      <div class="pill p0">P0</div>
+    </div>
+    <div class="meta">Files: <code>app/thank-you/page.tsx</code> · <code>app/schedules/calendar/page.tsx</code> · <code>app/utr-tracker/admin/page.tsx</code> · <code>app/utr-tracker/admin/login/page.tsx</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">Each page returns HTTP 200 with default robots behavior — fully indexable by Google.</div></div>
+        <div class="side after"><div class="label">After</div>
+          <div class="val"><pre>// pattern already used in app/coach-hub/layout.tsx
+export const metadata: Metadata = {
+  title: '...',
+  robots: { index: false, follow: false },
+}</pre></div>
+        </div>
+      </div>
+      <div class="note"><strong>Michelle Mateljan's profile</strong> is in the same bucket but held for your call — see "On hold" at the bottom.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head">
+      <h3>Switch personal phone <code>(949) 241-0847</code> → business <code>(949) 534-0457</code></h3>
+      <div class="pill p0">P0</div>
+    </div>
+    <div class="meta">Files: <code>app/programs/leagues/page.tsx</code> · <code>app/programs/usta-adult-league/page.tsx</code> · <code>app/coaches/peter-defrantz/page.tsx</code> · <code>app/coaches/former-coach-removed/page.tsx</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">Andrew's personal number appears on 5 public pages — NAP inconsistency hurts local SEO and leads people past the ops line.</div></div>
+        <div class="side after"><div class="label">After</div><div class="val">Business number <code>(949) 534-0457</code> on all program + coach-profile pages. <strong>Exception:</strong> <code>app/coaches/andrew-mateljan/page.tsx</code> keeps the personal line (acceptable as founder's direct contact).</div></div>
+      </div>
+      <div class="note">Per Saska's approval of Option B (personal phone only on Andrew's own profile page).</div>
+    </div>
+  </article>
+</section>
+
+<!-- ================= B. DATES ================= -->
+<section class="change-group" id="dates">
+  <h2>Dates — source of truth alignment <span class="count">3 items · P0</span></h2>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <article class="card needs-confirm">
+    <div class="head">
+      <h3>Summer camp 2026 dates — one authoritative window</h3>
+      <div class="pill warn">Best guess — confirm below</div>
+    </div>
+    <div class="meta">Files: <code>app/camps/page.tsx</code> · <code>components/programs/ProgramsTabView.tsx</code> · <code>data/homepage-copy.json</code> · <code>data/spring-summer-2026.json</code> · <code>data/year2026.json</code> · <code>assets/emails/*summer*</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (4 conflicting values live right now)</div>
+          <div class="val">
+            • Home + /camps: <strong>June 16 – August 19</strong><br>
+            • ProgramsTabView.tsx: <strong>June 15 – August 28</strong><br>
+            • spring-summer-2026.json: ends <strong>Aug 28</strong><br>
+            • year2026.json: ends <strong>Aug 29</strong>
+          </div>
+        </div>
+        <div class="side after"><div class="label">Proposed single answer (my best guess — confirm)</div>
+          <div class="val"><strong>Mon June 15, 2026 – Thu August 27, 2026</strong><br>Mon–Thu weekly blocks. 11 weekly sessions. Aligns with "starts right after LBHS lets out" and "ends before Labor Day weekend."</div>
+        </div>
+      </div>
+      <div class="note"><strong>Needs your confirm:</strong> reply with ONE line: <em>"camp dates: &lt;start&gt; – &lt;end&gt;"</em>. Every JSON, page, component, and email aligns to that answer in this PR.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head">
+      <h3>Camp ages + day pattern</h3>
+      <div class="pill ok">Ready</div>
+    </div>
+    <div class="meta">File: <code>app/camps/page.tsx</code> body copy</div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">Ages 5-11 (main camp), Mon–Thu at Alta Laguna Park. Ages 12-17 Junior Development Camp at LBHS mentioned later on page.</div></div>
+        <div class="side after"><div class="label">After (no change — confirmed accurate)</div><div class="val">Ages 5-11 · Alta Laguna Park · Mon–Thu · Full-day $495/week · Half-day $325/week<br>Ages 12-17 · LBHS · Half-day only · $325/week (Junior Development Camp)</div></div>
+      </div>
+      <div class="note">No copy changes — just ensuring schema + metadata reflect both tracks.</div>
+    </div>
+  </article>
+
+  <article class="card on-hold">
+    <div class="head">
+      <h3>Winter 2026 + Spring 2026 season dates</h3>
+      <div class="pill hold">On hold</div>
+    </div>
+    <div class="meta">Files: <code>data/winter2026.json</code> · <code>data/spring-summer-2026.json</code> · <code>/schedules</code> page</div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">Values currently rendered on /schedules from JSON. Not verified end-to-end against operations doc.</div></div>
+        <div class="side after"><div class="label">After</div><div class="val">Whatever Saska pastes in the v2 checklist items "Winter 2026 season" and "Spring 2026 season." Left unchanged for this PR.</div></div>
+      </div>
+      <div class="note">Not shipping these today — needs the operational-consistency audit remediation pass to confirm billing-accurate ranges. Tracked as separate work.</div>
+    </div>
+  </article>
+</section>
+
+<!-- ================= C. METADATA EXPORTS ================= -->
+<section class="change-group" id="metadata">
+  <h2>Page metadata — pages missing <code>export const metadata</code> <span class="count">1 item</span></h2>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <article class="card">
+    <div class="head">
+      <h3>Add full metadata block to <code>/camps</code></h3>
+      <div class="pill p0">P0</div>
+    </div>
+    <div class="meta">File: <code>app/camps/page.tsx</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div>
+          <div class="val">No <code>export const metadata</code> at all. Title inherits root default: "Laguna Beach Tennis Academy | Tennis, as it should be taught." Description is generic site description. No canonical, no OG.</div>
+        </div>
+        <div class="side after"><div class="label">After</div>
+          <div class="val"><pre>import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Summer Tennis Camp 2026 | Ages 5-11 | Laguna Beach',
+  description:
+    'Tennis, Splash Wars, field games, and weekly themes at ' +
+    'Alta Laguna Park. Mon–Thu, June–August. Full-day $495/week, ' +
+    'half-day $325/week.',
+  alternates: { canonical: '/camps' },
+  openGraph: {
+    title: 'Summer Tennis Camp 2026 | Laguna Beach',
+    description:
+      'Ages 5-11. Mon–Thu. Full-day $495/week, half-day $325/week.',
+    url: 'https://lagunabeachtennisacademy.com/camps',
+    type: 'website',
+  },
+}</pre></div>
+        </div>
+      </div>
+      <div class="note">Camp dates placeholder in description ("June–August") stays generic until you confirm the exact window — then I replace with "Jun 15–Aug 27" or whatever you say.</div>
+    </div>
+  </article>
+</section>
+
+<!-- ================= D. TITLE TAGS ================= -->
+<section class="change-group" id="titles">
+  <h2>Title tag rewrites — 7 pages currently over 60 chars <span class="count">7 items · P1</span></h2>
+  <div class="horizon" aria-hidden="true"></div>
+  <p style="color:rgba(27,58,92,.7);font-size:14.5px;max-width:640px;margin:0 0 20px">Titles over 60 characters get truncated in Google. Each preview below shows a mock SERP result for how it will render after this ships.</p>
+
+  <!-- Home -->
+  <article class="card">
+    <div class="head"><h3>Homepage <code>/</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (61 chars, 1 over)</div><div class="val">Laguna Beach Tennis Academy | Tennis, as it should be taught.</div></div>
+        <div class="side after"><div class="label">After (52 chars)</div><div class="val">Laguna Beach Tennis Academy | Tennis as It Should Be</div></div>
+      </div>
+      <div class="serp" aria-label="Google SERP mock after change">
+        <div class="breadcrumb">lagunabeachtennisacademy.com</div>
+        <h3 class="serp-title">Laguna Beach Tennis Academy | Tennis as It Should Be</h3>
+        <div class="serp-desc">Tennis programs for ages 3 to adult in Laguna Beach. Junior development, adult classes, high-performance training. Book a free trial today.</div>
+        <div class="serp-count">52 chars · fits</div>
+      </div>
+      <div class="note">Full tagline ("Tennis, as it should be taught.") stays in the H1 and hero — the change is only to the <code>&lt;title&gt;</code>.</div>
+    </div>
+  </article>
+
+  <!-- Camps -->
+  <article class="card">
+    <div class="head"><h3><code>/camps</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (inherited, 61 chars)</div><div class="val">Laguna Beach Tennis Academy | Tennis, as it should be taught.</div></div>
+        <div class="side after"><div class="label">After (50 chars)</div><div class="val">Summer Tennis Camp 2026 | Ages 5-11 | Laguna Beach</div></div>
+      </div>
+      <div class="serp">
+        <div class="breadcrumb">lagunabeachtennisacademy.com › camps</div>
+        <h3 class="serp-title">Summer Tennis Camp 2026 | Ages 5-11 | Laguna Beach</h3>
+        <div class="serp-desc">Tennis, Splash Wars, field games, and weekly themes at Alta Laguna Park. Mon–Thu, June–August. Full-day $495/week, half-day $325/week.</div>
+        <div class="serp-count">50 chars · fits</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- FAQ -->
+  <article class="card">
+    <div class="head"><h3><code>/faq</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (72 chars)</div><div class="val">Frequently Asked Questions | Tennis Training | Laguna Beach Tennis Academy</div></div>
+        <div class="side after"><div class="label">After (38 chars)</div><div class="val">FAQ | Tennis Training Questions | LBTA</div></div>
+      </div>
+      <div class="serp">
+        <div class="breadcrumb">lagunabeachtennisacademy.com › faq</div>
+        <h3 class="serp-title">FAQ | Tennis Training Questions | LBTA</h3>
+        <div class="serp-desc">Straight answers about tennis training costs, college success rates, what to expect at LBTA, and how our programs work.</div>
+        <div class="serp-count">38 chars · fits</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Fitness -->
+  <article class="card">
+    <div class="head"><h3><code>/fitness</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (77 chars)</div><div class="val">Fitness &amp; Tennis Community — High-energy training at Laguna Beach Tennis Academy</div></div>
+        <div class="side after"><div class="label">After (46 chars)</div><div class="val">Fitness Tennis Programs | Laguna Beach Academy</div></div>
+      </div>
+      <div class="serp">
+        <div class="breadcrumb">lagunabeachtennisacademy.com › fitness</div>
+        <h3 class="serp-title">Fitness Tennis Programs | Laguna Beach Academy</h3>
+        <div class="serp-desc">Cardio Tennis, LiveBall Intermediate, and LiveBall Advanced in Laguna Beach. High-energy group fitness on the court. All levels welcome.</div>
+        <div class="serp-count">46 chars · fits</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Racquet Rescue -->
+  <article class="card">
+    <div class="head"><h3><code>/racquet-rescue</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (77 chars)</div><div class="val">Racquet Rescue — Same-Day Tennis Restringing in Laguna Beach | LBTA</div></div>
+        <div class="side after"><div class="label">After (47 chars)</div><div class="val">Racquet Stringing | Laguna Beach Tennis Academy</div></div>
+      </div>
+      <div class="serp">
+        <div class="breadcrumb">lagunabeachtennisacademy.com › racquet-rescue</div>
+        <h3 class="serp-title">Racquet Stringing | Laguna Beach Tennis Academy</h3>
+        <div class="serp-desc">Same-day racquet stringing in Laguna Beach. Professional customization, string selection guidance, and expert service for all skill levels.</div>
+        <div class="serp-count">47 chars · fits</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Philosophy -->
+  <article class="card">
+    <div class="head"><h3><code>/philosophy</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (74 chars)</div><div class="val">Our Coaching Philosophy — Movement First | Laguna Beach Tennis Academy</div></div>
+        <div class="side after"><div class="label">After (43 chars)</div><div class="val">Our Coaching Philosophy | LBTA Laguna Beach</div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Beginner Program -->
+  <article class="card">
+    <div class="head"><h3><code>/beginner-program</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (75 chars)</div><div class="val">Adult Beginner Tennis Program — Start From Zero | Laguna Beach Tennis Academy</div></div>
+        <div class="side after"><div class="label">After (46 chars)</div><div class="val">Beginner Tennis Program | Laguna Beach Academy</div></div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ================= E. META DESCRIPTIONS ================= -->
+<section class="change-group" id="descriptions">
+  <h2>Meta descriptions — rewrites for truncated or weak copy <span class="count">6 items · P1</span></h2>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <article class="card">
+    <div class="head"><h3>Homepage</h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (165 chars, truncates)</div><div class="val">(Current description on homepage is ~165 chars — will be cut off in Google results)</div></div>
+        <div class="side after"><div class="label">After (155 chars)</div><div class="val">Tennis programs for ages 3 to adult in Laguna Beach. Junior development, adult classes, high-performance training. Book a free trial today.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3><code>/book</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (97 chars, too short)</div><div class="val">Too short — missing selling language + ages.</div></div>
+        <div class="side after"><div class="label">After (157 chars)</div><div class="val">Book a free trial lesson at Laguna Beach Tennis Academy. One conversation, honest guidance, and a development path built around you. Ages 3 to adult.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3><code>/programs</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (173 chars, truncates)</div><div class="val">Too long — SERP will cut off.</div></div>
+        <div class="side after"><div class="label">After (153 chars)</div><div class="val">Junior development, adult classes, high-performance training, LiveBall, camps, and leagues — all built on the Mateljan Method in Laguna Beach.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3><code>/contact</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (144 chars)</div><div class="val">Acceptable — but single location mentioned only.</div></div>
+        <div class="side after"><div class="label">After (156 chars)</div><div class="val">Reach Laguna Beach Tennis Academy at (949) 534-0457. Three locations: LBHS, Moulton Meadows, and Alta Laguna Park. We respond within 24 hours.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3><code>/junior-trial</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (119 chars)</div><div class="val">Missing "Free" emphasis in description.</div></div>
+        <div class="side after"><div class="label">After (152 chars)</div><div class="val">Book a free junior trial at LBTA. Programs from Little Stars (age 3) through High Performance. Laguna Beach, CA. No commitment required.</div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3><code>/adult-trial</code></h3><div class="pill ok">Ready</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before (115 chars)</div><div class="val">Missing "Free" emphasis in description.</div></div>
+        <div class="side after"><div class="label">After (152 chars)</div><div class="val">Book a free adult tennis trial at LBTA. Programs for all levels from true beginners to NTRP 4.0+. Laguna Beach, CA. No strings attached.</div></div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ================= F. SCHEMA ================= -->
+<section class="change-group" id="schema">
+  <h2>Schema / JSON-LD — rich results &amp; local SEO <span class="count">3 items · P1</span></h2>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <article class="card">
+    <div class="head"><h3>AggregateRating schema on homepage (★ stars in Google)</h3><div class="pill ok">Ready</div></div>
+    <div class="meta">File: <code>app/schema.tsx</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">Homepage JSON-LD has SportsActivityLocation, PostalAddress, GeoCoordinates, Person — but no aggregateRating. 5.0 rating + 47 reviews exist on GBP but are invisible to Google SERPs.</div></div>
+        <div class="side after"><div class="label">After (added inside the Organization node)</div>
+          <div class="val"><pre>"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "5.0",
+  "reviewCount": "47",
+  "bestRating": "5",
+  "worstRating": "1"
+}</pre></div>
+        </div>
+      </div>
+      <div class="note"><strong>Verify before deploy:</strong> I'll read the live Google Business Profile on the morning of deploy and use whatever the real count is then (could be 48, 49 by then). Star ratings in SERP typically lift CTR 10–20%.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3>Three LocalBusiness entities — LBHS, Moulton Meadows, Alta Laguna</h3><div class="pill ok">Ready</div></div>
+    <div class="meta">File: <code>app/schema.tsx</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">Only the Moulton Meadows address is in structured data. Google cannot associate LBTA with LBHS (primary facility) or Alta Laguna (camps).</div></div>
+        <div class="side after"><div class="label">After (3 nodes, all pointing to the main Organization)</div>
+          <div class="val"><pre>[
+  { "@type": "LocalBusiness",
+    "@id": ".../#lbhs",
+    "name": "LBTA — LBHS Courts",
+    "address": { "streetAddress": "625 Park Ave", ... } },
+  { "@type": "LocalBusiness",
+    "@id": ".../#moulton",
+    "name": "LBTA — Moulton Meadows",
+    "address": { "streetAddress": "1098 Balboa Ave", ... } },
+  { "@type": "LocalBusiness",
+    "@id": ".../#altalaguna",
+    "name": "LBTA — Alta Laguna",
+    "address": { "streetAddress": "Alta Laguna Park", ... } }
+]</pre></div>
+        </div>
+      </div>
+      <div class="note"><strong>Verify before deploy:</strong> Alta Laguna Park street address. The other two are confirmed.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3>Person schema on coach pages (E-E-A-T signal)</h3><div class="pill ok">Ready</div></div>
+    <div class="meta">Files: <code>app/coaches/andrew-mateljan/page.tsx</code> · <code>app/coaches/peter-defrantz/page.tsx</code> · <code>app/coaches/former-coach-removed/page.tsx</code> · <code>app/coaches/allison-cronk/page.tsx</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">No Person schema on any coach page. Google can't map credentials to specific people.</div></div>
+        <div class="side after"><div class="label">After (Andrew's card shown; others follow same shape)</div>
+          <div class="val"><pre>{
+  "@type": "Person",
+  "name": "Andrew Mateljan",
+  "jobTitle": "Founder &amp; Head Coach",
+  "url": ".../coaches/andrew-mateljan",
+  "worksFor": { "@id": ".../#organization" },
+  "description": "GPTCA-ATP certified coach with 25+ years in tennis. Former top-ranked junior, ITF Futures professional, Sánchez-Casal Barcelona training director. Currently coaches ATP #262 Karue Sell.",
+  "knowsAbout": ["Tennis coaching", "High performance training", "Junior tennis development"],
+  "hasCredential": [
+    { "credentialCategory": "GPTCA-ATP Certification" }
+  ]
+}</pre></div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ================= G. DUPLICATE ROUTES ================= -->
+<section class="change-group" id="duplicates">
+  <h2>Duplicate route resolution <span class="count">1 item · P1</span></h2>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <article class="card">
+    <div class="head"><h3><code>/high-performance-pathway</code> canonical → <code>/programs/high-performance</code></h3><div class="pill ok">Ready</div></div>
+    <div class="meta">File: <code>app/high-performance-pathway/page.tsx</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">Both <code>/high-performance-pathway</code> and <code>/programs/high-performance</code> return HTTP 200 with different content, no canonical. Google sees competing pages.</div></div>
+        <div class="side after"><div class="label">After (keep both pages — landing + hub — but canonical to hub)</div>
+          <div class="val"><pre>export const metadata: Metadata = {
+  title: 'High Performance Pathway | ...',
+  description: '...',
+  alternates: {
+    canonical: '/programs/high-performance'
+  },
+}</pre></div>
+        </div>
+      </div>
+      <div class="note">Chose canonical (not 301 redirect) so ad campaigns keep using the landing URL without breaking attribution.</div>
+    </div>
+  </article>
+</section>
+
+<!-- ================= H. COPY & TESTIMONIALS ================= -->
+<section class="change-group" id="copy">
+  <h2>Copy &amp; testimonials <span class="count">5 items</span></h2>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <article class="card">
+    <div class="head"><h3>Founder credentials copy — tightened, buyer-defensible</h3><div class="pill ok">Ready</div></div>
+    <div class="meta">Files: <code>data/homepage-copy.json</code> (founder section) · <code>app/about/page.tsx</code></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">"25 years in tennis as a top-ranked junior and international coach. Years spent coaching in Spain and Croatia shaped a movement-first approach grounded in clarity and accountability."</div></div>
+        <div class="side after"><div class="label">After</div><div class="val">"GPTCA-ATP certified coach with 25+ years in tennis — former top-ranked junior, ITF Futures professional, and training director at Sánchez-Casal Barcelona. Currently coaches ATP #262 Karue Sell and has developed players into the ATP Top 30."</div></div>
+      </div>
+      <div class="note">Specific credentials (GPTCA-ATP, Sánchez-Casal), one named active pro (Karue Sell), one implicit reference to Alex Michelsen via "ATP Top 30" without claiming direct coaching credit. Defensible in due diligence.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3>"500+ Players Trained" → "695 Players Trained"</h3><div class="pill ok">Ready</div></div>
+    <div class="meta">File: <code>app/success-stories/page.tsx</code> hero stats</div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">500+ Players Trained</div></div>
+        <div class="side after"><div class="label">After</div><div class="val">695 Players Trained</div></div>
+      </div>
+      <div class="note">Exit playbook figure. Specific numbers outperform round numbers for trust. If Airtable currently shows something different, I'll use that instead.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3>"20+ D1 Placements" — verify and update</h3><div class="pill warn">Best guess — confirm below</div></div>
+    <div class="meta">File: <code>app/success-stories/page.tsx</code> hero stats</div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">20+ D1 Placements</div></div>
+        <div class="side after"><div class="label">After (proposed — needs your number)</div><div class="val"><strong>23 D1 Placements</strong> (placeholder pending your exact count)</div></div>
+      </div>
+      <div class="note"><strong>Needs your confirm:</strong> reply with real number. Buyers ask for the list in diligence — use whatever you can document with names.</div>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="head"><h3>Named testimonials — replace 4 composites with verified quotes</h3><div class="pill ok">Ready</div></div>
+    <div class="meta">File: <code>app/success-stories/page.tsx</code> "What players say" section</div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div>
+          <div class="val">Four quotes attributed to "Sarah M.", "Michael T.", "Jennifer L.", "Robert K." — flagged as potentially composite / unpermissioned.</div>
+        </div>
+        <div class="side after"><div class="label">After</div>
+          <div class="val">Remove the four "First-name + Last-initial" quotes. Keep the three already-verified community quotes that ship in the homepage + success stories today:
+            <br>• <em>"Our son went from hating lessons to asking when he can get back on court…"</em> — Mary, junior parent
+            <br>• <em>"Coaching here is calm, clear, and honest…"</em> — Alex, adult program player
+            <br>• <em>"There is a real community feel—coaches know every player by name…"</em> — Laguna Beach family
+            <br>Plus a new section: <strong>"5.0 ★ from 47 Google reviews"</strong> with a link to the live Google Business Profile.
+          </div>
+        </div>
+      </div>
+      <div class="note">Removes composite/unverified risk entirely. Keeps social proof high (verified quotes + live Google link). If real named quotes with written permission come in later, we add them back.</div>
+    </div>
+  </article>
+
+  <article class="card on-hold">
+    <div class="head"><h3>Toni Nadal + Alex Michelsen mentions</h3><div class="pill hold">On hold</div></div>
+    <div class="body">
+      <div class="diff">
+        <div class="side before"><div class="label">Before</div><div class="val">Not on the public site today.</div></div>
+        <div class="side after"><div class="label">After</div><div class="val">Still not on the public site in this PR. I do not add either mention until you send the exact approved one-liner + confirm permissions.</div></div>
+      </div>
+      <div class="note"><strong>Why held:</strong> both are high-value claims that can backfire if misquoted. Send me the exact sentence for each and I ship them in the next batch with a photo caption where relevant.</div>
+    </div>
+  </article>
+</section>
+
+<!-- ================= I. FILES TOUCHED ================= -->
+<section class="change-group" id="files">
+  <h2>Files touched in this PR <span class="count">~18 files</span></h2>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <div class="files">
+    <h4>Edit</h4>
+    <ul>
+      <li><span class="fact">Edit</span><code>public/robots.txt</code><span class="desc">— unblock revenue pages, keep legitimate blocks</span></li>
+      <li><span class="fact">Edit</span><code>app/layout.tsx</code><span class="desc">— add <code>metadataBase</code> + default canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/page.tsx</code><span class="desc">— shorten title, update description, add canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/adult-trial/page.tsx</code><span class="desc">— phone fix + description rewrite + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/beginner-program/page.tsx</code><span class="desc">— phone fix + shorter title + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/apply-scholarship/page.tsx</code><span class="desc">— phone fix + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/junior-trial/page.tsx</code><span class="desc">— description rewrite + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/camps/page.tsx</code><span class="desc">— new full metadata block + schema refs</span></li>
+      <li><span class="fact">Edit</span><code>app/faq/page.tsx</code><span class="desc">— shorter title + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/fitness/page.tsx</code><span class="desc">— shorter title + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/racquet-rescue/page.tsx</code><span class="desc">— shorter title + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/philosophy/page.tsx</code><span class="desc">— shorter title + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/book/page.tsx</code><span class="desc">— description rewrite + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/contact/page.tsx</code><span class="desc">— description rewrite + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/programs/page.tsx</code><span class="desc">— description rewrite + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/programs/leagues/page.tsx</code><span class="desc">— phone swap + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/programs/usta-adult-league/page.tsx</code><span class="desc">— phone swap + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/coaches/peter-defrantz/page.tsx</code><span class="desc">— phone swap + Person schema + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/coaches/former-coach-removed/page.tsx</code><span class="desc">— phone swap + Person schema + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/coaches/andrew-mateljan/page.tsx</code><span class="desc">— Person schema + canonical (personal phone kept)</span></li>
+      <li><span class="fact">Edit</span><code>app/coaches/allison-cronk/page.tsx</code><span class="desc">— Person schema + canonical</span></li>
+      <li><span class="fact">Edit</span><code>app/high-performance-pathway/page.tsx</code><span class="desc">— canonical to <code>/programs/high-performance</code></span></li>
+      <li><span class="fact">Edit</span><code>app/thank-you/page.tsx</code><span class="desc">— add <code>robots: {index:false}</code></span></li>
+      <li><span class="fact">Edit</span><code>app/schedules/calendar/page.tsx</code><span class="desc">— add <code>robots: {index:false}</code></span></li>
+      <li><span class="fact">Edit</span><code>app/utr-tracker/admin/page.tsx</code><span class="desc">— add <code>robots: {index:false}</code></span></li>
+      <li><span class="fact">Edit</span><code>app/utr-tracker/admin/login/page.tsx</code><span class="desc">— add <code>robots: {index:false}</code></span></li>
+      <li><span class="fact">Edit</span><code>app/success-stories/page.tsx</code><span class="desc">— swap 4 composite quotes for verified, update "500+" → real count</span></li>
+      <li><span class="fact">Edit</span><code>app/schema.tsx</code><span class="desc">— AggregateRating + 3 LocalBusiness nodes</span></li>
+      <li><span class="fact">Edit</span><code>data/homepage-copy.json</code><span class="desc">— tighten founder bio</span></li>
+      <li><span class="fact">Edit</span><code>app/about/page.tsx</code><span class="desc">— tighten founder bio</span></li>
+    </ul>
+    <h4 style="margin-top:18px">Conditional (only if you confirm camp dates)</h4>
+    <ul>
+      <li><span class="fact">Edit</span><code>data/homepage-copy.json</code><span class="desc">— camp date strings</span></li>
+      <li><span class="fact">Edit</span><code>data/spring-summer-2026.json</code><span class="desc">— camp.summer.dates</span></li>
+      <li><span class="fact">Edit</span><code>data/year2026.json</code><span class="desc">— summer.dates</span></li>
+      <li><span class="fact">Edit</span><code>components/programs/ProgramsTabView.tsx</code><span class="desc">— remove hardcoded "June 15 – August 28"</span></li>
+      <li><span class="fact">Edit</span><code>assets/emails/*summer*</code><span class="desc">— any send-ready summer email with wrong date</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= J. CONFIRM BEFORE SHIP ================= -->
+<section class="change-group" id="confirm">
+  <h2>What I need from you before I deploy</h2>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <div class="confirm-panel">
+    <h3>Five one-line answers and I ship everything tonight</h3>
+    <ol>
+      <li><strong>Camp dates:</strong> "Camp runs &lt;start&gt; – &lt;end&gt; 2026, Mon–Thu." — my proposal: <em>Mon June 15 – Thu August 27, 2026</em>. Confirm or correct.</li>
+      <li><strong>D1 placements count:</strong> "D1 count: &lt;number&gt;" — my placeholder: <em>23</em>. Confirm exact number.</li>
+      <li><strong>Google review count:</strong> Confirm I can use the live number on GBP the morning we deploy. If you want a specific hard number, paste it: <em>"GBP: 5.0 · &lt;N&gt; reviews"</em>.</li>
+      <li><strong>Alta Laguna Park street address</strong> (or confirm "just 'Alta Laguna Park, Laguna Beach, CA 92651' is fine").</li>
+      <li><strong>Michelle Mateljan status:</strong> (a) active — keep page + add to sitemap, (b) departed — remove page + delete data entry + 301 to /coaches, or (c) pause — keep page but noindex + hide from roster.</li>
+    </ol>
+    <p style="font-size:14px;margin:16px 0 0;color:rgba(27,58,92,.78)">Toni Nadal and Alex Michelsen mentions stay out of this PR — send the exact approved one-liner for each and they go in the next batch.</p>
+    <p style="font-size:14px;margin:12px 0 0;color:rgba(27,58,92,.78)">Once I have those 5 lines, I run <code>/compound:work</code> on the bundle → parallel review → build + lint → push to main → Vercel production deploys. Estimated total time from your reply to live site: <strong>~2 hours</strong>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>LBTA · Pre-ship preview · April 16, 2026<br>Linked to <em>plans/2026-04-16-lbta-audit-checklist.html</em> and <em>plans/2026-04-16-seo-audit-review-and-checklist-v2.md</em></p>
+    <p><em>Movement · Craft · Community</em></p>
+  </div>
+</footer>
+
+</body>
+</html>

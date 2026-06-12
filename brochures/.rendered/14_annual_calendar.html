@@ -1,0 +1,498 @@
+<!doctype html>
+<!-- @page width="11in" height="8.5in" landscape="true" -->
+<!--
+  14 — Annual Calendar (Year At-a-Glance)
+  ========================================
+  12-month Gantt-style timeline. Programs as horizontal bars across month
+  columns. Camps as point events. Leagues + UTR Match Play as bars. Plus
+  a key-dates strip (registration opens, early-bird deadlines).
+
+  Layout:
+    Top band         — title + lede + LBTA logo
+    Month axis       — Jan – Dec column heads
+    Group programs   — 4 season bars (Winter / Spring / Summer / Fall)
+    Open court       — 1 year-round bar (LiveBall + Cardio)
+    Camps            — 6 point events on the timeline
+    Match play       — UTR + USTA bars
+    Bottom strip     — Key dates list + foot
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · 2026 Annual Calendar</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 11in 8.5in; margin: 0; }
+    .sheet {
+      width: 11in; height: 8.5in;
+      position: relative; overflow: hidden;
+      background: var(--morning-light);
+    }
+    .pad { padding: 18pt 26pt 12pt; }
+
+    /* Header */
+    .top {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 16pt; margin-bottom: 10pt;
+    }
+    .top .titles { flex: 1; }
+    .top .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 7pt;
+      color: var(--victoria-cove); margin-bottom: 2pt;
+    }
+    .top h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 24pt; line-height: 1.05; color: var(--text-heading);
+      margin: 0; letter-spacing: -0.005em;
+    }
+    .top .lede {
+      font-size: 9pt; color: var(--text-on-light); margin-top: 3pt;
+      max-width: 6.5in; line-height: 1.45;
+    }
+    .top .logo { height: 32pt; width: auto; }
+
+    /* Calendar grid (12 months) — uses CSS grid for alignment */
+    .cal {
+      width: 100%;
+      display: grid;
+      /* Row label = 1.4in fixed; 12 months = remaining */
+      grid-template-columns: 1.5in repeat(12, 1fr);
+      column-gap: 0;
+    }
+    /* Header row */
+    .cal .month-head {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em; font-size: 7pt;
+      color: var(--text-muted);
+      padding: 4pt 4pt 6pt;
+      text-align: center;
+      border-bottom: 0.5pt solid var(--border-light);
+      background: var(--morning-light);
+    }
+    .cal .row-label {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; font-size: 6.5pt;
+      color: var(--text-muted);
+      padding: 0 8pt 0 0;
+      align-self: center;
+      text-align: right;
+    }
+    /* Generic cell — a relative positioning container for bars */
+    .cal .cell {
+      position: relative;
+      height: 18pt;
+      border-bottom: 0.5pt dotted rgba(27,58,92,0.10);
+    }
+    .cal .cell.alt { background: rgba(245,240,229,0.40); }
+
+    /* Section row group label */
+    .cal .group-label {
+      grid-column: 1 / -1;
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--sunset-cliff);
+      padding: 5pt 0 2pt;
+      border-bottom: 0.5pt solid var(--border-light);
+    }
+    .cal .group-label.cove   { color: var(--victoria-cove); }
+    .cal .group-label.gold   { color: var(--gold-deep); }
+    .cal .group-label.deep   { color: var(--pacific-dusk); }
+
+    /* Bars + dots */
+    .bar {
+      position: absolute; top: 4pt; bottom: 4pt;
+      border-radius: 3pt;
+      display: flex; align-items: center;
+      padding: 0 6pt;
+      font-family: var(--font-body); font-weight: 600;
+      font-size: 6.5pt; color: #FFFFFF;
+      letter-spacing: 0.04em;
+      box-shadow: 0 1px 2px rgba(15,34,55,0.10);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .bar.deep    { background: var(--deep-water); }
+    .bar.cove    { background: var(--victoria-cove); }
+    .bar.sunset  { background: var(--sunset-cliff); }
+    .bar.gold    { background: var(--gold-deep); }
+    .bar.pacific { background: var(--pacific-dusk); }
+    .bar .meta {
+      font-weight: 400;
+      opacity: 0.82;
+      margin-left: 6pt;
+      font-size: 5.8pt;
+    }
+
+    .dot {
+      position: absolute; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 11pt; height: 11pt;
+      border-radius: 50%;
+      box-shadow: 0 1px 2px rgba(15,34,55,0.20);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .dot.gold   { background: var(--gold); border: 1pt solid var(--gold-deep); }
+    .dot.cove   { background: var(--victoria-cove); }
+    .dot.sunset { background: var(--sunset-cliff); }
+    .dot.deep   { background: var(--deep-water); }
+    .dot-label {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      margin-left: 12pt;
+      font-family: var(--font-body); font-weight: 600;
+      font-size: 6pt; color: var(--text-on-light);
+      white-space: nowrap;
+    }
+
+    /* Bottom strip — key dates + foot */
+    .bottom {
+      margin-top: 6pt;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 14pt;
+    }
+    .keydates {
+      background: var(--deep-water); color: var(--text-on-dark);
+      border-radius: 4pt; padding: 8pt 14pt;
+    }
+    .keydates .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--gold); margin-bottom: 4pt;
+    }
+    .keydates h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 12pt; color: #FFFFFF; margin: 0 0 4pt;
+    }
+    .keydates .grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12pt;
+      margin-top: 4pt; font-size: 7pt; line-height: 1.5;
+    }
+    .keydates .row {
+      display: grid; grid-template-columns: 0.55fr 1fr; gap: 6pt;
+      padding: 1.5pt 0;
+      border-bottom: 0.4pt solid rgba(245,240,229,0.14);
+    }
+    .keydates .row:last-child { border-bottom: none; }
+    .keydates .row .when {
+      font-weight: 700; color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+    .keydates .row .what { color: rgba(245,240,229,0.86); }
+
+    .legend-card {
+      background: var(--sandstone); border-radius: 4pt;
+      padding: 8pt 14pt;
+      font-size: 6.8pt; line-height: 1.5;
+      color: var(--text-on-light);
+    }
+    .legend-card .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--victoria-cove); margin-bottom: 4pt;
+    }
+    .legend-card h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 12pt; color: var(--text-heading); margin: 0 0 4pt;
+    }
+    .legend-card .swatch {
+      display: inline-block; width: 9pt; height: 9pt; border-radius: 2pt;
+      vertical-align: middle; margin-right: 5pt;
+    }
+    .legend-card .scholarship {
+      margin-top: 6pt; padding-top: 5pt;
+      border-top: 0.5pt solid var(--border-light);
+      font-size: 6.5pt;
+      color: var(--text-muted);
+    }
+    .legend-card .scholarship strong { color: var(--gold-deep); }
+
+    .foot {
+      margin-top: 6pt; padding-top: 4pt;
+      border-top: 0.5pt solid var(--divider-light);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 6pt; color: var(--text-muted);
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .foot .tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic; font-weight: 400; font-size: 9pt;
+      color: var(--gold-deep); letter-spacing: normal; text-transform: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sheet">
+  <span class="horizon-bar h-med" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+
+    <div class="top">
+      <div class="titles">
+        <div class="eyebrow">Annual Calendar · 2026</div>
+        <h1>The year at a glance.</h1>
+        <div class="lede">
+          Four group sessions, two open-court formats running year-round, six camps, USTA leagues, and the UTR Match Play season — laid out across twelve months.
+        </div>
+      </div>
+      <img class="logo" src="../assets/logos/LBTAblktext.png" alt="LBTA" />
+    </div>
+
+    <!-- ============= CALENDAR GRID ============= -->
+    <div class="cal">
+
+      <div></div>
+        <div class="month-head">Jan</div>
+        <div class="month-head">Feb</div>
+        <div class="month-head">Mar</div>
+        <div class="month-head">Apr</div>
+        <div class="month-head">May</div>
+        <div class="month-head">Jun</div>
+        <div class="month-head">Jul</div>
+        <div class="month-head">Aug</div>
+        <div class="month-head">Sep</div>
+        <div class="month-head">Oct</div>
+        <div class="month-head">Nov</div>
+        <div class="month-head">Dec</div>
+
+      <div class="group-label cove">Group programs · seasonal sessions</div>
+
+      <div class="row-label">Winter session</div>
+          <div class="cell" style="grid-column: span 4;">
+            <div class="bar deep" style="left: 4pt; right: 4pt;">
+              Winter session<span class="meta">13 wks · January 5 – April 5, 2026</span>
+            </div>
+          </div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+      <div class="row-label">Spring session</div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt" style="grid-column: span 3;">
+            <div class="bar cove" style="left: 4pt; right: 4pt;">
+              Spring session<span class="meta">10 wks · April 6 – June 13, 2026</span>
+            </div>
+          </div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+      <div class="row-label">Summer session</div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt" style="grid-column: span 3;">
+            <div class="bar sunset" style="left: 4pt; right: 4pt;">
+              Summer session<span class="meta">11 wks · June 15 – August 29, 2026</span>
+            </div>
+          </div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+      <div class="row-label">Fall session</div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell" style="grid-column: span 4;">
+            <div class="bar gold" style="left: 4pt; right: 4pt;">
+              Fall session<span class="meta">16 wks · August 31 – December 19, 2026</span>
+            </div>
+          </div>
+
+      <div class="group-label deep">Open court · year-round</div>
+      <div class="row-label">LiveBall · Cardio Tennis (year-round)</div>
+      <div class="cell" style="grid-column: span 12;">
+        <div class="bar pacific" style="left: 4pt; right: 4pt;">
+          LiveBall · Cardio Tennis (year-round)<span class="meta">$150/mo · $50 drop-in</span>
+        </div>
+      </div>
+
+      <div class="group-label">Camps · point events</div>
+      <div class="row-label">Tennis camps</div>
+        <div class="cell">
+        </div>
+        <div class="cell alt">
+              <div class="dot gold" style="left: 50%;"></div>
+              <div class="dot-label" style="left: 50%; transform: translate(-50%, calc(50% + 8pt)); top: auto; bottom: 0; margin-left: 0; text-align: center; width: 100%;">
+                <span style="display: block; font-weight: 700; color: var(--text-heading); font-size: 6pt;">Ski Week</span>
+                <span style="display: block; color: var(--text-muted); font-size: 5.5pt;">Feb 16–20</span>
+              </div>
+        </div>
+        <div class="cell">
+        </div>
+        <div class="cell alt">
+              <div class="dot cove" style="left: 50%;"></div>
+              <div class="dot-label" style="left: 50%; transform: translate(-50%, calc(50% + 8pt)); top: auto; bottom: 0; margin-left: 0; text-align: center; width: 100%;">
+                <span style="display: block; font-weight: 700; color: var(--text-heading); font-size: 6pt;">Spring Break Camp</span>
+                <span style="display: block; color: var(--text-muted); font-size: 5.5pt;">Mar 30 – Apr 2</span>
+              </div>
+        </div>
+        <div class="cell">
+        </div>
+        <div class="cell alt">
+              <div class="bar sunset" style="left: 4pt; width: calc(300% - 8pt);">
+                Summer Camps<span class="meta">Jun 15 – Aug 29</span>
+              </div>
+        </div>
+        <div class="cell">
+        </div>
+        <div class="cell alt">
+              <div class="dot sunset" style="left: 50%;"></div>
+              <div class="dot-label" style="left: 50%; transform: translate(-50%, calc(50% + 8pt)); top: auto; bottom: 0; margin-left: 0; text-align: center; width: 100%;">
+                <span style="display: block; font-weight: 700; color: var(--text-heading); font-size: 6pt;">Back-to-School</span>
+                <span style="display: block; color: var(--text-muted); font-size: 5.5pt;">Aug 17–20</span>
+              </div>
+        </div>
+        <div class="cell">
+        </div>
+        <div class="cell alt">
+        </div>
+        <div class="cell">
+              <div class="dot gold" style="left: 50%;"></div>
+              <div class="dot-label" style="left: 50%; transform: translate(-50%, calc(50% + 8pt)); top: auto; bottom: 0; margin-left: 0; text-align: center; width: 100%;">
+                <span style="display: block; font-weight: 700; color: var(--text-heading); font-size: 6pt;">Thanksgiving</span>
+                <span style="display: block; color: var(--text-muted); font-size: 5.5pt;">Nov 23–25</span>
+              </div>
+        </div>
+        <div class="cell alt">
+              <div class="dot deep" style="left: 50%;"></div>
+              <div class="dot-label" style="left: 50%; transform: translate(-50%, calc(50% + 8pt)); top: auto; bottom: 0; margin-left: 0; text-align: center; width: 100%;">
+                <span style="display: block; font-weight: 700; color: var(--text-heading); font-size: 6pt;">Winter Break</span>
+                <span style="display: block; color: var(--text-muted); font-size: 5.5pt;">Dec 21–24 + 28–31</span>
+              </div>
+        </div>
+
+      <div class="group-label cove">USTA Adult Leagues</div>
+      <div class="row-label">Adult 18+ League</div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt" style="grid-column: span 4;">
+            <div class="bar cove" style="left: 4pt; right: 4pt;">
+              USTA Adult 18+ League<span class="meta">Apr 17 – Jul 5</span>
+            </div>
+          </div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+      <div class="row-label">Friday Women&#39;s League</div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt" style="grid-column: span 4;">
+            <div class="bar cove" style="left: 4pt; right: 4pt;">
+              USTA Friday Women&#39;s League<span class="meta">Apr 17 – Jul 5</span>
+            </div>
+          </div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+      <div class="row-label">Mixed 40+ Doubles</div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt" style="grid-column: span 6;">
+            <div class="bar cove" style="left: 4pt; right: 4pt;">
+              USTA Mixed 40+ Doubles<span class="meta">Apr 18 – Sep 6</span>
+            </div>
+          </div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+      <div class="row-label">Adult 55+ Doubles</div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell" style="grid-column: span 4;">
+            <div class="bar cove" style="left: 4pt; right: 4pt;">
+              USTA Adult 55+ Doubles<span class="meta">May 2 – Aug 16</span>
+            </div>
+          </div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+
+      <div class="group-label gold">UTR Match Play</div>
+      <div class="row-label">(all divisions)</div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt" style="grid-column: span 3;">
+            <div class="bar sunset" style="left: 4pt; right: 4pt;">
+              UTR Match Play (all divisions)<span class="meta">Apr 11 – Jun 6 (Grand Finals)</span>
+            </div>
+          </div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+          <div class="cell"></div>
+          <div class="cell alt"></div>
+
+    </div>
+
+    <!-- ============= BOTTOM ============= -->
+    <div class="bottom">
+      <div class="keydates">
+        <div class="eyebrow">Key dates</div>
+        <h3>Mark your calendar.</h3>
+        <div class="grid">
+          <div>
+<div class="row"><span class="when">Jan 5</span><span class="what">Winter session begins</span></div><div class="row"><span class="when">Mar 2</span><span class="what">Spring registration opens</span></div><div class="row"><span class="when">Mar 20</span><span class="what">Spring early-bird deadline</span></div><div class="row"><span class="when">Apr 6</span><span class="what">Spring session begins</span></div>          </div>
+          <div>
+<div class="row"><span class="when">May 1</span><span class="what">Summer registration opens</span></div><div class="row"><span class="when">May 20</span><span class="what">Summer early-bird deadline</span></div><div class="row"><span class="when">Jun 15</span><span class="what">Summer session + camps begin</span></div><div class="row"><span class="when">Aug 5</span><span class="what">Fall registration opens</span></div>          </div>
+          <div>
+<div class="row"><span class="when">Aug 19</span><span class="what">Fall early-bird deadline</span></div><div class="row"><span class="when">Aug 31</span><span class="what">Fall session begins</span></div><div class="row"><span class="when">Dec 1</span><span class="what">Winter &#39;27 registration opens</span></div>          </div>
+        </div>
+      </div>
+
+      <div class="legend-card">
+        <div class="eyebrow">Legend</div>
+        <h3>How to read this.</h3>
+        <div><span class="swatch" style="background: var(--deep-water);"></span> Winter session · year-round open court</div>
+        <div><span class="swatch" style="background: var(--victoria-cove);"></span> Spring session · USTA leagues</div>
+        <div><span class="swatch" style="background: var(--sunset-cliff);"></span> Summer session · UTR Match Play · summer camps</div>
+        <div><span class="swatch" style="background: var(--gold-deep);"></span> Fall session · holiday camps</div>
+        <div class="scholarship">
+          <strong>Scholarships available.</strong> $25,000 awarded annually · 25–50% coverage. Email support@lagunabeachtennisacademy.com to apply.
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="tagline">Movement. Craft. Community.</span>
+      <span>support@lagunabeachtennisacademy.com · (949) 534-0457 · Official City of Laguna Beach Tennis Partner since 2020</span>
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="display: block; width: 100%;"></span>
+</div>
+</body>
+</html>

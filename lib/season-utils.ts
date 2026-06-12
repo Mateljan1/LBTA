@@ -23,7 +23,7 @@ interface SeasonData {
   registrationOpen: string
   earlyBirdDeadline: string
   earlyBirdDiscount: number
-  status: string
+  status?: string // advisory only; runtime derives from dates
   multiplier: number
   skipDates?: string[]
 }
@@ -79,11 +79,30 @@ function parseDate(dateStr: string): Date {
 }
 
 /**
+ * Derives season status from calendar dates rather than the hand-edited JSON field.
+ *
+ * Rules (in priority order):
+ *   today > end                         → 'complete'
+ *   start ≤ today ≤ end                 → 'active'
+ *   registrationOpen ≤ today < start    → 'registration_open'
+ *   today < registrationOpen            → 'coming_soon'
+ */
+export function deriveSeasonStatus(season: Pick<SeasonData, 'dates' | 'registrationOpen'>, now: Date = new Date()): string {
+  const start = parseSeasonStartDate(season.dates)
+  const end = parseSeasonEndDate(season.dates)
+  const regOpen = parseDate(season.registrationOpen)
+
+  if (now > end) return 'complete'
+  if (now >= start) return 'active'
+  if (now >= regOpen) return 'registration_open'
+  return 'coming_soon'
+}
+
+/**
  * Returns the current season based on today's date and the season date ranges.
  * If between seasons, returns the next upcoming season.
  */
-export function getCurrentSeason(): SeasonKey {
-  const now = new Date()
+export function getCurrentSeason(now: Date = new Date()): SeasonKey {
   const seasons = year2026Data.seasons as Record<string, SeasonData>
 
   for (const key of SEASON_ORDER) {
@@ -108,19 +127,21 @@ export function getCurrentSeason(): SeasonKey {
  * Returns the most relevant season for display — prioritizes seasons with
  * open registration, then falls back to the current season.
  */
-export function getActiveSeason(): ActiveSeason {
+export function getActiveSeason(now: Date = new Date()): ActiveSeason {
   const seasons = year2026Data.seasons as Record<string, SeasonData>
-  const currentKey = getCurrentSeason()
+  const currentKey = getCurrentSeason(now)
 
   for (const key of SEASON_ORDER) {
     const season = seasons[key]
-    if (season?.status === 'registration_open') {
+    if (!season) continue
+    const status = deriveSeasonStatus(season, now)
+    if (status === 'registration_open') {
       return {
         key: key as SeasonKey,
         name: season.name,
         dates: season.dates,
         weeks: season.weeks,
-        status: season.status,
+        status,
       }
     }
   }
@@ -131,28 +152,28 @@ export function getActiveSeason(): ActiveSeason {
     name: current.name,
     dates: current.dates,
     weeks: current.weeks,
-    status: current.status,
+    status: deriveSeasonStatus(current, now),
   }
 }
 
 /**
  * Returns CTA messaging appropriate for the current moment in the season cycle.
  */
-export function getSeasonCTA(): SeasonCTA {
-  const now = new Date()
+export function getSeasonCTA(now: Date = new Date()): SeasonCTA {
   const seasons = year2026Data.seasons as Record<string, SeasonData>
 
   for (const key of SEASON_ORDER) {
     const season = seasons[key]
     if (!season) continue
-    if (season.status !== 'registration_open' && season.status !== 'active') continue
+    const status = deriveSeasonStatus(season, now)
+    if (status !== 'registration_open' && status !== 'active') continue
 
     const earlyBirdEnd = parseDate(season.earlyBirdDeadline)
     const isEarlyBird = now < earlyBirdEnd
     const startDate = parseSeasonStartDate(season.dates)
     const startFormatted = startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
 
-    if (season.status === 'registration_open') {
+    if (status === 'registration_open') {
       return {
         headline: `${season.name} Registration Open`,
         subline: isEarlyBird
@@ -164,18 +185,21 @@ export function getSeasonCTA(): SeasonCTA {
       }
     }
 
-    if (season.status === 'active') {
+    if (status === 'active') {
       const nextKey = SEASON_ORDER[SEASON_ORDER.indexOf(key as SeasonKey) + 1]
       const nextSeason = nextKey ? seasons[nextKey] : null
-      if (nextSeason && (nextSeason.status === 'registration_open' || nextSeason.status === 'coming_soon')) {
-        const nextStart = parseSeasonStartDate(nextSeason.dates)
-        const nextFormatted = nextStart.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
-        return {
-          headline: `${nextSeason.name} Registration Open`,
-          subline: `Starts ${nextFormatted}. Register now to secure your spot.`,
-          showEarlyBird: false,
-          earlyBirdDeadline: null,
-          earlyBirdDiscount: 0,
+      if (nextSeason) {
+        const nextStatus = deriveSeasonStatus(nextSeason, now)
+        if (nextStatus === 'registration_open' || nextStatus === 'coming_soon') {
+          const nextStart = parseSeasonStartDate(nextSeason.dates)
+          const nextFormatted = nextStart.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })
+          return {
+            headline: `${nextSeason.name} Registration Open`,
+            subline: `Starts ${nextFormatted}. Register now to secure your spot.`,
+            showEarlyBird: false,
+            earlyBirdDeadline: null,
+            earlyBirdDiscount: 0,
+          }
         }
       }
 

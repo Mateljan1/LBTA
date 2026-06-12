@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "title": "LBTA Upgrade and Polish Master Manifest",
+    "version": "2026-05-22",
+    "purpose": "Single handoff bundle for agents and operators covering strategy, risk, workflows, automation endpoints, and execution order."
+  },
+  "coreDocs": {
+    "threadReadmeFull": "docs/README-thread-upgrade-and-polish-2026-05-21.md",
+    "threadReadmeExec": "docs/README-thread-upgrade-and-polish-2026-05-21-exec.md",
+    "systemMapMd": "docs/lbta-system-map-2026.md",
+    "systemMapJson": "docs/lbta-system-map-2026.json",
+    "registrationMarketingRacquetMd": "docs/lbta-registration-marketing-racquet-rescue-2026.md",
+    "riskRegisterMd": "docs/lbta-risk-register-2026.md",
+    "riskRegisterJson": "docs/lbta-risk-register-2026.json",
+    "opsRunbook": "docs/ops-city-payment-workflow-runbook.md",
+    "listingAndAppGovernance": "docs/lbta-listing-and-app-governance.md"
+  },
+  "apiWorkflowEndpoints": {
+    "stalePendingCityPayment": {
+      "method": "GET|POST",
+      "path": "/api/cron/stale-city-payment-leads",
+      "auth": "Bearer CRON_SECRET",
+      "query": {
+        "hours": "default 24",
+        "limit": "default 200"
+      }
+    },
+    "cityPaymentSync": {
+      "method": "POST",
+      "path": "/api/cron/city-payment-sync",
+      "auth": "Bearer CRON_SECRET",
+      "body": {
+        "emails": "string[] required",
+        "dryRun": "boolean optional"
+      }
+    },
+    "cityPaymentFollowups": {
+      "method": "GET|POST",
+      "path": "/api/cron/city-payment-followups",
+      "auth": "Bearer CRON_SECRET",
+      "query": {
+        "dryRun": "default 1 (set 0 to apply GHL tags)",
+        "tier2h": "default 2",
+        "tier24h": "default 24",
+        "tier72h": "default 72"
+      }
+    },
+    "leadFunnelSummary": {
+      "method": "GET",
+      "path": "/api/cron/lead-funnel-summary",
+      "auth": "Bearer CRON_SECRET",
+      "query": {
+        "hours": "default 24"
+      }
+    }
+  },
+  "operatorCommands": {
+    "stalePendingCityPaymentReport": "npm run leads:stale-city-payment",
+    "cityPaymentSync": "npm run leads:city-payment-sync -- email1@example.com,email2@example.com",
+    "cityPaymentSyncDryRun": "DRY_RUN=1 npm run leads:city-payment-sync -- email1@example.com",
+    "cityPaymentFollowupsDryRun": "npm run leads:city-payment-followups",
+    "cityPaymentFollowupsApply": "DRY_RUN=0 npm run leads:city-payment-followups",
+    "cityPaymentSyncFromExport": "npm run leads:city-payment-sync-from-export -- --file ./city-paid-export.csv --dry-run"
+  },
+  "codeIntegrationMap": {
+    "workflowStateModel": "lib/lead-workflow.ts",
+    "workflowStateWiring": [
+      "app/api/book/route.ts",
+      "app/api/register/route.ts",
+      "app/api/register-program/route.ts",
+      "app/api/register-year/route.ts"
+    ],
+    "staleDetection": [
+      "lib/stale-city-payment-leads.ts",
+      "app/api/cron/stale-city-payment-leads/route.ts"
+    ],
+    "cityPaidReconciliation": [
+      "lib/city-payment-workflow.ts",
+      "app/api/cron/city-payment-sync/route.ts"
+    ],
+    "cityPaymentFollowupAutomation": [
+      "lib/city-payment-followups.ts",
+      "app/api/cron/city-payment-followups/route.ts",
+      "scripts/city-payment-followups.ts"
+    ],
+    "kpiSummary": [
+      "lib/lead-funnel-summary.ts",
+      "app/api/cron/lead-funnel-summary/route.ts"
+    ]
+  },
+  "deploymentAndSchedule": {
+    "vercelCronsConfiguredIn": "vercel.json",
+    "cronPaths": [
+      "/api/cron/mirror-meta-leads",
+      "/api/cron/leads-canary",
+      "/api/cron/stale-city-payment-leads",
+      "/api/cron/city-payment-followups",
+      "/api/cron/lead-funnel-summary"
+    ],
+    "manualActionRequired": [
+      "Confirm CRON_SECRET is set in Vercel project env",
+      "Confirm Supabase envs are present in target environment",
+      "Run first dry-run city-payment-sync with known paid email list"
+    ]
+  },
+  "priorityBacklogRemaining": [
+    "Complete conversion-page contrast/performance backlog",
+    "Run GBP/Yelp/Apple/Bing live verification against canonical governance doc"
+  ]
+}
+

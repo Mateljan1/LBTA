@@ -1,0 +1,681 @@
+<!doctype html>
+<!-- @page width="8.5in" height="11in" landscape="false" -->
+<!--
+  13 — Annual Pricing Reference
+  ==============================
+  Single source of truth for what everything costs across all four 2026 seasons.
+  Distribution-friendly (parents asking "what does it cost for the year?") and
+  internal reference for staff. Pulls from year2026.json + spring-summer-2026.json
+  + fall2026.json + leagues-2026.json + private-rates.json — every cell traces
+  to a source file.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · 2026 Annual Pricing</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 8.5in 11in; margin: 0; }
+    .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--morning-light); }
+    .pad { padding: 18pt 26pt 14pt; }
+
+    /* Header */
+    .top {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 16pt; margin-bottom: 6pt;
+    }
+    .top .logo { height: 32pt; width: auto; }
+    .top .titles { flex: 1; }
+    .top .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 7pt;
+      color: var(--victoria-cove); margin-bottom: 2pt;
+    }
+    .top h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 22pt; line-height: 1.05; color: var(--text-heading);
+      margin: 0; letter-spacing: -0.005em;
+    }
+    .top .lede {
+      font-size: 8pt; color: var(--text-muted); margin-top: 2pt;
+      max-width: 5in; line-height: 1.4;
+    }
+
+    /* Section heading */
+    .sec-eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--sunset-cliff); margin: 10pt 0 2pt 0;
+    }
+    .sec-eyebrow.cove   { color: var(--victoria-cove); }
+    .sec-eyebrow.gold   { color: var(--gold-deep); }
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 13pt; color: var(--text-heading); line-height: 1.15;
+      margin: 0 0 4pt 0;
+    }
+
+    /* Master programs table — 11 rows × 4 seasons */
+    .prog-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 7pt; line-height: 1.35;
+      table-layout: fixed;
+    }
+    .prog-table col.c-name  { width: 22%; }
+    .prog-table col.c-level { width: 11%; }
+    .prog-table col.c-seas  { width: 14%; }
+    .prog-table col.c-drop  { width: 11%; }
+    .prog-table thead th {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; font-size: 6pt;
+      color: var(--text-muted);
+      padding: 5pt 4pt 3pt;
+      border-bottom: 0.5pt solid var(--border-light);
+      text-align: left;
+      vertical-align: bottom;
+    }
+    .prog-table thead th.season {
+      text-align: right;
+      color: var(--pacific-dusk);
+    }
+    .prog-table thead th.season .weeks {
+      display: block;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 5.5pt;
+      letter-spacing: 0.08em;
+      margin-top: 1pt;
+    }
+    .prog-table tbody td {
+      padding: 3pt 4pt;
+      vertical-align: top;
+      border-bottom: 0.4pt solid var(--divider-light);
+    }
+    .prog-table tbody tr:last-child td { border-bottom: none; }
+    .prog-table tbody td.name {
+      font-weight: 700; color: var(--text-heading);
+    }
+    .prog-table tbody td.level { color: var(--text-muted); font-size: 6.5pt; }
+    .prog-table tbody td.seas {
+      text-align: right; font-variant-numeric: tabular-nums;
+      color: var(--text-on-light);
+    }
+    .prog-table tbody td.seas .stack {
+      display: block;
+      font-size: 6.5pt;
+      line-height: 1.35;
+    }
+    .prog-table tbody td.seas .stack .ones { font-weight: 700; color: var(--gold-deep); }
+    .prog-table tbody td.seas .stack .twos { color: var(--text-on-light); }
+    .prog-table tbody td.seas .stack .threes { color: var(--text-muted); font-size: 6pt; }
+    .prog-table tbody td.drop {
+      text-align: right; font-variant-numeric: tabular-nums;
+      font-weight: 700; color: var(--gold-deep);
+    }
+    .prog-table tbody tr.cat-break td {
+      background: var(--sandstone);
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em;
+      font-size: 6pt; color: var(--text-muted);
+      padding: 3pt 4pt;
+      border-bottom: 0.5pt solid var(--border-light);
+    }
+
+    /* Three-column lower section: Privates / Open Court / Camps */
+    .lower {
+      display: grid; grid-template-columns: 1.05fr 0.85fr 1.4fr;
+      gap: 12pt; margin-top: 6pt;
+    }
+    .lower .block .grid {
+      display: grid;
+      font-size: 7pt; line-height: 1.4;
+    }
+    .lower .row {
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 6pt; padding: 2.5pt 0;
+      border-bottom: 0.4pt solid var(--divider-light);
+    }
+    .lower .row:last-child { border-bottom: none; }
+    .lower .row .name { font-weight: 700; color: var(--text-heading); }
+    .lower .row .meta { color: var(--text-muted); font-size: 6.5pt; }
+    .lower .row .price {
+      text-align: right; font-variant-numeric: tabular-nums;
+      color: var(--gold-deep); font-weight: 700; font-size: 7pt;
+    }
+
+    .privates-grid {
+      font-size: 7pt;
+    }
+    .privates-grid .row {
+      display: grid; grid-template-columns: 1.6fr 0.6fr 0.6fr 0.7fr 0.7fr;
+      gap: 4pt; padding: 3pt 0;
+      border-bottom: 0.4pt solid var(--divider-light);
+    }
+    .privates-grid .row:last-child { border-bottom: none; }
+    .privates-grid .row.head {
+      color: var(--text-muted); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; font-size: 5.5pt;
+      border-bottom: 0.5pt solid var(--border-light);
+    }
+    .privates-grid .row .who { font-weight: 700; color: var(--text-heading); font-size: 7pt; }
+    .privates-grid .row .num {
+      text-align: right; font-variant-numeric: tabular-nums;
+      color: var(--gold-deep); font-weight: 700; font-size: 6.5pt;
+    }
+
+    .camps-grid {
+      font-size: 6.8pt;
+    }
+    .camps-grid .row {
+      display: grid; grid-template-columns: 1fr 1.2fr 0.6fr 1.6fr;
+      gap: 5pt; padding: 3pt 0;
+      border-bottom: 0.4pt solid var(--divider-light);
+      line-height: 1.35;
+    }
+    .camps-grid .row:last-child { border-bottom: none; }
+    .camps-grid .row.head {
+      color: var(--text-muted); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; font-size: 5.5pt;
+      border-bottom: 0.5pt solid var(--border-light);
+    }
+    .camps-grid .row .name { font-weight: 700; color: var(--text-heading); }
+    .camps-grid .row .meta { color: var(--text-muted); }
+    .camps-grid .row .price { color: var(--gold-deep); font-weight: 700; }
+
+    /* Leagues + discounts band */
+    .band {
+      background: var(--deep-water); color: var(--text-on-dark);
+      border-radius: 4pt; padding: 9pt 14pt; margin-top: 8pt;
+    }
+    .band h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 11pt; color: #FFFFFF; margin: 0 0 4pt 0;
+    }
+    .band .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--gold); margin-bottom: 2pt;
+    }
+    .band .grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 16pt; margin-top: 6pt; font-size: 6.8pt;
+    }
+    .band .row {
+      display: grid; grid-template-columns: 1.6fr 1fr;
+      gap: 6pt; padding: 2pt 0; line-height: 1.35;
+      border-bottom: 0.4pt solid rgba(245,240,229,0.14);
+    }
+    .band .row:last-child { border-bottom: none; }
+    .band .row .who { font-weight: 700; color: #FFFFFF; }
+    .band .row .what {
+      text-align: right; font-variant-numeric: tabular-nums;
+      color: var(--gold);
+    }
+    .band .col-eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em; font-size: 6pt;
+      color: var(--gold); margin-bottom: 4pt;
+    }
+
+    .foot {
+      margin-top: 10pt; padding-top: 6pt;
+      border-top: 0.5pt solid var(--divider-light);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 6.5pt; color: var(--text-muted);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .foot .tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic; font-weight: 400; font-size: 9pt;
+      color: var(--gold-deep); letter-spacing: normal; text-transform: none;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <span class="horizon-bar h-med" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+
+    <div class="top">
+      <div class="titles">
+        <div class="eyebrow">Annual Pricing · 2026</div>
+        <h1>What it costs. All year. All formats.</h1>
+        <div class="lede">
+          Group prices scale by season length — Winter is 13 weeks, Spring 10, Summer 11, Fall 16. Per-week rate is the same;
+          the season multiplier does the math. Drop-in stays flat.
+        </div>
+      </div>
+      <img class="logo" src="../assets/logos/LBTAblktext.png" alt="LBTA" />
+    </div>
+
+    <!-- =================== PROGRAMS TABLE =================== -->
+    <div class="sec-eyebrow cove">Group programs</div>
+    <h2>Junior pathway · Adult tiers</h2>
+    <table class="prog-table">
+      <colgroup>
+        <col class="c-name"/><col class="c-level"/>
+        <col class="c-seas"/><col class="c-seas"/><col class="c-seas"/><col class="c-seas"/>
+        <col class="c-drop"/>
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Program</th><th>Ages / level</th>
+          <th class="season">Winter<span class="weeks">13 weeks</span></th>
+          <th class="season">Spring<span class="weeks">10 weeks</span></th>
+          <th class="season">Summer<span class="weeks">11 weeks</span></th>
+          <th class="season">Fall<span class="weeks">16 weeks</span></th>
+          <th class="season">Drop-in</th>
+        </tr>
+        <tr>
+          <th colspan="2"></th>
+          <th class="season" style="font-size: 5pt; color: var(--text-muted); border-bottom: none; padding-top: 0;">1× / 2× / 3×</th>
+          <th class="season" style="font-size: 5pt; color: var(--text-muted); border-bottom: none; padding-top: 0;">1× / 2× / 3×</th>
+          <th class="season" style="font-size: 5pt; color: var(--text-muted); border-bottom: none; padding-top: 0;">1× / 2× / 3×</th>
+          <th class="season" style="font-size: 5pt; color: var(--text-muted); border-bottom: none; padding-top: 0;">1× / 2× / 3×</th>
+          <th class="season" style="font-size: 5pt; color: var(--text-muted); border-bottom: none; padding-top: 0;">flat</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="cat-break"><td colspan="7">Junior</td></tr>
+          <tr>
+            <td class="name">Little Tennis Stars</td>
+            <td class="level">3–4</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$120/mo</span>
+                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$120/mo</span>
+                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$120/mo</span>
+                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$120/mo</span>
+                  </span>
+              </td>
+            <td class="drop">$40</td>
+          </tr>
+          <tr>
+            <td class="name">Red Ball</td>
+            <td class="level">5–6</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$546</span> / <span class="twos">$1,092</span> / <span class="threes">$1,635</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$420</span> / <span class="twos">$840</span> / <span class="threes">$1,260</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$462</span> / <span class="twos">$924</span> / <span class="threes">$1,386</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$672</span> / <span class="twos">$1,344</span> / <span class="threes">$2,016</span>                  </span>
+              </td>
+            <td class="drop">$50</td>
+          </tr>
+          <tr>
+            <td class="name">Orange Ball</td>
+            <td class="level">7–8</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$546</span> / <span class="twos">$1,092</span> / <span class="threes">$1,635</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$420</span> / <span class="twos">$840</span> / <span class="threes">$1,260</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$462</span> / <span class="twos">$924</span> / <span class="threes">$1,386</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$672</span> / <span class="twos">$1,344</span> / <span class="threes">$2,016</span>                  </span>
+              </td>
+            <td class="drop">$50</td>
+          </tr>
+          <tr>
+            <td class="name">Green Dot</td>
+            <td class="level">9–11</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$546</span> / <span class="twos">$1,092</span> / <span class="threes">$1,635</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$420</span> / <span class="twos">$840</span> / <span class="threes">$1,260</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$462</span> / <span class="twos">$924</span> / <span class="threes">$1,386</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$672</span> / <span class="twos">$1,344</span> / <span class="threes">$2,016</span>                  </span>
+              </td>
+            <td class="drop">$50</td>
+          </tr>
+          <tr class="cat-break"><td colspan="7">Development</td></tr>
+          <tr>
+            <td class="name">Competitive Green Dot</td>
+            <td class="level">9–11+ inv</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$810</span> / <span class="twos">$1,620</span> / <span class="threes">$2,268</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$625</span> / <span class="twos">$1,250</span> / <span class="threes">$1,745</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$688</span> / <span class="twos">$1,375</span> / <span class="threes">$1,920</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$1,000</span> / <span class="twos">$2,000</span> / <span class="threes">$2,792</span>                  </span>
+              </td>
+            <td class="drop">$70</td>
+          </tr>
+          <tr>
+            <td class="name">Junior Development</td>
+            <td class="level">11–18</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$810</span> / <span class="twos">$1,620</span> / <span class="threes">$2,268</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$625</span> / <span class="twos">$1,250</span> / <span class="threes">$1,745</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$688</span> / <span class="twos">$1,375</span> / <span class="threes">$1,920</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$1,000</span> / <span class="twos">$2,000</span> / <span class="threes">$2,792</span>                  </span>
+              </td>
+            <td class="drop">$70</td>
+          </tr>
+          <tr>
+            <td class="name">High Performance</td>
+            <td class="level">12–17 UTR8+</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$810</span> / <span class="twos">$1,620</span> / <span class="threes">$2,268</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$625</span> / <span class="twos">$1,250</span> / <span class="threes">$1,745</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$688</span> / <span class="twos">$1,375</span> / <span class="threes">$1,920</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$1,000</span> / <span class="twos">$2,000</span> / <span class="threes">$2,792</span>                  </span>
+              </td>
+            <td class="drop">$100</td>
+          </tr>
+          <tr class="cat-break"><td colspan="7">Adult</td></tr>
+          <tr>
+            <td class="name">New to Tennis</td>
+            <td class="level">All Levels</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$546</span> / <span class="twos">$797</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$420</span> / <span class="twos">$615</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$462</span> / <span class="twos">$677</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$672</span> / <span class="twos">$984</span>                  </span>
+              </td>
+            <td class="drop">$55</td>
+          </tr>
+          <tr>
+            <td class="name">Beyond Beginner</td>
+            <td class="level">All Levels</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$546</span> / <span class="twos">$797</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$420</span> / <span class="twos">$615</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$462</span> / <span class="twos">$677</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$672</span> / <span class="twos">$984</span>                  </span>
+              </td>
+            <td class="drop">$55</td>
+          </tr>
+          <tr>
+            <td class="name">Adult Intermediate</td>
+            <td class="level">NTRP 3.0–4.0</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$756</span> / <span class="twos">$1,437</span> / <span class="threes">$2,042</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$580</span> / <span class="twos">$1,105</span> / <span class="threes">$1,570</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$638</span> / <span class="twos">$1,216</span> / <span class="threes">$1,727</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$928</span> / <span class="twos">$1,768</span> / <span class="threes">$2,512</span>                  </span>
+              </td>
+            <td class="drop">$70</td>
+          </tr>
+          <tr>
+            <td class="name">Adult Advanced</td>
+            <td class="level">NTRP 4.0+</td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$810</span> / <span class="twos">$1,620</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$625</span> / <span class="twos">$1,250</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$688</span> / <span class="twos">$1,375</span>                  </span>
+              </td>
+              <td class="seas">
+                  <span class="stack">
+<span class="ones">$1,000</span> / <span class="twos">$2,000</span>                  </span>
+              </td>
+            <td class="drop">$90</td>
+          </tr>
+      </tbody>
+    </table>
+
+    <!-- =================== LOWER 3 COLUMNS =================== -->
+    <div class="lower">
+
+      <div class="block">
+        <div class="sec-eyebrow gold">Private coaching</div>
+        <h2 style="font-size: 11pt;">Per coach · per format</h2>
+        <div class="privates-grid">
+          <div class="row head"><span class="who">Coach</span><span class="num">60 min</span><span class="num">90 min</span><span class="num">10-pack</span><span class="num">20-pack</span></div>
+          <div class="row">
+            <span class="who">Andrew Mateljan</span>
+            <span class="num">$250</span>
+            <span class="num">$350</span>
+            <span class="num">$2,300</span>
+            <span class="num">$4,200</span>
+          </div>
+          <div class="row">
+            <span class="who">Peter DeFrantz</span>
+            <span class="num">$120</span>
+            <span class="num">$165</span>
+            <span class="num">$1,100</span>
+            <span class="num">$2,000</span>
+          </div>
+          <div class="row">
+            <span class="who">Allison Cronk</span>
+            <span class="num">$120</span>
+            <span class="num">$165</span>
+            <span class="num">$1,100</span>
+            <span class="num">$2,000</span>
+          </div>
+        </div>
+        <p style="font-size: 6.5pt; color: var(--text-muted); margin: 4pt 0 0; line-height: 1.4;">Pack expiry 12 months. 24-hr cancellation. Default offer is Peter or Allison; Andrew is for HP / Pod-track / specific request.</p>
+      </div>
+
+      <div class="block">
+        <div class="sec-eyebrow cove">Open court</div>
+        <h2 style="font-size: 11pt;">Year-round</h2>
+        <div>
+          <div class="row">
+            <span><span class="name">LiveBall</span><br/><span class="meta">NTRP 3.0+ · Thu Moulton · Sat/Sun LBHS</span></span>
+            <span class="price">$150/mo · $50 drop-in</span>
+          </div>
+          <div class="row">
+            <span><span class="name">Cardio Tennis</span><br/><span class="meta">All levels · Fri 9a LBHS</span></span>
+            <span class="price">$150/mo · $50 drop-in</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="sec-eyebrow">Camps</div>
+        <h2 style="font-size: 11pt;">Six sessions across the year</h2>
+        <div class="camps-grid">
+          <div class="row head"><span>Camp</span><span>Dates</span><span>Ages</span><span>Investment</span></div>
+          <div class="row">
+            <span class="name">Ski Week Camp</span>
+            <span class="meta">Feb 16–20, 2026</span>
+            <span class="meta">5–14</span>
+            <span class="price">$525/wk · $105/day</span>
+          </div>
+          <div class="row">
+            <span class="name">Spring Break Camp</span>
+            <span class="meta">Mar 30 – Apr 2, 2026</span>
+            <span class="meta">5–17</span>
+            <span class="price">$325/wk · $85/day</span>
+          </div>
+          <div class="row">
+            <span class="name">Summer Camps</span>
+            <span class="meta">Jun 15 – Aug 29, 2026</span>
+            <span class="meta">5–17</span>
+            <span class="price">T&amp;A: $495 full / $325 half · Training: $595 full / $325 half</span>
+          </div>
+          <div class="row">
+            <span class="name">Back-to-School Mini</span>
+            <span class="meta">Aug 17–20, 2026 (3 days)</span>
+            <span class="meta">5–17</span>
+            <span class="price">T&amp;A: $372 full / $245 half · Training: $447 full</span>
+          </div>
+          <div class="row">
+            <span class="name">Thanksgiving Camp</span>
+            <span class="meta">Nov 23–25, 2026 (3 days)</span>
+            <span class="meta">5–17</span>
+            <span class="price">$221 (T&amp;A) · $244 (JD)</span>
+          </div>
+          <div class="row">
+            <span class="name">Winter Break Camp</span>
+            <span class="meta">Dec 21–24 + Dec 28–31</span>
+            <span class="meta">5–17</span>
+            <span class="price">$425/session (4 days)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =================== LEAGUES + DISCOUNTS BAND =================== -->
+    <div class="band">
+      <div class="grid">
+        <div>
+          <div class="col-eyebrow">UTR Match Play · Apr 11 – Jun 6</div>
+          <div class="row">
+            <span class="who">Color Ball</span>
+            <span class="what">$349 · $55 drop-in</span>
+          </div>
+          <div class="row">
+            <span class="who">UTR 1–7 Singles</span>
+            <span class="what">$399 · $65 drop-in</span>
+          </div>
+          <div class="row">
+            <span class="who">UTR 3–12 Singles</span>
+            <span class="what">$399 · $65 drop-in</span>
+          </div>
+          <div class="row">
+            <span class="who">UTR 1–12 Doubles</span>
+            <span class="what">$399 · $65 drop-in</span>
+          </div>
+          <p style="font-size: 6pt; color: rgba(245,240,229,0.6); margin: 4pt 0 0;">Saturdays at Alta Laguna · Sundays at LBHS. Grand Finals June 6.</p>
+        </div>
+
+        <div>
+          <div class="col-eyebrow">Discounts &amp; scholarship</div>
+          <div class="row">
+            <span class="who">Early Bird</span>
+            <span class="what">5%</span>
+          </div>
+          <div class="row">
+            <span class="who">Sibling</span>
+            <span class="what">10%</span>
+          </div>
+          <div class="row">
+            <span class="who">Multi-Program</span>
+            <span class="what">5%</span>
+          </div>
+          <div class="row">
+            <span class="who">Annual Prepay</span>
+            <span class="what">10%</span>
+          </div>
+          <p style="font-size: 6pt; color: rgba(245,240,229,0.7); margin: 5pt 0 0; line-height: 1.4;">
+            <strong style="color:var(--gold);">Scholarships:</strong> $25,000 awarded annually · 25–50% coverage. Email support@lagunabeachtennisacademy.com.
+          </p>
+        </div>
+
+        <div>
+          <div class="col-eyebrow">USTA Adult Leagues</div>
+          <p style="font-size: 6.8pt; color: rgba(245,240,229,0.86); margin: 0 0 5pt; line-height: 1.5;">
+            Four leagues run Apr–Sep at LBTA: <strong style="color:#FFFFFF;">Adult 18+, Friday Women's, Mixed 40+ Doubles, Adult 55+ Doubles.</strong>
+          </p>
+          <p style="font-size: 6pt; color: rgba(245,240,229,0.6); margin: 0; line-height: 1.4;">
+            League fees and USTA membership are paid directly to USTA — not LBTA. Captains and team formation supported by LBTA staff. Talk to us about joining a team.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="tagline">Movement. Craft. Community.</span>
+      <span>Reply to support@lagunabeachtennisacademy.com · (949) 534-0457 · Official City of Laguna Beach Tennis Partner since 2020</span>
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="display: block; width: 100%;"></span>
+</div>
+</body>
+</html>

@@ -1,0 +1,634 @@
+[
+  {
+    "id": "red-forehand-day",
+    "title": "Red Ball — Forehand Day",
+    "program": "red",
+    "ageBand": "5–7 yo",
+    "durationMin": 45,
+    "focus": "Forehand grip + first 3 reps",
+    "theme": "Make the racket talk to the ball.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 8,
+        "focus": "Body awareness + agility",
+        "items": [
+          { "name": "Animal walks (bear, crab, frog) — across the court", "min": 3 },
+          { "name": "Agility ladder (in-in-out)", "cue": "Light feet.", "min": 3 },
+          { "name": "Spider tag (red-line tag)", "min": 2 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 22,
+        "focus": "Forehand: grip → unit turn → contact",
+        "items": [
+          { "name": "Continental → Eastern grip transition", "cue": "Shake the hand of the racket.", "why": "Grip habits set in early.", "min": 4 },
+          { "name": "Self-drop forehand (10 reps)", "cue": "Side, swing, finish.", "min": 6 },
+          { "name": "Coach-fed forehand (1 cone target)", "cue": "Belly-button to the cone.", "min": 6 },
+          { "name": "Forehand into the open court (cooperative)", "min": 6 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 12,
+        "focus": "Forehand into rally",
+        "items": [
+          { "name": "First-to-3 cooperative (forehand only)", "cue": "Side, hit, recover.", "min": 6 },
+          { "name": "Pattern point: cross-court forehand wins +2", "min": 6 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 3,
+        "focus": "Recap + homework",
+        "items": [
+          { "name": "60-sec debrief", "cue": "What was your best forehand?", "min": 1 },
+          { "name": "Homework: 10 self-drop forehands at home", "min": 2 }
+        ]
+      }
+    ],
+    "homework": "10 self-drop forehands before bedtime — count out loud.",
+    "tags": ["forehand", "grip", "junior", "stroke-fundamentals"],
+    "source": "LBTA_Coaching_LessonPlanLibrary_v1.md §Block 2 — Forehand"
+  },
+  {
+    "id": "red-footwork-day",
+    "title": "Red Ball — Footwork Day",
+    "program": "red",
+    "ageBand": "5–7 yo",
+    "durationMin": 45,
+    "focus": "Split-step + first move",
+    "theme": "Feet first, then the racket.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 10,
+        "focus": "Active footwork warmup",
+        "items": [
+          { "name": "Lateral skips + carioca across court", "min": 3 },
+          { "name": "Cone weave (in-out-in-out)", "min": 3 },
+          { "name": "Reaction-color cones (coach calls red/blue)", "min": 4 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 20,
+        "focus": "Split-step + first step",
+        "items": [
+          { "name": "Split-step to coach's clap", "cue": "Land light, knees soft.", "why": "Reaction speed comes from the split.", "min": 5 },
+          { "name": "Split-step → cross-step to a cone", "min": 5 },
+          { "name": "Coach-fed: split → step → forehand", "min": 5 },
+          { "name": "Coach-fed: split → step → backhand", "min": 5 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 12,
+        "focus": "Movement under live feed",
+        "items": [
+          { "name": "Pepper drill (coach feeds wide both sides)", "cue": "Recover to center every shot.", "min": 6 },
+          { "name": "Cooperative rally with cone-recovery rule", "min": 6 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 3,
+        "focus": "Recap + homework",
+        "items": [
+          { "name": "Show your split-step to the parent", "min": 1 },
+          { "name": "Homework: 20 split-steps in front of the TV", "min": 2 }
+        ]
+      }
+    ],
+    "homework": "20 split-steps in front of the TV — every commercial break.",
+    "tags": ["footwork", "split-step", "junior", "movement"],
+    "source": "LBTA_Coaching_LessonPlanLibrary_v1.md §Block 1 — Movement"
+  },
+  {
+    "id": "orange-volley-day",
+    "title": "Orange Ball — Volley Day",
+    "program": "orange",
+    "ageBand": "7–9 yo",
+    "durationMin": 60,
+    "focus": "Volley grip + punch contact",
+    "theme": "Catch the ball with the strings.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 8,
+        "focus": "Reaction + first step",
+        "items": [
+          { "name": "Split-step to clap", "min": 3 },
+          { "name": "Reaction-color cones", "min": 3 },
+          { "name": "Mirror drill (coach moves, kids match)", "min": 2 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 30,
+        "focus": "Volley: grip → punch vs slice → split-step before contact",
+        "items": [
+          { "name": "Continental grip drill — bounce-and-catch on strings", "cue": "Hammer grip, no flip.", "min": 6 },
+          { "name": "Forehand volley shadow (no ball)", "cue": "Punch, don't swing.", "min": 4 },
+          { "name": "Forehand volley with coach catch-and-feed", "min": 6 },
+          { "name": "Backhand volley with coach catch-and-feed", "min": 6 },
+          { "name": "Volley-volley cooperative (partner)", "cue": "Soft hands.", "min": 8 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 18,
+        "focus": "Approach and volley",
+        "items": [
+          { "name": "Approach off short ball → volley winner", "cue": "Split-step before contact.", "min": 8 },
+          { "name": "King of the court (volleys count double)", "min": 10 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 4,
+        "focus": "Recap + homework",
+        "items": [
+          { "name": "60-sec debrief", "cue": "What's your volley cue?", "min": 1 },
+          { "name": "Homework: 20 wall volleys (continental grip)", "min": 3 }
+        ]
+      }
+    ],
+    "homework": "20 wall volleys with continental grip — no swing, just punch.",
+    "tags": ["volley", "net", "junior", "stroke-fundamentals"],
+    "source": "LBTA_Coaching_LessonPlanLibrary_v1.md §Block 2 — Volley"
+  },
+  {
+    "id": "orange-serve-return",
+    "title": "Orange Ball — Serve & Return",
+    "program": "orange",
+    "ageBand": "7–9 yo",
+    "durationMin": 60,
+    "focus": "Toss consistency + return split-step timing",
+    "theme": "Start every point on your terms.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 8,
+        "focus": "Shoulder + hip mobility",
+        "items": [
+          { "name": "Arm circles + scarecrow", "min": 3 },
+          { "name": "Lateral skips + carioca", "min": 3 },
+          { "name": "Split-step to clap", "min": 2 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 28,
+        "focus": "Serve: toss → trophy → drop → drive · Return: split-step timing → block",
+        "items": [
+          { "name": "Toss-and-catch drill (10 in a row)", "cue": "Up, not out.", "min": 6 },
+          { "name": "Serve into target box (alternate sides)", "min": 8 },
+          { "name": "Return split-step on coach's toss", "cue": "Land as the ball is hit.", "min": 6 },
+          { "name": "Block return cross-court", "min": 8 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 20,
+        "focus": "Point starts",
+        "items": [
+          { "name": "Serve + 1 game (server hits +1, then play)", "min": 10 },
+          { "name": "Return + 1 game", "min": 10 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 4,
+        "focus": "Recap + homework",
+        "items": [
+          { "name": "Show the parent your toss", "min": 1 },
+          { "name": "Homework: 10 toss-and-catches", "min": 3 }
+        ]
+      }
+    ],
+    "homework": "10 perfect toss-and-catches — same height every time.",
+    "tags": ["serve", "return", "junior", "point-starts"],
+    "source": "LBTA_Coaching_LessonPlanLibrary_v1.md §Block 2 — Serve, Return"
+  },
+  {
+    "id": "green-cross-court-patterns",
+    "title": "Green Ball — Cross-Court Patterns",
+    "program": "green",
+    "ageBand": "9–11 yo",
+    "durationMin": 60,
+    "focus": "Cross-cross-down-the-line decision-making",
+    "theme": "Build the point before you finish it.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 8,
+        "focus": "Controlled split-step + lateral shuffle",
+        "items": [
+          { "name": "Universal opener (3-line dynamic mobility + 4-corner footwork)", "min": 4 },
+          { "name": "Lateral shuffle + recovery to center", "min": 4 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 25,
+        "focus": "Cross-court rally control + change of direction",
+        "items": [
+          { "name": "Forehand cross-court rally (10 in a row target)", "cue": "Shoulder turn early.", "min": 8 },
+          { "name": "Backhand cross-court rally (10 in a row target)", "min": 7 },
+          { "name": "Cross-cross-down-the-line decision drill", "cue": "Wait for the short ball to change direction.", "min": 10 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 22,
+        "focus": "Pattern under pressure",
+        "items": [
+          { "name": "Pattern point play — must include cross-court → DTL", "min": 12 },
+          { "name": "First-to-7 cooperative with target zones", "min": 10 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 5,
+        "focus": "Recap + homework",
+        "items": [
+          { "name": "60-sec debrief: when did you change direction?", "min": 2 },
+          { "name": "Homework: shadow 20 cross-court forehands at home", "min": 3 }
+        ]
+      }
+    ],
+    "homework": "Shadow 20 cross-court forehands — focus on the shoulder turn.",
+    "tags": ["patterns", "cross-court", "tactical", "junior"],
+    "source": "LBTA_Coaching_LessonPlanLibrary_v1.md §Tactical — Cross-cross-DTL"
+  },
+  {
+    "id": "green-backhand-day",
+    "title": "Green Ball — Backhand Day",
+    "program": "green",
+    "ageBand": "9–11 yo",
+    "durationMin": 60,
+    "focus": "Two-handed backhand: shoulder turn → low-to-high → finish",
+    "theme": "Make your second hand the engine.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 8,
+        "focus": "Rotation + shoulder activation",
+        "items": [
+          { "name": "Rotational warm-up (med ball if available)", "min": 4 },
+          { "name": "Split-step → cross-step toward backhand corner", "min": 4 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 27,
+        "focus": "Backhand: shoulder turn → low-to-high → rotation → finish",
+        "items": [
+          { "name": "Self-drop two-handed backhand (10 reps)", "cue": "Both shoulders rotate.", "min": 6 },
+          { "name": "Coach-fed backhand cross-court", "min": 8 },
+          { "name": "Backhand down-the-line target", "min": 7 },
+          { "name": "Run-around forehand vs commit-to-backhand decision", "cue": "Default to backhand inside the baseline.", "min": 6 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 20,
+        "focus": "Backhand under live feed",
+        "items": [
+          { "name": "Cooperative rally — backhand only", "min": 8 },
+          { "name": "Pattern point: backhand DTL wins +2", "min": 12 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 5,
+        "focus": "Recap + homework",
+        "items": [
+          { "name": "Show your shoulder turn", "min": 2 },
+          { "name": "Homework: 20 shadow backhands", "min": 3 }
+        ]
+      }
+    ],
+    "homework": "20 shadow backhands — both shoulders rotating together.",
+    "tags": ["backhand", "stroke-fundamentals", "junior"],
+    "source": "LBTA_Coaching_LessonPlanLibrary_v1.md §Block 2 — Backhand"
+  },
+  {
+    "id": "yellow-1-2-punch",
+    "title": "Yellow Junior — 1-2 Punch Pattern Day",
+    "program": "yellow",
+    "ageBand": "11–14 yo",
+    "durationMin": 90,
+    "focus": "Deep middle → wide forehand finish",
+    "theme": "Build pressure, then strike.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 12,
+        "focus": "Full split + first-step + recovery loop",
+        "items": [
+          { "name": "Power hop → directional sprint", "min": 4 },
+          { "name": "Band walks + RDL warmup", "min": 4 },
+          { "name": "Split → first step → recovery (3 sets each side)", "min": 4 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 35,
+        "focus": "1-2 punch pattern + run-around forehand",
+        "items": [
+          { "name": "Deep middle ball drill (target 3' inside baseline, middle)", "cue": "Set up the wide.", "min": 10 },
+          { "name": "Wide forehand finish off the deep middle", "cue": "Step in, drive through.", "min": 10 },
+          { "name": "Run-around forehand from backhand corner", "min": 8 },
+          { "name": "Deep middle → wide combo (full pattern)", "min": 7 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 35,
+        "focus": "Pattern under match pressure",
+        "items": [
+          { "name": "Pattern-point play — 1-2 punch +2 if executed", "min": 15 },
+          { "name": "Set-up sets — start at 30-30 (focus on pattern under pressure)", "min": 20 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 8,
+        "focus": "Recap + homework + RacquetIQ log",
+        "items": [
+          { "name": "60-sec debrief: when did the pattern win you a point?", "min": 3 },
+          { "name": "Homework: 20 deep-middle targets on the wall", "min": 5 }
+        ]
+      }
+    ],
+    "homework": "20 deep-middle targets on the wall — depth is the setup.",
+    "tags": ["patterns", "1-2-punch", "tactical", "yellow", "high-performance"],
+    "source": "LBTA_Coaching_LessonPlanLibrary_v1.md §Tactical — 1-2 punch"
+  },
+  {
+    "id": "yellow-serve-day",
+    "title": "Yellow Junior — Serve Day",
+    "program": "yellow",
+    "ageBand": "11–14 yo",
+    "durationMin": 90,
+    "focus": "Serve + 1: trophy → drive → pronation → +1 forehand",
+    "theme": "Your serve is your weapon — use the +1.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 12,
+        "focus": "Shoulder + hip mobility for serve",
+        "items": [
+          { "name": "Arm circles + scarecrow + thoracic openers", "min": 4 },
+          { "name": "Med ball serve toss simulation", "min": 4 },
+          { "name": "Split → first step (return practice)", "min": 4 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 38,
+        "focus": "Serve mechanics + serve+1 pattern",
+        "items": [
+          { "name": "Toss consistency drill (10 in target hoop)", "cue": "Up, not out.", "min": 8 },
+          { "name": "Trophy + drop position rehearsal (no contact)", "min": 6 },
+          { "name": "Pronation drill — racket toss to fence", "cue": "Throw the racket head.", "min": 6 },
+          { "name": "Full serve to T target (deuce + ad)", "min": 10 },
+          { "name": "Serve + 1 forehand (deep middle target)", "cue": "Recover to center, then strike.", "min": 8 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 32,
+        "focus": "Serve under pressure",
+        "items": [
+          { "name": "Serve + 1 game (server +1, then play)", "min": 12 },
+          { "name": "Set-up sets — start at deuce, server pressure", "min": 20 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 8,
+        "focus": "Recap + homework + RacquetIQ log",
+        "items": [
+          { "name": "Track your serve % — log to RacquetIQ", "min": 3 },
+          { "name": "Homework: 30 toss-only practice (with target hoop)", "min": 5 }
+        ]
+      }
+    ],
+    "homework": "30 toss-only reps with a target hoop — height + placement.",
+    "tags": ["serve", "serve-plus-1", "yellow", "high-performance"],
+    "source": "LBTA_Coaching_LessonPlanLibrary_v1.md §Block 2 — Serve"
+  },
+  {
+    "id": "adult-bridge-forehand",
+    "title": "Adult Bridge — Beginner Forehand",
+    "program": "adult-bridge",
+    "ageBand": "Adult",
+    "durationMin": 60,
+    "focus": "Forehand fundamentals with adult coordination",
+    "theme": "Adult bodies move differently — start with rhythm.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 10,
+        "focus": "Adult-friendly mobility",
+        "items": [
+          { "name": "Hip openers + thoracic rotation", "min": 4 },
+          { "name": "Walking lunges + carioca", "min": 3 },
+          { "name": "Split-step rehearsal (no rush)", "min": 3 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 30,
+        "focus": "Forehand: grip → unit turn → contact → recovery",
+        "items": [
+          { "name": "Eastern grip + shake-the-hand check", "min": 5 },
+          { "name": "Self-drop forehand (10 reps with rhythm count)", "cue": "Bounce-set-hit.", "min": 8 },
+          { "name": "Coach-fed forehand to single cone target", "min": 8 },
+          { "name": "Forehand cross-court (cooperative, 5 in a row goal)", "min": 9 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 15,
+        "focus": "Forehand into rally",
+        "items": [
+          { "name": "Cooperative cross-court rally (forehand only)", "min": 8 },
+          { "name": "Pattern point: cross-court forehand wins +1", "min": 7 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 5,
+        "focus": "Recap + homework",
+        "items": [
+          { "name": "60-sec debrief: rhythm cue you take home", "min": 2 },
+          { "name": "Homework: shadow 20 forehands daily this week", "min": 3 }
+        ]
+      }
+    ],
+    "homework": "Shadow 20 forehands daily — rhythm cue: bounce-set-hit.",
+    "tags": ["adult", "forehand", "beginner", "stroke-fundamentals"],
+    "source": "LBTA_Coaching_AdultClinics_v1.md §Cardio Tennis + Bridge"
+  },
+  {
+    "id": "adult-bridge-live-ball",
+    "title": "Adult Bridge — Live-Ball Game Format",
+    "program": "adult-bridge",
+    "ageBand": "Adult",
+    "durationMin": 60,
+    "focus": "Cooperative point play — get to 4 shots",
+    "theme": "Rally first, win second.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 10,
+        "focus": "Adult mobility + reaction",
+        "items": [
+          { "name": "Universal opener", "min": 5 },
+          { "name": "Reaction-color cones (slow start)", "min": 5 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 20,
+        "focus": "Mini-rally + first 4 shots",
+        "items": [
+          { "name": "Mini rally inside service line (cooperative)", "cue": "Soft hands, find the contact.", "min": 8 },
+          { "name": "Move back: rally to baseline (cooperative)", "min": 7 },
+          { "name": "Add: serve + return + 2 (must reach 4 shots)", "min": 5 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 25,
+        "focus": "Game-based formats",
+        "items": [
+          { "name": "First-to-7 cooperative rallies (with target zones)", "cue": "Get to 4 before you swing for it.", "min": 10 },
+          { "name": "King of the court (3 players rotating)", "min": 15 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 5,
+        "focus": "Recap + social",
+        "items": [
+          { "name": "Highlight of the day (each player names one)", "min": 3 },
+          { "name": "Suggest: post-clinic hour at the bar nearby", "min": 2 }
+        ]
+      }
+    ],
+    "homework": "Pick one match this week — count rallies to 4 before going for a winner.",
+    "tags": ["adult", "live-ball", "game-based"],
+    "source": "LBTA_Coaching_AdultClinics_v1.md §Live-Ball Adult Clinic"
+  },
+  {
+    "id": "cardio-tennis-60",
+    "title": "Cardio Tennis — 60 min HR + Drills",
+    "program": "cardio",
+    "ageBand": "Adult",
+    "durationMin": 60,
+    "focus": "Heart rate up + ball on the strings",
+    "theme": "Best cardio you can do with a racket in your hand.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 10,
+        "focus": "Get the HR up — music ON",
+        "items": [
+          { "name": "Music-driven jog around courts (3 laps)", "min": 4 },
+          { "name": "Side-shuffle ladder + lateral skips", "min": 3 },
+          { "name": "Reaction-color cones (fast)", "min": 3 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 18,
+        "focus": "Warm rally → live ball patterns",
+        "items": [
+          { "name": "Warm rally (each player gets 30 forehands, 30 backhands)", "min": 10 },
+          { "name": "Live-ball pattern: cross-court → DTL switch", "min": 8 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 27,
+        "focus": "Cooperative point games — keep moving",
+        "items": [
+          { "name": "First-to-7 cooperative rallies", "min": 9 },
+          { "name": "King of the court (rotation, music)", "min": 9 },
+          { "name": "Tag-team doubles (4 on, swap every 2 points)", "min": 9 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 5,
+        "focus": "Cool down + cross-sell",
+        "items": [
+          { "name": "Cooldown stretch (30 sec each: hip, hamstring, shoulder)", "min": 3 },
+          { "name": "Mention Fit4Tennis trial offer (members at 4 weeks)", "min": 2 }
+        ]
+      }
+    ],
+    "homework": "20 min of any cardio mid-week — keep the legs moving.",
+    "tags": ["cardio", "adult", "group", "social"],
+    "source": "LBTA_Coaching_AdultClinics_v1.md §Cardio Tennis — entry funnel"
+  },
+  {
+    "id": "hp-adult-tactical",
+    "title": "HP Adult — Tactical Patterns",
+    "program": "hp-adult",
+    "ageBand": "Adult 4.0+",
+    "durationMin": 90,
+    "focus": "3 patterns under match pressure",
+    "theme": "Win the point you decide to win.",
+    "blocks": [
+      {
+        "type": "movement",
+        "minutes": 12,
+        "focus": "Full Fit4Tennis pre-court protocol",
+        "items": [
+          { "name": "Dynamic mobility (3-line)", "min": 3 },
+          { "name": "Band activation (glutes, shoulders)", "min": 4 },
+          { "name": "Power split-step + first-step + recovery", "min": 5 }
+        ]
+      },
+      {
+        "type": "craft",
+        "minutes": 35,
+        "focus": "1-2 punch + body serve + approach off short ball",
+        "items": [
+          { "name": "1-2 punch (deep middle → wide forehand)", "cue": "Set, then strike.", "min": 12 },
+          { "name": "Body serve + off-shoulder forehand", "cue": "Jam them.", "min": 12 },
+          { "name": "Approach off short ball + volley finish", "cue": "Split-step before contact.", "min": 11 }
+        ]
+      },
+      {
+        "type": "live-ball",
+        "minutes": 35,
+        "focus": "Patterns under match pressure",
+        "items": [
+          { "name": "Set-up sets — start at deuce, must use today's pattern", "min": 15 },
+          { "name": "Tiebreak with pattern bonuses (+2 for executed pattern)", "min": 20 }
+        ]
+      },
+      {
+        "type": "review",
+        "minutes": 8,
+        "focus": "Recap + RacquetIQ log + tournament prep",
+        "items": [
+          { "name": "Debrief: which pattern felt automatic?", "min": 3 },
+          { "name": "Log to RacquetIQ practice planner", "min": 2 },
+          { "name": "Homework: identify upcoming match opponent's UTR + plan pattern", "min": 3 }
+        ]
+      }
+    ],
+    "homework": "Pick your next match opponent — plan which pattern fits their game.",
+    "tags": ["adult", "high-performance", "tactical", "patterns"],
+    "source": "LBTA_Coaching_LessonPlanLibrary_v1.md §Tactical patterns"
+  }
+]

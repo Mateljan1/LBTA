@@ -163,7 +163,7 @@ export default function SchedulesPageClient({
         <section id="private" className="scroll-mt-28 bg-brand-morning-light py-14 md:py-16">
           <div className="max-w-[1200px] mx-auto px-4 md:px-6">
             <div className="rounded-lg border border-black/[0.08] bg-white px-6 py-7 md:px-8 md:py-8">
-              <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-3">
+              <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/70 uppercase mb-3">
                 ONE-ON-ONE
               </p>
               <h2 className="font-headline text-[30px] md:text-[38px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
@@ -212,7 +212,7 @@ export default function SchedulesPageClient({
         <section id="camps" className="scroll-mt-28 bg-brand-morning-light py-14 md:py-16">
           <div className="max-w-[1200px] mx-auto px-4 md:px-6">
             <div className="rounded-lg border border-black/[0.08] bg-white px-6 py-7 md:px-8 md:py-8">
-              <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-3">
+              <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/70 uppercase mb-3">
                 SEASONAL & HOLIDAY
               </p>
               <h2 className="font-headline text-[30px] md:text-[38px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
@@ -257,7 +257,7 @@ export default function SchedulesPageClient({
         <section id="leagues" className="scroll-mt-28 bg-white py-14 md:py-16">
           <div className="max-w-[1200px] mx-auto px-4 md:px-6">
             <div className="rounded-lg border border-black/[0.08] bg-brand-morning-light px-6 py-7 md:px-8 md:py-8">
-              <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/60 uppercase mb-3">
+              <p className="font-sans text-eyebrow font-medium text-brand-pacific-dusk/70 uppercase mb-3">
                 LEAGUES & MATCH PLAY
               </p>
               <h2 className="font-headline text-[30px] md:text-[38px] font-medium text-brand-pacific-dusk leading-[1.1] mb-3">
@@ -298,7 +298,7 @@ export default function SchedulesPageClient({
 
       <DarkSection className="py-20 md:py-24">
         <div className="max-w-[720px] mx-auto text-center">
-          <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/60 uppercase tracking-[0.2em] mb-4">
+          <p className="font-sans text-[11px] md:text-[12px] font-medium text-white/70 uppercase tracking-[0.2em] mb-4">
             {seasonCta.headline}
           </p>
           <h2 className="font-headline text-[32px] md:text-[48px] font-medium text-white leading-[1.15] mb-4">

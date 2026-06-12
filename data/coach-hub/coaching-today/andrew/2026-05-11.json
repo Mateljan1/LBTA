@@ -1,0 +1,48 @@
+{
+  "coach": "andrew",
+  "date": "2026-05-11",
+  "eyebrow": "Coach Today · Mon May 11",
+  "title": "Andrew — Today",
+  "location": "",
+  "metaNote": "Edit data/coach-hub/coaching-today/andrew/2026-05-11.json to populate today's plan.",
+  "theme": {
+    "num": "01",
+    "label": "Theme of the day",
+    "title": "",
+    "body": "Add today's overarching coaching theme — what every session ladders up to."
+  },
+  "rule": {
+    "label": "Rule of the day",
+    "title": "",
+    "body": "One non-negotiable for today (technique focus, footwork pattern, mental cue).",
+    "tiles": []
+  },
+  "sessions": [
+    {
+      "time": "",
+      "durationMin": 60,
+      "title": "Session 1",
+      "subtitle": "Group · level · court",
+      "ageCue": "",
+      "drills": [
+        {
+          "time": "",
+          "min": 10,
+          "name": "Warm-up",
+          "cue": "Move with intention.",
+          "why": "Activate footwork, open shoulders.",
+          "details": "Add details: progression, court position, ball feed pattern."
+        },
+        {
+          "time": "",
+          "min": 20,
+          "name": "Drill name",
+          "cue": "One short coaching cue.",
+          "why": "What this teaches the player.",
+          "details": "Step-by-step setup, success criteria, common errors to look for."
+        }
+      ]
+    }
+  ],
+  "notes": "Free-form notes for today: weather, court conditions, player check-ins, anything that doesn't fit the structured fields."
+}

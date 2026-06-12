@@ -24,6 +24,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env.ghl-sync
 .env.vercel
 
 # Cursor MCP config (may contain ActiveCampaign token)

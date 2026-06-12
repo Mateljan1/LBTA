@@ -1,0 +1,2011 @@
+{
+  "_source_note": "Generated from data/*.json by scripts/build_brochure_content.py. Do not edit by hand — re-run the script after data changes.",
+  "contact": {
+    "name": "Laguna Beach Tennis Academy",
+    "web": "lagunabeachtennisacademy.com",
+    "email": "support@lagunabeachtennisacademy.com",
+    "phone": "(949) 534-0457",
+    "address": "1098 Balboa Ave, Laguna Beach, CA 92651",
+    "tagline": "Movement. Craft. Community.",
+    "primary_tagline": "Tennis, as it should be taught.",
+    "city_partner_line": "Official City of Laguna Beach Tennis Partner Since 2020"
+  },
+  "locations": [
+    {
+      "name": "Moulton Meadows Park",
+      "address": "Balboa Ave & Capistrano Ave",
+      "use": "Youth & beginners"
+    },
+    {
+      "name": "Alta Laguna Park",
+      "address": "3300 Alta Laguna Blvd",
+      "use": "Junior development & UTR weekends"
+    },
+    {
+      "name": "Laguna Beach High School",
+      "address": "625 Park Ave",
+      "use": "High Performance · LiveBall · Camps"
+    }
+  ],
+  "stats": {
+    "years_experience": "25+",
+    "players_count": "695",
+    "rating": "5.0",
+    "review_count": "47",
+    "d1_placements": "20+",
+    "coach_count": "4",
+    "active_students": "100+"
+  },
+  "season": {
+    "spring": {
+      "label": "Spring",
+      "dates": "April 6 – June 13, 2026",
+      "weeks": 10,
+      "skipDates": [
+        "May 25"
+      ],
+      "registrationOpens": "March 2, 2026"
+    },
+    "summer": {
+      "label": "Summer",
+      "dates": "June 15 – August 29, 2026",
+      "weeks": 11,
+      "skipDates": [
+        "June 19",
+        "July 4"
+      ]
+    },
+    "discounts": [
+      {
+        "label": "Sibling",
+        "percent": 10,
+        "description": "Additional siblings in same program"
+      },
+      {
+        "label": "Early Bird",
+        "percent": 5,
+        "description": "Registered 2+ weeks before session start"
+      },
+      {
+        "label": "Multi-Session",
+        "percent": 5,
+        "description": "Register Spring + Summer together"
+      },
+      {
+        "label": "Multi-Camp Week",
+        "percent": 10,
+        "description": "Booking 4+ weeks of camp"
+      }
+    ]
+  },
+  "coaches": [
+    {
+      "slug": "andrew-mateljan",
+      "name": "Andrew Mateljan",
+      "title": "Founder & Director of Tennis",
+      "specialization": "Founder & Director of Tennis · Head Coach, LBHS Boys Varsity Tennis",
+      "bio": "Fourth-generation tennis coach. Twenty years developing competitive players from junior foundations to professional tour. Top-12 nationally as a junior, two-time Kalamazoo Nationals competitor, ITF Futures circuit (US, Venezuela, El Salvador, Guatemala). Trained at Sánchez-Casal Spain under Jimmy Johnson; seven years coaching internationally across Spain, Croatia, and Norway. Currently coaches Karue Sell (ATP #258 — took him from #860 to #258 in 2025). Colton Smith (ATP #133), Max McKennon (#458), and Ryan Seggerman (#63 in doubles) all came through the same training. Alex Michelsen came through the program at ages 12–13 — now ATP #30.",
+      "quote": "Structure creates confidence.",
+      "credentials": [
+        "Former Top Junior",
+        "ATP/WTA Tour Coach",
+        "20+ D1 Placements",
+        "Sánchez-Casal Spain — Jimmy Johnson"
+      ],
+      "image_local": "andrew.png",
+      "role": "founder",
+      "order": 1
+    },
+    {
+      "slug": "peter-defrantz",
+      "name": "Peter DeFrantz",
+      "title": "Head Coach, Junior Development",
+      "specialization": "USPTA & PTR Certified Professional · College Tennis at Mt. San Jacinto · 8+ Years Coaching",
+      "bio": "Peter grew up on the tennis court — his father coached high school tennis — and learned early that the game is about more than strokes: how you carry yourself, compete, and treat people. College tennis at Mt. San Jacinto College; dual USPTA and PTR certified. Eight years coaching across Southern California with a progressive, player-centered approach.",
+      "quote": "Build the player, not just the game.",
+      "credentials": [
+        "USPTA & PTR Certified",
+        "8+ Years Coaching",
+        "College Tennis — Mt. San Jacinto"
+      ],
+      "image_local": "peter.png",
+      "role": "program",
+      "order": 4
+    },
+    {
+      "slug": "allison-cronk",
+      "name": "Allison Cronk",
+      "title": "Head Coach, Youth Programs",
+      "specialization": "Head Coach, Youth Programs · Collegiate Player · Educator",
+      "bio": "Allison played varsity tennis at Mira Costa High School, then competed at Westcliff University (NAIA) and Shepherd University (NCAA) — Dean's List every semester at both. She has coached at five academies across Orange County and the South Bay. Beginners, juniors, adults, competitors. She adapts to whoever is on the other side of the net.",
+      "quote": "She doesn't just teach the game. She teaches the person playing it.",
+      "credentials": [
+        "NCAA & NAIA Collegiate Tennis",
+        "B.A. History, Education Minor",
+        "5+ Years Coaching",
+        "CPR / AED Certified"
+      ],
+      "image_local": "allison.png",
+      "role": "program",
+      "order": 5
+    }
+  ],
+  "programs": {
+    "junior": [
+      {
+        "id": "little-stars",
+        "program": "Little Tennis Stars",
+        "ages": "3-4",
+        "location": "Moulton Meadows Park + Saturday at Alta Laguna",
+        "duration": "45 min",
+        "schedule": [
+          {
+            "day": "Monday",
+            "time": "3:30–4:15 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Wednesday",
+            "time": "3:30–4:15 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Saturday",
+            "time": "9:00–9:45 AM",
+            "coach": "Allison Cronk",
+            "location": "Alta Laguna Park"
+          }
+        ],
+        "pricing": {
+          "monthly": {
+            "1x": 120,
+            "2x": 200
+          },
+          "drop_in": 40
+        },
+        "description": "Your child's first time on a tennis court should feel like play — because it is. Foam balls, low nets, mini courts. Movement games, relay races, treasure hunts. No drills. No pressure.",
+        "pricing_note": null,
+        "inquiry_label": null
+      },
+      {
+        "id": "red-ball",
+        "program": "Red Ball",
+        "ages": "5-6",
+        "location": "Moulton Meadows Park + Saturday at Alta Laguna",
+        "duration": "60 min",
+        "schedule": [
+          {
+            "day": "Monday",
+            "time": "4:15–5:15 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Wednesday",
+            "time": "4:15–5:15 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Saturday",
+            "time": "9:45–10:45 AM",
+            "coach": "Allison Cronk",
+            "location": "Alta Laguna Park"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 420,
+            "2x": 840,
+            "3x": 1260,
+            "saturday1x": 380
+          },
+          "summer": {
+            "1x": 462,
+            "2x": 924,
+            "3x": 1386,
+            "saturday1x": 418
+          },
+          "drop_in": 50
+        },
+        "description": "The real starting line. Players learn to swing, move, and rally on a 36-foot court with low-compression red balls. By the end of the season, your child is hitting 4–6 ball rallies, serving to start a point, and keeping score.",
+        "pricing_note": null,
+        "inquiry_label": null
+      },
+      {
+        "id": "orange-ball",
+        "program": "Orange Ball",
+        "ages": "7-8",
+        "location": "Moulton Meadows Park + Saturday at Alta Laguna",
+        "duration": "60 min",
+        "schedule": [
+          {
+            "day": "Monday",
+            "time": "5:15–6:15 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Wednesday",
+            "time": "5:15–6:15 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Tuesday",
+            "time": "3:30–4:30 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Thursday",
+            "time": "3:30–4:30 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Saturday",
+            "time": "10:45–11:45 AM",
+            "coach": "Allison Cronk",
+            "location": "Alta Laguna Park"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 420,
+            "2x": 840,
+            "3x": 1260,
+            "saturday1x": 380
+          },
+          "summer": {
+            "1x": 462,
+            "2x": 924,
+            "3x": 1386,
+            "saturday1x": 418
+          },
+          "drop_in": 50
+        },
+        "description": "Bigger court. Faster ball. Players move to a 60-foot court with orange balls — closer to the real game. Direction becomes a coached focus. Volleys and overhand serves are introduced through games, and structured point play begins.",
+        "pricing_note": null,
+        "inquiry_label": null
+      },
+      {
+        "id": "green-dot",
+        "program": "Green Dot",
+        "ages": "9-11",
+        "location": "Moulton Meadows Park + Saturday at Alta Laguna",
+        "duration": "60 min",
+        "schedule": [
+          {
+            "day": "Tuesday",
+            "time": "4:30–5:30 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Thursday",
+            "time": "4:30–5:30 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Saturday",
+            "time": "11:45 AM–12:45 PM",
+            "coach": "Allison Cronk",
+            "location": "Alta Laguna Park"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 420,
+            "2x": 840,
+            "3x": 1260,
+            "saturday1x": 380
+          },
+          "summer": {
+            "1x": 462,
+            "2x": 924,
+            "3x": 1386,
+            "saturday1x": 418
+          },
+          "drop_in": 50
+        },
+        "description": "Full-size court. Green dot balls — 25% slower than regulation. This is where players learn to think. We introduce Phase Play: is this a rally ball, an attack ball, or a defensive ball?",
+        "pricing_note": null,
+        "inquiry_label": null
+      }
+    ],
+    "development": [
+      {
+        "id": "utr-green-dot",
+        "program": "Competitive Green Dot",
+        "ages": "9-11+",
+        "location": "Alta Laguna Park (Tue/Thu); Laguna Beach High School (Fri)",
+        "duration": "2 hr",
+        "schedule": [
+          {
+            "day": "Tuesday",
+            "time": "4:30–6:30 PM",
+            "coach": "Staff",
+            "location": "Alta Laguna Park"
+          },
+          {
+            "day": "Thursday",
+            "time": "4:30–6:30 PM",
+            "coach": "Staff",
+            "location": "Alta Laguna Park"
+          },
+          {
+            "day": "Friday",
+            "time": "4:30–6:30 PM",
+            "coach": "Staff",
+            "location": "Laguna Beach High School"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 625,
+            "2x": 1250,
+            "3x": 1745
+          },
+          "summer": {
+            "1x": 688,
+            "2x": 1375,
+            "3x": 1920
+          },
+          "drop_in": 70
+        },
+        "description": "For green dot players who are ready for more than group classes. Match play, point construction, and tournament preparation. Placement by coach invitation.",
+        "pricing_note": "Placement by invitation. Contact us to discuss if your player may be ready.",
+        "inquiry_label": "Inquire about placement"
+      },
+      {
+        "id": "youth-development",
+        "program": "Junior Development",
+        "ages": "11-18 (UTR 1–4 / UTR 4–7)",
+        "location": "Alta Laguna Park (Mon/Wed); Laguna Beach High School (Fri)",
+        "duration": "2 hr",
+        "schedule": [
+          {
+            "day": "Monday",
+            "time": "4:30–6:30 PM",
+            "coach": "Peter DeFrantz",
+            "location": "Alta Laguna Park"
+          },
+          {
+            "day": "Wednesday",
+            "time": "4:30–6:30 PM",
+            "coach": "Peter DeFrantz",
+            "location": "Alta Laguna Park"
+          },
+          {
+            "day": "Friday",
+            "time": "4:30–6:30 PM",
+            "coach": "Andrew Mateljan",
+            "location": "Laguna Beach High School"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 625,
+            "2x": 1250,
+            "3x": 1745
+          },
+          "summer": {
+            "1x": 688,
+            "2x": 1375,
+            "3x": 1920
+          },
+          "drop_in": 70
+        },
+        "description": "The first competitive training tier. Players develop their own playing style, learn to manage points independently, and build the physical and mental habits that tournament play demands. Two tiers by UTR — Tier 1 (UTR 1–4) and Tier 2 (UTR 4–7).",
+        "pricing_note": "Under 11 but already at UTR 1.5+? Contact us to inquire about placement.",
+        "inquiry_label": "Inquire about placement"
+      },
+      {
+        "id": "high-performance",
+        "program": "High Performance",
+        "ages": "12-17 (UTR 8+)",
+        "location": "Laguna Beach High School",
+        "duration": "2 hr",
+        "schedule": [
+          {
+            "day": "Monday",
+            "time": "6:30–8:30 PM",
+            "coach": "Andrew Mateljan & Peter DeFrantz",
+            "location": "Laguna Beach High School",
+            "note": "Training"
+          },
+          {
+            "day": "Wednesday",
+            "time": "6:30–8:30 PM",
+            "coach": "Andrew Mateljan & Peter DeFrantz",
+            "location": "Laguna Beach High School",
+            "note": "Training"
+          },
+          {
+            "day": "Friday",
+            "time": "4:30–6:30 PM",
+            "coach": "Peter DeFrantz & Allison Cronk",
+            "location": "Laguna Beach High School",
+            "note": "Match Play"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 625,
+            "2x": 1250,
+            "3x": 1745
+          },
+          "summer": {
+            "1x": 688,
+            "2x": 1375,
+            "3x": 1920
+          },
+          "drop_in": 100
+        },
+        "description": "The highest level of training at LBTA. Every session simulates tournament conditions. UTR 8+ required. Coach approval required.",
+        "pricing_note": "UTR 8+ required. Under 12 or close to UTR 8? Contact us to discuss readiness.",
+        "inquiry_label": "Inquire about placement"
+      }
+    ],
+    "adult": [
+      {
+        "id": "adult-beginner-1",
+        "program": "New to Tennis",
+        "ages": "All Levels",
+        "location": "Laguna Beach High School",
+        "duration": "1 hr",
+        "schedule": [
+          {
+            "day": "Monday",
+            "time": "6:30–7:30 PM",
+            "coach": "Peter DeFrantz",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Wednesday",
+            "time": "6:30–7:30 PM",
+            "coach": "Peter DeFrantz",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Tuesday",
+            "time": "10:00–11:00 AM",
+            "coach": "Andrew Mateljan",
+            "location": "Laguna Beach High School"
+          },
+          {
+            "day": "Thursday",
+            "time": "10:00–11:00 AM",
+            "coach": "Andrew Mateljan",
+            "location": "Laguna Beach High School"
+          },
+          {
+            "day": "Saturday",
+            "time": "9:00–10:00 AM",
+            "coach": "Peter DeFrantz",
+            "location": "Laguna Beach High School"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 420,
+            "2x": 615,
+            "saturday1x": 380
+          },
+          "summer": {
+            "1x": 462,
+            "2x": 677,
+            "saturday1x": 418
+          },
+          "drop_in": 55
+        },
+        "description": "No rating required. No experience needed. We get you hitting the ball on day one.",
+        "pricing_note": null,
+        "inquiry_label": null
+      },
+      {
+        "id": "adult-beginner-2",
+        "program": "Beyond Beginner",
+        "ages": "All Levels",
+        "location": "Moulton Meadows Park",
+        "duration": "1 hr",
+        "schedule": [
+          {
+            "day": "Monday",
+            "time": "6:30–7:30 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          },
+          {
+            "day": "Wednesday",
+            "time": "6:30–7:30 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 420,
+            "2x": 615
+          },
+          "summer": {
+            "1x": 462,
+            "2x": 677
+          },
+          "drop_in": 55
+        },
+        "description": "You can rally. You can serve. Now learn to place the ball and start thinking about doubles strategy.",
+        "pricing_note": null,
+        "inquiry_label": null
+      },
+      {
+        "id": "adult-intermediate",
+        "program": "Adult Intermediate",
+        "ages": "NTRP 3.0-4.0",
+        "location": "Laguna Beach High School",
+        "duration": "1.5 hr",
+        "schedule": [
+          {
+            "day": "Tuesday",
+            "time": "11:00 AM–12:30 PM",
+            "coach": "Andrew Mateljan",
+            "location": "Laguna Beach High School"
+          },
+          {
+            "day": "Thursday",
+            "time": "11:00 AM–12:30 PM",
+            "coach": "Andrew Mateljan",
+            "location": "Laguna Beach High School"
+          },
+          {
+            "day": "Saturday",
+            "time": "10:00–11:30 AM",
+            "coach": "Peter DeFrantz",
+            "location": "Laguna Beach High School"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 580,
+            "2x": 1105,
+            "3x": 1570
+          },
+          "summer": {
+            "1x": 638,
+            "2x": 1216,
+            "3x": 1727
+          },
+          "drop_in": 70
+        },
+        "description": "Tennis becomes a tactical sport at this level. The 90-minute format gives 30+ minutes of real match play every session. USTA league preparation begins here. Tue, Thu, and Sat are interchangeable days inside the 1×/2×/3× package — pick any combination.",
+        "pricing_note": null,
+        "inquiry_label": null
+      },
+      {
+        "id": "adult-advanced",
+        "program": "Adult Advanced",
+        "ages": "NTRP 4.0+",
+        "location": "Laguna Beach High School",
+        "duration": "2 hr",
+        "schedule": [
+          {
+            "day": "Monday",
+            "time": "12:00–2:00 PM",
+            "coach": "Peter DeFrantz & Andrew Mateljan",
+            "location": "Laguna Beach High School"
+          },
+          {
+            "day": "Friday",
+            "time": "12:00–2:00 PM",
+            "coach": "Peter DeFrantz & Andrew Mateljan",
+            "location": "Laguna Beach High School"
+          }
+        ],
+        "pricing": {
+          "spring": {
+            "1x": 625,
+            "2x": 1250
+          },
+          "summer": {
+            "1x": 688,
+            "2x": 1375
+          },
+          "drop_in": 90
+        },
+        "description": "Full tactical play. Phase Play is assumed. All five ball controls are active. Feeds directly into USTA league teams and UTR competition.",
+        "pricing_note": null,
+        "inquiry_label": null
+      }
+    ],
+    "open-court": [
+      {
+        "id": "liveball",
+        "program": "LiveBall",
+        "ages": "NTRP 3.0+",
+        "location": "Moulton Meadows Park / LBHS",
+        "duration": "1-1.5 hr",
+        "schedule": [
+          {
+            "day": "Thursday",
+            "time": "6:00–7:30 PM",
+            "coach": "Allison Cronk",
+            "location": "Moulton Meadows Park",
+            "note": "Intermediate (3.0–4.0)"
+          },
+          {
+            "day": "Saturday",
+            "time": "11:30 AM–1:00 PM",
+            "coach": "Peter DeFrantz",
+            "location": "Laguna Beach High School",
+            "note": "Intermediate (3.0–4.0)"
+          },
+          {
+            "day": "Sunday",
+            "time": "9:00–10:30 AM",
+            "coach": "Peter DeFrantz & Andrew Mateljan",
+            "location": "Laguna Beach High School",
+            "note": "Intermediate (3.0–4.0)"
+          },
+          {
+            "day": "Sunday",
+            "time": "10:30 AM–12:00 PM",
+            "coach": "Peter DeFrantz & Andrew Mateljan",
+            "location": "Laguna Beach High School",
+            "note": "Advanced (4.0+)"
+          }
+        ],
+        "pricing": {
+          "monthly": 150,
+          "drop_in": 50
+        },
+        "description": "High-energy, coach-fed sessions. 150–200 ball contacts per session. Intermediate (NTRP 3.0–4.0) and Advanced (4.0+) levels. Minimum 5 players to run.",
+        "pricing_note": null,
+        "inquiry_label": null
+      },
+      {
+        "id": "cardio-tennis",
+        "program": "Cardio Tennis",
+        "ages": "All Levels",
+        "location": "Laguna Beach High School",
+        "duration": "1.5 hr",
+        "schedule": [
+          {
+            "day": "Friday",
+            "time": "9:00–10:30 AM",
+            "coach": "Andrew Mateljan & Peter DeFrantz",
+            "location": "Laguna Beach High School"
+          }
+        ],
+        "pricing": {
+          "monthly": 150,
+          "drop_in": 50
+        },
+        "description": "Tennis-based fitness. High-intensity rallies, movement drills, and competitive games — all coach-fed.",
+        "pricing_note": null,
+        "inquiry_label": null
+      }
+    ]
+  },
+  "private_rates": [
+    {
+      "coach": "Andrew Mateljan",
+      "specialty": "Founder & Director of Tennis",
+      "rate_60": 250,
+      "rate_90": 350,
+      "pack_10": 2300,
+      "pack_20": 4200
+    },
+    {
+      "coach": "Peter DeFrantz",
+      "specialty": "Head Coach, Junior Development",
+      "rate_60": 120,
+      "rate_90": 165,
+      "pack_10": 1100,
+      "pack_20": 2000
+    },
+    {
+      "coach": "Allison Cronk",
+      "specialty": "Head Coach, Youth Programs",
+      "rate_60": 120,
+      "rate_90": 165,
+      "pack_10": 1100,
+      "pack_20": 2000
+    }
+  ],
+  "camps": {
+    "springBreak": {
+      "label": "Spring Break Camp",
+      "dates": "March 30 – April 2, 2026 (Mon–Thu)",
+      "options": [
+        {
+          "name": "Tennis & Adventure",
+          "ages": "5–11",
+          "location": "Alta Laguna Park",
+          "pricePerWeek": 325,
+          "perDay": 85,
+          "hours": "Morning 9am–12pm · Afternoon 12–3pm"
+        },
+        {
+          "name": "Junior Development",
+          "ages": "12–17",
+          "location": "Laguna Beach High School",
+          "pricePerWeek": 325,
+          "perDay": 85,
+          "hours": "Morning 9am–12pm · Afternoon 1–4pm"
+        }
+      ],
+      "coach": "Peter DeFrantz"
+    },
+    "summer": {
+      "label": "Summer Camps",
+      "dates": "June 15 – August 29, 2026",
+      "options": [
+        {
+          "name": "Tennis & Adventure Full Day",
+          "ages": "5-11",
+          "hours": "9am-3pm",
+          "pricePerWeek": 495,
+          "perDay": 99
+        },
+        {
+          "name": "Tennis & Adventure Half Day AM",
+          "ages": "5-11",
+          "hours": "9am-12pm",
+          "pricePerWeek": 325,
+          "perDay": 85
+        },
+        {
+          "name": "Tennis & Adventure Half Day PM",
+          "ages": "5-11",
+          "hours": "12pm-3pm",
+          "pricePerWeek": 325,
+          "perDay": 85
+        },
+        {
+          "name": "Summer Training Camp Full Day",
+          "ages": "12-17",
+          "hours": "9am-3pm",
+          "location": "LBHS",
+          "pricePerWeek": 595,
+          "perDay": 120
+        },
+        {
+          "name": "Summer Training Camp Half Day",
+          "ages": "12-17",
+          "hours": "9am-12pm or 12pm-3pm",
+          "location": "LBHS",
+          "pricePerWeek": 325,
+          "perDay": 85
+        }
+      ],
+      "coach": "Peter DeFrantz"
+    }
+  },
+  "leagues": {
+    "usta": {
+      "totalSeasonCost": 5500,
+      "ustaMembershipAnnual": 48,
+      "leagues": [
+        {
+          "id": 1,
+          "name": "Adult 18 & Over",
+          "season": "Apr 17 – Jul 5, 2026",
+          "weeks": "~11 weeks",
+          "format": "2 singles + 3 doubles, same gender",
+          "levels": "2.5 / 3.0 / 3.5 / 4.0 / 4.5 / 5.0",
+          "pricing12": "$458",
+          "pricing14": "$393",
+          "weeklyApprox": "~$42/week",
+          "deadline": "April 1"
+        },
+        {
+          "id": 2,
+          "name": "Friday Women's League",
+          "season": "Apr 17 – Jul 5, 2026",
+          "weeks": "~11 weeks",
+          "format": "2 singles + 3 doubles, women only",
+          "levels": "2.5 / 3.0 / 3.5 / 4.0 / 4.5",
+          "pricing12": "$458",
+          "pricing14": "$393",
+          "weeklyApprox": "~$42/week",
+          "deadline": "April 1"
+        },
+        {
+          "id": 3,
+          "name": "Mixed 40+ Doubles",
+          "season": "Apr 18 – Sep 6, 2026",
+          "weeks": "~20 weeks",
+          "format": "3 doubles lines, mixed gender, combined NTRP",
+          "levels": "6.0 / 7.0 / 8.0 / 9.0 / 10.0 combined",
+          "pricing12": "$458",
+          "pricing14": "$393",
+          "weeklyApprox": "~$23/week",
+          "deadline": "April 1"
+        },
+        {
+          "id": 4,
+          "name": "Adult 55+ Doubles",
+          "season": "May 2 – Aug 16, 2026",
+          "weeks": "~15 weeks",
+          "format": "3 doubles lines, same gender, combined NTRP",
+          "levels": "6.0 / 7.0 / 8.0 / 9.0 combined",
+          "pricing12": "$458",
+          "pricing14": "$393",
+          "weeklyApprox": "~$31/week",
+          "deadline": "April 19"
+        }
+      ],
+      "ntrpGuide": [
+        {
+          "level": "2.5",
+          "desc": "Can rally but inconsistent. Learning serve. New to match play."
+        },
+        {
+          "level": "3.0",
+          "desc": "Consistent rally. Developing serve. Playing points with intention."
+        },
+        {
+          "level": "3.5",
+          "desc": "Reliable groundstrokes and serve. Can place the ball. Comfortable in doubles."
+        },
+        {
+          "level": "4.0",
+          "desc": "Strong all-court game. Spin, pace variation, tactical patterns."
+        },
+        {
+          "level": "4.5+",
+          "desc": "Tournament-level. Weapons on serve and groundstrokes. Advanced tactics."
+        }
+      ]
+    },
+    "utr": {
+      "seasonLabel": "April 11 – June 6, 2026 · Grand Finals June 6",
+      "regularSeasonSaturdays": [
+        "2026-04-11",
+        "2026-04-18",
+        "2026-04-25",
+        "2026-05-02",
+        "2026-05-09",
+        "2026-05-16",
+        "2026-05-23",
+        "2026-05-30"
+      ],
+      "regularSeasonSundays": [
+        "2026-04-12",
+        "2026-04-19",
+        "2026-04-26",
+        "2026-05-03",
+        "2026-05-10",
+        "2026-05-17",
+        "2026-05-24",
+        "2026-05-31"
+      ],
+      "grandFinalsDate": "2026-06-06",
+      "saturdayVenueShort": "Alta Laguna Park",
+      "sundayVenueShort": "Laguna Beach HS",
+      "grandFinalsVenueShort": "Laguna Beach High School",
+      "divisions": [
+        {
+          "name": "Color Ball",
+          "level": "Juniors — Scaled courts, right ball for every stage",
+          "format": "Pod Round Robin",
+          "note": "Coach on court for every match. Underhand serves and drop feeds are totally fine — no pressure. If they can rally, they can play.",
+          "price": "$349",
+          "drop_in": 55,
+          "time": "1:30–4:00 PM",
+          "venue": "Alta Laguna Park · 3300 Alta Laguna Blvd, Laguna Beach, CA 92651",
+          "match_day": "Saturday",
+          "cta_style": "teal",
+          "image": "/images/programs/utr-match-play/color-ball.webp",
+          "imageAlt": "Color Ball match play on outdoor courts at Laguna Beach Tennis Academy — scaled tennis for developing players",
+          "imageObjectPosition": "50% 38%"
+        },
+        {
+          "name": "UTR 1–7 Singles",
+          "level": "Saturdays at Alta Laguna Park",
+          "format": "8-Game Pro Sets",
+          "price": "$399",
+          "drop_in": 65,
+          "time": "4:00–6:30 PM",
+          "venue": "Alta Laguna Park · 3300 Alta Laguna Blvd, Laguna Beach, CA 92651",
+          "match_day": "Saturday",
+          "cta_style": "teal",
+          "image": "/images/programs/utr-match-play/utr-2-4.webp",
+          "imageAlt": "Singles player during UTR match play on outdoor courts at Alta Laguna Park",
+          "imageObjectPosition": "50% 14%"
+        },
+        {
+          "name": "UTR 3–12 Singles",
+          "level": "Sundays at Laguna Beach High School · UTR 3–12",
+          "format": "Formats may vary week to week",
+          "description": "You'll be paired against players at your level. Formats may vary week to week.",
+          "price": "$399",
+          "drop_in": 65,
+          "time": "3:00–5:30 PM",
+          "venue": "Laguna Beach High School · 625 Park Ave, Laguna Beach, CA 92651",
+          "match_day": "Sunday",
+          "cta_style": "sunset",
+          "image": "/images/programs/utr-match-play/utr-3-5.webp",
+          "imageAlt": "Singles player during UTR match play on outdoor courts at Laguna Beach High School",
+          "imageObjectPosition": "50% 4%"
+        },
+        {
+          "name": "UTR 1–12 Doubles",
+          "level": "Sundays at Laguna Beach High School · Show up solo — we'll pair you",
+          "format": "8-Game Pro Sets",
+          "description": "Teams matched by combined UTR. No partner needed.",
+          "price": "$399",
+          "drop_in": 65,
+          "time": "5:30 PM",
+          "venue": "Laguna Beach High School · 625 Park Ave, Laguna Beach, CA 92651",
+          "match_day": "Sunday",
+          "cta_style": "sunset",
+          "image": "/images/programs/utr-match-play/doubles.webp",
+          "imageAlt": "Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy",
+          "imageObjectPosition": "50% 32%"
+        }
+      ],
+      "ntrpToUtr": [
+        {
+          "ntrp": "2.5",
+          "men": "1.5–2.5",
+          "women": "1.5–2.5"
+        },
+        {
+          "ntrp": "3.0",
+          "men": "2.5–3.5",
+          "women": "2.3–3.3"
+        },
+        {
+          "ntrp": "3.5",
+          "men": "3.5–4.8",
+          "women": "3.0–4.0"
+        },
+        {
+          "ntrp": "4.0",
+          "men": "4.8–6.5",
+          "women": "4.0–5.0"
+        },
+        {
+          "ntrp": "4.5",
+          "men": "6.5–8.0",
+          "women": "5.0–6.0"
+        },
+        {
+          "ntrp": "5.0+",
+          "men": "8.0+",
+          "women": "6.0+"
+        }
+      ]
+    }
+  },
+  "annual_pricing": {
+    "seasons": [
+      {
+        "key": "winter",
+        "label": "Winter",
+        "weeks": 13,
+        "dates": "January 5 – April 5, 2026"
+      },
+      {
+        "key": "spring",
+        "label": "Spring",
+        "weeks": 10,
+        "dates": "April 6 – June 13, 2026"
+      },
+      {
+        "key": "summer",
+        "label": "Summer",
+        "weeks": 11,
+        "dates": "June 15 – August 29, 2026"
+      },
+      {
+        "key": "fall",
+        "label": "Fall",
+        "weeks": 16,
+        "dates": "August 31 – December 19, 2026"
+      }
+    ],
+    "rows": [
+      {
+        "id": "little-stars",
+        "program": "Little Tennis Stars",
+        "level": "3–4",
+        "category": "Junior",
+        "winter": {
+          "1x": null,
+          "2x": null,
+          "3x": null,
+          "monthly": 120,
+          "drop_in": 40
+        },
+        "spring": {
+          "1x": null,
+          "2x": null,
+          "3x": null,
+          "monthly": 120,
+          "drop_in": 40
+        },
+        "summer": {
+          "1x": null,
+          "2x": null,
+          "3x": null,
+          "monthly": 120,
+          "drop_in": 40
+        },
+        "fall": {
+          "1x": null,
+          "2x": 200,
+          "3x": null,
+          "monthly": 120,
+          "drop_in": 40
+        }
+      },
+      {
+        "id": "red-ball",
+        "program": "Red Ball",
+        "level": "5–6",
+        "category": "Junior",
+        "winter": {
+          "1x": 546,
+          "2x": 1092,
+          "3x": 1635,
+          "drop_in": 50
+        },
+        "spring": {
+          "1x": 420,
+          "2x": 840,
+          "3x": 1260,
+          "monthly": null,
+          "drop_in": 50
+        },
+        "summer": {
+          "1x": 462,
+          "2x": 924,
+          "3x": 1386,
+          "monthly": null,
+          "drop_in": 50
+        },
+        "fall": {
+          "1x": 672,
+          "2x": 1344,
+          "3x": 2016,
+          "monthly": null,
+          "drop_in": 50
+        }
+      },
+      {
+        "id": "orange-ball",
+        "program": "Orange Ball",
+        "level": "7–8",
+        "category": "Junior",
+        "winter": {
+          "1x": 546,
+          "2x": 1092,
+          "3x": 1635,
+          "drop_in": 50
+        },
+        "spring": {
+          "1x": 420,
+          "2x": 840,
+          "3x": 1260,
+          "monthly": null,
+          "drop_in": 50
+        },
+        "summer": {
+          "1x": 462,
+          "2x": 924,
+          "3x": 1386,
+          "monthly": null,
+          "drop_in": 50
+        },
+        "fall": {
+          "1x": 672,
+          "2x": 1344,
+          "3x": 2016,
+          "monthly": null,
+          "drop_in": 50
+        }
+      },
+      {
+        "id": "green-dot",
+        "program": "Green Dot",
+        "level": "9–11",
+        "category": "Junior",
+        "winter": {
+          "1x": 546,
+          "2x": 1092,
+          "3x": 1635,
+          "drop_in": 50
+        },
+        "spring": {
+          "1x": 420,
+          "2x": 840,
+          "3x": 1260,
+          "monthly": null,
+          "drop_in": 50
+        },
+        "summer": {
+          "1x": 462,
+          "2x": 924,
+          "3x": 1386,
+          "monthly": null,
+          "drop_in": 50
+        },
+        "fall": {
+          "1x": 672,
+          "2x": 1344,
+          "3x": 2016,
+          "monthly": null,
+          "drop_in": 50
+        }
+      },
+      {
+        "id": "utr-green-dot",
+        "program": "Competitive Green Dot",
+        "level": "9–11+ inv",
+        "category": "Development",
+        "winter": {
+          "1x": 810,
+          "2x": 1620,
+          "3x": 2268,
+          "drop_in": 70
+        },
+        "spring": {
+          "1x": 625,
+          "2x": 1250,
+          "3x": 1745,
+          "monthly": null,
+          "drop_in": 70
+        },
+        "summer": {
+          "1x": 688,
+          "2x": 1375,
+          "3x": 1920,
+          "monthly": null,
+          "drop_in": 70
+        },
+        "fall": {
+          "1x": 1000,
+          "2x": 2000,
+          "3x": 2792,
+          "monthly": null,
+          "drop_in": 70
+        }
+      },
+      {
+        "id": "youth-development",
+        "program": "Junior Development",
+        "level": "11–18",
+        "category": "Development",
+        "winter": {
+          "1x": 810,
+          "2x": 1620,
+          "3x": 2268,
+          "drop_in": 70
+        },
+        "spring": {
+          "1x": 625,
+          "2x": 1250,
+          "3x": 1745,
+          "monthly": null,
+          "drop_in": 70
+        },
+        "summer": {
+          "1x": 688,
+          "2x": 1375,
+          "3x": 1920,
+          "monthly": null,
+          "drop_in": 70
+        },
+        "fall": {
+          "1x": 1000,
+          "2x": 2000,
+          "3x": 2792,
+          "monthly": null,
+          "drop_in": 70
+        }
+      },
+      {
+        "id": "high-performance",
+        "program": "High Performance",
+        "level": "12–17 UTR8+",
+        "category": "Development",
+        "winter": {
+          "1x": 810,
+          "2x": 1620,
+          "3x": 2268,
+          "drop_in": 100
+        },
+        "spring": {
+          "1x": 625,
+          "2x": 1250,
+          "3x": 1745,
+          "monthly": null,
+          "drop_in": 100
+        },
+        "summer": {
+          "1x": 688,
+          "2x": 1375,
+          "3x": 1920,
+          "monthly": null,
+          "drop_in": 100
+        },
+        "fall": {
+          "1x": 1000,
+          "2x": 2000,
+          "3x": 2792,
+          "monthly": null,
+          "drop_in": 100
+        }
+      },
+      {
+        "id": "adult-beginner-1",
+        "program": "New to Tennis",
+        "level": "All Levels",
+        "category": "Adult",
+        "winter": {
+          "1x": 546,
+          "2x": 797,
+          "drop_in": 55
+        },
+        "spring": {
+          "1x": 420,
+          "2x": 615,
+          "3x": null,
+          "monthly": null,
+          "drop_in": 55
+        },
+        "summer": {
+          "1x": 462,
+          "2x": 677,
+          "3x": null,
+          "monthly": null,
+          "drop_in": 55
+        },
+        "fall": {
+          "1x": 672,
+          "2x": 984,
+          "3x": null,
+          "monthly": null,
+          "drop_in": 55
+        }
+      },
+      {
+        "id": "adult-beginner-2",
+        "program": "Beyond Beginner",
+        "level": "All Levels",
+        "category": "Adult",
+        "winter": {
+          "1x": 546,
+          "2x": 797,
+          "drop_in": 55
+        },
+        "spring": {
+          "1x": 420,
+          "2x": 615,
+          "3x": null,
+          "monthly": null,
+          "drop_in": 55
+        },
+        "summer": {
+          "1x": 462,
+          "2x": 677,
+          "3x": null,
+          "monthly": null,
+          "drop_in": 55
+        },
+        "fall": {
+          "1x": 672,
+          "2x": 984,
+          "3x": null,
+          "monthly": null,
+          "drop_in": 55
+        }
+      },
+      {
+        "id": "adult-intermediate",
+        "program": "Adult Intermediate",
+        "level": "NTRP 3.0–4.0",
+        "category": "Adult",
+        "winter": {
+          "1x": 756,
+          "2x": 1437,
+          "3x": 2042,
+          "drop_in": 70
+        },
+        "spring": {
+          "1x": 580,
+          "2x": 1105,
+          "3x": 1570,
+          "monthly": null,
+          "drop_in": 70
+        },
+        "summer": {
+          "1x": 638,
+          "2x": 1216,
+          "3x": 1727,
+          "monthly": null,
+          "drop_in": 70
+        },
+        "fall": {
+          "1x": 928,
+          "2x": 1768,
+          "3x": 2512,
+          "monthly": null,
+          "drop_in": 70
+        }
+      },
+      {
+        "id": "adult-advanced",
+        "program": "Adult Advanced",
+        "level": "NTRP 4.0+",
+        "category": "Adult",
+        "winter": {
+          "1x": 810,
+          "2x": 1620,
+          "drop_in": 90
+        },
+        "spring": {
+          "1x": 625,
+          "2x": 1250,
+          "3x": null,
+          "monthly": null,
+          "drop_in": 90
+        },
+        "summer": {
+          "1x": 688,
+          "2x": 1375,
+          "3x": null,
+          "monthly": null,
+          "drop_in": 90
+        },
+        "fall": {
+          "1x": 1000,
+          "2x": 2000,
+          "3x": null,
+          "monthly": null,
+          "drop_in": 90
+        }
+      }
+    ],
+    "open_court": [
+      {
+        "name": "LiveBall",
+        "level": "NTRP 3.0+",
+        "monthly": 150,
+        "drop_in": 50,
+        "schedule": "Thu Moulton · Sat/Sun LBHS"
+      },
+      {
+        "name": "Cardio Tennis",
+        "level": "All levels",
+        "monthly": 150,
+        "drop_in": 50,
+        "schedule": "Fri 9a LBHS"
+      }
+    ],
+    "privates": [
+      {
+        "coach": "Andrew Mateljan",
+        "title": "Founder & Director of Tennis",
+        "rate60": 250,
+        "rate90": 350,
+        "pack10": 2300,
+        "pack20": 4200
+      },
+      {
+        "coach": "Peter DeFrantz",
+        "title": "Head Coach, Junior Development",
+        "rate60": 120,
+        "rate90": 165,
+        "pack10": 1100,
+        "pack20": 2000
+      },
+      {
+        "coach": "Allison Cronk",
+        "title": "Head Coach, Youth Programs",
+        "rate60": 120,
+        "rate90": 165,
+        "pack10": 1100,
+        "pack20": 2000
+      }
+    ],
+    "camps": [
+      {
+        "name": "Ski Week Camp",
+        "dates": "Feb 16–20, 2026",
+        "ages": "5–14",
+        "price_label": "$525/wk · $105/day"
+      },
+      {
+        "name": "Spring Break Camp",
+        "dates": "Mar 30 – Apr 2, 2026",
+        "ages": "5–17",
+        "price_label": "$325/wk · $85/day"
+      },
+      {
+        "name": "Summer Camps",
+        "dates": "Jun 15 – Aug 29, 2026",
+        "ages": "5–17",
+        "price_label": "T&A: $495 full / $325 half · Training: $595 full / $325 half"
+      },
+      {
+        "name": "Back-to-School Mini",
+        "dates": "Aug 17–20, 2026 (3 days)",
+        "ages": "5–17",
+        "price_label": "T&A: $372 full / $245 half · Training: $447 full"
+      },
+      {
+        "name": "Thanksgiving Camp",
+        "dates": "Nov 23–25, 2026 (3 days)",
+        "ages": "5–17",
+        "price_label": "$221 (T&A) · $244 (JD)"
+      },
+      {
+        "name": "Winter Break Camp",
+        "dates": "Dec 21–24 + Dec 28–31",
+        "ages": "5–17",
+        "price_label": "$425/session (4 days)"
+      }
+    ],
+    "leagues_usta": [
+      {
+        "id": 1,
+        "name": "Adult 18 & Over",
+        "season": "Apr 17 – Jul 5, 2026",
+        "weeks": "~11 weeks",
+        "format": "2 singles + 3 doubles, same gender",
+        "levels": "2.5 / 3.0 / 3.5 / 4.0 / 4.5 / 5.0",
+        "pricing12": "$458",
+        "pricing14": "$393",
+        "weeklyApprox": "~$42/week",
+        "deadline": "April 1"
+      },
+      {
+        "id": 2,
+        "name": "Friday Women's League",
+        "season": "Apr 17 – Jul 5, 2026",
+        "weeks": "~11 weeks",
+        "format": "2 singles + 3 doubles, women only",
+        "levels": "2.5 / 3.0 / 3.5 / 4.0 / 4.5",
+        "pricing12": "$458",
+        "pricing14": "$393",
+        "weeklyApprox": "~$42/week",
+        "deadline": "April 1"
+      },
+      {
+        "id": 3,
+        "name": "Mixed 40+ Doubles",
+        "season": "Apr 18 – Sep 6, 2026",
+        "weeks": "~20 weeks",
+        "format": "3 doubles lines, mixed gender, combined NTRP",
+        "levels": "6.0 / 7.0 / 8.0 / 9.0 / 10.0 combined",
+        "pricing12": "$458",
+        "pricing14": "$393",
+        "weeklyApprox": "~$23/week",
+        "deadline": "April 1"
+      },
+      {
+        "id": 4,
+        "name": "Adult 55+ Doubles",
+        "season": "May 2 – Aug 16, 2026",
+        "weeks": "~15 weeks",
+        "format": "3 doubles lines, same gender, combined NTRP",
+        "levels": "6.0 / 7.0 / 8.0 / 9.0 combined",
+        "pricing12": "$458",
+        "pricing14": "$393",
+        "weeklyApprox": "~$31/week",
+        "deadline": "April 19"
+      }
+    ],
+    "matchplay_utr": [
+      {
+        "name": "Color Ball",
+        "level": "Juniors — Scaled courts, right ball for every stage",
+        "format": "Pod Round Robin",
+        "note": "Coach on court for every match. Underhand serves and drop feeds are totally fine — no pressure. If they can rally, they can play.",
+        "price": "$349",
+        "drop_in": 55,
+        "time": "1:30–4:00 PM",
+        "venue": "Alta Laguna Park · 3300 Alta Laguna Blvd, Laguna Beach, CA 92651",
+        "match_day": "Saturday",
+        "cta_style": "teal",
+        "image": "/images/programs/utr-match-play/color-ball.webp",
+        "imageAlt": "Color Ball match play on outdoor courts at Laguna Beach Tennis Academy — scaled tennis for developing players",
+        "imageObjectPosition": "50% 38%"
+      },
+      {
+        "name": "UTR 1–7 Singles",
+        "level": "Saturdays at Alta Laguna Park",
+        "format": "8-Game Pro Sets",
+        "price": "$399",
+        "drop_in": 65,
+        "time": "4:00–6:30 PM",
+        "venue": "Alta Laguna Park · 3300 Alta Laguna Blvd, Laguna Beach, CA 92651",
+        "match_day": "Saturday",
+        "cta_style": "teal",
+        "image": "/images/programs/utr-match-play/utr-2-4.webp",
+        "imageAlt": "Singles player during UTR match play on outdoor courts at Alta Laguna Park",
+        "imageObjectPosition": "50% 14%"
+      },
+      {
+        "name": "UTR 3–12 Singles",
+        "level": "Sundays at Laguna Beach High School · UTR 3–12",
+        "format": "Formats may vary week to week",
+        "description": "You'll be paired against players at your level. Formats may vary week to week.",
+        "price": "$399",
+        "drop_in": 65,
+        "time": "3:00–5:30 PM",
+        "venue": "Laguna Beach High School · 625 Park Ave, Laguna Beach, CA 92651",
+        "match_day": "Sunday",
+        "cta_style": "sunset",
+        "image": "/images/programs/utr-match-play/utr-3-5.webp",
+        "imageAlt": "Singles player during UTR match play on outdoor courts at Laguna Beach High School",
+        "imageObjectPosition": "50% 4%"
+      },
+      {
+        "name": "UTR 1–12 Doubles",
+        "level": "Sundays at Laguna Beach High School · Show up solo — we'll pair you",
+        "format": "8-Game Pro Sets",
+        "description": "Teams matched by combined UTR. No partner needed.",
+        "price": "$399",
+        "drop_in": 65,
+        "time": "5:30 PM",
+        "venue": "Laguna Beach High School · 625 Park Ave, Laguna Beach, CA 92651",
+        "match_day": "Sunday",
+        "cta_style": "sunset",
+        "image": "/images/programs/utr-match-play/doubles.webp",
+        "imageAlt": "Doubles players across the net during outdoor match play at Laguna Beach Tennis Academy",
+        "imageObjectPosition": "50% 32%"
+      }
+    ],
+    "discounts": [
+      {
+        "label": "Early Bird",
+        "value": "5%",
+        "note": "Registered 2+ weeks before session start"
+      },
+      {
+        "label": "Sibling",
+        "value": "10%",
+        "note": "Additional siblings in same program"
+      },
+      {
+        "label": "Multi-Program",
+        "value": "5%",
+        "note": "Two or more programs"
+      },
+      {
+        "label": "Annual Prepay",
+        "value": "10%",
+        "note": "Full year paid up front"
+      }
+    ],
+    "scholarship": {
+      "available": true,
+      "annual_pool": "$25,000",
+      "coverage": "25–50%",
+      "email": "support@lagunabeachtennisacademy.com"
+    }
+  },
+  "annual_calendar": {
+    "year": 2026,
+    "season_bars": [
+      {
+        "label": "Winter session",
+        "weeks": 13,
+        "dates": "January 5 – April 5, 2026",
+        "start": 1,
+        "end": 4,
+        "color": "deep"
+      },
+      {
+        "label": "Spring session",
+        "weeks": 10,
+        "dates": "April 6 – June 13, 2026",
+        "start": 4,
+        "end": 6,
+        "color": "cove"
+      },
+      {
+        "label": "Summer session",
+        "weeks": 11,
+        "dates": "June 15 – August 29, 2026",
+        "start": 6,
+        "end": 8,
+        "color": "sunset"
+      },
+      {
+        "label": "Fall session",
+        "weeks": 16,
+        "dates": "August 31 – December 19, 2026",
+        "start": 9,
+        "end": 12,
+        "color": "gold"
+      }
+    ],
+    "open_court_bars": [
+      {
+        "label": "LiveBall · Cardio Tennis (year-round)",
+        "start": 1,
+        "end": 12,
+        "color": "pacific"
+      }
+    ],
+    "camps": [
+      {
+        "label": "Ski Week",
+        "dates": "Feb 16–20",
+        "month": 2,
+        "color": "gold"
+      },
+      {
+        "label": "Spring Break Camp",
+        "dates": "Mar 30 – Apr 2",
+        "month": 4,
+        "color": "cove"
+      },
+      {
+        "label": "Summer Camps",
+        "dates": "Jun 15 – Aug 29",
+        "start": 6,
+        "end": 8,
+        "color": "sunset"
+      },
+      {
+        "label": "Back-to-School",
+        "dates": "Aug 17–20",
+        "month": 8,
+        "color": "sunset"
+      },
+      {
+        "label": "Thanksgiving",
+        "dates": "Nov 23–25",
+        "month": 11,
+        "color": "gold"
+      },
+      {
+        "label": "Winter Break",
+        "dates": "Dec 21–24 + 28–31",
+        "month": 12,
+        "color": "deep"
+      }
+    ],
+    "leagues_usta_bars": [
+      {
+        "label": "USTA Adult 18+ League",
+        "dates": "Apr 17 – Jul 5",
+        "start": 4,
+        "end": 7,
+        "color": "cove"
+      },
+      {
+        "label": "USTA Friday Women's League",
+        "dates": "Apr 17 – Jul 5",
+        "start": 4,
+        "end": 7,
+        "color": "cove"
+      },
+      {
+        "label": "USTA Mixed 40+ Doubles",
+        "dates": "Apr 18 – Sep 6",
+        "start": 4,
+        "end": 9,
+        "color": "cove"
+      },
+      {
+        "label": "USTA Adult 55+ Doubles",
+        "dates": "May 2 – Aug 16",
+        "start": 5,
+        "end": 8,
+        "color": "cove"
+      }
+    ],
+    "matchplay_bars": [
+      {
+        "label": "UTR Match Play (all divisions)",
+        "dates": "Apr 11 – Jun 6 (Grand Finals)",
+        "start": 4,
+        "end": 6,
+        "color": "sunset"
+      }
+    ],
+    "key_dates": [
+      {
+        "date": "Jan 5",
+        "event": "Winter session begins"
+      },
+      {
+        "date": "Mar 2",
+        "event": "Spring registration opens"
+      },
+      {
+        "date": "Mar 20",
+        "event": "Spring early-bird deadline"
+      },
+      {
+        "date": "Apr 6",
+        "event": "Spring session begins"
+      },
+      {
+        "date": "May 1",
+        "event": "Summer registration opens"
+      },
+      {
+        "date": "May 20",
+        "event": "Summer early-bird deadline"
+      },
+      {
+        "date": "Jun 15",
+        "event": "Summer session + camps begin"
+      },
+      {
+        "date": "Aug 5",
+        "event": "Fall registration opens"
+      },
+      {
+        "date": "Aug 19",
+        "event": "Fall early-bird deadline"
+      },
+      {
+        "date": "Aug 31",
+        "event": "Fall session begins"
+      },
+      {
+        "date": "Dec 1",
+        "event": "Winter '27 registration opens"
+      }
+    ],
+    "scholarship_note": "Scholarships: $25,000 awarded annually · 25–50% coverage · email support@lagunabeachtennisacademy.com"
+  },
+  "pathway": [
+    {
+      "level": "Little Tennis Stars",
+      "ages": "3–4",
+      "court": "36' foam",
+      "leads_to": "First racquet, first rally"
+    },
+    {
+      "level": "Red Ball",
+      "ages": "5–6",
+      "court": "36' foam",
+      "leads_to": "Coordination + first match play"
+    },
+    {
+      "level": "Orange Ball",
+      "ages": "7–8",
+      "court": "60' low-compression",
+      "leads_to": "Scoring, footwork, first tournament"
+    },
+    {
+      "level": "Green Dot",
+      "ages": "9–11",
+      "court": "78' green",
+      "leads_to": "Phase Play · UTR 1.0–3.0"
+    },
+    {
+      "level": "Junior Development",
+      "ages": "11–18",
+      "court": "78' yellow",
+      "leads_to": "UTR 1–7 · USTA Level 6/5"
+    },
+    {
+      "level": "High Performance",
+      "ages": "12–17",
+      "court": "78' yellow",
+      "leads_to": "UTR 8+ · Section / National events"
+    }
+  ],
+  "pod": {
+    "name": "The Pod",
+    "framing": "Private Player Management",
+    "scarcity_line": "By invitation. Two paying families per 3-player Pod.",
+    "configurations_narrative": "Two configurations. A 3-player Pod has two paying families plus Henry. A 4-player Pod has three. The number is fixed; there is no twentieth student waiting for a slot to open.",
+    "what_is_included_narrative": "One tuition covers everything: on-court training three to five days per week, individual development plans, tournament programming, travel coaching when families travel, and the standing availability you'd expect from a coach who knows your child by name. It is a year-long program commitment, not a per-session fee.",
+    "track_record": {
+      "name": "Henry Mateljan",
+      "age": 9,
+      "joined_utr": "2.48",
+      "current_utr": "4.60",
+      "current_band": "4.60–5.00",
+      "duration_months": 18,
+      "narrative": "Henry Mateljan, age nine, joined the Pod at UTR 2.48. Eighteen months later he is at 4.60, currently in the 4.60–5.00 band."
+    },
+    "team_narrative": "Andrew runs every Pod session personally. Twenty years coaching internationally and on tour. Took Karue Sell from ATP #860 to #258 in 2025. Trained Colton Smith (#133), Max McKennon (#458), Ryan Seggerman (#63 in doubles). Alex Michelsen came through the program at ages 12–13 and is now ATP #30.",
+    "d1_pipeline": "Sean Daryabeigi (USC, Blue Chip #2) · Rebecca Lynn (Yale) · Lauren Stein (Cornell)",
+    "cta_email": "andrew@lagunabeachtennisacademy.com",
+    "cta_text": "Pod placement is by invitation. To request consideration, write to Andrew directly at andrew@lagunabeachtennisacademy.com. He reads and replies to every Pod inquiry personally."
+  },
+  "placement": {
+    "junior_decision": [
+      {
+        "if": "3–4",
+        "go_to": "Little Tennis Stars"
+      },
+      {
+        "if": "5–6",
+        "go_to": "Red Ball"
+      },
+      {
+        "if": "7–8",
+        "go_to": "Orange Ball"
+      },
+      {
+        "if": "9–11 · group classes",
+        "go_to": "Green Dot"
+      },
+      {
+        "if": "9–11 · tournament-ready (invite)",
+        "go_to": "Competitive Green Dot"
+      },
+      {
+        "if": "11–18 · UTR 1–4 or no rating",
+        "go_to": "Junior Development · Tier 1"
+      },
+      {
+        "if": "11–18 · UTR 4–7",
+        "go_to": "Junior Development · Tier 2"
+      },
+      {
+        "if": "12–17 · UTR 8+",
+        "go_to": "High Performance"
+      }
+    ],
+    "adult_decision": [
+      {
+        "if": "Never picked up a racquet",
+        "go_to": "New to Tennis"
+      },
+      {
+        "if": "Can rally and serve, inconsistent",
+        "go_to": "Beyond Beginner"
+      },
+      {
+        "if": "Comfortable rallying, 1+ years, consistent serve · NTRP 3.0–4.0",
+        "go_to": "Adult Intermediate"
+      },
+      {
+        "if": "Tournament / league experience · NTRP 4.0+",
+        "go_to": "Adult Advanced"
+      }
+    ],
+    "junior_grid": [
+      {
+        "program": "Little Tennis Stars",
+        "ages": "3–4",
+        "where": "Mon/Wed Moulton · Sat Alta",
+        "also": "Just here. Saturday class adds reps."
+      },
+      {
+        "program": "Red Ball",
+        "ages": "5–6",
+        "where": "Mon/Wed Moulton · Sat Alta",
+        "also": "Spring Break + Summer Camps (Tennis & Adventure 5–11)"
+      },
+      {
+        "program": "Orange Ball",
+        "ages": "7–8",
+        "where": "Mon/Wed/Tue/Thu Moulton · Sat Alta",
+        "also": "Camps · UTR Color Ball (Sat Alta · $55 drop-in)"
+      },
+      {
+        "program": "Green Dot",
+        "ages": "9–11",
+        "where": "Tue/Thu Moulton · Sat Alta",
+        "also": "Camps · UTR Color Ball (Sat)"
+      },
+      {
+        "program": "Competitive Green Dot",
+        "ages": "9–11+ · invite",
+        "where": "Tue/Thu Alta · Fri LBHS",
+        "also": "Camps · UTR Color Ball + Singles 1–7 (Sat)"
+      },
+      {
+        "program": "Junior Development · T1",
+        "ages": "11–18 · UTR 1–4",
+        "where": "Mon/Wed Alta · Fri LBHS",
+        "also": "Camps · UTR Singles 1–7 (Sat)"
+      },
+      {
+        "program": "Junior Development · T2",
+        "ages": "11–18 · UTR 4–7",
+        "where": "Mon/Wed Alta · Fri LBHS",
+        "also": "Camps · UTR Singles 1–7 (Sat) · Singles 3–12 + Doubles (Sun · mixed with adults)"
+      },
+      {
+        "program": "High Performance",
+        "ages": "12–17 · UTR 8+",
+        "where": "Mon/Wed/Fri LBHS",
+        "also": "Summer Training Camp · UTR Singles 3–12 + Doubles (Sun · mixed with adults)"
+      }
+    ],
+    "adult_grid": [
+      {
+        "program": "New to Tennis",
+        "level": "Beginner",
+        "where": "Tue/Thu 10a · Mon/Wed 6:30p · Sat 9a",
+        "also": "Just here. Foundation first."
+      },
+      {
+        "program": "Beyond Beginner",
+        "level": "Advanced beginner",
+        "where": "Mon/Wed 6:30p Moulton",
+        "also": "Cardio Tennis (Fri all levels) when ready"
+      },
+      {
+        "program": "Adult Intermediate",
+        "level": "NTRP 3.0–4.0",
+        "where": "Tue/Thu 11a · Sat 10a LBHS",
+        "also": "LiveBall Intermediate (Thu/Sat/Sun · $50) · Cardio Tennis (Fri · $50) · USTA Adult League (3.0/3.5/4.0) · UTR Doubles (Sun · $65)"
+      },
+      {
+        "program": "Adult Advanced",
+        "level": "NTRP 4.0+",
+        "where": "Mon/Fri 12–2p LBHS",
+        "also": "LiveBall Advanced (Sun 10:30a · $50) · Cardio Tennis (Fri) · USTA League (4.0/4.5/5.0) · UTR Singles 3–12 + Doubles (Sun · $65)"
+      },
+      {
+        "program": "LiveBall",
+        "level": "NTRP 3.0+",
+        "where": "Thu Moulton · Sat/Sun LBHS · monthly $150 / $50 drop-in",
+        "also": "Cardio · USTA League at your level · UTR Doubles"
+      },
+      {
+        "program": "Cardio Tennis",
+        "level": "All levels",
+        "where": "Fri 9a LBHS · monthly $150 / $50 drop-in",
+        "also": "LiveBall at your level · USTA League"
+      }
+    ],
+    "cross_program": [
+      {
+        "profile": "Junior · Green Dot (9–11)",
+        "stacks_with": "Camps · UTR Color Ball (Sat at Alta)"
+      },
+      {
+        "profile": "Junior · JD Tier 2 (UTR 4–7)",
+        "stacks_with": "Camps · UTR Singles 1–7 (Sat) · UTR Singles 3–12 + Doubles (Sun)"
+      },
+      {
+        "profile": "Junior · High Performance (UTR 8+)",
+        "stacks_with": "Summer Training Camp · UTR Singles 3–12 + Doubles (Sun, mixed with adults)"
+      },
+      {
+        "profile": "Adult · Beyond Beginner",
+        "stacks_with": "Cardio Tennis (Fri, all levels)"
+      },
+      {
+        "profile": "Adult · Intermediate (NTRP 3.0–4.0)",
+        "stacks_with": "LiveBall Intermediate · Cardio Tennis · USTA Adult League · UTR Doubles"
+      },
+      {
+        "profile": "Adult · Advanced (NTRP 4.0+)",
+        "stacks_with": "LiveBall Advanced · Cardio · USTA League 4.0+ · UTR Singles 3–12 + Doubles"
+      }
+    ],
+    "cta_internal": "Internal use: cross-reference with PlayByPoint enrollment. Note: junior programs stay kid-only — no adult drop-ins.",
+    "cta_external": "Not sure where you (or your player) belong? Reply to support@lagunabeachtennisacademy.com and we'll match you to the right starting point. First session is on us."
+  },
+  "audience": {
+    "concierge": {
+      "intro": "If your guest brought a racquet — or wishes they had — point them here. Laguna Beach Tennis Academy runs the city's official tennis programs across three parks, ten minutes from most hotels. Drop-in clinics, private lessons, and camp drop-in for traveling families.",
+      "guest_call_to_action": "Book at lagunabeachtennisacademy.com/book"
+    },
+    "family": {
+      "intro": "A clear pathway from age three through college tennis — same coaches, same courts, same standard. Start with a $50 LiveBall or a complimentary trial.",
+      "guest_call_to_action": "View the schedule at lagunabeachtennisacademy.com/schedules"
+    },
+    "warm_lead": {
+      "intro": "Thanks for getting in touch. This is a quick map of how we train at LBTA — the pathway, the coaches, and the programs that fit where you (or your player) are right now. Reply to this email and I'll match you to the right starting point.",
+      "sign_off": "— Andrew"
+    },
+    "private": {
+      "intro": "Private coaching at LBTA is built around your goals: technical clarity, match preparation, return-to-play after injury, or a structured ramp toward competitive tennis. Three coaches with published rates and 10/20-pack savings. Sessions on city-managed courts — no club membership required."
+    }
+  }
+}

@@ -1,0 +1,202 @@
+<!doctype html>
+<!-- @page width="8.5in" height="11in" landscape="false" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · Hotel Concierge</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 8.5in 11in; margin: 0; }
+    .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; }
+    .pad  { padding: 32pt 44pt; }
+
+    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 36pt; line-height: 1.05; color: var(--text-heading); margin: 6pt 0 8pt; letter-spacing: -0.005em; }
+    h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 24pt; line-height: 1.1; color: var(--text-heading); margin: 12pt 0 6pt; }
+    h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+         font-size: 14pt; color: var(--pacific-dusk); margin: 10pt 0 4pt; }
+    p, .body { font-size: 10pt; line-height: 1.6; color: var(--text-on-light); margin: 0 0 6pt; }
+    .lede { font-size: 11pt; line-height: 1.6; color: var(--text-on-light); margin-bottom: 10pt; }
+
+    /* Page 1: warm intro panel */
+    .top-eyebrow { font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 8pt; color: var(--victoria-cove); }
+    .hero-img { width: 100%; height: 220pt; object-fit: cover; border-radius: 4pt; margin: 12pt 0 16pt; }
+
+    .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; margin: 14pt 0; }
+    .price-card { background: #F5F0E5; border-radius: 4pt; padding: 16pt; }
+    .price-card .head { font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em; font-size: 8pt; color: var(--victoria-cove); }
+    .price-card .price { font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400; font-size: 28pt; color: var(--text-heading); line-height: 1.1; margin-top: 4pt; }
+    .price-card .meta { font-size: 8.5pt; color: var(--text-on-light); margin-top: 4pt; line-height: 1.5; }
+
+    .session-row { display: flex; justify-content: space-between; padding: 5pt 0;
+      border-bottom: 0.5pt solid var(--divider-light); font-size: 9pt; }
+    .session-row:last-child { border-bottom: none; }
+    .session-row .name { font-weight: 600; color: var(--text-heading); }
+    .session-row .when { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+    /* Page 2: location + how-to-book */
+    .dark { background: #0F2237; color: rgba(255,255,255,0.86); }
+    .dark h1, .dark h2 { color: #FFFFFF; }
+    .dark h3 { color: var(--gold); }
+    .dark p, .dark .lede, .dark .body { color: rgba(255,255,255,0.86); }
+    .dark .session-row { border-bottom: 0.5pt solid rgba(245,240,229,0.14); }
+    .dark .session-row .name { color: #FFFFFF; }
+    .dark .session-row .when { color: rgba(245,240,229,0.65); }
+
+    .step-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14pt; margin: 14pt 0; }
+    .step { background: rgba(255,255,255,0.06); border-radius: 4pt; padding: 14pt; }
+    .step .num { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      color: var(--gold); font-size: 28pt; line-height: 1; }
+    .step .head { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      color: #FFFFFF; font-size: 13pt; margin-top: 4pt; }
+    .step .body { font-size: 8.5pt; color: rgba(245,240,229,0.78); margin-top: 4pt; }
+
+    .loc-card { background: rgba(255,255,255,0.06); border-radius: 4pt; padding: 12pt; margin-bottom: 8pt; }
+    .loc-card .name { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      color: #FFFFFF; font-size: 14pt; }
+    .loc-card .meta { font-size: 8pt; color: rgba(245,240,229,0.72); margin-top: 2pt; }
+
+    .footer-bar { background: var(--gold); color: var(--deep-water); padding: 14pt 44pt;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-body); font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; font-size: 9pt; }
+  </style>
+</head>
+<body>
+
+<!-- ─────────────── PAGE 1 ─────────────── -->
+<div class="page">
+  <span class="horizon-bar h-thick" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <div style="display:flex; justify-content: space-between; align-items: center;">
+      <img src="../assets/logos/LBTAblktext.png" style="height: 40pt; width:auto;" alt="LBTA" />
+      <span class="top-eyebrow eyebrow-warm" style="color: var(--sunset-cliff);">For your guest · Laguna Beach</span>
+    </div>
+
+    <h1>Tennis. While they're here.</h1>
+    <p class="tagline-italic" style="font-size: 14pt; color: var(--gold-deep); margin-bottom: 10pt;">Movement. Craft. Community.</p>
+
+    <p class="lede">If your guest brought a racquet — or wishes they had — point them here. Laguna Beach Tennis Academy runs the city&#39;s official tennis programs across three parks, ten minutes from most hotels. Drop-in clinics, private lessons, and camp drop-in for traveling families.</p>
+
+    <img class="hero-img" src="../assets/photos/hero-women-team.jpg" alt="Players at Laguna Beach Tennis Academy" />
+
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="head">LiveBall · drop-in</div>
+        <div class="price">$50</div>
+        <div class="meta">High-energy, coach-fed point play. All levels (3.0+). Three sessions weekly at LBHS, plus Thursdays at Moulton Meadows.</div>
+      </div>
+      <div class="price-card">
+        <div class="head">Private lesson · from</div>
+        <div class="price">$120</div>
+        <div class="meta">60-minute private with Peter or Allison ($120) or Andrew ($250). Typically scheduled within 24–48 hours. 90-minute and 10-pack options available.</div>
+      </div>
+    </div>
+
+    <h2>This week, on court.</h2>
+    <div class="session-row">
+      <span class="name">LiveBall · Intermediate (3.0–4.0)</span>
+      <span class="when">Thu 6:00–7:30p · Moulton Meadows</span>
+    </div>
+    <div class="session-row">
+      <span class="name">LiveBall · Intermediate (3.0–4.0)</span>
+      <span class="when">Sat 11:30a–1:00p · Laguna Beach HS</span>
+    </div>
+    <div class="session-row">
+      <span class="name">LiveBall · Intermediate (3.0–4.0)</span>
+      <span class="when">Sun 9:00–10:30a · Laguna Beach HS</span>
+    </div>
+    <div class="session-row">
+      <span class="name">LiveBall · Advanced (4.0+)</span>
+      <span class="when">Sun 10:30a–12:00p · Laguna Beach HS</span>
+    </div>
+    <div class="session-row">
+      <span class="name">Cardio Tennis · all levels</span>
+      <span class="when">Fri 9:00–10:30a · Laguna Beach HS</span>
+    </div>
+
+    <h2 style="margin-top: 14pt;">Kids in town · camp drop-in.</h2>
+    <p>Spring Break Camp (March 30 – April 2, 2026 (Mon–Thu)) and Summer Camps (June 15 – August 29, 2026) accept drop-ins for traveling families. Same coaches the locals get.</p>
+    <div class="session-row">
+      <span class="name">Tennis &amp; Adventure (5–11) · Alta Laguna</span>
+      <span class="when">$85/day half · $99/day full</span>
+    </div>
+    <div class="session-row">
+      <span class="name">Junior Development (12–17) · LBHS</span>
+      <span class="when">$85/day half · $120/day full</span>
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────── PAGE 2 ─────────────── -->
+<div class="page dark">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="top-eyebrow eyebrow-on-dark" style="color: var(--gold);">Concierge · how it works</span>
+    <h1 style="color:#FFFFFF;">How your guest books.</h1>
+
+    <div class="step-grid">
+      <div class="step">
+        <div class="num">1</div>
+        <div class="head">Visit the site</div>
+        <div class="body">lagunabeachtennisacademy.com</div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div class="head">Choose a session</div>
+        <div class="body">LiveBall, private lesson, or camp drop-in</div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div class="head">Book in seconds</div>
+        <div class="body">Court time, coach, and confirmation by email</div>
+      </div>
+    </div>
+
+    <h2>Locations · two to ten minutes from most hotels.</h2>
+    <div class="loc-card">
+      <div class="name">Moulton Meadows Park</div>
+      <div class="meta">Balboa Ave &amp; Capistrano Ave · Youth &amp; beginners</div>
+    </div>
+    <div class="loc-card">
+      <div class="name">Alta Laguna Park</div>
+      <div class="meta">3300 Alta Laguna Blvd · Junior development &amp; UTR weekends</div>
+    </div>
+    <div class="loc-card">
+      <div class="name">Laguna Beach High School</div>
+      <div class="meta">625 Park Ave · High Performance · LiveBall · Camps</div>
+    </div>
+
+    <h2 style="margin-top: 14pt;">Concierge: a few things to know.</h2>
+    <p>• All courts are public, city-managed. Guests don't need a club membership.<br/>
+       • A 60-minute private lesson can typically be scheduled within 24–48 hours.<br/>
+       • LiveBall drop-in is the fastest way to play — show up ten minutes early, $50, all levels.<br/>
+       • Loaner racquets available with advance notice.<br/>
+       • For families traveling with juniors, our camps accept drop-in days at $85/half-day.</p>
+
+    <h2 style="margin-top: 18pt;">A note from the founder.</h2>
+    <div style="display: grid; grid-template-columns: 80pt 1fr; gap: 16pt; align-items: start; margin-top: 6pt;">
+      <img src="../assets/photos/andrew.png" style="width: 80pt; height: 100pt; object-fit: cover; border-radius: 4pt;" alt="Andrew Mateljan" />
+      <div>
+        <p style="color: rgba(255,255,255,0.86);">Twenty years of competitive tennis, seven coaching internationally — Spain, Croatia, Norway. Currently coaches Karue Sell (ATP #262). Your guests are training on the same courts, with the same standard, the locals do.</p>
+        <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; color: var(--gold); font-size: 11pt; margin-top: 6pt;">— Andrew Mateljan, Founder</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>lagunabeachtennisacademy.com/book</span>
+    <span>(949) 534-0457</span>
+    <span>support@lagunabeachtennisacademy.com</span>
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+
+</body>
+</html>

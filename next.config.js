@@ -85,12 +85,22 @@ const nextConfig = {
       },
       {
         source: '/racket-stringing',
-        destination: '/contact',
+        destination: '/racquet-rescue',
         permanent: true,
       },
       {
         source: '/racket-stringing/',
-        destination: '/contact',
+        destination: '/racquet-rescue',
+        permanent: true,
+      },
+      {
+        source: '/racket-rescue',
+        destination: '/racquet-rescue',
+        permanent: true,
+      },
+      {
+        source: '/racket-rescue/',
+        destination: '/racquet-rescue',
         permanent: true,
       },
       // Academy program redirects

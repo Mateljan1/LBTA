@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1B3A5C">
+<title>Coach Peter — Mon May 11 · Alta + LBHS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--pacific-dusk:#1B3A5C;--deep-water:#0F2237;--victoria-cove:#2E8B8B;--sunset-cliff:#E8834A;--thousand-steps:#C4963C;--tide-pool:#3A8B6E;--morning-light:#FAF8F4;--sandstone:#F5F0E5;--salt-air:#FFFFFF;--pd-12:rgba(27,58,92,.12);--pd-30:rgba(27,58,92,.3);--pd-60:rgba(27,58,92,.6);--shadow:0 1px 0 rgba(27,58,92,.04),0 8px 24px -8px rgba(27,58,92,.10);--r:14px;--rs:8px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--morning-light);color:var(--pacific-dusk);line-height:1.55;font-size:16px;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:24px 18px 120px}
+.hero{padding:28px 4px 28px;border-bottom:1px solid var(--pd-12);margin-bottom:24px}
+.hero .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--victoria-cove);margin-bottom:14px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,8vw,48px);line-height:1.05;letter-spacing:-.02em;color:var(--deep-water);margin-bottom:18px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;color:var(--pacific-dusk)}
+.hero .meta strong{font-weight:600}
+.hero .clock{margin-top:18px;display:inline-block;padding:6px 12px;background:var(--sandstone);border-radius:var(--rs);font-variant-numeric:tabular-nums;font-weight:500;font-size:13px}
+.theme{background:var(--sandstone);border-radius:var(--r);padding:18px 20px;margin-bottom:18px;display:flex;align-items:flex-start;gap:16px}
+.theme .num{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;line-height:1;color:var(--thousand-steps);letter-spacing:-.02em;flex-shrink:0}
+.theme .label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--pd-60);margin-bottom:2px;font-weight:600}
+.theme h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:22px;letter-spacing:-.01em;color:var(--deep-water);margin-bottom:6px}
+.theme p{font-size:14px;color:var(--pacific-dusk)}
+.rule{background:var(--deep-water);color:var(--salt-air);border-radius:var(--r);padding:18px 20px;margin-bottom:28px}
+.rule .label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:4px;font-weight:600}
+.rule h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:22px;letter-spacing:-.01em;margin-bottom:10px;color:var(--salt-air)}
+.rule p{font-size:13px;color:rgba(255,255,255,.85);margin-bottom:12px;line-height:1.5}
+.rule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:6px;margin-top:8px}
+.rule-grid div{background:rgba(255,255,255,.08);border-radius:6px;padding:8px 6px;text-align:center;font-size:12px;font-variant-numeric:tabular-nums}
+.rule-grid div strong{display:block;font-size:14px;color:var(--salt-air);font-weight:600;margin-bottom:2px}
+.rule-grid div span{color:rgba(255,255,255,.7);font-size:11px}
+.session{background:var(--salt-air);border-radius:var(--r);margin-bottom:28px;box-shadow:var(--shadow);overflow:hidden}
+.session-head{padding:24px 22px 18px;border-bottom:1px solid var(--pd-12)}
+.session-head .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+.session-head .time{font-weight:600;font-size:13px;letter-spacing:.04em;color:var(--victoria-cove);padding:4px 10px;background:rgba(46,139,139,.10);border-radius:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.session-head .duration{font-size:12px;color:var(--pd-60);font-weight:500;font-variant-numeric:tabular-nums}
+.session-head h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:32px;line-height:1.1;letter-spacing:-.02em;color:var(--deep-water);margin-bottom:6px}
+.session-head .sub{font-size:14px;color:var(--pacific-dusk)}
+.session-head .age-cue{margin-top:10px;display:inline-block;padding:4px 10px;background:var(--sandstone);border-radius:6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--pacific-dusk)}
+.progress{padding:14px 22px;background:var(--morning-light);border-bottom:1px solid var(--pd-12);display:flex;align-items:center;gap:14px}
+.progress .bar{flex:1;height:6px;background:var(--pd-12);border-radius:3px;overflow:hidden}
+.progress .fill{height:100%;background:var(--tide-pool);width:0%;transition:width .4s}
+.progress .count{font-size:12px;font-weight:600;color:var(--pd-60);font-variant-numeric:tabular-nums;white-space:nowrap}
+.drill{padding:16px 22px;border-bottom:1px solid var(--pd-12);transition:background .2s;position:relative}
+.drill:last-child{border-bottom:0}
+.drill.done{background:rgba(58,139,110,.04)}
+.drill.done .drill-name{color:var(--pd-60);text-decoration:line-through;text-decoration-thickness:1px}
+.drill.current{background:rgba(46,139,139,.05)}
+.drill.current::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--victoria-cove)}
+.drill-head{display:flex;align-items:flex-start;gap:14px;cursor:pointer}
+.check{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--pd-30);background:var(--salt-air);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:2px}
+.check svg{width:14px;height:14px;stroke:transparent;transition:stroke .2s}
+.drill.done .check{background:var(--tide-pool);border-color:var(--tide-pool)}
+.drill.done .check svg{stroke:var(--salt-air)}
+.drill-body{flex:1;min-width:0}
+.drill-meta{display:flex;gap:10px;align-items:baseline;margin-bottom:4px;flex-wrap:wrap}
+.drill-time{font-size:11px;font-weight:600;color:var(--victoria-cove);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.drill-min{font-size:11px;color:var(--pd-60);font-weight:500}
+.drill-name{font-weight:600;font-size:16px;color:var(--deep-water);line-height:1.3;margin-bottom:6px}
+.drill-cue{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:17px;line-height:1.35;color:var(--pacific-dusk);letter-spacing:-.005em;padding-left:12px;border-left:2px solid var(--thousand-steps);margin-bottom:6px}
+.drill-why{font-size:13px;color:var(--pd-60);font-weight:500}
+.drill-details{margin-top:12px;padding:14px 16px;background:var(--sandstone);border-radius:var(--rs);font-size:14px;line-height:1.55;display:none}
+.drill.open .drill-details{display:block}
+.drill-details strong{font-weight:600;color:var(--deep-water)}
+.drill-details .row{margin-bottom:8px}
+.drill-details .row:last-child{margin-bottom:0}
+.drill-details .row-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--victoria-cove);margin-bottom:2px}
+.toggle{margin-top:8px;font-size:12px;color:var(--victoria-cove);background:transparent;border:0;cursor:pointer;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 0;font-family:inherit}
+.timer-bar{display:flex;align-items:center;gap:12px;margin-top:10px;padding:10px 14px;background:var(--deep-water);color:var(--salt-air);border-radius:var(--rs);font-variant-numeric:tabular-nums}
+.timer-bar.hidden{display:none}
+.timer-display{font-size:22px;font-weight:600;letter-spacing:.02em;flex:1}
+.timer-btn{background:var(--salt-air);color:var(--deep-water);border:0;padding:8px 14px;border-radius:6px;font-family:inherit;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.timer-btn.secondary{background:transparent;color:var(--salt-air);border:1px solid rgba(255,255,255,.3)}
+.controls{padding:18px 22px;display:flex;gap:10px;flex-wrap:wrap;background:var(--morning-light);border-top:1px solid var(--pd-12)}
+.btn{border:0;padding:12px 18px;border-radius:var(--rs);font-family:inherit;font-weight:600;font-size:13px;letter-spacing:.04em;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--deep-water);color:var(--salt-air)}
+.btn-ghost{background:transparent;color:var(--pacific-dusk);border:1px solid var(--pd-30)}
+.foot{margin-top:36px;padding:22px 4px 0;border-top:1px solid var(--pd-12);font-size:13px;color:var(--pd-60);line-height:1.6}
+.foot p{margin-bottom:10px}
+.foot strong{color:var(--pacific-dusk);font-weight:600}
+.horizon{height:2px;background:linear-gradient(90deg,#2E8B8B 0%,#E8834A 35%,#C4963C 50%,#E8834A 65%,#2E8B8B 100%);border-radius:1px;margin:32px 0;opacity:.6}
+@media (max-width:480px){.wrap{padding:18px 14px 100px}.session-head,.controls{padding:16px}.drill,.progress{padding:14px 16px}.session-head h2{font-size:26px}.drill-cue{font-size:15px}.drill-name{font-size:15px}.hero h1{font-size:32px}.rule h3{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Coach plan · Spring · Week 1 of 5</div>
+  <h1>Monday, May 11</h1>
+  <div class="meta">
+    <span><strong>Coach Peter</strong></span>
+    <span>Alta Laguna → LBHS</span>
+    <span>Two sessions</span>
+  </div>
+  <div class="clock" id="clock">Loading…</div>
+</header>
+
+<section class="theme">
+  <div class="num">1</div>
+  <div>
+    <div class="label">Week theme</div>
+    <h2>Reset and re-anchor</h2>
+    <p>Movement first. Contact point. Rhythm. No pressure points this week — build the engagement habit before we add intensity in Week 3.</p>
+  </div>
+</section>
+
+<section class="rule">
+  <div class="label">Coaching rule</div>
+  <h3>Activity duration matches the player's age in minutes</h3>
+  <p>Switch the game, drill, or constraint roughly every "age in minutes." For Green Dot (9-11) that's ~10 min blocks. For adults, 15-20 min focused blocks work — but still vary intensity and format inside the block.</p>
+  <div class="rule-grid">
+    <div><strong>3 yr</strong><span>3 min</span></div>
+    <div><strong>4 yr</strong><span>4 min</span></div>
+    <div><strong>5 yr</strong><span>5 min</span></div>
+    <div><strong>6 yr</strong><span>6 min</span></div>
+    <div><strong>7-8</strong><span>7-8 min</span></div>
+    <div><strong>9-11</strong><span>10 min</span></div>
+    <div><strong>12+</strong><span>15+ min</span></div>
+  </div>
+</section>
+
+<!-- ====================== GREEN DOT @ ALTA ====================== -->
+<section class="session" data-session="gd">
+  <div class="session-head">
+    <div class="row1">
+      <span class="time">4:00 – 5:30 PM</span>
+      <span class="duration">90 min · 9 blocks · ~10 min each</span>
+    </div>
+    <h2>Green Dot</h2>
+    <div class="sub">Ages 9–11 · Alta Laguna · Pillar emphasis: Craft &amp; Movement</div>
+    <div class="age-cue">~10 minutes per activity · vary the constraint mid-block</div>
+  </div>
+  <div class="progress"><div class="bar"><div class="fill" id="fill-gd"></div></div><div class="count" id="count-gd">0 / 9</div></div>
+
+  <article class="drill" data-id="gd-1" data-mins="10">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:00 – 4:10</span><span class="drill-min">10 min</span></div>
+        <div class="drill-name">1 · Rainbow Toss + Foot Sliders (paired warm-up)</div>
+        <div class="drill-cue">"Keep your eyes up and watch the ball the whole way — like tracking a shooting star."</div>
+        <div class="drill-why">Overhead tracking + multi-directional coordination. Warm-up that doubles as athletic prep.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">First 5 min — Rainbow Toss</div>Players in pairs. Toss ball hand to hand in a rainbow arc (like a hook-shot), tracking with eyes the whole way. Both dominant and non-dominant hand.</div><div class="row"><div class="row-label">Second 5 min — Foot Sliders</div>Each player has ball on ground + racket in hand. Hop on one foot while using the OTHER foot to push and roll the ball forward. Switch legs. <strong>Tougher:</strong> balance a ball on strings simultaneously.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">10:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="gd-2" data-mins="10">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:10 – 4:20</span><span class="drill-min">10 min</span></div>
+        <div class="drill-name">2 · Mini Ball Rally</div>
+        <div class="drill-cue">"Catch it to the side — throw it back from the side. Rotate your whole body."</div>
+        <div class="drill-why">Teaches rotation and spacing before they pick up a racket today. They often execute tactics with this ball before they can with a racket.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Pairs using a small basketball or similar-sized ball. Throw back and forth like forehand and backhand. Catch to SIDE of body, throw back with rotational motion. After 5 minutes: move each other around the court — start teaching pattern play.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">10:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="gd-3" data-mins="10">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:20 – 4:30</span><span class="drill-min">10 min</span></div>
+        <div class="drill-name">3 · Tap and Hit</div>
+        <div class="drill-cue">"Soften your hands — feel the ball on your strings, then send it."</div>
+        <div class="drill-why">Touch and feel. Forces them to absorb pace before hitting — foundation of soft-ball play.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Two players rally from baseline. Before hitting rally ball over, player must first tap the ball up to themselves (self-rally once), let it bounce, then hit to partner. <strong>Variation after 5 min:</strong> Tap forehand, hit backhand (or vice versa).</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">10:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="gd-4" data-mins="10">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:30 – 4:40</span><span class="drill-min">10 min</span></div>
+        <div class="drill-name">4 · Up – Back – Stay</div>
+        <div class="drill-cue">"Read the ball before it bounces — call it as early as you can."</div>
+        <div class="drill-why">Anticipation. Single biggest separator between plateaued and improving players.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Two players cooperatively rally from baseline. Each strike, player must audibly call: UP (moving forward), BACK (moving back), or STAY (holding ground). Goal: call it before the ball bounces on your side. Make them yell it loud.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">10:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="gd-5" data-mins="10">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:40 – 4:50</span><span class="drill-min">10 min</span></div>
+        <div class="drill-name">5 · Hot Lava</div>
+        <div class="drill-cue">"Keep your toes on the line — if the ball is coming high, shorten your backswing."</div>
+        <div class="drill-why">Forces compact swing mechanics. Teaches them to take the ball earlier — a key competitive skill.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>60-foot orange court. Both feet must stay inside the baseline at all times. Rally as normal. Stepping behind baseline = "hot lava" = lose the point.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">10:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="gd-6" data-mins="10">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:50 – 5:00</span><span class="drill-min">10 min</span></div>
+        <div class="drill-name">6 · Davis Cup Volleys</div>
+        <div class="drill-cue">"Steer the ball — don't swing at it. Guide it with the bottom edge."</div>
+        <div class="drill-why">Volley control is harder than volley power. This makes that clear immediately.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Two players very close to net. Cooperatively volley back and forth while side-shuffling across the net and back. Control over power. As mastery grows, increase distance from net. Start with foam/low-compression ball.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">10:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="gd-7" data-mins="10">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">5:00 – 5:10</span><span class="drill-min">10 min</span></div>
+        <div class="drill-name">7 · Short or Deep</div>
+        <div class="drill-cue">"Watch the arc — does it look like it's dropping fast or floating far?"</div>
+        <div class="drill-why">Court awareness + anticipation. Players who read depth get to the ball earlier, always.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Two players cooperatively rally from baseline. Players call SHORT (lands inside service line) or DEEP (past service line) for every incoming ball. Goal: call it before the ball bounces.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">10:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="gd-8" data-mins="15">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">5:10 – 5:25</span><span class="drill-min">15 min</span></div>
+        <div class="drill-name">8 · Capture the Net</div>
+        <div class="drill-cue">"Win the point, then sprint — the net is the prize."</div>
+        <div class="drill-why">Teaches net transition as a reward, not a risk. The point-play finale.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Balls on ground at net both sides. Two players from baseline. You feed the first ball; point played out from baseline. Winner sprints to net, grabs a ball from the ground, bounce-feeds to opponent. Net winner stays and keeps feeding. Net loser retreats; opponent rushes to feed their own ball before retreating player is ready.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">15:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="gd-9" data-mins="5">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">5:25 – 5:30</span><span class="drill-min">5 min</span></div>
+        <div class="drill-name">9 · Debrief &amp; send-off</div>
+        <div class="drill-cue">"What's one thing you read better today than last week?"</div>
+        <div class="drill-why">Anchors the anticipation theme — they leave aware of what they're now noticing.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Circle on baseline. Each kid: one thing they read better today (short/deep, up/back/stay, anticipation). Send-off: "Wednesday we add targeting — you'll get to pick where you hit."</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">5:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <div class="controls">
+    <button class="btn btn-primary" onclick="resetSession('gd')">Reset session</button>
+    <button class="btn btn-ghost" onclick="window.print()">Print</button>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- ====================== ADULT LIVEBALL @ LBHS ====================== -->
+<section class="session" data-session="al">
+  <div class="session-head">
+    <div class="row1">
+      <span class="time">7:30 – 9:00 PM</span>
+      <span class="duration">90 min · 6 blocks · 10-20 min each</span>
+    </div>
+    <h2>Adult Liveball</h2>
+    <div class="sub">LBHS · Intermediate / Advanced · Pillar emphasis: Craft &amp; Movement</div>
+    <div class="age-cue">Adults sustain 15-20 min blocks · still vary the format and intensity within each</div>
+  </div>
+  <div class="progress"><div class="bar"><div class="fill" id="fill-al"></div></div><div class="count" id="count-al">0 / 6</div></div>
+
+  <article class="drill" data-id="al-1" data-mins="10">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">7:30 – 7:40</span><span class="drill-min">10 min</span></div>
+        <div class="drill-name">1 · Cardio Mini Tennis</div>
+        <div class="drill-cue">"Sprint to the angle — first one there has the advantage."</div>
+        <div class="drill-why">Touch + fitness warm-up that wakes up the legs and the hands at once.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Teams of 2. Players start on singles sideline opposite each other. Feed a sharp angle. All four players run into position and play out a mini-tennis point. After 2 points, reset to other singles sideline. Feed again. Volleys allowed or not on your call.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">10:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="al-2" data-mins="15">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">7:40 – 7:55</span><span class="drill-min">15 min</span></div>
+        <div class="drill-name">2 · Up &amp; Back Game</div>
+        <div class="drill-cue">"Adjust your swing as you move — shorter when you're at the net, longer when you're back."</div>
+        <div class="drill-why">Especially helpful for adults stuck in no-man's land. Reset week — makes the transition zone feel natural again.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Two players, start at net facing each other. Cooperatively rally while slowly moving back to baseline, then forward again. Use just 1 ball if possible. Hit volleys, half-volleys, no-man's land shots, groundstrokes throughout. Error → restart from where you are.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">15:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="al-3" data-mins="20">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">7:55 – 8:15</span><span class="drill-min">20 min</span></div>
+        <div class="drill-name">3 · Far Side Cross-Court</div>
+        <div class="drill-cue">"Every ball goes to the same place — make it deep and give yourself margin."</div>
+        <div class="drill-why">Counter-intuitive result — the restricted player (crosscourt only) often wins more points. Powerful Week 1 lesson on high-percentage tennis.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Two players baseline. Far side player (away from you) may ONLY hit crosscourt. Near side player may hit anywhere. Switch ends after 8-10 min. <strong>Mid-block constraint:</strong> increase target depth — crosscourt ball must land behind service line to count.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">20:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="al-4" data-mins="20">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">8:15 – 8:35</span><span class="drill-min">20 min</span></div>
+        <div class="drill-name">4 · Cardio Doubles</div>
+        <div class="drill-cue">"Jog to position — if you're walking, you're resting when you should be moving."</div>
+        <div class="drill-why">Fitness assessment disguised as a doubles game. Reveals who falls apart in a long third set.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Regular doubles. Time between points spent jogging into position for next point. 3–5 seconds max between points. Can complete an entire set in 10–12 minutes. Rotate partners every set.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">20:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="al-5" data-mins="15">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">8:35 – 8:50</span><span class="drill-min">15 min</span></div>
+        <div class="drill-name">5 · The Big Mo (momentum scoring)</div>
+        <div class="drill-cue">"String two together — the second point is where the score is."</div>
+        <div class="drill-why">Adults have the hardest time stringing points. This makes the limitation visible and gives them a reason to develop between-point routines.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Two games on half-courts simultaneously. Win 1 point in a row = 0 points scored. Win 2 in a row = 1 point. Win 3+ in a row = 1 point each additional.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">15:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="al-6" data-mins="10">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">8:50 – 9:00</span><span class="drill-min">10 min</span></div>
+        <div class="drill-name">6 · Cooldown &amp; recap</div>
+        <div class="drill-cue">"What's the one shot you trust more tonight than you did at 7:30?"</div>
+        <div class="drill-why">Adults need the narrative — name what they learned out loud so it locks in.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Gentle stretching, conversational. One sentence each — what landed tonight. Set the hook for Wednesday: tactical patterns, Week 1 still in reset mode.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">10:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <div class="controls">
+    <button class="btn btn-primary" onclick="resetSession('al')">Reset session</button>
+    <button class="btn btn-ghost" onclick="window.print()">Print</button>
+  </div>
+</section>
+
+<footer class="foot">
+  <p><strong>Week 1 of 5 — Reset and re-anchor.</strong> Both sessions tonight are about rhythm and consistency. Save the pressure points for Week 3.</p>
+  <p><strong>Green Dot tip:</strong> the calling drills (Up-Back-Stay, Short-or-Deep) only work if they yell it loud. Quiet calls = the brain isn't actually engaged. Make them perform it.</p>
+  <p><strong>Adult Liveball tip:</strong> Cardio Doubles will surface who's been off the court. Note who fades — those are the kids/adults to nudge toward more frequency before summer.</p>
+  <p><strong>End-of-day text:</strong> drop Andrew a line on anything that didn't land. Goes into Week 2 planning.</p>
+</footer>
+
+</div>
+<script>
+function updateClock(){const n=new Date();document.getElementById('clock').textContent=n.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}
+updateClock();setInterval(updateClock,30000);
+const STORE='lbta_planner_peter_2026_05_11_v1';
+function loadState(){try{return JSON.parse(localStorage.getItem(STORE)||'{}')}catch{return{}}}
+function saveState(s){try{localStorage.setItem(STORE,JSON.stringify(s))}catch{}}
+document.querySelectorAll('.drill').forEach(drill=>{
+  const id=drill.dataset.id;const state=loadState();
+  if(state[id]&&state[id].done)drill.classList.add('done');
+  drill.querySelector('.check').addEventListener('click',e=>{e.stopPropagation();drill.classList.toggle('done');const s=loadState();s[id]=s[id]||{};s[id].done=drill.classList.contains('done');saveState(s);updateProgress()});
+  const toggle=drill.querySelector('.toggle');
+  if(toggle){toggle.addEventListener('click',()=>{drill.classList.toggle('open');toggle.textContent=drill.classList.contains('open')?'Hide details':'Show details';const t=drill.querySelector('.timer-bar');if(t)t.classList.toggle('hidden',!drill.classList.contains('open'))})}
+  const tbar=drill.querySelector('.timer-bar');
+  if(tbar){const disp=tbar.querySelector('.timer-display');const sb=tbar.querySelector('.start');const rb=tbar.querySelector('.reset');const mins=parseInt(drill.dataset.mins,10);let r=mins*60;let iv=null;
+    function render(){const m=Math.floor(r/60);const s=(r%60).toString().padStart(2,'0');disp.textContent=`${m}:${s}`}render();
+    sb.addEventListener('click',()=>{if(iv){clearInterval(iv);iv=null;sb.textContent='Resume';return}sb.textContent='Pause';iv=setInterval(()=>{r=Math.max(0,r-1);render();if(r===0){clearInterval(iv);iv=null;sb.textContent='Done';if(navigator.vibrate)navigator.vibrate([200,100,200]);try{const c=new (window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator();const g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=660;g.gain.value=.12;o.start();setTimeout(()=>{o.stop();c.close()},280)}catch{}}},1000)});
+    rb.addEventListener('click',()=>{if(iv){clearInterval(iv);iv=null}r=mins*60;render();sb.textContent='Start'})}
+});
+function updateProgress(){['gd','al'].forEach(k=>{const ds=document.querySelectorAll(`[data-session="${k}"] .drill`);const dn=document.querySelectorAll(`[data-session="${k}"] .drill.done`).length;const t=ds.length;const p=t?(dn/t)*100:0;const f=document.getElementById(`fill-${k}`);const c=document.getElementById(`count-${k}`);if(f)f.style.width=p+'%';if(c)c.textContent=`${dn} / ${t}`});
+  document.querySelectorAll('.session').forEach(s=>{s.querySelectorAll('.drill').forEach(d=>d.classList.remove('current'));const nx=s.querySelector('.drill:not(.done)');if(nx)nx.classList.add('current')})}
+updateProgress();
+function resetSession(k){if(!confirm('Reset all completion marks for this session?'))return;const s=loadState();document.querySelectorAll(`[data-session="${k}"] .drill`).forEach(d=>{delete s[d.dataset.id];d.classList.remove('done')});saveState(s);updateProgress()}
+</script>
+</body>
+</html>

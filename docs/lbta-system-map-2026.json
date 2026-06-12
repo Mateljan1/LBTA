@@ -1,0 +1,861 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "meta": {
+    "title": "LBTA System Map 2026",
+    "purpose": "Cross-agent reference: website routes, apps, calendar, coaches, programs, data files, external systems. Pass to any agent working on LBTA website, bots, email, or ops.",
+    "generated": "2026-05-17",
+    "repo": "LBTA_WEBSITE_DRAFT_3:5:26",
+    "productionOrigin": "https://lagunabeachtennisacademy.com",
+    "humanReadableCompanion": "docs/lbta-system-map-2026.md",
+    "pricingRule": "Never quote prices except from data/*.json or /schedules. Website /schedules is the public SSOT for display.",
+    "doNotUseCoaches": [
+      "Robert LeBuhn",
+      "Kevin Jackson",
+      "Savriyan Danilov",
+      "Jay Grollman",
+      "Ryan Fritzinger"
+    ]
+  },
+  "canonicalContact": {
+    "phone": "(949) 534-0457",
+    "phoneTel": "tel:9495340457",
+    "email": "support@lagunabeachtennisacademy.com",
+    "postalAddress": "1098 Balboa Ave, Laguna Beach, CA 92651",
+    "bookingUrl": "https://lagunabeachtennisacademy.com/book",
+    "schedulesUrl": "https://lagunabeachtennisacademy.com/schedules",
+    "doNotGiveByDefault": {
+      "andrewPersonalEmail": "andrew@lagunabeachtennisacademy.com",
+      "note": "Only if user explicitly asks for Andrew direct line/email"
+    }
+  },
+  "facilities": [
+    {
+      "anchor": "moulton-meadows",
+      "name": "Moulton Meadows Park",
+      "street": "1098 Balboa Ave, Laguna Beach, CA 92651",
+      "courts": 4,
+      "contactUrl": "https://lagunabeachtennisacademy.com/contact#moulton-meadows",
+      "programs": [
+        "Little Tennis Stars",
+        "Red Ball",
+        "Orange Ball",
+        "Green Dot",
+        "Adult beginner blocks",
+        "LiveBall Intermediate (Thu)"
+      ]
+    },
+    {
+      "anchor": "alta-laguna",
+      "name": "Alta Laguna Park",
+      "street": "3300 Alta Laguna Blvd, Laguna Beach, CA 92651",
+      "courts": 2,
+      "contactUrl": "https://lagunabeachtennisacademy.com/contact#alta-laguna",
+      "programs": [
+        "Saturday juniors",
+        "Summer camps",
+        "UTR Match Play"
+      ]
+    },
+    {
+      "anchor": "lbhs",
+      "name": "Laguna Beach High School",
+      "street": "625 Park Ave, Laguna Beach, CA 92651",
+      "courts": 6,
+      "contactUrl": "https://lagunabeachtennisacademy.com/contact#lbhs",
+      "programs": [
+        "High Performance",
+        "Junior Development",
+        "Adult programs",
+        "LiveBall",
+        "USTA leagues",
+        "Training camps 12-17"
+      ]
+    }
+  ],
+  "mobileApps": {
+    "productName": "LBTA",
+    "ios": {
+      "canonical": true,
+      "url": "https://apps.apple.com/us/app/lbta/id6746348933",
+      "appStoreId": "6746348933"
+    },
+    "android": {
+      "canonical": {
+        "url": "https://play.google.com/store/apps/details?id=com.court.laguna",
+        "packageId": "com.court.laguna",
+        "usedIn": [
+          "gpt/03-KNOWLEDGE-BRAIN/07-website-and-links.md",
+          "gpt/03-KNOWLEDGE-BRAIN/23-bot-knowledge-base-2026.md",
+          "assets/emails/spring-2026/prospects/LBTA_Spring2026_Schedule_SEND_READY.html"
+        ]
+      },
+      "alternate": {
+        "url": "https://play.google.com/store/apps/details?id=com.court.laguna",
+        "packageId": "com.court.laguna",
+        "usedIn": [
+          "app/thank-you/page.tsx",
+          "lib/email.ts (email footer badges)",
+          "many spring-2026 email templates"
+        ],
+        "note": "PlayByPoint white-label package \u2014 may be legacy. RESOLVE: pick one canonical Android URL site-wide."
+      }
+    },
+    "backend": {
+      "name": "PlayByPoint",
+      "domain": "playbypoint.com",
+      "role": "Court booking, app backend, waivers; GPT web-search whitelist"
+    }
+  },
+  "externalSystems": {
+    "website": {
+      "host": "Vercel",
+      "productionUrl": "https://lagunabeachtennisacademy.com",
+      "healthCheck": "npm run health:prod",
+      "shipGate": "npm run ship:gate"
+    },
+    "cityRegistration": {
+      "name": "City of Laguna Beach Recreation (Rec1)",
+      "canonicalCatalog": "https://secure.rec1.com/CA/city-of-laguna-beach/catalog",
+      "codebaseVariants": [
+        "lib/flyer-config.ts (flyer deep link)",
+        "components/RegistrationModal.tsx (modal deep link)",
+        "assets/emails/... (marketing deep links with filters)"
+      ],
+      "rule": "Prefer base catalog URL in bots; deep links may stale when City updates session IDs"
+    },
+    "payments": {
+      "websiteCheckout": "Stripe via /api/checkout/utr-season (UTR season pass)",
+      "cityPortal": "Rec1 \u2014 payment confirms spot for many city-listed programs"
+    },
+    "crm": {
+      "activeCampaign": {
+        "status": "DEPRECATING \u2014 do not preserve or expand",
+        "websiteHooks": [
+          "/api/activecampaign-webhook",
+          "lib/activecampaign.ts",
+          "form routes may still sync"
+        ]
+      },
+      "goHighLevel": {
+        "status": "Target CRM for LBTA ops \u2014 not wired in this repo",
+        "cursorAccess": "Claude Code / Desktop only, not Cursor"
+      }
+    },
+    "database": {
+      "supabase": {
+        "optional": true,
+        "env": [
+          "SUPABASE_URL",
+          "SUPABASE_SERVICE_ROLE_KEY"
+        ],
+        "uses": [
+          "lib/leads-store.ts (form leads)",
+          "UTR tracker (utr-tracker pages)"
+        ]
+      }
+    },
+    "rag": {
+      "note": "Org RAG: Supabase pgvector + Voyage \u2014 see Andrew meta rules; not this repo"
+    },
+    "siblingBrands": {
+      "fit4Tennis": "Separate brand \u2014 do not apply LBTA voice/rules",
+      "racquetIQ": "Pre-launch \u2014 separate",
+      "thePod": "CONCEPT ONLY \u2014 no approved pricing or copy"
+    }
+  },
+  "calendar2026": {
+    "sourceFile": "data/year2026.json",
+    "lastUpdated": "2026-03-26",
+    "seasons": {
+      "winter": {
+        "name": "Winter 2026",
+        "dates": "January 5 \u2013 April 5, 2026",
+        "weeks": 13,
+        "status": "active",
+        "dataFile": "data/winter2026.json"
+      },
+      "spring": {
+        "name": "Spring 2026",
+        "dates": "April 6 \u2013 June 13, 2026",
+        "weeks": 10,
+        "skipDates": [
+          "May 25"
+        ],
+        "status": "registration_open",
+        "dataFile": "data/spring-summer-2026.json"
+      },
+      "summer": {
+        "name": "Summer 2026",
+        "dates": "June 15 \u2013 August 29, 2026",
+        "weeks": 11,
+        "skipDates": [
+          "June 19",
+          "July 4"
+        ],
+        "status": "registration_open",
+        "dataFile": "data/spring-summer-2026.json"
+      },
+      "fall": {
+        "name": "Fall 2026",
+        "dates": "August 31 \u2013 December 19, 2026",
+        "weeks": 16,
+        "skipDates": [
+          "Sep 7",
+          "Nov 11",
+          "Nov 26",
+          "Nov 27"
+        ],
+        "status": "coming_soon",
+        "dataFile": "data/fall2026.json"
+      }
+    },
+    "campHighlights": {
+      "springBreak": {
+        "dates": "March 30 \u2013 April 2, 2026",
+        "status": "completed"
+      },
+      "summerCamps": {
+        "dates": "June 15 \u2013 August 29, 2026",
+        "page": "/camps"
+      },
+      "swimTennis": {
+        "suspended": true,
+        "reason": "Alta pool closed summer 2026 \u2014 use Tennis & Adventure instead"
+      },
+      "backToSchool": {
+        "dates": "August 17\u201320, 2026"
+      },
+      "thanksgiving": {
+        "dates": "November 23\u201325, 2026"
+      },
+      "winterBreak": {
+        "dates": "December 21\u201324 & December 28\u201331, 2026"
+      }
+    },
+    "coachHubSeasons": "data/coach-hub/seasons.json (ISO starts for hub UI)"
+  },
+  "pricingAnchors": {
+    "source": "gpt/03-KNOWLEDGE-BRAIN/02-programs-and-pricing.md",
+    "firstTouch": {
+      "dropIn": 50,
+      "springSeasonal1x": 420,
+      "springCommitted2x": 840,
+      "spring3x": 1260,
+      "saturdayOnly": 380
+    },
+    "summerMultiplier": "~1.10 on spring tier (e.g. Red 1x = 462)"
+  },
+  "programs": {
+    "sourceFiles": {
+      "primary": "data/spring-summer-2026.json",
+      "winter": "data/winter2026.json",
+      "fall": "data/fall2026.json",
+      "yearMeta": "data/year2026.json",
+      "private": "data/private-rates.json",
+      "leagues": "data/leagues-2026.json",
+      "liveball": "data/liveball.json",
+      "supplemental": "data/pricing-supplemental.json"
+    },
+    "catalog": [
+      {
+        "id": "little-stars",
+        "name": "Little Tennis Stars",
+        "ages": "3-4",
+        "category": "Junior",
+        "websitePath": "/programs/junior"
+      },
+      {
+        "id": "red-ball",
+        "name": "Red Ball",
+        "ages": "5-6",
+        "category": "Junior"
+      },
+      {
+        "id": "orange-ball",
+        "name": "Orange Ball",
+        "ages": "7-8",
+        "category": "Junior"
+      },
+      {
+        "id": "green-dot",
+        "name": "Green Dot",
+        "ages": "9-11",
+        "category": "Junior"
+      },
+      {
+        "id": "utr-green-dot",
+        "name": "Competitive Green Dot",
+        "ages": "9-11+",
+        "category": "Junior",
+        "note": "UTR-tracked"
+      },
+      {
+        "id": "youth-development",
+        "name": "Junior Development",
+        "ages": "11-18",
+        "category": "Junior",
+        "tiers": "UTR 1-4 / 4-7"
+      },
+      {
+        "id": "high-performance",
+        "name": "High Performance",
+        "ages": "12-17",
+        "category": "Junior",
+        "requirement": "UTR 8+ \u00b7 coach approval",
+        "websitePath": "/programs/high-performance"
+      },
+      {
+        "id": "adult-beginner-1",
+        "name": "New to Tennis",
+        "category": "Adult",
+        "websitePath": "/programs/adult"
+      },
+      {
+        "id": "adult-beginner-2",
+        "name": "Beyond Beginner",
+        "category": "Adult"
+      },
+      {
+        "id": "adult-intermediate",
+        "name": "Adult Intermediate",
+        "category": "Adult",
+        "ntrp": "3.0-4.0"
+      },
+      {
+        "id": "adult-advanced",
+        "name": "Adult Advanced",
+        "category": "Adult",
+        "ntrp": "4.0+"
+      },
+      {
+        "id": "liveball",
+        "name": "LiveBall",
+        "category": "Adult",
+        "websitePath": "/liveball"
+      },
+      {
+        "id": "cardio-tennis",
+        "name": "Cardio Tennis",
+        "category": "Fitness",
+        "websitePath": "/fitness"
+      }
+    ],
+    "packages": {
+      "frequencyOptions": [
+        "1x",
+        "2x",
+        "3x",
+        "saturday1x",
+        "monthly",
+        "drop_in"
+      ],
+      "discounts": [
+        {
+          "label": "Sibling",
+          "percent": 10
+        },
+        {
+          "label": "Early Bird",
+          "percent": 5
+        },
+        {
+          "label": "Multi-Session",
+          "percent": 5
+        },
+        {
+          "label": "Multi-Camp Week",
+          "percent": 10
+        }
+      ]
+    },
+    "privateLessons": {
+      "sourceFile": "data/private-rates.json",
+      "coaches": [
+        {
+          "coach": "Andrew Mateljan",
+          "rate60": 250,
+          "rate90": 350,
+          "pack10": 2300,
+          "pack20": 4200
+        },
+        {
+          "coach": "Peter DeFrantz",
+          "rate60": 120,
+          "rate90": 165,
+          "pack10": 1100,
+          "pack20": 2000
+        },
+        {
+          "coach": "Allison Cronk",
+          "rate60": 120,
+          "rate90": 165,
+          "pack10": 1100,
+          "pack20": 2000
+        }
+      ],
+      "booking": "/book?type=private or contact support"
+    },
+    "leagues": {
+      "sourceFile": "data/leagues-2026.json",
+      "websitePath": "/programs/leagues",
+      "ustaPage": "/programs/usta-adult-league"
+    },
+    "utrMatchPlay": {
+      "season": "Season 1, 2026 \u2014 Apr 11 \u2013 Jun 6",
+      "websitePath": "/programs/utr-match-play",
+      "trackerPath": "/utr-tracker",
+      "grandFinals": "June 6, 2026"
+    }
+  },
+  "coachesAndStaff": {
+    "publicRoster": {
+      "sourceFile": "data/coaches.json",
+      "listed": [
+        {
+          "slug": "andrew-mateljan",
+          "name": "Andrew Mateljan",
+          "title": "Founder & Director of Tennis",
+          "role": "founder",
+          "url": "https://lagunabeachtennisacademy.com/coaches/andrew-mateljan",
+          "indexable": true
+        },
+        {
+          "slug": "allison-cronk",
+          "name": "Allison Cronk",
+          "title": "Head Coach, Youth Programs",
+          "url": "https://lagunabeachtennisacademy.com/coaches/allison-cronk",
+          "indexable": true
+        },
+        {
+          "slug": "peter-defrantz",
+          "name": "Peter DeFrantz",
+          "title": "Head Coach, Junior Development",
+          "url": "https://lagunabeachtennisacademy.com/coaches/peter-defrantz",
+          "indexable": true
+        },
+        {
+          "slug": "michelle-mateljan",
+          "name": "Michelle Mateljan",
+          "hidden": true,
+          "hiddenReason": "Paused 2026",
+          "url": "https://lagunabeachtennisacademy.com/coaches/michelle-mateljan",
+          "indexable": false
+        }
+      ],
+      "redirects": [
+        {
+          "slug": "robert-lebuhn",
+          "redirectTo": "/coaches",
+          "reason": "Departed \u2014 do not reference"
+        }
+      ]
+    },
+    "coachHub": {
+      "status": "In build \u2014 routes exist; much of work uncommitted as of 2026-05-17",
+      "robots": "Disallow /coach-hub",
+      "sourceFile": "data/coach-hub/coaches.json",
+      "activeSlugs": [
+        "andrew",
+        "allison",
+        "peter"
+      ],
+      "baseUrl": "https://lagunabeachtennisacademy.com/coach-hub",
+      "routes": [
+        "/coach-hub",
+        "/coach-hub/login",
+        "/coach-hub/leads",
+        "/coach-hub/{coach}",
+        "/coach-hub/{coach}/login",
+        "/coach-hub/{coach}/today",
+        "/coach-hub/{coach}/schedule",
+        "/coach-hub/{coach}/lesson-plans",
+        "/coach-hub/{coach}/lesson-plans/framework",
+        "/coach-hub/{coach}/lesson-plans/generate",
+        "/coach-hub/{coach}/lesson-plans/{planId}",
+        "/coach-hub/{coach}/lesson-plans/drafts/{draftId}"
+      ],
+      "apis": [
+        "/api/coach-hub/auth",
+        "/api/coach-hub/logout",
+        "/api/coach-hub/leads/export",
+        "/api/coach-hub/{coach}/auth",
+        "/api/coach-hub/{coach}/logout",
+        "/api/coach-hub/{coach}/lesson-plans/generate"
+      ]
+    }
+  },
+  "website": {
+    "sitemapCount": 40,
+    "pages": {
+      "core": [
+        {
+          "path": "/",
+          "purpose": "Homepage \u2014 brand, programs, founder, FAQ, trial CTA",
+          "status": "shipped",
+          "priority": 1.0
+        },
+        {
+          "path": "/schedules",
+          "purpose": "SSOT pricing & registration UI",
+          "status": "shipped",
+          "data": [
+            "winter2026",
+            "spring-summer-2026",
+            "fall2026",
+            "year2026",
+            "leagues-2026",
+            "private-rates"
+          ],
+          "gaps": [
+            "contrast on season tabs",
+            "dense mobile UX"
+          ]
+        },
+        {
+          "path": "/book",
+          "purpose": "Trial + private lesson modals",
+          "status": "shipped",
+          "api": "/api/book",
+          "gaps": [
+            "modal a11y",
+            "mobile field count"
+          ]
+        },
+        {
+          "path": "/programs",
+          "purpose": "Program hub / pathways",
+          "status": "shipped"
+        },
+        {
+          "path": "/camps",
+          "purpose": "Camp marketing + registration modal",
+          "status": "shipped"
+        },
+        {
+          "path": "/coaches",
+          "purpose": "Coach roster",
+          "status": "shipped"
+        },
+        {
+          "path": "/about",
+          "purpose": "Academy story",
+          "status": "shipped"
+        },
+        {
+          "path": "/contact",
+          "purpose": "Contact form + facilities",
+          "status": "shipped",
+          "gaps": [
+            "CLS 0.499 audit"
+          ]
+        },
+        {
+          "path": "/faq",
+          "purpose": "FAQ",
+          "status": "shipped"
+        },
+        {
+          "path": "/blog",
+          "purpose": "Journal index",
+          "status": "shipped",
+          "postCount": 5
+        }
+      ],
+      "pathways": [
+        {
+          "path": "/programs/junior",
+          "status": "shipped"
+        },
+        {
+          "path": "/programs/adult",
+          "status": "shipped"
+        },
+        {
+          "path": "/programs/high-performance",
+          "status": "shipped"
+        },
+        {
+          "path": "/programs/leagues",
+          "status": "shipped"
+        },
+        {
+          "path": "/programs/usta-adult-league",
+          "status": "shipped"
+        },
+        {
+          "path": "/programs/utr-match-play",
+          "status": "shipped"
+        },
+        {
+          "path": "/fitness",
+          "status": "shipped"
+        },
+        {
+          "path": "/liveball",
+          "status": "shipped",
+          "nav": "Programs dropdown only"
+        },
+        {
+          "path": "/philosophy",
+          "status": "shipped",
+          "nav": "orphan \u2014 SEO/deep link"
+        },
+        {
+          "path": "/success-stories",
+          "status": "shipped",
+          "navLabel": "Results"
+        }
+      ],
+      "landings": [
+        {
+          "path": "/junior-trial",
+          "status": "shipped",
+          "api": "/api/book",
+          "gaps": [
+            "unlabeled select"
+          ]
+        },
+        {
+          "path": "/adult-trial",
+          "status": "shipped",
+          "api": "/api/book"
+        },
+        {
+          "path": "/beginner-program",
+          "status": "shipped",
+          "nav": "orphan"
+        },
+        {
+          "path": "/high-performance-pathway",
+          "status": "shipped",
+          "nav": "orphan"
+        },
+        {
+          "path": "/pathway-planner",
+          "status": "shipped",
+          "gaps": [
+            "quiz a11y",
+            "no progress UI"
+          ]
+        },
+        {
+          "path": "/match-play",
+          "status": "shipped",
+          "note": "Friday match play NOT offered \u2014 routes to UTR/leagues"
+        },
+        {
+          "path": "/apply-scholarship",
+          "status": "shipped",
+          "api": "/api/scholarship"
+        },
+        {
+          "path": "/racquet-rescue",
+          "status": "shipped"
+        },
+        {
+          "path": "/help",
+          "status": "shipped",
+          "nav": "orphan"
+        }
+      ],
+      "tools": [
+        {
+          "path": "/utr-tracker",
+          "status": "shipped",
+          "requires": "Supabase config",
+          "indexable": true
+        },
+        {
+          "path": "/utr-tracker/admin",
+          "status": "shipped",
+          "indexable": false
+        }
+      ],
+      "legal": [
+        {
+          "path": "/privacy",
+          "status": "shipped"
+        },
+        {
+          "path": "/terms",
+          "status": "shipped"
+        },
+        {
+          "path": "/thank-you",
+          "status": "shipped",
+          "indexable": false,
+          "note": "Post-form; includes app download CTAs"
+        }
+      ],
+      "internal": [
+        {
+          "path": "/brand",
+          "purpose": "Design token showcase",
+          "indexable": false
+        },
+        {
+          "path": "/schedules/calendar",
+          "purpose": "Printable calendar",
+          "indexable": false
+        },
+        {
+          "path": "/print/court-flyer",
+          "purpose": "Print PDF source",
+          "indexable": false
+        }
+      ]
+    },
+    "blogPosts": [
+      "movement-before-strokes-footwork-first",
+      "what-utr-measures-and-what-it-does-not",
+      "how-to-choose-a-summer-tennis-camp-for-your-child",
+      "private-lessons-vs-group-training",
+      "college-tennis-path-balance-and-expectations"
+    ],
+    "legacyRedirects": [
+      {
+        "from": "/pricing",
+        "to": "/schedules"
+      },
+      {
+        "from": "/schedule",
+        "to": "/schedules"
+      },
+      {
+        "from": "/private-lessons",
+        "to": "/book"
+      },
+      {
+        "from": "/vylo",
+        "to": "/programs/high-performance"
+      },
+      {
+        "from": "/jtt",
+        "to": "/programs/leagues"
+      },
+      {
+        "from": "/racket-stringing",
+        "to": "/contact",
+        "note": "Consider /racquet-rescue"
+      }
+    ],
+    "apis": [
+      {
+        "path": "/api/book",
+        "use": "Trials, contact, landings"
+      },
+      {
+        "path": "/api/scholarship",
+        "use": "Scholarship form"
+      },
+      {
+        "path": "/api/register-program",
+        "use": "Schedule/camp registration modal"
+      },
+      {
+        "path": "/api/register-year",
+        "use": "Annual registration"
+      },
+      {
+        "path": "/api/register",
+        "use": "General registration"
+      },
+      {
+        "path": "/api/newsletter",
+        "use": "Footer newsletter"
+      },
+      {
+        "path": "/api/checkout/utr-season",
+        "use": "UTR Stripe checkout"
+      },
+      {
+        "path": "/api/chat",
+        "use": "Site chatbot (Rally)"
+      },
+      {
+        "path": "/api/chatbot-webhook",
+        "use": "Chat webhook"
+      },
+      {
+        "path": "/api/activecampaign-webhook",
+        "use": "AC \u2014 deprecating"
+      },
+      {
+        "path": "/api/utr-tracker/*",
+        "use": "Tracker CRUD"
+      },
+      {
+        "path": "/api/cron/*",
+        "use": "Lead mirror, canary"
+      }
+    ]
+  },
+  "botAndGptKnowledge": {
+    "paths": [
+      "gpt/03-KNOWLEDGE-BRAIN/01-academy-facts.md",
+      "gpt/03-KNOWLEDGE-BRAIN/02-programs-and-pricing.md",
+      "gpt/03-KNOWLEDGE-BRAIN/07-website-and-links.md",
+      "gpt/03-KNOWLEDGE-BRAIN/23-bot-knowledge-base-2026.md"
+    ],
+    "personaName": "Rally",
+    "forbiddenPersonaAliases": [
+      "Coach",
+      "Ben",
+      "Rowley",
+      "SmartConcierge",
+      "Concierge",
+      "LBTA AI Bot v2 Cloud"
+    ]
+  },
+  "auditSnapshot2026-05": {
+    "reportDir": "docs/audits/2026-05/",
+    "critical": [
+      "Newsletter button no accessible name (site-wide footer)",
+      "Unlabeled selects on /junior-trial and /pathway-planner",
+      "Systemic text-brand-pacific-dusk/50-70 contrast failures",
+      "/contact CLS 0.499"
+    ],
+    "reference": "docs/audits/2026-05/findings.md"
+  },
+  "knownDiscrepancies": [
+    {
+      "id": "android-play-store-package",
+      "severity": "engineering_action_queued",
+      "issue": "Canonical LOCKED to com.court.laguna by Andrew 2026-05-17. 3 surfaces still point to deprecated com.court.laguna (thank-you, lib/email.ts, spring-2026 email templates) \u2014 engineer fix queued.",
+      "canonical": "com.court.laguna",
+      "action": "Search-replace com.court.laguna \u2192 com.court.laguna across app/**, lib/**, email templates, .md knowledge brain. Validate with grep returning zero.",
+      "status": "resolved_canonically_2026-05-17",
+      "deprecated": "com.court.laguna"
+    },
+    {
+      "id": "rec1-deep-links",
+      "severity": "medium",
+      "issue": "Multiple Rec1 catalog filter URLs in repo",
+      "action": "Use base catalog in bots; audit RegistrationModal vs flyer-config"
+    },
+    {
+      "id": "racket-stringing-redirect",
+      "severity": "resolved",
+      "issue": "/racket-stringing and /racket-rescue now redirect to /racquet-rescue (2026-05-17)",
+      "action": null
+    },
+    {
+      "id": "activecampaign",
+      "severity": "ops",
+      "issue": "AC still in API layer while org direction is kill AC",
+      "action": "Migrate leads to GHL; remove AC webhook when ready"
+    }
+  ],
+  "agentInstructions": {
+    "beforeQuotingPrice": "Read data/spring-summer-2026.json or load /schedules",
+    "beforeNamingCoach": "Check data/coaches.json hidden flags and doNotUseCoaches list",
+    "beforeAppLinks": "Use mobileApps.android.canonical unless Andrew confirms alternate",
+    "beforeShip": "npm run ship:gate; npm run health:prod after push",
+    "companionDocs": [
+      "docs/lbta-system-map-2026.md",
+      "gpt/03-KNOWLEDGE-BRAIN/",
+      "AGENTS.md",
+      ".cursorrules"
+    ]
+  }
+}

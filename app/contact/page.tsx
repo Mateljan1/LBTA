@@ -10,6 +10,7 @@ import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import { formatUtrSessionDateLong } from '@/lib/utr-match-play'
 import FacilitiesSection from '@/components/contact/FacilitiesSection'
+import { LBTA_PUBLIC_CONTACT } from '@/lib/public-contact'
 
 type ContactFormPrefill = {
   interestedIn: string
@@ -228,11 +229,11 @@ function ContactPageContent() {
               <div>
                 <p className="font-sans font-semibold text-[15px] text-brand-pacific-dusk mb-1">Phone</p>
                 <a 
-                  href="tel:9495340457" 
+                  href={`tel:${LBTA_PUBLIC_CONTACT.phoneDial}`}
                   className="font-sans text-[14px] text-brand-victoria-cove hover:text-brand-victoria-cove/80 transition-colors"
-                  aria-label="Call us at (949) 534-0457"
+                  aria-label={`Call us at ${LBTA_PUBLIC_CONTACT.phoneDisplay}`}
                 >
-                  (949) 534-0457
+                  {LBTA_PUBLIC_CONTACT.phoneDisplay}
                 </a>
               </div>
             </div>
@@ -243,11 +244,11 @@ function ContactPageContent() {
               <div>
                 <p className="font-sans font-semibold text-[15px] text-brand-pacific-dusk mb-1">Email</p>
                 <a 
-                  href="mailto:support@lagunabeachtennisacademy.com" 
+                  href={`mailto:${LBTA_PUBLIC_CONTACT.email}`}
                   className="font-sans text-[14px] text-brand-victoria-cove hover:text-brand-victoria-cove/80 transition-colors break-all"
-                  aria-label="Email us at support@lagunabeachtennisacademy.com"
+                  aria-label={`Email us at ${LBTA_PUBLIC_CONTACT.email}`}
                 >
-                  support@lagunabeachtennisacademy.com
+                  {LBTA_PUBLIC_CONTACT.email}
                 </a>
               </div>
             </div>
@@ -420,7 +421,7 @@ function ContactPageContent() {
                   </div>
                   
                   {/* Confirmation Text */}
-                  <p className="font-sans text-[13px] text-black/60 italic">
+                  <p className="font-sans text-[13px] text-black/70 italic">
                     We'll respond within 24 hours.
                   </p>
                   
@@ -442,7 +443,7 @@ function ContactPageContent() {
                   
                   {status === 'error' && (
                     <p className="text-lbta-red text-[14px] text-center">
-                      Error sending message. Please call (949) 534-0457
+                      Error sending message. Please call {LBTA_PUBLIC_CONTACT.phoneDisplay}
                     </p>
                   )}
                 </form>

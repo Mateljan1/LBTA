@@ -1,0 +1,126 @@
+<!doctype html>
+<!-- @page width="8.5in" height="11in" landscape="false" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · Private Coaching</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 8.5in 11in; margin: 0; }
+    .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; }
+    .pad  { padding: 32pt 44pt; }
+
+    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 38pt; line-height: 1.04; color: var(--text-heading); margin: 6pt 0 8pt; letter-spacing: -0.005em; }
+    h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 22pt; line-height: 1.12; color: var(--text-heading); margin: 14pt 0 6pt; }
+    h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+         font-size: 13pt; color: var(--pacific-dusk); margin: 8pt 0 4pt; }
+    p { font-size: 10pt; line-height: 1.6; color: var(--text-on-light); margin: 0 0 6pt; }
+    .lede { font-size: 11pt; line-height: 1.6; color: var(--text-on-light); margin-bottom: 12pt; }
+    .top-eyebrow { font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 8pt; color: var(--gold-deep); }
+
+    .coach-row {
+      display: grid; grid-template-columns: 90pt 1fr 220pt; gap: 18pt;
+      padding: 16pt 0; border-bottom: 0.5pt solid var(--divider-light); align-items: start;
+    }
+    .coach-row:last-child { border-bottom: none; }
+    .coach-row img { width: 90pt; height: 112pt; object-fit: cover; border-radius: 4pt; background: var(--sandstone); }
+    .coach-row .name { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 18pt; color: var(--text-heading); line-height: 1.05; }
+    .coach-row .title { font-family: var(--font-body); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.14em; font-size: 8pt; color: var(--victoria-cove); margin-top: 2pt; }
+    .coach-row .bio { font-size: 8.5pt; line-height: 1.5; margin-top: 6pt; }
+    .coach-row .creds { font-size: 7.5pt; color: var(--text-muted); margin-top: 4pt; }
+
+    .rate-card {
+      background: #F5F0E5; border-radius: 4pt; padding: 14pt;
+    }
+    .rate-card .row { display: flex; justify-content: space-between; padding: 4pt 0;
+      border-bottom: 0.5pt solid var(--border-light); font-size: 9pt; }
+    .rate-card .row:last-child { border-bottom: none; }
+    .rate-card .row .lbl { color: var(--text-on-light); }
+    .rate-card .row .val { font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500; font-size: 13pt; color: var(--text-heading); line-height: 1; }
+    .rate-card .row .val .save { font-family: var(--font-body); font-weight: 600; font-size: 7pt;
+      color: var(--gold-deep); text-transform: uppercase; letter-spacing: 0.14em; display: block; margin-top: 1pt; }
+
+    .policy { background: var(--deep-water); color: rgba(255,255,255,0.86); border-radius: 4pt;
+      padding: 14pt; margin: 12pt 0; font-size: 8.5pt; line-height: 1.5; }
+    .policy strong { color: var(--gold); }
+
+    .cta-bar { background: #0F2237; color: rgba(255,255,255,0.86); padding: 18pt 44pt;
+      display: flex; justify-content: space-between; align-items: center; }
+    .cta-bar .head { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      color: #FFFFFF; font-size: 22pt; line-height: 1.1; }
+    .cta-bar .url { font-family: var(--font-body); font-weight: 700; color: var(--gold);
+      font-size: 11pt; letter-spacing: 0.14em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <span class="horizon-bar h-thick" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <div style="display:flex; justify-content: space-between; align-items: center;">
+      <img src="../assets/logos/LBTAblktext.png" style="height: 40pt; width:auto;" alt="LBTA" />
+      <span class="top-eyebrow">Private coaching</span>
+    </div>
+
+    <h1>One-on-one,<br/>by appointment.</h1>
+    <p class="tagline-italic" style="font-size: 14pt; color: var(--gold-deep); margin-bottom: 10pt;">Movement. Craft. Community.</p>
+    <p class="lede">{{ audience.private.intro }}</p>
+
+    {% for r in private_rates %}
+    {% set coach = (coaches | selectattr('name', 'equalto', r.coach) | list)[0] %}
+    <div class="coach-row">
+      {% if coach %}
+      <img src="../assets/photos/{{ coach.image_local }}" alt="{{ coach.name }}" />
+      <div>
+        <div class="name">{{ coach.name }}</div>
+        <div class="title">{{ coach.title }}</div>
+        {% if coach.slug == 'andrew-mateljan' %}
+        <div class="bio">Fourth-generation tennis coach. Twenty years on tour and on court. Took Karue Sell from ATP #860 to #258 in 2025. Colton Smith (#133), Max McKennon (#458), and Ryan Seggerman (#63 in doubles) all came through the same training. Alex Michelsen came through the program at ages 12–13 — now ATP #30. Trained at Sánchez-Casal Spain under Jimmy Johnson; seven years coaching internationally across Spain, Croatia, and Norway.</div>
+        <div class="creds">Fourth-generation · ATP/WTA Tour Coach · 20+ D1 Placements · Sánchez-Casal Spain</div>
+        {% else %}
+        <div class="bio">{{ coach.bio }}</div>
+        <div class="creds">{{ coach.credentials | join(' · ') }}</div>
+        {% endif %}
+      </div>
+      {% else %}
+      <div></div>
+      <div>
+        <div class="name">{{ r.coach }}</div>
+        <div class="title">{{ r.specialty }}</div>
+      </div>
+      {% endif %}
+      <div class="rate-card">
+        <div class="row"><span class="lbl">60 min</span><span class="val">${{ r.rate_60 }}</span></div>
+        <div class="row"><span class="lbl">90 min</span><span class="val">${{ r.rate_90 }}</span></div>
+        <div class="row"><span class="lbl">10-pack (60 min)</span><span class="val">${{ '{:,}'.format(r.pack_10) }}<span class="save">saves ${{ r.rate_60 * 10 - r.pack_10 }}</span></span></div>
+        <div class="row"><span class="lbl">20-pack (60 min)</span><span class="val">${{ '{:,}'.format(r.pack_20) }}<span class="save">saves ${{ r.rate_60 * 20 - r.pack_20 }}</span></span></div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="policy">
+      <strong>How it works.</strong> Sessions on city-managed courts (Moulton Meadows, Alta Laguna,
+      or LBHS) — no club membership required. Pack expiry 12 months from purchase.
+      24-hour cancellation policy. Most new clients start with a 60-minute session to
+      establish technical baseline and goals before booking a pack.
+    </div>
+  </div>
+
+  <div class="cta-bar">
+    <div>
+      <div class="head">Book a private session.</div>
+      <div style="font-size: 8pt; color: rgba(245,240,229,0.65); margin-top: 4pt; letter-spacing: 0.14em; text-transform: uppercase;">{{ contact.phone }} · {{ contact.email }}</div>
+    </div>
+    <div class="url">{{ contact.web }}/book</div>
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+
+</body>
+</html>
