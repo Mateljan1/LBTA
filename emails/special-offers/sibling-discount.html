@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20% sibling discount for Spring JTT</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Work+Sans:wght@300;400;500;600&display=swap');
+    
+    body { margin: 0; padding: 0; font-family: 'Work Sans', Arial, sans-serif; background-color: #FAF8F3; }
+    table { border-collapse: collapse; }
+    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    
+    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: #1a1a1a; margin: 0; line-height: 1.3; }
+    p { font-size: 16px; line-height: 1.7; color: #444444; margin: 0 0 16px 0; }
+    
+    .discount-box {
+      background-color: #e8f5e9;
+      border: 2px solid #4caf50;
+      padding: 24px;
+      margin: 24px 0;
+      border-radius: 4px;
+    }
+    
+    .btn-primary {
+      display: inline-block;
+      background-color: #1a1a1a;
+      color: #ffffff !important;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 2px;
+    }
+    
+    @media screen and (max-width: 640px) {
+      .mobile-padding { padding-left: 24px !important; padding-right: 24px !important; }
+    }
+  </style>
+</head>
+<body>
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FAF8F3;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" width="640" style="background-color: #ffffff; max-width: 640px;">
+          
+          <!-- Header -->
+          <tr>
+            <td align="center" style="padding: 48px 40px 32px 40px; border-bottom: 1px solid #f0f0f0;">
+              <a href="https://lagunabeachtennisacademy.com">
+                <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690bf75d8cd1b88fbac92ad3/55664e8d1_LagunaBeachTennisAcademy_FC-STACKED.png" alt="LBTA" width="160">
+              </a>
+            </td>
+          </tr>
+          
+          <!-- Content -->
+          <tr>
+            <td style="padding: 48px 48px 56px 48px;" class="mobile-padding">
+              
+              <p style="font-size: 18px; color: #1a1a1a; margin-bottom: 24px;">Hi {{contact.first_name}},</p>
+              
+              <p style="margin-bottom: 32px;">
+                I'm reaching out about Spring JTT for {{custom_field.player1_name}} and {{custom_field.player2_name}}.
+              </p>
+              
+              <p style="margin-bottom: 24px;">
+                For families with multiple players, we offer a <strong>20% sibling discount</strong> on the second registration:
+              </p>
+              
+              <!-- Discount Breakdown -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin: 24px 0;">
+                <tr>
+                  <td class="discount-box" style="background-color: #e8f5e9; border: 2px solid #4caf50; padding: 28px; border-radius: 4px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                        <td style="padding-bottom: 12px; border-bottom: 1px solid #4caf50/20;">
+                          <p style="font-size: 15px; color: #1a1a1a; margin: 0;">
+                            <strong>First player:</strong> <span style="float: right;">$2,800 ($2,750 pay-in-full)</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #4caf50/20;">
+                          <p style="font-size: 15px; color: #1a1a1a; margin: 0;">
+                            <strong>Second player:</strong> <span style="float: right;">$2,240 ($2,200 pay-in-full)</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding-top: 16px;">
+                          <p style="font-size: 18px; color: #2e7d32; font-weight: 600; margin: 0; text-align: center;">
+                            Total savings: $560
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              
+              <p style="margin-bottom: 32px; font-weight: 500; color: #1a1a1a;">
+                Practices start Monday, January 12. Would you like to register both players?
+              </p>
+              
+              <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin-bottom: 32px;">
+                <tr>
+                  <td>
+                    <a href="https://lagunabeachtennisacademy.com/jtt?utm_source=email&utm_medium=special-offer&utm_campaign=sibling-discount" class="btn-primary" style="display: inline-block; background-color: #1a1a1a; color: #ffffff; font-size: 13px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; text-decoration: none; padding: 16px 32px; border-radius: 2px;">
+                      Register Both Players
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              
+              <p style="margin-bottom: 4px; font-weight: 500; color: #1a1a1a;">Best,</p>
+              <p style="margin-bottom: 4px; color: #1a1a1a;">Ben</p>
+              <p style="font-size: 14px; color: #888888; margin: 0;">LBTA Admin Team</p>
+              
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 32px 48px; background-color: #1a1a1a; text-align: center;">
+              <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 12px;">
+                1098 Balboa Ave · Laguna Beach, CA 92651
+              </p>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 16px;">
+                <a href="tel:9494646645" style="color: rgba(255,255,255,0.7); text-decoration: none;">(949) 464-6645</a> · 
+                <a href="mailto:support@lagunabeachtennisacademy.com" style="color: rgba(255,255,255,0.7); text-decoration: none;">support@lagunabeachtennisacademy.com</a>
+              </p>
+              <p style="font-size: 12px; color: rgba(255,255,255,0.4); margin: 0;">
+                <a href="{{unsubscribe_link}}" style="color: rgba(255,255,255,0.4);">Unsubscribe</a>
+              </p>
+            </td>
+          </tr>
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
