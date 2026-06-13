@@ -147,23 +147,26 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Mailchimp: upsert + tags (primary CRM)
+    // Mailchimp: upsert + tags (primary CRM — awaited for reliability)
     if (isMailchimpConfigured()) {
-      const mcTags = isContactPage || isRacquetRescue || isRegistrationAssist
-        ? buildContactTags(isRacquetRescue ? 'racquet-rescue' : isRegistrationAssist ? 'registration-assist' : 'contact')
-        : buildTrialTags(tb.program)
-
-      waitUntil(upsertAndTag(
-        {
-          email: tb.email,
-          firstName: tb.firstName,
-          lastName: tb.lastName,
-          phone: tb.phone,
-        },
-        mcTags
-      ).then(r => {
-        if (!r.success) console.error('[MC] Trial/contact upsert failed:', r.error)
-      }))
+      try {
+        const mcTags = isContactPage || isRacquetRescue || isRegistrationAssist
+          ? buildContactTags(isRacquetRescue ? 'racquet-rescue' : isRegistrationAssist ? 'registration-assist' : 'contact')
+          : buildTrialTags(tb.program)
+        const mcResult = await upsertAndTag(
+          { email: tb.email, firstName: tb.firstName, lastName: tb.lastName, phone: tb.phone },
+          mcTags
+        )
+        if (mcResult.success) {
+          console.log('[MC] Upserted:', tb.email)
+        } else {
+          console.error('[MC] Upsert failed:', mcResult.error)
+        }
+      } catch (mcErr) {
+        console.error('[MC] Error:', mcErr instanceof Error ? mcErr.message : mcErr)
+      }
+    } else {
+      console.warn('[MC] Not configured — skipping upsert')
     }
 
     // Supabase: secondary sink
