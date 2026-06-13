@@ -1,15 +1,15 @@
 /**
  * Lead-pipeline canary — shared logic for the cron route + manual smoke script.
  *
- * What it verifies (silently — no AC / Notion / GHL / Postmark side effects):
+ * What it verifies (silently — no side effects on CRM or email systems):
  *   1. Supabase write path (storeLead → row appears in `leads` table)
  *   2. Supabase read path (we can fetch the row back within READ_TIMEOUT_MS)
- *   3. Postmark token validity (GET /server returns 200 with a valid token)
+ *   3. Mailchimp API reachability (GET /ping returns healthy)
  *
  * What it does NOT verify (intentionally):
  *   - The `/api/book` route handler logic. That belongs in a separate "full"
- *     smoke that runs pre-deploy, not on a cron — to avoid polluting AC, GHL,
- *     and Postmark deliverability with synthetic traffic 4× per day.
+ *     smoke that runs pre-deploy, not on a cron — to avoid polluting Mailchimp
+ *     audience with synthetic traffic 4× per day.
  *   - Frontend form rendering. That is a Playwright job.
  *
  * The `health-canary` source is filtered out of Coach Hub views by
@@ -17,9 +17,11 @@
  *
  * Why this exists: 2026-05-13 — silent 13-day drought of website leads with
  * no automated detection. We had no canary on the conversion path.
+ * Updated 2026-06-12: replaced Postmark + GHL steps with Mailchimp ping.
  */
 
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { pingMailchimp } from './mailchimp'
 
 export const HEALTH_CANARY_SOURCE = 'health-canary'
 const HEALTH_CANARY_EMAIL_PREFIX = 'health-canary+'
@@ -97,43 +99,10 @@ export async function runLeadCanary(): Promise<CanaryResult> {
     throw new Error(`row not visible within ${READ_TIMEOUT_MS}ms`)
   }))
 
-  steps.push(await runStep('ghl-token', async () => {
-    const apiKey = process.env.GHL_API_KEY?.trim() || process.env.GHL_PIT_TOKEN?.trim()
-    const locationId = process.env.GHL_LOCATION_ID
-    if (!apiKey || !locationId) throw new Error('GHL_API_KEY/GHL_PIT_TOKEN or GHL_LOCATION_ID not set')
-    const res = await fetch(
-      `https://services.leadconnectorhq.com/locations/${encodeURIComponent(locationId)}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          Version: '2021-07-28',
-        },
-      }
-    )
-    if (!res.ok) {
-      const body = await res.text().catch(() => '')
-      throw new Error(`GHL location returned ${res.status}: ${body.slice(0, 120)}`)
-    }
-    return 'location reachable'
-  }))
-
-  steps.push(await runStep('postmark-token', async () => {
-    const token = process.env.POSTMARK_SERVER_TOKEN
-    if (!token) throw new Error('POSTMARK_SERVER_TOKEN not set')
-    const res = await fetch('https://api.postmarkapp.com/server', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'X-Postmark-Server-Token': token,
-      },
-    })
-    if (!res.ok) {
-      const body = await res.text().catch(() => '')
-      throw new Error(`Postmark /server returned ${res.status}: ${body.slice(0, 120)}`)
-    }
-    const json = (await res.json().catch(() => ({}))) as { Name?: string }
-    return `server "${json.Name ?? '?'}" reachable`
+  steps.push(await runStep('mailchimp-ping', async () => {
+    const result = await pingMailchimp()
+    if (!result.ok) throw new Error(result.detail)
+    return result.detail
   }))
 
   // Best-effort prune of old canary rows so the table doesn't grow forever.

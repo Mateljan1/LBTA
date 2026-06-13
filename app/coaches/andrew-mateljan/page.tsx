@@ -297,9 +297,9 @@ export default function AndrewMateljanPage() {
               <Mail className="w-5 h-5" />
               <span>andrew@tennisbeast.com</span>
             </a>
-            <a href="tel:9492410847" className="inline-flex items-center gap-3 min-h-[48px] text-white/80 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]">
+            <a href="tel:9495340457" className="inline-flex items-center gap-3 min-h-[48px] text-white/80 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-deep-water rounded-[2px]">
               <Phone className="w-5 h-5" />
-              <span>(949) 241-0847</span>
+              <span>(949) 534-0457</span>
             </a>
           </div>
           <Link

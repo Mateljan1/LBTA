@@ -6,7 +6,6 @@ import { CHAT_COPY, getChatReply } from '@/lib/chat-copy'
 import { validateAgentSecret } from '@/lib/agent-auth'
 import { storeLead } from '@/lib/leads-store'
 import { notifyChatMessage } from '@/lib/email'
-import { writeNotionLead } from '@/lib/notion-leads'
 
 /**
  * Chat widget stub: validates input, rate limits, and returns a friendly
@@ -108,7 +107,7 @@ export async function POST(request: NextRequest) {
       },
     }))
 
-    // First message only: notify academy + write to Notion
+    // First message only: notify academy
     // (avoid spamming on every back-and-forth in the same conversation)
     const isFirstMessage = history.length <= 1
     if (isFirstMessage) {
@@ -116,14 +115,6 @@ export async function POST(request: NextRequest) {
         message,
         pathname,
         messageCount: 1,
-      }))
-
-      waitUntil(writeNotionLead({
-        parentName: 'Chat Visitor',
-        email: syntheticEmail,
-        program: 'Chat Inquiry',
-        category: 'Chat',
-        notes: `Message: ${message.slice(0, 200)}${message.length > 200 ? '…' : ''}${pathname ? ` | Page: ${pathname}` : ''}`,
       }))
     }
 

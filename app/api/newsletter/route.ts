@@ -2,13 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { waitUntil } from '@vercel/functions'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { newsletterSchema, parseJsonBody, validateRequest } from '@/lib/validations'
-import { hasEnvVar } from '@/lib/env'
 import { validateAgentSecret } from '@/lib/agent-auth'
-import { upsertContact, addToList, addTag, getWebsiteSignupsListId, CAMPAIGN_TAGS } from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
-import { sendToAirtable } from '@/lib/airtable-leads'
-import { notifyNewsletter } from '@/lib/email'
-import { writeNotionLead } from '@/lib/notion-leads'
+import { upsertAndTag, buildNewsletterTags, isMailchimpConfigured } from '@/lib/mailchimp'
 
 export async function GET() {
   return NextResponse.json(
@@ -18,7 +14,6 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  // Agent auth: validate X-Agent-Secret header if present (for agent tool calls)
   const agentSecret = request.headers.get('X-Agent-Secret')
   if (agentSecret && !validateAgentSecret(request)) {
     return NextResponse.json(
@@ -70,41 +65,18 @@ export async function POST(request: NextRequest) {
 
     const { email } = validation.data
 
-    if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
-      try {
-        const result = await upsertContact({
-          email: email.trim(),
-          firstName: '',
-          lastName: '',
-        })
-
-        if (result.success && result.data?.id) {
-          const listResult = await addToList(result.data.id)
-          if (!listResult.success) {
-            console.error('[newsletter] ActiveCampaign addToList failed')
-          }
-          const websiteSignupsListId = getWebsiteSignupsListId()
-          if (websiteSignupsListId !== null) {
-            await addToList(result.data.id, websiteSignupsListId)
-          }
-          await addTag(result.data.id, CAMPAIGN_TAGS.website_registration)
-        } else {
-          console.error('[newsletter] ActiveCampaign upsert failed')
-        }
-      } catch (acError) {
-        console.error('[newsletter] ActiveCampaign error:', acError instanceof Error ? acError.message : acError)
-      }
+    // Mailchimp: primary CRM
+    if (isMailchimpConfigured()) {
+      waitUntil(upsertAndTag(
+        { email: email.trim() },
+        buildNewsletterTags()
+      ).then(r => {
+        if (!r.success) console.error('[MC] Newsletter upsert failed:', r.error)
+      }))
     }
 
-    waitUntil(writeNotionLead({
-      parentName: email.trim(),
-      email: email.trim(),
-      program: 'Newsletter Signup',
-      category: 'Newsletter',
-    }))
-    waitUntil(sendToAirtable({ name: email.trim(), email: email.trim(), category: 'newsletter', formSource: 'newsletter' }))
+    // Supabase: secondary sink
     waitUntil(storeLead({ source: 'newsletter', email: email.trim() }))
-    waitUntil(notifyNewsletter(email.trim()))
 
     return NextResponse.json({ success: true, message: 'Subscribed successfully' })
   } catch (err) {
