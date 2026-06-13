@@ -1,0 +1,25 @@
+{
+  "allison": {
+    "slug": "allison",
+    "name": "Allison Cronk",
+    "firstName": "Allison",
+    "location": "Moulton Meadows",
+    "contentType": "html",
+    "htmlPath": "/coach-hub-content/allison-2026-05-11.html"
+  },
+  "andrew": {
+    "slug": "andrew",
+    "name": "Andrew Mateljan",
+    "firstName": "Andrew",
+    "contentType": "data",
+    "dataPath": "data/coach-hub/coaching-today/andrew/2026-05-11.json"
+  },
+  "peter": {
+    "slug": "peter",
+    "name": "Peter de Frantz",
+    "firstName": "Peter",
+    "location": "Alta + LBHS",
+    "contentType": "html",
+    "htmlPath": "/coach-hub-content/peter-2026-05-11.html"
+  }
+}

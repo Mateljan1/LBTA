@@ -1,0 +1,362 @@
+<!doctype html>
+<!-- @page width="11in" height="8.5in" landscape="true" -->
+<!--
+  10 — Placement Guide
+  ====================
+  Dual-purpose: send to prospects asking "where do I belong?" + internal staff
+  reference for placement conversations. Letter landscape, single page.
+
+  Layout:
+    Top band       — title + lede
+    Left column    — Juniors · decision tree by age + program grid
+    Right column   — Adults · decision tree by experience + program grid
+    Bottom band    — Cross-program matrix (what stacks with what)
+    Foot           — internal note + external CTA + contact
+
+  Cross-program rules confirmed by Andrew 2026-05-06:
+    - Sunday UTR 3–12 + Doubles: juniors and adults play together
+    - Junior programs stay kid-only (no adult drop-ins)
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · Placement Guide</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 11in 8.5in; margin: 0; }
+    .sheet {
+      width: 11in;
+      height: 8.5in;
+      position: relative;
+      overflow: hidden;
+      background: var(--morning-light);
+    }
+
+    /* ---- Top band -------------------------------------------------------- */
+    .top {
+      padding: 12pt 30pt 6pt;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20pt;
+    }
+    .top .titles { flex: 1; }
+    .top .titles .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 7pt;
+      color: var(--victoria-cove);
+      margin-bottom: 2pt;
+    }
+    .top h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 22pt;
+      line-height: 1.05;
+      color: var(--text-heading);
+      margin: 0;
+      letter-spacing: -0.005em;
+    }
+    .top .lede {
+      font-size: 8.5pt;
+      color: var(--text-on-light);
+      max-width: 7in;
+      margin-top: 2pt;
+      line-height: 1.45;
+    }
+    .top .logo { height: 30pt; width: auto; }
+
+    /* ---- Two columns ---------------------------------------------------- */
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 4pt 30pt 0;
+      column-gap: 18pt;
+    }
+    .col h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 13pt;
+      color: var(--text-heading);
+      line-height: 1.15;
+      margin: 0 0 3pt 0;
+    }
+    .col .col-eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 7pt;
+      color: var(--sunset-cliff);
+      margin-bottom: 2pt;
+    }
+    .col .col-eyebrow.juniors { color: var(--victoria-cove); }
+    .col .col-eyebrow.adults  { color: var(--sunset-cliff); }
+
+    .decision {
+      margin: 5pt 0 6pt;
+      background: var(--sandstone);
+      border-radius: 3pt;
+      padding: 6pt 8pt;
+    }
+    .decision .label {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em; font-size: 6.5pt;
+      color: var(--text-muted);
+      margin-bottom: 3pt;
+    }
+    .decision .row {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 6pt;
+      font-size: 7.5pt;
+      line-height: 1.3;
+      padding: 1.6pt 0;
+      border-bottom: 0.4pt dotted var(--border-light);
+    }
+    .decision .row:last-child { border-bottom: none; }
+    .decision .row .when { color: var(--text-on-light); }
+    .decision .row .then {
+      font-weight: 700; color: var(--text-heading);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      font-size: 7.5pt;
+    }
+
+    .grid-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7pt;
+      margin-top: 2pt;
+      table-layout: fixed;
+    }
+    .grid-table col.c-name  { width: 28%; }
+    .grid-table col.c-meta1 { width: 16%; }
+    .grid-table col.c-meta2 { width: 24%; }
+    .grid-table col.c-also  { width: 32%; }
+    .grid-table th {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; font-size: 6pt;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 3pt 3pt 2pt;
+      border-bottom: 0.5pt solid var(--border-light);
+    }
+    .grid-table td {
+      padding: 2.5pt 3pt;
+      vertical-align: top;
+      border-bottom: 0.4pt solid var(--divider-light);
+      line-height: 1.35;
+      word-wrap: break-word;
+    }
+    .grid-table tr:last-child td { border-bottom: none; }
+    .grid-table .name {
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+    .grid-table .meta { color: var(--text-muted); font-size: 6.5pt; }
+    .grid-table .also { color: var(--text-on-light); font-size: 6.5pt; }
+
+    /* ---- Cross-program band --------------------------------------------- */
+    .cross-band {
+      margin: 8pt 30pt 0;
+      background: var(--deep-water);
+      color: var(--text-on-dark);
+      border-radius: 3pt;
+      padding: 8pt 14pt 6pt;
+    }
+    .cross-band .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4pt;
+    }
+    .cross-band .head .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 7pt;
+      color: var(--gold);
+    }
+    .cross-band .head h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 11pt;
+      color: #FFFFFF;
+      margin: 0;
+    }
+    .cross-band .matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20pt;
+      row-gap: 1pt;
+    }
+    .cross-band .row {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6pt;
+      font-size: 6.8pt;
+      line-height: 1.35;
+      padding: 2pt 0;
+      border-bottom: 0.4pt solid rgba(245,240,229,0.14);
+    }
+    .cross-band .row:nth-last-child(-n+2) { border-bottom: none; }
+    .cross-band .row .profile {
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    .cross-band .row .stacks {
+      color: rgba(245,240,229,0.86);
+    }
+
+    /* ---- Foot — in flow, not absolute ---------------------------------- */
+    .foot {
+      margin: 6pt 30pt 0;
+      padding: 5pt 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 6.5pt;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .foot .reply {
+      color: var(--victoria-cove);
+      font-weight: 700;
+    }
+    .foot .tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic; font-weight: 400;
+      font-size: 9pt;
+      color: var(--gold-deep);
+      letter-spacing: normal;
+      text-transform: none;
+    }
+  </style>
+</head>
+<body>
+<div class="sheet">
+  <span class="horizon-bar h-med" style="position:absolute; top:0; left:0;"></span>
+
+  <!-- ─────────────── TOP ─────────────── -->
+  <div class="top">
+    <div class="titles">
+      <div class="eyebrow">Placement Guide · Spring 2026</div>
+      <h1>Find your level. Know what stacks with it.</h1>
+      <div class="lede">
+        A quick map for "where do I belong?" — by age for juniors, by experience for adults.
+        Plus the cross-program matrix: which open-court classes, leagues, and match-play
+        formats fit each tier.
+      </div>
+    </div>
+    <img class="logo" src="../assets/logos/LBTAblktext.png" alt="LBTA" />
+  </div>
+
+  <!-- ─────────────── COLUMNS ─────────────── -->
+  <div class="columns">
+
+    <!-- =============== JUNIORS =============== -->
+    <div class="col">
+      <div class="col-eyebrow juniors">Juniors · by age</div>
+      <h2>Where to start.</h2>
+
+      <div class="decision">
+        <div class="label">Decision tree</div>
+        {% for r in placement.junior_decision %}
+        <div class="row">
+          <span class="when">{{ r.if }}</span>
+          <span class="then">{{ r.go_to }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <table class="grid-table">
+        <colgroup>
+          <col class="c-name" /><col class="c-meta1" /><col class="c-meta2" /><col class="c-also" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th>Ages / level</th>
+            <th>Where &amp; when</th>
+            <th>Also fits</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in placement.junior_grid %}
+          <tr>
+            <td class="name">{{ p.program }}</td>
+            <td class="meta">{{ p.ages }}</td>
+            <td class="meta">{{ p.where }}</td>
+            <td class="also">{{ p.also }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- =============== ADULTS =============== -->
+    <div class="col">
+      <div class="col-eyebrow adults">Adults · by experience</div>
+      <h2>Where to start.</h2>
+
+      <div class="decision">
+        <div class="label">Decision tree</div>
+        {% for r in placement.adult_decision %}
+        <div class="row">
+          <span class="when">{{ r.if }}</span>
+          <span class="then">{{ r.go_to }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <table class="grid-table">
+        <colgroup>
+          <col class="c-name" /><col class="c-meta1" /><col class="c-meta2" /><col class="c-also" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th>Level</th>
+            <th>Where &amp; when</th>
+            <th>Also fits</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in placement.adult_grid %}
+          <tr>
+            <td class="name">{{ p.program }}</td>
+            <td class="meta">{{ p.level }}</td>
+            <td class="meta">{{ p.where }}</td>
+            <td class="also">{{ p.also }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ─────────────── CROSS-PROGRAM BAND ─────────────── -->
+  <div class="cross-band">
+    <div class="head">
+      <span class="eyebrow">Cross-program · what stacks</span>
+      <h3>One enrollment opens the door to several formats.</h3>
+    </div>
+    <div class="matrix">
+      {% for r in placement.cross_program %}
+      <div class="row">
+        <span class="profile">{{ r.profile }}</span>
+        <span class="stacks">{{ r.stacks_with }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- ─────────────── FOOT ─────────────── -->
+  <div class="foot">
+    <span class="tagline">Movement. Craft. Community.</span>
+    <span><span class="reply">Not sure?</span> Reply to support@lagunabeachtennisacademy.com · (949) 534-0457 · First session is on us.</span>
+    <span>Official City of Laguna Beach Tennis Partner since 2020</span>
+  </div>
+
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+</body>
+</html>

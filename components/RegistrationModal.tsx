@@ -438,7 +438,7 @@ export default function RegistrationModal({
                         We&apos;ll Handle It
                       </p>
                       <p className="font-sans text-[13px] text-white/55">
-                        Share your details and we&apos;ll get you registered within 24 hours.
+                        Share your details and we&apos;ll help you complete City registration.
                       </p>
                     </div>
                     <span className="shrink-0 font-sans text-[13px] font-medium text-white/70" aria-hidden="true">→</span>
@@ -447,7 +447,7 @@ export default function RegistrationModal({
               </div>
 
               <p className="font-sans text-[11px] text-white/60 leading-relaxed">
-                All registration goes through the City of Laguna Beach recreation department.
+                Spot confirmation happens after payment in the City of Laguna Beach registration system.
               </p>
             </div>
           )}
@@ -462,7 +462,7 @@ export default function RegistrationModal({
               <h2 className="font-headline text-[22px] font-medium text-white mb-2">
                 Opening city site…
               </h2>
-              <p className="font-sans text-[13px] text-white/65 max-w-[320px]">
+                <p className="font-sans text-[13px] text-white/65 max-w-[320px]">
                 The City of Laguna Beach registration page should be opening in a new tab. Complete your payment there
                 and then return here.
               </p>
@@ -730,13 +730,13 @@ export default function RegistrationModal({
                   </svg>
                 </div>
                 <h2 className="font-headline text-[24px] md:text-[26px] font-medium text-white mb-2">
-                  You&apos;re registered.
+                  Request received.
                 </h2>
                 <p className="font-sans text-[14px] text-white/65 max-w-[360px] leading-relaxed">
                   {path === 'a' ? (
-                    <>Complete payment on the city site — the tab should be open.</>
+                    <>Complete payment on the City site to lock your spot — the tab should be open.</>
                   ) : (
-                    <>We&apos;ll reach out within 24 hours to confirm your spot.</>
+                    <>We&apos;ll reach out within 24 hours to help you complete City payment and lock your spot.</>
                   )}
                 </p>
               </div>

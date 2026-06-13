@@ -1,0 +1,169 @@
+<!doctype html>
+<!-- @page width="7in" height="5in" landscape="true" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · 5×7 Postcard</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 7in 5in; margin: 0; }
+    .sheet { width: 7in; height: 5in; position: relative; overflow: hidden; }
+
+    /* FRONT */
+    .front { background: #0F2237; color: rgba(255,255,255,0.86); }
+    .front .hero { position: absolute; inset: 0; }
+    .front .hero img { width: 100%; height: 100%; object-fit: cover; }
+    .front .hero::after { content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(11,17,32,0.45) 0%, rgba(11,17,32,0.72) 55%, rgba(11,17,32,0.92) 100%); }
+    .front .content { position: relative; z-index: 2; padding: 30pt 36pt 28pt; height: 100%;
+      display: flex; flex-direction: column; justify-content: space-between; }
+    .front .top { display: flex; justify-content: space-between; align-items: center; }
+    .front .top .eyebrow { color: rgba(245,240,229,0.78); }
+    .front .top img { height: 38pt; width: auto; }
+    .front .display { color: #FFFFFF; font-size: 36pt; font-weight: 300; line-height: 1.04; max-width: 5.6in;
+      font-family: 'Cormorant Garamond', Georgia, serif; }
+    .front .pillars { color: var(--gold); font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic; font-size: 13pt; margin-top: 4pt; }
+    .front .strip { display: flex; justify-content: space-between; align-items: end; }
+    .front .strip .cta { font-family: var(--font-body); font-weight: 700; text-transform: uppercase;
+      font-size: 9pt; letter-spacing: 0.18em; color: var(--gold); }
+
+    /* BACK */
+    .back { background: #FAF8F4; color: var(--text-on-light); padding: 26pt 30pt; }
+    .back .grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20pt; height: 100%; }
+    .back h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      color: var(--text-heading); font-size: 22pt; line-height: 1.12; margin: 0 0 4pt 0; }
+    .back .col h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 12pt; margin: 8pt 0 4pt; color: var(--pacific-dusk); }
+    .back .row { display: flex; justify-content: space-between; gap: 8pt;
+      font-size: 8.5pt; padding: 3pt 0; border-bottom: 0.5pt solid var(--divider-light); }
+    .back .row:last-child { border-bottom: none; }
+    .back .name { font-weight: 600; color: var(--text-heading); }
+    .back .price { font-variant-numeric: tabular-nums; color: var(--gold-deep); font-weight: 700; }
+    .back .footer { display: flex; justify-content: space-between; align-items: end; margin-top: 12pt; }
+    .back .contact { font-size: 8pt; line-height: 1.55; }
+    .back .contact strong { color: var(--text-heading); }
+    .back .city { color: var(--text-muted); font-size: 7pt; margin-top: 4pt; }
+    .back .logo { height: 40pt; width: auto; }
+  </style>
+</head>
+<body>
+
+<!-- ─────────────── FRONT ─────────────── -->
+<div class="sheet front">
+  <span class="horizon-bar h-thick" style="position:absolute; top:0; left:0; z-index:3;"></span>
+  <div class="hero"><img src="../assets/photos/hero-courts-sunset.jpg" alt="" /></div>
+  <div class="content">
+    <div class="top">
+      <img src="../assets/logos/LBTAwhttext.png" alt="Laguna Beach Tennis Academy" />
+      <span class="eyebrow">Movement. Craft. Community.</span>
+    </div>
+    <div>
+      <div class="display">Tennis,<br/>as it should<br/>be taught.</div>
+      <div class="pillars">Movement. Craft. Community.</div>
+    </div>
+    <div class="strip">
+      <span class="eyebrow" style="color: rgba(245,240,229,0.65);">Official City of Laguna Beach Tennis Partner Since 2020</span>
+      <span class="cta">Book a Trial · lagunabeachtennisacademy.com/book</span>
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0; z-index:3;"></span>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────── BACK ─────────────── -->
+<div class="sheet back">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+
+  <div class="grid">
+    <div class="col">
+      <span class="eyebrow">Programs · Spring 2026</span>
+      <h2>A pathway from age three<br/>through college tennis.</h2>
+
+      <h3>Junior pathway</h3>
+      <div class="row">
+        <span class="name">Little Tennis Stars · 3-4</span>
+        <span class="price">$120/mo</span>
+      </div>
+      <div class="row">
+        <span class="name">Red Ball · 5-6</span>
+        <span class="price">$420 / season</span>
+      </div>
+      <div class="row">
+        <span class="name">Orange Ball · 7-8</span>
+        <span class="price">$420 / season</span>
+      </div>
+      <div class="row">
+        <span class="name">Green Dot · 9-11</span>
+        <span class="price">$420 / season</span>
+      </div>
+
+      <h3>Adult programs</h3>
+      <div class="row">
+        <span class="name">New to Tennis</span>
+        <span class="price">$420 / season · $55 drop-in</span>
+      </div>
+      <div class="row">
+        <span class="name">Beyond Beginner</span>
+        <span class="price">$420 / season · $55 drop-in</span>
+      </div>
+      <div class="row">
+        <span class="name">Adult Intermediate</span>
+        <span class="price">$580 / season · $70 drop-in</span>
+      </div>
+      <div class="row">
+        <span class="name">Adult Advanced</span>
+        <span class="price">$625 / season · $90 drop-in</span>
+      </div>
+      <div class="row">
+        <span class="name">LiveBall · Cardio Tennis</span>
+        <span class="price">$150/mo · $50 drop-in</span>
+      </div>
+    </div>
+
+    <div class="col">
+      <span class="eyebrow eyebrow-warm">Locations</span>
+      <h3 style="margin-top:6pt;">Three city parks. Twelve courts.</h3>
+      <div class="row" style="border:none; padding:2pt 0;">
+        <span class="name">Moulton Meadows Park</span>
+      </div>
+      <div style="font-size: 7.5pt; color: var(--text-muted); margin: -2pt 0 4pt 0;">
+        Balboa Ave &amp; Capistrano Ave · Youth &amp; beginners
+      </div>
+      <div class="row" style="border:none; padding:2pt 0;">
+        <span class="name">Alta Laguna Park</span>
+      </div>
+      <div style="font-size: 7.5pt; color: var(--text-muted); margin: -2pt 0 4pt 0;">
+        3300 Alta Laguna Blvd · Junior development &amp; UTR weekends
+      </div>
+      <div class="row" style="border:none; padding:2pt 0;">
+        <span class="name">Laguna Beach High School</span>
+      </div>
+      <div style="font-size: 7.5pt; color: var(--text-muted); margin: -2pt 0 4pt 0;">
+        625 Park Ave · High Performance · LiveBall · Camps
+      </div>
+
+      <div style="margin-top: 14pt;">
+        <span class="eyebrow eyebrow-gold">Coaches</span>
+        <div style="font-size: 8.5pt; line-height: 1.55; margin-top: 4pt;">
+<strong>Andrew Mateljan</strong> · Founder &amp; Director of Tennis<br/><strong>Peter DeFrantz</strong> · Head Coach, Junior Development<br/><strong>Allison Cronk</strong> · Head Coach, Youth Programs<br/>        </div>
+      </div>
+
+      <div class="footer">
+        <div class="contact">
+          <strong>lagunabeachtennisacademy.com</strong><br/>
+          (949) 534-0457<br/>
+          support@lagunabeachtennisacademy.com
+          <div class="city">Official City of Laguna Beach Tennis Partner Since 2020</div>
+        </div>
+        <img class="logo" src="../assets/logos/LBTAblktext.png" alt="LBTA" />
+      </div>
+    </div>
+  </div>
+
+  <span class="horizon-bar h-med" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+
+</body>
+</html>

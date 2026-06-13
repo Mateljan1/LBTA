@@ -1,0 +1,1116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LBTA — Source of Truth Verification Checklist v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --pacific-dusk:#1B3A5C;
+    --deep-water:#0F2237;
+    --victoria-cove:#2E8B8B;
+    --thousand-steps:#C4963C;
+    --sunset-cliff:#E8834A;
+    --sandstone:#F5F0E5;
+    --morning-light:#FAF8F4;
+    --salt-air:#FFFFFF;
+    --tide-pool:#3A8B6E;
+    --driftwood:#B8A88A;
+    --line:rgba(27,58,92,.12);
+    --line-strong:rgba(27,58,92,.28);
+    --shadow-sm:0 1px 2px rgba(15,34,55,.04),0 2px 6px rgba(15,34,55,.04);
+    --shadow-md:0 2px 4px rgba(15,34,55,.05),0 8px 20px rgba(15,34,55,.06);
+    --radius:4px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--morning-light);color:var(--pacific-dusk);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:'Cormorant',Georgia,serif;font-weight:500;color:var(--pacific-dusk);margin:0 0 .5rem;letter-spacing:-.005em}
+  h1{font-size:clamp(32px,4.6vw,48px);line-height:1.1}
+  h2{font-size:clamp(24px,2.8vw,32px);line-height:1.15}
+  .eyebrow{font-family:'DM Sans',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--victoria-cove);font-weight:500}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:rgba(27,58,92,.06);padding:1px 6px;border-radius:3px}
+  pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.5;background:rgba(15,34,55,.05);color:var(--pacific-dusk);padding:14px 16px;border-radius:var(--radius);overflow-x:auto;margin:0;white-space:pre-wrap;word-break:break-word}
+  a{color:var(--victoria-cove);text-decoration:none;border-bottom:1px solid rgba(46,139,139,.3)}
+
+  /* ===== Hero ===== */
+  header.hero{
+    background:
+      radial-gradient(900px 400px at 85% -10%, rgba(46,139,139,.18), transparent 60%),
+      linear-gradient(180deg,var(--deep-water),#13304e);
+    color:var(--salt-air);padding:56px 28px 44px;
+  }
+  header.hero .wrap{max-width:1100px;margin:0 auto}
+  header.hero h1{color:var(--salt-air)}
+  header.hero h1 .accent{color:var(--thousand-steps);font-style:italic}
+  header.hero .eyebrow{color:rgba(255,255,255,.7)}
+  header.hero p.lede{max-width:820px;color:rgba(255,255,255,.82);font-size:17px;margin-top:10px}
+
+  .progress-panel{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);
+    padding:20px;
+  }
+  @media (min-width:640px){ .progress-panel{grid-template-columns:repeat(5,1fr)} }
+  .progress-panel .stat{border-left:2px solid var(--thousand-steps);padding-left:14px}
+  .progress-panel .v{font-family:'Cormorant';font-size:28px;line-height:1;color:var(--salt-air);font-weight:500}
+  .progress-panel .k{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.65);margin-top:6px;display:block}
+  .bar{grid-column:1/-1;margin-top:4px}
+  .bar .track{background:rgba(255,255,255,.1);height:6px;border-radius:999px;overflow:hidden}
+  .bar .fill{height:100%;background:linear-gradient(90deg,var(--victoria-cove),var(--thousand-steps),var(--tide-pool));transition:width .3s ease}
+
+  /* Toolbar */
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;align-items:center}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;font-size:13px;
+    font-weight:500;letter-spacing:1.2px;text-transform:uppercase;
+    padding:10px 18px;border-radius:2px;border:1px solid transparent;cursor:pointer;
+    transition:all .2s ease;min-height:44px;
+  }
+  .btn-primary{background:var(--salt-air);color:var(--pacific-dusk)}
+  .btn-primary:hover{background:var(--thousand-steps);color:var(--salt-air)}
+  .btn-ghost{background:transparent;color:var(--salt-air);border-color:rgba(255,255,255,.3)}
+  .btn-ghost:hover{border-color:var(--salt-air)}
+  .btn-filter{background:var(--sandstone);color:var(--pacific-dusk);border-color:var(--line)}
+  .btn-filter.active{background:var(--pacific-dusk);color:var(--salt-air);border-color:var(--pacific-dusk)}
+  .btn-filter:hover:not(.active){border-color:var(--line-strong)}
+  .saved-flash{display:inline-block;margin-left:6px;font-size:11.5px;color:var(--tide-pool);letter-spacing:1.2px;text-transform:uppercase;opacity:0;transition:opacity .3s ease}
+  .saved-flash.show{opacity:1}
+
+  /* Main */
+  main{max-width:1100px;margin:0 auto;padding:40px 28px 80px}
+  .filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+  .filter-row .btn-filter{font-size:12px;padding:8px 14px;min-height:36px}
+
+  /* Item card */
+  .item{
+    background:var(--salt-air);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow-sm);margin-bottom:22px;overflow:hidden;position:relative;
+    border-left:3px solid var(--line-strong);
+    transition:border-color .25s ease;
+  }
+  .item.state-approved{border-left-color:var(--tide-pool)}
+  .item.state-edited{border-left-color:var(--sunset-cliff)}
+  .item.state-flagged{border-left-color:var(--thousand-steps)}
+
+  .item .head{padding:22px 24px 8px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+  .item h3{font-size:20px;margin:0;flex:1;min-width:0;line-height:1.25}
+  .pills{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+  .pill{
+    display:inline-flex;align-items:center;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;
+    padding:4px 10px;border-radius:999px;font-weight:600;border:1px solid var(--line);
+    background:var(--sandstone);color:var(--pacific-dusk);
+  }
+  .pill.sev-p0{background:rgba(232,131,74,.14);color:#8a3d12;border-color:rgba(232,131,74,.35)}
+  .pill.sev-p1{background:rgba(196,150,60,.14);color:#7a5a17;border-color:rgba(196,150,60,.35)}
+  .pill.sev-p2{background:rgba(46,139,139,.12);color:#1e5a5a;border-color:rgba(46,139,139,.3)}
+  .item .meta{padding:0 24px 12px;font-size:12.5px;color:rgba(27,58,92,.7)}
+  .item .meta code{font-size:11.5px}
+
+  /* Compare + replacement */
+  .compare{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+  @media (min-width:720px){ .compare{grid-template-columns:1fr 1fr} }
+  .compare .cell{padding:16px 24px;background:var(--morning-light)}
+  .compare .cell:first-child{border-bottom:1px solid var(--line)}
+  @media (min-width:720px){
+    .compare .cell:first-child{border-bottom:0;border-right:1px solid var(--line)}
+  }
+  .compare .cell.is-now{background:rgba(46,139,139,.06)}
+  .compare .cell.should-be{background:rgba(196,150,60,.07)}
+  .label{font-size:10.5px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;display:flex;align-items:center;gap:6px;margin-bottom:6px}
+  .compare .is-now .label{color:var(--victoria-cove)}
+  .compare .should-be .label{color:#7a5a17}
+  .val{font-size:14.5px;color:var(--pacific-dusk);line-height:1.5;word-break:break-word}
+
+  /* Proposed replacement */
+  .replacement{padding:18px 24px;background:#fefcf6;border-top:2px solid var(--thousand-steps);border-bottom:1px solid var(--line)}
+  .replacement .label{color:#7a5a17;margin-bottom:8px}
+  .replacement .label .tag{margin-left:auto;font-family:'DM Sans';font-size:10px;background:var(--thousand-steps);color:var(--salt-air);padding:2px 8px;border-radius:999px;letter-spacing:1.2px}
+  .replacement .proposed-text{background:var(--salt-air);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:14px 16px;font-size:14.5px;line-height:1.55;color:var(--pacific-dusk);white-space:pre-wrap;word-break:break-word}
+  .replacement .proposed-text.code-block{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.5;background:rgba(15,34,55,.04)}
+  .replacement .proposed-text.awaiting{font-style:italic;color:rgba(27,58,92,.6);background:rgba(196,150,60,.08);border-color:rgba(196,150,60,.3)}
+  .replacement .note{font-size:12.5px;color:rgba(27,58,92,.65);margin-top:8px;line-height:1.45}
+
+  /* Edit textarea (when replacing) */
+  .edit-box{display:none;padding:16px 24px 0;background:#fefcf6}
+  .item.mode-edit .edit-box{display:block}
+  .edit-box label{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;color:var(--pacific-dusk);margin-bottom:6px;display:block}
+  .edit-box textarea{width:100%;min-height:110px;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;padding:12px 14px;background:var(--salt-air);border:1px solid var(--line-strong);border-radius:var(--radius);color:var(--pacific-dusk);resize:vertical}
+  .edit-box textarea.code-mode{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+  .edit-box textarea:focus{outline:2px solid var(--victoria-cove);outline-offset:1px;border-color:var(--victoria-cove)}
+  .edit-box .hint{font-size:12px;color:rgba(27,58,92,.65);margin:6px 0 0}
+
+  /* Flag note */
+  .flag-box{display:none;padding:16px 24px 0;background:rgba(196,150,60,.08)}
+  .item.mode-flag .flag-box{display:block}
+  .flag-box label{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;color:#7a5a17;margin-bottom:6px;display:block}
+  .flag-box input[type=text]{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;background:var(--salt-air);border:1px solid var(--line-strong);border-radius:var(--radius);color:var(--pacific-dusk)}
+  .flag-box input:focus{outline:2px solid var(--thousand-steps);outline-offset:1px;border-color:var(--thousand-steps)}
+
+  /* Actions */
+  .actions{padding:18px 24px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;background:var(--salt-air)}
+  .btn-ans{
+    flex:1;min-width:130px;min-height:44px;
+    background:var(--salt-air);color:var(--pacific-dusk);border:1.5px solid var(--line-strong);
+    font-family:'DM Sans',sans-serif;font-size:12.5px;letter-spacing:1.2px;text-transform:uppercase;font-weight:500;
+    padding:10px 14px;border-radius:2px;cursor:pointer;transition:all .15s ease;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .btn-ans .dot-ic{width:10px;height:10px;border-radius:50%;background:currentColor;opacity:.45}
+  .btn-ans.active .dot-ic{opacity:1;background:var(--salt-air)}
+  .btn-ans.sel-approve.active{background:var(--tide-pool);color:var(--salt-air);border-color:var(--tide-pool)}
+  .btn-ans.sel-edit.active{background:var(--sunset-cliff);color:var(--salt-air);border-color:var(--sunset-cliff)}
+  .btn-ans.sel-flag.active{background:var(--thousand-steps);color:var(--salt-air);border-color:var(--thousand-steps)}
+  .btn-ans:hover:not(.active){border-color:var(--pacific-dusk)}
+
+  .status-note{padding:10px 24px;background:var(--sandstone);font-size:12.5px;color:rgba(27,58,92,.75);border-top:1px solid var(--line);display:none}
+  .item.has-status .status-note{display:block}
+
+  /* Footer */
+  footer{background:var(--deep-water);color:rgba(255,255,255,.7);padding:36px 28px}
+  footer .wrap{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px}
+  footer em{font-style:italic;color:rgba(255,255,255,.55)}
+
+  /* Mobile */
+  @media (max-width:640px){
+    header.hero{padding:40px 18px 32px}
+    main{padding:28px 18px 60px}
+    .item .head{padding:18px 18px 8px}
+    .item .meta{padding:0 18px 10px}
+    .compare .cell{padding:14px 18px}
+    .replacement{padding:14px 18px}
+    .edit-box, .flag-box{padding:12px 18px 0}
+    .actions{padding:14px 18px}
+    .status-note{padding:10px 18px}
+    .btn-ans{min-width:100px;padding:10px 10px;font-size:11.5px}
+    .progress-panel{grid-template-columns:repeat(2,1fr);gap:12px;padding:16px}
+    .progress-panel .v{font-size:22px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Source of truth · Checklist v2 · April 16, 2026</span>
+    <h1>Review the replacement<br><span class="accent">before we ship it.</span></h1>
+    <p class="lede">Each item shows what the website says today, what it should be, and the <strong>exact replacement copy or code</strong> we will deploy. Approve it, edit it, or flag it — nothing goes live until you do. Answers save automatically to this browser.</p>
+
+    <div class="progress-panel" aria-live="polite">
+      <div class="stat"><div class="v" id="stat-total">0</div><span class="k">Total items</span></div>
+      <div class="stat"><div class="v" id="stat-approved">0</div><span class="k">Approved</span></div>
+      <div class="stat"><div class="v" id="stat-edited">0</div><span class="k">Edited</span></div>
+      <div class="stat"><div class="v" id="stat-flagged">0</div><span class="k">Flagged</span></div>
+      <div class="stat"><div class="v" id="stat-remaining">0</div><span class="k">Pending</span></div>
+      <div class="bar"><div class="track"><div class="fill" id="progress-fill" style="width:0%"></div></div></div>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn btn-primary" id="btn-export" type="button">Export report (.md)</button>
+      <button class="btn btn-ghost" id="btn-reset" type="button">Reset all answers</button>
+      <span class="saved-flash" id="saved-flash">Saved</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="filter-row" role="tablist" aria-label="Filter by group">
+    <button class="btn btn-filter active" data-filter="all" type="button">All</button>
+    <button class="btn btn-filter" data-filter="p0" type="button">P0 · ship this week</button>
+    <button class="btn btn-filter" data-filter="p1" type="button">P1 · this month</button>
+    <button class="btn btn-filter" data-filter="seo" type="button">SEO</button>
+    <button class="btn btn-filter" data-filter="contact" type="button">Contact</button>
+    <button class="btn btn-filter" data-filter="dates" type="button">Dates</button>
+    <button class="btn btn-filter" data-filter="pricing" type="button">Pricing</button>
+    <button class="btn btn-filter" data-filter="stats" type="button">Stats</button>
+    <button class="btn btn-filter" data-filter="claims" type="button">Claims</button>
+    <button class="btn btn-filter" data-filter="team" type="button">Team</button>
+    <button class="btn btn-filter" data-filter="remaining" type="button">Pending only</button>
+  </div>
+
+  <div id="items"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>LBTA · Source of truth verification v2 · Linked to <em>2026-04-16-seo-audit-review-and-checklist-v2.md</em></p>
+    <p><em>Movement · Craft · Community</em></p>
+  </div>
+</footer>
+
+<script>
+  // ===== Data =====
+  // mode: 'text' (plain copy), 'code' (monospace, preserve), 'awaiting' (need user input)
+  // severity: 'p0' | 'p1' | 'p2'
+  const CHECKLIST = [
+
+    // ========== P0 — SEO audit verified + new findings ==========
+    {
+      id: 'phone-placeholder-adult-trial',
+      category: 'seo', severity: 'p0',
+      title: 'Placeholder phone on /adult-trial',
+      source: 'app/adult-trial/page.tsx · contains (949) 123-4567',
+      isNow: '(949) 123-4567 — literal placeholder in trial conversion page',
+      shouldBe: 'The real business phone a new adult lead calls.',
+      proposedMode: 'text',
+      proposed: '(949) 534-0457',
+      note: 'Applies site-wide to all pages where the placeholder exists. This is a broken conversion path — fixes 3 pages (adult-trial, beginner-program, apply-scholarship) in one PR.'
+    },
+    {
+      id: 'phone-placeholder-beginner',
+      category: 'seo', severity: 'p0',
+      title: 'Placeholder phone on /beginner-program',
+      source: 'app/beginner-program/page.tsx · contains (949) 123-4567',
+      isNow: '(949) 123-4567 — literal placeholder on the beginner conversion page',
+      shouldBe: 'The real business phone a new beginner lead calls.',
+      proposedMode: 'text',
+      proposed: '(949) 534-0457',
+      note: 'Same fix as /adult-trial.'
+    },
+    {
+      id: 'phone-placeholder-scholarship',
+      category: 'seo', severity: 'p0',
+      title: 'Placeholder phone on /apply-scholarship',
+      source: 'app/apply-scholarship/page.tsx · contains (949) 123-4567',
+      isNow: '(949) 123-4567 — literal placeholder on scholarship application page',
+      shouldBe: 'The real business phone a scholarship applicant calls.',
+      proposedMode: 'text',
+      proposed: '(949) 534-0457',
+      note: 'Scholarship applicants are the most vulnerable leads to lose from a bad phone — highest urgency.'
+    },
+    {
+      id: 'robots-txt-disallow',
+      category: 'seo', severity: 'p0',
+      title: 'robots.txt is blocking revenue pages from Google',
+      source: 'public/robots.txt — Disallow includes /beginner-program, /adult-trial, /junior-trial, /philosophy, /success-stories',
+      isNow: `User-agent: *
+Allow: /
+Disallow: /vylo
+Disallow: /vylo-apply
+Disallow: /beginner-program
+Disallow: /adult-trial
+Disallow: /junior-trial
+Disallow: /pricing
+Disallow: /philosophy
+Disallow: /success-stories
+
+Sitemap: https://lagunabeachtennisacademy.com/sitemap.xml`,
+      shouldBe: 'Block only legacy / redirected routes. Allow Google to crawl trial landing pages, philosophy, and success stories — these are high-intent + trust pages.',
+      proposedMode: 'code',
+      proposed: `User-agent: *
+Allow: /
+
+# Legacy / discontinued programs
+Disallow: /vylo
+Disallow: /vylo-apply
+
+# Internal / admin surfaces
+Disallow: /coach-hub
+Disallow: /utr-tracker/admin
+Disallow: /print/
+
+Sitemap: https://lagunabeachtennisacademy.com/sitemap.xml`,
+      note: 'IMPORTANT: The SEO audit claimed the sitemap URL was wrong — it is not. The real issue is that our trial landing pages and philosophy/success-stories pages are currently blocked from Google. This likely explains any underperformance on "adult tennis lessons Laguna Beach" and similar searches.'
+    },
+    {
+      id: 'canonical-tags',
+      category: 'seo', severity: 'p0',
+      title: 'Zero canonical tags site-wide',
+      source: 'All app/**/page.tsx — no alternates.canonical in any metadata export',
+      isNow: 'Next.js metadata exports do not include alternates.canonical on any page. Google may treat duplicate-ish URLs as competing (e.g. /high-performance-pathway vs /programs/high-performance).',
+      shouldBe: 'Every page has a self-referencing canonical so Google knows the official URL for its content.',
+      proposedMode: 'code',
+      proposed: `// app/layout.tsx — add once, covers every page
+export const metadata: Metadata = {
+  // ...existing
+  metadataBase: new URL('https://lagunabeachtennisacademy.com'),
+  alternates: {
+    canonical: '/', // root default
+  },
+};
+
+// Each page can override with its own path:
+// e.g. app/programs/junior/page.tsx
+export const metadata: Metadata = {
+  title: '...',
+  alternates: { canonical: '/programs/junior' },
+};`,
+      note: 'Implemented in one PR: set metadataBase in root layout, then add alternates.canonical per page. ~1–2 hours of work, blocks duplicate-content risk site-wide.'
+    },
+    {
+      id: 'camps-metadata',
+      category: 'seo', severity: 'p0',
+      title: '/camps has no exported metadata (inherits generic title)',
+      source: 'app/camps/page.tsx — no export const metadata found',
+      isNow: 'Title falls back to the root layout default: "Laguna Beach Tennis Academy | Tennis, as it should be taught." Meta description is the generic site description. No page-specific canonical.',
+      shouldBe: 'Dedicated camp-specific title, meta description, and canonical that match the summer camps product.',
+      proposedMode: 'code',
+      proposed: `// Add to app/camps/page.tsx (top of file, after imports)
+export const metadata: Metadata = {
+  title: 'Summer Tennis Camp 2026 | Ages 5-11 | Laguna Beach',
+  description: 'Tennis, Splash Wars, field games and weekly themes at Alta Laguna Park. Mon-Thu, June-August. Full-day $495/week, half-day $325/week.',
+  alternates: { canonical: '/camps' },
+  openGraph: {
+    title: 'Summer Tennis Camp 2026 | Laguna Beach',
+    description: 'Ages 5-11. Mon-Thu. Full-day $495/week, half-day $325/week.',
+    url: 'https://lagunabeachtennisacademy.com/camps',
+    type: 'website',
+  },
+};`,
+      note: 'Blocked by the operational-consistency audit: confirm June 15 vs June 16 start and Aug 19 vs Aug 28 vs Aug 29 end before this description goes live. Current copy below uses June 16–Aug 19 to match the existing on-page text; change before ship if source-of-truth dates differ.'
+    },
+    {
+      id: 'noindex-leaking-routes',
+      category: 'seo', severity: 'p0',
+      title: 'Admin + utility routes are indexable',
+      source: '/thank-you, /schedules/calendar, /utr-tracker/admin, /utr-tracker/admin/login, /coaches/michelle-mateljan',
+      isNow: 'Each of these routes returns HTTP 200 and can be indexed. Admin login pages and post-form confirmations should never appear in Google.',
+      shouldBe: 'Each page has robots: { index: false, follow: false } in its metadata export (matching the pattern already used in app/coach-hub/layout.tsx).',
+      proposedMode: 'code',
+      proposed: `// Add to each page's metadata export (or its layout if it has one):
+export const metadata: Metadata = {
+  title: '...',              // keep whatever the page title should be
+  robots: { index: false, follow: false },
+};
+
+// Pages to patch:
+// - app/thank-you/page.tsx
+// - app/schedules/calendar/page.tsx
+// - app/utr-tracker/admin/page.tsx
+// - app/utr-tracker/admin/login/page.tsx
+// - app/coaches/michelle-mateljan/page.tsx   (see separate item — confirm status first)`,
+      note: '/coaches/michelle-mateljan needs an explicit decision before we noindex or remove the page — flag that item separately below.'
+    },
+    {
+      id: 'michelle-mateljan-status',
+      category: 'team', severity: 'p1',
+      title: 'Michelle Mateljan coach profile — active or departed?',
+      source: 'app/coaches/michelle-mateljan/page.tsx + data/coaches.json + lib/coaches-data.ts all reference her',
+      isNow: 'Page is live and indexable at /coaches/michelle-mateljan. The SEO audit flags her as departed; we need confirmation before we act.',
+      shouldBe: 'A clear status: (a) active coach — keep page, add to sitemap; (b) departed — delete the page and data entries; (c) on pause — noindex + redirect to /coaches.',
+      proposedMode: 'awaiting',
+      proposed: '',
+      note: 'Tell us (a), (b), or (c). If she is still coaching, we add her back to sitemap.ts. If not, we delete the page, the data/coaches.json entry, the lib/coaches-data.ts entry, and 301 /coaches/michelle-mateljan → /coaches.'
+    },
+    {
+      id: 'hp-pathway-duplicate',
+      category: 'seo', severity: 'p1',
+      title: 'Duplicate content: /high-performance-pathway vs /programs/high-performance',
+      source: 'Both routes return HTTP 200 with overlapping content and no canonical to resolve',
+      isNow: 'Two separate pages both describing High Performance training, each indexable, competing with each other in Google.',
+      shouldBe: 'One primary page at /programs/high-performance. The landing /high-performance-pathway either becomes a thin marketing variant that canonicals to the primary, or is removed and 301-redirected.',
+      proposedMode: 'code',
+      proposed: `// Option A (preferred): 301 redirect. Add to next.config.js redirects() array:
+{
+  source: '/high-performance-pathway',
+  destination: '/programs/high-performance',
+  permanent: true,
+},
+
+// Option B: Keep /high-performance-pathway as a conversion landing but canonical to the hub:
+// app/high-performance-pathway/page.tsx
+export const metadata: Metadata = {
+  title: 'High Performance Pathway | Laguna Beach Tennis Academy',
+  description: '...',
+  alternates: { canonical: '/programs/high-performance' },
+};`,
+      note: 'Same decision needed for /beginner-program, /junior-trial, /adult-trial — all landing variants of hub pages. Default recommendation: Option B (canonical to hub) since these are ad-destination pages that need to stay alive.'
+    },
+    {
+      id: 'camps-title-tag',
+      category: 'seo', severity: 'p1',
+      title: '/camps page title — new copy',
+      source: 'See camps-metadata item above for full metadata block',
+      isNow: '(Inherits layout default — 61 chars, no camp-specific keywords)',
+      shouldBe: 'Under 60 characters, includes "Summer Tennis Camp 2026", age range, and "Laguna Beach".',
+      proposedMode: 'text',
+      proposed: 'Summer Tennis Camp 2026 | Ages 5-11 | Laguna Beach',
+      note: '50 chars. Approve this and we bake it into the metadata block in the /camps fix above.'
+    },
+
+    // ========== P1 — Title tag rewrites (highest-leverage from SEO audit Phase 10) ==========
+    {
+      id: 'title-home',
+      category: 'seo', severity: 'p1',
+      title: 'Homepage title tag — new copy',
+      source: 'app/layout.tsx + app/page.tsx metadata',
+      isNow: 'Laguna Beach Tennis Academy | Tennis, as it should be taught.',
+      shouldBe: 'Under 60 characters, still on-brand (the existing tagline is at 61 chars so SERP truncates it by one character).',
+      proposedMode: 'text',
+      proposed: 'Laguna Beach Tennis Academy | Tennis as It Should Be',
+      note: 'Drops the final "taught." to fit 60-char limit. Keep full line in H1 and hero — this only changes <title>.'
+    },
+    {
+      id: 'title-faq',
+      category: 'seo', severity: 'p1',
+      title: '/faq title tag — new copy',
+      source: 'app/faq/page.tsx metadata',
+      isNow: '(72 chars — 12 over limit, SERP truncates)',
+      shouldBe: 'Under 60 chars with "FAQ" keyword + "LBTA" or "Laguna Beach".',
+      proposedMode: 'text',
+      proposed: 'FAQ | Tennis Training Questions | LBTA',
+      note: '38 chars. Short enough to pair with a longer meta description below.'
+    },
+    {
+      id: 'title-fitness',
+      category: 'seo', severity: 'p1',
+      title: '/fitness title tag — new copy',
+      source: 'app/fitness/page.tsx metadata',
+      isNow: '(77 chars — 17 over limit)',
+      shouldBe: 'Under 60 chars with "Fitness" + tennis + Laguna Beach.',
+      proposedMode: 'text',
+      proposed: 'Fitness Tennis Programs | Laguna Beach Academy',
+      note: '46 chars.'
+    },
+    {
+      id: 'title-racquet-rescue',
+      category: 'seo', severity: 'p1',
+      title: '/racquet-rescue title tag — new copy',
+      source: 'app/racquet-rescue/page.tsx metadata',
+      isNow: '(77 chars)',
+      shouldBe: 'Under 60 chars. "Stringing" is the keyword people search.',
+      proposedMode: 'text',
+      proposed: 'Racquet Stringing | Laguna Beach Tennis Academy',
+      note: '47 chars. Keep brand intact.'
+    },
+    {
+      id: 'title-philosophy',
+      category: 'seo', severity: 'p1',
+      title: '/philosophy title tag — new copy',
+      source: 'app/philosophy/page.tsx metadata',
+      isNow: '(74 chars)',
+      shouldBe: 'Under 60 chars with "Coaching Philosophy" + Laguna Beach.',
+      proposedMode: 'text',
+      proposed: 'Our Coaching Philosophy | LBTA Laguna Beach',
+      note: '43 chars.'
+    },
+    {
+      id: 'title-beginner-program',
+      category: 'seo', severity: 'p1',
+      title: '/beginner-program title tag — new copy',
+      source: 'app/beginner-program/page.tsx metadata',
+      isNow: '(75 chars)',
+      shouldBe: 'Under 60 chars with "Beginner" keyword + Laguna Beach.',
+      proposedMode: 'text',
+      proposed: 'Beginner Tennis Program | Laguna Beach Academy',
+      note: '46 chars.'
+    },
+
+    // ========== P1 — Schema (AggregateRating is the highest-ROI on-page change) ==========
+    {
+      id: 'aggregate-rating-schema',
+      category: 'seo', severity: 'p1',
+      title: 'AggregateRating schema — enables star rating in Google results',
+      source: 'app/schema.tsx — no aggregateRating present',
+      isNow: 'Homepage JSON-LD has SportsActivityLocation, PostalAddress, GeoCoordinates, Person — but no aggregateRating block. 5.0 rating + 47 reviews exist on the Google Business Profile but are invisible to the SERP.',
+      shouldBe: 'aggregateRating block added inside the main Organization/LocalBusiness schema on the homepage, with values matching the live GBP count.',
+      proposedMode: 'code',
+      proposed: `// Add inside the homepage schema JSON (app/schema.tsx)
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "5.0",
+  "reviewCount": "47",
+  "bestRating": "5",
+  "worstRating": "1"
+}`,
+      note: 'IMPORTANT: 47 is what the site currently claims. Verify live count on Google Business Profile the day we ship — if it has changed, we use the live number. Star ratings in SERP can lift CTR 10–20%.'
+    },
+    {
+      id: 'localbusiness-schema-multi',
+      category: 'seo', severity: 'p1',
+      title: 'LocalBusiness schema for all 3 facilities',
+      source: 'app/schema.tsx — only 1 address in structured data',
+      isNow: 'Only the Moulton Meadows address is in structured data. Google cannot associate LBTA with LBHS (primary facility) or Alta Laguna (camps).',
+      shouldBe: 'Three LocalBusiness entities — LBHS (625 Park Ave), Moulton Meadows Park, Alta Laguna Park — all with parentOrganization pointing to the main LBTA Organization node.',
+      proposedMode: 'code',
+      proposed: `[
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://lagunabeachtennisacademy.com/#lbhs",
+    "name": "Laguna Beach Tennis Academy — LBHS Courts",
+    "address": {"@type": "PostalAddress", "streetAddress": "625 Park Ave",
+                "addressLocality": "Laguna Beach", "addressRegion": "CA",
+                "postalCode": "92651", "addressCountry": "US"},
+    "telephone": "+1-949-534-0457",
+    "parentOrganization": {"@id": "https://lagunabeachtennisacademy.com/#organization"}
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://lagunabeachtennisacademy.com/#moulton",
+    "name": "Laguna Beach Tennis Academy — Moulton Meadows",
+    "address": {"@type": "PostalAddress", "streetAddress": "1098 Balboa Ave",
+                "addressLocality": "Laguna Beach", "addressRegion": "CA",
+                "postalCode": "92651", "addressCountry": "US"},
+    "telephone": "+1-949-534-0457",
+    "parentOrganization": {"@id": "https://lagunabeachtennisacademy.com/#organization"}
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://lagunabeachtennisacademy.com/#altalaguna",
+    "name": "Laguna Beach Tennis Academy — Alta Laguna",
+    "address": {"@type": "PostalAddress", "streetAddress": "Alta Laguna Park",
+                "addressLocality": "Laguna Beach", "addressRegion": "CA",
+                "postalCode": "92651", "addressCountry": "US"},
+    "telephone": "+1-949-534-0457",
+    "parentOrganization": {"@id": "https://lagunabeachtennisacademy.com/#organization"}
+  }
+]`,
+      note: 'Verify the LBHS address (625 Park Ave) and the Alta Laguna Park street address before publishing. Both need to be exact, not approximate.'
+    },
+
+    // ========== Original verification items (contact, dates, pricing, stats, claims) ==========
+    {
+      id: 'phone-primary',
+      category: 'contact', severity: 'p0',
+      title: 'Primary business phone number',
+      source: 'Site footer + home CTA',
+      isNow: '(949) 534-0457',
+      shouldBe: 'The number currently ringing and answered within business hours.',
+      proposedMode: 'text',
+      proposed: '(949) 534-0457',
+      note: 'If this is correct, approve. If not, tell us the real main number and we update footer + all pages in one pass.'
+    },
+    {
+      id: 'phone-personal-on-public-pages',
+      category: 'contact', severity: 'p1',
+      title: 'Personal phone (949) 241-0847 on public pages',
+      source: 'app/programs/leagues/page.tsx, app/programs/usta-adult-league/page.tsx, app/coaches/andrew-mateljan/page.tsx, app/coaches/peter-defrantz/page.tsx, app/coaches/former-coach-removed/page.tsx (legacy)',
+      isNow: 'Andrew\'s personal (949) 241-0847 is listed on 5 public pages. The SEO audit flagged this as inconsistent NAP.',
+      shouldBe: 'Decide a policy: (a) replace with business number (949) 534-0457 everywhere; (b) keep only on /coaches/andrew-mateljan as a personal contact, remove from program/league pages.',
+      proposedMode: 'awaiting',
+      proposed: '',
+      note: 'Recommendation: Option (b). Business phone on all program and league pages; Andrew\'s personal only on his coach profile. Confirm and we execute.'
+    },
+    {
+      id: 'email-support',
+      category: 'contact', severity: 'p0',
+      title: 'Support email',
+      source: 'Site footer',
+      isNow: 'support@lagunabeachtennisacademy.com',
+      shouldBe: 'The inbox you actually reply from within 24 hours.',
+      proposedMode: 'text',
+      proposed: 'support@lagunabeachtennisacademy.com',
+      note: 'Approve or tell us the real inbox. This is what every schema block, every form, and every footer references.'
+    },
+    {
+      id: 'address-primary',
+      category: 'contact', severity: 'p1',
+      title: 'Primary address on site',
+      source: 'Site footer + home philosophy section + JSON-LD',
+      isNow: 'Moulton Meadows Park · 1098 Balboa Ave · Laguna Beach, CA 92651',
+      shouldBe: 'The address a trial parent uses by default. LBHS and Alta Laguna live on their own location pages.',
+      proposedMode: 'text',
+      proposed: 'Moulton Meadows Park · 1098 Balboa Ave · Laguna Beach, CA 92651',
+      note: 'If Moulton Meadows should stay the default, approve. If you want LBHS as the default, we swap — and the three LocalBusiness schema entries above need to match.'
+    },
+
+    // ---- Dates ----
+    {
+      id: 'summer-camp-dates',
+      category: 'dates', severity: 'p0',
+      title: 'Summer camp window — four conflicting values live right now',
+      source: 'app/camps/page.tsx (Jun 16–Aug 19) · ProgramsTabView.tsx (Jun 15–Aug 28) · spring-summer-2026.json (Aug 28) · year2026.json (Aug 29)',
+      isNow: 'Home + /camps say "June 16 to August 19." ProgramsTabView says "June 15 – August 28." spring-summer-2026.json ends Aug 28. year2026.json ends Aug 29.',
+      shouldBe: 'ONE authoritative start and end date. Every JSON, page, email, and doc aligns to it.',
+      proposedMode: 'awaiting',
+      proposed: '',
+      note: 'Paste the one real answer: "Mon <start> – <end> 2026." We then update camps/page.tsx, homepage-copy.json, spring-summer-2026.json, year2026.json, ProgramsTabView.tsx, and the summer email in one PR.'
+    },
+    {
+      id: 'summer-camp-ages',
+      category: 'dates', severity: 'p1',
+      title: 'Summer camp age range',
+      source: 'Home page camps module + /camps',
+      isNow: 'Ages 5-11 (and a separate Junior Development Camp for ages 12-17 mentioned further down /camps)',
+      shouldBe: 'The exact ages accepted in 2026, including whether 12-17 is a separate track or integrated.',
+      proposedMode: 'text',
+      proposed: 'Ages 5-11 (main camp) + Ages 12-17 (Junior Development Camp, LBHS, half-day only, $325/week)',
+      note: 'Approve if the split is real. If ages differ in reality, tell us.'
+    },
+    {
+      id: 'winter-2026-dates',
+      category: 'dates', severity: 'p1',
+      title: 'Winter 2026 season — start and end',
+      source: 'data/winter2026.json + /schedules page',
+      isNow: '(Read from winter2026.json on next site refresh — currently displayed on /schedules)',
+      shouldBe: 'Exact winter season dates used for billing.',
+      proposedMode: 'awaiting',
+      proposed: '',
+      note: 'Paste "<start date> – <end date>" and any skip weeks. We confirm JSON matches and update anywhere it drifts.'
+    },
+    {
+      id: 'spring-2026-dates',
+      category: 'dates', severity: 'p1',
+      title: 'Spring 2026 season — start and end',
+      source: 'data/spring-summer-2026.json + /schedules page',
+      isNow: '(Read from spring-summer-2026.json — currently displayed on /schedules)',
+      shouldBe: 'Exact spring season dates used for billing.',
+      proposedMode: 'awaiting',
+      proposed: '',
+      note: 'Paste "<start date> – <end date>" + any skip weeks.'
+    },
+
+    // ---- Pricing ----
+    {
+      id: 'drop-in-price',
+      category: 'pricing', severity: 'p1',
+      title: 'Drop-in session price',
+      source: 'Home page "Tuition snapshot"',
+      isNow: '$50 per session',
+      shouldBe: 'Actual price a new player pays for a single drop-in in 2026.',
+      proposedMode: 'text',
+      proposed: '$50 per session',
+      note: 'Approve or edit. If drop-in differs by program, tell us and we break it out.'
+    },
+    {
+      id: 'seasonal-price',
+      category: 'pricing', severity: 'p1',
+      title: 'Seasonal tuition ("Most popular")',
+      source: 'Home page "Tuition snapshot"',
+      isNow: '$420 per season · 10 weeks · 1× per week',
+      shouldBe: 'Actual 1×/week price charged in Spring 2026 and the exact week count.',
+      proposedMode: 'text',
+      proposed: '$420 per season · 10 weeks · 1× per week',
+      note: 'Approve or edit.'
+    },
+    {
+      id: 'committed-price',
+      category: 'pricing', severity: 'p1',
+      title: 'Committed tuition ("Maximum results")',
+      source: 'Home page "Tuition snapshot"',
+      isNow: '$840 per season · 10 weeks · 2× per week',
+      shouldBe: 'Actual 2×/week price charged in Spring 2026.',
+      proposedMode: 'text',
+      proposed: '$840 per season · 10 weeks · 2× per week',
+      note: 'Approve or edit.'
+    },
+    {
+      id: 'camp-prices',
+      category: 'pricing', severity: 'p0',
+      title: 'Summer camp pricing (Full-Day / Half-Day)',
+      source: 'Home page camps module + /camps',
+      isNow: 'Full-Day $495/week · Half-Day $325/week',
+      shouldBe: '2026 summer rates charged to families, including any sibling / member / early-bird discounts.',
+      proposedMode: 'text',
+      proposed: 'Full-Day $495/week · Half-Day $325/week',
+      note: 'Approve if unchanged. If you want to add a member rate (per the annual membership pilot), edit with the new structure.'
+    },
+
+    // ---- Stats ----
+    {
+      id: 'stat-d1',
+      category: 'stats', severity: 'p1',
+      title: '"20+ D1 Placements" claim',
+      source: '/success-stories hero stats',
+      isNow: '20+ D1 Placements',
+      shouldBe: 'A defensible count with names available for due diligence (South Carolina, Yale, Cornell, etc.).',
+      proposedMode: 'text',
+      proposed: '20+ D1 Placements',
+      note: 'If the true number is higher (23, 25, etc.), edit. Buyers will ask for the list in diligence.'
+    },
+    {
+      id: 'stat-players-trained',
+      category: 'stats', severity: 'p1',
+      title: '"500+ Players Trained" claim',
+      source: '/success-stories hero stats',
+      isNow: '500+ Players Trained',
+      shouldBe: 'A defensible lifetime unique count. Exit playbook cites 695 students.',
+      proposedMode: 'text',
+      proposed: '695 Players Trained',
+      note: 'Exit playbook figure. If Airtable shows different today, edit.'
+    },
+    {
+      id: 'stat-google',
+      category: 'stats', severity: 'p0',
+      title: 'Google rating + review count',
+      source: '/success-stories + home social proof',
+      isNow: '5.0 average from 47 Google reviews',
+      shouldBe: 'The live number on Google Business Profile today.',
+      proposedMode: 'awaiting',
+      proposed: '',
+      note: 'Open Google Maps, find LBTA, paste current "5.0 · N reviews." The AggregateRating schema above uses this same number — keep them in sync.'
+    },
+    {
+      id: 'stat-years',
+      category: 'stats', severity: 'p2',
+      title: '"25+ Years Experience" claim',
+      source: '/success-stories hero',
+      isNow: '25+ Years Experience',
+      shouldBe: 'Verifiable years of Andrew\'s competitive + coaching career.',
+      proposedMode: 'text',
+      proposed: '25+ Years Experience',
+      note: 'If closer to 30 now, edit.'
+    },
+
+    // ---- Claims ----
+    {
+      id: 'claim-karue-sell',
+      category: 'claims', severity: 'p1',
+      title: 'Karue Sell ATP #858 → #262',
+      source: '/success-stories Karue Sell card + homepage results slide',
+      isNow: '#858 → #262 · "career high earned through structured work on tour"',
+      shouldBe: 'Exact career-high ATP singles ranking + starting ranking during LBTA training period.',
+      proposedMode: 'text',
+      proposed: 'From the #800s to a career high of #262 ATP',
+      note: 'If the numbers have moved, edit. Cite ATP profile URL in the edit note.'
+    },
+    {
+      id: 'claim-alex-michelsen',
+      category: 'claims', severity: 'p1',
+      title: 'Alex Michelsen (ATP Top 30) connection',
+      source: 'Exit playbook — not currently on live site',
+      isNow: 'Not yet on the public site. Playbook references him as "coached by Andrew."',
+      shouldBe: 'One approved sentence that accurately describes the relationship and has Alex\'s permission.',
+      proposedMode: 'awaiting',
+      proposed: '',
+      note: 'Write the one line you want us to use. Include whether you have written permission for public marketing use.'
+    },
+    {
+      id: 'claim-toni-nadal',
+      category: 'claims', severity: 'p1',
+      title: 'Toni Nadal hosted at LBTA (May 2025)',
+      source: 'Exit playbook asset inventory — not currently on live site',
+      isNow: 'Not on the public site.',
+      shouldBe: 'One approved sentence plus a photo caption we can use on /about or /success-stories.',
+      proposedMode: 'awaiting',
+      proposed: '',
+      note: 'Provide the exact line + any photo URL / caption. Buyers love this — get it on the site.'
+    },
+    {
+      id: 'claim-testimonials',
+      category: 'claims', severity: 'p0',
+      title: 'Named testimonials (Sarah M., Michael T., Jennifer L., Robert K.)',
+      source: '/success-stories page',
+      isNow: 'Four short quotes attributed to first name + last initial.',
+      shouldBe: 'Real families with permission, OR clearly marked as illustrative / composite.',
+      proposedMode: 'awaiting',
+      proposed: '',
+      note: 'Per quote: real person (yes/no), permission (yes/no), quote accurate (yes/no). If any are composites, flag and we either remove or re-caption.'
+    },
+
+    // ---- Team ----
+    {
+      id: 'coach-roster',
+      category: 'team', severity: 'p1',
+      title: 'Public coach roster',
+      source: '/coaches page + individual profile pages',
+      isNow: 'Andrew Mateljan · Michelle Mateljan · Peter DeFrantz · former coach (removed) · Allison Cronk',
+      shouldBe: 'The five (or however many) currently active coaches, as of today.',
+      proposedMode: 'text',
+      proposed: 'Andrew Mateljan · Peter DeFrantz · Allison Cronk',
+      note: 'This proposal removes Michelle pending the status decision above. If she is active, edit to keep her. If anyone new has joined, add.'
+    },
+    {
+      id: 'founder-credentials',
+      category: 'team', severity: 'p1',
+      title: 'Founder credentials copy',
+      source: 'Home founder section + /about',
+      isNow: '"25 years in tennis as a top-ranked junior and international coach. Years spent coaching in Spain and Croatia shaped a movement-first approach grounded in clarity and accountability."',
+      shouldBe: 'The two-sentence version you are comfortable defending to a buyer. Should include GPTCA certification director role, Sánchez-Casal Barcelona, ITF Futures, and at least one named pro.',
+      proposedMode: 'text',
+      proposed: 'GPTCA-ATP certified coach with 25+ years in tennis — former top-ranked junior, ITF Futures professional, and training director at Sánchez-Casal Barcelona. Currently coaches ATP #262 Karue Sell and has developed players into the ATP Top 30.',
+      note: 'Approve or edit to match the exact story you want on record. Same copy will feed the /coaches/andrew-mateljan Person schema.'
+    }
+  ];
+
+  // ===== State management =====
+  const STORAGE_KEY = 'lbta-audit-checklist-v2-2026-04-16';
+  let state = loadState();
+  function loadState(){ try{ const r=localStorage.getItem(STORAGE_KEY); return r?JSON.parse(r):{};}catch{return {};} }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); flashSaved(); }catch(e){} }
+  function flashSaved(){ const el=document.getElementById('saved-flash'); el.classList.add('show'); clearTimeout(flashSaved._t); flashSaved._t=setTimeout(()=>el.classList.remove('show'),1200); }
+
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const debounce = (fn, wait) => { let t; return (...a) => { clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; };
+
+  // ===== Render =====
+  const wrap = document.getElementById('items');
+  let currentFilter = 'all';
+
+  function render(){
+    wrap.innerHTML = '';
+    const visible = CHECKLIST.filter(it => {
+      const s = state[it.id] || {};
+      if (currentFilter === 'all') return true;
+      if (currentFilter === 'remaining') return !s.status;
+      if (currentFilter === 'p0' || currentFilter === 'p1' || currentFilter === 'p2') return it.severity === currentFilter;
+      return it.category === currentFilter;
+    });
+
+    if (!visible.length) {
+      wrap.innerHTML = '<p style="padding:40px 0;text-align:center;color:rgba(27,58,92,.6)">No items match this filter.</p>';
+      updateStats();
+      return;
+    }
+    visible.forEach(it => wrap.appendChild(renderItem(it)));
+    updateStats();
+  }
+
+  function renderItem(it){
+    const s = state[it.id] || {};
+    const el = document.createElement('article');
+    el.className = 'item';
+    if (s.status) el.classList.add('state-' + s.status, 'has-status');
+    if (s.status === 'edited') el.classList.add('mode-edit');
+    if (s.status === 'flagged') el.classList.add('mode-flag');
+
+    const sevLabel = { p0: 'P0 · ship this week', p1: 'P1 · this month', p2: 'P2 · later' }[it.severity] || '';
+
+    const isAwaiting = it.proposedMode === 'awaiting';
+    const proposedClass = it.proposedMode === 'code' ? 'code-block' : (isAwaiting ? 'awaiting' : '');
+    const proposedDisplay = isAwaiting
+      ? 'Awaiting your answer. Click "Edit replacement" below and paste the correct value.'
+      : it.proposed;
+
+    // What to pre-fill the edit textarea with
+    const editInitial = (s.editedValue !== undefined && s.editedValue !== null)
+      ? s.editedValue
+      : (isAwaiting ? '' : it.proposed);
+    const editCodeClass = it.proposedMode === 'code' ? 'code-mode' : '';
+
+    el.innerHTML = `
+      <div class="head">
+        <h3>${esc(it.title)}</h3>
+        <div class="pills">
+          ${it.severity ? `<span class="pill sev-${it.severity}">${esc(sevLabel)}</span>` : ''}
+          <span class="pill">${esc(it.category)}</span>
+        </div>
+      </div>
+      <div class="meta">Source: ${esc(it.source)}</div>
+
+      <div class="compare">
+        <div class="cell is-now">
+          <div class="label">What it is now</div>
+          <div class="val">${esc(it.isNow)}</div>
+        </div>
+        <div class="cell should-be">
+          <div class="label">What it should be</div>
+          <div class="val">${esc(it.shouldBe)}</div>
+        </div>
+      </div>
+
+      <div class="replacement">
+        <div class="label">Proposed replacement <span class="tag">ships if approved</span></div>
+        <div class="proposed-text ${proposedClass}">${esc(proposedDisplay)}</div>
+        ${it.note ? `<p class="note">${esc(it.note)}</p>` : ''}
+      </div>
+
+      <div class="edit-box">
+        <label for="edit-${it.id}">Your replacement content</label>
+        <textarea id="edit-${it.id}" class="${editCodeClass}" placeholder="${isAwaiting ? 'Paste the correct value here' : 'Edit the proposed text above'}">${esc(editInitial)}</textarea>
+        <p class="hint">Your version ships instead of the proposal above. Saved as you type.</p>
+      </div>
+
+      <div class="flag-box">
+        <label for="flag-${it.id}">Why is this flagged?</label>
+        <input id="flag-${it.id}" type="text" placeholder="One-line note — what needs discussion before we ship" value="${esc(s.flagNote || '')}" />
+      </div>
+
+      <div class="actions" role="group" aria-label="Decision">
+        <button type="button" class="btn-ans sel-approve ${s.status==='approved'?'active':''}" data-ans="approved" ${isAwaiting?'disabled title="Add your value below first — then this unlocks"':''}><span class="dot-ic" aria-hidden="true"></span> Approve replacement</button>
+        <button type="button" class="btn-ans sel-edit ${s.status==='edited'?'active':''}" data-ans="edited"><span class="dot-ic" aria-hidden="true"></span> Edit replacement</button>
+        <button type="button" class="btn-ans sel-flag ${s.status==='flagged'?'active':''}" data-ans="flagged"><span class="dot-ic" aria-hidden="true"></span> Flag for discussion</button>
+      </div>
+
+      <div class="status-note">${statusText(it, s)}</div>
+    `;
+
+    // Approve / Edit / Flag buttons
+    el.querySelectorAll('.btn-ans').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        const ans = btn.dataset.ans;
+        state[it.id] = state[it.id] || {};
+        state[it.id].status = ans;
+        if (ans === 'approved') {
+          state[it.id].finalValue = isAwaiting ? (state[it.id].editedValue || '') : it.proposed;
+        } else if (ans === 'edited') {
+          // Keep finalValue in sync with whatever is in the edit textarea
+          state[it.id].finalValue = editInitial;
+        }
+        state[it.id].updatedAt = new Date().toISOString();
+
+        // Update card state
+        el.classList.remove('state-approved','state-edited','state-flagged','mode-edit','mode-flag');
+        el.classList.add('state-' + ans, 'has-status');
+        if (ans === 'edited') el.classList.add('mode-edit');
+        if (ans === 'flagged') el.classList.add('mode-flag');
+        el.querySelectorAll('.btn-ans').forEach(b => b.classList.toggle('active', b.dataset.ans === ans));
+        el.querySelector('.status-note').textContent = statusText(it, state[it.id]);
+
+        saveState();
+        updateStats();
+        if (ans === 'edited') setTimeout(() => el.querySelector('textarea').focus(), 100);
+        if (ans === 'flagged') setTimeout(() => el.querySelector('input[type=text]').focus(), 100);
+      });
+    });
+
+    // Edit textarea — persist on keystroke
+    const editEl = el.querySelector(`#edit-${it.id}`);
+    const persistEdit = () => {
+      state[it.id] = state[it.id] || {};
+      state[it.id].editedValue = editEl.value;
+      if (state[it.id].status === 'edited') state[it.id].finalValue = editEl.value;
+      if (state[it.id].status === 'approved' && isAwaiting) state[it.id].finalValue = editEl.value;
+      saveState();
+      // Unlock Approve if it was awaiting-input
+      if (isAwaiting) {
+        const approveBtn = el.querySelector('.sel-approve');
+        approveBtn.disabled = !editEl.value.trim();
+      }
+      el.querySelector('.status-note').textContent = statusText(it, state[it.id]);
+    };
+    editEl.addEventListener('input', debounce(persistEdit, 400));
+
+    // Flag note input — persist on keystroke
+    const flagEl = el.querySelector(`#flag-${it.id}`);
+    flagEl.addEventListener('input', debounce(() => {
+      state[it.id] = state[it.id] || {};
+      state[it.id].flagNote = flagEl.value;
+      saveState();
+      el.querySelector('.status-note').textContent = statusText(it, state[it.id]);
+    }, 400));
+
+    // If awaiting and no value yet, disable Approve button
+    if (isAwaiting && !editInitial.trim()) {
+      el.querySelector('.sel-approve').disabled = true;
+    }
+
+    return el;
+  }
+
+  function statusText(it, s){
+    if (!s || !s.status) return '';
+    if (s.status === 'approved') {
+      const v = (s.finalValue || it.proposed || '').toString();
+      return v ? 'APPROVED — shipping: ' + truncate(v, 160) : 'APPROVED.';
+    }
+    if (s.status === 'edited') {
+      const v = (s.editedValue || '').toString();
+      return v ? 'EDITED — shipping your version: ' + truncate(v, 160) : 'EDITED — awaiting your content in the box above.';
+    }
+    if (s.status === 'flagged') {
+      return 'FLAGGED — ' + (s.flagNote ? s.flagNote : 'needs discussion before we ship.');
+    }
+    return '';
+  }
+  function truncate(s, n){ return s.length > n ? s.slice(0, n-1) + '…' : s; }
+
+  function updateStats(){
+    const total = CHECKLIST.length;
+    let approved=0, edited=0, flagged=0;
+    CHECKLIST.forEach(it => {
+      const s = state[it.id]; if (!s || !s.status) return;
+      if (s.status === 'approved') approved++;
+      else if (s.status === 'edited') edited++;
+      else if (s.status === 'flagged') flagged++;
+    });
+    const remaining = total - approved - edited - flagged;
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-approved').textContent = approved;
+    document.getElementById('stat-edited').textContent = edited;
+    document.getElementById('stat-flagged').textContent = flagged;
+    document.getElementById('stat-remaining').textContent = remaining;
+    document.getElementById('progress-fill').style.width = Math.round(((approved+edited+flagged)/total)*100) + '%';
+  }
+
+  // ===== Filters =====
+  document.querySelectorAll('.btn-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      render();
+    });
+  });
+
+  // ===== Export =====
+  document.getElementById('btn-export').addEventListener('click', () => {
+    const date = new Date().toISOString().slice(0,10);
+    let md = `# LBTA audit verification v2 — ${date}\n\n`;
+    md += `Source: \`plans/2026-04-16-lbta-audit-checklist.html\`\n`;
+    md += `Plan: \`plans/2026-04-16-seo-audit-review-and-checklist-v2.md\`\n\n`;
+
+    const buckets = { approved: [], edited: [], flagged: [], pending: [] };
+    CHECKLIST.forEach(it => {
+      const s = state[it.id] || {};
+      const bucket = s.status || 'pending';
+      buckets[bucket === 'approved' ? 'approved' : bucket === 'edited' ? 'edited' : bucket === 'flagged' ? 'flagged' : 'pending'].push({ it, s });
+    });
+
+    md += `## Summary\n\n`;
+    md += `- Approved (ship as proposed): **${buckets.approved.length}**\n`;
+    md += `- Edited (ship your version): **${buckets.edited.length}**\n`;
+    md += `- Flagged (needs discussion): **${buckets.flagged.length}**\n`;
+    md += `- Pending: **${buckets.pending.length}**\n\n`;
+
+    if (buckets.approved.length) {
+      md += `## Approved — ready to ship\n\n`;
+      buckets.approved.forEach(({it, s}) => {
+        md += `### ${it.title}\n`;
+        md += `- Severity: \`${it.severity || 'n/a'}\` · Category: \`${it.category}\`\n`;
+        md += `- Source: ${it.source}\n`;
+        md += `- **Final value:**\n\n\`\`\`\n${s.finalValue || it.proposed}\n\`\`\`\n\n`;
+      });
+    }
+
+    if (buckets.edited.length) {
+      md += `## Edited — ship the edited version\n\n`;
+      buckets.edited.forEach(({it, s}) => {
+        md += `### ${it.title}\n`;
+        md += `- Severity: \`${it.severity || 'n/a'}\` · Category: \`${it.category}\`\n`;
+        md += `- Source: ${it.source}\n`;
+        md += `- Proposed was:\n\n\`\`\`\n${it.proposed || '(awaiting input)'}\n\`\`\`\n\n`;
+        md += `- **Edited to:**\n\n\`\`\`\n${s.editedValue || '(empty)'}\n\`\`\`\n\n`;
+      });
+    }
+
+    if (buckets.flagged.length) {
+      md += `## Flagged — discuss before shipping\n\n`;
+      buckets.flagged.forEach(({it, s}) => {
+        md += `### ${it.title}\n`;
+        md += `- Severity: \`${it.severity || 'n/a'}\` · Category: \`${it.category}\`\n`;
+        md += `- Note: ${s.flagNote || '_(no note)_'}\n`;
+        md += `- Proposed was:\n\n\`\`\`\n${it.proposed || '(awaiting input)'}\n\`\`\`\n\n`;
+      });
+    }
+
+    if (buckets.pending.length) {
+      md += `## Pending review\n\n`;
+      buckets.pending.forEach(({it}) => {
+        md += `- ${it.title} (\`${it.severity || 'n/a'}\` · \`${it.category}\`)\n`;
+      });
+      md += `\n`;
+    }
+
+    const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `lbta-audit-verification-v2-${date}.md`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 500);
+  });
+
+  // ===== Reset =====
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    if (!confirm('Clear all answers on this device? This cannot be undone.')) return;
+    state = {};
+    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>

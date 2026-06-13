@@ -59,7 +59,14 @@ export default function NewsletterForm() {
               <button
                 type="submit"
                 disabled={status === 'loading' || status === 'success'}
-                className="px-6 py-4 bg-white text-black font-sans text-[13px] font-semibold tracking-wider uppercase rounded-r-md hover:bg-white/90 transition-all duration-300 disabled:opacity-70 flex items-center gap-2"
+                aria-label={
+                  status === 'loading'
+                    ? 'Submitting newsletter signup'
+                    : status === 'success'
+                      ? 'Newsletter signup submitted'
+                      : 'Subscribe to newsletter'
+                }
+                className="px-6 py-4 min-h-[48px] bg-white text-black font-sans text-[13px] font-semibold tracking-wider uppercase rounded-r-md hover:bg-white/90 transition-all duration-300 disabled:opacity-70 flex items-center gap-2"
               >
                 {status === 'loading' ? (
                   <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">

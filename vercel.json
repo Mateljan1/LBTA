@@ -48,6 +48,18 @@
     {
       "path": "/api/cron/leads-canary",
       "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/cron/stale-city-payment-leads",
+      "schedule": "0 */12 * * *"
+    },
+    {
+      "path": "/api/cron/city-payment-followups",
+      "schedule": "15 */6 * * *"
+    },
+    {
+      "path": "/api/cron/lead-funnel-summary",
+      "schedule": "15 15 * * *"
     }
   ]
 }

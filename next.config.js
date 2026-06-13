@@ -40,6 +40,12 @@ const nextConfig = {
   poweredByHeader: false,
   async redirects() {
     return [
+      // Departed coaches — redirect to team page
+      {
+        source: '/coaches/robert-lebuhn',
+        destination: '/coaches',
+        permanent: true,
+      },
       // Fitness & Conditioning redirects
       {
         source: '/strength-conditioning',
@@ -85,12 +91,22 @@ const nextConfig = {
       },
       {
         source: '/racket-stringing',
-        destination: '/contact',
+        destination: '/racquet-rescue',
         permanent: true,
       },
       {
         source: '/racket-stringing/',
-        destination: '/contact',
+        destination: '/racquet-rescue',
+        permanent: true,
+      },
+      {
+        source: '/racket-rescue',
+        destination: '/racquet-rescue',
+        permanent: true,
+      },
+      {
+        source: '/racket-rescue/',
+        destination: '/racquet-rescue',
         permanent: true,
       },
       // Academy program redirects

@@ -2,28 +2,15 @@ import { NextRequest, NextResponse } from 'next/server'
 import { waitUntil } from '@vercel/functions'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { bookingSchema, privateLessonBookingSchema, parseJsonBody, validateRequest } from '@/lib/validations'
-import { getEnvVar, hasEnvVar } from '@/lib/env'
 import { validateAgentSecret } from '@/lib/agent-auth'
-import {
-  upsertContact,
-  addToList,
-  addTags,
-  getClassTagFromProgram,
-  LBTA_LIST_ID,
-  getWebsiteSignupsListId,
-  CAMPAIGN_TAGS,
-  CLASS_TAGS,
-} from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
-import { sendToAirtable } from '@/lib/airtable-leads'
 import {
-  notifyTrialRequest,
-  notifyPrivateLesson,
-  sendTrialConfirmationEmail,
-  sendContactFormConfirmationEmail,
-  sendPrivateLessonConfirmationEmail,
-} from '@/lib/email'
-import { writeNotionLead } from '@/lib/notion-leads'
+  upsertAndTag,
+  buildTrialTags,
+  buildContactTags,
+  buildPrivateLessonTags,
+  isMailchimpConfigured,
+} from '@/lib/mailchimp'
 import {
   buildRegistrationAssistWorkflow,
   buildTrialRequestedWorkflow,
@@ -31,29 +18,13 @@ import {
 
 // ============================================================
 // LBTA Booking/Trial Request API
+// Primary CRM: Mailchimp (upsert + tags)
+// Secondary sink: Supabase leads table
+// Email: customer confirmations → Mailchimp Customer Journey automations
+//        staff alerts → Mailchimp internal notification automation (tag: source:website-form)
 // ============================================================
-// Handles trial class requests and general booking inquiries
-// Integrates with ActiveCampaign for contact management and email automation
-// ============================================================
-
-// Kebab-case program slug → AC tag ID (from canonical CLASS_TAGS)
-const PROGRAM_TAGS: Record<string, number> = {
-  'little-tennis-stars': CLASS_TAGS.little_tennis_stars,
-  'red-ball': CLASS_TAGS.red_ball,
-  'orange-ball': CLASS_TAGS.orange_ball,
-  'green-dot': CLASS_TAGS.green_dot,
-  'youth-development': CLASS_TAGS.youth_development,
-  'high-performance': CLASS_TAGS.high_performance,
-  'adult-beginner': CLASS_TAGS.adult_beginner,
-  'adult-intermediate': CLASS_TAGS.adult_intermediate,
-  'adult-advanced': CLASS_TAGS.adult_advanced,
-  'cardio-tennis': CLASS_TAGS.cardio,
-  'private-lessons': CLASS_TAGS.private_lessons,
-  'not-sure': CAMPAIGN_TAGS.not_sure,
-}
 
 export async function POST(request: NextRequest) {
-  // Agent auth: validate X-Agent-Secret header if present (for agent tool calls)
   const agentSecret = request.headers.get('X-Agent-Secret')
   if (agentSecret && !validateAgentSecret(request)) {
     return NextResponse.json(
@@ -62,7 +33,6 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  // Rate limiting: 5 requests per minute per IP
   const ip = request.headers.get('x-forwarded-for') || 'anonymous'
   let rateLimitResult: { allowed: boolean; remaining: number; resetTime: number }
   try {
@@ -93,7 +63,6 @@ export async function POST(request: NextRequest) {
       )
     }
     const raw = parsed.data as Record<string, unknown>
-    // Only bookingType === 'private' uses private-lesson schema; missing or any other value → trial path
     const isPrivateLesson = raw.bookingType === 'private'
 
     const validation = isPrivateLesson
@@ -111,85 +80,44 @@ export async function POST(request: NextRequest) {
 
     const body = validation.data
 
+    // ── Private lesson path ──────────────────────────────────────
     if (isPrivateLesson) {
-      const privateBody = body as import('@/lib/validations').PrivateLessonBookingRequest
+      const pb = body as import('@/lib/validations').PrivateLessonBookingRequest
       if (process.env.NODE_ENV !== 'production') {
-        console.log('[Private] Request received:', { coach: privateBody.coach, option: privateBody.option, timestamp: new Date().toISOString() })
+        console.log('[Private] Request received:', { coach: pb.coach, option: pb.option, timestamp: new Date().toISOString() })
       }
 
-      if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
-        try {
-          const contactResult = await upsertContact({
-            email: privateBody.email,
-            firstName: privateBody.firstName,
-            lastName: privateBody.lastName,
-            phone: privateBody.phone,
-            fieldValues: [
-              { field: '7', value: `Private: ${privateBody.coach} — ${privateBody.option}` },
-              { field: '11', value: 'website' },
-              { field: '12', value: 'private-lesson' },
-            ],
-          })
-          if (contactResult.success && contactResult.data) {
-            const contactId = contactResult.data.id
-            const websiteSignupsListId = getWebsiteSignupsListId()
-            await Promise.all([
-              addToList(contactId, LBTA_LIST_ID),
-              websiteSignupsListId !== null ? addToList(contactId, websiteSignupsListId) : Promise.resolve(),
-            ])
-            await addTags(contactId, [CAMPAIGN_TAGS.website_registration, PROGRAM_TAGS['private-lessons']])
-          }
-        } catch (acError) {
-          console.error('[AC] Error:', acError)
-        }
+      // Mailchimp: upsert + tags (primary CRM)
+      if (isMailchimpConfigured()) {
+        waitUntil(upsertAndTag(
+          {
+            email: pb.email,
+            firstName: pb.firstName,
+            lastName: pb.lastName,
+            phone: pb.phone,
+          },
+          buildPrivateLessonTags()
+        ).then(r => {
+          if (!r.success) console.error('[MC] Private lesson upsert failed:', r.error)
+        }))
       }
 
-      waitUntil(writeNotionLead({
-        parentName: `${privateBody.firstName} ${privateBody.lastName}`,
-        email: privateBody.email,
-        phone: privateBody.phone,
-        program: `Private Lessons — ${privateBody.coach}`,
-        category: 'Private Lesson',
-        notes: `Option: ${privateBody.option}`,
-      }))
-      waitUntil(sendToAirtable({
-        name: `${privateBody.firstName} ${privateBody.lastName}`,
-        email: privateBody.email,
-        phone: privateBody.phone,
-        program: `Private Lessons — ${privateBody.coach}`,
-        formSource: 'book-private',
-        category: 'private',
-      }))
+      // Supabase: secondary sink (source of truth for internal queries)
       waitUntil(storeLead({
         source: 'book',
-        email: privateBody.email,
-        name: `${privateBody.firstName ?? ''} ${privateBody.lastName ?? ''}`.trim() || undefined,
-        phone: privateBody.phone ?? undefined,
-      payload: {
-        bookingType: 'private',
-        coach: privateBody.coach,
-        option: privateBody.option,
-        workflow: {
-          stage: 'not_required',
-          cityPaymentStatus: 'not_required',
-          createdAt: new Date().toISOString(),
+        email: pb.email,
+        name: `${pb.firstName ?? ''} ${pb.lastName ?? ''}`.trim() || undefined,
+        phone: pb.phone ?? undefined,
+        payload: {
+          bookingType: 'private',
+          coach: pb.coach,
+          option: pb.option,
+          workflow: {
+            stage: 'not_required',
+            cityPaymentStatus: 'not_required',
+            createdAt: new Date().toISOString(),
+          },
         },
-      },
-      }))
-      waitUntil(notifyPrivateLesson({
-        firstName: privateBody.firstName,
-        lastName: privateBody.lastName,
-        email: privateBody.email,
-        phone: privateBody.phone,
-        coach: privateBody.coach,
-        option: privateBody.option,
-      }))
-      // Send branded confirmation email TO the requestor
-      waitUntil(sendPrivateLessonConfirmationEmail({
-        email: privateBody.email,
-        firstName: privateBody.firstName,
-        coach: privateBody.coach,
-        option: privateBody.option,
       }))
 
       return NextResponse.json({
@@ -198,176 +126,66 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    const trialBody = body as import('@/lib/validations').BookingRequest
-    const isContactPage = trialBody.source === 'contact-page'
-    const isRacquetRescue = trialBody.source === 'racquet-rescue'
+    // ── Trial / contact / registration-assist path ───────────────
+    const tb = body as import('@/lib/validations').BookingRequest
+    const isContactPage = tb.source === 'contact-page'
+    const isRacquetRescue = tb.source === 'racquet-rescue'
     const isRegistrationAssist = [
       'schedules_modal',
       'camps_schedules_modal',
       'programs_page',
       'camps_page_modal',
-    ].includes(trialBody.source ?? '')
-    const contactMessage = trialBody.message?.trim()
+    ].includes(tb.source ?? '')
+    const contactMessage = tb.message?.trim()
 
     if (process.env.NODE_ENV !== 'production') {
       console.log('[Trial] Request received:', {
-        program: trialBody.program,
-        source: trialBody.source,
+        program: tb.program,
+        source: tb.source,
         isContactPage,
         timestamp: new Date().toISOString(),
       })
     }
-    const daysSelected = (trialBody.preferredDays ?? []).join(', ') || 'Flexible'
-    const signupSourceField11 = isContactPage
-      ? 'website-contact-page'
-      : isRacquetRescue
-        ? 'website-racquet-rescue'
-        : isRegistrationAssist
-          ? 'website-registration-assist'
-        : trialBody.source === 'homepage-cta'
-          ? 'website-homepage-cta'
-          : 'website'
 
-    if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
-      try {
-        const contactResult = await upsertContact({
-          email: trialBody.email,
-          firstName: trialBody.firstName,
-          lastName: trialBody.lastName,
-          phone: trialBody.phone,
-          fieldValues: [
-            {
-              field: '7',
-              value:
-                trialBody.program ||
-                (isRacquetRescue ? 'Racquet Rescue' : isContactPage ? 'Contact Form' : isRegistrationAssist ? 'Registration Assistance' : 'Trial Request'),
-            },
-            { field: '8', value: trialBody.location || 'Not specified' },
-            { field: '9', value: daysSelected },
-            { field: '11', value: signupSourceField11 },
-            { field: '12', value: isRacquetRescue ? 'racquet-rescue' : isContactPage ? 'contact' : isRegistrationAssist ? 'registration-assist' : 'trial' },
-            {
-              field: '5',
-              value: isContactPage || isRacquetRescue || isRegistrationAssist
-                ? [contactMessage, trialBody.experience].filter(Boolean).join('\n\n') || 'Not specified'
-                : trialBody.experience || 'Not specified',
-            },
-          ],
-        })
-        if (contactResult.success && contactResult.data) {
-          const contactId = contactResult.data.id
-          const websiteSignupsListId = getWebsiteSignupsListId()
-          await Promise.all([
-            addToList(contactId, LBTA_LIST_ID),
-            websiteSignupsListId !== null ? addToList(contactId, websiteSignupsListId) : Promise.resolve(),
-          ])
-          const tagsToApply: number[] = [CAMPAIGN_TAGS.website_registration]
-          if (isContactPage) {
-            tagsToApply.push(CAMPAIGN_TAGS.not_sure)
-          } else if (isRacquetRescue) {
-            tagsToApply.push(CAMPAIGN_TAGS.not_sure)
-          } else if (isRegistrationAssist) {
-            tagsToApply.push(CAMPAIGN_TAGS.not_sure)
-          } else {
-            tagsToApply.push(CAMPAIGN_TAGS.trial_request)
-            if (trialBody.program && PROGRAM_TAGS[trialBody.program]) tagsToApply.push(PROGRAM_TAGS[trialBody.program])
-          }
-          await addTags(contactId, tagsToApply)
-        }
-      } catch (acError) {
-        console.error('[AC] Error:', acError)
-      }
+    // Mailchimp: upsert + tags (primary CRM)
+    if (isMailchimpConfigured()) {
+      const mcTags = isContactPage || isRacquetRescue || isRegistrationAssist
+        ? buildContactTags(isRacquetRescue ? 'racquet-rescue' : isRegistrationAssist ? 'registration-assist' : 'contact')
+        : buildTrialTags(tb.program)
+
+      waitUntil(upsertAndTag(
+        {
+          email: tb.email,
+          firstName: tb.firstName,
+          lastName: tb.lastName,
+          phone: tb.phone,
+        },
+        mcTags
+      ).then(r => {
+        if (!r.success) console.error('[MC] Trial/contact upsert failed:', r.error)
+      }))
     }
 
-    const notionNotes = isContactPage || isRacquetRescue || isRegistrationAssist
-      ? [contactMessage && `Message:\n${contactMessage}`, trialBody.experience && `Experience: ${trialBody.experience}`]
-          .filter(Boolean)
-          .join('\n\n') || undefined
-      : trialBody.experience
-        ? `Experience: ${trialBody.experience}`
-        : undefined
-
-    waitUntil(writeNotionLead({
-      parentName: `${trialBody.firstName} ${trialBody.lastName}`,
-      email: trialBody.email,
-      phone: trialBody.phone,
-      program:
-        trialBody.program ||
-        (isRacquetRescue ? 'Racquet Rescue' : isContactPage ? 'Contact Form' : isRegistrationAssist ? 'Registration Assistance' : 'Trial Request'),
-      category: isRacquetRescue ? 'Racquet Rescue' : isContactPage ? 'Contact' : isRegistrationAssist ? 'Registration Assist' : 'Trial',
-      location: trialBody.location,
-      notes: notionNotes,
-    }))
-    waitUntil(
-      sendToAirtable({
-        name: `${trialBody.firstName} ${trialBody.lastName}`,
-        email: trialBody.email,
-        phone: trialBody.phone,
-        program: trialBody.program,
-        formSource: isRacquetRescue ? 'racquet-rescue' : isContactPage ? 'contact-page' : isRegistrationAssist ? 'registration-assist' : 'book-trial',
-        category: isRacquetRescue ? 'racquet-rescue' : isContactPage ? 'contact' : isRegistrationAssist ? 'registration-assist' : 'trial',
-      })
-    )
+    // Supabase: secondary sink
     waitUntil(storeLead({
       source: 'book',
-      email: trialBody.email,
-      name: `${trialBody.firstName ?? ''} ${trialBody.lastName ?? ''}`.trim() || undefined,
-      phone: trialBody.phone ?? undefined,
+      email: tb.email,
+      name: `${tb.firstName ?? ''} ${tb.lastName ?? ''}`.trim() || undefined,
+      phone: tb.phone ?? undefined,
       payload: {
-        program: trialBody.program,
-        location: trialBody.location,
+        program: tb.program,
+        location: tb.location,
+        source: tb.source,
         ...((isContactPage || isRacquetRescue || isRegistrationAssist) && contactMessage ? { message: contactMessage } : {}),
-        ...(isRacquetRescue ? { source: 'racquet-rescue' } : {}),
-        ...(isRegistrationAssist ? { source: 'registration-assist' } : {}),
         workflow: isRacquetRescue
-          ? {
-              stage: 'not_required',
-              cityPaymentStatus: 'not_required',
-              createdAt: new Date().toISOString(),
-            }
+          ? { stage: 'not_required', cityPaymentStatus: 'not_required', createdAt: new Date().toISOString() }
           : isContactPage
-            ? {
-                stage: 'not_required',
-                cityPaymentStatus: 'not_required',
-                createdAt: new Date().toISOString(),
-              }
+            ? { stage: 'not_required', cityPaymentStatus: 'not_required', createdAt: new Date().toISOString() }
             : isRegistrationAssist
               ? buildRegistrationAssistWorkflow(24)
               : buildTrialRequestedWorkflow(),
       },
     }))
-    waitUntil(
-      notifyTrialRequest({
-        firstName: trialBody.firstName,
-        lastName: trialBody.lastName,
-        email: trialBody.email,
-        phone: trialBody.phone,
-        program: trialBody.program,
-        location: trialBody.location,
-        experience: trialBody.experience,
-        preferredDays: trialBody.preferredDays,
-        message: contactMessage,
-        intent: isRacquetRescue ? 'racquet-rescue' : isContactPage ? 'contact' : isRegistrationAssist ? 'registration-assist' : 'trial',
-      })
-    )
-    if (isContactPage || isRacquetRescue || isRegistrationAssist) {
-      waitUntil(
-        sendContactFormConfirmationEmail({
-          email: trialBody.email,
-          firstName: trialBody.firstName,
-          programInterest: trialBody.program ?? (isRacquetRescue ? 'Racquet Rescue' : isRegistrationAssist ? 'Program registration support' : undefined),
-        })
-      )
-    } else {
-      waitUntil(
-        sendTrialConfirmationEmail({
-          email: trialBody.email,
-          firstName: trialBody.firstName,
-          program: trialBody.program,
-          location: trialBody.location,
-        })
-      )
-    }
 
     return NextResponse.json({
       success: true,

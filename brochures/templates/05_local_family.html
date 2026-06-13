@@ -1,0 +1,192 @@
+<!doctype html>
+<!-- @page width="8.5in" height="11in" landscape="false" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · Local Family</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 8.5in 11in; margin: 0; }
+    .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; }
+    .pad  { padding: 32pt 44pt; }
+
+    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 38pt; line-height: 1.04; color: var(--text-heading); margin: 6pt 0 8pt; letter-spacing: -0.005em; }
+    h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 24pt; line-height: 1.1; color: var(--text-heading); margin: 14pt 0 6pt; }
+    h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+         font-size: 14pt; color: var(--pacific-dusk); margin: 10pt 0 4pt; }
+    p, .body { font-size: 10pt; line-height: 1.6; color: var(--text-on-light); margin: 0 0 6pt; }
+    .lede { font-size: 11pt; line-height: 1.55; color: var(--text-on-light); margin-bottom: 10pt; }
+    .top-eyebrow { font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 8pt; color: var(--victoria-cove); }
+
+    .hero-img { width: 100%; height: 200pt; object-fit: cover; border-radius: 4pt; margin: 10pt 0 14pt; }
+
+    .row { display: grid; grid-template-columns: 1.6fr 0.8fr 0.7fr 0.7fr 0.6fr;
+           gap: 6pt; font-size: 9pt; padding: 5pt 0;
+           border-bottom: 0.5pt solid var(--divider-light); }
+    .row.head { color: var(--text-muted); font-weight: 700; text-transform: uppercase;
+                letter-spacing: 0.08em; font-size: 7pt; border-bottom: 0.5pt solid var(--border-light); }
+    .row .name { font-weight: 600; color: var(--text-heading); }
+    .row .ages { color: var(--text-muted); }
+    .row .num  { font-variant-numeric: tabular-nums; text-align: right; color: var(--gold-deep); font-weight: 700; }
+
+    .pathway-card { background: #F5F0E5; border-radius: 4pt; padding: 14pt; margin: 10pt 0; }
+    .pathway-card .grid { display: grid; grid-template-columns: 1.5fr 0.6fr 1.5fr; gap: 6pt;
+      font-size: 8.5pt; padding: 4pt 0; border-bottom: 0.5pt solid var(--border-light); }
+    .pathway-card .grid:last-child { border-bottom: none; }
+    .pathway-card .grid .l { font-weight: 700; color: var(--text-heading); }
+    .pathway-card .grid .a { color: var(--text-muted); }
+
+    /* Page 2 dark */
+    .dark { background: #0F2237; color: rgba(255,255,255,0.86); }
+    .dark h1, .dark h2 { color: #FFFFFF; }
+    .dark h3 { color: var(--gold); }
+    .dark p, .dark .lede { color: rgba(255,255,255,0.86); }
+    .dark .row { border-bottom: 0.5pt solid rgba(245,240,229,0.14); }
+    .dark .row .name { color: #FFFFFF; }
+    .dark .row .ages { color: rgba(245,240,229,0.65); }
+    .dark .row .num { color: var(--gold); }
+
+    .quick-card { background: var(--gold); color: var(--deep-water); border-radius: 4pt;
+      padding: 16pt; margin: 14pt 0; text-align: center; }
+    .quick-card .head { font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300; color: var(--deep-water); font-size: 22pt; line-height: 1.1; }
+    .quick-card .meta { font-family: var(--font-body); font-weight: 600; color: var(--deep-water);
+      font-size: 9pt; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 4pt; }
+
+    .footer-bar { background: var(--deep-water); color: rgba(255,255,255,0.86); padding: 14pt 44pt;
+      display: flex; justify-content: space-between; align-items: center; font-size: 8pt; letter-spacing: 0.12em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<!-- ─────────────── PAGE 1 ─────────────── -->
+<div class="page">
+  <span class="horizon-bar h-thick" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <div style="display:flex; justify-content: space-between; align-items: center;">
+      <img src="../assets/logos/LBTAblktext.png" style="height: 40pt; width:auto;" alt="LBTA" />
+      <span class="top-eyebrow">For Laguna families</span>
+    </div>
+
+    <h1>From age three<br/>to college tennis.</h1>
+    <p class="tagline-italic" style="font-size: 14pt; color: var(--gold-deep); margin-bottom: 10pt;">Movement. Craft. Community.</p>
+    <p class="lede">{{ audience.family.intro }}</p>
+
+    <img class="hero-img" src="../assets/photos/hero-little-stars.jpg" alt="Junior players in a Little Tennis Stars session at LBTA" />
+
+    <div class="pathway-card">
+      <span class="top-eyebrow">The Pathway</span>
+      <h3 style="margin-top: 4pt;">A clear progression. Same coaches the whole way.</h3>
+      <div class="grid" style="font-weight:700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 7pt; color: var(--text-muted); border-bottom: 0.5pt solid var(--border-light);">
+        <span>Level</span><span>Ages</span><span>Where it leads</span>
+      </div>
+      {% for r in pathway %}
+      <div class="grid">
+        <span class="l">{{ r.level }}</span>
+        <span class="a">{{ r.ages }}</span>
+        <span>{{ r.leads_to }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <h2>Junior programs · Spring 2026</h2>
+    <div class="row head"><span>Program</span><span>Ages</span><span class="num">1×/wk</span><span class="num">2×/wk</span><span class="num">Drop-in</span></div>
+    {% for p in programs.junior %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      {% if p.pricing.monthly %}
+      <span class="num">${{ p.pricing.monthly['1x'] }}/mo</span>
+      <span class="num">${{ p.pricing.monthly['2x'] }}/mo</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+      {% else %}
+      <span class="num">${{ p.pricing.spring['1x'] }}</span>
+      <span class="num">${{ p.pricing.spring['2x'] }}</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+      {% endif %}
+    </div>
+    {% endfor %}
+    {% for p in programs.development %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      <span class="num">${{ p.pricing.spring['1x'] }}</span>
+      <span class="num">${{ p.pricing.spring['2x'] }}</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────── PAGE 2 (dark) ─────────────── -->
+<div class="page dark">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="top-eyebrow eyebrow-on-dark" style="color: var(--gold);">For adults · for the family</span>
+    <h1 style="color:#FFFFFF;">Adults play here too.</h1>
+    <p class="lede">From new-to-tennis through 4.0+ tournament play. USTA leagues, UTR Match Play, LiveBall and Cardio Tennis. Bring the parents on court while the kids train.</p>
+
+    <h3>Adult programs</h3>
+    <div class="row head"><span>Program</span><span>Level</span><span class="num">1×/wk</span><span class="num">2×/wk</span><span class="num">Drop-in</span></div>
+    {% for p in programs.adult %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      <span class="num">${{ p.pricing.spring['1x'] }}</span>
+      <span class="num">${{ p.pricing.spring['2x'] }}</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+    </div>
+    {% endfor %}
+    {% for p in programs['open-court'] %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      <span class="num">${{ p.pricing.monthly }}/mo</span>
+      <span class="num">—</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+    </div>
+    {% endfor %}
+
+    <div class="quick-card">
+      <div class="head">Try LiveBall · $50 drop-in.</div>
+      <div class="meta">Sun 9:00a · LBHS · No reservation</div>
+    </div>
+
+    <h3>Match play & leagues</h3>
+    <div class="row head"><span>Format</span><span>Level</span><span class="num"></span><span class="num">Season</span><span class="num">Drop-in</span></div>
+    {% for d in leagues.utr.divisions %}
+    <div class="row">
+      <span class="name">{{ d.name }}</span>
+      <span class="ages">{{ d.match_day }} · {{ d.time }}</span>
+      <span class="num"></span>
+      <span class="num">{{ d.price }}</span>
+      <span class="num">${{ d.drop_in }}</span>
+    </div>
+    {% endfor %}
+    <p style="margin-top: 8pt; color: rgba(245,240,229,0.78);">USTA Adult Leagues open April–September — Adult 18+, Friday Women's, Mixed 40+ Doubles, Adult 55+ Doubles. Captains and team formation supported by LBTA staff. League fees paid directly to USTA.</p>
+
+    <h3 style="margin-top: 16pt;">Three city parks</h3>
+    {% for loc in locations %}
+    <div style="padding: 4pt 0; border-bottom: 0.5pt solid rgba(245,240,229,0.14);">
+      <span style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: 12pt; color: #FFFFFF;">{{ loc.name }}</span>
+      <span style="font-size: 8pt; color: rgba(245,240,229,0.6); margin-left: 8pt;">{{ loc.address }} · {{ loc.use }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="footer-bar">
+    <span>{{ contact.web }}/book</span>
+    <span>{{ contact.phone }} · {{ contact.email }}</span>
+    <span>{{ contact.city_partner_line }}</span>
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+
+</body>
+</html>

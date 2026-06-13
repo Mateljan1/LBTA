@@ -2,27 +2,20 @@ import { NextRequest, NextResponse } from 'next/server'
 import { waitUntil } from '@vercel/functions'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, registerSchema, validateRequest } from '@/lib/validations'
-import { hasEnvVar } from '@/lib/env'
 import { validateAgentSecret } from '@/lib/agent-auth'
-import {
-  upsertContact,
-  addToList,
-  addTags,
-  getClassTagFromProgram,
-  getClassTagFromLevel,
-  LBTA_LIST_ID,
-  getWebsiteSignupsListId,
-  CAMPAIGN_TAGS,
-} from '@/lib/activecampaign'
 import { storeLead } from '@/lib/leads-store'
-import { sendToAirtable } from '@/lib/airtable-leads'
-import { writeNotionLead } from '@/lib/notion-leads'
 import { notifyRegistration, sendConfirmationEmail } from '@/lib/email'
 import { FORM_CONFIGS } from '@/lib/form-config'
 import { buildPendingCityPaymentWorkflow } from '@/lib/lead-workflow'
+import { upsertAndTag, buildRegistrationTags, isMailchimpConfigured } from '@/lib/mailchimp'
+
+// ============================================================
+// General Registration API
+// Primary CRM: Mailchimp (upsert + tags)
+// Secondary sink: Supabase leads table
+// ============================================================
 
 export async function POST(request: NextRequest) {
-  // Agent auth: validate X-Agent-Secret header if present (for agent tool calls)
   const agentSecret = request.headers.get('X-Agent-Secret')
   if (agentSecret && !validateAgentSecret(request)) {
     return NextResponse.json(
@@ -75,55 +68,28 @@ export async function POST(request: NextRequest) {
 
     const data = validation.data
 
-    // Log without PII: program/season only
     console.log('[register] Received', {
       program: data.program ?? 'unspecified',
       season: data.season ?? 'unspecified',
       timestamp: new Date().toISOString(),
     })
 
-    // ActiveCampaign: create/update contact with tags
-    if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
-      try {
-        const contactResult = await upsertContact({
+    // Mailchimp: primary CRM
+    if (isMailchimpConfigured()) {
+      waitUntil(upsertAndTag(
+        {
           email: data.email,
           firstName: data.firstName,
           lastName: data.lastName,
           phone: data.phone,
-          fieldValues: [
-            { field: '7', value: data.program || 'Not specified' },
-            { field: '5', value: data.experience || 'Not specified' },
-            { field: '11', value: 'website' },
-          ],
-        })
-        if (contactResult.success && contactResult.data) {
-          const contactId = contactResult.data.id
-          const websiteSignupsListId = getWebsiteSignupsListId()
-          await Promise.all([
-            addToList(contactId, LBTA_LIST_ID),
-            websiteSignupsListId !== null ? addToList(contactId, websiteSignupsListId) : Promise.resolve(),
-          ])
-          const tagsToApply: number[] = [CAMPAIGN_TAGS.website_registration]
-          const classTag = data.program ? getClassTagFromProgram(data.program) : null
-          const levelTag = data.skillLevel ? getClassTagFromLevel(data.skillLevel) : null
-          if (classTag) tagsToApply.push(classTag)
-          else if (levelTag) tagsToApply.push(levelTag)
-          await addTags(contactId, tagsToApply)
-        }
-      } catch (acError) {
-        console.error('[register] AC error:', acError)
-      }
+        },
+        buildRegistrationTags(data.program)
+      ).then(r => {
+        if (!r.success) console.error('[MC] register upsert failed:', r.error)
+      }))
     }
 
-    waitUntil(sendToAirtable({
-      name: `${data.firstName} ${data.lastName}`,
-      email: data.email,
-      phone: data.phone,
-      program: data.program,
-      formSource: 'register',
-      category: 'registration',
-    }))
-
+    // Supabase: secondary sink
     waitUntil(storeLead({
       source: 'register',
       email: data.email,
@@ -135,13 +101,8 @@ export async function POST(request: NextRequest) {
         workflow: buildPendingCityPaymentWorkflow(24),
       },
     }))
-    waitUntil(writeNotionLead({
-      parentName: `${data.firstName} ${data.lastName}`,
-      email: data.email,
-      phone: data.phone,
-      program: data.program ?? 'Not specified',
-      category: 'Adult',
-    }))
+
+    // Staff alert (Postmark — no-op when POSTMARK_SERVER_TOKEN unset)
     waitUntil(notifyRegistration({
       firstName: data.firstName,
       lastName: data.lastName,
@@ -152,7 +113,7 @@ export async function POST(request: NextRequest) {
       experience: data.experience,
     }))
 
-    // Send branded confirmation email TO the registrant
+    // Customer confirmation (Postmark — no-op when POSTMARK_SERVER_TOKEN unset)
     const matchedConfig = data.program
       ? Object.values(FORM_CONFIGS).find(
           c => c.prePopulateData.programName === data.program

@@ -1,0 +1,278 @@
+<!doctype html>
+<!-- @page width="11in" height="8.5in" landscape="true" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · Tri-Fold Core</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 11in 8.5in; margin: 0; }
+    .sheet { width: 11in; height: 8.5in; display: grid;
+             grid-template-columns: 1fr 1fr 1fr; position: relative; overflow: hidden; }
+    .panel { position: relative; padding: 24pt 22pt; overflow: hidden; }
+    .panel + .panel { border-left: 0.5pt dashed rgba(0,0,0,0.06); }
+
+    /* ── FRONT (outside, three panels: cover | back | inside-flap) ── */
+    .cover { background: #0F2237; color: rgba(255,255,255,0.86); padding: 0; }
+    .cover .photo { position:absolute; inset:0; }
+    .cover .photo img { width:100%; height:100%; object-fit:cover; }
+    .cover .photo::after { content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(11,17,32,0.45) 0%, rgba(11,17,32,0.72) 55%, rgba(11,17,32,0.92) 100%); }
+    .cover .stack { position: relative; z-index: 2; height: 100%; padding: 30pt 26pt;
+      display: flex; flex-direction: column; justify-content: space-between; }
+    .cover img.logo { height: 44pt; width: auto; }
+    .cover .display { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      color: #FFFFFF; font-size: 38pt; line-height: 1.05; }
+    .cover .pillars { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+      color: var(--gold); font-size: 13pt; margin-top: 4pt; }
+    .cover .strip { display:flex; justify-content: space-between; align-items: end;
+      font-size: 7.5pt; color: rgba(245,240,229,0.65); letter-spacing: 0.14em; text-transform: uppercase; }
+    .cover .strip .cta { color: var(--gold); font-weight: 700; letter-spacing: 0.18em; }
+
+    /* Back panel (when folded, becomes the back of the brochure) */
+    .back-panel { background: #FAF8F4; }
+    .back-panel h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 22pt; color: var(--text-heading); margin: 6pt 0 8pt; line-height: 1.1; }
+    .back-panel .loc { font-size: 8.5pt; line-height: 1.5; padding: 5pt 0; border-bottom: 0.5pt solid var(--divider-light); }
+    .back-panel .loc:last-child { border-bottom: none; }
+    .back-panel .loc .name { font-weight: 700; color: var(--text-heading); }
+    .back-panel .loc .meta { color: var(--text-muted); font-size: 7.5pt; }
+    .back-panel .contact-block { margin-top: 14pt; font-size: 8pt; line-height: 1.55; }
+    .back-panel .contact-block strong { color: var(--text-heading); }
+    .back-panel .city { color: var(--text-muted); font-size: 7pt; margin-top: 6pt; }
+
+    /* Inside-flap (the panel folded inward; first thing seen when unfolding) */
+    .flap { background: #F5F0E5; }
+    .flap h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 22pt; color: var(--text-heading); margin: 6pt 0 8pt; line-height: 1.12; }
+    .flap .lede { font-size: 9pt; line-height: 1.55; }
+    .flap .pathway-row { display: grid; grid-template-columns: 1.4fr 0.7fr 1.6fr; gap: 6pt;
+      font-size: 8pt; padding: 4pt 0; border-bottom: 0.5pt solid var(--border-light); }
+    .flap .pathway-row:last-child { border-bottom: none; }
+    .flap .pathway-row .l { font-weight: 700; color: var(--text-heading); }
+    .flap .pathway-row .a { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .flap .pathway-row .lt { color: var(--text-on-light); }
+
+    /* ── INSIDE (three panels: junior | adult | trust+CTA) ── */
+    .inside-panel h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 20pt; color: var(--text-heading); margin: 4pt 0 6pt; line-height: 1.12; }
+    .inside-panel .row { display: grid; grid-template-columns: 1fr 0.7fr 0.7fr 0.7fr 0.6fr;
+      gap: 4pt; font-size: 7.5pt; padding: 3pt 0; border-bottom: 0.5pt solid var(--divider-light); }
+    .inside-panel .row.head { color: var(--text-muted); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; font-size: 6.5pt; border-bottom: 0.5pt solid var(--border-light); }
+    .inside-panel .row .name { font-weight: 600; color: var(--text-heading); }
+    .inside-panel .row .ages { color: var(--text-muted); }
+    .inside-panel .row .num  { font-variant-numeric: tabular-nums; text-align: right; color: var(--gold-deep); font-weight: 700; }
+    .inside-panel .note { font-size: 7pt; color: var(--text-muted); margin-top: 4pt; font-style: italic; }
+
+    .juniors  { background: #FAF8F4; }
+    .adults   { background: #FAF8F4; }
+    .closing  { background: #0F2237; color: rgba(255,255,255,0.86); }
+    .closing h2 { color: #FFFFFF; }
+    .closing .stat .num { color: var(--gold); }
+    .closing .coach { display: grid; grid-template-columns: 38pt 1fr; gap: 8pt; padding: 6pt 0;
+      border-bottom: 0.5pt solid rgba(245,240,229,0.14); align-items: center; }
+    .closing .coach:last-child { border-bottom: none; }
+    .closing .coach img { width: 38pt; height: 48pt; object-fit: cover; border-radius: 3pt; }
+    .closing .coach .who { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 12pt; color: #FFFFFF; line-height: 1.1; }
+    .closing .coach .role { font-size: 7pt; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2pt; }
+    .closing .cta-block { background: rgba(255,255,255,0.06); border-radius: 4pt;
+      padding: 12pt; margin-top: 10pt; text-align: center; }
+    .closing .cta-block .head { font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300; color: #FFFFFF; font-size: 18pt; line-height: 1.1; }
+    .closing .cta-block .url { font-family: var(--font-body); font-weight: 700; color: var(--gold);
+      font-size: 9pt; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 6pt; display: block; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ OUTSIDE (front of folded brochure) ════════════════ -->
+<!-- Panel order when printed and folded:  back | flap | cover  -->
+<div class="sheet">
+
+  <!-- Back panel (left when printed; outermost back of brochure when folded) -->
+  <div class="panel back-panel">
+    <span class="horizon-bar h-med" style="position:absolute; top:0; left:0;"></span>
+    <span class="eyebrow eyebrow-warm">Where we play</span>
+    <h3>Three city parks.<br/>Twelve courts.<br/>One standard.</h3>
+    {% for loc in locations %}
+    <div class="loc">
+      <div class="name">{{ loc.name }}</div>
+      <div class="meta">{{ loc.address }}</div>
+      <div class="meta">{{ loc.use }}</div>
+    </div>
+    {% endfor %}
+    <div class="contact-block">
+      <strong>{{ contact.web }}</strong><br/>
+      {{ contact.phone }} · {{ contact.email }}<br/>
+      {{ contact.address }}
+      <div class="city">{{ contact.city_partner_line }}</div>
+    </div>
+    <img src="../assets/logos/LBTAblktext.png" style="height: 36pt; width:auto; position:absolute; bottom: 22pt; right: 22pt;" alt="LBTA" />
+    <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+  </div>
+
+  <!-- Inside-flap (middle panel) -->
+  <div class="panel flap">
+    <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+    <span class="eyebrow">The Pathway</span>
+    <h3>Movement first.<br/>Craft second.<br/>Community always.</h3>
+    <div class="lede" style="margin-bottom: 10pt;">
+      A clear progression from age three through college tennis. Same coaches.
+      Same standard. The path is the same; the work meets you where you are.
+    </div>
+    <div class="pathway-row" style="font-weight:700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 6.5pt; color: var(--text-muted);">
+      <span>Level</span><span>Ages</span><span>Where it leads</span>
+    </div>
+    {% for r in pathway %}
+    <div class="pathway-row">
+      <span class="l">{{ r.level }}</span>
+      <span class="a">{{ r.ages }}</span>
+      <span class="lt">{{ r.leads_to }}</span>
+    </div>
+    {% endfor %}
+    <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+  </div>
+
+  <!-- Cover panel (right when printed; outer front when folded) -->
+  <div class="panel cover">
+    <div class="photo"><img src="../assets/photos/hero-courts-sunset.jpg" alt="" /></div>
+    <span class="horizon-bar h-thick" style="position:absolute; top:0; left:0; z-index: 3;"></span>
+    <div class="stack">
+      <div style="display:flex; justify-content: space-between; align-items: center;">
+        <img class="logo" src="../assets/logos/LBTAwhttext.png" alt="Laguna Beach Tennis Academy" />
+        <span class="eyebrow eyebrow-on-dark">{{ contact.tagline }}</span>
+      </div>
+      <div>
+        <div class="display">Tennis,<br/>as it should<br/>be taught.</div>
+        <div class="pillars">Movement. Craft. Community.</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 7.5pt; color: rgba(245,240,229,0.55); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6pt;">{{ contact.city_partner_line }}</div>
+        <div class="cta" style="color: var(--gold); font-family: var(--font-body); font-weight: 700; font-size: 9pt; letter-spacing: 0.18em; text-transform: uppercase;">Book a Trial &nbsp;·&nbsp; {{ contact.web }}/book</div>
+      </div>
+    </div>
+    <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0; z-index: 3;"></span>
+  </div>
+
+</div>
+
+<div class="page-break"></div>
+
+<!-- ════════════════ INSIDE (when unfolded) ════════════════ -->
+<div class="sheet">
+
+  <!-- Junior pathway -->
+  <div class="panel inside-panel juniors">
+    <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+    <span class="eyebrow">Junior pathway</span>
+    <h2>Where juniors begin —<br/>and where they go.</h2>
+    <div class="row head"><span>Program</span><span>Ages</span><span class="num">1×/wk</span><span class="num">2×/wk</span><span class="num">Drop-in</span></div>
+    {% for p in programs.junior %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      {% if p.pricing.monthly %}
+      <span class="num">${{ p.pricing.monthly['1x'] }}/mo</span>
+      <span class="num">${{ p.pricing.monthly['2x'] }}/mo</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+      {% else %}
+      <span class="num">${{ p.pricing.spring['1x'] }}</span>
+      <span class="num">${{ p.pricing.spring['2x'] }}</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+      {% endif %}
+    </div>
+    {% endfor %}
+    {% for p in programs.development %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      <span class="num">${{ p.pricing.spring['1x'] }}</span>
+      <span class="num">${{ p.pricing.spring['2x'] }}</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+    </div>
+    {% endfor %}
+    <div class="note">Spring 2026 · {{ season.spring.dates }} · {{ season.spring.weeks }} weeks (skip May 25). Registration opens {{ season.spring.registrationOpens }}.</div>
+    <div class="note">High Performance requires UTR 8+. Junior Development covers UTR 1–7.</div>
+    <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+  </div>
+
+  <!-- Adult programs -->
+  <div class="panel inside-panel adults">
+    <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+    <span class="eyebrow eyebrow-warm">Adult programs</span>
+    <h2>Adults — from new<br/>to nationally rated.</h2>
+    <div class="row head"><span>Program</span><span>Level</span><span class="num">1×/wk</span><span class="num">2×/wk</span><span class="num">Drop-in</span></div>
+    {% for p in programs.adult %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      <span class="num">${{ p.pricing.spring['1x'] }}</span>
+      <span class="num">${{ p.pricing.spring['2x'] }}</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+    </div>
+    {% endfor %}
+    {% for p in programs['open-court'] %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      <span class="num">${{ p.pricing.monthly }}/mo</span>
+      <span class="num">—</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+    </div>
+    {% endfor %}
+    <div class="note">USTA Adult Leagues run April through September. UTR Match Play every Saturday + Sunday. See variant 02 (A5 booklet) or {{ contact.web }}/programs for league details.</div>
+
+    <div style="margin-top: 12pt;">
+      <span class="eyebrow eyebrow-gold">Private coaching · published rates</span>
+      <div class="row head"><span>Coach</span><span></span><span class="num">60 min</span><span class="num">90 min</span><span class="num">10-pack</span></div>
+      {% for r in private_rates %}
+      <div class="row">
+        <span class="name">{{ r.coach }}</span>
+        <span class="ages">{{ r.specialty }}</span>
+        <span class="num">${{ r.rate_60 }}</span>
+        <span class="num">${{ r.rate_90 }}</span>
+        <span class="num">${{ '{:,}'.format(r.pack_10) }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+  </div>
+
+  <!-- Anchors + Coaches + CTA -->
+  <div class="panel inside-panel closing">
+    <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+    <span class="eyebrow eyebrow-on-dark">Who you're training with</span>
+    <h2 style="color:#FFFFFF; font-size: 18pt;">A fourth-generation tennis<br/>family. Three coaches.<br/>One standard.</h2>
+
+    <div style="font-size: 8.5pt; line-height: 1.55; color: rgba(255,255,255,0.86); margin-top: 6pt;">
+      Andrew Mateljan was introduced to the game by his grandfather Steve at Ford Park in Redlands and has spent twenty years on tour and on court since. He coaches Karue Sell (ATP #258 — took him from #860 to #258 in 2025). Colton Smith (#133), Max McKennon (#458), and Ryan Seggerman (#63 in doubles) all came through the same training. Alex Michelsen came through the program at ages 12–13 — now ATP #30.
+    </div>
+
+    <div style="margin-top: 12pt;">
+      {% for c in coaches %}
+      <div class="coach">
+        <img src="../assets/photos/{{ c.image_local }}" alt="{{ c.name }}" />
+        <div>
+          <div class="who">{{ c.name }}</div>
+          <div class="role">{{ c.title }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="cta-block">
+      <div class="head" style="font-size: 16pt;">Book a complimentary trial.</div>
+      <div style="font-size: 8pt; color: rgba(245,240,229,0.7); margin-top: 4pt;">
+        Official City of Laguna Beach Tennis Partner since 2020
+      </div>
+      <span class="url">{{ contact.web }}/book</span>
+    </div>
+    <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+  </div>
+
+</div>
+
+</body>
+</html>

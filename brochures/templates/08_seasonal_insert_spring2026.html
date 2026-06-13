@@ -1,0 +1,110 @@
+<!doctype html>
+<!-- @page width="6in" height="4in" landscape="true" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · Spring 2026 Insert</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 6in 4in; margin: 0; }
+    .sheet { width: 6in; height: 4in; position: relative; overflow: hidden; }
+
+    /* FRONT */
+    .front { background: #FAF8F4; padding: 22pt 26pt; }
+    .front .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6pt; }
+    .front .logo { height: 30pt; width: auto; }
+    .front h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 30pt; line-height: 1.05; color: var(--text-heading); margin: 4pt 0 6pt; }
+    .front .lede { font-size: 9pt; line-height: 1.55; color: var(--text-on-light); max-width: 4.6in; }
+    .front .dates { display: flex; gap: 18pt; margin-top: 10pt; }
+    .front .date-block { flex: 1; }
+    .front .date-block .label { font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em; font-size: 7pt; color: var(--victoria-cove); }
+    .front .date-block .val { font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400; font-size: 14pt; color: var(--text-heading); margin-top: 2pt; }
+    .front .date-block .meta { font-size: 7.5pt; color: var(--text-muted); margin-top: 1pt; }
+
+    /* BACK */
+    .back { background: #0F2237; color: rgba(255,255,255,0.86); padding: 22pt 26pt; }
+    .back h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      color: #FFFFFF; font-size: 22pt; line-height: 1.1; margin: 0 0 6pt 0; }
+    .back .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; margin-top: 8pt; }
+    .back .block .head { font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em; font-size: 7.5pt;
+      color: var(--gold); margin-bottom: 4pt; }
+    .back .block .row { display:flex; justify-content: space-between; font-size: 8.5pt;
+      padding: 2pt 0; border-bottom: 0.5pt solid rgba(245,240,229,0.14); }
+    .back .block .row:last-child { border-bottom:none; }
+    .back .footer { display:flex; justify-content:space-between; align-items:end;
+      margin-top: 12pt; font-size: 7.5pt; color: rgba(245,240,229,0.55); }
+    .back .footer .cta { color: var(--gold); font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; font-size: 8pt; }
+  </style>
+</head>
+<body>
+
+<!-- ─────────────── FRONT (light) ─────────────── -->
+<div class="sheet front">
+  <span class="horizon-bar h-thick" style="position:absolute; top:0; left:0;"></span>
+  <div class="top">
+    <img class="logo" src="../assets/logos/LBTAblktext.png" alt="LBTA" />
+    <span class="eyebrow">Insert · Spring 2026</span>
+  </div>
+  <h1>Spring is on.<br/>Registration is open.</h1>
+  <div class="lede">
+    Ten weeks of training across three city parks. Junior pathway from age three.
+    Adults from new-to-tennis through 4.0+. UTR Match Play and USTA leagues
+    running every weekend.
+  </div>
+  <div class="dates">
+    <div class="date-block">
+      <div class="label">Spring session</div>
+      <div class="val">{{ season.spring.dates }}</div>
+      <div class="meta">{{ season.spring.weeks }} weeks · skip May 25</div>
+    </div>
+    <div class="date-block">
+      <div class="label">Spring break camp</div>
+      <div class="val">{{ camps.springBreak.dates }}</div>
+      <div class="meta">Tennis &amp; Adventure (5–11) · Junior Development (12–17)</div>
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────── BACK (dark) ─────────────── -->
+<div class="sheet back">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <h2>What's running this spring.</h2>
+  <div class="grid">
+    <div class="block">
+      <div class="head">Camps · Spring Break</div>
+      {% for opt in camps.springBreak.options %}
+      <div class="row"><span>{{ opt.name }} · {{ opt.ages }}</span><span>${{ opt.pricePerWeek }}/wk · ${{ opt.perDay }}/day</span></div>
+      {% endfor %}
+      <div class="head" style="margin-top: 10pt;">UTR Match Play · weekly</div>
+      <div class="row"><span>Color Ball (juniors) · Sat</span><span>${{ leagues.utr.divisions[0].drop_in }} drop-in</span></div>
+      <div class="row"><span>UTR 1–7 Singles · Sat</span><span>${{ leagues.utr.divisions[1].drop_in }} drop-in</span></div>
+      <div class="row"><span>UTR 3–12 Singles / Doubles · Sun</span><span>${{ leagues.utr.divisions[2].drop_in }} drop-in</span></div>
+    </div>
+    <div class="block">
+      <div class="head">USTA Leagues · Spring 2026</div>
+      {% for lg in leagues.usta.leagues %}
+      <div class="row"><span>{{ lg.name }}</span><span>{{ lg.season.split(',')[0] }}</span></div>
+      {% endfor %}
+      <div class="head" style="margin-top: 10pt;">Open registration</div>
+      <div class="row"><span>Registration opens</span><span>{{ season.spring.registrationOpens }}</span></div>
+      <div class="row"><span>Early-bird discount</span><span>5% (2+ weeks early)</span></div>
+      <div class="row"><span>Sibling discount</span><span>10%</span></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div>{{ contact.web }} · {{ contact.phone }} · {{ contact.email }}</div>
+    <div class="cta">Register at {{ contact.web }}/schedules</div>
+  </div>
+  <span class="horizon-bar h-med" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+
+</body>
+</html>

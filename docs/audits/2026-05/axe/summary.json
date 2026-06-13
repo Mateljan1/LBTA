@@ -1,0 +1,429 @@
+[
+  {
+    "route": "/",
+    "slug": "home",
+    "ruleCount": 4,
+    "nodeCount": 4,
+    "byImpact": {
+      "critical": 1,
+      "serious": 1,
+      "moderate": 2
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".font-semibold"
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 1,
+        "sample": ".hover\\:text-brand-victoria-cove\\/80"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": ".sm\\:grid-cols-3 > div:nth-child(1) > .mb-5"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-sm.text-lbta-slate > .font-headline.font-light"
+      }
+    ]
+  },
+  {
+    "route": "/schedules",
+    "slug": "schedules",
+    "ruleCount": 4,
+    "nodeCount": 53,
+    "byImpact": {
+      "critical": 1,
+      "serious": 49,
+      "moderate": 3
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".text-black"
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 49,
+        "sample": "#season-tab-winter > .leading-tight.block"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 2,
+        "sample": "div:nth-child(1) > .mb-6 > .text-\\[26px\\].md\\:text-\\[32px\\]"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-lbta-slate > .font-headline.font-light"
+      }
+    ]
+  },
+  {
+    "route": "/book",
+    "slug": "book",
+    "ruleCount": 4,
+    "nodeCount": 6,
+    "byImpact": {
+      "critical": 1,
+      "serious": 3,
+      "moderate": 2
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".tracking-wider"
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 3,
+        "sample": ".uppercase.text-brand-pacific-dusk\\/50.text-eyebrow"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": "div:nth-child(1) > h4"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-sm > .font-headline.font-light"
+      }
+    ]
+  },
+  {
+    "route": "/junior-trial",
+    "slug": "junior-trial",
+    "ruleCount": 2,
+    "nodeCount": 5,
+    "byImpact": {
+      "serious": 4,
+      "critical": 1
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 4,
+        "sample": ".bg-brand-sunset-cliff.tracking-wide.py-3"
+      },
+      {
+        "id": "select-name",
+        "impact": "critical",
+        "help": "Select element must have an accessible name",
+        "nodes": 1,
+        "sample": "select"
+      }
+    ]
+  },
+  {
+    "route": "/adult-trial",
+    "slug": "adult-trial",
+    "ruleCount": 4,
+    "nodeCount": 13,
+    "byImpact": {
+      "critical": 1,
+      "serious": 9,
+      "moderate": 3
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".text-black"
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 9,
+        "sample": ".mb-20 > .tracking-\\[0\\.2em\\].mb-4.uppercase"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 2,
+        "sample": ".border-l-2.border-brand-sunset-cliff.pl-6:nth-child(1) > .mb-2"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-lbta-slate.text-sm > .font-headline"
+      }
+    ]
+  },
+  {
+    "route": "/programs",
+    "slug": "programs",
+    "ruleCount": 4,
+    "nodeCount": 7,
+    "byImpact": {
+      "critical": 1,
+      "serious": 4,
+      "moderate": 2
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".text-black"
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 4,
+        "sample": "#tab-camps > .font-semibold.text-\\[13px\\]"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": "div:nth-child(1) > h4"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-lbta-slate > .font-headline.font-light"
+      }
+    ]
+  },
+  {
+    "route": "/coaches/andrew-mateljan",
+    "slug": "coaches--andrew-mateljan",
+    "ruleCount": 4,
+    "nodeCount": 4,
+    "byImpact": {
+      "critical": 1,
+      "serious": 1,
+      "moderate": 2
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".text-black"
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 1,
+        "sample": ".text-black\\/50.hover\\:text-brand-sunset-cliff[href$=\"coaches\"]"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": "div:nth-child(1) > h4"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-sm.text-lbta-slate > .font-headline.font-light"
+      }
+    ]
+  },
+  {
+    "route": "/about",
+    "slug": "about",
+    "ruleCount": 4,
+    "nodeCount": 12,
+    "byImpact": {
+      "critical": 1,
+      "serious": 9,
+      "moderate": 2
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".text-black"
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 9,
+        "sample": "div:nth-child(2) > .text-brand-pacific-dusk\\/60.mb-4.text-eyebrow"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": "div:nth-child(1) > h4"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-sm > .font-headline.font-light"
+      }
+    ]
+  },
+  {
+    "route": "/contact",
+    "slug": "contact",
+    "ruleCount": 4,
+    "nodeCount": 14,
+    "byImpact": {
+      "critical": 1,
+      "serious": 11,
+      "moderate": 2
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".tracking-wider"
+      },
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 11,
+        "sample": ".mt-2"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": "div:nth-child(1) > h4"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-sm > .font-headline"
+      }
+    ]
+  },
+  {
+    "route": "/pathway-planner",
+    "slug": "pathway-planner",
+    "ruleCount": 4,
+    "nodeCount": 7,
+    "byImpact": {
+      "critical": 5,
+      "moderate": 2
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".text-black"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": "div:nth-child(1) > h4"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-sm > .font-headline"
+      },
+      {
+        "id": "select-name",
+        "impact": "critical",
+        "help": "Select element must have an accessible name",
+        "nodes": 4,
+        "sample": "div:nth-child(1) > select"
+      }
+    ]
+  },
+  {
+    "route": "/thank-you",
+    "slug": "thank-you",
+    "ruleCount": 3,
+    "nodeCount": 3,
+    "byImpact": {
+      "critical": 1,
+      "moderate": 2
+    },
+    "topViolations": [
+      {
+        "id": "button-name",
+        "impact": "critical",
+        "help": "Buttons must have discernible text",
+        "nodes": 1,
+        "sample": ".tracking-wider"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": "div:nth-child(1) > h4"
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": 1,
+        "sample": ".text-sm > .font-headline"
+      }
+    ]
+  }
+]

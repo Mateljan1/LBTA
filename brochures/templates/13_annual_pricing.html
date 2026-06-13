@@ -1,0 +1,404 @@
+<!doctype html>
+<!-- @page width="8.5in" height="11in" landscape="false" -->
+<!--
+  13 — Annual Pricing Reference
+  ==============================
+  Single source of truth for what everything costs across all four 2026 seasons.
+  Distribution-friendly (parents asking "what does it cost for the year?") and
+  internal reference for staff. Pulls from year2026.json + spring-summer-2026.json
+  + fall2026.json + leagues-2026.json + private-rates.json — every cell traces
+  to a source file.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · 2026 Annual Pricing</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 8.5in 11in; margin: 0; }
+    .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--morning-light); }
+    .pad { padding: 18pt 26pt 14pt; }
+
+    /* Header */
+    .top {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 16pt; margin-bottom: 6pt;
+    }
+    .top .logo { height: 32pt; width: auto; }
+    .top .titles { flex: 1; }
+    .top .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 7pt;
+      color: var(--victoria-cove); margin-bottom: 2pt;
+    }
+    .top h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 22pt; line-height: 1.05; color: var(--text-heading);
+      margin: 0; letter-spacing: -0.005em;
+    }
+    .top .lede {
+      font-size: 8pt; color: var(--text-muted); margin-top: 2pt;
+      max-width: 5in; line-height: 1.4;
+    }
+
+    /* Section heading */
+    .sec-eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--sunset-cliff); margin: 10pt 0 2pt 0;
+    }
+    .sec-eyebrow.cove   { color: var(--victoria-cove); }
+    .sec-eyebrow.gold   { color: var(--gold-deep); }
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 13pt; color: var(--text-heading); line-height: 1.15;
+      margin: 0 0 4pt 0;
+    }
+
+    /* Master programs table — 11 rows × 4 seasons */
+    .prog-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 7pt; line-height: 1.35;
+      table-layout: fixed;
+    }
+    .prog-table col.c-name  { width: 22%; }
+    .prog-table col.c-level { width: 11%; }
+    .prog-table col.c-seas  { width: 14%; }
+    .prog-table col.c-drop  { width: 11%; }
+    .prog-table thead th {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; font-size: 6pt;
+      color: var(--text-muted);
+      padding: 5pt 4pt 3pt;
+      border-bottom: 0.5pt solid var(--border-light);
+      text-align: left;
+      vertical-align: bottom;
+    }
+    .prog-table thead th.season {
+      text-align: right;
+      color: var(--pacific-dusk);
+    }
+    .prog-table thead th.season .weeks {
+      display: block;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 5.5pt;
+      letter-spacing: 0.08em;
+      margin-top: 1pt;
+    }
+    .prog-table tbody td {
+      padding: 3pt 4pt;
+      vertical-align: top;
+      border-bottom: 0.4pt solid var(--divider-light);
+    }
+    .prog-table tbody tr:last-child td { border-bottom: none; }
+    .prog-table tbody td.name {
+      font-weight: 700; color: var(--text-heading);
+    }
+    .prog-table tbody td.level { color: var(--text-muted); font-size: 6.5pt; }
+    .prog-table tbody td.seas {
+      text-align: right; font-variant-numeric: tabular-nums;
+      color: var(--text-on-light);
+    }
+    .prog-table tbody td.seas .stack {
+      display: block;
+      font-size: 6.5pt;
+      line-height: 1.35;
+    }
+    .prog-table tbody td.seas .stack .ones { font-weight: 700; color: var(--gold-deep); }
+    .prog-table tbody td.seas .stack .twos { color: var(--text-on-light); }
+    .prog-table tbody td.seas .stack .threes { color: var(--text-muted); font-size: 6pt; }
+    .prog-table tbody td.drop {
+      text-align: right; font-variant-numeric: tabular-nums;
+      font-weight: 700; color: var(--gold-deep);
+    }
+    .prog-table tbody tr.cat-break td {
+      background: var(--sandstone);
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em;
+      font-size: 6pt; color: var(--text-muted);
+      padding: 3pt 4pt;
+      border-bottom: 0.5pt solid var(--border-light);
+    }
+
+    /* Three-column lower section: Privates / Open Court / Camps */
+    .lower {
+      display: grid; grid-template-columns: 1.05fr 0.85fr 1.4fr;
+      gap: 12pt; margin-top: 6pt;
+    }
+    .lower .block .grid {
+      display: grid;
+      font-size: 7pt; line-height: 1.4;
+    }
+    .lower .row {
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 6pt; padding: 2.5pt 0;
+      border-bottom: 0.4pt solid var(--divider-light);
+    }
+    .lower .row:last-child { border-bottom: none; }
+    .lower .row .name { font-weight: 700; color: var(--text-heading); }
+    .lower .row .meta { color: var(--text-muted); font-size: 6.5pt; }
+    .lower .row .price {
+      text-align: right; font-variant-numeric: tabular-nums;
+      color: var(--gold-deep); font-weight: 700; font-size: 7pt;
+    }
+
+    .privates-grid {
+      font-size: 7pt;
+    }
+    .privates-grid .row {
+      display: grid; grid-template-columns: 1.6fr 0.6fr 0.6fr 0.7fr 0.7fr;
+      gap: 4pt; padding: 3pt 0;
+      border-bottom: 0.4pt solid var(--divider-light);
+    }
+    .privates-grid .row:last-child { border-bottom: none; }
+    .privates-grid .row.head {
+      color: var(--text-muted); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; font-size: 5.5pt;
+      border-bottom: 0.5pt solid var(--border-light);
+    }
+    .privates-grid .row .who { font-weight: 700; color: var(--text-heading); font-size: 7pt; }
+    .privates-grid .row .num {
+      text-align: right; font-variant-numeric: tabular-nums;
+      color: var(--gold-deep); font-weight: 700; font-size: 6.5pt;
+    }
+
+    .camps-grid {
+      font-size: 6.8pt;
+    }
+    .camps-grid .row {
+      display: grid; grid-template-columns: 1fr 1.2fr 0.6fr 1.6fr;
+      gap: 5pt; padding: 3pt 0;
+      border-bottom: 0.4pt solid var(--divider-light);
+      line-height: 1.35;
+    }
+    .camps-grid .row:last-child { border-bottom: none; }
+    .camps-grid .row.head {
+      color: var(--text-muted); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; font-size: 5.5pt;
+      border-bottom: 0.5pt solid var(--border-light);
+    }
+    .camps-grid .row .name { font-weight: 700; color: var(--text-heading); }
+    .camps-grid .row .meta { color: var(--text-muted); }
+    .camps-grid .row .price { color: var(--gold-deep); font-weight: 700; }
+
+    /* Leagues + discounts band */
+    .band {
+      background: var(--deep-water); color: var(--text-on-dark);
+      border-radius: 4pt; padding: 9pt 14pt; margin-top: 8pt;
+    }
+    .band h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 11pt; color: #FFFFFF; margin: 0 0 4pt 0;
+    }
+    .band .eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 6.5pt;
+      color: var(--gold); margin-bottom: 2pt;
+    }
+    .band .grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 16pt; margin-top: 6pt; font-size: 6.8pt;
+    }
+    .band .row {
+      display: grid; grid-template-columns: 1.6fr 1fr;
+      gap: 6pt; padding: 2pt 0; line-height: 1.35;
+      border-bottom: 0.4pt solid rgba(245,240,229,0.14);
+    }
+    .band .row:last-child { border-bottom: none; }
+    .band .row .who { font-weight: 700; color: #FFFFFF; }
+    .band .row .what {
+      text-align: right; font-variant-numeric: tabular-nums;
+      color: var(--gold);
+    }
+    .band .col-eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em; font-size: 6pt;
+      color: var(--gold); margin-bottom: 4pt;
+    }
+
+    .foot {
+      margin-top: 10pt; padding-top: 6pt;
+      border-top: 0.5pt solid var(--divider-light);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 6.5pt; color: var(--text-muted);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .foot .tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic; font-weight: 400; font-size: 9pt;
+      color: var(--gold-deep); letter-spacing: normal; text-transform: none;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <span class="horizon-bar h-med" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+
+    <div class="top">
+      <div class="titles">
+        <div class="eyebrow">Annual Pricing · 2026</div>
+        <h1>What it costs. All year. All formats.</h1>
+        <div class="lede">
+          Group prices scale by season length — Winter is 13 weeks, Spring 10, Summer 11, Fall 16. Per-week rate is the same;
+          the season multiplier does the math. Drop-in stays flat.
+        </div>
+      </div>
+      <img class="logo" src="../assets/logos/LBTAblktext.png" alt="LBTA" />
+    </div>
+
+    <!-- =================== PROGRAMS TABLE =================== -->
+    <div class="sec-eyebrow cove">Group programs</div>
+    <h2>Junior pathway · Adult tiers</h2>
+    <table class="prog-table">
+      <colgroup>
+        <col class="c-name"/><col class="c-level"/>
+        <col class="c-seas"/><col class="c-seas"/><col class="c-seas"/><col class="c-seas"/>
+        <col class="c-drop"/>
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Program</th><th>Ages / level</th>
+          {% for s in annual_pricing.seasons %}
+          <th class="season">{{ s.label }}<span class="weeks">{{ s.weeks }} weeks</span></th>
+          {% endfor %}
+          <th class="season">Drop-in</th>
+        </tr>
+        <tr>
+          <th colspan="2"></th>
+          {% for s in annual_pricing.seasons %}
+          <th class="season" style="font-size: 5pt; color: var(--text-muted); border-bottom: none; padding-top: 0;">1× / 2× / 3×</th>
+          {% endfor %}
+          <th class="season" style="font-size: 5pt; color: var(--text-muted); border-bottom: none; padding-top: 0;">flat</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set last_cat = namespace(v="") %}
+        {% for r in annual_pricing.rows %}
+          {% if r.category != last_cat.v %}
+          <tr class="cat-break"><td colspan="7">{{ r.category }}</td></tr>
+          {% set last_cat.v = r.category %}
+          {% endif %}
+          <tr>
+            <td class="name">{{ r.program }}</td>
+            <td class="level">{{ r.level }}</td>
+            {% for s in annual_pricing.seasons %}
+              {% set cell = r[s.key] %}
+              <td class="seas">
+                {% if cell %}
+                  <span class="stack">
+                  {% if cell['1x'] %}<span class="ones">${{ '{:,}'.format(cell['1x']) }}</span>{% if cell['2x'] %} / <span class="twos">${{ '{:,}'.format(cell['2x']) }}</span>{% endif %}{% if cell['3x'] %} / <span class="threes">${{ '{:,}'.format(cell['3x']) }}</span>{% endif %}
+                  {% elif cell['monthly'] %}<span class="ones">${{ cell['monthly'] }}/mo</span>
+                  {% else %}<span style="color:var(--text-muted);">—</span>
+                  {% endif %}
+                  </span>
+                {% else %}<span style="color:var(--text-muted);">—</span>{% endif %}
+              </td>
+            {% endfor %}
+            <td class="drop">${{ r.winter['drop_in'] if r.winter else '—' }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- =================== LOWER 3 COLUMNS =================== -->
+    <div class="lower">
+
+      <div class="block">
+        <div class="sec-eyebrow gold">Private coaching</div>
+        <h2 style="font-size: 11pt;">Per coach · per format</h2>
+        <div class="privates-grid">
+          <div class="row head"><span class="who">Coach</span><span class="num">60 min</span><span class="num">90 min</span><span class="num">10-pack</span><span class="num">20-pack</span></div>
+          {% for r in annual_pricing.privates %}
+          <div class="row">
+            <span class="who">{{ r.coach }}</span>
+            <span class="num">${{ r.rate60 }}</span>
+            <span class="num">${{ r.rate90 }}</span>
+            <span class="num">${{ '{:,}'.format(r.pack10) }}</span>
+            <span class="num">${{ '{:,}'.format(r.pack20) }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        <p style="font-size: 6.5pt; color: var(--text-muted); margin: 4pt 0 0; line-height: 1.4;">Pack expiry 12 months. 24-hr cancellation. Default offer is Peter or Allison; Andrew is for HP / Pod-track / specific request.</p>
+      </div>
+
+      <div class="block">
+        <div class="sec-eyebrow cove">Open court</div>
+        <h2 style="font-size: 11pt;">Year-round</h2>
+        <div>
+          {% for r in annual_pricing.open_court %}
+          <div class="row">
+            <span><span class="name">{{ r.name }}</span><br/><span class="meta">{{ r.level }} · {{ r.schedule }}</span></span>
+            <span class="price">${{ r.monthly }}/mo · ${{ r.drop_in }} drop-in</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="sec-eyebrow">Camps</div>
+        <h2 style="font-size: 11pt;">Six sessions across the year</h2>
+        <div class="camps-grid">
+          <div class="row head"><span>Camp</span><span>Dates</span><span>Ages</span><span>Investment</span></div>
+          {% for c in annual_pricing.camps %}
+          <div class="row">
+            <span class="name">{{ c.name }}</span>
+            <span class="meta">{{ c.dates }}</span>
+            <span class="meta">{{ c.ages }}</span>
+            <span class="price">{{ c.price_label }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =================== LEAGUES + DISCOUNTS BAND =================== -->
+    <div class="band">
+      <div class="grid">
+        <div>
+          <div class="col-eyebrow">UTR Match Play · Apr 11 – Jun 6</div>
+          {% for d in annual_pricing.matchplay_utr %}
+          <div class="row">
+            <span class="who">{{ d.name }}</span>
+            <span class="what">{{ d.price }} · ${{ d.drop_in }} drop-in</span>
+          </div>
+          {% endfor %}
+          <p style="font-size: 6pt; color: rgba(245,240,229,0.6); margin: 4pt 0 0;">Saturdays at Alta Laguna · Sundays at LBHS. Grand Finals June 6.</p>
+        </div>
+
+        <div>
+          <div class="col-eyebrow">Discounts &amp; scholarship</div>
+          {% for d in annual_pricing.discounts %}
+          <div class="row">
+            <span class="who">{{ d.label }}</span>
+            <span class="what">{{ d.value }}</span>
+          </div>
+          {% endfor %}
+          <p style="font-size: 6pt; color: rgba(245,240,229,0.7); margin: 5pt 0 0; line-height: 1.4;">
+            <strong style="color:var(--gold);">Scholarships:</strong> {{ annual_pricing.scholarship.annual_pool }} awarded annually · {{ annual_pricing.scholarship.coverage }} coverage. Email {{ annual_pricing.scholarship.email }}.
+          </p>
+        </div>
+
+        <div>
+          <div class="col-eyebrow">USTA Adult Leagues</div>
+          <p style="font-size: 6.8pt; color: rgba(245,240,229,0.86); margin: 0 0 5pt; line-height: 1.5;">
+            Four leagues run Apr–Sep at LBTA: <strong style="color:#FFFFFF;">Adult 18+, Friday Women's, Mixed 40+ Doubles, Adult 55+ Doubles.</strong>
+          </p>
+          <p style="font-size: 6pt; color: rgba(245,240,229,0.6); margin: 0; line-height: 1.4;">
+            League fees and USTA membership are paid directly to USTA — not LBTA. Captains and team formation supported by LBTA staff. Talk to us about joining a team.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="tagline">Movement. Craft. Community.</span>
+      <span>Reply to support@lagunabeachtennisacademy.com · (949) 534-0457 · Official City of Laguna Beach Tennis Partner since 2020</span>
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="display: block; width: 100%;"></span>
+</div>
+</body>
+</html>

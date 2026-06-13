@@ -1,0 +1,130 @@
+<!doctype html>
+<!-- @page width="8.5in" height="11in" landscape="false" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · A note for you</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 8.5in 11in; margin: 0; }
+    .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; }
+    .pad  { padding: 28pt 50pt 28pt; }
+
+    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 32pt; line-height: 1.05; color: var(--text-heading); margin: 4pt 0 6pt; letter-spacing: -0.005em; }
+    h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 19pt; line-height: 1.12; color: var(--text-heading); margin: 12pt 0 4pt; }
+    h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+         font-size: 14pt; color: var(--pacific-dusk); margin: 12pt 0 4pt; }
+    p { font-size: 10pt; line-height: 1.55; color: var(--text-on-light); margin: 0 0 6pt; }
+    .lede { font-size: 10.5pt; line-height: 1.55; color: var(--text-on-light); margin: 4pt 0 8pt; }
+
+    .top-eyebrow { font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 8pt; color: var(--victoria-cove); }
+
+    a { color: var(--victoria-cove); text-decoration: none; border-bottom: 0.5pt solid var(--victoria-cove); }
+    a:hover { color: var(--cove-bright); }
+
+    .pathway-row { display: grid; grid-template-columns: 1.4fr 0.5fr 1.6fr; gap: 8pt;
+      font-size: 9pt; padding: 4pt 0; border-bottom: 0.5pt solid var(--divider-light); }
+    .pathway-row:first-child { font-weight:700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-size: 7pt; border-bottom: 0.5pt solid var(--border-light); }
+    .pathway-row .l { font-weight: 700; color: var(--text-heading); }
+
+    .coach-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14pt; margin: 14pt 0; }
+    .coach-card { text-align: center; }
+    .coach-card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 4pt; }
+    .coach-card .name { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+      font-size: 13pt; color: var(--text-heading); margin-top: 6pt; line-height: 1.1; }
+    .coach-card .role { font-size: 7.5pt; color: var(--victoria-cove); text-transform: uppercase;
+      letter-spacing: 0.14em; font-weight: 700; margin-top: 2pt; }
+
+    .cta-card { background: #F5F0E5; border-radius: 4pt; padding: 18pt; margin: 14pt 0;
+      text-align: center; border: 0.5pt solid var(--border-light); }
+    .cta-card .head { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 24pt; color: var(--text-heading); line-height: 1.12; }
+    .cta-card .url { font-family: var(--font-body); font-weight: 700; color: var(--victoria-cove);
+      font-size: 11pt; margin-top: 8pt; display: inline-block; border: none; }
+    .cta-card .meta { font-size: 8.5pt; color: var(--text-muted); margin-top: 6pt; }
+
+    .signature {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+      color: var(--gold-deep); font-size: 16pt; margin-top: 10pt;
+    }
+    .signature .name {
+      display: block; font-style: normal; font-weight: 400; color: var(--text-heading);
+      font-size: 14pt; margin-top: 2pt;
+    }
+    .signature .role {
+      display: block; font-family: var(--font-body); font-style: normal; font-weight: 600;
+      font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.14em; color: var(--victoria-cove); margin-top: 2pt;
+    }
+
+    .small-row { display: flex; justify-content: space-between; padding: 4pt 0;
+      border-bottom: 0.5pt solid var(--divider-light); font-size: 9pt; }
+    .small-row .name { font-weight: 600; color: var(--text-heading); }
+    .small-row .meta { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <span class="horizon-bar h-thick" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <div style="display:flex; justify-content: space-between; align-items: center;">
+      <img src="../assets/logos/LBTAblktext.png" style="height: 40pt; width:auto;" alt="LBTA" />
+      <span class="top-eyebrow">A personal note · Spring 2026</span>
+    </div>
+
+    <h1>Thanks for getting<br/>in touch.</h1>
+    <p class="lede">Thanks for getting in touch. This is a quick map of how we train at LBTA — the pathway, the coaches, and the programs that fit where you (or your player) are right now. Reply to this email and I&#39;ll match you to the right starting point.</p>
+
+    <h2>Coaches you'll meet.</h2>
+    <div class="coach-strip">
+      <div class="coach-card">
+        <img src="../assets/photos/andrew.png" alt="Andrew Mateljan" />
+        <div class="name">Andrew Mateljan</div>
+        <div class="role">Founder &amp; Director of Tennis</div>
+        <div style="font-size: 7pt; color: var(--text-muted); margin-top: 2pt; letter-spacing: 0.04em;">Fourth-generation tennis coach</div>
+      </div>
+      <div class="coach-card">
+        <img src="../assets/photos/peter.png" alt="Peter DeFrantz" />
+        <div class="name">Peter DeFrantz</div>
+        <div class="role">Head Coach, Junior Development</div>
+      </div>
+      <div class="coach-card">
+        <img src="../assets/photos/allison.png" alt="Allison Cronk" />
+        <div class="name">Allison Cronk</div>
+        <div class="role">Head Coach, Youth Programs</div>
+      </div>
+    </div>
+
+    <h2>The pathway, in one line.</h2>
+    <p>Little Tennis Stars (3–4) › Red Ball (5–6) › Orange Ball (7–8) › Green Dot (9–11) › Junior Development (UTR 1–7) › High Performance (UTR 8+). Same coaches the whole way. Adults run in parallel — New to Tennis through 4.0+.</p>
+
+    <h2>Spring 2026 · key dates</h2>
+    <div class="small-row"><span class="name">Spring session</span><span class="meta">April 6 – June 13, 2026</span></div>
+    <div class="small-row"><span class="name">Spring Break Camp</span><span class="meta">March 30 – April 2, 2026 (Mon–Thu)</span></div>
+    <div class="small-row"><span class="name">UTR Match Play season</span><span class="meta">April 11 – June 6, 2026 · Grand Finals June 6</span></div>
+
+    <div class="cta-card">
+      <div class="head">Reply for a personal program match.</div>
+      <div class="meta">Or browse all programs at <a href="https://lagunabeachtennisacademy.com/programs">lagunabeachtennisacademy.com/programs</a> · Book a complimentary trial at <a href="https://lagunabeachtennisacademy.com/book">lagunabeachtennisacademy.com/book</a>.</div>
+      <div class="meta">30-day money-back guarantee · No long-term commitment</div>
+    </div>
+
+    <div class="signature">
+      Looking forward to seeing you on court,
+      <span class="name">— Andrew</span>
+      <span class="role">Andrew Mateljan · Founder &amp; Director of Tennis</span>
+    </div>
+
+    <div style="margin-top: 12pt; padding-top: 8pt; border-top: 0.5pt solid var(--divider-light); display: flex; justify-content: space-between; align-items: center; font-size: 7pt; color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase;">
+      <span>support@lagunabeachtennisacademy.com · (949) 534-0457</span>
+      <span>Official City of Laguna Beach Tennis Partner Since 2020</span>
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+
+</body>
+</html>

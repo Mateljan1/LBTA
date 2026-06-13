@@ -10,6 +10,7 @@ import PrivateLessonModal from '@/components/PrivateLessonModal'
 import DarkSection from '@/components/ui/DarkSection'
 import HorizonDivider from '@/components/ui/HorizonDivider'
 import { getCoachNameBySlug } from '@/lib/coach-slug'
+import { LBTA_PUBLIC_CONTACT } from '@/lib/public-contact'
 
 function BookPageContent() {
   const searchParams = useSearchParams()
@@ -103,20 +104,20 @@ function BookPageContent() {
             </button>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-black/10">
-              <p className="font-sans text-[13px] text-black/60">
+              <p className="font-sans text-[13px] text-black/70">
                 Prefer to speak directly?
               </p>
               <div className="flex gap-4">
                 <a 
-                  href="tel:9495340457"
-                  aria-label="Call (949) 534-0457"
+                  href={`tel:${LBTA_PUBLIC_CONTACT.phoneDial}`}
+                  aria-label={`Call ${LBTA_PUBLIC_CONTACT.phoneDisplay}`}
                   className="flex items-center gap-2 text-black font-sans font-semibold text-[14px] hover:text-black/70 transition-colors"
                 >
                   <Phone className="w-4 h-4" aria-hidden="true" />
-                  (949) 534-0457
+                  {LBTA_PUBLIC_CONTACT.phoneDisplay}
                 </a>
                 <a 
-                  href="mailto:support@lagunabeachtennisacademy.com" 
+                  href={`mailto:${LBTA_PUBLIC_CONTACT.email}`}
                   className="flex items-center gap-2 text-black font-sans font-semibold text-[14px] hover:text-black/70 transition-colors"
                 >
                   <Mail className="w-4 h-4" aria-hidden="true" />

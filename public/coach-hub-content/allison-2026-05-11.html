@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1B3A5C">
+<title>Coach Allison — Mon May 11 · Moulton Meadows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--pacific-dusk:#1B3A5C;--deep-water:#0F2237;--victoria-cove:#2E8B8B;--sunset-cliff:#E8834A;--thousand-steps:#C4963C;--tide-pool:#3A8B6E;--morning-light:#FAF8F4;--sandstone:#F5F0E5;--salt-air:#FFFFFF;--pd-12:rgba(27,58,92,.12);--pd-30:rgba(27,58,92,.3);--pd-60:rgba(27,58,92,.6);--shadow:0 1px 0 rgba(27,58,92,.04),0 8px 24px -8px rgba(27,58,92,.10);--r:14px;--rs:8px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--morning-light);color:var(--pacific-dusk);line-height:1.55;font-size:16px;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:24px 18px 120px}
+.hero{padding:28px 4px 28px;border-bottom:1px solid var(--pd-12);margin-bottom:24px}
+.hero .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--victoria-cove);margin-bottom:14px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,8vw,48px);line-height:1.05;letter-spacing:-.02em;color:var(--deep-water);margin-bottom:18px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;color:var(--pacific-dusk)}
+.hero .meta strong{font-weight:600}
+.hero .clock{margin-top:18px;display:inline-block;padding:6px 12px;background:var(--sandstone);border-radius:var(--rs);font-variant-numeric:tabular-nums;font-weight:500;font-size:13px}
+.theme{background:var(--sandstone);border-radius:var(--r);padding:18px 20px;margin-bottom:18px;display:flex;align-items:flex-start;gap:16px}
+.theme .num{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;line-height:1;color:var(--thousand-steps);letter-spacing:-.02em;flex-shrink:0}
+.theme .label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--pd-60);margin-bottom:2px;font-weight:600}
+.theme h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:22px;letter-spacing:-.01em;color:var(--deep-water);margin-bottom:6px}
+.theme p{font-size:14px;color:var(--pacific-dusk)}
+.rule{background:var(--deep-water);color:var(--salt-air);border-radius:var(--r);padding:18px 20px;margin-bottom:28px}
+.rule .label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:4px;font-weight:600}
+.rule h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:22px;letter-spacing:-.01em;margin-bottom:10px;color:var(--salt-air)}
+.rule p{font-size:13px;color:rgba(255,255,255,.85);margin-bottom:12px;line-height:1.5}
+.rule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:6px;margin-top:8px}
+.rule-grid div{background:rgba(255,255,255,.08);border-radius:6px;padding:8px 6px;text-align:center;font-size:12px;font-variant-numeric:tabular-nums}
+.rule-grid div strong{display:block;font-size:14px;color:var(--salt-air);font-weight:600;margin-bottom:2px}
+.rule-grid div span{color:rgba(255,255,255,.7);font-size:11px}
+.session{background:var(--salt-air);border-radius:var(--r);margin-bottom:28px;box-shadow:var(--shadow);overflow:hidden}
+.session-head{padding:24px 22px 18px;border-bottom:1px solid var(--pd-12)}
+.session-head .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+.session-head .time{font-weight:600;font-size:13px;letter-spacing:.04em;color:var(--victoria-cove);padding:4px 10px;background:rgba(46,139,139,.10);border-radius:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.session-head .duration{font-size:12px;color:var(--pd-60);font-weight:500;font-variant-numeric:tabular-nums}
+.session-head h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:32px;line-height:1.1;letter-spacing:-.02em;color:var(--deep-water);margin-bottom:6px}
+.session-head .sub{font-size:14px;color:var(--pacific-dusk)}
+.session-head .age-cue{margin-top:10px;display:inline-block;padding:4px 10px;background:var(--sandstone);border-radius:6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--pacific-dusk)}
+.progress{padding:14px 22px;background:var(--morning-light);border-bottom:1px solid var(--pd-12);display:flex;align-items:center;gap:14px}
+.progress .bar{flex:1;height:6px;background:var(--pd-12);border-radius:3px;overflow:hidden}
+.progress .fill{height:100%;background:var(--tide-pool);width:0%;transition:width .4s}
+.progress .count{font-size:12px;font-weight:600;color:var(--pd-60);font-variant-numeric:tabular-nums;white-space:nowrap}
+.drill{padding:16px 22px;border-bottom:1px solid var(--pd-12);transition:background .2s;position:relative}
+.drill:last-child{border-bottom:0}
+.drill.done{background:rgba(58,139,110,.04)}
+.drill.done .drill-name{color:var(--pd-60);text-decoration:line-through;text-decoration-thickness:1px}
+.drill.current{background:rgba(46,139,139,.05)}
+.drill.current::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--victoria-cove)}
+.drill-head{display:flex;align-items:flex-start;gap:14px;cursor:pointer}
+.check{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--pd-30);background:var(--salt-air);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:2px}
+.check svg{width:14px;height:14px;stroke:transparent;transition:stroke .2s}
+.drill.done .check{background:var(--tide-pool);border-color:var(--tide-pool)}
+.drill.done .check svg{stroke:var(--salt-air)}
+.drill-body{flex:1;min-width:0}
+.drill-meta{display:flex;gap:10px;align-items:baseline;margin-bottom:4px;flex-wrap:wrap}
+.drill-time{font-size:11px;font-weight:600;color:var(--victoria-cove);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.drill-min{font-size:11px;color:var(--pd-60);font-weight:500}
+.drill-name{font-weight:600;font-size:16px;color:var(--deep-water);line-height:1.3;margin-bottom:6px}
+.drill-cue{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:17px;line-height:1.35;color:var(--pacific-dusk);letter-spacing:-.005em;padding-left:12px;border-left:2px solid var(--thousand-steps);margin-bottom:6px}
+.drill-why{font-size:13px;color:var(--pd-60);font-weight:500}
+.drill-details{margin-top:12px;padding:14px 16px;background:var(--sandstone);border-radius:var(--rs);font-size:14px;line-height:1.55;display:none}
+.drill.open .drill-details{display:block}
+.drill-details strong{font-weight:600;color:var(--deep-water)}
+.drill-details .row{margin-bottom:8px}
+.drill-details .row:last-child{margin-bottom:0}
+.drill-details .row-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--victoria-cove);margin-bottom:2px}
+.toggle{margin-top:8px;font-size:12px;color:var(--victoria-cove);background:transparent;border:0;cursor:pointer;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 0;font-family:inherit}
+.toggle:hover{color:var(--pacific-dusk)}
+.timer-bar{display:flex;align-items:center;gap:12px;margin-top:10px;padding:10px 14px;background:var(--deep-water);color:var(--salt-air);border-radius:var(--rs);font-variant-numeric:tabular-nums}
+.timer-bar.hidden{display:none}
+.timer-display{font-size:22px;font-weight:600;letter-spacing:.02em;flex:1}
+.timer-btn{background:var(--salt-air);color:var(--deep-water);border:0;padding:8px 14px;border-radius:6px;font-family:inherit;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.timer-btn.secondary{background:transparent;color:var(--salt-air);border:1px solid rgba(255,255,255,.3)}
+.controls{padding:18px 22px;display:flex;gap:10px;flex-wrap:wrap;background:var(--morning-light);border-top:1px solid var(--pd-12)}
+.btn{border:0;padding:12px 18px;border-radius:var(--rs);font-family:inherit;font-weight:600;font-size:13px;letter-spacing:.04em;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--deep-water);color:var(--salt-air)}
+.btn-ghost{background:transparent;color:var(--pacific-dusk);border:1px solid var(--pd-30)}
+.foot{margin-top:36px;padding:22px 4px 0;border-top:1px solid var(--pd-12);font-size:13px;color:var(--pd-60);line-height:1.6}
+.foot p{margin-bottom:10px}
+.foot strong{color:var(--pacific-dusk);font-weight:600}
+.horizon{height:2px;background:linear-gradient(90deg,#2E8B8B 0%,#E8834A 35%,#C4963C 50%,#E8834A 65%,#2E8B8B 100%);border-radius:1px;margin:32px 0;opacity:.6}
+@media (max-width:480px){.wrap{padding:18px 14px 100px}.session-head,.controls{padding:16px}.drill,.progress{padding:14px 16px}.session-head h2{font-size:26px}.drill-cue{font-size:15px}.drill-name{font-size:15px}.hero h1{font-size:32px}.rule h3{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Coach plan · Spring · Week 1 of 5</div>
+  <h1>Monday, May 11</h1>
+  <div class="meta">
+    <span><strong>Coach Allison</strong></span>
+    <span>Moulton Meadows</span>
+    <span>Two sessions</span>
+  </div>
+  <div class="clock" id="clock">Loading…</div>
+</header>
+
+<section class="theme">
+  <div class="num">1</div>
+  <div>
+    <div class="label">Week theme</div>
+    <h2>Reset and re-anchor</h2>
+    <p>Movement first. Contact point. Rhythm. After a busy April, today is about feeling the basics again — no pressure points, lots of consistency, lots of yes-moments.</p>
+  </div>
+</section>
+
+<section class="rule">
+  <div class="label">Coaching rule</div>
+  <h3>Drill duration matches the child's age in minutes</h3>
+  <p>Younger kids' working attention span is short. Cross the limit and you lose them — stay under it and the same kid stays engaged for 90 minutes. Switch activity, switch game, switch constraint. Variety beats volume.</p>
+  <div class="rule-grid">
+    <div><strong>3 yr</strong><span>3 min</span></div>
+    <div><strong>4 yr</strong><span>4 min</span></div>
+    <div><strong>5 yr</strong><span>5 min</span></div>
+    <div><strong>6 yr</strong><span>6 min</span></div>
+    <div><strong>7-8</strong><span>7-8 min</span></div>
+    <div><strong>9-11</strong><span>10 min</span></div>
+    <div><strong>12+</strong><span>15+ min</span></div>
+  </div>
+</section>
+
+<!-- ====================== LITTLE STARS ====================== -->
+<section class="session" data-session="ls">
+  <div class="session-head">
+    <div class="row1">
+      <span class="time">3:30 – 4:15 PM</span>
+      <span class="duration">45 min · 13 blocks · ~3-4 min each</span>
+    </div>
+    <h2>Little Tennis Stars</h2>
+    <div class="sub">Ages 3–4 · Mini-court · Pillar emphasis: Movement &amp; Community</div>
+    <div class="age-cue">Stay under 4 minutes per activity</div>
+  </div>
+  <div class="progress"><div class="bar"><div class="fill" id="fill-ls"></div></div><div class="count" id="count-ls">0 / 13</div></div>
+
+  <article class="drill" data-id="ls-1" data-mins="3">
+    <div class="drill-head"><button class="check" aria-label="Mark complete"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">3:30 – 3:33</span><span class="drill-min">3 min</span></div>
+        <div class="drill-name">1 · Popcorn</div>
+        <div class="drill-cue">"Chase the popcorn before it stops popping!"</div>
+        <div class="drill-why">Reaction time + tracking + first-step quickness. No racket yet.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Yell "popcorn!" — throw foam balls high and behind toward players. Kids catch as many as possible before each ball stops bouncing.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">3:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-2" data-mins="3">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">3:33 – 3:36</span><span class="drill-min">3 min</span></div>
+        <div class="drill-name">2 · Zoo Warm-Up</div>
+        <div class="drill-cue">"Show me your best kangaroo — big jumps!"</div>
+        <div class="drill-why">Disguised athletic prep — jump, gallop, hop, balance.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Call animals — kangaroo (jumping), horse (gallop), frog (squat hops), hummingbird (quick feet), eagle (arms wide + balance), elephant (heavy steps). Players mimic around the court.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">3:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-3" data-mins="3">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">3:36 – 3:39</span><span class="drill-min">3 min</span></div>
+        <div class="drill-name">3 · Lily Pad</div>
+        <div class="drill-cue">"Stick your landing like a superhero!"</div>
+        <div class="drill-why">Single-leg balance. Foundation for split-step landing.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Poly dots in a line. Players jump pad to pad on ONE leg, regaining balance before next jump. Form over speed.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">3:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-4" data-mins="3">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">3:39 – 3:42</span><span class="drill-min">3 min</span></div>
+        <div class="drill-name">4 · Bobsled</div>
+        <div class="drill-cue">"Watch the ball the whole way — dodge it before it gets to you!"</div>
+        <div class="drill-why">Ball tracking while seated. Trains visual tracking before feet get involved.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Players sit single file (bobsled) facing net. Coach gently tosses foam balls — kids bob and weave to avoid but stay seated. Foam balls only.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">3:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-5" data-mins="4">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">3:42 – 3:46</span><span class="drill-min">4 min</span></div>
+        <div class="drill-name">5 · Goof Balls &amp; Magic Balls (round 1)</div>
+        <div class="drill-cue">"Send the ball over, then race to your magic!"</div>
+        <div class="drill-why">First "the shot matters" moment — making it over earns the reward.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Two hoppers at net posts (Magic Balls). One hopper at baseline (Goof Balls). Two teams. Drop/hit baseline ball over net → make it → run to net, grab a Magic Ball. Miss → back of line. First team to empty Magic Ball hopper wins.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">4:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-6" data-mins="4">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">3:46 – 3:50</span><span class="drill-min">4 min</span></div>
+        <div class="drill-name">6 · Goof Balls round 2 (with cone targets)</div>
+        <div class="drill-cue">"This time aim at the cones — hit one and bring it back as treasure."</div>
+        <div class="drill-why">Same drill, new constraint = brand new activity to a 4-year-old.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Reset hoppers. Add 4 upside-down cones across each team's side as bonus targets. Hit a cone on the way over → extra Magic Ball. Resets the engagement clock without leaving the format.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">4:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-7" data-mins="4">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">3:50 – 3:54</span><span class="drill-min">4 min</span></div>
+        <div class="drill-name">7 · Rip It</div>
+        <div class="drill-cue">"Full swing — send it all the way to the net!"</div>
+        <div class="drill-why">First real racket-on-ball contact. Loud, satisfying, no moving-ball pressure.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Empty ball can upside down on court. Foam ball balanced on top. Line up players. Call "1, 2, 3, RIP IT!" — take turns hitting ball off can toward net. Emphasize full follow-through.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">4:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-8" data-mins="3">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">3:54 – 3:57</span><span class="drill-min">3 min</span></div>
+        <div class="drill-name">8 · In the Toilet</div>
+        <div class="drill-cue">"Make the ball float up in slow motion and land in the toilet!"</div>
+        <div class="drill-why">Racket head control — the prerequisite to any real rally.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Circle dots scattered around court. Each player balances ball on strings, walking dot to dot. Yell "toilet!" → player goes to closest dot, lifts ball gently, tries to bounce it into the dot and catch back on strings.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">3:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-9" data-mins="4">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">3:57 – 4:01</span><span class="drill-min">4 min</span></div>
+        <div class="drill-name">9 · Spider in the Web</div>
+        <div class="drill-cue">"Run fast — dodge the spider's web!"</div>
+        <div class="drill-why">Pure movement — acceleration, direction change, spatial awareness, high fun.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>One player = spider at center. Rest start at baseline. Spider yells "Spider in the Web!" — runners sprint to opposite baseline without being tagged. Tagged players sit and become sitting spiders. Continue until all caught.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">4:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-10" data-mins="3">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:01 – 4:04</span><span class="drill-min">3 min</span></div>
+        <div class="drill-name">10 · Balloon Balls (solo)</div>
+        <div class="drill-cue">"Hit it up — imagine it's floating to the ceiling!"</div>
+        <div class="drill-why">Slow ball = feel overhead mechanics with instant success.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Each player keeps their own balloon up in the air. Hit UP, not out or down.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">3:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-11" data-mins="3">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:04 – 4:07</span><span class="drill-min">3 min</span></div>
+        <div class="drill-name">11 · Balloon Balls (partner)</div>
+        <div class="drill-cue">"Hit it back to your friend — keep it floating!"</div>
+        <div class="drill-why">Cooperation + overhead. Same drill, new partner constraint.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Pair up. Alternate turns hitting the balloon up — partner hits it next. Goal: how many in a row.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">3:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-12" data-mins="4">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:07 – 4:11</span><span class="drill-min">4 min</span></div>
+        <div class="drill-name">12 · Clean Your Room</div>
+        <div class="drill-cue">"Throw like you're reaching for the stars — big arm!"</div>
+        <div class="drill-why">Teaches throwing motion (serve foundation) in joyful chaos.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Both teams start with 10 foam balls on their side. Goal: get all balls off your side by throwing over net. Team with fewest balls when time's up wins. Overhand throws only.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">4:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="ls-13" data-mins="4">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:11 – 4:15</span><span class="drill-min">4 min</span></div>
+        <div class="drill-name">13 · Circle up &amp; send-off</div>
+        <div class="drill-cue">"One thing you did well today — say it out loud."</div>
+        <div class="drill-why">Ends on each kid's own win. Builds the verbal vocabulary of progress.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Circle on the baseline. Each kid says one thing they did well today. Repeat it back. High five each kid by name. Send to parents.</div><div class="row"><div class="row-label">Watch for</div>The shy ones — give them a specific prompt. Never skip a kid.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">4:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <div class="controls">
+    <button class="btn btn-primary" onclick="resetSession('ls')">Reset session</button>
+    <button class="btn btn-ghost" onclick="window.print()">Print</button>
+  </div>
+</section>
+
+<div class="horizon"></div>
+
+<!-- ====================== RED BALL ====================== -->
+<section class="session" data-session="rb">
+  <div class="session-head">
+    <div class="row1">
+      <span class="time">4:15 – 5:15 PM</span>
+      <span class="duration">60 min · 11 blocks · ~5-6 min each</span>
+    </div>
+    <h2>Red Ball</h2>
+    <div class="sub">Ages 5–6 · Mini-court · Pillar emphasis: Movement &amp; Craft</div>
+    <div class="age-cue">Stay under 6 minutes per activity</div>
+  </div>
+  <div class="progress"><div class="bar"><div class="fill" id="fill-rb"></div></div><div class="count" id="count-rb">0 / 11</div></div>
+
+  <article class="drill" data-id="rb-1" data-mins="5">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:15 – 4:20</span><span class="drill-min">5 min</span></div>
+        <div class="drill-name">1 · Caterpillar</div>
+        <div class="drill-cue">"Make a gate with your feet — keep the ball inside the gate!"</div>
+        <div class="drill-why">Lateral movement, wakes up the legs, zero racket required.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Players single file, feet shoulder-width. Roll a ball to one side — players side-shuffle to it. Ball between feet = safe. Ball outside foot = back of line.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">5:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-2" data-mins="5">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:20 – 4:25</span><span class="drill-min">5 min</span></div>
+        <div class="drill-name">2 · Mirror Hands</div>
+        <div class="drill-cue">"Keep your hands in the high-five position the whole time!"</div>
+        <div class="drill-why">Lateral movement + upper-body balance. Direct volley translation.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Players face each other patty-cake close, hands at chest height. One moves side to side; partner mirrors. Switch every 30 sec.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">5:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-3" data-mins="5">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:25 – 4:30</span><span class="drill-min">5 min</span></div>
+        <div class="drill-name">3 · Cone Catchers</div>
+        <div class="drill-cue">"Wait for the bounce — then move your cone to catch it!"</div>
+        <div class="drill-why">Teaches spacing to the ball. Tennis requires distance the way no other sport does.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Pairs across mini-court. One underhand-tosses to partner who catches the ball — after one bounce — in a cone. Progress to two bounces.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">5:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-4" data-mins="6">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:30 – 4:36</span><span class="drill-min">6 min</span></div>
+        <div class="drill-name">4 · Speed Racer</div>
+        <div class="drill-cue">"Go go go — run around the whole court without getting hit!"</div>
+        <div class="drill-why">Skill + explosive movement reward. The earned-lap moment lands hard.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>All players on same team across mini-court baseline. Feed one ball at a time. Team gets 10 over and in → all players run around the entire court while you try to peg them with foam. Successful round trip = Speed Racer.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">6:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-5" data-mins="6">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:36 – 4:42</span><span class="drill-min">6 min</span></div>
+        <div class="drill-name">5 · Instant Tennis (stages 1-3)</div>
+        <div class="drill-cue">"Make the ball go high enough to touch the sky before it comes back."</div>
+        <div class="drill-why">Staged progression — earn the next step before climbing.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">Three stages</div>(1) Ball on strings → lift → catch after 1 bounce. (2) Lift, sustain self-rally (up, not out). (3) Hit cooperatively to partner one alley-width away.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">6:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-6" data-mins="6">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:42 – 4:48</span><span class="drill-min">6 min</span></div>
+        <div class="drill-name">6 · Lift It (two-racket trick)</div>
+        <div class="drill-cue">"Catch it to the side — like a real tennis shot!"</div>
+        <div class="drill-why">Contact point and spacing using a second racket as a training aid.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">Three skills</div>(1) Ball between rackets — lift, let bounce, trap again. (2) Same but hit up for self-rally before trapping. (3) Lift, hit over net to partner; partner catches between their two rackets. Catch at SIDE of body — not in front.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">6:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-7" data-mins="5">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:48 – 4:53</span><span class="drill-min">5 min</span></div>
+        <div class="drill-name">7 · Collision</div>
+        <div class="drill-cue">"Send it from the side of your body — like a real shot!"</div>
+        <div class="drill-why">Teaches proper racket position and spacing before full shots.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Players face each other on same side of court (not over net). Ball on ground in front of each. Yell "send it!" — both push ball along ground with SIDE of racket (not tip), aiming for the two balls to collide. Use the incoming ball to repeat.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">5:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-8" data-mins="6">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:53 – 4:59</span><span class="drill-min">6 min</span></div>
+        <div class="drill-name">8 · Rip It</div>
+        <div class="drill-cue">"Full swing — send it all the way to the net!"</div>
+        <div class="drill-why">Real racket-on-ball contact, full follow-through, loud, satisfying.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Empty ball can upside down on court. Foam or low-compression ball balanced on top. Line of players. "1, 2, 3, RIP IT!" Take turns hitting ball off can toward net.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">6:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-9" data-mins="6">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">4:59 – 5:05</span><span class="drill-min">6 min</span></div>
+        <div class="drill-name">9 · Cone Battle</div>
+        <div class="drill-cue">"Aim for the cone — pick your target before you hit."</div>
+        <div class="drill-why">Intentional targeting before they can even rally consistently. First taste of competition with purpose.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>3 upside-down cones on each side of mini-court. Players rally. Hit opponent's cone → capture it. Goal: capture all opponent's cones. Adjust difficulty by moving cones closer/farther from net.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">6:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-10" data-mins="6">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">5:05 – 5:11</span><span class="drill-min">6 min</span></div>
+        <div class="drill-name">10 · Clean Your Room</div>
+        <div class="drill-cue">"Throw like you're reaching for the stars — big arm!"</div>
+        <div class="drill-why">Throwing motion (serve foundation) wrapped in pure chaos. The energy release.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Both teams start with 10 foam balls on their side. Goal: get all balls off your side by throwing over net. Team with fewest balls when time's up wins. Overhand throws only.</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">6:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <article class="drill" data-id="rb-11" data-mins="4">
+    <div class="drill-head"><button class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+      <div class="drill-body"><div class="drill-meta"><span class="drill-time">5:11 – 5:15</span><span class="drill-min">4 min</span></div>
+        <div class="drill-name">11 · Circle up &amp; send-off</div>
+        <div class="drill-cue">"One thing you did well today — say it out loud."</div>
+        <div class="drill-why">Ends on each kid's win. Plants the hook for Wednesday.</div></div></div>
+    <div class="drill-details"><div class="row"><div class="row-label">How</div>Circle on the baseline. Each kid says one thing they did well today. Repeat it back by name. High five each. Send-off line: "Wednesday we're going to start aiming for targets."</div></div>
+    <button class="toggle">Show details</button>
+    <div class="timer-bar hidden"><div class="timer-display">4:00</div><button class="timer-btn start">Start</button><button class="timer-btn secondary reset">Reset</button></div>
+  </article>
+
+  <div class="controls">
+    <button class="btn btn-primary" onclick="resetSession('rb')">Reset session</button>
+    <button class="btn btn-ghost" onclick="window.print()">Print</button>
+  </div>
+</section>
+
+<footer class="foot">
+  <p><strong>Week 1 of 5 — Reset and re-anchor.</strong> Lots of "good… good…" between feeds. Make every kid leave saying "that was fun" so they show up Wednesday ready to work.</p>
+  <p><strong>If a kid is struggling:</strong> regress one step — drop the racket, use hands, slow it down. Win in the simpler version, then climb back up.</p>
+  <p><strong>If a kid is bored:</strong> add a constraint — non-dominant hand, alternate feet, a target. Boredom = under-challenged.</p>
+  <p><strong>Send-off line:</strong> "See you Wednesday — we're going to start aiming for targets next time."</p>
+</footer>
+
+</div>
+<script>
+function updateClock(){const n=new Date();document.getElementById('clock').textContent=n.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}
+updateClock();setInterval(updateClock,30000);
+const STORE='lbta_planner_allison_2026_05_11_v2';
+function loadState(){try{return JSON.parse(localStorage.getItem(STORE)||'{}')}catch{return{}}}
+function saveState(s){try{localStorage.setItem(STORE,JSON.stringify(s))}catch{}}
+document.querySelectorAll('.drill').forEach(drill=>{
+  const id=drill.dataset.id;const state=loadState();
+  if(state[id]&&state[id].done)drill.classList.add('done');
+  drill.querySelector('.check').addEventListener('click',e=>{e.stopPropagation();drill.classList.toggle('done');const s=loadState();s[id]=s[id]||{};s[id].done=drill.classList.contains('done');saveState(s);updateProgress()});
+  const toggle=drill.querySelector('.toggle');
+  if(toggle){toggle.addEventListener('click',()=>{drill.classList.toggle('open');toggle.textContent=drill.classList.contains('open')?'Hide details':'Show details';const t=drill.querySelector('.timer-bar');if(t)t.classList.toggle('hidden',!drill.classList.contains('open'))})}
+  const tbar=drill.querySelector('.timer-bar');
+  if(tbar){const disp=tbar.querySelector('.timer-display');const sb=tbar.querySelector('.start');const rb=tbar.querySelector('.reset');const mins=parseInt(drill.dataset.mins,10);let r=mins*60;let iv=null;
+    function render(){const m=Math.floor(r/60);const s=(r%60).toString().padStart(2,'0');disp.textContent=`${m}:${s}`}render();
+    sb.addEventListener('click',()=>{if(iv){clearInterval(iv);iv=null;sb.textContent='Resume';return}sb.textContent='Pause';iv=setInterval(()=>{r=Math.max(0,r-1);render();if(r===0){clearInterval(iv);iv=null;sb.textContent='Done';if(navigator.vibrate)navigator.vibrate([200,100,200]);try{const c=new (window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator();const g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=660;g.gain.value=.12;o.start();setTimeout(()=>{o.stop();c.close()},280)}catch{}}},1000)});
+    rb.addEventListener('click',()=>{if(iv){clearInterval(iv);iv=null}r=mins*60;render();sb.textContent='Start'})}
+});
+function updateProgress(){['ls','rb'].forEach(k=>{const ds=document.querySelectorAll(`[data-session="${k}"] .drill`);const dn=document.querySelectorAll(`[data-session="${k}"] .drill.done`).length;const t=ds.length;const p=t?(dn/t)*100:0;const f=document.getElementById(`fill-${k}`);const c=document.getElementById(`count-${k}`);if(f)f.style.width=p+'%';if(c)c.textContent=`${dn} / ${t}`});
+  document.querySelectorAll('.session').forEach(s=>{s.querySelectorAll('.drill').forEach(d=>d.classList.remove('current'));const nx=s.querySelector('.drill:not(.done)');if(nx)nx.classList.add('current')})}
+updateProgress();
+function resetSession(k){if(!confirm('Reset all completion marks for this session?'))return;const s=loadState();document.querySelectorAll(`[data-session="${k}"] .drill`).forEach(d=>{delete s[d.dataset.id];d.classList.remove('done')});saveState(s);updateProgress()}
+</script>
+</body>
+</html>

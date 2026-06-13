@@ -1,0 +1,196 @@
+[
+  {
+    "route": "/",
+    "slug": "home",
+    "ruleCount": 1,
+    "nodeCount": 1,
+    "byImpact": {
+      "serious": 1
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 1,
+        "sample": ".hover\\:text-brand-victoria-cove\\/80"
+      }
+    ]
+  },
+  {
+    "route": "/schedules",
+    "slug": "schedules",
+    "ruleCount": 2,
+    "nodeCount": 50,
+    "byImpact": {
+      "serious": 49,
+      "moderate": 1
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 49,
+        "sample": "#season-tab-winter > .leading-tight.block"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": "div:nth-child(1) > .mb-6 > .text-\\[26px\\].md\\:text-\\[32px\\]"
+      }
+    ]
+  },
+  {
+    "route": "/book",
+    "slug": "book",
+    "ruleCount": 1,
+    "nodeCount": 3,
+    "byImpact": {
+      "serious": 3
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 3,
+        "sample": ".uppercase.text-brand-pacific-dusk\\/50.text-eyebrow"
+      }
+    ]
+  },
+  {
+    "route": "/junior-trial",
+    "slug": "junior-trial",
+    "ruleCount": 1,
+    "nodeCount": 4,
+    "byImpact": {
+      "serious": 4
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 4,
+        "sample": ".bg-brand-sunset-cliff.tracking-wide.py-3"
+      }
+    ]
+  },
+  {
+    "route": "/adult-trial",
+    "slug": "adult-trial",
+    "ruleCount": 2,
+    "nodeCount": 10,
+    "byImpact": {
+      "serious": 9,
+      "moderate": 1
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 9,
+        "sample": ".mb-20 > .tracking-\\[0\\.2em\\].mb-4.uppercase"
+      },
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "help": "Heading levels should only increase by one",
+        "nodes": 1,
+        "sample": ".border-l-2.border-brand-sunset-cliff.pl-6:nth-child(1) > h4"
+      }
+    ]
+  },
+  {
+    "route": "/programs",
+    "slug": "programs",
+    "ruleCount": 1,
+    "nodeCount": 4,
+    "byImpact": {
+      "serious": 4
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 4,
+        "sample": "#tab-camps > .font-semibold.text-\\[13px\\]"
+      }
+    ]
+  },
+  {
+    "route": "/coaches/andrew-mateljan",
+    "slug": "coaches--andrew-mateljan",
+    "ruleCount": 1,
+    "nodeCount": 1,
+    "byImpact": {
+      "serious": 1
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 1,
+        "sample": ".text-black\\/50.hover\\:text-brand-sunset-cliff[href$=\"coaches\"]"
+      }
+    ]
+  },
+  {
+    "route": "/about",
+    "slug": "about",
+    "ruleCount": 1,
+    "nodeCount": 9,
+    "byImpact": {
+      "serious": 9
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 9,
+        "sample": "div:nth-child(2) > .text-brand-pacific-dusk\\/60.mb-4.text-eyebrow"
+      }
+    ]
+  },
+  {
+    "route": "/contact",
+    "slug": "contact",
+    "ruleCount": 1,
+    "nodeCount": 11,
+    "byImpact": {
+      "serious": 11
+    },
+    "topViolations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": 11,
+        "sample": ".mt-2"
+      }
+    ]
+  },
+  {
+    "route": "/pathway-planner",
+    "slug": "pathway-planner",
+    "ruleCount": 0,
+    "nodeCount": 0,
+    "byImpact": {},
+    "topViolations": []
+  },
+  {
+    "route": "/thank-you",
+    "slug": "thank-you",
+    "ruleCount": 0,
+    "nodeCount": 0,
+    "byImpact": {},
+    "topViolations": []
+  }
+]

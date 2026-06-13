@@ -3,22 +3,17 @@ import { waitUntil } from '@vercel/functions'
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit'
 import { parseJsonBody, scholarshipSchema, validateRequest } from '@/lib/validations'
 import { storeLead } from '@/lib/leads-store'
-import { hasEnvVar } from '@/lib/env'
 import { validateAgentSecret } from '@/lib/agent-auth'
-import {
-  upsertContact,
-  addToList,
-  addTags,
-  LBTA_LIST_ID,
-  getWebsiteSignupsListId,
-  CAMPAIGN_TAGS,
-} from '@/lib/activecampaign'
-import { sendToAirtable } from '@/lib/airtable-leads'
 import { notifyScholarship, sendScholarshipConfirmationEmail } from '@/lib/email'
-import { writeNotionLead } from '@/lib/notion-leads'
+import { upsertAndTag, buildScholarshipTags, isMailchimpConfigured } from '@/lib/mailchimp'
+
+// ============================================================
+// Scholarship Application API
+// Primary CRM: Mailchimp (upsert + tags)
+// Secondary sink: Supabase leads table
+// ============================================================
 
 export async function POST(request: NextRequest) {
-  // Agent auth: validate X-Agent-Secret header if present (for agent tool calls)
   const agentSecret = request.headers.get('X-Agent-Secret')
   if (agentSecret && !validateAgentSecret(request)) {
     return NextResponse.json(
@@ -69,56 +64,29 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // No PII in logs
-    console.log('[scholarship] Application received', {
-      timestamp: new Date().toISOString(),
-    })
+    console.log('[scholarship] Application received', { timestamp: new Date().toISOString() })
 
     const parentName = (validation.data.parentName ?? '').trim()
     const spaceIdx = parentName.indexOf(' ')
-    const ghlFirstName = spaceIdx > 0 ? parentName.slice(0, spaceIdx) : parentName || undefined
-    const ghlLastName = spaceIdx > 0 ? parentName.slice(spaceIdx + 1) : undefined
+    const firstName = spaceIdx > 0 ? parentName.slice(0, spaceIdx) : parentName || 'Parent'
+    const lastName = spaceIdx > 0 ? parentName.slice(spaceIdx + 1) : ''
 
-    if (hasEnvVar('ACTIVECAMPAIGN_URL') && hasEnvVar('ACTIVECAMPAIGN_API_KEY')) {
-      const firstName = spaceIdx > 0 ? parentName.slice(0, spaceIdx) : parentName
-      const lastName = spaceIdx > 0 ? parentName.slice(spaceIdx + 1) : ''
-      const acResult = await upsertContact({
-        email: validation.data.email,
-        firstName: firstName || 'Parent',
-        lastName: lastName || '',
-        phone: validation.data.phone ?? undefined,
-        fieldValues: [
-          { field: '7', value: 'Scholarship Application' },
-          { field: '11', value: 'website' },
-        ],
-      })
-      if (acResult.success && acResult.data?.id) {
-        await addToList(acResult.data.id, LBTA_LIST_ID)
-        const websiteSignupsListId = getWebsiteSignupsListId()
-        if (websiteSignupsListId !== null) {
-          await addToList(acResult.data.id, websiteSignupsListId)
-        }
-        await addTags(acResult.data.id, [CAMPAIGN_TAGS.website_registration, CAMPAIGN_TAGS.scholarship])
-      }
+    // Mailchimp: primary CRM
+    if (isMailchimpConfigured()) {
+      waitUntil(upsertAndTag(
+        {
+          email: validation.data.email,
+          firstName: firstName,
+          lastName: lastName,
+          phone: validation.data.phone ?? undefined,
+        },
+        buildScholarshipTags()
+      ).then(r => {
+        if (!r.success) console.error('[MC] scholarship upsert failed:', r.error)
+      }))
     }
 
-    waitUntil(writeNotionLead({
-      parentName: parentName || 'Not provided',
-      playerName: validation.data.studentName,
-      email: validation.data.email,
-      phone: validation.data.phone ?? undefined,
-      program: 'Scholarship Application',
-      category: 'Scholarship',
-    }))
-    waitUntil(sendToAirtable({
-      name: parentName || validation.data.email,
-      email: validation.data.email,
-      phone: validation.data.phone ?? undefined,
-      program: validation.data.studentName ? `Scholarship — ${validation.data.studentName}` : 'Scholarship Application',
-      formSource: 'scholarship',
-      category: 'scholarship',
-    }))
-
+    // Supabase: secondary sink
     waitUntil(storeLead({
       source: 'scholarship',
       email: validation.data.email,
@@ -126,16 +94,17 @@ export async function POST(request: NextRequest) {
       phone: validation.data.phone ?? undefined,
       payload: { studentName: validation.data.studentName },
     }))
+
+    // Staff alert (Postmark — no-op when POSTMARK_SERVER_TOKEN unset)
     waitUntil(notifyScholarship({
       parentName: validation.data.parentName,
       email: validation.data.email,
       phone: validation.data.phone,
       studentName: validation.data.studentName,
     }))
-    // Send confirmation email TO the applicant
-    const scholarshipFirstName = spaceIdx > 0
-      ? parentName.slice(0, spaceIdx)
-      : parentName || 'there'
+
+    // Applicant confirmation (Postmark — no-op when POSTMARK_SERVER_TOKEN unset)
+    const scholarshipFirstName = spaceIdx > 0 ? parentName.slice(0, spaceIdx) : parentName || 'there'
     waitUntil(sendScholarshipConfirmationEmail({
       email: validation.data.email,
       firstName: scholarshipFirstName,

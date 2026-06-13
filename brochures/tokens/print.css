@@ -1,0 +1,332 @@
+/* =============================================================================
+   LBTA Print Brochure Tokens — V2 (locked)
+   Source of truth: tokens/lbta-web-tokens.json v1.1.0 + ~/.claude/skills/lbta-brand
+   No arbitrary hex. No banned fonts. Horizon gradient is the LBTA signature.
+   ============================================================================= */
+
+@import url('../assets/fonts/fonts-local.css');
+
+:root {
+  /* Brand palette (locked) */
+  --pacific-dusk:   #1B3A5C;
+  --deep-water:     #0F2237;
+  --deep-card:      #0A1628;
+  --deep-navy:      #0B1120;
+  --victoria-cove:  #2E8B8B;
+  --cove-bright:    #33A3A3;
+  --thousand-steps: #C4963C;
+  --gold-deep:      #C4963C;
+  --gold:           #D4A853;
+  --sunset-cliff:   #E8834A;
+  --sunset-bright:  #F09050;
+  --sandstone:      #F5F0E5;
+  --morning-light:  #FAF8F4;
+  --salt-air:       #FFFFFF;
+  --tide-pool:      #3A8B6E;
+  --sage-hill:      #7A8B6E;
+  --driftwood:      #B8A88A;
+
+  /* Semantic */
+  --text-on-light:  #2B3D50;
+  --text-heading:   #0F2237;
+  --text-muted:     #6B7F95;
+  --text-on-dark:   rgba(255,255,255,0.86);
+  --text-on-dark-muted: rgba(245,240,229,0.62);
+  --border-light:   #E4E7EB;
+  --divider-light:  #EDEFF2;
+
+  /* Signature horizon gradient */
+  --horizon: linear-gradient(90deg,
+    #2E8B8B 0%,
+    #E8834A 35%,
+    #D4A853 50%,
+    #E8834A 65%,
+    #2E8B8B 100%);
+
+  /* Type families (locked) */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', Helvetica, Arial, sans-serif;
+
+  /* Print-safe shadows (avoid heavy blur in print) */
+  --shadow-card:  0 1px 2px rgba(15,34,55,0.06), 0 4px 12px rgba(15,34,55,0.04);
+}
+
+/* ----------------------------------------------------------------------------
+   Reset (print-tuned)
+   ---------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  color: var(--text-on-light);
+  background: var(--morning-light);
+  font-size: 10pt;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+img { display: block; max-width: 100%; }
+
+/* Force colored backgrounds to print on every browser */
+[class*="bg-"], .horizon-bar, .panel-dark, .panel-warm, .panel-deep, .pill, .badge,
+.card-dark, .stat-block, .accent-bar, .footer-bar {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ----------------------------------------------------------------------------
+   Typography
+   ---------------------------------------------------------------------------- */
+.display      { font-family: var(--font-display); font-weight: 300; line-height: 1.05; letter-spacing: -0.01em; color: var(--text-heading); }
+.headline     { font-family: var(--font-display); font-weight: 300; line-height: 1.12; letter-spacing: -0.005em; color: var(--text-heading); }
+.headline-sm  { font-family: var(--font-display); font-weight: 400; line-height: 1.18; color: var(--text-heading); }
+.body         { font-family: var(--font-body);    font-weight: 400; line-height: 1.55; color: var(--text-on-light); }
+.body-sm      { font-family: var(--font-body);    font-weight: 400; line-height: 1.5;  color: var(--text-on-light); font-size: 8.5pt; }
+
+.eyebrow      {
+  font-family: var(--font-body); font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 7pt;
+  color: var(--victoria-cove);
+}
+.eyebrow-warm { color: var(--sunset-cliff); }
+.eyebrow-gold { color: var(--gold-deep); }
+.eyebrow-on-dark { color: rgba(245,240,229,0.78); }
+
+.label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 7.5pt;
+  color: var(--text-on-light);
+}
+
+.tagline-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold-deep);
+}
+
+.muted { color: var(--text-muted); }
+.on-dark { color: var(--text-on-dark); }
+.on-dark-muted { color: var(--text-on-dark-muted); }
+
+/* ----------------------------------------------------------------------------
+   Surfaces
+   ---------------------------------------------------------------------------- */
+.bg-morning   { background: var(--morning-light); }
+.bg-sandstone { background: var(--sandstone); }
+.bg-deep      { background: var(--deep-water); color: var(--text-on-dark); }
+.bg-deep-card { background: var(--deep-card);  color: var(--text-on-dark); }
+.bg-pacific   { background: var(--pacific-dusk); color: var(--text-on-dark); }
+.bg-cove      { background: var(--victoria-cove); color: var(--salt-air); }
+.bg-sunset    { background: var(--sunset-cliff);  color: var(--salt-air); }
+
+.panel-dark   { background: var(--deep-water); color: var(--text-on-dark); }
+.panel-warm   { background: var(--sandstone); color: var(--text-on-light); }
+.panel-deep   { background: var(--deep-card);  color: var(--text-on-dark); }
+
+/* ----------------------------------------------------------------------------
+   Horizon gradient bar (THE LBTA signature element)
+   ---------------------------------------------------------------------------- */
+.horizon-bar {
+  display: block;
+  width: 100%;
+  background: var(--horizon);
+}
+.horizon-bar.h-thin   { height: 3pt; }
+.horizon-bar.h-med    { height: 5pt; }
+.horizon-bar.h-thick  { height: 8pt; }
+
+/* ----------------------------------------------------------------------------
+   Pills, badges, buttons
+   ---------------------------------------------------------------------------- */
+.pill {
+  display: inline-block;
+  padding: 3pt 8pt;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 7pt;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  background: var(--sandstone);
+  color: var(--pacific-dusk);
+  border: 0.5pt solid var(--border-light);
+}
+.pill.pill-cove   { background: var(--victoria-cove); color: var(--salt-air); border: none; }
+.pill.pill-sunset { background: var(--sunset-cliff);  color: var(--salt-air); border: none; }
+.pill.pill-gold   { background: var(--gold);          color: var(--deep-water); border: none; }
+.pill.pill-deep   { background: var(--deep-card);     color: var(--salt-air); border: none; }
+
+.btn {
+  display: inline-block;
+  padding: 7pt 14pt;
+  border-radius: 4pt;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 8pt;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.btn-primary { background: var(--pacific-dusk); color: var(--salt-air); }
+.btn-cove    { background: var(--victoria-cove); color: var(--salt-air); }
+.btn-light   { background: var(--salt-air); color: var(--pacific-dusk); border: 0.5pt solid var(--border-light); }
+
+/* ----------------------------------------------------------------------------
+   Card
+   ---------------------------------------------------------------------------- */
+.card {
+  background: var(--salt-air);
+  border: 0.5pt solid var(--border-light);
+  border-radius: 4pt;
+  padding: 12pt;
+}
+.card-dark {
+  background: var(--deep-card);
+  color: var(--text-on-dark);
+  border-radius: 4pt;
+  padding: 12pt;
+}
+.card-warm {
+  background: var(--sandstone);
+  border-radius: 4pt;
+  padding: 12pt;
+}
+
+/* ----------------------------------------------------------------------------
+   Tables (program rows, schedules)
+   ---------------------------------------------------------------------------- */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+}
+.tbl th, .tbl td {
+  padding: 5pt 7pt;
+  text-align: left;
+  border-bottom: 0.5pt solid var(--divider-light);
+  vertical-align: top;
+}
+.tbl th {
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 7pt;
+  color: var(--text-muted);
+  border-bottom: 0.5pt solid var(--border-light);
+}
+.tbl tr:last-child td { border-bottom: none; }
+.tbl .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ----------------------------------------------------------------------------
+   Stats / trust block
+   ---------------------------------------------------------------------------- */
+.stat-row {
+  display: flex;
+  gap: 16pt;
+}
+.stat {
+  flex: 1;
+  text-align: center;
+}
+.stat .num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22pt;
+  line-height: 1;
+  color: var(--gold-deep);
+}
+.stat .label {
+  margin-top: 3pt;
+  font-size: 6.5pt;
+  letter-spacing: 0.16em;
+}
+
+/* ----------------------------------------------------------------------------
+   Logos
+   ---------------------------------------------------------------------------- */
+.logo-light { height: 22pt; width: auto; }
+.logo-dark  { height: 22pt; width: auto; }
+
+/* ----------------------------------------------------------------------------
+   QR
+   ---------------------------------------------------------------------------- */
+.qr { width: 60pt; height: 60pt; image-rendering: crisp-edges; }
+.qr-sm { width: 44pt; height: 44pt; }
+
+/* ----------------------------------------------------------------------------
+   Coach portrait
+   ---------------------------------------------------------------------------- */
+.portrait {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4pt;
+  background: var(--sandstone);
+}
+.portrait-round {
+  width: 60pt;
+  height: 60pt;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+/* ----------------------------------------------------------------------------
+   Hero image
+   ---------------------------------------------------------------------------- */
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-tint {
+  position: relative;
+}
+.hero-tint::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,34,55,0.10) 0%, rgba(15,34,55,0.55) 70%, rgba(15,34,55,0.78) 100%);
+}
+
+/* ----------------------------------------------------------------------------
+   Page utilities
+   ---------------------------------------------------------------------------- */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-xs { gap: 4pt; }
+.gap-sm { gap: 8pt; }
+.gap-md { gap: 14pt; }
+.gap-lg { gap: 22pt; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+.uppercase   { text-transform: uppercase; letter-spacing: 0.12em; }
+
+.divider {
+  height: 0.5pt;
+  background: var(--divider-light);
+  border: none;
+  margin: 8pt 0;
+}
+.divider-dark {
+  height: 0.5pt;
+  background: rgba(245,240,229,0.18);
+  border: none;
+  margin: 8pt 0;
+}
+
+.no-break { page-break-inside: avoid; break-inside: avoid; }
+.page-break { page-break-after: always; break-after: page; }
+
+/* Print page defaults — each template overrides @page size + margin */
+@page { margin: 0; }

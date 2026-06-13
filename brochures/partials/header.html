@@ -1,0 +1,10 @@
+<!-- Shared header: logo (light or dark variant) + horizon bar -->
+{% set on_dark = on_dark|default(false) %}
+<header class="brochure-header" style="padding: 14pt 18pt; display: flex; align-items: center; justify-content: space-between; background: {{ '#0F2237' if on_dark else 'transparent' }};">
+  <img src="{{ '../assets/logos/LBTAwhttext.png' if on_dark else '../assets/logos/LBTAblktext.png' }}"
+       alt="Laguna Beach Tennis Academy"
+       class="{{ 'logo-light' if on_dark else 'logo-dark' }}"
+       style="height: 22pt; width: auto;" />
+  <span class="eyebrow {{ 'eyebrow-on-dark' if on_dark else '' }}">{{ header_eyebrow|default('Movement · Craft · Community') }}</span>
+</header>
+{% include 'partials/horizon-bar.html' %}

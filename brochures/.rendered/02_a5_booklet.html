@@ -1,0 +1,441 @@
+<!doctype html>
+<!-- @page width="5.83in" height="8.27in" landscape="false" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · A5 Booklet</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 5.83in 8.27in; margin: 0; }
+    .page { width: 5.83in; height: 8.27in; position: relative; overflow: hidden; padding: 0; }
+    .pad  { padding: 26pt 30pt; }
+
+    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 30pt; line-height: 1.06; color: var(--text-heading); margin: 4pt 0 8pt; letter-spacing: -0.005em; }
+    h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 22pt; line-height: 1.12; color: var(--text-heading); margin: 4pt 0 8pt; }
+    h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+         font-size: 13pt; color: var(--pacific-dusk); margin: 10pt 0 4pt; }
+    p, .body { font-size: 9pt; line-height: 1.55; color: var(--text-on-light); margin: 0 0 6pt; }
+    .lede { font-size: 10pt; line-height: 1.55; color: var(--text-on-light); margin-bottom: 8pt; }
+
+    .row { display: grid; grid-template-columns: 1.5fr 0.7fr 0.6fr 0.6fr 0.6fr;
+           gap: 4pt; font-size: 7.5pt; padding: 3pt 0;
+           border-bottom: 0.5pt solid var(--divider-light); }
+    .row.head { color: var(--text-muted); font-weight: 700; text-transform: uppercase;
+                letter-spacing: 0.08em; font-size: 6.5pt; border-bottom: 0.5pt solid var(--border-light); }
+    .row .name { font-weight: 600; color: var(--text-heading); }
+    .row .ages { color: var(--text-muted); }
+    .row .num  { font-variant-numeric: tabular-nums; text-align: right; color: var(--gold-deep); font-weight: 700; }
+
+    /* p1 cover */
+    .cover { background: #0F2237; color: rgba(255,255,255,0.86); padding: 0; }
+    .cover .photo { position: absolute; inset: 0; }
+    .cover .photo img { width:100%; height:100%; object-fit:cover; }
+    .cover .photo::after { content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(11,17,32,0.45) 0%, rgba(11,17,32,0.72) 55%, rgba(11,17,32,0.92) 100%); }
+    .cover .stack { position: relative; z-index: 2; height: 100%; padding: 36pt 30pt;
+      display: flex; flex-direction: column; justify-content: space-between; }
+    .cover img.logo { height: 44pt; width: auto; }
+    .cover .display { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      color: #FFFFFF; font-size: 36pt; line-height: 1.05; }
+    .cover .pillars { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+      color: var(--gold); font-size: 14pt; margin-top: 6pt; }
+
+    /* dark page (philosophy / closing CTA) */
+    .dark { background: #0F2237; color: rgba(255,255,255,0.86); }
+    .dark h1, .dark h2 { color: #FFFFFF; }
+    .dark h3 { color: var(--gold); }
+    .dark p, .dark .body, .dark .lede { color: rgba(255,255,255,0.86); }
+    .dark .row { border-bottom: 0.5pt solid rgba(245,240,229,0.14); }
+    .dark .row .name { color: #FFFFFF; }
+    .dark .row .ages { color: rgba(245,240,229,0.65); }
+    .dark .row .num  { color: var(--gold); }
+    .dark .pull-quote { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+      font-size: 18pt; line-height: 1.25; color: var(--gold); margin: 12pt 0; }
+
+    .coach-card { display: grid; grid-template-columns: 60pt 1fr; gap: 10pt;
+      padding: 8pt 0; border-bottom: 0.5pt solid var(--divider-light); }
+    .coach-card:last-child { border-bottom: none; }
+    .coach-card img { width: 60pt; height: 75pt; object-fit: cover; border-radius: 3pt; background: var(--sandstone); }
+    .coach-card .name { font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400; font-size: 14pt; color: var(--text-heading); line-height: 1.1; }
+    .coach-card .title { font-family: var(--font-body); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; font-size: 7pt; color: var(--victoria-cove); margin-top: 2pt; }
+    .coach-card .bio { font-size: 8pt; line-height: 1.5; margin-top: 4pt; }
+    .coach-card .creds { font-size: 7pt; color: var(--text-muted); margin-top: 4pt; }
+
+    .pn { position: absolute; bottom: 14pt; left: 0; right: 0; text-align: center;
+      font-size: 7pt; color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; }
+    .dark .pn { color: rgba(245,240,229,0.45); }
+  </style>
+</head>
+<body>
+
+<!-- ========== PAGE 1: COVER ========== -->
+<div class="page cover">
+  <div class="photo"><img src="../assets/photos/hero-courts-sunset.jpg" alt="" /></div>
+  <span class="horizon-bar h-thick" style="position:absolute; top:0; left:0; z-index:3;"></span>
+  <div class="stack">
+    <div style="display:flex; justify-content: space-between; align-items: center;">
+      <img class="logo" src="../assets/logos/LBTAwhttext.png" alt="Laguna Beach Tennis Academy" />
+      <span class="eyebrow eyebrow-on-dark">Movement. Craft. Community.</span>
+    </div>
+    <div>
+      <div class="display">Tennis,<br/>as it should<br/>be taught.</div>
+      <div class="pillars">Movement. Craft. Community.</div>
+    </div>
+    <div style="font-size: 7.5pt; color: rgba(245,240,229,0.65); letter-spacing: 0.14em; text-transform: uppercase;">
+      Official City of Laguna Beach Tennis Partner Since 2020
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0; z-index:3;"></span>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 2: FOUNDER + PHILOSOPHY (dark) ========== -->
+<div class="page dark">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow eyebrow-on-dark">Our Founder</span>
+    <h1>Founded by<br/>Andrew Mateljan.</h1>
+    <p>Fourth-generation tennis coach. Andrew was introduced to the game by his grandfather Steve at Ford Park in Redlands and has spent twenty years on tour and on court since. Top-12 nationally as a junior, two-time Kalamazoo Nationals competitor, ITF Futures circuit (US, Venezuela, El Salvador, Guatemala). Trained at Sánchez-Casal Spain under Jimmy Johnson. Seven years coaching internationally — Spain, Croatia, Norway — built the movement-first approach that runs every session at LBTA today.</p>
+    <p>Currently coaches Karue Sell (ATP #258 — took him from #860 to #258 in 2025). Colton Smith (ATP #133), Max McKennon (#458), and Ryan Seggerman (#63 in doubles) all came through the same training. Alex Michelsen came through the program at ages 12–13 — now ATP #30, 2022 Wimbledon Boys' Doubles champion.</p>
+    <div class="pull-quote">"Structure creates confidence.<br/>Confidence creates results."</div>
+    <h3 style="color: var(--gold);">The Three Pillars</h3>
+    <p style="color: rgba(255,255,255,0.86);"><strong style="color:#FFF;">Movement</strong> — the foundation. Footwork solves 80% of the problem before the swing happens.</p>
+    <p style="color: rgba(255,255,255,0.86);"><strong style="color:#FFF;">Craft</strong> — structure that builds confidence. Consistent practice routines create lasting mental toughness.</p>
+    <p style="color: rgba(255,255,255,0.86);"><strong style="color:#FFF;">Community</strong> — a community built on respect. Every LBTA session ends in a circle.</p>
+  </div>
+  <div class="pn">— 2 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 3: THE PATHWAY ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow">The Pathway</span>
+    <h1>From first rally<br/>to college tennis.</h1>
+    <p class="lede">A clear progression from age three. Same coaches, same standard. The path is the same; the work meets you where you are.</p>
+    <table class="tbl">
+      <thead><tr><th>Level</th><th>Ages</th><th>Court</th><th>Where it leads</th></tr></thead>
+      <tbody>
+      <tr><td><strong>Little Tennis Stars</strong></td><td>3–4</td><td style="color: var(--text-muted);">36&#39; foam</td><td>First racquet, first rally</td></tr>
+      <tr><td><strong>Red Ball</strong></td><td>5–6</td><td style="color: var(--text-muted);">36&#39; foam</td><td>Coordination + first match play</td></tr>
+      <tr><td><strong>Orange Ball</strong></td><td>7–8</td><td style="color: var(--text-muted);">60&#39; low-compression</td><td>Scoring, footwork, first tournament</td></tr>
+      <tr><td><strong>Green Dot</strong></td><td>9–11</td><td style="color: var(--text-muted);">78&#39; green</td><td>Phase Play · UTR 1.0–3.0</td></tr>
+      <tr><td><strong>Junior Development</strong></td><td>11–18</td><td style="color: var(--text-muted);">78&#39; yellow</td><td>UTR 1–7 · USTA Level 6/5</td></tr>
+      <tr><td><strong>High Performance</strong></td><td>12–17</td><td style="color: var(--text-muted);">78&#39; yellow</td><td>UTR 8+ · Section / National events</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Spring 2026</h3>
+    <p><strong>Spring session:</strong> April 6 – June 13, 2026 · 10 weeks (skip May 25)<br/>
+    <strong>Registration opens:</strong> March 2, 2026<br/>
+    <strong>Spring Break Camp:</strong> March 30 – April 2, 2026 (Mon–Thu)</p>
+  </div>
+  <div class="pn">— 3 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 4: JUNIOR PROGRAMS ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow">Juniors</span>
+    <h1>Where juniors begin —<br/>and where they go.</h1>
+    <div class="row head"><span>Program</span><span>Ages</span><span class="num">1×/wk</span><span class="num">2×/wk</span><span class="num">Drop-in</span></div>
+    <div class="row">
+      <span class="name">Little Tennis Stars</span>
+      <span class="ages">3-4</span>
+      <span class="num">$120/mo</span>
+      <span class="num">$200/mo</span>
+      <span class="num">$40</span>
+    </div>
+    <div class="row">
+      <span class="name">Red Ball</span>
+      <span class="ages">5-6</span>
+      <span class="num">$420</span>
+      <span class="num">$840</span>
+      <span class="num">$50</span>
+    </div>
+    <div class="row">
+      <span class="name">Orange Ball</span>
+      <span class="ages">7-8</span>
+      <span class="num">$420</span>
+      <span class="num">$840</span>
+      <span class="num">$50</span>
+    </div>
+    <div class="row">
+      <span class="name">Green Dot</span>
+      <span class="ages">9-11</span>
+      <span class="num">$420</span>
+      <span class="num">$840</span>
+      <span class="num">$50</span>
+    </div>
+    <div class="row">
+      <span class="name">Competitive Green Dot</span>
+      <span class="ages">9-11+</span>
+      <span class="num">$625</span>
+      <span class="num">$1250</span>
+      <span class="num">$70</span>
+    </div>
+    <div class="row">
+      <span class="name">Junior Development</span>
+      <span class="ages">11-18 (UTR 1–4 / UTR 4–7)</span>
+      <span class="num">$625</span>
+      <span class="num">$1250</span>
+      <span class="num">$70</span>
+    </div>
+    <div class="row">
+      <span class="name">High Performance</span>
+      <span class="ages">12-17 (UTR 8+)</span>
+      <span class="num">$625</span>
+      <span class="num">$1250</span>
+      <span class="num">$100</span>
+    </div>
+
+    <h3>Camps</h3>
+    <p><strong>Spring Break:</strong> March 30 – April 2, 2026 (Mon–Thu) · $325/wk · $85/day<br/>
+    <strong>Summer (Tennis & Adventure, 5–11):</strong> Full Day $495/wk · Half Day $325/wk<br/>
+    <strong>Summer Training (12–17):</strong> Full Day $595/wk · Half Day $325/wk</p>
+  </div>
+  <div class="pn">— 4 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 5: ADULT PROGRAMS ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow eyebrow-warm">Adults</span>
+    <h1>From new to nationally<br/>rated — one program in.</h1>
+    <div class="row head"><span>Program</span><span>Level</span><span class="num">1×/wk</span><span class="num">2×/wk</span><span class="num">Drop-in</span></div>
+    <div class="row">
+      <span class="name">New to Tennis</span>
+      <span class="ages">All Levels</span>
+      <span class="num">$420</span>
+      <span class="num">$615</span>
+      <span class="num">$55</span>
+    </div>
+    <div class="row">
+      <span class="name">Beyond Beginner</span>
+      <span class="ages">All Levels</span>
+      <span class="num">$420</span>
+      <span class="num">$615</span>
+      <span class="num">$55</span>
+    </div>
+    <div class="row">
+      <span class="name">Adult Intermediate</span>
+      <span class="ages">NTRP 3.0-4.0</span>
+      <span class="num">$580</span>
+      <span class="num">$1105</span>
+      <span class="num">$70</span>
+    </div>
+    <div class="row">
+      <span class="name">Adult Advanced</span>
+      <span class="ages">NTRP 4.0+</span>
+      <span class="num">$625</span>
+      <span class="num">$1250</span>
+      <span class="num">$90</span>
+    </div>
+    <div class="row">
+      <span class="name">LiveBall</span>
+      <span class="ages">NTRP 3.0+</span>
+      <span class="num">$150/mo</span>
+      <span class="num">—</span>
+      <span class="num">$50</span>
+    </div>
+    <div class="row">
+      <span class="name">Cardio Tennis</span>
+      <span class="ages">All Levels</span>
+      <span class="num">$150/mo</span>
+      <span class="num">—</span>
+      <span class="num">$50</span>
+    </div>
+
+    <h3>Private coaching · published rates</h3>
+    <div class="row head"><span>Coach</span><span></span><span class="num">60 min</span><span class="num">90 min</span><span class="num">10-pack</span></div>
+    <div class="row">
+      <span class="name">Andrew Mateljan</span>
+      <span class="ages">Founder &amp; Director of Tennis</span>
+      <span class="num">$250</span>
+      <span class="num">$350</span>
+      <span class="num">$2,300</span>
+    </div>
+    <div class="row">
+      <span class="name">Peter DeFrantz</span>
+      <span class="ages">Head Coach, Junior Development</span>
+      <span class="num">$120</span>
+      <span class="num">$165</span>
+      <span class="num">$1,100</span>
+    </div>
+    <div class="row">
+      <span class="name">Allison Cronk</span>
+      <span class="ages">Head Coach, Youth Programs</span>
+      <span class="num">$120</span>
+      <span class="num">$165</span>
+      <span class="num">$1,100</span>
+    </div>
+    <p class="body" style="margin-top: 8pt;">10-pack saves $100–$200; 20-pack saves $400–$800. Pack expiry 12 months. 24-hour cancellation.</p>
+  </div>
+  <div class="pn">— 5 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 6: UTR + USTA LEAGUES ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow eyebrow-gold">Match play & leagues</span>
+    <h1>Real matches.<br/>Every weekend.</h1>
+
+    <h3>UTR Match Play · April 11 – June 6, 2026 · Grand Finals June 6</h3>
+    <div class="row head"><span>Division</span><span>When</span><span class="num"></span><span class="num">Season</span><span class="num">Drop-in</span></div>
+    <div class="row">
+      <span class="name">Color Ball</span>
+      <span class="ages">Saturday · 1:30–4:00 PM</span>
+      <span class="num"></span>
+      <span class="num">$349</span>
+      <span class="num">$55</span>
+    </div>
+    <div class="row">
+      <span class="name">UTR 1–7 Singles</span>
+      <span class="ages">Saturday · 4:00–6:30 PM</span>
+      <span class="num"></span>
+      <span class="num">$399</span>
+      <span class="num">$65</span>
+    </div>
+    <div class="row">
+      <span class="name">UTR 3–12 Singles</span>
+      <span class="ages">Sunday · 3:00–5:30 PM</span>
+      <span class="num"></span>
+      <span class="num">$399</span>
+      <span class="num">$65</span>
+    </div>
+    <div class="row">
+      <span class="name">UTR 1–12 Doubles</span>
+      <span class="ages">Sunday · 5:30 PM</span>
+      <span class="num"></span>
+      <span class="num">$399</span>
+      <span class="num">$65</span>
+    </div>
+
+    <h3>USTA Adult Leagues · Spring 2026</h3>
+    <div class="row head"><span>League</span><span>Levels</span><span class="num"></span><span class="num"></span><span class="num">Season</span></div>
+    <div class="row">
+      <span class="name">Adult 18 &amp; Over</span>
+      <span class="ages">2.5 / 3.0 / 3.5 / 4.0 / 4.5 / 5.0</span>
+      <span class="num"></span>
+      <span class="num"></span>
+      <span class="num">Apr 17 – Jul 5, 2026</span>
+    </div>
+    <div class="row">
+      <span class="name">Friday Women&#39;s League</span>
+      <span class="ages">2.5 / 3.0 / 3.5 / 4.0 / 4.5</span>
+      <span class="num"></span>
+      <span class="num"></span>
+      <span class="num">Apr 17 – Jul 5, 2026</span>
+    </div>
+    <div class="row">
+      <span class="name">Mixed 40+ Doubles</span>
+      <span class="ages">6.0 / 7.0 / 8.0 / 9.0 / 10.0 combined</span>
+      <span class="num"></span>
+      <span class="num"></span>
+      <span class="num">Apr 18 – Sep 6, 2026</span>
+    </div>
+    <div class="row">
+      <span class="name">Adult 55+ Doubles</span>
+      <span class="ages">6.0 / 7.0 / 8.0 / 9.0 combined</span>
+      <span class="num"></span>
+      <span class="num"></span>
+      <span class="num">May 2 – Aug 16, 2026</span>
+    </div>
+    <p class="body" style="margin-top: 8pt;">League fees and USTA membership paid directly to USTA — not LBTA. Captains and team formation supported by LBTA staff. Talk to us about joining a team.</p>
+  </div>
+  <div class="pn">— 6 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 7: COACHES ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow">Coaches</span>
+    <h1>The people you'll<br/>be on court with.</h1>
+    <div class="coach-card">
+      <img src="../assets/photos/andrew.png" alt="Andrew Mateljan" />
+      <div>
+        <div class="name">Andrew Mateljan</div>
+        <div class="title">Founder &amp; Director of Tennis</div>
+        <div class="bio">Fourth-generation tennis coach. Twenty years developing competitive players from junior foundations to professional tour. Top-12 nationally as a junior, two-time Kalamazoo Nationals competitor, ITF Futures circuit (US, Venezuela, El Salvador, Guatemala). Trained at Sánchez-Casal Spain under Jimmy Johnson; seven years coaching internationally across Spain, Croatia, and Norway. Currently coaches Karue Sell (ATP #258 — took him from #860 to #258 in 2025). Colton Smith (ATP #133), Max McKennon (#458), and Ryan Seggerman (#63 in doubles) all came through the same training. Alex Michelsen came through the program at ages 12–13 — now ATP #30.</div>
+        <div class="creds">Former Top Junior · ATP/WTA Tour Coach · 20+ D1 Placements · Sánchez-Casal Spain — Jimmy Johnson</div>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img src="../assets/photos/peter.png" alt="Peter DeFrantz" />
+      <div>
+        <div class="name">Peter DeFrantz</div>
+        <div class="title">Head Coach, Junior Development</div>
+        <div class="bio">Peter grew up on the tennis court — his father coached high school tennis — and learned early that the game is about more than strokes: how you carry yourself, compete, and treat people. College tennis at Mt. San Jacinto College; dual USPTA and PTR certified. Eight years coaching across Southern California with a progressive, player-centered approach.</div>
+        <div class="creds">USPTA &amp; PTR Certified · 8+ Years Coaching · College Tennis — Mt. San Jacinto</div>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img src="../assets/photos/allison.png" alt="Allison Cronk" />
+      <div>
+        <div class="name">Allison Cronk</div>
+        <div class="title">Head Coach, Youth Programs</div>
+        <div class="bio">Allison played varsity tennis at Mira Costa High School, then competed at Westcliff University (NAIA) and Shepherd University (NCAA) — Dean&#39;s List every semester at both. She has coached at five academies across Orange County and the South Bay. Beginners, juniors, adults, competitors. She adapts to whoever is on the other side of the net.</div>
+        <div class="creds">NCAA &amp; NAIA Collegiate Tennis · B.A. History, Education Minor · 5+ Years Coaching · CPR / AED Certified</div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">— 7 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 8: CTA + LOCATIONS + CONTACT (dark) ========== -->
+<div class="page dark">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow eyebrow-on-dark">Get started</span>
+    <h1 style="color:#FFFFFF;">Come play with us.</h1>
+    <p style="color: rgba(255,255,255,0.86);">The fastest way in is a $50 LiveBall on Sunday morning at LBHS — show up ten minutes early, no reservation. Or reply for a personal program match. First session is on us.</p>
+
+    <div style="background: rgba(255,255,255,0.06); border-radius: 4pt; padding: 16pt; margin: 12pt 0; text-align: center;">
+      <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: 22pt; color: #FFFFFF; line-height: 1.1;">lagunabeachtennisacademy.com/book</div>
+      <div style="margin-top: 6pt; font-size: 8pt; color: rgba(245,240,229,0.7); letter-spacing: 0.14em; text-transform: uppercase;">(949) 534-0457 · support@lagunabeachtennisacademy.com</div>
+    </div>
+
+    <h3 style="color: var(--gold);">Three city parks</h3>
+    <div style="padding: 4pt 0; border-bottom: 0.5pt solid rgba(245,240,229,0.14);">
+      <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: 12pt; color: #FFFFFF;">Moulton Meadows Park</div>
+      <div style="font-size: 7.5pt; color: rgba(245,240,229,0.6);">Balboa Ave &amp; Capistrano Ave · Youth &amp; beginners</div>
+    </div>
+    <div style="padding: 4pt 0; border-bottom: 0.5pt solid rgba(245,240,229,0.14);">
+      <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: 12pt; color: #FFFFFF;">Alta Laguna Park</div>
+      <div style="font-size: 7.5pt; color: rgba(245,240,229,0.6);">3300 Alta Laguna Blvd · Junior development &amp; UTR weekends</div>
+    </div>
+    <div style="padding: 4pt 0; border-bottom: 0.5pt solid rgba(245,240,229,0.14);">
+      <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: 12pt; color: #FFFFFF;">Laguna Beach High School</div>
+      <div style="font-size: 7.5pt; color: rgba(245,240,229,0.6);">625 Park Ave · High Performance · LiveBall · Camps</div>
+    </div>
+
+    <div style="margin-top: 16pt; font-size: 7.5pt; color: rgba(245,240,229,0.55); letter-spacing: 0.14em; text-transform: uppercase;">
+      Official City of Laguna Beach Tennis Partner Since 2020
+    </div>
+  </div>
+  <div class="pn">— 8 —</div>
+</div>
+
+</body>
+</html>

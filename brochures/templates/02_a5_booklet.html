@@ -1,0 +1,319 @@
+<!doctype html>
+<!-- @page width="5.83in" height="8.27in" landscape="false" -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LBTA · A5 Booklet</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 5.83in 8.27in; margin: 0; }
+    .page { width: 5.83in; height: 8.27in; position: relative; overflow: hidden; padding: 0; }
+    .pad  { padding: 26pt 30pt; }
+
+    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 30pt; line-height: 1.06; color: var(--text-heading); margin: 4pt 0 8pt; letter-spacing: -0.005em; }
+    h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+         font-size: 22pt; line-height: 1.12; color: var(--text-heading); margin: 4pt 0 8pt; }
+    h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
+         font-size: 13pt; color: var(--pacific-dusk); margin: 10pt 0 4pt; }
+    p, .body { font-size: 9pt; line-height: 1.55; color: var(--text-on-light); margin: 0 0 6pt; }
+    .lede { font-size: 10pt; line-height: 1.55; color: var(--text-on-light); margin-bottom: 8pt; }
+
+    .row { display: grid; grid-template-columns: 1.5fr 0.7fr 0.6fr 0.6fr 0.6fr;
+           gap: 4pt; font-size: 7.5pt; padding: 3pt 0;
+           border-bottom: 0.5pt solid var(--divider-light); }
+    .row.head { color: var(--text-muted); font-weight: 700; text-transform: uppercase;
+                letter-spacing: 0.08em; font-size: 6.5pt; border-bottom: 0.5pt solid var(--border-light); }
+    .row .name { font-weight: 600; color: var(--text-heading); }
+    .row .ages { color: var(--text-muted); }
+    .row .num  { font-variant-numeric: tabular-nums; text-align: right; color: var(--gold-deep); font-weight: 700; }
+
+    /* p1 cover */
+    .cover { background: #0F2237; color: rgba(255,255,255,0.86); padding: 0; }
+    .cover .photo { position: absolute; inset: 0; }
+    .cover .photo img { width:100%; height:100%; object-fit:cover; }
+    .cover .photo::after { content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(11,17,32,0.45) 0%, rgba(11,17,32,0.72) 55%, rgba(11,17,32,0.92) 100%); }
+    .cover .stack { position: relative; z-index: 2; height: 100%; padding: 36pt 30pt;
+      display: flex; flex-direction: column; justify-content: space-between; }
+    .cover img.logo { height: 44pt; width: auto; }
+    .cover .display { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      color: #FFFFFF; font-size: 36pt; line-height: 1.05; }
+    .cover .pillars { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+      color: var(--gold); font-size: 14pt; margin-top: 6pt; }
+
+    /* dark page (philosophy / closing CTA) */
+    .dark { background: #0F2237; color: rgba(255,255,255,0.86); }
+    .dark h1, .dark h2 { color: #FFFFFF; }
+    .dark h3 { color: var(--gold); }
+    .dark p, .dark .body, .dark .lede { color: rgba(255,255,255,0.86); }
+    .dark .row { border-bottom: 0.5pt solid rgba(245,240,229,0.14); }
+    .dark .row .name { color: #FFFFFF; }
+    .dark .row .ages { color: rgba(245,240,229,0.65); }
+    .dark .row .num  { color: var(--gold); }
+    .dark .pull-quote { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+      font-size: 18pt; line-height: 1.25; color: var(--gold); margin: 12pt 0; }
+
+    .coach-card { display: grid; grid-template-columns: 60pt 1fr; gap: 10pt;
+      padding: 8pt 0; border-bottom: 0.5pt solid var(--divider-light); }
+    .coach-card:last-child { border-bottom: none; }
+    .coach-card img { width: 60pt; height: 75pt; object-fit: cover; border-radius: 3pt; background: var(--sandstone); }
+    .coach-card .name { font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400; font-size: 14pt; color: var(--text-heading); line-height: 1.1; }
+    .coach-card .title { font-family: var(--font-body); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; font-size: 7pt; color: var(--victoria-cove); margin-top: 2pt; }
+    .coach-card .bio { font-size: 8pt; line-height: 1.5; margin-top: 4pt; }
+    .coach-card .creds { font-size: 7pt; color: var(--text-muted); margin-top: 4pt; }
+
+    .pn { position: absolute; bottom: 14pt; left: 0; right: 0; text-align: center;
+      font-size: 7pt; color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; }
+    .dark .pn { color: rgba(245,240,229,0.45); }
+  </style>
+</head>
+<body>
+
+<!-- ========== PAGE 1: COVER ========== -->
+<div class="page cover">
+  <div class="photo"><img src="../assets/photos/hero-courts-sunset.jpg" alt="" /></div>
+  <span class="horizon-bar h-thick" style="position:absolute; top:0; left:0; z-index:3;"></span>
+  <div class="stack">
+    <div style="display:flex; justify-content: space-between; align-items: center;">
+      <img class="logo" src="../assets/logos/LBTAwhttext.png" alt="Laguna Beach Tennis Academy" />
+      <span class="eyebrow eyebrow-on-dark">{{ contact.tagline }}</span>
+    </div>
+    <div>
+      <div class="display">Tennis,<br/>as it should<br/>be taught.</div>
+      <div class="pillars">Movement. Craft. Community.</div>
+    </div>
+    <div style="font-size: 7.5pt; color: rgba(245,240,229,0.65); letter-spacing: 0.14em; text-transform: uppercase;">
+      {{ contact.city_partner_line }}
+    </div>
+  </div>
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0; z-index:3;"></span>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 2: FOUNDER + PHILOSOPHY (dark) ========== -->
+<div class="page dark">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow eyebrow-on-dark">Our Founder</span>
+    <h1>Founded by<br/>Andrew Mateljan.</h1>
+    <p>Fourth-generation tennis coach. Andrew was introduced to the game by his grandfather Steve at Ford Park in Redlands and has spent twenty years on tour and on court since. Top-12 nationally as a junior, two-time Kalamazoo Nationals competitor, ITF Futures circuit (US, Venezuela, El Salvador, Guatemala). Trained at Sánchez-Casal Spain under Jimmy Johnson. Seven years coaching internationally — Spain, Croatia, Norway — built the movement-first approach that runs every session at LBTA today.</p>
+    <p>Currently coaches Karue Sell (ATP #258 — took him from #860 to #258 in 2025). Colton Smith (ATP #133), Max McKennon (#458), and Ryan Seggerman (#63 in doubles) all came through the same training. Alex Michelsen came through the program at ages 12–13 — now ATP #30, 2022 Wimbledon Boys' Doubles champion.</p>
+    <div class="pull-quote">"Structure creates confidence.<br/>Confidence creates results."</div>
+    <h3 style="color: var(--gold);">The Three Pillars</h3>
+    <p style="color: rgba(255,255,255,0.86);"><strong style="color:#FFF;">Movement</strong> — the foundation. Footwork solves 80% of the problem before the swing happens.</p>
+    <p style="color: rgba(255,255,255,0.86);"><strong style="color:#FFF;">Craft</strong> — structure that builds confidence. Consistent practice routines create lasting mental toughness.</p>
+    <p style="color: rgba(255,255,255,0.86);"><strong style="color:#FFF;">Community</strong> — a community built on respect. Every LBTA session ends in a circle.</p>
+  </div>
+  <div class="pn">— 2 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 3: THE PATHWAY ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow">The Pathway</span>
+    <h1>From first rally<br/>to college tennis.</h1>
+    <p class="lede">A clear progression from age three. Same coaches, same standard. The path is the same; the work meets you where you are.</p>
+    <table class="tbl">
+      <thead><tr><th>Level</th><th>Ages</th><th>Court</th><th>Where it leads</th></tr></thead>
+      <tbody>
+      {% for r in pathway %}
+      <tr><td><strong>{{ r.level }}</strong></td><td>{{ r.ages }}</td><td style="color: var(--text-muted);">{{ r.court }}</td><td>{{ r.leads_to }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <h3>Spring 2026</h3>
+    <p><strong>Spring session:</strong> {{ season.spring.dates }} · {{ season.spring.weeks }} weeks (skip May 25)<br/>
+    <strong>Registration opens:</strong> {{ season.spring.registrationOpens }}<br/>
+    <strong>Spring Break Camp:</strong> {{ camps.springBreak.dates }}</p>
+  </div>
+  <div class="pn">— 3 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 4: JUNIOR PROGRAMS ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow">Juniors</span>
+    <h1>Where juniors begin —<br/>and where they go.</h1>
+    <div class="row head"><span>Program</span><span>Ages</span><span class="num">1×/wk</span><span class="num">2×/wk</span><span class="num">Drop-in</span></div>
+    {% for p in programs.junior %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      {% if p.pricing.monthly %}
+      <span class="num">${{ p.pricing.monthly['1x'] }}/mo</span>
+      <span class="num">${{ p.pricing.monthly['2x'] }}/mo</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+      {% else %}
+      <span class="num">${{ p.pricing.spring['1x'] }}</span>
+      <span class="num">${{ p.pricing.spring['2x'] }}</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+      {% endif %}
+    </div>
+    {% endfor %}
+    {% for p in programs.development %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      <span class="num">${{ p.pricing.spring['1x'] }}</span>
+      <span class="num">${{ p.pricing.spring['2x'] }}</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+    </div>
+    {% endfor %}
+
+    <h3>Camps</h3>
+    <p><strong>Spring Break:</strong> {{ camps.springBreak.dates }} · $325/wk · $85/day<br/>
+    <strong>Summer (Tennis & Adventure, 5–11):</strong> Full Day $495/wk · Half Day $325/wk<br/>
+    <strong>Summer Training (12–17):</strong> Full Day $595/wk · Half Day $325/wk</p>
+  </div>
+  <div class="pn">— 4 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 5: ADULT PROGRAMS ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow eyebrow-warm">Adults</span>
+    <h1>From new to nationally<br/>rated — one program in.</h1>
+    <div class="row head"><span>Program</span><span>Level</span><span class="num">1×/wk</span><span class="num">2×/wk</span><span class="num">Drop-in</span></div>
+    {% for p in programs.adult %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      <span class="num">${{ p.pricing.spring['1x'] }}</span>
+      <span class="num">${{ p.pricing.spring['2x'] }}</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+    </div>
+    {% endfor %}
+    {% for p in programs['open-court'] %}
+    <div class="row">
+      <span class="name">{{ p.program }}</span>
+      <span class="ages">{{ p.ages }}</span>
+      <span class="num">${{ p.pricing.monthly }}/mo</span>
+      <span class="num">—</span>
+      <span class="num">${{ p.pricing.drop_in }}</span>
+    </div>
+    {% endfor %}
+
+    <h3>Private coaching · published rates</h3>
+    <div class="row head"><span>Coach</span><span></span><span class="num">60 min</span><span class="num">90 min</span><span class="num">10-pack</span></div>
+    {% for r in private_rates %}
+    <div class="row">
+      <span class="name">{{ r.coach }}</span>
+      <span class="ages">{{ r.specialty }}</span>
+      <span class="num">${{ r.rate_60 }}</span>
+      <span class="num">${{ r.rate_90 }}</span>
+      <span class="num">${{ '{:,}'.format(r.pack_10) }}</span>
+    </div>
+    {% endfor %}
+    <p class="body" style="margin-top: 8pt;">10-pack saves $100–$200; 20-pack saves $400–$800. Pack expiry 12 months. 24-hour cancellation.</p>
+  </div>
+  <div class="pn">— 5 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 6: UTR + USTA LEAGUES ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow eyebrow-gold">Match play & leagues</span>
+    <h1>Real matches.<br/>Every weekend.</h1>
+
+    <h3>UTR Match Play · {{ leagues.utr.seasonLabel }}</h3>
+    <div class="row head"><span>Division</span><span>When</span><span class="num"></span><span class="num">Season</span><span class="num">Drop-in</span></div>
+    {% for d in leagues.utr.divisions %}
+    <div class="row">
+      <span class="name">{{ d.name }}</span>
+      <span class="ages">{{ d.match_day }} · {{ d.time }}</span>
+      <span class="num"></span>
+      <span class="num">{{ d.price }}</span>
+      <span class="num">${{ d.drop_in }}</span>
+    </div>
+    {% endfor %}
+
+    <h3>USTA Adult Leagues · Spring 2026</h3>
+    <div class="row head"><span>League</span><span>Levels</span><span class="num"></span><span class="num"></span><span class="num">Season</span></div>
+    {% for lg in leagues.usta.leagues %}
+    <div class="row">
+      <span class="name">{{ lg.name }}</span>
+      <span class="ages">{{ lg.levels }}</span>
+      <span class="num"></span>
+      <span class="num"></span>
+      <span class="num">{{ lg.season }}</span>
+    </div>
+    {% endfor %}
+    <p class="body" style="margin-top: 8pt;">League fees and USTA membership paid directly to USTA — not LBTA. Captains and team formation supported by LBTA staff. Talk to us about joining a team.</p>
+  </div>
+  <div class="pn">— 6 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 7: COACHES ========== -->
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow">Coaches</span>
+    <h1>The people you'll<br/>be on court with.</h1>
+    {% for c in coaches %}
+    <div class="coach-card">
+      <img src="../assets/photos/{{ c.image_local }}" alt="{{ c.name }}" />
+      <div>
+        <div class="name">{{ c.name }}</div>
+        <div class="title">{{ c.title }}</div>
+        <div class="bio">{{ c.bio }}</div>
+        {% if c.credentials %}
+        <div class="creds">{{ c.credentials | join(' · ') }}</div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="pn">— 7 —</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========== PAGE 8: CTA + LOCATIONS + CONTACT (dark) ========== -->
+<div class="page dark">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+  <div class="pad">
+    <span class="eyebrow eyebrow-on-dark">Get started</span>
+    <h1 style="color:#FFFFFF;">Come play with us.</h1>
+    <p style="color: rgba(255,255,255,0.86);">The fastest way in is a $50 LiveBall on Sunday morning at LBHS — show up ten minutes early, no reservation. Or reply for a personal program match. First session is on us.</p>
+
+    <div style="background: rgba(255,255,255,0.06); border-radius: 4pt; padding: 16pt; margin: 12pt 0; text-align: center;">
+      <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: 22pt; color: #FFFFFF; line-height: 1.1;">{{ contact.web }}/book</div>
+      <div style="margin-top: 6pt; font-size: 8pt; color: rgba(245,240,229,0.7); letter-spacing: 0.14em; text-transform: uppercase;">{{ contact.phone }} · {{ contact.email }}</div>
+    </div>
+
+    <h3 style="color: var(--gold);">Three city parks</h3>
+    {% for loc in locations %}
+    <div style="padding: 4pt 0; border-bottom: 0.5pt solid rgba(245,240,229,0.14);">
+      <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: 12pt; color: #FFFFFF;">{{ loc.name }}</div>
+      <div style="font-size: 7.5pt; color: rgba(245,240,229,0.6);">{{ loc.address }} · {{ loc.use }}</div>
+    </div>
+    {% endfor %}
+
+    <div style="margin-top: 16pt; font-size: 7.5pt; color: rgba(245,240,229,0.55); letter-spacing: 0.14em; text-transform: uppercase;">
+      {{ contact.city_partner_line }}
+    </div>
+  </div>
+  <div class="pn">— 8 —</div>
+</div>
+
+</body>
+</html>

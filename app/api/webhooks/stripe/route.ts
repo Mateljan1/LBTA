@@ -5,6 +5,7 @@ import { fulfillUtrCircuitRegistration } from '@/lib/fulfill-utr-circuit-registr
 import type { RegisterYearRequest } from '@/lib/validations'
 import { UTR_COLOR_BALL_DIVISION_NAME, colorBallStageSchema } from '@/lib/validations'
 import { resolveUtrDivisionAmountCents } from '@/lib/utr-checkout-pricing'
+import { upsertAndTag, buildRegistrationTags, isMailchimpConfigured } from '@/lib/mailchimp'
 
 export const runtime = 'nodejs'
 
@@ -90,6 +91,14 @@ export async function POST(request: NextRequest) {
   if (!data.email) {
     console.error('[webhooks/stripe] Missing email on session', session.id)
     return NextResponse.json({ error: 'Missing email' }, { status: 400 })
+  }
+
+  // Mailchimp: primary CRM for Stripe-paid UTR registrations
+  if (isMailchimpConfigured() && data.email) {
+    void upsertAndTag(
+      { email: data.email, firstName: data.firstName, lastName: data.lastName, phone: data.phone },
+      [...buildRegistrationTags(data.program), 'program:utr-circuit', 'form:stripe-payment']
+    ).catch(e => console.error('[MC] Stripe UTR upsert failed:', e))
   }
 
   try {

@@ -1,0 +1,32 @@
+<!-- Qualitative anchors block (replaces trust-block).
+     No volume metrics. Three single-line anchors that hold trust through
+     founder lineage, civic relationship, and pillar voice. Source: Andrew
+     feedback 2026-05-06 + Brand_VoiceGuide_v2 §1 LBTA voice ("warm authority,
+     professional but never corporate"). -->
+{% set on_dark = on_dark|default(false) %}
+<div class="anchors-block" style="padding: 12pt 0;">
+  <div class="anchor-row" style="text-align: center; padding: 6pt 0; border-bottom: 0.5pt solid {{ 'rgba(245,240,229,0.18)' if on_dark else 'var(--divider-light)' }};">
+    <div class="eyebrow {{ 'eyebrow-on-dark' if on_dark else 'eyebrow-warm' }}" style="margin-bottom: 3pt;">Founder</div>
+    <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: 14pt; color: {{ '#FFFFFF' if on_dark else 'var(--text-heading)' }}; line-height: 1.2;">
+      Founded by Andrew Mateljan
+    </div>
+    <div style="font-size: 8pt; color: {{ 'rgba(245,240,229,0.65)' if on_dark else 'var(--text-muted)' }}; margin-top: 2pt;">
+      Fourth-generation tennis coach · Twenty years on tour and on court
+    </div>
+  </div>
+  <div class="anchor-row" style="text-align: center; padding: 6pt 0; border-bottom: 0.5pt solid {{ 'rgba(245,240,229,0.18)' if on_dark else 'var(--divider-light)' }};">
+    <div class="eyebrow {{ 'eyebrow-on-dark' if on_dark else 'eyebrow-warm' }}" style="margin-bottom: 3pt;">City partnership</div>
+    <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: 14pt; color: {{ '#FFFFFF' if on_dark else 'var(--text-heading)' }}; line-height: 1.2;">
+      Official City of Laguna Beach Tennis Partner
+    </div>
+    <div style="font-size: 8pt; color: {{ 'rgba(245,240,229,0.65)' if on_dark else 'var(--text-muted)' }}; margin-top: 2pt;">
+      Three city parks · twelve courts · since 2020
+    </div>
+  </div>
+  <div class="anchor-row" style="text-align: center; padding: 6pt 0;">
+    <div class="eyebrow {{ 'eyebrow-on-dark' if on_dark else 'eyebrow-warm' }}" style="margin-bottom: 3pt;">Philosophy</div>
+    <div style="font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 400; font-size: 14pt; color: {{ 'var(--gold)' if on_dark else 'var(--gold-deep)' }}; line-height: 1.2;">
+      Movement · Craft · Community
+    </div>
+  </div>
+</div>

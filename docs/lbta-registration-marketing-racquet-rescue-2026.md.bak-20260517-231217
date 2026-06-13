@@ -1,0 +1,355 @@
+# LBTA Registration, City Rec1, Marketing Calendar & Racquet Rescue — 2026
+
+**Companion:** [`lbta-system-map-2026.md`](./lbta-system-map-2026.md) · [`lbta-system-map-2026.json`](./lbta-system-map-2026.json)  
+**Generated:** 2026-05-17  
+**Audience:** Andrew, Saska, coaches, agents (Rally/GHL/email ops)
+
+---
+
+## Part 1 — City of Laguna Beach Rec1 catalog
+
+### URLs (multiple in repo — pick one canonical)
+
+| Use | URL |
+|-----|-----|
+| **Bot / KB canonical** | https://secure.rec1.com/CA/city-of-laguna-beach/catalog |
+| **Registration modal (website)** | `…/catalog/index/3b26b76547b72c4ddb248e0f9709a753?filter=c2VhcmNoPSZjYXRlZ29yeSU1QjIwMjgzJTVEPTE=` (tennis category filter) |
+| **Spring schedule email** | `…/catalog/index/fbc6b05911777267d85126f8380d26f6?filter=…` (same filter pattern) |
+
+**Filter note:** `category[20283]=1` in the encoded filter = **Tennis** programs in the City catalog. Always tell parents to search **tennis** or the **exact program name** from `/schedules`.
+
+**In-person registration:** Community & Susi Q Center, **380 Third Street**, Laguna Beach 92651 (City business hours).
+
+### What Rec1 is (policy — from live catalog terms)
+
+- **Payment due at registration** — registration required before participation.
+- **Online or in-person** at Susi Q Center.
+- **Late registration** space-available only; fees **not pro-rated**; expire end of session.
+- **Drop-ins:** City instructors may accept **checks only** (payable to "City of Laguna Beach"); registration form required; **no cash/credit** at drop-in.
+- **Transfers:** Written request ≥1 business day before start; **$20 fee**.
+- **Independent contractors** (LBTA coaches) represent the City on court.
+- **Release of liability** must be on file.
+
+### What should be listed on Rec1 (expected mirror of LBTA offerings)
+
+Rec1 does **not** expose a machine-readable list in this repo. The catalog is a logged-in SPA. Below is the **expected inventory** from `data/spring-summer-2026.json`, `data/year2026.json`, and Spring 2026 marketing emails — **verify live** before quoting “it’s on the City site.”
+
+#### Spring / Summer 2026 — group programs (season packages)
+
+| Program | Ages / level | Typical City listing name (search) |
+|---------|----------------|-------------------------------------|
+| Little Tennis Stars | 3–4 | Little Tennis Stars |
+| Red Ball | 5–6 | Red Ball |
+| Orange Ball | 7–8 | Orange Ball |
+| Green Dot | 9–11 | Green Dot |
+| Competitive / UTR Green Dot | 9–11+ | Green Dot Competitive / Competitive Green |
+| Junior Development (T1 / T2) | 11–18, UTR bands | Youth Development / Junior Development |
+| High Performance | UTR 8+ | High Performance |
+| New to Tennis | Adult beginner | New to Tennis / Bridge |
+| Beyond Beginner | Adult | Beyond Beginner |
+| Adult Intermediate | NTRP 3.0–4.0 | Adult Intermediate |
+| Adult Advanced | NTRP 4.0+ | Adult Advanced |
+| LiveBall | 3.0+ divisions | LiveBall |
+| Cardio Tennis | All levels | Cardio Tennis |
+
+Packages on City site are usually sold as **1× / 2× / 3× per week** or **monthly** (Little Stars), matching `/schedules` — not separate SKUs per day.
+
+#### Camps & breaks (often separate Rec1 activities)
+
+| Camp | Dates (2026) |
+|------|----------------|
+| Spring Break Camp | Mar 30 – Apr 2 (done) |
+| Summer Tennis & Adventure (5–11) | Jun 15 – Aug 29 blocks |
+| Summer Training Camp (12–17) | Jun 15 – Aug 29 |
+| Ski Week | Feb 16–20 (done) |
+| Back-to-School mini | Aug 17–20 |
+| Thanksgiving | Nov 23–25 |
+| Winter Break | Dec 21–24 & Dec 28–31 |
+
+Swim & Tennis camp is **suspended** 2026 (pool construction) — should **not** appear or should show City’s substitute messaging.
+
+#### Leagues & UTR (often separate from “classes”)
+
+| Offering | Where paid | Notes |
+|----------|------------|-------|
+| **UTR Match Play Season 1** | City catalog **and/or** Stripe on site (`/api/checkout/utr-season`) | Emails cite “register through the City” for season pass; website also has checkout |
+| **USTA Adult League** | USTA + LBTA coordination | City may list league-adjacent fees; full pathway ~$5.5K/season cited in KB — confirm with Allison |
+
+#### Usually **NOT** on Rec1 (LBTA handles directly)
+
+| Offering | Payment path |
+|----------|----------------|
+| **Private lessons** | LBTA invoice / `/book?type=private` — `RegistrationModal` uses `hideRec1` |
+| **Racquet Rescue** | Contact / phone — **not** City group catalog today |
+| **Scholarship** | `/api/scholarship` |
+| **Free trial** | `/api/book` → placement → then City for enrollment |
+
+### Known friction (documented in SMS + bot KB)
+
+1. **City catalog lags `/schedules` by 1–2 days** when sessions move or new classes publish.
+2. **App/email confirmation ≠ enrolled** until **City card charges**.
+3. **“Pay Later” in app** — credits loaded after City receipt (Week 2 email).
+4. **Wrong class name** in catalog (e.g. “green dot” missing) — front desk holds manually.
+5. **Multiple Rec1 deep links** in emails can go stale when City changes session IDs.
+
+**Ops rule:** If it’s on `/schedules` but not Rec1 → don’t tell family to double-book; text **(949) 534-0457**.
+
+---
+
+## Part 2 — User registration workflows (as built + as told)
+
+### Workflow A — New family (recommended path)
+
+```mermaid
+flowchart LR
+  A[Discover LBTA] --> B["/book — free trial"]
+  B --> C[Coach placement + trial]
+  C --> D["/schedules — pick program + frequency"]
+  D --> E{Register modal}
+  E -->|Path A| F[Rec1 — pay now]
+  E -->|Path B| G[Lead form → /api/book]
+  F --> H[City charge = spot held]
+  G --> I[Staff calls → then Rec1]
+  H --> J[Download LBTA app]
+  I --> J
+  J --> K[Check-in / weather / roster]
+```
+
+| Step | System | Owner |
+|------|--------|-------|
+| 1. Trial | `lagunabeachtennisacademy.com/book` | LBTA |
+| 2. Choose program | `/schedules` (SSOT) | LBTA data |
+| 3. Pay | **Rec1** (or in-person City) | **City** |
+| 4. Operate | **LBTA app** (iOS/Android) | LBTA / PlayByPoint |
+| 5. Questions | support@ / (949) 534-0457 | Saska / desk |
+
+### Workflow B — Returning player (knows program)
+
+```mermaid
+flowchart LR
+  A["/schedules"] --> B[Register]
+  B --> C[Path A: Rec1 tab]
+  C --> D[Pay at City]
+  D --> E[App for schedule]
+```
+
+### Workflow C — UTR Match Play
+
+| Step | Channel |
+|------|---------|
+| Learn | `/programs/utr-match-play`, emails, `/utr-tracker` |
+| Register | City catalog **and/or** site Stripe checkout |
+| Play | Saturdays/Sundays Alta Laguna |
+| Standings | `/utr-tracker` (Supabase) |
+
+### Workflow D — Camps
+
+| Step | Channel |
+|------|---------|
+| Browse | `/camps` |
+| Register | `RegistrationModal` → Rec1 **or** lead form |
+| Pay | City |
+
+### Workflow E — Private lessons
+
+| Step | Channel |
+|------|---------|
+| Request | `/book?type=private` or phone |
+| Pay | **LBTA** (not Rec1) |
+| Schedule | Staff / app |
+
+### What the website `RegistrationModal` does
+
+1. **Choose:** Path A (Rec1 new tab) vs Path B (inline form).
+2. **Path A:** Opens `rec1Url` or `BASE_REC1_URL` → 2.2s → confirmation + **app download**.
+3. **Path B:** Collects placement fields → `POST /api/book` → confirmation + app download.
+4. **Private / hideRec1:** Skips Path A; form only.
+
+### What Rally / bots must say
+
+- **Payment confirms the spot** — not app signup alone.
+- **Group classes → City.** Private → LBTA.
+- **Canonical Rec1:** base catalog URL; search tennis + program name.
+- **App:** operations only; payment still City.
+
+---
+
+## Part 3 — Suggested workflow improvements
+
+| Priority | Change | Why |
+|----------|--------|-----|
+| **P0** | Unify Android app URL site-wide | `com.court.laguna` vs `com.playbypoint.appx` confuses parents |
+| **P0** | Redirect `/racket-stringing` → `/racquet-rescue` | Legacy URL hits contact, not stringing page |
+| **P1** | Rec1 **per-program deep links** in `data/*.json` | Reduces search friction in Path A |
+| **P1** | Post-payment email automation | “You paid City — next: download app” triggered by webhook or manual export |
+| **P1** | Ops checklist when `/schedules` changes | Notify City recreation to publish matching activity (1-pager for Saska) |
+| **P2** | GHL pipeline stages: Trial → Quoted → Paid City → Active | AC is dying; map to GHL |
+| **P2** | Path B SLA | “We’ll reach out within 4 business hours” (Front Desk GPT already promises this) |
+| **P3** | `Pay Later` clarity in onboarding | Week 2 email pattern — bake into thank-you + modal |
+
+---
+
+## Part 4 — Marketing calendar 2026
+
+Anchored to `data/year2026.json` and program calendar. **Channels:** email (Postmark when migrated), SMS (GHL), site banners, app push (if available), social (manual).
+
+### Legend
+
+- **E** = Email blast  
+- **S** = SMS / GHL  
+- **W** = Website banner / schedules CTA  
+- **A** = App notice  
+- **O** = Ops (coach / court)
+
+| When | Trigger | Action | Primary CTA |
+|------|---------|--------|-------------|
+| **Jan 5** | Winter season starts | W: winter tab active | `/schedules` |
+| **Mar 2** | Spring reg opens | **E+S:** Spring schedule email (sent/refine) | Rec1 + `/schedules` |
+| **Mar 20** | Spring early bird ends | **E:** Early bird last chance | Rec1 |
+| **Mar 30–Apr 2** | Spring Break camp | **E:** Camp reminder (local list) | Rec1 camp SKU |
+| **Apr 6** | Spring session starts | **S:** “First week — app + court location” | App download |
+| **Apr 11** | UTR S1 starts | **E:** UTR Week 1 kickoff (`lbta-utr-season1-week1-kickoff.html`) | City + `/utr-tracker` |
+| **Weekly Apr–May** | UTR match days | **E/S:** Week N reminder (template) | Sign up + show time |
+| **May 1** | Summer reg opens | **E+S:** Summer camps + programs | `/camps` + Rec1 |
+| **May 20** | Summer early bird ends | **E:** Early bird | Rec1 |
+| **May 25** | Memorial Day skip | **S:** No class reminder | — |
+| **Jun 6** | UTR Grand Finals | **E:** Finals + photos | `/success-stories` |
+| **Jun 13** | Spring ends | **E:** Summer preview / re-enroll | Multi-session discount |
+| **Jun 15** | Summer starts | **E+S:** Camp week 1 push | `/camps` |
+| **Jun 19, Jul 4** | Summer skips | **S:** Schedule note | — |
+| **Jul–Aug** | Camp weeks 2–10 | **E:** Weekly camp spot (optional) | Rec1 |
+| **Aug 17–20** | Back-to-school camp | **E:** Short camp blast | Rec1 |
+| **Aug 19** | Last summer camp week | **E:** Fall teaser | `/schedules` |
+| **Aug 31** | Fall reg opens | **E+S:** Fall registration | `/schedules` |
+| **Aug 19** | Fall early bird deadline | **E:** Early bird | Rec1 |
+| **Sep 7** | Labor Day skip | **S** | — |
+| **Sep–Nov** | USTA league deadlines | **E:** League-specific (Allison audience) | `/programs/leagues` |
+| **Nov 11, 23–25, 26–27** | Fall skips / Thanksgiving camp | **E** as needed | — |
+| **Dec 21–31** | Winter break camps | **E:** Holiday camp | Rec1 |
+| **Ongoing** | Trial completed, no City pay | **S:** 48h nudge | Rec1 link |
+| **Ongoing** | Path B lead | **S:** Staff follow-up task | Phone |
+| **Monthly** | Newsletter | **E:** LBTA Weekly (footer signup) | One CTA only |
+
+### Seasonal email arcs (already partially built)
+
+| Arc | Location | Status |
+|-----|----------|--------|
+| Spring prospect P1–P8 | `assets/emails/spring-2026/prospects/` | SEND_READY templates exist |
+| Spring returning R1–R8 | `assets/emails/spring-2026/returning/` | SEND_READY |
+| Week 2 operational | `assets/emails/lbta-spring2026-week2.html` | UTR + app + schedule |
+| UTR kickoff | `assets/emails/lbta-utr-season1-week1-kickoff.html` | Week 1 |
+
+**Gap:** Fall/Winter 2026 prospect arcs not in repo yet — clone spring structure using `data/fall2026.json` dates.
+
+### Automation candidates (build when GHL + Postmark stable)
+
+| Automation | Trigger | Action |
+|------------|---------|--------|
+| **Trial → enroll** | `/api/book` trial, no Rec1 pay in 7d | SMS: Rec1 link + program name |
+| **Early bird** | Date = deadline − 7d | Email segment on interested leads |
+| **UTR week** | Cron Thu for Sat session | Email active UTR players |
+| **Camp fill** | 2 weeks before week start | Email waitlist / last spots |
+| **City lag ticket** | Manual tag when ops flags | SMS hold — don’t register wrong SKU |
+| **App install** | Post City payment (manual list from City export) | SMS app links |
+
+---
+
+## Part 5 — Racquet Rescue: current state & finish plan
+
+### Current state (repo truth)
+
+| Item | Status |
+|------|--------|
+| Page | https://lagunabeachtennisacademy.com/racquet-rescue — **live** |
+| Nav | **Footer** under Academy; **not** in main header (per audit) |
+| Pricing source | `data/pricing-supplemental.json` → `racquetRescue` |
+| Booking | **Contact only** — `/contact?service=racquet-rescue` or phone; **no API** |
+| Legacy redirect | `/racket-stringing` → `/contact` (should be `/racquet-rescue`) |
+| Domains | racketrescue.com plans exist in `RACQUET_RESCUE_*.md` — verify DNS |
+
+### Published pricing (labor only — strings extra)
+
+| Service | Price |
+|---------|-------|
+| Standard stringing | $25 / racquet |
+| Same-day (drop before noon) | $35 / racquet |
+| Customization | $50+ / racquet |
+| Grip replacement | $10 / racquet |
+| Strings | Luxilon $20–35 · Babolat $18–30 · Wilson $15–28 · Solinco $15–25 |
+
+### Revenue model options
+
+| Model | Price logic | Best for |
+|-------|-------------|----------|
+| **A. Walk-in retail** | Labor + string at retail margin | Locals, drop-in at Moulton/LBHS |
+| **B. Academy bundle** | 10-pack stringing **$220** (save $30 vs $25×10) | Active junior/adult families |
+| **C. Tournament weekend** | Same-day $35 + priority queue | UTR / junior events |
+| **D. Hotel/concierge** | Pickup/delivery Laguna + fee | Per brochure hotel one-pager concept |
+| **E. Restring subscription** | $49/mo — 2 restrings + grips | High-volume adults |
+| **F. String consult upsell** | $15 add-on with lesson | Private lesson clients |
+
+**Margin example:** Standard $25 labor + $28 string (mid Luxilon) = **$53** retail; string cost ~$18 → **~$35** gross before labor time.
+
+### Finish plan (phased)
+
+#### Phase 1 — Fix funnel (1–2 days, website) — **shipped 2026-05-17 (interim)**
+
+- [x] `next.config.js`: redirect `/racket-stringing` and `/racket-rescue` → `/racquet-rescue`
+- [ ] Add **Racquet Rescue** to header OR prominent schedules cross-link (Andrew call — deferred)
+- [x] Booking section: `RacquetRescueRequestForm` → `POST /api/book` with `source=racquet-rescue`
+- [x] Thank-you `?type=racquet-rescue`
+- [x] Drop-off copy: Moulton Meadows (1098 Balboa)
+
+**Deferred until Andrew decides:** GHL pipeline vs Airtable tickets, Stripe 10-pack, Rec1 SKU, header nav placement.
+
+#### Phase 2 — Operations (1 week)
+
+- [ ] Pick **one intake**: GHL form, Airtable, or email alias `stringing@` → support@
+- [ ] Turnaround SLA card on page (2–3 day standard; same-day before noon)
+- [ ] Drop-off location: **Moulton Meadows** default; LBHS on HP days
+- [ ] Simple ticket: sticker on racquet + SMS when ready
+
+#### Phase 3 — Revenue (2–4 weeks)
+
+- [ ] **10-pack** SKU on page + optional Rec1 “activity” only if City allows private vendor services (unlikely — keep LBTA-billed)
+- [ ] Stripe **Payment Link** for 10-pack (no full cart needed) — Claude/GHL can’t do Stripe; Andrew or dev
+- [ ] Hotel one-pager PDF QR → `/racquet-rescue` (brochure `04_hotel_concierge`)
+
+#### Phase 4 — Growth (ongoing)
+
+- [ ] Email signature + spring email footer block
+- [ ] Coach cue: “Drop racquets at office” on trial days
+- [ ] UTR weekend stringing booth (same-day $35)
+- [ ] Track: jobs/week, avg string sale, attach rate to active players
+
+### Racquet Rescue — NOT on City Rec1 today
+
+Treat as **LBTA direct revenue** (Stripe, cash, check to LBTA, or invoice) unless City creates a contractor activity. Do not mix into group-class Rec1 flow.
+
+---
+
+## Part 6 — Cross-system checklist for agents
+
+| Question | Answer |
+|----------|--------|
+| Where is price truth? | `data/*.json` → displayed on `/schedules` |
+| Where is payment? | **City Rec1** for group/camps; **LBTA** for private, Racquet Rescue |
+| Where is schedule truth for families? | **LBTA app** + `/schedules` |
+| What confirms enrollment? | **City charge** |
+| CRM direction? | **GHL** (AC dying) |
+| Email direction? | **Postmark** (when cutover) |
+| Bot KB? | `gpt/03-KNOWLEDGE-BRAIN/23-bot-knowledge-base-2026.md` |
+
+---
+
+## Verification task (human — 15 min)
+
+1. Log into https://secure.rec1.com/CA/city-of-laguna-beach/catalog (tennis filter).
+2. Export or screenshot **every** Spring/Summer 2026 activity title.
+3. Diff against table in **Part 1** above; update this doc + `lbta-system-map-2026.json`.
+4. Confirm UTR season pass SKU name matches email copy.
+5. Confirm camp SKUs match `data/year2026.json` weeks.
+
+---
+
+*When Rec1 inventory changes, update Part 1 and bump `meta.generated` in the JSON companion.*

@@ -153,7 +153,7 @@ function buildNotificationHtml(options: {
       <table style="width:100%;border-collapse:collapse;font-size:14px;">
         ${rows}
       </table>
-      <p style="margin:20px 0 0;color:#999;font-size:12px;">This contact has been added to ActiveCampaign and GoHighLevel automatically.</p>
+      <p style="margin:20px 0 0;color:#999;font-size:12px;">This contact has been added to your mailing list automatically.</p>
     </div>
     <div style="height:3px;background:linear-gradient(90deg,#2E8B8B,#E8834A 35%,#C4963C 50%,#E8834A 65%,#2E8B8B);"></div>
     <div style="background:#0F2237;padding:24px;text-align:center;">

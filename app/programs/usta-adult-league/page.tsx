@@ -247,10 +247,10 @@ export default function USTAAdultLeaguePage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="sms:9492410847"
+              href="sms:9495340457"
               className="btn-primary"
             >
-              Text (949) 241-0847
+              Text (949) 534-0457
             </a>
             <a
               href="mailto:andrew@lagunabeachtennisacademy.com"

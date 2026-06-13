@@ -29,6 +29,11 @@ export type GHLSyncResult = {
   error?: string
 }
 
+export type GHLTagResult = {
+  ok: boolean
+  error?: string
+}
+
 function getGhlAuthKey(): string | null {
   return process.env.GHL_API_KEY?.trim() || process.env.GHL_PIT_TOKEN?.trim() || null
 }
@@ -87,6 +92,28 @@ async function findContactByEmail(email: string): Promise<string | null> {
   const dupData = (await dupRes.json()) as { contact?: { id?: string }; id?: string }
   const id = dupData?.contact?.id ?? dupData?.id
   return typeof id === 'string' ? id : null
+}
+
+async function addTagsToContact(contactId: string, tags: string[]): Promise<GHLTagResult> {
+  const apiKey = getGhlAuthKey()
+  if (!apiKey) return { ok: false, error: 'missing_api_key' }
+  const cleanTags = [...new Set(tags.map((tag) => tag.trim()).filter(Boolean))]
+  if (cleanTags.length === 0) return { ok: true }
+
+  const res = await fetch(`${GHL_BASE}/contacts/${encodeURIComponent(contactId)}/tags`, {
+    method: 'POST',
+    headers: apiHeaders(apiKey),
+    body: JSON.stringify({ tags: cleanTags }),
+  })
+  if (res.ok) return { ok: true }
+
+  const text = await res.text().catch(() => '')
+  if (process.env.NODE_ENV === 'production') {
+    console.error('[GHL] Add tags failed:', res.status)
+  } else {
+    console.error('[GHL] Add tags failed:', res.status, text.slice(0, 160))
+  }
+  return { ok: false, error: `add_tags_failed_${res.status}` }
 }
 
 async function createContact(payload: GHLContactPayload): Promise<string | null> {
@@ -181,5 +208,27 @@ export async function sendToGHL(payload: GHLContactPayload): Promise<void> {
     }
   } catch (err) {
     console.error('[GHL] Error:', err instanceof Error ? err.message : err)
+  }
+}
+
+export async function findGHLContactIdByEmail(email: string): Promise<string | null> {
+  if (!isGHLConfigured()) return null
+  try {
+    return await findContactByEmail(email)
+  } catch (err) {
+    console.error('[GHL] find contact error:', err instanceof Error ? err.message : err)
+    return null
+  }
+}
+
+export async function addTagsByContactId(contactId: string, tags: string[]): Promise<GHLTagResult> {
+  if (!isGHLConfigured()) return { ok: false, error: 'ghl_not_configured' }
+  try {
+    return await addTagsToContact(contactId, tags)
+  } catch (err) {
+    return {
+      ok: false,
+      error: err instanceof Error ? err.message : 'add_tags_unknown_error',
+    }
   }
 }

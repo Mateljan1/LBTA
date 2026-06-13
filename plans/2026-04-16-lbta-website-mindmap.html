@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LBTA — Website Mind Map · Where we are → What's off → Where we're going</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --pacific-dusk:#1B3A5C;
+    --deep-water:#0F2237;
+    --victoria-cove:#2E8B8B;
+    --thousand-steps:#C4963C;
+    --sunset-cliff:#E8834A;
+    --sandstone:#F5F0E5;
+    --morning-light:#FAF8F4;
+    --salt-air:#FFFFFF;
+    --tide-pool:#3A8B6E;
+    --driftwood:#B8A88A;
+    --ink:#0A0A0A;
+    --line:rgba(27,58,92,.12);
+    --line-strong:rgba(27,58,92,.28);
+    --shadow-sm:0 1px 2px rgba(15,34,55,.04),0 2px 6px rgba(15,34,55,.04);
+    --shadow-md:0 2px 4px rgba(15,34,55,.05),0 8px 20px rgba(15,34,55,.06);
+    --radius:4px;
+    --maxw:1280px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--morning-light);color:var(--pacific-dusk);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--victoria-cove);text-decoration:none;border-bottom:1px solid rgba(46,139,139,.3)}
+  a:hover{border-bottom-color:var(--victoria-cove)}
+
+  /* Typography */
+  h1,h2,h3,h4{font-family:'Cormorant',Georgia,serif;font-weight:500;color:var(--pacific-dusk);margin:0 0 .5rem}
+  h1{font-size:clamp(36px,5vw,56px);letter-spacing:-.01em;line-height:1.05}
+  h2{font-size:clamp(28px,3.2vw,40px);letter-spacing:-.005em;line-height:1.15}
+  h3{font-size:clamp(22px,2.2vw,28px);line-height:1.2}
+  h4{font-size:18px;font-weight:600;letter-spacing:.02em}
+  .eyebrow{font-family:'DM Sans',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--victoria-cove);font-weight:500}
+
+  /* Header */
+  header.hero{
+    background:
+      radial-gradient(1100px 520px at 85% -10%, rgba(46,139,139,.18), transparent 60%),
+      radial-gradient(900px 500px at 0% 110%, rgba(196,150,60,.12), transparent 55%),
+      linear-gradient(180deg,var(--deep-water),#13304e);
+    color:var(--salt-air);
+    padding:72px 32px 64px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  header.hero .wrap{max-width:var(--maxw);margin:0 auto}
+  header.hero .eyebrow{color:rgba(255,255,255,.7)}
+  header.hero h1{color:var(--salt-air)}
+  header.hero p.lede{max-width:780px;color:rgba(255,255,255,.8);font-size:18px;margin-top:14px}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08)}
+  .legend .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.85)}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .dot-crit{background:var(--sunset-cliff)}
+  .dot-warn{background:var(--thousand-steps)}
+  .dot-ok{background:var(--tide-pool)}
+  .dot-info{background:var(--victoria-cove)}
+
+  /* Layout */
+  section{padding:72px 32px}
+  section .wrap{max-width:var(--maxw);margin:0 auto}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:32px;flex-wrap:wrap}
+  .section-head h2{margin:6px 0 0}
+  .section-head p{max-width:620px;margin:0;color:rgba(27,58,92,.78)}
+
+  /* Horizon divider (brand) */
+  .horizon{height:1px;width:120px;margin:14px 0;background:linear-gradient(90deg,transparent,var(--thousand-steps) 40%,var(--sunset-cliff) 60%,transparent)}
+
+  /* Three swim lanes */
+  .mindmap{display:grid;grid-template-columns:1fr;gap:24px}
+  @media (min-width:900px){ .mindmap{grid-template-columns:repeat(3,1fr);gap:28px} }
+  .lane{
+    background:var(--salt-air);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px 24px;
+    box-shadow:var(--shadow-sm);
+    position:relative;
+    overflow:hidden;
+  }
+  .lane::before{
+    content:"";position:absolute;inset:0 auto 0 0;width:3px;
+  }
+  .lane.now::before{background:var(--victoria-cove)}
+  .lane.gap::before{background:var(--sunset-cliff)}
+  .lane.next::before{background:var(--thousand-steps)}
+  .lane h3{margin-bottom:4px}
+  .lane .eyebrow{display:block;margin-bottom:12px}
+  .lane ul{list-style:none;padding:0;margin:18px 0 0}
+  .lane li{
+    padding:12px 0;
+    border-bottom:1px dashed var(--line);
+    display:grid;grid-template-columns:14px 1fr;gap:10px;align-items:flex-start;
+    font-size:14.5px;
+  }
+  .lane li:last-child{border-bottom:0}
+  .lane li .marker{margin-top:7px;width:8px;height:8px;border-radius:50%;background:var(--victoria-cove)}
+  .lane.gap li .marker{background:var(--sunset-cliff)}
+  .lane.next li .marker{background:var(--thousand-steps)}
+  .lane li strong{display:block;font-weight:600;color:var(--pacific-dusk);margin-bottom:2px}
+  .lane li span.note{color:rgba(27,58,92,.72);font-size:13.5px}
+
+  /* Discrepancy table */
+  .table-wrap{overflow-x:auto;background:var(--salt-air);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+  table{width:100%;border-collapse:collapse;min-width:760px}
+  th,td{padding:14px 18px;text-align:left;vertical-align:top;font-size:14px;border-bottom:1px solid var(--line)}
+  th{background:var(--sandstone);font-family:'DM Sans';font-weight:600;text-transform:uppercase;letter-spacing:1.5px;font-size:11.5px;color:var(--pacific-dusk)}
+  tr:last-child td{border-bottom:0}
+  td code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:rgba(27,58,92,.05);padding:2px 6px;border-radius:3px;color:var(--pacific-dusk)}
+  .sev{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:1px}
+  .sev.crit{color:#9a3a14}
+  .sev.warn{color:#8a6b1d}
+
+  /* Inventory grid */
+  .inv{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media (min-width:760px){ .inv{grid-template-columns:repeat(4,1fr)} }
+  .inv .card{
+    background:var(--salt-air);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 20px;box-shadow:var(--shadow-sm);
+  }
+  .inv .card .num{font-family:'Cormorant';font-size:44px;line-height:1;color:var(--pacific-dusk);font-weight:500}
+  .inv .card .label{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--victoria-cove);margin-top:8px}
+  .inv .card .sub{font-size:13.5px;color:rgba(27,58,92,.7);margin-top:8px;line-height:1.45}
+
+  /* Triangle / strategy */
+  .strategy{
+    display:grid;grid-template-columns:1fr;gap:20px;
+  }
+  @media (min-width:900px){ .strategy{grid-template-columns:repeat(3,1fr)} }
+  .pillar{
+    background:linear-gradient(180deg,var(--salt-air),#fcfaf5);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px 24px;
+    box-shadow:var(--shadow-sm);
+    position:relative;
+  }
+  .pillar .mark{
+    display:inline-block;font-family:'Cormorant';font-size:22px;color:var(--thousand-steps);
+    border:1px solid var(--thousand-steps);width:42px;height:42px;text-align:center;line-height:40px;border-radius:50%;
+    margin-bottom:14px;
+  }
+  .pillar h4{font-family:'Cormorant';font-size:24px;font-weight:500;margin-bottom:6px}
+  .pillar p{color:rgba(27,58,92,.78);font-size:14.5px;margin:8px 0 0}
+  .pillar ul{margin:14px 0 0;padding-left:18px;color:rgba(27,58,92,.78);font-size:14px}
+  .pillar ul li{margin:6px 0}
+
+  /* Next move sequence */
+  .sequence{position:relative;counter-reset:step}
+  .step{
+    display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:flex-start;
+    padding:22px 0;border-top:1px solid var(--line);
+  }
+  .step:first-child{border-top:0}
+  .step .n{
+    counter-increment:step;
+    font-family:'Cormorant';font-size:36px;line-height:1;color:var(--pacific-dusk);
+    width:56px;height:56px;border-radius:50%;border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;background:var(--salt-air);
+  }
+  .step .n::before{content:counter(step,decimal-leading-zero)}
+  .step h4{margin:6px 0 4px;font-size:20px}
+  .step p{margin:0;color:rgba(27,58,92,.78);font-size:14.5px}
+  .step .meta{display:inline-flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .tag{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;padding:4px 10px;border-radius:999px;background:var(--sandstone);color:var(--pacific-dusk);border:1px solid var(--line)}
+  .tag.primary{background:var(--pacific-dusk);color:var(--salt-air);border-color:var(--pacific-dusk)}
+  .tag.accent{background:rgba(232,131,74,.1);color:#8a3d12;border-color:rgba(232,131,74,.3)}
+
+  /* Footer */
+  footer{padding:48px 32px 64px;background:var(--deep-water);color:rgba(255,255,255,.7)}
+  footer .wrap{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  footer p{margin:0;font-size:13px}
+  footer em{font-style:italic;color:rgba(255,255,255,.55)}
+
+  /* details */
+  details{background:var(--sandstone);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin-top:18px}
+  details summary{cursor:pointer;font-weight:600;color:var(--pacific-dusk);font-size:14px;letter-spacing:.3px}
+  details[open] summary{margin-bottom:8px}
+  details p, details ul{font-size:14px;color:rgba(27,58,92,.82)}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+
+  /* ===== Mobile tightening ===== */
+  @media (max-width:640px){
+    header.hero{padding:48px 20px 40px}
+    section{padding:48px 20px}
+    .section-head{gap:14px;margin-bottom:20px}
+    .lane{padding:22px 18px}
+    .pillar{padding:22px 18px}
+    th,td{padding:10px 12px;font-size:13px}
+    .inv{grid-template-columns:repeat(2,1fr);gap:12px}
+    .inv .card{padding:16px 14px}
+    .inv .card .num{font-size:34px}
+    .legend{gap:12px}
+    .legend .chip{font-size:12px}
+    .step{grid-template-columns:48px 1fr;gap:14px;padding:16px 0}
+    .step .n{width:42px;height:42px;font-size:24px}
+    footer{padding:32px 20px}
+  }
+  @media (max-width:380px){
+    .inv{grid-template-columns:1fr}
+  }
+
+  /* ===== Sitemap tree ===== */
+  .tree{display:grid;grid-template-columns:1fr;gap:16px}
+  @media (min-width:900px){ .tree{grid-template-columns:repeat(2,1fr);gap:20px} }
+  .tree .branch{
+    background:var(--salt-air);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 20px;box-shadow:var(--shadow-sm);
+  }
+  .tree .branch > h4{
+    display:flex;align-items:center;gap:10px;font-family:'Cormorant';font-size:22px;
+    font-weight:500;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--line);
+  }
+  .tree .node{
+    display:flex;align-items:flex-start;gap:10px;padding:8px 0 8px 18px;
+    border-left:1px solid var(--line);margin-left:6px;font-size:14px;
+    color:rgba(27,58,92,.88);
+  }
+  .tree .node code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--pacific-dusk);background:rgba(27,58,92,.05);padding:1px 6px;border-radius:3px}
+  .tree .node .label{flex:1;min-width:0;line-height:1.45}
+  .tree .node .label small{display:block;color:rgba(27,58,92,.6);font-size:12px;margin-top:2px;line-height:1.35}
+  .tree .node.sub{margin-left:22px}
+  .tree .node.sub2{margin-left:38px}
+  .pill{
+    display:inline-flex;align-items:center;gap:5px;font-size:10.5px;letter-spacing:1.2px;
+    text-transform:uppercase;padding:2px 8px;border-radius:999px;font-weight:600;
+    border:1px solid transparent;white-space:nowrap;flex-shrink:0;
+  }
+  .pill-keep{background:rgba(58,139,110,.12);color:#1f5a3f;border-color:rgba(58,139,110,.3)}
+  .pill-move{background:rgba(46,139,139,.12);color:#1e5a5a;border-color:rgba(46,139,139,.3)}
+  .pill-new{background:rgba(196,150,60,.14);color:#7a5a17;border-color:rgba(196,150,60,.35)}
+  .pill-remove{background:rgba(232,131,74,.14);color:#8a3d12;border-color:rgba(232,131,74,.35)}
+  .pill-merge{background:rgba(184,168,138,.18);color:#5d5234;border-color:rgba(184,168,138,.45)}
+  .tree-legend{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 24px}
+
+  /* ===== Exit tracker ===== */
+  .exit-head{
+    background:linear-gradient(135deg,var(--deep-water),var(--pacific-dusk));
+    color:var(--salt-air);padding:32px 28px;border-radius:var(--radius);
+    box-shadow:var(--shadow-md);margin-bottom:28px;
+  }
+  .exit-head h3{color:var(--salt-air);margin:0 0 8px;font-size:28px}
+  .exit-head p{margin:0;color:rgba(255,255,255,.8);font-size:14.5px;max-width:720px}
+  .exit-head .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+  @media (min-width:640px){ .exit-head .stats{grid-template-columns:repeat(4,1fr)} }
+  .exit-head .stat{border-left:2px solid var(--thousand-steps);padding-left:14px}
+  .exit-head .stat .v{font-family:'Cormorant';font-size:26px;color:var(--salt-air);line-height:1;font-weight:500}
+  .exit-head .stat .k{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.65);margin-top:6px;display:block}
+
+  .phases{display:grid;grid-template-columns:1fr;gap:20px}
+  @media (min-width:900px){ .phases{grid-template-columns:repeat(2,1fr)} }
+  .phase{
+    background:var(--salt-air);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 20px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;
+  }
+  .phase::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--victoria-cove)}
+  .phase.p2::before{background:var(--thousand-steps)}
+  .phase.p3::before{background:var(--sunset-cliff)}
+  .phase.p4::before{background:var(--pacific-dusk)}
+  .phase .ph-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .phase h4{font-family:'Cormorant';font-size:22px;font-weight:500;margin:0}
+  .phase .ph-range{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--victoria-cove)}
+  .phase .ph-sub{font-size:13px;color:rgba(27,58,92,.7);margin:0 0 14px}
+
+  .task{
+    display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:flex-start;
+    padding:10px 0;border-top:1px dashed var(--line);font-size:14px;
+  }
+  .task:first-of-type{border-top:0}
+  .task .check{
+    width:16px;height:16px;border-radius:50%;margin-top:4px;border:1.5px solid var(--line-strong);background:transparent;
+  }
+  .task.done .check{background:var(--tide-pool);border-color:var(--tide-pool);position:relative}
+  .task.done .check::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid var(--salt-air);border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .task.progress .check{background:var(--thousand-steps);border-color:var(--thousand-steps)}
+  .task.risk .check{background:var(--sunset-cliff);border-color:var(--sunset-cliff)}
+  .task .body{min-width:0}
+  .task .body strong{display:block;font-weight:600;color:var(--pacific-dusk)}
+  .task .body small{display:block;color:rgba(27,58,92,.7);font-size:12.5px;margin-top:2px;line-height:1.4}
+  .task .due{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:rgba(27,58,92,.55);white-space:nowrap}
+  .task.done .due{color:var(--tide-pool)}
+
+  .progress-bar{background:var(--sandstone);height:6px;border-radius:999px;overflow:hidden;margin:14px 0 4px}
+  .progress-bar > div{height:100%;background:linear-gradient(90deg,var(--victoria-cove),var(--thousand-steps))}
+  .progress-meta{display:flex;justify-content:space-between;font-size:11.5px;color:rgba(27,58,92,.65);text-transform:uppercase;letter-spacing:1.2px}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Laguna Beach Tennis Academy · April 16, 2026 · Exit target: October 2027</span>
+    <h1>Website mind map<br/><span style="color:var(--thousand-steps);font-style:italic">Where we are, what's off, where we're going.</span></h1>
+    <p class="lede">One visual page to talk through the current site, the operational audit findings, the proposed new sitemap, and the 18-month path to a $1.5M–$2M exit — without losing craft, clarity, or community.</p>
+
+    <div class="legend" aria-label="Severity legend">
+      <div class="chip"><span class="dot dot-info"></span> Today · observed</div>
+      <div class="chip"><span class="dot dot-crit"></span> Off · needs fix</div>
+      <div class="chip"><span class="dot dot-warn"></span> Direction · next</div>
+      <div class="chip"><span class="dot dot-ok"></span> Working well</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ SECTION 1 — MIND MAP ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">The map</span>
+        <h2>Three lanes: today → gaps → tomorrow</h2>
+        <div class="horizon" aria-hidden="true"></div>
+      </div>
+      <p>Read left to right. The middle column is <strong>everything the audit flags as inconsistent today</strong>. The right column is the <strong>HNW · destination · local-first</strong> strategy we want to reach.</p>
+    </div>
+
+    <div class="mindmap">
+
+      <!-- LANE 1: Where we are -->
+      <article class="lane now" aria-labelledby="lane-now">
+        <span class="eyebrow">Lane 01 · Today</span>
+        <h3 id="lane-now">Where the site is</h3>
+        <p style="margin:6px 0 0;color:rgba(27,58,92,.75);font-size:14px">Baseline observations from the repo, sitemap, and live pages.</p>
+
+        <ul>
+          <li><span class="marker"></span>
+            <div><strong>43 live routes</strong><span class="note">31 in <code>sitemap.ts</code> · 12 additional (coach profiles, tools, admin, print, thank-you).</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Single source of truth in <code>/data/*.json</code></strong><span class="note">Schedule, pricing, leagues, camps centralized. Good foundation — but only if everything downstream respects it.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Brand system is locked</strong><span class="note">Cormorant + DM Sans, brand palette, luxury restraint rules in <code>.cursorrules</code>. Most pages follow it.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Two-funnel behavior is informal</strong><span class="note">Locals find programs easily; visitors have no dedicated hub (camps is the closest).</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>HNW positioning is implicit</strong><span class="note">Founder story and success arcs are strong; no explicit concierge / retreat / relocating-family path.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Emails, doc, site live in parallel</strong><span class="note">Operations Word doc + site JSON + email HTML are each edited separately — drift is already documented.</span></div>
+          </li>
+        </ul>
+      </article>
+
+      <!-- LANE 2: What's off -->
+      <article class="lane gap" aria-labelledby="lane-gap">
+        <span class="eyebrow">Lane 02 · Off</span>
+        <h3 id="lane-gap">What the audit flags</h3>
+        <p style="margin:6px 0 0;color:rgba(27,58,92,.75);font-size:14px">Specific drift between site data, operations doc, and downstream surfaces.</p>
+
+        <ul>
+          <li><span class="marker"></span>
+            <div><strong>Summer camp end date conflict</strong><span class="note"><code>spring-summer-2026.json</code> (Aug 28) vs <code>year2026.json</code> (Aug 29).</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Hardcoded dates in UI</strong><span class="note"><code>ProgramsTabView.tsx</code> renders "June 15 – August 28" — bypasses JSON.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Email narrative drift</strong><span class="note">Summer plan email shows <em>June 16</em> start vs JSON/doc <em>June 15</em>.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Duplicate pricing exposure</strong><span class="note">Any price echoed inside a page component is a future drift risk — rule already says no hardcoded prices outside <code>/data</code>.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Social proof needs verification</strong><span class="note">Google rating count, named testimonials (e.g. "Sarah M.") should be auditable and permissioned.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>UX: destination vs local is unclear</strong><span class="note">A visiting parent has no obvious "Stay &amp; Train" path; a local has no reassurance of priority.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>External systems not auto-verified</strong><span class="note">ActiveCampaign, GHL, Playbypoint, city portal — only manually spot-checked today.</span></div>
+          </li>
+        </ul>
+      </article>
+
+      <!-- LANE 3: Where we're going -->
+      <article class="lane next" aria-labelledby="lane-next">
+        <span class="eyebrow">Lane 03 · Direction</span>
+        <h3 id="lane-next">Where we want to take it</h3>
+        <p style="margin:6px 0 0;color:rgba(27,58,92,.75);font-size:14px">Boutique academy for serious development + Laguna-as-destination, without losing community.</p>
+
+        <ul>
+          <li><span class="marker"></span>
+            <div><strong>Two funnels, one brand</strong><span class="note">Local / recurring <em>and</em> Destination / concierge — shared voice, separate entry paths.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Truth is non-negotiable</strong><span class="note">JSON → site → email → doc in one direction; grep for any literal date/price outside <code>/data</code>.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>HNW voice = AUTHORITY + warmth</strong><span class="note">Specifics (method, ratio, pathway), not hype. No "elite / world-class / don't miss out."</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Grand Slam trajectory framed as process</strong><span class="note">Hours, structure, tournament support, assessment — not trophy promises.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Destination hub + hotel pilots</strong><span class="note">One repeatable template for a stay-and-train retreat; 1–2 named partners before scaling.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>Simple professional sale</strong><span class="note">Every key screen: one primary CTA, one secondary. ≤3 clicks from home to book or inquire.</span></div>
+          </li>
+          <li><span class="marker"></span>
+            <div><strong>CRM-ready inquiries</strong><span class="note">Tags for Local, Visitor, Trial, Camp, Retreat — so follow-up quality matches the positioning.</span></div>
+          </li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 2 — KNOWN DISCREPANCIES ============ -->
+<section style="background:var(--sandstone)">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Operational audit · concrete findings</span>
+        <h2>What's off, in plain English</h2>
+        <div class="horizon" aria-hidden="true"></div>
+      </div>
+      <p>These are already documented in the operational consistency audit. Fixing them is the trust prerequisite for any premium messaging.</p>
+    </div>
+
+    <div class="table-wrap" role="region" aria-label="Known discrepancies">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:20%">Item</th>
+            <th style="width:26%">Location A</th>
+            <th style="width:26%">Location B</th>
+            <th style="width:14%">Severity</th>
+            <th>Canonical action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Summer camp end date</td>
+            <td><code>spring-summer-2026.json</code> → <code>camps.summer.dates</code> <strong>Aug 28</strong></td>
+            <td><code>year2026.json</code> → summer dates <strong>Aug 29</strong></td>
+            <td><span class="sev crit"><span class="dot dot-crit"></span>High</span></td>
+            <td>Pick one official end date; update both JSON files + doc §13 in one pass.</td>
+          </tr>
+          <tr>
+            <td>Summer range in UI</td>
+            <td><code>ProgramsTabView.tsx</code> → <strong>June 15 – August 28</strong> (hardcoded)</td>
+            <td>JSON source → ends <strong>Aug 29</strong></td>
+            <td><span class="sev crit"><span class="dot dot-crit"></span>High</span></td>
+            <td>Remove hardcoded string; render from <code>season-utils</code>/JSON.</td>
+          </tr>
+          <tr>
+            <td>Summer plan email</td>
+            <td><code>LBTA_R7_SummerPlan_SEND_READY.html</code> → start <strong>June 16</strong></td>
+            <td>JSON/doc → start <strong>June 15</strong></td>
+            <td><span class="sev crit"><span class="dot dot-crit"></span>High</span></td>
+            <td>Correct email before any resend; never send live with a date conflict.</td>
+          </tr>
+          <tr>
+            <td>Pricing duplicates (general)</td>
+            <td>Any TSX with <code>$…</code> literals</td>
+            <td><code>/data/*.json</code> price fields</td>
+            <td><span class="sev warn"><span class="dot dot-warn"></span>Med</span></td>
+            <td>Grep pass in remediation phase; fix or document exception.</td>
+          </tr>
+          <tr>
+            <td>External systems alignment</td>
+            <td>ActiveCampaign · GHL · Playbypoint · City portal</td>
+            <td>Site JSON + Ops doc</td>
+            <td><span class="sev warn"><span class="dot dot-warn"></span>Med</span></td>
+            <td>Manual checklist sync after web/doc reconciliation lands.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <details>
+      <summary>Why this matters for the HNW / destination strategy</summary>
+      <p>Premium buyers detect inconsistency instantly. A parent who flies in because of a newsletter, then sees a different date on the website and a third date in the confirmation email, won't complain — they'll quietly choose a competitor. Fixing the truth layer <em>before</em> upgrading the marketing layer protects every dollar spent on partnerships, ads, or concierge outreach.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============ SECTION 3 — SITE AT A GLANCE ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Inventory</span>
+        <h2>What's actually on the site today</h2>
+        <div class="horizon" aria-hidden="true"></div>
+      </div>
+      <p>Totals pulled from the App Router (<code>app/**/page.tsx</code>) and sitemap. Numbers are for orientation, not a final count.</p>
+    </div>
+
+    <div class="inv">
+      <div class="card">
+        <div class="num">31</div>
+        <div class="label">Public pages in sitemap</div>
+        <div class="sub">Home, programs, schedule, coaches, about, landings, legal.</div>
+      </div>
+      <div class="card">
+        <div class="num">12</div>
+        <div class="label">Additional routes</div>
+        <div class="sub">Extra coach profiles, calendar, thank-you, print, help, coach-hub (<em>noindex</em>), admin.</div>
+      </div>
+      <div class="card">
+        <div class="num">7</div>
+        <div class="label">Conversion landing pages</div>
+        <div class="sub">Junior trial, adult trial, beginner, HP pathway, scholarship, book, pathway planner.</div>
+      </div>
+      <div class="card">
+        <div class="num">0</div>
+        <div class="label">Destination / stay-and-train hub</div>
+        <div class="sub">Not yet built — clearest addressable gap for HNW + visitor strategy.</div>
+      </div>
+    </div>
+
+    <details>
+      <summary>Show the full route list</summary>
+      <ul>
+        <li>Core: <code>/</code>, <code>/schedules</code>, <code>/schedules/calendar</code>, <code>/book</code>, <code>/contact</code>, <code>/thank-you</code>, <code>/faq</code>, <code>/help</code></li>
+        <li>Programs: <code>/programs</code>, <code>/programs/junior</code>, <code>/programs/adult</code>, <code>/programs/high-performance</code>, <code>/programs/leagues</code>, <code>/programs/usta-adult-league</code>, <code>/programs/utr-match-play</code></li>
+        <li>Seasonal &amp; specialty: <code>/camps</code>, <code>/fitness</code>, <code>/liveball</code>, <code>/match-play</code>, <code>/racquet-rescue</code>, <code>/pathway-planner</code></li>
+        <li>Landings: <code>/junior-trial</code>, <code>/adult-trial</code>, <code>/beginner-program</code>, <code>/high-performance-pathway</code>, <code>/apply-scholarship</code></li>
+        <li>Trust: <code>/about</code>, <code>/philosophy</code>, <code>/success-stories</code>, <code>/coaches</code>, <code>/coaches/andrew-mateljan</code>, <code>/coaches/michelle-mateljan</code>, <code>/coaches/peter-defrantz</code>, <code>/coaches/former-coach-removed</code>, <code>/coaches/allison-cronk</code></li>
+        <li>Tools: <code>/utr-tracker</code>, <code>/utr-tracker/admin</code>, <code>/utr-tracker/admin/login</code></li>
+        <li>Internal: <code>/coach-hub</code>, <code>/coach-hub/login</code>, <code>/print/court-flyer</code></li>
+        <li>Legal: <code>/privacy</code>, <code>/terms</code></li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<!-- ============ SECTION 4 — STRATEGY TRIANGLE ============ -->
+<section style="background:linear-gradient(180deg,var(--morning-light),var(--sandstone))">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Where we're going</span>
+        <h2>Three pillars that have to sit together</h2>
+        <div class="horizon" aria-hidden="true"></div>
+      </div>
+      <p>The moment any single pillar starts to dominate, the brand loses. All three have to feel true on the same site.</p>
+    </div>
+
+    <div class="strategy">
+      <article class="pillar">
+        <span class="mark">I</span>
+        <h4>Local-first community</h4>
+        <p>Families who live here get priority, recognition, and a standard that doesn't change when visitors show up.</p>
+        <ul>
+          <li>Repeated community proof on home + programs.</li>
+          <li>One sentence on court priority where policy supports it.</li>
+          <li>Program pages link <em>back</em> to schedule truth, not sideways to marketing.</li>
+        </ul>
+      </article>
+
+      <article class="pillar">
+        <span class="mark">II</span>
+        <h4>Boutique developmental</h4>
+        <p>Serious players — including long-horizon Grand Slam trajectory — see a program that respects the process.</p>
+        <ul>
+          <li>Method specificity: movement, structure, tournament support.</li>
+          <li>Individual readiness language, not trophy promises.</li>
+          <li>Named coaches, clear ratios, real alumni outcomes.</li>
+        </ul>
+      </article>
+
+      <article class="pillar">
+        <span class="mark">III</span>
+        <h4>Laguna as destination</h4>
+        <p>Summer camps, adult retreats, and pickleball + tennis packages make Laguna a reason to travel — on our terms.</p>
+        <ul>
+          <li>Dedicated hub (route TBD) with inquiry-first CTAs.</li>
+          <li>1–2 hotel pilots with written partnership standards.</li>
+          <li>Concierge form fields → CRM tags → human follow-up.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 5 — BEST NEXT MOVE ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Sequence</span>
+        <h2>Best move forward — in order</h2>
+        <div class="horizon" aria-hidden="true"></div>
+      </div>
+      <p>Trust first, positioning second, one thin increment third. This ordering makes every later move cheaper.</p>
+    </div>
+
+    <div class="sequence">
+
+      <div class="step">
+        <div class="n" aria-hidden="true"></div>
+        <div>
+          <h4>Execute the operational consistency audit (minimum viable)</h4>
+          <p>Build the discrepancy log for every parent-visible surface: site JSON, homepage/FAQ, camp copy, top 2 emails. Close the known date/price conflicts. No premium messaging goes live until this is clean.</p>
+          <div class="meta">
+            <span class="tag primary">Loss function: trust in operational truth</span>
+            <span class="tag">Owner: ops + web</span>
+            <span class="tag">~2 weeks</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="n" aria-hidden="true"></div>
+        <div>
+          <h4>Lock the one-paragraph positioning</h4>
+          <p>Who we are for locals vs visitors. What we never claim. How "Grand Slam / HNW" shows up in language (process, not trophies). No code; it unlocks every subsequent copy and IA decision.</p>
+          <div class="meta">
+            <span class="tag primary">Stakeholder alignment</span>
+            <span class="tag">1 session</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="n" aria-hidden="true"></div>
+        <div>
+          <h4>Ship one thin increment — not a redesign</h4>
+          <p>Pick <strong>one</strong> of: (a) destination hub stub with inquiry CTA, (b) concierge fields + CRM tags on existing forms, (c) sitemap + internal link clean-up. Validate with 3–5 real parents before building anything else.</p>
+          <div class="meta">
+            <span class="tag accent">Barbell: core stable + one bet</span>
+            <span class="tag">1–2 weeks dev</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="n" aria-hidden="true"></div>
+        <div>
+          <h4>Partnerships after the above, never before</h4>
+          <p>1–2 named hotel pilots, written standards, one repeatable landing pattern. Scale only when inbound inquiries land in CRM with clean tags and a human follow-up plan.</p>
+          <div class="meta">
+            <span class="tag">Conditional on steps 1–3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="n" aria-hidden="true"></div>
+        <div>
+          <h4>Compound the learnings</h4>
+          <p>After each increment, capture: what messaging landed, what confused, which CRM paths worked. Feed back into <code>plans/</code> and the memory system so the next cycle is faster than this one.</p>
+          <div class="meta">
+            <span class="tag">/compound:learn</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 6 — PROPOSED SITEMAP TREE ============ -->
+<section style="background:var(--sandstone)">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Proposed new sitemap</span>
+        <h2>What moves, what's new, what goes</h2>
+        <div class="horizon" aria-hidden="true"></div>
+      </div>
+      <p>A buyer looking at this site in 2027 needs to see two funnels working, revenue lines documented, and zero dead pages. Tree below is mobile-first — nothing to scroll sideways.</p>
+    </div>
+
+    <div class="tree-legend" aria-label="Sitemap change legend">
+      <span class="pill pill-keep">Keep</span>
+      <span class="pill pill-move">Move / rename</span>
+      <span class="pill pill-new">New</span>
+      <span class="pill pill-merge">Consolidate</span>
+      <span class="pill pill-remove">Remove / archive</span>
+    </div>
+
+    <div class="tree">
+
+      <!-- LEFT: Customer-facing primary nav -->
+      <article class="branch">
+        <h4>Primary nav · customer-facing</h4>
+
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>Home</strong> · <code>/</code><small>Hero reframed for two funnels. Clear paths to Train, Visit, and Book.</small></div></div>
+
+        <div class="node"><span class="pill pill-move">Move</span><div class="label"><strong>Train</strong> · <code>/programs</code> (hub)<small>Relabel "Programs" → "Train." Same URL. Hub, not a content page.</small></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Junior pathway · <code>/programs/junior</code></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Adult pathway · <code>/programs/adult</code></div></div>
+        <div class="node sub"><span class="pill pill-move">Move</span><div class="label">High Performance + The Pod · <code>/programs/high-performance</code><small>Add a Pod section inline (high-ticket, Andrew-run). Surfaces the $132K–$264K revenue line for any buyer.</small></div></div>
+        <div class="node sub"><span class="pill pill-merge">Merge</span><div class="label">Leagues &amp; match play · <code>/programs/leagues</code><small>Absorb <code>/match-play</code> (generic) and <code>/liveball</code>. Keep deeper pages <code>/programs/usta-adult-league</code> and <code>/programs/utr-match-play</code>.</small></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Camps · <code>/camps</code></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Fitness · <code>/fitness</code></div></div>
+
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>Schedule &amp; pricing</strong> · <code>/schedules</code><small>Single source of truth. Everything links here for dates + tuition.</small></div></div>
+
+        <div class="node"><span class="pill pill-new">New</span><div class="label"><strong>Visit Laguna</strong> · <code>/visit</code><small>Destination &amp; HNW hub. Due July 31, 2026 per exit playbook.</small></div></div>
+        <div class="node sub"><span class="pill pill-new">New</span><div class="label">Hotel partnerships · <code>/visit/partners</code><small>Montage, Surf &amp; Sand, The Ranch, vacation rentals.</small></div></div>
+        <div class="node sub"><span class="pill pill-new">New</span><div class="label">Tennis + pickleball retreats · <code>/visit/retreats</code></div></div>
+        <div class="node sub"><span class="pill pill-new">New</span><div class="label">Corporate clinics · <code>/visit/corporate</code></div></div>
+        <div class="node sub"><span class="pill pill-new">New</span><div class="label">Concierge inquiry form · shared component<small>Tags CRM with Local / Visitor / Retreat / Pod.</small></div></div>
+
+        <div class="node"><span class="pill pill-new">New</span><div class="label"><strong>Services</strong> (new top-level group)</div></div>
+        <div class="node sub"><span class="pill pill-move">Move</span><div class="label">Racket Rescue · <code>/racquet-rescue</code> → rename to <code>/racket-rescue</code><small>Cross-link to racketrescue.com booking. Pickup/delivery zones. Activation due May 15, 2026.</small></div></div>
+        <div class="node sub"><span class="pill pill-new">New</span><div class="label">Pro shop / Tennis Beast apparel · <code>/shop</code><small>Currently redirects to <code>/contact</code>. Repurpose when apparel launches (Sep 2026).</small></div></div>
+
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>About</strong> · <code>/about</code></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Founder · <code>/coaches/andrew-mateljan</code></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Coaches · <code>/coaches</code> (+ individual profiles)</div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Philosophy · <code>/philosophy</code></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Success stories · <code>/success-stories</code><small>Verify and name-permission every quote; buyers will read this.</small></div></div>
+
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>Book a trial</strong> · <code>/book</code><small>Primary CTA site-wide. One form, smart routing to trial type.</small></div></div>
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>Contact</strong> · <code>/contact</code></div></div>
+      </article>
+
+      <!-- RIGHT: Secondary nav, conversions, internal -->
+      <article class="branch">
+        <h4>Secondary · landings, resources, internal</h4>
+
+        <div class="node"><span class="pill pill-merge">Merge</span><div class="label"><strong>Trial landings</strong><small>Keep <code>/junior-trial</code>, <code>/adult-trial</code>, <code>/beginner-program</code>, <code>/high-performance-pathway</code> — but funnel them all through <code>/book</code>. One shared form, different copy. <code>/apply-scholarship</code> keeps its own page.</small></div></div>
+
+        <div class="node"><span class="pill pill-new">New</span><div class="label"><strong>Members</strong> · <code>/members</code> (pilot)<small>Annual membership pilot — top 50 families (Sep 2026 per playbook). Gated or invite-only page.</small></div></div>
+
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>Resources</strong></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Pathway planner · <code>/pathway-planner</code></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">FAQ · <code>/faq</code></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">UTR tracker · <code>/utr-tracker</code><small>Showcase as tech asset in CIM — built-in-house tool.</small></div></div>
+
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>Internal</strong> (noindex)</div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Coach hub · <code>/coach-hub</code> (+ login)</div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">UTR tracker admin · <code>/utr-tracker/admin</code></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Print flyer · <code>/print/court-flyer</code></div></div>
+
+        <div class="node"><span class="pill pill-remove">Remove</span><div class="label"><strong><code>/match-play</code></strong><small>Duplicates <code>/programs/utr-match-play</code>. 301 → <code>/programs/leagues</code>.</small></div></div>
+        <div class="node"><span class="pill pill-remove">Remove</span><div class="label"><strong><code>/help</code></strong><small>Empty / unused. Delete or consolidate into <code>/faq</code>.</small></div></div>
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>Thank-you</strong> · <code>/thank-you</code><small>Post-form confirmation. Critical for ad attribution.</small></div></div>
+
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>Legal</strong></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Privacy · <code>/privacy</code></div></div>
+        <div class="node sub"><span class="pill pill-keep">Keep</span><div class="label">Terms · <code>/terms</code></div></div>
+
+        <div class="node"><span class="pill pill-keep">Keep</span><div class="label"><strong>Sitemap &amp; schemas</strong> · <code>app/sitemap.ts</code>, <code>app/schema.tsx</code><small>Add new routes, remove dead ones. Add <code>LocalBusiness</code> + event schema for camps/retreats.</small></div></div>
+      </article>
+
+    </div>
+
+    <details>
+      <summary>Summary of changes at a glance</summary>
+      <ul>
+        <li><strong>New routes:</strong> <code>/visit</code> + sub-pages, <code>/members</code> (pilot), <code>/shop</code> (re-purposed for Tennis Beast apparel), concierge inquiry component.</li>
+        <li><strong>Moves:</strong> "Programs" → "Train" label; <code>/racquet-rescue</code> → <code>/racket-rescue</code> (matches the external brand).</li>
+        <li><strong>Consolidations:</strong> Trial landings funnel through <code>/book</code>; <code>/liveball</code> folds under <code>/programs/leagues</code> hub.</li>
+        <li><strong>Removes:</strong> <code>/match-play</code>, <code>/help</code> (redirect or delete).</li>
+        <li><strong>Un-touched:</strong> Schedule, about, FAQ, coaches, legal, thank-you, coach-hub — working well.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<!-- ============ SECTION 7 — EXIT TRACKER ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Exit tracker · October 2027</span>
+        <h2>18 months. Four phases. One destination.</h2>
+        <div class="horizon" aria-hidden="true"></div>
+      </div>
+      <p>Website-specific slice of the LBTA Exit Playbook ($1.5M–$2M target). Update the status dots as work ships. Full operations tracker lives in the playbook doc.</p>
+    </div>
+
+    <div class="exit-head">
+      <h3>Sale target: $1.5M – $2.0M by October 2027</h3>
+      <p>A clean website that tells a two-funnel story with documented revenue streams is part of what takes the multiple from 2.5× to 3.5×. Every section below is a step toward that.</p>
+      <div class="stats">
+        <div class="stat"><div class="v">$390K</div><span class="k">2025 revenue</span></div>
+        <div class="stat"><div class="v">$538K</div><span class="k">2026 target</span></div>
+        <div class="stat"><div class="v">$650K+</div><span class="k">2027 target</span></div>
+        <div class="stat"><div class="v">3.0–3.5×</div><span class="k">Target SDE multiple</span></div>
+      </div>
+    </div>
+
+    <div class="phases">
+
+      <!-- Phase 1 -->
+      <article class="phase p1">
+        <div class="ph-head"><h4>Phase 1 · Foundation</h4><span class="ph-range">Apr – Jun 2026</span></div>
+        <p class="ph-sub">Truth layer + revenue activation. Website is not redesigned — it stops lying about dates.</p>
+
+        <div class="task progress">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Operational consistency audit — minimum viable</strong><small>Close Aug 28 / Aug 29, June 15 / June 16 drift across JSON, emails, doc.</small></div>
+          <span class="due">In progress</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Lock positioning paragraph</strong><small>Local vs visitor voice; Grand Slam language guardrails. No code needed.</small></div>
+          <span class="due">May 2026</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Racket Rescue activation on site</strong><small>Finalize pricing, booking widget, cross-link to racketrescue.com.</small></div>
+          <span class="due">May 15</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Summer camp marketing push (destination families)</strong><small>Copy + imagery emphasizing Laguna-as-destination on <code>/camps</code>.</small></div>
+          <span class="due">May 1</span>
+        </div>
+        <div class="task risk">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Grep for hardcoded dates / prices outside <code>/data</code></strong><small>Prevent new drift. Add as CI check if feasible.</small></div>
+          <span class="due">Jun 30</span>
+        </div>
+
+        <div class="progress-bar"><div style="width:15%"></div></div>
+        <div class="progress-meta"><span>Progress</span><span>1 of 5 started</span></div>
+      </article>
+
+      <!-- Phase 2 -->
+      <article class="phase p2">
+        <div class="ph-head"><h4>Phase 2 · Growth &amp; documentation</h4><span class="ph-range">Jul – Dec 2026</span></div>
+        <p class="ph-sub">Destination hub + two-funnel reposition. This is when the site starts earning the premium positioning.</p>
+
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Build <code>/visit</code> destination hub</strong><small>Inquiry-first CTAs, partner logos when real. Playbook deadline: Jul 31, 2026.</small></div>
+          <span class="due">Jul 31</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Concierge inquiry form + CRM tags</strong><small>Local / Visitor / Retreat / Pod / Trial routing into GHL.</small></div>
+          <span class="due">Jul 31</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>First hotel pilot page live</strong><small>Pilot event Aug 31; page supports the pilot, not the other way around.</small></div>
+          <span class="due">Aug 31</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Annual membership pilot page</strong><small>Gated or invite-only. Top 50 families.</small></div>
+          <span class="due">Sep 1</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Tennis Beast apparel shop</strong><small>Re-purpose <code>/shop</code>. 3 SKUs minimum (hat, tee, hoodie).</small></div>
+          <span class="due">Sep 1</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Website fully repositioned — two funnels</strong><small>All copy, nav, and CTAs reflect Local + Destination. Playbook deadline: Dec 2026.</small></div>
+          <span class="due">Dec 31</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Sitemap / schema updates</strong><small>Remove dead routes, add new. LocalBusiness + event schemas.</small></div>
+          <span class="due">Dec 31</span>
+        </div>
+
+        <div class="progress-bar"><div style="width:0%"></div></div>
+        <div class="progress-meta"><span>Progress</span><span>0 of 7</span></div>
+      </article>
+
+      <!-- Phase 3 -->
+      <article class="phase p3">
+        <div class="ph-head"><h4>Phase 3 · Package &amp; list</h4><span class="ph-range">Jan – Jun 2027</span></div>
+        <p class="ph-sub">The site becomes a sales asset. Buyers (domestic, EB-5, strategic) will scrape every page.</p>
+
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Professional photos / video tour</strong><small>3 locations, programs, tech. Assets double as CIM + website refresh.</small></div>
+          <span class="due">Feb 2027</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Tech stack showcase on site</strong><small>Discreet page or section — UTR tracker, CRM pipelines, Airtable integration as IP signals.</small></div>
+          <span class="due">Feb 2027</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Success stories expansion</strong><small>Pod families (with permission), hotel pilot outcomes, Racket Rescue volume.</small></div>
+          <span class="due">Mar 2027</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Analytics + performance clean-up</strong><small>Lighthouse ≥90, clean Plausible/GA events, no broken links. Reduces buyer friction in DD.</small></div>
+          <span class="due">Mar 2027</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Buyer-facing microsite or NDA portal</strong><small>Linked from CIM. CRM numbers, P&amp;L highlights, team bios behind NDA.</small></div>
+          <span class="due">Apr 2027</span>
+        </div>
+
+        <div class="progress-bar"><div style="width:0%"></div></div>
+        <div class="progress-meta"><span>Progress</span><span>0 of 5</span></div>
+      </article>
+
+      <!-- Phase 4 -->
+      <article class="phase p4">
+        <div class="ph-head"><h4>Phase 4 · Close</h4><span class="ph-range">Jul – Oct 2027</span></div>
+        <p class="ph-sub">Site is stable and updatable. No new features. Support due diligence and transition.</p>
+
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Freeze major site changes</strong><small>Anything new = risk during DD. Content-only updates from here.</small></div>
+          <span class="due">Jul 2027</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Handover docs in repo</strong><small><code>README</code>, <code>ONBOARDING.md</code>, deploy runbook, CRM / tech map — so a new owner ships on day one.</small></div>
+          <span class="due">Aug 2027</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Domain + DNS + Vercel ownership transfer plan</strong><small>Clear chain of custody; stage as part of purchase agreement.</small></div>
+          <span class="due">Sep 2027</span>
+        </div>
+        <div class="task">
+          <span class="check" aria-hidden="true"></span>
+          <div class="body"><strong>Close + transition goes live</strong><small>Site unchanged on the day; Andrew stays 18–24 months as Head Coach / Advisor.</small></div>
+          <span class="due">Oct 2027</span>
+        </div>
+
+        <div class="progress-bar"><div style="width:0%"></div></div>
+        <div class="progress-meta"><span>Progress</span><span>0 of 4 · blocked on Phase 3</span></div>
+      </article>
+
+    </div>
+
+    <details>
+      <summary>How to use this tracker</summary>
+      <p>Each task's dot has three states you can flip by hand in the HTML: empty ring (not started), orange (<code>class="task progress"</code>), green check (<code>class="task done"</code>). Red (<code>class="task risk"</code>) marks items that block everything downstream. When a phase hits 100%, the progress bar fills — that's the moment to run <code>/compound:learn</code> and lock the wins into memory before the next phase starts.</p>
+    </details>
+
+    <details>
+      <summary>Potential buyers to prepare for (from exit playbook)</summary>
+      <ul>
+        <li><strong>Domestic operators / coaches</strong> — BizBuySell listing, tennis industry LinkedIn outreach, USTA SoCal network.</li>
+        <li><strong>Strategic buyers</strong> — Tennis academy groups, youth sports roll-ups, sports PE (Houlihan Lokey network).</li>
+        <li><strong>EB-5 investors</strong> — European academy operators, Asian/Middle Eastern HNW families, Latin American entrepreneurs, Australian/South African coaches. Requires $800K–$1.05M and a job-creation story. Needs CA counsel + immigration attorney before any outreach.</li>
+        <li><strong>Local HNW</strong> — Laguna Beach real estate &amp; business networks.</li>
+      </ul>
+      <p>Website signal to each of these: exclusive city license, documented diversified revenue, tech stack that works without the founder, community that re-enrolls seasonally.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Laguna Beach Tennis Academy · Website mind map · April 16, 2026<br/>Linked to <em>LBTA_Exit_Playbook_2M_Target.md</em> · Refresh monthly.</p>
+    <p><em>Movement · Craft · Community</em></p>
+  </div>
+</footer>
+
+</body>
+</html>

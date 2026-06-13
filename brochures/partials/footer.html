@@ -1,0 +1,17 @@
+<!-- Shared footer: horizon bar + tagline + contact + city partner line -->
+{% set on_dark = on_dark|default(true) %}
+{% include 'partials/horizon-bar.html' %}
+<footer class="brochure-footer" style="background: {{ '#0F2237' if on_dark else '#FAF8F4' }}; color: {{ 'rgba(255,255,255,0.86)' if on_dark else '#2B3D50' }}; padding: 14pt 18pt;">
+  <div class="flex items-center justify-between" style="gap: 14pt;">
+    <div>
+      <div class="tagline-italic" style="font-size: 13pt;">Tennis, as it should be taught.</div>
+      <div class="eyebrow {{ 'eyebrow-on-dark' if on_dark else '' }}" style="margin-top: 3pt;">{{ contact.tagline }}</div>
+    </div>
+    <div style="text-align: right; font-size: 7.5pt; line-height: 1.5;">
+      <div style="font-weight: 600;">{{ contact.web }}</div>
+      <div>{{ contact.email }} &nbsp;·&nbsp; {{ contact.phone }}</div>
+      <div style="opacity: 0.7;">{{ contact.address }}</div>
+      <div style="opacity: 0.7; margin-top: 2pt; font-size: 7pt;">{{ contact.city_partner_line }}</div>
+    </div>
+  </div>
+</footer>

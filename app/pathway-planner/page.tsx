@@ -20,6 +20,7 @@ function PathwayPlannerInteractive() {
     commitment: ''
   })
   const [results, setResults] = useState<PathwayResult | null>(null)
+  const completedSteps = [formData.age, formData.experience, formData.goal, formData.commitment].filter(Boolean).length
 
   const calculatePathway = (e: React.FormEvent) => {
     e.preventDefault()
@@ -104,6 +105,20 @@ function PathwayPlannerInteractive() {
       {/* Form */}
       <section className="section-spacing bg-brand-morning-light">
         <div className="container-narrow">
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-sm font-sans text-lbta-slate">Planner progress</p>
+              <p className="text-sm font-sans font-medium text-brand-pacific-dusk">
+                Step {Math.min(completedSteps + 1, 4)} of 4
+              </p>
+            </div>
+            <div className="w-full h-2 bg-lbta-stone rounded-full overflow-hidden" role="presentation" aria-hidden="true">
+              <div
+                className="h-full bg-brand-victoria-cove transition-all duration-300"
+                style={{ width: `${(completedSteps / 4) * 100}%` }}
+              />
+            </div>
+          </div>
           <form onSubmit={calculatePathway} className="max-w-2xl mx-auto space-y-8">
             <div>
               <label htmlFor="pathway-age" className="block text-lg font-sans font-medium text-brand-pacific-dusk mb-4">

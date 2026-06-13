@@ -17,7 +17,7 @@ export const metadata = {
   },
 }
 
-type ThankYouType = 'trial' | 'private' | 'program' | 'year' | 'scholarship'
+type ThankYouType = 'trial' | 'private' | 'program' | 'year' | 'scholarship' | 'racquet-rescue'
 
 const COPY_BY_TYPE: Record<ThankYouType, { headline: string; firstLine: string }> = {
   trial: {
@@ -40,11 +40,23 @@ const COPY_BY_TYPE: Record<ThankYouType, { headline: string; firstLine: string }
     headline: 'Application Received',
     firstLine: "We've received your scholarship application and will review it shortly.",
   },
+  'racquet-rescue': {
+    headline: 'Request Received',
+    firstLine:
+      "We've received your stringing request. We'll confirm drop-off details and timing within one business day.",
+  },
 }
 
 function getThankYouType(raw: string | string[] | undefined): ThankYouType {
   const type = Array.isArray(raw) ? raw[0] : raw
-  if (type === 'private' || type === 'program' || type === 'year' || type === 'scholarship') return type
+  if (
+    type === 'private' ||
+    type === 'program' ||
+    type === 'year' ||
+    type === 'scholarship' ||
+    type === 'racquet-rescue'
+  )
+    return type
   return 'trial'
 }
 
@@ -350,7 +362,7 @@ export default async function ThankYouPage({
                     </div>
                   </a>
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.playbypoint.appx&pli=1"
+                    href="https://play.google.com/store/apps/details?id=com.court.laguna&pli=1"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-lg hover:bg-white/90 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"

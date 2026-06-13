@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import pricingData from '@/data/pricing-supplemental.json'
+import RacquetRescueRequestForm from '@/components/racquet-rescue/RacquetRescueRequestForm'
 
 const rr = pricingData.racquetRescue
 
@@ -279,32 +280,20 @@ export default function RacquetRescuePage() {
               Book Your Service
             </h2>
             <p className="font-body text-lg md:text-xl text-brand-pacific-dusk/70 leading-relaxed">
-              Fill out the form below and we'll confirm your appointment within 24 hours.
+              Request stringing below — we confirm within one business day. Same-day when you drop off before noon.
             </p>
           </div>
 
           <div className="max-w-2xl mx-auto bg-white p-8 md:p-12 border border-black/6">
-            <div className="space-y-6 text-center">
-              <p className="font-body text-lg text-brand-pacific-dusk/70 leading-relaxed">
-                To book racquet stringing services, please contact us directly. We'll confirm your appointment within 24 hours.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Link
-                  href="/contact?service=racquet-rescue"
-                  className="inline-flex items-center justify-center bg-black text-white font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
-                >
-                  Contact Us
-                </Link>
-                <a
-                  href="tel:9495340457"
-                  className="inline-flex items-center justify-center bg-transparent text-brand-pacific-dusk border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-black hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
-                >
-                  Call (949) 534-0457
-                </a>
-              </div>
-              <p className="text-center text-sm text-brand-pacific-dusk/70 pt-4">
-                Same-day service available when you drop off before noon
-              </p>
+            <RacquetRescueRequestForm />
+            <div className="mt-8 pt-8 border-t border-black/10 text-center">
+              <p className="font-body text-sm text-brand-pacific-dusk/70 mb-4">Prefer to talk?</p>
+              <a
+                href="tel:9495340457"
+                className="inline-flex items-center justify-center bg-transparent text-brand-pacific-dusk border border-black/20 font-sans text-sm font-medium tracking-[2.5px] uppercase min-h-[48px] px-10 py-4 rounded-[2px] transition-all duration-300 hover:border-black hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-victoria-cove focus-visible:ring-offset-2"
+              >
+                Call (949) 534-0457
+              </a>
             </div>
           </div>
         </div>
@@ -324,7 +313,7 @@ export default function RacquetRescuePage() {
                   Laguna Beach, CA 92651
                 </p>
                 <p>
-                  Located at the beautiful Laguna Beach High School tennis facility.
+                  Drop-off at Moulton Meadows Park (Balboa Ave &amp; Capistrano Ave). LBHS courts for pickup by arrangement on program days.
                 </p>
                 <Link
                   href="/contact"

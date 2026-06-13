@@ -1,0 +1,299 @@
+<!doctype html>
+<!-- @page width="8.5in" height="11in" landscape="false" -->
+<!--
+  09 — The Pod · Application One-Pager
+  =====================================
+  Voice: Aman Resorts × tennis. The Pod's distinct register, NOT the public LBTA voice.
+  Source: 05_Shared_Brand_VoiceGuide_v2.md §2 The Pod (Ultra-Luxury Voice).
+
+  4-Layer Framework (Pod-only — drives the section order on this sheet):
+
+    1. Sensory Luxury Design (SLD)
+       Describe the physical experience. Morning light. Sound of the ball.
+       Ocean breeze. Specific sensory details. → §1 OPENING
+
+    2. Status Architecture (SA)
+       Signal exclusivity through scarcity and craft, NOT logos. By invitation.
+       Limited slots. Two paying families per Pod. → §2 STRUCTURE
+
+    3. Institutional Semiosis (IS)
+       Reference heritage, provenance, institutional weight. Fourth-generation
+       tennis family. ATP coaching network. D1 pipeline. → §3 TEAM + §4 LINEAGE
+
+    4. Narrative Cognition & Pacing (NCP)
+       Slow reveal. Let the reader arrive at the conclusion. Don't telegraph
+       the close. → No price on this sheet. CTA last, quiet.
+
+  Andrew's locked decisions (2026-05-06 plan):
+    - Email only (no phone)
+    - No published price (invite the conversation)
+    - Henry named in full with verified trajectory
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>The Pod · By invitation</title>
+  <link rel="stylesheet" href="../tokens/print.css" />
+  <style>
+    @page { size: 8.5in 11in; margin: 0; }
+    .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; }
+
+    /* ------------------------------------------------------------------
+       Pod uses dark canvas to differentiate from the public LBTA set.
+       Cormorant 300 throughout headlines; DM Sans body small + tight.
+       ------------------------------------------------------------------ */
+    .page { background: #0F2237; color: rgba(255,255,255,0.86); }
+
+    .pad { padding: 32pt 56pt 30pt; }
+
+    /* Hero band — sensory entry, no headline shouting */
+    .hero {
+      position: relative;
+      height: 165pt;
+      overflow: hidden;
+    }
+    .hero img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.78) contrast(1.05);
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg,
+        rgba(15,34,55,0.30) 0%,
+        rgba(15,34,55,0.62) 70%,
+        rgba(15,34,55,1.00) 100%);
+    }
+    .hero .badge {
+      position: absolute; top: 28pt; left: 56pt; right: 56pt; z-index: 2;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .hero .badge img.logo { height: 32pt; width: auto; }
+    .hero .badge .invite-eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.32em; font-size: 8pt;
+      color: var(--gold);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 30pt;
+      line-height: 1.06;
+      color: #FFFFFF;
+      margin: 0 0 4pt 0;
+      letter-spacing: -0.005em;
+    }
+    .subhead-italic {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic; font-weight: 400;
+      font-size: 13pt; color: var(--gold);
+      margin-bottom: 12pt;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 16pt;
+      line-height: 1.15;
+      color: #FFFFFF;
+      margin: 12pt 0 4pt 0;
+    }
+    .layer-eyebrow {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; font-size: 7pt;
+      color: var(--gold);
+      margin-bottom: 3pt;
+    }
+    p {
+      font-size: 9.5pt;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.86);
+      margin: 0 0 6pt;
+    }
+    p.lead {
+      font-size: 11pt;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 8pt;
+    }
+
+    /* Track record — quiet, no price-card vibe */
+    .record {
+      border-top: 0.5pt solid rgba(245,240,229,0.18);
+      border-bottom: 0.5pt solid rgba(245,240,229,0.18);
+      padding: 12pt 0;
+      margin: 12pt 0 8pt;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20pt;
+      align-items: start;
+    }
+    .record .who {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 18pt;
+      color: #FFFFFF;
+      line-height: 1.05;
+    }
+    .record .role {
+      font-family: var(--font-body); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em;
+      font-size: 7pt; color: var(--gold);
+      margin-top: 3pt;
+    }
+    .record .trajectory {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 22pt; color: var(--gold);
+      line-height: 1.1;
+    }
+    .record .trajectory .arrow { color: rgba(255,255,255,0.5); margin: 0 5pt; }
+    .record .meta {
+      font-size: 8.5pt; color: rgba(255,255,255,0.7);
+      margin-top: 4pt;
+      line-height: 1.5;
+    }
+
+    /* CTA — quiet close, no button */
+    .close {
+      margin-top: 14pt;
+      padding-top: 10pt;
+      border-top: 0.5pt solid rgba(245,240,229,0.18);
+    }
+    .close .invitation {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 12pt;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.92);
+      margin: 0 0 6pt 0;
+    }
+    .close .email {
+      font-family: var(--font-body); font-weight: 700;
+      letter-spacing: 0.02em;
+      font-size: 11pt;
+      color: var(--gold);
+    }
+
+    /* Foot — minimal, in flow at end of .pad */
+    .foot {
+      margin-top: 14pt;
+      padding-top: 10pt;
+      border-top: 0.5pt solid rgba(245,240,229,0.10);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 7pt;
+      color: rgba(245,240,229,0.55);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .foot .tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 10pt;
+      letter-spacing: normal;
+      text-transform: none;
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <span class="horizon-bar h-thin" style="position:absolute; top:0; left:0;"></span>
+
+  <!-- =========================================================================
+       LAYER 1 — Sensory Luxury Design (SLD)
+       Hero photograph + restrained eyebrow. The reader arrives at the place
+       before they arrive at the pitch.
+       ========================================================================= -->
+  <div class="hero">
+    <img src="../assets/photos/hero-courts-sunset.jpg" alt="" />
+    <div class="badge">
+      <img class="logo" src="../assets/logos/LBTAwhttext.png" alt="Laguna Beach Tennis Academy" />
+      <span class="invite-eyebrow">By invitation</span>
+    </div>
+  </div>
+
+  <div class="pad" style="padding-top: 22pt;">
+    <h1>Three players. One court. The same coach every session.</h1>
+    <div class="subhead-italic">You know me. You know Henry. Here is how this works.</div>
+
+    <p class="lead">
+      Morning light on the court. The sound of the ball off a clean strike. Ocean
+      breeze ten minutes from the water. The Pod is private player management
+      built around a small, fixed group of serious juniors who train together,
+      every day, with the same coach.
+    </p>
+
+    <!-- ===========================================================================
+         LAYER 2 — Status Architecture (SA)
+         Scarcity through configuration, not "exclusive" language.
+         ========================================================================= -->
+    <h2>The structure.</h2>
+    <span class="layer-eyebrow">Configuration</span>
+    <p>
+      Two configurations. A 3-player Pod has two paying families plus Henry. A 4-player Pod has three. The number is fixed; there is no twentieth student waiting for a slot to open. The annual commitment is what makes the
+      year-long planning possible — periodization, tournament selection, travel
+      coaching, and the calls we take when something needs to be talked through
+      outside a session.
+    </p>
+    <p>
+      One tuition covers everything: on-court training three to five days per week, individual development plans, tournament programming, travel coaching when families travel, and the standing availability you&#39;d expect from a coach who knows your child by name. It is a year-long program commitment, not a per-session fee.
+    </p>
+
+    <!-- ===========================================================================
+         LAYER 3 — Institutional Semiosis (IS)
+         Heritage + provenance. The team and the lineage that backs the work.
+         ========================================================================= -->
+    <h2>The team behind it.</h2>
+    <span class="layer-eyebrow">Coach + lineage</span>
+    <p>
+      Andrew runs every Pod session personally. Twenty years coaching internationally and on tour. Took Karue Sell from ATP #860 to #258 in 2025. Trained Colton Smith (#133), Max McKennon (#458), Ryan Seggerman (#63 in doubles). Alex Michelsen came through the program at ages 12–13 and is now ATP #30.
+    </p>
+    <p style="font-size: 9.5pt; color: rgba(255,255,255,0.72);">
+      <strong style="color: rgba(255,255,255,0.92);">D1 pipeline.</strong>
+      Sean Daryabeigi (USC, Blue Chip #2) · Rebecca Lynn (Yale) · Lauren Stein (Cornell).
+    </p>
+
+    <!-- ===========================================================================
+         Verified track record — named, single line. Quiet, no marketing.
+         ========================================================================= -->
+    <div class="record">
+      <div>
+        <div class="who">Henry Mateljan</div>
+        <div class="role">In the Pod since 2024 · age 9</div>
+      </div>
+      <div>
+        <div class="trajectory">
+          UTR&nbsp;2.48<span class="arrow">›</span>4.60
+        </div>
+        <div class="meta">
+          Eighteen months. Currently in the 4.60–5.00 band. One son, one verifiable line.
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================================================================
+         LAYER 4 — Narrative Cognition & Pacing (NCP)
+         Slow reveal. No price. Quiet invitation. Email only.
+         ========================================================================= -->
+    <div class="close">
+      <p class="invitation">
+        Pod placement is by invitation. If this sounds like the right next step
+        for your player, write to Andrew directly. He reads and replies to every
+        Pod inquiry personally.
+      </p>
+      <div class="email">andrew@lagunabeachtennisacademy.com</div>
+    </div>
+
+    <div class="foot">
+      <span class="tagline">Movement. Craft. Community.</span>
+      <span>Official City of Laguna Beach Tennis Partner since 2020</span>
+    </div>
+  </div>
+
+  <span class="horizon-bar h-thin" style="position:absolute; bottom:0; left:0;"></span>
+</div>
+</body>
+</html>
