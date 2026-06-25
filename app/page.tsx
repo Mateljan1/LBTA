@@ -171,7 +171,7 @@ export default function Home() {
                   8 kids per group
                 </span>
                 <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk">
-                  Full-Day: $495/week
+                  Full-Day: $415/week
                 </span>
                 <span className="inline-flex min-h-[36px] items-center rounded-full bg-white px-4 py-2 font-sans text-eyebrow font-medium uppercase text-brand-pacific-dusk">
                   Half-Day: $325/week

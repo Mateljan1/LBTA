@@ -381,7 +381,7 @@ export default function CampsPage() {
                 Most Popular
               </p>
               <h3 className="mt-3 font-headline text-display-sm text-brand-pacific-dusk">Full-Day</h3>
-              <p className="mt-2 font-headline text-[2rem] text-brand-pacific-dusk">$495 / week</p>
+              <p className="mt-2 font-headline text-[2rem] text-brand-pacific-dusk">$415 / week</p>
               <p className="mt-3 font-sans text-[14px] text-brand-pacific-dusk/75">Monday-Thursday · 9am-3pm</p>
               <ul className="mt-4 space-y-2 font-sans text-[14px] text-brand-pacific-dusk/80 flex-1">
                 <li>10+ hours of tennis coaching</li>
@@ -431,11 +431,11 @@ export default function CampsPage() {
               Stroke production, match play, point construction, and tactical development for tournament-level players. Half-day only.
             </p>
             <p className="mt-4 font-sans text-[14px] text-brand-pacific-dusk/75">
-              Monday-Thursday · AM: 9am-12pm or PM: 1-4pm · $325/week
+              Monday-Thursday · 10am-1pm · $245-$325/week
             </p>
             <button
               type="button"
-              onClick={() => openCampModal('Junior Development Camp (12-17)', 'Laguna Beach High School · Half-Day only · $325/week')}
+              onClick={() => openCampModal('Junior Development Camp (12-17)', 'Laguna Beach High School · Half-Day only · $245-$325/week')}
               className="mt-6 inline-flex min-h-[48px] items-center justify-center rounded-[2px] bg-black px-8 py-3 font-sans text-button uppercase text-white transition-all duration-300 hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               Reserve Junior Dev Camp
@@ -487,7 +487,7 @@ export default function CampsPage() {
               <h3 className="font-headline text-display-sm text-brand-pacific-dusk">Spring Break Camp</h3>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">4 days · Mon-Thu · Alta Laguna Park + LBHS</p>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Ages 5-11 and 12-17</p>
-              <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Full-Day $495 · Half-Day $325</p>
+              <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Full-Day $415 · Half-Day $325</p>
               <p className="mt-4 font-sans text-eyebrow font-semibold uppercase text-brand-pacific-dusk/50">Completed · Spring 2026</p>
             </article>
             <article className="rounded-[2px] border border-brand-pacific-dusk/20 bg-white p-5 shadow-[0_12px_28px_rgba(27,58,92,0.08)]">
@@ -495,7 +495,7 @@ export default function CampsPage() {
               <h3 className="mt-3 font-headline text-display-sm text-brand-pacific-dusk">Summer Camp</h3>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">11 weeks · Mon-Thu · June 15-Aug 29</p>
               <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Ages 5-11 and 12-17</p>
-              <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Full-Day $495/wk · Half-Day $325/wk</p>
+              <p className="mt-2 font-sans text-[13px] text-brand-pacific-dusk/75">Full-Day $415/wk · Half-Day $325/wk</p>
               <button
                 type="button"
                 onClick={() => openCampModal('Summer Camp - Reserve Your Week', 'Ages 5-11 and 12-17 · Mon-Thu weeks')}

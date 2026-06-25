@@ -73,7 +73,7 @@ export default async function CourtFlyerPage({
       label: 'Summer',
       dates: springSummer.camps.summer.dates,
       ages: summerCamp?.ages ?? '5-17',
-      price: `$${summerCamp?.price ?? 495}/wk`,
+      price: `$${summerCamp?.price ?? 415}/wk`,
       location: summerCamp?.location ?? 'Alta Laguna Park / Laguna Beach High School',
     },
     ...(thanksgivingCamp
