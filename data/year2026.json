@@ -14,7 +14,7 @@
       "registrationOpen": "December 1, 2025",
       "earlyBirdDeadline": "December 5, 2025",
       "earlyBirdDiscount": 5,
-      "status": "active",
+      "status": "complete",
       "multiplier": 1.0
     },
     "spring": {
@@ -25,7 +25,7 @@
       "registrationOpen": "March 2, 2026",
       "earlyBirdDeadline": "March 20, 2026",
       "earlyBirdDiscount": 5,
-      "status": "registration_open",
+      "status": "active",
       "multiplier": 0.769
     },
     "summer": {
