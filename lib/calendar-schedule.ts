@@ -316,7 +316,8 @@ export function getScheduleByLocationByDayWithLive(
       ages: m?.ages || '',
       time: c.time,
       duration: m?.duration || durationFromTime(c.time),
-      coach: c.coach,
+      // coach intentionally omitted — public schedule shows class/time only.
+      // Coach assignment stays backend-only (front desk notes).
     }
     if (!out[loc]) out[loc] = {}
     if (!out[loc][c.day]) out[loc][c.day] = []
