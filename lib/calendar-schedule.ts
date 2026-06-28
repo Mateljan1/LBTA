@@ -222,6 +222,114 @@ export function getScheduleByLocationByDay(season: SeasonKey): ScheduleByLocatio
   return out
 }
 
+// ── Slice 3 · LIVE desk schedule sync (ONE schedule everywhere) ──────────────
+// The LBTA Front Desk owns WHEN/WHO/WHERE. The website keeps its rich program
+// metadata (category/ages/duration) and overlays the live day/time/coach/location
+// from the desk's public API. Falls back to the static map if the desk is unreachable.
+
+export interface DeskClass {
+  id?: string
+  name?: string
+  program: string
+  day: string
+  time: string
+  location?: string
+  coach?: string
+  season?: string
+}
+
+const DESK_API_BASE =
+  process.env.NEXT_PUBLIC_DESK_API_BASE || 'https://saska-messaging-cloud.vercel.app'
+
+/** Fetch the live desk schedule (server-side, no CORS; cached 5 min). [] on any failure. */
+export async function fetchLiveSchedule(): Promise<DeskClass[]> {
+  try {
+    const res = await fetch(`${DESK_API_BASE}/api/public-schedule`, {
+      next: { revalidate: 300 },
+    })
+    if (!res.ok) return []
+    const data = await res.json()
+    return Array.isArray(data?.classes) ? (data.classes as DeskClass[]) : []
+  } catch {
+    return []
+  }
+}
+
+function normProgramName(s: string | undefined | null): string {
+  return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
+}
+
+function seasonMatches(seasonKey: SeasonKey, deskSeason: string | undefined): boolean {
+  return (deskSeason || '').toLowerCase().includes(seasonKey)
+}
+
+function durationFromTime(time: string): string {
+  const p = parseTimeRangeToMinutes(time)
+  if (!p) return ''
+  const mins = p.end - p.start
+  return mins % 60 === 0 ? `${mins / 60} hr` : `${mins} min`
+}
+
+function inferCategory(programName: string): string {
+  const n = programName.toLowerCase()
+  if (n.includes('adult')) return 'Adult'
+  if (n.includes('liveball') || n.includes('cardio') || n.includes('fitness')) return 'Fitness'
+  if (n.includes('youth')) return 'Youth'
+  return 'Junior'
+}
+
+/**
+ * One synced schedule: when the live desk has classes for this season, build the calendar
+ * straight from the desk (authoritative day/time/coach/location), enriching category/ages/duration
+ * from the website's static program metadata by normalized name. Falls back to the fully static map
+ * when the desk feed is empty (fetch failed or no live classes this season) so the page never breaks.
+ */
+export function getScheduleByLocationByDayWithLive(
+  season: SeasonKey,
+  liveClasses: DeskClass[]
+): ScheduleByLocationByDay {
+  const live = (liveClasses || []).filter(
+    (c) => c && c.program && c.day && c.time && seasonMatches(season, c.season)
+  )
+  if (live.length === 0) return getScheduleByLocationByDay(season)
+
+  const meta: Record<string, { programId: string; category: string; ages: string; duration: string }> = {}
+  for (const prog of getProgramsForSeason(season)) {
+    meta[normProgramName(prog.program)] = {
+      programId: prog.id,
+      category: prog.category,
+      ages: prog.ages,
+      duration: prog.duration,
+    }
+  }
+
+  const out: ScheduleByLocationByDay = {}
+  for (const c of live) {
+    const loc = normalizeSlotLocation({ day: c.day, location: c.location }, c.location || '')
+    if (!LOCATION_KEYS.includes(loc)) continue
+    const m = meta[normProgramName(c.program)]
+    const slot: CalendarSlot = {
+      programId: m?.programId || normProgramName(c.program).replace(/\s+/g, '-'),
+      programName: c.program,
+      category: m?.category || inferCategory(c.program),
+      ages: m?.ages || '',
+      time: c.time,
+      duration: m?.duration || durationFromTime(c.time),
+      coach: c.coach,
+    }
+    if (!out[loc]) out[loc] = {}
+    if (!out[loc][c.day]) out[loc][c.day] = []
+    out[loc][c.day].push(slot)
+  }
+
+  for (const loc of Object.keys(out)) {
+    for (const day of Object.keys(out[loc])) {
+      out[loc][day].sort((a, b) => a.time.localeCompare(b.time))
+    }
+  }
+  return out
+}
+
 export function getSeasonLabel(season: SeasonKey): string {
   if (season === 'spring' || season === 'summer') {
     const ss = getSpringSummer2026()

@@ -390,3 +390,6 @@ auditor: `tools/empower-audit.py`). Thesis (theirs = ours): "AI can't augment wh
   Andrew OS — the brain already exists; EMPOWER gives it a legible spine so all 7 brands are organized the same way.
 
 - **1Password WRITES (2026-05-25):** write token is in `~/.config/op/write-token` (600, NOT in `~/.claude-env`). Write via `~/.claude/tools/opget create "<title>" --tag live-env` (SDK, stdin) or `~/.claude/tools/op-write.sh item create/edit ...` (CLI) — both read that file, silent, no Touch ID. Plain `op item create` uses the READ-ONLY token and fails. Never put the write token in `~/.claude-env`.
+
+## Project Operating Kit — live state
+Live state: run `node scripts/sot.cjs` (or read docs/PROJECT_SOURCE_OF_TRUTH.md) BEFORE planning or building.

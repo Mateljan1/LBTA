@@ -1,6 +1,7 @@
 import type { SeasonKey } from '@/lib/season-utils'
 import {
-  getScheduleByLocationByDay,
+  getScheduleByLocationByDayWithLive,
+  fetchLiveSchedule,
   getSeasonLabel,
   getSeasonDates,
 } from '@/lib/calendar-schedule'
@@ -11,11 +12,12 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs'
 
 const SEASONS: SeasonKey[] = ['winter', 'spring', 'summer', 'fall']
 
-function buildCalendarBySeason(): Record<SeasonKey, CalendarSeasonData> {
+async function buildCalendarBySeason(): Promise<Record<SeasonKey, CalendarSeasonData>> {
+  const live = await fetchLiveSchedule()
   const out = {} as Record<SeasonKey, CalendarSeasonData>
   for (const season of SEASONS) {
     out[season] = {
-      scheduleByLocationByDay: getScheduleByLocationByDay(season),
+      scheduleByLocationByDay: getScheduleByLocationByDayWithLive(season, live),
       seasonLabel: getSeasonLabel(season),
       seasonDates: getSeasonDates(season),
     }
@@ -37,7 +39,7 @@ export default async function ScheduleCalendarPage({
   searchParams?: Promise<{ season?: string }>
 }) {
   const params = await searchParams
-  const calendarBySeason = buildCalendarBySeason()
+  const calendarBySeason = await buildCalendarBySeason()
   const seasonParam = params?.season
   const initialSeason: SeasonKey =
     seasonParam && SEASONS.includes(seasonParam as SeasonKey)

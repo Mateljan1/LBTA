@@ -24,11 +24,13 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env.local.preview
 .env.ghl-sync
 .env.vercel
 
-# Cursor MCP config (may contain ActiveCampaign token)
+# Cursor MCP config (may contain ActiveCampaign token) + local hooks
 .cursor/mcp.json
+.cursor/hooks/
 
 # Local Claude / skills metadata (never commit)
 .claude/
