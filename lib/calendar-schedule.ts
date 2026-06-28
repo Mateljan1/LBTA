@@ -208,7 +208,8 @@ export function getScheduleByLocationByDay(season: SeasonKey): ScheduleByLocatio
         ages: prog.ages,
         time: slot.time,
         duration: prog.duration,
-        coach: slot.coach,
+        // coach intentionally omitted — public schedule shows class/time only.
+        // Coach assignment stays backend-only (front desk notes).
       })
     }
   }
